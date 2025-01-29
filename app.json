@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Transat 2.0",
-    "slug": "Transat_2.0",
+    "slug": "transat-20",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -35,10 +35,20 @@
           "resizeMode": "contain",
           "backgroundColor": "#0D0505"
         }
-      ]
+      ],
+      "expo-localization"
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "9567d031-3154-4723-998b-ebde847d2ae5"
+      }
+    },
+    "owner": "yohann69"
   }
 }

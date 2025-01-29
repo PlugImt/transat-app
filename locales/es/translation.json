@@ -1,0 +1,13 @@
+{
+  "common": {
+    "welcome": "Bienvenido",
+    "editText": "Edita app/index.tsx para editar esta pantalla.",
+    "settings": "Ajustes"
+  },
+  "auth": {
+    "signIn": "Iniciar sesión",
+    "signUp": "Registrarse",
+    "email": "Correo electrónico",
+    "password": "Contraseña"
+  }
+}

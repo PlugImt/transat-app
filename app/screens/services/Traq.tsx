@@ -2,10 +2,10 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
 
-export const Restoration = () => {
+export const Traq = () => {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Menu RU</Text>
+            <Text style={styles.title}>Traq</Text>
         </View>
     );
 };

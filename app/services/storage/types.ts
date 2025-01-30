@@ -42,6 +42,8 @@ export type AppStackParamList = {
     };
     Settings: undefined;
     BottomTabNavigator: undefined;
+    Clubs: undefined;
+    Traq: undefined;
 };
 
 // Root Stack Types

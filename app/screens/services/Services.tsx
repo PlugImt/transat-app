@@ -6,7 +6,7 @@ import {useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {AppStackParamList} from "@/app/services/storage/types";
 
-type AppScreenNavigationProp = StackNavigationProp<AppStackParamList, 'WashingMachine'>;
+type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
 export const Services = () => {
     const {t} = useTranslation();
@@ -17,7 +17,9 @@ export const Services = () => {
         <ScrollView style={{
             backgroundColor: '#0D0505',
         }}>
-            <Text>{t('services.services')}</Text>
+            <Text
+                className="text-foreground font-pblack m-4 text-3xl"
+            >{t('services.services')}</Text>
 
             <Card
                 image={require('@/assets/images/Logos/machine_large_bg.png')}
@@ -25,15 +27,15 @@ export const Services = () => {
             />
             <Card
                 image={require('@/assets/images/Logos/restoration_large_bg.png')}
-                onPress={() => navigation.navigate('WashingMachine')}
+                onPress={() => navigation.navigate('Restoration')}
             />
             <Card
                 image={require('@/assets/images/Logos/clubs_large_bg.png')}
-                onPress={() => navigation.navigate('WashingMachine')}
+                onPress={() => navigation.navigate('Clubs')}
             />
             <Card
                 image={require('@/assets/images/Logos/traq_large_bg.png')}
-                onPress={() => navigation.navigate('WashingMachine')}
+                onPress={() => navigation.navigate('Traq')}
             />
             <Card
                 image={require('@/assets/images/Logos/velo_large_bg.png')}

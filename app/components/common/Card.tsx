@@ -27,7 +27,7 @@ const Card = ({title, description, image, onPress}: CardProps) => {
                     });
                 }
             }
-        } else if (image && typeof image === 'number') {
+        } else if (image) {
             const sourceImage = Image.resolveAssetSource(image);
             const aspectRatio = sourceImage.width / sourceImage.height;
             setImageHeight(imageWidth / aspectRatio);
@@ -50,6 +50,7 @@ const Card = ({title, description, image, onPress}: CardProps) => {
                         style={{
                             width: imageWidth,
                             height: imageHeight,
+                            borderRadius: 10,
                         }}
                     />
                 )}

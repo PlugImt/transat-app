@@ -183,3 +183,4 @@ class AsyncStorageService implements StorageService {
 
 
 export const storage = new AsyncStorageService();
+export default AsyncStorageService;

@@ -2,7 +2,7 @@
   "common": {
     "welcome": "Bienvenue",
     "settings": "Paramètres",
-    "logout": "Se déconnecter",
+    "logout": "Déconnexion",
     "language": "Langue",
     "theme": "Thème",
     "dark": "Sombre",
@@ -13,14 +13,27 @@
   },
   "auth": {
     "signIn": "Se connecter",
-    "signUp": "S'inscrire",
+    "signUp": "Inscription",
     "email": "Email",
     "password": "Mot de passe"
   },
   "services": {
     "services": "Services",
-    "washing_machine": "Machine à laver",
-    "restoration": "Restauration",
-    "games": "Jeux"
+    "washing_machine": "Lave-linge",
+    "games": "Jeux",
+    "market": "Marché",
+    "traq": "Traq",
+    "clubs": "Clubs",
+    "events": "Événements",
+    "reservations": "Reservations",
+    "restoration": {
+      "title": "Menu RU",
+      "lunch": "Midi",
+      "dinner": "Soir",
+      "grill": "Grillades",
+      "migrator": "Migrateur",
+      "vegetarian": "Végétarien",
+      "side_dishes": "Accompagnements"
+    }
   }
 }

@@ -65,3 +65,5 @@ export const useAuth = () => {
         register
     };
 };
+
+export default useAuth;

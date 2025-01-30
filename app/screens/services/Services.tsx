@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, ScrollView, Text} from 'react-native';
+import {ScrollView, Text} from 'react-native';
 import {useTranslation} from "react-i18next";
 import Card from "@/app/components/common/Card";
 import {useNavigation} from "@react-navigation/native";
@@ -16,8 +16,17 @@ export const Services = () => {
     return (
         <ScrollView style={{
             backgroundColor: '#0D0505',
+            paddingLeft: 20,
+            paddingRight: 20,
+            paddingTop: 30,
+            paddingBottom: 10,
         }}>
             <Text
+                style={{
+                    color: "#ffe6cc",
+                    fontSize: 24,
+                    fontWeight: 'bold',
+                }}
                 className="text-foreground font-pblack m-4 text-3xl"
             >{t('services.services')}</Text>
 
@@ -41,9 +50,11 @@ export const Services = () => {
                 image={require('@/assets/images/Logos/velo_large.png')}
                 onPress={() => navigation.navigate('WashingMachine')}
             />
-            <Button title={t('services.market')} onPress={() => console.log('Restoration')}/>
-            <Button title={t('services.reservations')} onPress={() => console.log('Restoration')}/>
-            <Button title={t('services.events')} onPress={() => console.log('Restoration')}/>
+            {/*<Button title={t('services.market')} onPress={() => console.log('Restoration')}/>*/}
+            {/*<Button title={t('services.reservations')} onPress={() => console.log('Restoration')}/>*/}
+            {/*<Button title={t('services.events')} onPress={() => console.log('Restoration')}/>*/}
         </ScrollView>
     );
 };
+
+export default Services;

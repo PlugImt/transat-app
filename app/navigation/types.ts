@@ -4,3 +4,5 @@ export type BottomTabParamList = {
     Games: undefined;
     Profile: undefined;
 };
+
+export default BottomTabParamList;

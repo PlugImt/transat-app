@@ -1,13 +1,39 @@
 {
   "common": {
-    "welcome": "Bienvenido",
-    "editText": "Edita app/index.tsx para editar esta pantalla.",
-    "settings": "Ajustes"
+    "welcome": "Bienvenido/a",
+    "settings": "Ajustes",
+    "logout": "Cerrar sesión",
+    "language": "Idioma",
+    "theme": "Tema",
+    "dark": "Oscura",
+    "light": "Luminosa",
+    "system": "Sistema",
+    "home": "Inicio",
+    "account": "Cuenta"
   },
   "auth": {
     "signIn": "Iniciar sesión",
-    "signUp": "Registrarse",
+    "signUp": "Crear cuenta",
     "email": "Correo electrónico",
     "password": "Contraseña"
+  },
+  "services": {
+    "services": "Servicios",
+    "washing_machine": "Lavadora",
+    "games": "Juegos",
+    "market": "Mercado",
+    "traq": "Traq",
+    "clubs": "Clubes",
+    "events": "Eventos",
+    "reservations": "Reservas",
+    "restoration": {
+      "title": "Restauración",
+      "lunch": "Almuerzo",
+      "dinner": "Cena",
+      "grill": "Barbacoa",
+      "migrator": "Migrador",
+      "vegetarian": "Vegetario",
+      "side_dishes": "Salsas y guarniciones"
+    }
   }
 }

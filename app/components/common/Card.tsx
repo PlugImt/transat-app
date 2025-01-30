@@ -37,8 +37,6 @@ const Card = ({title, description, image, onPress}: CardProps) => {
         <TouchableWithoutFeedback onPress={onPress} accessible={true}>
             <View
                 style={{
-                    paddingLeft: 20,
-                    paddingRight: 20,
                     paddingTop: 10,
                     paddingBottom: 5,
                 }}>

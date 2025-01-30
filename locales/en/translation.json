@@ -20,12 +20,20 @@
   "services": {
     "services": "Services",
     "washing_machine": "Washing Machine",
-    "restoration": "Restoration",
     "games": "Games",
     "market": "Market",
     "traq": "Traq",
     "clubs": "Clubs",
     "events": "Events",
-    "reservations": "Reservations"
+    "reservations": "Reservations",
+    "restoration": {
+      "title": "Restoration",
+      "lunch": "Lunch",
+      "dinner": "Dinner",
+      "grill": "Grill",
+      "migrator": "Migrator",
+      "vegetarian": "Vegetarian",
+      "side_dishes": "Side Dishes"
+    }
   }
 }

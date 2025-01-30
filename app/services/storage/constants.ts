@@ -7,3 +7,4 @@ export const STORAGE_KEYS = {
     ONBOARDING_COMPLETED: 'onboarding_completed'
 } as const;
 
+export default STORAGE_KEYS;

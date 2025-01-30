@@ -13,3 +13,8 @@ export const darkTheme = {
     primaryColor: '#ec7f32',
     secondaryColor: '#0049a8'
 };
+
+export default {
+    lightTheme,
+    darkTheme
+}

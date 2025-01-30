@@ -4,34 +4,29 @@ import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 interface ButtonProps {
     title: string;
     onPress: () => void;
-    disabled?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({title, onPress, disabled = false}) => {
+const Button: React.FC<ButtonProps> = ({title, onPress}) => {
     return (
-        <TouchableOpacity
-            style={[styles.button, disabled && styles.disabledButton]}
-            onPress={onPress}
-            disabled={disabled}
-        >
-            <Text style={styles.buttonText}>{title}</Text>
+        <TouchableOpacity style={styles.button} onPress={onPress}>
+            <Text style={styles.text}>{title}</Text>
         </TouchableOpacity>
     );
 };
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: '#007BFF',
-        padding: 10,
-        borderRadius: 5,
+        backgroundColor: '#007AFF',
+        paddingVertical: 15,
+        paddingHorizontal: 20,
+        borderRadius: 8,
         alignItems: 'center',
+        justifyContent: 'center',
     },
-    disabledButton: {
-        backgroundColor: '#A9A9A9',
-    },
-    buttonText: {
-        color: '#FFFFFF',
+    text: {
+        color: 'white',
         fontSize: 16,
+        fontWeight: 'bold',
     },
 });
 

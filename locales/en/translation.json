@@ -1,13 +1,31 @@
 {
   "common": {
     "welcome": "Welcome",
-    "editText": "Edit app/index.tsx to edit this screen.",
-    "settings": "Settings"
+    "settings": "Settings",
+    "logout": "Logout",
+    "language": "Language",
+    "theme": "Theme",
+    "dark": "Dark",
+    "light": "Light",
+    "system": "System",
+    "home": "Home",
+    "account": "Account"
   },
   "auth": {
     "signIn": "Sign In",
     "signUp": "Sign Up",
     "email": "Email",
     "password": "Password"
+  },
+  "services": {
+    "services": "Services",
+    "washing_machine": "Washing Machine",
+    "restoration": "Restoration",
+    "games": "Games",
+    "market": "Market",
+    "traq": "Traq",
+    "clubs": "Clubs",
+    "events": "Events",
+    "reservations": "Reservations"
   }
 }

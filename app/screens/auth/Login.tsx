@@ -1,33 +1,70 @@
-import React from 'react';
-import {StyleSheet, TextInput, View} from 'react-native';
-import Button from "@/app/components/common/Button";
+import React, {useState} from 'react';
+import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {useAuth} from "@/app/hooks/useAuth";
+import {AuthStackParamList} from "@/app/services/storage/types";
 
-const LoginScreen: React.FC = () => {
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
+
+type LoginScreenNavigationProp = StackNavigationProp<AuthStackParamList, 'Login'>;
+
+export const Login = () => {
+    const navigation = useNavigation<LoginScreenNavigationProp>();
+    const {login, isLoading} = useAuth();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
     const handleLogin = async () => {
-        // Implement login logic here
-        console.log('Email:', email);
-        console.log('Password:', password);
+        if (!email || !password) {
+            setError('Please fill in all fields');
+            return;
+        }
+
+        try {
+            await login(email, password);
+        } catch (err) {
+            setError('Invalid email or password');
+        }
     };
 
     return (
         <View style={styles.container}>
+            <Text style={styles.title}>Welcome Back</Text>
+
             <TextInput
-                style={styles.input}
                 placeholder="Email"
                 value={email}
-                onChangeText={setEmail}
+                onChangeText={(text) => {
+                    setEmail(text);
+                    setError('');
+                }}
+                autoCapitalize="none"
+                // error={error}
             />
+
             <TextInput
-                style={styles.input}
                 placeholder="Password"
                 value={password}
-                onChangeText={setPassword}
+                onChangeText={(text) => {
+                    setPassword(text);
+                    setError('');
+                }}
                 secureTextEntry
+                // error={error}
             />
-            <Button title="Login" onPress={handleLogin}/>
+
+            <Button
+                title={isLoading ? "Loading..." : "Login"}
+                onPress={handleLogin}
+                disabled={isLoading}
+            />
+
+            <Button
+                title="Create an Account"
+                onPress={() => navigation.navigate('Register')}
+                // variant="secondary"
+            />
         </View>
     );
 };
@@ -35,16 +72,14 @@ const LoginScreen: React.FC = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
         padding: 20,
+        justifyContent: 'center',
+        backgroundColor: '#fff',
     },
-    input: {
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginBottom: 15,
-        paddingHorizontal: 10,
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 30,
+        textAlign: 'center',
     },
 });
-
-export default LoginScreen;

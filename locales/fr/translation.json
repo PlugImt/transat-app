@@ -1,13 +1,26 @@
 {
   "common": {
     "welcome": "Bienvenue",
-    "editText": "Modifiez app/index.tsx pour éditer cet écran.",
-    "settings": "Paramètres"
+    "settings": "Paramètres",
+    "logout": "Se déconnecter",
+    "language": "Langue",
+    "theme": "Thème",
+    "dark": "Sombre",
+    "light": "Clair",
+    "system": "Système",
+    "home": "Accueil",
+    "account": "Compte"
   },
   "auth": {
     "signIn": "Se connecter",
     "signUp": "S'inscrire",
     "email": "Email",
     "password": "Mot de passe"
+  },
+  "services": {
+    "services": "Services",
+    "washing_machine": "Machine à laver",
+    "restoration": "Restauration",
+    "games": "Jeux"
   }
 }

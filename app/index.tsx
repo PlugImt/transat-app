@@ -1,11 +1,22 @@
-import {useTranslation} from 'react-i18next';
+import React, {useState} from 'react';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {ThemeProvider} from 'styled-components';
+import {darkTheme, lightTheme} from './themes';
+import {RootNavigator} from "@/app/navigation/RootNavigator";
 import '../i18n';
-import Login from "@/app/screens/auth/Login";
+import {useTranslation} from "react-i18next"; // Updated import path to point to root i18n.ts
 
-export default function Index() {
+const Stack = createNativeStackNavigator();
+
+const App: React.FC = () => {
+    const [isDarkMode, setIsDarkMode] = useState(false);
     const {t} = useTranslation();
 
     return (
-        <Login/>
+        <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+            <RootNavigator/>
+        </ThemeProvider>
     );
-}
+};
+
+export default App;

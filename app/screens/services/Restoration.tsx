@@ -2,10 +2,10 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
 
-export const WashingMachine = () => {
+export const Restoration = () => {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Washing machine</Text>
+            <Text style={styles.title}>Restoration</Text>
         </View>
     );
 };

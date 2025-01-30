@@ -22,23 +22,23 @@ export const Services = () => {
             >{t('services.services')}</Text>
 
             <Card
-                image={require('@/assets/images/Logos/machine_large_bg.png')}
+                image={require('@/assets/images/Logos/machine_large.png')}
                 onPress={() => navigation.navigate('WashingMachine')}
             />
             <Card
-                image={require('@/assets/images/Logos/restoration_large_bg.png')}
+                image={require('@/assets/images/Logos/restoration_large.png')}
                 onPress={() => navigation.navigate('Restoration')}
             />
             <Card
-                image={require('@/assets/images/Logos/clubs_large_bg.png')}
+                image={require('@/assets/images/Logos/clubs_large.png')}
                 onPress={() => navigation.navigate('Clubs')}
             />
             <Card
-                image={require('@/assets/images/Logos/traq_large_bg.png')}
+                image={require('@/assets/images/Logos/traq_large.png')}
                 onPress={() => navigation.navigate('Traq')}
             />
             <Card
-                image={require('@/assets/images/Logos/velo_large_bg.png')}
+                image={require('@/assets/images/Logos/velo_large.png')}
                 onPress={() => navigation.navigate('WashingMachine')}
             />
             <Button title={t('services.market')} onPress={() => console.log('Restoration')}/>

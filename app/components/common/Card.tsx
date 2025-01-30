@@ -19,7 +19,6 @@ const Card = ({title, description, image, onPress}: CardProps) => {
             if ("uri" in image) {
                 if (image.uri != null) {
                     Image.getSize(image.uri, (width, height) => {
-                        // Calculate height based on screen width and aspect ratio
                         const aspectRatio = width / height;
                         setImageHeight(imageWidth / aspectRatio);
                     }, (error) => {
@@ -51,10 +50,10 @@ const Card = ({title, description, image, onPress}: CardProps) => {
                             width: imageWidth,
                             height: imageHeight,
                             borderRadius: 10,
+                            backgroundColor: '#181010',
                         }}
                     />
                 )}
-
                 {title && (
                     <Text
                         numberOfLines={1}
@@ -68,7 +67,6 @@ const Card = ({title, description, image, onPress}: CardProps) => {
                         {title}
                     </Text>
                 )}
-
                 {description && (
                     <Text
                         numberOfLines={3}

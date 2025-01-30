@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, ScrollView, StyleSheet, Text, View} from 'react-native';
 import axios from 'axios';
+import RestorationCard from "@/app/components/custom/RestorationCard";
+import {useTranslation} from "react-i18next";
+import {Beef, ChefHat, Soup, Vegan} from "lucide-react-native";
 
 // Define interfaces for our data structure
 interface MenuItem {
@@ -22,6 +25,8 @@ interface MenuData {
 }
 
 export const Restoration = () => {
+    const {t} = useTranslation();
+
     const [menuData, setMenuData] = useState<MenuData>({
         grilladesMidi: [],
         migrateurs: [],
@@ -42,7 +47,7 @@ export const Restoration = () => {
             const proxyUrl = 'https://api.allorigins.win/raw?url=';
             const targetUrl = 'https://toast-js.ew.r.appspot.com/coteresto?key=1ohdRUdCYo6e71aLuBh7ZfF2lc_uZqp9D78icU4DPufA';
 
-            const response = await axios.get(proxyUrl + targetUrl);
+            const response = await axios.get(proxyUrl + encodeURIComponent(targetUrl));
             const data = response.data;
 
             const regex = /var loadingData = (\[.*?])/;
@@ -118,59 +123,51 @@ export const Restoration = () => {
         }
     };
 
-    if (loading) {
-        return (
-            <View style={styles.container}>
-                <ActivityIndicator size="large" color="#0000ff"/>
-            </View>
-        );
-    }
 
     if (error) {
+        alert(error);
         return (
-            <View style={styles.container}>
-                <Text style={styles.error}>{error}</Text>
-            </View>
+            <Text style={styles.error}>{error}</Text>
         );
     }
 
     return (
         <ScrollView style={styles.container}>
-            <Text style={styles.title}>Menu RU</Text>
+            <Text
+                style={{
+                    color: "#ffe6cc",
+                    fontSize: 24,
+                    fontWeight: 'bold',
+                }}
+                className="text-foreground font-pblack m-4 text-3xl"
+            >{t('services.restoration.title')}</Text>
 
-            <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Menu du Midi</Text>
+            {loading ? <ActivityIndicator size="large" color="#ec7f32"/> : (
+                <>
+                    <View style={styles.section}>
+                        <Text style={styles.sectionTitle}>{t('services.restoration.lunch')}</Text>
 
-                <Text style={styles.subTitle}>Grillades</Text>
-                {menuData.grilladesMidi.map((item, index) => (
-                    <Text key={index} style={styles.menuItem}>{item}</Text>
-                ))}
+                        <RestorationCard title={t('services.restoration.grill')} meals={menuData.grilladesMidi}
+                                         icon={<Beef color={'#ec7f32'}/>}/>
+                        <RestorationCard title={t('services.restoration.migrator')} meals={menuData.migrateurs}
+                                         icon={<ChefHat color={'#ec7f32'}/>}/>
+                        <RestorationCard title={t('services.restoration.vegetarian')} meals={menuData.cibo}
+                                         icon={<Vegan color={'#ec7f32'}/>}/>
+                        <RestorationCard title={t('services.restoration.side_dishes')} meals={menuData.accompMidi}
+                                         icon={<Soup color={'#ec7f32'}/>}/>
+                    </View>
 
-                <Text style={styles.subTitle}>Les Cuistots Migrateurs</Text>
-                {menuData.migrateurs.map((item, index) => (
-                    <Text key={index} style={styles.menuItem}>{item}</Text>
-                ))}
+                    <View style={styles.section}>
+                        <Text style={styles.sectionTitle}>{t('services.restoration.dinner')}</Text>
 
-                <Text style={styles.subTitle}>Menu Végétarien</Text>
-                {menuData.cibo.map((item, index) => (
-                    <Text key={index} style={styles.menuItem}>{item}</Text>
-                ))}
+                        <RestorationCard title={t('services.restoration.grill')} meals={[menuData.grilladesSoir]}
+                                         icon={<Beef color={'#ec7f32'}/>}/>
 
-                <Text style={styles.subTitle}>Accompagnements</Text>
-                {menuData.accompMidi.map((item, index) => (
-                    <Text key={index} style={styles.menuItem}>{item}</Text>
-                ))}
-            </View>
+                        <RestorationCard title={t('services.restoration.side_dishes')} meals={[menuData.accompSoir]}
+                                         icon={<Soup color={'#ec7f32'}/>}/>
 
-            <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Menu du Soir</Text>
-
-                <Text style={styles.subTitle}>Grillades</Text>
-                <Text style={styles.menuItem}>{menuData.grilladesSoir}</Text>
-
-                <Text style={styles.subTitle}>Accompagnements</Text>
-                <Text style={styles.menuItem}>{menuData.accompSoir}</Text>
-            </View>
+                    </View>
+                </>)}
         </ScrollView>
     );
 };
@@ -179,7 +176,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
-        backgroundColor: '#fff',
+        backgroundColor: '#0D0505',
+        paddingTop: 30,
+        paddingBottom: 10,
     },
     title: {
         fontSize: 24,
@@ -194,7 +193,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         marginBottom: 15,
-        color: '#333',
+        color: '#c0c0c0',
     },
     subTitle: {
         fontSize: 18,
@@ -207,7 +206,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginBottom: 5,
         paddingLeft: 10,
-        color: '#444',
+        color: '#b7b7b7',
     },
     error: {
         color: 'red',
@@ -215,3 +214,5 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
 });
+
+export default Restoration;

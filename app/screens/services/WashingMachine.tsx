@@ -143,8 +143,7 @@ const styles = StyleSheet.create({
     sectionTitle: {
         color: "#ffe6cc",
         fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 10,
+        fontWeight: '900',
     },
     subTitle: {
         color: "#ffe6cc",

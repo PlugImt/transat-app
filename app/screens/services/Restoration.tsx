@@ -151,7 +151,7 @@ export const Restoration = () => {
                 style={{
                     color: "#ffe6cc",
                     fontSize: 24,
-                    fontWeight: 'bold',
+                    fontWeight: '900',
                 }}
                 className="text-foreground font-pblack m-4 text-3xl"
             >{t('services.restoration.title')}</Text>

@@ -1,6 +1,7 @@
+import React, {useEffect, useState} from 'react';
 import {Text, TouchableWithoutFeedback, View} from 'react-native';
-import * as Icons from "lucide-react-native";
-import {useTranslation} from "react-i18next";
+import {useTranslation} from 'react-i18next';
+import {Icon} from 'react-native-paper';
 
 interface WashingMachineProps {
     number: string;
@@ -12,43 +13,59 @@ interface WashingMachineProps {
 const WashingMachineCard = ({number, type, status, icon}: WashingMachineProps) => {
     const {t} = useTranslation();
 
-    const getMachineStatus = (timeBeforeOff: number): string => {
-        if (timeBeforeOff === 0) return t('common.free');
-        return timeBeforeOff > 0 ? formatTime(timeBeforeOff) : 'UNKNOWN';
-    };
+    const [timeRemaining, setTimeRemaining] = useState<number>(status);
 
     const formatTime = (seconds: number): string => {
         const minutes = Math.floor(seconds / 60);
         const remainingSeconds = seconds % 60;
-        return `${minutes}m${remainingSeconds}s`;
+        return `${minutes}m${remainingSeconds < 10 ? `0${remainingSeconds}` : remainingSeconds}`;
+    };
+
+    useEffect(() => {
+        if (timeRemaining > 0 && status > 0) {
+            const timer = setInterval(() => {
+                setTimeRemaining(prevTime => prevTime - 1);
+            }, 1000);
+
+            return () => clearInterval(timer);
+        }
+        return undefined;
+    }, [timeRemaining, status]);
+
+    const getMachineStatus = (timeBeforeOff: number): string => {
+        if (timeBeforeOff === 0) return t('common.free');
+        return timeBeforeOff > 0 ? formatTime(timeBeforeOff) : 'UNKNOWN';
     };
 
     return (
         <TouchableWithoutFeedback accessible={true}>
             <View
                 style={{
-                    paddingLeft: 20,
-                    paddingRight: 20,
-                    paddingTop: 10,
-                    paddingBottom: 5,
+                    padding: 10,
                     backgroundColor: '#181010',
                     borderRadius: 10,
                     marginBottom: 15,
-                }}>
-                <View style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    marginBottom: 10
-                }}>
-                    <View style={{
+                }}
+            >
+                <View
+                    style={{
                         flexDirection: 'row',
                         alignItems: 'center',
-                        minWidth: 10,
-                    }}>
-                        {icon.toUpperCase() === 'WASHING MACHINE' ? <Icons.WashingMachine size={24} color="#ec7f32"/>
-                            : icon.toUpperCase() === 'DRYER' ? <Icons.Wind size={24} color="#ec7f32"/>
-                                : null}
+                        justifyContent: 'space-between',
+                    }}
+                >
+                    <View
+                        style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            minWidth: 5,
+                        }}
+                    >
+                        {icon.toUpperCase() === 'WASHING MACHINE' ? (
+                            <Icon source="washing-machine" size={24} color="#ec7f32"/>
+                        ) : icon.toUpperCase() === 'DRYER' ? (
+                            <Icon source="weather-windy" size={24} color="#ec7f32"/>
+                        ) : null}
 
                         <Text
                             numberOfLines={1}
@@ -56,9 +73,10 @@ const WashingMachineCard = ({number, type, status, icon}: WashingMachineProps) =
                                 fontSize: 14,
                                 color: '#ffe6cc',
                                 fontWeight: 'bold',
-                                marginLeft: 20,
+                                marginLeft: 10,
                                 minWidth: 10,
-                            }}>
+                            }}
+                        >
                             N°{number}
                         </Text>
                     </View>
@@ -72,7 +90,8 @@ const WashingMachineCard = ({number, type, status, icon}: WashingMachineProps) =
                             marginLeft: 10,
                             flex: 1,
                             textAlign: 'center',
-                        }}>
+                        }}
+                    >
                         {type}
                     </Text>
 
@@ -80,11 +99,12 @@ const WashingMachineCard = ({number, type, status, icon}: WashingMachineProps) =
                         style={{
                             backgroundColor: status === 0 ? '#0049a8' : '#ec7f32',
                             borderRadius: 10,
-                            minWidth: 75,
+                            minWidth: 70,
                             paddingTop: 10,
                             paddingBottom: 10,
                             marginRight: 10,
-                        }}>
+                        }}
+                    >
                         <Text
                             numberOfLines={1}
                             style={{
@@ -93,12 +113,17 @@ const WashingMachineCard = ({number, type, status, icon}: WashingMachineProps) =
                                 fontWeight: 'bold',
                                 marginHorizontal: 10,
                                 textAlign: 'center',
-                            }}>
-                            {getMachineStatus(status)}
+                            }}
+                        >
+                            {getMachineStatus(timeRemaining)}
                         </Text>
                     </View>
 
-                    <Icons.Bell size={24} color={status === 0 ? '#494949' : '#ec7f32'}/>
+                    <Icon
+                        source="bell-outline"
+                        size={24}
+                        color={status === 0 ? '#494949' : '#ec7f32'}
+                    />
                 </View>
             </View>
         </TouchableWithoutFeedback>

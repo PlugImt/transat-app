@@ -3,7 +3,6 @@ import {ActivityIndicator, ScrollView, StyleSheet, Text, View} from 'react-nativ
 import axios from 'axios';
 import RestorationCard from "@/app/components/custom/RestorationCard";
 import {useTranslation} from "react-i18next";
-import {Beef, ChefHat, Soup, Vegan} from "lucide-react-native";
 
 // Define interfaces for our data structure
 interface MenuItem {
@@ -148,23 +147,23 @@ export const Restoration = () => {
                         <Text style={styles.sectionTitle}>{t('services.restoration.lunch')}</Text>
 
                         <RestorationCard title={t('services.restoration.grill')} meals={menuData.grilladesMidi}
-                                         icon={<Beef color={'#ec7f32'}/>}/>
+                                         icon={"Beef"}/>
                         <RestorationCard title={t('services.restoration.migrator')} meals={menuData.migrateurs}
-                                         icon={<ChefHat color={'#ec7f32'}/>}/>
+                                         icon={"ChefHat"}/>
                         <RestorationCard title={t('services.restoration.vegetarian')} meals={menuData.cibo}
-                                         icon={<Vegan color={'#ec7f32'}/>}/>
+                                         icon={"Vegan"}/>
                         <RestorationCard title={t('services.restoration.side_dishes')} meals={menuData.accompMidi}
-                                         icon={<Soup color={'#ec7f32'}/>}/>
+                                         icon={"Soup"}/>
                     </View>
 
                     <View style={styles.section}>
                         <Text style={styles.sectionTitle}>{t('services.restoration.dinner')}</Text>
 
                         <RestorationCard title={t('services.restoration.grill')} meals={[menuData.grilladesSoir]}
-                                         icon={<Beef color={'#ec7f32'}/>}/>
+                                         icon={"Beef"}/>
 
                         <RestorationCard title={t('services.restoration.side_dishes')} meals={[menuData.accompSoir]}
-                                         icon={<Soup color={'#ec7f32'}/>}/>
+                                         icon={"Soup"}/>
 
                     </View>
                 </>)}

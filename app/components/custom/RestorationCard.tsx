@@ -1,9 +1,10 @@
 import {Text, TouchableWithoutFeedback, View} from 'react-native';
+import * as Icons from "lucide-react-native";
 
 interface CardProps {
     title: string;
     meals: string[];
-    icon: JSX.Element;
+    icon: string;
 }
 
 const RestorationCard = ({title, meals, icon}: CardProps) => {
@@ -21,13 +22,18 @@ const RestorationCard = ({title, meals, icon}: CardProps) => {
                 }}>
 
                 <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 10}}>
-                    {icon}
+                    {icon === 'Soup' ? <Icons.Soup size={24} color="#ec7f32"/>
+                        : icon === 'Beef' ? <Icons.Beef size={24} color="#ec7f32"/>
+                            : icon === 'Vegan' ? <Icons.Vegan size={24} color="#ec7f32"/>
+                                : icon === 'ChefHat' ? <Icons.ChefHat size={24} color="#ec7f32"/>
+                                    : null}
+
                     <Text
                         numberOfLines={1}
                         ellipsizeMode="tail"
                         style={{
                             fontSize: 18,
-                            fontWeight: 'black',
+                            fontWeight: 'bold',
                             marginBottom: 4,
                             color: '#ec7f32',
                             marginLeft: 10,

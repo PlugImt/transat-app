@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ActivityIndicator, RefreshControl, ScrollView, StyleSheet, Text, View} from 'react-native';
 import axios from 'axios';
 import RestorationCard from "@/app/components/custom/RestorationCard";
 import {useTranslation} from "react-i18next";
 
-// Define interfaces for our data structure
 interface MenuItem {
     pole: string;
     accompagnement: string;
@@ -35,11 +34,8 @@ export const Restoration = () => {
         accompSoir: ''
     });
     const [loading, setLoading] = useState<boolean>(true);
+    const [refreshing, setRefreshing] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
-
-    useEffect(() => {
-        fetchMenuData();
-    }, []);
 
     const fetchMenuData = async () => {
         try {
@@ -116,12 +112,22 @@ export const Restoration = () => {
 
             setMenuData(newMenuData);
             setLoading(false);
+            setRefreshing(false);
         } catch (err) {
             setError('Erreur lors du chargement du menu' + err);
             setLoading(false);
+            setRefreshing(false);
         }
     };
 
+    useEffect(() => {
+        fetchMenuData().then(r => r);
+    }, []);
+
+    const onRefresh = () => {
+        setRefreshing(true);
+        fetchMenuData().then(r => r);
+    };
 
     if (error) {
         alert(error);
@@ -131,7 +137,17 @@ export const Restoration = () => {
     }
 
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView
+            style={styles.container}
+            refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                    colors={['#ec7f32']}
+                    progressBackgroundColor="#0D0505"
+                />
+            }
+        >
             <Text
                 style={{
                     color: "#ffe6cc",
@@ -164,7 +180,6 @@ export const Restoration = () => {
 
                         <RestorationCard title={t('services.restoration.side_dishes')} meals={[menuData.accompSoir]}
                                          icon={"Soup"}/>
-
                     </View>
                 </>)}
         </ScrollView>

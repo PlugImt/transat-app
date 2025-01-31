@@ -35,7 +35,6 @@ const WashingMachineCard = ({number, type, status, icon}: WashingMachineProps) =
                     borderRadius: 10,
                     marginBottom: 15,
                 }}>
-
                 <View style={{
                     flexDirection: 'row',
                     alignItems: 'center',
@@ -45,6 +44,7 @@ const WashingMachineCard = ({number, type, status, icon}: WashingMachineProps) =
                     <View style={{
                         flexDirection: 'row',
                         alignItems: 'center',
+                        minWidth: 10,
                     }}>
                         {icon.toUpperCase() === 'WASHING MACHINE' ? <Icons.WashingMachine size={24} color="#ec7f32"/>
                             : icon.toUpperCase() === 'DRYER' ? <Icons.Wind size={24} color="#ec7f32"/>
@@ -52,24 +52,48 @@ const WashingMachineCard = ({number, type, status, icon}: WashingMachineProps) =
 
                         <Text
                             numberOfLines={1}
-                            style={{fontSize: 14, color: '#ffe6cc', fontWeight: 'bold', marginLeft: 20}}>
+                            style={{
+                                fontSize: 14,
+                                color: '#ffe6cc',
+                                fontWeight: 'bold',
+                                marginLeft: 20,
+                                minWidth: 10,
+                            }}>
                             N°{number}
                         </Text>
                     </View>
 
                     <Text
                         numberOfLines={1}
-                        style={{fontSize: 14, color: '#ffe6cc', fontWeight: 'bold', marginLeft: 10}}>
+                        style={{
+                            fontSize: 14,
+                            color: '#ffe6cc',
+                            fontWeight: 'bold',
+                            marginLeft: 10,
+                            flex: 1,
+                            textAlign: 'center',
+                        }}>
                         {type}
                     </Text>
 
-                    <View style={{
-                        backgroundColor: status === 0 ? '#0049a8' : '#ec7f32',
-                        borderRadius: 10
-                    }}>
+                    <View
+                        style={{
+                            backgroundColor: status === 0 ? '#0049a8' : '#ec7f32',
+                            borderRadius: 10,
+                            minWidth: 75,
+                            paddingTop: 10,
+                            paddingBottom: 10,
+                            marginRight: 10,
+                        }}>
                         <Text
                             numberOfLines={1}
-                            style={{fontSize: 14, color: '#ffe6cc', fontWeight: 'bold', margin: 10}}>
+                            style={{
+                                fontSize: 14,
+                                color: '#ffe6cc',
+                                fontWeight: 'bold',
+                                marginHorizontal: 10,
+                                textAlign: 'center',
+                            }}>
                             {getMachineStatus(status)}
                         </Text>
                     </View>
@@ -78,8 +102,7 @@ const WashingMachineCard = ({number, type, status, icon}: WashingMachineProps) =
                 </View>
             </View>
         </TouchableWithoutFeedback>
-    )
-        ;
+    );
 };
 
 export default WashingMachineCard;

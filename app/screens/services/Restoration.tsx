@@ -39,10 +39,9 @@ export const Restoration = () => {
 
     const fetchMenuData = async () => {
         try {
-            const proxyUrl = 'https://api.allorigins.win/raw?url=';
             const targetUrl = 'https://toast-js.ew.r.appspot.com/coteresto?key=1ohdRUdCYo6e71aLuBh7ZfF2lc_uZqp9D78icU4DPufA';
 
-            const response = await axios.get(proxyUrl + encodeURIComponent(targetUrl));
+            const response = await axios.get(targetUrl);
             const data = response.data;
 
             const regex = /var loadingData = (\[.*?])/;

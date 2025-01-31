@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, RefreshControl, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {useTranslation} from "react-i18next";
+import WashingMachineCard from "@/app/components/custom/WashingMachineCard";
 
 interface MachineData {
     machine_id: string;
@@ -111,12 +112,8 @@ export const WashingMachine: React.FC = () => {
                     const status = getMachineStatus(item.status, item.time_before_off);
 
                     return (
-                        <View key={item.machine_id} style={styles.machineItem}>
-                            <Text style={styles.machineText}>
-                                N°{item.selecteur_machine} {machineType} {status}
-                            </Text>
-                        </View>
-                    );
+                        <WashingMachineCard key={item.machine_id} number={item.selecteur_machine} type={machineType}
+                                            status={status}/>)
                 })
             )}
         </ScrollView>

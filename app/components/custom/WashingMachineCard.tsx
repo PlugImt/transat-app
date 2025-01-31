@@ -1,7 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import {Text, TouchableWithoutFeedback, View} from 'react-native';
+import React, {useCallback, useEffect, useState} from 'react';
+import {Modal, Text, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native';
 import {useTranslation} from 'react-i18next';
-import {Icon} from 'react-native-paper';
+import {Button, Icon, TextInput} from 'react-native-paper';
+import * as Notifications from 'expo-notifications';
+import {SchedulableTriggerInputTypes} from 'expo-notifications';
 
 interface WashingMachineProps {
     number: string;
@@ -10,120 +12,201 @@ interface WashingMachineProps {
     icon: string;
 }
 
+// Configure notifications
+Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+        shouldShowAlert: true,
+        shouldPlaySound: true,
+        shouldSetBadge: true,
+    }),
+});
+
 const WashingMachineCard = ({number, type, status, icon}: WashingMachineProps) => {
     const {t} = useTranslation();
-
     const [timeRemaining, setTimeRemaining] = useState<number>(status);
+    const [modalVisible, setModalVisible] = useState<boolean>(false);
+    const [notificationTime, setNotificationTime] = useState<string>('5');
+    const [notificationSet, setNotificationSet] = useState<boolean>(false);
 
-    const formatTime = (seconds: number): string => {
+    const formatTime = useCallback((seconds: number): string => {
         const minutes = Math.floor(seconds / 60);
         const remainingSeconds = seconds % 60;
         return `${minutes}m${remainingSeconds < 10 ? `0${remainingSeconds}` : remainingSeconds}`;
-    };
+    }, []);
+
+    const getMachineStatus = useCallback((timeBeforeOff: number): string => {
+        if (timeBeforeOff === 0) return t('common.free');
+        return timeBeforeOff > 0 ? formatTime(timeBeforeOff) : 'UNKNOWN';
+    }, [formatTime, t]);
 
     useEffect(() => {
         if (timeRemaining > 0 && status > 0) {
             const timer = setInterval(() => {
-                setTimeRemaining(prevTime => prevTime - 1);
+                setTimeRemaining(prev => prev - 1);
             }, 1000);
-
             return () => clearInterval(timer);
         }
-        return undefined;
-    }, [timeRemaining, status]);
+    }, [status]);
 
-    const getMachineStatus = (timeBeforeOff: number): string => {
-        if (timeBeforeOff === 0) return t('common.free');
-        return timeBeforeOff > 0 ? formatTime(timeBeforeOff) : 'UNKNOWN';
+    const scheduleNotification = async (minutes: number) => {
+        const notificationTriggerTime = timeRemaining - (minutes * 60);
+
+        if (notificationTriggerTime > 0) {
+            await Notifications.scheduleNotificationAsync({
+                content: {
+                    title: `Machine ${number} Almost Done!`,
+                    body: `Your ${type} will complete in ${minutes} minutes`,
+                },
+                trigger: {
+                    type: SchedulableTriggerInputTypes.TIME_INTERVAL,
+                    seconds: notificationTriggerTime,
+                },
+            });
+            setNotificationSet(true);
+        }
     };
+
+
+    const handleSetNotification = async () => {
+        const minutes = parseInt(notificationTime);
+        if (!isNaN(minutes) && minutes > 0) {
+            await scheduleNotification(minutes);
+            setModalVisible(false);
+        }
+    };
+
+    const NotificationModal = useCallback(() => (
+        <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => setModalVisible(false)}
+        >
+            <View style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: 'rgba(0,0,0,0.5)'
+            }}>
+                <View style={{
+                    backgroundColor: '#181010',
+                    padding: 20,
+                    borderRadius: 10,
+                    width: '80%'
+                }}>
+                    <Text style={{color: '#ffe6cc', fontSize: 16, marginBottom: 15}}>
+                        Get notified before machine completes
+                    </Text>
+                    <TextInput
+                        value={notificationTime}
+                        onChangeText={(text) => {
+                            const numericText = text.replace(/[^0-9]/g, '');
+                            setNotificationTime(numericText);
+                        }}
+                        keyboardType="numeric"
+                        label="Minutes before completion"
+                        style={{
+                            marginBottom: 15,
+                            color: '#ffe6cc',
+                            backgroundColor: '#181010',
+                        }}
+                    />
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                        <Button
+                            onPress={() => setModalVisible(false)}
+                            mode="outlined"
+                            textColor="#ec7f32"
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            onPress={handleSetNotification}
+                            mode="contained"
+                            buttonColor="#ec7f32"
+                        >
+                            Set Notification
+                        </Button>
+                    </View>
+                </View>
+            </View>
+        </Modal>
+    ), [modalVisible, notificationTime]);
 
     return (
         <TouchableWithoutFeedback accessible={true}>
-            <View
-                style={{
-                    padding: 10,
-                    backgroundColor: '#181010',
-                    borderRadius: 10,
-                    marginBottom: 15,
-                }}
-            >
-                <View
-                    style={{
+            <View style={{
+                padding: 10,
+                backgroundColor: '#181010',
+                borderRadius: 10,
+                marginBottom: 15,
+            }}>
+                <NotificationModal/>
+                <View style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                }}>
+                    <View style={{
                         flexDirection: 'row',
                         alignItems: 'center',
-                        justifyContent: 'space-between',
-                    }}
-                >
-                    <View
-                        style={{
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            minWidth: 5,
-                        }}
-                    >
+                        minWidth: 5,
+                    }}>
                         {icon.toUpperCase() === 'WASHING MACHINE' ? (
                             <Icon source="washing-machine" size={24} color="#ec7f32"/>
                         ) : icon.toUpperCase() === 'DRYER' ? (
                             <Icon source="weather-windy" size={24} color="#ec7f32"/>
                         ) : null}
-
-                        <Text
-                            numberOfLines={1}
-                            style={{
-                                fontSize: 14,
-                                color: '#ffe6cc',
-                                fontWeight: 'bold',
-                                marginLeft: 10,
-                                minWidth: 10,
-                            }}
-                        >
-                            N°{number}
-                        </Text>
-                    </View>
-
-                    <Text
-                        numberOfLines={1}
-                        style={{
+                        <Text style={{
                             fontSize: 14,
                             color: '#ffe6cc',
                             fontWeight: 'bold',
                             marginLeft: 10,
-                            flex: 1,
-                            textAlign: 'center',
-                        }}
-                    >
+                            minWidth: 10,
+                        }} numberOfLines={1}>
+                            N°{number}
+                        </Text>
+                    </View>
+
+                    <Text style={{
+                        fontSize: 14,
+                        color: '#ffe6cc',
+                        fontWeight: 'bold',
+                        marginLeft: 10,
+                        flex: 1,
+                        textAlign: 'center',
+                    }} numberOfLines={1}>
                         {type}
                     </Text>
 
-                    <View
-                        style={{
-                            backgroundColor: status === 0 ? '#0049a8' : '#ec7f32',
-                            borderRadius: 10,
-                            minWidth: 70,
-                            paddingTop: 10,
-                            paddingBottom: 10,
-                            marginRight: 10,
-                        }}
-                    >
-                        <Text
-                            numberOfLines={1}
-                            style={{
-                                fontSize: 14,
-                                color: '#ffe6cc',
-                                fontWeight: 'bold',
-                                marginHorizontal: 10,
-                                textAlign: 'center',
-                            }}
-                        >
+                    <View style={{
+                        backgroundColor: status === 0 ? '#0049a8' : '#ec7f32',
+                        borderRadius: 10,
+                        minWidth: 70,
+                        paddingTop: 10,
+                        paddingBottom: 10,
+                        marginRight: 10,
+                    }}>
+                        <Text style={{
+                            fontSize: 14,
+                            color: '#ffe6cc',
+                            fontWeight: 'bold',
+                            marginHorizontal: 10,
+                            textAlign: 'center',
+                        }} numberOfLines={1}>
                             {getMachineStatus(timeRemaining)}
                         </Text>
                     </View>
 
-                    <Icon
-                        source="bell-outline"
-                        size={24}
-                        color={status === 0 ? '#494949' : '#ec7f32'}
-                    />
+                    <TouchableOpacity
+                        onPress={() => status !== 0 && setModalVisible(true)}
+                        disabled={status === 0}
+                    >
+                        <Icon
+                            source={notificationSet ? "bell-ring" : "bell-outline"}
+                            size={24}
+                            color={status === 0 ? '#494949' : '#ec7f32'}
+                        />
+                    </TouchableOpacity>
                 </View>
             </View>
         </TouchableWithoutFeedback>

@@ -19,16 +19,6 @@ export const WashingMachine: React.FC = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
-    const formatTime = (seconds: number): string => {
-        const minutes = Math.floor(seconds / 60);
-        const remainingSeconds = seconds % 60;
-        return `${minutes}m${remainingSeconds}s`;
-    };
-
-    const getMachineStatus = (status: number, timeBeforeOff: number): string => {
-        if (status === 1) return 'FREE';
-        return timeBeforeOff > 0 ? formatTime(timeBeforeOff) : 'UNKNOWN';
-    };
 
     const getMachine = () => {
         fetch(`https://status.wi-line.fr/update_machine_ext.php`, {
@@ -108,7 +98,7 @@ export const WashingMachine: React.FC = () => {
                             key={item.machine_id}
                             number={item.selecteur_machine}
                             type={t('services.washing_machine.washing_machine')}
-                            status={getMachineStatus(item.status, item.time_before_off)}
+                            status={item.time_before_off}
                         />
                     ))}
                 </>
@@ -122,7 +112,7 @@ export const WashingMachine: React.FC = () => {
                             key={item.machine_id}
                             number={item.selecteur_machine}
                             type={t('services.washing_machine.dryer')}
-                            status={getMachineStatus(item.status, item.time_before_off)}
+                            status={item.time_before_off}
                         />
                     ))}
                 </>

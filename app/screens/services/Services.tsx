@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView, Text} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 import {useTranslation} from "react-i18next";
 import Card from "@/app/components/common/Card";
 import {useNavigation} from "@react-navigation/native";
@@ -32,6 +32,7 @@ export const Services = () => {
 
             <Card
                 image={require('@/assets/images/Logos/machine_large.png')}
+                // animation={require('@/assets/animations/washing_machine.json')}
                 onPress={() => navigation.navigate('WashingMachine')}
             />
             <Card
@@ -50,6 +51,7 @@ export const Services = () => {
                 image={require('@/assets/images/Logos/velo_large.png')}
                 onPress={() => navigation.navigate('WashingMachine')}
             />
+            <View style={{height: 50}}/>
             {/*<Button title={t('services.market')} onPress={() => console.log('Restoration')}/>*/}
             {/*<Button title={t('services.reservations')} onPress={() => console.log('Restoration')}/>*/}
             {/*<Button title={t('services.events')} onPress={() => console.log('Restoration')}/>*/}

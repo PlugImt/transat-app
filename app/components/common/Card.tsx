@@ -1,18 +1,21 @@
-import type {ImageSourcePropType} from 'react-native';
-import {Dimensions, Image, Text, TouchableWithoutFeedback, View} from 'react-native';
-import {useEffect, useState} from 'react';
+import {Dimensions, Image, ImageSourcePropType, Text, TouchableOpacity, View} from 'react-native';
+import {useEffect, useRef, useState} from 'react';
+import LottieView from "lottie-react-native";
 
 interface CardProps {
     title?: string;
     description?: string;
     image?: ImageSourcePropType | null;
+    animation?: string;
     onPress: () => void;
 }
 
-const Card = ({title, description, image, onPress}: CardProps) => {
+const Card = ({title, description, image, animation, onPress}: CardProps) => {
     const [imageHeight, setImageHeight] = useState(200);
     const screenWidth = Dimensions.get('window').width;
     const imageWidth = screenWidth - 40;
+
+    const animation_ref = useRef(null);
 
     useEffect(() => {
         if (image && typeof image !== 'number') {
@@ -34,7 +37,7 @@ const Card = ({title, description, image, onPress}: CardProps) => {
     }, [image, imageWidth]);
 
     return (
-        <TouchableWithoutFeedback onPress={onPress} accessible={true}>
+        <TouchableOpacity onPress={onPress} accessible={true} activeOpacity={0.4}>
             <View
                 style={{
                     paddingTop: 10,
@@ -52,6 +55,19 @@ const Card = ({title, description, image, onPress}: CardProps) => {
                         }}
                     />
                 )}
+                {animation && (
+                    <LottieView
+                        ref={animation_ref}
+                        loop={true}
+                        style={{
+                            width: imageWidth,
+                            height: imageHeight,
+                            borderRadius: 10,
+                            backgroundColor: '#181010',
+                        }}
+                        autoPlay
+                        source={animation}
+                    />)}
                 {title && (
                     <Text
                         numberOfLines={1}
@@ -79,7 +95,7 @@ const Card = ({title, description, image, onPress}: CardProps) => {
                     </Text>
                 )}
             </View>
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
     );
 };
 

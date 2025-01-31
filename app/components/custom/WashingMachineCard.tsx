@@ -8,8 +8,6 @@ interface WashingMachineProps {
 }
 
 const WashingMachineCard = ({number, type, status}: WashingMachineProps) => {
-    console.log('WashingMachineCard', number, type, status);
-
     return (
         <TouchableWithoutFeedback accessible={true}>
             <View
@@ -23,28 +21,41 @@ const WashingMachineCard = ({number, type, status}: WashingMachineProps) => {
                     marginBottom: 15,
                 }}>
 
-                <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 10}}>
+                <View style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    marginBottom: 10
+                }}>
                     {type.toUpperCase() === 'WASHING MACHINE' ? <Icons.WashingMachine size={24} color="#ec7f32"/>
                         : type.toUpperCase() === 'DRYER' ? <Icons.Waves size={24} color="#ec7f32"/>
                             : null}
 
                     <Text
                         numberOfLines={1}
-                        ellipsizeMode="tail"
-                        style={{
-                            fontSize: 18,
-                            fontWeight: 'bold',
-                            marginBottom: 4,
-                            color: '#ec7f32',
-                            marginLeft: 10,
-                        }}>
-                        N°{number} {type} {status}
-
+                        style={{fontSize: 14, color: '#ffe6cc', fontWeight: 'bold', marginLeft: 10}}>
+                        N°{number}
                     </Text>
+                    <Text
+                        numberOfLines={1}
+                        style={{fontSize: 14, color: '#ffe6cc', fontWeight: 'bold', marginLeft: 10}}>
+                        {type}
+                    </Text>
+                    <View style={{
+                        backgroundColor: "#ec7f32",
+                        borderRadius: 10
+                    }}>
+                        <Text
+                            numberOfLines={1}
+                            style={{fontSize: 14, color: '#ffe6cc', fontWeight: 'bold', margin: 10}}>
+                            {status}
+                        </Text>
+                    </View>
                 </View>
             </View>
         </TouchableWithoutFeedback>
-    );
+    )
+        ;
 };
 
 export default WashingMachineCard;

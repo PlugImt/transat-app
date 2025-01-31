@@ -82,6 +82,10 @@ export const WashingMachine: React.FC = () => {
         );
     }
 
+    // Group washing machines and dryers separately
+    const washingMachines = dataMachine.filter(machine => machine.nom_type.trim() === 'LAVE LINGE');
+    const dryers = dataMachine.filter(machine => machine.nom_type.trim() !== 'LAVE LINGE');
+
     return (
         <ScrollView
             style={styles.container}
@@ -94,27 +98,38 @@ export const WashingMachine: React.FC = () => {
                 />
             }
         >
+            <Text style={styles.sectionTitle}>{t('services.washing_machine.title')}</Text>
 
-            <Text
-                style={{
-                    color: "#ffe6cc",
-                    fontSize: 24,
-                    fontWeight: 'bold',
-                }}
-                className="text-foreground font-pblack m-4 text-3xl"
-            >{t('services.washing_machine.title')}</Text>
+            {washingMachines.length > 0 && (
+                <>
+                    <Text style={styles.subTitle}>{t('services.washing_machine.washing_machine')}</Text>
+                    {washingMachines.map(item => (
+                        <WashingMachineCard
+                            key={item.machine_id}
+                            number={item.selecteur_machine}
+                            type={t('services.washing_machine.washing_machine')}
+                            status={getMachineStatus(item.status, item.time_before_off)}
+                        />
+                    ))}
+                </>
+            )}
 
-            {dataMachine.length === 0 ? (
+            {dryers.length > 0 && (
+                <>
+                    <Text style={styles.subTitle}>{t('services.washing_machine.dryer')}</Text>
+                    {dryers.map(item => (
+                        <WashingMachineCard
+                            key={item.machine_id}
+                            number={item.selecteur_machine}
+                            type={t('services.washing_machine.dryer')}
+                            status={getMachineStatus(item.status, item.time_before_off)}
+                        />
+                    ))}
+                </>
+            )}
+
+            {washingMachines.length === 0 && dryers.length === 0 && (
                 <Text style={styles.emptyText}>No machines available</Text>
-            ) : (
-                dataMachine.map((item) => {
-                    const machineType = item.nom_type.trim() === 'LAVE LINGE' ? t('services.washing_machine.washing_machine') : t('services.washing_machine.dryer');
-                    const status = getMachineStatus(item.status, item.time_before_off);
-
-                    return (
-                        <WashingMachineCard key={item.machine_id} number={item.selecteur_machine} type={machineType}
-                                            status={status}/>)
-                })
             )}
         </ScrollView>
     );
@@ -133,23 +148,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#0D0505',
     },
-    title: {
+    sectionTitle: {
+        color: "#ffe6cc",
         fontSize: 24,
         fontWeight: 'bold',
-        marginBottom: 20,
-        textAlign: 'center',
-        color: 'white',
-    },
-    machineItem: {
-        backgroundColor: '#1C1C1C',
-        padding: 15,
         marginBottom: 10,
-        borderRadius: 10,
     },
-    machineText: {
-        color: 'white',
-        textAlign: 'center',
-        fontSize: 16,
+    subTitle: {
+        color: "#ffe6cc",
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginTop: 20,
+        marginBottom: 10,
     },
     errorText: {
         color: 'red',

@@ -19,7 +19,6 @@
   },
   "services": {
     "services": "Services",
-    "washing_machine": "Washing Machine",
     "games": "Games",
     "market": "Market",
     "traq": "Traq",
@@ -34,6 +33,11 @@
       "migrator": "Migrator",
       "vegetarian": "Vegetarian",
       "side_dishes": "Side Dishes"
+    },
+    "washing_machine": {
+      "title": "Washing Machine",
+      "washing_machine": "Washing Machine",
+      "dryer": "Dryer"
     }
   }
 }

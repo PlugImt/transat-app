@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, FlatList, StyleSheet, Text, View} from 'react-native';
+import {ActivityIndicator, RefreshControl, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {useTranslation} from "react-i18next";
 
 interface MachineData {
     machine_id: string;
@@ -10,7 +11,10 @@ interface MachineData {
 }
 
 export const WashingMachine: React.FC = () => {
+    const {t} = useTranslation();
+
     const [dataMachine, setDataMachine] = useState<MachineData[]>([]);
+    const [refreshing, setRefreshing] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -23,19 +27,6 @@ export const WashingMachine: React.FC = () => {
     const getMachineStatus = (status: number, timeBeforeOff: number): string => {
         if (status === 1) return 'FREE';
         return timeBeforeOff > 0 ? formatTime(timeBeforeOff) : 'UNKNOWN';
-    };
-
-    const renderMachineItem = ({item}: { item: MachineData }) => {
-        const machineType = item.nom_type.trim() === 'LAVE LINGE' ? 'Washing Machine' : 'Dryer';
-        const status = getMachineStatus(item.status, item.time_before_off);
-
-        return (
-            <View style={styles.machineItem}>
-                <Text style={styles.machineText}>
-                    N°{item.selecteur_machine} {machineType} {status}
-                </Text>
-            </View>
-        );
     };
 
     const getMachine = () => {
@@ -55,11 +46,13 @@ export const WashingMachine: React.FC = () => {
             .then((jsonData) => {
                 setDataMachine(jsonData.machine_info_status.machine_list);
                 setIsLoading(false);
+                setRefreshing(false);
             })
             .catch((error) => {
                 console.error('Fetch error:', error);
                 setError(error.message);
                 setIsLoading(false);
+                setRefreshing(false);
             });
     };
 
@@ -67,9 +60,14 @@ export const WashingMachine: React.FC = () => {
         getMachine();
     }, []);
 
+    const onRefresh = () => {
+        setRefreshing(true);
+        getMachine();
+    };
+
     if (isLoading) {
         return (
-            <View style={styles.container}>
+            <View style={styles.centeredContainer}>
                 <ActivityIndicator size="large" color="#ffffff"/>
             </View>
         );
@@ -77,24 +75,51 @@ export const WashingMachine: React.FC = () => {
 
     if (error) {
         return (
-            <View style={styles.container}>
+            <View style={styles.centeredContainer}>
                 <Text style={styles.errorText}>Error: {error}</Text>
             </View>
         );
     }
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Machine Status</Text>
-            <FlatList
-                data={dataMachine}
-                renderItem={renderMachineItem}
-                keyExtractor={(item) => item.machine_id}
-                ListEmptyComponent={
-                    <Text style={styles.emptyText}>No machines available</Text>
-                }
-            />
-        </View>
+        <ScrollView
+            style={styles.container}
+            refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                    colors={['#ec7f32']}
+                    progressBackgroundColor="#0D0505"
+                />
+            }
+        >
+
+            <Text
+                style={{
+                    color: "#ffe6cc",
+                    fontSize: 24,
+                    fontWeight: 'bold',
+                }}
+                className="text-foreground font-pblack m-4 text-3xl"
+            >{t('services.washing_machine.title')}</Text>
+
+            {dataMachine.length === 0 ? (
+                <Text style={styles.emptyText}>No machines available</Text>
+            ) : (
+                dataMachine.map((item) => {
+                    const machineType = item.nom_type.trim() === 'LAVE LINGE' ? t('services.washing_machine.washing_machine') : t('services.washing_machine.dryer');
+                    const status = getMachineStatus(item.status, item.time_before_off);
+
+                    return (
+                        <View key={item.machine_id} style={styles.machineItem}>
+                            <Text style={styles.machineText}>
+                                N°{item.selecteur_machine} {machineType} {status}
+                            </Text>
+                        </View>
+                    );
+                })
+            )}
+        </ScrollView>
     );
 };
 
@@ -104,6 +129,12 @@ const styles = StyleSheet.create({
         padding: 20,
         backgroundColor: '#0D0505',
         paddingTop: 30,
+    },
+    centeredContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#0D0505',
     },
     title: {
         fontSize: 24,

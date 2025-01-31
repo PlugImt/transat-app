@@ -9,7 +9,8 @@
     "light": "Clair",
     "system": "Système",
     "home": "Accueil",
-    "account": "Compte"
+    "account": "Compte",
+    "free": "Libre"
   },
   "auth": {
     "signIn": "Se connecter",
@@ -19,13 +20,12 @@
   },
   "services": {
     "services": "Services",
-    "washing_machine": "Lave-linge",
     "games": "Jeux",
     "market": "Marché",
     "traq": "Traq",
     "clubs": "Clubs",
     "events": "Événements",
-    "reservations": "Reservations",
+    "reservations": "Réservations",
     "restoration": {
       "title": "Menu RU",
       "lunch": "Midi",
@@ -34,6 +34,11 @@
       "migrator": "Migrateur",
       "vegetarian": "Végétarien",
       "side_dishes": "Accompagnements"
+    },
+    "washing_machine": {
+      "title": "Laverie",
+      "washing_machine": "Lave-linge",
+      "dryer": "Sèche-linge"
     }
   }
 }

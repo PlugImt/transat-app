@@ -99,6 +99,7 @@ export const WashingMachine: React.FC = () => {
                             number={item.selecteur_machine}
                             type={t('services.washing_machine.washing_machine')}
                             status={item.time_before_off}
+                            icon={'WASHING MACHINE'}
                         />
                     ))}
                 </>
@@ -113,6 +114,7 @@ export const WashingMachine: React.FC = () => {
                             number={item.selecteur_machine}
                             type={t('services.washing_machine.dryer')}
                             status={item.time_before_off}
+                            icon={'DRYER'}
                         />
                     ))}
                 </>

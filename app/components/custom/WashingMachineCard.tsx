@@ -1,17 +1,19 @@
 import {Text, TouchableWithoutFeedback, View} from 'react-native';
 import * as Icons from "lucide-react-native";
+import {useTranslation} from "react-i18next";
 
 interface WashingMachineProps {
     number: string;
     type: string;
     status: number;
+    icon: string;
 }
 
-const WashingMachineCard = ({number, type, status}: WashingMachineProps) => {
-
+const WashingMachineCard = ({number, type, status, icon}: WashingMachineProps) => {
+    const {t} = useTranslation();
 
     const getMachineStatus = (timeBeforeOff: number): string => {
-        if (timeBeforeOff === 0) return 'FREE';
+        if (timeBeforeOff === 0) return t('common.free');
         return timeBeforeOff > 0 ? formatTime(timeBeforeOff) : 'UNKNOWN';
     };
 
@@ -44,8 +46,8 @@ const WashingMachineCard = ({number, type, status}: WashingMachineProps) => {
                         flexDirection: 'row',
                         alignItems: 'center',
                     }}>
-                        {type.toUpperCase() === 'WASHING MACHINE' ? <Icons.WashingMachine size={24} color="#ec7f32"/>
-                            : type.toUpperCase() === 'DRYER' ? <Icons.Waves size={24} color="#ec7f32"/>
+                        {icon.toUpperCase() === 'WASHING MACHINE' ? <Icons.WashingMachine size={24} color="#ec7f32"/>
+                            : icon.toUpperCase() === 'DRYER' ? <Icons.Wind size={24} color="#ec7f32"/>
                                 : null}
 
                         <Text
@@ -72,7 +74,7 @@ const WashingMachineCard = ({number, type, status}: WashingMachineProps) => {
                         </Text>
                     </View>
 
-                    <Icons.Bell size={24} color="#ec7f32"/>
+                    <Icons.Bell size={24} color={status === 0 ? '#494949' : '#ec7f32'}/>
                 </View>
             </View>
         </TouchableWithoutFeedback>

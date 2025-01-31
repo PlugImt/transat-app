@@ -9,7 +9,8 @@
     "light": "Light",
     "system": "System",
     "home": "Home",
-    "account": "Account"
+    "account": "Account",
+    "free": "Free"
   },
   "auth": {
     "signIn": "Sign In",

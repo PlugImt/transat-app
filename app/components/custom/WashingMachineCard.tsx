@@ -27,6 +27,7 @@ const WashingMachineCard = ({number, type, status, icon}: WashingMachineProps) =
     const [modalVisible, setModalVisible] = useState<boolean>(false);
     const [notificationTime, setNotificationTime] = useState<string>('5');
     const [notificationSet, setNotificationSet] = useState<boolean>(false);
+    const [notificationId, setNotificationId] = useState<string | null>(null);
 
     const formatTime = useCallback((seconds: number): string => {
         const minutes = Math.floor(seconds / 60);
@@ -49,10 +50,14 @@ const WashingMachineCard = ({number, type, status, icon}: WashingMachineProps) =
     }, [status]);
 
     const scheduleNotification = async (minutes: number) => {
+        if (notificationId) {
+            await Notifications.cancelScheduledNotificationAsync(notificationId);
+        }
+
         const notificationTriggerTime = timeRemaining - (minutes * 60);
 
         if (notificationTriggerTime > 0) {
-            await Notifications.scheduleNotificationAsync({
+            const id = await Notifications.scheduleNotificationAsync({
                 content: {
                     title: `Machine ${number} Almost Done!`,
                     body: `Your ${type} will complete in ${minutes} minutes`,
@@ -62,6 +67,7 @@ const WashingMachineCard = ({number, type, status, icon}: WashingMachineProps) =
                     seconds: notificationTriggerTime,
                 },
             });
+            setNotificationId(id);
             setNotificationSet(true);
         }
     };
@@ -72,6 +78,20 @@ const WashingMachineCard = ({number, type, status, icon}: WashingMachineProps) =
         if (!isNaN(minutes) && minutes > 0) {
             await scheduleNotification(minutes);
             setModalVisible(false);
+        }
+    };
+
+    const handleBellPress = async () => {
+        if (status === 0) return;
+
+        if (notificationSet) {
+            if (notificationId) {
+                await Notifications.cancelScheduledNotificationAsync(notificationId);
+            }
+            setNotificationId(null);
+            setNotificationSet(false);
+        } else {
+            setModalVisible(true);
         }
     };
 
@@ -198,7 +218,7 @@ const WashingMachineCard = ({number, type, status, icon}: WashingMachineProps) =
                     </View>
 
                     <TouchableOpacity
-                        onPress={() => status !== 0 && setModalVisible(true)}
+                        onPress={handleBellPress}
                         disabled={status === 0}
                     >
                         <Icon

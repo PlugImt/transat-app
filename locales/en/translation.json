@@ -33,7 +33,9 @@
       "grill": "Grill",
       "migrator": "Migrator",
       "vegetarian": "Vegetarian",
-      "side_dishes": "Side Dishes"
+      "side_dishes": "Side Dishes",
+      "no_data": "It seems that there is no data to display",
+      "closed": "The restaurant is closed on weekends"
     },
     "washing_machine": {
       "title": "Laundromat",

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, RefreshControl, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ActivityIndicator, Image, RefreshControl, ScrollView, StyleSheet, Text, View} from 'react-native';
 import axios from 'axios';
 import RestorationCard from "@/app/components/custom/RestorationCard";
 import {useTranslation} from "react-i18next";
@@ -113,7 +113,7 @@ export const Restoration = () => {
             setLoading(false);
             setRefreshing(false);
         } catch (err) {
-            setError('Erreur lors du chargement du menu' + err);
+            setError(String(err));
             setLoading(false);
             setRefreshing(false);
         }
@@ -128,12 +128,12 @@ export const Restoration = () => {
         fetchMenuData().then(r => r);
     };
 
-    if (error) {
-        alert(error);
-        return (
-            <Text style={styles.error}>{error}</Text>
-        );
-    }
+    const isWeekend = () => {
+        const now = new Date();
+        const day = now.getDay();
+        const hour = now.getHours();
+        return (day === 5 && hour >= 14) || (day === 6) || (day === 0 && hour < 10);
+    };
 
     return (
         <ScrollView
@@ -158,28 +158,55 @@ export const Restoration = () => {
 
             {loading ? <ActivityIndicator size="large" color="#ec7f32"/> : (
                 <>
-                    <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>{t('services.restoration.lunch')}</Text>
+                    {isWeekend() ? (
+                        <View style={[styles.center, {minHeight: '100%'}]}>
+                            <Image source={require('@/assets/images/Logos/resoration.png')}
+                                   style={{width: 150, height: 150, tintColor: 'gray'}}/>
+                            <Text style={styles.error}>{t('services.restoration.closed')}</Text>
+                        </View>
+                    ) : error ? (
+                        <View style={styles.center}>
+                            <Text style={styles.error}>{error}</Text>
+                        </View>
+                    ) : menuData.grilladesMidi.length === 0 && menuData.migrateurs.length === 0
+                    && menuData.cibo.length === 0 && menuData.accompMidi.length === 0
+                    && menuData.grilladesSoir.length === 0 && menuData.accompSoir.length === 0 ? (
+                        <View style={[styles.center, {minHeight: '100%'}]}>
+                            <Image source={require('@/assets/images/Logos/resoration.png')}
+                                   style={{width: 150, height: 150, tintColor: 'gray'}}/>
+                            <Text style={styles.error}>{t('services.restoration.no_data')}</Text>
+                        </View>
+                    ) : (
+                        <View style={styles.section}>
+                            <Text style={styles.sectionTitle}>{t('services.restoration.lunch')}</Text>
 
-                        <RestorationCard title={t('services.restoration.grill')} meals={menuData.grilladesMidi}
-                                         icon={"Beef"}/>
-                        <RestorationCard title={t('services.restoration.migrator')} meals={menuData.migrateurs}
-                                         icon={"ChefHat"}/>
-                        <RestorationCard title={t('services.restoration.vegetarian')} meals={menuData.cibo}
-                                         icon={"Vegan"}/>
-                        <RestorationCard title={t('services.restoration.side_dishes')} meals={menuData.accompMidi}
-                                         icon={"Soup"}/>
-                    </View>
+                            <RestorationCard title={t('services.restoration.grill')} meals={menuData.grilladesMidi}
+                                             icon={"Beef"}/>
+                            <RestorationCard title={t('services.restoration.migrator')} meals={menuData.migrateurs}
+                                             icon={"ChefHat"}/>
+                            <RestorationCard title={t('services.restoration.vegetarian')} meals={menuData.cibo}
+                                             icon={"Vegan"}/>
+                            <RestorationCard title={t('services.restoration.side_dishes')}
+                                             meals={menuData.accompMidi}
+                                             icon={"Soup"}/>
+                        </View>
+                    )}
 
-                    <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>{t('services.restoration.dinner')}</Text>
+                    {menuData.grilladesSoir && menuData.accompSoir && (
+                        <View style={styles.section}>
+                            <Text style={styles.sectionTitle}>{t('services.restoration.dinner')}</Text>
 
-                        <RestorationCard title={t('services.restoration.grill')} meals={[menuData.grilladesSoir]}
-                                         icon={"Beef"}/>
+                            <RestorationCard title={t('services.restoration.grill')}
+                                             meals={[menuData.grilladesSoir]}
+                                             icon={"Beef"}/>
 
-                        <RestorationCard title={t('services.restoration.side_dishes')} meals={[menuData.accompSoir]}
-                                         icon={"Soup"}/>
-                    </View>
+                            <RestorationCard title={t('services.restoration.side_dishes')}
+                                             meals={[menuData.accompSoir]}
+                                             icon={"Soup"}/>
+                        </View>
+                    )}
+
+
                 </>)}
         </ScrollView>
     );
@@ -225,6 +252,12 @@ const styles = StyleSheet.create({
         color: 'red',
         fontSize: 16,
         textAlign: 'center',
+    },
+    center: {
+        flex: 1,
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });
 

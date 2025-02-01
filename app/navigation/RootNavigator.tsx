@@ -15,8 +15,7 @@ export const RootNavigator = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        // Check for stored user data when app loads
-        checkUser();
+        checkUser().then(r => r);
     }, []);
 
     const checkUser = async () => {

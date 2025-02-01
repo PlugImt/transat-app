@@ -61,8 +61,8 @@ const WashingMachineCard = ({number, type, status, icon}: WashingMachineProps) =
         if (notificationTriggerTime > 0) {
             const id = await Notifications.scheduleNotificationAsync({
                 content: {
-                    title: `Machine ${number} Almost Done!`,
-                    body: `Your ${type} will complete in ${minutes} minutes`,
+                    title: t("services.washing_machine.almost_done", {number}),
+                    body: t("services.washing_machine.almost_done_body", {type, minutes}),
                 },
                 trigger: {
                     type: SchedulableTriggerInputTypes.TIME_INTERVAL,
@@ -117,7 +117,7 @@ const WashingMachineCard = ({number, type, status, icon}: WashingMachineProps) =
                     width: '80%'
                 }}>
                     <Text style={{color: '#ffe6cc', fontSize: 16, marginBottom: 15}}>
-                        Get notified before machine completes
+                        {t('services.washing_machine.get_notification')}
                     </Text>
                     <TextInput
                         value={notificationTime}
@@ -126,7 +126,7 @@ const WashingMachineCard = ({number, type, status, icon}: WashingMachineProps) =
                             setNotificationTime(numericText);
                         }}
                         keyboardType="numeric"
-                        placeholder="Minutes before completion"
+                        placeholder={t('services.washing_machine.time_to_completion')}
                         style={{
                             marginBottom: 15,
                             color: '#ffe6cc',
@@ -139,14 +139,14 @@ const WashingMachineCard = ({number, type, status, icon}: WashingMachineProps) =
                             mode="outlined"
                             textColor="#ec7f32"
                         >
-                            Cancel
+                            {t('common.cancel')}
                         </Button>
                         <Button
                             onPress={handleSetNotification}
                             mode="contained"
                             buttonColor="#ec7f32"
                         >
-                            Set Notification
+                            {t('common.set_notification')}
                         </Button>
                     </View>
                 </View>

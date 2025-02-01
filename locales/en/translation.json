@@ -10,7 +10,9 @@
     "system": "System",
     "home": "Home",
     "account": "Account",
-    "free": "Free"
+    "free": "Free",
+    "cancel": "Cancel",
+    "set_notification": "Set Notification"
   },
   "auth": {
     "signIn": "Sign In",
@@ -40,7 +42,11 @@
     "washing_machine": {
       "title": "Laundromat",
       "washing_machine": "Washing Machine",
-      "dryer": "Dryer"
+      "dryer": "Dryer",
+      "almost_done": "Machine {{number}} Almost Done!",
+      "almost_done_body": "Your {{type}} will complete in {{minutes}} minutes",
+      "get_notification": "Get notified before machine completes",
+      "time_to_completion": "Minutes before completion"
     }
   }
 }

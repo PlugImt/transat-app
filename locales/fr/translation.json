@@ -10,7 +10,9 @@
     "system": "Système",
     "home": "Accueil",
     "account": "Compte",
-    "free": "Libre"
+    "free": "Libre",
+    "cancel": "Annuler",
+    "set_notification": "Définir une notification"
   },
   "auth": {
     "signIn": "Se connecter",
@@ -33,12 +35,18 @@
       "grill": "Grillades",
       "migrator": "Migrateur",
       "vegetarian": "Végétarien",
-      "side_dishes": "Accompagnements"
+      "side_dishes": "Accompagnements",
+      "no_data": "Il semble qu'il n'y ait pas de données à afficher",
+      "closed": "Le restaurant est fermé le week-end"
     },
     "washing_machine": {
       "title": "Laverie",
       "washing_machine": "Lave-linge",
-      "dryer": "Sèche-linge"
+      "dryer": "Sèche-linge",
+      "almost_done": "Machine {{number}} presque terminée !",
+      "almost_done_body": "Votre {{type}} sera terminé dans {{minutes}} minutes",
+      "get_notification": "Recevoir une notification avant la fin du cycle",
+      "time_to_completion": "Minutes avant la fin"
     }
   }
 }

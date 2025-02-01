@@ -1,25 +1,27 @@
 {
   "common": {
-    "welcome": "Bienvenido/a",
-    "settings": "Ajustes",
+    "welcome": "Bienvenido",
+    "settings": "Configuración",
     "logout": "Cerrar sesión",
     "language": "Idioma",
     "theme": "Tema",
-    "dark": "Oscura",
-    "light": "Luminosa",
+    "dark": "Oscuro",
+    "light": "Claro",
     "system": "Sistema",
     "home": "Inicio",
-    "account": "Cuenta"
+    "account": "Cuenta",
+    "free": "FREE",
+    "cancel": "Cancelar",
+    "set_notification": "Establecer notificación"
   },
   "auth": {
     "signIn": "Iniciar sesión",
-    "signUp": "Crear cuenta",
+    "signUp": "Registrarse",
     "email": "Correo electrónico",
     "password": "Contraseña"
   },
   "services": {
     "services": "Servicios",
-    "washing_machine": "Lavadora",
     "games": "Juegos",
     "market": "Mercado",
     "traq": "Traq",
@@ -30,10 +32,21 @@
       "title": "Restauración",
       "lunch": "Almuerzo",
       "dinner": "Cena",
-      "grill": "Barbacoa",
+      "grill": "Parrilla",
       "migrator": "Migrador",
-      "vegetarian": "Vegetario",
-      "side_dishes": "Salsas y guarniciones"
+      "vegetarian": "Vegetariano",
+      "side_dishes": "Acompañamientos",
+      "no_data": "Parece que no hay datos para mostrar",
+      "closed": "El restaurante está cerrado los fines de semana"
+    },
+    "washing_machine": {
+      "title": "Lavandería",
+      "washing_machine": "Lavadora",
+      "dryer": "Secadora",
+      "almost_done": "¡Máquina {{number}} casi lista!",
+      "almost_done_body": "Tu {{type}} estará listo en {{minutes}} minutos",
+      "get_notification": "Recibir notificación antes de que termine la máquina",
+      "time_to_completion": "Minutos antes de finalizar"
     }
   }
 }

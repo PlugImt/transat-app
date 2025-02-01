@@ -14,11 +14,9 @@ interface WeatherData {
     img: string;
 }
 
-// Display the current weather in Nantes
 export function Weather({setRefreshing, refreshing}: WeatherProps) {
     const [weatherNantes, setWeatherNantes] = useState<WeatherData | undefined>();
 
-    // Get the current date
     const date = new Date();
 
     useEffect(() => {
@@ -27,11 +25,11 @@ export function Weather({setRefreshing, refreshing}: WeatherProps) {
                 const data = await getWeather(setRefreshing);
                 setWeatherNantes(data);
             } catch (error) {
-                console.error('Erreur lors de la récupération de la météo :', error);
+                console.error('Error while getting the weather :', error);
             }
         }
 
-        fetchWeather();
+        fetchWeather().then(r => r);
     }, [refreshing]);
 
     return (

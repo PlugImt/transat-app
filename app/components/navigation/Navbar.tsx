@@ -1,12 +1,13 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Feather} from '@expo/vector-icons';
 import {StyleSheet} from 'react-native';
 import {BottomTabParamList} from "@/app/navigation/types";
 import {Home} from "@/app/screens/Home";
-import {Games} from "@/app/screens/games/Games";
 import {Services} from "@/app/screens/services/Services";
 import {useTranslation} from "react-i18next";
+import {GridIcon, LucideHome, Play, User} from "lucide-react-native";
+import Games from "@/app/screens/services/Games";
+import Account from "@/app/screens/services/Account";
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -28,7 +29,7 @@ export const BottomTabNavigator = () => {
                 options={{
                     tabBarLabel: t('common.home'),
                     tabBarIcon: ({color, size}) => (
-                        <Feather name="home" size={size} color={color}/>
+                        <LucideHome size={size} color={color}/>
                     ),
                 }}
             />
@@ -38,7 +39,7 @@ export const BottomTabNavigator = () => {
                 options={{
                     tabBarLabel: t('services.services'),
                     tabBarIcon: ({color, size}) => (
-                        <Feather name="grid" size={size} color={color}/>
+                        <GridIcon size={size} color={color}/>
                     ),
                 }}
             />
@@ -48,18 +49,18 @@ export const BottomTabNavigator = () => {
                 options={{
                     tabBarLabel: t('services.games'),
                     tabBarIcon: ({color, size}) => (
-                        <Feather name="play" size={size} color={color}/>
+                        <Play size={size} color={color}/>
                     ),
                 }}
             />
             <Tab.Screen
                 //@ts-ignore
                 name="Account"
-                component={Games}
+                component={Account}
                 options={{
                     tabBarLabel: t('common.account'),
                     tabBarIcon: ({color, size}) => (
-                        <Feather name="user" size={size} color={color}/>
+                        <User size={size} color={color}/>
                     ),
                 }}
             />

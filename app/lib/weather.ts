@@ -24,7 +24,7 @@ export async function getWeather(setRefreshing: (refreshing: boolean) => void): 
 
         return {temperature, condition: weatherCondition, img};
     } catch (error) {
-        console.error('Il y a eu un problème avec la requête fetch :', error);
+        console.error('Error while getting the weather :', error);
         setRefreshing(false);
     }
 }

@@ -12,16 +12,17 @@ export const Games = () => {
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: '#0D0505',
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 30,
+        paddingBottom: 10,
         flex: 1,
-        padding: 20,
-        justifyContent: 'center',
-        backgroundColor: '#fff',
     },
     title: {
+        color: "#ffe6cc",
         fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 30,
-        textAlign: 'center',
+        fontWeight: '900',
     },
 });
 

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, RefreshControl, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {useTranslation} from "react-i18next";
 import WashingMachineCard from "@/app/components/custom/WashingMachineCard";
+import {getWashingMachines} from "@/app/lib/washingMachine";
 
 interface MachineData {
     machine_id: string;
@@ -21,30 +22,14 @@ export const WashingMachine: React.FC = () => {
 
 
     const getMachine = () => {
-        fetch(`https://status.wi-line.fr/update_machine_ext.php`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-            },
-            body: 'action=READ_LIST_STATUS&serial_centrale=65e4444c3471550a789e2138a9e28eff',
+        getWashingMachines(setRefreshing).then(r => {
+            if (r) {
+                setDataMachine(r);
+                setIsLoading(false);
+            } else {
+                setError('Error while getting the washing machines');
+            }
         })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then((jsonData) => {
-                setDataMachine(jsonData.machine_info_status.machine_list);
-                setIsLoading(false);
-                setRefreshing(false);
-            })
-            .catch((error) => {
-                console.error('Fetch error:', error);
-                setError(error.message);
-                setIsLoading(false);
-                setRefreshing(false);
-            });
     };
 
     useEffect(() => {

@@ -79,56 +79,61 @@ export function WashingMachineSummary({setRefreshing, refreshing}: WashingMachin
     }
 
     return (
-        <TouchableOpacity onPress={() => navigation.navigate('WashingMachine')} accessible={true} activeOpacity={0.4}>
-            <View
-                style={{
-                    backgroundColor: '#181010',
-                    padding: 15,
-                    borderRadius: 10,
-                    alignItems: 'center',
-                    marginBottom: 15,
-                }}
-            >
-                <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
-                    <View style={{alignItems: 'center', flex: 1}}>
-                        <WashingMachineIcon size={40} color={
-                            availableWashers === 0 ? '#494949' : '#ec7f32'
-                        }/>
-                        <Text style={{
-                            color: '#ffe6cc',
-                            fontSize: 16,
-                            marginTop: 5
-                        }}>
-                            {availableWashers}/{totalWashers}
-                        </Text>
-                        <Text style={{
-                            color: '#ffe6cc',
-                            fontSize: 12
-                        }}>
-                            {t('services.washing_machine.available_machines')}
-                        </Text>
-                    </View>
-                    <View style={{alignItems: 'center', flex: 1}}>
-                        <Wind size={40} color={
-                            availableDryers === 0 ? '#494949' : '#ec7f32'
-                        }/>
-                        <Text style={{
-                            color: '#ffe6cc',
-                            fontSize: 16,
-                            marginTop: 5
-                        }}>
-                            {availableDryers}/{totalDryers}
-                        </Text>
-                        <Text style={{
-                            color: '#ffe6cc',
-                            fontSize: 12
-                        }}>
-                            {t('services.washing_machine.available_dryers')}
-                        </Text>
+        <View>
+            <Text style={styles.subTitle}>{t('services.washing_machine.title')}</Text>
+
+            <TouchableOpacity onPress={() => navigation.navigate('WashingMachine')} accessible={true}
+                              activeOpacity={0.4}>
+                <View
+                    style={{
+                        backgroundColor: '#181010',
+                        padding: 15,
+                        borderRadius: 10,
+                        alignItems: 'center',
+                        marginBottom: 15,
+                    }}
+                >
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
+                        <View style={{alignItems: 'center', flex: 1}}>
+                            <WashingMachineIcon size={40} color={
+                                availableWashers === 0 ? '#494949' : '#ec7f32'
+                            }/>
+                            <Text style={{
+                                color: '#ffe6cc',
+                                fontSize: 16,
+                                marginTop: 5
+                            }}>
+                                {availableWashers}/{totalWashers}
+                            </Text>
+                            <Text style={{
+                                color: '#ffe6cc',
+                                fontSize: 12
+                            }}>
+                                {t('services.washing_machine.available_machines')}
+                            </Text>
+                        </View>
+                        <View style={{alignItems: 'center', flex: 1}}>
+                            <Wind size={40} color={
+                                availableDryers === 0 ? '#494949' : '#ec7f32'
+                            }/>
+                            <Text style={{
+                                color: '#ffe6cc',
+                                fontSize: 16,
+                                marginTop: 5
+                            }}>
+                                {availableDryers}/{totalDryers}
+                            </Text>
+                            <Text style={{
+                                color: '#ffe6cc',
+                                fontSize: 12
+                            }}>
+                                {t('services.washing_machine.available_dryers')}
+                            </Text>
+                        </View>
                     </View>
                 </View>
-            </View>
-        </TouchableOpacity>
+            </TouchableOpacity>
+        </View>
     );
 }
 
@@ -143,6 +148,13 @@ const styles = StyleSheet.create({
     errorText: {
         color: 'red',
         textAlign: 'center',
+    },
+    subTitle: {
+        color: "#ffe6cc",
+        fontSize: 17,
+        fontWeight: '800',
+        marginBottom: 5,
+        marginTop: 5,
     },
 });
 

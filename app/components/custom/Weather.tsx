@@ -62,8 +62,8 @@ export function Weather({setRefreshing, refreshing}: WeatherProps) {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        height: '50%',
         alignSelf: 'center',
+        marginBottom: 15,
     },
     card: {
         backgroundColor: '#181010',

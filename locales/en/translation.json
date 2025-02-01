@@ -46,7 +46,9 @@
       "almost_done": "Machine {{number}} Almost Done!",
       "almost_done_body": "Your {{type}} will complete in {{minutes}} minutes",
       "get_notification": "Get notified before machine completes",
-      "time_to_completion": "Minutes before completion"
+      "time_to_completion": "Minutes before completion",
+      "available_machines": "Available Machines",
+      "available_dryers": "Available Dryers"
     }
   }
 }

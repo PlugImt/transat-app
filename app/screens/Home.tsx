@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {RefreshControl, ScrollView, StyleSheet, Text} from 'react-native';
 import {useAuth} from "@/app/hooks/useAuth";
 import {useTranslation} from "react-i18next";
 import {Weather} from "@/app/components/custom/Weather";
+import LaundrySummary from "@/app/components/custom/HomeCards/WashingMachineHome";
 
 
 export const Home = () => {
@@ -13,12 +14,23 @@ export const Home = () => {
 
 
     return (
-        <View style={styles.container}>
+        <ScrollView
+            style={styles.container}
+            refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={() => setRefreshing(!refreshing)}
+                />
+            }
+        >
             <Text style={styles.welcome}>{t('common.welcome')} <Text
                 style={styles.colored}>{user?.name || "Yohann"}</Text></Text>
 
             <Weather refreshing={refreshing} setRefreshing={setRefreshing}/>
-        </View>
+
+            <Text style={styles.subTitle}>{t('services.washing_machine.title')}</Text>
+            <LaundrySummary/>
+        </ScrollView>
     );
 };
 
@@ -33,6 +45,13 @@ const styles = StyleSheet.create({
         color: "#ffe6cc",
         fontSize: 24,
         fontWeight: '900',
+    },
+    subTitle: {
+        color: "#ffe6cc",
+        fontSize: 17,
+        fontWeight: '800',
+        marginBottom: 5,
+        marginTop: 5,
     },
     welcome: {
         color: "#ffe6cc",

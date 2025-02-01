@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {RefreshControl, ScrollView, StyleSheet, Text} from 'react-native';
+import {RefreshControl, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {useAuth} from "@/app/hooks/useAuth";
 import {useTranslation} from "react-i18next";
 import {Weather} from "@/app/components/custom/Weather";
@@ -32,6 +32,8 @@ export const Home = () => {
             <RestorationSummary refreshing={refreshing} setRefreshing={setRefreshing}/>
 
             <WashingMachineSummary refreshing={refreshing} setRefreshing={setRefreshing}/>
+
+            <View style={{height: 50}}/>
         </ScrollView>
     );
 };

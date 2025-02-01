@@ -123,6 +123,8 @@ export const Restoration = () => {
 
 
                 </>)}
+
+            <View style={{height: 50}}/>
         </ScrollView>
     );
 };

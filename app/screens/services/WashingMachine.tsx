@@ -108,6 +108,9 @@ export const WashingMachine: React.FC = () => {
             {washingMachines.length === 0 && dryers.length === 0 && (
                 <Text style={styles.emptyText}>No machines available</Text>
             )}
+
+
+            <View style={{height: 50}}/>
         </ScrollView>
     );
 };

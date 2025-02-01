@@ -1,9 +1,10 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {Modal, Text, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native';
+import {Modal, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native';
 import {useTranslation} from 'react-i18next';
-import {Button, Icon, TextInput} from 'react-native-paper';
 import * as Notifications from 'expo-notifications';
 import {SchedulableTriggerInputTypes} from 'expo-notifications';
+import {Bell, BellRing, WashingMachineIcon, Wind} from "lucide-react-native";
+import {Button} from "react-native-paper";
 
 interface WashingMachineProps {
     number: string;
@@ -23,6 +24,7 @@ Notifications.setNotificationHandler({
 
 const WashingMachineCard = ({number, type, status, icon}: WashingMachineProps) => {
     const {t} = useTranslation();
+
     const [timeRemaining, setTimeRemaining] = useState<number>(status);
     const [modalVisible, setModalVisible] = useState<boolean>(false);
     const [notificationTime, setNotificationTime] = useState<string>('5');
@@ -124,7 +126,7 @@ const WashingMachineCard = ({number, type, status, icon}: WashingMachineProps) =
                             setNotificationTime(numericText);
                         }}
                         keyboardType="numeric"
-                        label="Minutes before completion"
+                        placeholder="Minutes before completion"
                         style={{
                             marginBottom: 15,
                             color: '#ffe6cc',
@@ -172,9 +174,9 @@ const WashingMachineCard = ({number, type, status, icon}: WashingMachineProps) =
                         minWidth: 5,
                     }}>
                         {icon.toUpperCase() === 'WASHING MACHINE' ? (
-                            <Icon source="washing-machine" size={24} color="#ec7f32"/>
+                            <WashingMachineIcon size={24} color="#ec7f32"/>
                         ) : icon.toUpperCase() === 'DRYER' ? (
-                            <Icon source="weather-windy" size={24} color="#ec7f32"/>
+                            <Wind size={24} color="#ec7f32"/>
                         ) : null}
                         <Text style={{
                             fontSize: 14,
@@ -221,11 +223,15 @@ const WashingMachineCard = ({number, type, status, icon}: WashingMachineProps) =
                         onPress={handleBellPress}
                         disabled={status === 0}
                     >
-                        <Icon
-                            source={notificationSet ? "bell-ring" : "bell-outline"}
-                            size={24}
-                            color={status === 0 ? '#494949' : '#ec7f32'}
-                        />
+                        {notificationSet ? (
+                            <BellRing size={24}
+                                      color={status === 0 ? '#494949' : '#ec7f32'}
+                            />
+                        ) : (
+                            <Bell size={24}
+                                  color={status === 0 ? '#494949' : '#ec7f32'}
+                            />
+                        )}
                     </TouchableOpacity>
                 </View>
             </View>

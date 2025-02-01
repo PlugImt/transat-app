@@ -1,5 +1,5 @@
 import {Text, TouchableWithoutFeedback, View} from 'react-native';
-import {Icon} from "react-native-paper";
+import {Beef, ChefHat, Soup, Vegan} from "lucide-react-native";
 
 interface CardProps {
     title: string;
@@ -22,10 +22,10 @@ const RestorationCard = ({title, meals, icon}: CardProps) => {
                 }}>
 
                 <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 10}}>
-                    {icon === 'Soup' ? <Icon source="pot-steam-outline" size={24} color="#ec7f32"/>
-                        : icon === 'Beef' ? <Icon source="food-steak" size={24} color="#ec7f32"/>
-                            : icon === 'Vegan' ? <Icon source="corn" size={24} color="#ec7f32"/>
-                                : icon === 'ChefHat' ? <Icon source="chef-hat" size={24} color="#ec7f32"/>
+                    {icon === 'Soup' ? <Soup size={24} color="#ec7f32"/>
+                        : icon === 'Beef' ? <Beef size={24} color="#ec7f32"/>
+                            : icon === 'Vegan' ? <Vegan size={24} color="#ec7f32"/>
+                                : icon === 'ChefHat' ? <ChefHat size={24} color="#ec7f32"/>
                                     : null}
 
                     <Text

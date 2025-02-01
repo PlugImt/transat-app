@@ -4,6 +4,7 @@ import {useAuth} from "@/app/hooks/useAuth";
 import {useTranslation} from "react-i18next";
 import {Weather} from "@/app/components/custom/Weather";
 import {WashingMachineSummary} from "@/app/components/custom/HomeCards/WashingMachineHome";
+import RestorationSummary from "@/app/components/custom/HomeCards/RestorationHome";
 
 
 export const Home = () => {
@@ -28,8 +29,9 @@ export const Home = () => {
 
             <Weather refreshing={refreshing} setRefreshing={setRefreshing}/>
 
-            <Text style={styles.subTitle}>{t('services.washing_machine.title')}</Text>
             <WashingMachineSummary refreshing={refreshing} setRefreshing={setRefreshing}/>
+
+            <RestorationSummary refreshing={refreshing} setRefreshing={setRefreshing}/>
         </ScrollView>
     );
 };
@@ -45,13 +47,6 @@ const styles = StyleSheet.create({
         color: "#ffe6cc",
         fontSize: 24,
         fontWeight: '900',
-    },
-    subTitle: {
-        color: "#ffe6cc",
-        fontSize: 17,
-        fontWeight: '800',
-        marginBottom: 5,
-        marginTop: 5,
     },
     welcome: {
         color: "#ffe6cc",

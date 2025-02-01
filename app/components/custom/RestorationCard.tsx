@@ -3,7 +3,7 @@ import {Beef, ChefHat, Soup, Vegan} from "lucide-react-native";
 
 interface CardProps {
     title: string;
-    meals: string[];
+    meals?: string[];
     icon: string;
 }
 

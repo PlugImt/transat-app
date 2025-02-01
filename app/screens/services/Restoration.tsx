@@ -1,17 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, Image, RefreshControl, ScrollView, StyleSheet, Text, View} from 'react-native';
-import axios from 'axios';
 import RestorationCard from "@/app/components/custom/RestorationCard";
 import {useTranslation} from "react-i18next";
-
-interface MenuItem {
-    pole: string;
-    accompagnement: string;
-    periode: string;
-    nom: string;
-    info1: string;
-    info2: string;
-}
+import {getRestoration} from "@/app/lib/restoration";
+import {isWeekend} from "@/app/lib/utils";
 
 interface MenuData {
     grilladesMidi: string[];
@@ -25,7 +17,7 @@ interface MenuData {
 export const Restoration = () => {
     const {t} = useTranslation();
 
-    const [menuData, setMenuData] = useState<MenuData>({
+    const [menuData, setMenuData] = useState<MenuData | undefined>({
         grilladesMidi: [],
         migrateurs: [],
         cibo: [],
@@ -39,81 +31,12 @@ export const Restoration = () => {
 
     const fetchMenuData = async () => {
         try {
-            const targetUrl = 'https://toast-js.ew.r.appspot.com/coteresto?key=1ohdRUdCYo6e71aLuBh7ZfF2lc_uZqp9D78icU4DPufA';
-
-            const response = await axios.get(targetUrl);
-            const data = response.data;
-
-            const regex = /var loadingData = (\[.*?])/;
-            const match = data.match(regex);
-            const loadingData = match ? match[1] : 'Valeur non trouvée';
-            const json: MenuItem[] = JSON.parse(loadingData.substring(1));
-
-            const newMenuData: MenuData = {
-                grilladesMidi: [],
-                migrateurs: [],
-                cibo: [],
-                accompMidi: [],
-                grilladesSoir: '',
-                accompSoir: ''
-            };
-
-            json.forEach((objet: MenuItem) => {
-                switch (objet.pole) {
-                    case 'Grillades / Plats traditions':
-                        if (objet.accompagnement === "TRUE") {
-                            if (objet.periode === "midi") {
-                                const item = `${objet.nom} ${objet.info1}${objet.info2}`;
-                                if (!newMenuData.accompMidi.includes(item)) {
-                                    newMenuData.accompMidi.push(item);
-                                }
-                            } else {
-                                newMenuData.accompSoir += `${objet.nom}\n- ${objet.info1}${objet.info2}`;
-                            }
-                        } else {
-                            if (objet.periode === "midi") {
-                                newMenuData.grilladesMidi.push(`${objet.nom} ${objet.info1}${objet.info2}`);
-                            } else {
-                                newMenuData.grilladesSoir += `${objet.nom}${objet.info1}${objet.info2}`;
-                            }
-                        }
-                        break;
-                    case 'Les Cuistots migrateurs':
-                        if (objet.accompagnement === "TRUE") {
-                            if (objet.periode === "midi") {
-                                const item = `${objet.nom} ${objet.info1}${objet.info2}`;
-                                if (!newMenuData.accompMidi.includes(item)) {
-                                    newMenuData.accompMidi.push(item);
-                                }
-                            } else {
-                                newMenuData.accompSoir += `${objet.nom}\n- ${objet.info1}${objet.info2}`;
-                            }
-                        } else {
-                            newMenuData.migrateurs.push(`${objet.nom} ${objet.info1}${objet.info2}`);
-                        }
-                        break;
-                    case 'Le Végétarien':
-                        if (objet.accompagnement === "TRUE") {
-                            if (objet.periode === "midi") {
-                                const item = `${objet.nom} ${objet.info1}${objet.info2}`;
-                                if (!newMenuData.accompMidi.includes(item)) {
-                                    newMenuData.accompMidi.push(item);
-                                }
-                            } else {
-                                newMenuData.accompSoir += `${objet.nom} ${objet.info1}${objet.info2}`;
-                            }
-                        } else {
-                            newMenuData.cibo.push(`${objet.nom} ${objet.info1}${objet.info2}`);
-                        }
-                        break;
-                }
-            });
-
-            setMenuData(newMenuData);
-            setLoading(false);
-            setRefreshing(false);
-        } catch (err) {
-            setError(String(err));
+            const data = await getRestoration(setRefreshing);
+            setMenuData(data);
+        } catch (error: any) {
+            console.error('Error while getting the menu :', error);
+            setError("" + error.message);
+        } finally {
             setLoading(false);
             setRefreshing(false);
         }
@@ -125,14 +48,6 @@ export const Restoration = () => {
 
     const onRefresh = () => {
         setRefreshing(true);
-        fetchMenuData().then(r => r);
-    };
-
-    const isWeekend = () => {
-        const now = new Date();
-        const day = now.getDay();
-        const hour = now.getHours();
-        return (day === 5 && hour >= 14) || (day === 6) || (day === 0 && hour < 10);
     };
 
     return (
@@ -168,9 +83,9 @@ export const Restoration = () => {
                         <View style={styles.center}>
                             <Text style={styles.error}>{error}</Text>
                         </View>
-                    ) : menuData.grilladesMidi.length === 0 && menuData.migrateurs.length === 0
-                    && menuData.cibo.length === 0 && menuData.accompMidi.length === 0
-                    && menuData.grilladesSoir.length === 0 && menuData.accompSoir.length === 0 ? (
+                    ) : menuData?.grilladesMidi.length === 0 && menuData?.migrateurs.length === 0
+                    && menuData?.cibo.length === 0 && menuData?.accompMidi.length === 0
+                    && menuData?.grilladesSoir.length === 0 && menuData?.accompSoir.length === 0 ? (
                         <View style={[styles.center, {minHeight: '100%'}]}>
                             <Image source={require('@/assets/images/Logos/resoration.png')}
                                    style={{width: 150, height: 150, tintColor: 'gray'}}/>
@@ -180,28 +95,28 @@ export const Restoration = () => {
                         <View style={styles.section}>
                             <Text style={styles.sectionTitle}>{t('services.restoration.lunch')}</Text>
 
-                            <RestorationCard title={t('services.restoration.grill')} meals={menuData.grilladesMidi}
+                            <RestorationCard title={t('services.restoration.grill')} meals={menuData?.grilladesMidi}
                                              icon={"Beef"}/>
-                            <RestorationCard title={t('services.restoration.migrator')} meals={menuData.migrateurs}
+                            <RestorationCard title={t('services.restoration.migrator')} meals={menuData?.migrateurs}
                                              icon={"ChefHat"}/>
-                            <RestorationCard title={t('services.restoration.vegetarian')} meals={menuData.cibo}
+                            <RestorationCard title={t('services.restoration.vegetarian')} meals={menuData?.cibo}
                                              icon={"Vegan"}/>
                             <RestorationCard title={t('services.restoration.side_dishes')}
-                                             meals={menuData.accompMidi}
+                                             meals={menuData?.accompMidi}
                                              icon={"Soup"}/>
                         </View>
                     )}
 
-                    {menuData.grilladesSoir && menuData.accompSoir && (
+                    {menuData?.grilladesSoir && menuData?.accompSoir && (
                         <View style={styles.section}>
                             <Text style={styles.sectionTitle}>{t('services.restoration.dinner')}</Text>
 
                             <RestorationCard title={t('services.restoration.grill')}
-                                             meals={[menuData.grilladesSoir]}
+                                             meals={[menuData?.grilladesSoir]}
                                              icon={"Beef"}/>
 
                             <RestorationCard title={t('services.restoration.side_dishes')}
-                                             meals={[menuData.accompSoir]}
+                                             meals={[menuData?.accompSoir]}
                                              icon={"Soup"}/>
                         </View>
                     )}

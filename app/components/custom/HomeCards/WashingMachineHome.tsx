@@ -9,6 +9,11 @@ import {AppStackParamList} from "@/app/services/storage/types";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
+interface WashingMachineSummaryProps {
+    setRefreshing: (refreshing: boolean) => void;
+    refreshing: boolean;
+}
+
 interface MachineData {
     machine_id: string;
     nom_type: string;
@@ -17,30 +22,45 @@ interface MachineData {
     time_before_off: number;
 }
 
-const LaundrySummary: React.FC = () => {
+export function WashingMachineSummary({setRefreshing, refreshing}: WashingMachineSummaryProps) {
     const {t} = useTranslation();
-
-    const [dataMachine, setDataMachine] = useState<MachineData[]>([]);
-    const [_, setRefreshing] = useState<boolean>(false);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
 
     const navigation = useNavigation<AppScreenNavigationProp>();
 
-    const getMachine = () => {
-        getWashingMachines(setRefreshing).then(r => {
-            if (r) {
-                setDataMachine(r);
-                setIsLoading(false);
-            } else {
-                setError('Error while getting the washing machines');
-            }
-        })
-    };
+    const [dataMachine, setDataMachine] = useState<MachineData[] | undefined>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
+    const [totalWashers, setTotalWashers] = useState<number>(0);
+    const [totalDryers, setTotalDryers] = useState<number>(0);
+    const [availableWashers, setAvailableWashers] = useState<number>(0);
+    const [availableDryers, setAvailableDryers] = useState<number>(0);
+
 
     useEffect(() => {
-        getMachine();
-    }, []);
+        async function fetchWashingMachines() {
+            try {
+                const data = await getWashingMachines(setRefreshing);
+                setDataMachine(data);
+
+                // Group washing machines and dryers separately
+                const washingMachines = dataMachine?.filter(machine => machine.nom_type.trim() === 'LAVE LINGE');
+                const dryers = dataMachine?.filter(machine => machine.nom_type.trim() !== 'LAVE LINGE');
+
+                setTotalWashers(washingMachines?.length || 0);
+                setTotalDryers(dryers?.length || 0);
+
+                setAvailableWashers(washingMachines?.filter(machine => machine.time_before_off === 0).length || 0);
+                setAvailableDryers(dryers?.filter(machine => machine.time_before_off === 0).length || 0);
+            } catch (error: any) {
+                console.error('Error while getting the washing machines :', error);
+                setError("" + error.message);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+
+        fetchWashingMachines().then(r => r);
+    }, [refreshing]);
 
     if (isLoading) {
         return (
@@ -57,16 +77,6 @@ const LaundrySummary: React.FC = () => {
             </View>
         );
     }
-
-    // Group washing machines and dryers separately
-    const washingMachines = dataMachine.filter(machine => machine.nom_type.trim() === 'LAVE LINGE');
-    const dryers = dataMachine.filter(machine => machine.nom_type.trim() !== 'LAVE LINGE');
-
-    const totalWashers = washingMachines.length;
-    const totalDryers = dryers.length;
-
-    const availableWashers = washingMachines.filter(machine => machine.time_before_off === 0).length;
-    const availableDryers = dryers.filter(machine => machine.time_before_off === 0).length;
 
     return (
         <TouchableOpacity onPress={() => navigation.navigate('WashingMachine')} accessible={true} activeOpacity={0.4}>
@@ -120,7 +130,7 @@ const LaundrySummary: React.FC = () => {
             </View>
         </TouchableOpacity>
     );
-};
+}
 
 
 const styles = StyleSheet.create({
@@ -137,4 +147,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default LaundrySummary;
+export default WashingMachineSummary;

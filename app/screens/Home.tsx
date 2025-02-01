@@ -3,7 +3,7 @@ import {RefreshControl, ScrollView, StyleSheet, Text} from 'react-native';
 import {useAuth} from "@/app/hooks/useAuth";
 import {useTranslation} from "react-i18next";
 import {Weather} from "@/app/components/custom/Weather";
-import LaundrySummary from "@/app/components/custom/HomeCards/WashingMachineHome";
+import {WashingMachineSummary} from "@/app/components/custom/HomeCards/WashingMachineHome";
 
 
 export const Home = () => {
@@ -29,7 +29,7 @@ export const Home = () => {
             <Weather refreshing={refreshing} setRefreshing={setRefreshing}/>
 
             <Text style={styles.subTitle}>{t('services.washing_machine.title')}</Text>
-            <LaundrySummary/>
+            <WashingMachineSummary refreshing={refreshing} setRefreshing={setRefreshing}/>
         </ScrollView>
     );
 };

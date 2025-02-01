@@ -46,7 +46,9 @@
       "almost_done": "Machine {{number}} presque terminée !",
       "almost_done_body": "Votre {{type}} sera terminé dans {{minutes}} minutes",
       "get_notification": "Recevoir une notification avant la fin du cycle",
-      "time_to_completion": "Minutes avant la fin"
+      "time_to_completion": "Minutes avant la fin",
+      "available_machines": "Machines disponnibles",
+      "available_dryers": "Sèche-linges disponibles"
     }
   }
 }

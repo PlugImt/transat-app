@@ -29,9 +29,9 @@ export const Home = () => {
 
             <Weather refreshing={refreshing} setRefreshing={setRefreshing}/>
 
-            <WashingMachineSummary refreshing={refreshing} setRefreshing={setRefreshing}/>
-
             <RestorationSummary refreshing={refreshing} setRefreshing={setRefreshing}/>
+
+            <WashingMachineSummary refreshing={refreshing} setRefreshing={setRefreshing}/>
         </ScrollView>
     );
 };

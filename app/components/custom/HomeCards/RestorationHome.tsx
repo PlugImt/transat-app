@@ -75,7 +75,8 @@ export function RestorationSummary({setRefreshing, refreshing}: RestorationSumma
 
     return (
         <View>
-            <Text style={styles.subTitle}>{t('services.restoration.title')}</Text>
+            <Text style={styles.subTitle}>{t('services.restoration.title')} {!isWeekend() && isLunch() ? (
+                t('services.restoration.lunch')) : !isWeekend() && isDinner() ? (t('services.restoration.dinner')) : null}</Text>
 
             <TouchableOpacity onPress={() => navigation.navigate('Restoration')} accessible={true}
                               activeOpacity={0.4}>
@@ -89,10 +90,15 @@ export function RestorationSummary({setRefreshing, refreshing}: RestorationSumma
                     }}
                 >
                     {isWeekend() ? (
-                        <View style={[styles.center, {minHeight: '100%'}]}>
+                        <View style={{
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            width: '100%'
+                        }}>
                             <Image source={require('@/assets/images/Logos/resoration.png')}
-                                   style={{width: 100, height: 100, tintColor: 'gray'}}/>
-                            <Text style={styles.error}>{t('services.restoration.closed')}</Text>
+                                   style={{width: 70, height: 70, tintColor: 'gray'}}/>
+                            <Text style={styles.closed}>{t('services.restoration.closed')}</Text>
                         </View>
                     ) : error ? (
                         <View style={styles.center}>
@@ -100,80 +106,90 @@ export function RestorationSummary({setRefreshing, refreshing}: RestorationSumma
                         </View>
                     ) : isLunch() ? (
                         <View>
-                            <Text style={styles.subTitle}>{t('services.restoration.lunch')}</Text>
+                            <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
 
-                            <View style={styles.container}>
-                                <View style={styles.row}>
-                                    <Beef size={20} color="#ec7f32"/>
-                                    <Text style={styles.title}>{t('services.restoration.grill')}</Text>
+                                <View style={{alignItems: 'flex-start', flex: 1, paddingRight: 5}}>
+                                    <View style={styles.container}>
+                                        <View style={styles.row}>
+                                            <Beef size={18} color="#ec7f32"/>
+                                            <Text style={styles.title}>{t('services.restoration.grill')}</Text>
+                                        </View>
+
+                                        {menuData?.grilladesMidi.map((item, index) => (
+                                            <Text key={index} style={styles.itemText}>
+                                                {item}
+                                            </Text>
+                                        ))}
+                                    </View>
+
+                                    <View style={styles.container}>
+                                        <View style={styles.row}>
+                                            <ChefHat size={18} color="#ec7f32"/>
+                                            <Text style={styles.title}>{t('services.restoration.migrator')}</Text>
+                                        </View>
+
+                                        {menuData?.migrateurs.map((item, index) => (
+                                            <Text key={index} style={styles.itemText}>
+                                                {item}
+                                            </Text>
+                                        ))}
+                                    </View>
                                 </View>
 
-                                {menuData?.grilladesMidi.map((item, index) => (
-                                    <Text key={index} style={styles.itemText}>
-                                        {item}
-                                    </Text>
-                                ))}
-                            </View>
+                                <View style={{alignItems: 'flex-start', flex: 1, paddingLeft: 5}}>
+                                    <View style={styles.container}>
+                                        <View style={styles.row}>
+                                            <Vegan size={18} color="#ec7f32"/>
+                                            <Text style={styles.title}>{t('services.restoration.vegetarian')}</Text>
+                                        </View>
 
-                            <View style={styles.container}>
-                                <View style={styles.row}>
-                                    <ChefHat size={20} color="#ec7f32"/>
-                                    <Text style={styles.title}>{t('services.restoration.migrator')}</Text>
+                                        {menuData?.cibo.map((item, index) => (
+                                            <Text key={index} style={styles.itemText}>
+                                                {item}
+                                            </Text>
+                                        ))}
+                                    </View>
+
+                                    <View style={styles.container}>
+                                        <View style={styles.row}>
+                                            <Soup size={18} color="#ec7f32"/>
+                                            <Text style={styles.title}>{t('services.restoration.side_dishes')}</Text>
+                                        </View>
+
+                                        {menuData?.accompMidi.map((item, index) => (
+                                            <Text key={index} style={styles.itemText}>
+                                                {item}
+                                            </Text>
+                                        ))}
+                                    </View>
                                 </View>
-
-                                {menuData?.migrateurs.map((item, index) => (
-                                    <Text key={index} style={styles.itemText}>
-                                        {item}
-                                    </Text>
-                                ))}
-                            </View>
-
-                            <View style={styles.container}>
-                                <View style={styles.row}>
-                                    <Vegan size={20} color="#ec7f32"/>
-                                    <Text style={styles.title}>{t('services.restoration.vegetarian')}</Text>
-                                </View>
-
-                                {menuData?.cibo.map((item, index) => (
-                                    <Text key={index} style={styles.itemText}>
-                                        {item}
-                                    </Text>
-                                ))}
-                            </View>
-
-                            <View style={styles.container}>
-                                <View style={styles.row}>
-                                    <Soup size={20} color="#ec7f32"/>
-                                    <Text style={styles.title}>{t('services.restoration.side_dishes')}</Text>
-                                </View>
-
-                                {menuData?.accompMidi.map((item, index) => (
-                                    <Text key={index} style={styles.itemText}>
-                                        {item}
-                                    </Text>
-                                ))}
                             </View>
                         </View>
                     ) : isDinner() ? (
                         <View>
-                            <Text style={styles.subTitle}>{t('services.restoration.dinner')}</Text>
+                            <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
 
-                            <View style={styles.container}>
-                                <View style={styles.row}>
-                                    <Beef size={20} color="#ec7f32"/>
-                                    <Text style={styles.title}>{t('services.restoration.grill')}</Text>
+                                <View style={{alignItems: 'flex-start', flex: 1, paddingRight: 5}}>
+                                    <View style={styles.container}>
+                                        <View style={styles.row}>
+                                            <Beef size={18} color="#ec7f32"/>
+                                            <Text style={styles.title}>{t('services.restoration.grill')}</Text>
+                                        </View>
+
+                                        {menuData?.grilladesSoir}
+                                    </View>
                                 </View>
 
-                                {menuData?.grilladesSoir}
-                            </View>
+                                <View style={{alignItems: 'flex-start', flex: 1, paddingLeft: 5}}>
+                                    <View style={styles.container}>
+                                        <View style={styles.row}>
+                                            <Soup size={18} color="#ec7f32"/>
+                                            <Text style={styles.title}>{t('services.restoration.side_dishes')}</Text>
+                                        </View>
 
-                            <View style={styles.container}>
-                                <View style={styles.row}>
-                                    <Soup size={20} color="#ec7f32"/>
-                                    <Text style={styles.title}>{t('services.restoration.side_dishes')}</Text>
+                                        {menuData?.accompSoir}
+                                    </View>
                                 </View>
-
-                                {menuData?.accompSoir}
                             </View>
                         </View>
                     ) : (
@@ -218,12 +234,12 @@ const styles = StyleSheet.create({
     },
     title: {
         color: '#ffe6cc',
-        fontSize: 15,
+        fontSize: 14,
         fontWeight: '600',
         marginLeft: 10,
     },
     itemText: {
-        fontSize: 14,
+        fontSize: 12,
         color: '#ffe6cc',
         fontWeight: '300',
     },
@@ -231,6 +247,13 @@ const styles = StyleSheet.create({
         color: 'red',
         fontSize: 16,
         textAlign: 'center',
+    },
+    closed: {
+        color: 'gray',
+        fontSize: 16,
+        textAlign: 'center',
+        paddingLeft: 50,
+        paddingRight: 50,
     },
     center: {
         flex: 1,

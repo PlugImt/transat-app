@@ -12,7 +12,9 @@
     "account": "Account",
     "free": "Free",
     "cancel": "Cancel",
-    "set_notification": "Set Notification"
+    "set_notification": "Set Notification",
+    "sign_in": "Sign in",
+    "sign_up": "Sign up"
   },
   "auth": {
     "signIn": "Sign In",

@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {useAuth} from "@/app/hooks/useAuth";
 import {AuthStackParamList} from "@/app/services/storage/types";
+import {StackNavigationProp} from "@react-navigation/stack";
+import {useNavigation} from "@react-navigation/native";
+import useAuth from "@/app/hooks/useAuth";
+import {useTranslation} from "react-i18next";
 
 
 type LoginScreenNavigationProp = StackNavigationProp<AuthStackParamList, 'Login'>;
@@ -14,6 +15,7 @@ export const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const {t} = useTranslation();
 
     const handleLogin = async () => {
         if (!email || !password) {
@@ -30,58 +32,77 @@ export const Login = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Welcome Back</Text>
+            <Text style={styles.title}>{t("common.sign_in")} <Text style={styles.colored}>Transat</Text> </Text>
 
-            <TextInput
-                placeholder="Email"
-                value={email}
-                onChangeText={(text) => {
-                    setEmail(text);
-                    setError('');
-                }}
-                autoCapitalize="none"
-                // error={error}
-            />
+            {/*<Text style={{color: 'red'}}>{error}</Text>*/}
 
-            <TextInput
-                placeholder="Password"
-                value={password}
-                onChangeText={(text) => {
-                    setPassword(text);
-                    setError('');
-                }}
-                secureTextEntry
-                // error={error}
-            />
+            <View>
+                <Text style={{
+                    color: "#ffe6cc",
+                    fontSize: 18,
+                    fontWeight: '900',
+                    marginBottom: 10,
+                }}>Email</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Email"
+                    value={email}
+                    onChangeText={setEmail}
+                />
 
-            <Button
-                title={isLoading ? "Loading..." : "Login"}
-                onPress={handleLogin}
-                disabled={isLoading}
-            />
+                <Text style={{
+                    color: "#ffe6cc",
+                    fontSize: 18,
+                    fontWeight: '900',
+                    marginBottom: 10,
+                }}>Password</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Password"
+                    value={password}
+                    onChangeText={setPassword}
+                    secureTextEntry
+                />
 
-            <Button
-                title="Create an Account"
-                onPress={() => navigation.navigate('Register')}
-                // variant="secondary"
-            />
+                <Button
+                    title="Login"
+                    onPress={handleLogin}
+                    disabled={isLoading}
+                />
+            </View>
+
+            {/*<Button*/}
+            {/*    title="Register"*/}
+            {/*    onPress={() => navigation.navigate('Register')}*/}
+            {/*/>*/}
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: '#0D0505',
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 30,
+        paddingBottom: 10,
         flex: 1,
-        padding: 20,
-        justifyContent: 'center',
-        backgroundColor: '#fff',
+    },
+    input: {
+        backgroundColor: '#ffe6cc',
+        padding: 10,
+        borderRadius: 5,
+        marginBottom: 10,
     },
     title: {
+        color: "#ffe6cc",
         fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 30,
-        textAlign: 'center',
+        fontWeight: '900',
+        marginBottom: 20,
     },
+    colored: {
+        color: '#ec7f32',
+    }
 });
 
 export default Login;

@@ -54,7 +54,6 @@ export const BottomTabNavigator = () => {
                 }}
             />
             <Tab.Screen
-                //@ts-ignore
                 name="Account"
                 component={Account}
                 options={{

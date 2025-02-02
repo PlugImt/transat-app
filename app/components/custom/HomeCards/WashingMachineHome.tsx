@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {WashingMachineIcon, Wind} from 'lucide-react-native';
-import {getWashingMachines} from "@/app/lib/washingMachine";
-import {useTranslation} from "react-i18next";
-import {useNavigation} from "@react-navigation/native";
-import {StackNavigationProp} from "@react-navigation/stack";
-import {AppStackParamList} from "@/app/services/storage/types";
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { WashingMachineIcon, Wind } from 'lucide-react-native';
+import { getWashingMachines } from '@/app/lib/washingMachine';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { AppStackParamList } from '@/app/services/storage/types';
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -22,8 +22,8 @@ interface MachineData {
     time_before_off: number;
 }
 
-export function WashingMachineSummary({setRefreshing, refreshing}: WashingMachineSummaryProps) {
-    const {t} = useTranslation();
+export function WashingMachineSummary({ setRefreshing, refreshing }: WashingMachineSummaryProps) {
+    const { t } = useTranslation();
 
     const navigation = useNavigation<AppScreenNavigationProp>();
 
@@ -34,8 +34,7 @@ export function WashingMachineSummary({setRefreshing, refreshing}: WashingMachin
     const [totalDryers, setTotalDryers] = useState<number>(0);
     const [availableWashers, setAvailableWashers] = useState<number>(0);
     const [availableDryers, setAvailableDryers] = useState<number>(0);
-
-
+    
     useEffect(() => {
         async function fetchWashingMachines() {
             try {
@@ -53,9 +52,10 @@ export function WashingMachineSummary({setRefreshing, refreshing}: WashingMachin
                 setAvailableDryers(dryers?.filter(machine => machine.time_before_off === 0).length || 0);
             } catch (error: any) {
                 console.error('Error while getting the washing machines :', error);
-                setError("" + error.message);
+                setError('' + error.message);
             } finally {
                 setIsLoading(false);
+                setRefreshing(false);
             }
         }
 
@@ -65,7 +65,7 @@ export function WashingMachineSummary({setRefreshing, refreshing}: WashingMachin
     if (isLoading) {
         return (
             <View style={styles.centeredContainer}>
-                <ActivityIndicator size="large" color="#ffffff"/>
+                <ActivityIndicator size="large" color="#ffffff" />
             </View>
         );
     }
@@ -93,39 +93,39 @@ export function WashingMachineSummary({setRefreshing, refreshing}: WashingMachin
                         marginBottom: 15,
                     }}
                 >
-                    <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
-                        <View style={{alignItems: 'center', flex: 1}}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
+                        <View style={{ alignItems: 'center', flex: 1 }}>
                             <WashingMachineIcon size={40} color={
                                 availableWashers === 0 ? '#494949' : '#ec7f32'
-                            }/>
+                            } />
                             <Text style={{
                                 color: '#ffe6cc',
                                 fontSize: 16,
-                                marginTop: 5
+                                marginTop: 5,
                             }}>
                                 {availableWashers}/{totalWashers}
                             </Text>
                             <Text style={{
                                 color: '#ffe6cc',
-                                fontSize: 12
+                                fontSize: 12,
                             }}>
                                 {t('services.washing_machine.available_machines')}
                             </Text>
                         </View>
-                        <View style={{alignItems: 'center', flex: 1}}>
+                        <View style={{ alignItems: 'center', flex: 1 }}>
                             <Wind size={40} color={
                                 availableDryers === 0 ? '#494949' : '#ec7f32'
-                            }/>
+                            } />
                             <Text style={{
                                 color: '#ffe6cc',
                                 fontSize: 16,
-                                marginTop: 5
+                                marginTop: 5,
                             }}>
                                 {availableDryers}/{totalDryers}
                             </Text>
                             <Text style={{
                                 color: '#ffe6cc',
-                                fontSize: 12
+                                fontSize: 12,
                             }}>
                                 {t('services.washing_machine.available_dryers')}
                             </Text>
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     subTitle: {
-        color: "#ffe6cc",
+        color: '#ffe6cc',
         fontSize: 17,
         fontWeight: '800',
         marginBottom: 5,

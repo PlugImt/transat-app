@@ -42,7 +42,7 @@ export async function getRestoration(setRefreshing: (refreshing: boolean) => voi
 
         const addToMenu = (menuArray: string[], item: string) => {
             if (!menuArray.includes(item)) {
-                menuArray.push(item);
+                menuArray.push(item.trim());
             }
         };
 

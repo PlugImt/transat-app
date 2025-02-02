@@ -50,11 +50,11 @@ export function RestorationSummary({ setRefreshing, refreshing }: RestorationSum
                 setError('' + error.message);
             } finally {
                 setRefreshing(false);
+                setIsLoading(false);
             }
         };
 
         fetchMenuData().then(r => r);
-        console.log();
     }, [refreshing]);
 
     if (isLoading) {

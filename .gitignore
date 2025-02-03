@@ -37,3 +37,7 @@ yarn-error.*
 
 app-example
 /.idea/
+
+*.apk
+*.aab
+Transat Firebase Service Account.json

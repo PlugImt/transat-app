@@ -19,7 +19,8 @@
         "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.yohann69.transat2_0"
+      "package": "com.yohann69.transat2_0",
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "bundler": "metro",

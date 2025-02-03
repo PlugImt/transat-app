@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1054657810452",
+    "project_id": "transat-a4195",
+    "storage_bucket": "transat-a4195.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1054657810452:android:5707e084276de7256d1701",
+        "android_client_info": {
+          "package_name": "com.yohann69.transat2_0"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPu9U1-Mu7_cxDQoS_RJcVrC0Pc203vko"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

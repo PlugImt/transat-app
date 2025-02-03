@@ -1,16 +1,9 @@
 import React, {useState} from 'react';
 import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
-import {AuthStackParamList} from "@/app/services/storage/types";
-import {StackNavigationProp} from "@react-navigation/stack";
-import {useNavigation} from "@react-navigation/native";
 import useAuth from "@/app/hooks/useAuth";
 import {useTranslation} from "react-i18next";
 
-
-type LoginScreenNavigationProp = StackNavigationProp<AuthStackParamList, 'Login'>;
-
 export const Login = () => {
-    const navigation = useNavigation<LoginScreenNavigationProp>();
     const {login, isLoading} = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

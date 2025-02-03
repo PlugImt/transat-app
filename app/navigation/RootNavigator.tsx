@@ -1,18 +1,20 @@
 import React, {useEffect, useState} from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createStackNavigator, StackNavigationProp} from '@react-navigation/stack';
 import {ActivityIndicator, View} from 'react-native';
 import {useAuth} from "@/app/hooks/useAuth";
 import {AppNavigator} from "@/app/navigation/AppNavigator";
 import {AuthNavigator} from "@/app/navigation/AuthNavigator";
-import {RootStackParamList} from "@/app/services/storage/types";
+import {AppStackParamList, RootStackParamList} from "@/app/services/storage/types";
 import {storage} from "@/app/services/storage/asyncStorage";
 
+type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
 const Stack = createStackNavigator<RootStackParamList>();
 
 export const RootNavigator = () => {
     const {user, setUser} = useAuth();
     const [isLoading, setIsLoading] = useState(true);
+    const [isLogged, setIsLogged] = useState(false);
 
     useEffect(() => {
         checkUser().then(r => r);
@@ -23,6 +25,7 @@ export const RootNavigator = () => {
             const userData = await storage.get('user');
             if (userData) {
                 setUser(userData);
+                setIsLogged(true);
             }
         } catch (error) {
             console.error('Error checking user:', error);
@@ -42,7 +45,7 @@ export const RootNavigator = () => {
     return (
         // <NavigationContainer>
         <Stack.Navigator screenOptions={{headerShown: false}}>
-            {user ? (
+            {isLogged ? (
                 <Stack.Screen name="App" component={AppNavigator}/>
             ) : (
                 <Stack.Screen name="Auth" component={AuthNavigator}/>

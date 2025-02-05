@@ -28,6 +28,9 @@
 - [ ] Ajouter les clubs ⏳
 - [ ] Ajouter les jeux ⏳
 
+### Idées d'amélioration
+- [ ] Permettre d'indiquer lorsque le contenu de la machine à laver a été récupéré ⏳
+
 ## 🛠️ Participer au développement
 
 ### Code

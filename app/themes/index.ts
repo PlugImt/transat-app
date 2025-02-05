@@ -1,12 +1,4 @@
-export const lightTheme = {
-    background: '#FFFFFF',
-    textPrimary: '#000000',
-    textSecondary: '#555555',
-    primaryColor: '#ec7f32',
-    secondaryColor: '#0049a8'
-};
-
-export const darkTheme = {
+export const theme = {
     background: '#121212',
     textPrimary: '#FFFFFF',
     textSecondary: '#AAAAAA',
@@ -14,7 +6,4 @@ export const darkTheme = {
     secondaryColor: '#0049a8'
 };
 
-export default {
-    lightTheme,
-    darkTheme
-}
+export default theme;

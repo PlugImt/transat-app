@@ -30,8 +30,8 @@
     "clubs": "Clubs",
     "events": "Events",
     "reservations": "Reservations",
-    "restoration": {
-      "title": "Restoration",
+    "restaurant": {
+      "title": "Restaurant",
       "lunch": "Lunch",
       "dinner": "Dinner",
       "grill": "Grill",
@@ -39,6 +39,7 @@
       "vegetarian": "Vegetarian",
       "side_dishes": "Side Dishes",
       "no_data": "It seems that there is no data to display",
+      "no_meal": "No meal",
       "closed": "The restaurant is closed on weekends",
       "closed_night": "The restaurant is currently closed. Come back tomorrow!"
     },

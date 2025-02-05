@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, RefreshControl, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {useTranslation} from "react-i18next";
-import WashingMachineCard from "@/app/components/custom/WashingMachineCard";
+import WashingMachineCard from "@/components/custom/WashingMachineCard";
 import {getWashingMachines} from "@/app/lib/washingMachine";
 
 interface MachineData {

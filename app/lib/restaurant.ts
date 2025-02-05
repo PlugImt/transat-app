@@ -19,7 +19,7 @@ interface MenuData {
 }
 
 
-export async function getRestoration(setRefreshing: (refreshing: boolean) => void): Promise<MenuData | undefined> {
+export async function getRestaurant(setRefreshing: (refreshing: boolean) => void): Promise<MenuData | undefined> {
     try {
         const targetUrl = 'https://toast-js.ew.r.appspot.com/coteresto?key=1ohdRUdCYo6e71aLuBh7ZfF2lc_uZqp9D78icU4DPufA';
 

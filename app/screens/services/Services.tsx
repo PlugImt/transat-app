@@ -1,34 +1,22 @@
 import React from 'react';
-import {ScrollView, Text, View} from 'react-native';
-import {useTranslation} from "react-i18next";
-import Card from "@/app/components/common/Card";
-import {useNavigation} from "@react-navigation/native";
-import {StackNavigationProp} from "@react-navigation/stack";
-import {AppStackParamList} from "@/app/services/storage/types";
+import { ScrollView, Text, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import Card from '@/components/common/Card';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { AppStackParamList } from '@/app/services/storage/types';
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
 export const Services = () => {
-    const {t} = useTranslation();
+    const { t } = useTranslation();
     const navigation = useNavigation<AppScreenNavigationProp>();
 
-
     return (
-        <ScrollView style={{
-            backgroundColor: '#0D0505',
-            paddingLeft: 20,
-            paddingRight: 20,
-            paddingTop: 30,
-            paddingBottom: 10,
-        }}>
-            <Text
-                style={{
-                    color: "#ffe6cc",
-                    fontSize: 24,
-                    fontWeight: '900',
-                }}
-                className="text-foreground font-pblack m-4 text-3xl"
-            >{t('services.services')}</Text>
+        <ScrollView className="container">
+            <Text className="h1 m-4">
+                {t('services.services')}
+            </Text>
 
             <Card
                 image={require('@/assets/images/Logos/machine_large.png')}
@@ -36,8 +24,8 @@ export const Services = () => {
                 onPress={() => navigation.navigate('WashingMachine')}
             />
             <Card
-                image={require('@/assets/images/Logos/restoration_large.png')}
-                onPress={() => navigation.navigate('Restoration')}
+                image={require('@/assets/images/Logos/restaurant_large.png')}
+                onPress={() => navigation.navigate('Restaurant')}
             />
             <Card
                 image={require('@/assets/images/Logos/clubs_large.png')}
@@ -51,10 +39,10 @@ export const Services = () => {
                 image={require('@/assets/images/Logos/velo_large.png')}
                 onPress={() => navigation.navigate('WashingMachine')}
             />
-            <View style={{height: 50}}/>
-            {/*<Button title={t('services.market')} onPress={() => console.log('Restoration')}/>*/}
-            {/*<Button title={t('services.reservations')} onPress={() => console.log('Restoration')}/>*/}
-            {/*<Button title={t('services.events')} onPress={() => console.log('Restoration')}/>*/}
+            <View style={{ height: 50 }} />
+            {/*<Button title={t('services.market')} onPress={() => console.log('Restaurant')}/>*/}
+            {/*<Button title={t('services.reservations')} onPress={() => console.log('Restaurant')}/>*/}
+            {/*<Button title={t('services.events')} onPress={() => console.log('Restaurant')}/>*/}
         </ScrollView>
     );
 };

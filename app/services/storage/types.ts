@@ -36,7 +36,7 @@ export interface StorageService {
 export type AppStackParamList = {
     Home: undefined;
     WashingMachine: undefined;
-    Restoration: undefined;
+    Restaurant: undefined;
     Games: undefined;
     Profile: {
         userId: string;

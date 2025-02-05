@@ -28,7 +28,7 @@
     "clubs": "Clubs",
     "events": "Événements",
     "reservations": "Réservations",
-    "restoration": {
+    "restaurant": {
       "title": "Menu RU",
       "lunch": "Midi",
       "dinner": "Soir",
@@ -37,6 +37,7 @@
       "vegetarian": "Végétarien",
       "side_dishes": "Accompagnements",
       "no_data": "Il semble qu'il n'y ait pas de données à afficher",
+      "no_meal": "Aucun repas",
       "closed": "Le restaurant est fermé le week-end"
     },
     "washing_machine": {

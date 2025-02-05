@@ -4,13 +4,13 @@ import {useTranslation} from "react-i18next";
 import {useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {AppStackParamList} from "@/app/services/storage/types";
-import {getRestoration} from "@/app/lib/restoration";
+import {getRestaurant} from "@/app/lib/restaurant";
 import {Beef, ChefHat, Soup, Vegan} from "lucide-react-native";
 import {isDinner, isLunch, isWeekend} from "@/lib/utils";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
-interface RestorationSummaryProps {
+interface RestaurantSummaryProps {
     setRefreshing: (refreshing: boolean) => void;
     refreshing: boolean;
 }
@@ -24,7 +24,7 @@ interface MenuData {
     accompSoir: string[];
 }
 
-export function RestorationSummary({ setRefreshing, refreshing }: RestorationSummaryProps) {
+export function RestaurantSummary({ setRefreshing, refreshing }: RestaurantSummaryProps) {
     const { t } = useTranslation();
 
     const navigation = useNavigation<AppScreenNavigationProp>();
@@ -43,7 +43,7 @@ export function RestorationSummary({ setRefreshing, refreshing }: RestorationSum
     useEffect(() => {
         const fetchMenuData = async () => {
             try {
-                const data = await getRestoration(setRefreshing);
+                const data = await getRestaurant(setRefreshing);
                 setMenuData(data);
             } catch (error: any) {
                 console.error('Error while getting the menu :', error);
@@ -75,10 +75,10 @@ export function RestorationSummary({ setRefreshing, refreshing }: RestorationSum
 
     return (
         <View>
-            <Text style={styles.subTitle}>{t('services.restoration.title')} {!isWeekend() && isLunch() ? (
-                t('services.restoration.lunch')) : !isWeekend() && isDinner() ? (t('services.restoration.dinner')) : null}</Text>
+            <Text style={styles.subTitle}>{t('services.restaurant.title')} {!isWeekend() && isLunch() ? (
+                t('services.restaurant.lunch')) : !isWeekend() && isDinner() ? (t('services.restaurant.dinner')) : null}</Text>
 
-            <TouchableOpacity onPress={() => navigation.navigate('Restoration')} accessible={true}
+            <TouchableOpacity onPress={() => navigation.navigate('Restaurant')} accessible={true}
                               activeOpacity={0.4}>
                 <View
                     style={{
@@ -96,9 +96,9 @@ export function RestorationSummary({ setRefreshing, refreshing }: RestorationSum
                             alignItems: 'center',
                             width: '100%',
                         }}>
-                            <Image source={require('@/assets/images/Logos/resoration.png')}
+                            <Image source={require('@/assets/images/Logos/restaurant.png')}
                                    style={{ width: 70, height: 70, tintColor: 'gray' }} />
-                            <Text style={styles.closed}>{t('services.restoration.closed')}</Text>
+                            <Text style={styles.closed}>{t('services.restaurant.closed')}</Text>
                         </View>
                     ) : error ? (
                         <View style={styles.center}>
@@ -112,7 +112,7 @@ export function RestorationSummary({ setRefreshing, refreshing }: RestorationSum
                                     <View style={styles.container}>
                                         <View style={styles.row}>
                                             <Beef size={18} color="#ec7f32" />
-                                            <Text style={styles.title}>{t('services.restoration.grill')}</Text>
+                                            <Text style={styles.title}>{t('services.restaurant.grill')}</Text>
                                         </View>
 
                                         {menuData?.grilladesMidi.map((item, index) => (
@@ -125,7 +125,7 @@ export function RestorationSummary({ setRefreshing, refreshing }: RestorationSum
                                     <View style={styles.container}>
                                         <View style={styles.row}>
                                             <ChefHat size={18} color="#ec7f32" />
-                                            <Text style={styles.title}>{t('services.restoration.migrator')}</Text>
+                                            <Text style={styles.title}>{t('services.restaurant.migrator')}</Text>
                                         </View>
 
                                         {menuData?.migrateurs.map((item, index) => (
@@ -140,7 +140,7 @@ export function RestorationSummary({ setRefreshing, refreshing }: RestorationSum
                                     <View style={styles.container}>
                                         <View style={styles.row}>
                                             <Vegan size={18} color="#ec7f32" />
-                                            <Text style={styles.title}>{t('services.restoration.vegetarian')}</Text>
+                                            <Text style={styles.title}>{t('services.restaurant.vegetarian')}</Text>
                                         </View>
 
                                         {menuData?.cibo.map((item, index) => (
@@ -153,7 +153,7 @@ export function RestorationSummary({ setRefreshing, refreshing }: RestorationSum
                                     <View style={styles.container}>
                                         <View style={styles.row}>
                                             <Soup size={18} color="#ec7f32" />
-                                            <Text style={styles.title}>{t('services.restoration.side_dishes')}</Text>
+                                            <Text style={styles.title}>{t('services.restaurant.side_dishes')}</Text>
                                         </View>
 
                                         {menuData?.accompMidi.map((item, index) => (
@@ -173,7 +173,7 @@ export function RestorationSummary({ setRefreshing, refreshing }: RestorationSum
                                     <View style={styles.container}>
                                         <View style={styles.row}>
                                             <Beef size={18} color="#ec7f32" />
-                                            <Text style={styles.title}>{t('services.restoration.grill')}</Text>
+                                            <Text style={styles.title}>{t('services.restaurant.grill')}</Text>
                                         </View>
 
                                         {menuData?.grilladesSoir.map((item, index) => (
@@ -188,7 +188,7 @@ export function RestorationSummary({ setRefreshing, refreshing }: RestorationSum
                                     <View style={styles.container}>
                                         <View style={styles.row}>
                                             <Soup size={18} color="#ec7f32" />
-                                            <Text style={styles.title}>{t('services.restoration.side_dishes')}</Text>
+                                            <Text style={styles.title}>{t('services.restaurant.side_dishes')}</Text>
                                         </View>
 
                                         {menuData?.accompSoir.map((item, index) => (
@@ -202,7 +202,7 @@ export function RestorationSummary({ setRefreshing, refreshing }: RestorationSum
                         </View>
                     ) : (
                         <View style={styles.center}>
-                            <Text style={styles.error}>{t('services.restoration.closed_night')}</Text>
+                            <Text style={styles.error}>{t('services.restaurant.closed_night')}</Text>
                         </View>
                     )}
                 </View>
@@ -271,4 +271,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default RestorationSummary;
+export default RestaurantSummary;

@@ -28,7 +28,7 @@
     "clubs": "Clubes",
     "events": "Eventos",
     "reservations": "Reservas",
-    "restoration": {
+    "restaurant": {
       "title": "Restauración",
       "lunch": "Almuerzo",
       "dinner": "Cena",
@@ -37,6 +37,7 @@
       "vegetarian": "Vegetariano",
       "side_dishes": "Acompañamientos",
       "no_data": "Parece que no hay datos para mostrar",
+      "no_meal": "Sin comida",
       "closed": "El restaurante está cerrado los fines de semana"
     },
     "washing_machine": {

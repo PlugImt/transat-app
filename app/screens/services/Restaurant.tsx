@@ -101,7 +101,7 @@ export const Restaurant = () => {
     if (error) {
         return (
             <Page refreshing={refreshing} onRefresh={onRefresh}>
-                <View className="min-h-screen flex justify-center items-center ">
+                <View className="min-h-screen flex justify-center items-center">
                     <Text className="text-red-500 text-center h1">{error}</Text>
                 </View>
             </Page>
@@ -112,50 +112,50 @@ export const Restaurant = () => {
         <Page refreshing={refreshing} onRefresh={onRefresh}>
             <Text className="h1 m-4">{t('services.restaurant.title')}</Text>
 
-            <View className='flex flex-col gap-4'>
-                <Text className='h3 ml-4'>{t('services.restaurant.lunch')}</Text>
-
-                <RestaurantCard
-                    title={t('services.restaurant.grill')}
-                    meals={menuData?.grilladesMidi}
-                    icon={'Beef'}
-                />
-                <RestaurantCard
-                    title={t('services.restaurant.migrator')}
-                    meals={menuData?.migrateurs}
-                    icon={'ChefHat'}
-                />
-                <RestaurantCard
-                    title={t('services.restaurant.vegetarian')}
-                    meals={menuData?.cibo}
-                    icon={'Vegan'}
-                />
-                <RestaurantCard
-                    title={t('services.restaurant.side_dishes')}
-                    meals={menuData?.accompMidi}
-                    icon={'Soup'}
-                />
-            </View>
-
-            {menuData?.grilladesSoir && menuData?.accompSoir && (
-                <View className='flex flex-col gap-4'>
-                    <Text className='h3 ml-4'>{t('services.restaurant.dinner')}</Text>
+            <View className="flex flex-col gap-8">
+                <View className="flex flex-col gap-4">
+                    <Text className="h3 ml-4">{t('services.restaurant.lunch')}</Text>
 
                     <RestaurantCard
                         title={t('services.restaurant.grill')}
-                        meals={menuData?.grilladesSoir}
+                        meals={menuData?.grilladesMidi}
                         icon={'Beef'}
                     />
-
+                    <RestaurantCard
+                        title={t('services.restaurant.migrator')}
+                        meals={menuData?.migrateurs}
+                        icon={'ChefHat'}
+                    />
+                    <RestaurantCard
+                        title={t('services.restaurant.vegetarian')}
+                        meals={menuData?.cibo}
+                        icon={'Vegan'}
+                    />
                     <RestaurantCard
                         title={t('services.restaurant.side_dishes')}
-                        meals={menuData?.accompSoir}
+                        meals={menuData?.accompMidi}
                         icon={'Soup'}
                     />
                 </View>
-            )}
 
-            <View style={{ height: 50 }} />
+                {menuData?.grilladesSoir && menuData?.accompSoir && (
+                    <View className="flex flex-col gap-4">
+                        <Text className="h3 ml-4">{t('services.restaurant.dinner')}</Text>
+
+                        <RestaurantCard
+                            title={t('services.restaurant.grill')}
+                            meals={menuData?.grilladesSoir}
+                            icon={'Beef'}
+                        />
+
+                        <RestaurantCard
+                            title={t('services.restaurant.side_dishes')}
+                            meals={menuData?.accompSoir}
+                            icon={'Soup'}
+                        />
+                    </View>
+                )}
+            </View>
         </Page>
     );
 };

@@ -3,7 +3,7 @@ import { Platform, RefreshControl, ScrollView, StyleSheet, Text, View } from 're
 import { useAuth } from '@/app/hooks/useAuth';
 import { useTranslation } from 'react-i18next';
 import { Weather } from '@/components/custom/Weather';
-import { WashingMachineSummary } from '@/components/custom/HomeCards/WashingMachineHome';
+import { WashingMachineWidget } from '@/app/components/custom/HomeCards/WashingMachineWidget';
 import RestaurantSummary from '@/components/custom/HomeCards/RestaurantHome';
 import * as Notifications from 'expo-notifications';
 import * as Device from 'expo-device';
@@ -76,7 +76,7 @@ export const Home = () => {
 
     const [expoPushToken, setExpoPushToken] = useState('');
     const [notification, setNotification] = useState<Notifications.Notification | undefined>(
-        undefined,
+        undefined
     );
     const notificationListener = useRef<Notifications.EventSubscription>();
     const responseListener = useRef<Notifications.EventSubscription>();
@@ -114,84 +114,32 @@ export const Home = () => {
 
     return (
         <Page refreshing={refreshing} onRefresh={() => setRefreshing(!refreshing)}>
-            <Text style={styles.welcome}>
-                {t('common.welcome')} <Text style={styles.colored}>{user?.name || 'Yohann'}</Text>
+            <Text className="h1 m-4">
+                {t('common.welcome')} <Text className="text-primary">{user?.name || 'Yohann'}</Text>
             </Text>
 
             <Weather refreshing={refreshing} setRefreshing={setRefreshing} />
-
             <RestaurantSummary refreshing={refreshing} setRefreshing={setRefreshing} />
-
-            <WashingMachineSummary refreshing={refreshing} setRefreshing={setRefreshing} />
+            <WashingMachineWidget refreshing={refreshing} setRefreshing={setRefreshing} />
 
             <View className="flex items-center flex-col gap-5">
-                <Button
-                    label="Send Notification"
-                    onPress={async () => {
-                        await Notifications.scheduleNotificationAsync({
-                            content: {
-                                title: "You've got mail! 📬",
-                                body: 'Here is the notification body',
-                                data: { data: 'goes here' },
-                            },
-                            trigger: null,
-                        });
-                    }}
-                />
-                <Text className="text-center text-white">
+                <Text className="text-center text-foreground">
                     Your Expo push token: {expoPushToken}
                 </Text>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                    <Text
-                        style={{
-                            color: '#ffe6cc',
-                            fontWeight: '900',
-                            marginBottom: 20,
-                        }}
-                    >
+                    <Text className="text-foreground font-black">
                         Title: {notification && notification.request.content.title}{' '}
                     </Text>
-                    <Text
-                        style={{
-                            color: '#ffe6cc',
-                            fontWeight: '900',
-                            marginBottom: 20,
-                        }}
-                    >
+                    <Text className="text-foreground font-black">
                         Body: {notification && notification.request.content.body}
                     </Text>
-                    <Text
-                        style={{
-                            color: '#ffe6cc',
-                            fontWeight: '900',
-                            marginBottom: 20,
-                        }}
-                    >
+                    <Text className="text-foreground font-black">
                         Data: {notification && JSON.stringify(notification.request.content.data)}
                     </Text>
                 </View>
             </View>
-
-            <View style={{ height: 50 }} />
         </Page>
     );
 };
-
-const styles = StyleSheet.create({
-    sectionTitle: {
-        color: '#ffe6cc',
-        fontSize: 24,
-        fontWeight: '900',
-    },
-    welcome: {
-        color: '#ffe6cc',
-        fontSize: 24,
-        fontWeight: '900',
-        marginBottom: 20,
-    },
-    colored: {
-        color: '#ec7f32',
-    },
-});
 
 export default Home;

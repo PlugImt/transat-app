@@ -20,7 +20,7 @@ export default function Page({ children, refreshing = false, onRefresh }: PagePr
                 />
             }
         >
-            <View className='container'>{children}</View>
+            <View className='container pb-12'>{children}</View>
         </ScrollView>
     );
 }

@@ -5,6 +5,7 @@ import Card from '@/components/common/Card';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { AppStackParamList } from '@/app/services/storage/types';
+import Page from '@/app/components/common/Page';
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -13,7 +14,7 @@ export const Services = () => {
     const navigation = useNavigation<AppScreenNavigationProp>();
 
     return (
-        <ScrollView className="container">
+        <Page>
             <Text className="h1 m-4">
                 {t('services.services')}
             </Text>
@@ -43,7 +44,7 @@ export const Services = () => {
             {/*<Button title={t('services.market')} onPress={() => console.log('Restaurant')}/>*/}
             {/*<Button title={t('services.reservations')} onPress={() => console.log('Restaurant')}/>*/}
             {/*<Button title={t('services.events')} onPress={() => console.log('Restaurant')}/>*/}
-        </ScrollView>
+        </Page>
     );
 };
 

@@ -1,29 +1,14 @@
+import Page from '@/app/components/common/Page';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
 
 export const Traq = () => {
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Traq</Text>
-        </View>
+        <Page>
+            <Text className='h1 m-4'>Traq</Text>
+        </Page>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#0D0505',
-        paddingLeft: 20,
-        paddingRight: 20,
-        paddingTop: 30,
-        paddingBottom: 10,
-        flex: 1,
-    },
-    title: {
-        color: "#ffe6cc",
-        fontSize: 24,
-        fontWeight: '900',
-    },
-});
 
 export default Traq;

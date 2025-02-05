@@ -22,7 +22,7 @@ interface MachineData {
     time_before_off: number;
 }
 
-export function WashingMachineSummary({ setRefreshing, refreshing }: WashingMachineSummaryProps) {
+export function WashingMachineWidget({ setRefreshing, refreshing }: WashingMachineSummaryProps) {
     const { t } = useTranslation();
 
     const navigation = useNavigation<AppScreenNavigationProp>();
@@ -159,4 +159,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default WashingMachineSummary;
+export default WashingMachineWidget;

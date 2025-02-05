@@ -3,8 +3,8 @@ import { Platform, RefreshControl, ScrollView, StyleSheet, Text, View } from 're
 import { useAuth } from '@/app/hooks/useAuth';
 import { useTranslation } from 'react-i18next';
 import { Weather } from '@/components/custom/Weather';
-import { WashingMachineWidget } from '@/app/components/custom/HomeCards/WashingMachineWidget';
-import RestaurantSummary from '@/components/custom/HomeCards/RestaurantHome';
+import { WashingMachineWidget } from '@/app/components/custom/Widget/WashingMachineWidget';
+import RestaurantWidget from '@/app/components/custom/Widget/RestaurantWidget';
 import * as Notifications from 'expo-notifications';
 import * as Device from 'expo-device';
 import Constants from 'expo-constants';
@@ -117,9 +117,8 @@ export const Home = () => {
             <Text className="h1 m-4">
                 {t('common.welcome')} <Text className="text-primary">{user?.name || 'Yohann'}</Text>
             </Text>
-
             <Weather refreshing={refreshing} setRefreshing={setRefreshing} />
-            <RestaurantSummary refreshing={refreshing} setRefreshing={setRefreshing} />
+            <RestaurantWidget refreshing={refreshing} setRefreshing={setRefreshing} />
             <WashingMachineWidget refreshing={refreshing} setRefreshing={setRefreshing} />
 
             <View className="flex items-center flex-col gap-5">

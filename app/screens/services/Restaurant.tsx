@@ -101,7 +101,7 @@ export const Restaurant = () => {
     if (error) {
         return (
             <Page refreshing={refreshing} onRefresh={onRefresh}>
-                <View className="min-h-screen flex justify-center items-center">
+                <View className="min-h-screen flex justify-center items-center ">
                     <Text className="text-red-500 text-center h1">{error}</Text>
                 </View>
             </Page>

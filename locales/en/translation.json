@@ -39,7 +39,8 @@
       "vegetarian": "Vegetarian",
       "side_dishes": "Side Dishes",
       "no_data": "It seems that there is no data to display",
-      "closed": "The restaurant is closed on weekends"
+      "closed": "The restaurant is closed on weekends",
+      "closed_night": "The restaurant is currently closed. Come back tomorrow!"
     },
     "washing_machine": {
       "title": "Laundromat",

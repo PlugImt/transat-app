@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 interface MenuItem {
     pole: string;
@@ -14,8 +14,8 @@ interface MenuData {
     migrateurs: string[];
     cibo: string[];
     accompMidi: string[];
-    grilladesSoir: string;
-    accompSoir: string;
+    grilladesSoir: string[];
+    accompSoir: string[];
 }
 
 
@@ -36,61 +36,44 @@ export async function getRestoration(setRefreshing: (refreshing: boolean) => voi
             migrateurs: [],
             cibo: [],
             accompMidi: [],
-            grilladesSoir: '',
-            accompSoir: ''
+            grilladesSoir: [],
+            accompSoir: [],
+        };
+
+        const addToMenu = (menuArray: string[], item: string) => {
+            if (!menuArray.includes(item)) {
+                menuArray.push(item);
+            }
         };
 
         json.forEach((objet: MenuItem) => {
+            const item = `${objet.nom} ${objet.info1}${objet.info2}`;
+            const isMidi = objet.periode === 'midi';
+
             switch (objet.pole) {
                 case 'Grillades / Plats traditions':
-                    if (objet.accompagnement === "TRUE") {
-                        if (objet.periode === "midi") {
-                            const item = `${objet.nom} ${objet.info1}${objet.info2}`;
-                            if (!newMenuData.accompMidi.includes(item)) {
-                                newMenuData.accompMidi.push(item);
-                            }
-                        } else {
-                            newMenuData.accompSoir += `${objet.nom}\n- ${objet.info1}${objet.info2}`;
-                        }
+                    if (objet.accompagnement === 'TRUE') {
+                        isMidi ? addToMenu(newMenuData.accompMidi, item) : addToMenu(newMenuData.accompSoir, item);
                     } else {
-                        if (objet.periode === "midi") {
-                            newMenuData.grilladesMidi.push(`${objet.nom} ${objet.info1}${objet.info2}`);
-                        } else {
-                            newMenuData.grilladesSoir += `${objet.nom}${objet.info1}${objet.info2}`;
-                        }
+                        isMidi ? addToMenu(newMenuData.grilladesMidi, item) : addToMenu(newMenuData.grilladesSoir, item);
                     }
                     break;
                 case 'Les Cuistots migrateurs':
-                    if (objet.accompagnement === "TRUE") {
-                        if (objet.periode === "midi") {
-                            const item = `${objet.nom} ${objet.info1}${objet.info2}`;
-                            if (!newMenuData.accompMidi.includes(item)) {
-                                newMenuData.accompMidi.push(item);
-                            }
-                        } else {
-                            newMenuData.accompSoir += `${objet.nom}\n- ${objet.info1}${objet.info2}`;
-                        }
+                    if (objet.accompagnement === 'TRUE') {
+                        isMidi ? addToMenu(newMenuData.accompMidi, item) : addToMenu(newMenuData.accompSoir, item);
                     } else {
-                        newMenuData.migrateurs.push(`${objet.nom} ${objet.info1}${objet.info2}`);
+                        addToMenu(newMenuData.migrateurs, item);
                     }
                     break;
                 case 'Le Végétarien':
-                    if (objet.accompagnement === "TRUE") {
-                        if (objet.periode === "midi") {
-                            const item = `${objet.nom} ${objet.info1}${objet.info2}`;
-                            if (!newMenuData.accompMidi.includes(item)) {
-                                newMenuData.accompMidi.push(item);
-                            }
-                        } else {
-                            newMenuData.accompSoir += `${objet.nom} ${objet.info1}${objet.info2}`;
-                        }
+                    if (objet.accompagnement === 'TRUE') {
+                        isMidi ? addToMenu(newMenuData.accompMidi, item) : addToMenu(newMenuData.accompSoir, item);
                     } else {
-                        newMenuData.cibo.push(`${objet.nom} ${objet.info1}${objet.info2}`);
+                        addToMenu(newMenuData.cibo, item);
                     }
                     break;
             }
         });
-
         setRefreshing(false);
 
         return newMenuData;

@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {useTranslation} from "react-i18next";
-import {useNavigation} from "@react-navigation/native";
-import {StackNavigationProp} from "@react-navigation/stack";
-import {AppStackParamList} from "@/app/services/storage/types";
-import {getRestoration} from "@/app/lib/restoration";
-import {Beef, ChefHat, Soup, Vegan} from "lucide-react-native";
-import {isDinner, isLunch, isWeekend} from "@/app/lib/utils";
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { AppStackParamList } from '@/app/services/storage/types';
+import { getRestoration } from '@/app/lib/restoration';
+import { Beef, ChefHat, Soup, Vegan } from 'lucide-react-native';
+import { isDinner, isLunch, isWeekend } from '@/app/lib/utils';
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -20,12 +20,12 @@ interface MenuData {
     migrateurs: string[];
     cibo: string[];
     accompMidi: string[];
-    grilladesSoir: string;
-    accompSoir: string;
+    grilladesSoir: string[];
+    accompSoir: string[];
 }
 
-export function RestorationSummary({setRefreshing, refreshing}: RestorationSummaryProps) {
-    const {t} = useTranslation();
+export function RestorationSummary({ setRefreshing, refreshing }: RestorationSummaryProps) {
+    const { t } = useTranslation();
 
     const navigation = useNavigation<AppScreenNavigationProp>();
 
@@ -36,31 +36,31 @@ export function RestorationSummary({setRefreshing, refreshing}: RestorationSumma
         migrateurs: [],
         cibo: [],
         accompMidi: [],
-        grilladesSoir: '',
-        accompSoir: ''
+        grilladesSoir: [],
+        accompSoir: [],
     });
 
     useEffect(() => {
-        async function fetchRestoration() {
+        const fetchMenuData = async () => {
             try {
                 const data = await getRestoration(setRefreshing);
                 setMenuData(data);
-
             } catch (error: any) {
                 console.error('Error while getting the menu :', error);
-                setError("" + error.message);
+                setError('' + error.message);
             } finally {
-                setIsLoading(false);
+                setRefreshing(false);
             }
-        }
+        };
 
-        fetchRestoration().then(r => r);
+        fetchMenuData().then(r => r);
+        console.log();
     }, [refreshing]);
 
     if (isLoading) {
         return (
             <View style={styles.centeredContainer}>
-                <ActivityIndicator size="large" color="#ffffff"/>
+                <ActivityIndicator size="large" color="#ffffff" />
             </View>
         );
     }
@@ -94,10 +94,10 @@ export function RestorationSummary({setRefreshing, refreshing}: RestorationSumma
                             flexDirection: 'row',
                             justifyContent: 'space-between',
                             alignItems: 'center',
-                            width: '100%'
+                            width: '100%',
                         }}>
                             <Image source={require('@/assets/images/Logos/resoration.png')}
-                                   style={{width: 70, height: 70, tintColor: 'gray'}}/>
+                                   style={{ width: 70, height: 70, tintColor: 'gray' }} />
                             <Text style={styles.closed}>{t('services.restoration.closed')}</Text>
                         </View>
                     ) : error ? (
@@ -106,12 +106,12 @@ export function RestorationSummary({setRefreshing, refreshing}: RestorationSumma
                         </View>
                     ) : isLunch() ? (
                         <View>
-                            <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
 
-                                <View style={{alignItems: 'flex-start', flex: 1, paddingRight: 5}}>
+                                <View style={{ alignItems: 'flex-start', flex: 1, paddingRight: 5 }}>
                                     <View style={styles.container}>
                                         <View style={styles.row}>
-                                            <Beef size={18} color="#ec7f32"/>
+                                            <Beef size={18} color="#ec7f32" />
                                             <Text style={styles.title}>{t('services.restoration.grill')}</Text>
                                         </View>
 
@@ -124,7 +124,7 @@ export function RestorationSummary({setRefreshing, refreshing}: RestorationSumma
 
                                     <View style={styles.container}>
                                         <View style={styles.row}>
-                                            <ChefHat size={18} color="#ec7f32"/>
+                                            <ChefHat size={18} color="#ec7f32" />
                                             <Text style={styles.title}>{t('services.restoration.migrator')}</Text>
                                         </View>
 
@@ -136,10 +136,10 @@ export function RestorationSummary({setRefreshing, refreshing}: RestorationSumma
                                     </View>
                                 </View>
 
-                                <View style={{alignItems: 'flex-start', flex: 1, paddingLeft: 5}}>
+                                <View style={{ alignItems: 'flex-start', flex: 1, paddingLeft: 5 }}>
                                     <View style={styles.container}>
                                         <View style={styles.row}>
-                                            <Vegan size={18} color="#ec7f32"/>
+                                            <Vegan size={18} color="#ec7f32" />
                                             <Text style={styles.title}>{t('services.restoration.vegetarian')}</Text>
                                         </View>
 
@@ -152,7 +152,7 @@ export function RestorationSummary({setRefreshing, refreshing}: RestorationSumma
 
                                     <View style={styles.container}>
                                         <View style={styles.row}>
-                                            <Soup size={18} color="#ec7f32"/>
+                                            <Soup size={18} color="#ec7f32" />
                                             <Text style={styles.title}>{t('services.restoration.side_dishes')}</Text>
                                         </View>
 
@@ -167,34 +167,42 @@ export function RestorationSummary({setRefreshing, refreshing}: RestorationSumma
                         </View>
                     ) : isDinner() ? (
                         <View>
-                            <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
 
-                                <View style={{alignItems: 'flex-start', flex: 1, paddingRight: 5}}>
+                                <View style={{ alignItems: 'flex-start', flex: 1, paddingRight: 5 }}>
                                     <View style={styles.container}>
                                         <View style={styles.row}>
-                                            <Beef size={18} color="#ec7f32"/>
+                                            <Beef size={18} color="#ec7f32" />
                                             <Text style={styles.title}>{t('services.restoration.grill')}</Text>
                                         </View>
 
-                                        {menuData?.grilladesSoir}
+                                        {menuData?.grilladesSoir.map((item, index) => (
+                                            <Text key={index} style={styles.itemText}>
+                                                {item}
+                                            </Text>
+                                        ))}
                                     </View>
                                 </View>
 
-                                <View style={{alignItems: 'flex-start', flex: 1, paddingLeft: 5}}>
+                                <View style={{ alignItems: 'flex-start', flex: 1, paddingLeft: 5 }}>
                                     <View style={styles.container}>
                                         <View style={styles.row}>
-                                            <Soup size={18} color="#ec7f32"/>
+                                            <Soup size={18} color="#ec7f32" />
                                             <Text style={styles.title}>{t('services.restoration.side_dishes')}</Text>
                                         </View>
 
-                                        {menuData?.accompSoir}
+                                        {menuData?.accompSoir.map((item, index) => (
+                                            <Text key={index} style={styles.itemText}>
+                                                {item}
+                                            </Text>
+                                        ))}
                                     </View>
                                 </View>
                             </View>
                         </View>
                     ) : (
                         <View style={styles.center}>
-                            <Text style={styles.error}>{t('services.restoration.closed')}</Text>
+                            <Text style={styles.error}>{t('services.restoration.closed_night')}</Text>
                         </View>
                     )}
                 </View>
@@ -216,7 +224,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     subTitle: {
-        color: "#ffe6cc",
+        color: '#ffe6cc',
         fontSize: 17,
         fontWeight: '800',
         marginBottom: 5,

@@ -17,7 +17,7 @@ function isDinner() {
     return hour >= 14 && hour < 21;
 }
 
-export {isWeekend, isLunch, isDinner};
+export { isWeekend, isLunch, isDinner };
 
 export default {
     isWeekend,

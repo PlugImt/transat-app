@@ -1,29 +1,29 @@
-import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, Image, RefreshControl, ScrollView, StyleSheet, Text, View} from 'react-native';
-import RestorationCard from "@/app/components/custom/RestorationCard";
-import {useTranslation} from "react-i18next";
-import {getRestoration} from "@/app/lib/restoration";
-import {isWeekend} from "@/app/lib/utils";
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, Image, RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
+import RestorationCard from '@/app/components/custom/RestorationCard';
+import { useTranslation } from 'react-i18next';
+import { getRestoration } from '@/app/lib/restoration';
+import { isWeekend } from '@/app/lib/utils';
 
 interface MenuData {
     grilladesMidi: string[];
     migrateurs: string[];
     cibo: string[];
     accompMidi: string[];
-    grilladesSoir: string;
-    accompSoir: string;
+    grilladesSoir: string[];
+    accompSoir: string[];
 }
 
 export const Restoration = () => {
-    const {t} = useTranslation();
+    const { t } = useTranslation();
 
     const [menuData, setMenuData] = useState<MenuData | undefined>({
         grilladesMidi: [],
         migrateurs: [],
         cibo: [],
         accompMidi: [],
-        grilladesSoir: '',
-        accompSoir: ''
+        grilladesSoir: [],
+        accompSoir: [],
     });
     const [loading, setLoading] = useState<boolean>(true);
     const [refreshing, setRefreshing] = useState<boolean>(false);
@@ -35,7 +35,7 @@ export const Restoration = () => {
             setMenuData(data);
         } catch (error: any) {
             console.error('Error while getting the menu :', error);
-            setError("" + error.message);
+            setError('' + error.message);
         } finally {
             setLoading(false);
             setRefreshing(false);
@@ -64,19 +64,19 @@ export const Restoration = () => {
         >
             <Text
                 style={{
-                    color: "#ffe6cc",
+                    color: '#ffe6cc',
                     fontSize: 24,
                     fontWeight: '900',
                 }}
                 className="text-foreground font-pblack m-4 text-3xl"
             >{t('services.restoration.title')}</Text>
 
-            {loading ? <ActivityIndicator size="large" color="#ec7f32"/> : (
+            {loading ? <ActivityIndicator size="large" color="#ec7f32" /> : (
                 <>
                     {isWeekend() ? (
-                        <View style={[styles.center, {minHeight: '100%'}]}>
+                        <View style={[styles.center, { minHeight: '100%' }]}>
                             <Image source={require('@/assets/images/Logos/resoration.png')}
-                                   style={{width: 150, height: 150, tintColor: 'gray'}}/>
+                                   style={{ width: 150, height: 150, tintColor: 'gray' }} />
                             <Text style={styles.error}>{t('services.restoration.closed')}</Text>
                         </View>
                     ) : error ? (
@@ -86,9 +86,9 @@ export const Restoration = () => {
                     ) : menuData?.grilladesMidi.length === 0 && menuData?.migrateurs.length === 0
                     && menuData?.cibo.length === 0 && menuData?.accompMidi.length === 0
                     && menuData?.grilladesSoir.length === 0 && menuData?.accompSoir.length === 0 ? (
-                        <View style={[styles.center, {minHeight: '100%'}]}>
+                        <View style={[styles.center, { minHeight: '100%' }]}>
                             <Image source={require('@/assets/images/Logos/resoration.png')}
-                                   style={{width: 150, height: 150, tintColor: 'gray'}}/>
+                                   style={{ width: 150, height: 150, tintColor: 'gray' }} />
                             <Text style={styles.error}>{t('services.restoration.no_data')}</Text>
                         </View>
                     ) : (
@@ -96,14 +96,14 @@ export const Restoration = () => {
                             <Text style={styles.sectionTitle}>{t('services.restoration.lunch')}</Text>
 
                             <RestorationCard title={t('services.restoration.grill')} meals={menuData?.grilladesMidi}
-                                             icon={"Beef"}/>
+                                             icon={'Beef'} />
                             <RestorationCard title={t('services.restoration.migrator')} meals={menuData?.migrateurs}
-                                             icon={"ChefHat"}/>
+                                             icon={'ChefHat'} />
                             <RestorationCard title={t('services.restoration.vegetarian')} meals={menuData?.cibo}
-                                             icon={"Vegan"}/>
+                                             icon={'Vegan'} />
                             <RestorationCard title={t('services.restoration.side_dishes')}
                                              meals={menuData?.accompMidi}
-                                             icon={"Soup"}/>
+                                             icon={'Soup'} />
                         </View>
                     )}
 
@@ -112,19 +112,19 @@ export const Restoration = () => {
                             <Text style={styles.sectionTitle}>{t('services.restoration.dinner')}</Text>
 
                             <RestorationCard title={t('services.restoration.grill')}
-                                             meals={[menuData?.grilladesSoir]}
-                                             icon={"Beef"}/>
+                                             meals={menuData?.grilladesSoir}
+                                             icon={'Beef'} />
 
                             <RestorationCard title={t('services.restoration.side_dishes')}
-                                             meals={[menuData?.accompSoir]}
-                                             icon={"Soup"}/>
+                                             meals={menuData?.accompSoir}
+                                             icon={'Soup'} />
                         </View>
                     )}
 
 
                 </>)}
 
-            <View style={{height: 50}}/>
+            <View style={{ height: 50 }} />
         </ScrollView>
     );
 };

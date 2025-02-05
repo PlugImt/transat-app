@@ -1,49 +1,53 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    // NOTE: Update this to include the paths to all of your component files.
-    content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
-    presets: [require("nativewind/preset")],
+    darkMode: ["class"],
+    content: ['./app/**/*.{js,jsx,ts,tsx}'],
+    presets: [require('nativewind/preset')],
     theme: {
+        fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+        },
         extend: {
             colors: {
-                border: '#27272a',
-                input: '#27272a',
-                ring: '#0049a8',
-                background: '#0D0505',
-                foreground: '#ffe6cc',
+                border: 'hsl(var(--border))',
+                input: 'hsl(var(--input))',
+                ring: 'hsl(var(--ring))',
+                background: 'hsl(var(--background))',
+                foreground: 'hsl(var(--foreground))',
                 primary: {
-                    DEFAULT: '#0049a8', foreground: '#ffe6cc',
+                    DEFAULT: 'hsl(var(--primary))',
+                    foreground: 'hsl(var(--primary-foreground))',
                 },
                 secondary: {
-                    DEFAULT: '#0f172a', foreground: '#ffe6cc',
+                    DEFAULT: 'hsl(var(--secondary))',
+                    foreground: 'hsl(var(--secondary-foreground))',
                 },
                 destructive: {
-                    DEFAULT: '#7f1d1d', foreground: '#ffe6cc',
+                    DEFAULT: 'hsl(var(--destructive))',
+                    foreground: 'hsl(var(--destructive-foreground))',
                 },
                 muted: {
-                    DEFAULT: '#262626', foreground: '#a1a1aa',
+                    DEFAULT: 'hsl(var(--muted))',
+                    foreground: 'hsl(var(--muted-foreground))',
                 },
                 accent: {
-                    DEFAULT: '#ec7f32', foreground: '#ffe6cc',
+                    DEFAULT: 'hsl(var(--accent))',
+                    foreground: 'hsl(var(--accent-foreground))',
                 },
                 popover: {
-                    DEFAULT: '#1d1711', foreground: '#ffe6cc',
+                    DEFAULT: 'hsl(var(--popover))',
+                    foreground: 'hsl(var(--popover-foreground))',
                 },
                 card: {
-                    DEFAULT: '#140C0C', foreground: '#ffe6cc',
+                    DEFAULT: 'hsl(var(--card))',
+                    foreground: 'hsl(var(--card-foreground))',
                 },
-            }, fontFamily: {
-                pthin: ["Poppins-Thin", "sans-serif"],
-                pextralight: ["Poppins-ExtraLight", "sans-serif"],
-                plight: ["Poppins-Light", "sans-serif"],
-                pregular: ["Poppins-Regular", "sans-serif"],
-                pmedium: ["Poppins-Medium", "sans-serif"],
-                psemibold: ["Poppins-SemiBold", "sans-serif"],
-                pbold: ["Poppins-Bold", "sans-serif"],
-                pextrabold: ["Poppins-ExtraBold", "sans-serif"],
-                pblack: ["Poppins-Black", "sans-serif"],
+            },
+            borderRadius: {
+                lg: `var(--radius)`,
+                md: `calc(var(--radius) - 2px)`,
+                sm: 'calc(var(--radius) - 4px)',
             },
         },
-    },
-    plugins: [],
-}
+    }
+};

@@ -8,6 +8,7 @@ import RestorationSummary from '@/app/components/custom/HomeCards/RestorationHom
 import * as Notifications from 'expo-notifications';
 import * as Device from 'expo-device';
 import Constants from 'expo-constants';
+import { Button } from '@/components/common/ButtonV2';
 
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
@@ -40,7 +41,9 @@ async function registerForPushNotificationsAsync() {
             finalStatus = status;
         }
         if (finalStatus !== 'granted') {
-            handleRegistrationError('Permission not granted to get push token for push notification!');
+            handleRegistrationError(
+                'Permission not granted to get push token for push notification!'
+            );
             return;
         }
         const projectId =
@@ -64,7 +67,6 @@ async function registerForPushNotificationsAsync() {
     }
 }
 
-
 export const Home = () => {
     const { user } = useAuth();
     const { t } = useTranslation();
@@ -80,7 +82,7 @@ export const Home = () => {
 
     useEffect(() => {
         registerForPushNotificationsAsync()
-            .then(token => {
+            .then((token) => {
                 console.log('Retrieved Expo Push Token:', token);
                 setExpoPushToken(token ?? '');
             })
@@ -89,19 +91,23 @@ export const Home = () => {
                 setExpoPushToken(`${error}`);
             });
 
-        notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
-            setNotification(notification);
-        });
+        notificationListener.current = Notifications.addNotificationReceivedListener(
+            (notification) => {
+                setNotification(notification);
+            }
+        );
 
-        responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-            console.log(response);
-        });
+        responseListener.current = Notifications.addNotificationResponseReceivedListener(
+            (response) => {
+                console.log(response);
+            }
+        );
 
         return () => {
             notificationListener.current &&
-            Notifications.removeNotificationSubscription(notificationListener.current);
+                Notifications.removeNotificationSubscription(notificationListener.current);
             responseListener.current &&
-            Notifications.removeNotificationSubscription(responseListener.current);
+                Notifications.removeNotificationSubscription(responseListener.current);
         };
     }, []);
 
@@ -115,8 +121,9 @@ export const Home = () => {
                 />
             }
         >
-            <Text style={styles.welcome}>{t('common.welcome')} <Text
-                style={styles.colored}>{user?.name || 'Yohann'}</Text></Text>
+            <Text style={styles.welcome}>
+                {t('common.welcome')} <Text style={styles.colored}>{user?.name || 'Yohann'}</Text>
+            </Text>
 
             <Weather refreshing={refreshing} setRefreshing={setRefreshing} />
 
@@ -124,28 +131,51 @@ export const Home = () => {
 
             <WashingMachineSummary refreshing={refreshing} setRefreshing={setRefreshing} />
 
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'space-around' }}>
-                <Text style={{
-                    color: '#ffe6cc',
-                    fontWeight: '900',
-                    marginBottom: 20,
-                }}>Your Expo push token: {expoPushToken}</Text>
+            <View className="flex items-center flex-col gap-5">
+                <Button
+                    label="Send Notification"
+                    onPress={async () => {
+                        await Notifications.scheduleNotificationAsync({
+                            content: {
+                                title: "You've got mail! 📬",
+                                body: 'Here is the notification body',
+                                data: { data: 'goes here' },
+                            },
+                            trigger: null,
+                        });
+                    }}
+                />
+                <Text className="text-center text-white">
+                    Your Expo push token: {expoPushToken}
+                </Text>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                    <Text style={{
-                        color: '#ffe6cc',
-                        fontWeight: '900',
-                        marginBottom: 20,
-                    }}>Title: {notification && notification.request.content.title} </Text>
-                    <Text style={{
-                        color: '#ffe6cc',
-                        fontWeight: '900',
-                        marginBottom: 20,
-                    }}>Body: {notification && notification.request.content.body}</Text>
-                    <Text style={{
-                        color: '#ffe6cc',
-                        fontWeight: '900',
-                        marginBottom: 20,
-                    }}>Data: {notification && JSON.stringify(notification.request.content.data)}</Text>
+                    <Text
+                        style={{
+                            color: '#ffe6cc',
+                            fontWeight: '900',
+                            marginBottom: 20,
+                        }}
+                    >
+                        Title: {notification && notification.request.content.title}{' '}
+                    </Text>
+                    <Text
+                        style={{
+                            color: '#ffe6cc',
+                            fontWeight: '900',
+                            marginBottom: 20,
+                        }}
+                    >
+                        Body: {notification && notification.request.content.body}
+                    </Text>
+                    <Text
+                        style={{
+                            color: '#ffe6cc',
+                            fontWeight: '900',
+                            marginBottom: 20,
+                        }}
+                    >
+                        Data: {notification && JSON.stringify(notification.request.content.data)}
+                    </Text>
                 </View>
             </View>
 

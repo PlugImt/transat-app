@@ -21,6 +21,8 @@
     "@react-navigation/native": "^7.0.14",
     "@react-navigation/stack": "^7.1.1",
     "axios": "^1.7.9",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "expo": "~52.0.28",
     "expo-blur": "~14.0.3",
@@ -40,6 +42,7 @@
     "i18next": "^24.2.2",
     "lottie-react-native": "^7.2.2",
     "lucide-react-native": "^0.474.0",
+    "nativecn-ui": "^0.0.8",
     "nativewind": "^4.1.23",
     "react": "18.3.1",
     "react-dom": "18.3.1",
@@ -48,12 +51,13 @@
     "react-native-gesture-handler": "~2.20.2",
     "react-native-paper": "^5.13.1",
     "react-native-reanimated": "~3.16.1",
-    "react-native-safe-area-context": "4.12.0",
+    "react-native-safe-area-context": "^4.12.0",
     "react-native-screens": "~4.4.0",
     "react-native-svg": "^15.11.1",
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.5",
-    "styled-components": "^6.1.14"
+    "styled-components": "^6.1.14",
+    "tailwind-merge": "^3.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

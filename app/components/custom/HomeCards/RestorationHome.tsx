@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useTranslation } from 'react-i18next';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { AppStackParamList } from '@/app/services/storage/types';
-import { getRestoration } from '@/app/lib/restoration';
-import { Beef, ChefHat, Soup, Vegan } from 'lucide-react-native';
-import { isDinner, isLunch, isWeekend } from '@/app/lib/utils';
+import React, {useEffect, useState} from 'react';
+import {ActivityIndicator, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {useTranslation} from "react-i18next";
+import {useNavigation} from "@react-navigation/native";
+import {StackNavigationProp} from "@react-navigation/stack";
+import {AppStackParamList} from "@/app/services/storage/types";
+import {getRestoration} from "@/app/lib/restoration";
+import {Beef, ChefHat, Soup, Vegan} from "lucide-react-native";
+import {isDinner, isLunch, isWeekend} from "@/lib/utils";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 

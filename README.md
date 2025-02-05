@@ -1,55 +1,120 @@
-# Welcome to your Expo app 👋
+<h1 align="center">
+    <br>
+        <img src="/assets/images/icon.svg" alt="Logo de l'association" width="200">
+    <br>
+    Transat
+</h1>
 
-This is an [Expo](https://expo.dev) project created with [
-`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+<h4 align="center">L'application du campus pour l'IMT Atlantique de Nantes</h4>
 
-## Get started
+<p align="center">
+  <a href="#✨-roadmap">Roadmap</a> •
+  <a href="#🛠️-participer-au-développement">Participer</a> •
+  <a href="#🕹️-outils-utilisés">Outils</a> •
+  <a href="#👋-nous-contacter">Contact</a> •
+  <!-- <a href="#🫶-soutenir-l'association">Soutenir</a> • -->
+  <a href="#🤠-crédits">Crédit</a> •
+  <a href="#©-licence">Licence</a> •
+</p>
 
-1. Install dependencies
+![Screenshot de l'appli](/assets/preview.png)
 
-   ```bash
-   npm install
-   ```
+> **NOTE:** Plug'IMT est une association créée par des étudiants de l'IMT mais n'est pas affilié à l'école
 
-2. Start the app
+## ✨ Roadmap
 
-   ```bash
-    npx expo start
-   ```
+- [ ] Sortir la première version sur les stores ⏳
+- [ ] Ajouter les events ⏳
+- [ ] Ajouter les clubs ⏳
+- [ ] Ajouter les jeux ⏳
 
-In the output, you'll find options to open the app in a
+## 🛠️ Participer au développement
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### Code
 
-You can start developing by editing the files inside the **app** directory. This project
-uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+Pour clôner le projet et lancer l'application, vous aurez besoin d'installer [Git](https://git-scm.com) et [Node.js](https://nodejs.org/en/download/) (qui installe [npm](http://npmjs.com)). Depuis votre terminal:
 
 ```bash
-npm run reset-project
+# Clôner le projet
+$ git clone https://github.com/PlugImt/Transat.git
+
+# Se déplacer dans le projet
+$ cd Transat
+
+# Installer les dépendances
+$ npm install
+
+# Lancer l'application
+$ npm run start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you
-can start developing.
+Vous aurez ensuite besoin d'installer l'applicationmobile [Expo Go](https://expo.dev/go) qui vous permettra de visualiser les changements apportés au projet en temps réel.
 
-## Learn more
+### 🌎 Traductions
+The app isn't available in your language yet? You can help us translate it!
 
-To learn more about developing your project with Expo, look at the following resources:
+=> [Crowdin translation project](https://crowdin.com/project/transat/invite?h=818cd265f3f9d6680d0caab9d29998ee2225755)
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with
-  our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll
-  create a project that runs on Android, iOS, and the web.
 
-## Join the community
+<!-- ### Design
 
-Join our community of developers creating universal apps.
+Pour participer au design de l'application, faites une demande pour modifier le fichier Figma 👇
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+<a href="">
+    <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white" />
+</a> -->
+
+## 🕹️ Outils utilisés
+
+<img src="https://skillicons.dev/icons?i=react,tailwind,supabase" alt="Les technologies utilisées" />
+
+## 👋 Nous contacter
+
+Rejoignez le groupe Whatsapp de [Transat](https://chat.whatsapp.com/Hu2SjIL3ROx9y3BDcKNCyY)
+
+<!-- ## 🫶 Soutenir l'association
+
+Contribuez à la cagnotte Lydia -->
+
+## 🤠 Crédits
+
+<table>
+    <tr>
+        <td align="center">
+            <a href="https://github.com/zephyr-dassouli">
+                <img src="https://avatars.githubusercontent.com/u/145542064?v=4" width="100px;" alt="Image de profil" style="border-radius: 100%"/>
+                <br />
+                <sub><b>Zéphyr</b></sub>
+            </a>
+            <br />
+        </td>
+        <td align="center">
+            <a href="https://github.com/HeineZo">
+                <img src="https://avatars.githubusercontent.com/u/85509892?v=4" width="100px;" alt="Image de profil" style="border-radius: 100%"/>
+                <br />
+                <sub><b>Enzo</b></sub>
+            </a>
+            <br />
+        </td>
+        <td align="center">
+            <a href="https://github.com/luclu7">
+                <img src="https://avatars.githubusercontent.com/u/11773528?v=4" width="100px;" alt="Image de profil" style="border-radius: 100%"/>
+                <br />
+                <sub><b>Lucie</b></sub>
+            </a>
+            <br />
+        </td>
+        <td align="center">
+            <a href="https://github.com/yohann69">
+                <img src="https://avatars.githubusercontent.com/u/73314529?v=4" width="100px;" alt="Image de profil" style="border-radius: 100%"/>
+                <br />
+                <sub><b>Yohann</b></sub>
+            </a>
+            <br />
+        </td>
+    </tr>
+</table>
+
+## © Licence
+
+[MIT](LICENSE)

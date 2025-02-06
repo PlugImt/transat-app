@@ -33,12 +33,10 @@ jobs:
       with:
         eas-version: latest
         expo-version: latest
-        token: ${{ env.EXPO_TOKEN }}
+        token: "3QJl9HOF51eBt-R_in39AVbZoYlqtnCLTWzfo9T_"
         
     - name: 🧱 Build APK
       run: eas build -p android --profile preview --local
-      env:
-        EXPO_TOKEN: ${{ env.EXPO_TOKEN }}
 
     - name: 📦 Upload APK
       uses: actions/upload-artifact@v4.6.0

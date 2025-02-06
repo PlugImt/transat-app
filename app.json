@@ -33,9 +33,7 @@
         {
           "icon": "./assets/images/icon.png",
           "color": "#ffffff",
-          "sounds": [
-            "./assets/sounds/notification_sound.wav"
-          ]
+          "sounds": ["./assets/sounds/notification_sound.wav"]
         }
       ],
       "expo-router",

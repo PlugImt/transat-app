@@ -1,102 +1,117 @@
-import {Dimensions, Image, ImageSourcePropType, Text, TouchableOpacity, View} from 'react-native';
-import {useEffect, useRef, useState} from 'react';
 import LottieView from "lottie-react-native";
+import { useEffect, useRef, useState } from "react";
+import {
+  Dimensions,
+  Image,
+  type ImageSourcePropType,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 interface CardProps {
-    title?: string;
-    description?: string;
-    image?: ImageSourcePropType | null;
-    animation?: string;
-    onPress: () => void;
+  title?: string;
+  description?: string;
+  image?: ImageSourcePropType | null;
+  animation?: string;
+  onPress: () => void;
 }
 
-const Card = ({title, description, image, animation, onPress}: CardProps) => {
-    const [imageHeight, setImageHeight] = useState(200);
-    const screenWidth = Dimensions.get('window').width;
-    const imageWidth = screenWidth - 40;
+const Card = ({ title, description, image, animation, onPress }: CardProps) => {
+  const [imageHeight, setImageHeight] = useState(200);
+  const screenWidth = Dimensions.get("window").width;
+  const imageWidth = screenWidth - 40;
 
-    const animation_ref = useRef(null);
+  const animation_ref = useRef(null);
 
-    useEffect(() => {
-        if (image && typeof image !== 'number') {
-            if ("uri" in image) {
-                if (image.uri != null) {
-                    Image.getSize(image.uri, (width, height) => {
-                        const aspectRatio = width / height;
-                        setImageHeight(imageWidth / aspectRatio);
-                    }, (error) => {
-                        console.log('Error loading image:', error);
-                    });
-                }
-            }
-        } else if (image) {
-            const sourceImage = Image.resolveAssetSource(image);
-            const aspectRatio = sourceImage.width / sourceImage.height;
-            setImageHeight(imageWidth / aspectRatio);
+  useEffect(() => {
+    if (image && typeof image !== "number") {
+      if ("uri" in image) {
+        if (image.uri != null) {
+          Image.getSize(
+            image.uri,
+            (width, height) => {
+              const aspectRatio = width / height;
+              setImageHeight(imageWidth / aspectRatio);
+            },
+            (error) => {
+              console.log("Error loading image:", error);
+            },
+          );
         }
-    }, [image, imageWidth]);
+      }
+    } else if (image) {
+      const sourceImage = Image.resolveAssetSource(image);
+      const aspectRatio = sourceImage.width / sourceImage.height;
+      setImageHeight(imageWidth / aspectRatio);
+    }
+  }, [image, imageWidth]);
 
-    return (
-        <TouchableOpacity onPress={onPress} accessible={true} activeOpacity={0.4}>
-            <View
-                style={{
-                    paddingTop: 10,
-                    paddingBottom: 5,
-                }}>
-                {image && (
-                    <Image
-                        source={image}
-                        resizeMode="contain"
-                        style={{
-                            width: imageWidth,
-                            height: imageHeight,
-                            borderRadius: 10,
-                            backgroundColor: '#181010',
-                        }}
-                    />
-                )}
-                {animation && (
-                    <LottieView
-                        ref={animation_ref}
-                        loop={true}
-                        style={{
-                            width: imageWidth,
-                            height: imageHeight,
-                            borderRadius: 10,
-                            backgroundColor: '#181010',
-                        }}
-                        autoPlay
-                        source={animation}
-                    />)}
-                {title && (
-                    <Text
-                        numberOfLines={1}
-                        ellipsizeMode="tail"
-                        style={{
-                            fontSize: 18,
-                            fontWeight: '600',
-                            marginBottom: 4,
-                            color: '#000'
-                        }}>
-                        {title}
-                    </Text>
-                )}
-                {description && (
-                    <Text
-                        numberOfLines={3}
-                        ellipsizeMode="tail"
-                        style={{
-                            fontSize: 14,
-                            color: '#666',
-                            fontWeight: '300',
-                            marginBottom: 8
-                        }}>
-                        {description}
-                    </Text>
-                )}
-            </View>
-        </TouchableOpacity>
-    );
+  return (
+    <TouchableOpacity onPress={onPress} accessible={true} activeOpacity={0.4}>
+      <View
+        style={{
+          paddingTop: 10,
+          paddingBottom: 5,
+        }}
+      >
+        {image && (
+          <Image
+            source={image}
+            resizeMode="contain"
+            style={{
+              width: imageWidth,
+              height: imageHeight,
+              borderRadius: 10,
+              backgroundColor: "#181010",
+            }}
+          />
+        )}
+        {animation && (
+          <LottieView
+            ref={animation_ref}
+            loop={true}
+            style={{
+              width: imageWidth,
+              height: imageHeight,
+              borderRadius: 10,
+              backgroundColor: "#181010",
+            }}
+            autoPlay
+            source={animation}
+          />
+        )}
+        {title && (
+          <Text
+            numberOfLines={1}
+            ellipsizeMode="tail"
+            style={{
+              fontSize: 18,
+              fontWeight: "600",
+              marginBottom: 4,
+              color: "#000",
+            }}
+          >
+            {title}
+          </Text>
+        )}
+        {description && (
+          <Text
+            numberOfLines={3}
+            ellipsizeMode="tail"
+            style={{
+              fontSize: 14,
+              color: "#666",
+              fontWeight: "300",
+              marginBottom: 8,
+            }}
+          >
+            {description}
+          </Text>
+        )}
+      </View>
+    </TouchableOpacity>
+  );
 };
 
 export default Card;

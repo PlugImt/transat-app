@@ -2,58 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
+  :root {
+    --background: 23 62% 4%;
+    --foreground: 31 100% 90%;
 
-    :root {
-        --background: 23 62% 4%;
-        --foreground: 31 100% 90%;
+    --muted: 223 47% 11%;
+    --muted-foreground: 215.4 16.3% 56.9%;
 
-        --muted: 223 47% 11%;
-        --muted-foreground: 215.4 16.3% 56.9%;
+    --accent: 216 34% 17%;
+    --accent-foreground: 210 40% 98%;
 
-        --accent: 216 34% 17%;
-        --accent-foreground: 210 40% 98%;
+    --popover: 224 71% 4%;
+    --popover-foreground: 215 20.2% 65.1%;
 
-        --popover: 224 71% 4%;
-        --popover-foreground: 215 20.2% 65.1%;
+    --border: 216 34% 17%;
+    --input: 216 34% 17%;
 
-        --border: 216 34% 17%;
-        --input: 216 34% 17%;
+    --card: 0 20% 8%;
+    --card-foreground: 213 31% 91%;
 
-        --card: 0 20% 8%;
-        --card-foreground: 213 31% 91%;
+    --primary: 25 83% 56%;
+    --primary-foreground: 31 100% 90%;
 
-        --primary: 25 83% 56%;
-        --primary-foreground: 31 100% 90%;
-    
-        --secondary: 214 100% 33%;
-        --secondary-foreground: 214 54% 73%;
+    --secondary: 214 100% 33%;
+    --secondary-foreground: 214 54% 73%;
 
-        --destructive: 0 63% 31%;
-        --destructive-foreground: 210 40% 98%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
 
-        --ring: 216 34% 17%;
+    --ring: 216 34% 17%;
 
-        --radius: 0.5rem;
-    }
+    --radius: 0.5rem;
+  }
 
-    .h1 {
-        @apply text-3xl font-black text-foreground;
-    }
+  .h1 {
+    @apply text-3xl font-black text-foreground;
+  }
 
-    .h2 {
-        @apply text-2xl font-bold text-foreground;
-    }
+  .h2 {
+    @apply text-2xl font-bold text-foreground;
+  }
 
-    .h3 {
-        @apply text-xl font-bold text-foreground;
-    }
+  .h3 {
+    @apply text-xl font-bold text-foreground;
+  }
 
-    .container {
-        @apply bg-background px-5 pt-8 pb-3 flex flex-col gap-2
-    }
+  .container {
+    @apply bg-background px-5 pt-8 pb-3 flex flex-col gap-2;
+  }
 }
 
 @layer components {
+  /*    */
 }

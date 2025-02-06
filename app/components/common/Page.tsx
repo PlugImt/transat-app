@@ -1,26 +1,30 @@
-import React from 'react';
-import { RefreshControl, ScrollView, View } from 'react-native';
+import type React from "react";
+import { RefreshControl, ScrollView, View } from "react-native";
 
 type PageProps = {
-    children: React.ReactNode;
-    refreshing?: boolean;
-    onRefresh?: () => void;
+  children: React.ReactNode;
+  refreshing?: boolean;
+  onRefresh?: () => void;
 };
 
-export default function Page({ children, refreshing = false, onRefresh }: PageProps) {
-    return (
-        <ScrollView
-            className="bg-background"
-            refreshControl={
-                <RefreshControl
-                    refreshing={refreshing}
-                    onRefresh={onRefresh}
-                    colors={['#ec7f32']}
-                    progressBackgroundColor="#0D0505"
-                />
-            }
-        >
-            <View className='container pb-12'>{children}</View>
-        </ScrollView>
-    );
+export default function Page({
+  children,
+  refreshing = false,
+  onRefresh,
+}: PageProps) {
+  return (
+    <ScrollView
+      className="bg-background"
+      refreshControl={
+        <RefreshControl
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+          colors={["#ec7f32"]}
+          progressBackgroundColor="#0D0505"
+        />
+      }
+    >
+      <View className="container pb-12">{children}</View>
+    </ScrollView>
+  );
 }

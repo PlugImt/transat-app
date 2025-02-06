@@ -91,6 +91,13 @@ Contribuez à la cagnotte Lydia -->
 	<tbody>
 		<tr>
             <td align="center">
+                <a href="https://github.com/luclu7">
+                    <img src="https://avatars.githubusercontent.com/u/11773528?v=4" width="100;" alt="luclu7"/>
+                    <br />
+                    <sub><b>Lucie</b></sub>
+                </a>
+            </td>
+            <td align="center">
                 <a href="https://github.com/yohann69">
                     <img src="https://avatars.githubusercontent.com/u/73314529?v=4" width="100;" alt="yohann69"/>
                     <br />

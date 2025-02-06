@@ -86,45 +86,6 @@ Contribuez à la cagnotte Lydia -->
 
 ## 🤠 Crédits
 
-<table>
-    <tr>
-        <td align="center">
-            <a href="https://github.com/zephyr-dassouli">
-                <img src="https://avatars.githubusercontent.com/u/145542064?v=4" width="100px;" alt="Image de profil" style="border-radius: 100%"/>
-                <br />
-                <sub><b>Zéphyr</b></sub>
-            </a>
-            <br />
-        </td>
-        <td align="center">
-            <a href="https://github.com/HeineZo">
-                <img src="https://avatars.githubusercontent.com/u/85509892?v=4" width="100px;" alt="Image de profil" style="border-radius: 100%"/>
-                <br />
-                <sub><b>Enzo</b></sub>
-            </a>
-            <br />
-        </td>
-        <td align="center">
-            <a href="https://github.com/luclu7">
-                <img src="https://avatars.githubusercontent.com/u/11773528?v=4" width="100px;" alt="Image de profil" style="border-radius: 100%"/>
-                <br />
-                <sub><b>Lucie</b></sub>
-            </a>
-            <br />
-        </td>
-        <td align="center">
-            <a href="https://github.com/yohann69">
-                <img src="https://avatars.githubusercontent.com/u/73314529?v=4" width="100px;" alt="Image de profil" style="border-radius: 100%"/>
-                <br />
-                <sub><b>Yohann</b></sub>
-            </a>
-            <br />
-        </td>
-    </tr>
-</table>
-
-## Contributors
-
 <!-- readme: collaborators,contributors -start -->
 <table>
 	<tbody>

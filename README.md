@@ -123,6 +123,11 @@ Contribuez à la cagnotte Lydia -->
     </tr>
 </table>
 
+## Contributors
+
+<!-- readme: collaborators,contributors -start -->
+<!-- readme: collaborators,contributors -end -->
+
 ## © Licence
 
 [MIT](LICENSE)

@@ -118,6 +118,18 @@ Contribuez à la cagnotte Lydia -->
     </tr>
 </table>
 
+
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
 ## © Licence
 
 [MIT](LICENSE)

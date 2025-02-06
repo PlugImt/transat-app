@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: 📂 Checkout repository
       uses: actions/checkout@v2
 
     - name: 🏗 Setup JDK 21
@@ -32,11 +32,9 @@ jobs:
       with:
         eas-version: latest
         token: ${{ secrets.EXPO_TOKEN }}
-    # - name: Install EAS CLI
-    #   run: npm install -g eas-cli
-
-    - name: Build APK
-      run: EXPO_TOKEN="%EXPO_TOKEN%" eas build -p android --profile preview --local
+        
+    - name: 🧱 Build APK
+      run: eas build -p android --profile preview --local
 
   contrib-readme-job:
     runs-on: ubuntu-latest

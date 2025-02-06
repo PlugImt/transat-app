@@ -23,13 +23,18 @@
 
 ## ✨ Roadmap
 
-- [ ] Sortir la première version sur les stores ⏳
-- [ ] Ajouter les events ⏳
-- [ ] Ajouter les clubs ⏳
-- [ ] Ajouter les jeux ⏳
+- [ ] Finaliser le processus d'inscription/connexion/gestion de compte ⏳
+- [ ] Ajouter Un système de notifications ⏳
+- [ ] Sortir la première version sur les stores
+- [ ] Ajouter les events
+- [ ] Ajouter les clubs
+- [ ] Ajouter les jeux
 
 ### Idées d'amélioration
 - [ ] Permettre d'indiquer lorsque le contenu de la machine à laver a été récupéré ⏳
+- [ ] Signaler une machine déffectueuse ⏳
+- [ ] Manager un club (Modifier, créer des events, gérer les membres)
+
 
 ## 🛠️ Participer au développement
 
@@ -69,12 +74,12 @@ Pour participer au design de l'application, faites une demande pour modifier le 
 
 ## 🕹️ Outils utilisés
 
-<img src="https://skillicons.dev/icons?i=react,tailwind,supabase" alt="Les technologies utilisées" />
+<img src="https://skillicons.dev/icons?i=react,tailwind,golang,postgresql" alt="Les technologies utilisées" />
 
 ## 👋 Nous contacter
+<!-- Rejoignez le groupe Whatsapp de [Transat](https://chat.whatsapp.com/Hu2SjIL3ROx9y3BDcKNCyY) -->
 
-Rejoignez le groupe Whatsapp de [Transat](https://chat.whatsapp.com/Hu2SjIL3ROx9y3BDcKNCyY)
-
+            
 <!-- ## 🫶 Soutenir l'association
 
 Contribuez à la cagnotte Lydia -->
@@ -117,11 +122,6 @@ Contribuez à la cagnotte Lydia -->
         </td>
     </tr>
 </table>
-
-
-## Contributors
-
-<img src="https://contrib.rocks/image?repo=yohann69/Transat_2.0" alt="Image de profil" style="border-radius: 100%"/>
 
 ## © Licence
 

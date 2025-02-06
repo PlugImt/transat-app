@@ -41,7 +41,7 @@ jobs:
         EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
     - name: 📦 Upload APK
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4.6.0
       with:
         name: TransatV2.apk
         path: /home/runner/work/Transat_2.0/Transat_2.0/TransatV2.apk

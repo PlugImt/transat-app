@@ -121,14 +121,7 @@ Contribuez à la cagnotte Lydia -->
 
 ## Contributors
 
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
+<img src="https://contrib.rocks/image?repo=yohann69/Transat_2.0" alt="Image de profil" style="border-radius: 100%"/>
 
 ## © Licence
 

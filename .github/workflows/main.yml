@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    name: 🤖 Android APK Builder
 
     steps:
     - name: 📂 Checkout repository
@@ -31,14 +32,23 @@ jobs:
       uses: expo/expo-github-action@v8
       with:
         eas-version: latest
-        token: "3QJl9HOF51eBt-R_in39AVbZoYlqtnCLTWzfo9T_"
+        expo-version: latest
+        token: ${{ secrets.EXPO_TOKEN }}
         
     - name: 🧱 Build APK
-      run: eas build -p android --profile preview --local
+      run: eas build -p android --profile preview --local --build-name TransatV2.apk
+      env:
+        EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+
+    - name: 📦 Upload APK
+      uses: actions/upload-artifact@v3
+      with:
+        name: TransatV2.apk
+        path: /home/runner/work/Transat_2.0/Transat_2.0/TransatV2.apk
 
   contrib-readme-job:
     runs-on: ubuntu-latest
-    name: A job to automate contrib in readme
+    name: 🤝 Contributors Updater
     permissions:
       contents: write
       pull-requests: write

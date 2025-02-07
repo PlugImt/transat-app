@@ -1,4 +1,4 @@
-import type React from "react";
+import type { FC } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 
 class InputProps {
@@ -10,7 +10,7 @@ class InputProps {
   error?: string;
 }
 
-const Input: React.FC<InputProps> = ({
+const Input: FC<InputProps> = ({
   placeholder,
   value,
   onChangeText,

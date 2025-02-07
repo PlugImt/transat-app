@@ -1,8 +1,8 @@
-import type React from "react";
+import type { ReactNode } from "react";
 import { RefreshControl, ScrollView, View } from "react-native";
 
 type PageProps = {
-  children: React.ReactNode;
+  children: ReactNode;
   refreshing?: boolean;
   onRefresh?: () => void;
 };

@@ -1,6 +1,6 @@
 import WashingMachineCard from "@/components/custom/WashingMachineCard";
 import { getWashingMachines } from "@/lib/washingMachine";
-import type React from "react";
+import type { FC } from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -20,7 +20,7 @@ interface MachineData {
   time_before_off: number;
 }
 
-export const WashingMachine: React.FC = () => {
+export const WashingMachine: FC = () => {
   const { t } = useTranslation();
 
   const [dataMachine, setDataMachine] = useState<MachineData[]>([]);

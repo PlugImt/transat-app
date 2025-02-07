@@ -1,20 +1,4 @@
-interface MenuItem {
-  pole: string;
-  accompagnement: string;
-  periode: string;
-  nom: string;
-  info1: string;
-  info2: string;
-}
-
-interface MenuData {
-  grilladesMidi: string[];
-  migrateurs: string[];
-  cibo: string[];
-  accompMidi: string[];
-  grilladesSoir: string[];
-  accompSoir: string[];
-}
+import type { MenuData, MenuItem } from "@/types/restaurant";
 
 const TARGET_URL =
   "https://toast-js.ew.r.appspot.com/coteresto?key=1ohdRUdCYo6e71aLuBh7ZfF2lc_uZqp9D78icU4DPufA";

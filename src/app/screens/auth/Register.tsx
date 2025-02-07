@@ -1,11 +1,12 @@
 import { useAuth } from "@/hooks/useAuth";
+import { useState } from "react";
 import { Button, StyleSheet, TextInput, View } from "react-native";
 
 export const Register = () => {
   const { register } = useAuth();
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [confirmPassword, setConfirmPassword] = React.useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   return (
     <View style={styles.container}>

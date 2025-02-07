@@ -1,5 +1,3 @@
-import axios from "axios";
-
 interface MenuItem {
   pole: string;
   accompagnement: string;
@@ -18,19 +16,42 @@ interface MenuData {
   accompSoir: string[];
 }
 
-export async function getRestaurant(
-  setRefreshing: (refreshing: boolean) => void,
-): Promise<MenuData | undefined> {
+const TARGET_URL =
+  "https://toast-js.ew.r.appspot.com/coteresto?key=1ohdRUdCYo6e71aLuBh7ZfF2lc_uZqp9D78icU4DPufA";
+const REGEX = /var loadingData = (\[.*?])/;
+
+const getMenuCategory = (
+  pole: string,
+  accompagnement: string,
+  periode: string,
+) => {
+  if (accompagnement === "TRUE") {
+    return periode === "midi" ? "accompMidi" : "accompSoir";
+  }
+  switch (pole) {
+    case "Grillades / Plats traditions":
+      return periode === "midi" ? "grilladesMidi" : "grilladesSoir";
+    case "Les Cuistots migrateurs":
+      return "migrateurs";
+    case "Le Végétarien":
+      return "cibo";
+    default:
+      return null;
+  }
+};
+
+export async function getRestaurant(): Promise<MenuData | undefined> {
   try {
-    const targetUrl =
-      "https://toast-js.ew.r.appspot.com/coteresto?key=1ohdRUdCYo6e71aLuBh7ZfF2lc_uZqp9D78icU4DPufA";
+    const response = await fetch(TARGET_URL);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.text();
 
-    const response = await axios.get(targetUrl);
-    const data = response.data;
+    const match = data.match(REGEX);
+    if (!match) return;
 
-    const regex = /var loadingData = (\[.*?])/;
-    const match = data.match(regex);
-    const loadingData = match ? match[1] : "Valeur non trouvée";
+    const loadingData = match[1];
     const json: MenuItem[] = JSON.parse(loadingData.substring(1));
 
     const newMenuData: MenuData = {
@@ -42,56 +63,23 @@ export async function getRestaurant(
       accompSoir: [],
     };
 
-    const addToMenu = (menuArray: string[], item: string) => {
-      if (!menuArray.includes(item)) {
-        menuArray.push(item.trim());
-      }
-    };
-
-    for (const objet of json) {
-      const item = `${objet.nom} ${objet.info1}${objet.info2}`;
-      const isMidi = objet.periode === "midi";
-
-      switch (objet.pole) {
-        case "Grillades / Plats traditions":
-          if (objet.accompagnement === "TRUE") {
-            isMidi
-              ? addToMenu(newMenuData.accompMidi, item)
-              : addToMenu(newMenuData.accompSoir, item);
-          } else {
-            isMidi
-              ? addToMenu(newMenuData.grilladesMidi, item)
-              : addToMenu(newMenuData.grilladesSoir, item);
-          }
-          break;
-        case "Les Cuistots migrateurs":
-          if (objet.accompagnement === "TRUE") {
-            isMidi
-              ? addToMenu(newMenuData.accompMidi, item)
-              : addToMenu(newMenuData.accompSoir, item);
-          } else {
-            addToMenu(newMenuData.migrateurs, item);
-          }
-          break;
-        case "Le Végétarien":
-          if (objet.accompagnement === "TRUE") {
-            isMidi
-              ? addToMenu(newMenuData.accompMidi, item)
-              : addToMenu(newMenuData.accompSoir, item);
-          } else {
-            addToMenu(newMenuData.cibo, item);
-          }
-          break;
+    for (const item of json) {
+      const category = getMenuCategory(
+        item.pole,
+        item.accompagnement,
+        item.periode,
+      );
+      if (category) {
+        const menuItem = `${item.nom} ${item.info1}${item.info2}`.trim();
+        if (!newMenuData[category].includes(menuItem)) {
+          newMenuData[category].push(menuItem);
+        }
       }
     }
 
-    setRefreshing(false);
-
     return newMenuData;
-  } catch (err) {
-    console.error("Error while getting the menu :", err);
-    setRefreshing(false);
-  } finally {
-    setRefreshing(false);
+  } catch (error) {
+    console.error("Error fetching the restaurant menu:", error);
+    return;
   }
 }

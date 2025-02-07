@@ -10,7 +10,7 @@ import {
   type StackNavigationProp,
   createStackNavigator,
 } from "@react-navigation/stack";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ActivityIndicator, View } from "react-native";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;

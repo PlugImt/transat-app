@@ -1,4 +1,4 @@
-import { getRestaurant } from "@/lib/restaurant";
+import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
 import { isDinner, isLunch, isWeekend } from "@/lib/utils";
 import type { AppStackParamList } from "@/services/storage/types";
 import theme from "@/themes";
@@ -9,62 +9,23 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   ActivityIndicator,
-  Image,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
-import Loading from "../../common/Loading";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
-interface RestaurantSummaryProps {
-  setRefreshing: (refreshing: boolean) => void;
-  refreshing: boolean;
-}
-
-interface MenuData {
-  grilladesMidi: string[];
-  migrateurs: string[];
-  cibo: string[];
-  accompMidi: string[];
-  grilladesSoir: string[];
-  accompSoir: string[];
-}
-
-export function RestaurantWidget({
-  setRefreshing,
-  refreshing,
-}: RestaurantSummaryProps) {
+export function RestaurantWidget() {
   const { t } = useTranslation();
 
   const navigation = useNavigation<AppScreenNavigationProp>();
-
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-  const [menuData, setMenuData] = useState<MenuData | undefined>({
-    grilladesMidi: [],
-    migrateurs: [],
-    cibo: [],
-    accompMidi: [],
-    grilladesSoir: [],
-    accompSoir: [],
-  });
+  const { data: menu, isPending, error, isError } = useRestaurantMenu();
 
   const weekend: boolean = useMemo(() => isWeekend(), []);
   const lunch: boolean = useMemo(() => isLunch(), []);
   const dinner: boolean = useMemo(() => isDinner(), []);
-  const empty: boolean = useMemo(
-    () =>
-      menuData?.grilladesMidi.length === 0 &&
-      menuData?.migrateurs.length === 0 &&
-      menuData?.cibo.length === 0 &&
-      menuData?.accompMidi.length === 0 &&
-      menuData?.grilladesSoir.length === 0 &&
-      menuData?.accompSoir.length === 0,
-    [menuData],
-  );
 
   const title = `${t("services.restaurant.title")} ${
     !weekend && lunch
@@ -74,24 +35,7 @@ export function RestaurantWidget({
         : ""
   }`;
 
-  useEffect(() => {
-    const fetchMenuData = async () => {
-      try {
-        const data = await getRestaurant(setRefreshing);
-        setMenuData(data);
-      } catch (error) {
-        console.error("Error while getting the menu :", error);
-        setError(`${error}`);
-      } finally {
-        setRefreshing(false);
-        setIsLoading(false);
-      }
-    };
-
-    fetchMenuData().then((r) => r);
-  }, [setRefreshing]);
-
-  if (isLoading) {
+  if (isPending) {
     return (
       <View className="flex flex-col gap-2">
         <Text className="h3">{title}</Text>
@@ -102,7 +46,7 @@ export function RestaurantWidget({
     );
   }
 
-  if (error || weekend || empty) {
+  if (error || weekend) {
     return null;
   }
 
@@ -126,7 +70,7 @@ export function RestaurantWidget({
                   </Text>
                 </View>
 
-                {menuData?.grilladesMidi.map((item) => (
+                {menu?.grilladesMidi.map((item) => (
                   <Text key={item} style={styles.itemText}>
                     {item}
                   </Text>
@@ -141,7 +85,7 @@ export function RestaurantWidget({
                   </Text>
                 </View>
 
-                {menuData?.migrateurs.map((item) => (
+                {menu?.migrateurs.map((item) => (
                   <Text key={item} style={styles.itemText}>
                     {item}
                   </Text>
@@ -156,7 +100,7 @@ export function RestaurantWidget({
                   </Text>
                 </View>
 
-                {menuData?.cibo.map((item) => (
+                {menu?.cibo.map((item) => (
                   <Text key={item} style={styles.itemText}>
                     {item}
                   </Text>
@@ -171,7 +115,7 @@ export function RestaurantWidget({
                   </Text>
                 </View>
 
-                {menuData?.accompMidi.map((item) => (
+                {menu?.accompMidi.map((item) => (
                   <Text key={item} style={styles.itemText}>
                     {item}
                   </Text>
@@ -198,7 +142,7 @@ export function RestaurantWidget({
                       </Text>
                     </View>
 
-                    {menuData?.grilladesSoir.map((item) => (
+                    {menu?.grilladesSoir.map((item) => (
                       <Text key={item} style={styles.itemText}>
                         {item}
                       </Text>
@@ -217,7 +161,7 @@ export function RestaurantWidget({
                       </Text>
                     </View>
 
-                    {menuData?.accompSoir.map((item) => (
+                    {menu?.accompSoir.map((item) => (
                       <Text key={item} style={styles.itemText}>
                         {item}
                       </Text>

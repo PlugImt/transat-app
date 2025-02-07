@@ -129,7 +129,7 @@ export const Home = () => {
         <Text className="text-primary">{user?.name || "Yohann"}</Text>
       </Text>
       <Weather refreshing={refreshing} setRefreshing={setRefreshing} />
-      <RestaurantWidget refreshing={refreshing} setRefreshing={setRefreshing} />
+      <RestaurantWidget />
       <WashingMachineWidget
         refreshing={refreshing}
         setRefreshing={setRefreshing}

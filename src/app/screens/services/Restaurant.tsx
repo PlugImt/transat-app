@@ -1,6 +1,7 @@
 import Loading from "@/components/common/Loading";
 import Page from "@/components/common/Page";
 import RestaurantCard from "@/components/custom/RestaurantCard";
+import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
 import { getRestaurant } from "@/lib/restaurant";
 import { isWeekend } from "@/lib/utils";
 import React, { useEffect, useMemo, useState } from "react";
@@ -15,76 +16,30 @@ import {
   View,
 } from "react-native";
 
-interface MenuData {
-  grilladesMidi: string[];
-  migrateurs: string[];
-  cibo: string[];
-  accompMidi: string[];
-  grilladesSoir: string[];
-  accompSoir: string[];
-}
-
 export const Restaurant = () => {
   const { t } = useTranslation();
 
-  const [menuData, setMenuData] = useState<MenuData | undefined>({
-    grilladesMidi: [],
-    migrateurs: [],
-    cibo: [],
-    accompMidi: [],
-    grilladesSoir: [],
-    accompSoir: [],
-  });
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [refreshing, setRefreshing] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
+  const {
+    data: menu,
+    isPending,
+    refetch,
+    error,
+    isError,
+  } = useRestaurantMenu();
 
   const weekend: boolean = useMemo(() => isWeekend(), []);
-  const empty: boolean = useMemo(
-    () =>
-      menuData?.grilladesMidi.length === 0 &&
-      menuData?.migrateurs.length === 0 &&
-      menuData?.cibo.length === 0 &&
-      menuData?.accompMidi.length === 0 &&
-      menuData?.grilladesSoir.length === 0 &&
-      menuData?.accompSoir.length === 0,
-    [menuData],
-  );
 
-  const fetchMenuData = async () => {
-    try {
-      const data = await getRestaurant(setRefreshing);
-      setMenuData(data);
-      // biome-ignore lint/suspicious/noExplicitAny: à être remplacé par React Query
-    } catch (error: any) {
-      console.error("Error while getting the menu :", error);
-      setError(`${error.message}`);
-    } finally {
-      setIsLoading(false);
-      setRefreshing(false);
-    }
-  };
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies: à être remplacé par React Query
-  useEffect(() => {
-    fetchMenuData().then((r) => r);
-  }, []);
-
-  const onRefresh = () => {
-    setRefreshing(!refreshing);
-  };
-
-  if (isLoading) {
+  if (isPending) {
     return (
-      <Page refreshing={refreshing} onRefresh={onRefresh}>
+      <Page refreshing={isPending} onRefresh={refetch}>
         <Loading />
       </Page>
     );
   }
 
-  if (weekend || empty) {
+  if (weekend) {
     return (
-      <Page refreshing={refreshing} onRefresh={onRefresh}>
+      <Page refreshing={isPending} onRefresh={refetch}>
         <View className="min-h-screen flex justify-center items-center">
           <Image
             source={require("@/assets/images/Logos/restaurant.png")}
@@ -100,18 +55,18 @@ export const Restaurant = () => {
     );
   }
 
-  if (error) {
+  if (isError) {
     return (
-      <Page refreshing={refreshing} onRefresh={onRefresh}>
+      <Page refreshing={isPending} onRefresh={refetch}>
         <View className="min-h-screen flex justify-center items-center ">
-          <Text className="text-red-500 text-center h1">{error}</Text>
+          <Text className="text-red-500 text-center h1">{error?.message}</Text>
         </View>
       </Page>
     );
   }
 
   return (
-    <Page refreshing={refreshing} onRefresh={onRefresh}>
+    <Page refreshing={isPending} onRefresh={refetch}>
       <Text className="h1 m-4">{t("services.restaurant.title")}</Text>
 
       <View className="flex flex-col gap-8">
@@ -120,39 +75,39 @@ export const Restaurant = () => {
 
           <RestaurantCard
             title={t("services.restaurant.grill")}
-            meals={menuData?.grilladesMidi}
+            meals={menu?.grilladesMidi}
             icon={"Beef"}
           />
           <RestaurantCard
             title={t("services.restaurant.migrator")}
-            meals={menuData?.migrateurs}
+            meals={menu?.migrateurs}
             icon={"ChefHat"}
           />
           <RestaurantCard
             title={t("services.restaurant.vegetarian")}
-            meals={menuData?.cibo}
+            meals={menu?.cibo}
             icon={"Vegan"}
           />
           <RestaurantCard
             title={t("services.restaurant.side_dishes")}
-            meals={menuData?.accompMidi}
+            meals={menu?.accompMidi}
             icon={"Soup"}
           />
         </View>
 
-        {menuData?.grilladesSoir && menuData?.accompSoir && (
+        {menu?.grilladesSoir && menu?.accompSoir && (
           <View className="flex flex-col gap-4">
             <Text className="h3 ml-4">{t("services.restaurant.dinner")}</Text>
 
             <RestaurantCard
               title={t("services.restaurant.grill")}
-              meals={menuData?.grilladesSoir}
+              meals={menu?.grilladesSoir}
               icon={"Beef"}
             />
 
             <RestaurantCard
               title={t("services.restaurant.side_dishes")}
-              meals={menuData?.accompSoir}
+              meals={menu?.accompSoir}
               icon={"Soup"}
             />
           </View>

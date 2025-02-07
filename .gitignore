@@ -41,3 +41,5 @@ app-example
 *.apk
 *.aab
 Transat Firebase Service Account.json
+
+.env

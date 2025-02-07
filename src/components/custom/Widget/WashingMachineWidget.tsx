@@ -1,4 +1,4 @@
-import { getWashingMachines } from "@/lib/washingMachine";
+import { useWashingMachines } from "@/hooks/useWashingMachines";
 import type { AppStackParamList } from "@/services/storage/types";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
@@ -15,74 +15,40 @@ import {
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
-interface WashingMachineSummaryProps {
-  setRefreshing: (refreshing: boolean) => void;
-  refreshing: boolean;
-}
-
-interface MachineData {
-  machine_id: string;
-  nom_type: string;
-  selecteur_machine: string;
-  status: number;
-  time_before_off: number;
-}
-
-export function WashingMachineWidget({
-  setRefreshing,
-  refreshing,
-}: WashingMachineSummaryProps) {
+export function WashingMachineWidget() {
   const { t } = useTranslation();
-
   const navigation = useNavigation<AppScreenNavigationProp>();
 
-  const [dataMachine, setDataMachine] = useState<MachineData[] | undefined>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data, isPending, isError, error, refetch } = useWashingMachines();
+
   const [totalWashers, setTotalWashers] = useState<number>(0);
   const [totalDryers, setTotalDryers] = useState<number>(0);
   const [availableWashers, setAvailableWashers] = useState<number>(0);
   const [availableDryers, setAvailableDryers] = useState<number>(0);
 
   useEffect(() => {
-    async function fetchWashingMachines() {
-      try {
-        const data = await getWashingMachines(setRefreshing);
-        setDataMachine(data);
+    if (data) {
+      const washingMachines = data.filter(
+        (machine) => machine.nom_type.trim() === "LAVE LINGE",
+      );
+      const dryers = data.filter(
+        (machine) => machine.nom_type.trim() !== "LAVE LINGE",
+      );
 
-        // Group washing machines and dryers separately
-        const washingMachines = dataMachine?.filter(
-          (machine) => machine.nom_type.trim() === "LAVE LINGE",
-        );
-        const dryers = dataMachine?.filter(
-          (machine) => machine.nom_type.trim() !== "LAVE LINGE",
-        );
+      setTotalWashers(washingMachines.length);
+      setTotalDryers(dryers.length);
 
-        setTotalWashers(washingMachines?.length || 0);
-        setTotalDryers(dryers?.length || 0);
-
-        setAvailableWashers(
-          washingMachines?.filter((machine) => machine.time_before_off === 0)
-            .length || 0,
-        );
-        setAvailableDryers(
-          dryers?.filter((machine) => machine.time_before_off === 0).length ||
-            0,
-        );
-        // biome-ignore lint/suspicious/noExplicitAny: à être remplacé par React Query
-      } catch (error: any) {
-        console.error("Error while getting the washing machines :", error);
-        setError(`${error.message}`);
-      } finally {
-        setIsLoading(false);
-        setRefreshing(false);
-      }
+      setAvailableWashers(
+        washingMachines.filter((machine) => machine.time_before_off === 0)
+          .length,
+      );
+      setAvailableDryers(
+        dryers.filter((machine) => machine.time_before_off === 0).length,
+      );
     }
+  }, [data]);
 
-    fetchWashingMachines().then((r) => r);
-  }, [setRefreshing, dataMachine?.filter]);
-
-  if (isLoading) {
+  if (isPending) {
     return (
       <View style={styles.centeredContainer}>
         <ActivityIndicator size="large" color="#ffffff" />
@@ -90,10 +56,10 @@ export function WashingMachineWidget({
     );
   }
 
-  if (error) {
+  if (isError) {
     return (
       <View style={styles.centeredContainer}>
-        <Text style={styles.errorText}>Error: {error}</Text>
+        <Text style={styles.errorText}>Error: {(error as Error).message}</Text>
       </View>
     );
   }

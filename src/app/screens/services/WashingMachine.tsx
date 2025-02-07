@@ -1,7 +1,6 @@
 import WashingMachineCard from "@/components/custom/WashingMachineCard";
-import { getWashingMachines } from "@/lib/washingMachine";
+import { useWashingMachines } from "@/hooks/useWashingMachines";
 import type { FC } from "react";
-import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   ActivityIndicator,
@@ -12,44 +11,13 @@ import {
   View,
 } from "react-native";
 
-interface MachineData {
-  machine_id: string;
-  nom_type: string;
-  selecteur_machine: string;
-  status: number;
-  time_before_off: number;
-}
-
 export const WashingMachine: FC = () => {
   const { t } = useTranslation();
 
-  const [dataMachine, setDataMachine] = useState<MachineData[]>([]);
-  const [refreshing, setRefreshing] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data, isPending, isFetching, isError, error, refetch } =
+    useWashingMachines();
 
-  const getMachine = () => {
-    getWashingMachines(setRefreshing).then((r) => {
-      if (r) {
-        setDataMachine(r);
-        setIsLoading(false);
-      } else {
-        setError("Error while getting the washing machines");
-      }
-    });
-  };
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies: à être remplacé par React Query
-  useEffect(() => {
-    getMachine();
-  }, []);
-
-  const onRefresh = () => {
-    setRefreshing(true);
-    getMachine();
-  };
-
-  if (isLoading) {
+  if (isPending) {
     return (
       <View style={styles.centeredContainer}>
         <ActivityIndicator size="large" color="#ffffff" />
@@ -57,19 +25,27 @@ export const WashingMachine: FC = () => {
     );
   }
 
-  if (error) {
+  if (isError) {
     return (
       <View style={styles.centeredContainer}>
-        <Text style={styles.errorText}>Error: {error}</Text>
+        <Text style={styles.errorText}>Error: {(error as Error).message}</Text>
+      </View>
+    );
+  }
+
+  if (!data) {
+    return (
+      <View style={styles.centeredContainer}>
+        <Text style={styles.errorText}>No data available?</Text>
       </View>
     );
   }
 
   // Group washing machines and dryers separately
-  const washingMachines = dataMachine.filter(
+  const washingMachines = data?.filter(
     (machine) => machine.nom_type.trim() === "LAVE LINGE",
   );
-  const dryers = dataMachine.filter(
+  const dryers = data?.filter(
     (machine) => machine.nom_type.trim() !== "LAVE LINGE",
   );
 
@@ -78,8 +54,8 @@ export const WashingMachine: FC = () => {
       style={styles.container}
       refreshControl={
         <RefreshControl
-          refreshing={refreshing}
-          onRefresh={onRefresh}
+          refreshing={isFetching}
+          onRefresh={() => refetch()}
           colors={["#ec7f32"]}
           progressBackgroundColor="#0D0505"
         />
@@ -89,7 +65,7 @@ export const WashingMachine: FC = () => {
         {t("services.washing_machine.title")}
       </Text>
 
-      {washingMachines.length > 0 && (
+      {washingMachines?.length > 0 && (
         <>
           <Text style={styles.subTitle}>
             {t("services.washing_machine.washing_machine")}
@@ -106,7 +82,7 @@ export const WashingMachine: FC = () => {
         </>
       )}
 
-      {dryers.length > 0 && (
+      {dryers?.length > 0 && (
         <>
           <Text style={styles.subTitle}>
             {t("services.washing_machine.dryer")}
@@ -123,7 +99,7 @@ export const WashingMachine: FC = () => {
         </>
       )}
 
-      {washingMachines.length === 0 && dryers.length === 0 && (
+      {washingMachines?.length === 0 && dryers?.length === 0 && (
         <Text style={styles.emptyText}>No machines available</Text>
       )}
 

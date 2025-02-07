@@ -1,36 +1,28 @@
-import { getWeather } from "@/lib/weather";
+import { useWeather } from "@/hooks/useWeather";
 import { format } from "date-fns";
-import { useEffect, useState } from "react";
+import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 
-interface WeatherProps {
-  setRefreshing: (refreshing: boolean) => void;
-  refreshing: boolean;
-}
-
-interface WeatherData {
-  temperature: number;
-  condition: string;
-  img: string;
-}
-
-export function Weather({ setRefreshing, refreshing }: WeatherProps) {
-  const [weatherNantes, setWeatherNantes] = useState<WeatherData | undefined>();
+export function Weather() {
+  const { data: weatherNantes, isPending, isError, error } = useWeather();
 
   const date = new Date();
 
-  useEffect(() => {
-    async function fetchWeather() {
-      try {
-        const data = await getWeather(setRefreshing);
-        setWeatherNantes(data);
-      } catch (error) {
-        console.error("Error while getting the weather :", error);
-      }
-    }
+  if (isPending) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.loadingText}>Loading...</Text>
+      </View>
+    );
+  }
 
-    fetchWeather().then((r) => r);
-  }, [setRefreshing]);
+  if (isError) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.errorText}>Error: {(error as Error).message}</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -102,6 +94,15 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 10,
+  },
+  loadingText: {
+    fontSize: 18,
+    color: "#ccc",
+    textAlign: "center",
+  },
+  errorText: {
+    color: "red",
+    textAlign: "center",
   },
 });
 

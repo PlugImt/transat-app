@@ -1,35 +1,26 @@
-import axios from "axios";
+import type { MachineData } from "@/types/washingMachine";
 
-interface MachineData {
-  machine_id: string;
-  nom_type: string;
-  selecteur_machine: string;
-  status: number;
-  time_before_off: number;
-}
-
-export async function getWashingMachines(
-  setRefreshing: (refreshing: boolean) => void,
-): Promise<MachineData[] | undefined> {
-  try {
-    const response = await axios.post(
-      "https://status.wi-line.fr/update_machine_ext.php",
-      new URLSearchParams({
+export async function fetchWashingMachines(): Promise<
+  MachineData[] | undefined
+> {
+  const response = await fetch(
+    "https://status.wi-line.fr/update_machine_ext.php",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      },
+      body: new URLSearchParams({
         action: "READ_LIST_STATUS",
         serial_centrale: "65e4444c3471550a789e2138a9e28eff",
       }).toString(),
-      {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-        },
-      },
-    );
+    },
+  );
 
-    setRefreshing(false);
-    return response.data.machine_info_status.machine_list;
-  } catch (error) {
-    console.error("Axios error:", error);
-  } finally {
-    setRefreshing(false);
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
   }
+
+  const data = await response.json();
+  return data.machine_info_status.machine_list as MachineData[];
 }

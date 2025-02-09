@@ -1,52 +1,47 @@
-import type { FC } from "react";
-import { StyleSheet, TextInput, View } from "react-native";
+import { forwardRef } from 'react';
+import { Text, TextInput, View } from 'react-native';
+import { Controller, type FieldValues, type Path } from 'react-hook-form';
 
-class InputProps {
-  placeholder: string | undefined;
-  value: string | undefined;
-  onChangeText: ((text: string) => void) | undefined;
-  secureTextEntry?: boolean;
-  autoCapitalize?: "none" | "sentences" | "words" | "characters";
+import { cn } from '@/lib/utils';
+
+export interface InputProps<T extends FieldValues> extends Omit<React.ComponentPropsWithoutRef<typeof TextInput>, 'onChangeText' | 'value'> {
+  label?: string;
+  labelClasses?: string;
+  inputClasses?: string;
+  control: any;
+  name: Path<T>; // Assure que le `name` est une clé valide du form
   error?: string;
 }
 
-const Input: FC<InputProps> = ({
-  placeholder,
-  value,
-  onChangeText,
-  secureTextEntry,
-  autoCapitalize,
-  error,
-}) => {
-  return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder={placeholder}
-        value={value}
-        onChangeText={onChangeText}
-        secureTextEntry={secureTextEntry}
-        autoCapitalize={autoCapitalize}
+const Input = forwardRef(<T extends FieldValues>(
+  { className, label, labelClasses, inputClasses, control, name, error, ...props }: InputProps<T>,
+  ref: React.Ref<TextInput>
+) => (
+    <View className={cn('flex flex-col gap-1.5', className)}>
+      {label && <Text className={cn('h3 text-foreground', labelClasses)}>{label}</Text>}
+
+      <Controller
+        control={control}
+        name={name}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <TextInput
+            ref={ref}
+            className={cn(
+              inputClasses,
+              'py-2.5 px-4 rounded-lg bg-primary-foreground placeholder:text-stone-400',
+              error && 'border border-red-500'
+            )}
+            onChangeText={onChange}
+            onBlur={onBlur}
+            value={value}
+            {...props}
+          />
+        )}
       />
-      {/*{error ? <Text style={styles.error}>{error}</Text> : null}*/}
+
+      {error && <Text className="text-red-500 text-sm">{error}</Text>}
     </View>
-  );
-};
+  )
+);
 
-const styles = StyleSheet.create({
-  container: {
-    marginBottom: 20,
-  },
-  input: {
-    height: 50,
-    borderWidth: 1,
-    padding: 10,
-    borderRadius: 8,
-  },
-  error: {
-    color: "red",
-    marginTop: 5,
-  },
-});
-
-export default Input;
+export { Input };

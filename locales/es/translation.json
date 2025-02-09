@@ -18,7 +18,25 @@
     "signIn": "Iniciar sesión",
     "signUp": "Registrarse",
     "email": "Correo electrónico",
-    "password": "Contraseña"
+    "password": "Contraseña",
+    "gotAccount": "Ya tengo una cuenta",
+    "noAccount": "No tengo una cuenta",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "confirmPassword": "Confirmar contraseña",
+    "createAccount": "Crear cuenta",
+    "errors": {
+      "email": "La dirección de correo electrónico no es válida",
+      "password": "La contraseña debe tener al menos 6 caracteres",
+      "confirmPassword": "Las contraseñas no coinciden",
+      "firstName": "Se requiere el nombre",
+      "lastName": "Se requiere el apellido"
+    }
+  },
+  "welcome": {
+    "subtitle": "Por los atlantes, para los atlantes 🐙",
+    "login": "Iniciar sesión",
+    "signup": "Registrarse"
   },
   "services": {
     "services": "Servicios",

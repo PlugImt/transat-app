@@ -1,5 +1,5 @@
-import { Login } from "@/app/screens/auth/Login";
-import { Register } from "@/app/screens/auth/Register";
+import { Signin } from "@/app/screens/auth/Signin";
+import { Signup } from "@/app/screens/auth/Signup";
 import Welcome from "@/app/screens/auth/Welcome";
 import type { AuthStackParamList } from "@/services/storage/types";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -10,8 +10,8 @@ export const AuthNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Welcome" component={Welcome} />
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Register" component={Register} />
+      <Stack.Screen name="Signin" component={Signin} />
+      <Stack.Screen name="Signup" component={Signup} />
     </Stack.Navigator>
   );
 };

@@ -5,12 +5,13 @@ import { cn } from "@/lib/utils";
 import type { ComponentPropsWithoutRef } from "react";
 
 const buttonVariants = cva(
-  "flex flex-row items-center justify-center rounded-md",
+  "flex flex-row items-center justify-center rounded-xl",
   {
     variants: {
       variant: {
         default: "bg-primary",
         secondary: "bg-secondary",
+        outlined: "border border-primary",
         destructive: "bg-destructive",
         ghost: "bg-slate-700",
         link: "text-primary underline-offset-4",
@@ -33,6 +34,7 @@ const buttonTextVariants = cva("text-center font-medium", {
     variant: {
       default: "text-primary-foreground",
       secondary: "text-secondary-foreground",
+      outlined: "text-primary",
       destructive: "text-destructive-foreground",
       ghost: "text-primary-foreground",
       link: "text-primary-foreground underline",

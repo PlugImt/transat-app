@@ -14,11 +14,29 @@
     "cancel": "Annuler",
     "set_notification": "Définir une notification"
   },
+  "welcome": {
+    "subtitle": "Par les atlantes, pour les atlantes 🐙",
+    "login": "Se connecter",
+    "signup": "Inscription"
+  },
   "auth": {
     "signIn": "Se connecter",
     "signUp": "Inscription",
     "email": "Email",
-    "password": "Mot de passe"
+    "password": "Mot de passe",
+    "gotAccount": "J'ai déjà un compte",
+    "noAccount": "Je n'ai pas de compte",
+    "firstName": "Prénom",
+    "lastName": "Nom de famille",
+    "confirmPassword": "Confirmer le mot de passe",
+    "createAccount": "Créer un compte",
+    "errors": {
+      "email": "L'adresse email est invalide",
+      "password": "Le mot de passe doit contenir au moins 6 caractères",
+      "confirmPassword": "Les mots de passe ne correspondent pas",
+      "firstName": "Le prénom est requis",
+      "lastName": "Le nom de famille est requis"
+    }
   },
   "services": {
     "services": "Services",

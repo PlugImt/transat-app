@@ -12,6 +12,7 @@ import {
 } from "@react-navigation/stack";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, View } from "react-native";
+import Signup from "../screens/auth/Signup";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 

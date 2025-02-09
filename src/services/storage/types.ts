@@ -11,8 +11,8 @@ export interface StorageItem {
 // Auth Stack Types
 export type AuthStackParamList = {
   Welcome: undefined;
-  Login: undefined;
-  Register: undefined;
+  Signin: undefined;
+  Signup: undefined;
   ForgotPassword?: undefined;
 };
 

@@ -17,10 +17,28 @@
     "sign_up": "Sign up"
   },
   "auth": {
-    "signIn": "Sign In",
-    "signUp": "Sign Up",
+    "signIn": "Sign in",
+    "signUp": "Sign up",
     "email": "Email",
-    "password": "Password"
+    "password": "Password",
+    "gotAccount": "Already have an account",
+    "noAccount": "Don't have an account",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "confirmPassword": "Confirm Password",
+    "createAccount": "Create Account",
+    "errors": {
+      "email": "The email address is invalid",
+      "password": "Password must be at least 6 characters",
+      "confirmPassword": "Passwords do not match",
+      "firstName": "First name is required",
+      "lastName": "Last name is required"
+    }
+  },
+  "welcome": {
+    "subtitle": "By the Atlanteans, for the Atlanteans 🐙",
+    "login": "Login",
+    "signup": "Signup"
   },
   "services": {
     "services": "Services",

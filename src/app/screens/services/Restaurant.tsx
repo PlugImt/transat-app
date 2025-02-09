@@ -2,16 +2,11 @@ import Loading from "@/components/common/Loading";
 import Page from "@/components/common/Page";
 import RestaurantCard from "@/components/custom/RestaurantCard";
 import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
-import { getRestaurant } from "@/lib/restaurant";
 import { isWeekend } from "@/lib/utils";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import {
-  ActivityIndicator,
   Image,
-  RefreshControl,
-  ScrollView,
-  StyleSheet,
   Text,
   View,
 } from "react-native";
@@ -40,10 +35,10 @@ export const Restaurant = () => {
   if (weekend) {
     return (
       <Page refreshing={isPending} onRefresh={refetch}>
-        <View className="min-h-screen flex justify-center items-center">
+        <View className="min-h-full flex justify-center items-center">
           <Image
             source={require("@/assets/images/Logos/restaurant.png")}
-            className="w-40 h-40 grayscale"
+            className="w-40 h-40 filter grayscale"
           />
           <Text className="h1 text-red-500 text-center">
             {weekend

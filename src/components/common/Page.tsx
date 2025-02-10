@@ -29,7 +29,14 @@ export default function Page({
         />
       }
     >
-      <View className={cn("bg-background px-5 pt-8 flex flex-col gap-2 pb-12", className)}>{children}</View>
+      <View
+        className={cn(
+          "bg-background px-5 pt-8 flex flex-col gap-2 pb-12",
+          className,
+        )}
+      >
+        {children}
+      </View>
     </ScrollView>
   );
 }

@@ -5,11 +5,7 @@ import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
 import { isWeekend } from "@/lib/utils";
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  Image,
-  Text,
-  View,
-} from "react-native";
+import { Image, Text, View } from "react-native";
 
 export const Restaurant = () => {
   const { t } = useTranslation();

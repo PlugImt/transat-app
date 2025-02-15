@@ -36,13 +36,15 @@
     "enterCode": "Please enter the 6-digit code sent to ",
     "resendCode": "Resend Code",
     "errors": {
+      "tokenSaveFailed": "Failed to save authentication token",
       "email": "The email address is invalid",
       "password": "Password must be at least 6 characters",
       "confirmPassword": "Passwords do not match",
       "firstName": "First name is required",
       "lastName": "Last name is required",
       "codeSent": "A new verification code has been sent to your email",
-      "errorSendingCode": "Failed to request new code"
+      "errorSendingCode": "Failed to request new code",
+      "imtOnly": "Only IMT email addresses are allowed"
     }
   },
   "welcome": {

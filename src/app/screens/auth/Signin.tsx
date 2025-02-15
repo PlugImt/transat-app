@@ -13,16 +13,6 @@ import { z } from 'zod';
 import { VerificationCodeModal } from '@/components/auth/VerificationCode';
 
 
-const loginSchema = z.object({
-    email: z
-        .string()
-        .email('Invalid email address')
-        .refine((email) => email.endsWith('@imt-atlantique.net'), {
-            message: 'Email must be an IMT Atlantique address',
-        }),
-    password: z.string().min(6, 'Password must be at least 6 characters long'),
-});
-
 export const Signin = () => {
     const navigation = useNavigation();
     const { login, saveToken, isLoading } = useAuth();
@@ -33,6 +23,16 @@ export const Signin = () => {
     const [verificationEmail, setVerificationEmail] = useState<string>('');
 
     const passwordRef = useRef<TextInput>(null);
+
+    const loginSchema = z.object({
+        email: z
+            .string()
+            .email(t('auth.errors.email'))
+            .refine((email) => email.endsWith('@imt-atlantique.net'), {
+                message: t('auth.errors.imtOnly'),
+            }),
+        password: z.string().min(6, t('auth.errors.password')),
+    });
 
     const {
         control,
@@ -71,7 +71,7 @@ export const Signin = () => {
             }
         } catch (err) {
             // @ts-ignore
-            setLoginError(err.message || 'Invalid email or password. Please try again.');
+            setLoginError(t('auth.invalidCredentials'));
         }
     };
 
@@ -81,7 +81,7 @@ export const Signin = () => {
             setVerificationModalVisible(false);
             alert('Account verified and logged in successfully');
         } catch (err) {
-            setLoginError('Failed to save authentication token');
+            setLoginError(t('auth.errors.tokenSaveFailed'));
         }
     };
 

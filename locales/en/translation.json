@@ -25,8 +25,8 @@
     "signUp": "Sign up",
     "email": "Email",
     "password": "Password",
-    "gotAccount": "Already have an account",
-    "noAccount": "Don't have an account",
+    "gotAccount": "I already have an account",
+    "noAccount": "I don't have an account",
     "firstName": "First Name",
     "lastName": "Last Name",
     "confirmPassword": "Confirm Password",
@@ -35,6 +35,8 @@
     "verificationCode": "Verification Code",
     "enterCode": "Please enter the 6-digit code sent to ",
     "resendCode": "Resend Code",
+    "signupSuccess": "Signup successful",
+    "signingUp": "Signing up...",
     "errors": {
       "tokenSaveFailed": "Failed to save authentication token",
       "email": "The email address is invalid",
@@ -44,7 +46,9 @@
       "lastName": "Last name is required",
       "codeSent": "A new verification code has been sent to your email",
       "errorSendingCode": "Failed to request new code",
-      "imtOnly": "Only IMT email addresses are allowed"
+      "imtOnly": "Only IMT email addresses are allowed",
+      "accountExists": "An account with this email already exists",
+      "signupFailed": "Failed to create account"
     }
   },
   "welcome": {

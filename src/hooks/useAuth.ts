@@ -71,17 +71,34 @@ export const useAuth = () => {
     const register = async (email: string, password: string) => {
         try {
             setIsLoading(true);
-            // Here you would normally make an API call to your backend
-            // For this example, we'll simulate an API call
-            await new Promise((resolve) => setTimeout(resolve, 1000));
 
-            // Simulate successful registration
-            const userData = { email, id: '1', name: 'User' };
-            await storage.set('user', userData);
-            setUser(userData);
+            const response = await fetch('https://transat.destimt.fr/api/newf/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email,
+                    password,
+                }),
+            });
+
+            if (response.status === 409) {
+                throw new Error('You already have an account');
+            }
+
+            if (response.status === 400) {
+                throw new Error('Only IMT emails are allowed');
+            }
+
+            if (response.status === 201) {
+                return { success: true };
+            }
+
+            throw new Error('Registration failed');
         } catch (error) {
             console.error(error);
-            throw new Error('Registration failed');
+            throw error;
         } finally {
             setIsLoading(false);
         }

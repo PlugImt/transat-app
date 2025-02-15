@@ -10,6 +10,8 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, Text, type TextInput, View } from 'react-native';
 import { z } from 'zod';
+import { VerificationCodeModal } from '@/components/auth/VerificationCode';
+
 
 const loginSchema = z.object({
     email: z
@@ -23,16 +25,19 @@ const loginSchema = z.object({
 
 export const Signin = () => {
     const navigation = useNavigation();
-    const { login, isLoading } = useAuth();
+    const { login, saveToken, isLoading } = useAuth();
     const { t } = useTranslation();
     const [loginError, setLoginError] = useState<string | null>(null);
+
+    const [verificationModalVisible, setVerificationModalVisible] = useState(false);
+    const [verificationEmail, setVerificationEmail] = useState<string>('');
 
     const passwordRef = useRef<TextInput>(null);
 
     const {
         control,
         handleSubmit,
-        formState: { errors, isValid, isDirty },
+        formState: { errors },
         watch,
     } = useForm({
         resolver: zodResolver(loginSchema),
@@ -56,11 +61,27 @@ export const Signin = () => {
     const handleLogin = async (data: { email: string; password: string }) => {
         setLoginError(null);
         try {
-            await login(data.email, data.password);
-            setLoginError('Invalid email or password. Please try again.');
+            const result = await login(data.email, data.password);
 
+            if (result?.needsVerification) {
+                setVerificationEmail(data.email);
+                setVerificationModalVisible(true);
+            } else if (result?.success) {
+                alert('Logged in successfully');
+            }
         } catch (err) {
-            setLoginError('Invalid email or password. Please try again.');
+            // @ts-ignore
+            setLoginError(err.message || 'Invalid email or password. Please try again.');
+        }
+    };
+
+    const handleVerificationSuccess = async (token: string) => {
+        try {
+            await saveToken(token);
+            setVerificationModalVisible(false);
+            alert('Account verified and logged in successfully');
+        } catch (err) {
+            setLoginError('Failed to save authentication token');
         }
     };
 
@@ -70,9 +91,11 @@ export const Signin = () => {
 
             <Text className="h1">{t('auth.signIn')}</Text>
 
-            <View className={loginError ? 'bg-red-300 p-3 rounded-md' : 'p-3'}>
-                <Text className="text-red-900">{loginError}</Text>
-            </View>
+            {loginError && (
+                <View className="bg-red-300 p-3 rounded-md">
+                    <Text className="text-red-900">{loginError}</Text>
+                </View>
+            )}
 
             <View className="flex flex-col gap-10">
                 <Input
@@ -114,6 +137,13 @@ export const Signin = () => {
                     />
                 </View>
             </View>
+
+            <VerificationCodeModal
+                isVisible={verificationModalVisible}
+                email={verificationEmail}
+                onClose={() => setVerificationModalVisible(false)}
+                onSuccess={handleVerificationSuccess}
+            />
         </Page>
     );
 };

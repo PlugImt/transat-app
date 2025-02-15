@@ -12,33 +12,46 @@ export const useAuth = () => {
         try {
             setIsLoading(true);
             const response = await axios.post('https://transat.destimt.fr/api/auth/login', { email, password });
+
             if (response.status === 200) {
                 const { token } = response.data;
                 await storage.set('token', token);
-
-                // // Fetch user data
-                // const userResponse = await axios.get('https://transat.destimt.fr/api/auth/me', {
-                //     headers: {
-                //         Authorization: `Bearer ${token}`,
-                //     },
-                // });
-                // if (userResponse.status === 200) {
-                //     const user = userResponse.data;
-                //     await storage.set('user', user);
-                //
-                //     setUser(user);
-                // }
-
+                return { success: true };
             }
+
         } catch (error) {
             // @ts-ignore
-            console.error('Login failed:', error.response?.data || error.message);
-            console.error(error);
+            const errorMessage = error.response?.data?.error || 'Login failed';
+            console.error('Login failed:', errorMessage);
+
             // @ts-ignore
-            throw new Error(error.response?.data?.message || 'Login failed');
+            if (error.response?.status === 401 && errorMessage === 'Validate your account first') {
+                return { needsVerification: true, email };
+            }
+
+            throw new Error(errorMessage);
         } finally {
             setIsLoading(false);
         }
+    };
+
+    const saveToken = async (token: string) => {
+        await storage.set('token', token);
+
+        // // Fetch user data
+        // const userResponse = await axios.get('https://transat.destimt.fr/api/auth/me', {
+        //     headers: {
+        //         Authorization: `Bearer ${token}`,
+        //     },
+        // });
+        // if (userResponse.status === 200) {
+        //     const user = userResponse.data;
+        //     await storage.set('user', user);
+        //
+        //     setUser(user);
+        // }
+
+        return { success: true };
     };
 
     const logout = async () => {
@@ -81,6 +94,7 @@ export const useAuth = () => {
         login,
         logout,
         register,
+        saveToken,
     };
 };
 

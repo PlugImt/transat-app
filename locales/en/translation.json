@@ -14,7 +14,10 @@
     "cancel": "Cancel",
     "set_notification": "Set Notification",
     "sign_in": "Sign in",
-    "sign_up": "Sign up"
+    "sign_up": "Sign up",
+    "verify": "Verify",
+    "verifying": "Verifying...",
+    "verificationFailed": "Verification failed"
   },
   "auth": {
     "signIn": "Sign in",
@@ -28,12 +31,18 @@
     "lastName": "Last Name",
     "confirmPassword": "Confirm Password",
     "createAccount": "Create Account",
+    "enterVerificationCode": "Enter the verification code sent to your email",
+    "verificationCode": "Verification Code",
+    "enterCode": "Please enter the 6-digit code sent to ",
+    "resendCode": "Resend Code",
     "errors": {
       "email": "The email address is invalid",
       "password": "Password must be at least 6 characters",
       "confirmPassword": "Passwords do not match",
       "firstName": "First name is required",
-      "lastName": "Last name is required"
+      "lastName": "Last name is required",
+      "codeSent": "A new verification code has been sent to your email",
+      "errorSendingCode": "Failed to request new code"
     }
   },
   "welcome": {

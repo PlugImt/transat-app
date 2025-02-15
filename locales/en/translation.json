@@ -18,6 +18,7 @@
   },
   "auth": {
     "signIn": "Sign in",
+    "signingIn": "Signing in...",
     "signUp": "Sign up",
     "email": "Email",
     "password": "Password",

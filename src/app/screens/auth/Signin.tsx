@@ -67,7 +67,7 @@ export const Signin = () => {
         setVerificationEmail(data.email);
         setVerificationModalVisible(true);
       } else if (result?.success) {
-        alert("Logged in successfully");
+        alert("Logged in successfully. Restart the app");
       }
     } catch (err) {
       // @ts-ignore

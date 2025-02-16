@@ -2,7 +2,8 @@ import { type VariantProps, cva } from "class-variance-authority";
 import { Text, TouchableOpacity } from "react-native";
 
 import { cn } from "@/lib/utils";
-import type { ComponentPropsWithoutRef } from "react";
+// biome-ignore lint/style/useImportType: <explanation>
+import React, { ComponentPropsWithoutRef } from "react";
 
 const buttonVariants = cva(
   "flex flex-row items-center justify-center rounded-xl",
@@ -56,6 +57,7 @@ interface ButtonProps
     VariantProps<typeof buttonVariants> {
   label: string;
   labelClasses?: string;
+  icon?: () => React.ReactNode;
 }
 function Button({
   label,
@@ -63,6 +65,7 @@ function Button({
   className,
   variant,
   size,
+  icon,
   ...props
 }: ButtonProps) {
   return (
@@ -70,6 +73,7 @@ function Button({
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
     >
+      {icon ? icon() : null}
       <Text
         className={cn(
           buttonTextVariants({ variant, size, className: labelClasses }),

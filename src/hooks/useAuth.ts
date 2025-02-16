@@ -17,7 +17,7 @@ export const useAuth = () => {
 
       if (response.status === 200) {
         const { token } = response.data;
-        await storage.set("token", token);
+        await saveToken(token);
         return { success: true };
       }
     } catch (error) {
@@ -42,18 +42,21 @@ export const useAuth = () => {
   const saveToken = async (token: string) => {
     await storage.set("token", token);
 
-    // // Fetch user data
-    // const userResponse = await axios.get('https://transat.destimt.fr/api/auth/me', {
-    //     headers: {
-    //         Authorization: `Bearer ${token}`,
-    //     },
-    // });
-    // if (userResponse.status === 200) {
-    //     const user = userResponse.data;
-    //     await storage.set('user', user);
-    //
-    //     setUser(user);
-    // }
+    // Fetch newf data
+    const newfResponse = await axios.get(
+      "https://transat.destimt.fr/api/newf/me",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+    if (newfResponse.status === 200) {
+      const newf = newfResponse.data;
+      await storage.set("newf", newf);
+
+      setUser(newf);
+    }
 
     return { success: true };
   };
@@ -62,7 +65,7 @@ export const useAuth = () => {
     try {
       setIsLoading(true);
       await storage.remove("token");
-      await storage.remove("user");
+      await storage.remove("newf");
       setUser(null);
     } catch (error) {
       // @ts-ignore

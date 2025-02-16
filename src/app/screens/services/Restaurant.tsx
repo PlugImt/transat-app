@@ -2,7 +2,7 @@ import Loading from "@/components/common/Loading";
 import Page from "@/components/common/Page";
 import RestaurantCard from "@/components/custom/RestaurantCard";
 import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
-import { isWeekend } from "@/lib/utils";
+import { isWeekend } from "date-fns";
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Image, Text, View } from "react-native";
@@ -18,7 +18,7 @@ export const Restaurant = () => {
     isError,
   } = useRestaurantMenu();
 
-  const weekend: boolean = useMemo(() => isWeekend(), []);
+  const weekend: boolean = useMemo(() => isWeekend(new Date()), []);
 
   if (isPending) {
     return (
@@ -89,7 +89,7 @@ export const Restaurant = () => {
           />
         </View>
 
-        {menu?.grilladesSoir && menu?.accompSoir && (
+        {menu?.grilladesSoir.length && menu?.accompSoir.length && (
           <View className="flex flex-col gap-4">
             <Text className="h3 ml-4">{t("services.restaurant.dinner")}</Text>
 

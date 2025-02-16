@@ -1,10 +1,10 @@
-import { Button } from "@/components/common/ButtonV2";
+import { Button } from "@/components/common/Button";
 import Page from "@/components/common/Page";
 import type { AuthStackParamList } from "@/services/storage/types";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
-import { ImageBackground, Text, View } from "react-native";
+import { Text, View } from "react-native";
 
 type LoginScreenNavigationProp = StackNavigationProp<AuthStackParamList>;
 

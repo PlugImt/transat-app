@@ -15,13 +15,13 @@ const RestaurantCard = ({ title, meals, icon }: CardProps) => {
   function getIcon() {
     switch (icon) {
       case "Soup":
-        return <Soup color={theme.primaryColor} />;
+        return <Soup color={theme.primary} />;
       case "Beef":
-        return <Beef color={theme.primaryColor} />;
+        return <Beef color={theme.primary} />;
       case "Vegan":
-        return <Vegan color={theme.primaryColor} />;
+        return <Vegan color={theme.primary} />;
       case "ChefHat":
-        return <ChefHat color={theme.primaryColor} />;
+        return <ChefHat color={theme.primary} />;
       default:
         return null;
     }

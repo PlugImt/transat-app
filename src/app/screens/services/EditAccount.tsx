@@ -3,6 +3,8 @@ import Page from "@/components/common/Page";
 import { storage } from "@/services/storage/asyncStorage";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
+import * as FileSystem from "expo-file-system";
+import * as ImagePicker from "expo-image-picker";
 import {
   ChevronDown,
   Edit,
@@ -169,6 +171,84 @@ export const EditProfile = () => {
       Alert.alert(t("common.error"), t("account.passwordChangeFailed"));
     } finally {
       setIsSaving(false);
+    }
+  };
+
+  const handleUpdateProfilePicture = async () => {
+    try {
+      // Request media library permissions
+      const { status } =
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (status !== "granted") {
+        Alert.alert(t("common.error"), t("account.permissionDenied"));
+        return;
+      }
+
+      // Launch image picker
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 1,
+        base64: true,
+      });
+
+      if (result.canceled || !result.assets[0].uri) return;
+
+      // Prepare image data
+      const image = result.assets[0];
+      const base64 = await FileSystem.readAsStringAsync(image.uri, {
+        encoding: FileSystem.EncodingType.Base64,
+      });
+
+      // Upload to ImgBB
+      const formData = new FormData();
+      formData.append("key", "08a0689ec289e5488db04a7da79d5dff"); // Replace with your actual API key
+      formData.append("image", base64);
+
+      const uploadResponse = await axios.post(
+        "https://api.imgbb.com/1/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        },
+      );
+
+      if (!uploadResponse.data.success) {
+        throw new Error("Image upload failed");
+      }
+
+      const imageUrl = uploadResponse.data.data.url;
+
+      // Update backend
+      const token = await storage.get("token");
+      if (!token) {
+        Alert.alert(t("common.error"), t("account.noToken"));
+        return;
+      }
+
+      const patchResponse = await axios.patch(
+        "https://transat.destimt.fr/api/newf/me",
+        { profile_picture: imageUrl },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+
+      if (patchResponse.status === 200) {
+        // Update local state
+        const updatedUser = { ...user, profile_picture: imageUrl };
+        await storage.set("newf", updatedUser);
+        setUser(updatedUser);
+        Alert.alert(t("common.success"), t("account.profilePictureUpdated"));
+      }
+    } catch (error) {
+      console.error("Error updating profile picture:", error);
+      Alert.alert(t("common.error"), t("account.profilePictureUpdateFailed"));
     }
   };
 

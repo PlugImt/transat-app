@@ -36,6 +36,12 @@
           "sounds": ["./assets/sounds/notification_sound.wav"]
         }
       ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow access to your photos to update your profile picture."
+        }
+      ],
       "expo-router",
       [
         "expo-splash-screen",

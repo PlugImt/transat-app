@@ -184,7 +184,6 @@ export const EditProfile = () => {
         return;
       }
 
-      // Launch image picker
       const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
@@ -195,15 +194,13 @@ export const EditProfile = () => {
 
       if (result.canceled || !result.assets[0].uri) return;
 
-      // Prepare image data
       const image = result.assets[0];
       const base64 = await FileSystem.readAsStringAsync(image.uri, {
         encoding: FileSystem.EncodingType.Base64,
       });
 
-      // Upload to ImgBB
       const formData = new FormData();
-      formData.append("key", "08a0689ec289e5488db04a7da79d5dff"); // Replace with your actual API key
+      formData.append("key", "08a0689ec289e5488db04a7da79d5dff");
       formData.append("image", base64);
 
       const uploadResponse = await axios.post(
@@ -222,7 +219,6 @@ export const EditProfile = () => {
 
       const imageUrl = uploadResponse.data.data.url;
 
-      // Update backend
       const token = await storage.get("token");
       if (!token) {
         Alert.alert(t("common.error"), t("account.noToken"));
@@ -240,7 +236,6 @@ export const EditProfile = () => {
       );
 
       if (patchResponse.status === 200) {
-        // Update local state
         const updatedUser = { ...user, profile_picture: imageUrl };
         await storage.set("newf", updatedUser);
         setUser(updatedUser);

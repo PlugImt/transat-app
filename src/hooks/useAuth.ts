@@ -25,8 +25,8 @@ export const useAuth = () => {
       const errorMessage = error.response?.data?.error || "Login failed";
       console.error("Login failed:", errorMessage);
 
-      // @ts-ignore
       if (
+        // @ts-ignore
         error.response?.status === 401 &&
         errorMessage === "Validate your account first"
       ) {

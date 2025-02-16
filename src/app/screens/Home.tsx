@@ -4,13 +4,15 @@ import RestaurantWidget from "@/components/custom/Widget/RestaurantWidget";
 import WashingMachineWidget from "@/components/custom/Widget/WashingMachineWidget";
 import { useAuth } from "@/hooks/useAuth";
 import { QUERY_KEYS } from "@/lib/queryKeys";
+import { storage } from "@/services/storage/asyncStorage";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
 import Constants from "expo-constants";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Platform, Text, View } from "react-native";
+import { Alert, Platform, Text } from "react-native";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -87,9 +89,31 @@ export const Home = () => {
 
   useEffect(() => {
     registerForPushNotificationsAsync()
-      .then((token) => {
+      .then(async (token) => {
         console.log("Retrieved Expo Push Token:", token);
         setExpoPushToken(token ?? "");
+        const JWTtoken = await storage.get("token");
+
+        if (!token) {
+          Alert.alert("ERREUR : No token found");
+          return;
+        }
+
+        const response = await axios.patch(
+          "https://transat.destimt.fr/api/newf/me",
+          {
+            notification_token: token,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${JWTtoken}`,
+            },
+          },
+        );
+
+        if (response.status === 200) {
+          console.log("Notification token updated");
+        }
       })
       // biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
       .catch((error: any) => {
@@ -150,24 +174,6 @@ export const Home = () => {
       <Weather />
       <RestaurantWidget />
       <WashingMachineWidget />
-
-      <View className="flex items-center flex-col gap-5">
-        <Text className="text-center text-foreground">
-          Your Expo push token: {expoPushToken}
-        </Text>
-        <View style={{ alignItems: "center", justifyContent: "center" }}>
-          <Text className="text-foreground font-black">
-            Title: {notification?.request.content.title}{" "}
-          </Text>
-          <Text className="text-foreground font-black">
-            Body: {notification?.request.content.body}
-          </Text>
-          <Text className="text-foreground font-black">
-            Data:{" "}
-            {notification && JSON.stringify(notification.request.content.data)}
-          </Text>
-        </View>
-      </View>
     </Page>
   );
 };

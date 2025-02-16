@@ -2,6 +2,7 @@ import { Button } from "@/components/common/ButtonV2";
 import Page from "@/components/common/Page";
 import useAuth from "@/hooks/useAuth";
 import { storage } from "@/services/storage/asyncStorage";
+import axios from "axios";
 import {
   GraduationCap,
   LogOut,
@@ -10,7 +11,8 @@ import {
   Phone,
 } from "lucide-react-native";
 import type React from "react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Image, Text, View } from "react-native";
 
 type UserData = {
@@ -24,6 +26,7 @@ type UserData = {
 };
 
 export const Account = () => {
+  const { t } = useTranslation();
   const { logout, saveToken } = useAuth();
   const [user, setUser] = useState<UserData>({
     first_name: "",
@@ -34,6 +37,56 @@ export const Account = () => {
     graduation_year: "",
   });
   const [isLoading, setIsLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const fetchUserData = useCallback(async () => {
+    try {
+      const userData = await storage.get("newf");
+      if (userData) {
+        setUser(userData as UserData);
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  const handleRefresh = useCallback(async () => {
+    try {
+      setRefreshing(true);
+      const token = await storage.get("token");
+
+      if (!token) {
+        console.error("No token found");
+        return;
+      }
+
+      // Call the API to get fresh data
+      const newfResponse = await axios.get(
+        "https://transat.destimt.fr/api/newf/me",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+
+      if (newfResponse.status === 200) {
+        const newf = newfResponse.data;
+        await storage.set("newf", newf);
+        setUser(newf);
+      }
+    } catch (error) {
+      console.error("Error refreshing user data:", error);
+    } finally {
+      setRefreshing(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchUserData().then((r) => r);
+  }, [fetchUserData]);
 
   const handleLogout = async () => {
     try {
@@ -44,29 +97,15 @@ export const Account = () => {
     }
   };
 
-  useEffect(() => {
-    const getUser = async () => {
-      try {
-        setIsLoading(true);
-        const userData = await storage.get("newf");
-        if (userData) {
-          setUser(userData as UserData);
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    getUser();
-  }, []);
-
   const InfoItem = ({
     icon,
     label,
     value,
-  }: { icon: React.ReactNode; label: string; value: string }) => (
+  }: {
+    icon: React.ReactNode;
+    label: string;
+    value: string;
+  }) => (
     <View className="flex-row items-center mb-4">
       {icon}
       <View className="ml-4 flex-1">
@@ -82,15 +121,18 @@ export const Account = () => {
     return (
       <Page>
         <View className="flex-1 justify-center items-center">
-          <Text className="text-[#ffe6cc] text-base">Loading profile...</Text>
+          <Text className="text-[#ffe6cc] text-base">
+            {" "}
+            {t("account.loadingProfile")}{" "}
+          </Text>
         </View>
       </Page>
     );
   }
 
   return (
-    <Page>
-      <View className="flex-1 p-4">
+    <Page refreshing={refreshing} onRefresh={handleRefresh}>
+      <View className="flex-1">
         <View className="mb-6">
           <Text className="text-2xl font-bold text-[#ffe6cc]">My Profile</Text>
         </View>
@@ -125,44 +167,44 @@ export const Account = () => {
             {user.first_name} {user.last_name}
           </Text>
           <Text className="text-base text-[#ffe6cc] opacity-80">
-            Graduation {user.graduation_year}
+            {t("account.graduation")} {user.graduation_year}
           </Text>
         </View>
 
         <View className="bg-[#181010] rounded-2xl p-5 mb-6">
           <Text className="text-lg font-bold text-[#ffe6cc] mb-3">
-            Contact Information
+            {t("account.contactInfo")}
           </Text>
           <View className="h-px bg-[#333333] mb-4" />
 
           <InfoItem
             icon={<Mail color="#ffe6cc" size={20} />}
-            label="Email"
+            label={t("account.email")}
             value={user.email}
           />
 
           <InfoItem
             icon={<Phone color="#ffe6cc" size={20} />}
-            label="Phone"
-            value={user.phone_number}
+            label={t("account.phone")}
+            value={user.phone_number || t("account.notProvided")}
           />
 
           <InfoItem
             icon={<MapPin color="#ffe6cc" size={20} />}
-            label="Campus"
-            value={user.campus}
+            label={t("account.campus")}
+            value={user.campus || t("account.notProvided")}
           />
 
           <InfoItem
             icon={<GraduationCap color="#ffe6cc" size={20} />}
-            label="Graduation Year"
-            value={user.graduation_year}
+            label={t("account.graduationYear")}
+            value={user.graduation_year || t("account.notProvided")}
           />
         </View>
 
         <View className="mt-2">
           <Button
-            label="Logout"
+            label={t("common.logout")}
             onPress={handleLogout}
             className="bg-[#e74c3c] py-2"
             icon={() => (

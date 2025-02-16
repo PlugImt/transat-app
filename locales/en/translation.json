@@ -89,5 +89,15 @@
       "available_machines": "Available Machines",
       "available_dryers": "Available Dryers"
     }
+  },
+  "account": {
+    "graduationYear": "Graduation Year",
+    "campus": "Campus",
+    "phone": "Phone",
+    "email": "Email",
+    "contactInfo": "Contact Information",
+    "graduation": "Graduation",
+    "loadingProfile": "Loading profile...",
+    "notProvided": "Not provided"
   }
 }

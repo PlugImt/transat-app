@@ -7,9 +7,11 @@ import axios from "axios";
 import {
   Edit,
   GraduationCap,
+  Lock,
   LogOut,
   Mail,
   MapPin,
+  Medal,
   Phone,
 } from "lucide-react-native";
 import type React from "react";
@@ -25,6 +27,9 @@ type UserData = {
   email: string;
   graduation_year: string;
   profile_picture?: string;
+  id_newf?: number;
+  total_newf?: number;
+  password_updated_date?: string;
 };
 
 export const Account = () => {
@@ -38,6 +43,9 @@ export const Account = () => {
     phone_number: "",
     email: "",
     graduation_year: "",
+    id_newf: -1,
+    total_newf: -1,
+    password_updated_date: "",
   });
   const [isLoading, setIsLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -90,12 +98,9 @@ export const Account = () => {
   useEffect(() => {
     fetchUserData().then((r) => r);
 
-    // Refresh data when coming back to this screen
-    const unsubscribe = navigation.addListener("focus", () => {
-      fetchUserData();
+    return navigation.addListener("focus", () => {
+      fetchUserData().then((r) => r);
     });
-
-    return unsubscribe;
   }, [fetchUserData, navigation]);
 
   const handleLogout = async () => {
@@ -176,12 +181,12 @@ export const Account = () => {
             </View>
           )}
           <View
-            className={`absolute bottom-0 right-0 py-1.5 px-3 rounded-xl ${
-              user.campus === "NANTES" ? "bg-[#0049a8]" : "bg-[#ec7f32]"
-            }`}
+            className={
+              "absolute bottom-0 right-0 py-1.5 px-3 rounded-xl bg-[#ec7f32]"
+            }
           >
             <Text className="text-[#ffe6cc] font-bold text-xs">
-              {user.campus}
+              #{user.id_newf}
             </Text>
           </View>
         </View>
@@ -222,6 +227,38 @@ export const Account = () => {
           icon={<GraduationCap color="#ffe6cc" size={20} />}
           label={t("account.graduationYear")}
           value={user.graduation_year || t("account.notProvided")}
+        />
+      </View>
+
+      <View className="bg-[#181010] rounded-2xl p-5 mb-6">
+        <Text className="text-lg font-bold text-[#ffe6cc] mb-3">
+          {t("account.infos")}
+        </Text>
+        <View className="h-px bg-[#333333] mb-4" />
+
+        <InfoItem
+          icon={<Medal color="#ffe6cc" size={20} />}
+          label={t("account.registration")}
+          value={`n°${user.id_newf}/${user.total_newf} ${t("account.newf")}`}
+        />
+
+        <InfoItem
+          icon={<Lock color="#ffe6cc" size={20} />}
+          label={t("account.passwordUpdated")}
+          value={
+            user.password_updated_date
+              ? new Date(user.password_updated_date)
+                  .toLocaleString("fr-FR", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false,
+                  })
+                  .replace(",", "")
+              : t("account.notProvided")
+          }
         />
       </View>
 

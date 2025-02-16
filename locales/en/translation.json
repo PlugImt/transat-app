@@ -122,6 +122,10 @@
     "photoUpdateNotAvailable": "Profile photo upload is not available yet",
     "noToken": "Authentication token not found",
     "selectCampus": "Select Campus",
-    "selectGraduationYear": "Select Graduation Year"
+    "selectGraduationYear": "Select Graduation Year",
+    "newf": "users",
+    "registration": "Registration",
+    "infos": "Informations",
+    "passwordUpdated": "Last password update"
   }
 }

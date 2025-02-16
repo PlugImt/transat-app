@@ -33,7 +33,7 @@ type UserData = {
   campus: string;
   phone_number: string;
   email: string;
-  graduation_year: string;
+  graduation_year: number;
   profile_picture?: string;
 };
 
@@ -47,7 +47,7 @@ export const EditProfile = () => {
     campus: "",
     phone_number: "",
     email: "",
-    graduation_year: "",
+    graduation_year: 0,
   });
 
   const [user, setUser] = useState<UserData>({
@@ -56,7 +56,7 @@ export const EditProfile = () => {
     campus: "",
     phone_number: "",
     email: "",
-    graduation_year: "",
+    graduation_year: 0,
   });
 
   const [isLoading, setIsLoading] = useState(true);
@@ -92,7 +92,7 @@ export const EditProfile = () => {
   }, []);
 
   useEffect(() => {
-    fetchUserData();
+    fetchUserData().then((r) => r);
   }, [fetchUserData]);
 
   const handleUpdateProfile = async () => {
@@ -274,12 +274,7 @@ export const EditProfile = () => {
             )}
             <TouchableOpacity
               className="absolute bottom-0 right-0 bg-[#333333] p-2 rounded-full"
-              onPress={() =>
-                Alert.alert(
-                  t("common.info"),
-                  t("account.photoUpdateNotAvailable"),
-                )
-              }
+              onPress={() => handleUpdateProfilePicture()}
             >
               <Edit color="#ffe6cc" size={16} />
             </TouchableOpacity>
@@ -339,7 +334,7 @@ export const EditProfile = () => {
 
           <DropdownField
             label={t("account.graduationYear")}
-            value={formState.graduation_year}
+            value={formState.graduation_year.toString()}
             onPress={() => {
               Keyboard.dismiss();
               setShowYearDropdown(true);
@@ -483,13 +478,18 @@ export const EditProfile = () => {
                   key={year}
                   className="py-3 border-b border-[#333333]"
                   onPress={() => {
-                    setFormState({ ...formState, graduation_year: year });
+                    setFormState({
+                      ...formState,
+                      graduation_year: Number.parseInt(year),
+                    });
                     setShowYearDropdown(false);
                   }}
                 >
                   <Text
                     className={`text-[#ffe6cc] text-center text-lg ${
-                      formState.graduation_year === year ? "font-bold" : ""
+                      formState.graduation_year === Number.parseInt(year)
+                        ? "font-bold"
+                        : ""
                     }`}
                   >
                     {year}

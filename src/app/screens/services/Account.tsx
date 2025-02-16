@@ -2,8 +2,10 @@ import { Button } from "@/components/common/ButtonV2";
 import Page from "@/components/common/Page";
 import useAuth from "@/hooks/useAuth";
 import { storage } from "@/services/storage/asyncStorage";
+import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import {
+  Edit,
   GraduationCap,
   LogOut,
   Mail,
@@ -27,7 +29,8 @@ type UserData = {
 
 export const Account = () => {
   const { t } = useTranslation();
-  const { logout, saveToken } = useAuth();
+  const { logout } = useAuth();
+  const navigation = useNavigation();
   const [user, setUser] = useState<UserData>({
     first_name: "",
     last_name: "",
@@ -86,7 +89,14 @@ export const Account = () => {
 
   useEffect(() => {
     fetchUserData().then((r) => r);
-  }, [fetchUserData]);
+
+    // Refresh data when coming back to this screen
+    const unsubscribe = navigation.addListener("focus", () => {
+      fetchUserData();
+    });
+
+    return unsubscribe;
+  }, [fetchUserData, navigation]);
 
   const handleLogout = async () => {
     try {
@@ -99,6 +109,11 @@ export const Account = () => {
 
   const handleDeleteAccount = async () => {
     alert("This feature is not yet implemented");
+  };
+
+  const navigateToEditProfile = () => {
+    // @ts-ignore - Add proper typing for your navigation if needed
+    navigation.navigate("EditProfile");
   };
 
   const InfoItem = ({
@@ -126,8 +141,7 @@ export const Account = () => {
       <Page>
         <View className="flex-1 justify-center items-center">
           <Text className="text-[#ffe6cc] text-base">
-            {" "}
-            {t("account.loadingProfile")}{" "}
+            {t("account.loadingProfile")}
           </Text>
         </View>
       </Page>
@@ -136,7 +150,15 @@ export const Account = () => {
 
   return (
     <Page refreshing={refreshing} onRefresh={handleRefresh}>
-      <Text className="h1 m-4">{t("common.account")}</Text>
+      <View className="flex-row justify-between items-center m-4">
+        <Text className="h1">{t("common.account")}</Text>
+        <TouchableOpacity
+          onPress={navigateToEditProfile}
+          className="bg-[#333333] p-2 rounded-full"
+        >
+          <Edit color="#ffe6cc" size={20} />
+        </TouchableOpacity>
+      </View>
 
       <View className="items-center mb-8">
         <View className="relative mb-4">
@@ -201,13 +223,6 @@ export const Account = () => {
           label={t("account.graduationYear")}
           value={user.graduation_year || t("account.notProvided")}
         />
-      </View>
-
-      <View className="bg-[#181010] rounded-2xl p-5 mb-6">
-        <Text className="text-lg font-bold text-[#ffe6cc] mb-3">
-          {t("account.security")}
-        </Text>
-        <View className="h-px bg-[#333333] mb-4" />
       </View>
 
       <View className="mt-2">

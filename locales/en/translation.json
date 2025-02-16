@@ -17,7 +17,12 @@
     "sign_up": "Sign up",
     "verify": "Verify",
     "verifying": "Verifying...",
-    "verificationFailed": "Verification failed"
+    "verificationFailed": "Verification failed",
+    "save": "Save",
+    "saveChanges": "Save Changes",
+    "success": "Success",
+    "error": "Error",
+    "info": "Information"
   },
   "auth": {
     "signIn": "Sign in",
@@ -100,6 +105,23 @@
     "loadingProfile": "Loading profile...",
     "notProvided": "Not provided",
     "security": "Security",
-    "deleteAccount": "Delete Account"
+    "deleteAccount": "Delete Account",
+    "editProfile": "Edit Profile",
+    "personalInfo": "Personal Information",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "changePassword": "Change Password",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm New Password",
+    "passwordChanged": "Password successfully changed",
+    "passwordChangeFailed": "Failed to change password",
+    "passwordMismatch": "New passwords don't match",
+    "profileUpdated": "Profile successfully updated",
+    "updateFailed": "Failed to update profile",
+    "photoUpdateNotAvailable": "Profile photo upload is not available yet",
+    "noToken": "Authentication token not found",
+    "selectCampus": "Select Campus",
+    "selectGraduationYear": "Select Graduation Year"
   }
 }

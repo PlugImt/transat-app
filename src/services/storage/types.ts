@@ -47,6 +47,8 @@ export type AppStackParamList = {
   BottomTabNavigator: undefined;
   Clubs: undefined;
   Traq: undefined;
+  Account: undefined;
+  EditProfile: undefined;
 };
 
 // Root Stack Types

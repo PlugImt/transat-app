@@ -12,31 +12,50 @@
     "account": "Compte",
     "free": "Libre",
     "cancel": "Annuler",
-    "set_notification": "Définir une notification"
-  },
-  "welcome": {
-    "subtitle": "Par les atlantes, pour les atlantes 🐙",
-    "login": "Se connecter",
-    "signup": "Inscription"
+    "set_notification": "Définir une notification",
+    "sign_in": "Connexion",
+    "sign_up": "Inscription",
+    "verify": "Vérifier",
+    "verifying": "Vérification...",
+    "verificationFailed": "Échec de la vérification"
   },
   "auth": {
-    "signIn": "Se connecter",
+    "signIn": "Connexion",
+    "signingIn": "Connexion...",
     "signUp": "Inscription",
     "email": "Email",
     "password": "Mot de passe",
     "gotAccount": "J'ai déjà un compte",
     "noAccount": "Je n'ai pas de compte",
     "firstName": "Prénom",
-    "lastName": "Nom de famille",
+    "lastName": "Nom",
     "confirmPassword": "Confirmer le mot de passe",
     "createAccount": "Créer un compte",
+    "enterVerificationCode": "Entrez le code de vérification envoyé à votre email",
+    "verificationCode": "Code de vérification",
+    "enterCode": "Veuillez entrer le code à 6 chiffres envoyé à ",
+    "resendCode": "Renvoyer le code",
+    "signupSuccess": "Inscription réussie",
+    "signingUp": "Inscription...",
     "errors": {
+      "tokenSaveFailed": "Échec de l'enregistrement du jeton d'authentification",
       "email": "L'adresse email est invalide",
       "password": "Le mot de passe doit contenir au moins 6 caractères",
       "confirmPassword": "Les mots de passe ne correspondent pas",
       "firstName": "Le prénom est requis",
-      "lastName": "Le nom de famille est requis"
+      "lastName": "Le nom est requis",
+      "codeSent": "Un nouveau code de vérification a été envoyé à votre email",
+      "errorSendingCode": "Échec de la demande de nouveau code",
+      "imtOnly": "Seules les adresses email IMT sont autorisées",
+      "accountExists": "Un compte avec cet email existe déjà",
+      "signupFailed": "Échec de la création du compte",
+      "invalidCredentials": "Email ou mot de passe invalide"
     }
+  },
+  "welcome": {
+    "subtitle": "Par les Atlantes, pour les Atlantes 🐙",
+    "login": "Connexion",
+    "signup": "Inscription"
   },
   "services": {
     "services": "Services",
@@ -56,7 +75,8 @@
       "side_dishes": "Accompagnements",
       "no_data": "Il semble qu'il n'y ait pas de données à afficher",
       "no_meal": "Aucun repas",
-      "closed": "Le restaurant est fermé le week-end"
+      "closed": "Le restaurant est fermé le week-end",
+      "closed_night": "Le restaurant est actuellement fermé. Revenez demain !"
     },
     "washing_machine": {
       "title": "Laverie",
@@ -66,7 +86,7 @@
       "almost_done_body": "Votre {{type}} sera terminé dans {{minutes}} minutes",
       "get_notification": "Recevoir une notification avant la fin du cycle",
       "time_to_completion": "Minutes avant la fin",
-      "available_machines": "Machines disponnibles",
+      "available_machines": "Machines disponibles",
       "available_dryers": "Sèche-linges disponibles"
     }
   }

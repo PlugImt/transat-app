@@ -10,12 +10,18 @@
     "system": "Sistema",
     "home": "Inicio",
     "account": "Cuenta",
-    "free": "FREE",
+    "free": "Gratis",
     "cancel": "Cancelar",
-    "set_notification": "Establecer notificación"
+    "set_notification": "Establecer notificación",
+    "sign_in": "Iniciar sesión",
+    "sign_up": "Registrarse",
+    "verify": "Verificar",
+    "verifying": "Verificando...",
+    "verificationFailed": "Verificación fallida"
   },
   "auth": {
     "signIn": "Iniciar sesión",
+    "signingIn": "Iniciando sesión...",
     "signUp": "Registrarse",
     "email": "Correo electrónico",
     "password": "Contraseña",
@@ -25,16 +31,29 @@
     "lastName": "Apellido",
     "confirmPassword": "Confirmar contraseña",
     "createAccount": "Crear cuenta",
+    "enterVerificationCode": "Introduce el código de verificación enviado a tu correo",
+    "verificationCode": "Código de verificación",
+    "enterCode": "Por favor, introduce el código de 6 dígitos enviado a ",
+    "resendCode": "Reenviar código",
+    "signupSuccess": "Registro exitoso",
+    "signingUp": "Registrando...",
     "errors": {
+      "tokenSaveFailed": "Error al guardar el token de autenticación",
       "email": "La dirección de correo electrónico no es válida",
       "password": "La contraseña debe tener al menos 6 caracteres",
       "confirmPassword": "Las contraseñas no coinciden",
-      "firstName": "Se requiere el nombre",
-      "lastName": "Se requiere el apellido"
+      "firstName": "El nombre es obligatorio",
+      "lastName": "El apellido es obligatorio",
+      "codeSent": "Se ha enviado un nuevo código de verificación a tu correo",
+      "errorSendingCode": "Error al solicitar un nuevo código",
+      "imtOnly": "Solo se permiten direcciones de correo IMT",
+      "accountExists": "Ya existe una cuenta con este correo",
+      "signupFailed": "Error al crear la cuenta",
+      "invalidCredentials": "Correo o contraseña inválidos"
     }
   },
   "welcome": {
-    "subtitle": "Por los atlantes, para los atlantes 🐙",
+    "subtitle": "Por los Atlantes, para los Atlantes 🐙",
     "login": "Iniciar sesión",
     "signup": "Registrarse"
   },
@@ -47,7 +66,7 @@
     "events": "Eventos",
     "reservations": "Reservas",
     "restaurant": {
-      "title": "Restauración",
+      "title": "Restaurante",
       "lunch": "Almuerzo",
       "dinner": "Cena",
       "grill": "Parrilla",
@@ -55,8 +74,9 @@
       "vegetarian": "Vegetariano",
       "side_dishes": "Acompañamientos",
       "no_data": "Parece que no hay datos para mostrar",
-      "no_meal": "Sin comida",
-      "closed": "El restaurante está cerrado los fines de semana"
+      "no_meal": "No hay comida",
+      "closed": "El restaurante está cerrado los fines de semana",
+      "closed_night": "El restaurante está cerrado. ¡Vuelve mañana!"
     },
     "washing_machine": {
       "title": "Lavandería",
@@ -64,8 +84,10 @@
       "dryer": "Secadora",
       "almost_done": "¡Máquina {{number}} casi lista!",
       "almost_done_body": "Tu {{type}} estará listo en {{minutes}} minutos",
-      "get_notification": "Recibir notificación antes de que termine la máquina",
-      "time_to_completion": "Minutos antes de finalizar"
+      "get_notification": "Recibe una notificación antes de que termine",
+      "time_to_completion": "Minutos restantes",
+      "available_machines": "Lavadoras disponibles",
+      "available_dryers": "Secadoras disponibles"
     }
   }
 }

@@ -48,7 +48,8 @@
       "errorSendingCode": "Failed to request new code",
       "imtOnly": "Only IMT email addresses are allowed",
       "accountExists": "An account with this email already exists",
-      "signupFailed": "Failed to create account"
+      "signupFailed": "Failed to create account",
+      "invalidCredentials": "Invalid email or password"
     }
   },
   "welcome": {

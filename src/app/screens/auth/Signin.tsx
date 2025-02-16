@@ -71,7 +71,7 @@ export const Signin = () => {
       }
     } catch (err) {
       // @ts-ignore
-      setLoginError(t("auth.invalidCredentials"));
+      setLoginError(t("auth.errors.invalidCredentials"));
     }
   };
 

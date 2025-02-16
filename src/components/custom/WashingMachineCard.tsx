@@ -1,17 +1,19 @@
+import theme from "@/themes";
 import * as Notifications from "expo-notifications";
 import { SchedulableTriggerInputTypes } from "expo-notifications";
 import { Bell, BellRing, WashingMachineIcon, Wind } from "lucide-react-native";
 import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Modal, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Badge } from "../common/Badge";
+import { Button } from "../common/Button";
 import {
-  Modal,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
-import { Button } from "react-native-paper";
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+  useDialog,
+} from "../common/Dialog";
+import { Input } from "../common/Input";
 
 interface WashingMachineProps {
   number: string;
@@ -29,6 +31,8 @@ Notifications.setNotificationHandler({
   }),
 });
 
+const MINUTES_BEFORE_NOTIFICATION = 5;
+
 const WashingMachineCard = ({
   number,
   type,
@@ -37,9 +41,8 @@ const WashingMachineCard = ({
 }: WashingMachineProps) => {
   const { t } = useTranslation();
 
+  const { setOpen } = useDialog();
   const [timeRemaining, setTimeRemaining] = useState<number>(status);
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
-  const [notificationTime, setNotificationTime] = useState<string>("5");
   const [notificationSet, setNotificationSet] = useState<boolean>(false);
   const [notificationId, setNotificationId] = useState<string | null>(null);
 
@@ -96,12 +99,9 @@ const WashingMachineCard = ({
   );
 
   const handleSetNotification = useCallback(async () => {
-    const minutes = Number.parseInt(notificationTime);
-    if (!Number.isNaN(minutes) && minutes > 0) {
-      await scheduleNotification(minutes);
-      setModalVisible(false);
-    }
-  }, [notificationTime, scheduleNotification]);
+    await scheduleNotification(MINUTES_BEFORE_NOTIFICATION);
+    setOpen(false);
+  }, [scheduleNotification, setOpen]);
 
   const handleBellPress = async () => {
     if (status === 0) return;
@@ -112,172 +112,62 @@ const WashingMachineCard = ({
       }
       setNotificationId(null);
       setNotificationSet(false);
-    } else {
-      setModalVisible(true);
     }
   };
 
-  const NotificationModal = useCallback(
-    () => (
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <View
-          style={{
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "rgba(0,0,0,0.5)",
-          }}
-        >
-          <View
-            style={{
-              backgroundColor: "#181010",
-              padding: 20,
-              borderRadius: 10,
-              width: "80%",
-            }}
-          >
-            <Text style={{ color: "#ffe6cc", fontSize: 16, marginBottom: 15 }}>
-              {t("services.washing_machine.get_notification")}
-            </Text>
-            <TextInput
-              value={notificationTime}
-              onChangeText={(text) => {
-                const numericText = text.replace(/[^0-9]/g, "");
-                setNotificationTime(numericText);
-              }}
-              keyboardType="numeric"
-              placeholder={t("services.washing_machine.time_to_completion")}
-              style={{
-                marginBottom: 15,
-                color: "#ffe6cc",
-                backgroundColor: "#181010",
-              }}
-            />
-            <View
-              style={{ flexDirection: "row", justifyContent: "space-between" }}
-            >
-              <Button
-                onPress={() => setModalVisible(false)}
-                mode="outlined"
-                textColor="#ec7f32"
-              >
-                {t("common.cancel")}
-              </Button>
-              <Button
-                onPress={handleSetNotification}
-                mode="contained"
-                buttonColor="#ec7f32"
-              >
-                {t("common.set_notification")}
-              </Button>
-            </View>
-          </View>
-        </View>
-      </Modal>
-    ),
-    [modalVisible, notificationTime, t, handleSetNotification],
-  );
-
   return (
-    <TouchableWithoutFeedback accessible={true}>
-      <View
-        style={{
-          padding: 10,
-          backgroundColor: "#181010",
-          borderRadius: 10,
-          marginBottom: 15,
-        }}
-      >
-        <NotificationModal />
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              minWidth: 5,
-            }}
-          >
-            {icon.toUpperCase() === "WASHING MACHINE" ? (
-              <WashingMachineIcon size={24} color="#ec7f32" />
-            ) : icon.toUpperCase() === "DRYER" ? (
-              <Wind size={24} color="#ec7f32" />
-            ) : null}
-            <Text
-              style={{
-                fontSize: 14,
-                color: "#ffe6cc",
-                fontWeight: "bold",
-                marginLeft: 10,
-                minWidth: 10,
-              }}
-              numberOfLines={1}
-            >
-              N°{number}
-            </Text>
-          </View>
-
-          <Text
-            style={{
-              fontSize: 14,
-              color: "#ffe6cc",
-              fontWeight: "bold",
-              marginLeft: 10,
-              flex: 1,
-              textAlign: "center",
-            }}
-            numberOfLines={1}
-          >
-            {type}
-          </Text>
-
-          <View
-            style={{
-              backgroundColor: status === 0 ? "#0049a8" : "#ec7f32",
-              borderRadius: 10,
-              minWidth: 70,
-              paddingTop: 10,
-              paddingBottom: 10,
-              marginRight: 10,
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 14,
-                color: "#ffe6cc",
-                fontWeight: "bold",
-                marginHorizontal: 10,
-                textAlign: "center",
-              }}
-              numberOfLines={1}
-            >
-              {getMachineStatus(timeRemaining)}
-            </Text>
-          </View>
-
-          <TouchableOpacity onPress={handleBellPress} disabled={status === 0}>
-            {notificationSet ? (
-              <BellRing
-                size={24}
-                color={status === 0 ? "#494949" : "#ec7f32"}
-              />
-            ) : (
-              <Bell size={24} color={status === 0 ? "#494949" : "#ec7f32"} />
-            )}
-          </TouchableOpacity>
-        </View>
+    <View className="px-6 py-4 rounded-lg bg-card flex-row justify-between gap-6 items-center">
+      <View className="flex-row items-center gap-2">
+        {icon.toUpperCase() === "WASHING MACHINE" ? (
+          <WashingMachineIcon size={24} color={theme.primary} />
+        ) : icon.toUpperCase() === "DRYER" ? (
+          <Wind size={24} color={theme.primary} />
+        ) : null}
+        <Text className="text-foreground font-bold" numberOfLines={1}>
+          N°{number}
+        </Text>
       </View>
-    </TouchableWithoutFeedback>
+
+      <Text className="text-foreground text-ellipsis font-bold">{type}</Text>
+
+      <Badge
+        label={getMachineStatus(timeRemaining)}
+        variant={status === 0 ? "secondary" : "default"}
+      />
+
+      <DialogTrigger>
+        <TouchableOpacity onPress={handleBellPress} disabled={status === 0}>
+          {notificationSet ? (
+            <BellRing color={status === 0 ? theme.muted : theme.primary} />
+          ) : (
+            <Bell color={status === 0 ? theme.muted : theme.primary} />
+          )}
+        </TouchableOpacity>
+      </DialogTrigger>
+
+      <DialogContent className="gap-6">
+        <Text className="h2">
+          {t("services.washing_machine.get_notification")}
+        </Text>
+        <Text className="text-foreground lowercase">
+          {t("services.washing_machine.get_notification_description", {
+            type,
+            minutes: MINUTES_BEFORE_NOTIFICATION,
+          })}
+        </Text>
+        <View className="flex-row gap-4 justify-end">
+          <Button
+            onPress={() => setOpen(false)}
+            label={t("common.cancel")}
+            variant="outlined"
+          />
+          <Button
+            onPress={handleSetNotification}
+            label={t("common.set_notification")}
+          />
+        </View>
+      </DialogContent>
+    </View>
   );
 };
 

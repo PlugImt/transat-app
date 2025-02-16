@@ -69,6 +69,8 @@
       "title": "Restaurante",
       "lunch": "Almuerzo",
       "dinner": "Cena",
+      "widget_lunch": "Menú de almuerzo",
+      "widget_dinner": "Menú de cena",
       "grill": "Parrilla",
       "migrator": "Migrador",
       "vegetarian": "Vegetariano",
@@ -84,10 +86,12 @@
       "dryer": "Secadora",
       "almost_done": "¡Máquina {{number}} casi lista!",
       "almost_done_body": "Tu {{type}} estará listo en {{minutes}} minutos",
-      "get_notification": "Recibe una notificación antes de que termine",
+      "get_notification": "Recibe una notificación",
+      "get_notification_description": "Recibirás una notificación {{minutes}} minutos antes de que tu {{type}} esté lista",
       "time_to_completion": "Minutos restantes",
       "available_machines": "Lavadoras disponibles",
-      "available_dryers": "Secadoras disponibles"
+      "available_dryers": "Secadoras disponibles",
+      "no_machines": "No hay máquinas disponibles"
     }
   }
 }

@@ -1,7 +1,7 @@
 import Page from "@/components/common/Page";
 import { Weather } from "@/components/custom/Weather";
-import RestaurantWidget from "@/components/custom/Widget/RestaurantWidget";
-import { WashingMachineWidget } from "@/components/custom/Widget/WashingMachineWidget";
+import RestaurantWidget from "@/components/custom/widget/RestaurantWidget";
+import WashingMachineWidget from "@/components/custom/widget/WashingMachineWidget";
 import { useAuth } from "@/hooks/useAuth";
 import { QUERY_KEYS } from "@/lib/queryKeys";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
@@ -142,10 +142,10 @@ export const Home = () => {
   };
 
   return (
-    <Page refreshing={isFetching} onRefresh={() => refetch()}>
+    <Page refreshing={isFetching} onRefresh={refetch}>
       <Text className="h1 m-4">
         {t("common.welcome")}{" "}
-        <Text className="text-primary">{user?.name || "Yohann"}</Text>
+        <Text className="text-primary">{user?.name || "Newf"}</Text>
       </Text>
       <Weather />
       <RestaurantWidget />

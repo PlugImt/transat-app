@@ -1,5 +1,6 @@
 import { AppNavigator } from "@/app/navigation/AppNavigator";
 import { AuthNavigator } from "@/app/navigation/AuthNavigator";
+import { Dialog } from "@/components/common/Dialog";
 import { useAuth } from "@/hooks/useAuth";
 import { storage } from "@/services/storage/asyncStorage";
 import type {

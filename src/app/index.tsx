@@ -1,6 +1,7 @@
 import { RootNavigator } from "@/app/navigation/RootNavigator";
 import "../i18n";
 import "./global.css";
+import { Dialog } from "@/components/common/Dialog";
 import {
   QueryClient,
   QueryClientProvider,

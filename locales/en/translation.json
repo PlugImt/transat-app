@@ -74,6 +74,8 @@
       "title": "Restaurant",
       "lunch": "Lunch",
       "dinner": "Dinner",
+      "widget_lunch": "Lunch Menu",
+      "widget_dinner": "Dinner Menu",
       "grill": "Grill",
       "migrator": "Migrator",
       "vegetarian": "Vegetarian",
@@ -89,10 +91,12 @@
       "dryer": "Dryer",
       "almost_done": "Machine {{number}} Almost Done!",
       "almost_done_body": "Your {{type}} will complete in {{minutes}} minutes",
-      "get_notification": "Get notified before machine completes",
+      "get_notification": "Get notified",
+      "get_notification_description": "You will receive a notification {{minutes}} minutes before your {{type}} is ready",
       "time_to_completion": "Minutes before completion",
       "available_machines": "Available Machines",
-      "available_dryers": "Available Dryers"
+      "available_dryers": "Available Dryers",
+      "no_machines": "No machines available"
     }
   },
   "account": {

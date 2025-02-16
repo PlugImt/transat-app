@@ -1,5 +1,5 @@
 import Page from "@/components/common/Page";
-import { StyleSheet, Text, View } from "react-native";
+import { Text } from "react-native";
 
 export const Games = () => {
   return (

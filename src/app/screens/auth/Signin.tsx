@@ -1,5 +1,5 @@
 import { VerificationCodeModal } from "@/components/auth/VerificationCode";
-import { Button } from "@/components/common/ButtonV2";
+import { Button } from "@/components/common/Button";
 import { Input } from "@/components/common/Input";
 import Page from "@/components/common/Page";
 import useAuth from "@/hooks/useAuth";
@@ -9,7 +9,7 @@ import { ArrowLeft } from "lucide-react-native";
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { ActivityIndicator, Text, type TextInput, View } from "react-native";
+import { Text, type TextInput, View } from "react-native";
 import { z } from "zod";
 
 export const Signin = () => {
@@ -124,15 +124,8 @@ export const Signin = () => {
             onPress={handleSubmit(handleLogin)}
             disabled={isButtonDisabled}
             className={isButtonDisabled ? "opacity-50" : ""}
-          >
-            {isLoading && (
-              <ActivityIndicator
-                size="small"
-                color="white"
-                style={{ marginLeft: 8 }}
-              />
-            )}
-          </Button>
+            loading={isLoading}
+          />
           <Button
             label={t("auth.noAccount")}
             onPress={() => navigation.navigate("Auth", { screen: "Signup" })}

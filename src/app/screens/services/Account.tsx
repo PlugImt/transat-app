@@ -13,7 +13,7 @@ import {
 import type React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Image, Text, View } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 
 type UserData = {
   first_name: string;
@@ -97,6 +97,10 @@ export const Account = () => {
     }
   };
 
+  const handleDeleteAccount = async () => {
+    alert("This feature is not yet implemented");
+  };
+
   const InfoItem = ({
     icon,
     label,
@@ -132,87 +136,100 @@ export const Account = () => {
 
   return (
     <Page refreshing={refreshing} onRefresh={handleRefresh}>
-      <View className="flex-1">
-        <View className="mb-6">
-          <Text className="text-2xl font-bold text-[#ffe6cc]">My Profile</Text>
-        </View>
+      <Text className="h1 m-4">{t("common.account")}</Text>
 
-        <View className="items-center mb-8">
-          <View className="relative mb-4">
-            {user.profile_picture ? (
-              <Image
-                source={{ uri: user.profile_picture }}
-                className="w-32 h-32 rounded-full"
-              />
-            ) : (
-              <View className="w-32 h-32 rounded-full bg-[#2c2c2c] justify-center items-center">
-                <Text className="text-[#ffe6cc] text-4xl font-bold">
-                  {user.first_name.charAt(0)}
-                  {user.last_name.charAt(0)}
-                </Text>
-              </View>
-            )}
-            <View
-              className={`absolute bottom-0 right-0 py-1.5 px-3 rounded-xl ${
-                user.campus === "NANTES" ? "bg-[#0049a8]" : "bg-[#ec7f32]"
-              }`}
-            >
-              <Text className="text-[#ffe6cc] font-bold text-xs">
-                {user.campus}
+      <View className="items-center mb-8">
+        <View className="relative mb-4">
+          {user.profile_picture ? (
+            <Image
+              source={{ uri: user.profile_picture }}
+              className="w-32 h-32 rounded-full"
+            />
+          ) : (
+            <View className="w-32 h-32 rounded-full bg-[#2c2c2c] justify-center items-center">
+              <Text className="text-[#ffe6cc] text-4xl font-bold">
+                {user.first_name.charAt(0)}
+                {user.last_name.charAt(0)}
               </Text>
             </View>
+          )}
+          <View
+            className={`absolute bottom-0 right-0 py-1.5 px-3 rounded-xl ${
+              user.campus === "NANTES" ? "bg-[#0049a8]" : "bg-[#ec7f32]"
+            }`}
+          >
+            <Text className="text-[#ffe6cc] font-bold text-xs">
+              {user.campus}
+            </Text>
           </View>
-
-          <Text className="text-2xl font-bold text-[#ffe6cc] mb-1">
-            {user.first_name} {user.last_name}
-          </Text>
-          <Text className="text-base text-[#ffe6cc] opacity-80">
-            {t("account.graduation")} {user.graduation_year}
-          </Text>
         </View>
 
-        <View className="bg-[#181010] rounded-2xl p-5 mb-6">
-          <Text className="text-lg font-bold text-[#ffe6cc] mb-3">
-            {t("account.contactInfo")}
-          </Text>
-          <View className="h-px bg-[#333333] mb-4" />
-
-          <InfoItem
-            icon={<Mail color="#ffe6cc" size={20} />}
-            label={t("account.email")}
-            value={user.email}
-          />
-
-          <InfoItem
-            icon={<Phone color="#ffe6cc" size={20} />}
-            label={t("account.phone")}
-            value={user.phone_number || t("account.notProvided")}
-          />
-
-          <InfoItem
-            icon={<MapPin color="#ffe6cc" size={20} />}
-            label={t("account.campus")}
-            value={user.campus || t("account.notProvided")}
-          />
-
-          <InfoItem
-            icon={<GraduationCap color="#ffe6cc" size={20} />}
-            label={t("account.graduationYear")}
-            value={user.graduation_year || t("account.notProvided")}
-          />
-        </View>
-
-        <View className="mt-2">
-          <Button
-            label={t("common.logout")}
-            onPress={handleLogout}
-            className="bg-[#e74c3c] py-2"
-            icon={() => (
-              <LogOut color="white" size={18} style={{ marginRight: 8 }} />
-            )}
-          />
-        </View>
+        <Text className="text-2xl font-bold text-[#ffe6cc] mb-1">
+          {user.first_name} {user.last_name}
+        </Text>
+        <Text className="text-base text-[#ffe6cc] opacity-80">
+          {t("account.graduation")} {user.graduation_year}
+        </Text>
       </View>
+
+      <View className="bg-[#181010] rounded-2xl p-5 mb-6">
+        <Text className="text-lg font-bold text-[#ffe6cc] mb-3">
+          {t("account.contactInfo")}
+        </Text>
+        <View className="h-px bg-[#333333] mb-4" />
+
+        <InfoItem
+          icon={<Mail color="#ffe6cc" size={20} />}
+          label={t("account.email")}
+          value={user.email}
+        />
+
+        <InfoItem
+          icon={<Phone color="#ffe6cc" size={20} />}
+          label={t("account.phone")}
+          value={user.phone_number || t("account.notProvided")}
+        />
+
+        <InfoItem
+          icon={<MapPin color="#ffe6cc" size={20} />}
+          label={t("account.campus")}
+          value={user.campus || t("account.notProvided")}
+        />
+
+        <InfoItem
+          icon={<GraduationCap color="#ffe6cc" size={20} />}
+          label={t("account.graduationYear")}
+          value={user.graduation_year || t("account.notProvided")}
+        />
+      </View>
+
+      <View className="bg-[#181010] rounded-2xl p-5 mb-6">
+        <Text className="text-lg font-bold text-[#ffe6cc] mb-3">
+          {t("account.security")}
+        </Text>
+        <View className="h-px bg-[#333333] mb-4" />
+      </View>
+
+      <View className="mt-2">
+        <Button
+          label={t("common.logout")}
+          onPress={handleLogout}
+          className="bg-[#e74c3c] py-2"
+          icon={() => (
+            <LogOut color="white" size={18} style={{ marginRight: 8 }} />
+          )}
+        />
+      </View>
+
+      <View>
+        <TouchableOpacity onPress={handleDeleteAccount}>
+          <Text className="text-gray-700 text-right mt-4">
+            {t("account.deleteAccount")}
+          </Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={{ height: 50 }} />
     </Page>
   );
 };

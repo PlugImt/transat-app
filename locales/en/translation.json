@@ -95,9 +95,11 @@
     "campus": "Campus",
     "phone": "Phone",
     "email": "Email",
-    "contactInfo": "Contact Information",
+    "contactInfo": "Personnal Information",
     "graduation": "Graduation",
     "loadingProfile": "Loading profile...",
-    "notProvided": "Not provided"
+    "notProvided": "Not provided",
+    "security": "Security",
+    "deleteAccount": "Delete Account"
   }
 }

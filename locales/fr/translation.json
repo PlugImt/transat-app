@@ -17,7 +17,12 @@
     "sign_up": "Inscription",
     "verify": "Vérifier",
     "verifying": "Vérification...",
-    "verificationFailed": "Échec de la vérification"
+    "verificationFailed": "Échec de la vérification",
+    "save": "Sauvegarder",
+    "saveChanges": "Sauvegarder les modifications",
+    "success": "Succès",
+    "error": "Erreur",
+    "info": "Information"
   },
   "auth": {
     "signIn": "Connexion",
@@ -93,5 +98,41 @@
       "available_dryers": "Sèche-linges disponibles",
       "no_machine": "Aucune machine disponible"
     }
+  },
+  "account": {
+    "graduationYear": "Année de diplôme",
+    "campus": "Campus",
+    "phone": "Téléphone",
+    "email": "Email",
+    "contactInfo": "Informations personnelles",
+    "graduation": "Diplôme",
+    "loadingProfile": "Chargement du profil...",
+    "notProvided": "Non fourni",
+    "security": "Sécurité",
+    "deleteAccount": "Supprimer le compte",
+    "editProfile": "Modifier le profil",
+    "personalInfo": "Informations personnelles",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "changePassword": "Changer le mot de passe",
+    "currentPassword": "Mot de passe actuel",
+    "newPassword": "Nouveau mot de passe",
+    "confirmPassword": "Confirmer le nouveau mot de passe",
+    "passwordChanged": "Mot de passe changé avec succès",
+    "passwordChangeFailed": "Échec du changement de mot de passe",
+    "passwordMismatch": "Les nouveaux mots de passe ne correspondent pas",
+    "profileUpdated": "Profil mis à jour avec succès",
+    "updateFailed": "Échec de la mise à jour du profil",
+    "photoUpdateNotAvailable": "Le téléchargement de la photo de profil n'est pas encore disponible",
+    "noToken": "Jeton d'authentification non trouvé",
+    "selectCampus": "Sélectionner le campus",
+    "selectGraduationYear": "Sélectionner l'année de diplôme",
+    "newf": "utilisateurs",
+    "registration": "Inscription",
+    "infos": "Informations",
+    "passwordUpdated": "Dernière mise à jour du mot de passe",
+    "profilePictureUpdated": "Photo de profil mise à jour",
+    "profilePictureUpdateFailed": "Échec de la mise à jour de la photo de profil",
+    "permissionDenied": "Permission refusée"
   }
 }

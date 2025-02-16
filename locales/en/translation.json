@@ -130,6 +130,9 @@
     "newf": "users",
     "registration": "Registration",
     "infos": "Informations",
-    "passwordUpdated": "Last password update"
+    "passwordUpdated": "Last password update",
+    "profilePictureUpdated": "Profile picture updated",
+    "profilePictureUpdateFailed": "Failed to update profile picture",
+    "permissionDenied": "Permission denied"
   }
 }

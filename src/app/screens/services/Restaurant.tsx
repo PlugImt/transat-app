@@ -1,7 +1,8 @@
 import Loading from "@/components/common/Loading";
 import Page from "@/components/common/Page";
-import RestaurantCard from "@/components/custom/RestaurantCard";
+import RestaurantCard from "@/components/custom/card/RestaurantCard";
 import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
+import { outOfService } from "@/lib/utils";
 import { isWeekend } from "date-fns";
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -19,26 +20,22 @@ export const Restaurant = () => {
   } = useRestaurantMenu();
 
   const weekend: boolean = useMemo(() => isWeekend(new Date()), []);
+  const outOfHours: boolean = useMemo(() => outOfService(), []);
 
   if (isPending) {
-    return (
-      <Page refreshing={isPending} onRefresh={refetch}>
-        <Text className="h1 m-4">{t("services.restaurant.title")}</Text>
-        <Loading />
-      </Page>
-    );
+    return <Loading />;
   }
 
   if (weekend) {
     return (
-      <Page refreshing={isPending} onRefresh={refetch}>
+      <Page refreshing={isPending} onRefresh={refetch} goBack>
         <Text className="h1 m-4">{t("services.restaurant.title")}</Text>
-        <View className="min-h-full flex justify-center items-center">
+        <View className="min-h-full flex justify-center items-center gap-4">
           <Image
             source={require("@/assets/images/Logos/restaurant.png")}
             className="w-40 h-40 filter grayscale"
           />
-          <Text className="h1 text-red-500 text-center">
+          <Text className="h1 text-center">
             {weekend
               ? t("services.restaurant.closed")
               : t("services.restaurant.no_data")}
@@ -48,9 +45,31 @@ export const Restaurant = () => {
     );
   }
 
+  if (outOfHours) {
+    return (
+      <Page refreshing={isPending} onRefresh={refetch} goBack>
+        <Text className="h1 m-4">{t("services.restaurant.title")}</Text>
+        <View className="min-h-full flex justify-center items-center gap-4">
+          <Image
+            source={require("@/assets/images/Logos/restaurant.png")}
+            className="w-40 h-40 filter grayscale"
+          />
+          <View className="gap-2">
+            <Text className="h1 text-center">
+              {t("services.restaurant.closed_night.title")}
+            </Text>
+            <Text className="h3 text-center text-muted-foreground">
+              {t("services.restaurant.closed_night.description")}
+            </Text>
+          </View>
+        </View>
+      </Page>
+    );
+  }
+
   if (isError) {
     return (
-      <Page refreshing={isPending} onRefresh={refetch}>
+      <Page refreshing={isPending} onRefresh={refetch} goBack>
         <Text className="h1 m-4">{t("services.restaurant.title")}</Text>
         <View className="min-h-screen flex justify-center items-center ">
           <Text className="text-red-500 text-center h1">{error?.message}</Text>
@@ -60,7 +79,7 @@ export const Restaurant = () => {
   }
 
   return (
-    <Page refreshing={isPending} onRefresh={refetch}>
+    <Page refreshing={isPending} onRefresh={refetch} goBack>
       <Text className="h1 m-4">{t("services.restaurant.title")}</Text>
 
       <View className="flex flex-col gap-8">

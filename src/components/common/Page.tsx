@@ -1,4 +1,6 @@
 import { cn } from "@/lib/utils";
+import { useNavigation } from "@react-navigation/native";
+import { ArrowLeft } from "lucide-react-native";
 import type React from "react";
 import type { ReactNode } from "react";
 import { RefreshControl, ScrollView, View } from "react-native";
@@ -8,6 +10,7 @@ type PageProps = {
   refreshing?: boolean;
   onRefresh?: () => void;
   className?: string;
+  goBack?: boolean;
 };
 
 export default function Page({
@@ -15,7 +18,10 @@ export default function Page({
   refreshing = false,
   onRefresh,
   className,
+  goBack,
 }: PageProps) {
+  const navigation = useNavigation();
+
   return (
     <ScrollView
       className="bg-background"
@@ -35,6 +41,9 @@ export default function Page({
           className,
         )}
       >
+        {goBack && (
+          <ArrowLeft color="white" onPress={() => navigation.goBack()} />
+        )}
         {children}
       </View>
     </ScrollView>

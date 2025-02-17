@@ -1,10 +1,10 @@
 import Home from "@/app/screens/Home";
-import Account from "@/app/screens/services/Account";
 import { Clubs } from "@/app/screens/services/Clubs";
-import EditProfile from "@/app/screens/services/EditAccount";
 import { Restaurant } from "@/app/screens/services/Restaurant";
 import { Traq } from "@/app/screens/services/Traq";
 import { WashingMachine } from "@/app/screens/services/WashingMachine";
+import Account from "@/app/screens/services/account/Account";
+import EditProfile from "@/app/screens/services/account/EditAccount";
 import { BottomTabNavigator } from "@/components/navigation/Navbar";
 import type { AppStackParamList } from "@/services/storage/types";
 import { createStackNavigator } from "@react-navigation/stack";

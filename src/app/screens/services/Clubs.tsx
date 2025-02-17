@@ -3,7 +3,7 @@ import { Text } from "react-native";
 
 export const Clubs = () => {
   return (
-    <Page>
+    <Page goBack>
       <Text className="h1 m-4">Clubs</Text>
     </Page>
   );

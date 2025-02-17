@@ -13,6 +13,12 @@ export function isDinner() {
   return hour >= 14 && hour < 21;
 }
 
+export function outOfService() {
+  const now = new Date();
+  const hour = now.getHours();
+  return hour >= 21 || hour < 11;
+}
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }

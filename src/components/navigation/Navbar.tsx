@@ -1,7 +1,7 @@
 import { Home } from "@/app/screens/Home";
-import Account from "@/app/screens/services/Account";
 import Games from "@/app/screens/services/Games";
 import { Services } from "@/app/screens/services/Services";
+import Account from "@/app/screens/services/account/Account";
 import type { BottomTabParamList } from "@/types/navigation";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { GridIcon, LucideHome, Play, User } from "lucide-react-native";

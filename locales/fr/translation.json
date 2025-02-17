@@ -18,7 +18,7 @@
     "verify": "Vérifier",
     "verifying": "Vérification...",
     "verificationFailed": "Échec de la vérification",
-    "save": "Sauvegarder",
+    "save": "Enregistrer",
     "saveChanges": "Sauvegarder les modifications",
     "success": "Succès",
     "error": "Erreur",
@@ -83,7 +83,10 @@
       "no_data": "Il semble qu'il n'y ait pas de données à afficher",
       "no_meal": "Aucun repas",
       "closed": "Le restaurant est fermé le week-end",
-      "closed_night": "Le restaurant est actuellement fermé. Revenez demain !"
+      "closed_night": {
+        "title": "Le restaurant est fermé",
+        "description": "Revenez à 11h pour voir le menu du jour"
+      }
     },
     "washing_machine": {
       "title": "Laverie",

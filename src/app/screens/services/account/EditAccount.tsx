@@ -1,6 +1,8 @@
 import { Button } from "@/components/common/Button";
+import Dropdown from "@/components/common/Dropdown";
 import Page from "@/components/common/Page";
 import { storage } from "@/services/storage/asyncStorage";
+import { Picker } from "@react-native-picker/picker";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import * as FileSystem from "expo-file-system";
@@ -399,17 +401,25 @@ export const EditProfile = () => {
 
           <DropdownField
             label={t("account.campus")}
-            value={formState.campus}
+            value={formState?.campus}
             onPress={() => {
               Keyboard.dismiss();
               setShowCampusDropdown(true);
             }}
             icon={<MapPin color="#ffe6cc" size={20} />}
           />
+          <Dropdown
+            label={t("account.campus")}
+            placeholder={t("account.selectCampus")}
+            icon={<MapPin color="#ffe6cc" size={20} />}
+            options={campusOptions}
+            selectedValue={formState?.campus}
+            onValueChange={(campus) => setFormState({ ...formState, campus })}
+          />
 
           <DropdownField
             label={t("account.graduationYear")}
-            value={formState.graduation_year.toString()}
+            value={formState.graduation_year?.toString()}
             onPress={() => {
               Keyboard.dismiss();
               setShowYearDropdown(true);

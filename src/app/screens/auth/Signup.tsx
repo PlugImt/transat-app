@@ -97,9 +97,7 @@ export const Signup = () => {
   };
 
   return (
-    <Page className="flex flex-col gap-8">
-      <ArrowLeft color="white" onPress={() => navigation.goBack()} />
-
+    <Page className="flex flex-col gap-8" goBack>
       <Text className="h1">{t("auth.signUp")}</Text>
 
       {signupError && (
@@ -113,6 +111,9 @@ export const Signup = () => {
           placeholder="christophe.lerouge@imt-atlantique.net"
           control={control}
           name="email"
+          textContentType="emailAddress"
+          autoCapitalize="none"
+          autoFocus
           label={t("auth.email")}
           returnKeyType="next"
           onSubmitEditing={() => passwordRef.current?.focus()}
@@ -122,6 +123,7 @@ export const Signup = () => {
           placeholder="••••••••••"
           control={control}
           name="password"
+          textContentType="newPassword"
           label={t("auth.password")}
           secureTextEntry
           ref={passwordRef}
@@ -133,6 +135,7 @@ export const Signup = () => {
           placeholder="••••••••••"
           control={control}
           name="confirmPassword"
+          textContentType="password"
           label={t("auth.confirmPassword")}
           secureTextEntry
           ref={confirmPasswordRef}

@@ -1,7 +1,7 @@
 import Page from "@/components/common/Page";
 import { Weather } from "@/components/custom/Weather";
-import RestaurantWidget from "@/components/custom/Widget/RestaurantWidget";
-import WashingMachineWidget from "@/components/custom/Widget/WashingMachineWidget";
+import RestaurantWidget from "@/components/custom/widget/RestaurantWidget";
+import WashingMachineWidget from "@/components/custom/widget/WashingMachineWidget";
 import { useAuth } from "@/hooks/useAuth";
 import { QUERY_KEYS } from "@/lib/queryKeys";
 import { storage } from "@/services/storage/asyncStorage";

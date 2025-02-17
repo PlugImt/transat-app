@@ -1,4 +1,4 @@
-import { Button } from "@/components/common/ButtonV2";
+import { Button } from "@/components/common/Button";
 import Page from "@/components/common/Page";
 import useAuth from "@/hooks/useAuth";
 import { storage } from "@/services/storage/asyncStorage";

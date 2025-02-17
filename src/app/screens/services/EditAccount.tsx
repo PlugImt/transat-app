@@ -1,4 +1,4 @@
-import { Button } from "@/components/common/ButtonV2";
+import { Button } from "@/components/common/Button";
 import Page from "@/components/common/Page";
 import { storage } from "@/services/storage/asyncStorage";
 import { useNavigation } from "@react-navigation/native";

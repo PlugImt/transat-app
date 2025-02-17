@@ -1,14 +1,17 @@
+import { AboutModal } from "@/components/common/AboutModal";
 import { Dialog } from "@/components/common/Dialog";
 import Loading from "@/components/common/Loading";
 import Page from "@/components/common/Page";
 import WashingMachineCard from "@/components/custom/WashingMachineCard";
 import { useWashingMachines } from "@/hooks/useWashingMachines";
-import type { FC } from "react";
+import React, { type FC, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 
 export const WashingMachine: FC = () => {
   const { t } = useTranslation();
+  const [aboutPopupVisible, setAboutPopupVisible] = useState(false);
+  const openingHoursData = [{ day: "24/7", lunch: "", dinner: "" }];
 
   const { data, isPending, isFetching, isError, error, refetch } =
     useWashingMachines();
@@ -93,6 +96,23 @@ export const WashingMachine: FC = () => {
           ))}
         </View>
       )}
+
+      <TouchableOpacity onPress={() => setAboutPopupVisible(true)}>
+        <Text className="text-center text-sm text-gray-500 mt-4">
+          {t("common.info")}
+        </Text>
+      </TouchableOpacity>
+
+      <AboutModal
+        isVisible={aboutPopupVisible}
+        onClose={() => setAboutPopupVisible(false)}
+        title={t("services.washing_machine.title")}
+        description={t("services.washing_machine.about")}
+        openingHours={openingHoursData}
+        location={t("services.washing_machine.location")}
+        price={t("services.washing_machine.price")}
+        additionalInfo={t("services.washing_machine.additional_info")}
+      />
     </Page>
   );
 };

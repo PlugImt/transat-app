@@ -1,14 +1,55 @@
+import { AboutModal } from "@/components/common/AboutModal";
 import Loading from "@/components/common/Loading";
 import Page from "@/components/common/Page";
 import RestaurantCard from "@/components/custom/RestaurantCard";
 import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
 import { isWeekend } from "date-fns";
-import React, { useMemo } from "react";
+import { Bell } from "lucide-react-native";
+import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Image, Text, View } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 
 export const Restaurant = () => {
   const { t } = useTranslation();
+  const [aboutPopupVisible, setAboutPopupVisible] = useState(false);
+
+  const openingHoursData = [
+    {
+      day: " ",
+      lunch: t("services.restaurant.lunch"),
+      dinner: t("services.restaurant.dinner"),
+    },
+    {
+      day: t("common.days.monday"),
+      lunch: "11h30-13h30",
+      dinner: "18h30-19h45",
+    },
+    {
+      day: t("common.days.tuesday"),
+      lunch: "11h30-13h30",
+      dinner: "18h30-19h45",
+    },
+    {
+      day: t("common.days.wednesday"),
+      lunch: "11h30-13h30",
+      dinner: "18h30-19h45",
+    },
+    {
+      day: t("common.days.thursday"),
+      lunch: "11h30-13h30",
+      dinner: "18h30-19h45",
+    },
+    {
+      day: t("common.days.friday"),
+      lunch: "11h30-13h30",
+      dinner: t("services.restaurant.closed"),
+    },
+    {
+      day: t("common.days.weekend"),
+      lunch: t("services.restaurant.closed"),
+      dinner: t("services.restaurant.closed"),
+    },
+  ];
 
   const {
     data: menu,
@@ -40,7 +81,7 @@ export const Restaurant = () => {
           />
           <Text className="h1 text-red-500 text-center">
             {weekend
-              ? t("services.restaurant.closed")
+              ? t("services.restaurant.closedWeekends")
               : t("services.restaurant.no_data")}
           </Text>
         </View>
@@ -61,7 +102,10 @@ export const Restaurant = () => {
 
   return (
     <Page refreshing={isPending} onRefresh={refetch}>
-      <Text className="h1 m-4">{t("services.restaurant.title")}</Text>
+      <View className="flex flex-row items-center">
+        <Text className="h1 m-4 mr-0">{t("services.restaurant.title")} </Text>
+        <Bell size={24} color={"#ec7f32"} />
+      </View>
 
       <View className="flex flex-col gap-8">
         <View className="flex flex-col gap-4">
@@ -107,6 +151,23 @@ export const Restaurant = () => {
           </View>
         )}
       </View>
+
+      <TouchableOpacity onPress={() => setAboutPopupVisible(true)}>
+        <Text className="text-center text-sm text-gray-500 mt-4">
+          {t("common.info")}
+        </Text>
+      </TouchableOpacity>
+
+      <AboutModal
+        isVisible={aboutPopupVisible}
+        onClose={() => setAboutPopupVisible(false)}
+        title={t("services.restaurant.title")}
+        description={t("services.restaurant.about")}
+        openingHours={openingHoursData}
+        location={t("services.restaurant.location")}
+        price={t("services.restaurant.price")}
+        additionalInfo={t("services.restaurant.additional_info")}
+      />
     </Page>
   );
 };

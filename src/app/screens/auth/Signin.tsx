@@ -86,9 +86,7 @@ export const Signin = () => {
   };
 
   return (
-    <Page className="flex flex-col gap-8">
-      <ArrowLeft color="white" onPress={() => navigation.goBack()} />
-
+    <Page className="flex flex-col gap-8" goBack>
       <Text className="h1">{t("auth.signIn")}</Text>
 
       {loginError && (
@@ -102,6 +100,9 @@ export const Signin = () => {
           placeholder="christophe.lerouge@imt-atlantique.net"
           control={control}
           name="email"
+          autoCapitalize="none"
+          autoFocus
+          textContentType="emailAddress"
           label={t("auth.email")}
           returnKeyType="next"
           onSubmitEditing={() => passwordRef.current?.focus()}
@@ -111,6 +112,7 @@ export const Signin = () => {
           placeholder="••••••••••"
           control={control}
           name="password"
+          textContentType="password"
           label={t("auth.password")}
           secureTextEntry
           ref={passwordRef}

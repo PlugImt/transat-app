@@ -78,7 +78,10 @@
       "no_data": "Parece que no hay datos para mostrar",
       "no_meal": "No hay comida",
       "closed": "El restaurante está cerrado los fines de semana",
-      "closed_night": "El restaurante está cerrado. ¡Vuelve mañana!"
+      "closed_night": {
+        "title": "El restaurante está cerrado",
+        "description": "Vuelve a las 11h para ver el menú del día"
+      }
     },
     "washing_machine": {
       "title": "Lavandería",

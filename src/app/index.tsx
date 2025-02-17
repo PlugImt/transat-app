@@ -25,7 +25,7 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <RootNavigator />
-      <DevToolsBubble onCopy={onCopy} />
+      {/* <DevToolsBubble onCopy={onCopy} /> */}
     </QueryClientProvider>
   );
 }

@@ -1,5 +1,5 @@
 import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
-import { isDinner, isLunch } from "@/lib/utils";
+import { isDinner, isLunch, outOfService } from "@/lib/utils";
 import type { AppStackParamList } from "@/services/storage/types";
 import theme from "@/themes";
 import { useNavigation } from "@react-navigation/native";
@@ -21,6 +21,7 @@ export function RestaurantWidget() {
   const weekend: boolean = useMemo(() => isWeekend(new Date()), []);
   const lunch: boolean = useMemo(() => isLunch(), []);
   const dinner: boolean = useMemo(() => isDinner(), []);
+  const outOfHours = useMemo(() => outOfService(), []);
 
   const title =
     !weekend && lunch
@@ -28,6 +29,7 @@ export function RestaurantWidget() {
       : !weekend && dinner
         ? t("services.restaurant.widget_dinner")
         : "";
+
   if (isPending) {
     return (
       <View className="flex flex-col gap-2">
@@ -39,7 +41,7 @@ export function RestaurantWidget() {
     );
   }
 
-  if (error || weekend) {
+  if (error || weekend || outOfHours) {
     return null;
   }
 

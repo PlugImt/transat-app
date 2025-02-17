@@ -99,9 +99,12 @@
       "side_dishes": "Side Dishes",
       "no_data": "It seems that there is no data to display",
       "no_meal": "No meal",
+      "closed_night": {
+        "title": "The restaurant is closed",
+        "description": "The restaurant is closed at night"
+      },
       "closed": "Closed",
       "closedWeekends": "The restaurant is closed on weekends",
-      "closed_night": "The restaurant is currently closed. Come back tomorrow!",
       "location": "Next to the gymnasium",
       "about": "API prepares fresh, homemade dishes daily—even the fruit salad! The menu updates daily for lunch and dinner.",
       "price": "3.90€ for an appetizer, main course, and dessert.",

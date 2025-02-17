@@ -1,11 +1,12 @@
 import { Button } from "@/components/common/Button";
+import Loading from "@/components/common/Loading";
 import Page from "@/components/common/Page";
 import useAuth from "@/hooks/useAuth";
 import { storage } from "@/services/storage/asyncStorage";
+import theme from "@/themes";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import {
-  Edit,
   GraduationCap,
   Lock,
   LogOut,
@@ -17,7 +18,8 @@ import {
 import type React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Image, Text, View } from "react-native";
+import { InfoItem } from "./components/InfoItem";
 
 type UserData = {
   first_name: string;
@@ -121,48 +123,20 @@ export const Account = () => {
     navigation.navigate("EditProfile");
   };
 
-  const InfoItem = ({
-    icon,
-    label,
-    value,
-  }: {
-    icon: React.ReactNode;
-    label: string;
-    value: string;
-  }) => (
-    <View className="flex-row items-center mb-4">
-      {icon}
-      <View className="ml-4 flex-1">
-        <Text className="text-sm text-[#ffe6cc] opacity-70 mb-0.5">
-          {label}
-        </Text>
-        <Text className="text-base text-[#ffe6cc] font-medium">{value}</Text>
-      </View>
-    </View>
-  );
-
   if (isLoading) {
-    return (
-      <Page>
-        <View className="flex-1 justify-center items-center">
-          <Text className="text-[#ffe6cc] text-base">
-            {t("account.loadingProfile")}
-          </Text>
-        </View>
-      </Page>
-    );
+    return <Loading />;
   }
 
   return (
-    <Page refreshing={refreshing} onRefresh={handleRefresh}>
-      <View className="flex-row justify-between items-center m-4">
+    <Page refreshing={refreshing} onRefresh={handleRefresh} className="gap-6">
+      <View className="flex-row justify-between items-center ">
         <Text className="h1">{t("common.account")}</Text>
-        <TouchableOpacity
+        <Button
+          label="Modifier"
           onPress={navigateToEditProfile}
-          className="bg-[#333333] p-2 rounded-full"
-        >
-          <Edit color="#ffe6cc" size={20} />
-        </TouchableOpacity>
+          size="sm"
+          variant="ghost"
+        />
       </View>
 
       <View className="items-center mb-8">
@@ -173,77 +147,60 @@ export const Account = () => {
               className="w-32 h-32 rounded-full"
             />
           ) : (
-            <View className="w-32 h-32 rounded-full bg-[#2c2c2c] justify-center items-center">
-              <Text className="text-[#ffe6cc] text-4xl font-bold">
+            <View className="w-32 h-32 rounded-full bg-muted justify-center items-center">
+              <Text className="text-foreground text-4xl font-bold">
                 {user.first_name.charAt(0)}
                 {user.last_name.charAt(0)}
               </Text>
             </View>
           )}
-          <View
-            className={
-              "absolute bottom-0 right-0 py-1.5 px-3 rounded-xl bg-[#ec7f32]"
-            }
-          >
-            <Text className="text-[#ffe6cc] font-bold text-xs">
-              #{user.id_newf}
-            </Text>
-          </View>
         </View>
 
         <Text className="text-2xl font-bold text-[#ffe6cc] mb-1">
           {user.first_name} {user.last_name}
         </Text>
-        <Text className="text-base text-[#ffe6cc] opacity-80">
-          {t("account.graduation")} {user.graduation_year}
-        </Text>
+        {user.graduation_year && (
+          <Text className="text-base text-[#ffe6cc] opacity-80">
+            {t("account.graduation")} {user.graduation_year}
+          </Text>
+        )}
       </View>
 
-      <View className="bg-[#181010] rounded-2xl p-5 mb-6">
-        <Text className="text-lg font-bold text-[#ffe6cc] mb-3">
-          {t("account.contactInfo")}
-        </Text>
-        <View className="h-px bg-[#333333] mb-4" />
-
+      <View className="bg-card rounded-lg px-6 py-4 gap-4">
+        <Text className="h3">{t("account.contactInfo")}</Text>
         <InfoItem
-          icon={<Mail color="#ffe6cc" size={20} />}
+          icon={<Mail color={theme.textPrimary} size={20} />}
           label={t("account.email")}
           value={user.email}
         />
-
         <InfoItem
-          icon={<Phone color="#ffe6cc" size={20} />}
+          icon={<Phone color={theme.textPrimary} size={20} />}
           label={t("account.phone")}
           value={user.phone_number || t("account.notProvided")}
         />
-
         <InfoItem
-          icon={<MapPin color="#ffe6cc" size={20} />}
+          icon={<MapPin color={theme.textPrimary} size={20} />}
           label={t("account.campus")}
           value={user.campus || t("account.notProvided")}
         />
-
         <InfoItem
-          icon={<GraduationCap color="#ffe6cc" size={20} />}
+          icon={<GraduationCap color={theme.textPrimary} size={20} />}
           label={t("account.graduationYear")}
           value={user.graduation_year || t("account.notProvided")}
         />
       </View>
 
-      <View className="bg-[#181010] rounded-2xl p-5 mb-6">
-        <Text className="text-lg font-bold text-[#ffe6cc] mb-3">
-          {t("account.infos")}
-        </Text>
-        <View className="h-px bg-[#333333] mb-4" />
+      <View className="bg-card rounded-lg px-6 py-4 gap-4">
+        <Text className="h3">{t("account.infos")}</Text>
 
         <InfoItem
-          icon={<Medal color="#ffe6cc" size={20} />}
+          icon={<Medal color={theme.textPrimary} size={20} />}
           label={t("account.registration")}
           value={`n°${user.id_newf}/${user.total_newf} ${t("account.newf")}`}
         />
 
         <InfoItem
-          icon={<Lock color="#ffe6cc" size={20} />}
+          icon={<Lock color={theme.textPrimary} size={20} />}
           label={t("account.passwordUpdated")}
           value={
             user.password_updated_date
@@ -262,26 +219,23 @@ export const Account = () => {
         />
       </View>
 
-      <View className="mt-2">
+      <View className="gap-2">
         <Button
           label={t("common.logout")}
           onPress={handleLogout}
-          className="bg-[#e74c3c] py-2"
+          variant="destructive"
           icon={() => (
             <LogOut color="white" size={18} style={{ marginRight: 8 }} />
           )}
         />
+        <Button
+          label={t("account.deleteAccount")}
+          onPress={handleDeleteAccount}
+          variant="outlined"
+          className="border-destructive"
+          labelClasses="text-destructive"
+        />
       </View>
-
-      <View>
-        <TouchableOpacity onPress={handleDeleteAccount}>
-          <Text className="text-gray-700 text-right mt-4">
-            {t("account.deleteAccount")}
-          </Text>
-        </TouchableOpacity>
-      </View>
-
-      <View style={{ height: 50 }} />
     </Page>
   );
 };

@@ -169,7 +169,7 @@ export const Home = () => {
     <Page refreshing={isFetching} onRefresh={refetch} className="gap-6">
       <Text className="h1 m-4">
         {t("common.welcome")}{" "}
-        <Text className="text-primary">{user?.name || "Newf"}</Text>
+        <Text className="text-primary">{user?.first_name || "Newf"}</Text>
       </Text>
       <Weather />
       <RestaurantWidget />

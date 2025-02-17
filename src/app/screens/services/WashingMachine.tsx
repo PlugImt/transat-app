@@ -2,7 +2,7 @@ import { AboutModal } from "@/components/common/AboutModal";
 import { Dialog } from "@/components/common/Dialog";
 import Loading from "@/components/common/Loading";
 import Page from "@/components/common/Page";
-import WashingMachineCard from "@/components/custom/WashingMachineCard";
+import WashingMachineCard from "@/components/custom/card/WashingMachineCard";
 import { useWashingMachines } from "@/hooks/useWashingMachines";
 import React, { type FC, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -22,7 +22,7 @@ export const WashingMachine: FC = () => {
 
   if (isError) {
     return (
-      <Page refreshing={isPending} onRefresh={refetch}>
+      <Page refreshing={isPending} onRefresh={refetch} goBack>
         <Text className="h1 m-4">{t("services.washing_machine.title")}</Text>
         <View className="min-h-screen flex justify-center items-center">
           <Text className="text-red-500 text-center h1">{error?.message}</Text>
@@ -33,7 +33,7 @@ export const WashingMachine: FC = () => {
 
   if (!data || data.length === 0) {
     return (
-      <Page refreshing={isPending} onRefresh={refetch}>
+      <Page refreshing={isPending} onRefresh={refetch} goBack>
         <Text className="h1 m-4">{t("services.washing_machine.title")}</Text>
         <View className="min-h-screen flex justify-center items-center ">
           <Text className="text-foreground text-center h1">
@@ -57,6 +57,7 @@ export const WashingMachine: FC = () => {
       onRefresh={refetch}
       refreshing={isFetching}
       className="flex-col gap-6"
+      goBack
     >
       <Text className="h1">{t("services.washing_machine.title")}</Text>
 
@@ -66,15 +67,13 @@ export const WashingMachine: FC = () => {
             {t("services.washing_machine.washing_machine")}
           </Text>
           {washingMachines.map((item) => (
-            <Dialog key={item.machine_id}>
-              <WashingMachineCard
-                key={item.machine_id}
-                number={item.selecteur_machine}
-                type={t("services.washing_machine.washing_machine")}
-                status={item.time_before_off}
-                icon={"WASHING MACHINE"}
-              />
-            </Dialog>
+            <WashingMachineCard
+              key={item.machine_id}
+              number={item.selecteur_machine}
+              type={t("services.washing_machine.washing_machine")}
+              status={item.time_before_off}
+              icon={"WASHING MACHINE"}
+            />
           ))}
         </View>
       )}
@@ -85,14 +84,13 @@ export const WashingMachine: FC = () => {
             {t("services.washing_machine.dryer")}
           </Text>
           {dryers.map((item) => (
-            <Dialog key={item.machine_id}>
-              <WashingMachineCard
-                number={item.selecteur_machine}
-                type={t("services.washing_machine.dryer")}
-                status={item.time_before_off}
-                icon={"DRYER"}
-              />
-            </Dialog>
+            <WashingMachineCard
+              key={item.machine_id}
+              number={item.selecteur_machine}
+              type={t("services.washing_machine.dryer")}
+              status={item.time_before_off}
+              icon={"DRYER"}
+            />
           ))}
         </View>
       )}

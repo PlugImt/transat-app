@@ -166,7 +166,7 @@ export const Home = () => {
   };
 
   return (
-    <Page refreshing={isFetching} onRefresh={refetch}>
+    <Page refreshing={isFetching} onRefresh={refetch} className="gap-6">
       <Text className="h1 m-4">
         {t("common.welcome")}{" "}
         <Text className="text-primary">{user?.name || "Newf"}</Text>

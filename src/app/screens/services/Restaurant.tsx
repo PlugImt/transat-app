@@ -1,11 +1,10 @@
 import { AboutModal } from "@/components/common/AboutModal";
-import Loading from "@/components/common/Loading";
 import Page from "@/components/common/Page";
+import Loading from "@/components/custom/Loading";
 import RestaurantCard from "@/components/custom/card/RestaurantCard";
 import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
 import { outOfService } from "@/lib/utils";
 import { isWeekend } from "date-fns";
-import { Bell } from "lucide-react-native";
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Image, Text, TouchableOpacity, View } from "react-native";

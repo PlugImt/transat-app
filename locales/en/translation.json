@@ -18,6 +18,7 @@
     "verify": "Verify",
     "verifying": "Verifying...",
     "verificationFailed": "Verification failed",
+    "verificationSuccess": "Verification successful",
     "save": "Save",
     "saveChanges": "Save Changes",
     "success": "Success",
@@ -35,10 +36,15 @@
       "sunday": "Sunday",
       "weekdays": "Weekdays",
       "weekend": "Weekend"
+    },
+    "errors": {
+      "occurred": "An error occurred",
+      "unableToFetch": "Unable to fetch data"
     }
   },
   "auth": {
     "signIn": "Sign in",
+    "signInSuccess": "Sign in successful",
     "signingIn": "Signing in...",
     "signUp": "Sign up",
     "email": "Email",
@@ -55,6 +61,7 @@
     "resendCode": "Resend Code",
     "signupSuccess": "Signup successful",
     "signingUp": "Signing up...",
+    "disconnected": "You have been disconnected",
     "errors": {
       "tokenSaveFailed": "Failed to save authentication token",
       "email": "The email address is invalid",

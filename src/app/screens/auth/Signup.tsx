@@ -2,6 +2,7 @@ import { VerificationCodeModal } from "@/components/auth/VerificationCode";
 import { Button } from "@/components/common/Button";
 import { Input } from "@/components/common/Input";
 import Page from "@/components/common/Page";
+import { useToast } from "@/components/common/Toast";
 import useAuth from "@/hooks/useAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
@@ -16,8 +17,9 @@ export const Signup = () => {
   const navigation = useNavigation();
   const { register, saveToken, isLoading } = useAuth();
   const { t } = useTranslation();
-  const [signupError, setSignupError] = useState<string | null>(null);
+  const { toast } = useToast();
 
+  const [signupError, setSignupError] = useState<string | null>(null);
   const [verificationModalVisible, setVerificationModalVisible] =
     useState(false);
   const [verificationEmail, setVerificationEmail] = useState<string>("");
@@ -90,7 +92,7 @@ export const Signup = () => {
     try {
       await saveToken(token);
       setVerificationModalVisible(false);
-      alert("Verification successful");
+      toast(t('common.verificationSuccess'), 'success');
     } catch (err) {
       setSignupError(t("auth.errors.tokenSaveFailed"));
     }

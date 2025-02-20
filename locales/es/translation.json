@@ -17,10 +17,16 @@
     "sign_up": "Registrarse",
     "verify": "Verificar",
     "verifying": "Verificando...",
-    "verificationFailed": "Verificación fallida"
+    "verificationFailed": "Verificación fallida",
+    "verificationSuccess": "Verificación exitosa",
+    "errors": {
+      "occurred": "Ocurrió un error",
+      "unableToFetch": "No se pueden obtener los datos"
+    }
   },
   "auth": {
     "signIn": "Iniciar sesión",
+    "signInSuccess": "Inicio de sesión exitoso",
     "signingIn": "Iniciando sesión...",
     "signUp": "Registrarse",
     "email": "Correo electrónico",
@@ -37,6 +43,7 @@
     "resendCode": "Reenviar código",
     "signupSuccess": "Registro exitoso",
     "signingUp": "Registrando...",
+    "disconnected": "Te has desconectado",
     "errors": {
       "tokenSaveFailed": "Error al guardar el token de autenticación",
       "email": "La dirección de correo electrónico no es válida",

@@ -7,7 +7,8 @@ import * as Clipboard from 'expo-clipboard';
 import { DevToolsBubble } from 'react-native-react-query-devtools';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
+import { ToastProvider } from '@/components/common/Toast';
 
 export default function App() {
     const queryClient = new QueryClient();
@@ -23,13 +24,14 @@ export default function App() {
 
     return (
         <QueryClientProvider client={queryClient}>
-            <GestureHandlerRootView>
-                <BottomSheetModalProvider>
-                    <RootNavigator />
-                    {/* <DevToolsBubble onCopy={onCopy} /> */}
-                </BottomSheetModalProvider>
-            </GestureHandlerRootView>
+            <ToastProvider position="top">
+                <GestureHandlerRootView>
+                    <BottomSheetModalProvider>
+                        <RootNavigator />
+                        {/* <DevToolsBubble onCopy={onCopy} /> */}
+                    </BottomSheetModalProvider>
+                </GestureHandlerRootView>
+            </ToastProvider>
         </QueryClientProvider>
     );
 }
-

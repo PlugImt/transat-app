@@ -18,14 +18,20 @@
     "verify": "Vérifier",
     "verifying": "Vérification...",
     "verificationFailed": "Échec de la vérification",
+    "verificationSuccess": "Vérification réussie",
     "save": "Enregistrer",
     "saveChanges": "Sauvegarder les modifications",
     "success": "Succès",
     "error": "Erreur",
-    "info": "Information"
+    "info": "Information",
+    "errors": {
+      "occurred": "Une erreur est survenue",
+      "unableToFetch": "Impossible de récupérer les données"
+    }
   },
   "auth": {
     "signIn": "Connexion",
+    "signInSuccess": "Connexion réussie",
     "signingIn": "Connexion...",
     "signUp": "Inscription",
     "email": "Email",
@@ -42,6 +48,7 @@
     "resendCode": "Renvoyer le code",
     "signupSuccess": "Inscription réussie",
     "signingUp": "Inscription...",
+    "disconnected": "Vous vous êtes déconnecté",
     "errors": {
       "tokenSaveFailed": "Échec de l'enregistrement du jeton d'authentification",
       "email": "L'adresse email est invalide",

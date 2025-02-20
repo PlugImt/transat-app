@@ -11,7 +11,7 @@ const badgeVariants = cva(
         default: "bg-primary",
         secondary: "bg-secondary",
         destructive: "bg-destructive",
-        success: "bg-green-500 dark:bg-green-700",
+        success: "bg-green-500",
       },
     },
     defaultVariants: {

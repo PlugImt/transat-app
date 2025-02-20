@@ -1,10 +1,11 @@
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/common/Avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar';
 import { Button } from '@/components/common/Button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/common/Dialog';
 import Dropdown from '@/components/common/Dropdown';
 import { Input } from '@/components/common/Input';
-import Loading from '@/components/common/Loading';
 import Page from '@/components/common/Page';
+import { useToast } from '@/components/common/Toast';
+import Loading from '@/components/custom/Loading';
 import { storage } from '@/services/storage/asyncStorage';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigation } from '@react-navigation/native';
@@ -16,13 +17,7 @@ import type React from 'react';
 import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import {
-    Alert,
-    Keyboard,
-    Text,
-    TouchableOpacity,
-    View,
-} from 'react-native';
+import { Keyboard, Text, TouchableOpacity, View } from 'react-native';
 import { z } from 'zod';
 
 type UserData = {
@@ -38,6 +33,7 @@ type UserData = {
 export const EditProfile = () => {
     const { t } = useTranslation();
     const navigation = useNavigation();
+    const { toast } = useToast();
 
     const userSchema = z.object({
         first_name: z.string().nonempty(t('auth.errors.firstName')),
@@ -130,25 +126,26 @@ export const EditProfile = () => {
         fetchUserData().then((r) => r);
     }, [fetchUserData]);
 
-    const handleUpdateProfile = async () => {
+    const handleUpdateProfile = async (data: UserData) => {
+        console.log('formState:', data);
         try {
             Keyboard.dismiss();
             setIsSaving(true);
             const token = await storage.get('token');
 
             if (!token) {
-                Alert.alert(t('common.error'), t('account.noToken'));
+                toast(t('account.noToken'), 'destructive');
                 return;
             }
 
             const response = await axios.patch(
                 'https://transat.destimt.fr/api/newf/me',
                 {
-                    first_name: formState.first_name,
-                    last_name: formState.last_name,
-                    campus: formState.campus,
-                    phone_number: formState.phone_number,
-                    graduation_year: formState.graduation_year,
+                    first_name: data.first_name,
+                    last_name: data.last_name,
+                    campus: data.campus,
+                    phone_number: data.phone_number,
+                    graduation_year: data.graduation_year,
                 },
                 {
                     headers: {
@@ -161,12 +158,12 @@ export const EditProfile = () => {
                 const updatedUser = { ...user, ...formState };
                 await storage.set('newf', updatedUser);
                 setUser(updatedUser);
-                Alert.alert(t('common.success'), t('account.profileUpdated'));
+                toast(t('account.profileUpdated'), 'success');
                 navigation.goBack();
             }
         } catch (error) {
             console.error('Error updating profile:', error);
-            Alert.alert(t('common.error'), t('account.updateFailed'));
+            toast(t('account.updateFailed'), 'destructive');
         } finally {
             setIsSaving(false);
         }
@@ -189,14 +186,14 @@ export const EditProfile = () => {
             );
 
             if (response.status === 200) {
-                Alert.alert(t('common.success'), t('account.passwordChanged'));
+                toast(t('account.passwordChanged'), 'success');
                 setCurrentPassword('');
                 setNewPassword('');
                 setConfirmPassword('');
             }
         } catch (error) {
             console.error('Error changing password:', error);
-            Alert.alert(t('common.error'), t('account.passwordChangeFailed'));
+            toast(t('account.passwordChangeFailed'), 'destructive');
         } finally {
             setIsSaving(false);
         }
@@ -207,7 +204,7 @@ export const EditProfile = () => {
             // Request media library permissions
             const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
             if (status !== 'granted') {
-                Alert.alert(t('common.error'), t('account.permissionDenied'));
+                toast(t('account.permissionDenied'), 'destructive');
                 return;
             }
 
@@ -244,7 +241,7 @@ export const EditProfile = () => {
 
             const token = await storage.get('token');
             if (!token) {
-                Alert.alert(t('common.error'), t('account.noToken'));
+                toast(t('account.noToken'), 'destructive');
                 return;
             }
 
@@ -262,11 +259,11 @@ export const EditProfile = () => {
                 const updatedUser = { ...user, profile_picture: imageUrl };
                 await storage.set('newf', updatedUser);
                 setUser(updatedUser);
-                Alert.alert(t('common.success'), t('account.profilePictureUpdated'));
+                toast(t('account.profilePictureUpdated'), 'success');
             }
         } catch (error) {
             console.error('Error updating profile picture:', error);
-            Alert.alert(t('common.error'), t('account.profilePictureUpdateFailed'));
+            toast(t('account.profilePictureUpdateFailed'), 'destructive');
         }
     };
 
@@ -318,6 +315,8 @@ export const EditProfile = () => {
                     label={t('account.firstName')}
                     control={userControl}
                     name="first_name"
+                    returnKeyType="go"
+                    textContentType="name"
                     error={userErrors.first_name?.message}
                 />
 
@@ -325,6 +324,7 @@ export const EditProfile = () => {
                     label={t('account.lastName')}
                     control={userControl}
                     name="last_name"
+                    textContentType="familyName"
                     error={userErrors.last_name?.message}
                 />
 
@@ -332,6 +332,8 @@ export const EditProfile = () => {
                     label={t('account.email')}
                     control={userControl}
                     name="email"
+                    autoCapitalize="none"
+                    textContentType="emailAddress"
                     error={userErrors.email?.message}
                 />
 
@@ -339,6 +341,7 @@ export const EditProfile = () => {
                     label={t('account.phone')}
                     control={userControl}
                     name="phone_number"
+                    textContentType="telephoneNumber"
                     error={userErrors.phone_number?.message}
                     keyboardType="phone-pad"
                 />
@@ -377,6 +380,7 @@ export const EditProfile = () => {
                             label={t('account.currentPassword')}
                             control={passwordControl}
                             name="password"
+                            textContentType="password"
                             error={passwordErrors.current_password?.message?.toString()}
                             secureTextEntry
                         />
@@ -385,6 +389,7 @@ export const EditProfile = () => {
                             label={t('account.newPassword')}
                             control={passwordControl}
                             name="new_password"
+                            textContentType="newPassword"
                             error={passwordErrors.new_password?.message?.toString()}
                             secureTextEntry
                         />
@@ -393,6 +398,7 @@ export const EditProfile = () => {
                             label={t('account.confirmPassword')}
                             control={passwordControl}
                             name="new_password_confirmation"
+                            textContentType="newPassword"
                             error={passwordErrors.new_password_confirmation?.message?.toString()}
                             secureTextEntry
                         />

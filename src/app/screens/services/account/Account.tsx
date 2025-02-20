@@ -224,9 +224,6 @@ export const Account = () => {
           label={t("common.logout")}
           onPress={handleLogout}
           variant="destructive"
-          icon={() => (
-            <LogOut color="white" size={18} style={{ marginRight: 8 }} />
-          )}
         />
         <Button
           label={t("account.deleteAccount")}

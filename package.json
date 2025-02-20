@@ -18,8 +18,10 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.4",
+    "@gorhom/bottom-sheet": "^5.1.1",
     "@hookform/resolvers": "^3.10.0",
     "@react-native-async-storage/async-storage": "^2.1.0",
+    "@react-native-picker/picker": "2.9.0",
     "@react-navigation/bottom-tabs": "^7.2.0",
     "@react-navigation/native": "^7.0.14",
     "@react-navigation/stack": "^7.1.1",
@@ -68,8 +70,7 @@
     "react-native-webview": "13.12.5",
     "styled-components": "^6.1.14",
     "tailwind-merge": "^3.0.1",
-    "zod": "^3.24.1",
-    "@react-native-picker/picker": "2.9.0"
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

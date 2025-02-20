@@ -22,7 +22,7 @@ type BottomSheetTriggerProps = {
     children: any;
 };
 export function BottomSheetTrigger({ children }: BottomSheetTriggerProps) {
-    const { bottomSheetRef, handleBottomSheet } = useBottomSheet();
+    const { handleBottomSheet } = useBottomSheet();
 
     return cloneElement(children, { onPress: () => handleBottomSheet(true) });
 }
@@ -48,7 +48,7 @@ export function BottomSheetProvider({ children }: { children: React.ReactNode })
 type BottomSheetProps = {
     children: React.ReactNode;
 };
-export  function BottomSheet({ children }: BottomSheetProps) {
+export function BottomSheet({ children }: BottomSheetProps) {
     const { bottomSheetRef } = useBottomSheet();
 
     return (

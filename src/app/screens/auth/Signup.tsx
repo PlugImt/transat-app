@@ -115,6 +115,7 @@ export const Signup = () => {
           autoCapitalize="none"
           autoFocus
           label={t("auth.email")}
+          labelClasses="h3"
           returnKeyType="next"
           onSubmitEditing={() => passwordRef.current?.focus()}
           error={errors.email?.message}
@@ -124,6 +125,7 @@ export const Signup = () => {
           control={control}
           name="password"
           textContentType="newPassword"
+          labelClasses="h3"
           label={t("auth.password")}
           secureTextEntry
           ref={passwordRef}
@@ -137,6 +139,7 @@ export const Signup = () => {
           name="confirmPassword"
           textContentType="password"
           label={t("auth.confirmPassword")}
+          labelClasses="h3"
           secureTextEntry
           ref={confirmPasswordRef}
           returnKeyType="done"

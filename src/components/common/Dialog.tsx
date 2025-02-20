@@ -66,7 +66,7 @@ function DialogContent({
         className="w-full h-full"
         onPress={() => setOpen(false)}
       >
-        <View className="flex flex-1 justify-center items-center bg-black/75">
+        <View className="flex flex-1 justify-center items-center bg-background/75">
           <TouchableOpacity
             className="border border-border bg-background rounded-lg p-6 shadow-lg"
             activeOpacity={1}

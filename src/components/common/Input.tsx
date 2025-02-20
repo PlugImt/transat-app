@@ -32,9 +32,9 @@ const Input = forwardRef(
     }: InputProps<T>,
     ref: React.Ref<TextInput>,
   ) => (
-    <View className={cn("flex flex-col gap-1.5", className)}>
+    <View className={cn("gap-1.5", className)}>
       {label && (
-        <Text className={cn("h3 text-foreground", labelClasses)}>{label}</Text>
+        <Text className={cn("text-sm text-foreground/70", labelClasses)}>{label}</Text>
       )}
 
       <Controller

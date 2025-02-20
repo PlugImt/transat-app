@@ -67,7 +67,8 @@
       "imtOnly": "Only IMT email addresses are allowed",
       "accountExists": "An account with this email already exists",
       "signupFailed": "Failed to create account",
-      "invalidCredentials": "Invalid email or password"
+      "invalidCredentials": "Invalid email or password",
+      "phone": "Phone number is too short"
     }
   },
   "welcome": {
@@ -135,7 +136,6 @@
     "email": "Email",
     "contactInfo": "Personnal Information",
     "graduation": "Graduation",
-    "loadingProfile": "Loading profile...",
     "notProvided": "Not provided",
     "security": "Security",
     "deleteAccount": "Delete Account",

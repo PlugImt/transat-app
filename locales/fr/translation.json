@@ -54,7 +54,8 @@
       "imtOnly": "Seules les adresses email IMT sont autorisées",
       "accountExists": "Un compte avec cet email existe déjà",
       "signupFailed": "Échec de la création du compte",
-      "invalidCredentials": "Email ou mot de passe invalide"
+      "invalidCredentials": "Email ou mot de passe invalide",
+      "phone": "Le numéro de téléphone est trop court"
     }
   },
   "welcome": {
@@ -109,7 +110,6 @@
     "email": "Email",
     "contactInfo": "Informations personnelles",
     "graduation": "Diplôme",
-    "loadingProfile": "Chargement du profil...",
     "notProvided": "Non fourni",
     "security": "Sécurité",
     "deleteAccount": "Supprimer le compte",
@@ -117,7 +117,7 @@
     "personalInfo": "Informations personnelles",
     "firstName": "Prénom",
     "lastName": "Nom",
-    "changePassword": "Changer le mot de passe",
+    "changePassword": "Changer de mot de passe",
     "currentPassword": "Mot de passe actuel",
     "newPassword": "Nouveau mot de passe",
     "confirmPassword": "Confirmer le nouveau mot de passe",

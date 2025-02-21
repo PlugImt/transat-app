@@ -14,7 +14,7 @@ import type React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 import { InfoItem } from './components/InfoItem';
-import ErrorPage from '@/components/custom/Error';
+import ErrorPage from '@/components/custom/ErrorPage';
 
 export const Account = () => {
     const { t } = useTranslation();
@@ -57,7 +57,7 @@ export const Account = () => {
 
     if (isError && error) {
         return (
-            <ErrorPage error={error} refetch={refetch} />
+            <ErrorPage error={error} refetch={refetch} isRefetching={isPending} />
         );
     }
 

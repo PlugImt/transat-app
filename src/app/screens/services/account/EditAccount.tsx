@@ -370,12 +370,12 @@ export const EditProfile = () => {
                 />
                 <Dialog>
                     <DialogContent
+                        title={t('account.changePassword')}
                         className="gap-4"
                         cancelLabel={t('common.cancel')}
                         confirmLabel={t('common.save')}
                         onConfirm={handlePasswordSubmit(handleChangePassword)}
                     >
-                        <Text className="h3">{t('account.changePassword')}</Text>
                         <Input
                             label={t('account.currentPassword')}
                             control={passwordControl}

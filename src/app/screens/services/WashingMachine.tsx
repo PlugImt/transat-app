@@ -1,5 +1,5 @@
-import { AboutModal } from "@/components/common/AboutModal";
 import Page from "@/components/common/Page";
+import { AboutModal } from "@/components/custom/AboutModal";
 import Loading from "@/components/custom/Loading";
 import WashingMachineCard from "@/components/custom/card/WashingMachineCard";
 import { useWashingMachines } from "@/hooks/useWashingMachines";

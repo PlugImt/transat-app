@@ -2,9 +2,10 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar'
 import { Button } from '@/components/common/Button';
 import Page from '@/components/common/Page';
 import { useToast } from '@/components/common/Toast';
+import ErrorPage from '@/components/custom/ErrorPage';
 import Loading from '@/components/custom/Loading';
-import { useAccount } from '@/hooks/useAccount';
-import useAuth from '@/hooks/useAuth';
+import { useAccount } from '@/hooks/account/useAccount';
+import useAuth from '@/hooks/account/useAuth';
 import { QUERY_KEYS } from '@/lib/queryKeys';
 import theme from '@/themes';
 import { useNavigation } from '@react-navigation/native';
@@ -14,7 +15,6 @@ import type React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 import { InfoItem } from './components/InfoItem';
-import ErrorPage from '@/components/custom/ErrorPage';
 
 export const Account = () => {
     const { t } = useTranslation();

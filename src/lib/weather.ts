@@ -1,5 +1,6 @@
 import type { WeatherData } from "@/types/weather";
 import { weatherApiKey } from "./config";
+import { t } from "i18next";
 
 export async function fetchWeather(): Promise<WeatherData> {
   const lat = 47.218371; // Latitude de Nantes
@@ -8,7 +9,7 @@ export async function fetchWeather(): Promise<WeatherData> {
 
   const response = await fetch(url);
   if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
+    throw new Error(t('common.errors.unableToFetch'));
   }
   const data = await response.json();
 

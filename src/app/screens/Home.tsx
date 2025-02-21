@@ -1,10 +1,9 @@
-import { Button } from '@/components/common/Button';
 import Page from '@/components/common/Page';
 import { useToast } from '@/components/common/Toast';
 import { Weather } from '@/components/custom/Weather';
 import RestaurantWidget from '@/components/custom/widget/RestaurantWidget';
 import WashingMachineWidget from '@/components/custom/widget/WashingMachineWidget';
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from '@/hooks/account/useAuth';
 import { QUERY_KEYS } from '@/lib/queryKeys';
 import { storage } from '@/services/storage/asyncStorage';
 import { useIsFetching, useQueryClient } from '@tanstack/react-query';
@@ -14,7 +13,7 @@ import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Platform, Text } from 'react-native';
+import { Platform, Text } from 'react-native';
 
 Notifications.setNotificationHandler({
     handleNotification: async () => ({

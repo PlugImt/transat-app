@@ -1,15 +1,14 @@
 import { AppNavigator } from "@/app/navigation/AppNavigator";
 import { AuthNavigator } from "@/app/navigation/AuthNavigator";
-import { Dialog } from "@/components/common/Dialog";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/hooks/account/useAuth";
 import { storage } from "@/services/storage/asyncStorage";
 import type {
-  AppStackParamList,
-  RootStackParamList,
+    AppStackParamList,
+    RootStackParamList,
 } from "@/services/storage/types";
 import {
-  type StackNavigationProp,
-  createStackNavigator,
+    type StackNavigationProp,
+    createStackNavigator,
 } from "@react-navigation/stack";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, View } from "react-native";

@@ -41,6 +41,7 @@ type DialogContentProps = {
     onCancel?: () => void;
     onConfirm?: () => void;
     title: string;
+    isPending?: boolean;
 };
 function DialogContent({
     className,
@@ -50,6 +51,7 @@ function DialogContent({
     onCancel,
     onConfirm,
     title,
+    isPending,
 }: DialogContentProps) {
     const { open, setOpen } = useDialog();
 
@@ -95,7 +97,7 @@ function DialogContent({
                                     />
                                 )}
                                 {confirmLabel && (
-                                    <Button onPress={handleConfirm} label={confirmLabel} />
+                                    <Button onPress={handleConfirm} label={confirmLabel} loading={isPending} />
                                 )}
                             </View>
                         )}

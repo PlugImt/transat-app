@@ -10,3 +10,10 @@ export interface User {
     total_newf?: number;
     password_updated_date?: string;
 }
+
+export interface Password {
+    email: string;
+    password: string;
+    new_password: string;
+    confirm_password: string;
+}

@@ -1,4 +1,5 @@
 import type { MachineData } from "@/types/washingMachine";
+import { t } from "i18next";
 
 export async function fetchWashingMachines(): Promise<
   MachineData[] | undefined
@@ -18,7 +19,7 @@ export async function fetchWashingMachines(): Promise<
   );
 
   if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
+    throw new Error(t('common.errors.unableToFetch'));
   }
 
   const data = await response.json();

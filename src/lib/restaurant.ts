@@ -1,4 +1,5 @@
 import type { MenuData, MenuItem } from "@/types/restaurant";
+import { t } from "i18next";
 
 const TARGET_URL =
   "https://toast-js.ew.r.appspot.com/coteresto?key=1ohdRUdCYo6e71aLuBh7ZfF2lc_uZqp9D78icU4DPufA";
@@ -28,7 +29,7 @@ export async function getRestaurant(): Promise<MenuData | undefined> {
   try {
     const response = await fetch(TARGET_URL);
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      throw new Error(t('common.errors.unableToFetch'));
     }
     const data = await response.text();
 

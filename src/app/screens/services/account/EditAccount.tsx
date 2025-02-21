@@ -5,35 +5,39 @@ import Dropdown from '@/components/common/Dropdown';
 import { Input } from '@/components/common/Input';
 import Page from '@/components/common/Page';
 import { useToast } from '@/components/common/Toast';
+import ErrorPage from '@/components/custom/ErrorPage';
 import Loading from '@/components/custom/Loading';
-import { storage } from '@/services/storage/asyncStorage';
+import { useAccount } from '@/hooks/account/useAccount';
+import { useChangePassword } from '@/hooks/account/useChangePassword';
+import { useUpdateAccount } from '@/hooks/account/useUpdateAccount';
+import { useUpdateProfilePicture } from '@/hooks/account/useUpdateProfilePicture';
+import { QUERY_KEYS } from '@/lib/queryKeys';
+import theme from '@/themes';
+import type { Password, User } from '@/types/user';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigation } from '@react-navigation/native';
-import axios from 'axios';
-import * as FileSystem from 'expo-file-system';
-import * as ImagePicker from 'expo-image-picker';
+import { useQueryClient } from '@tanstack/react-query';
 import { Edit, GraduationCap, MapPin } from 'lucide-react-native';
 import type React from 'react';
-import { useCallback, useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Keyboard, Text, TouchableOpacity, View } from 'react-native';
 import { z } from 'zod';
-
-type UserData = {
-    first_name: string;
-    last_name: string;
-    campus: string;
-    phone_number: string;
-    email: string;
-    graduation_year: number;
-    profile_picture?: string;
-};
 
 export const EditProfile = () => {
     const { t } = useTranslation();
     const navigation = useNavigation();
     const { toast } = useToast();
+    const queryClient = useQueryClient();
+    const { data: user, isPending, isError, error } = useAccount();
+    const { mutate: updateAccount, isPending: isUpdatingAccount } = useUpdateAccount();
+    const { mutate: updateProfilePicture, isPending: isUpdatingProfilePicture } =
+        useUpdateProfilePicture();
+    const { mutate: changePassword, isPending: isUpdatingPassword } = useChangePassword();
+
+    const refetch = async () => {
+        await queryClient.invalidateQueries({ queryKey: QUERY_KEYS.user });
+    };
 
     const userSchema = z.object({
         first_name: z.string().nonempty(t('auth.errors.firstName')),
@@ -50,32 +54,14 @@ export const EditProfile = () => {
 
     const passwordSchema = z
         .object({
-            current_password: z.string().min(6, t('auth.errors.password')),
+            password: z.string().min(6, t('auth.errors.password')),
             new_password: z.string().min(6, t('auth.errors.password')),
-            new_password_confirmation: z.string().min(6, t('auth.errors.password')),
+            confirm_password: z.string().min(6, t('auth.errors.password')),
         })
-        .refine((data) => data.new_password === data.new_password_confirmation, {
+        .refine((data) => data.new_password === data.confirm_password, {
             message: t('account.passwordMismatch'),
             path: ['new_password_confirmation'],
         });
-
-    const [formState, setFormState] = useState<UserData>({
-        first_name: '',
-        last_name: '',
-        campus: '',
-        phone_number: '',
-        email: '',
-        graduation_year: 0,
-    });
-
-    const [user, setUser] = useState<UserData>({
-        first_name: '',
-        last_name: '',
-        campus: '',
-        phone_number: '',
-        email: '',
-        graduation_year: 0,
-    });
 
     const {
         control: userControl,
@@ -83,7 +69,7 @@ export const EditProfile = () => {
         formState: { errors: userErrors },
     } = useForm({
         resolver: zodResolver(userSchema),
-        defaultValues: formState,
+        defaultValues: user,
         mode: 'onChange',
     });
 
@@ -91,188 +77,89 @@ export const EditProfile = () => {
         control: passwordControl,
         handleSubmit: handlePasswordSubmit,
         formState: { errors: passwordErrors },
+        reset: resetPassword,
     } = useForm({
         resolver: zodResolver(passwordSchema),
         mode: 'onChange',
+        defaultValues: {
+            email: user?.email || '',
+            password: '',
+            new_password: '',
+            confirm_password: '',
+        }
     });
-
-    const [isLoading, setIsLoading] = useState(true);
-    const [isSaving, setIsSaving] = useState(false);
-
-    const [currentPassword, setCurrentPassword] = useState('');
-    const [newPassword, setNewPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
 
     const campusOptions = ['NANTES', 'BREST', 'RENNES'];
     const currentYear = new Date().getFullYear();
     const yearOptions = Array.from({ length: 6 }, (_, i) => (currentYear + i).toString());
 
-    const fetchUserData = useCallback(async () => {
-        try {
-            const userData = await storage.get('newf');
-            if (userData) {
-                const typedUserData = userData as UserData;
-                setUser(typedUserData);
-                setFormState(typedUserData);
-            }
-        } catch (error) {
-            console.error('Error fetching user data:', error);
-        } finally {
-            setIsLoading(false);
-        }
-    }, []);
-
-    useEffect(() => {
-        fetchUserData().then((r) => r);
-    }, [fetchUserData]);
-
-    const handleUpdateProfile = async (data: UserData) => {
-        console.log('formState:', data);
-        try {
-            Keyboard.dismiss();
-            setIsSaving(true);
-            const token = await storage.get('token');
-
-            if (!token) {
-                toast(t('account.noToken'), 'destructive');
-                return;
-            }
-
-            const response = await axios.patch(
-                'https://transat.destimt.fr/api/newf/me',
-                {
-                    first_name: data.first_name,
-                    last_name: data.last_name,
-                    campus: data.campus,
-                    phone_number: data.phone_number,
-                    graduation_year: data.graduation_year,
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
-
-            if (response.status === 200) {
-                const updatedUser = { ...user, ...formState };
-                await storage.set('newf', updatedUser);
-                setUser(updatedUser);
+    const handleUpdateAccount = (data: User) => {
+        Keyboard.dismiss();
+        updateAccount(data, {
+            onSuccess: () => {
                 toast(t('account.profileUpdated'), 'success');
                 navigation.goBack();
-            }
-        } catch (error) {
-            console.error('Error updating profile:', error);
-            toast(t('account.updateFailed'), 'destructive');
-        } finally {
-            setIsSaving(false);
-        }
+            },
+            onError: (error) => {
+                console.error('Error updating profile:', error);
+                toast(t('account.updateFailed'), 'destructive');
+            },
+        });
     };
 
-    const handleChangePassword = async () => {
-        try {
-            Keyboard.dismiss();
+    const handleChangePassword = (data: Password) => {
+        Keyboard.dismiss();
 
-            setIsSaving(true);
-
-            const response = await axios.post(
-                'https://transat.destimt.fr/api/auth/change-password',
-                {
-                    email: user.email,
-                    password: currentPassword,
-                    new_password: newPassword,
-                    new_password_confirmation: confirmPassword,
-                }
-            );
-
-            if (response.status === 200) {
-                toast(t('account.passwordChanged'), 'success');
-                setCurrentPassword('');
-                setNewPassword('');
-                setConfirmPassword('');
-            }
-        } catch (error) {
-            console.error('Error changing password:', error);
-            toast(t('account.passwordChangeFailed'), 'destructive');
-        } finally {
-            setIsSaving(false);
-        }
-    };
-
-    const handleUpdateProfilePicture = async () => {
-        try {
-            // Request media library permissions
-            const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-            if (status !== 'granted') {
-                toast(t('account.permissionDenied'), 'destructive');
-                return;
-            }
-
-            const result = await ImagePicker.launchImageLibraryAsync({
-                mediaTypes: ImagePicker.MediaTypeOptions.Images,
-                allowsEditing: true,
-                aspect: [1, 1],
-                quality: 1,
-                base64: true,
-            });
-
-            if (result.canceled || !result.assets[0].uri) return;
-
-            const image = result.assets[0];
-            const base64 = await FileSystem.readAsStringAsync(image.uri, {
-                encoding: FileSystem.EncodingType.Base64,
-            });
-
-            const formData = new FormData();
-            formData.append('key', '08a0689ec289e5488db04a7da79d5dff');
-            formData.append('image', base64);
-
-            const uploadResponse = await axios.post('https://api.imgbb.com/1/upload', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
+        changePassword(
+            {
+                email: user?.email || '',
+                password: data.password,
+                new_password: data.new_password,
+                confirm_password: data.confirm_password,
+            },
+            {
+                onSuccess: () => {
+                    resetPassword();
+                    toast(t('account.passwordChanged'), 'success');
+                    navigation.goBack();
                 },
-            });
-
-            if (!uploadResponse.data.success) {
-                throw new Error('Image upload failed');
+                onError: (error) => {
+                    resetPassword();
+                    console.error('Error changing password:', error);
+                    toast(t('account.passwordChangeFailed'), 'destructive');
+                },
             }
-
-            const imageUrl = uploadResponse.data.data.url;
-
-            const token = await storage.get('token');
-            if (!token) {
-                toast(t('account.noToken'), 'destructive');
-                return;
-            }
-
-            const patchResponse = await axios.patch(
-                'https://transat.destimt.fr/api/newf/me',
-                { profile_picture: imageUrl },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
-
-            if (patchResponse.status === 200) {
-                const updatedUser = { ...user, profile_picture: imageUrl };
-                await storage.set('newf', updatedUser);
-                setUser(updatedUser);
-                toast(t('account.profilePictureUpdated'), 'success');
-            }
-        } catch (error) {
-            console.error('Error updating profile picture:', error);
-            toast(t('account.profilePictureUpdateFailed'), 'destructive');
-        }
+        );
     };
 
-    if (isLoading) {
+    const handleUpdateProfilePicture = () => {
+        updateProfilePicture(undefined, {
+            onSuccess: () => {
+                toast(t('account.profilePictureUpdated'), 'success');
+            },
+            onError: (error) => {
+                console.error('Error updating profile picture:', error);
+                toast(t('account.profilePictureUpdateFailed'), 'destructive');
+            },
+        });
+    };
+
+    if (isPending) {
         return <Loading />;
     }
 
+    if ((isError && error) || !user) {
+        return (
+            <ErrorPage
+                error={error || ({ message: t('common.errors.unableToFetch') } as Error)}
+                refetch={refetch}
+                isRefetching={isPending}
+            />
+        );
+    }
+
     return (
-        <Page className="gap-8">
+        <Page className="gap-8" refreshing={isPending} onRefresh={refetch}>
             <View className="flex-row items-center justify-between m-4">
                 <Text className="h1">{t('account.editProfile')}</Text>
                 <Button
@@ -346,27 +233,34 @@ export const EditProfile = () => {
                     keyboardType="phone-pad"
                 />
 
-                <Dropdown
-                    label={t('account.campus')}
-                    placeholder={t('account.selectCampus')}
-                    icon={<MapPin color="#ffe6cc" size={20} />}
-                    options={campusOptions}
-                    value={formState?.campus}
-                    onValueChange={(campus) => setFormState({ ...formState, campus })}
+                <Controller
+                    control={userControl}
+                    name="campus"
+                    render={({ field: { onChange, value } }) => (
+                        <Dropdown
+                            label={t('account.campus')}
+                            placeholder={t('account.selectCampus')}
+                            icon={<MapPin color={theme.textPrimary} size={20} />}
+                            options={campusOptions}
+                            value={value}
+                            onValueChange={onChange}
+                        />
+                    )}
                 />
 
-                <Dropdown
-                    label={t('account.graduationYear')}
-                    placeholder={t('account.selectGraduationYear')}
-                    icon={<GraduationCap color="#ffe6cc" size={20} />}
-                    options={yearOptions}
-                    value={formState?.graduation_year?.toString()}
-                    onValueChange={(year) =>
-                        setFormState({
-                            ...formState,
-                            graduation_year: Number.parseInt(year),
-                        })
-                    }
+                <Controller
+                    control={userControl}
+                    name="graduation_year"
+                    render={({ field: { onChange, value } }) => (
+                        <Dropdown
+                            label={t('account.graduationYear')}
+                            placeholder={t('account.selectGraduationYear')}
+                            icon={<GraduationCap color={theme.textPrimary} size={20} />}
+                            options={yearOptions}
+                            value={value}
+                            onValueChange={onChange}
+                        />
+                    )}
                 />
                 <Dialog>
                     <DialogContent
@@ -375,13 +269,14 @@ export const EditProfile = () => {
                         cancelLabel={t('common.cancel')}
                         confirmLabel={t('common.save')}
                         onConfirm={handlePasswordSubmit(handleChangePassword)}
+                        isPending={isUpdatingPassword}
                     >
                         <Input
                             label={t('account.currentPassword')}
                             control={passwordControl}
                             name="password"
                             textContentType="password"
-                            error={passwordErrors.current_password?.message?.toString()}
+                            error={passwordErrors.password?.message?.toString()}
                             secureTextEntry
                         />
 
@@ -399,7 +294,7 @@ export const EditProfile = () => {
                             control={passwordControl}
                             name="new_password_confirmation"
                             textContentType="newPassword"
-                            error={passwordErrors.new_password_confirmation?.message?.toString()}
+                            error={passwordErrors.confirm_password?.message?.toString()}
                             secureTextEntry
                         />
                     </DialogContent>
@@ -414,8 +309,8 @@ export const EditProfile = () => {
 
             <Button
                 label={t('common.save')}
-                onPress={handleUserSubmit(handleUpdateProfile)}
-                loading={isSaving}
+                onPress={handleUserSubmit(handleUpdateAccount)}
+                loading={isUpdatingAccount}
             />
         </Page>
     );

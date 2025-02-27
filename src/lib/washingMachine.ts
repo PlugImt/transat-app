@@ -19,7 +19,7 @@ export async function fetchWashingMachines(): Promise<
   );
 
   if (!response.ok) {
-    throw new Error(t('common.errors.unableToFetch'));
+    throw new Error(t("common.errors.unableToFetch"));
   }
 
   const data = await response.json();

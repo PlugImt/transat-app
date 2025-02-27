@@ -34,7 +34,9 @@ const Input = forwardRef(
   ) => (
     <View className={cn("gap-1.5", className)}>
       {label && (
-        <Text className={cn("text-sm text-foreground/70", labelClasses)}>{label}</Text>
+        <Text className={cn("text-sm text-foreground/70", labelClasses)}>
+          {label}
+        </Text>
       )}
 
       <Controller

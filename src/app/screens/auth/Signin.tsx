@@ -19,7 +19,8 @@ export const Signin = () => {
   const { toast } = useToast();
 
   const [loginError, setLoginError] = useState<string | null>(null);
-  const [verificationModalVisible, setVerificationModalVisible] =useState(false);
+  const [verificationModalVisible, setVerificationModalVisible] =
+    useState(false);
   const [verificationEmail, setVerificationEmail] = useState<string>("");
 
   const passwordRef = useRef<TextInput>(null);
@@ -67,7 +68,7 @@ export const Signin = () => {
         setVerificationEmail(data.email);
         setVerificationModalVisible(true);
       } else if (result?.success) {
-        toast(t('auth.signInSuccess'), 'success');
+        toast(t("auth.signInSuccess"), "success");
       }
     } catch (err) {
       // @ts-ignore
@@ -79,7 +80,7 @@ export const Signin = () => {
     try {
       await saveToken(token);
       setVerificationModalVisible(false);
-      toast(t('auth.signInSuccess'), 'success');
+      toast(t("auth.signInSuccess"), "success");
     } catch (err) {
       setLoginError(t("auth.errors.tokenSaveFailed"));
     }

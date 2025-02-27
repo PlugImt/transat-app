@@ -29,7 +29,7 @@ export async function getRestaurant(): Promise<MenuData | undefined> {
   try {
     const response = await fetch(TARGET_URL);
     if (!response.ok) {
-      throw new Error(t('common.errors.unableToFetch'));
+      throw new Error(t("common.errors.unableToFetch"));
     }
     const data = await response.text();
 

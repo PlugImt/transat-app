@@ -91,7 +91,7 @@ export const Signup = () => {
     try {
       await saveToken(token);
       setVerificationModalVisible(false);
-      toast(t('common.verificationSuccess'), 'success');
+      toast(t("common.verificationSuccess"), "success");
     } catch (err) {
       setSignupError(t("auth.errors.tokenSaveFailed"));
     }

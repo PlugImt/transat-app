@@ -5,7 +5,7 @@ import WashingMachineCard from "@/components/custom/card/WashingMachineCard";
 import { useWashingMachines } from "@/hooks/useWashingMachines";
 import React, { type FC, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, View } from "react-native";
 
 export const WashingMachine: FC = () => {
   const { t } = useTranslation();
@@ -58,7 +58,19 @@ export const WashingMachine: FC = () => {
       className="flex-col gap-6"
       goBack
     >
-      <Text className="h1">{t("services.washing_machine.title")}</Text>
+      <View className="flex-row gap-2 justify-between items-center">
+        <Text className="h1">{t("services.washing_machine.title")}</Text>
+        <AboutModal
+          isVisible={aboutPopupVisible}
+          onClose={() => setAboutPopupVisible(false)}
+          title={t("services.washing_machine.title")}
+          description={t("services.washing_machine.about")}
+          openingHours={openingHoursData}
+          location={t("services.washing_machine.location")}
+          price={t("services.washing_machine.price")}
+          additionalInfo={t("services.washing_machine.additional_info")}
+        />
+      </View>
 
       {washingMachines?.length > 0 && (
         <View className="flex-col gap-4">
@@ -93,23 +105,6 @@ export const WashingMachine: FC = () => {
           ))}
         </View>
       )}
-
-      <TouchableOpacity onPress={() => setAboutPopupVisible(true)}>
-        <Text className="text-center text-sm text-gray-500 mt-4">
-          {t("common.info")}
-        </Text>
-      </TouchableOpacity>
-
-      <AboutModal
-        isVisible={aboutPopupVisible}
-        onClose={() => setAboutPopupVisible(false)}
-        title={t("services.washing_machine.title")}
-        description={t("services.washing_machine.about")}
-        openingHours={openingHoursData}
-        location={t("services.washing_machine.location")}
-        price={t("services.washing_machine.price")}
-        additionalInfo={t("services.washing_machine.additional_info")}
-      />
     </Page>
   );
 };

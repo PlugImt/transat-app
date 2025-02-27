@@ -1,15 +1,8 @@
 import theme from "@/themes";
-import {
-  Clock,
-  EuroIcon,
-  Info,
-  InfoIcon,
-  MapPin,
-  Plus,
-} from "lucide-react-native";
+import { Clock, EuroIcon, Info, MapPin, Plus } from "lucide-react-native";
 import type React from "react";
 import { useTranslation } from "react-i18next";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, View } from "react-native";
 import { IconButton } from "../common/Button";
 import { Dialog, DialogContent, DialogTrigger } from "../common/Dialog";
 
@@ -41,7 +34,7 @@ export const AboutModal: React.FC<AboutModalProps> = ({
   return (
     <Dialog>
       <DialogTrigger>
-        <IconButton icon={<InfoIcon />} variant="link" />
+        <IconButton icon={<Info color={theme.muted} />} variant="link" />
       </DialogTrigger>
       <DialogContent
         title={title}

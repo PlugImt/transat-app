@@ -1,15 +1,14 @@
-import { Dialog } from "@/components/common/Dialog";
 import Page from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
-import ErrorPage from "@/components/custom/ErrorPage";
 import Loading from "@/components/custom/Loading";
+import NotificationBell from "@/components/custom/NotificationBell";
 import RestaurantCard from "@/components/custom/card/RestaurantCard";
 import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
 import { outOfService } from "@/lib/utils";
 import { isWeekend } from "date-fns";
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Image, Text, View } from "react-native";
 
 export const Restaurant = () => {
   const { t } = useTranslation();
@@ -43,12 +42,12 @@ export const Restaurant = () => {
     {
       day: t("common.days.friday"),
       lunch: "11h30-13h30",
-      dinner: t("common.closed"),
+      dinner: t("services.restaurant.closed"),
     },
     {
       day: t("common.days.weekend"),
-      lunch: t("common.closed"),
-      dinner: t("common.closed"),
+      lunch: t("services.restaurant.closed"),
+      dinner: t("services.restaurant.closed"),
     },
   ];
 
@@ -70,7 +69,10 @@ export const Restaurant = () => {
   if (weekend) {
     return (
       <Page refreshing={isPending} onRefresh={refetch} goBack>
-        <Text className="h1 m-4">{t("services.restaurant.title")}</Text>
+        <View className="flex flex-row items-center gap-2">
+          <Text className="h1 m-4">{t("services.restaurant.title")}</Text>
+          <NotificationBell service={"RESTAURANT"} />
+        </View>
         <View className="min-h-full flex justify-center items-center gap-4">
           <Image
             source={require("@/assets/images/Logos/restaurant.png")}
@@ -89,7 +91,10 @@ export const Restaurant = () => {
   if (outOfHours) {
     return (
       <Page refreshing={isPending} onRefresh={refetch} goBack>
-        <Text className="h1 m-4">{t("services.restaurant.title")}</Text>
+        <View className="flex flex-row items-center gap-2">
+          <Text className="h1 m-4">{t("services.restaurant.title")}</Text>
+          <NotificationBell service={"RESTAURANT"} />
+        </View>
         <View className="min-h-full flex justify-center items-center gap-4">
           <Image
             source={require("@/assets/images/Logos/restaurant.png")}
@@ -108,16 +113,28 @@ export const Restaurant = () => {
     );
   }
 
-  if (isError && error) {
+  if (isError) {
     return (
-      <ErrorPage error={error} refetch={refetch} isRefetching={isPending} />
+      <Page refreshing={isPending} onRefresh={refetch}>
+        <View className="flex flex-row items-center gap-2">
+          <Text className="h1 m-4">{t("services.restaurant.title")}</Text>
+          <NotificationBell service={"RESTAURANT"} />
+        </View>
+        <View className="min-h-screen flex justify-center items-center ">
+          <Text className="text-red-500 text-center h1">{error?.message}</Text>
+        </View>
+      </Page>
     );
   }
 
   return (
     <Page refreshing={isPending} onRefresh={refetch} goBack>
       <View className="flex-row gap-2 justify-between items-center">
-        <Text className="h1 m-4">{t("services.restaurant.title")}</Text>
+        <View className="flex flex-row items-center gap-2">
+          <Text className="h1 m-4">{t("services.restaurant.title")}</Text>
+          <NotificationBell service={"RESTAURANT"} />
+        </View>
+
         <AboutModal
           title={t("services.restaurant.title")}
           description={t("services.restaurant.about")}

@@ -61,6 +61,7 @@ export const WashingMachine: FC = () => {
       <View className="flex-row gap-2 justify-between items-center">
         <Text className="h1">{t("services.washing_machine.title")}</Text>
         <AboutModal
+          // @ts-ignore
           isVisible={aboutPopupVisible}
           onClose={() => setAboutPopupVisible(false)}
           title={t("services.washing_machine.title")}

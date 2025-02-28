@@ -1,14 +1,56 @@
 import { Home } from "@/app/screens/Home";
+import { Clubs } from "@/app/screens/services/Clubs";
 import Games from "@/app/screens/services/Games";
+import { Restaurant } from "@/app/screens/services/Restaurant";
 import { Services } from "@/app/screens/services/Services";
+import { Traq } from "@/app/screens/services/Traq";
+import { WashingMachine } from "@/app/screens/services/WashingMachine";
 import Account from "@/app/screens/services/account/Account";
+import EditProfile from "@/app/screens/services/account/EditAccount";
 import type { BottomTabParamList } from "@/types/navigation";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
 import { GridIcon, LucideHome, Play, User } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
+
+// Create stack navigators for each tab
+const HomeStack = createStackNavigator();
+const HomeStackScreen = () => (
+  <HomeStack.Navigator screenOptions={{ headerShown: false }}>
+    <HomeStack.Screen name="HomeScreen" component={Home} />
+    <ServicesStack.Screen name="WashingMachine" component={WashingMachine} />
+    <ServicesStack.Screen name="Restaurant" component={Restaurant} />
+  </HomeStack.Navigator>
+);
+
+const ServicesStack = createStackNavigator();
+const ServicesStackScreen = () => (
+  <ServicesStack.Navigator screenOptions={{ headerShown: false }}>
+    <ServicesStack.Screen name="ServicesScreen" component={Services} />
+    <ServicesStack.Screen name="WashingMachine" component={WashingMachine} />
+    <ServicesStack.Screen name="Restaurant" component={Restaurant} />
+    <ServicesStack.Screen name="Clubs" component={Clubs} />
+    <ServicesStack.Screen name="Traq" component={Traq} />
+  </ServicesStack.Navigator>
+);
+
+const GamesStack = createStackNavigator();
+const GamesStackScreen = () => (
+  <GamesStack.Navigator screenOptions={{ headerShown: false }}>
+    <GamesStack.Screen name="GamesScreen" component={Games} />
+  </GamesStack.Navigator>
+);
+
+const AccountStack = createStackNavigator();
+const AccountStackScreen = () => (
+  <AccountStack.Navigator screenOptions={{ headerShown: false }}>
+    <AccountStack.Screen name="AccountScreen" component={Account} />
+    <AccountStack.Screen name="EditProfile" component={EditProfile} />
+  </AccountStack.Navigator>
+);
 
 export const BottomTabNavigator = () => {
   const { t } = useTranslation();
@@ -24,7 +66,7 @@ export const BottomTabNavigator = () => {
     >
       <Tab.Screen
         name="Home"
-        component={Home}
+        component={HomeStackScreen}
         options={{
           tabBarLabel: t("common.home"),
           tabBarIcon: ({ color, size }) => (
@@ -34,7 +76,7 @@ export const BottomTabNavigator = () => {
       />
       <Tab.Screen
         name="Services"
-        component={Services}
+        component={ServicesStackScreen}
         options={{
           tabBarLabel: t("services.services"),
           tabBarIcon: ({ color, size }) => (
@@ -44,7 +86,7 @@ export const BottomTabNavigator = () => {
       />
       <Tab.Screen
         name="Games"
-        component={Games}
+        component={GamesStackScreen}
         options={{
           tabBarLabel: t("services.games"),
           tabBarIcon: ({ color, size }) => <Play size={size} color={color} />,
@@ -52,7 +94,7 @@ export const BottomTabNavigator = () => {
       />
       <Tab.Screen
         name="Account"
-        component={Account}
+        component={AccountStackScreen}
         options={{
           tabBarLabel: t("common.account"),
           tabBarIcon: ({ color, size }) => <User size={size} color={color} />,

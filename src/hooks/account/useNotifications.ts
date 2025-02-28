@@ -39,10 +39,6 @@ export const useNotifications = () => {
     }
 
     if (notifications[service] !== undefined) {
-      console.log(
-        `${service} notifications already set: `,
-        notifications[service],
-      );
       return notifications[service];
     }
 

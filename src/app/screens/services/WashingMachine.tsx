@@ -21,7 +21,7 @@ export const WashingMachine: FC = () => {
 
   if (isError) {
     return (
-      <Page refreshing={isPending} onRefresh={refetch} goBack>
+      <Page refreshing={isPending} onRefresh={refetch}>
         <Text className="h1 m-4">{t("services.washing_machine.title")}</Text>
         <View className="min-h-screen flex justify-center items-center">
           <Text className="text-red-500 text-center h1">{error?.message}</Text>
@@ -32,7 +32,7 @@ export const WashingMachine: FC = () => {
 
   if (!data || data.length === 0) {
     return (
-      <Page refreshing={isPending} onRefresh={refetch} goBack>
+      <Page refreshing={isPending} onRefresh={refetch}>
         <Text className="h1 m-4">{t("services.washing_machine.title")}</Text>
         <View className="min-h-screen flex justify-center items-center ">
           <Text className="text-foreground text-center h1">
@@ -56,7 +56,6 @@ export const WashingMachine: FC = () => {
       onRefresh={refetch}
       refreshing={isFetching}
       className="flex-col gap-6"
-      goBack
     >
       <View className="flex-row gap-2 justify-between items-center">
         <Text className="h1">{t("services.washing_machine.title")}</Text>

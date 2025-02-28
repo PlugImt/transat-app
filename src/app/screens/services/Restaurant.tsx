@@ -86,7 +86,7 @@ export const Restaurant = () => {
 
   if (weekend) {
     return (
-      <Page refreshing={isPending} onRefresh={refetch} goBack>
+      <Page refreshing={isPending} onRefresh={refetch}>
         {header}
 
         <View className="min-h-full flex justify-center items-center gap-4">
@@ -106,7 +106,7 @@ export const Restaurant = () => {
 
   if (outOfHours) {
     return (
-      <Page refreshing={isPending} onRefresh={refetch} goBack>
+      <Page refreshing={isPending} onRefresh={refetch}>
         {header}
 
         <View className="min-h-full flex justify-center items-center gap-4">
@@ -140,7 +140,7 @@ export const Restaurant = () => {
   }
 
   return (
-    <Page refreshing={isPending} onRefresh={refetch} goBack>
+    <Page refreshing={isPending} onRefresh={refetch}>
       {header}
 
       <View className="flex flex-col gap-8">
@@ -169,7 +169,8 @@ export const Restaurant = () => {
           />
         </View>
 
-        {menu?.grilladesSoir.length && menu?.accompSoir.length && (
+        {(menu?.grilladesSoir?.length ?? 0) > 0 &&
+        (menu?.accompSoir?.length ?? 0) > 0 ? (
           <View className="flex flex-col gap-4">
             <Text className="h3 ml-4">{t("services.restaurant.dinner")}</Text>
 
@@ -185,7 +186,7 @@ export const Restaurant = () => {
               icon={"Soup"}
             />
           </View>
-        )}
+        ) : null}
       </View>
     </Page>
   );

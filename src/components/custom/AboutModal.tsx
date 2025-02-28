@@ -9,10 +9,10 @@ import { Dialog, DialogContent, DialogTrigger } from "../common/Dialog";
 interface AboutModalProps {
   title: string;
   description: string;
-  openingHours: OpeningHours[];
-  location: string;
-  price: string;
-  additionalInfo: string;
+  openingHours?: OpeningHours[] | string;
+  location?: string;
+  price?: string;
+  additionalInfo?: string;
 }
 
 interface OpeningHours {
@@ -43,59 +43,74 @@ export const AboutModal: React.FC<AboutModalProps> = ({
       >
         <Text className="text-foreground">{description}</Text>
 
-        <View className="gap-2">
-          <View className="flex-row items-center gap-2">
-            <Clock size={20} color={theme.primary} />
-            <Text className="text-foreground font-bold">
-              {t("services.opening_hours")}
-            </Text>
-          </View>
-
-          {openingHours.map((item) => (
-            <View key={item.day} className="flex-row justify-between w-full">
-              <Text className="text-foreground w-1/3">{item.day}</Text>
-              <Text className="text-foreground w-1/3 text-right">
-                {item.lunch}
-              </Text>
-              <Text className="text-foreground w-1/3 text-right">
-                {item.dinner}
+        {openingHours && (
+          <View className="gap-2">
+            <View className="flex-row items-center gap-2">
+              <Clock size={20} color={theme.primary} />
+              <Text className="text-foreground font-bold">
+                {t("services.opening_hours")}
               </Text>
             </View>
-          ))}
-        </View>
 
-        <View className="gap-2">
-          <View className="flex-row items-center gap-2">
-            <MapPin size={20} color={theme.primary} />
-            <Text className="text-foreground font-bold">
-              {t("services.location")}
-            </Text>
+            {typeof openingHours === "string" ? (
+              <Text className="text-foreground">{openingHours}</Text>
+            ) : (
+              openingHours.map((item) => (
+                <View
+                  key={item.day}
+                  className="flex-row justify-between w-full"
+                >
+                  <Text className="text-foreground w-1/3">{item.day}</Text>
+                  <Text className="text-foreground w-1/3 text-right">
+                    {item.lunch}
+                  </Text>
+                  <Text className="text-foreground w-1/3 text-right">
+                    {item.dinner}
+                  </Text>
+                </View>
+              ))
+            )}
           </View>
+        )}
 
-          <Text className="text-foreground">{location}</Text>
-        </View>
+        {location && (
+          <View className="gap-2">
+            <View className="flex-row items-center gap-2">
+              <MapPin size={20} color={theme.primary} />
+              <Text className="text-foreground font-bold">
+                {t("services.location")}
+              </Text>
+            </View>
 
-        <View className="gap-2">
-          <View className="flex-row items-center gap-2">
-            <EuroIcon size={20} color={theme.primary} />
-            <Text className="text-foreground font-bold">
-              {t("services.price")}
-            </Text>
+            <Text className="text-foreground">{location}</Text>
           </View>
+        )}
 
-          <Text className="text-foreground">{price}</Text>
-        </View>
+        {price && (
+          <View className="gap-2">
+            <View className="flex-row items-center gap-2">
+              <EuroIcon size={20} color={theme.primary} />
+              <Text className="text-foreground font-bold">
+                {t("services.price")}
+              </Text>
+            </View>
 
-        <View className="gap-2">
-          <View className="flex-row items-center gap-2">
-            <Plus size={20} color={theme.primary} />
-            <Text className="text-foreground font-bold">
-              {t("services.additional_info")}
-            </Text>
+            <Text className="text-foreground">{price}</Text>
           </View>
+        )}
 
-          <Text className="text-foreground">{additionalInfo}</Text>
-        </View>
+        {additionalInfo && (
+          <View className="gap-2">
+            <View className="flex-row items-center gap-2">
+              <Plus size={20} color={theme.primary} />
+              <Text className="text-foreground font-bold">
+                {t("services.additional_info")}
+              </Text>
+            </View>
+
+            <Text className="text-foreground">{additionalInfo}</Text>
+          </View>
+        )}
       </DialogContent>
     </Dialog>
   );

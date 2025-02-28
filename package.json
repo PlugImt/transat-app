@@ -68,7 +68,7 @@
     "react-native-svg": "^15.11.1",
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.5",
-    "styled-components": "^6.1.14",
+    "styled-components": "^6.1.15",
     "tailwind-merge": "^3.0.1",
     "zod": "^3.24.1"
   },

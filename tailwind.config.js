@@ -45,6 +45,10 @@ module.exports = {
           DEFAULT: "#181010",
           foreground: "#ffe6cc",
         },
+        lightCard: {
+          DEFAULT: "#1e1515",
+          foreground: "#ffe6cc",
+        },
       },
       borderRadius: {
         sm: "4px",

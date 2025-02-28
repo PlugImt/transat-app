@@ -1,18 +1,20 @@
 import { RootNavigator } from "@/app/navigation/RootNavigator";
 import "../i18n";
 import "./global.css";
-import { Dialog } from "@/components/common/Dialog";
 import { ToastProvider } from "@/components/common/Toast";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
-import {
-  QueryClient,
-  QueryClientProvider,
-  focusManager,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import * as Clipboard from "expo-clipboard";
-import { StyleSheet } from "react-native";
+import * as Notifications from "expo-notifications";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { DevToolsBubble } from "react-native-react-query-devtools";
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+  }),
+});
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -27,15 +29,14 @@ export default function App() {
   };
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ToastProvider position="top">
-        <GestureHandlerRootView>
-          <BottomSheetModalProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <QueryClientProvider client={queryClient}>
+        <BottomSheetModalProvider>
+          <ToastProvider position="top">
             <RootNavigator />
-            {/* <DevToolsBubble onCopy={onCopy} /> */}
-          </BottomSheetModalProvider>
-        </GestureHandlerRootView>
-      </ToastProvider>
-    </QueryClientProvider>
+          </ToastProvider>
+        </BottomSheetModalProvider>
+      </QueryClientProvider>
+    </GestureHandlerRootView>
   );
 }

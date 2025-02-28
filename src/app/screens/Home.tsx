@@ -6,22 +6,19 @@ import WashingMachineWidget from "@/components/custom/widget/WashingMachineWidge
 import { useAccount } from "@/hooks/account/useAccount";
 import { QUERY_KEYS } from "@/lib/queryKeys";
 import { storage } from "@/services/storage/asyncStorage";
+import type { AppStackParamList } from "@/services/storage/types";
+import { useNavigation } from "@react-navigation/native";
+import type { StackNavigationProp } from "@react-navigation/stack";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import Constants from "expo-constants";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Platform, Text } from "react-native";
 
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: true,
-  }),
-});
+type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
 function handleRegistrationError(errorMessage: string) {
   if (Platform.OS === "web") {
@@ -33,7 +30,7 @@ function handleRegistrationError(errorMessage: string) {
 
 async function registerForPushNotificationsAsync() {
   if (Platform.OS === "android") {
-    Notifications.setNotificationChannelAsync("default", {
+    await Notifications.setNotificationChannelAsync("default", {
       name: "default",
       importance: Notifications.AndroidImportance.MAX,
       vibrationPattern: [0, 250, 250, 250],
@@ -83,13 +80,12 @@ export const Home = () => {
   const { toast } = useToast();
 
   const [expoPushToken, setExpoPushToken] = useState("");
-  const [notification, setNotification] = useState<
-    Notifications.Notification | undefined
-  >(undefined);
-  const notificationListener = useRef<Notifications.EventSubscription>();
-  const responseListener = useRef<Notifications.EventSubscription>();
+  const [notificationOpened, setNotificationOpened] = useState(false);
+  // biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
+  const [notificationData, setNotificationData] = useState<any>(null);
+  const navigation = useNavigation<AppScreenNavigationProp>();
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // Register for push notifications and send token to backend
   useEffect(() => {
     registerForPushNotificationsAsync()
       .then(async (token) => {
@@ -123,26 +119,29 @@ export const Home = () => {
         console.error("Error retrieving token:", error);
         setExpoPushToken(`${error}`);
       });
+  }, [t, toast]);
 
-    notificationListener.current =
-      Notifications.addNotificationReceivedListener((notification) => {
-        setNotification(notification);
-      });
+  // Check if app was opened from a notification when component mounts
+  useEffect(() => {
+    const checkInitialNotification = async () => {
+      const lastNotificationResponse =
+        await Notifications.getLastNotificationResponseAsync();
 
-    responseListener.current =
-      Notifications.addNotificationResponseReceivedListener((response) => {
-        console.log(response);
-      });
-
-    return () => {
-      notificationListener.current &&
-        Notifications.removeNotificationSubscription(
-          notificationListener.current,
+      if (lastNotificationResponse) {
+        setNotificationOpened(true);
+        setNotificationData(
+          lastNotificationResponse.notification.request.content,
         );
-      responseListener.current &&
-        Notifications.removeNotificationSubscription(responseListener.current);
+
+        const screen =
+          lastNotificationResponse.notification.request.content.data.screen;
+        if (screen) {
+          navigation.navigate(screen);
+        }
+      }
     };
-  }, []);
+    checkInitialNotification();
+  }, [navigation.navigate]);
 
   const queryClient = useQueryClient();
   const isMenuFetching =

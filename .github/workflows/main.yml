@@ -6,43 +6,43 @@ on:
       - master
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    name: 🤖 Android APK Builder
-
-    steps:
-    - name: 📂 Checkout repository
-      uses: actions/checkout@v2
-
-    - name: 🏗 Setup JDK 21
-      uses: actions/setup-java@v4.7.0
-      with:
-        java-version: '21'
-        distribution: 'adopt'
-
-    - name: 🏗 Setup Node
-      uses: actions/setup-node@v4.2.0
-      with:
-        node-version: '23'
-
-    - name: 📦 Install dependencies
-      run: npm install
-
-    - name: 🏗 Setup EAS
-      uses: expo/expo-github-action@v8
-      with:
-        eas-version: latest
-        expo-version: latest
-        token: "3QJl9HOF51eBt-R_in39AVbZoYlqtnCLTWzfo9T_"
-        
-    - name: 🧱 Build APK
-      run: eas build -p android --profile preview --local
-
-    - name: 📦 Upload APK
-      uses: actions/upload-artifact@v4.6.0
-      with:
-        name: TransatV2
-        path: /home/runner/work/Transat_2.0/Transat_2.0/*.apk
+  #  build:
+  #    runs-on: ubuntu-latest
+  #    name: 🤖 Android APK Builder
+  #
+  #    steps:
+  #    - name: 📂 Checkout repository
+  #      uses: actions/checkout@v2
+  #
+  #    - name: 🏗 Setup JDK 21
+  #      uses: actions/setup-java@v4.7.0
+  #      with:
+  #        java-version: '21'
+  #        distribution: 'adopt'
+  #
+  #    - name: 🏗 Setup Node
+  #      uses: actions/setup-node@v4.2.0
+  #      with:
+  #        node-version: '23'
+  #
+  #    - name: 📦 Install dependencies
+  #      run: npm install
+  #
+  #    - name: 🏗 Setup EAS
+  #      uses: expo/expo-github-action@v8
+  #      with:
+  #        eas-version: latest
+  #        expo-version: latest
+  #        token: "3QJl9HOF51eBt-R_in39AVbZoYlqtnCLTWzfo9T_"
+  #
+  #    - name: 🧱 Build APK
+  #      run: eas build -p android --profile preview --local
+  #
+  #    - name: 📦 Upload APK
+  #      uses: actions/upload-artifact@v4.6.0
+  #      with:
+  #        name: TransatV2
+  #        path: /home/runner/work/Transat_2.0/Transat_2.0/*.apk
 
   contrib-readme-job:
     runs-on: ubuntu-latest

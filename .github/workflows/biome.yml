@@ -4,6 +4,9 @@ on:
   push:
   pull_request:
 
+permissions:
+  contents: write
+
 jobs:
   quality:
     runs-on: ubuntu-latest
@@ -11,7 +14,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Ensures full repo history for committing changes
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -35,5 +38,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit -m "style: auto-format code using Biome" || echo "No changes to commit"
-          git push origin master
+          git commit -m "style: auto-format code using Biome" || exit 0
+          git push origin HEAD:master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

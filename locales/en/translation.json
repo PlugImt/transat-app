@@ -27,6 +27,8 @@
     "info": "Information",
     "about": "About",
     "close": "Close",
+    "clear_all": "Clear",
+    "filter": "Filter",
     "days": {
       "monday": "Monday",
       "tuesday": "Tuesday",
@@ -98,7 +100,8 @@
       "price_half": "Half (25cl)",
       "alcohol": "Alcohol",
       "limited": "Limited",
-      "out_of_stock": "Out of stock"
+      "out_of_stock": "Out of stock",
+      "no_items_found": "No items found"
     },
     "clubs": "Clubs",
     "events": "Events",

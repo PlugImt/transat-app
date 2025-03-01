@@ -85,7 +85,7 @@ const TraqCard = ({
           </View>
 
           <View className="bg-lightCard rounded-xl p-4 gap-2 border border-muted-100">
-            {alcohol !== undefined && (
+            {alcohol !== undefined && alcohol > 0 && (
               <View className="flex flex-row justify-between items-center">
                 <View className="flex flex-row items-center">
                   <Ionicons
@@ -114,14 +114,17 @@ const TraqCard = ({
                     className="mr-2"
                   />
                   <Text className="text-base font-semibold text-foreground">
-                    {t("services.traq.price")}
+                    {t("services.traq.price")}{" "}
+                    {alcohol && alcohol > 0 ? " (50cl)" : ""}
                   </Text>
                 </View>
-                <Text className="text-base font-bold text-white">{price}€</Text>
+                <Text className="text-base font-bold text-white">
+                  {price > 0 ? `${price}€` : t("common.free")}
+                </Text>
               </View>
             )}
 
-            {priceHalf !== undefined && (
+            {priceHalf !== undefined && priceHalf > 0 && (
               <View className="flex flex-row justify-between items-center">
                 <View className="flex flex-row items-center">
                   <Ionicons
@@ -131,7 +134,8 @@ const TraqCard = ({
                     className="mr-2"
                   />
                   <Text className="text-base font-semibold text-foreground">
-                    {t("services.traq.price_half")}
+                    {t("services.traq.price_half")}{" "}
+                    {alcohol && alcohol > 0 ? " (25cl)" : ""}
                   </Text>
                 </View>
                 <Text className="text-base font-bold text-white">

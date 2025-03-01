@@ -3,4 +3,5 @@ export const QUERY_KEYS = {
   washingMachines: ["washingMachines"],
   weather: ["weather"],
   user: ["user"],
+  traq: ["traq"],
 };

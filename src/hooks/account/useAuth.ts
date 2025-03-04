@@ -1,10 +1,10 @@
 import { storage } from "@/services/storage/asyncStorage";
+import type { User } from "@/types/user";
 import axios from "axios";
 import { useState } from "react";
 
 export const useAuth = () => {
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  const [user, setUser] = useState<null | any>(null);
+  const [user, setUser] = useState<null | User>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const login = async (email: string, password: string) => {
@@ -52,7 +52,8 @@ export const useAuth = () => {
       },
     );
     if (newfResponse.status === 200) {
-      const newf = newfResponse.data;
+      const newf = newfResponse.data as User;
+      console.log("newf", newf);
       await storage.set("newf", newf);
 
       setUser(newf);

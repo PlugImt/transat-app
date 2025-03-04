@@ -4,6 +4,7 @@ import {
   AvatarImage,
 } from "@/components/common/Avatar";
 import { Button } from "@/components/common/Button";
+import { InfoItem } from "@/components/common/InfoItem";
 import Page from "@/components/common/Page";
 import { useToast } from "@/components/common/Toast";
 import ErrorPage from "@/components/custom/ErrorPage";
@@ -25,7 +26,6 @@ import {
 import type React from "react";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
-import { InfoItem } from "./components/InfoItem";
 
 export const Account = () => {
   const { t } = useTranslation();

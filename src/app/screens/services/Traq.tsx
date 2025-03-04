@@ -1,6 +1,6 @@
 import Page from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
-import Loading from "@/components/custom/Loading";
+import LoadingScreen from "@/components/custom/Loading";
 import NotificationBell from "@/components/custom/NotificationBell";
 import TraqCard from "@/components/custom/card/TraqCard";
 import { useTraq } from "@/hooks/useTraq";
@@ -51,7 +51,7 @@ export const Traq = () => {
   }, [traq, selectedTags]);
 
   if (isPending) {
-    return <Loading />;
+    return <LoadingScreen />;
   }
 
   const header = (

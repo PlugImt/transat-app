@@ -14,7 +14,7 @@ import { Input } from "@/components/common/Input";
 import Page from "@/components/common/Page";
 import { useToast } from "@/components/common/Toast";
 import ErrorPage from "@/components/custom/ErrorPage";
-import Loading from "@/components/custom/Loading";
+import LoadingScreen from "@/components/custom/Loading";
 import { useAccount } from "@/hooks/account/useAccount";
 import { useChangePassword } from "@/hooks/account/useChangePassword";
 import { useUpdateAccount } from "@/hooks/account/useUpdateAccount";
@@ -157,7 +157,7 @@ export const EditProfile = () => {
   };
 
   if (isPending) {
-    return <Loading />;
+    return <LoadingScreen />;
   }
 
   if ((isError && error) || !user) {

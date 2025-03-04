@@ -1,6 +1,6 @@
 import Page from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
-import Loading from "@/components/custom/Loading";
+import LoadingScreen from "@/components/custom/Loading";
 import NotificationBell from "@/components/custom/NotificationBell";
 import RestaurantCard from "@/components/custom/card/RestaurantCard";
 import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
@@ -63,7 +63,7 @@ export const Restaurant = () => {
   const outOfHours: boolean = useMemo(() => outOfService(), []);
 
   if (isPending) {
-    return <Loading />;
+    return <LoadingScreen />;
   }
 
   const header = (

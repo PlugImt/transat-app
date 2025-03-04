@@ -1,5 +1,6 @@
 import { AppNavigator } from "@/app/navigation/AppNavigator";
 import { AuthNavigator } from "@/app/navigation/AuthNavigator";
+import LoadingScreen from "@/components/custom/Loading";
 import { useAuth } from "@/hooks/account/useAuth";
 import { storage } from "@/services/storage/asyncStorage";
 import type {
@@ -10,18 +11,11 @@ import {
   type StackNavigationProp,
   createStackNavigator,
 } from "@react-navigation/stack";
-import { useEffect, useState } from "react";
-import { ActivityIndicator, View } from "react-native";
+import { useEffect } from "react";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
 const Stack = createStackNavigator<RootStackParamList>();
-
-const LoadingScreen = () => (
-  <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-    <ActivityIndicator size="large" />
-  </View>
-);
 
 export const RootNavigator = () => {
   const { user, saveToken, setUser } = useAuth();

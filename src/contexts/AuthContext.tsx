@@ -1,7 +1,7 @@
 import { storage } from "@/services/storage/asyncStorage";
 import type { User } from "@/types/user";
 import axios from "axios";
-import { type FC, createContext, useState } from "react";
+import { type FC, createContext, useEffect, useState } from "react";
 
 interface AuthContextType {
   user: User | null | undefined;
@@ -30,6 +30,23 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
   // undefined when the user is not checked yet, null when the user is not logged in, User when the user is logged in
   const [user, setUser] = useState<undefined | null | User>(undefined);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    checkUser().then((r) => r);
+  }, []);
+
+  const checkUser = async () => {
+    try {
+      const userData = await storage.get("token");
+      if (userData && typeof userData === "string") {
+        saveToken(userData);
+      } else {
+        setUser(null);
+      }
+    } catch (error) {
+      console.error("Error checking user:", error);
+    }
+  };
 
   const login = async (email: string, password: string) => {
     try {

@@ -20,23 +20,6 @@ const Stack = createStackNavigator<RootStackParamList>();
 export const RootNavigator = () => {
   const { user, saveToken, setUser } = useAuth();
 
-  useEffect(() => {
-    checkUser().then((r) => r);
-  }, []);
-
-  const checkUser = async () => {
-    try {
-      const userData = await storage.get("token");
-      if (userData && typeof userData === "string") {
-        saveToken(userData);
-      } else {
-        setUser(null);
-      }
-    } catch (error) {
-      console.error("Error checking user:", error);
-    }
-  };
-
   // pendant qu'on vérifie si l'utilisateur est connecté, on affiche un écran de chargement
   if (user === undefined) {
     return <LoadingScreen />;

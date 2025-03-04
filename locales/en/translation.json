@@ -88,7 +88,9 @@
   },
   "services": {
     "services": "Services",
-    "games": "Games",
+    "games": {
+      "title": "Games"
+    },
     "market": "Market",
     "traq": {
       "title": "Traq",
@@ -130,8 +132,8 @@
       "closedWeekends": "The restaurant is closed on weekends",
       "location": "Next to the gymnasium",
       "about": "API prepares fresh, homemade dishes daily—even the fruit salad! The menu updates daily for lunch and dinner.",
-      "price": "3.90€ for an appetizer, main course, and dessert.",
-      "additional_info": "You can swap an appetizer for a dessert. Extra dishes cost XX€. Feeling hungry? Ask the waiters! After 19:45, extra food at dinner is free."
+      "price": "3.95€ for an appetizer, main course, and dessert.",
+      "additional_info": "You can swap an appetizer for a dessert. Extra dishes are available, for an extra cost. Feeling hungry? Ask the waiters! After 19:45, extra food at dinner is free."
     },
     "washing_machine": {
       "title": "Laundromat",

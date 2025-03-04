@@ -28,6 +28,21 @@
     "errors": {
       "occurred": "Une erreur est survenue",
       "unableToFetch": "Impossible de récupérer les données"
+    },
+    "about": "À propos",
+    "close": "Fermer",
+    "clear_all": "Effacer",
+    "filter": "Filtrer",
+    "days": {
+      "monday": "Lundi",
+      "tuesday": "Mardi",
+      "wednesday": "Mercredi",
+      "thursday": "Jeudi",
+      "friday": "Vendredi",
+      "saturday": "Samedi",
+      "sunday": "Dimanche",
+      "weekdays": "Jours de semaine",
+      "weekend": "Week-end"
     }
   },
   "auth": {
@@ -73,9 +88,23 @@
   },
   "services": {
     "services": "Services",
-    "games": "Jeux",
+    "games": {
+      "title": "Jeux"
+    },
     "market": "Marché",
-    "traq": "Traq",
+    "traq": {
+      "title": "Traq",
+      "about": "🍺 Le Traq (Traquenard) est le bar étudiant de l'école où vous pouvez déguster différentes boissons.",
+      "location": "À l'intérieur de la MDE",
+      "additional_info": "Pendant les événements, des shooters ou des cocktails peuvent être vendus. Veuillez consulter la page de l'événement pour plus d'informations.",
+      "opening_hours": "Le Traq est ouvert pendant toutes les soirées et les événements spéciaux. \n\nSi vous avez soif et que le Traq est fermé, vous pouvez demander au BDE de l'ouvrir via WhatsApp.",
+      "price": "Prix",
+      "price_half": "Demi (25cl)",
+      "alcohol": "Alcool",
+      "limited": "Limité",
+      "out_of_stock": "En rupture de stock",
+      "no_items_found": "Aucun article trouvé"
+    },
     "clubs": "Clubs",
     "events": "Événements",
     "reservations": "Réservations",
@@ -91,11 +120,16 @@
       "side_dishes": "Accompagnements",
       "no_data": "Il semble qu'il n'y ait pas de données à afficher",
       "no_meal": "Aucun repas",
-      "closed": "Le restaurant est fermé le week-end",
+      "closed": "Fermé",
+      "closedWeekends": "Le restaurant est fermé le week-end",
       "closed_night": {
         "title": "Le restaurant est fermé",
         "description": "Revenez à 11h pour voir le menu du jour"
-      }
+      },
+      "location": "À côté du gymnase",
+      "about": "API prépare des plats frais et faits maison quotidiennement—même la salade de fruits ! Le menu change tous les jours pour le déjeuner et le dîner.",
+      "price": "3,95€ pour une entrée, un plat principal et un dessert.",
+      "additional_info": "Vous pouvez échanger une entrée contre un dessert. Des plats supplémentaires sont disponibles, pour un coût supplémentaire. Vous avez encore faim ? Demandez aux serveurs ! Après 19h45, la nourriture supplémentaire au dîner est gratuite."
     },
     "washing_machine": {
       "title": "Laverie",
@@ -108,8 +142,16 @@
       "time_to_completion": "Minutes avant la fin",
       "available_machines": "Machines disponibles",
       "available_dryers": "Sèche-linges disponibles",
-      "no_machine": "Aucune machine disponible"
-    }
+      "no_machine": "Aucune machine disponible",
+      "about": "Ouverte 24h/24 et 7j/7, la laverie vous permet de laver et sécher à tout moment. Recevez une notification lorsque votre lessive est presque terminée et vérifiez la disponibilité des machines en temps réel.",
+      "price": "Lavage : 2€, Séchage : 1€.",
+      "additional_info": "Payez en pièces, par carte ou avec le portefeuille Monix (recommandé pour les bonus et les remboursements). Besoin de plus de temps de séchage ? Payez plusieurs sessions avant de commencer.",
+      "location": "Sous la MDE, après les boîtes aux lettres"
+    },
+    "opening_hours": "Horaires d'ouverture",
+    "location": "Emplacement",
+    "price": "Prix",
+    "additional_info": "Informations complémentaires"
   },
   "account": {
     "graduationYear": "Année de diplôme",

@@ -68,7 +68,9 @@
   },
   "services": {
     "services": "Servicios",
-    "games": "Juegos",
+    "games": {
+      "title": "Juegos"
+    },
     "market": "Mercado",
     "traq": "Traq",
     "clubs": "Clubes",
@@ -86,11 +88,16 @@
       "side_dishes": "Acompañamientos",
       "no_data": "Parece que no hay datos para mostrar",
       "no_meal": "No hay comida",
-      "closed": "El restaurante está cerrado los fines de semana",
+      "closed": "Cerrado",
+      "closedWeekends": "El restaurante está cerrado los fines de semana",
       "closed_night": {
         "title": "El restaurante está cerrado",
         "description": "Vuelve a las 11h para ver el menú del día"
-      }
+      },
+      "location": "Al lado del gimnasio",
+      "about": "API prepara platos frescos y caseros diariamente, incluso la ensalada de frutas. El menú cambia cada día para el almuerzo y la cena.",
+      "price": "3,95€ para una entrada, plato principal y postre.",
+      "additional_info": "Puedes cambiar una entrada por un postre. Hay platos adicionales disponibles, por un coste adicional. ¿Tienes hambre? Pide a los camareros. Después de las 19:45, la comida adicional en la cena es gratis."
     },
     "washing_machine": {
       "title": "Lavandería",

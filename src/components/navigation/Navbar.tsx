@@ -88,7 +88,7 @@ export const BottomTabNavigator = () => {
         name="Games"
         component={GamesStackScreen}
         options={{
-          tabBarLabel: t("services.games"),
+          tabBarLabel: t("services.games.title"),
           tabBarIcon: ({ color, size }) => <Play size={size} color={color} />,
         }}
       />

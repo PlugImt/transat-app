@@ -36,7 +36,6 @@
     --radius: 0.5rem;
   }
 
-
   .h1 {
     @apply text-3xl font-black text-foreground;
   }

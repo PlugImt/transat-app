@@ -17,10 +17,14 @@ type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
 const Stack = createStackNavigator<RootStackParamList>();
 
+const LoadingScreen = () => (
+  <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+    <ActivityIndicator size="large" />
+  </View>
+);
+
 export const RootNavigator = () => {
-  const { user, setUser } = useAuth();
-  const [isLoading, setIsLoading] = useState(true);
-  const [isLogged, setIsLogged] = useState(false);
+  const { user, saveToken, setUser } = useAuth();
 
   useEffect(() => {
     checkUser().then((r) => r);
@@ -29,35 +33,29 @@ export const RootNavigator = () => {
   const checkUser = async () => {
     try {
       const userData = await storage.get("token");
-      if (userData) {
-        setUser(userData);
-        setIsLogged(true);
+      if (userData && typeof userData === "string") {
+        saveToken(userData);
+      } else {
+        setUser(null);
       }
     } catch (error) {
       console.error("Error checking user:", error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
-  if (isLoading) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" />
-      </View>
-    );
+  // pendant qu'on vérifie si l'utilisateur est connecté, on affiche un écran de chargement
+  if (user === undefined) {
+    return <LoadingScreen />;
   }
 
   return (
-    // <NavigationContainer>
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {isLogged ? (
+      {user ? (
         <Stack.Screen name="App" component={AppNavigator} />
       ) : (
         <Stack.Screen name="Auth" component={AuthNavigator} />
       )}
     </Stack.Navigator>
-    // </NavigationContainer>
   );
 };
 

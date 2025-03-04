@@ -2,6 +2,7 @@ import { RootNavigator } from "@/app/navigation/RootNavigator";
 import "../i18n";
 import "./global.css";
 import { ToastProvider } from "@/components/common/Toast";
+import { AuthProvider } from "@/contexts/AuthContext";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import * as Clipboard from "expo-clipboard";
@@ -32,9 +33,11 @@ export default function App() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <QueryClientProvider client={queryClient}>
         <BottomSheetModalProvider>
-          <ToastProvider position="top">
-            <RootNavigator />
-          </ToastProvider>
+          <AuthProvider>
+            <ToastProvider position="top">
+              <RootNavigator />
+            </ToastProvider>
+          </AuthProvider>
         </BottomSheetModalProvider>
       </QueryClientProvider>
     </GestureHandlerRootView>

@@ -8,7 +8,7 @@ import { InfoItem } from "@/components/common/InfoItem";
 import Page from "@/components/common/Page";
 import { useToast } from "@/components/common/Toast";
 import ErrorPage from "@/components/custom/ErrorPage";
-import LoadingScreen from "@/components/custom/Loading";
+import LoadingScreen from "@/components/custom/LoadingScreen";
 import { useAccount } from "@/hooks/account/useAccount";
 import useAuth from "@/hooks/account/useAuth";
 import { QUERY_KEYS } from "@/lib/queryKeys";

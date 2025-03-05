@@ -1,6 +1,6 @@
 import Page from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
-import LoadingScreen from "@/components/custom/Loading";
+import LoadingScreen from "@/components/custom/LoadingScreen";
 import WashingMachineCard from "@/components/custom/card/WashingMachineCard";
 import { useWashingMachines } from "@/hooks/useWashingMachines";
 import React, { type FC, useState } from "react";

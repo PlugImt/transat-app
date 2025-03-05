@@ -1,6 +1,6 @@
 import Page from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
-import LoadingScreen from "@/components/custom/Loading";
+import LoadingScreen from "@/components/custom/LoadingScreen";
 import NotificationBell from "@/components/custom/NotificationBell";
 import RestaurantCard from "@/components/custom/card/RestaurantCard";
 import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";

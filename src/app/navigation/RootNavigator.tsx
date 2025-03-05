@@ -1,6 +1,6 @@
 import { AppNavigator } from "@/app/navigation/AppNavigator";
 import { AuthNavigator } from "@/app/navigation/AuthNavigator";
-import LoadingScreen from "@/components/custom/Loading";
+import LoadingScreen from "@/components/custom/LoadingScreen";
 import { useAuth } from "@/hooks/account/useAuth";
 import { storage } from "@/services/storage/asyncStorage";
 import type {
@@ -21,9 +21,9 @@ export const RootNavigator = () => {
   const { user, saveToken, setUser } = useAuth();
 
   // pendant qu'on vérifie si l'utilisateur est connecté, on affiche un écran de chargement
-  if (user === undefined) {
-    return <LoadingScreen />;
-  }
+  // if (user === undefined) {
+  //   return <LoadingScreen />;
+  // }
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>

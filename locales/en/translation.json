@@ -126,7 +126,7 @@
       "no_meal": "No meal",
       "closed_night": {
         "title": "The restaurant is closed",
-        "description": "The restaurant is closed at night"
+        "description": "Come back at 11am to see the daily menu"
       },
       "closed": "Closed",
       "closedWeekends": "The restaurant is closed on weekends",

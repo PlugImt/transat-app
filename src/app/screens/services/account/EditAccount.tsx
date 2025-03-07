@@ -52,14 +52,14 @@ export const EditProfile = () => {
   const userSchema = z.object({
     first_name: z.string().nonempty(t("auth.errors.firstName")),
     last_name: z.string().nonempty(t("auth.errors.lastName")),
-    phone_number: z.string().min(10, t("auth.errors.phone")),
+    phone_number: z.string().min(10, t("auth.errors.phone")).optional(),
     email: z
       .string()
       .email(t("auth.errors.email"))
       .refine((email) => email.endsWith("@imt-atlantique.net"), {
         message: t("auth.errors.imtOnly"),
       }),
-    password: z.string().min(6, t("auth.errors.password")),
+    graduation_year: z.number().optional(),
   });
 
   const passwordSchema = z
@@ -99,7 +99,6 @@ export const EditProfile = () => {
     },
   });
 
-  const campusOptions = ["NANTES", "BREST", "RENNES"];
   const currentYear = new Date().getFullYear();
   const yearOptions = Array.from({ length: 6 }, (_, i) =>
     (currentYear + i).toString(),
@@ -119,7 +118,9 @@ export const EditProfile = () => {
     });
   };
 
+  console.log(passwordErrors);
   const handleChangePassword = (data: Password) => {
+    console.log(data);
     Keyboard.dismiss();
 
     changePassword(
@@ -249,21 +250,6 @@ export const EditProfile = () => {
 
         <Controller
           control={userControl}
-          name="campus"
-          render={({ field: { onChange, value } }) => (
-            <Dropdown
-              label={t("account.campus")}
-              placeholder={t("account.selectCampus")}
-              icon={<MapPin color={theme.textPrimary} size={20} />}
-              options={campusOptions}
-              value={value}
-              onValueChange={onChange}
-            />
-          )}
-        />
-
-        <Controller
-          control={userControl}
           name="graduation_year"
           render={({ field: { onChange, value } }) => (
             <Dropdown
@@ -271,8 +257,8 @@ export const EditProfile = () => {
               placeholder={t("account.selectGraduationYear")}
               icon={<GraduationCap color={theme.textPrimary} size={20} />}
               options={yearOptions}
-              value={value}
-              onValueChange={onChange}
+              value={value?.toString()}
+              onValueChange={(value) => onChange(Number(value))}
             />
           )}
         />
@@ -282,7 +268,7 @@ export const EditProfile = () => {
             className="gap-4"
             cancelLabel={t("common.cancel")}
             confirmLabel={t("common.save")}
-            onConfirm={handlePasswordSubmit(handleChangePassword)}
+            onConfirm={() => handlePasswordSubmit(handleChangePassword)}
             isPending={isUpdatingPassword}
           >
             <Input
@@ -290,7 +276,7 @@ export const EditProfile = () => {
               control={passwordControl}
               name="password"
               textContentType="password"
-              error={passwordErrors.password?.message?.toString()}
+              error={passwordErrors.password?.message}
               secureTextEntry
             />
 
@@ -299,7 +285,7 @@ export const EditProfile = () => {
               control={passwordControl}
               name="new_password"
               textContentType="newPassword"
-              error={passwordErrors.new_password?.message?.toString()}
+              error={passwordErrors.new_password?.message}
               secureTextEntry
             />
 
@@ -308,7 +294,7 @@ export const EditProfile = () => {
               control={passwordControl}
               name="new_password_confirmation"
               textContentType="newPassword"
-              error={passwordErrors.confirm_password?.message?.toString()}
+              error={passwordErrors.confirm_password?.message}
               secureTextEntry
             />
           </DialogContent>

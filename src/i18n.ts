@@ -34,7 +34,7 @@ i18n.use(initReactI18next).init(
   },
   (err, t) => {
     if (err) {
-      return console.log("something went wrong loading translations", err);
+      return console.log("Something went wrong loading translations", err);
     }
   },
 );

@@ -71,7 +71,6 @@ export const Signin = () => {
         toast(t("auth.signInSuccess"), "success");
       }
     } catch (err) {
-      // @ts-ignore
       setLoginError(t("auth.errors.invalidCredentials"));
     }
   };

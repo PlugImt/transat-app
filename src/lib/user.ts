@@ -19,7 +19,7 @@ export async function fetchUser(): Promise<User> {
   const data = await response.json();
   await storage.set("newf", data);
 
-  return data satisfies User;
+  return data;
 }
 
 export async function updateUser(data: User) {
@@ -33,7 +33,6 @@ export async function updateUser(data: User) {
     {
       first_name: data.first_name,
       last_name: data.last_name,
-      campus: data.campus,
       phone_number: data.phone_number,
       graduation_year: data.graduation_year,
     },

@@ -21,9 +21,9 @@ export const RootNavigator = () => {
   const { user, saveToken, setUser } = useAuth();
 
   // pendant qu'on vérifie si l'utilisateur est connecté, on affiche un écran de chargement
-  // if (user === undefined) {
-  //   return <LoadingScreen />;
-  // }
+  if (user === undefined) {
+    return <LoadingScreen />;
+  }
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>

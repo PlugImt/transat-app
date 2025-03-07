@@ -97,7 +97,7 @@ export const Account = () => {
           </AvatarFallback>
         </Avatar>
 
-        <View className="gap-1">
+        <View className="gap-1 justify-center items-center">
           <Text className="text-2xl font-bold text-foreground">
             {user?.first_name} {user?.last_name}
           </Text>
@@ -120,16 +120,6 @@ export const Account = () => {
           icon={<Phone color={theme.textPrimary} size={20} />}
           label={t("account.phone")}
           value={user?.phone_number || t("account.notProvided")}
-        />
-        <InfoItem
-          icon={<MapPin color={theme.textPrimary} size={20} />}
-          label={t("account.campus")}
-          value={user?.campus || t("account.notProvided")}
-        />
-        <InfoItem
-          icon={<GraduationCap color={theme.textPrimary} size={20} />}
-          label={t("account.graduationYear")}
-          value={user?.graduation_year || t("account.notProvided")}
         />
       </View>
 

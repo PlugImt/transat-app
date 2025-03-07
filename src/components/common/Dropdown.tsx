@@ -15,7 +15,7 @@ import { Button } from "./Button";
 
 type DropdownProps = {
   options: string[];
-  value: string;
+  value?: string;
   onValueChange: (value: string) => void;
   icon?: React.ReactNode;
   label: string;

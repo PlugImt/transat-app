@@ -4,13 +4,12 @@ import { Weather } from "@/components/custom/Weather";
 import RestaurantWidget from "@/components/custom/widget/RestaurantWidget";
 import WashingMachineWidget from "@/components/custom/widget/WashingMachineWidget";
 import { useAccount } from "@/hooks/account/useAccount";
+import useAuth from "@/hooks/account/useAuth";
 import { QUERY_KEYS } from "@/lib/queryKeys";
-import { storage } from "@/services/storage/asyncStorage";
 import type { AppStackParamList } from "@/services/storage/types";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import Constants from "expo-constants";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
@@ -24,7 +23,7 @@ function handleRegistrationError(errorMessage: string) {
   if (Platform.OS === "web") {
     console.error(errorMessage);
   }
-  if (Device.isDevice) alert(errorMessage);
+  // if (Device.isDevice) alert(errorMessage);
   throw new Error(errorMessage);
 }
 
@@ -79,47 +78,27 @@ export const Home = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
 
+  const { saveExpoPushToken } = useAuth();
+
   const [expoPushToken, setExpoPushToken] = useState("");
   const [notificationOpened, setNotificationOpened] = useState(false);
   // biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
   const [notificationData, setNotificationData] = useState<any>(null);
   const navigation = useNavigation<AppScreenNavigationProp>();
 
-  // Register for push notifications and send token to backend
   useEffect(() => {
     registerForPushNotificationsAsync()
       .then(async (token) => {
         console.log("Retrieved Expo Push Token:", token);
         setExpoPushToken(token ?? "");
-        const JWTtoken = await storage.get("token");
-
-        if (!token) {
-          toast(t("account.noToken"), "destructive");
-          return;
-        }
-
-        const response = await axios.patch(
-          "https://transat.destimt.fr/api/newf/me",
-          {
-            notification_token: token,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${JWTtoken}`,
-            },
-          },
-        );
-
-        if (response.status === 200) {
-          console.log("Notification token updated");
-        }
+        await saveExpoPushToken(token ?? "");
       })
       // biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
       .catch((error: any) => {
         console.error("Error retrieving token:", error);
         setExpoPushToken(`${error}`);
       });
-  }, [t, toast]);
+  }, [saveExpoPushToken]);
 
   // Check if app was opened from a notification when component mounts
   useEffect(() => {
@@ -140,7 +119,7 @@ export const Home = () => {
         }
       }
     };
-    checkInitialNotification();
+    checkInitialNotification().then((r) => r);
   }, [navigation.navigate]);
 
   const queryClient = useQueryClient();

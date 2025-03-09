@@ -18,6 +18,7 @@ interface AuthContextType {
   register: (email: string, password: string) => Promise<{ success: boolean }>;
   saveToken: (token: string) => Promise<{ success: boolean }>;
   setUser: (user: User | null) => void;
+  saveExpoPushToken: (token: string) => Promise<boolean | undefined>;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(
@@ -153,6 +154,41 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     }
   };
 
+  const saveExpoPushToken = async (token: string) => {
+    const JWTtoken = await storage.get("token");
+
+    const expoPushToken = await storage.get("expoPushToken");
+
+    if (expoPushToken === token) {
+      return true;
+    }
+
+    if (!JWTtoken) {
+      throw new Error("No JWT token");
+    }
+
+    if (!token) {
+      return false;
+    }
+
+    const response = await axios.patch(
+      "https://transat.destimt.fr/api/newf/me",
+      {
+        notification_token: token,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${JWTtoken}`,
+        },
+      },
+    );
+
+    if (response.status === 200) {
+      await storage.set("expoPushToken", token);
+      return true;
+    }
+  };
+
   const value = {
     user,
     isLoading,
@@ -161,6 +197,7 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     register,
     saveToken,
     setUser,
+    saveExpoPushToken,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

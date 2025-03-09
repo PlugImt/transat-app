@@ -47,7 +47,7 @@ const Input = forwardRef(
             ref={ref}
             className={cn(
               inputClasses,
-              "py-2.5 px-4 rounded-lg bg-primary-foreground placeholder:text-stone-400",
+              "py-2.5 px-4 rounded-lg bg-input placeholder:text-stone-400 text-foreground",
               error && "border border-red-500",
             )}
             onChangeText={onChange}

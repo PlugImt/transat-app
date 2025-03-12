@@ -2,8 +2,13 @@
   "common": {
     "welcome": "Welcome",
     "settings": "Settings",
+    "edit": "Edit",
+    "other": "Other",
+    "help": "Help",
+    "contactSupport": "Contact support",
+    "notifications": "Notifications",
+    "appearance": "Appearance",
     "logout": "Logout",
-    "language": "Language",
     "theme": "Theme",
     "dark": "Dark",
     "light": "Light",
@@ -25,6 +30,7 @@
     "success": "Success",
     "error": "Error",
     "info": "Information",
+    "knowMore": "Learn more about Transat",
     "about": "About",
     "close": "Close",
     "clear_all": "Clear",
@@ -44,6 +50,13 @@
       "occurred": "An error occurred",
       "unableToFetch": "Unable to fetch data"
     }
+  },
+  "language": {
+    "language": "Language",
+    "selectLanguage": "Select language",
+    "english": "English",
+    "french": "French",
+    "spanish": "Spanish"
   },
   "auth": {
     "signIn": "Sign in",

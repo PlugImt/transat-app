@@ -79,7 +79,7 @@ export async function updatePassword(data: Password) {
       email: data.email,
       password: data.password,
       new_password: data.new_password,
-      new_password_confirmation: data.confirm_password,
+      new_password_confirmation: data.new_password_confirmation,
     },
     {
       headers: { Authorization: `Bearer ${token}` },

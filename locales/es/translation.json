@@ -1,7 +1,13 @@
 {
   "common": {
     "welcome": "Bienvenido",
+    "edit": "Editar",
+    "other": "Otro",
+    "help": "Ayuda",
+    "contactSupport": "Contactar soporte",
     "settings": "Configuración",
+    "notifications": "Notificaciónes",
+    "appearance": "Apariencia",
     "logout": "Cerrar sesión",
     "language": "Idioma",
     "theme": "Tema",
@@ -11,6 +17,8 @@
     "home": "Inicio",
     "account": "Cuenta",
     "free": "Gratis",
+    "info": "Información",
+    "knowMore": "Aprende más sobre Transat",
     "cancel": "Cancelar",
     "closed": "Cerrado",
     "set_notification": "Establecer notificación",
@@ -24,6 +32,13 @@
       "occurred": "Ocurrió un error",
       "unableToFetch": "No se pueden obtener los datos"
     }
+  },
+  "language": {
+    "language": "Idioma",
+    "selectLanguage": "Seleccionar idioma",
+    "english": "Inglés",
+    "french": "Francés",
+    "spanish": "Español"
   },
   "auth": {
     "signIn": "Iniciar sesión",
@@ -112,5 +127,40 @@
       "available_dryers": "Secadoras disponibles",
       "no_machines": "No hay máquinas disponibles"
     }
+  },
+  "account": {
+    "graduationYear": "Año de graduación",
+    "campus": "Campus",
+    "phone": "Teléfono",
+    "email": "Correo electrónico",
+    "contactInfo": "Información personal",
+    "graduation": "Diploma",
+    "notProvided": "No proporcionado",
+    "security": "Seguridad",
+    "deleteAccount": "Eliminar cuenta",
+    "editProfile": "Editar perfil",
+    "personalInfo": "Información personal",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "changePassword": "Cambiar contraseña",
+    "currentPassword": "Contraseña actual",
+    "newPassword": "Nueva contraseña",
+    "confirmPassword": "Confirmar nueva contraseña",
+    "passwordChanged": "Contraseña cambiada con éxito",
+    "passwordChangeFailed": "Error al cambiar la contraseña",
+    "passwordMismatch": "Las nuevas contraseñas no coinciden",
+    "profileUpdated": "Perfil actualizado con éxito",
+    "updateFailed": "Error al actualizar el perfil",
+    "photoUpdateNotAvailable": "La subida de foto de perfil aún no está disponible",
+    "noToken": "Token de autenticación no encontrado",
+    "selectCampus": "Seleccionar campus",
+    "selectGraduationYear": "Seleccionar año de graduación",
+    "newf": "usuarios",
+    "registration": "Registro",
+    "infos": "Información",
+    "passwordUpdated": "Última actualización de contraseña",
+    "profilePictureUpdated": "Foto de perfil actualizada",
+    "profilePictureUpdateFailed": "Error al actualizar la foto de perfil",
+    "permissionDenied": "Permiso denegado"
   }
 }

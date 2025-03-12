@@ -14,5 +14,5 @@ export interface Password {
   email: string;
   password: string;
   new_password: string;
-  confirm_password: string;
+  new_password_confirmation: string;
 }

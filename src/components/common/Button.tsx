@@ -16,6 +16,7 @@ const buttonVariants = cva(
         destructive: "bg-destructive",
         ghost: "bg-muted",
         link: "text-primary underline-offset-4",
+        disabled: "bg-muted",
       },
       size: {
         default: "h-10 px-4",
@@ -39,6 +40,7 @@ const buttonTextVariants = cva("text-center font-medium", {
       destructive: "text-destructive-foreground",
       ghost: "text-primary-foreground",
       link: "text-primary-foreground underline",
+      disabled: "text-muted",
     },
     size: {
       default: "text-base",
@@ -71,11 +73,15 @@ function Button({
   loading,
   ...props
 }: ButtonProps) {
+  const isDisabled = props.disabled || loading;
   return (
     <TouchableOpacity
-      className={cn(buttonVariants({ variant, size, className }))}
+      className={cn(
+        buttonVariants({ variant, size, className }),
+        isDisabled && "opacity-50",
+      )}
       {...props}
-      disabled={loading}
+      disabled={isDisabled}
     >
       <Text
         className={cn(

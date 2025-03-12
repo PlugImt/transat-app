@@ -7,6 +7,7 @@ import { Traq } from "@/app/screens/services/Traq";
 import { WashingMachine } from "@/app/screens/services/WashingMachine";
 import Account from "@/app/screens/services/account/Account";
 import EditProfile from "@/app/screens/services/account/EditAccount";
+import Settings from "@/app/screens/services/account/Settings";
 import type { BottomTabParamList } from "@/types/navigation";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -49,6 +50,7 @@ const AccountStackScreen = () => (
   <AccountStack.Navigator screenOptions={{ headerShown: false }}>
     <AccountStack.Screen name="AccountScreen" component={Account} />
     <AccountStack.Screen name="EditProfile" component={EditProfile} />
+    <AccountStack.Screen name="Settings" component={Settings} />
   </AccountStack.Navigator>
 );
 

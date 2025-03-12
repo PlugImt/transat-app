@@ -44,7 +44,7 @@ export async function uploadImage(): Promise<string> {
   });
 
   if (result.canceled || !result.assets[0].uri) {
-    throw new Error("Image selection cancelled");
+    throw new Error();
   }
 
   // Lire l'image en base64
@@ -67,7 +67,7 @@ export async function uploadImage(): Promise<string> {
   );
 
   if (!uploadResponse.data.success) {
-    throw new Error("Image upload failed");
+    throw new Error(t("account.passwordChangeFailed"));
   }
 
   return uploadResponse.data.data.url;

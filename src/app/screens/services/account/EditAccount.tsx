@@ -25,7 +25,7 @@ import type { Password, User } from "@/types/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
-import { Edit, GraduationCap, MapPin } from "lucide-react-native";
+import { Edit, GraduationCap } from "lucide-react-native";
 import type React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -66,9 +66,9 @@ export const EditProfile = () => {
     .object({
       password: z.string().min(6, t("auth.errors.password")),
       new_password: z.string().min(6, t("auth.errors.password")),
-      confirm_password: z.string().min(6, t("auth.errors.password")),
+      new_password_confirmation: z.string().min(6, t("auth.errors.password")),
     })
-    .refine((data) => data.new_password === data.confirm_password, {
+    .refine((data) => data.new_password === data.new_password_confirmation, {
       message: t("account.passwordMismatch"),
       path: ["new_password_confirmation"],
     });
@@ -76,7 +76,7 @@ export const EditProfile = () => {
   const {
     control: userControl,
     handleSubmit: handleUserSubmit,
-    formState: { errors: userErrors },
+    formState: { errors: userErrors, isValid: isUserValid },
   } = useForm({
     resolver: zodResolver(userSchema),
     defaultValues: user,
@@ -86,7 +86,7 @@ export const EditProfile = () => {
   const {
     control: passwordControl,
     handleSubmit: handlePasswordSubmit,
-    formState: { errors: passwordErrors },
+    formState: { errors: passwordErrors, isValid: isPasswordValid },
     reset: resetPassword,
   } = useForm({
     resolver: zodResolver(passwordSchema),
@@ -95,7 +95,7 @@ export const EditProfile = () => {
       email: user?.email || "",
       password: "",
       new_password: "",
-      confirm_password: "",
+      new_password_confirmation: "",
     },
   });
 
@@ -112,23 +112,19 @@ export const EditProfile = () => {
         navigation.goBack();
       },
       onError: (error) => {
-        console.error("Error updating profile:", error);
-        toast(t("account.updateFailed"), "destructive");
+        toast(error.message, "destructive");
       },
     });
   };
 
-  console.log(passwordErrors);
   const handleChangePassword = (data: Password) => {
-    console.log(data);
     Keyboard.dismiss();
-
     changePassword(
       {
         email: user?.email || "",
         password: data.password,
         new_password: data.new_password,
-        confirm_password: data.confirm_password,
+        new_password_confirmation: data.new_password_confirmation,
       },
       {
         onSuccess: () => {
@@ -138,8 +134,7 @@ export const EditProfile = () => {
         },
         onError: (error) => {
           resetPassword();
-          console.error("Error changing password:", error);
-          toast(t("account.passwordChangeFailed"), "destructive");
+          toast(error.message, "destructive");
         },
       },
     );
@@ -147,12 +142,14 @@ export const EditProfile = () => {
 
   const handleUpdateProfilePicture = () => {
     updateProfilePicture(undefined, {
-      onSuccess: () => {
+      onSuccess: async () => {
+        await refetch();
         toast(t("account.profilePictureUpdated"), "success");
       },
       onError: (error) => {
-        console.error("Error updating profile picture:", error);
-        toast(t("account.profilePictureUpdateFailed"), "destructive");
+        if (error.message) {
+          toast(error.message, "destructive");
+        }
       },
     });
   };
@@ -195,6 +192,7 @@ export const EditProfile = () => {
               source={{
                 uri: user.profile_picture,
               }}
+              loading={isUpdatingProfilePicture}
             />
             <AvatarFallback>
               {user.first_name.charAt(0)}
@@ -268,8 +266,9 @@ export const EditProfile = () => {
             className="gap-4"
             cancelLabel={t("common.cancel")}
             confirmLabel={t("common.save")}
-            onConfirm={() => handlePasswordSubmit(handleChangePassword)}
+            onConfirm={handlePasswordSubmit(handleChangePassword)}
             isPending={isUpdatingPassword}
+            disableConfirm={!isPasswordValid}
           >
             <Input
               label={t("account.currentPassword")}
@@ -294,7 +293,7 @@ export const EditProfile = () => {
               control={passwordControl}
               name="new_password_confirmation"
               textContentType="newPassword"
-              error={passwordErrors.confirm_password?.message}
+              error={passwordErrors.new_password_confirmation?.message}
               secureTextEntry
             />
           </DialogContent>
@@ -313,6 +312,7 @@ export const EditProfile = () => {
         label={t("common.save")}
         onPress={handleUserSubmit(handleUpdateAccount)}
         loading={isUpdatingAccount}
+        disabled={!isUserValid}
       />
     </Page>
   );

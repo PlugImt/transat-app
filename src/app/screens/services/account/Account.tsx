@@ -3,35 +3,25 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/common/Avatar";
-import { Button } from "@/components/common/Button";
+import { Button, IconButton } from "@/components/common/Button";
 import { InfoItem } from "@/components/common/InfoItem";
 import Page from "@/components/common/Page";
-import { useToast } from "@/components/common/Toast";
 import ErrorPage from "@/components/custom/ErrorPage";
 import LoadingScreen from "@/components/custom/LoadingScreen";
 import { useAccount } from "@/hooks/account/useAccount";
-import useAuth from "@/hooks/account/useAuth";
 import { QUERY_KEYS } from "@/lib/queryKeys";
+import type { AccountNavigation } from "@/services/storage/types";
 import theme from "@/themes";
 import { useNavigation } from "@react-navigation/native";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
-import {
-  GraduationCap,
-  Lock,
-  Mail,
-  MapPin,
-  Medal,
-  Phone,
-} from "lucide-react-native";
+import { Lock, Mail, Medal, Phone, Settings } from "lucide-react-native";
 import type React from "react";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
 
 export const Account = () => {
   const { t } = useTranslation();
-  const { logout } = useAuth();
-  const navigation = useNavigation();
-  const { toast } = useToast();
+  const navigation = useNavigation<AccountNavigation>();
   const queryClient = useQueryClient();
 
   const { data: user, isPending, isError, error } = useAccount();
@@ -44,21 +34,7 @@ export const Account = () => {
     await queryClient.invalidateQueries({ queryKey: QUERY_KEYS.user });
   };
 
-  const handleLogout = async () => {
-    try {
-      await logout();
-      toast(t("auth.disconnected"));
-    } catch (err) {
-      console.error("Error logging out:", err);
-    }
-  };
-
-  const handleDeleteAccount = async () => {
-    toast("We are working on it 🚧");
-  };
-
   const navigateToEditProfile = () => {
-    // @ts-ignore - Add proper typing for your navigation if needed
     navigation.navigate("EditProfile");
   };
 
@@ -76,11 +52,10 @@ export const Account = () => {
     <Page refreshing={isUserFetching} onRefresh={refetch} className="gap-6">
       <View className="flex-row justify-between items-center ">
         <Text className="h1">{t("common.account")}</Text>
-        <Button
-          label={t("account.editProfile")}
-          onPress={navigateToEditProfile}
-          size="sm"
-          variant="ghost"
+        <IconButton
+          icon={<Settings color={theme.textPrimary} />}
+          variant="link"
+          onPress={() => navigation.navigate("Settings")}
         />
       </View>
 
@@ -108,7 +83,6 @@ export const Account = () => {
           )}
         </View>
       </View>
-
       <View className="bg-card rounded-lg px-6 py-4 gap-4">
         <Text className="h3">{t("account.contactInfo")}</Text>
         <InfoItem
@@ -150,20 +124,11 @@ export const Account = () => {
               : t("account.notProvided")
           }
         />
-      </View>
-
-      <View className="gap-2">
         <Button
-          label={t("common.logout")}
-          onPress={handleLogout}
-          variant="destructive"
-        />
-        <Button
-          label={t("account.deleteAccount")}
-          onPress={handleDeleteAccount}
+          label={t("account.editProfile")}
+          onPress={navigateToEditProfile}
+          size="sm"
           variant="outlined"
-          className="border-destructive"
-          labelClasses="text-destructive"
         />
       </View>
     </Page>

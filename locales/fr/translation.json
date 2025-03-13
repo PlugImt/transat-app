@@ -1,7 +1,13 @@
 {
   "common": {
     "welcome": "Bienvenue",
+    "edit": "Modifier",
     "settings": "Paramètres",
+    "other": "Autre",
+    "help": "Aide",
+    "contactSupport": "Contacter le support",
+    "notifications": "Notifications",
+    "appearance": "Apparence",
     "logout": "Déconnexion",
     "language": "Langue",
     "theme": "Thème",
@@ -30,6 +36,7 @@
       "unableToFetch": "Impossible de récupérer les données"
     },
     "about": "À propos",
+    "knowMore": "En savoir plus sur Transat",
     "close": "Fermer",
     "clear_all": "Effacer",
     "filter": "Filtrer",
@@ -44,6 +51,13 @@
       "weekdays": "Jours de semaine",
       "weekend": "Week-end"
     }
+  },
+  "language": {
+    "language": "Langue",
+    "selectLanguage": "Sélectionner la langue",
+    "english": "Anglais",
+    "french": "Français",
+    "spanish": "Espagnol"
   },
   "auth": {
     "signIn": "Connexion",

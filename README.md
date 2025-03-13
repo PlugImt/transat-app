@@ -111,6 +111,20 @@ Contribuez à la cagnotte Lydia -->
                     <sub><b>Enzo</b></sub>
                 </a>
             </td>
+            <td align="center">
+                <a href="https://github.com/matisbyar">
+                    <img src="https://avatars.githubusercontent.com/u/86782053?v=4" width="100;" alt="matisbyar"/>
+                    <br />
+                    <sub><b>Matis Byar</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/zephyr-dassouli">
+                    <img src="https://avatars.githubusercontent.com/u/145542064?v=4" width="100;" alt="zephyr-dassouli"/>
+                    <br />
+                    <sub><b>Zephyr</b></sub>
+                </a>
+            </td>
 		</tr>
 	<tbody>
 </table>

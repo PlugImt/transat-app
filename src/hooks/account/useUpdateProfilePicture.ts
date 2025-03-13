@@ -11,7 +11,8 @@ export function useUpdateProfilePicture() {
   return useMutation({
     mutationFn: async () => {
       const imageUrl = await uploadImage();
-      return updateProfilePicture(imageUrl);
+      await updateProfilePicture(imageUrl);
+      return imageUrl;
     },
     onSuccess: async (imageUrl) => {
       const user = await storage.get("newf");
@@ -19,7 +20,6 @@ export function useUpdateProfilePicture() {
         throw new Error(t("account.updateFailed"));
       }
       const updatedUser = { ...user, profile_picture: imageUrl };
-
       await storage.set("newf", updatedUser);
       queryClient.setQueryData([QUERY_KEYS.user], updatedUser);
     },

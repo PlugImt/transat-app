@@ -1,5 +1,5 @@
 import { forwardRef, useState } from "react";
-import { Image, Text, View } from "react-native";
+import { ActivityIndicator, Image, Text, View } from "react-native";
 
 import { cn } from "@/lib/utils";
 
@@ -18,14 +18,26 @@ const Avatar = forwardRef<
 ));
 Avatar.displayName = "Avatar";
 
+interface AvatarImageProps
+  extends React.ComponentPropsWithoutRef<typeof Image> {
+  loading?: boolean;
+}
+
 const AvatarImage = forwardRef<
   React.ElementRef<typeof Image>,
-  React.ComponentPropsWithoutRef<typeof Image>
->(({ className, ...props }, ref) => {
+  AvatarImageProps
+>(({ className, loading, ...props }, ref) => {
   const [hasError, setHasError] = useState(false);
 
   if (hasError) {
     return null;
+  }
+  if (loading) {
+    return (
+      <View className="h-full w-full items-center justify-center bg-muted">
+        <ActivityIndicator color="white" />
+      </View>
+    );
   }
   return (
     <Image

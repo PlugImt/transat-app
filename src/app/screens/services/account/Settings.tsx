@@ -1,0 +1,142 @@
+import { useNavigation } from "@react-navigation/native";
+import { useQueryClient } from "@tanstack/react-query";
+import {
+  Bell,
+  ChevronRight,
+  Globe,
+  HelpCircle,
+  Info,
+  LogOut,
+  Moon,
+  Shield,
+} from "lucide-react-native";
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { ScrollView, Switch, Text, View } from "react-native";
+
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/common/Avatar";
+import { Button } from "@/components/common/Button";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/common/Dialog";
+import Page from "@/components/common/Page";
+import { useToast } from "@/components/common/Toast";
+import { AccountCard } from "@/components/custom/card/AccountCard";
+import { useAccount } from "@/hooks/account/useAccount";
+import useAuth from "@/hooks/account/useAuth";
+// import { useLogout } from '@/hooks/auth/useLogout';
+import { QUERY_KEYS } from "@/lib/queryKeys";
+import theme from "@/themes";
+import { SettingsItem } from "./SettingsItem";
+
+export const Settings = () => {
+  const { t } = useTranslation();
+  const navigation = useNavigation();
+  const { logout } = useAuth();
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+  const { data: user, isPending } = useAccount();
+  //   const { mutate: logout, isPending: isLoggingOut } = useLogout();
+
+  const [darkMode, setDarkMode] = useState(false);
+  const [notifications, setNotifications] = useState(true);
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      toast(t("auth.disconnected"));
+    } catch (err) {
+      console.error("Error logging out:", err);
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    toast("We are working on it 🚧");
+  };
+  const refetch = async () => {
+    await queryClient.invalidateQueries({ queryKey: QUERY_KEYS.user });
+  };
+
+  return (
+    <Page className="gap-6" refreshing={isPending} onRefresh={refetch}>
+      <Text className="h1 m-4">{t("common.settings")}</Text>
+
+      <AccountCard user={user} />
+
+      <View>
+        <Text className="h3 mb-2">{t("common.appearance")}</Text>
+        <View className="bg-card rounded-lg px-4 py-2">
+          <SettingsItem
+            icon={<Globe color={theme.textPrimary} size={22} />}
+            title={t("language.language")}
+            subtitle={t("language.french")}
+            onPress={() => {}}
+          />
+        </View>
+      </View>
+
+      <View>
+        <Text className="h3 mb-2">{t("common.notifications")}</Text>
+        <View className="bg-card rounded-lg px-4 py-2">
+          <SettingsItem
+            icon={<Bell color={theme.textPrimary} size={22} />}
+            title="Notifications"
+            onPress={() => {}}
+          />
+        </View>
+      </View>
+
+      <View>
+        <Text className="h3 mb-2">{t("account.security")}</Text>
+        <View className="bg-card rounded-lg px-4 py-2">
+          <SettingsItem
+            icon={<Shield color={theme.textPrimary} size={22} />}
+            title={t("account.changePassword")}
+            onPress={() => {}}
+          />
+        </View>
+      </View>
+
+      <View>
+        <Text className="h3 mb-2">{t("common.other")}</Text>
+        <View className="bg-card rounded-lg px-4 py-2 gap-4">
+          <SettingsItem
+            icon={<HelpCircle color={theme.textPrimary} size={22} />}
+            title={t("common.help")}
+            subtitle={t("common.contactSupport")}
+            onPress={() => {}}
+          />
+          <SettingsItem
+            icon={<Info color={theme.textPrimary} size={22} />}
+            title={t("common.about")}
+            subtitle={t("common.knowMore")}
+            onPress={() => {}}
+          />
+        </View>
+      </View>
+
+      <View className="gap-2">
+        <Button
+          label={t("common.logout")}
+          onPress={handleLogout}
+          variant="destructive"
+        />
+        <Button
+          label={t("account.deleteAccount")}
+          onPress={handleDeleteAccount}
+          variant="outlined"
+          className="border-destructive"
+          labelClasses="text-destructive"
+        />
+      </View>
+    </Page>
+  );
+};
+
+export default Settings;

@@ -1,4 +1,5 @@
 import type { NavigatorScreenParams } from "@react-navigation/core";
+import type { StackNavigationProp } from "@react-navigation/stack";
 
 export type StorageItemValue = string | object | null;
 
@@ -43,13 +44,18 @@ export type AppStackParamList = {
   Profile: {
     userId: string;
   };
-  Settings: undefined;
   BottomTabNavigator: undefined;
   Clubs: undefined;
   Traq: undefined;
   Account: undefined;
-  EditProfile: undefined;
 };
+
+type AccountStackParamList = {
+  Account: undefined;
+  EditProfile: undefined;
+  Settings: undefined;
+};
+export type AccountNavigation = StackNavigationProp<AccountStackParamList>;
 
 // Root Stack Types
 export type RootStackParamList = {

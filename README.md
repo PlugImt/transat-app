@@ -125,6 +125,13 @@ Contribuez à la cagnotte Lydia -->
                     <sub><b>Zephyr</b></sub>
                 </a>
             </td>
+            <td align="center">
+                <a href="https://github.com/maxbodin">
+                    <img src="https://avatars.githubusercontent.com/u/159888863?v=4" width="100;" alt="maxbodin"/>
+                    <br />
+                    <sub><b>maxbodin</b></sub>
+                </a>
+            </td>
 		</tr>
 	<tbody>
 </table>

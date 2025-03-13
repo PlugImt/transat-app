@@ -1,3 +1,4 @@
+import { storage } from "@/services/storage/asyncStorage";
 import axios from "axios";
 import { type ClassValue, clsx } from "clsx";
 import * as FileSystem from "expo-file-system";
@@ -28,47 +29,69 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export async function uploadImage(): Promise<string> {
-  // Demander la permission d'accès à la galerie
+  // Request permission to access the gallery
   const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
   if (status !== "granted") {
     throw new Error(t("account.permissionDenied"));
   }
 
-  // Ouvrir la galerie et sélectionner une image
+  // Open the gallery and select an image
   const result = await ImagePicker.launchImageLibraryAsync({
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
     allowsEditing: true,
     aspect: [1, 1],
-    quality: 1,
-    base64: true,
+    quality: 0.8, // Reduced quality for better performance
   });
 
   if (result.canceled || !result.assets[0].uri) {
     throw new Error();
   }
 
-  // Lire l'image en base64
+  // Get the selected image
   const image = result.assets[0];
   const base64 = await FileSystem.readAsStringAsync(image.uri, {
     encoding: FileSystem.EncodingType.Base64,
   });
 
-  // Upload sur ImgBB
-  const formData = new FormData();
-  formData.append("key", "08a0689ec289e5488db04a7da79d5dff");
-  formData.append("image", base64);
+  try {
+    // Get the JWT token for authentication
+    const token = await storage.get("token");
+    if (!token) {
+      throw new Error(t("account.noToken"));
+    }
 
-  const uploadResponse = await axios.post(
-    "https://api.imgbb.com/1/upload",
-    formData,
-    {
-      headers: { "Content-Type": "multipart/form-data" },
-    },
-  );
+    // Create form data
+    const formData = new FormData();
 
-  if (!uploadResponse.data.success) {
-    throw new Error(t("account.passwordChangeFailed"));
+    formData.append("image", {
+      uri: image.uri,
+      name: image.uri.split("/").pop() || "image.jpg",
+      type: `image/${image.uri.split(".").pop()}` || "image/jpeg",
+      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    } as any);
+
+    // Upload to your API
+    const uploadResponse = await axios.post(
+      "https://transat.destimt.fr/api/upload",
+      formData,
+      {
+        headers: {
+          Authorization: token,
+          "Content-Type": "multipart/form-data",
+        },
+      },
+    );
+
+    if (!uploadResponse.data.success) {
+      throw new Error(t("account.uploadFailed"));
+    }
+
+    // Return the URL from your API response
+    // Modify this based on your actual API response structure
+    const baseUrl = "https://transat.destimt.fr/api";
+    return baseUrl + uploadResponse.data.url;
+  } catch (error) {
+    console.error("Image upload failed:", error);
+    throw new Error(t("account.uploadFailed"));
   }
-
-  return uploadResponse.data.data.url;
 }

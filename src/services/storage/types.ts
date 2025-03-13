@@ -54,8 +54,16 @@ type AccountStackParamList = {
   Account: undefined;
   EditProfile: undefined;
   Settings: undefined;
+  ChangePassword: undefined;
 };
 export type AccountNavigation = StackNavigationProp<AccountStackParamList>;
+
+type SettingsStackParamList = {
+  Account: undefined;
+  EditProfile: undefined;
+  ChangePassword: undefined;
+};
+export type SettingsNavigation = StackNavigationProp<SettingsStackParamList>;
 
 // Root Stack Types
 export type RootStackParamList = {

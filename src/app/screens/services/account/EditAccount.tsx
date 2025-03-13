@@ -185,7 +185,6 @@ export const EditProfile = () => {
         <TouchableOpacity
           className="relative"
           onPress={handleUpdateProfilePicture}
-          activeOpacity={4}
         >
           <Avatar className="w-32 h-32">
             <AvatarImage

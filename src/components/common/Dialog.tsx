@@ -86,13 +86,10 @@ function DialogContent({
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           className="flex flex-1 justify-center items-center bg-background/75 w-full"
         >
-          <TouchableOpacity
-            className="border border-border bg-background rounded-lg p-6 shadow-lg w-11/12 max-h-[80%] gap-8"
-            activeOpacity={1}
-          >
+          <TouchableOpacity className="border border-border bg-background rounded-lg p-6 shadow-lg w-11/12 max-h-[80%] gap-8">
             <Text className="h2">{title}</Text>
             <ScrollView keyboardShouldPersistTaps="handled">
-              <TouchableOpacity activeOpacity={1} className="pr-6">
+              <TouchableOpacity className="pr-6">
                 <View className={className}>{children}</View>
               </TouchableOpacity>
             </ScrollView>

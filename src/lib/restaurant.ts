@@ -2,7 +2,6 @@ import type { MenuData } from "@/types/restaurant";
 import { t } from "i18next";
 
 const TARGET_URL = "https://transat.destimt.fr/api/restaurant";
-const REGEX = /var loadingData = (\[.*?])/;
 
 export async function getRestaurant(): Promise<MenuData | undefined> {
   try {

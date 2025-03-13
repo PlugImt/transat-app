@@ -48,7 +48,7 @@ const Card = ({ title, description, image, animation, onPress }: CardProps) => {
   }, [image, imageWidth]);
 
   return (
-    <TouchableOpacity onPress={onPress} accessible={true} activeOpacity={0.4}>
+    <TouchableOpacity onPress={onPress}>
       <View
         style={{
           paddingTop: 10,

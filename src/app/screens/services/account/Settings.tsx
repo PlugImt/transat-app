@@ -1,51 +1,31 @@
-import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
-import {
-  Bell,
-  ChevronRight,
-  Globe,
-  HelpCircle,
-  Info,
-  LogOut,
-  Moon,
-  Shield,
-} from "lucide-react-native";
-import React, { useState } from "react";
+import { Bell, Globe, HelpCircle, Info, Shield } from "lucide-react-native";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { ScrollView, Switch, Text, View } from "react-native";
+import { Text, View } from "react-native";
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/common/Avatar";
 import { Button } from "@/components/common/Button";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "@/components/common/Dialog";
 import Page from "@/components/common/Page";
 import { useToast } from "@/components/common/Toast";
 import { AccountCard } from "@/components/custom/card/AccountCard";
 import { useAccount } from "@/hooks/account/useAccount";
 import useAuth from "@/hooks/account/useAuth";
-// import { useLogout } from '@/hooks/auth/useLogout';
 import { QUERY_KEYS } from "@/lib/queryKeys";
+import type {
+  AccountNavigation,
+  SettingsNavigation,
+} from "@/services/storage/types";
 import theme from "@/themes";
+import { useNavigation } from "@react-navigation/native";
 import { SettingsItem } from "./SettingsItem";
 
 export const Settings = () => {
   const { t } = useTranslation();
-  const navigation = useNavigation();
   const { logout } = useAuth();
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const { data: user, isPending } = useAccount();
-  //   const { mutate: logout, isPending: isLoggingOut } = useLogout();
-
-  const [darkMode, setDarkMode] = useState(false);
-  const [notifications, setNotifications] = useState(true);
+  const navigation = useNavigation<SettingsNavigation>();
 
   const handleLogout = async () => {
     try {
@@ -98,7 +78,7 @@ export const Settings = () => {
           <SettingsItem
             icon={<Shield color={theme.textPrimary} size={22} />}
             title={t("account.changePassword")}
-            onPress={() => {}}
+            onPress={() => navigation.navigate("ChangePassword")}
           />
         </View>
       </View>

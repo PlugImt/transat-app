@@ -17,7 +17,7 @@ export function NotificationBell({ service }: { service: string }) {
   };
 
   return (
-    <TouchableOpacity onPress={() => handleBellClick()}>
+    <TouchableOpacity onPress={handleBellClick}>
       {
         // @ts-ignore
         notificationsEnabled ? (

@@ -50,8 +50,6 @@ export function RestaurantWidget() {
       <Text className="h3">{title}</Text>
       <TouchableOpacity
         onPress={() => navigation.navigate("Restaurant")}
-        accessible={true}
-        activeOpacity={0.4}
         className="px-6 py-4 rounded-lg bg-card flex flex-col gap-6"
       >
         {lunch ? (

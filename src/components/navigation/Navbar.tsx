@@ -6,6 +6,7 @@ import { Services } from "@/app/screens/services/Services";
 import { Traq } from "@/app/screens/services/Traq";
 import { WashingMachine } from "@/app/screens/services/WashingMachine";
 import Account from "@/app/screens/services/account/Account";
+import { ChangePassword } from "@/app/screens/services/account/ChangePassword";
 import EditProfile from "@/app/screens/services/account/EditAccount";
 import Settings from "@/app/screens/services/account/Settings";
 import type { BottomTabParamList } from "@/types/navigation";
@@ -51,6 +52,7 @@ const AccountStackScreen = () => (
     <AccountStack.Screen name="AccountScreen" component={Account} />
     <AccountStack.Screen name="EditProfile" component={EditProfile} />
     <AccountStack.Screen name="Settings" component={Settings} />
+    <AccountStack.Screen name="ChangePassword" component={ChangePassword} />
   </AccountStack.Navigator>
 );
 

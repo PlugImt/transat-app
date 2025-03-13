@@ -199,6 +199,7 @@
     "passwordUpdated": "Last password update",
     "profilePictureUpdated": "Profile picture updated",
     "profilePictureUpdateFailed": "Failed to update profile picture",
-    "permissionDenied": "Permission denied"
+    "permissionDenied": "Permission denied",
+    "uploadFailed": "Failed to upload image"
   }
 }

@@ -20,7 +20,7 @@ export function isDinner() {
 export function outOfService() {
   const now = new Date();
   const hour = now.getHours();
-  return hour >= 21 || hour < 11;
+  return hour >= 21 || hour < 9;
 }
 
 export function cn(...inputs: ClassValue[]) {

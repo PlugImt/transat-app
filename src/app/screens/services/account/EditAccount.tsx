@@ -4,11 +4,6 @@ import {
   AvatarImage,
 } from "@/components/common/Avatar";
 import { Button } from "@/components/common/Button";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "@/components/common/Dialog";
 import Dropdown from "@/components/common/Dropdown";
 import { Input } from "@/components/common/Input";
 import Page from "@/components/common/Page";
@@ -16,12 +11,11 @@ import { useToast } from "@/components/common/Toast";
 import ErrorPage from "@/components/custom/ErrorPage";
 import LoadingScreen from "@/components/custom/LoadingScreen";
 import { useAccount } from "@/hooks/account/useAccount";
-import { useChangePassword } from "@/hooks/account/useChangePassword";
 import { useUpdateAccount } from "@/hooks/account/useUpdateAccount";
 import { useUpdateProfilePicture } from "@/hooks/account/useUpdateProfilePicture";
 import { QUERY_KEYS } from "@/lib/queryKeys";
 import theme from "@/themes";
-import type { Password, User } from "@/types/user";
+import type { User } from "@/types/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
@@ -42,8 +36,6 @@ export const EditProfile = () => {
     useUpdateAccount();
   const { mutate: updateProfilePicture, isPending: isUpdatingProfilePicture } =
     useUpdateProfilePicture();
-  const { mutate: changePassword, isPending: isUpdatingPassword } =
-    useChangePassword();
 
   const refetch = async () => {
     await queryClient.invalidateQueries({ queryKey: QUERY_KEYS.user });
@@ -62,17 +54,6 @@ export const EditProfile = () => {
     graduation_year: z.number().optional(),
   });
 
-  const passwordSchema = z
-    .object({
-      password: z.string().min(6, t("auth.errors.password")),
-      new_password: z.string().min(6, t("auth.errors.password")),
-      new_password_confirmation: z.string().min(6, t("auth.errors.password")),
-    })
-    .refine((data) => data.new_password === data.new_password_confirmation, {
-      message: t("account.passwordMismatch"),
-      path: ["new_password_confirmation"],
-    });
-
   const {
     control: userControl,
     handleSubmit: handleUserSubmit,
@@ -81,22 +62,6 @@ export const EditProfile = () => {
     resolver: zodResolver(userSchema),
     defaultValues: user,
     mode: "onChange",
-  });
-
-  const {
-    control: passwordControl,
-    handleSubmit: handlePasswordSubmit,
-    formState: { errors: passwordErrors, isValid: isPasswordValid },
-    reset: resetPassword,
-  } = useForm({
-    resolver: zodResolver(passwordSchema),
-    mode: "onChange",
-    defaultValues: {
-      email: user?.email || "",
-      password: "",
-      new_password: "",
-      new_password_confirmation: "",
-    },
   });
 
   const currentYear = new Date().getFullYear();
@@ -115,29 +80,6 @@ export const EditProfile = () => {
         toast(error.message, "destructive");
       },
     });
-  };
-
-  const handleChangePassword = (data: Password) => {
-    Keyboard.dismiss();
-    changePassword(
-      {
-        email: user?.email || "",
-        password: data.password,
-        new_password: data.new_password,
-        new_password_confirmation: data.new_password_confirmation,
-      },
-      {
-        onSuccess: () => {
-          resetPassword();
-          toast(t("account.passwordChanged"), "success");
-          navigation.goBack();
-        },
-        onError: (error) => {
-          resetPassword();
-          toast(error.message, "destructive");
-        },
-      },
-    );
   };
 
   const handleUpdateProfilePicture = () => {
@@ -259,52 +201,6 @@ export const EditProfile = () => {
             />
           )}
         />
-        <Dialog>
-          <DialogContent
-            title={t("account.changePassword")}
-            className="gap-4"
-            cancelLabel={t("common.cancel")}
-            confirmLabel={t("common.save")}
-            onConfirm={handlePasswordSubmit(handleChangePassword)}
-            isPending={isUpdatingPassword}
-            disableConfirm={!isPasswordValid}
-          >
-            <Input
-              label={t("account.currentPassword")}
-              control={passwordControl}
-              name="password"
-              textContentType="password"
-              error={passwordErrors.password?.message}
-              secureTextEntry
-            />
-
-            <Input
-              label={t("account.newPassword")}
-              control={passwordControl}
-              name="new_password"
-              textContentType="newPassword"
-              error={passwordErrors.new_password?.message}
-              secureTextEntry
-            />
-
-            <Input
-              label={t("account.confirmPassword")}
-              control={passwordControl}
-              name="new_password_confirmation"
-              textContentType="newPassword"
-              error={passwordErrors.new_password_confirmation?.message}
-              secureTextEntry
-            />
-          </DialogContent>
-          <View className="gap-1.5">
-            <Text className="text-foreground/70 text-sm">
-              {t("auth.password")}
-            </Text>
-            <DialogTrigger>
-              <Button label={t("account.changePassword")} variant="ghost" />
-            </DialogTrigger>
-          </View>
-        </Dialog>
       </View>
 
       <Button

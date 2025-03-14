@@ -52,7 +52,7 @@ const WashingMachineCard = ({
 
   const getMachineStatus = useCallback(
     (timeBeforeOff: number): string => {
-      if (timeBeforeOff === 0) return t("common.free");
+      if (timeBeforeOff === 0) return t("common.freeToUse");
       return timeBeforeOff > 0 ? formatTime(timeBeforeOff) : "UNKNOWN";
     },
     [formatTime, t],

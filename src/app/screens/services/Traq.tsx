@@ -1,12 +1,14 @@
+import { Badge } from "@/components/common/Badge";
 import Page from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
+import ErrorPage from "@/components/custom/ErrorPage";
 import LoadingScreen from "@/components/custom/LoadingScreen";
 import NotificationBell from "@/components/custom/NotificationBell";
 import TraqCard from "@/components/custom/card/TraqCard";
 import { useTraq } from "@/hooks/useTraq";
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 
 export const Traq = () => {
   const { t } = useTranslation();
@@ -71,83 +73,67 @@ export const Traq = () => {
     </View>
   );
 
-  if (isError) {
+  if ((isError && error) || !traq) {
     return (
-      <Page refreshing={isPending} onRefresh={refetch}>
-        {header}
-
-        <View className="min-h-screen flex justify-center items-center ">
-          <Text className="text-red-500 text-center h1">{error?.message}</Text>
-        </View>
-      </Page>
+      <ErrorPage
+        error={
+          error || ({ message: t("common.errors.unableToFetch") } as Error)
+        }
+        refetch={refetch}
+        isRefetching={isPending}
+      />
     );
   }
 
   return (
-    <Page refreshing={isPending} onRefresh={refetch}>
+    <Page refreshing={isPending} onRefresh={refetch} className="gap-4">
       {header}
 
-      <View className="mb-4">
-        <View className="flex-row justify-between items-center mb-2">
-          <Text className="text-lg font-semibold text-foreground">
-            {t("common.filter")}
-          </Text>
-          {selectedTags.length > 0 && (
-            <TouchableOpacity onPress={clearTags}>
-              <Text className="text-secondary">{t("common.clear_all")}</Text>
-            </TouchableOpacity>
-          )}
-        </View>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          className="pb-2"
-        >
-          {uniqueTags.map((tag) => (
-            <TouchableOpacity
-              key={tag}
-              onPress={() => toggleTag(tag)}
-              className={`mr-2  pl-5 pr-5 pt-2 pb-2 py-1 rounded-lg ${
-                selectedTags.includes(tag) ? "bg-secondary" : "bg-foreground"
-              }`}
-            >
-              <Text
-                className={`${
-                  selectedTags.includes(tag) ? "text-white" : "text-gray-800"
-                }`}
-              >
-                {tag}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-      </View>
-
-      <View className="flex flex-col gap-8">
-        {filteredArticles.length === 0 ? (
-          <View className="flex items-center justify-center py-10">
-            <Text className="text-gray-500">
-              {t("services.traq.no_items_found")}
-            </Text>
-          </View>
-        ) : (
-          <View className="flex flex-col gap-4">
-            {filteredArticles.map((article) => (
-              <TraqCard
-                key={article.id_traq}
-                image={article.picture}
-                description={article.description}
-                name={article.name}
-                price={article.price}
-                limited={article.limited}
-                outOfStock={article.out_of_stock}
-                alcohol={article.alcohol}
-                priceHalf={article.price_half}
-              />
-            ))}
-          </View>
+      <View className="flex-row justify-between items-center">
+        <Text className="h2">{t("common.filter")}</Text>
+        {selectedTags.length > 0 && (
+          <Badge
+            label={t("common.clear_all")}
+            variant="secondary"
+            onPress={clearTags}
+          />
         )}
       </View>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        {uniqueTags.map((tag) => (
+          <Badge
+            key={tag}
+            label={tag}
+            variant={selectedTags.includes(tag) ? "secondary" : "light"}
+            onPress={() => toggleTag(tag)}
+            className="mr-2"
+          />
+        ))}
+      </ScrollView>
+
+      {filteredArticles.length === 0 ? (
+        <View className="flex items-center justify-center h-full">
+          <Text className="h3 text-muted-foreground">
+            {t("services.traq.no_items_found")}
+          </Text>
+        </View>
+      ) : (
+        <View className="gap-4">
+          {filteredArticles.map((article) => (
+            <TraqCard
+              key={article.id_traq}
+              image={article.picture}
+              description={article.description}
+              name={article.name}
+              price={article.price}
+              limited={article.limited}
+              outOfStock={article.out_of_stock}
+              alcohol={article.alcohol}
+              priceHalf={article.price_half}
+            />
+          ))}
+        </View>
+      )}
     </Page>
   );
 };

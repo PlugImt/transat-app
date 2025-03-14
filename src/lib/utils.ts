@@ -20,8 +20,16 @@ export function isDinner() {
 
 export function outOfService(lastUpdate: string) {
   const now = new Date();
-  const diff = now.getTime() - new Date(lastUpdate).getTime();
-  return diff > 1000 * 60 * 60 * 24; // returns true if the difference is greater than 24 hours
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const updateDate = new Date(lastUpdate);
+  const updateDay = new Date(
+    updateDate.getFullYear(),
+    updateDate.getMonth(),
+    updateDate.getDate(),
+  );
+
+  // Return true if update date is before today, false otherwise
+  return updateDay < today;
 }
 
 export function cn(...inputs: ClassValue[]) {

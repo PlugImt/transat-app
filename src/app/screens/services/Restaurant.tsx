@@ -60,7 +60,10 @@ export const Restaurant = () => {
   } = useRestaurantMenu();
 
   const weekend: boolean = useMemo(() => isWeekend(new Date()), []);
-  const outOfHours: boolean = useMemo(() => outOfService(), []);
+  const outOfHours: boolean = useMemo(
+    () => (menu?.updated_date ? outOfService(menu.updated_date) : false),
+    [menu?.updated_date],
+  );
 
   if (isPending) {
     return <LoadingScreen />;

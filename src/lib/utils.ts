@@ -18,10 +18,10 @@ export function isDinner() {
   return hour >= 14 && hour < 21;
 }
 
-export function outOfService() {
+export function outOfService(lastUpdate: string) {
   const now = new Date();
-  const hour = now.getHours();
-  return hour >= 21 || hour < 9;
+  const diff = now.getTime() - new Date(lastUpdate).getTime();
+  return diff > 1000 * 60 * 60 * 24; // returns true if the difference is greater than 24 hours
 }
 
 export function cn(...inputs: ClassValue[]) {

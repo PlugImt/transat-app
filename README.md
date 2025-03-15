@@ -10,7 +10,7 @@
 <p align="center">
   <a href="#✨-roadmap">Roadmap</a> •
   <a href="#🛠️-participer-au-développement">Participer</a> •
-  <a href="#🕹️-outils-utilisés">Outils</a> •
+  <a href="#🕹️-technos-utilisées">Technos</a> •
   <a href="#👋-nous-contacter">Contact</a> •
   <!-- <a href="#🫶-soutenir-l'association">Soutenir</a> • -->
   <a href="#🤠-crédits">Crédit</a> •
@@ -72,7 +72,7 @@ Pour participer au design de l'application, faites une demande pour modifier le 
     <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white" />
 </a> -->
 
-## 🕹️ Outils utilisés
+## 🕹️ Technos utilisées
 
 <img src="https://skillicons.dev/icons?i=react,tailwind,golang,postgresql" alt="Les technologies utilisées" />
 

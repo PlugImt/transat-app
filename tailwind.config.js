@@ -1,3 +1,5 @@
+const colors = require("./src/themes/colors").default;
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
@@ -9,45 +11,30 @@ module.exports = {
     },
     extend: {
       colors: {
-        border: "#2A2A2A",
-        input: "#2A2A2A",
-        background: "#110904",
-        foreground: "#ffe6cc",
+        border: colors.dark.muted,
+        input: colors.dark.muted,
+        background: colors.dark.background,
+        foreground: colors.dark.foreground,
         primary: {
-          DEFAULT: "#ec7f32",
-          foreground: "#ffe6cc",
+          DEFAULT: colors.dark.primary,
+          foreground: colors.dark.foreground,
         },
         secondary: {
-          DEFAULT: "#0049a8",
+          DEFAULT: colors.dark.secondary,
           foreground: "#95b5df",
         },
-        destructive: {
-          DEFAULT: "#F44336",
-          foreground: "#FFFFFF",
-        },
-        success: {
-          DEFAULT: "#4CAF50",
-          foreground: "#FFFFFF",
-        },
-        warning: {
-          DEFAULT: "#FFC107",
-          foreground: "#000000",
-        },
-        info: {
-          DEFAULT: "#2196F3",
-          foreground: "#FFFFFF",
-        },
-        muted: {
-          DEFAULT: "#494949",
-          foreground: "#8A8A8A",
-        },
         card: {
-          DEFAULT: "#181010",
-          foreground: "#ffe6cc",
+          DEFAULT: colors.dark.card,
+          foreground: colors.dark.foreground,
         },
         lightCard: {
           DEFAULT: "#1e1515",
-          foreground: "#ffe6cc",
+          foreground: colors.dark.foreground,
+        },
+        ...colors.shared,
+        muted: {
+          DEFAULT: colors.dark.muted,
+          foreground: "#8A8A8A",
         },
       },
       borderRadius: {

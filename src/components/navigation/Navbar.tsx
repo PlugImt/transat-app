@@ -6,8 +6,9 @@ import { Services } from "@/app/screens/services/Services";
 import { Traq } from "@/app/screens/services/Traq";
 import { WashingMachine } from "@/app/screens/services/WashingMachine";
 import Account from "@/app/screens/services/account/Account";
-import { ChangePassword } from "@/app/screens/services/account/ChangePassword";
+import ChangePassword from "@/app/screens/services/account/ChangePassword";
 import EditProfile from "@/app/screens/services/account/EditAccount";
+import Notifications from "@/app/screens/services/account/Notifications";
 import Settings from "@/app/screens/services/account/Settings";
 import type { BottomTabParamList } from "@/types/navigation";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -53,6 +54,7 @@ const AccountStackScreen = () => (
     <AccountStack.Screen name="EditProfile" component={EditProfile} />
     <AccountStack.Screen name="Settings" component={Settings} />
     <AccountStack.Screen name="ChangePassword" component={ChangePassword} />
+    <AccountStack.Screen name="Notifications" component={Notifications} />
   </AccountStack.Navigator>
 );
 

@@ -3,6 +3,7 @@ import "../i18n";
 import "./global.css";
 import { ToastProvider } from "@/components/common/Toast";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { ThemeProvider } from "@/themes/useThemeProvider";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import * as Clipboard from "expo-clipboard";
@@ -30,16 +31,18 @@ export default function App() {
   };
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <QueryClientProvider client={queryClient}>
-        <BottomSheetModalProvider>
-          <AuthProvider>
-            <ToastProvider position="top">
-              <RootNavigator />
-            </ToastProvider>
-          </AuthProvider>
-        </BottomSheetModalProvider>
-      </QueryClientProvider>
-    </GestureHandlerRootView>
+    <ThemeProvider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <QueryClientProvider client={queryClient}>
+          <BottomSheetModalProvider>
+            <AuthProvider>
+              <ToastProvider position="top">
+                <RootNavigator />
+              </ToastProvider>
+            </AuthProvider>
+          </BottomSheetModalProvider>
+        </QueryClientProvider>
+      </GestureHandlerRootView>
+    </ThemeProvider>
   );
 }

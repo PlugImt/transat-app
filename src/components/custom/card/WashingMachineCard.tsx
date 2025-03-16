@@ -1,4 +1,4 @@
-import theme from "@/themes";
+import { useTheme } from "@/themes/useThemeProvider";
 import * as Notifications from "expo-notifications";
 import { SchedulableTriggerInputTypes } from "expo-notifications";
 import { Bell, BellRing, WashingMachineIcon, Wind } from "lucide-react-native";
@@ -6,13 +6,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Text, TouchableOpacity, View } from "react-native";
 import { Badge } from "../../common/Badge";
-import { Button } from "../../common/Button";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-  useDialog,
-} from "../../common/Dialog";
+import { Dialog, DialogContent, DialogTrigger } from "../../common/Dialog";
 
 interface WashingMachineProps {
   number: string;
@@ -39,6 +33,7 @@ const WashingMachineCard = ({
   icon,
 }: WashingMachineProps) => {
   const { t } = useTranslation();
+  const theme = useTheme();
 
   const [timeRemaining, setTimeRemaining] = useState<number>(status);
   const [notificationSet, setNotificationSet] = useState<boolean>(false);

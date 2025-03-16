@@ -1,6 +1,6 @@
 import { useWashingMachines } from "@/hooks/useWashingMachines";
 import type { AppStackParamList } from "@/services/storage/types";
-import theme from "@/themes";
+import { useTheme } from "@/themes/useThemeProvider";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { WashingMachineIcon, Wind } from "lucide-react-native";
@@ -13,6 +13,7 @@ type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 export function WashingMachineWidget() {
   const { t } = useTranslation();
   const navigation = useNavigation<AppScreenNavigationProp>();
+  const theme = useTheme();
 
   const { data, isPending, isError, error, refetch } = useWashingMachines();
 

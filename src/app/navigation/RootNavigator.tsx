@@ -2,7 +2,6 @@ import { AppNavigator } from "@/app/navigation/AppNavigator";
 import { AuthNavigator } from "@/app/navigation/AuthNavigator";
 import LoadingScreen from "@/components/custom/LoadingScreen";
 import { useAuth } from "@/hooks/account/useAuth";
-import { storage } from "@/services/storage/asyncStorage";
 import type {
   AppStackParamList,
   RootStackParamList,
@@ -11,7 +10,6 @@ import {
   type StackNavigationProp,
   createStackNavigator,
 } from "@react-navigation/stack";
-import { useEffect } from "react";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 

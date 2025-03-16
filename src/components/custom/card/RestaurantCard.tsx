@@ -1,7 +1,7 @@
-import theme from "@/themes";
+import { useTheme } from "@/themes/useThemeProvider";
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
-import { Text, TouchableWithoutFeedback, View } from "react-native";
+import { Text, View } from "react-native";
 
 interface CardProps {
   title: string;
@@ -11,6 +11,7 @@ interface CardProps {
 
 const RestaurantCard = ({ title, meals, icon }: CardProps) => {
   const { t } = useTranslation();
+  const theme = useTheme();
 
   function getIcon() {
     switch (icon) {

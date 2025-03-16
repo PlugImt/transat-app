@@ -11,7 +11,7 @@ import LoadingScreen from "@/components/custom/LoadingScreen";
 import { useAccount } from "@/hooks/account/useAccount";
 import { QUERY_KEYS } from "@/lib/queryKeys";
 import type { AccountNavigation } from "@/services/storage/types";
-import theme from "@/themes";
+import { useTheme } from "@/themes/useThemeProvider";
 import { useNavigation } from "@react-navigation/native";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
 import { Lock, Mail, Medal, Phone, Settings } from "lucide-react-native";
@@ -20,6 +20,7 @@ import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
 
 export const Account = () => {
+  const theme = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation<AccountNavigation>();
   const queryClient = useQueryClient();
@@ -53,7 +54,7 @@ export const Account = () => {
       <View className="flex-row justify-between items-center ">
         <Text className="h1">{t("common.account")}</Text>
         <IconButton
-          icon={<Settings color={theme.textPrimary} />}
+          icon={<Settings color={theme.foreground} />}
           variant="link"
           onPress={() => navigation.navigate("Settings")}
         />
@@ -86,12 +87,12 @@ export const Account = () => {
       <View className="bg-card rounded-lg px-6 py-4 gap-4">
         <Text className="h3">{t("account.contactInfo")}</Text>
         <InfoItem
-          icon={<Mail color={theme.textPrimary} size={20} />}
+          icon={<Mail color={theme.foreground} size={20} />}
           label={t("account.email")}
           value={user?.email || t("account.notProvided")}
         />
         <InfoItem
-          icon={<Phone color={theme.textPrimary} size={20} />}
+          icon={<Phone color={theme.foreground} size={20} />}
           label={t("account.phone")}
           value={user?.phone_number || t("account.notProvided")}
         />
@@ -101,13 +102,13 @@ export const Account = () => {
         <Text className="h3">{t("account.infos")}</Text>
 
         <InfoItem
-          icon={<Medal color={theme.textPrimary} size={20} />}
+          icon={<Medal color={theme.foreground} size={20} />}
           label={t("account.registration")}
           value={`n°${user?.id_newf}/${user?.total_newf} ${t("account.newf")}`}
         />
 
         <InfoItem
-          icon={<Lock color={theme.textPrimary} size={20} />}
+          icon={<Lock color={theme.foreground} size={20} />}
           label={t("account.passwordUpdated")}
           value={
             user?.password_updated_date

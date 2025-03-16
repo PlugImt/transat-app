@@ -1,17 +1,14 @@
-import theme from "@/themes";
+import { useTheme } from "@/themes/useThemeProvider";
 import { Picker } from "@react-native-picker/picker";
 import { ChevronDown } from "lucide-react-native";
 import type React from "react";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Text, TouchableOpacity, View } from "react-native";
 import {
   BottomSheet,
   BottomSheetProvider,
   BottomSheetTrigger,
-  useBottomSheet,
 } from "./BottomSheet";
-import { Button } from "./Button";
 
 type DropdownProps = {
   options: string[];
@@ -31,6 +28,7 @@ const Dropdown = ({
   placeholder,
 }: DropdownProps) => {
   const { t } = useTranslation();
+  const theme = useTheme();
 
   return (
     <BottomSheetProvider>
@@ -44,7 +42,7 @@ const Dropdown = ({
                 {value ? value : placeholder}
               </Text>
             </View>
-            <ChevronDown color={theme.textPrimary} size={20} />
+            <ChevronDown color={theme.foreground} size={20} />
           </TouchableOpacity>
         </BottomSheetTrigger>
 

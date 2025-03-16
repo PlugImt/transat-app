@@ -108,3 +108,5 @@ export const ChangePassword = () => {
     </Page>
   );
 };
+
+export default ChangePassword;

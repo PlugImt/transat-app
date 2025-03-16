@@ -11,15 +11,13 @@ import { AccountCard } from "@/components/custom/card/AccountCard";
 import { useAccount } from "@/hooks/account/useAccount";
 import useAuth from "@/hooks/account/useAuth";
 import { QUERY_KEYS } from "@/lib/queryKeys";
-import type {
-  AccountNavigation,
-  SettingsNavigation,
-} from "@/services/storage/types";
-import theme from "@/themes";
+import type { SettingsNavigation } from "@/services/storage/types";
+import { useTheme } from "@/themes/useThemeProvider";
 import { useNavigation } from "@react-navigation/native";
-import { SettingsItem } from "./SettingsItem";
+import SettingsItem from "./SettingsItem";
 
 export const Settings = () => {
+  const theme = useTheme();
   const { t } = useTranslation();
   const { logout } = useAuth();
   const { toast } = useToast();
@@ -49,11 +47,11 @@ export const Settings = () => {
 
       <AccountCard user={user} />
 
-      <View>
-        <Text className="h3 mb-2">{t("common.appearance")}</Text>
+      <View className="gap-2">
+        <Text className="h3">{t("common.appearance")}</Text>
         <View className="bg-card rounded-lg px-4 py-2">
           <SettingsItem
-            icon={<Globe color={theme.textPrimary} size={22} />}
+            icon={<Globe color={theme.foreground} size={22} />}
             title={t("language.language")}
             subtitle={t("language.french")}
             onPress={() => {}}
@@ -61,39 +59,39 @@ export const Settings = () => {
         </View>
       </View>
 
-      <View>
-        <Text className="h3 mb-2">{t("common.notifications")}</Text>
+      <View className="gap-2">
+        <Text className="h3">{t("common.notifications")}</Text>
         <View className="bg-card rounded-lg px-4 py-2">
           <SettingsItem
-            icon={<Bell color={theme.textPrimary} size={22} />}
+            icon={<Bell color={theme.foreground} size={22} />}
             title="Notifications"
-            onPress={() => {}}
+            onPress={() => navigation.navigate("Notifications")}
           />
         </View>
       </View>
 
-      <View>
-        <Text className="h3 mb-2">{t("account.security")}</Text>
+      <View className="gap-2">
+        <Text className="h3">{t("account.security")}</Text>
         <View className="bg-card rounded-lg px-4 py-2">
           <SettingsItem
-            icon={<Shield color={theme.textPrimary} size={22} />}
+            icon={<Shield color={theme.foreground} size={22} />}
             title={t("account.changePassword")}
             onPress={() => navigation.navigate("ChangePassword")}
           />
         </View>
       </View>
 
-      <View>
-        <Text className="h3 mb-2">{t("common.other")}</Text>
+      <View className="gap-2">
+        <Text className="h3">{t("common.other")}</Text>
         <View className="bg-card rounded-lg px-4 py-2 gap-4">
           <SettingsItem
-            icon={<HelpCircle color={theme.textPrimary} size={22} />}
+            icon={<HelpCircle color={theme.foreground} size={22} />}
             title={t("common.help")}
             subtitle={t("common.contactSupport")}
             onPress={() => {}}
           />
           <SettingsItem
-            icon={<Info color={theme.textPrimary} size={22} />}
+            icon={<Info color={theme.foreground} size={22} />}
             title={t("common.about")}
             subtitle={t("common.knowMore")}
             onPress={() => {}}

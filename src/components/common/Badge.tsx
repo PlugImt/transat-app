@@ -2,7 +2,7 @@ import { type VariantProps, cva } from "class-variance-authority";
 import { Text, TouchableOpacity, type View } from "react-native";
 
 import { cn } from "@/lib/utils";
-import theme from "@/themes";
+import { useTheme } from "@/themes/useThemeProvider";
 import type { LucideIcon } from "lucide-react-native";
 import type React from "react";
 
@@ -69,6 +69,7 @@ function Badge({
   icon: Icon,
   ...props
 }: BadgeProps) {
+  const theme = useTheme();
   return (
     <TouchableOpacity
       className={cn(
@@ -80,7 +81,7 @@ function Badge({
       onPress={onPress}
       activeOpacity={onPress ? 0.2 : 1}
     >
-      {Icon && <Icon size={14} color={theme.textPrimary} />}
+      {Icon && <Icon size={14} color={theme.foreground} />}
       <Text className={cn(badgeTextVariants({ variant, size }), labelClasses)}>
         {label}
       </Text>

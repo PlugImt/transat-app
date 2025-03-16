@@ -2,12 +2,14 @@ import { Signin } from "@/app/screens/auth/Signin";
 import { Signup } from "@/app/screens/auth/Signup";
 import Welcome from "@/app/screens/auth/Welcome";
 import type { AuthStackParamList } from "@/services/storage/types";
-import theme from "@/themes";
+import { useTheme } from "@/themes/useThemeProvider";
 import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator<AuthStackParamList>();
 
 export const AuthNavigator = () => {
+  const theme = useTheme();
+
   return (
     <Stack.Navigator
       screenOptions={{

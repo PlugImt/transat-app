@@ -1,7 +1,7 @@
 import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
 import { isDinner, isLunch, outOfService } from "@/lib/utils";
 import type { AppStackParamList } from "@/services/storage/types";
-import theme from "@/themes";
+import { useTheme } from "@/themes/useThemeProvider";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { isWeekend } from "date-fns";
@@ -14,6 +14,7 @@ type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
 export function RestaurantWidget() {
   const { t } = useTranslation();
+  const theme = useTheme();
 
   const navigation = useNavigation<AppScreenNavigationProp>();
   const { data: menu, isPending, error, isError } = useRestaurantMenu();
@@ -21,7 +22,10 @@ export function RestaurantWidget() {
   const weekend: boolean = useMemo(() => isWeekend(new Date()), []);
   const lunch: boolean = useMemo(() => isLunch(), []);
   const dinner: boolean = useMemo(() => isDinner(), []);
-  const outOfHours = useMemo(() => outOfService(), []);
+  const outOfHours: boolean = useMemo(
+    () => (menu?.updated_date ? outOfService(menu.updated_date) : false),
+    [menu?.updated_date],
+  );
 
   const title =
     !weekend && lunch

@@ -1,10 +1,11 @@
 import { useWeather } from "@/hooks/useWeather";
-import theme from "@/themes";
+import { useTheme } from "@/themes/useThemeProvider";
 import { format } from "date-fns";
 import React from "react";
 import { ActivityIndicator, Image, Text, View } from "react-native";
 
 export function Weather() {
+  const theme = useTheme();
   const { data: weatherNantes, isPending, isError, error } = useWeather();
 
   const date = new Date();

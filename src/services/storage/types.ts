@@ -62,6 +62,7 @@ type SettingsStackParamList = {
   Account: undefined;
   EditProfile: undefined;
   ChangePassword: undefined;
+  Notifications: undefined;
 };
 export type SettingsNavigation = StackNavigationProp<SettingsStackParamList>;
 

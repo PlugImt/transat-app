@@ -1,13 +1,7 @@
-import theme from "@/themes";
+import { useTheme } from "@/themes/useThemeProvider";
 import { BottomSheetModal, BottomSheetView } from "@gorhom/bottom-sheet";
 import type React from "react";
-import {
-  cloneElement,
-  createContext,
-  useCallback,
-  useContext,
-  useRef,
-} from "react";
+import { cloneElement, createContext, useContext, useRef } from "react";
 
 interface BottomSheetContextType {
   bottomSheetRef: React.RefObject<BottomSheetModal>;
@@ -60,12 +54,12 @@ type BottomSheetProps = {
 };
 export function BottomSheet({ children }: BottomSheetProps) {
   const { bottomSheetRef } = useBottomSheet();
-
+  const theme = useTheme();
   return (
     <BottomSheetModal
       ref={bottomSheetRef}
       backgroundStyle={{ backgroundColor: theme.card }}
-      handleIndicatorStyle={{ backgroundColor: theme.textPrimary }}
+      handleIndicatorStyle={{ backgroundColor: theme.foreground }}
     >
       <BottomSheetView className="bg-card px-5 pt-8 gap-2">
         {children}

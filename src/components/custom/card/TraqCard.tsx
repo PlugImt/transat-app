@@ -1,5 +1,5 @@
 import { Badge } from "@/components/common/Badge";
-import theme from "@/themes";
+import { useTheme } from "@/themes/useThemeProvider";
 import { BadgeEuro, Beer, CircleX, Clock } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { Dimensions, Image, Text, View } from "react-native";
@@ -31,6 +31,7 @@ const TraqCard = ({
   onPress,
 }: CardProps) => {
   const { t } = useTranslation();
+  const theme = useTheme();
 
   return (
     <View className="px-6 py-8 rounded-lg bg-card gap-6 relative items-center">
@@ -68,7 +69,7 @@ const TraqCard = ({
         {alcohol !== undefined && alcohol > 0 && (
           <View className="flex-row justify-between items-center">
             <View className="flex-row items-center gap-2">
-              <Beer size={18} color={theme.textPrimary} />
+              <Beer size={18} color={theme.foreground} />
               <Text className="font-bold text-foreground">
                 {t("services.traq.alcohol")}
               </Text>
@@ -80,7 +81,7 @@ const TraqCard = ({
         {price !== undefined && (
           <View className="flex flex-row justify-between items-center">
             <View className="flex flex-row items-center gap-2 ">
-              <BadgeEuro size={18} color={theme.textPrimary} />
+              <BadgeEuro size={18} color={theme.foreground} />
               <Text className="font-bold text-foreground">
                 {t("services.traq.price")}{" "}
                 {alcohol && alcohol > 0 ? " (50cl)" : ""}
@@ -95,7 +96,7 @@ const TraqCard = ({
         {priceHalf !== undefined && priceHalf > 0 && (
           <View className="flex flex-row justify-between items-center">
             <View className="flex flex-row items-center gap-2 ">
-              <BadgeEuro size={18} color={theme.textPrimary} />
+              <BadgeEuro size={18} color={theme.foreground} />
               <Text className="font-bold text-foreground">
                 {t("services.traq.price_half")}{" "}
                 {alcohol && alcohol > 0 ? " (25cl)" : ""}

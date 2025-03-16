@@ -14,7 +14,7 @@ import { useAccount } from "@/hooks/account/useAccount";
 import { useUpdateAccount } from "@/hooks/account/useUpdateAccount";
 import { useUpdateProfilePicture } from "@/hooks/account/useUpdateProfilePicture";
 import { QUERY_KEYS } from "@/lib/queryKeys";
-import theme from "@/themes";
+import { useTheme } from "@/themes/useThemeProvider";
 import type { User } from "@/types/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
@@ -27,6 +27,7 @@ import { Keyboard, Text, TouchableOpacity, View } from "react-native";
 import { z } from "zod";
 
 export const EditProfile = () => {
+  const theme = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation();
   const { toast } = useToast();
@@ -194,7 +195,7 @@ export const EditProfile = () => {
             <Dropdown
               label={t("account.graduationYear")}
               placeholder={t("account.selectGraduationYear")}
-              icon={<GraduationCap color={theme.textPrimary} size={20} />}
+              icon={<GraduationCap color={theme.foreground} size={20} />}
               options={yearOptions}
               value={value?.toString()}
               onValueChange={(value) => onChange(Number(value))}

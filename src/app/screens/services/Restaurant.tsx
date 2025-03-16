@@ -1,7 +1,6 @@
 import Page from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
 import LoadingScreen from "@/components/custom/LoadingScreen";
-import NotificationBell from "@/components/custom/NotificationBell";
 import RestaurantCard from "@/components/custom/card/RestaurantCard";
 import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
 import { outOfService } from "@/lib/utils";
@@ -71,10 +70,7 @@ export const Restaurant = () => {
 
   const header = (
     <View className="flex-row gap-2 justify-between items-center">
-      <View className="flex flex-row items-center gap-2">
-        <Text className="h1 m-4">{t("services.restaurant.title")}</Text>
-        <NotificationBell service={"RESTAURANT"} />
-      </View>
+      <Text className="h1 m-4">{t("services.restaurant.title")}</Text>
 
       <AboutModal
         title={t("services.restaurant.title")}
@@ -82,7 +78,7 @@ export const Restaurant = () => {
         openingHours={openingHoursData}
         location={t("services.restaurant.location")}
         price={t("services.restaurant.price")}
-        additionalInfo={t("services.restaurant.additional_info")}
+        additionalInfo={t("services.restaurant.additionalInfo")}
       />
     </View>
   );
@@ -100,7 +96,7 @@ export const Restaurant = () => {
           <Text className="h1 text-center">
             {weekend
               ? t("services.restaurant.closedWeekends")
-              : t("services.restaurant.no_data")}
+              : t("services.restaurant.noData")}
           </Text>
         </View>
       </Page>
@@ -119,10 +115,10 @@ export const Restaurant = () => {
           />
           <View className="gap-2">
             <Text className="h1 text-center">
-              {t("services.restaurant.closed_night.title")}
+              {t("services.restaurant.closedNight.title")}
             </Text>
             <Text className="h3 text-center text-muted-foreground">
-              {t("services.restaurant.closed_night.description")}
+              {t("services.restaurant.closedNight.description")}
             </Text>
           </View>
         </View>
@@ -166,7 +162,7 @@ export const Restaurant = () => {
             icon={"Vegan"}
           />
           <RestaurantCard
-            title={t("services.restaurant.side_dishes")}
+            title={t("services.restaurant.sideDishes")}
             meals={menu?.accompMidi}
             icon={"Soup"}
           />
@@ -184,7 +180,7 @@ export const Restaurant = () => {
             />
 
             <RestaurantCard
-              title={t("services.restaurant.side_dishes")}
+              title={t("services.restaurant.sideDishes")}
               meals={menu?.accompSoir}
               icon={"Soup"}
             />

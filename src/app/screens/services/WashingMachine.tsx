@@ -22,7 +22,7 @@ export const WashingMachine: FC = () => {
   if (isError) {
     return (
       <Page refreshing={isPending} onRefresh={refetch}>
-        <Text className="h1 m-4">{t("services.washing_machine.title")}</Text>
+        <Text className="h1 m-4">{t("services.washingMachine.title")}</Text>
         <View className="min-h-screen flex justify-center items-center">
           <Text className="text-red-500 text-center h1">{error?.message}</Text>
         </View>
@@ -33,10 +33,10 @@ export const WashingMachine: FC = () => {
   if (!data || data.length === 0) {
     return (
       <Page refreshing={isPending} onRefresh={refetch}>
-        <Text className="h1 m-4">{t("services.washing_machine.title")}</Text>
+        <Text className="h1 m-4">{t("services.washingMachine.title")}</Text>
         <View className="min-h-screen flex justify-center items-center ">
           <Text className="text-foreground text-center h1">
-            {t("services.washing_machine.no_machines")}
+            {t("services.washingMachine.noMachine")}
           </Text>
         </View>
       </Page>
@@ -58,30 +58,27 @@ export const WashingMachine: FC = () => {
       className="flex-col gap-6"
     >
       <View className="flex-row gap-2 justify-between items-center">
-        <Text className="h1">{t("services.washing_machine.title")}</Text>
+        <Text className="h1">{t("services.washingMachine.title")}</Text>
         <AboutModal
-          // @ts-ignore
-          isVisible={aboutPopupVisible}
-          onClose={() => setAboutPopupVisible(false)}
-          title={t("services.washing_machine.title")}
-          description={t("services.washing_machine.about")}
+          title={t("services.washingMachine.title")}
+          description={t("services.washingMachine.about")}
           openingHours={openingHoursData}
-          location={t("services.washing_machine.location")}
-          price={t("services.washing_machine.price")}
-          additionalInfo={t("services.washing_machine.additional_info")}
+          location={t("services.washingMachine.location")}
+          price={t("services.washingMachine.price")}
+          additionalInfo={t("services.washingMachine.additionalInfo")}
         />
       </View>
 
       {washingMachines?.length > 0 && (
         <View className="flex-col gap-4">
           <Text className="text-foreground text-xl font-bold">
-            {t("services.washing_machine.washing_machine")}
+            {t("services.washingMachine.washingMachine")}
           </Text>
           {washingMachines.map((item) => (
             <WashingMachineCard
               key={item.machine_id}
               number={item.selecteur_machine}
-              type={t("services.washing_machine.washing_machine")}
+              type={t("services.washingMachine.washingMachine")}
               status={item.time_before_off}
               icon={"WASHING MACHINE"}
             />
@@ -92,13 +89,13 @@ export const WashingMachine: FC = () => {
       {dryers?.length > 0 && (
         <View className="flex-col gap-4">
           <Text className="text-foreground text-xl font-bold">
-            {t("services.washing_machine.dryer")}
+            {t("services.washingMachine.dryer")}
           </Text>
           {dryers.map((item) => (
             <WashingMachineCard
               key={item.machine_id}
               number={item.selecteur_machine}
-              type={t("services.washing_machine.dryer")}
+              type={t("services.washingMachine.dryer")}
               status={item.time_before_off}
               icon={"DRYER"}
             />

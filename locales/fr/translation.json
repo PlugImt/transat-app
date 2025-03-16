@@ -2,13 +2,9 @@
   "common": {
     "welcome": "Bienvenue",
     "edit": "Modifier",
-    "settings": "Paramètres",
     "other": "Autre",
     "help": "Aide",
-    "contactSupport": "Contacter le support",
-    "notifications": "Notifications",
     "appearance": "Apparence",
-    "logout": "Déconnexion",
     "language": "Langue",
     "theme": "Thème",
     "dark": "Sombre",
@@ -20,9 +16,8 @@
     "free": "Gratuit",
     "cancel": "Annuler",
     "closed": "Fermé",
-    "set_notification": "Définir une notification",
-    "sign_in": "Connexion",
-    "sign_up": "Inscription",
+    "signIn": "Connexion",
+    "signUp": "Inscription",
     "verify": "Vérifier",
     "verifying": "Vérification...",
     "verificationFailed": "Échec de la vérification",
@@ -39,7 +34,7 @@
     "about": "À propos",
     "knowMore": "En savoir plus sur Transat",
     "close": "Fermer",
-    "clear_all": "Effacer",
+    "clearAll": "Effacer",
     "filter": "Filtrer",
     "days": {
       "monday": "Lundi",
@@ -53,13 +48,28 @@
       "weekend": "Week-end"
     }
   },
-  "language": {
-    "language": "Langue",
-    "selectLanguage": "Sélectionner la langue",
-    "english": "Anglais",
-    "french": "Français",
-    "spanish": "Espagnol"
+  "settings": {
+    "settings": "Paramètres",
+    "logout": "Déconnexion",
+    "notifications": {
+      "notifications": "Notifications",
+      "fetchError": "Impossible de récupérer les paramètres de notification",
+      "updateError": "Impossible de mettre à jour les paramètres de notification",
+      "setNotification": "Définir une notification",
+      "toggleRestaurant": "Être notifié lorsque le menu du jour est publié",
+      "toggleTraq": "Être notifié lorsqu'un nouvel article est proposé au Traq'"
+    },
+    "contactSupport": "Contacter le support",
+    "appearance": "Apparence",
+    "language": {
+      "language": "Langue",
+      "selectLanguage": "Sélectionner la langue",
+      "english": "Anglais",
+      "french": "Français",
+      "spanish": "Espagnol"
+    }
   },
+
   "auth": {
     "signIn": "Connexion",
     "signInSuccess": "Connexion réussie",
@@ -102,23 +112,20 @@
     "signup": "Inscription"
   },
   "services": {
-    "services": "Services",
-    "games": {
-      "title": "Jeux"
-    },
+    "title": "Services",
     "market": "Marché",
     "traq": {
-      "title": "Traq",
+      "title": "Traq'",
       "about": "🍺 Le Traq (Traquenard) est le bar étudiant de l'école où vous pouvez déguster différentes boissons.",
       "location": "À l'intérieur de la MDE",
-      "additional_info": "Pendant les événements, des shooters ou des cocktails peuvent être vendus. Veuillez consulter la page de l'événement pour plus d'informations.",
-      "opening_hours": "Le Traq est ouvert pendant toutes les soirées et les événements spéciaux. \n\nSi vous avez soif et que le Traq est fermé, vous pouvez demander au BDE de l'ouvrir via WhatsApp.",
+      "additionalInfo": "Pendant les événements, des shooters ou des cocktails peuvent être vendus. Veuillez consulter la page de l'événement pour plus d'informations.",
+      "openingHours": "Le Traq est ouvert pendant toutes les soirées et les événements spéciaux. \n\nSi vous avez soif et que le Traq est fermé, vous pouvez demander au BDE de l'ouvrir via WhatsApp.",
       "price": "Prix",
-      "price_half": "Demi (25cl)",
+      "priceHalf": "Demi (25cl)",
       "alcohol": "Alcool",
       "limited": "Limité",
-      "out_of_stock": "En rupture de stock",
-      "no_items_found": "Aucun article trouvé"
+      "outOfStock": "En rupture de stock",
+      "noItemsFound": "Aucun article trouvé"
     },
     "clubs": "Clubs",
     "events": "Événements",
@@ -127,46 +134,49 @@
       "title": "Menu",
       "lunch": "Midi",
       "dinner": "Soir",
-      "widget_lunch": "Menu du midi",
-      "widget_dinner": "Menu du soir",
+      "widgetLunch": "Menu du midi",
+      "widgetDinner": "Menu du soir",
       "grill": "Grillades",
       "migrator": "Migrateur",
       "vegetarian": "Végétarien",
-      "side_dishes": "Accompagnements",
-      "no_data": "Il semble qu'il n'y ait pas de données à afficher",
-      "no_meal": "Aucun repas",
+      "sideDishes": "Accompagnements",
+      "noData": "Il semble qu'il n'y ait pas de données à afficher",
+      "noMeal": "Aucun repas",
       "closed": "Fermé",
       "closedWeekends": "Le restaurant est fermé le week-end",
-      "closed_night": {
+      "closedNight": {
         "title": "Le restaurant est fermé",
         "description": "Revenez à 11h pour voir le menu du jour"
       },
       "location": "À côté du gymnase",
       "about": "API prépare des plats frais et faits maison quotidiennement—même la salade de fruits ! Le menu change tous les jours pour le déjeuner et le dîner.",
       "price": "3,95€ pour une entrée, un plat principal et un dessert.",
-      "additional_info": "Vous pouvez échanger une entrée contre un dessert. Des plats supplémentaires sont disponibles, pour un coût supplémentaire. Vous avez encore faim ? Demandez aux serveurs ! Après 19h45, la nourriture supplémentaire au dîner est gratuite."
+      "additionalInfo": "Vous pouvez échanger une entrée contre un dessert. Des plats supplémentaires sont disponibles, pour un coût supplémentaire. Vous avez encore faim ? Demandez aux serveurs ! Après 19h45, la nourriture supplémentaire au dîner est gratuite."
     },
-    "washing_machine": {
+    "washingMachine": {
       "title": "Laverie",
-      "washing_machine": "Lave-linge",
+      "washingMachine": "Lave-linge",
       "dryer": "Sèche-linge",
-      "almost_done": "Machine {{number}} presque terminée !",
-      "almost_done_body": "Votre {{type}} sera terminé dans {{minutes}} minutes",
-      "get_notification": "Recevoir une notification",
-      "get_notification_description": "Vous recevrez une notification {{minutes}} minutes avant que votre {{type}} ne soit terminée",
-      "time_to_completion": "Minutes avant la fin",
-      "available_machines": "Machines disponibles",
-      "available_dryers": "Sèche-linges disponibles",
-      "no_machine": "Aucune machine disponible",
+      "almostDone": "Machine {{number}} presque terminée !",
+      "almostDoneBody": "Votre {{type}} sera terminé dans {{minutes}} minutes",
+      "getNotification": "Recevoir une notification",
+      "getNotificationDesc": "Vous recevrez une notification {{minutes}} minutes avant que votre {{type}} ne soit terminée",
+      "minutesBeforeEnd": "Minutes avant la fin",
+      "machineAvailable": "Machines disponibles",
+      "dryerAvailable": "Sèche-linges disponibles",
+      "noMachine": "Aucune machine disponible",
       "about": "Ouverte 24h/24 et 7j/7, la laverie vous permet de laver et sécher à tout moment. Recevez une notification lorsque votre lessive est presque terminée et vérifiez la disponibilité des machines en temps réel.",
       "price": "Lavage : 2€, Séchage : 1€.",
-      "additional_info": "Payez en pièces, par carte ou avec le portefeuille Monix (recommandé pour les bonus et les remboursements). Besoin de plus de temps de séchage ? Payez plusieurs sessions avant de commencer.",
+      "additionalInfo": "Payez en pièces, par carte ou avec le portefeuille Monix (recommandé pour les bonus et les remboursements). Besoin de plus de temps de séchage ? Payez plusieurs sessions avant de commencer.",
       "location": "Sous la MDE, après les boîtes aux lettres"
     },
-    "opening_hours": "Horaires d'ouverture",
+    "openingHours": "Horaires d'ouverture",
     "location": "Emplacement",
     "price": "Prix",
-    "additional_info": "Informations complémentaires"
+    "additionalInfo": "Informations complémentaires"
+  },
+  "games": {
+    "title": "Jeux"
   },
   "account": {
     "graduationYear": "Année de diplôme",

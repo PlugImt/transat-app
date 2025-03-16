@@ -84,7 +84,7 @@ export const BottomTabNavigator = () => {
         name="Services"
         component={ServicesStackScreen}
         options={{
-          tabBarLabel: t("services.services"),
+          tabBarLabel: t("services.title"),
           tabBarIcon: ({ color, size }) => (
             <GridIcon size={size} color={color} />
           ),
@@ -94,7 +94,7 @@ export const BottomTabNavigator = () => {
         name="Games"
         component={GamesStackScreen}
         options={{
-          tabBarLabel: t("services.games.title"),
+          tabBarLabel: t("games.title"),
           tabBarIcon: ({ color, size }) => <Play size={size} color={color} />,
         }}
       />

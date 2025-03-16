@@ -48,7 +48,7 @@ const TraqCard = ({
         )}
         {outOfStock && (
           <Badge
-            label={t("services.traq.out_of_stock")}
+            label={t("services.traq.outOfStock")}
             size="sm"
             icon={CircleX}
             variant="destructive"
@@ -98,7 +98,7 @@ const TraqCard = ({
             <View className="flex flex-row items-center gap-2 ">
               <BadgeEuro size={18} color={theme.foreground} />
               <Text className="font-bold text-foreground">
-                {t("services.traq.price_half")}{" "}
+                {t("services.traq.priceHalf")}{" "}
                 {alcohol && alcohol > 0 ? " (25cl)" : ""}
               </Text>
             </View>

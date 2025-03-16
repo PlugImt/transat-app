@@ -7,7 +7,7 @@ export const Games = () => {
 
   return (
     <Page>
-      <Text className="h1 m-4">{t("services.games.title")}</Text>
+      <Text className="h1 m-4">{t("games.title")}</Text>
     </Page>
   );
 };

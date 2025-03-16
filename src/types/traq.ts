@@ -4,11 +4,11 @@ export interface TraqArticle {
   disabled: boolean;
   limited: boolean;
   alcohol: number;
-  out_of_stock: boolean;
+  outOfStock: boolean;
   creation_date: string;
   picture: string;
   description: string;
   price: number;
-  price_half: number;
+  priceHalf: number;
   traq_type: string;
 }

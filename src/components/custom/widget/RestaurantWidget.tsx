@@ -29,9 +29,9 @@ export function RestaurantWidget() {
 
   const title =
     !weekend && lunch
-      ? t("services.restaurant.widget_lunch")
+      ? t("services.restaurant.widgetLunch")
       : !weekend && dinner
-        ? t("services.restaurant.widget_dinner")
+        ? t("services.restaurant.widgetDinner")
         : "";
 
   if (isPending) {
@@ -61,7 +61,10 @@ export function RestaurantWidget() {
             <View className="flex flex-col gap-2">
               <View className="flex flex-row items-center gap-2">
                 <Beef color={theme.primary} />
-                <Text className="text-lg font-bold text-primary text-ellipsis">
+                <Text
+                  className="text-lg font-bold text-primary"
+                  ellipsizeMode="tail"
+                >
                   {t("services.restaurant.grill")}
                 </Text>
               </View>
@@ -76,7 +79,10 @@ export function RestaurantWidget() {
             <View className="flex flex-col gap-2">
               <View className="flex flex-row items-center gap-2">
                 <ChefHat color={theme.primary} />
-                <Text className="text-lg font-bold text-primary text-ellipsis">
+                <Text
+                  className="text-lg font-bold text-primary"
+                  ellipsizeMode="tail"
+                >
                   {t("services.restaurant.migrator")}
                 </Text>
               </View>
@@ -91,7 +97,10 @@ export function RestaurantWidget() {
             <View className="flex flex-col gap-2">
               <View className="flex flex-row items-center gap-2">
                 <Vegan color={theme.primary} />
-                <Text className="text-lg font-bold text-primary text-ellipsis">
+                <Text
+                  className="text-lg font-bold text-primary"
+                  ellipsizeMode="tail"
+                >
                   {t("services.restaurant.vegetarian")}
                 </Text>
               </View>
@@ -106,8 +115,11 @@ export function RestaurantWidget() {
             <View className="flex flex-col gap-2">
               <View className="flex flex-row items-center gap-2">
                 <Soup color={theme.primary} />
-                <Text className="text-lg font-bold text-primary text-ellipsis">
-                  {t("services.restaurant.side_dishes")}
+                <Text
+                  className="text-lg font-bold text-primary"
+                  ellipsizeMode="tail"
+                >
+                  {t("services.restaurant.sideDishes")}
                 </Text>
               </View>
 
@@ -123,7 +135,10 @@ export function RestaurantWidget() {
             <View className="flex flex-col gap-2">
               <View className="flex flex-row items-center gap-2">
                 <Beef color={theme.primary} />
-                <Text className="text-lg font-bold text-primary text-ellipsis">
+                <Text
+                  className="text-lg font-bold text-primary"
+                  ellipsizeMode="tail"
+                >
                   {t("services.restaurant.grill")}
                 </Text>
               </View>
@@ -138,8 +153,11 @@ export function RestaurantWidget() {
             <View className="flex flex-col gap-2">
               <View className="flex flex-row items-center gap-2">
                 <Soup color={theme.primary} />
-                <Text className="text-lg font-bold text-primary text-ellipsis">
-                  {t("services.restaurant.side_dishes")}
+                <Text
+                  className="text-lg font-bold text-primary"
+                  ellipsizeMode="tail"
+                >
+                  {t("services.restaurant.sideDishes")}
                 </Text>
               </View>
 

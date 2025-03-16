@@ -47,7 +47,7 @@ export function WashingMachineWidget() {
   if (isPending) {
     return (
       <View className="flex flex-col gap-2">
-        <Text className="h3">{t("services.washing_machine.title")}</Text>
+        <Text className="h3">{t("services.washingMachine.title")}</Text>
         <View className="bg-card p-4 rounded-lg flex justify-center items-center">
           <ActivityIndicator size="large" color={theme.primary} />
         </View>
@@ -61,7 +61,7 @@ export function WashingMachineWidget() {
 
   return (
     <View className="flex flex-col gap-2">
-      <Text className="h3">{t("services.washing_machine.title")}</Text>
+      <Text className="h3">{t("services.washingMachine.title")}</Text>
       <TouchableOpacity
         onPress={() => navigation.navigate("WashingMachine")}
         className="px-6 py-4 rounded-lg bg-card flex-row justify-between gap-6"
@@ -74,8 +74,8 @@ export function WashingMachineWidget() {
           <Text className="text-lg font-bold text-foreground">
             {availableWashers}/{totalWashers}
           </Text>
-          <Text className="text-foreground text-ellipsis">
-            {t("services.washing_machine.available_machines")}
+          <Text className="text-foreground" ellipsizeMode="tail">
+            {t("services.washingMachine.machineAvailable")}
           </Text>
         </View>
         <View className="items-center">
@@ -86,8 +86,8 @@ export function WashingMachineWidget() {
           <Text className="text-lg font-bold text-foreground">
             {availableDryers}/{totalDryers}
           </Text>
-          <Text className="text-foreground text-ellipsis">
-            {t("services.washing_machine.available_dryers")}
+          <Text className="text-foreground" ellipsizeMode="tail">
+            {t("services.washingMachine.dryerAvailable")}
           </Text>
         </View>
       </TouchableOpacity>

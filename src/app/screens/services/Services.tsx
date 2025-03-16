@@ -14,11 +14,11 @@ export const Services = () => {
 
   return (
     <Page>
-      <Text className="h1 m-4">{t("services.services")}</Text>
+      <Text className="h1 m-4">{t("services.title")}</Text>
 
       <Card
         image={require("@/assets/images/Logos/machine_large.png")}
-        // animation={require('@/assets/animations/washing_machine.json')}
+        // animation={require('@/assets/animations/washingMachine.json')}
         onPress={() => navigation.navigate("WashingMachine")}
       />
       <Card

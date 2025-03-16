@@ -62,13 +62,11 @@ export async function uploadImage(): Promise<string> {
   });
 
   try {
-    // Get the JWT token for authentication
     const token = await storage.get("token");
     if (!token) {
       throw new Error(t("account.noToken"));
     }
 
-    // Create form data
     const formData = new FormData();
 
     formData.append("image", {
@@ -78,7 +76,6 @@ export async function uploadImage(): Promise<string> {
       // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     } as any);
 
-    // Upload to your API
     const uploadResponse = await axios.post(
       "https://transat.destimt.fr/api/upload",
       formData,
@@ -91,7 +88,7 @@ export async function uploadImage(): Promise<string> {
     );
 
     if (!uploadResponse.data.success) {
-      throw new Error(t("account.uploadFailed"));
+      throw new Error(t("account.profilePictureUpdateFailed"));
     }
 
     // Return the URL from your API response
@@ -100,6 +97,6 @@ export async function uploadImage(): Promise<string> {
     return baseUrl + uploadResponse.data.url;
   } catch (error) {
     console.error("Image upload failed:", error);
-    throw new Error(t("account.uploadFailed"));
+    throw new Error(t("account.profilePictureUpdateFailed"));
   }
 }

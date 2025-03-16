@@ -43,7 +43,7 @@ export const Settings = () => {
 
   return (
     <Page className="gap-6" refreshing={isPending} onRefresh={refetch}>
-      <Text className="h1 m-4">{t("common.settings")}</Text>
+      <Text className="h1 m-4">{t("settings.settings")}</Text>
 
       <AccountCard user={user} />
 
@@ -52,15 +52,15 @@ export const Settings = () => {
         <View className="bg-card rounded-lg px-4 py-2">
           <SettingsItem
             icon={<Globe color={theme.foreground} size={22} />}
-            title={t("language.language")}
-            subtitle={t("language.french")}
+            title={t("settings.language.language")}
+            subtitle={t("settings.language.french")}
             onPress={() => {}}
           />
         </View>
       </View>
 
       <View className="gap-2">
-        <Text className="h3">{t("common.notifications")}</Text>
+        <Text className="h3">{t("settings.notifications.notifications")}</Text>
         <View className="bg-card rounded-lg px-4 py-2">
           <SettingsItem
             icon={<Bell color={theme.foreground} size={22} />}
@@ -87,7 +87,7 @@ export const Settings = () => {
           <SettingsItem
             icon={<HelpCircle color={theme.foreground} size={22} />}
             title={t("common.help")}
-            subtitle={t("common.contactSupport")}
+            subtitle={t("settings.contactSupport")}
             onPress={() => {}}
           />
           <SettingsItem
@@ -101,7 +101,7 @@ export const Settings = () => {
 
       <View className="gap-2">
         <Button
-          label={t("common.logout")}
+          label={t("settings.logout")}
           onPress={handleLogout}
           variant="destructive"
         />

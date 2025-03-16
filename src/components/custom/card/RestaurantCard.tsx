@@ -29,14 +29,14 @@ const RestaurantCard = ({ title, meals, icon }: CardProps) => {
   }
 
   if (!meals) {
-    return <Text>{t("services.restaurant.no_meal")}</Text>;
+    return <Text>{t("services.restaurant.noMeal")}</Text>;
   }
 
   return (
     <View className="px-6 py-4 rounded-lg bg-card flex flex-col gap-6">
       <View className="flex flex-row items-center gap-2">
         {getIcon()}
-        <Text className="text-lg font-bold text-primary text-ellipsis">
+        <Text className="text-lg font-bold text-primary" ellipsizeMode="tail">
           {title}
         </Text>
       </View>

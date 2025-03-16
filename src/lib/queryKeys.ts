@@ -4,4 +4,5 @@ export const QUERY_KEYS = {
   weather: ["weather"],
   user: ["user"],
   traq: ["traq"],
+  notification: ["notification"],
 };

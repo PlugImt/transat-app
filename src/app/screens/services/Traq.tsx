@@ -3,7 +3,6 @@ import Page from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
 import ErrorPage from "@/components/custom/ErrorPage";
 import LoadingScreen from "@/components/custom/LoadingScreen";
-import NotificationBell from "@/components/custom/NotificationBell";
 import TraqCard from "@/components/custom/card/TraqCard";
 import { useTraq } from "@/hooks/useTraq";
 import React, { useMemo, useState } from "react";
@@ -58,17 +57,14 @@ export const Traq = () => {
 
   const header = (
     <View className="flex-row gap-2 justify-between items-center">
-      <View className="flex flex-row items-center gap-2">
-        <Text className="h1 m-4">{t("services.traq.title")}</Text>
-        <NotificationBell service={"TRAQ"} />
-      </View>
+      <Text className="h1 m-4">{t("services.traq.title")}</Text>
 
       <AboutModal
         title={t("services.traq.title")}
         description={t("services.traq.about")}
-        openingHours={t("services.traq.opening_hours")}
+        openingHours={t("services.traq.openingHours")}
         location={t("services.traq.location")}
-        additionalInfo={t("services.traq.additional_info")}
+        additionalInfo={t("services.traq.additionalInfo")}
       />
     </View>
   );
@@ -93,7 +89,7 @@ export const Traq = () => {
         <Text className="h2">{t("common.filter")}</Text>
         {selectedTags.length > 0 && (
           <Badge
-            label={t("common.clear_all")}
+            label={t("common.clearAll")}
             variant="secondary"
             onPress={clearTags}
           />
@@ -114,7 +110,7 @@ export const Traq = () => {
       {filteredArticles.length === 0 ? (
         <View className="flex items-center justify-center h-full">
           <Text className="h3 text-muted-foreground">
-            {t("services.traq.no_items_found")}
+            {t("services.traq.noItemsFound")}
           </Text>
         </View>
       ) : (
@@ -127,9 +123,9 @@ export const Traq = () => {
               name={article.name}
               price={article.price}
               limited={article.limited}
-              outOfStock={article.out_of_stock}
+              outOfStock={article.outOfStock}
               alcohol={article.alcohol}
-              priceHalf={article.price_half}
+              priceHalf={article.priceHalf}
             />
           ))}
         </View>

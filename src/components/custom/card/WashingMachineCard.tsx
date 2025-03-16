@@ -73,8 +73,8 @@ const WashingMachineCard = ({
       if (notificationTriggerTime > 0) {
         const id = await Notifications.scheduleNotificationAsync({
           content: {
-            title: t("services.washing_machine.almost_done", { number }),
-            body: t("services.washing_machine.almost_done_body", {
+            title: t("services.washingMachine.almostDone", { number }),
+            body: t("services.washingMachine.almostDoneBody", {
               type,
               minutes,
             }),
@@ -120,7 +120,9 @@ const WashingMachineCard = ({
         </Text>
       </View>
 
-      <Text className="text-foreground text-ellipsis font-bold">{type}</Text>
+      <Text className="text-foreground" ellipsizeMode="tail">
+        {type}
+      </Text>
 
       <Badge
         label={getMachineStatus(timeRemaining)}
@@ -139,14 +141,14 @@ const WashingMachineCard = ({
         </DialogTrigger>
 
         <DialogContent
-          title={t("services.washing_machine.get_notification")}
+          title={t("services.washingMachine.getNotification")}
           className="gap-2"
           cancelLabel={t("common.cancel")}
-          confirmLabel={t("common.set_notification")}
+          confirmLabel={t("settings.notifications.setNotification")}
           onConfirm={handleSetNotification}
         >
           <Text className="text-foreground">
-            {t("services.washing_machine.get_notification_description", {
+            {t("services.washingMachine.getNotificationDesc", {
               type: type.toLowerCase(),
               minutes: MINUTES_BEFORE_NOTIFICATION,
             })}

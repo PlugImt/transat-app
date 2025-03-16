@@ -49,7 +49,7 @@ export const AboutModal: React.FC<AboutModalProps> = ({
             <View className="flex-row items-center gap-2">
               <Clock size={20} color={theme.primary} />
               <Text className="text-foreground font-bold">
-                {t("services.opening_hours")}
+                {t("services.openingHours")}
               </Text>
             </View>
 
@@ -105,7 +105,7 @@ export const AboutModal: React.FC<AboutModalProps> = ({
             <View className="flex-row items-center gap-2">
               <Plus size={20} color={theme.primary} />
               <Text className="text-foreground font-bold">
-                {t("services.additional_info")}
+                {t("services.additionalInfo")}
               </Text>
             </View>
 

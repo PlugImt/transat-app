@@ -23,12 +23,10 @@
 
 ## ✨ Roadmap
 
-- [ ] Finaliser le processus d'inscription/connexion/gestion de compte ⏳
-- [ ] Ajouter Un système de notifications ⏳
+- [ ] Supprimer un compte ⏳
+- [ ] Finir les pages dans les paramètres ⏳
 - [ ] Sortir la première version sur les stores
-- [ ] Ajouter les events
 - [ ] Ajouter les clubs
-- [ ] Ajouter les jeux
 
 ### Idées d'amélioration
 - [ ] Permettre d'indiquer lorsque le contenu de la machine à laver a été récupéré ⏳

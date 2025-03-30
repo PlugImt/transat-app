@@ -8,9 +8,10 @@ import { WashingMachine } from "@/app/screens/services/WashingMachine";
 import Account from "@/app/screens/services/account/Account";
 import ChangePassword from "@/app/screens/services/account/ChangePassword";
 import EditProfile from "@/app/screens/services/account/EditAccount";
-import Language from "@/app/screens/services/account/Language";
 import Notifications from "@/app/screens/services/account/Notifications";
 import Settings from "@/app/screens/services/account/Settings";
+import Language from "@/app/screens/services/account/Language";
+import { About } from "@/app/screens/services/account/About";
 import type { BottomTabParamList } from "@/types/navigation";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -49,6 +50,7 @@ const GamesStackScreen = () => (
 );
 
 const AccountStack = createStackNavigator();
+
 const AccountStackScreen = () => (
   <AccountStack.Navigator screenOptions={{ headerShown: false }}>
     <AccountStack.Screen name="AccountScreen" component={Account} />
@@ -57,6 +59,7 @@ const AccountStackScreen = () => (
     <AccountStack.Screen name="ChangePassword" component={ChangePassword} />
     <AccountStack.Screen name="Notifications" component={Notifications} />
     <AccountStack.Screen name="Language" component={Language} />
+    <AccountStack.Screen name="About" component={About} />
   </AccountStack.Navigator>
 );
 

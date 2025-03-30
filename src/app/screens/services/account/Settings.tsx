@@ -102,7 +102,7 @@ export const Settings = () => {
             icon={<Info color={theme.foreground} size={22} />}
             title={t("common.about")}
             subtitle={t("common.knowMore")}
-            onPress={() => {}}
+            onPress={() => navigation.navigate("About")}
           />
         </View>
       </View>

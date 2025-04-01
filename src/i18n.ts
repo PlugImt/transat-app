@@ -2,6 +2,8 @@ import * as Localization from "expo-localization";
 // i18n.ts
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import { storage } from "./services/storage/asyncStorage";
+import STORAGE_KEYS from "./services/storage/constants";
 
 // Import all translation files
 import en from "../locales/en/translation.json";
@@ -23,20 +25,22 @@ const resources = {
   es: { translation: es },
 };
 
-i18n.use(initReactI18next).init(
-  {
-    resources,
-    lng: Localization.getLocales()[0].languageCode ?? "en", // Use device language
-    fallbackLng: "en",
-    interpolation: {
-      escapeValue: false,
+storage.get<string>(STORAGE_KEYS.LANGUAGE).then((language) => {
+  i18n.use(initReactI18next).init(
+    {
+      resources,
+      lng: language ?? Localization.getLocales()[0].languageCode ?? "en", // Use device language
+      fallbackLng: "en",
+      interpolation: {
+        escapeValue: false,
+      },
     },
-  },
-  (err, t) => {
-    if (err) {
-      return console.log("Something went wrong loading translations", err);
-    }
-  },
-);
+    (err, t) => {
+      if (err) {
+        return console.log("Something went wrong loading translations", err);
+      }
+    },
+  );
+});
 
 export default i18n;

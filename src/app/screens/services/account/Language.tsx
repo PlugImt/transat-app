@@ -1,9 +1,9 @@
 import Page from "@/components/common/Page";
 import i18n from "@/i18n";
+import { storage } from "@/services/storage/asyncStorage";
 import { STORAGE_KEYS } from "@/services/storage/constants";
 import type { SettingsNavigation } from "@/services/storage/types";
 import { useTheme } from "@/themes/useThemeProvider";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { Check, Globe } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
@@ -25,7 +25,7 @@ export const Language = () => {
   const handleLanguageChange = async (languageCode: string) => {
     try {
       await i18n.changeLanguage(languageCode);
-      await AsyncStorage.setItem(STORAGE_KEYS.LANGUAGE, languageCode);
+      await storage.set(STORAGE_KEYS.LANGUAGE, languageCode);
       navigation.goBack();
     } catch (error) {
       console.error("Error changing language:", error);

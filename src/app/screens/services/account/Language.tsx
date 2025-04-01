@@ -17,9 +17,21 @@ export const Language = () => {
   const navigation = useNavigation<SettingsNavigation>();
 
   const languages = [
-    { code: "fr", name: t("settings.language.french") },
-    { code: "en", name: t("settings.language.english") },
-    { code: "es", name: t("settings.language.spanish") },
+    {
+      code: "fr",
+      name: "Français",
+      translatedName: t("settings.language.french"),
+    },
+    {
+      code: "en",
+      name: "English",
+      translatedName: t("settings.language.english"),
+    },
+    {
+      code: "es",
+      name: "Español",
+      translatedName: t("settings.language.spanish"),
+    },
   ];
 
   const handleLanguageChange = async (languageCode: string) => {
@@ -41,6 +53,7 @@ export const Language = () => {
             key={language.code}
             icon={<Globe color={theme.foreground} size={22} />}
             title={language.name}
+            subtitle={language.translatedName}
             onPress={() => handleLanguageChange(language.code)}
             rightElement={
               currentLanguage === language.code ? (

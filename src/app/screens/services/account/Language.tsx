@@ -5,7 +5,7 @@ import { STORAGE_KEYS } from "@/services/storage/constants";
 import type { SettingsNavigation } from "@/services/storage/types";
 import { useTheme } from "@/themes/useThemeProvider";
 import { useNavigation } from "@react-navigation/native";
-import { Check, Globe } from "lucide-react-native";
+import { Check } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
 import { SettingsItem } from "./SettingsItem";
@@ -51,7 +51,7 @@ export const Language = () => {
         {languages.map((language) => (
           <SettingsItem
             key={language.code}
-            icon={<Globe color={theme.foreground} size={22} />}
+            // icon={<Globe color={theme.foreground} size={22} />}
             title={language.name}
             subtitle={language.translatedName}
             onPress={() => handleLanguageChange(language.code)}

@@ -2,7 +2,7 @@ import { useTheme } from "@/themes/useThemeProvider";
 import { Text, TouchableOpacity, View } from "react-native";
 
 interface Props {
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
   title: string;
   subtitle?: string;
   onPress?: () => void;
@@ -23,8 +23,8 @@ export const SettingsItem = ({
       onPress={() => onPress?.()}
     >
       <View className="flex-row items-center gap-3">
-        <View className="w-8">{icon}</View>
-        <View>
+        {icon}
+        <View className="ml-2.5">
           <Text className="text-foreground">{title}</Text>
           {subtitle && (
             <Text className="text-sm text-foreground/60">{subtitle}</Text>

@@ -5,7 +5,7 @@ import type { SettingsNavigation } from "@/services/storage/types";
 import { useTheme } from "@/themes/useThemeProvider";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import { Check } from "lucide-react-native";
+import { Check, Globe } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
 import { SettingsItem } from "./SettingsItem";
@@ -17,9 +17,9 @@ export const Language = () => {
   const navigation = useNavigation<SettingsNavigation>();
 
   const languages = [
-    { code: "fr", name: t("settings.language.french"), flag: "🇫🇷" },
-    { code: "en", name: t("settings.language.english"), flag: "🇬🇧" },
-    { code: "es", name: t("settings.language.spanish"), flag: "🇪🇸" },
+    { code: "fr", name: t("settings.language.french") },
+    { code: "en", name: t("settings.language.english") },
+    { code: "es", name: t("settings.language.spanish") },
   ];
 
   const handleLanguageChange = async (languageCode: string) => {
@@ -39,7 +39,7 @@ export const Language = () => {
         {languages.map((language) => (
           <SettingsItem
             key={language.code}
-            icon={<Text style={{ fontSize: 22 }}>{language.flag}</Text>}
+            icon={<Globe color={theme.foreground} size={22} />}
             title={language.name}
             onPress={() => handleLanguageChange(language.code)}
             rightElement={

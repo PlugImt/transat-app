@@ -1,4 +1,5 @@
 import { useTheme } from "@/themes/useThemeProvider";
+import { ChevronRight } from "lucide-react-native";
 import { Text, TouchableOpacity, View } from "react-native";
 
 interface Props {
@@ -33,7 +34,7 @@ export const SettingsItem = ({
       </View>
       <View className="flex-row items-center">
         {rightElement}
-        {/*{onPress && <ChevronRight size={20} color={theme.primary} />}*/}
+        {onPress && <ChevronRight size={20} color={theme.primary} />}
       </View>
     </TouchableOpacity>
   );

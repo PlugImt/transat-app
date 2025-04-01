@@ -30,48 +30,46 @@ export const addNotification = async (
 };
 
 export const getNotificationsState = async (
-  service: NotificationType,
-): Promise<boolean> => {
-  const notifications =
-    ((await storage.get("notification")) as Record<
-      NotificationType,
-      boolean
-    >) || {};
-
-  // Si présent dans le stockage local, retourner la valeur
-  if (notifications[service] !== undefined) {
-    return notifications[service];
-  }
-
-  // Sinon, requête à l'API
+  service?: NotificationType,
+  services?: NotificationType[],
+): Promise<boolean | NotificationType[]> => {
   const jwtToken = await storage.get("token");
   if (!jwtToken) return false;
 
   try {
-    const response = await fetch(
-      `${NOTIFICATION_API}?service=${service.trim()}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${jwtToken}`,
-        },
-      },
-    );
+    let url = NOTIFICATION_API;
+    const queryParams = new URLSearchParams();
 
-    if (!response.ok) return false;
+    if (service) {
+      queryParams.append("service", service.trim());
+    } else if (services?.length) {
+      for (const s of services) {
+        queryParams.append("services", s.trim());
+      }
+    }
+
+    if (queryParams.toString()) {
+      url += `?${queryParams.toString()}`;
+    }
+
+    // Make the request
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwtToken}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(t("settings.notifications.fetchError"));
+    }
 
     const data = await response.json();
 
-    // Mettre à jour le stockage local
-    await storage.set("notification", {
-      ...notifications,
-      [service]: data.enabled,
-    });
-
-    return data.enabled;
+    return service ? data.message === true : data.messages || [];
   } catch (error) {
     console.error("Error fetching notification state:", error);
-    return false;
+    return service ? false : [];
   }
 };

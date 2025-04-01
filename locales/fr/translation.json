@@ -46,7 +46,10 @@
       "sunday": "Dimanche",
       "weekdays": "Jours de semaine",
       "weekend": "Week-end"
-    }
+    },
+    "campusApp": "L'application du campus pour l'IMT Atlantique de Nantes",
+    "plugImtNote": "NOTE: Plug'IMT est une association créée par des étudiants de l'IMT mais n'est pas affilié à l'école",
+    "credits": "Crédits"
   },
   "settings": {
     "settings": "Paramètres",

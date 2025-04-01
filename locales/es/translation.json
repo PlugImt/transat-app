@@ -32,7 +32,7 @@
       "unableToFetch": "Imposible recuperar los datos"
     },
     "about": "Acerca de",
-    "knowMore": "Saber más sobre Transat",
+    "knowMore": "Más información sobre Transat",
     "close": "Cerrar",
     "clearAll": "Borrar",
     "filter": "Filtrar",
@@ -46,7 +46,10 @@
       "sunday": "Domingo",
       "weekdays": "Días laborables",
       "weekend": "Fin de semana"
-    }
+    },
+    "campusApp": "La aplicación del campus para IMT Atlantique Nantes",
+    "plugImtNote": "NOTA: Plug'IMT es una asociación creada por estudiantes de IMT pero no está afiliada a la escuela",
+    "credits": "Créditos"
   },
   "settings": {
     "settings": "Configuración",

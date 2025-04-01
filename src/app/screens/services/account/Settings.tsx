@@ -18,7 +18,7 @@ import SettingsItem from "./SettingsItem";
 
 export const Settings = () => {
   const theme = useTheme();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { logout } = useAuth();
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -53,8 +53,16 @@ export const Settings = () => {
           <SettingsItem
             icon={<Globe color={theme.foreground} size={22} />}
             title={t("settings.language.language")}
-            subtitle={t("settings.language.french")}
-            onPress={() => {}}
+            subtitle={t(
+              `settings.language.${
+                i18n.language === "fr"
+                  ? "french"
+                  : i18n.language === "en"
+                    ? "english"
+                    : "spanish"
+              }`,
+            )}
+            onPress={() => navigation.navigate("Language")}
           />
         </View>
       </View>
@@ -94,7 +102,7 @@ export const Settings = () => {
             icon={<Info color={theme.foreground} size={22} />}
             title={t("common.about")}
             subtitle={t("common.knowMore")}
-            onPress={() => {}}
+            onPress={() => navigation.navigate("About")}
           />
         </View>
       </View>

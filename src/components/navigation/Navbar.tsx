@@ -5,9 +5,11 @@ import { Restaurant } from "@/app/screens/services/Restaurant";
 import { Services } from "@/app/screens/services/Services";
 import { Traq } from "@/app/screens/services/Traq";
 import { WashingMachine } from "@/app/screens/services/WashingMachine";
+import { About } from "@/app/screens/services/account/About";
 import Account from "@/app/screens/services/account/Account";
 import ChangePassword from "@/app/screens/services/account/ChangePassword";
 import EditProfile from "@/app/screens/services/account/EditAccount";
+import Language from "@/app/screens/services/account/Language";
 import Notifications from "@/app/screens/services/account/Notifications";
 import Settings from "@/app/screens/services/account/Settings";
 import type { BottomTabParamList } from "@/types/navigation";
@@ -48,6 +50,7 @@ const GamesStackScreen = () => (
 );
 
 const AccountStack = createStackNavigator();
+
 const AccountStackScreen = () => (
   <AccountStack.Navigator screenOptions={{ headerShown: false }}>
     <AccountStack.Screen name="AccountScreen" component={Account} />
@@ -55,6 +58,8 @@ const AccountStackScreen = () => (
     <AccountStack.Screen name="Settings" component={Settings} />
     <AccountStack.Screen name="ChangePassword" component={ChangePassword} />
     <AccountStack.Screen name="Notifications" component={Notifications} />
+    <AccountStack.Screen name="Language" component={Language} />
+    <AccountStack.Screen name="About" component={About} />
   </AccountStack.Navigator>
 );
 

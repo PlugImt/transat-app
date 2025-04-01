@@ -1,2 +1,2 @@
-export const NotificationTypeValues = ["restaurant", "traq"] as const;
+export const NotificationTypeValues = ["RESTAURANT", "TRAQ"] as const;
 export type NotificationType = (typeof NotificationTypeValues)[number];

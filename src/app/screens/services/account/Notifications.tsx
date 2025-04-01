@@ -2,44 +2,29 @@ import Divider from "@/components/common/Divider";
 import Page from "@/components/common/Page";
 import { Switch } from "@/components/common/Switch";
 import useNotification from "@/hooks/account/useNotification";
-import { useEffect, useState } from "react";
+import { QUERY_KEYS } from "@/lib/queryKeys";
+import { useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
 
 export const Notifications = () => {
   const { t } = useTranslation();
+  const queryClient = useQueryClient();
   const {
     data: notifications,
     isPending,
     toggleNotification,
     isToggling,
-    getNotificationEnabled,
   } = useNotification();
 
-  const [notifRestaurant, setNotifRestaurant] = useState(
-    getNotificationEnabled("restaurant"),
-  );
-  const [notifTraq, setNotifTraq] = useState(getNotificationEnabled("traq"));
-
-  useEffect(() => {
-    if (notifications) {
-      setNotifRestaurant(notifications.restaurant);
-      setNotifTraq(notifications.traq);
-    }
-  }, [notifications]);
-
-  const handleRestaurantToggle = () => {
-    toggleNotification("restaurant");
-    setNotifRestaurant(!notifRestaurant);
-  };
-
-  const handleTraqToggle = () => {
-    toggleNotification("traq");
-    setNotifTraq(!notifTraq);
+  const onRefresh = async () => {
+    await Promise.all([
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notification }),
+    ]);
   };
 
   return (
-    <Page className="gap-6" refreshing={isPending}>
+    <Page className="gap-6" refreshing={isPending} onRefresh={onRefresh}>
       <Text className="h1 m-4">
         {t("settings.notifications.notifications")}
       </Text>
@@ -57,8 +42,8 @@ export const Notifications = () => {
               </Text>
             </View>
             <Switch
-              value={notifRestaurant}
-              onValueChange={handleRestaurantToggle}
+              value={notifications?.RESTAURANT === true}
+              onValueChange={() => toggleNotification("RESTAURANT")}
               disabled={isToggling}
             />
           </View>
@@ -73,8 +58,8 @@ export const Notifications = () => {
               </Text>
             </View>
             <Switch
-              value={notifTraq}
-              onValueChange={handleTraqToggle}
+              value={notifications?.TRAQ === true}
+              onValueChange={() => toggleNotification("TRAQ")}
               disabled={isToggling}
             />
           </View>

@@ -26,7 +26,7 @@ const resources = {
 i18n.use(initReactI18next).init(
   {
     resources,
-    lng: Localization.locale.split("-")[0], // Use device language
+    lng: Localization.getLocales()[0].languageCode ?? "en", // Use device language
     fallbackLng: "en",
     interpolation: {
       escapeValue: false,

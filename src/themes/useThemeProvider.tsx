@@ -14,7 +14,9 @@ type ThemeType = {
 const ThemeContext = createContext<ThemeType | undefined>(undefined);
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const colorScheme = useColorScheme() || "dark";
+  // TODO: fix when the light theme is implemented
+  // const colorScheme = useColorScheme() || "dark";
+  const colorScheme = "dark";
   const themeColors = colorScheme === "dark" ? colors.dark : colors.light;
 
   return (

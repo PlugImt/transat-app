@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Keyboard, Text, View } from "react-native";
+import { Keyboard, Text } from "react-native";
 import { z } from "zod";
 
 export const ChangePassword = () => {

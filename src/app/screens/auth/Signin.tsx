@@ -28,6 +28,7 @@ export const Signin = () => {
   const loginSchema = z.object({
     email: z
       .string()
+      .trim()
       .email(t("auth.errors.email"))
       .refine((email) => email.endsWith("@imt-atlantique.net"), {
         message: t("auth.errors.imtOnly"),

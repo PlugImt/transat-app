@@ -1,7 +1,6 @@
 import { cn } from "@/lib/utils";
 import { useNavigation } from "@react-navigation/native";
 import { ArrowLeft } from "lucide-react-native";
-import type React from "react";
 import type { ReactNode } from "react";
 import { RefreshControl, ScrollView, View } from "react-native";
 

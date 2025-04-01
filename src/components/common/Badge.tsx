@@ -59,6 +59,7 @@ export interface BadgeProps
   onPress?: () => void;
   icon?: LucideIcon;
 }
+
 function Badge({
   label,
   labelClasses,

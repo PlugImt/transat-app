@@ -32,6 +32,7 @@ interface ToastProps {
   duration?: number;
   showProgress?: boolean;
 }
+
 function Toast({
   id,
   message,
@@ -111,6 +112,7 @@ interface ToastMessage {
   position?: string;
   showProgress?: boolean;
 }
+
 interface ToastContextProps {
   toast: (
     message: string,
@@ -121,6 +123,7 @@ interface ToastContextProps {
   ) => void;
   removeToast: (id: number) => void;
 }
+
 const ToastContext = createContext<ToastContextProps | undefined>(undefined);
 
 // TODO: refactor to pass position to Toast instead of ToastProvider

@@ -5,12 +5,9 @@ import {
   Platform,
   ScrollView,
   Text,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-
-import { cn } from "@/lib/utils";
 import { Button } from "./Button";
 
 interface DialogContextType {
@@ -48,6 +45,7 @@ type DialogContentProps = {
   isPending?: boolean;
   disableConfirm?: boolean;
 };
+
 function DialogContent({
   className,
   children,

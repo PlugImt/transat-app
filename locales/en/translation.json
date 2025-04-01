@@ -12,7 +12,7 @@
     "system": "System",
     "home": "Home",
     "account": "Account",
-    "freeToUse": "Free to use",
+    "freeToUse": "Free",
     "free": "Free",
     "cancel": "Cancel",
     "closed": "Closed",
@@ -69,7 +69,6 @@
       "spanish": "Spanish"
     }
   },
-
   "auth": {
     "signIn": "Sign in",
     "signInSuccess": "Sign in successful",

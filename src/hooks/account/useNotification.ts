@@ -1,4 +1,4 @@
-import { addNotification, getNotificationsState } from "@/lib/notification";
+import { addNotification } from "@/lib/notification";
 import { QUERY_KEYS } from "@/lib/queryKeys";
 import { storage } from "@/services/storage/asyncStorage";
 import type { NotificationType } from "@/types/notification";

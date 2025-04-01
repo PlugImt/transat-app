@@ -8,7 +8,7 @@ function Switch({
   const theme = useTheme();
 
   const trackColor = props.trackColor || {
-    false: theme.background,
+    false: theme.muted,
     true: theme.foreground,
   };
   const thumbColor = props.thumbColor || theme.background;

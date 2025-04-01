@@ -40,7 +40,7 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     try {
       const userData = await storage.get("token");
       if (userData && typeof userData === "string") {
-        saveToken(userData);
+        await saveToken(userData);
       } else {
         setUser(null);
       }
@@ -99,6 +99,22 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
       await storage.set("newf", newf);
 
       setUser(newf);
+    }
+
+    // Fetch notification status
+    const notificationResponse = await axios.get(
+      "https://transat.destimt.fr/api/newf/notification",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+    if (notificationResponse.status === 200) {
+      const notification = notificationResponse.data as User;
+      await storage.set("notification", notification);
+
+      setUser(notification);
     }
 
     return { success: true };

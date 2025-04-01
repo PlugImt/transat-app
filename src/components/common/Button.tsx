@@ -2,7 +2,6 @@ import { type VariantProps, cva } from "class-variance-authority";
 import { ActivityIndicator, Text, TouchableOpacity } from "react-native";
 
 import { cn } from "@/lib/utils";
-import type React from "react";
 import type { ComponentPropsWithoutRef } from "react";
 
 const buttonVariants = cva(

@@ -23,8 +23,8 @@ export const Notifications = () => {
 
   useEffect(() => {
     if (notifications) {
-      setNotifRestaurant(notifications.restaurant === true);
-      setNotifTraq(notifications.traq === true);
+      setNotifRestaurant(notifications.restaurant);
+      setNotifTraq(notifications.traq);
     }
   }, [notifications]);
 

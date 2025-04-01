@@ -7,6 +7,7 @@ interface BottomSheetContextType {
   bottomSheetRef: React.RefObject<BottomSheetModal>;
   handleBottomSheet: (open: boolean) => void;
 }
+
 const BottomSheetContext = createContext<BottomSheetContextType | undefined>(
   undefined,
 );
@@ -23,6 +24,7 @@ type BottomSheetTriggerProps = {
   // biome-ignore lint/suspicious/noExplicitAny: Todo à handle
   children: any;
 };
+
 export function BottomSheetTrigger({ children }: BottomSheetTriggerProps) {
   const { handleBottomSheet } = useBottomSheet();
 
@@ -52,6 +54,7 @@ export function BottomSheetProvider({
 type BottomSheetProps = {
   children: React.ReactNode;
 };
+
 export function BottomSheet({ children }: BottomSheetProps) {
   const { bottomSheetRef } = useBottomSheet();
   const theme = useTheme();

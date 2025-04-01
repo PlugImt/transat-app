@@ -1,4 +1,4 @@
-import React, { createContext, useContext, type ReactNode } from "react";
+import React, { createContext, type ReactNode, useContext } from "react";
 import { useColorScheme } from "react-native";
 import colors from "./colors";
 

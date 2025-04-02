@@ -8,8 +8,8 @@ import { Button } from "@/components/common/Button";
 import Page from "@/components/common/Page";
 import { useToast } from "@/components/common/Toast";
 import { AccountCard } from "@/components/custom/card/AccountCard";
-import { useAccount } from "@/hooks/account/useAccount";
 import useAuth from "@/hooks/account/useAuth";
+import { useUser } from "@/hooks/account/useUser";
 import { QUERY_KEYS } from "@/lib/queryKeys";
 import type { SettingsNavigation } from "@/services/storage/types";
 import { useTheme } from "@/themes/useThemeProvider";
@@ -22,7 +22,7 @@ export const Settings = () => {
   const { logout } = useAuth();
   const { toast } = useToast();
   const queryClient = useQueryClient();
-  const { data: user, isPending } = useAccount();
+  const { data: user, isPending } = useUser();
   const navigation = useNavigation<SettingsNavigation>();
 
   const handleLogout = async () => {

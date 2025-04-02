@@ -8,7 +8,7 @@ import { InfoItem } from "@/components/common/InfoItem";
 import Page from "@/components/common/Page";
 import ErrorPage from "@/components/custom/ErrorPage";
 import LoadingScreen from "@/components/custom/LoadingScreen";
-import { useAccount } from "@/hooks/account/useAccount";
+import { useUser } from "@/hooks/account/useUser";
 import { QUERY_KEYS } from "@/lib/queryKeys";
 import type { AccountNavigation } from "@/services/storage/types";
 import { useTheme } from "@/themes/useThemeProvider";
@@ -25,7 +25,7 @@ export const Account = () => {
   const navigation = useNavigation<AccountNavigation>();
   const queryClient = useQueryClient();
 
-  const { data: user, isPending, isError, error } = useAccount();
+  const { data: user, isPending, isError, error } = useUser();
   const isUserFetching =
     useIsFetching({
       queryKey: QUERY_KEYS.user,

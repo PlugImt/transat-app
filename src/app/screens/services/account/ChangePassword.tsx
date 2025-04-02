@@ -2,8 +2,8 @@ import { Button } from "@/components/common/Button";
 import { Input } from "@/components/common/Input";
 import Page from "@/components/common/Page";
 import { useToast } from "@/components/common/Toast";
-import { useAccount } from "@/hooks/account/useAccount";
 import { useChangePassword } from "@/hooks/account/useChangePassword";
+import { useUser } from "@/hooks/account/useUser";
 import type { Password } from "@/types/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
@@ -14,7 +14,7 @@ import { z } from "zod";
 
 export const ChangePassword = () => {
   const { t } = useTranslation();
-  const { data: user, isPending, isError, error } = useAccount();
+  const { data: user, isPending, isError, error } = useUser();
   const { mutate: changePassword, isPending: isUpdatingPassword } =
     useChangePassword();
   const { toast } = useToast();

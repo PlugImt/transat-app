@@ -10,9 +10,9 @@ import Page from "@/components/common/Page";
 import { useToast } from "@/components/common/Toast";
 import ErrorPage from "@/components/custom/ErrorPage";
 import LoadingScreen from "@/components/custom/LoadingScreen";
-import { useAccount } from "@/hooks/account/useAccount";
 import { useUpdateAccount } from "@/hooks/account/useUpdateAccount";
 import { useUpdateProfilePicture } from "@/hooks/account/useUpdateProfilePicture";
+import { useUser } from "@/hooks/account/useUser";
 import { QUERY_KEYS } from "@/lib/queryKeys";
 import { useTheme } from "@/themes/useThemeProvider";
 import type { User } from "@/types/user";
@@ -32,7 +32,7 @@ export const EditProfile = () => {
   const navigation = useNavigation();
   const { toast } = useToast();
   const queryClient = useQueryClient();
-  const { data: user, isPending, isError, error } = useAccount();
+  const { data: user, isPending, isError, error } = useUser();
   const { mutate: updateAccount, isPending: isUpdatingAccount } =
     useUpdateAccount();
   const { mutate: updateProfilePicture, isPending: isUpdatingProfilePicture } =

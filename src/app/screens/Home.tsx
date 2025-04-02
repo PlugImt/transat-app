@@ -3,8 +3,8 @@ import { useToast } from "@/components/common/Toast";
 import { Weather } from "@/components/custom/Weather";
 import RestaurantWidget from "@/components/custom/widget/RestaurantWidget";
 import WashingMachineWidget from "@/components/custom/widget/WashingMachineWidget";
-import { useAccount } from "@/hooks/account/useAccount";
 import useAuth from "@/hooks/account/useAuth";
+import { useUser } from "@/hooks/account/useUser";
 import { QUERY_KEYS } from "@/lib/queryKeys";
 import type { AppStackParamList } from "@/services/storage/types";
 import { useNavigation } from "@react-navigation/native";
@@ -74,7 +74,7 @@ async function registerForPushNotificationsAsync() {
 }
 
 export const Home = () => {
-  const { data: user, isPending, isError, error } = useAccount();
+  const { data: user, isPending, isError, error } = useUser();
   const { t } = useTranslation();
   const { toast } = useToast();
 

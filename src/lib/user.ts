@@ -22,6 +22,25 @@ export async function fetchUser(): Promise<User> {
   return data;
 }
 
+export async function updateLanguage(language: string) {
+  const token = await storage.get("token");
+  if (!token) {
+    throw new Error(t("account.noToken"));
+  }
+
+  const response = await axios.patch(
+    "https://transat.destimt.fr/api/newf/me",
+    { language },
+    { headers: { Authorization: `Bearer ${token}` } },
+  );
+
+  if (response.status !== 200) {
+    throw new Error(t("account.updateFailed"));
+  }
+
+  return response.data;
+}
+
 export async function updateUser(data: User) {
   const token = await storage.get("token");
   if (!token) {
@@ -35,6 +54,7 @@ export async function updateUser(data: User) {
       last_name: data.last_name,
       phone_number: data.phone_number,
       graduation_year: data.graduation_year,
+      language: data.language,
     },
     {
       headers: { Authorization: `Bearer ${token}` },

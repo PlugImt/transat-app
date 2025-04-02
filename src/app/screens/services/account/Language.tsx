@@ -1,4 +1,5 @@
 import Page from "@/components/common/Page";
+import { useUpdateLanguage } from "@/hooks/account/useUpdateLanguage";
 import i18n from "@/i18n";
 import { storage } from "@/services/storage/asyncStorage";
 import { STORAGE_KEYS } from "@/services/storage/constants";
@@ -7,7 +8,7 @@ import { useTheme } from "@/themes/useThemeProvider";
 import { useNavigation } from "@react-navigation/native";
 import { Check } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
-import { Text, View } from "react-native";
+import { ActivityIndicator, Text, View } from "react-native";
 import { SettingsItem } from "./SettingsItem";
 
 export const Language = () => {
@@ -15,6 +16,7 @@ export const Language = () => {
   const { t } = useTranslation();
   const currentLanguage = i18n.language;
   const navigation = useNavigation<SettingsNavigation>();
+  const { mutate: updateLanguage, isPending, variables } = useUpdateLanguage();
 
   const languages = [
     {
@@ -36,9 +38,11 @@ export const Language = () => {
 
   const handleLanguageChange = async (languageCode: string) => {
     try {
-      await i18n.changeLanguage(languageCode);
-      await storage.set(STORAGE_KEYS.LANGUAGE, languageCode);
-      navigation.goBack();
+      updateLanguage(languageCode, {
+        onSuccess: () => {
+          navigation.goBack();
+        },
+      });
     } catch (error) {
       console.error("Error changing language:", error);
     }
@@ -51,12 +55,13 @@ export const Language = () => {
         {languages.map((language) => (
           <SettingsItem
             key={language.code}
-            // icon={<Globe color={theme.foreground} size={22} />}
             title={language.name}
             subtitle={language.translatedName}
             onPress={() => handleLanguageChange(language.code)}
             rightElement={
-              currentLanguage === language.code ? (
+              isPending && variables === language.code ? (
+                <ActivityIndicator size="small" color={theme.primary} />
+              ) : currentLanguage === language.code ? (
                 <Check color={theme.primary} size={20} />
               ) : null
             }

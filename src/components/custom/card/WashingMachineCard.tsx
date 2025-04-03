@@ -2,7 +2,7 @@ import { useTheme } from "@/themes/useThemeProvider";
 import * as Notifications from "expo-notifications";
 import { SchedulableTriggerInputTypes } from "expo-notifications";
 import { Bell, BellRing, WashingMachineIcon, Wind } from "lucide-react-native";
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Text, TouchableOpacity, View } from "react-native";
 import { Badge } from "../../common/Badge";

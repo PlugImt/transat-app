@@ -1,8 +1,6 @@
 import { useAuthMutations } from "@/hooks/auth/useAuthMutations";
 import { useVerificationCode } from "@/hooks/auth/useVerificationCode";
-import { apiRequest } from "@/lib/apiRequest";
 import type { Loading, NotLoggedIn, User } from "@/types/user";
-import { useQueryClient } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 import { type FC, createContext, useEffect, useState } from "react";
 

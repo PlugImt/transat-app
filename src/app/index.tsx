@@ -26,7 +26,7 @@ Notifications.setNotificationHandler({
 export default function App() {
   const queryClient = new QueryClient();
 
-  const onCopy = async (text: string) => {
+  const _onCopy = async (text: string) => {
     try {
       await Clipboard.setStringAsync(text);
       return true;

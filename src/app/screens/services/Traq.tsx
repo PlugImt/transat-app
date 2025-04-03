@@ -5,7 +5,7 @@ import ErrorPage from "@/components/custom/ErrorPage";
 import LoadingScreen from "@/components/custom/LoadingScreen";
 import TraqCard from "@/components/custom/card/TraqCard";
 import { useTraq } from "@/hooks/useTraq";
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView, Text, View } from "react-native";
 

@@ -7,7 +7,7 @@ import useAuth from "@/hooks/account/useAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
 import { getLocales } from "expo-localization";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Text, type TextInput, View } from "react-native";
@@ -104,7 +104,7 @@ export const Signup = () => {
       await saveToken(token);
       setVerificationModalVisible(false);
       toast(t("common.verificationSuccess"), "success");
-    } catch (err) {
+    } catch (_err) {
       setSignupError(t("auth.errors.tokenSaveFailed"));
     }
   };
@@ -180,7 +180,6 @@ export const Signup = () => {
         isVisible={verificationModalVisible}
         email={verificationEmail}
         onClose={() => setVerificationModalVisible(false)}
-        onSuccess={handleVerificationSuccess}
       />
     </Page>
   );

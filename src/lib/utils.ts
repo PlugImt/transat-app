@@ -6,7 +6,6 @@ import * as ImagePicker from "expo-image-picker";
 import { t } from "i18next";
 import { twMerge } from "tailwind-merge";
 import { getAPIUrl } from "./apiRequest";
-import { apiUrlDev, apiUrlProd } from "./config";
 
 export function isLunch() {
   const now = new Date();
@@ -59,7 +58,7 @@ export async function uploadImage(): Promise<string> {
 
   // Get the selected image
   const image = result.assets[0];
-  const base64 = await FileSystem.readAsStringAsync(image.uri, {
+  const _base64 = await FileSystem.readAsStringAsync(image.uri, {
     encoding: FileSystem.EncodingType.Base64,
   });
 

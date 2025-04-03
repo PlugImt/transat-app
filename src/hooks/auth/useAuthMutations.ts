@@ -1,6 +1,4 @@
 import { apiRequest, getAPIUrl } from "@/lib/apiRequest";
-import { apiUrlDev } from "@/lib/config";
-import { apiUrlProd } from "@/lib/config";
 import { QUERY_KEYS } from "@/lib/queryKeys";
 import { storage } from "@/services/storage/asyncStorage";
 import type { NotLoggedIn, User } from "@/types/user";
@@ -28,7 +26,7 @@ export const useAuthMutations = () => {
         const userData = await apiRequest<User>("/api/newf/me");
         await storage.set("newf", userData);
         return userData;
-      } catch (error) {
+      } catch (_error) {
         await storage.remove("token");
         return null as NotLoggedIn;
       }

@@ -6,7 +6,7 @@ import { useToast } from "@/components/common/Toast";
 import useAuth from "@/hooks/account/useAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Text, type TextInput, View } from "react-native";
@@ -14,7 +14,7 @@ import { z } from "zod";
 
 export const Signin = () => {
   const navigation = useNavigation();
-  const { login, saveToken, isLoading } = useAuth();
+  const { login, isLoading } = useAuth();
   const { t } = useTranslation();
   const { toast } = useToast();
 
@@ -71,18 +71,8 @@ export const Signin = () => {
       } else if (result?.success) {
         toast(t("auth.signInSuccess"), "success");
       }
-    } catch (err) {
+    } catch {
       setLoginError(t("auth.errors.invalidCredentials"));
-    }
-  };
-
-  const handleVerificationSuccess = async (token: string) => {
-    try {
-      await saveToken(token);
-      setVerificationModalVisible(false);
-      toast(t("auth.signInSuccess"), "success");
-    } catch (err) {
-      setLoginError(t("auth.errors.tokenSaveFailed"));
     }
   };
 
@@ -144,7 +134,6 @@ export const Signin = () => {
         isVisible={verificationModalVisible}
         email={verificationEmail}
         onClose={() => setVerificationModalVisible(false)}
-        onSuccess={handleVerificationSuccess}
       />
     </Page>
   );

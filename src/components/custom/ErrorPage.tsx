@@ -31,11 +31,13 @@ export default function ErrorPage({
         onPress={refetch}
         loading={isRefetching}
       />
-      <Button
-        label="Déconnexion"
-        variant="destructive"
-        onPress={() => logout()}
-      />
+      {isAccountPage && (
+        <Button
+          label="Déconnexion"
+          variant="destructive"
+          onPress={() => logout()}
+        />
+      )}
     </View>
   );
 }

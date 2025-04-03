@@ -16,7 +16,7 @@ export const SettingsItem = ({
   onPress,
   rightElement,
 }: Props) => {
-  const theme = useTheme();
+  const _theme = useTheme();
   return (
     <TouchableOpacity
       className="flex-row items-center justify-between py-4"

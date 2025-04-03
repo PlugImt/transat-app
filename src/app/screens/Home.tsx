@@ -1,5 +1,4 @@
 import Page from "@/components/common/Page";
-import { useToast } from "@/components/common/Toast";
 import { Weather } from "@/components/custom/Weather";
 import RestaurantWidget from "@/components/custom/widget/RestaurantWidget";
 import WashingMachineWidget from "@/components/custom/widget/WashingMachineWidget";
@@ -74,16 +73,15 @@ async function registerForPushNotificationsAsync() {
 }
 
 export const Home = () => {
-  const { data: user, isPending, isError, error } = useUser();
+  const { data: user } = useUser();
   const { t } = useTranslation();
-  const { toast } = useToast();
 
   const { saveExpoPushToken } = useAuth();
 
-  const [expoPushToken, setExpoPushToken] = useState("");
-  const [notificationOpened, setNotificationOpened] = useState(false);
+  const [_expoPushToken, setExpoPushToken] = useState("");
+  const [_notificationOpened, setNotificationOpened] = useState(false);
   // biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
-  const [notificationData, setNotificationData] = useState<any>(null);
+  const [_notificationData, setNotificationData] = useState<any>(null);
   const navigation = useNavigation<AppScreenNavigationProp>();
 
   useEffect(() => {

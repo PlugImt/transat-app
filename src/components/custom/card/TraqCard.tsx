@@ -28,7 +28,6 @@ const TraqCard = ({
   outOfStock,
   price,
   priceHalf,
-  onPress,
 }: CardProps) => {
   const { t } = useTranslation();
   const theme = useTheme();

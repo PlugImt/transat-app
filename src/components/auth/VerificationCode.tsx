@@ -1,6 +1,4 @@
 import { useAuth } from "@/hooks/account/useAuth";
-import { useVerificationCode } from "@/hooks/auth/useVerificationCode";
-import { apiRequest } from "@/lib/apiRequest";
 import type React from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -22,7 +20,6 @@ interface VerificationCodeModalProps {
   isVisible: boolean;
   email: string;
   onClose: () => void;
-  onSuccess: (token: string) => void;
 }
 
 const CELL_COUNT = 6;
@@ -31,7 +28,6 @@ export const VerificationCodeModal: React.FC<VerificationCodeModalProps> = ({
   isVisible,
   email,
   onClose,
-  onSuccess,
 }) => {
   const [value, setValue] = useState("");
   const [error, setError] = useState<string | null>(null);

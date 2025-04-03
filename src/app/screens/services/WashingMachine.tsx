@@ -3,13 +3,13 @@ import { AboutModal } from "@/components/custom/AboutModal";
 import LoadingScreen from "@/components/custom/LoadingScreen";
 import WashingMachineCard from "@/components/custom/card/WashingMachineCard";
 import { useWashingMachines } from "@/hooks/useWashingMachines";
-import React, { type FC, useState } from "react";
+import { type FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
 
 export const WashingMachine: FC = () => {
   const { t } = useTranslation();
-  const [aboutPopupVisible, setAboutPopupVisible] = useState(false);
+  const [_aboutPopupVisible, _setAboutPopupVisible] = useState(false);
   const openingHoursData = [{ day: "24/7", lunch: "", dinner: "" }];
 
   const { data, isPending, isFetching, isError, error, refetch } =

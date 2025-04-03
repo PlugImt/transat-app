@@ -4,7 +4,7 @@ import { useTheme } from "@/themes/useThemeProvider";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { WashingMachineIcon, Wind } from "lucide-react-native";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 
@@ -15,7 +15,7 @@ export function WashingMachineWidget() {
   const navigation = useNavigation<AppScreenNavigationProp>();
   const theme = useTheme();
 
-  const { data, isPending, isError, error, refetch } = useWashingMachines();
+  const { data, isPending, isError, error } = useWashingMachines();
 
   const [totalWashers, setTotalWashers] = useState<number>(0);
   const [totalDryers, setTotalDryers] = useState<number>(0);

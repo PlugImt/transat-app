@@ -1,8 +1,6 @@
 import Page from "@/components/common/Page";
 import { useUpdateLanguage } from "@/hooks/account/useUpdateLanguage";
 import i18n from "@/i18n";
-import { storage } from "@/services/storage/asyncStorage";
-import { STORAGE_KEYS } from "@/services/storage/constants";
 import type { SettingsNavigation } from "@/services/storage/types";
 import { useTheme } from "@/themes/useThemeProvider";
 import { useNavigation } from "@react-navigation/native";

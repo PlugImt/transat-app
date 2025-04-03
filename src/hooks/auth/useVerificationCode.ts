@@ -30,7 +30,7 @@ export const useVerificationCode = () => {
   });
 
   return {
-    verifyCode: verifyMutation.mutate,
+    verifyCode: verifyMutation.mutateAsync,
     resendCode: resendCodeMutation.mutate,
     isVerifying: verifyMutation.isPending,
     isResending: resendCodeMutation.isPending,

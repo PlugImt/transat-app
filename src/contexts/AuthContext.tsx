@@ -1,4 +1,6 @@
 import { useAuthMutations } from "@/hooks/auth/useAuthMutations";
+import { useVerificationCode } from "@/hooks/auth/useVerificationCode";
+import { apiRequest } from "@/lib/apiRequest";
 import type { Loading, NotLoggedIn, User } from "@/types/user";
 import { useQueryClient } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
@@ -22,8 +24,14 @@ interface AuthContextType {
     language: string,
   ) => Promise<{ success: boolean }>;
   saveToken: (token: string) => Promise<{ success: boolean }>;
-  setUser: (user: User | null) => void;
   saveExpoPushToken: (token: string) => Promise<boolean | undefined>;
+  verifyCode: (
+    email: string,
+    verification_code: string,
+  ) => Promise<{ success: boolean }>;
+  resendCode: (email: string) => void;
+  isVerifying: boolean;
+  isResending: boolean;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(
@@ -44,7 +52,12 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     saveExpoPushToken: saveExpoPushTokenMutation,
   } = useAuthMutations();
 
-  const queryClient = useQueryClient();
+  const {
+    verifyCode: verifyCodeMutation,
+    isVerifying,
+    resendCode,
+    isResending,
+  } = useVerificationCode();
 
   const [user, setUser] = useState<User | NotLoggedIn | Loading>(null);
   useEffect(() => {
@@ -127,6 +140,19 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     }
   };
 
+  const verifyCode = async (email: string, verification_code: string) => {
+    try {
+      const { token } = await verifyCodeMutation({ email, verification_code });
+      await saveTokenMutation(token);
+      const user = await refetchUser();
+      setUser(user.data);
+      return { success: true };
+    } catch (error) {
+      console.error("Error verifying code:", error);
+      return { success: false };
+    }
+  };
+
   const value = {
     user,
     isLoading: isUserLoading,
@@ -134,8 +160,11 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     logout,
     register,
     saveToken,
-    setUser: () => {}, // Cette fonction n'est plus nécessaire car React Query gère l'état
     saveExpoPushToken,
+    resendCode,
+    verifyCode,
+    isVerifying,
+    isResending,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

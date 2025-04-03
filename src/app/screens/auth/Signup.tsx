@@ -81,7 +81,6 @@ export const Signup = () => {
       const language = getLocales()[0].languageCode ?? "fr";
       const response = await register(data.email, data.password, language);
 
-      console.log("signup response", response);
       if (!response.success) {
         throw new Error("userAlreadyExists");
       }

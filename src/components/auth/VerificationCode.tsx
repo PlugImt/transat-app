@@ -1,4 +1,6 @@
+import { useAuth } from "@/hooks/account/useAuth";
 import { useVerificationCode } from "@/hooks/auth/useVerificationCode";
+import { apiRequest } from "@/lib/apiRequest";
 import type React from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -34,15 +36,7 @@ export const VerificationCodeModal: React.FC<VerificationCodeModalProps> = ({
   const [value, setValue] = useState("");
   const [error, setError] = useState<string | null>(null);
   const { t } = useTranslation();
-
-  const {
-    verifyCode,
-    resendCode,
-    isVerifying,
-    isResending,
-    verifyError,
-    resendError,
-  } = useVerificationCode();
+  const { verifyCode, isVerifying, isResending, resendCode } = useAuth();
 
   const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
@@ -68,29 +62,15 @@ export const VerificationCodeModal: React.FC<VerificationCodeModalProps> = ({
     if (value.length !== CELL_COUNT) return;
 
     setError(null);
-    verifyCode(
-      { email, verification_code: value },
-      {
-        onSuccess: (data) => {
-          onSuccess(data.token);
-        },
-        onError: () => {
-          setError(t("common.verificationFailed"));
-        },
-      },
-    );
+    const { success } = await verifyCode(email, value);
+    if (!success) {
+      setError(t("common.verificationFailed"));
+    }
   };
 
   const requestNewCode = async () => {
     setError(null);
-    resendCode(email, {
-      onSuccess: () => {
-        setError(t("auth.errors.codeSent"));
-      },
-      onError: () => {
-        setError(t("auth.errors.errorSendingCode"));
-      },
-    });
+    resendCode(email);
   };
 
   return (

@@ -128,18 +128,20 @@ export const Settings = () => {
             onPress={() => navigation.navigate("About")}
           />
 
-          <SettingsItem
-            icon={<Server color={theme.foreground} size={22} />}
-            title={t("settings.devServer")}
-            subtitle={t("settings.devServerDescription")}
-            onPress={() => {}}
-            rightElement={
-              <Switch
-                value={isDevServerSelected}
-                onValueChange={handleDevServerToggle}
-              />
-            }
-          />
+          {process.env.NODE_ENV === "development" && (
+            <SettingsItem
+              icon={<Server color={theme.foreground} size={22} />}
+              title={t("settings.devServer")}
+              subtitle={t("settings.devServerDescription")}
+              onPress={() => {}}
+              rightElement={
+                <Switch
+                  value={isDevServerSelected}
+                  onValueChange={handleDevServerToggle}
+                />
+              }
+            />
+          )}
         </View>
       </View>
 

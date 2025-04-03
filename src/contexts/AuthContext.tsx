@@ -63,7 +63,7 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     } catch (error) {
       const axiosError = error as AxiosError<{ error: string }>;
       const errorMessage = axiosError.response?.data?.error || "Login failed";
-      console.error("Login failed:", errorMessage);
+      console.error("Login failed:", error, errorMessage);
 
       if (
         axiosError.response?.status === 401 &&

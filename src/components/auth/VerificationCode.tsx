@@ -1,4 +1,4 @@
-import axios from "axios";
+import { useVerificationCode } from "@/hooks/auth/useVerificationCode";
 import type React from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -33,10 +33,16 @@ export const VerificationCodeModal: React.FC<VerificationCodeModalProps> = ({
 }) => {
   const [value, setValue] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isResending, setIsResending] = useState(false);
-
   const { t } = useTranslation();
+
+  const {
+    verifyCode,
+    resendCode,
+    isVerifying,
+    isResending,
+    verifyError,
+    resendError,
+  } = useVerificationCode();
 
   const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
@@ -54,7 +60,7 @@ export const VerificationCodeModal: React.FC<VerificationCodeModalProps> = ({
   // Auto-submit when code is complete
   useEffect(() => {
     if (value.length === CELL_COUNT) {
-      handleVerify().then((r) => r);
+      handleVerify();
     }
   }, [value]);
 
@@ -62,44 +68,29 @@ export const VerificationCodeModal: React.FC<VerificationCodeModalProps> = ({
     if (value.length !== CELL_COUNT) return;
 
     setError(null);
-    setIsLoading(true);
-
-    try {
-      const response = await axios.post(
-        "https://transat.destimt.fr/api/auth/verify-account",
-        {
-          email,
-          verification_code: value,
+    verifyCode(
+      { email, verification_code: value },
+      {
+        onSuccess: (data) => {
+          onSuccess(data.token);
         },
-      );
-
-      if (response.status === 200 && response.data.token) {
-        onSuccess(response.data.token);
-      }
-    } catch (err) {
-      // @ts-ignore
-      setError(t("common.verificationFailed"));
-      // setValue('');
-    } finally {
-      setIsLoading(false);
-    }
+        onError: () => {
+          setError(t("common.verificationFailed"));
+        },
+      },
+    );
   };
 
   const requestNewCode = async () => {
-    setIsResending(true);
     setError(null);
-
-    try {
-      await axios.post(
-        "https://transat.destimt.fr/api/auth/verification-code",
-        { email },
-      );
-      setError(t("auth.errors.codeSent"));
-    } catch (err) {
-      setError(t("auth.errors.errorSendingCode"));
-    } finally {
-      setIsResending(false);
-    }
+    resendCode(email, {
+      onSuccess: () => {
+        setError(t("auth.errors.codeSent"));
+      },
+      onError: () => {
+        setError(t("auth.errors.errorSendingCode"));
+      },
+    });
   };
 
   return (
@@ -170,12 +161,12 @@ export const VerificationCodeModal: React.FC<VerificationCodeModalProps> = ({
 
               <TouchableOpacity
                 onPress={handleVerify}
-                disabled={value.length !== CELL_COUNT || isLoading}
+                disabled={value.length !== CELL_COUNT || isVerifying}
                 className={`rounded-md bg-[#ec7f32] px-5 py-2 ${
-                  value.length !== CELL_COUNT || isLoading ? "opacity-50" : ""
+                  value.length !== CELL_COUNT || isVerifying ? "opacity-50" : ""
                 }`}
               >
-                {isLoading ? (
+                {isVerifying ? (
                   <ActivityIndicator size="small" color="#fff" />
                 ) : (
                   <Text className="text-base text-white">

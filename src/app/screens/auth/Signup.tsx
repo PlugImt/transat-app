@@ -6,6 +6,7 @@ import { useToast } from "@/components/common/Toast";
 import useAuth from "@/hooks/account/useAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
+import { getLocales } from "expo-localization";
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -77,13 +78,25 @@ export const Signup = () => {
   }) => {
     setSignupError(null);
     try {
-      const response = await register(data.email, data.password);
+      const language = getLocales()[0].languageCode ?? "fr";
+      const response = await register(data.email, data.password, language);
+
+      console.log("signup response", response);
+      if (!response.success) {
+        throw new Error("userAlreadyExists");
+      }
 
       setVerificationEmail(data.email);
       setVerificationModalVisible(true);
     } catch (err) {
-      // @ts-ignore
-      setSignupError(t("auth.errors.signupFailed"));
+      if (
+        err instanceof Error &&
+        err.message === "You already have an account"
+      ) {
+        setSignupError(t("auth.errors.accountExists"));
+      } else {
+        setSignupError(t("auth.errors.signupFailed"));
+      }
     }
   };
 

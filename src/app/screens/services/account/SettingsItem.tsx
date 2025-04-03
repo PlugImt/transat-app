@@ -27,7 +27,9 @@ export const SettingsItem = ({
         <View className="ml-2.5">
           <Text className="text-foreground">{title}</Text>
           {subtitle && (
-            <Text className="text-sm text-foreground/60">{subtitle}</Text>
+            <Text className="text-sm break-words text-foreground/60">
+              {subtitle}
+            </Text>
           )}
         </View>
       </View>

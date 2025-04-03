@@ -5,6 +5,8 @@ import * as FileSystem from "expo-file-system";
 import * as ImagePicker from "expo-image-picker";
 import { t } from "i18next";
 import { twMerge } from "tailwind-merge";
+import { getAPIUrl } from "./apiRequest";
+import { apiUrlDev, apiUrlProd } from "./config";
 
 export function isLunch() {
   const now = new Date();
@@ -76,25 +78,20 @@ export async function uploadImage(): Promise<string> {
       // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     } as any);
 
-    const uploadResponse = await axios.post(
-      "https://transat.destimt.fr/api/upload",
-      formData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
+    const apiUrl = await getAPIUrl();
+
+    const uploadResponse = await axios.post(`${apiUrl}/api/upload`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
       },
-    );
+    });
 
     if (!uploadResponse.data.success) {
       throw new Error(t("account.profilePictureUpdateFailed"));
     }
 
-    // Return the URL from your API response
-    // Modify this based on your actual API response structure
-    const baseUrl = "https://transat.destimt.fr/api";
-    return baseUrl + uploadResponse.data.url;
+    return apiUrl + uploadResponse.data.url;
   } catch (error) {
     console.error("Image upload failed:", error);
     throw new Error(t("account.profilePictureUpdateFailed"));

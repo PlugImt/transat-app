@@ -45,7 +45,12 @@ export const Account = () => {
 
   if (isError && error) {
     return (
-      <ErrorPage error={error} refetch={refetch} isRefetching={isPending} />
+      <ErrorPage
+        error={error}
+        refetch={refetch}
+        isRefetching={isPending}
+        isAccountPage={true}
+      />
     );
   }
 

@@ -1,3 +1,6 @@
+export type NotLoggedIn = null;
+export type Loading = undefined;
+
 export interface User {
   first_name: string;
   last_name: string;

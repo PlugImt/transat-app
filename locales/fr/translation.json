@@ -54,6 +54,8 @@
   "settings": {
     "settings": "Paramètres",
     "logout": "Déconnexion",
+    "devServer": "Serveur de développement",
+    "devServerDescription": "Utiliser localhost",
     "notifications": {
       "notifications": "Notifications",
       "fetchError": "Impossible de récupérer les paramètres de notification",

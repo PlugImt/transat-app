@@ -68,9 +68,10 @@ const WashingMachineCard = ({
         await Notifications.cancelScheduledNotificationAsync(notificationId);
       }
 
-      const notificationTriggerTime = timeRemaining - minutes * 60;
+      // Calculate when to notify (5 minutes before completion)
+      const notificationTriggerTime = Math.max(timeRemaining - minutes * 60, 1);
 
-      if (notificationTriggerTime > 0) {
+      if (timeRemaining > minutes * 60) {
         const id = await Notifications.scheduleNotificationAsync({
           content: {
             title: t("services.washingMachine.almostDone", { number }),
@@ -95,7 +96,7 @@ const WashingMachineCard = ({
     await scheduleNotification(MINUTES_BEFORE_NOTIFICATION);
   }, [scheduleNotification]);
 
-  const handleBellPress = async () => {
+  const handleBellPress = useCallback(async () => {
     if (status === 0) return;
 
     if (notificationSet) {
@@ -104,8 +105,10 @@ const WashingMachineCard = ({
       }
       setNotificationId(null);
       setNotificationSet(false);
+    } else {
+      await handleSetNotification();
     }
-  };
+  }, [notificationId, notificationSet, status, handleSetNotification]);
 
   return (
     <View className="px-6 py-4 rounded-lg bg-card flex-row justify-between gap-6 items-center">

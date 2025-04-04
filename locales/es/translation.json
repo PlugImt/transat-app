@@ -54,8 +54,8 @@
   "settings": {
     "settings": "Configuración",
     "logout": "Cerrar sesión",
-    "devServer": "Development Server",
-    "devServerDescription": "Use localhost",
+    "devServer": "Servidor de desarrollo",
+    "devServerDescription": "Usar localhost",
     "notifications": {
       "notifications": "Notificaciones",
       "fetchError": "Imposible recuperar los parámetros de notificación",
@@ -119,7 +119,7 @@
     "title": "Servicios",
     "market": "Mercado",
     "traq": {
-      "title": "Traq'",
+      "title": "Traq",
       "about": "🍺 El Traq (Traquenard) es el bar estudiantil de la escuela donde puedes degustar diferentes bebidas.",
       "location": "Dentro de la MDE",
       "additionalInfo": "Durante los eventos, pueden venderse chupitos o cócteles. Consulta la página del evento para más información.",
@@ -180,7 +180,7 @@
     "additionalInfo": "Información adicional"
   },
   "games": {
-    "title": "Games"
+    "title": "Juegos"
   },
   "account": {
     "graduationYear": "Año de graduación",

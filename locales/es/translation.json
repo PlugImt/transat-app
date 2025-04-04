@@ -54,11 +54,13 @@
   "settings": {
     "settings": "Configuración",
     "logout": "Cerrar sesión",
+    "devServer": "Development Server",
+    "devServerDescription": "Use localhost",
     "notifications": {
       "notifications": "Notificaciones",
-      "setNotification": "Establecer una notificación",
       "fetchError": "Imposible recuperar los parámetros de notificación",
       "updateError": "Imposible actualizar los parámetros de notificación",
+      "setNotification": "Establecer una notificación",
       "toggleRestaurant": "Ser notificado cuando se publique el menú diario",
       "toggleTraq": "Ser notificado cuando se ofrezca un nuevo artículo en el Traq'"
     },
@@ -72,7 +74,6 @@
       "spanish": "Español"
     }
   },
-
   "auth": {
     "signIn": "Iniciar sesión",
     "signInSuccess": "Sesión iniciada con éxito",

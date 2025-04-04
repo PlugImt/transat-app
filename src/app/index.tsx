@@ -47,6 +47,8 @@ export default function App() {
     fetchIsDevServerSelected();
   }, []);
 
+  const isDev = process.env.NODE_ENV === "development";
+
   return (
     <ThemeProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
@@ -66,7 +68,7 @@ export default function App() {
               </ToastProvider>
             </AuthProvider>
           </BottomSheetModalProvider>
-          <DevToolsBubble />
+          {isDev && <DevToolsBubble onCopy={_onCopy} />}
         </QueryClientProvider>
       </GestureHandlerRootView>
     </ThemeProvider>

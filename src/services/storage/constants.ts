@@ -5,6 +5,7 @@ export const STORAGE_KEYS = {
   LANGUAGE: "language",
   THEME: "theme",
   ONBOARDING_COMPLETED: "onboarding_completed",
+  IS_DEV_SERVER_SELECTED: "is_dev_server_selected",
 } as const;
 
 export default STORAGE_KEYS;

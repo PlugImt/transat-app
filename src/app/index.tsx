@@ -5,6 +5,7 @@ import { ToastProvider } from "@/components/common/Toast";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { apiUrlDev } from "@/lib/config";
 import { storage } from "@/services/storage/asyncStorage";
+import STORAGE_KEYS from "@/services/storage/constants";
 import { ThemeProvider } from "@/themes/useThemeProvider";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -38,7 +39,9 @@ export default function App() {
   const [isDevServerSelected, setIsDevServerSelected] = useState(false);
   useEffect(() => {
     const fetchIsDevServerSelected = async () => {
-      const isDevServerSelected = await storage.get("isDevServerSelected");
+      const isDevServerSelected = await storage.get(
+        STORAGE_KEYS.IS_DEV_SERVER_SELECTED,
+      );
       setIsDevServerSelected(isDevServerSelected === "true");
     };
     fetchIsDevServerSelected();

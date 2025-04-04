@@ -20,6 +20,7 @@ import useAuth from "@/hooks/account/useAuth";
 import { useUser } from "@/hooks/account/useUser";
 import { QUERY_KEYS } from "@/lib/queryKeys";
 import { storage } from "@/services/storage/asyncStorage";
+import STORAGE_KEYS from "@/services/storage/constants";
 import type { SettingsNavigation } from "@/services/storage/types";
 import { useTheme } from "@/themes/useThemeProvider";
 import { useNavigation } from "@react-navigation/native";
@@ -37,7 +38,7 @@ export const Settings = () => {
 
   useEffect(() => {
     const loadDevServerSetting = async () => {
-      const value = await storage.get("isDevServerSelected");
+      const value = await storage.get(STORAGE_KEYS.IS_DEV_SERVER_SELECTED);
       setIsDevServerSelected(value === "true");
     };
     loadDevServerSetting();
@@ -45,7 +46,7 @@ export const Settings = () => {
 
   const handleDevServerToggle = async (value: boolean) => {
     setIsDevServerSelected(value);
-    await storage.set("isDevServerSelected", value.toString());
+    await storage.set(STORAGE_KEYS.IS_DEV_SERVER_SELECTED, value.toString());
   };
 
   const handleLogout = async () => {

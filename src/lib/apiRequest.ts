@@ -1,4 +1,5 @@
 import { storage } from "@/services/storage/asyncStorage";
+import STORAGE_KEYS from "@/services/storage/constants";
 import axios from "axios";
 import type { AxiosInstance } from "axios";
 import { t } from "i18next";
@@ -12,7 +13,7 @@ export async function getAPIUrl(): Promise<string> {
   }
 
   const isDevServerSelected =
-    (await storage.get("isDevServerSelected")) === "true";
+    (await storage.get(STORAGE_KEYS.IS_DEV_SERVER_SELECTED)) === "true";
   return isDevServerSelected ? apiUrlDev : apiUrlProd;
 }
 

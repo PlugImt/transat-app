@@ -1,11 +1,11 @@
 {
   "common": {
-    "welcome": "Welcome",
+    "welcome": "Willkommen",
     "edit": "Edit",
-    "other": "Other",
-    "help": "Help",
-    "appearance": "Appearance",
-    "language": "Language",
+    "other": "Sonstiges",
+    "help": "Hilfe",
+    "appearance": "Erscheinung",
+    "language": "Sprache",
     "theme": "Theme",
     "dark": "Dark",
     "light": "Light",

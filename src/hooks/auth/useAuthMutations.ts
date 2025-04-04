@@ -31,6 +31,7 @@ export const useAuthMutations = () => {
         return null as NotLoggedIn;
       }
     },
+    staleTime: 1000 * 60 * 5, // 5 minutes
   });
 
   const loginMutation = useMutation<

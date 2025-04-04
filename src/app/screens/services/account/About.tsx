@@ -1,14 +1,11 @@
 import { Button } from "@/components/common/Button";
-import { InfoItem } from "@/components/common/InfoItem";
 import Page from "@/components/common/Page";
 import { useTheme } from "@/themes/useThemeProvider";
-import Constants from "expo-constants";
-import { Code, Github, Globe, Mail } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { Image, Linking, ScrollView, Text, View } from "react-native";
 
 export const About = () => {
-  const theme = useTheme();
+  const _theme = useTheme();
   const { t } = useTranslation();
 
   const handleOpenLink = async (url: string) => {

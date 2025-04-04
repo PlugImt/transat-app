@@ -15,7 +15,6 @@ import { useTheme } from "@/themes/useThemeProvider";
 import { useNavigation } from "@react-navigation/native";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
 import { Lock, Mail, Medal, Phone, Settings } from "lucide-react-native";
-import type React from "react";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
 
@@ -45,7 +44,12 @@ export const Account = () => {
 
   if (isError && error) {
     return (
-      <ErrorPage error={error} refetch={refetch} isRefetching={isPending} />
+      <ErrorPage
+        error={error}
+        refetch={refetch}
+        isRefetching={isPending}
+        isAccountPage={true}
+      />
     );
   }
 

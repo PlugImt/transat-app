@@ -16,7 +16,7 @@ export const SettingsItem = ({
   onPress,
   rightElement,
 }: Props) => {
-  const theme = useTheme();
+  const _theme = useTheme();
   return (
     <TouchableOpacity
       className="flex-row items-center justify-between py-4"
@@ -27,7 +27,9 @@ export const SettingsItem = ({
         <View className="ml-2.5">
           <Text className="text-foreground">{title}</Text>
           {subtitle && (
-            <Text className="text-sm text-foreground/60">{subtitle}</Text>
+            <Text className="text-sm break-words text-foreground/60">
+              {subtitle}
+            </Text>
           )}
         </View>
       </View>

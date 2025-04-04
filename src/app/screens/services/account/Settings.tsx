@@ -1,16 +1,25 @@
 import { useQueryClient } from "@tanstack/react-query";
-import { Bell, Globe, HelpCircle, Info, Shield } from "lucide-react-native";
-import React from "react";
+import {
+  Bell,
+  Globe,
+  HelpCircle,
+  Info,
+  Server,
+  Shield,
+} from "lucide-react-native";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
 
 import { Button } from "@/components/common/Button";
 import Page from "@/components/common/Page";
+import { Switch } from "@/components/common/Switch";
 import { useToast } from "@/components/common/Toast";
 import { AccountCard } from "@/components/custom/card/AccountCard";
 import useAuth from "@/hooks/account/useAuth";
 import { useUser } from "@/hooks/account/useUser";
 import { QUERY_KEYS } from "@/lib/queryKeys";
+import { storage } from "@/services/storage/asyncStorage";
 import type { SettingsNavigation } from "@/services/storage/types";
 import { useTheme } from "@/themes/useThemeProvider";
 import { useNavigation } from "@react-navigation/native";
@@ -24,6 +33,20 @@ export const Settings = () => {
   const queryClient = useQueryClient();
   const { data: user, isPending } = useUser();
   const navigation = useNavigation<SettingsNavigation>();
+  const [isDevServerSelected, setIsDevServerSelected] = React.useState(false);
+
+  useEffect(() => {
+    const loadDevServerSetting = async () => {
+      const value = await storage.get("isDevServerSelected");
+      setIsDevServerSelected(value === "true");
+    };
+    loadDevServerSetting();
+  }, []);
+
+  const handleDevServerToggle = async (value: boolean) => {
+    setIsDevServerSelected(value);
+    await storage.set("isDevServerSelected", value.toString());
+  };
 
   const handleLogout = async () => {
     try {
@@ -104,6 +127,21 @@ export const Settings = () => {
             subtitle={t("common.knowMore")}
             onPress={() => navigation.navigate("About")}
           />
+
+          {process.env.NODE_ENV === "development" && (
+            <SettingsItem
+              icon={<Server color={theme.foreground} size={22} />}
+              title={t("settings.devServer")}
+              subtitle={t("settings.devServerDescription")}
+              onPress={() => {}}
+              rightElement={
+                <Switch
+                  value={isDevServerSelected}
+                  onValueChange={handleDevServerToggle}
+                />
+              }
+            />
+          )}
         </View>
       </View>
 

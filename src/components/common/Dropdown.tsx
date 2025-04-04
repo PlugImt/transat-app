@@ -2,7 +2,6 @@ import { useTheme } from "@/themes/useThemeProvider";
 import { Picker } from "@react-native-picker/picker";
 import { ChevronDown } from "lucide-react-native";
 import type React from "react";
-import { useTranslation } from "react-i18next";
 import { Text, TouchableOpacity, View } from "react-native";
 import {
   BottomSheet,
@@ -27,7 +26,6 @@ const Dropdown = ({
   label,
   placeholder,
 }: DropdownProps) => {
-  const { t } = useTranslation();
   const theme = useTheme();
 
   return (

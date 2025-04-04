@@ -2,21 +2,13 @@ import { AppNavigator } from "@/app/navigation/AppNavigator";
 import { AuthNavigator } from "@/app/navigation/AuthNavigator";
 import LoadingScreen from "@/components/custom/LoadingScreen";
 import { useAuth } from "@/hooks/account/useAuth";
-import type {
-  AppStackParamList,
-  RootStackParamList,
-} from "@/services/storage/types";
-import {
-  type StackNavigationProp,
-  createStackNavigator,
-} from "@react-navigation/stack";
-
-type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
+import type { RootStackParamList } from "@/services/storage/types";
+import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
 export const RootNavigator = () => {
-  const { user, saveToken, setUser } = useAuth();
+  const { user } = useAuth();
 
   // pendant qu'on vérifie si l'utilisateur est connecté, on affiche un écran de chargement
   if (user === undefined) {

@@ -35,7 +35,7 @@ storage.get<string>(STORAGE_KEYS.LANGUAGE).then((language) => {
         escapeValue: false,
       },
     },
-    (err, t) => {
+    (err, _t) => {
       if (err) {
         return console.log("Something went wrong loading translations", err);
       }

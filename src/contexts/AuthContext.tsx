@@ -1,6 +1,7 @@
-import { storage } from "@/services/storage/asyncStorage";
-import type { User } from "@/types/user";
-import axios from "axios";
+import { useAuthMutations } from "@/hooks/auth/useAuthMutations";
+import { useVerificationCode } from "@/hooks/auth/useVerificationCode";
+import type { Loading, NotLoggedIn, User } from "@/types/user";
+import type { AxiosError } from "axios";
 import { type FC, createContext, useEffect, useState } from "react";
 
 interface AuthContextType {
@@ -15,10 +16,20 @@ interface AuthContextType {
     email?: string;
   }>;
   logout: () => Promise<void>;
-  register: (email: string, password: string) => Promise<{ success: boolean }>;
+  register: (
+    email: string,
+    password: string,
+    language: string,
+  ) => Promise<{ success: boolean }>;
   saveToken: (token: string) => Promise<{ success: boolean }>;
-  setUser: (user: User | null) => void;
   saveExpoPushToken: (token: string) => Promise<boolean | undefined>;
+  verifyCode: (
+    email: string,
+    verification_code: string,
+  ) => Promise<{ success: boolean }>;
+  resendCode: (email: string) => void;
+  isVerifying: boolean;
+  isResending: boolean;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(
@@ -28,192 +39,130 @@ export const AuthContext = createContext<AuthContextType | undefined>(
 export const AuthProvider: FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  // undefined when the user is not checked yet, null when the user is not logged in, User when the user is logged in
-  const [user, setUser] = useState<undefined | null | User>(undefined);
-  const [isLoading, setIsLoading] = useState(false);
+  const {
+    user: userQuery,
+    refetchUser,
+    isUserLoading,
+    login: loginMutation,
+    register: registerMutation,
+    saveToken: saveTokenMutation,
+    logout: logoutMutation,
+    saveExpoPushToken: saveExpoPushTokenMutation,
+  } = useAuthMutations();
 
+  const {
+    verifyCode: verifyCodeMutation,
+    isVerifying,
+    resendCode,
+    isResending,
+  } = useVerificationCode();
+
+  const [user, setUser] = useState<User | NotLoggedIn | Loading>(null);
   useEffect(() => {
-    checkUser().then((r) => r);
-  }, []);
-
-  const checkUser = async () => {
-    try {
-      const userData = await storage.get("token");
-      if (userData && typeof userData === "string") {
-        await saveToken(userData);
-      } else {
-        setUser(null);
-      }
-    } catch (error) {
-      console.error("Error checking user:", error);
+    if (userQuery) {
+      setUser(userQuery);
     }
-  };
+  }, [userQuery]);
 
   const login = async (email: string, password: string) => {
     try {
-      setIsLoading(true);
-      const response = await axios.post(
-        "https://transat.destimt.fr/api/auth/login",
-        { email, password },
-      );
-
-      if (response.status === 200) {
-        const { token } = response.data;
-        await saveToken(token);
-        return { success: true };
-      }
-      return { success: false };
+      const response = await loginMutation({ email, password });
+      await saveTokenMutation(response.token);
+      const user = await refetchUser();
+      setUser(user.data);
+      return { success: true };
     } catch (error) {
-      // @ts-ignore
-      const errorMessage = error.response?.data?.error || "Login failed";
-      console.error("Login failed:", errorMessage);
+      const axiosError = error as AxiosError<{ error: string }>;
+      const errorMessage = axiosError.response?.data?.error || "Login failed";
+      console.error("Login failed:", error, errorMessage);
 
       if (
-        // @ts-ignore
-        error.response?.status === 401 &&
+        axiosError.response?.status === 401 &&
         errorMessage === "Validate your account first"
       ) {
         return { needsVerification: true, email };
       }
 
       throw new Error(errorMessage);
-    } finally {
-      setIsLoading(false);
+    }
+  };
+
+  const register = async (
+    email: string,
+    password: string,
+    language: string,
+  ) => {
+    try {
+      await registerMutation({ email, password, language });
+      return { success: true };
+    } catch (error) {
+      const axiosError = error as AxiosError;
+      if (axiosError.response?.status === 409) {
+        throw new Error("You already have an account");
+      }
+
+      if (axiosError.response?.status === 400) {
+        throw new Error("Only IMT emails are allowed");
+      }
+
+      throw new Error("Registration failed");
     }
   };
 
   const saveToken = async (token: string) => {
-    await storage.set("token", token);
-
-    // Fetch newf data
-    const newfResponse = await axios.get(
-      "https://transat.destimt.fr/api/newf/me",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      },
-    );
-    if (newfResponse.status === 200) {
-      const newf = newfResponse.data as User;
-      await storage.set("newf", newf);
-
-      setUser(newf);
-    }
-
-    // Fetch notification status
-    const notificationResponse = await axios.get(
-      "https://transat.destimt.fr/api/newf/notification",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      },
-    );
-    if (notificationResponse.status === 200) {
-      const notification = notificationResponse.data as User;
-      await storage.set("notification", notification);
-
-      setUser(notification);
-    }
-
-    return { success: true };
-  };
-
-  const logout = async () => {
     try {
-      setIsLoading(true);
-      await storage.remove("token");
-      await storage.remove("newf");
-      setUser(null);
+      await saveTokenMutation(token);
+      return { success: true };
     } catch (error) {
-      // @ts-ignore
-      console.error("Logout failed:", error.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const register = async (email: string, password: string) => {
-    try {
-      setIsLoading(true);
-
-      const response = await fetch("https://transat.destimt.fr/api/newf/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
-
-      if (response.status === 409) {
-        throw new Error("You already have an account");
-      }
-
-      if (response.status === 400) {
-        throw new Error("Only IMT emails are allowed");
-      }
-
-      if (response.status === 201) {
-        return { success: true };
-      }
-
-      throw new Error("Registration failed");
-    } catch (error) {
-      console.error(error);
-      throw error;
-    } finally {
-      setIsLoading(false);
+      console.error("Error saving token:", error);
+      return { success: false };
     }
   };
 
   const saveExpoPushToken = async (token: string) => {
-    const JWTtoken = await storage.get("token");
-
-    const expoPushToken = await storage.get("expoPushToken");
-
-    if (expoPushToken === token) {
+    try {
+      await saveExpoPushTokenMutation(token);
       return true;
-    }
-
-    if (!JWTtoken) {
-      throw new Error("No JWT token");
-    }
-
-    if (!token) {
+    } catch (error) {
+      console.error("Error saving expo push token:", error);
       return false;
     }
+  };
 
-    const response = await axios.patch(
-      "https://transat.destimt.fr/api/newf/me",
-      {
-        notification_token: token,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${JWTtoken}`,
-        },
-      },
-    );
+  const logout = async () => {
+    try {
+      await logoutMutation();
+      setUser(null);
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
 
-    if (response.status === 200) {
-      await storage.set("expoPushToken", token);
-      return true;
+  const verifyCode = async (email: string, verification_code: string) => {
+    try {
+      const { token } = await verifyCodeMutation({ email, verification_code });
+      await saveTokenMutation(token);
+      const user = await refetchUser();
+      setUser(user.data);
+      return { success: true };
+    } catch (error) {
+      console.error("Error verifying code:", error);
+      return { success: false };
     }
   };
 
   const value = {
     user,
-    isLoading,
+    isLoading: isUserLoading,
     login,
     logout,
     register,
     saveToken,
-    setUser,
     saveExpoPushToken,
+    resendCode,
+    verifyCode,
+    isVerifying,
+    isResending,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { isWeekend } from "date-fns";
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 
@@ -17,7 +17,7 @@ export function RestaurantWidget() {
   const theme = useTheme();
 
   const navigation = useNavigation<AppScreenNavigationProp>();
-  const { data: menu, isPending, error, isError } = useRestaurantMenu();
+  const { data: menu, isPending, error } = useRestaurantMenu();
 
   const weekend: boolean = useMemo(() => isWeekend(new Date()), []);
   const lunch: boolean = useMemo(() => isLunch(), []);

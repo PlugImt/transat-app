@@ -1,3 +1,6 @@
+export type NotLoggedIn = null;
+export type Loading = undefined;
+
 export interface User {
   first_name: string;
   last_name: string;
@@ -8,6 +11,7 @@ export interface User {
   id_newf?: number;
   total_newf?: number;
   password_updated_date?: string;
+  language?: string;
 }
 
 export interface Password {

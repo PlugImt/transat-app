@@ -5,7 +5,7 @@ import ErrorPage from "@/components/custom/ErrorPage";
 import LoadingScreen from "@/components/custom/LoadingScreen";
 import TraqCard from "@/components/custom/card/TraqCard";
 import { useTraq } from "@/hooks/useTraq";
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView, Text, View } from "react-native";
 
@@ -69,7 +69,7 @@ export const Traq = () => {
     </View>
   );
 
-  if ((isError && error) || !traq) {
+  if (isError && error) {
     return (
       <ErrorPage
         error={
@@ -78,6 +78,18 @@ export const Traq = () => {
         refetch={refetch}
         isRefetching={isPending}
       />
+    );
+  }
+
+  if (!traq) {
+    return (
+      <Page>
+        <View className="flex items-center justify-center">
+          <Text className="h3 text-muted-foreground">
+            {t("services.traq.noItemsFound")}
+          </Text>
+        </View>
+      </Page>
     );
   }
 

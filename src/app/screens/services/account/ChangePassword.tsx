@@ -14,7 +14,7 @@ import { z } from "zod";
 
 export const ChangePassword = () => {
   const { t } = useTranslation();
-  const { data: user, isPending, isError, error } = useUser();
+  const { data: user } = useUser();
   const { mutate: changePassword, isPending: isUpdatingPassword } =
     useChangePassword();
   const { toast } = useToast();

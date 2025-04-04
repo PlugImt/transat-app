@@ -1,3 +1,4 @@
+import useAuth from "@/hooks/account/useAuth";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
 import { Button } from "../common/Button";
@@ -6,10 +7,18 @@ type Props = {
   error: Error;
   refetch: () => void;
   isRefetching: boolean;
+  isAccountPage?: boolean;
 };
 
-export default function ErrorPage({ error, refetch, isRefetching }: Props) {
+export default function ErrorPage({
+  error,
+  refetch,
+  isRefetching,
+  isAccountPage = false,
+}: Props) {
   const { t } = useTranslation();
+  const { logout } = useAuth();
+
   return (
     <View className="bg-background px-5 justify-center items-center gap-6 h-screen">
       <View className="gap-2 justify-center items-center">
@@ -22,6 +31,13 @@ export default function ErrorPage({ error, refetch, isRefetching }: Props) {
         onPress={refetch}
         loading={isRefetching}
       />
+      {isAccountPage && (
+        <Button
+          label="Déconnexion"
+          variant="destructive"
+          onPress={() => logout()}
+        />
+      )}
     </View>
   );
 }

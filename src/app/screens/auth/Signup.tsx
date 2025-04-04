@@ -99,7 +99,7 @@ export const Signup = () => {
     }
   };
 
-  const handleVerificationSuccess = async (token: string) => {
+  const _handleVerificationSuccess = async (token: string) => {
     try {
       await saveToken(token);
       setVerificationModalVisible(false);

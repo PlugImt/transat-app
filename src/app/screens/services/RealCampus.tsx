@@ -21,15 +21,8 @@ export default function RealCampus() {
         setTimer((prevTimer) => prevTimer - 1);
       }, 1000);
     } else if (isLoading && timer === 0) {
-      // Store original facing before flipping
-      setOriginalFacing(facing);
-      // Flip camera to opposite orientation
-      setFacing(facing === "front" ? "back" : "front");
-
-      // Small delay to ensure camera has switched
-      setTimeout(() => {
-        takeSecondPicture();
-      }, 500);
+      // Already flipped the camera during countdown, so we can take the second picture now
+      takeSecondPicture();
     }
 
     return () => clearInterval(interval);
@@ -59,7 +52,11 @@ export default function RealCampus() {
       const photo = await cameraRef.current.takePictureAsync();
       setPhotoUri(photo.uri);
       setIsLoading(true);
-      setTimer(2);
+      setTimer(4);
+      // Store original facing before flipping
+      setOriginalFacing(facing);
+      // Flip camera immediately after taking first picture so user can see what will be captured
+      setFacing(facing === "front" ? "back" : "front");
     }
   };
 
@@ -135,7 +132,7 @@ export default function RealCampus() {
           {isLoading && (
             <View className="absolute inset-0 bg-black/50 items-center justify-center">
               <Text className="text-white text-2xl font-bold">
-                Loading... {timer}s
+                {timer > 0 ? `Preview (${timer}s)` : "Taking second photo..."}
               </Text>
             </View>
           )}

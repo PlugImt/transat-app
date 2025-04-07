@@ -1,17 +1,32 @@
-import { type CameraType, CameraView, useCameraPermissions } from "expo-camera";
-import { Camera, RefreshCw } from "lucide-react-native";
+import CameraControls from "@/components/custom/realcampus/CameraControls";
+import CustomCamera from "@/components/custom/realcampus/CustomCamera";
+import MissingPermission from "@/components/custom/realcampus/MissingPermission";
+import PhotoActionButtons from "@/components/custom/realcampus/PhotoActionButtons";
+import { type CameraType, useCameraPermissions } from "expo-camera";
+import * as MediaLibrary from "expo-media-library";
 import { useEffect, useRef, useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function RealCampus() {
   const [permission, requestPermission] = useCameraPermissions();
+  const [mediaPermission, requestMediaPermission] =
+    MediaLibrary.usePermissions();
+
   const [photoUri, setPhotoUri] = useState<string | null>(null);
   const [secondPhotoUri, setSecondPhotoUri] = useState<string | null>(null);
+
   const [facing, setFacing] = useState<CameraType>("front");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [timer, setTimer] = useState<number>(0);
   const [originalFacing, setOriginalFacing] = useState<CameraType>("front");
+  const [swappedPhotos, setSwappedPhotos] = useState<boolean>(false);
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const [timer, setTimer] = useState<number>(0);
+
   const cameraRef = useRef(null);
+
+  const [zoomLevel, setZoomLevel] = useState<number>(0);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -21,142 +36,218 @@ export default function RealCampus() {
         setTimer((prevTimer) => prevTimer - 1);
       }, 1000);
     } else if (isLoading && timer === 0) {
-      // Already flipped the camera during countdown, so we can take the second picture now
+      // Already flipped the camera during countdown, so we can take the second picture now.
       takeSecondPicture();
     }
 
     return () => clearInterval(interval);
   }, [isLoading, timer]);
 
-  if (!permission) return <View />;
+  // Reset settings when returning to camera
+  useEffect(() => {
+    if (!photoUri) {
+      setZoomLevel(0);
+    }
+  }, [photoUri]);
+
+  useEffect(() => {
+    // Request camera permissions on component mount.
+    if (!permission?.granted) {
+      requestPermission();
+    }
+
+    // Request media library permissions for saving photos.
+    if (!mediaPermission?.granted) {
+      requestMediaPermission();
+    }
+  }, []);
+
+  if (!permission || !mediaPermission) return <View />;
   if (!permission.granted) {
-    return (
-      <View className="flex-1 items-center justify-center px-4">
-        <Text className="text-center text-lg mb-4">
-          We need your permission to show the camera
-        </Text>
-        <TouchableOpacity
-          className="bg-blue-500 px-6 py-3 rounded-lg"
-          onPress={requestPermission}
-        >
-          <Text className="text-white text-base font-semibold">
-            Grant Permission
-          </Text>
-        </TouchableOpacity>
-      </View>
-    );
+    return <MissingPermission requestPermission={requestPermission} />;
   }
 
+  /**
+   *
+   */
   const takePicture = async () => {
     if (cameraRef.current) {
-      const photo = await cameraRef.current.takePictureAsync();
-      setPhotoUri(photo.uri);
-      setIsLoading(true);
-      setTimer(4);
-      // Store original facing before flipping
-      setOriginalFacing(facing);
-      // Flip camera immediately after taking first picture so user can see what will be captured
-      setFacing(facing === "front" ? "back" : "front");
+      try {
+        const photo = await cameraRef.current.takePictureAsync();
+        setPhotoUri(photo.uri);
+        setIsLoading(true);
+        setTimer(4);
+        // Store original facing before flipping.
+        setOriginalFacing(facing);
+        // Flip camera immediately after taking first picture so user can see what will be captured.
+        setFacing(facing === "front" ? "back" : "front");
+      } catch (error) {
+        console.error("Error taking picture:", error);
+        alert("Failed to take picture. Please try again.");
+      }
     }
   };
 
+  /**
+   *
+   */
   const takeSecondPicture = async () => {
     if (cameraRef.current) {
-      const secondPhoto = await cameraRef.current.takePictureAsync();
-      setSecondPhotoUri(secondPhoto.uri);
-      setIsLoading(false);
-      // Return to original facing
-      setFacing(originalFacing);
+      try {
+        const secondPhoto = await cameraRef.current.takePictureAsync();
+        setSecondPhotoUri(secondPhoto.uri);
+        setIsLoading(false);
+        // Return to original facing
+        setFacing(originalFacing);
+      } catch (error) {
+        console.error("Error taking second picture:", error);
+        alert("Failed to take second picture. Please try again.");
+        resetCamera();
+      }
     }
   };
 
+  /**
+   *
+   */
   const toggleCamera = () => {
     setFacing((prev) => (prev === "front" ? "back" : "front"));
+    setZoomLevel(0);
   };
 
+  /**
+   *
+   */
   const resetCamera = () => {
     setPhotoUri(null);
     setSecondPhotoUri(null);
+    setSwappedPhotos(false);
+    setZoomLevel(0);
+  };
+
+  /**
+   *
+   */
+  const toggleSwapPhotos = () => {
+    setSwappedPhotos((prev) => !prev);
+  };
+
+  /**
+   *
+   */
+  const sendPhotos = async () => {
+    try {
+      alert("Photos would be sent now");
+    } catch (error) {
+      console.error("Error sending photos:", error);
+      alert("Failed to send photos");
+    }
+  };
+
+  /**
+   *
+   */
+  const savePicture = async () => {
+    try {
+      if (photoUri && secondPhotoUri && mediaPermission?.granted) {
+        await MediaLibrary.saveToLibraryAsync(photoUri);
+        await MediaLibrary.saveToLibraryAsync(secondPhotoUri);
+        alert("Photos saved to gallery!");
+      } else {
+        alert("Permission not granted or no photo available.");
+      }
+    } catch (error) {
+      console.error("Error saving photo:", error);
+      alert("Failed to save photo");
+    }
   };
 
   return (
-    <View className="flex-1 items-center justify-center bg-black px-4 py-8">
-      {photoUri && !isLoading && secondPhotoUri ? (
-        <View className="w-full h-full items-center">
-          <View className="relative w-full h-4/5">
-            <Image
-              source={{ uri: photoUri }}
-              className="w-full h-full rounded-xl"
-              resizeMode="cover"
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <View className="flex-1 items-center justify-center bg-black px-4 py-8">
+        {photoUri && !isLoading && secondPhotoUri ? (
+          <View className="w-full h-full items-center">
+            <View className="relative w-full">
+              {/* Main photo */}
+              <Image
+                source={{ uri: swappedPhotos ? secondPhotoUri : photoUri }}
+                className="w-full h-full rounded-2xl"
+                resizeMode="cover"
+                style={{ width: "100%", height: 600, borderRadius: 20 }}
+              />
+
+              {/* Second photo */}
+              <View
+                style={{
+                  position: "absolute",
+                  zIndex: 10,
+                  shadowColor: "#000",
+                  shadowOffset: { width: 0, height: 2 },
+                  shadowOpacity: 0.25,
+                  shadowRadius: 3.84,
+                  elevation: 5,
+                  padding: 10,
+                }}
+              >
+                <TouchableOpacity onPress={toggleSwapPhotos}>
+                  <View
+                    style={{
+                      width: "100%",
+                      borderWidth: 4,
+                      borderColor: "white",
+                      borderRadius: 12,
+                      overflow: "hidden",
+                    }}
+                  >
+                    <Image
+                      source={{
+                        uri: swappedPhotos ? photoUri : secondPhotoUri,
+                      }}
+                      style={{
+                        width: 120,
+                        height: 160,
+                        borderRadius: 8,
+                      }}
+                      resizeMode="cover"
+                    />
+                  </View>
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            <PhotoActionButtons
+              onRetake={resetCamera}
+              onSendPhotos={sendPhotos}
+              onSavePicture={savePicture}
+            />
+          </View>
+        ) : (
+          <View className="w-full h-full items-center relative">
+            <CustomCamera
+              cameraRef={cameraRef}
+              facing={facing}
+              isLoading={isLoading}
+              zoomLevel={zoomLevel}
+              setZoomLevel={setZoomLevel}
+              flash={"off"}
             />
 
-            {/* Second picture in the left corner with border */}
-            <View className="absolute bottom-4 left-4 border-4 border-white rounded-lg overflow-hidden shadow-lg">
-              <Image
-                source={{ uri: secondPhotoUri }}
-                className="w-32 h-40"
-                resizeMode="cover"
-              />
-            </View>
+            {isLoading && (
+              <View className="absolute inset-0 bg-black/50 items-center justify-center">
+                <Text className="text-white text-5xl font-bold">
+                  {timer > 0 ? `${timer}s` : "Taking second photo..."}
+                </Text>
+              </View>
+            )}
+
+            <CameraControls
+              onTakePicture={takePicture}
+              onToggleCamera={toggleCamera}
+              isLoading={isLoading}
+            />
           </View>
-
-          <TouchableOpacity
-            onPress={resetCamera}
-            className="bg-red-500 mt-4 px-6 py-3 rounded-full"
-          >
-            <Text className="text-white text-lg font-semibold">Retake</Text>
-          </TouchableOpacity>
-        </View>
-      ) : (
-        <View className="w-full h-full items-center relative">
-          {/* Back Button */}
-          <TouchableOpacity
-            className="absolute top-0 left-0 p-3 z-10"
-            onPress={() => {}}
-          >
-            <Text className="text-white text-lg">← Back</Text>
-          </TouchableOpacity>
-
-          {/* Camera with increased height */}
-          <CameraView
-            ref={cameraRef}
-            style={{
-              width: "100%",
-              height: 600,
-              borderRadius: 20,
-              overflow: "hidden",
-            }}
-            facing={facing}
-          />
-
-          {isLoading && (
-            <View className="absolute inset-0 bg-black/50 items-center justify-center">
-              <Text className="text-white text-2xl font-bold">
-                {timer > 0 ? `Preview (${timer}s)` : "Taking second photo..."}
-              </Text>
-            </View>
-          )}
-
-          {/* Controls */}
-          <View className="w-full mt-4 flex-row justify-center gap-6">
-            <TouchableOpacity
-              onPress={takePicture}
-              className="bg-green-600 p-4 rounded-full flex items-center justify-center"
-              disabled={isLoading}
-            >
-              <Camera size={32} color="white" />
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={toggleCamera}
-              className="bg-yellow-500 p-4 rounded-full flex items-center justify-center"
-              disabled={isLoading}
-            >
-              <RefreshCw size={28} color="white" />
-            </TouchableOpacity>
-          </View>
-        </View>
-      )}
-    </View>
+        )}
+      </View>
+    </GestureHandlerRootView>
   );
 }

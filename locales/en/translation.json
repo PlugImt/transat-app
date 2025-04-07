@@ -71,7 +71,11 @@
       "selectLanguage": "Select language",
       "english": "English",
       "french": "French",
-      "spanish": "Spanish"
+      "spanish": "Spanish",
+      "german": "German",
+      "portuguese": "Portuguese",
+      "italian": "Italian",
+      "chinese": "Chinese"
     }
   },
   "auth": {

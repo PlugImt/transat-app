@@ -37,6 +37,10 @@ export const Services = () => {
         image={require("@/assets/images/Logos/velo_large.png")}
         onPress={() => navigation.navigate("WashingMachine")}
       />
+      <Card
+        image={require("@/assets/images/Logos/velo_large.png")}
+        onPress={() => navigation.navigate("RealCampus")}
+      />
       <View style={{ height: 50 }} />
     </Page>
   );

@@ -1,6 +1,7 @@
 import { Home } from "@/app/screens/Home";
 import { Clubs } from "@/app/screens/services/Clubs";
 import Games from "@/app/screens/services/Games";
+import RealCampus from "@/app/screens/services/RealCampus";
 import { Restaurant } from "@/app/screens/services/Restaurant";
 import { Services } from "@/app/screens/services/Services";
 import { Traq } from "@/app/screens/services/Traq";
@@ -39,6 +40,7 @@ const ServicesStackScreen = () => (
     <ServicesStack.Screen name="Restaurant" component={Restaurant} />
     <ServicesStack.Screen name="Clubs" component={Clubs} />
     <ServicesStack.Screen name="Traq" component={Traq} />
+    <ServicesStack.Screen name="RealCampus" component={RealCampus} />
   </ServicesStack.Navigator>
 );
 

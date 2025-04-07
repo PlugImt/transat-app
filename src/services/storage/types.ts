@@ -48,6 +48,7 @@ export type AppStackParamList = {
   Clubs: undefined;
   Traq: undefined;
   Account: undefined;
+  RealCampus: undefined;
 };
 
 type AccountStackParamList = {

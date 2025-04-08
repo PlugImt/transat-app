@@ -7,9 +7,7 @@ import STORAGE_KEYS from "./services/storage/constants";
 // Dynamic import of all translation files
 const importAllTranslations = () => {
   const context = require.context("../locales", true, /\/translation\.json$/);
-  const resources: Record<string, { translation: Record<string, unknown> }> =
-    {};
-
+  const resources: Record<string, { translation: TranslationResource }> = {};
   // Default to English for type definitions
   let defaultTranslation = null;
 
@@ -31,14 +29,18 @@ const importAllTranslations = () => {
   return { resources, defaultTranslation };
 };
 
-const { resources, defaultTranslation } = importAllTranslations();
+const { resources } = importAllTranslations();
 
-// Type definitions based on English translations
+// type TranslationResource = { [key: string]: any };
+// or more specifically allowing strings or nested objects
+type TranslationResource = { [key: string]: string | TranslationResource };
+
 declare module "i18next" {
   interface CustomTypeOptions {
     defaultNS: "translation";
     resources: {
-      translation: typeof defaultTranslation;
+      // Use the simpler type here
+      translation: TranslationResource; // Or NestedTranslation if you prefer
     };
   }
 }

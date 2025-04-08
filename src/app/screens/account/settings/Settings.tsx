@@ -12,6 +12,11 @@ import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
 
 import { Button } from "@/components/common/Button";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/common/Dialog";
 import Page from "@/components/common/Page";
 import { Switch } from "@/components/common/Switch";
 import { useToast } from "@/components/common/Toast";
@@ -58,9 +63,6 @@ export const Settings = () => {
     }
   };
 
-  const handleDeleteAccount = async () => {
-    toast("We are working on it 🚧");
-  };
   const refetch = async () => {
     await queryClient.invalidateQueries({ queryKey: QUERY_KEYS.user });
   };
@@ -120,11 +122,11 @@ export const Settings = () => {
             icon={<HelpCircle color={theme.foreground} size={22} />}
             title={t("common.help")}
             subtitle={t("settings.contactSupport")}
-            onPress={() => {}}
+            onPress={() => navigation.navigate("Help")}
           />
           <SettingsItem
             icon={<Info color={theme.foreground} size={22} />}
-            title={t("common.about")}
+            title={t("settings.about.title")}
             subtitle={t("common.knowMore")}
             onPress={() => navigation.navigate("About")}
           />
@@ -147,18 +149,33 @@ export const Settings = () => {
       </View>
 
       <View className="gap-2">
-        <Button
-          label={t("settings.logout")}
-          onPress={handleLogout}
-          variant="destructive"
-        />
-        <Button
-          label={t("account.deleteAccount")}
-          onPress={handleDeleteAccount}
-          variant="outlined"
-          className="border-destructive"
-          labelClasses="text-destructive"
-        />
+        <Dialog>
+          <DialogTrigger>
+            <Button
+              label={t("settings.logout")}
+              onPress={handleLogout}
+              variant="destructive"
+            />
+          </DialogTrigger>
+
+          <DialogContent
+            title={t("settings.logout")}
+            className="gap-2"
+            cancelLabel={t("common.cancel")}
+            confirmLabel={t("settings.logoutConfirm")}
+            onConfirm={handleLogout}
+          >
+            <Text className="text-foreground">{t("settings.logoutDesc")}</Text>
+          </DialogContent>
+        </Dialog>
+
+        {/* <Button
+                  label={t("account.deleteAccount")}
+                  onPress={handleDeleteAccount}
+                  variant="outlined"
+                  className="border-destructive"
+                  labelClasses="text-destructive"
+                /> */}
       </View>
     </Page>
   );

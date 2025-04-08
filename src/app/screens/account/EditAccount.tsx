@@ -5,7 +5,7 @@ import {
 } from "@/components/common/Avatar";
 import { Button } from "@/components/common/Button";
 import Dropdown from "@/components/common/Dropdown";
-import { Input } from "@/components/common/Input";
+import Input from "@/components/common/Input";
 import Page from "@/components/common/Page";
 import { useToast } from "@/components/common/Toast";
 import ErrorPage from "@/components/custom/ErrorPage";

@@ -17,6 +17,23 @@ interface LanguageOption {
   translatedName: string;
 }
 
+// Map of language codes to their native names as fallback
+const languageNativeNames: Record<string, string> = {
+  en: "English",
+  es: "Español",
+  fr: "Français",
+  de: "Deutsch",
+  it: "Italiano",
+  pt: "Português",
+  ru: "Русский",
+  zh: "中文",
+  ja: "日本語",
+  ko: "한국어",
+  ar: "العربية",
+  hi: "हिन्दी",
+  // Add more languages as needed
+};
+
 export const Language = () => {
   const theme = useTheme();
   const { t } = useTranslation();
@@ -31,38 +48,43 @@ export const Language = () => {
 
     // Create language options array
     const languageOptions = availableLanguageCodes.map((code) => {
-      // Try to get the language's native name from its own translation file if available
-      let nativeName = code;
+      // Start with fallback native name from our map or use code as last resort
+      let nativeName = languageNativeNames[code] || code;
 
       try {
         // Try to access language's self-name from translation files
-        // This assumes each language file has a key for its own name
-        // e.g., in the English file: "language.english": "English"
         const languageRes = i18n.getResourceBundle(code, "translation");
+
+        // Define a helper function to safely navigate nested objects
+        const getNestedValue = (obj: any, path: string): string | null => {
+          const parts = path.split(".");
+          let current = obj;
+
+          for (const part of parts) {
+            if (current && typeof current === "object" && part in current) {
+              current = current[part];
+            } else {
+              return null;
+            }
+          }
+
+          return typeof current === "string" ? current : null;
+        };
+
         // Check different possible paths where the native name might be stored
         const possiblePaths = [
           `language.${code}`,
           `settings.language.${code}`,
           `common.language.${code}`,
+          `language.options.${code}`,
+          `settings.options.${code}`,
           "language.name",
           "settings.language.name",
         ];
 
         for (const path of possiblePaths) {
-          const parts = path.split(".");
-          let value = languageRes;
-
-          // Navigate through the nested object structure
-          for (const part of parts) {
-            if (value && typeof value === "object" && part in value) {
-              value = value[part];
-            } else {
-              value = null;
-              break;
-            }
-          }
-
-          if (typeof value === "string") {
+          const value = getNestedValue(languageRes, path);
+          if (value) {
             nativeName = value;
             break;
           }
@@ -72,14 +94,14 @@ export const Language = () => {
       }
 
       // For translatedName, use current language's translation of this language
-      // e.g., "French" in English or "Francés" in Spanish
       const translatedName = t(
         [
           `settings.language.${code}`,
           `language.${code}`,
           `common.language.${code}`,
+          `language.options.${code}`,
         ],
-        { defaultValue: nativeName },
+        { defaultValue: nativeName !== code ? nativeName : code },
       );
 
       return {
@@ -120,7 +142,12 @@ export const Language = () => {
           <SettingsItem
             key={language.code}
             title={language.name}
-            subtitle={language.translatedName}
+            subtitle={
+              language.translatedName !== language.name &&
+              language.translatedName !== language.code
+                ? language.translatedName
+                : language.code
+            }
             onPress={() => handleLanguageChange(language.code)}
             rightElement={
               isPending && variables === language.code ? (

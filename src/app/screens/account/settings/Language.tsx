@@ -56,6 +56,7 @@ export const Language = () => {
         const languageRes = i18n.getResourceBundle(code, "translation");
 
         // Define a helper function to safely navigate nested objects
+        // biome-ignore lint/suspicious/noExplicitAny : todo: a handle
         const getNestedValue = (obj: any, path: string): string | null => {
           const parts = path.split(".");
           let current = obj;

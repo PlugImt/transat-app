@@ -31,7 +31,6 @@
       "occurred": "Une erreur est survenue",
       "unableToFetch": "Impossible de récupérer les données"
     },
-    "about": "À propos",
     "knowMore": "En savoir plus sur Transat",
     "close": "Fermer",
     "clearAll": "Effacer",
@@ -56,6 +55,8 @@
     "logout": "Déconnexion",
     "devServer": "Serveur de développement",
     "devServerDescription": "Utiliser localhost",
+    "logoutDesc": "Are you sure you want to log out?",
+    "logoutConfirm": "Log me out",
     "notifications": {
       "notifications": "Notifications",
       "fetchError": "Impossible de récupérer les paramètres de notification",
@@ -63,6 +64,10 @@
       "setNotification": "Définir une notification",
       "toggleRestaurant": "Être notifié lorsque le menu du jour est publié",
       "toggleTraq": "Être notifié lorsqu'un nouvel article est proposé au Traq'"
+    },
+    "about": {
+      "title": "About",
+      "description": "We all know that situation when you arrive at the dining hall and realize you should have eaten at home. This has happened to us many times, and that's why we decided to fix it 😼\n\nOn Transat, you'll find the dining hall menu updated daily, but that's not all!\nNo more endless waiting at the laundry room for your machine to finish, get notified when your machine is done 🔔\n\nWe are Plug'IMT and we're determined to create an app made by students, for students 🐙\n\nNew features will be added throughout the year to make Transat an essential part of the Nantes IMT campus 🥳\n\nWe hope this app will save you as much as it saved us while we were developing it 🫶"
     },
     "contactSupport": "Contacter le support",
     "appearance": "Apparence",

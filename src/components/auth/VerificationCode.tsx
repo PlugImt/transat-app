@@ -77,7 +77,7 @@ export const VerificationCodeModal: React.FC<VerificationCodeModalProps> = ({
       onRequestClose={onClose}
     >
       <View className="flex-1 items-center justify-center bg-black/50">
-        <View className="w-5/6 items-center rounded-lg bg-[#181010] p-5">
+        <View className="w-5/6 items-center rounded-lg bg-card p-5">
           <Text className="h1">{t("auth.verificationCode")}</Text>
           <Text className="mb-5 text-center text-l p-2 text-[#ffe6cc]">
             {t("auth.enterVerificationCode")}

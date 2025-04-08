@@ -10,7 +10,8 @@ const colors = {
   dark: {
     background: "#110904",
     foreground: "#ffe6cc",
-    card: "#181010",
+    card: "#1e1515",
+    // card: '#181010',
     primary: "#ec7f32",
     secondary: "#0049a8",
     muted: "#494949",

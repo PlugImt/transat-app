@@ -31,7 +31,6 @@
       "occurred": "发生错误",
       "unableToFetch": "无法获取数据"
     },
-    "about": "关于",
     "knowMore": "了解更多有关 Transat 的信息",
     "close": "关闭",
     "clearAll": "清晰",
@@ -56,6 +55,8 @@
     "logout": "注销",
     "devServer": "开发服务器",
     "devServerDescription": "使用本地主机",
+    "logoutDesc": "Are you sure you want to log out?",
+    "logoutConfirm": "Log me out",
     "notifications": {
       "notifications": "通知",
       "fetchError": "无法获取通知设置",
@@ -63,6 +64,10 @@
       "setNotification": "设置通知",
       "toggleRestaurant": "发布每日菜单时获得通知",
       "toggleTraq": "当 Traq' 上有新文章时，您会收到通知。"
+    },
+    "about": {
+      "title": "About",
+      "description": "We all know that situation when you arrive at the dining hall and realize you should have eaten at home. This has happened to us many times, and that's why we decided to fix it 😼\n\nOn Transat, you'll find the dining hall menu updated daily, but that's not all!\nNo more endless waiting at the laundry room for your machine to finish, get notified when your machine is done 🔔\n\nWe are Plug'IMT and we're determined to create an app made by students, for students 🐙\n\nNew features will be added throughout the year to make Transat an essential part of the Nantes IMT campus 🥳\n\nWe hope this app will save you as much as it saved us while we were developing it 🫶"
     },
     "contactSupport": "支持联系人",
     "appearance": "外观",

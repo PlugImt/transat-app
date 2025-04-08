@@ -1,17 +1,18 @@
 import { Home } from "@/app/screens/Home";
+import Account from "@/app/screens/account/Account";
+import EditProfile from "@/app/screens/account/EditAccount";
+import About from "@/app/screens/account/settings/About";
+import ChangePassword from "@/app/screens/account/settings/ChangePassword";
+import Help from "@/app/screens/account/settings/Help";
+import Language from "@/app/screens/account/settings/Language";
+import Notifications from "@/app/screens/account/settings/Notifications";
+import Settings from "@/app/screens/account/settings/Settings";
 import { Clubs } from "@/app/screens/services/Clubs";
 import Games from "@/app/screens/services/Games";
 import { Restaurant } from "@/app/screens/services/Restaurant";
 import { Services } from "@/app/screens/services/Services";
 import { Traq } from "@/app/screens/services/Traq";
 import { WashingMachine } from "@/app/screens/services/WashingMachine";
-import { About } from "@/app/screens/services/account/About";
-import Account from "@/app/screens/services/account/Account";
-import ChangePassword from "@/app/screens/services/account/ChangePassword";
-import EditProfile from "@/app/screens/services/account/EditAccount";
-import Language from "@/app/screens/services/account/Language";
-import Notifications from "@/app/screens/services/account/Notifications";
-import Settings from "@/app/screens/services/account/Settings";
 import type { BottomTabParamList } from "@/types/navigation";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -60,6 +61,7 @@ const AccountStackScreen = () => (
     <AccountStack.Screen name="Notifications" component={Notifications} />
     <AccountStack.Screen name="Language" component={Language} />
     <AccountStack.Screen name="About" component={About} />
+    <AccountStack.Screen name="Help" component={Help} />
   </AccountStack.Navigator>
 );
 

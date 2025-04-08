@@ -63,4 +63,4 @@ const Input = forwardRef(
   ),
 );
 
-export { Input };
+export default Input;

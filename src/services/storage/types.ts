@@ -65,6 +65,7 @@ type SettingsStackParamList = {
   Notifications: undefined;
   Language: undefined;
   About: undefined;
+  Help: undefined;
 };
 export type SettingsNavigation = StackNavigationProp<SettingsStackParamList>;
 

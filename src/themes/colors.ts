@@ -8,7 +8,7 @@ const colors = {
     muted: "#F5F5F5",
   },
   dark: {
-    background: "#110904",
+    background: "#070402",
     foreground: "#ffe6cc",
     card: "#1e1515",
     // card: '#181010',

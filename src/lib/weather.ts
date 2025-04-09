@@ -1,6 +1,8 @@
+import i18n from "@/i18n";
 import type { WeatherData } from "@/types/weather";
 import { t } from "i18next";
 import { weatherApiKey } from "./config";
+import { translateText } from "./translation";
 
 export async function fetchWeather(): Promise<WeatherData> {
   const lat = 47.218371; // Latitude de Nantes
@@ -17,9 +19,22 @@ export async function fetchWeather(): Promise<WeatherData> {
   const weatherCondition: string = data.weather[0].main;
   const img: string = data.weather[0].icon;
 
+  // Get the current language from i18n
+  const currentLanguage = i18n.language.toUpperCase();
+  let translatedCondition: string = weatherCondition;
+
+  if (currentLanguage !== "EN") {
+    // Translate the weather condition
+    translatedCondition = await translateText(
+      weatherCondition,
+      // biome-ignore lint/suspicious/noExplicitAny: type DeepLSupportedLanguages which is string
+      currentLanguage as any,
+    );
+  }
+
   return {
     temperature,
-    condition: weatherCondition,
+    condition: translatedCondition,
     img,
   } satisfies WeatherData;
 }

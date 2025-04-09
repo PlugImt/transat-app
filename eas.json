@@ -12,7 +12,8 @@
       "distribution": "internal",
       "env": {
         "EXPO_PUBLIC_API_URL": "https://transat.destimt.fr",
-        "EXPO_PUBLIC_WEATHER_API_KEY": "803a62d94787febf43f1356d165e72e3"
+        "EXPO_PUBLIC_WEATHER_API_KEY": "803a62d94787febf43f1356d165e72e3",
+        "\nEXPO_PUBLIC_DEEPL_API_KEY": "bfa3426d-b9c2-4cc7-b0a8-e0868309f91e:fx"
       }
     },
     "production": {

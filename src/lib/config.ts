@@ -1,5 +1,6 @@
 const weatherApiKey = process.env.EXPO_PUBLIC_WEATHER_API_KEY;
 const apiUrlProd = process.env.EXPO_PUBLIC_API_URL;
 const apiUrlDev = process.env.EXPO_PUBLIC_API_URL_DEV;
+const deeplApiKey = process.env.EXPO_PUBLIC_DEEPL_API_KEY;
 
-export { weatherApiKey, apiUrlProd, apiUrlDev };
+export { weatherApiKey, apiUrlProd, apiUrlDev, deeplApiKey };

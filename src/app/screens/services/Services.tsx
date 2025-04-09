@@ -25,18 +25,18 @@ export const Services = () => {
         image={require("@/assets/images/Logos/restaurant_large.png")}
         onPress={() => navigation.navigate("Restaurant")}
       />
-      <Card
-        image={require("@/assets/images/Logos/clubs_large.png")}
-        onPress={() => navigation.navigate("Clubs")}
-      />
+      {/*<Card*/}
+      {/*  image={require("@/assets/images/Logos/clubs_large.png")}*/}
+      {/*  onPress={() => navigation.navigate("Clubs")}*/}
+      {/*/>*/}
       <Card
         image={require("@/assets/images/Logos/traq_large.png")}
         onPress={() => navigation.navigate("Traq")}
       />
-      <Card
-        image={require("@/assets/images/Logos/velo_large.png")}
-        onPress={() => navigation.navigate("WashingMachine")}
-      />
+      {/*<Card*/}
+      {/*  image={require("@/assets/images/Logos/velo_large.png")}*/}
+      {/*  onPress={() => navigation.navigate("WashingMachine")}*/}
+      {/*/>*/}
       <View style={{ height: 50 }} />
     </Page>
   );

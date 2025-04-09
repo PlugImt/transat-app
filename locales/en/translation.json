@@ -48,7 +48,9 @@
     },
     "campusApp": "The campus app for IMT Atlantique Nantes",
     "plugImtNote": "NOTE: Plug'IMT is an association created by IMT students but is not affiliated with the school",
-    "credits": "Credits"
+    "credits": "Credits",
+    "underConstruction": "Under construction 🏗️",
+    "underConstructionDesc": "This page is under construction. Please check back later."
   },
   "settings": {
     "settings": "Settings",

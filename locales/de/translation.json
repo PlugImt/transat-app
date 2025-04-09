@@ -48,7 +48,9 @@
     },
     "campusApp": "Die Campus-App für IMT Atlantique Nantes",
     "plugImtNote": "ANMERKUNG: Plug'IMT ist ein Verein, der von IMT-Studenten gegründet wurde, aber nicht mit der Schule verbunden ist.",
-    "credits": "Credits"
+    "credits": "Credits",
+    "underConstruction": "Under construction 🏗️",
+    "underConstructionDesc": "This page is under construction. Please check back later."
   },
   "settings": {
     "settings": "Einstellungen",

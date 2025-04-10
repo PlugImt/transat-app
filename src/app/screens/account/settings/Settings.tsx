@@ -120,7 +120,7 @@ export const Settings = () => {
         <View className="bg-card rounded-lg px-4 py-2 gap-4">
           <SettingsItem
             icon={<HelpCircle color={theme.foreground} size={22} />}
-            title={t("common.help")}
+            title={t("settings.help.title")}
             subtitle={t("settings.contactSupport")}
             onPress={() => navigation.navigate("Help")}
           />

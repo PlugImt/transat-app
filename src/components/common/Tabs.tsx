@@ -32,7 +32,7 @@ function TabsList({
 }: React.ComponentPropsWithoutRef<typeof View>) {
   return (
     <View
-      className={cn("flex flex-row justify-center", className)}
+      className={cn("flex flex-row justify-center gap-4", className)}
       {...props}
     />
   );
@@ -55,7 +55,7 @@ function TabsTrigger({
 
   return (
     <TouchableOpacity
-      className={cn("px-8 py-3 rounded-md w-1/2 bg-muted", {
+      className={cn("px-8 py-3 rounded-md flex-1 bg-muted", {
         "bg-foreground": activeTab === value,
         className,
       })}

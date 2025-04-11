@@ -3,7 +3,7 @@ import { AboutModal } from "@/components/custom/AboutModal";
 import LoadingScreen from "@/components/custom/LoadingScreen";
 import RestaurantCard from "@/components/custom/card/RestaurantCard";
 import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
-import { outOfService } from "@/lib/utils";
+import { isWeekend, outOfService } from "@/lib/utils";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Image, Text, View } from "react-native";

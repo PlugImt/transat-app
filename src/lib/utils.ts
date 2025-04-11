@@ -19,6 +19,12 @@ export function isDinner() {
   return hour >= 14 && hour < 21;
 }
 
+export function isWeekend() {
+  const now = new Date();
+  const day = now.getDay();
+  return day === 0 || day === 6 || (day === 5 && now.getHours() > 14); // Sunday or Saturday
+}
+
 export function outOfService(lastUpdate: string) {
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());

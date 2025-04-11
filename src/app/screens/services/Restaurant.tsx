@@ -4,7 +4,6 @@ import LoadingScreen from "@/components/custom/LoadingScreen";
 import RestaurantCard from "@/components/custom/card/RestaurantCard";
 import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
 import { outOfService } from "@/lib/utils";
-import { isWeekend } from "date-fns";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Image, Text, View } from "react-native";
@@ -146,44 +145,55 @@ export const Restaurant = () => {
         <View className="flex flex-col gap-4">
           <Text className="h3 ml-4">{t("services.restaurant.lunch")}</Text>
 
-          <RestaurantCard
-            title={t("services.restaurant.grill")}
-            meals={menu?.grilladesMidi}
-            icon={"Beef"}
-          />
-          <RestaurantCard
-            title={t("services.restaurant.migrator")}
-            meals={menu?.migrateurs}
-            icon={"ChefHat"}
-          />
-          <RestaurantCard
-            title={t("services.restaurant.vegetarian")}
-            meals={menu?.cibo}
-            icon={"Vegan"}
-          />
-          <RestaurantCard
-            title={t("services.restaurant.sideDishes")}
-            meals={menu?.accompMidi}
-            icon={"Soup"}
-          />
+          {menu?.grilladesMidi && menu.grilladesMidi.length > 0 && (
+            <RestaurantCard
+              title={t("services.restaurant.grill")}
+              meals={menu.grilladesMidi}
+              icon={"Beef"}
+            />
+          )}
+          {menu?.migrateurs && menu.migrateurs.length > 0 && (
+            <RestaurantCard
+              title={t("services.restaurant.migrator")}
+              meals={menu.migrateurs}
+              icon={"ChefHat"}
+            />
+          )}
+          {menu?.cibo && menu.cibo.length > 0 && (
+            <RestaurantCard
+              title={t("services.restaurant.vegetarian")}
+              meals={menu.cibo}
+              icon={"Vegan"}
+            />
+          )}
+          {menu?.accompMidi && menu.accompMidi.length > 0 && (
+            <RestaurantCard
+              title={t("services.restaurant.sideDishes")}
+              meals={menu.accompMidi}
+              icon={"Soup"}
+            />
+          )}
         </View>
 
-        {(menu?.grilladesSoir?.length ?? 0) > 0 &&
+        {(menu?.grilladesSoir?.length ?? 0) > 0 ||
         (menu?.accompSoir?.length ?? 0) > 0 ? (
           <View className="flex flex-col gap-4">
             <Text className="h3 ml-4">{t("services.restaurant.dinner")}</Text>
 
-            <RestaurantCard
-              title={t("services.restaurant.grill")}
-              meals={menu?.grilladesSoir}
-              icon={"Beef"}
-            />
-
-            <RestaurantCard
-              title={t("services.restaurant.sideDishes")}
-              meals={menu?.accompSoir}
-              icon={"Soup"}
-            />
+            {menu?.grilladesSoir && menu.grilladesSoir.length > 0 && (
+              <RestaurantCard
+                title={t("services.restaurant.grill")}
+                meals={menu.grilladesSoir}
+                icon={"Beef"}
+              />
+            )}
+            {menu?.accompSoir && menu.accompSoir.length > 0 && (
+              <RestaurantCard
+                title={t("services.restaurant.sideDishes")}
+                meals={menu.accompSoir}
+                icon={"Soup"}
+              />
+            )}
           </View>
         ) : null}
       </View>

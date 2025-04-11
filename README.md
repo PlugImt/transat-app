@@ -8,11 +8,9 @@
 <h4 align="center">L'application du campus pour l'IMT Atlantique de Nantes</h4>
 
 <p align="center">
-  <a href="#✨-roadmap">Roadmap</a> •
   <a href="#🛠️-participer-au-développement">Participer</a> •
   <a href="#🕹️-technos-utilisées">Technos</a> •
   <a href="#👋-nous-contacter">Contact</a> •
-  <!-- <a href="#🫶-soutenir-l'association">Soutenir</a> • -->
   <a href="#🤠-crédits">Crédit</a> •
   <a href="#©-licence">Licence</a> •
 </p>
@@ -20,19 +18,6 @@
 ![Screenshot de l'appli](/assets/preview.png)
 
 > **NOTE:** Plug'IMT est une association créée par des étudiants de l'IMT mais n'est pas affilié à l'école
-
-## ✨ Roadmap
-
-- [ ] Supprimer un compte ⏳
-- [ ] Finir les pages dans les paramètres ⏳
-- [ ] Sortir la première version sur les stores
-- [ ] Ajouter les clubs
-
-### Idées d'amélioration
-- [ ] Permettre d'indiquer lorsque le contenu de la machine à laver a été récupéré ⏳
-- [ ] Signaler une machine déffectueuse ⏳
-- [ ] Manager un club (Modifier, créer des events, gérer les membres)
-
 
 ## 🛠️ Participer au développement
 

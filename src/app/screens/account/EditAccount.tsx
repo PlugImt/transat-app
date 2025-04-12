@@ -64,10 +64,13 @@ export const EditProfile = () => {
     mode: "onChange",
   });
 
+  const currentMonth = new Date().getMonth(); // 0-based, so 8 is September
   const currentYear = new Date().getFullYear();
-  const yearOptions = Array.from({ length: 6 }, (_, i) =>
-    (currentYear + i).toString(),
-  );
+  // If we're past September, we're in the next academic year
+  const startAcademicYear = currentMonth >= 8 ? currentYear : currentYear - 1;
+  const yearOptions = Array.from({ length: 4 }, (_, i) => {
+    return (startAcademicYear + i).toString();
+  });
 
   const handleUpdateAccount = (data: User) => {
     Keyboard.dismiss();

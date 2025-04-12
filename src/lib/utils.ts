@@ -102,3 +102,37 @@ export async function uploadImage(): Promise<string> {
     throw new Error(t("account.profilePictureUpdateFailed"));
   }
 }
+
+/**
+ * Calculates the current study year based on the graduation year
+ * @param graduation_year Graduation year of the student
+ * @returns A string representing the current study year
+ * @example "2ème année"
+ */
+export function getStudentYear(graduationYear: number) {
+  const maxStudyYears = 3;
+  const currentYear = new Date().getFullYear();
+  const currentMonth = new Date().getMonth();
+
+  // L'année académique commence en septembre (8ème mois)
+  // Si on est avant septembre, l'année académique est l'année en cours
+  // Si on est après septembre, l'année académique est l'année en cours + 1
+  const academicYear = currentMonth >= 8 ? currentYear + 1 : currentYear;
+  const yearsLeft = graduationYear - academicYear;
+
+  // Le programme est en 3 ans
+  const currentStudyYear = maxStudyYears - yearsLeft;
+  console.log("currentStudyYear", currentStudyYear, yearsLeft);
+  const studyLevel = [
+    t("account.firstYear"),
+    t("account.secondYear"),
+    t("account.thirdYear"),
+  ];
+
+  // Si l'année d'étude est supérieure à 3, on retourne l'année de la promotion
+  if (currentStudyYear > maxStudyYears || currentStudyYear <= 0) {
+    return `${t("account.promotion")} ${graduationYear}`;
+  }
+
+  return studyLevel[currentStudyYear - 1];
+}

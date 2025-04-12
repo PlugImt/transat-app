@@ -10,6 +10,7 @@ import ErrorPage from "@/components/custom/ErrorPage";
 import LoadingScreen from "@/components/custom/LoadingScreen";
 import { useUser } from "@/hooks/account/useUser";
 import { QUERY_KEYS } from "@/lib/queryKeys";
+import { getStudentYear } from "@/lib/utils";
 import type { AccountNavigation } from "@/services/storage/types";
 import { useTheme } from "@/themes/useThemeProvider";
 import { useNavigation } from "@react-navigation/native";
@@ -83,7 +84,7 @@ export const Account = () => {
           </Text>
           {user?.graduation_year && (
             <Text className="text-base text-foreground/80">
-              {t("account.graduation")} {user?.graduation_year}
+              {getStudentYear(user?.graduation_year)}
             </Text>
           )}
         </View>

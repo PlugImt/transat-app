@@ -33,7 +33,7 @@ const { resources } = importAllTranslations();
 
 // type TranslationResource = { [key: string]: any };
 // or more specifically allowing strings or nested objects
-type TranslationResource = { [key: string]: string | TranslationResource };
+type TranslationResource = { [key: string]: string };
 
 declare module "i18next" {
   interface CustomTypeOptions {

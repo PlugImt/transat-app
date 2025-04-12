@@ -4,9 +4,9 @@ import Input from "@/components/common/Input";
 import Page from "@/components/common/Page";
 import { useToast } from "@/components/common/Toast";
 import useAuth from "@/hooks/account/useAuth";
+import i18n from "@/i18n";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
-import { getLocales } from "expo-localization";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -78,7 +78,7 @@ export const Signup = () => {
   }) => {
     setSignupError(null);
     try {
-      const language = getLocales()[0].languageCode ?? "fr";
+      const language = i18n.language ?? "fr";
       const response = await register(data.email, data.password, language);
 
       if (!response.success) {

@@ -59,7 +59,7 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
 
   const [user, setUser] = useState<User | NotLoggedIn | Loading>(undefined);
   useEffect(() => {
-    if (userQuery) {
+    if (typeof userQuery !== "undefined") {
       setUser(userQuery);
     }
   }, [userQuery]);

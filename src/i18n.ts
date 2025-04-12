@@ -4,6 +4,12 @@ import { initReactI18next } from "react-i18next";
 import { storage } from "./services/storage/asyncStorage";
 import STORAGE_KEYS from "./services/storage/constants";
 
+// hack pour qu'on puisse attendre que i18n soit initialisé
+let resolveInitialization: (value?: unknown) => void;
+export const i18nInitializedPromise = new Promise((resolve) => {
+  resolveInitialization = resolve;
+});
+
 // Dynamic import of all translation files
 const importAllTranslations = () => {
   const context = require.context("../locales", true, /\/translation\.json$/);
@@ -70,10 +76,13 @@ storage.get<string>(STORAGE_KEYS.LANGUAGE).then((language) => {
     },
     (err, _t) => {
       if (err) {
-        return console.log("Something went wrong loading translations", err);
+        console.log("Something went wrong loading translations", err);
+        resolveInitialization(); // Resolve even if there's an error to not block the app
+        return;
       }
       console.log(`i18n initialized with language: ${selectedLanguage}`);
       console.log(`Available languages: ${availableLanguages.join(", ")}`);
+      resolveInitialization(); // Resolve the promise
     },
   );
 });

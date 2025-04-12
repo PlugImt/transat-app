@@ -57,7 +57,7 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     isResending,
   } = useVerificationCode();
 
-  const [user, setUser] = useState<User | NotLoggedIn | Loading>(null);
+  const [user, setUser] = useState<User | NotLoggedIn | Loading>(undefined);
   useEffect(() => {
     if (userQuery) {
       setUser(userQuery);

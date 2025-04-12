@@ -65,7 +65,7 @@ export function SkeletonLoadingScreen({
             lineHeight={32}
             className="mb-6"
           />
-          {Array.from({ length: items }).map((_, index) => (
+          {[...Array(items).keys()].map((index) => (
             <CardSkeleton
               key={index}
               hasHeader

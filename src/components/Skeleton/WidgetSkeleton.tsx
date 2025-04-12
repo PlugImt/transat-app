@@ -31,7 +31,7 @@ export function WidgetSkeleton({
 
         {contentType === "grid" && (
           <View className="flex-row flex-wrap">
-            {Array.from({ length: gridItems }).map((_, index) => (
+            {[...Array(gridItems).keys()].map((index) => (
               <View
                 key={index}
                 style={{ width: `${100 / gridColumns}%` }}
@@ -57,7 +57,7 @@ export function WidgetSkeleton({
 
         {contentType === "list" && (
           <View className="flex-col">
-            {Array.from({ length: listItems }).map((_, index) => (
+            {[...Array(listItems).keys()].map((index) => (
               <View
                 key={index}
                 className={`flex-row items-center ${

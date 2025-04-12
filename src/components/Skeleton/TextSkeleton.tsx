@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { View } from "react-native";
 import Skeleton from "./Skeleton";
 
@@ -19,8 +20,8 @@ export function TextSkeleton({
   className,
 }: TextSkeletonProps) {
   return (
-    <View className={`flex flex-col ${className}`}>
-      {Array.from({ length: lines }).map((_, index) => (
+    <View className={cn("flex flex-col", className)}>
+      {[...Array(lines).keys()].map((index) => (
         <Skeleton
           key={index}
           width={index === lines - 1 && lastLineWidth ? lastLineWidth : width}

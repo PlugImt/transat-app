@@ -215,6 +215,7 @@
   },
   "account": {
     "graduationYear": "毕业年份",
+    "promotion": "Promotion",
     "campus": "校园",
     "phone": "电话",
     "email": "电子邮件",
@@ -246,6 +247,9 @@
     "passwordUpdated": "最后一次更新密码",
     "profilePictureUpdated": "更新了个人照片",
     "profilePictureUpdateFailed": "更新个人照片失败",
-    "permissionDenied": "拒绝许可"
+    "permissionDenied": "拒绝许可",
+    "firstYear": "1st year",
+    "secondYear": "2nd year",
+    "thirdYear": "3rd year"
   }
 }

@@ -59,7 +59,7 @@ export async function apiRequest<T>(
     headers: { Authorization: `Bearer ${token}` },
   });
 
-  if (response.status !== 200) {
+  if (response.status < 200 || response.status >= 300) {
     console.log("response", response);
     throw new Error(t("common.errors.occurred"));
   }

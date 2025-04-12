@@ -215,6 +215,7 @@
   },
   "account": {
     "graduationYear": "Année de diplôme",
+    "promotion": "Promotion",
     "campus": "Campus",
     "phone": "Téléphone",
     "email": "Email",
@@ -246,6 +247,9 @@
     "passwordUpdated": "Dernière mise à jour du mot de passe",
     "profilePictureUpdated": "Photo de profil mise à jour",
     "profilePictureUpdateFailed": "Échec de la mise à jour de la photo de profil",
-    "permissionDenied": "Permission refusée"
+    "permissionDenied": "Permission refusée",
+    "firstYear": "1st year",
+    "secondYear": "2nd year",
+    "thirdYear": "3rd year"
   }
 }

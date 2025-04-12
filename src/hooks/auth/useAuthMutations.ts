@@ -3,7 +3,6 @@ import { QUERY_KEYS } from "@/lib/queryKeys";
 import { storage } from "@/services/storage/asyncStorage";
 import type { NotLoggedIn, User } from "@/types/user";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 
 interface LoginResponse {
   token: string;
@@ -62,11 +61,16 @@ export const useAuthMutations = () => {
     }: { email: string; password: string; language: string }) => {
       const apiUrl = await getAPIUrl();
 
-      return await axios.post(`${apiUrl}/api/newf/`, {
-        email,
-        password,
-        language,
-      });
+      return await apiRequest(
+        `${apiUrl}/api/auth/register`,
+        "POST",
+        {
+          email,
+          password,
+          language,
+        },
+        true,
+      );
     },
     onError: (error) => {
       console.log(error);

@@ -57,7 +57,7 @@ export const Restaurant = () => {
     isError,
   } = useRestaurantMenu();
 
-  const weekend: boolean = useMemo(() => isWeekend(new Date()), []);
+  const weekend: boolean = useMemo(() => isWeekend(), []);
   const outOfHours: boolean = useMemo(
     () => (menu?.updated_date ? outOfService(menu.updated_date) : false),
     [menu?.updated_date],

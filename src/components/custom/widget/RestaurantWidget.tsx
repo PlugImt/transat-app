@@ -1,6 +1,6 @@
 import { WidgetSkeleton } from "@/components/Skeleton";
 import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
-import { isDinner, isLunch, outOfService } from "@/lib/utils";
+import { isDinner, isLunch, isWeekend, outOfService } from "@/lib/utils";
 import type { AppStackParamList } from "@/services/storage/types";
 import { useTheme } from "@/themes/useThemeProvider";
 import { useNavigation } from "@react-navigation/native";
@@ -19,7 +19,7 @@ export function RestaurantWidget() {
   const navigation = useNavigation<AppScreenNavigationProp>();
   const { data: menu, isPending, error } = useRestaurantMenu();
 
-  const weekend: boolean = false;
+  const weekend: boolean = useMemo(() => isWeekend(), []);
   const lunch: boolean = useMemo(() => isLunch(), []);
   const dinner: boolean = useMemo(() => isDinner(), []);
   const outOfHours: boolean = useMemo(

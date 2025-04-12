@@ -1,11 +1,18 @@
-import { useTheme } from "@/themes/useThemeProvider";
-import { ActivityIndicator, View } from "react-native";
+import { View } from "react-native";
+import SkeletonLoadingScreen from "./SkeletonLoadingScreen";
 
-export default function LoadingScreen() {
-  const theme = useTheme();
+export interface LoadingScreenProps {
+  type?: "default" | "profile" | "card" | "list";
+  items?: number;
+}
+
+export default function LoadingScreen({
+  type = "default",
+  items = 3,
+}: LoadingScreenProps = {}) {
   return (
     <View className="bg-background px-5 justify-center items-center gap-2 h-screen">
-      <ActivityIndicator size="large" color={theme.primary} />
+      <SkeletonLoadingScreen type={type} items={items} />
     </View>
   );
 }

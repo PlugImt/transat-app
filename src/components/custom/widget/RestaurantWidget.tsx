@@ -1,5 +1,6 @@
+import { WidgetSkeleton } from "@/components/Skeleton";
 import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
-import { isDinner, isLunch, isWeekend, outOfService } from "@/lib/utils";
+import { isDinner, isLunch, outOfService } from "@/lib/utils";
 import type { AppStackParamList } from "@/services/storage/types";
 import { useTheme } from "@/themes/useThemeProvider";
 import { useNavigation } from "@react-navigation/native";
@@ -7,7 +8,7 @@ import type { StackNavigationProp } from "@react-navigation/stack";
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -18,7 +19,7 @@ export function RestaurantWidget() {
   const navigation = useNavigation<AppScreenNavigationProp>();
   const { data: menu, isPending, error } = useRestaurantMenu();
 
-  const weekend: boolean = useMemo(() => isWeekend(), []);
+  const weekend: boolean = false;
   const lunch: boolean = useMemo(() => isLunch(), []);
   const dinner: boolean = useMemo(() => isDinner(), []);
   const outOfHours: boolean = useMemo(
@@ -34,14 +35,7 @@ export function RestaurantWidget() {
         : "";
 
   if (isPending) {
-    return (
-      <View className="flex flex-col gap-2">
-        <Text className="h3">{title}</Text>
-        <View className="bg-card p-4 rounded-lg flex justify-center items-center">
-          <ActivityIndicator size="large" color={theme.primary} />
-        </View>
-      </View>
-    );
+    return <WidgetSkeleton title contentType="list" listItems={4} />;
   }
 
   if (error || weekend || outOfHours) {

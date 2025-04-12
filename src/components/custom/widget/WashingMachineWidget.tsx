@@ -1,3 +1,4 @@
+import { WidgetSkeleton } from "@/components/Skeleton";
 import { useWashingMachines } from "@/hooks/useWashingMachines";
 import type { AppStackParamList } from "@/services/storage/types";
 import { useTheme } from "@/themes/useThemeProvider";
@@ -6,7 +7,7 @@ import type { StackNavigationProp } from "@react-navigation/stack";
 import { WashingMachineIcon, Wind } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -46,12 +47,7 @@ export function WashingMachineWidget() {
 
   if (isPending) {
     return (
-      <View className="flex flex-col gap-2">
-        <Text className="h3">{t("services.washingMachine.title")}</Text>
-        <View className="bg-card p-4 rounded-lg flex justify-center items-center">
-          <ActivityIndicator size="large" color={theme.primary} />
-        </View>
-      </View>
+      <WidgetSkeleton title contentType="grid" gridColumns={2} gridItems={2} />
     );
   }
 

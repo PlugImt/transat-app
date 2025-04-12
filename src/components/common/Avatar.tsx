@@ -1,7 +1,7 @@
-import { forwardRef, useState } from "react";
-import { ActivityIndicator, Image, Text, View } from "react-native";
-
+import { Skeleton } from "@/components/Skeleton";
 import { cn } from "@/lib/utils";
+import { forwardRef, useState } from "react";
+import { Image, Text, View } from "react-native";
 
 const Avatar = forwardRef<
   React.ElementRef<typeof View>,
@@ -34,9 +34,12 @@ const AvatarImage = forwardRef<
   }
   if (loading) {
     return (
-      <View className="h-full w-full items-center justify-center bg-muted">
-        <ActivityIndicator color="white" />
-      </View>
+      <Skeleton
+        variant="circle"
+        width="100%"
+        height="100%"
+        className="h-full w-full"
+      />
     );
   }
   return (

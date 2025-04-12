@@ -1,3 +1,4 @@
+import { CardSkeleton } from "@/components/Skeleton";
 import { useWeather } from "@/hooks/useWeather";
 import i18n from "@/i18n";
 import { useTheme } from "@/themes/useThemeProvider";
@@ -19,7 +20,7 @@ import {
   tr,
   zhCN,
 } from "date-fns/locale";
-import { ActivityIndicator, Image, Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 
 export function Weather() {
   const theme = useTheme();
@@ -66,11 +67,7 @@ export function Weather() {
   };
 
   if (isPending) {
-    return (
-      <View className="bg-card p-4 rounded-lg flex justify-center items-center">
-        <ActivityIndicator size="large" color={theme.primary} />
-      </View>
-    );
+    return <CardSkeleton hasHeader={false} contentLines={2} className="p-4" />;
   }
 
   if (isError) {

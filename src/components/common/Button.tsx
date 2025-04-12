@@ -1,8 +1,8 @@
-import { type VariantProps, cva } from "class-variance-authority";
-import { ActivityIndicator, Text, TouchableOpacity } from "react-native";
-
+import { Skeleton } from "@/components/Skeleton";
 import { cn } from "@/lib/utils";
+import { type VariantProps, cva } from "class-variance-authority";
 import type { ComponentPropsWithoutRef } from "react";
+import { Text, TouchableOpacity } from "react-native";
 
 const buttonVariants = cva(
   "flex flex-row items-center justify-center rounded-xl gap-2",
@@ -89,7 +89,16 @@ function Button({
       >
         {label}
       </Text>
-      {loading ? <ActivityIndicator color="white" /> : icon}
+      {loading ? (
+        <Skeleton
+          width={20}
+          height={20}
+          variant="circle"
+          className="bg-white opacity-80"
+        />
+      ) : (
+        icon
+      )}
     </TouchableOpacity>
   );
 }
@@ -112,7 +121,16 @@ function IconButton({
       {...props}
       disabled={loading}
     >
-      {loading ? <ActivityIndicator color="white" /> : icon}
+      {loading ? (
+        <Skeleton
+          width={20}
+          height={20}
+          variant="circle"
+          className="bg-white opacity-80"
+        />
+      ) : (
+        icon
+      )}
     </TouchableOpacity>
   );
 }

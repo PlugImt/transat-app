@@ -38,7 +38,7 @@ const AvatarImage = forwardRef<
         variant="circle"
         width="100%"
         height="100%"
-        className="h-full w-full"
+        className="aspect-square h-full w-full"
       />
     );
   }

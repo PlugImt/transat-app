@@ -115,11 +115,15 @@ function IconButton({
   ...props
 }: IconButtonProps) {
   const className = "flex items-center justify-center rounded-full";
+  const isDisabled = props.disabled || loading;
   return (
     <TouchableOpacity
-      className={cn(buttonVariants({ variant, size, className }))}
+      className={cn(
+        buttonVariants({ variant, size, className }),
+        isDisabled && "opacity-50",
+      )}
       {...props}
-      disabled={loading}
+      disabled={isDisabled}
     >
       {loading ? (
         <Skeleton

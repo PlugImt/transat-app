@@ -20,7 +20,7 @@ export function TextSkeleton({
   className,
 }: TextSkeletonProps) {
   return (
-    <View className={cn("flex flex-col", className)}>
+    <View className={cn("flex flex-col w-full", className)}>
       {[...Array(lines).keys()].map((index) => (
         <Skeleton
           key={index}

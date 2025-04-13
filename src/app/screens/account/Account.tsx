@@ -1,13 +1,13 @@
+import { TextSkeleton } from "@/components/Skeleton";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from "@/components/common/Avatar";
 import { Button, IconButton } from "@/components/common/Button";
-import { InfoItem } from "@/components/common/InfoItem";
+import InfoItem from "@/components/common/InfoItem";
 import Page from "@/components/common/Page";
 import ErrorPage from "@/components/custom/ErrorPage";
-import LoadingScreen from "@/components/custom/LoadingScreen";
 import { useUser } from "@/hooks/account/useUser";
 import { QUERY_KEYS } from "@/lib/queryKeys";
 import { getStudentYear } from "@/lib/utils";
@@ -40,7 +40,7 @@ export const Account = () => {
   };
 
   if (isPending) {
-    return <LoadingScreen />;
+    return <AccountLoading />;
   }
 
   if (isError && error) {
@@ -142,3 +142,66 @@ export const Account = () => {
 };
 
 export default Account;
+
+const AccountLoading = () => {
+  const theme = useTheme();
+  const { t } = useTranslation();
+  return (
+    <Page className="gap-6">
+      <View className="flex-row justify-between items-center">
+        <Text className="h1">{t("common.account")}</Text>
+        <IconButton
+          disabled
+          icon={<Settings color={theme.foreground} />}
+          variant="link"
+        />
+      </View>
+
+      <View className="items-center gap-2">
+        <Avatar className="w-32 h-32">
+          <AvatarImage loading />
+        </Avatar>
+
+        <View className="gap-1 justify-center items-center">
+          <TextSkeleton
+            className="w-64 items-center"
+            lines={1}
+            lineHeight={24}
+          />
+          <TextSkeleton className="w-24 items-center" lines={1} />
+        </View>
+      </View>
+      <View className="bg-card rounded-lg px-6 py-4 gap-4">
+        <Text className="h3">{t("account.contactInfo")}</Text>
+        <InfoItem
+          icon={<Mail color={theme.foreground} size={20} />}
+          label={t("account.email")}
+        />
+        <InfoItem
+          icon={<Phone color={theme.foreground} size={20} />}
+          label={t("account.phone")}
+        />
+      </View>
+
+      <View className="bg-card rounded-lg px-6 py-4 gap-4">
+        <Text className="h3">{t("account.infos")}</Text>
+
+        <InfoItem
+          icon={<Medal color={theme.foreground} size={20} />}
+          label={t("account.registration")}
+        />
+
+        <InfoItem
+          icon={<Lock color={theme.foreground} size={20} />}
+          label={t("account.passwordUpdated")}
+        />
+        <Button
+          label={t("account.editProfile")}
+          size="sm"
+          variant="outlined"
+          disabled
+        />
+      </View>
+    </Page>
+  );
+};

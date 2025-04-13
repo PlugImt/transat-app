@@ -123,7 +123,11 @@ const WashingMachineCard = ({
         </Text>
       </View>
 
-      <Text className="text-foreground" ellipsizeMode="tail">
+      <Text
+        className="text-foreground flex-1"
+        ellipsizeMode="tail"
+        numberOfLines={1}
+      >
         {type}
       </Text>
 

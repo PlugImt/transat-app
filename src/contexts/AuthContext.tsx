@@ -2,7 +2,13 @@ import { useAuthMutations } from "@/hooks/auth/useAuthMutations";
 import { useVerificationCode } from "@/hooks/auth/useVerificationCode";
 import type { Loading, NotLoggedIn, User } from "@/types/user";
 import type { AxiosError } from "axios";
-import { type FC, createContext, useEffect, useState } from "react";
+import {
+  type FC,
+  createContext,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 
 interface AuthContextType {
   user: User | null | undefined;
@@ -119,15 +125,18 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     }
   };
 
-  const saveExpoPushToken = async (token: string) => {
-    try {
-      await saveExpoPushTokenMutation(token);
-      return true;
-    } catch (error) {
-      console.error("Error saving expo push token:", error);
-      return false;
-    }
-  };
+  const saveExpoPushToken = useCallback(
+    async (token: string) => {
+      try {
+        await saveExpoPushTokenMutation(token);
+        return true;
+      } catch (error) {
+        console.error("Error saving expo push token:", error);
+        return false;
+      }
+    },
+    [saveExpoPushTokenMutation],
+  );
 
   const logout = async () => {
     try {

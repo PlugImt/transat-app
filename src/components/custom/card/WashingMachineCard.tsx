@@ -1,18 +1,19 @@
+import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/themes/useThemeProvider";
 import * as Notifications from "expo-notifications";
 import { SchedulableTriggerInputTypes } from "expo-notifications";
 import { Bell, BellRing, WashingMachineIcon, Wind } from "lucide-react-native";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Text, TouchableOpacity, View } from "react-native";
-import { Badge } from "../../common/Badge";
+import { type ColorValue, Text, TouchableOpacity, View } from "react-native";
+import Badge, { BadgeLoading } from "../../common/Badge";
 import { Dialog, DialogContent, DialogTrigger } from "../../common/Dialog";
 
 interface WashingMachineProps {
   number: string;
   type: string;
   status: number;
-  icon: string;
+  icon: "WASHING MACHINE" | "DRYER";
 }
 
 // Configure notifications
@@ -23,6 +24,17 @@ Notifications.setNotificationHandler({
     shouldSetBadge: true,
   }),
 });
+
+const getIcon = (icon: "WASHING MACHINE" | "DRYER", color: ColorValue) => {
+  switch (icon) {
+    case "WASHING MACHINE":
+      return <WashingMachineIcon size={24} color={color} />;
+    case "DRYER":
+      return <Wind size={24} color={color} />;
+    default:
+      return null;
+  }
+};
 
 const MINUTES_BEFORE_NOTIFICATION = 5;
 
@@ -113,11 +125,7 @@ const WashingMachineCard = ({
   return (
     <View className="px-6 py-4 rounded-lg bg-card flex-row justify-between gap-6 items-center">
       <View className="flex-row items-center gap-2">
-        {icon.toUpperCase() === "WASHING MACHINE" ? (
-          <WashingMachineIcon size={24} color={theme.primary} />
-        ) : icon.toUpperCase() === "DRYER" ? (
-          <Wind size={24} color={theme.primary} />
-        ) : null}
+        {getIcon(icon, theme.primary)}
         <Text className="text-foreground font-bold" numberOfLines={1}>
           N°{number}
         </Text>
@@ -167,3 +175,27 @@ const WashingMachineCard = ({
 };
 
 export default WashingMachineCard;
+
+interface WashingMachineCardSkeletonProps {
+  icon: "WASHING MACHINE" | "DRYER";
+}
+
+export const WashingMachineCardSkeleton = ({
+  icon,
+}: WashingMachineCardSkeletonProps) => {
+  const theme = useTheme();
+
+  return (
+    <View className="px-6 py-4 rounded-lg bg-card flex-row justify-between gap-6 items-center">
+      <View className="flex-row items-center gap-2">
+        {getIcon(icon, theme.muted)}
+        <Text className="text-muted-foreground font-bold">N°--</Text>
+      </View>
+      <TextSkeleton lines={1} lastLineWidth={100} />
+
+      <BadgeLoading />
+
+      <Bell color={theme.muted} />
+    </View>
+  );
+};

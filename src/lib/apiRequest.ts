@@ -60,7 +60,6 @@ export async function apiRequest<T>(
   });
 
   if (response.status < 200 || response.status >= 300) {
-    console.log("response", response);
     throw new Error(t("common.errors.occurred"));
   }
 

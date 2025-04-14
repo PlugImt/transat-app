@@ -22,11 +22,11 @@ export function WidgetSkeleton({
   return (
     <View className={`flex flex-col gap-2 ${className}`}>
       {title && (
-        <TextSkeleton lines={1} width="40%" lineHeight={24} className="mb-1" />
+        <TextSkeleton lines={1} width="40%" variant="h2" className="mb-1" />
       )}
       <View className="bg-card p-4 rounded-lg">
         {contentType === "default" && (
-          <TextSkeleton lines={4} width="100%" lineHeight={16} spacing={8} />
+          <TextSkeleton lines={4} width="100%" spacing={8} />
         )}
 
         {contentType === "grid" && (
@@ -43,13 +43,8 @@ export function WidgetSkeleton({
                   variant="rounded"
                   className="mb-2"
                 />
-                <TextSkeleton
-                  lines={1}
-                  width="80%"
-                  lineHeight={16}
-                  className="mb-1"
-                />
-                <TextSkeleton lines={1} width="60%" lineHeight={14} />
+                <TextSkeleton lines={1} width="80%" className="mb-1" />
+                <TextSkeleton lines={1} width="60%" variant="sm" />
               </View>
             ))}
           </View>
@@ -77,7 +72,7 @@ export function WidgetSkeleton({
                     lineHeight={18}
                     className="mb-1"
                   />
-                  <TextSkeleton lines={1} width="40%" lineHeight={14} />
+                  <TextSkeleton lines={1} width="40%" variant="sm" />
                 </View>
               </View>
             ))}

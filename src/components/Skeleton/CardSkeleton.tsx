@@ -34,20 +34,10 @@ export function CardSkeleton({
               className="mr-3"
             />
           )}
-          <TextSkeleton
-            lines={1}
-            width="60%"
-            lineHeight={24}
-            className="flex-1"
-          />
+          <TextSkeleton lines={1} width="60%" variant="h2" className="flex-1" />
         </View>
       )}
-      <TextSkeleton
-        lines={contentLines}
-        width="100%"
-        lineHeight={16}
-        spacing={8}
-      />
+      <TextSkeleton lines={contentLines} width="100%" spacing={8} />
     </View>
   );
 }

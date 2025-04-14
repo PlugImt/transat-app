@@ -16,7 +16,7 @@ const InfoItem = ({ icon, label, value }: InfoItemProps) => {
         {value ? (
           <Text className="text-sm text-muted-foreground/80">{value}</Text>
         ) : (
-          <TextSkeleton lines={1} lineHeight={14} />
+          <TextSkeleton lines={1} variant="sm" />
         )}
       </View>
     </View>

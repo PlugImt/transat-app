@@ -1,6 +1,5 @@
 import Page from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
-import LoadingScreen from "@/components/custom/LoadingScreen";
 import RestaurantCard from "@/components/custom/card/RestaurantCard";
 import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
 import { isWeekend, outOfService } from "@/lib/utils";
@@ -63,10 +62,6 @@ export const Restaurant = () => {
     [menu?.updated_date],
   );
 
-  if (isPending) {
-    return <LoadingScreen />;
-  }
-
   const header = (
     <View className="flex-row gap-2 justify-between items-center">
       <Text className="h1 m-4">{t("services.restaurant.title")}</Text>
@@ -81,6 +76,10 @@ export const Restaurant = () => {
       />
     </View>
   );
+
+  if (isPending) {
+    return <RestaurantLoading header={header} />;
+  }
 
   if (weekend) {
     return (
@@ -202,3 +201,51 @@ export const Restaurant = () => {
 };
 
 export default Restaurant;
+
+interface RestaurantLoadingProps {
+  header: React.ReactNode;
+}
+
+const RestaurantLoading = ({ header }: RestaurantLoadingProps) => {
+  const { t } = useTranslation();
+
+  return (
+    <Page>
+      {header}
+      <View className="flex flex-col gap-8">
+        <View className="flex flex-col gap-4">
+          <Text className="h3 ml-4">{t("services.restaurant.lunch")}</Text>
+
+          <RestaurantCard
+            title={t("services.restaurant.grill")}
+            icon={"Beef"}
+          />
+          <RestaurantCard
+            title={t("services.restaurant.migrator")}
+            icon={"ChefHat"}
+          />
+          <RestaurantCard
+            title={t("services.restaurant.vegetarian")}
+            icon={"Vegan"}
+          />
+          <RestaurantCard
+            title={t("services.restaurant.sideDishes")}
+            icon={"Soup"}
+          />
+        </View>
+
+        <View className="flex flex-col gap-4">
+          <Text className="h3 ml-4">{t("services.restaurant.dinner")}</Text>
+          <RestaurantCard
+            title={t("services.restaurant.grill")}
+            icon={"Beef"}
+          />
+          <RestaurantCard
+            title={t("services.restaurant.sideDishes")}
+            icon={"Soup"}
+          />
+        </View>
+      </View>
+    </Page>
+  );
+};

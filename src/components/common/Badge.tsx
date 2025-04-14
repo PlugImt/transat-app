@@ -90,4 +90,20 @@ function Badge({
   );
 }
 
-export { Badge, badgeVariants };
+export default Badge;
+
+interface BadgeLoadingProps {
+  className?: string;
+}
+
+export const BadgeLoading = ({ className }: BadgeLoadingProps) => {
+  const theme = useTheme();
+  return (
+    <Badge
+      label=""
+      variant="light"
+      className={cn("bg-muted-foreground animate-pulse w-20", className)}
+      labelClasses={`text-${theme.background} animate-pulse`}
+    />
+  );
+};

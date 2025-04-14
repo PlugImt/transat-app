@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import { View } from "react-native";
 import Skeleton from "./Skeleton";
 
@@ -9,6 +8,7 @@ export interface TextSkeletonProps {
   lineHeight?: number;
   spacing?: number;
   className?: string;
+  variant?: "h1" | "h2" | "h3" | "sm" | "default";
 }
 
 export function TextSkeleton({
@@ -16,16 +16,24 @@ export function TextSkeleton({
   width = "100%",
   lastLineWidth = "70%",
   lineHeight = 16,
+  variant = "default",
   spacing = 8,
   className,
 }: TextSkeletonProps) {
+  const lineHeightMap = {
+    h1: 30,
+    h2: 24,
+    h3: 20,
+    sm: 14,
+    default: lineHeight,
+  };
   return (
-    <View className={cn("flex flex-col w-full", className)}>
+    <View className={className}>
       {[...Array(lines).keys()].map((index) => (
         <Skeleton
           key={index}
           width={index === lines - 1 && lastLineWidth ? lastLineWidth : width}
-          height={lineHeight}
+          height={lineHeightMap[variant]}
           className={index !== lines - 1 ? `mb-${spacing}` : ""}
         />
       ))}

@@ -122,7 +122,6 @@ export function getStudentYear(graduationYear: number) {
 
   // Le programme est en 3 ans
   const currentStudyYear = maxStudyYears - yearsLeft;
-  console.log("currentStudyYear", currentStudyYear, yearsLeft);
   const studyLevel = [
     t("account.firstYear"),
     t("account.secondYear"),

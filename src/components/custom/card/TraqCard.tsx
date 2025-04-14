@@ -1,4 +1,6 @@
-import { Badge } from "@/components/common/Badge";
+import { TextSkeleton } from "@/components/Skeleton";
+import { Avatar, AvatarImage } from "@/components/common/Avatar";
+import Badge from "@/components/common/Badge";
 import { useTheme } from "@/themes/useThemeProvider";
 import { BadgeEuro, Beer, CircleX, Clock } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
@@ -110,3 +112,43 @@ const TraqCard = ({
 };
 
 export default TraqCard;
+
+export const TraqCardLoading = () => {
+  const { t } = useTranslation();
+  const theme = useTheme();
+
+  return (
+    <View className="px-6 py-8 rounded-lg bg-card gap-6 relative items-center">
+      <Avatar className="w-40 h-40">
+        <AvatarImage loading />
+      </Avatar>
+
+      <View className="gap-2 items-center justify-center">
+        <TextSkeleton variant="h2" lines={1} lastLineWidth={200} />
+        <TextSkeleton variant="sm" lines={2} width={300} />
+      </View>
+
+      <View className="w-full px-4 gap-2">
+        <View className="flex-row justify-between items-center">
+          <View className="flex-row items-center gap-2">
+            <Beer size={18} color={theme.foreground} />
+            <Text className="font-bold text-foreground">
+              {t("services.traq.alcohol")}
+            </Text>
+          </View>
+          <TextSkeleton lines={1} lastLineWidth={50} />
+        </View>
+
+        <View className="flex flex-row justify-between items-center">
+          <View className="flex flex-row items-center gap-2 ">
+            <BadgeEuro size={18} color={theme.foreground} />
+            <Text className="font-bold text-foreground">
+              {t("services.traq.price")}
+            </Text>
+          </View>
+          <TextSkeleton lines={1} lastLineWidth={50} />
+        </View>
+      </View>
+    </View>
+  );
+};

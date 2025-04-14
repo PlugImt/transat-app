@@ -42,8 +42,6 @@ export const getNotificationsState = async (
       "GET",
     );
 
-    console.log(response);
-
     return service ? response.services.includes(service) : response.services;
   } catch (error) {
     console.error("Error fetching notification state:", error);

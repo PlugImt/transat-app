@@ -163,11 +163,7 @@ const AccountLoading = () => {
         </Avatar>
 
         <View className="gap-1 justify-center items-center">
-          <TextSkeleton
-            className="w-64 items-center"
-            lines={1}
-            lineHeight={24}
-          />
+          <TextSkeleton className="w-64 items-center" lines={1} variant="h2" />
           <TextSkeleton className="w-24 items-center" lines={1} />
         </View>
       </View>

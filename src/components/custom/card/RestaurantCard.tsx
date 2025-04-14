@@ -1,3 +1,4 @@
+import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/themes/useThemeProvider";
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
@@ -29,7 +30,7 @@ const RestaurantCard = ({ title, meals, icon }: CardProps) => {
   }
 
   if (!meals) {
-    return <Text>{t("services.restaurant.noMeal")}</Text>;
+    return <RestaurantCardLoading title={title} icon={getIcon()} />;
   }
 
   return (
@@ -53,3 +54,31 @@ const RestaurantCard = ({ title, meals, icon }: CardProps) => {
 };
 
 export default RestaurantCard;
+
+interface RestaurantCardLoadingProps {
+  title: string;
+  icon: JSX.Element | null;
+}
+
+export const RestaurantCardLoading = ({
+  title,
+  icon,
+}: RestaurantCardLoadingProps) => {
+  const skeletonCount = Math.floor(Math.random() * 3) + 1;
+  return (
+    <View className="px-6 py-4 rounded-lg bg-card flex flex-col gap-6">
+      <View className="flex flex-row items-center gap-2">
+        {icon}
+        <Text className="text-lg font-bold text-primary" ellipsizeMode="tail">
+          {title}
+        </Text>
+      </View>
+
+      <View className="flex flex-col gap-4">
+        {[...Array(skeletonCount).keys()].map((index) => (
+          <TextSkeleton key={index} lines={1} />
+        ))}
+      </View>
+    </View>
+  );
+};

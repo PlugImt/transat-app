@@ -1,7 +1,8 @@
 import Page from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
-import LoadingScreen from "@/components/custom/LoadingScreen";
-import WashingMachineCard from "@/components/custom/card/WashingMachineCard";
+import WashingMachineCard, {
+  WashingMachineCardSkeleton,
+} from "@/components/custom/card/WashingMachineCard";
 import { useWashingMachines } from "@/hooks/useWashingMachines";
 import { type FC, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -15,8 +16,22 @@ export const WashingMachine: FC = () => {
   const { data, isPending, isFetching, isError, error, refetch } =
     useWashingMachines();
 
+  const header = (
+    <View className="flex-row gap-2 justify-between items-center">
+      <Text className="h1">{t("services.washingMachine.title")}</Text>
+      <AboutModal
+        title={t("services.washingMachine.title")}
+        description={t("services.washingMachine.about")}
+        openingHours={openingHoursData}
+        location={t("services.washingMachine.location")}
+        price={t("services.washingMachine.price")}
+        additionalInfo={t("services.washingMachine.additionalInfo")}
+      />
+    </View>
+  );
+
   if (isPending) {
-    return <LoadingScreen />;
+    return <WashingMachineLoading header={header} />;
   }
 
   if (isError) {
@@ -52,22 +67,8 @@ export const WashingMachine: FC = () => {
   );
 
   return (
-    <Page
-      onRefresh={refetch}
-      refreshing={isFetching}
-      className="flex-col gap-6"
-    >
-      <View className="flex-row gap-2 justify-between items-center">
-        <Text className="h1">{t("services.washingMachine.title")}</Text>
-        <AboutModal
-          title={t("services.washingMachine.title")}
-          description={t("services.washingMachine.about")}
-          openingHours={openingHoursData}
-          location={t("services.washingMachine.location")}
-          price={t("services.washingMachine.price")}
-          additionalInfo={t("services.washingMachine.additionalInfo")}
-        />
-      </View>
+    <Page onRefresh={refetch} refreshing={isFetching} className="gap-6">
+      {header}
 
       {washingMachines?.length > 0 && (
         <View className="flex-col gap-4">
@@ -107,3 +108,37 @@ export const WashingMachine: FC = () => {
 };
 
 export default WashingMachine;
+
+interface WashingMachineLoadingProps {
+  header: React.ReactNode;
+}
+
+const WashingMachineLoading = ({ header }: WashingMachineLoadingProps) => {
+  const { t } = useTranslation();
+
+  const nbMachines = 4;
+
+  return (
+    <Page className="gap-6">
+      {header}
+
+      <View className="flex-col gap-4">
+        <Text className="text-foreground text-xl font-bold">
+          {t("services.washingMachine.washingMachine")}
+        </Text>
+        {[...Array(nbMachines).keys()].map((index) => (
+          <WashingMachineCardSkeleton key={index} icon="WASHING MACHINE" />
+        ))}
+      </View>
+
+      <View className="flex-col gap-4">
+        <Text className="text-foreground text-xl font-bold">
+          {t("services.washingMachine.dryer")}
+        </Text>
+        {[...Array(nbMachines).keys()].map((index) => (
+          <WashingMachineCardSkeleton key={index} icon="DRYER" />
+        ))}
+      </View>
+    </Page>
+  );
+};

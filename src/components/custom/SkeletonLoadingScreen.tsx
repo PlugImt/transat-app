@@ -14,12 +14,7 @@ export function SkeletonLoadingScreen({
     <View className="bg-background px-5 justify-center items-center h-screen">
       {type === "default" && (
         <View className="w-full max-w-md">
-          <TextSkeleton
-            lines={1}
-            width="60%"
-            lineHeight={32}
-            className="mb-6"
-          />
+          <TextSkeleton lines={1} width="60%" variant="h1" className="mb-6" />
           <CardSkeleton hasHeader contentLines={4} className="mb-4" />
           <CardSkeleton hasHeader contentLines={2} className="mb-4" />
         </View>
@@ -28,12 +23,7 @@ export function SkeletonLoadingScreen({
       {type === "profile" && (
         <View className="w-full max-w-md">
           <ProfileSkeleton avatarSize={100} infoLines={3} className="mb-6" />
-          <TextSkeleton
-            lines={1}
-            width="40%"
-            lineHeight={24}
-            className="mb-4"
-          />
+          <TextSkeleton lines={1} width="40%" variant="h2" className="mb-4" />
           <CardSkeleton hasHeader={false} contentLines={4} className="mb-4" />
           <CardSkeleton hasHeader={false} contentLines={3} className="mb-4" />
         </View>
@@ -41,12 +31,7 @@ export function SkeletonLoadingScreen({
 
       {type === "card" && (
         <View className="w-full max-w-md">
-          <TextSkeleton
-            lines={1}
-            width="50%"
-            lineHeight={32}
-            className="mb-6"
-          />
+          <TextSkeleton lines={1} width="50%" variant="h1" className="mb-6" />
           <CardSkeleton
             hasHeader
             hasIcon
@@ -59,12 +44,7 @@ export function SkeletonLoadingScreen({
 
       {type === "list" && (
         <View className="w-full max-w-md">
-          <TextSkeleton
-            lines={1}
-            width="50%"
-            lineHeight={32}
-            className="mb-6"
-          />
+          <TextSkeleton lines={1} width="50%" variant="h1" className="mb-6" />
           {[...Array(items).keys()].map((index) => (
             <CardSkeleton
               key={index}

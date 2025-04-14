@@ -1,9 +1,9 @@
-import { Badge } from "@/components/common/Badge";
+import { TextSkeleton } from "@/components/Skeleton";
+import Badge, { BadgeLoading } from "@/components/common/Badge";
 import Page from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
 import ErrorPage from "@/components/custom/ErrorPage";
-import LoadingScreen from "@/components/custom/LoadingScreen";
-import TraqCard from "@/components/custom/card/TraqCard";
+import TraqCard, { TraqCardLoading } from "@/components/custom/card/TraqCard";
 import { useTraq } from "@/hooks/useTraq";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -51,10 +51,6 @@ export const Traq = () => {
     );
   }, [traq, selectedTags]);
 
-  if (isPending) {
-    return <LoadingScreen />;
-  }
-
   const header = (
     <View className="flex-row gap-2 justify-between items-center">
       <Text className="h1 m-4">{t("services.traq.title")}</Text>
@@ -68,6 +64,10 @@ export const Traq = () => {
       />
     </View>
   );
+
+  if (isPending) {
+    return <TraqLoading header={header} />;
+  }
 
   if (isError && error) {
     return (
@@ -147,3 +147,28 @@ export const Traq = () => {
 };
 
 export default Traq;
+
+interface TraqLoadingProps {
+  header: React.ReactNode;
+}
+
+const TraqLoading = ({ header }: TraqLoadingProps) => {
+  return (
+    <Page className="gap-4">
+      {header}
+      <View className="flex-row justify-between items-center">
+        <TextSkeleton lines={1} variant="h2" lastLineWidth={100} />
+      </View>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        {[...Array(3).keys()].map((index) => (
+          <BadgeLoading key={index} className="mr-2" />
+        ))}
+      </ScrollView>
+      <View className="gap-4">
+        {[...Array(5).keys()].map((index) => (
+          <TraqCardLoading key={index} />
+        ))}
+      </View>
+    </Page>
+  );
+};

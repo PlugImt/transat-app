@@ -33,7 +33,7 @@ export function ProfileSkeleton({
             <TextSkeleton
               lines={infoLines}
               width="80%"
-              lineHeight={20}
+              variant="h3"
               spacing={8}
             />
           </View>

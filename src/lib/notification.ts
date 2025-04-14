@@ -1,43 +1,27 @@
-import { storage } from "@/services/storage/asyncStorage";
 import type { NotificationType } from "@/types/notification";
-import { t } from "i18next";
+import { apiRequest } from "./apiRequest";
 
-const NOTIFICATION_API = "https://transat.destimt.fr/api/newf/notification";
+const NOTIFICATION_API = "/api/newf/notifications/subscriptions";
 
 export const addNotification = async (
   service: NotificationType,
 ): Promise<boolean> => {
-  const jwtToken = await storage.get("token");
-  if (!jwtToken) throw new Error(t("account.noToken"));
-
-  const response = await fetch(NOTIFICATION_API, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${jwtToken}`,
-    },
-    body: JSON.stringify({
+  const response = await apiRequest<{ subscribed: boolean }>(
+    NOTIFICATION_API,
+    "POST",
+    {
       service: service.trim(),
-    }),
-  });
+    },
+  );
 
-  if (!response.ok) {
-    throw new Error(t("settings.notifications.updateError"));
-  }
-
-  const data = await response.json();
-  return data.message === true;
+  return response.subscribed;
 };
 
 export const getNotificationsState = async (
   service?: NotificationType,
   services?: NotificationType[],
 ): Promise<boolean | NotificationType[]> => {
-  const jwtToken = await storage.get("token");
-  if (!jwtToken) return false;
-
   try {
-    let url = NOTIFICATION_API;
     const queryParams = new URLSearchParams();
 
     if (service) {
@@ -48,26 +32,19 @@ export const getNotificationsState = async (
       }
     }
 
-    if (queryParams.toString()) {
-      url += `?${queryParams.toString()}`;
-    }
+    const queryString = queryParams.toString();
+    const fullUrl = queryString
+      ? `${NOTIFICATION_API}?${queryString}`
+      : NOTIFICATION_API;
 
-    // Make the request
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${jwtToken}`,
-      },
-    });
+    const response = await apiRequest<{ services: NotificationType[] }>(
+      fullUrl,
+      "GET",
+    );
 
-    if (!response.ok) {
-      throw new Error(t("settings.notifications.fetchError"));
-    }
+    console.log(response);
 
-    const data = await response.json();
-
-    return service ? data.message === true : data.messages || [];
+    return service ? response.services.includes(service) : response.services;
   } catch (error) {
     console.error("Error fetching notification state:", error);
     return service ? false : [];

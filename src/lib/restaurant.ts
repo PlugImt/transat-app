@@ -8,7 +8,11 @@ export async function getRestaurant(): Promise<MenuData | undefined> {
   // retrieve the language from the local storage
   const currentLanguage = i18n.language.toLowerCase();
 
-  return await apiRequest<MenuData>(TARGET_URL, "GET", {
-    language: currentLanguage,
-  });
+  const queryParams = new URLSearchParams();
+  queryParams.append("language", currentLanguage);
+
+  return await apiRequest<MenuData>(
+    `${TARGET_URL}?${queryParams.toString()}`,
+    "GET",
+  );
 }

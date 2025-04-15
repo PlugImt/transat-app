@@ -69,7 +69,7 @@ export function WidgetSkeleton({
                   <TextSkeleton
                     lines={1}
                     width="60%"
-                    lineHeight={18}
+                    variant="lg"
                     className="mb-1"
                   />
                   <TextSkeleton lines={1} width="40%" variant="sm" />

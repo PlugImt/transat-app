@@ -12,7 +12,7 @@ const InfoItem = ({ icon, label, value }: InfoItemProps) => {
     <View className="flex-row items-center gap-4">
       {icon}
       <View className="gap-0.5 w-full">
-        <Text className="text-sm text-muted-foreground">{label}</Text>
+        <Text className="text-sm text-foreground">{label}</Text>
         {value ? (
           <Text className="text-sm text-muted-foreground/80">{value}</Text>
         ) : (

@@ -1,4 +1,4 @@
-import { WidgetSkeleton } from "@/components/Skeleton";
+import { TextSkeleton } from "@/components/Skeleton";
 import { useWashingMachines } from "@/hooks/useWashingMachines";
 import type { AppStackParamList } from "@/services/storage/types";
 import { useTheme } from "@/themes/useThemeProvider";
@@ -46,9 +46,7 @@ export function WashingMachineWidget() {
   }, [data]);
 
   if (isPending) {
-    return (
-      <WidgetSkeleton title contentType="grid" gridColumns={2} gridItems={2} />
-    );
+    return <WashingMachineWidgetLoading />;
   }
 
   if (isError || error || !data) {
@@ -65,7 +63,7 @@ export function WashingMachineWidget() {
         <View className="items-center">
           <WashingMachineIcon
             size={40}
-            color={availableWashers === 0 ? "#494949" : theme.primary}
+            color={availableWashers === 0 ? theme.muted : theme.primary}
           />
           <Text className="text-lg font-bold text-foreground">
             {availableWashers}/{totalWashers}
@@ -81,7 +79,7 @@ export function WashingMachineWidget() {
         <View className="items-center">
           <Wind
             size={40}
-            color={availableDryers === 0 ? "#494949" : theme.primary}
+            color={availableDryers === 0 ? theme.muted : theme.primary}
           />
           <Text className="text-lg font-bold text-foreground">
             {availableDryers}/{totalDryers}
@@ -100,3 +98,43 @@ export function WashingMachineWidget() {
 }
 
 export default WashingMachineWidget;
+
+const WashingMachineWidgetLoading = () => {
+  const { t } = useTranslation();
+  const navigation = useNavigation<AppScreenNavigationProp>();
+  const theme = useTheme();
+
+  return (
+    <View className="flex flex-col gap-2">
+      <Text className="h3">{t("services.washingMachine.title")}</Text>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("WashingMachine")}
+        className="px-6 py-4 rounded-lg bg-card flex-row justify-between gap-6"
+      >
+        <View className="items-center gap-2">
+          <WashingMachineIcon size={40} color={theme.muted} />
+          <TextSkeleton variant="lg" lines={1} lastLineWidth={32} />
+
+          <Text
+            className="text-foreground flex-1"
+            ellipsizeMode="tail"
+            numberOfLines={1}
+          >
+            {t("services.washingMachine.machineAvailable")}
+          </Text>
+        </View>
+        <View className="items-center gap-2">
+          <Wind size={40} color={theme.muted} />
+          <TextSkeleton variant="lg" lines={1} lastLineWidth={32} />
+          <Text
+            className="text-foreground flex-1"
+            ellipsizeMode="tail"
+            numberOfLines={1}
+          >
+            {t("services.washingMachine.dryerAvailable")}
+          </Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  );
+};

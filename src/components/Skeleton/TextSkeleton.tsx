@@ -8,7 +8,7 @@ export interface TextSkeletonProps {
   lineHeight?: number;
   spacing?: number;
   className?: string;
-  variant?: "h1" | "h2" | "h3" | "sm" | "default";
+  variant?: "h1" | "h2" | "h3" | "lg" | "sm" | "default";
 }
 
 export function TextSkeleton({
@@ -24,6 +24,7 @@ export function TextSkeleton({
     h1: 30,
     h2: 24,
     h3: 20,
+    lg: 18,
     sm: 14,
     default: lineHeight,
   };

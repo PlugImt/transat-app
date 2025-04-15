@@ -58,3 +58,29 @@ const Dropdown = ({
 };
 
 export default Dropdown;
+
+interface DropdownLoadingProps {
+  label: string;
+  placeholder: string;
+  icon?: React.ReactNode;
+}
+
+export const DropdownLoading = ({
+  label,
+  placeholder,
+  icon,
+}: DropdownLoadingProps) => {
+  const theme = useTheme();
+  return (
+    <View className="gap-1.5 opacity-50">
+      <Text className="text-foreground/70 text-sm">{label}</Text>
+      <View className="flex-row items-center justify-between bg-muted/70 rounded-lg px-3 h-12 gap-2">
+        <View className="flex-row items-center gap-2">
+          {icon ? icon : null}
+          <Text className="text-foreground">{placeholder}</Text>
+        </View>
+        <ChevronDown color={theme.foreground} size={20} />
+      </View>
+    </View>
+  );
+};

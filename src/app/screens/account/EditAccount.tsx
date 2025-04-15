@@ -4,12 +4,11 @@ import {
   AvatarImage,
 } from "@/components/common/Avatar";
 import { Button } from "@/components/common/Button";
-import Dropdown from "@/components/common/Dropdown";
-import Input from "@/components/common/Input";
+import Dropdown, { DropdownLoading } from "@/components/common/Dropdown";
+import Input, { InputLoading } from "@/components/common/Input";
 import Page from "@/components/common/Page";
 import { useToast } from "@/components/common/Toast";
 import ErrorPage from "@/components/custom/ErrorPage";
-import LoadingScreen from "@/components/custom/LoadingScreen";
 import { useUpdateAccount } from "@/hooks/account/useUpdateAccount";
 import { useUpdateProfilePicture } from "@/hooks/account/useUpdateProfilePicture";
 import { useUser } from "@/hooks/account/useUser";
@@ -100,7 +99,7 @@ export const EditProfile = () => {
   };
 
   if (isPending) {
-    return <LoadingScreen />;
+    return <EditProfileLoading />;
   }
 
   if ((isError && error) || !user) {
@@ -147,7 +146,7 @@ export const EditProfile = () => {
             className="absolute bottom-0 right-0 bg-muted p-2 rounded-full"
             onPress={handleUpdateProfilePicture}
           >
-            <Edit color="#ffe6cc" size={16} />
+            <Edit color={theme.foreground} size={16} />
           </TouchableOpacity>
         </TouchableOpacity>
       </View>
@@ -156,8 +155,9 @@ export const EditProfile = () => {
         <Text className="h3">{t("account.personalInfo")}</Text>
 
         <Input
-          label={t("account.firstName")}
           control={userControl}
+          label={t("account.firstName")}
+          disabled
           name="first_name"
           returnKeyType="go"
           textContentType="name"
@@ -165,16 +165,18 @@ export const EditProfile = () => {
         />
 
         <Input
-          label={t("account.lastName")}
           control={userControl}
+          label={t("account.lastName")}
+          disabled
           name="last_name"
           textContentType="familyName"
           error={userErrors.last_name?.message}
         />
 
         <Input
-          label={t("account.email")}
           control={userControl}
+          label={t("account.email")}
+          disabled
           name="email"
           autoCapitalize="none"
           textContentType="emailAddress"
@@ -182,8 +184,9 @@ export const EditProfile = () => {
         />
 
         <Input
-          label={t("account.phone")}
           control={userControl}
+          label={t("account.phone")}
+          disabled
           name="phone_number"
           textContentType="telephoneNumber"
           error={userErrors.phone_number?.message}
@@ -191,6 +194,7 @@ export const EditProfile = () => {
         />
 
         <Controller
+          disabled
           control={userControl}
           name="graduation_year"
           render={({ field: { onChange, value } }) => (
@@ -217,3 +221,47 @@ export const EditProfile = () => {
 };
 
 export default EditProfile;
+
+const EditProfileLoading = () => {
+  const { t } = useTranslation();
+  const theme = useTheme();
+  const navigation = useNavigation();
+
+  return (
+    <Page className="gap-8">
+      <View className="flex-row items-center justify-between m-4">
+        <Text className="h1">{t("account.editProfile")}</Text>
+        <Button
+          label={t("common.cancel")}
+          onPress={() => navigation.goBack()}
+          size="sm"
+          variant="ghost"
+        />
+      </View>
+      <View className="items-center">
+        <TouchableOpacity className="relative">
+          <Avatar className="w-32 h-32">
+            <AvatarImage loading />
+          </Avatar>
+        </TouchableOpacity>
+      </View>
+
+      <View className="bg-card rounded-lg px-6 py-4 gap-4">
+        <Text className="h3">{t("account.personalInfo")}</Text>
+
+        <InputLoading label={t("account.firstName")} />
+        <InputLoading label={t("account.lastName")} />
+        <InputLoading label={t("account.email")} />
+        <InputLoading label={t("account.phone")} />
+
+        <DropdownLoading
+          label={t("account.graduationYear")}
+          placeholder={t("account.selectGraduationYear")}
+          icon={<GraduationCap color={theme.foreground} size={20} />}
+        />
+      </View>
+
+      <Button label={t("common.save")} disabled />
+    </Page>
+  );
+};

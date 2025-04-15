@@ -1,4 +1,4 @@
-import { WidgetSkeleton } from "@/components/Skeleton";
+import { TextSkeleton } from "@/components/Skeleton";
 import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
 import { isDinner, isLunch, isWeekend, outOfService } from "@/lib/utils";
 import type { AppStackParamList } from "@/services/storage/types";
@@ -35,7 +35,7 @@ export function RestaurantWidget() {
         : "";
 
   if (isPending) {
-    return <WidgetSkeleton title contentType="list" listItems={4} />;
+    return <RestaurantWidgetLoading title={title} />;
   }
 
   if (error || weekend || outOfHours) {
@@ -168,3 +168,89 @@ export function RestaurantWidget() {
 }
 
 export default RestaurantWidget;
+
+interface RestaurantWidgetLoadingProps {
+  title: string;
+}
+
+const RestaurantWidgetLoading = ({ title }: RestaurantWidgetLoadingProps) => {
+  const theme = useTheme();
+  const { t } = useTranslation();
+  const navigation = useNavigation<AppScreenNavigationProp>();
+
+  const skeletonCount = () => Math.floor(Math.random() * 3) + 1;
+
+  return (
+    <View className="flex flex-col gap-2">
+      <Text className="h3">{title}</Text>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Restaurant")}
+        className="px-6 py-4 rounded-lg bg-card flex flex-col gap-6"
+      >
+        <View className="flex flex-col gap-2">
+          <View className="flex flex-row items-center gap-2">
+            <Beef color={theme.primary} />
+            <Text
+              className="text-lg font-bold text-primary"
+              ellipsizeMode="tail"
+            >
+              {t("services.restaurant.grill")}
+            </Text>
+          </View>
+
+          {[...Array(skeletonCount()).keys()].map((index) => (
+            <TextSkeleton lines={1} key={index} />
+          ))}
+        </View>
+
+        <View className="flex flex-col gap-2">
+          <View className="flex flex-row items-center gap-2">
+            <ChefHat color={theme.primary} />
+            <Text
+              className="text-lg font-bold text-primary"
+              ellipsizeMode="tail"
+            >
+              {t("services.restaurant.migrator")}
+            </Text>
+          </View>
+
+          {[...Array(skeletonCount()).keys()].map((index) => (
+            <TextSkeleton lines={1} key={index} />
+          ))}
+        </View>
+
+        <View className="flex flex-col gap-2">
+          <View className="flex flex-row items-center gap-2">
+            <Vegan color={theme.primary} />
+            <Text
+              className="text-lg font-bold text-primary"
+              ellipsizeMode="tail"
+            >
+              {t("services.restaurant.vegetarian")}
+            </Text>
+          </View>
+
+          {[...Array(skeletonCount()).keys()].map((index) => (
+            <TextSkeleton lines={1} key={index} />
+          ))}
+        </View>
+
+        <View className="flex flex-col gap-2">
+          <View className="flex flex-row items-center gap-2">
+            <Soup color={theme.primary} />
+            <Text
+              className="text-lg font-bold text-primary"
+              ellipsizeMode="tail"
+            >
+              {t("services.restaurant.sideDishes")}
+            </Text>
+          </View>
+
+          {[...Array(skeletonCount()).keys()].map((index) => (
+            <TextSkeleton lines={1} key={index} />
+          ))}
+        </View>
+      </TouchableOpacity>
+    </View>
+  );
+};

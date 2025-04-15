@@ -1,7 +1,6 @@
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/themes/useThemeProvider";
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
-import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
 
 interface CardProps {
@@ -11,7 +10,6 @@ interface CardProps {
 }
 
 const RestaurantCard = ({ title, meals, icon }: CardProps) => {
-  const { t } = useTranslation();
   const theme = useTheme();
 
   function getIcon() {

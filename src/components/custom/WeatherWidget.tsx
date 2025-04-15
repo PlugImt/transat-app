@@ -1,7 +1,6 @@
-import { CardSkeleton } from "@/components/Skeleton";
+import { TextSkeleton } from "@/components/Skeleton";
 import { useWeather } from "@/hooks/useWeather";
 import i18n from "@/i18n";
-import { useTheme } from "@/themes/useThemeProvider";
 import { format } from "date-fns";
 import {
   ar,
@@ -21,14 +20,13 @@ import {
   zhCN,
 } from "date-fns/locale";
 import { Image, Text, View } from "react-native";
+import { Avatar, AvatarImage } from "../common/Avatar";
 
-export function Weather() {
-  const theme = useTheme();
+export function WeatherWidget() {
   const { data: weatherNantes, isPending, isError } = useWeather();
 
   const date = new Date();
 
-  // Get the current language and map it to the corresponding date-fns locale
   const getLocale = () => {
     switch (i18n.language) {
       case "fr":
@@ -62,12 +60,12 @@ export function Weather() {
       case "pl":
         return pl;
       default:
-        return undefined; // English is the default in date-fns
+        return undefined;
     }
   };
 
   if (isPending) {
-    return <CardSkeleton hasHeader={false} contentLines={2} className="p-4" />;
+    return <WeatherSkeleton />;
   }
 
   if (isError) {
@@ -101,4 +99,19 @@ export function Weather() {
   );
 }
 
-export default Weather;
+export default WeatherWidget;
+
+const WeatherSkeleton = () => {
+  return (
+    <View className="p-6 rounded-lg bg-card flex-row justify-between gap-6">
+      <View className="gap-2">
+        <TextSkeleton variant="h3" className="w-64" lines={1} />
+        <TextSkeleton variant="h1" className="w-32" lines={1} />
+        <TextSkeleton variant="h3" className="w-32" lines={1} />
+      </View>
+      <Avatar className="w-24 h-24">
+        <AvatarImage loading />
+      </Avatar>
+    </View>
+  );
+};

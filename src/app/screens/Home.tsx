@@ -1,5 +1,5 @@
 import Page from "@/components/common/Page";
-import { Weather } from "@/components/custom/Weather";
+import { WeatherWidget } from "@/components/custom/WeatherWidget";
 import RestaurantWidget from "@/components/custom/widget/RestaurantWidget";
 import WashingMachineWidget from "@/components/custom/widget/WashingMachineWidget";
 import useAuth from "@/hooks/account/useAuth";
@@ -150,7 +150,7 @@ export const Home = () => {
         {t("common.welcome")}{" "}
         <Text className="text-primary">{user?.first_name || "Newf"}</Text>
       </Text>
-      <Weather />
+      <WeatherWidget />
       <RestaurantWidget />
       <WashingMachineWidget />
     </Page>

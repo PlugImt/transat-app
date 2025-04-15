@@ -157,7 +157,6 @@ export const EditProfile = () => {
         <Input
           control={userControl}
           label={t("account.firstName")}
-          disabled
           name="first_name"
           returnKeyType="go"
           textContentType="name"
@@ -167,7 +166,6 @@ export const EditProfile = () => {
         <Input
           control={userControl}
           label={t("account.lastName")}
-          disabled
           name="last_name"
           textContentType="familyName"
           error={userErrors.last_name?.message}
@@ -176,7 +174,6 @@ export const EditProfile = () => {
         <Input
           control={userControl}
           label={t("account.email")}
-          disabled
           name="email"
           autoCapitalize="none"
           textContentType="emailAddress"
@@ -186,7 +183,6 @@ export const EditProfile = () => {
         <Input
           control={userControl}
           label={t("account.phone")}
-          disabled
           name="phone_number"
           textContentType="telephoneNumber"
           error={userErrors.phone_number?.message}
@@ -194,7 +190,6 @@ export const EditProfile = () => {
         />
 
         <Controller
-          disabled
           control={userControl}
           name="graduation_year"
           render={({ field: { onChange, value } }) => (

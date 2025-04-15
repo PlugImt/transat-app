@@ -35,10 +35,10 @@ export function RestaurantWidget() {
         : "";
 
   if (isPending) {
-    return <RestaurantWidgetLoading title={title} />;
+    return <RestaurantWidgetLoading />;
   }
 
-  if (error || weekend || outOfHours) {
+  if (error || weekend || outOfHours || (!lunch && !dinner)) {
     return null;
   }
 
@@ -169,11 +169,7 @@ export function RestaurantWidget() {
 
 export default RestaurantWidget;
 
-interface RestaurantWidgetLoadingProps {
-  title: string;
-}
-
-const RestaurantWidgetLoading = ({ title }: RestaurantWidgetLoadingProps) => {
+const RestaurantWidgetLoading = () => {
   const theme = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation<AppScreenNavigationProp>();
@@ -182,7 +178,7 @@ const RestaurantWidgetLoading = ({ title }: RestaurantWidgetLoadingProps) => {
 
   return (
     <View className="flex flex-col gap-2">
-      <Text className="h3">{title}</Text>
+      <TextSkeleton lines={1} lastLineWidth={128} />
       <TouchableOpacity
         onPress={() => navigation.navigate("Restaurant")}
         className="px-6 py-4 rounded-lg bg-card flex flex-col gap-6"

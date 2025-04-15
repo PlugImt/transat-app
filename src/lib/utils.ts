@@ -7,24 +7,45 @@ import { t } from "i18next";
 import { twMerge } from "tailwind-merge";
 import { getAPIUrl } from "./apiRequest";
 
+/**
+ * Checks if the current time is before 2 PM
+ *
+ * @returns True if the current time is before 2 PM, false otherwise
+ */
 export function isLunch() {
   const now = new Date();
   const hour = now.getHours();
   return hour < 14;
 }
 
+/**
+ * Checks if the current time is between 2 PM and 11 PM
+ *
+ * @returns True if the current time is between 2 PM and 8 PM, false otherwise
+ */
 export function isDinner() {
   const now = new Date();
   const hour = now.getHours();
-  return hour >= 14 && hour < 21;
+  return hour >= 14 && hour < 20;
 }
 
+/**
+ * Checks if the current day is a weekend (Saturday or Sunday)
+ *
+ * @returns True if the current day is a weekend (Saturday or Sunday), false otherwise
+ */
 export function isWeekend() {
   const now = new Date();
   const day = now.getDay();
   return day === 0 || day === 6 || (day === 5 && now.getHours() > 14); // Sunday or Saturday
 }
 
+/**
+ * Checks if the last update date is before today
+ *
+ * @param lastUpdate Last update date in ISO format
+ * @returns True if the last update date is before today, false otherwise
+ */
 export function outOfService(lastUpdate: string) {
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -35,7 +56,6 @@ export function outOfService(lastUpdate: string) {
     updateDate.getDate(),
   );
 
-  // Return true if update date is before today, false otherwise
   return updateDay < today;
 }
 

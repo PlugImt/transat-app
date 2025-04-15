@@ -1,7 +1,7 @@
 const colors = {
   light: {
     background: "#FFFFFF",
-    foreground: "hsl(222.2, 47.4%, 11.2%)",
+    foreground: "#000000",
     card: "#FAFAFA",
     primary: "#ec7f32",
     secondary: "#0049a8",

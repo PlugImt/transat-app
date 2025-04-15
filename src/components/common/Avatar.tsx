@@ -26,29 +26,32 @@ interface AvatarImageProps
 const AvatarImage = forwardRef<
   React.ElementRef<typeof Image>,
   AvatarImageProps
->(({ className, loading, ...props }, ref) => {
+>(({ className, loading = false, ...props }, ref) => {
   const [hasError, setHasError] = useState(false);
+  const [imageLoading, setImageLoading] = useState(true);
+
+  const isLoading = loading || imageLoading;
 
   if (hasError) {
     return null;
   }
-  if (loading) {
-    return (
-      <Skeleton
-        variant="circle"
-        width="100%"
-        height="100%"
-        className="aspect-square h-full w-full"
-      />
-    );
-  }
+
   return (
-    <Image
-      ref={ref}
-      onError={() => setHasError(true)}
-      className={cn("aspect-square h-full w-full", className)}
-      {...props}
-    />
+    <View className={cn("h-full w-full", className)}>
+      {isLoading && <AvatarLoading className="absolute inset-0 z-10" />}
+
+      <Image
+        ref={ref}
+        onError={() => setHasError(true)}
+        className={cn(
+          "aspect-square h-full w-full",
+          isLoading ? "opacity-0" : "visible",
+        )}
+        onLoadStart={() => setImageLoading(true)}
+        onLoadEnd={() => setImageLoading(false)}
+        {...props}
+      />
+    </View>
   );
 });
 AvatarImage.displayName = "AvatarImage";
@@ -71,5 +74,14 @@ const AvatarFallback = forwardRef<
   </View>
 ));
 AvatarFallback.displayName = "AvatarFallback";
+
+const AvatarLoading = ({ className }: AvatarImageProps) => (
+  <Skeleton
+    variant="circle"
+    width="100%"
+    height="100%"
+    className={cn("aspect-square h-full w-full", className)}
+  />
+);
 
 export { Avatar, AvatarImage, AvatarFallback };

@@ -22,8 +22,8 @@
     "verificationFailed": "Verifikation fehlgeschlagen",
     "verificationSuccess": "Verification successful",
     "save": "Save",
-    "send": "Send",
-    "or": "Or",
+    "send": "Senden",
+    "or": "Gold",
     "saveChanges": "Änderungen speichern",
     "success": "Success",
     "error": "Error",
@@ -51,14 +51,14 @@
     "plugImtNote": "ANMERKUNG: Plug'IMT ist ein Verein, der von IMT-Studenten gegründet wurde, aber nicht mit der Schule verbunden ist.",
     "credits": "Credits",
     "underConstruction": "Under construction 🏗️",
-    "underConstructionDesc": "We're working hard to bring you this new feature as soon as possible. Stay tuned!"
+    "underConstructionDesc": "Wir arbeiten hart daran, Ihnen diese neue Funktion so schnell wie möglich zur Verfügung zu stellen. Bleiben Sie dran!"
   },
   "settings": {
     "settings": "Einstellungen",
     "logout": "Logout",
     "devServer": "Development Server",
     "devServerDescription": "Use localhost",
-    "logoutDesc": "Are you sure you want to log out?",
+    "logoutDesc": "Sind Sie sicher, dass Sie sich anmelden möchten?",
     "logoutConfirm": "Log me out",
     "notifications": {
       "notifications": "Benachrichtigungen",
@@ -70,30 +70,30 @@
     },
     "about": {
       "title": "About",
-      "description": "We all know that situation when you arrive at the dining hall and realize you should have eaten at home. This has happened to us many times, and that's why we decided to fix it 😼\n\nOn Transat, you'll find the dining hall menu updated daily, but that's not all!\nNo more endless waiting at the laundry room for your machine to finish, get notified when your machine is done 🔔\n\nWe are Plug'IMT and we're determined to create an app made by students, for students 🐙\n\nNew features will be added throughout the year to make Transat an essential part of the Nantes IMT campus 🥳\n\nWe hope this app will save you as much as it saved us while we were developing it 🫶"
+      "description": "Wir alle kennen diese Situation, wenn du in der Dining Hall ankommst und feststellst, dass du eigentlich zu Hause gegessen haben solltest. Das ist uns schon oft passiert, und deshalb haben wir beschlossen, es zu beheben 😼\n\nAuf Transat finden Sie das täglich aktualisierte Speisemenü, aber das ist noch nicht alles!\nKein endloses Warten mehr im Waschraum auf die Fertigstellung deiner Maschine, lass dich benachrichtigen, wenn deine Maschine fertig ist 🔔\n\nWir sind Plug'IMT und wir sind entschlossen, eine App von Studenten für Studenten zu schaffen 🐙\n\nNeue Funktionen werden im Laufe des Jahres hinzugefügt, um Transat zu einem wesentlichen Teil des Nantes IMT Campus zu machen 🥳\n\nWir hoffen, dass diese App dir genauso viel rettet, wie sie uns gerettet hat, als wir sie entwickelt haben 🫶."
     },
     "help": {
-      "title": "Help",
-      "description": "Any specific question, suggestion or issue?\nLet us know using the form below or by joining the Whatsapp group 🫶",
+      "title": "Hilfe",
+      "description": "Haben Sie eine spezielle Frage, einen Vorschlag oder ein Problem?\nLassen Sie es uns wissen, indem Sie das untenstehende Formular benutzen oder der Whatsapp-Gruppe beitreten 🫶.",
       "faq": "FAQ",
-      "contactUs": "Contact us",
+      "contactUs": "Kontakt us",
       "joinWhatsApp": "Join our WhatsApp group",
-      "subject": "Subject",
-      "subjectPlaceholder": "Bug with lunch menu",
-      "subjectRequired": "Please provide a short description, it will help us understand your message",
-      "message": "Message",
-      "messagePlaceholder": "Hello, thank you for this amazing app 🤩\n\nWhen I receive a notification and I click on it, the lunch menu doesn't appear.\n\nDo you have any idea why?",
+      "subject": "Betreff",
+      "subjectPlaceholder": "Bug mit Mittagsmenü",
+      "subjectRequired": "Bitte geben Sie eine kurze Beschreibung an, sie hilft uns, Ihre Nachricht zu verstehen.",
+      "message": "Nachricht",
+      "messagePlaceholder": "Hello, thank you for this amazing app 🤩\n\nWhen I receive a notification and I click on it, the lunch menu does not appear.\n\nHaben Sie eine Idee, warum?",
       "messageRequired": "You cannot send an empty message",
-      "messageSent": "Thank you for your feedback, we will get back to you as soon as possible!",
+      "messageSent": "Vielen Dank für Ihr Feedback, wir werden uns so bald wie möglich wieder bei Ihnen melden!",
       "messageFailed": "Failed to send your message, please try again later or reach us via WhatsApp",
-      "faq1Question": "How to change my password?",
-      "faq1Answer": "To change your password, go to the account settings and click on 'Change password'. Enter your current password and the new password you want to set.",
-      "faq2Question": "How to delete my account?",
-      "faq2Answer": "To delete your account, go to the account settings and click on 'Delete account'. Please note that this action is irreversible and will delete all your data.",
-      "faq3Question": "Is this app made by IMT students?",
-      "faq3Answer": "Yes, this app is developed by IMT students as part of a project to improve the student experience on campus. We are constantly working to add new features and improve the app based on your feedback.",
-      "faq4Question": "How to contribute?",
-      "faq4Answer": "If you want to contribute to the development of this app, you can join our team by contacting us on our WhatsApp group. We welcome any help, whether it's in development, design, or testing."
+      "faq1Question": "Wie kann ich mein Passwort ändern?",
+      "faq1Answer": "Um Ihr Kennwort zu ändern, gehen Sie zu den Kontoeinstellungen und klicken Sie auf 'Kennwort ändern'. Geben Sie Ihr aktuelles Kennwort und das neue Kennwort ein, das Sie festlegen möchten.",
+      "faq2Question": "Wie lösche ich meinen Account?",
+      "faq2Answer": "Um Ihr Konto zu löschen, gehen Sie zu den Kontoeinstellungen und klicken Sie auf 'Konto löschen'. Bitte beachten Sie, dass diese Aktion nicht rückgängig gemacht werden kann und alle Ihre Daten gelöscht werden.",
+      "faq3Question": "Wurde diese App von IMT-Studenten erstellt?",
+      "faq3Answer": "Ja, diese App wurde von IMT-Studenten als Teil eines Projekts zur Verbesserung der Studentenerfahrung auf dem Campus entwickelt. Wir arbeiten ständig daran, neue Funktionen hinzuzufügen und die App auf der Grundlage Ihres Feedbacks zu verbessern.",
+      "faq4Question": "Wie kann ich mich beteiligen?",
+      "faq4Answer": "Wenn Sie an der Entwicklung dieser App mitwirken möchten, können Sie unserem Team beitreten, indem Sie uns über unsere WhatsApp-Gruppe kontaktieren. Wir freuen uns über jede Hilfe, egal ob bei der Entwicklung, beim Design oder beim Testen."
     },
     "contactSupport": "Kontakt Support",
     "appearance": "Appearance",
@@ -215,7 +215,7 @@
   },
   "account": {
     "graduationYear": "Graduation year",
-    "promotion": "Promotion",
+    "promotion": "Förderung",
     "campus": "Campus",
     "phone": "Telefon",
     "email": "E-Mail",
@@ -249,7 +249,7 @@
     "profilePictureUpdateFailed": "Failed to update profile picture",
     "permissionDenied": "Erlaubnis verweigert",
     "firstYear": "1st year",
-    "secondYear": "2nd year",
-    "thirdYear": "3rd year"
+    "secondYear": "2. Jahr",
+    "thirdYear": "3. Jahr"
   }
 }

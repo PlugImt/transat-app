@@ -83,7 +83,7 @@ export function BottomSheet({ children }: { children: React.ReactNode }) {
       enablePanDownToClose
       index={0}
       // Animation du backdrop
-      onAnimate={(fromIndex, toIndex) => {
+      onAnimate={(_fromIndex, toIndex) => {
         opacity.value = withTiming(toIndex === 0 ? 0.5 : 0, { duration: 300 });
       }}
       // Backdrop avec animation

@@ -169,7 +169,7 @@ export function RestaurantWidget() {
 
 export default RestaurantWidget;
 
-const RestaurantWidgetLoading = () => {
+export const RestaurantWidgetLoading = () => {
   const theme = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation<AppScreenNavigationProp>();

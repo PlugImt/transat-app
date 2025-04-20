@@ -99,7 +99,7 @@ export function WashingMachineWidget() {
 
 export default WashingMachineWidget;
 
-const WashingMachineWidgetLoading = () => {
+export const WashingMachineWidgetLoading = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<AppScreenNavigationProp>();
   const theme = useTheme();

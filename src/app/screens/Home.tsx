@@ -1,7 +1,14 @@
 import Page from "@/components/common/Page";
-import { WeatherWidget } from "@/components/custom/WeatherWidget";
-import RestaurantWidget from "@/components/custom/widget/RestaurantWidget";
-import WashingMachineWidget from "@/components/custom/widget/WashingMachineWidget";
+import {
+  WeatherSkeleton,
+  WeatherWidget,
+} from "@/components/custom/WeatherWidget";
+import RestaurantWidget, {
+  RestaurantWidgetLoading,
+} from "@/components/custom/widget/RestaurantWidget";
+import WashingMachineWidget, {
+  WashingMachineWidgetLoading,
+} from "@/components/custom/widget/WashingMachineWidget";
 import useAuth from "@/hooks/account/useAuth";
 import { useUser } from "@/hooks/account/useUser";
 import { QUERY_KEYS } from "@/lib/queryKeys";
@@ -158,3 +165,16 @@ export const Home = () => {
 };
 
 export default Home;
+
+export const HomeLoading = () => {
+  const { t } = useTranslation();
+
+  return (
+    <Page className="gap-6">
+      <Text className="h1 m-4">{t("common.welcome")}</Text>
+      <WeatherSkeleton />
+      <RestaurantWidgetLoading />
+      <WashingMachineWidgetLoading />
+    </Page>
+  );
+};

@@ -101,7 +101,7 @@ export function WeatherWidget() {
 
 export default WeatherWidget;
 
-const WeatherSkeleton = () => {
+export const WeatherSkeleton = () => {
   return (
     <View className="p-6 rounded-lg bg-card flex-row justify-between gap-6">
       <View className="gap-2">

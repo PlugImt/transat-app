@@ -46,7 +46,11 @@ const Dropdown = ({
 
         <BottomSheet>
           <Text className="h2">{placeholder}</Text>
-          <Picker selectedValue={value} onValueChange={onValueChange}>
+          <Picker
+            selectedValue={value}
+            onValueChange={onValueChange}
+            mode="dropdown"
+          >
             {options.map((option) => (
               <Picker.Item key={option} label={option} value={option} />
             ))}

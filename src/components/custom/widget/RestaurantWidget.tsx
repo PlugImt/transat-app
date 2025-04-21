@@ -44,125 +44,148 @@ export function RestaurantWidget() {
 
   return (
     <View className="flex flex-col gap-2">
-      <Text className="h3">{title}</Text>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("Restaurant")}
-        className="px-6 py-4 rounded-lg bg-card flex flex-col gap-6"
-      >
-        {lunch ? (
-          <>
-            <View className="flex flex-col gap-2">
-              <View className="flex flex-row items-center gap-2">
-                <Beef color={theme.primary} />
-                <Text
-                  className="text-lg font-bold text-primary"
-                  ellipsizeMode="tail"
-                >
-                  {t("services.restaurant.grill")}
-                </Text>
-              </View>
+      {(lunch &&
+        menu &&
+        (menu.grilladesMidi.length > 0 ||
+          menu.cibo.length > 0 ||
+          menu.accompMidi.length > 0)) ||
+      (dinner &&
+        menu &&
+        (menu.accompSoir.length > 0 || menu.grilladesSoir.length > 0)) ? (
+        <>
+          <Text className="h3">{title}</Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Restaurant")}
+            className="px-6 py-4 rounded-lg bg-card flex flex-col gap-6"
+          >
+            {lunch ? (
+              <>
+                {menu?.grilladesMidi && menu.grilladesMidi.length > 0 && (
+                  <View className="flex flex-col gap-2">
+                    <View className="flex flex-row items-center gap-2">
+                      <Beef color={theme.primary} />
+                      <Text
+                        className="text-lg font-bold text-primary"
+                        ellipsizeMode="tail"
+                      >
+                        {t("services.restaurant.grill")}
+                      </Text>
+                    </View>
 
-              {menu?.grilladesMidi.map((item) => (
-                <Text key={item} className="text-foreground">
-                  {item}
-                </Text>
-              ))}
-            </View>
+                    {menu.grilladesMidi.map((item) => (
+                      <Text key={item} className="text-foreground">
+                        {item}
+                      </Text>
+                    ))}
+                  </View>
+                )}
 
-            <View className="flex flex-col gap-2">
-              <View className="flex flex-row items-center gap-2">
-                <ChefHat color={theme.primary} />
-                <Text
-                  className="text-lg font-bold text-primary"
-                  ellipsizeMode="tail"
-                >
-                  {t("services.restaurant.migrator")}
-                </Text>
-              </View>
+                {menu?.migrateurs && menu.migrateurs.length > 0 && (
+                  <View className="flex flex-col gap-2">
+                    <View className="flex flex-row items-center gap-2">
+                      <ChefHat color={theme.primary} />
+                      <Text
+                        className="text-lg font-bold text-primary"
+                        ellipsizeMode="tail"
+                      >
+                        {t("services.restaurant.migrator")}
+                      </Text>
+                    </View>
 
-              {menu?.migrateurs.map((item) => (
-                <Text key={item} className="text-foreground">
-                  {item}
-                </Text>
-              ))}
-            </View>
+                    {menu.migrateurs.map((item) => (
+                      <Text key={item} className="text-foreground">
+                        {item}
+                      </Text>
+                    ))}
+                  </View>
+                )}
 
-            <View className="flex flex-col gap-2">
-              <View className="flex flex-row items-center gap-2">
-                <Vegan color={theme.primary} />
-                <Text
-                  className="text-lg font-bold text-primary"
-                  ellipsizeMode="tail"
-                >
-                  {t("services.restaurant.vegetarian")}
-                </Text>
-              </View>
+                {menu?.cibo && menu.cibo.length > 0 && (
+                  <View className="flex flex-col gap-2">
+                    <View className="flex flex-row items-center gap-2">
+                      <Vegan color={theme.primary} />
+                      <Text
+                        className="text-lg font-bold text-primary"
+                        ellipsizeMode="tail"
+                      >
+                        {t("services.restaurant.vegetarian")}
+                      </Text>
+                    </View>
 
-              {menu?.cibo.map((item) => (
-                <Text key={item} className="text-foreground">
-                  {item}
-                </Text>
-              ))}
-            </View>
+                    {menu.cibo.map((item) => (
+                      <Text key={item} className="text-foreground">
+                        {item}
+                      </Text>
+                    ))}
+                  </View>
+                )}
 
-            <View className="flex flex-col gap-2">
-              <View className="flex flex-row items-center gap-2">
-                <Soup color={theme.primary} />
-                <Text
-                  className="text-lg font-bold text-primary"
-                  ellipsizeMode="tail"
-                >
-                  {t("services.restaurant.sideDishes")}
-                </Text>
-              </View>
+                {menu?.accompMidi && menu.accompMidi.length > 0 && (
+                  <View className="flex flex-col gap-2">
+                    <View className="flex flex-row items-center gap-2">
+                      <Soup color={theme.primary} />
+                      <Text
+                        className="text-lg font-bold text-primary"
+                        ellipsizeMode="tail"
+                      >
+                        {t("services.restaurant.sideDishes")}
+                      </Text>
+                    </View>
 
-              {menu?.accompMidi.map((item) => (
-                <Text key={item} className="text-foreground">
-                  {item}
-                </Text>
-              ))}
-            </View>
-          </>
-        ) : dinner ? (
-          <>
-            <View className="flex flex-col gap-2">
-              <View className="flex flex-row items-center gap-2">
-                <Beef color={theme.primary} />
-                <Text
-                  className="text-lg font-bold text-primary"
-                  ellipsizeMode="tail"
-                >
-                  {t("services.restaurant.grill")}
-                </Text>
-              </View>
+                    {menu.accompMidi.map((item) => (
+                      <Text key={item} className="text-foreground">
+                        {item}
+                      </Text>
+                    ))}
+                  </View>
+                )}
+              </>
+            ) : dinner ? (
+              <>
+                {menu?.grilladesSoir && menu.grilladesSoir.length > 0 && (
+                  <View className="flex flex-col gap-2">
+                    <View className="flex flex-row items-center gap-2">
+                      <Beef color={theme.primary} />
+                      <Text
+                        className="text-lg font-bold text-primary"
+                        ellipsizeMode="tail"
+                      >
+                        {t("services.restaurant.grill")}
+                      </Text>
+                    </View>
 
-              {menu?.grilladesSoir.map((item) => (
-                <Text key={item} className="text-foreground">
-                  {item}
-                </Text>
-              ))}
-            </View>
+                    {menu.grilladesSoir.map((item) => (
+                      <Text key={item} className="text-foreground">
+                        {item}
+                      </Text>
+                    ))}
+                  </View>
+                )}
 
-            <View className="flex flex-col gap-2">
-              <View className="flex flex-row items-center gap-2">
-                <Soup color={theme.primary} />
-                <Text
-                  className="text-lg font-bold text-primary"
-                  ellipsizeMode="tail"
-                >
-                  {t("services.restaurant.sideDishes")}
-                </Text>
-              </View>
+                {menu?.accompSoir && menu.accompSoir.length > 0 && (
+                  <View className="flex flex-col gap-2">
+                    <View className="flex flex-row items-center gap-2">
+                      <Soup color={theme.primary} />
+                      <Text
+                        className="text-lg font-bold text-primary"
+                        ellipsizeMode="tail"
+                      >
+                        {t("services.restaurant.sideDishes")}
+                      </Text>
+                    </View>
 
-              {menu?.accompSoir.map((item) => (
-                <Text key={item} className="text-foreground">
-                  {item}
-                </Text>
-              ))}
-            </View>
-          </>
-        ) : null}
-      </TouchableOpacity>
+                    {menu.accompSoir.map((item) => (
+                      <Text key={item} className="text-foreground">
+                        {item}
+                      </Text>
+                    ))}
+                  </View>
+                )}
+              </>
+            ) : null}
+          </TouchableOpacity>
+        </>
+      ) : null}
     </View>
   );
 }

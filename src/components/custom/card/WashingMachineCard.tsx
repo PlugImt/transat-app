@@ -37,6 +37,9 @@ const getIcon = (icon: "WASHING MACHINE" | "DRYER", color: ColorValue) => {
 };
 
 const MINUTES_BEFORE_NOTIFICATION = 5;
+const WASHING_MACHINE_DURATION = 40 * 60;
+const DRYER_DURATION = 40 * 60;
+const DRYER_DOUBLE_DURATION = 80 * 60;
 
 const WashingMachineCard = ({
   number,
@@ -50,6 +53,7 @@ const WashingMachineCard = ({
   const [timeRemaining, setTimeRemaining] = useState<number>(status);
   const [notificationSet, setNotificationSet] = useState<boolean>(false);
   const [notificationId, setNotificationId] = useState<string | null>(null);
+  const [progressPercentage, setProgressPercentage] = useState<number>(0);
 
   const formatTime = useCallback((seconds: number): string => {
     const minutes = Math.floor(seconds / 60);
@@ -73,6 +77,34 @@ const WashingMachineCard = ({
       return () => clearInterval(timer);
     }
   }, [status, timeRemaining]);
+
+  // Calculate progress percentage based on machine type and time remaining
+  useEffect(() => {
+    if (status === 0) {
+      setProgressPercentage(0);
+      return;
+    }
+
+    if (icon === "WASHING MACHINE") {
+      const totalDuration = WASHING_MACHINE_DURATION;
+      const elapsed = totalDuration - timeRemaining;
+      const progress = Math.min(
+        Math.max((elapsed / totalDuration) * 100, 0),
+        100,
+      );
+      setProgressPercentage(progress);
+    } else if (icon === "DRYER") {
+      // Determine if it's a single or double cycle
+      const totalDuration =
+        timeRemaining > DRYER_DURATION ? DRYER_DOUBLE_DURATION : DRYER_DURATION;
+      const elapsed = totalDuration - timeRemaining;
+      const progress = Math.min(
+        Math.max((elapsed / totalDuration) * 100, 0),
+        100,
+      );
+      setProgressPercentage(progress);
+    }
+  }, [timeRemaining, status, icon]);
 
   const scheduleNotification = useCallback(
     async (minutes: number) => {
@@ -123,53 +155,61 @@ const WashingMachineCard = ({
   }, [notificationId, notificationSet, status, handleSetNotification]);
 
   return (
-    <View className="px-6 py-4 rounded-lg bg-card flex-row justify-between gap-6 items-center">
-      <View className="flex-row items-center gap-2">
-        {getIcon(icon, theme.primary)}
-        <Text className="text-foreground font-bold" numberOfLines={1}>
-          N°{number}
-        </Text>
-      </View>
-
-      <Text
-        className="text-foreground flex-1"
-        ellipsizeMode="tail"
-        numberOfLines={1}
-      >
-        {type}
-      </Text>
-
-      <Badge
-        label={getMachineStatus(timeRemaining)}
-        variant={status === 0 ? "secondary" : "default"}
-      />
-
-      <Dialog>
-        <DialogTrigger>
-          <TouchableOpacity onPress={handleBellPress} disabled={status === 0}>
-            {notificationSet ? (
-              <BellRing color={status === 0 ? theme.muted : theme.primary} />
-            ) : (
-              <Bell color={status === 0 ? theme.muted : theme.primary} />
-            )}
-          </TouchableOpacity>
-        </DialogTrigger>
-
-        <DialogContent
-          title={t("services.washingMachine.getNotification")}
-          className="gap-2"
-          cancelLabel={t("common.cancel")}
-          confirmLabel={t("settings.notifications.setNotification")}
-          onConfirm={handleSetNotification}
-        >
-          <Text className="text-foreground">
-            {t("services.washingMachine.getNotificationDesc", {
-              type: type.toLowerCase(),
-              minutes: MINUTES_BEFORE_NOTIFICATION,
-            })}
+    <View className="relative px-6 py-4 rounded-lg bg-card overflow-hidden">
+      {status > 0 && (
+        <View
+          className="absolute left-0 top-0 h-[200%] bg-primary/10" // IDK why but h-full only does half of the height
+          style={{ width: `${progressPercentage}%` }}
+        />
+      )}
+      <View className="flex-row justify-between gap-6 items-center z-10">
+        <View className="flex-row items-center gap-2">
+          {getIcon(icon, status === 0 ? theme.secondary : theme.primary)}
+          <Text className="text-foreground font-bold" numberOfLines={1}>
+            N°{number}
           </Text>
-        </DialogContent>
-      </Dialog>
+        </View>
+
+        <Text
+          className="text-foreground flex-1"
+          ellipsizeMode="tail"
+          numberOfLines={1}
+        >
+          {type}
+        </Text>
+
+        <Badge
+          label={getMachineStatus(timeRemaining)}
+          variant={status === 0 ? "secondary" : "default"}
+        />
+
+        <Dialog>
+          <DialogTrigger>
+            <TouchableOpacity onPress={handleBellPress} disabled={status === 0}>
+              {notificationSet ? (
+                <BellRing color={status === 0 ? theme.muted : theme.primary} />
+              ) : (
+                <Bell color={status === 0 ? theme.muted : theme.primary} />
+              )}
+            </TouchableOpacity>
+          </DialogTrigger>
+
+          <DialogContent
+            title={t("services.washingMachine.getNotification")}
+            className="gap-2"
+            cancelLabel={t("common.cancel")}
+            confirmLabel={t("settings.notifications.setNotification")}
+            onConfirm={handleSetNotification}
+          >
+            <Text className="text-foreground">
+              {t("services.washingMachine.getNotificationDesc", {
+                type: type.toLowerCase(),
+                minutes: MINUTES_BEFORE_NOTIFICATION,
+              })}
+            </Text>
+          </DialogContent>
+        </Dialog>
+      </View>
     </View>
   );
 };

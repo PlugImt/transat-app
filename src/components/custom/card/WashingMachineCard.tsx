@@ -3,9 +3,9 @@ import { useTheme } from "@/themes/useThemeProvider";
 import * as Notifications from "expo-notifications";
 import { SchedulableTriggerInputTypes } from "expo-notifications";
 import { Bell, BellRing, WashingMachineIcon, Wind } from "lucide-react-native";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { type ColorValue, Text, TouchableOpacity, View } from "react-native";
+import { Animated, type ColorValue, Text, TouchableOpacity, View } from "react-native";
 import Badge, { BadgeLoading } from "../../common/Badge";
 import { Dialog, DialogContent, DialogTrigger } from "../../common/Dialog";
 
@@ -34,6 +34,157 @@ const getIcon = (icon: "WASHING MACHINE" | "DRYER", color: ColorValue) => {
     default:
       return null;
   }
+};
+
+// Animation components
+const BubbleAnimation = () => {
+  const bubbles = [...Array(8)].map((_, i) => {
+    const positionY = useRef(new Animated.Value(-20)).current;
+    const positionX = useRef(new Animated.Value(Math.random() * 100)).current;
+    const scale = useRef(new Animated.Value(Math.random() * 0.5 + 0.5)).current;
+    const opacity = useRef(new Animated.Value(Math.random() * 0.3 + 0.2)).current;
+    
+    useEffect(() => {
+      const moveBubble = () => {
+        const duration = Math.random() * 3000 + 2000;
+        Animated.parallel([
+          Animated.sequence([
+            Animated.timing(positionY, {
+              toValue: 120, // Move down (top to bottom)
+              duration,
+              useNativeDriver: false,
+            }),
+            Animated.timing(positionY, {
+              toValue: -20, // Reset to top
+              duration: 0,
+              useNativeDriver: false,
+            })
+          ]),
+          Animated.sequence([
+            Animated.timing(positionX, {
+              toValue: Math.random() * 100,
+              duration: duration / 2,
+              useNativeDriver: false,
+            }),
+            Animated.timing(positionX, {
+              toValue: Math.random() * 100,
+              duration: duration / 2, 
+              useNativeDriver: false,
+            })
+          ]),
+          Animated.sequence([
+            Animated.timing(opacity, {
+              toValue: Math.random() * 0.3 + 0.2,
+              duration: duration / 2,
+              useNativeDriver: false,
+            }),
+            Animated.timing(opacity, {
+              toValue: Math.random() * 0.3 + 0.2,
+              duration: duration / 2,
+              useNativeDriver: false,
+            })
+          ])
+        ]).start(moveBubble);
+      };
+      
+      moveBubble();
+    }, []);
+    
+    return (
+      <Animated.View
+        key={i}
+        style={{
+          position: 'absolute',
+          left: positionX,
+          top: positionY, // Use top instead of bottom
+          width: scale.interpolate({
+            inputRange: [0, 1],
+            outputRange: [4, 12]
+          }),
+          height: scale.interpolate({
+            inputRange: [0, 1],
+            outputRange: [4, 12]
+          }),
+          borderRadius: 20,
+          backgroundColor: 'white',
+          opacity,
+        }}
+      />
+    );
+  });
+  
+  return <View style={{ width: '100%', height: '100%', position: 'absolute', opacity: 0.3 }}>{bubbles}</View>;
+};
+
+const WindAnimation = () => {
+  const windPatterns = [...Array(5)].map((_, i) => {
+    const translateX = useRef(new Animated.Value(-30)).current;
+    const translateY = useRef(new Animated.Value(Math.random() * 100)).current;
+    const scaleY = useRef(new Animated.Value(Math.random() * 0.6 + 0.2)).current;
+    const opacity = useRef(new Animated.Value(Math.random() * 0.3 + 0.2)).current;
+    
+    useEffect(() => {
+      const moveWind = () => {
+        const duration = Math.random() * 2000 + 1000;
+        Animated.parallel([
+          Animated.sequence([
+            Animated.timing(translateX, {
+              toValue: 100, // Reduced to stay within container
+              duration,
+              useNativeDriver: false,
+            }),
+            Animated.timing(translateX, {
+              toValue: -30,
+              duration: 0,
+              useNativeDriver: false,
+            })
+          ]),
+          Animated.sequence([
+            Animated.timing(translateY, {
+              toValue: Math.random() * 100,
+              duration: 0,
+              useNativeDriver: false,
+            })
+          ]),
+          Animated.sequence([
+            Animated.timing(opacity, {
+              toValue: Math.random() * 0.3 + 0.2,
+              duration: duration / 2,
+              useNativeDriver: false,
+            }),
+            Animated.timing(opacity, {
+              toValue: Math.random() * 0.3 + 0.2,
+              duration: duration / 2,
+              useNativeDriver: false,
+            })
+          ])
+        ]).start(moveWind);
+      };
+      
+      moveWind();
+    }, []);
+    
+    return (
+      <Animated.View
+        key={i}
+        style={{
+          position: 'absolute',
+          left: translateX,
+          top: translateY,
+          width: 30,
+          height: scaleY.interpolate({
+            inputRange: [0, 1],
+            outputRange: [1, 3]
+          }),
+          backgroundColor: 'white',
+          borderRadius: 5,
+          opacity,
+        }}
+      />
+    );
+  });
+  
+  return <View style={{ width: '100%', height: '100%', position: 'absolute', opacity: 0.5 }}>{windPatterns}</View>;
 };
 
 const MINUTES_BEFORE_NOTIFICATION = 5;
@@ -159,12 +310,15 @@ const WashingMachineCard = ({
       {status > 0 && (
         <View
           className="absolute left-0 top-0 h-[200%] bg-primary/10" // IDK why but h-full only does half of the height
-          style={{ width: `${progressPercentage}%` }}
-        />
+          style={{ width: `${progressPercentage}%`, overflow: 'hidden' }}
+        >
+          {icon === "WASHING MACHINE" && <BubbleAnimation />}
+          {icon === "DRYER" && <WindAnimation />}
+        </View>
       )}
       <View className="flex-row justify-between gap-6 items-center z-10">
         <View className="flex-row items-center gap-2">
-          {getIcon(icon, status === 0 ? theme.secondary : theme.primary)}
+          {getIcon(icon, theme.primary)}
           <Text className="text-foreground font-bold" numberOfLines={1}>
             N°{number}
           </Text>

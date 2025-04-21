@@ -51,7 +51,7 @@
     "plugImtNote": "NOTA: Plug'IMT es una asociación creada por estudiantes de IMT pero no está afiliada a la escuela",
     "credits": "Créditos",
     "underConstruction": "En construcción 🏗️",
-    "underConstructionDesc": "Estamos trabajando duro para ofrecerte esta nueva función lo antes posible. Permanezca atento."
+    "underConstructionDesc": "This page is under construction. Please check back later."
   },
   "settings": {
     "settings": "Configuración",
@@ -74,7 +74,7 @@
     },
     "help": {
       "title": "Ayuda",
-      "description": "Alguna pregunta, sugerencia o problema concreto?\nHáznoslo saber a través del siguiente formulario o uniéndote al grupo de Whatsapp 🫶",
+      "description": "If you encounter any issues, please contact us via the contact form in the app or on our WhatsApp group. We will do our best to help you.",
       "faq": "PREGUNTAS FRECUENTES",
       "contactUs": "Póngase en contacto con nosotros",
       "joinWhatsApp": "Únase a nuestro grupo de WhatsApp",

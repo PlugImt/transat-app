@@ -3,7 +3,6 @@
     "welcome": "欢迎",
     "edit": "编辑",
     "other": "其他",
-    "help": "帮助",
     "appearance": "外观",
     "language": "语言",
     "theme": "主题",
@@ -23,6 +22,8 @@
     "verificationFailed": "验证失败",
     "verificationSuccess": "验证成功",
     "save": "节省",
+    "send": "发送",
+    "or": "金色",
     "saveChanges": "保存更改",
     "success": "成功",
     "error": "错误",
@@ -31,7 +32,6 @@
       "occurred": "发生错误",
       "unableToFetch": "无法获取数据"
     },
-    "about": "关于",
     "knowMore": "了解更多有关 Transat 的信息",
     "close": "关闭",
     "clearAll": "清晰",
@@ -49,13 +49,17 @@
     },
     "campusApp": "南特大西洋理工学院校园应用程序",
     "plugImtNote": "注：Plug'IMT 是由 IMT 学生创建的协会，但与学校无关。",
-    "credits": "荣誉"
+    "credits": "荣誉",
+    "underConstruction": "施工中 🏗️",
+    "underConstructionDesc": "我们正努力尽快为您提供这项新功能。敬请期待！"
   },
   "settings": {
     "settings": "设置",
     "logout": "注销",
     "devServer": "开发服务器",
     "devServerDescription": "使用本地主机",
+    "logoutDesc": "您确定要注销吗？",
+    "logoutConfirm": "注销",
     "notifications": {
       "notifications": "通知",
       "fetchError": "无法获取通知设置",
@@ -63,6 +67,33 @@
       "setNotification": "设置通知",
       "toggleRestaurant": "发布每日菜单时获得通知",
       "toggleTraq": "当 Traq' 上有新文章时，您会收到通知。"
+    },
+    "about": {
+      "title": "关于",
+      "description": "我们都知道，当您到达餐厅后才意识到您应该在家里用餐。这种情况在我们身上发生过很多次，所以我们决定解决这个问题 😼\n\n在 Transat 上，您会发现餐厅菜单每天都会更新，但这还不是全部！\n不再在洗衣房无休止地等待洗衣机洗完，洗衣机洗完后，您会收到通知 🔔\n\n我们是 Plug'IMT，我们决心打造一款由学生制作、为学生服务的应用程序 🐙\n\n全年都将添加新功能，使 Transat 成为南特 IMT 校园的重要组成部分 🥳\n\n我们希望这款应用程序能像我们在开发它时一样，为您节省大量时间 🫶"
+    },
+    "help": {
+      "title": "帮助",
+      "description": "有任何具体问题、建议或议题？\n请使用下面的表格或加入 Whatsapp 群组🫶，告诉我们。",
+      "faq": "常见问题",
+      "contactUs": "联系我们",
+      "joinWhatsApp": "加入我们的 WhatsApp 群组",
+      "subject": "主题",
+      "subjectPlaceholder": "带午餐菜单的 Bug",
+      "subjectRequired": "请提供简短描述，这将有助于我们了解您的信息",
+      "message": "留言",
+      "messagePlaceholder": "您好，感谢您提供这款出色的应用程序 🤩\n\n当我收到通知并点击它时，午餐菜单不会出现。\n\n你知道这是为什么吗？",
+      "messageRequired": "不能发送空信息",
+      "messageSent": "感谢您的反馈，我们会尽快回复您！",
+      "messageFailed": "发送信息失败，请稍后再试，或通过 WhatsApp 联系我们",
+      "faq1Question": "如何更改密码？",
+      "faq1Answer": "要更改密码，请进入账户设置并点击 \"更改密码\"。输入当前密码和要设置的新密码。",
+      "faq2Question": "如何删除我的账户？",
+      "faq2Answer": "要删除账户，请进入账户设置并点击 \"删除账户\"。请注意，此操作不可逆转，并将删除您的所有数据。",
+      "faq3Question": "这个应用程序是由 IMT 学生制作的吗？",
+      "faq3Answer": "是的，此应用程序由 IMT 学生开发，是改善学生校园体验项目的一部分。我们将不断根据您的反馈意见增加新功能，改进应用程序。",
+      "faq4Question": "如何捐款？",
+      "faq4Answer": "如果您想为本应用程序的开发做出贡献，可以通过我们的 WhatsApp 群组联系我们，加入我们的团队。我们欢迎任何帮助，无论是在开发、设计还是测试方面。"
     },
     "contactSupport": "支持联系人",
     "appearance": "外观",
@@ -184,6 +215,7 @@
   },
   "account": {
     "graduationYear": "毕业年份",
+    "promotion": "促销活动",
     "campus": "校园",
     "phone": "电话",
     "email": "电子邮件",
@@ -215,6 +247,9 @@
     "passwordUpdated": "最后一次更新密码",
     "profilePictureUpdated": "更新了个人照片",
     "profilePictureUpdateFailed": "更新个人照片失败",
-    "permissionDenied": "拒绝许可"
+    "permissionDenied": "拒绝许可",
+    "firstYear": "第一年",
+    "secondYear": "二年级",
+    "thirdYear": "三年级"
   }
 }

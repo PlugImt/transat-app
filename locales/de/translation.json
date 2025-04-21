@@ -3,7 +3,6 @@
     "welcome": "Willkommen",
     "edit": "Edit",
     "other": "Sonstiges",
-    "help": "Hilfe",
     "appearance": "Erscheinung",
     "language": "Sprache",
     "theme": "Thema",
@@ -23,6 +22,8 @@
     "verificationFailed": "Verifikation fehlgeschlagen",
     "verificationSuccess": "Verification successful",
     "save": "Save",
+    "send": "Senden",
+    "or": "Gold",
     "saveChanges": "Änderungen speichern",
     "success": "Success",
     "error": "Error",
@@ -31,7 +32,6 @@
       "occurred": "Ein Fehler ist aufgetreten",
       "unableToFetch": "Unable to fetch data"
     },
-    "about": "About",
     "knowMore": "Learn more about Transat",
     "close": "Close",
     "clearAll": "Clear",
@@ -49,13 +49,17 @@
     },
     "campusApp": "Die Campus-App für IMT Atlantique Nantes",
     "plugImtNote": "ANMERKUNG: Plug'IMT ist ein Verein, der von IMT-Studenten gegründet wurde, aber nicht mit der Schule verbunden ist.",
-    "credits": "Credits"
+    "credits": "Credits",
+    "underConstruction": "Under construction 🏗️",
+    "underConstructionDesc": "Wir arbeiten hart daran, Ihnen diese neue Funktion so schnell wie möglich zur Verfügung zu stellen. Bleiben Sie dran!"
   },
   "settings": {
     "settings": "Einstellungen",
     "logout": "Logout",
     "devServer": "Development Server",
     "devServerDescription": "Use localhost",
+    "logoutDesc": "Sind Sie sicher, dass Sie sich anmelden möchten?",
+    "logoutConfirm": "Log me out",
     "notifications": {
       "notifications": "Benachrichtigungen",
       "fetchError": "Unable to fetch notification settings",
@@ -63,6 +67,33 @@
       "setNotification": "Set Benachrichtigung",
       "toggleRestaurant": "Lassen Sie sich benachrichtigen, wenn das tägliche Menü veröffentlicht wird.",
       "toggleTraq": "Lassen Sie sich benachrichtigen, wenn ein neuer Artikel bei Traq' verfügbar ist."
+    },
+    "about": {
+      "title": "About",
+      "description": "Wir alle kennen diese Situation, wenn du in der Dining Hall ankommst und feststellst, dass du eigentlich zu Hause gegessen haben solltest. Das ist uns schon oft passiert, und deshalb haben wir beschlossen, es zu beheben 😼\n\nAuf Transat finden Sie das täglich aktualisierte Speisemenü, aber das ist noch nicht alles!\nKein endloses Warten mehr im Waschraum auf die Fertigstellung deiner Maschine, lass dich benachrichtigen, wenn deine Maschine fertig ist 🔔\n\nWir sind Plug'IMT und wir sind entschlossen, eine App von Studenten für Studenten zu schaffen 🐙\n\nNeue Funktionen werden im Laufe des Jahres hinzugefügt, um Transat zu einem wesentlichen Teil des Nantes IMT Campus zu machen 🥳\n\nWir hoffen, dass diese App dir genauso viel rettet, wie sie uns gerettet hat, als wir sie entwickelt haben 🫶."
+    },
+    "help": {
+      "title": "Hilfe",
+      "description": "Haben Sie eine spezielle Frage, einen Vorschlag oder ein Problem?\nLassen Sie es uns wissen, indem Sie das untenstehende Formular benutzen oder der Whatsapp-Gruppe beitreten 🫶.",
+      "faq": "FAQ",
+      "contactUs": "Kontakt us",
+      "joinWhatsApp": "Join our WhatsApp group",
+      "subject": "Betreff",
+      "subjectPlaceholder": "Bug mit Mittagsmenü",
+      "subjectRequired": "Bitte geben Sie eine kurze Beschreibung an, sie hilft uns, Ihre Nachricht zu verstehen.",
+      "message": "Nachricht",
+      "messagePlaceholder": "Hello, thank you for this amazing app 🤩\n\nWhen I receive a notification and I click on it, the lunch menu does not appear.\n\nHaben Sie eine Idee, warum?",
+      "messageRequired": "You cannot send an empty message",
+      "messageSent": "Vielen Dank für Ihr Feedback, wir werden uns so bald wie möglich wieder bei Ihnen melden!",
+      "messageFailed": "Failed to send your message, please try again later or reach us via WhatsApp",
+      "faq1Question": "Wie kann ich mein Passwort ändern?",
+      "faq1Answer": "Um Ihr Kennwort zu ändern, gehen Sie zu den Kontoeinstellungen und klicken Sie auf 'Kennwort ändern'. Geben Sie Ihr aktuelles Kennwort und das neue Kennwort ein, das Sie festlegen möchten.",
+      "faq2Question": "Wie lösche ich meinen Account?",
+      "faq2Answer": "Um Ihr Konto zu löschen, gehen Sie zu den Kontoeinstellungen und klicken Sie auf 'Konto löschen'. Bitte beachten Sie, dass diese Aktion nicht rückgängig gemacht werden kann und alle Ihre Daten gelöscht werden.",
+      "faq3Question": "Wurde diese App von IMT-Studenten erstellt?",
+      "faq3Answer": "Ja, diese App wurde von IMT-Studenten als Teil eines Projekts zur Verbesserung der Studentenerfahrung auf dem Campus entwickelt. Wir arbeiten ständig daran, neue Funktionen hinzuzufügen und die App auf der Grundlage Ihres Feedbacks zu verbessern.",
+      "faq4Question": "Wie kann ich mich beteiligen?",
+      "faq4Answer": "Wenn Sie an der Entwicklung dieser App mitwirken möchten, können Sie unserem Team beitreten, indem Sie uns über unsere WhatsApp-Gruppe kontaktieren. Wir freuen uns über jede Hilfe, egal ob bei der Entwicklung, beim Design oder beim Testen."
     },
     "contactSupport": "Kontakt Support",
     "appearance": "Appearance",
@@ -184,6 +215,7 @@
   },
   "account": {
     "graduationYear": "Graduation year",
+    "promotion": "Förderung",
     "campus": "Campus",
     "phone": "Telefon",
     "email": "E-Mail",
@@ -215,6 +247,9 @@
     "passwordUpdated": "Last password update",
     "profilePictureUpdated": "Profilbild aktualisiert",
     "profilePictureUpdateFailed": "Failed to update profile picture",
-    "permissionDenied": "Erlaubnis verweigert"
+    "permissionDenied": "Erlaubnis verweigert",
+    "firstYear": "1st year",
+    "secondYear": "2. Jahr",
+    "thirdYear": "3. Jahr"
   }
 }

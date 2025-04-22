@@ -42,9 +42,8 @@ const getIcon = (icon: "WASHING MACHINE" | "DRYER", color: ColorValue) => {
   }
 };
 
-// Animation components
 const BubbleAnimation = () => {
-  const bubbles = [...Array(8)].map((_, i) => {
+  const bubbles = [...Array(4)].map((_, i) => {
     const positionY = useRef(new Animated.Value(20)).current;
     const positionX = useRef(new Animated.Value(Math.random() * 100)).current;
     const scale = useRef(new Animated.Value(Math.random() * 0.5 + 0.5)).current;
@@ -54,48 +53,55 @@ const BubbleAnimation = () => {
 
     useEffect(() => {
       const moveBubble = () => {
-        const duration = Math.random() * 3000 + 2000;
+        const duration = Math.random() * 4000 + 3000;
+
         Animated.parallel([
           Animated.sequence([
             Animated.timing(positionY, {
               toValue: 120,
               duration,
-              useNativeDriver: false,
+              useNativeDriver: true,
             }),
             Animated.timing(positionY, {
               toValue: 20,
               duration: 0,
-              useNativeDriver: false,
+              useNativeDriver: true,
             }),
           ]),
           Animated.sequence([
             Animated.timing(positionX, {
               toValue: Math.random() * 100,
               duration: duration / 2,
-              useNativeDriver: false,
+              useNativeDriver: true,
             }),
             Animated.timing(positionX, {
               toValue: Math.random() * 100,
               duration: duration / 2,
-              useNativeDriver: false,
+              useNativeDriver: true,
             }),
           ]),
           Animated.sequence([
             Animated.timing(opacity, {
               toValue: Math.random() * 0.3 + 0.2,
               duration: duration / 2,
-              useNativeDriver: false,
+              useNativeDriver: true,
             }),
             Animated.timing(opacity, {
               toValue: Math.random() * 0.3 + 0.2,
               duration: duration / 2,
-              useNativeDriver: false,
+              useNativeDriver: true,
             }),
           ]),
         ]).start(moveBubble);
       };
 
       moveBubble();
+
+      return () => {
+        positionY.stopAnimation();
+        positionX.stopAnimation();
+        opacity.stopAnimation();
+      };
     }, [opacity, positionX, positionY]);
 
     return (
@@ -103,19 +109,22 @@ const BubbleAnimation = () => {
         key={i}
         style={{
           position: "absolute",
-          left: positionX.interpolate({
-            inputRange: [0, 100],
-            outputRange: ["0%", "100%"],
-          }),
-          bottom: positionY,
-          width: scale.interpolate({
-            inputRange: [0, 1],
-            outputRange: [4, 12],
-          }),
-          height: scale.interpolate({
-            inputRange: [0, 1],
-            outputRange: [4, 12],
-          }),
+          transform: [
+            {
+              translateX: positionX.interpolate({
+                inputRange: [0, 100],
+                outputRange: [0, 100],
+              }),
+            },
+            {
+              translateY: positionY,
+            },
+            {
+              scale: scale,
+            },
+          ],
+          width: 8,
+          height: 8,
           borderRadius: 20,
           backgroundColor: "white",
           opacity,
@@ -139,55 +148,59 @@ const BubbleAnimation = () => {
 };
 
 const WindAnimation = () => {
-  const windPatterns = [...Array(5)].map((_, i) => {
+  const windPatterns = [...Array(3)].map((_, i) => {
     const translateX = useRef(new Animated.Value(-30)).current;
     const translateY = useRef(new Animated.Value(Math.random() * 100)).current;
-    const scaleY = useRef(
-      new Animated.Value(Math.random() * 0.6 + 0.2),
-    ).current;
     const opacity = useRef(
       new Animated.Value(Math.random() * 0.3 + 0.2),
     ).current;
 
     useEffect(() => {
       const moveWind = () => {
-        const duration = Math.random() * 2000 + 1000;
+        const duration = Math.random() * 3000 + 2000;
+
         Animated.parallel([
           Animated.sequence([
             Animated.timing(translateX, {
-              toValue: 100, // Reduced to stay within container
+              toValue: 100,
               duration,
-              useNativeDriver: false,
+              useNativeDriver: true, // Use native driver for better performance
             }),
             Animated.timing(translateX, {
               toValue: -30,
               duration: 0,
-              useNativeDriver: false,
+              useNativeDriver: true,
             }),
           ]),
           Animated.sequence([
             Animated.timing(translateY, {
               toValue: Math.random() * 100,
               duration: 0,
-              useNativeDriver: false,
+              useNativeDriver: true,
             }),
           ]),
           Animated.sequence([
             Animated.timing(opacity, {
               toValue: Math.random() * 0.3 + 0.2,
               duration: duration / 2,
-              useNativeDriver: false,
+              useNativeDriver: true,
             }),
             Animated.timing(opacity, {
               toValue: Math.random() * 0.3 + 0.2,
               duration: duration / 2,
-              useNativeDriver: false,
+              useNativeDriver: true,
             }),
           ]),
         ]).start(moveWind);
       };
 
       moveWind();
+
+      return () => {
+        translateX.stopAnimation();
+        translateY.stopAnimation();
+        opacity.stopAnimation();
+      };
     }, [opacity, translateX, translateY]);
 
     return (
@@ -195,16 +208,19 @@ const WindAnimation = () => {
         key={i}
         style={{
           position: "absolute",
-          left: translateX.interpolate({
-            inputRange: [-30, 130],
-            outputRange: ["-5%", "105%"],
-          }),
-          top: translateY,
-          width: 30,
-          height: scaleY.interpolate({
-            inputRange: [0, 1],
-            outputRange: [1, 3],
-          }),
+          transform: [
+            {
+              translateX: translateX.interpolate({
+                inputRange: [-30, 130],
+                outputRange: [-15, 130],
+              }),
+            },
+            {
+              translateY: translateY,
+            },
+          ],
+          width: 40,
+          height: 3,
           backgroundColor: "white",
           borderRadius: 5,
           opacity,
@@ -269,32 +285,26 @@ const WashingMachineCard = ({
     }
   }, [status, timeRemaining]);
 
-  // Calculate progress percentage based on machine type and time remaining
   useEffect(() => {
     if (status === 0) {
       setProgressPercentage(0);
       return;
     }
 
+    let totalDuration = 0;
     if (icon === "WASHING MACHINE") {
-      const totalDuration = WASHING_MACHINE_DURATION;
-      const elapsed = totalDuration - timeRemaining;
-      const progress = Math.min(
-        Math.max((elapsed / totalDuration) * 100, 0),
-        100,
-      );
-      setProgressPercentage(progress);
-    } else if (icon === "DRYER") {
-      // Determine if it's a single or double cycle
-      const totalDuration =
+      totalDuration = WASHING_MACHINE_DURATION;
+    } else {
+      totalDuration =
         timeRemaining > DRYER_DURATION ? DRYER_DOUBLE_DURATION : DRYER_DURATION;
-      const elapsed = totalDuration - timeRemaining;
-      const progress = Math.min(
-        Math.max((elapsed / totalDuration) * 100, 0),
-        100,
-      );
-      setProgressPercentage(progress);
     }
+
+    const elapsed = totalDuration - timeRemaining;
+    const progress = Math.min(
+      Math.max((elapsed / totalDuration) * 100, 0),
+      100,
+    );
+    setProgressPercentage(progress);
   }, [timeRemaining, status, icon]);
 
   const scheduleNotification = useCallback(

@@ -7,10 +7,10 @@ import useAuth from "@/hooks/account/useAuth";
 import i18n from "@/i18n";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Text, type TextInput, View } from "react-native";
+import { Text, type TextInput, View, Animated as RNAnimated } from "react-native";
 import { z } from "zod";
 
 export const Signup = () => {
@@ -109,79 +109,106 @@ export const Signup = () => {
     }
   };
 
+  const fadeAnim = useRef(new RNAnimated.Value(0)).current;
+  const slideAnim = useRef(new RNAnimated.Value(50)).current;
+
+  useEffect(() => {
+    RNAnimated.parallel([
+      RNAnimated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 800,
+        useNativeDriver: true,
+      }),
+      RNAnimated.timing(slideAnim, {
+        toValue: 0,
+        duration: 800,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  }, []);
+
   return (
-    <Page className="flex flex-col gap-8" goBack>
-      <Text className="h1">{t("auth.signUp")}</Text>
+    <Page goBack>
 
-      {signupError && (
-        <View className="bg-red-300 p-3 rounded-md">
-          <Text className="text-red-900">{signupError}</Text>
-        </View>
-      )}
+      <RNAnimated.View
+        style={{
+          opacity: fadeAnim,
+          transform: [{ translateY: slideAnim }],
+          flex: 1,
+        }}
+      >
+        <Text className="h1">{t("auth.signUp")}</Text>
 
-      <View className="flex flex-col gap-10">
-        <Input
-          placeholder="christophe.lerouge@imt-atlantique.net"
-          control={control}
-          name="email"
-          textContentType="emailAddress"
-          autoCapitalize="none"
-          autoFocus
-          label={t("auth.email")}
-          labelClasses="h3"
-          returnKeyType="next"
-          onSubmitEditing={() => passwordRef.current?.focus()}
-          error={errors.email?.message}
-        />
-        <Input
-          placeholder="••••••••••"
-          control={control}
-          name="password"
-          textContentType="newPassword"
-          labelClasses="h3"
-          label={t("auth.password")}
-          secureTextEntry
-          ref={passwordRef}
-          returnKeyType="next"
-          onSubmitEditing={() => confirmPasswordRef.current?.focus()}
-          error={errors.password?.message}
-        />
-        <Input
-          placeholder="••••••••••"
-          control={control}
-          name="confirmPassword"
-          textContentType="password"
-          label={t("auth.confirmPassword")}
-          labelClasses="h3"
-          secureTextEntry
-          ref={confirmPasswordRef}
-          returnKeyType="done"
-          onSubmitEditing={handleSubmit(handleSignup)}
-          error={errors.confirmPassword?.message}
-        />
-        <View className="flex flex-col gap-2">
-          <Button
-            size="lg"
-            label={isLoading ? t("auth.signingUp") : t("auth.signUp")}
-            onPress={handleSubmit(handleSignup)}
-            disabled={isButtonDisabled}
-            className={isButtonDisabled ? "opacity-50" : ""}
-            loading={isLoading}
+        {signupError && (
+          <View className="bg-red-300 p-3 rounded-md">
+            <Text className="text-red-900">{signupError}</Text>
+          </View>
+        )}
+
+        <View className="flex flex-col gap-10">
+          <Input
+            placeholder="christophe.lerouge@imt-atlantique.net"
+            control={control}
+            name="email"
+            textContentType="emailAddress"
+            autoCapitalize="none"
+            autoFocus
+            label={t("auth.email")}
+            labelClasses="h3"
+            returnKeyType="next"
+            onSubmitEditing={() => passwordRef.current?.focus()}
+            error={errors.email?.message}
           />
-          <Button
-            label={t("auth.gotAccount")}
-            onPress={() => navigation.navigate("Auth", { screen: "Signin" })}
-            disabled={isLoading}
-            variant="link"
+          <Input
+            placeholder="••••••••••"
+            control={control}
+            name="password"
+            textContentType="newPassword"
+            labelClasses="h3"
+            label={t("auth.password")}
+            secureTextEntry
+            ref={passwordRef}
+            returnKeyType="next"
+            onSubmitEditing={() => confirmPasswordRef.current?.focus()}
+            error={errors.password?.message}
           />
+          <Input
+            placeholder="••••••••••"
+            control={control}
+            name="confirmPassword"
+            textContentType="password"
+            label={t("auth.confirmPassword")}
+            labelClasses="h3"
+            secureTextEntry
+            ref={confirmPasswordRef}
+            returnKeyType="done"
+            onSubmitEditing={handleSubmit(handleSignup)}
+            error={errors.confirmPassword?.message}
+          />
+          <View className="flex flex-col gap-2">
+            <Button
+              size="lg"
+              label={isLoading ? t("auth.signingUp") : t("auth.signUp")}
+              onPress={handleSubmit(handleSignup)}
+              disabled={isButtonDisabled}
+              className={isButtonDisabled ? "opacity-50" : ""}
+              loading={isLoading}
+            />
+            <Button
+              label={t("auth.gotAccount")}
+              onPress={() => navigation.navigate("Auth", { screen: "Signin" })}
+              disabled={isLoading}
+              variant="link"
+            />
+          </View>
         </View>
-      </View>
 
-      <VerificationCodeModal
-        isVisible={verificationModalVisible}
-        email={verificationEmail}
-        onClose={() => setVerificationModalVisible(false)}
-      />
+        <VerificationCodeModal
+          isVisible={verificationModalVisible}
+          email={verificationEmail}
+          onClose={() => setVerificationModalVisible(false)}
+        />
+      </RNAnimated.View>
     </Page>
   );
 };

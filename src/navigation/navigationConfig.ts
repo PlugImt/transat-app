@@ -1,36 +1,22 @@
-import {
-  CardStyleInterpolators,
-  TransitionPresets,
-} from "@react-navigation/stack";
+import { CardStyleInterpolators } from "@react-navigation/stack";
 import type { StackNavigationOptions } from "@react-navigation/stack";
 import { useTheme } from "@/themes/useThemeProvider";
 
 export const screenOptions: StackNavigationOptions = {
   headerShown: false,
   cardStyle: { backgroundColor: "transparent" },
-  cardOverlayEnabled: true,
-  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+  cardStyleInterpolator: CardStyleInterpolators.forFadeFromCenter,
   transitionSpec: {
     open: {
-      animation: 'spring',
+      animation: "timing",
       config: {
-        stiffness: 1000,
-        damping: 50,
-        mass: 3,
-        overshootClamping: true,
-        restDisplacementThreshold: 0.01,
-        restSpeedThreshold: 0.01,
+        duration: 300,
       },
     },
     close: {
-      animation: 'spring',
+      animation: "timing",
       config: {
-        stiffness: 1000,
-        damping: 50,
-        mass: 3,
-        overshootClamping: true,
-        restDisplacementThreshold: 0.01,
-        restSpeedThreshold: 0.01,
+        duration: 300,
       },
     },
   },

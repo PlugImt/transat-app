@@ -1,11 +1,11 @@
 import { cn } from "@/lib/utils";
+import { useTheme } from "@/themes/useThemeProvider";
 import { useNavigation } from "@react-navigation/native";
 import { ArrowLeft } from "lucide-react-native";
 import { type ReactNode, useState } from "react";
 import { useRef } from "react";
 import { Dimensions, RefreshControl, ScrollView, View } from "react-native";
 import ConfettiCannon from "react-native-confetti-cannon";
-import { useTheme } from "@/themes/useThemeProvider";
 
 type PageProps = {
   children: ReactNode;
@@ -65,7 +65,10 @@ export default function Page({
           )}
         >
           {goBack && (
-            <ArrowLeft color={theme.foreground} onPress={() => navigation.goBack()} />
+            <ArrowLeft
+              color={theme.foreground}
+              onPress={() => navigation.goBack()}
+            />
           )}
           {children}
         </View>

@@ -59,7 +59,7 @@ export const Welcome = () => {
       <Button
         size="lg"
         variant="outlined"
-        label={t("welcome.signup")}
+        label={t("welcome.register")}
         onPress={() => handleNavigation("Signup")}
         className="flex-1"
       />

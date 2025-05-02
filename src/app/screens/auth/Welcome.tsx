@@ -107,6 +107,7 @@ export const Welcome = () => {
       onConfettiTrigger={(trigger) => {
         triggerConfettiRef.current = trigger;
       }}
+      confetti={true}
     >
       {/*<FloatingElements count={20}  />*/}
 

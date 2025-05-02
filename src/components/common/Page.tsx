@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { useNavigation } from "@react-navigation/native";
 import { ArrowLeft } from "lucide-react-native";
-import type { ReactNode } from "react";
+import { type ReactNode, useState } from "react";
 import { useRef } from "react";
 import { Dimensions, RefreshControl, ScrollView, View } from "react-native";
 import ConfettiCannon from "react-native-confetti-cannon";
@@ -13,6 +13,7 @@ type PageProps = {
   className?: string;
   goBack?: boolean;
   footer?: ReactNode;
+  confetti?: boolean;
   onConfettiTrigger?: (trigger: () => void) => void;
 };
 
@@ -23,16 +24,19 @@ export default function Page({
   className,
   goBack,
   footer,
+  confetti = false,
   onConfettiTrigger,
 }: PageProps) {
   const navigation = useNavigation();
   const confettiRef = useRef<ConfettiCannon>(null);
   const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
+  const [confettiTriggered, setConfettiTriggered] = useState(false);
 
   // Expose the confetti trigger function to parent components
   if (onConfettiTrigger) {
     onConfettiTrigger(() => {
       if (confettiRef.current) {
+        setConfettiTriggered(true);
         confettiRef.current.start();
       }
     });
@@ -66,17 +70,21 @@ export default function Page({
       </ScrollView>
       {footer && <View className="bg-background px-5 py-4">{footer}</View>}
 
-      <ConfettiCannon
-        ref={confettiRef}
-        count={100}
-        origin={{ x: screenWidth / 2, y: screenHeight - 200 }}
-        autoStart={false}
-        fadeOut={false}
-        colors={["#ec7f32", "#0049a8", "#ffe6cc"]}
-        explosionSpeed={200}
-        fallSpeed={3000}
-        autoStartDelay={0}
-      />
+      {confetti && (
+        <View className={confettiTriggered ? "z-50" : "-z-10"}>
+          <ConfettiCannon
+            ref={confettiRef}
+            count={200}
+            origin={{ x: screenWidth / 2, y: screenHeight - 200 }}
+            autoStart={false}
+            fadeOut={false}
+            colors={["#ec7f32", "#0049a8", "#ffe6cc"]}
+            explosionSpeed={400}
+            fallSpeed={4000}
+            autoStartDelay={-1}
+          />
+        </View>
+      )}
     </View>
   );
 }

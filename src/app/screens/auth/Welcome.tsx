@@ -16,7 +16,6 @@ export const Welcome = () => {
 
   const fadeAnim = useRef(new RNAnimated.Value(0)).current;
   const slideAnim = useRef(new RNAnimated.Value(50)).current;
-  const floatingElementsRef = useRef<FloatingElementsRef>(null);
   const triggerConfettiRef = useRef<(() => void) | null>(null);
 
   // Animation function that can be reused
@@ -64,11 +63,6 @@ export const Welcome = () => {
   };
 
   const handleLogoPress = (x: number, y: number) => {
-    // Spawn new floating elements from the logo position
-    if (floatingElementsRef.current) {
-      floatingElementsRef.current.spawnElements(x, y, 8);
-    }
-
     // Trigger confetti
     if (triggerConfettiRef.current) {
       triggerConfettiRef.current();

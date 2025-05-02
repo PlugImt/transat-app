@@ -10,6 +10,7 @@ type PageProps = {
   onRefresh?: () => void;
   className?: string;
   goBack?: boolean;
+  footer?: ReactNode;
 };
 
 export default function Page({
@@ -18,33 +19,37 @@ export default function Page({
   onRefresh,
   className,
   goBack,
+  footer,
 }: PageProps) {
   const navigation = useNavigation();
 
   return (
-    <ScrollView
-      className="bg-background"
-      automaticallyAdjustKeyboardInsets
-      refreshControl={
-        <RefreshControl
-          refreshing={refreshing}
-          onRefresh={onRefresh}
-          colors={["#ec7f32"]}
-          progressBackgroundColor="#0D0505"
-        />
-      }
-    >
-      <View
-        className={cn(
-          "bg-background px-5 pt-8 flex flex-col gap-2 pb-12",
-          className,
-        )}
+    <View className="flex-1 bg-background">
+      <ScrollView
+        className="flex-1 bg-background"
+        automaticallyAdjustKeyboardInsets
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            colors={["#ec7f32"]}
+            progressBackgroundColor="#0D0505"
+          />
+        }
       >
-        {goBack && (
-          <ArrowLeft color="white" onPress={() => navigation.goBack()} />
-        )}
-        {children}
-      </View>
-    </ScrollView>
+        <View
+          className={cn(
+            "bg-background px-5 pt-8 flex flex-col gap-2 pb-12",
+            className,
+          )}
+        >
+          {goBack && (
+            <ArrowLeft color="white" onPress={() => navigation.goBack()} />
+          )}
+          {children}
+        </View>
+      </ScrollView>
+      {footer && <View className="bg-background px-5 py-4">{footer}</View>}
+    </View>
   );
 }

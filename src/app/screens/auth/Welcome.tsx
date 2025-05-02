@@ -13,25 +13,30 @@ export const Welcome = () => {
 
   const navigation = useNavigation<LoginScreenNavigationProp>();
 
+  const buttonsFooter = (
+    <View className="flex flex-row gap-4 w-full mb-9">
+      <Button
+        size="lg"
+        label={t("welcome.login")}
+        onPress={() => navigation.navigate("Signin")}
+        className="flex-1"
+      />
+      <Button
+        size="lg"
+        variant="outlined"
+        label={t("welcome.signup")}
+        onPress={() => navigation.navigate("Signup")}
+        className="flex-1"
+      />
+    </View>
+  );
+
   return (
-    <Page>
-      <View className="flex flex-col gap-16 items-center mt-32">
+    <Page footer={buttonsFooter}>
+      <View className="flex flex-col items-center mt-32">
         <View className="flex flex-col items-center gap-4">
           <Text className="h1 text-5xl">Transat</Text>
           <Text className="h3">{t("welcome.subtitle")}</Text>
-        </View>
-        <View className="flex flex-col gap-4 w-full">
-          <Button
-            size="lg"
-            label={t("welcome.login")}
-            onPress={() => navigation.navigate("Signin")}
-          />
-          <Button
-            size="lg"
-            variant="outlined"
-            label={t("welcome.signup")}
-            onPress={() => navigation.navigate("Signup")}
-          />
         </View>
       </View>
     </Page>

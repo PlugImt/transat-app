@@ -106,7 +106,7 @@
     }
   },
   "auth": {
-    "signIn": "Sign In",
+    "signIn": "Welcome back",
     "signInSuccess": "Sign in successful",
     "signingIn": "Signing in...",
     "signUp": "Sign Up",

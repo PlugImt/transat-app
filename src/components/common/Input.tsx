@@ -64,7 +64,7 @@ const Input = forwardRef(
               editable={!disabled}
               className={cn(
                 inputClasses,
-                "py-2.5 px-4 rounded-lg bg-input placeholder:text-stone-400 text-foreground",
+                "py-2.5 px-4 rounded-lg bg-input placeholder:text-stone-400 text-foreground h-12",
                 error && "border border-red-500",
               )}
               onChangeText={onChange}

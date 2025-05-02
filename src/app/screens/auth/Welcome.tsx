@@ -1,29 +1,30 @@
+import type { FloatingElementsRef } from "@/components/animations/FloatingElements";
+import LogoAnimation from "@/components/animations/LogoAnimation";
 import { Button } from "@/components/common/Button";
 import Page from "@/components/common/Page";
-import FloatingElements from "@/components/animations/FloatingElements";
-import LogoAnimation from "@/components/animations/LogoAnimation";
 import type { AuthStackParamList } from "@/services/storage/types";
-import { useNavigation, useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
+import { useCallback, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { Text, View, Animated as RNAnimated } from "react-native";
-import { useRef, useEffect, useCallback } from "react";
+import { Animated as RNAnimated, Text, View } from "react-native";
 
 type LoginScreenNavigationProp = StackNavigationProp<AuthStackParamList>;
 
 export const Welcome = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<LoginScreenNavigationProp>();
-  
+
   const fadeAnim = useRef(new RNAnimated.Value(0)).current;
   const slideAnim = useRef(new RNAnimated.Value(50)).current;
+  const floatingElementsRef = useRef<FloatingElementsRef>(null);
 
   // Animation function that can be reused
   const startAnimations = useCallback(() => {
     // Reset animation values
     fadeAnim.setValue(0);
     slideAnim.setValue(50);
-    
+
     // Start animations
     RNAnimated.parallel([
       RNAnimated.timing(fadeAnim, {
@@ -35,7 +36,7 @@ export const Welcome = () => {
         toValue: 0,
         duration: 1000,
         useNativeDriver: true,
-      })
+      }),
     ]).start();
   }, [fadeAnim, slideAnim]);
 
@@ -49,7 +50,7 @@ export const Welcome = () => {
     useCallback(() => {
       startAnimations();
       return () => {};
-    }, [startAnimations])
+    }, [startAnimations]),
   );
 
   const handleNavigation = (route: keyof AuthStackParamList) => {
@@ -63,8 +64,15 @@ export const Welcome = () => {
     });
   };
 
+  const handleLogoPress = (x: number, y: number) => {
+    // Spawn new floating elements from the logo position
+    if (floatingElementsRef.current) {
+      floatingElementsRef.current.spawnElements(x, y, 8);
+    }
+  };
+
   const buttonsFooter = (
-    <RNAnimated.View 
+    <RNAnimated.View
       className="flex flex-row gap-4 w-full mb-9"
       style={{ opacity: fadeAnim }}
     >
@@ -86,16 +94,16 @@ export const Welcome = () => {
 
   return (
     <Page footer={buttonsFooter}>
-      <FloatingElements count={20} />
-      
+      {/*<FloatingElements count={20}  />*/}
+
       <View className="flex flex-col items-center justify-center h-full mt-20 bg-transparent">
-        <LogoAnimation size={70} />
-        
-        <RNAnimated.View 
+        <LogoAnimation size={70} onLogoPress={handleLogoPress} />
+
+        <RNAnimated.View
           className="flex flex-col items-center gap-4 mt-6"
-          style={{ 
+          style={{
             opacity: fadeAnim,
-            transform: [{ translateY: slideAnim }]
+            transform: [{ translateY: slideAnim }],
           }}
         >
           <Text className="h1 text-5xl text-primary">Transat</Text>

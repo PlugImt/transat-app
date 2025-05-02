@@ -7,10 +7,15 @@ import useAuth from "@/hooks/account/useAuth";
 import i18n from "@/i18n";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
-import { useRef, useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Text, type TextInput, View, Animated as RNAnimated } from "react-native";
+import {
+  Animated as RNAnimated,
+  Text,
+  type TextInput,
+  View,
+} from "react-native";
 import { z } from "zod";
 
 export const Signup = () => {
@@ -129,7 +134,6 @@ export const Signup = () => {
 
   return (
     <Page goBack>
-
       <RNAnimated.View
         style={{
           opacity: fadeAnim,

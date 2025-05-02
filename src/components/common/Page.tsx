@@ -2,7 +2,9 @@ import { cn } from "@/lib/utils";
 import { useNavigation } from "@react-navigation/native";
 import { ArrowLeft } from "lucide-react-native";
 import type { ReactNode } from "react";
-import { RefreshControl, ScrollView, View } from "react-native";
+import { useRef } from "react";
+import { Dimensions, RefreshControl, ScrollView, View } from "react-native";
+import ConfettiCannon from "react-native-confetti-cannon";
 
 type PageProps = {
   children: ReactNode;
@@ -11,6 +13,7 @@ type PageProps = {
   className?: string;
   goBack?: boolean;
   footer?: ReactNode;
+  onConfettiTrigger?: (trigger: () => void) => void;
 };
 
 export default function Page({
@@ -20,8 +23,20 @@ export default function Page({
   className,
   goBack,
   footer,
+  onConfettiTrigger,
 }: PageProps) {
   const navigation = useNavigation();
+  const confettiRef = useRef<ConfettiCannon>(null);
+  const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
+
+  // Expose the confetti trigger function to parent components
+  if (onConfettiTrigger) {
+    onConfettiTrigger(() => {
+      if (confettiRef.current) {
+        confettiRef.current.start();
+      }
+    });
+  }
 
   return (
     <View className="flex-1 bg-background">
@@ -50,6 +65,18 @@ export default function Page({
         </View>
       </ScrollView>
       {footer && <View className="bg-background px-5 py-4">{footer}</View>}
+
+      <ConfettiCannon
+        ref={confettiRef}
+        count={100}
+        origin={{ x: screenWidth / 2, y: screenHeight - 200 }}
+        autoStart={false}
+        fadeOut={false}
+        colors={["#ec7f32", "#0049a8", "#ffe6cc"]}
+        explosionSpeed={200}
+        fallSpeed={3000}
+        autoStartDelay={0}
+      />
     </View>
   );
 }

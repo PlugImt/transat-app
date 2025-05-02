@@ -7,17 +7,21 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { useCallback, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { Animated as RNAnimated, Text, View } from "react-native";
+import { Dimensions, Animated as RNAnimated, Text, View } from "react-native";
+import type ConfettiCannon from "react-native-confetti-cannon";
 
 type LoginScreenNavigationProp = StackNavigationProp<AuthStackParamList>;
 
 export const Welcome = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<LoginScreenNavigationProp>();
+  const confettiRef = useRef<ConfettiCannon>(null);
+  const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
 
   const fadeAnim = useRef(new RNAnimated.Value(0)).current;
   const slideAnim = useRef(new RNAnimated.Value(50)).current;
   const floatingElementsRef = useRef<FloatingElementsRef>(null);
+  const triggerConfettiRef = useRef<(() => void) | null>(null);
 
   // Animation function that can be reused
   const startAnimations = useCallback(() => {
@@ -69,6 +73,11 @@ export const Welcome = () => {
     if (floatingElementsRef.current) {
       floatingElementsRef.current.spawnElements(x, y, 8);
     }
+
+    // Trigger confetti
+    if (triggerConfettiRef.current) {
+      triggerConfettiRef.current();
+    }
   };
 
   const buttonsFooter = (
@@ -93,7 +102,12 @@ export const Welcome = () => {
   );
 
   return (
-    <Page footer={buttonsFooter}>
+    <Page
+      footer={buttonsFooter}
+      onConfettiTrigger={(trigger) => {
+        triggerConfettiRef.current = trigger;
+      }}
+    >
       {/*<FloatingElements count={20}  />*/}
 
       <View className="flex flex-col items-center justify-center h-full mt-20 bg-transparent">

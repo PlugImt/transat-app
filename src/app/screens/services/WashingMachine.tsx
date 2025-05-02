@@ -18,7 +18,7 @@ export const WashingMachine: FC = () => {
 
   const header = (
     <View className="flex-row gap-2 justify-between items-center">
-      <Text className="h1">{t("services.washingMachine.title")}</Text>
+      <Text className="h1 m-4">{t("services.washingMachine.title")}</Text>
       <AboutModal
         title={t("services.washingMachine.title")}
         description={t("services.washingMachine.about")}

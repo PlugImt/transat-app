@@ -5,6 +5,7 @@ import { type ReactNode, useState } from "react";
 import { useRef } from "react";
 import { Dimensions, RefreshControl, ScrollView, View } from "react-native";
 import ConfettiCannon from "react-native-confetti-cannon";
+import { useTheme } from "@/themes/useThemeProvider";
 
 type PageProps = {
   children: ReactNode;
@@ -28,6 +29,7 @@ export default function Page({
   onConfettiTrigger,
 }: PageProps) {
   const navigation = useNavigation();
+  const theme = useTheme();
   const confettiRef = useRef<ConfettiCannon>(null);
   const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
   const [confettiTriggered, setConfettiTriggered] = useState(false);
@@ -43,16 +45,16 @@ export default function Page({
   }
 
   return (
-    <View className="flex-1 bg-background">
+    <View style={{ flex: 1, backgroundColor: theme.background }}>
       <ScrollView
-        className="flex-1 bg-background"
+        style={{ flex: 1, backgroundColor: theme.background }}
         automaticallyAdjustKeyboardInsets
         refreshControl={
           <RefreshControl
             refreshing={refreshing}
             onRefresh={onRefresh}
-            colors={["#ec7f32"]}
-            progressBackgroundColor="#0D0505"
+            colors={[theme.primary]}
+            progressBackgroundColor={theme.background}
           />
         }
       >
@@ -63,7 +65,7 @@ export default function Page({
           )}
         >
           {goBack && (
-            <ArrowLeft color="white" onPress={() => navigation.goBack()} />
+            <ArrowLeft color={theme.foreground} onPress={() => navigation.goBack()} />
           )}
           {children}
         </View>
@@ -71,14 +73,14 @@ export default function Page({
       {footer && <View className="bg-background px-5 py-4">{footer}</View>}
 
       {confetti && (
-        <View className={confettiTriggered ? "z-50" : "-z-10"}>
+        <View style={{ zIndex: confettiTriggered ? 50 : -10 }}>
           <ConfettiCannon
             ref={confettiRef}
             count={200}
             origin={{ x: screenWidth / 2, y: screenHeight - 200 }}
             autoStart={false}
             fadeOut={false}
-            colors={["#ec7f32", "#0049a8", "#ffe6cc"]}
+            colors={[theme.primary, theme.secondary, theme.foreground]}
             explosionSpeed={400}
             fallSpeed={4000}
             autoStartDelay={-1}

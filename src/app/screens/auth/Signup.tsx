@@ -156,7 +156,7 @@ export const Signup = () => {
             name="email"
             textContentType="emailAddress"
             autoCapitalize="none"
-            autoFocus
+            // autoFocus
             label={t("auth.email")}
             labelClasses="h3"
             returnKeyType="next"

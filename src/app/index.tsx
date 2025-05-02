@@ -57,7 +57,7 @@ export default function App() {
             <AuthProvider>
               <ToastProvider position="top">
                 {isDevServerSelected ? (
-                  <View className="fixed top-0 left-0">
+                  <View className="fixed top-0 left-0 ">
                     <Text className="text-white">
                       Dev server selected: {apiUrlDev}
                     </Text>

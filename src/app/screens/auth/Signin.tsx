@@ -120,7 +120,7 @@ export const Signin = () => {
             control={control}
             name="email"
             autoCapitalize="none"
-            autoFocus
+            // autoFocus
             textContentType="emailAddress"
             label={t("auth.email")}
             labelClasses="h3"

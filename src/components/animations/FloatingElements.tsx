@@ -19,6 +19,7 @@ const ELEMENTS_COLORS = ['#ec7f32', '#0049a8', '#ffe6cc'];
 
 const FloatingElements: React.FC<FloatingElementsProps> = ({ count = 12 }) => {
   const elements = Array(count).fill(0).map((_, index) => {
+    // Distribute elements across the entire screen initially
     const x = useSharedValue(Math.random() * SCREEN_WIDTH);
     const y = useSharedValue(Math.random() * SCREEN_HEIGHT);
     const size = useSharedValue(10 + Math.random() * 20);
@@ -28,10 +29,14 @@ const FloatingElements: React.FC<FloatingElementsProps> = ({ count = 12 }) => {
       const animate = () => {
         const randomDuration = 3000 + Math.random() * 5000;
         
+        // Generate random positions across the entire screen
+        const randomX = Math.random() * SCREEN_WIDTH;
+        const randomY = Math.random() * SCREEN_HEIGHT;
+        
         x.value = withDelay(
           index * 200,
           withRepeat(
-            withTiming(Math.random() * SCREEN_WIDTH, { 
+            withTiming(randomX, { 
               duration: randomDuration, 
               easing: Easing.inOut(Easing.ease) 
             }),
@@ -43,7 +48,7 @@ const FloatingElements: React.FC<FloatingElementsProps> = ({ count = 12 }) => {
         y.value = withDelay(
           index * 200,
           withRepeat(
-            withTiming(Math.random() * SCREEN_HEIGHT, { 
+            withTiming(randomY, { 
               duration: randomDuration * 1.3, 
               easing: Easing.inOut(Easing.ease) 
             }),
@@ -66,6 +71,9 @@ const FloatingElements: React.FC<FloatingElementsProps> = ({ count = 12 }) => {
       };
       
       animate();
+      
+      // Clean up animations when component unmounts
+      return () => {};
     }, []);
     
     const animatedStyle = useAnimatedStyle(() => {
@@ -87,7 +95,7 @@ const FloatingElements: React.FC<FloatingElementsProps> = ({ count = 12 }) => {
   });
   
   return (
-    <View style={styles.container}>
+    <View style={styles.container} pointerEvents="none">
       {elements}
     </View>
   );
@@ -97,6 +105,8 @@ const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
     zIndex: -1,
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
   },
 });
 

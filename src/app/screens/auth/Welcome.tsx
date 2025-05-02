@@ -3,11 +3,11 @@ import Page from "@/components/common/Page";
 import FloatingElements from "@/components/animations/FloatingElements";
 import LogoAnimation from "@/components/animations/LogoAnimation";
 import type { AuthStackParamList } from "@/services/storage/types";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { Text, View, Animated as RNAnimated } from "react-native";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useCallback } from "react";
 
 type LoginScreenNavigationProp = StackNavigationProp<AuthStackParamList>;
 
@@ -18,8 +18,13 @@ export const Welcome = () => {
   const fadeAnim = useRef(new RNAnimated.Value(0)).current;
   const slideAnim = useRef(new RNAnimated.Value(50)).current;
 
-  useEffect(() => {
-    // Start title animations after a short delay
+  // Animation function that can be reused
+  const startAnimations = useCallback(() => {
+    // Reset animation values
+    fadeAnim.setValue(0);
+    slideAnim.setValue(50);
+    
+    // Start animations
     RNAnimated.parallel([
       RNAnimated.timing(fadeAnim, {
         toValue: 1,
@@ -32,7 +37,20 @@ export const Welcome = () => {
         useNativeDriver: true,
       })
     ]).start();
+  }, [fadeAnim, slideAnim]);
+
+  // Run animation when component mounts
+  useEffect(() => {
+    startAnimations();
   }, []);
+
+  // Re-run animations when the screen comes back into focus
+  useFocusEffect(
+    useCallback(() => {
+      startAnimations();
+      return () => {};
+    }, [startAnimations])
+  );
 
   const handleNavigation = (route: keyof AuthStackParamList) => {
     // Fade out when navigating
@@ -68,7 +86,7 @@ export const Welcome = () => {
 
   return (
     <Page footer={buttonsFooter}>
-      <FloatingElements count={15} />
+      <FloatingElements count={20} />
       
       <View className="flex flex-col items-center justify-center h-full mt-20 bg-transparent">
         <LogoAnimation size={70} />

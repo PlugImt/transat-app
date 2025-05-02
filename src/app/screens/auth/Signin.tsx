@@ -95,7 +95,7 @@ export const Signin = () => {
         useNativeDriver: true,
       }),
     ]).start();
-  }, []);
+  }, [fadeAnim, slideAnim]);
 
   return (
     <Page goBack>

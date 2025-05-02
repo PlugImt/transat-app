@@ -155,6 +155,7 @@ export const Settings = () => {
               label={t("settings.logout")}
               onPress={handleLogout}
               variant="destructive"
+              size="lg"
             />
           </DialogTrigger>
 

@@ -106,7 +106,7 @@ const BubbleAnimation = () => {
 
     return (
       <Animated.View
-        key={i}
+        key={`bubble-${i}-${Math.random().toString(36).slice(2, 11)}`}
         style={{
           position: "absolute",
           transform: [
@@ -205,7 +205,7 @@ const WindAnimation = () => {
 
     return (
       <Animated.View
-        key={i}
+        key={`wind-${i}-${Math.random().toString(36).slice(2, 11)}`}
         style={{
           position: "absolute",
           transform: [

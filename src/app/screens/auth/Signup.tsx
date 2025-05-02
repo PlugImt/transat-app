@@ -130,7 +130,7 @@ export const Signup = () => {
         useNativeDriver: true,
       }),
     ]).start();
-  }, []);
+  }, [fadeAnim, slideAnim]);
 
   return (
     <Page goBack>

@@ -192,8 +192,8 @@ const AccountLoading = () => {
           label={t("account.passwordUpdated")}
         />
         <Button
+          size="lg"
           label={t("account.editProfile")}
-          size="sm"
           variant="outlined"
           disabled
         />

@@ -206,6 +206,7 @@ export const EditProfile = () => {
       </View>
 
       <Button
+        size="lg"
         label={t("common.save")}
         onPress={handleUserSubmit(handleUpdateAccount)}
         loading={isUpdatingAccount}

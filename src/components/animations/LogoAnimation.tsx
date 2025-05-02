@@ -1,5 +1,5 @@
 import type React from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Pressable, StyleSheet } from "react-native";
 import Animated, {
   useSharedValue,
@@ -13,13 +13,11 @@ import Animated, {
 } from "react-native-reanimated";
 
 interface LogoAnimationProps {
-  size?: number;
   onAnimationComplete?: () => void;
   onLogoPress?: (x: number, y: number) => void;
 }
 
 const LogoAnimation: React.FC<LogoAnimationProps> = ({
-  size = 100,
   onAnimationComplete,
   onLogoPress,
 }) => {
@@ -27,7 +25,6 @@ const LogoAnimation: React.FC<LogoAnimationProps> = ({
   const opacity = useSharedValue(0);
   const rotate = useSharedValue(0);
   const pulseScale = useSharedValue(1);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     scale.value = withSequence(
@@ -55,13 +52,13 @@ const LogoAnimation: React.FC<LogoAnimationProps> = ({
         ),
       ),
     );
-  }, []);
+  }, [onAnimationComplete, rotate, opacity, scale]);
 
+  // biome-ignore lint/suspicious/noExplicitAny: TODO: à être mieux handle
   const handlePress = (event: any) => {
     // Get the position of the tap
     const x = event.nativeEvent.pageX;
     const y = event.nativeEvent.pageY;
-    setPosition({ x, y });
 
     // Animate the logo to pulse when pressed
     pulseScale.value = withSequence(

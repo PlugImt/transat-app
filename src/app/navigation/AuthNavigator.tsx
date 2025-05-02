@@ -9,7 +9,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 const Stack = createStackNavigator<AuthStackParamList>();
 
 export const AuthNavigator = () => {
-  const theme = useTheme();
+  const _theme = useTheme();
 
   return (
     <Stack.Navigator screenOptions={screenOptions}>

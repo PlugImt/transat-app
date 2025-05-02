@@ -12,7 +12,7 @@ module.exports = {
     extend: {
       colors: {
         border: colors.dark.muted,
-        input: colors.dark.muted,
+        input: colors.dark.input,
         background: colors.dark.background,
         foreground: colors.dark.foreground,
         primary: {

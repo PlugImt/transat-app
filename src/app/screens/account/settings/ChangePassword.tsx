@@ -100,6 +100,7 @@ export const ChangePassword = () => {
         secureTextEntry
       />
       <Button
+        size="lg"
         label={t("account.changePassword")}
         onPress={handlePasswordSubmit(handleChangePassword)}
         disabled={isUpdatingPassword || !isPasswordValid}

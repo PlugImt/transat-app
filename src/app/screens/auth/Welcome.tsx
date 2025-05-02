@@ -1,4 +1,3 @@
-import type { FloatingElementsRef } from "@/components/animations/FloatingElements";
 import LogoAnimation from "@/components/animations/LogoAnimation";
 import { Button } from "@/components/common/Button";
 import Page from "@/components/common/Page";
@@ -7,16 +6,13 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { useCallback, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { Dimensions, Animated as RNAnimated, Text, View } from "react-native";
-import type ConfettiCannon from "react-native-confetti-cannon";
+import { Animated as RNAnimated, Text, View } from "react-native";
 
 type LoginScreenNavigationProp = StackNavigationProp<AuthStackParamList>;
 
 export const Welcome = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<LoginScreenNavigationProp>();
-  const confettiRef = useRef<ConfettiCannon>(null);
-  const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
 
   const fadeAnim = useRef(new RNAnimated.Value(0)).current;
   const slideAnim = useRef(new RNAnimated.Value(50)).current;
@@ -44,10 +40,9 @@ export const Welcome = () => {
     ]).start();
   }, [fadeAnim, slideAnim]);
 
-  // Run animation when component mounts
   useEffect(() => {
     startAnimations();
-  }, []);
+  }, [startAnimations]);
 
   // Re-run animations when the screen comes back into focus
   useFocusEffect(
@@ -109,8 +104,6 @@ export const Welcome = () => {
       }}
       confetti={true}
     >
-      {/*<FloatingElements count={20}  />*/}
-
       <View className="flex flex-col items-center justify-center h-full mt-20 bg-transparent">
         <LogoAnimation size={70} onLogoPress={handleLogoPress} />
 

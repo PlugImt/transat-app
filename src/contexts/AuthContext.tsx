@@ -37,6 +37,12 @@ interface AuthContextType {
   isVerifying: boolean;
   isResending: boolean;
   resetPassword: (email: string) => Promise<{ success: boolean }>;
+  changePassword: (
+    email: string,
+    verification_code: string,
+    new_password: string,
+    new_password_confirmation: string,
+  ) => Promise<{ success: boolean }>;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(
@@ -56,6 +62,7 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     logout: logoutMutation,
     saveExpoPushToken: saveExpoPushTokenMutation,
     resetPassword: resetPasswordMutation,
+    changePassword: changePasswordMutation,
   } = useAuthMutations();
 
   const {
@@ -172,6 +179,26 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     }
   };
 
+  const changePassword = async (
+    email: string,
+    verification_code: string,
+    new_password: string,
+    new_password_confirmation: string,
+  ) => {
+    try {
+      await changePasswordMutation({
+        email,
+        verification_code,
+        new_password,
+        new_password_confirmation,
+      });
+      return { success: true };
+    } catch (error) {
+      console.error("Error changing password:", error);
+      return { success: false };
+    }
+  };
+
   const value = {
     user,
     isLoading: isUserLoading,
@@ -185,6 +212,7 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     isVerifying,
     isResending,
     resetPassword,
+    changePassword,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

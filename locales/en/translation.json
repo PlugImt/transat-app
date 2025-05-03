@@ -131,6 +131,9 @@
     "signInDescription": "We're glad to see you again! Please enter your email and password to access Transat.",
     "signUpDescription": "Join the Transat community! Fill in your details to create an account and start enjoying our services.",
     "resetPasswordDescription": "Enter your email address to receive your one time code for resetting your password.",
+    "requestVerificationCode": "Request verification code",
+    "newPassword": "New password",
+    "requestCodeCooldown": "Please wait {{seconds}} seconds before requesting a new code",
     "errors": {
       "tokenSaveFailed": "Failed to save authentication token",
       "email": "Invalid email address",
@@ -145,7 +148,8 @@
       "signupFailed": "Failed to create account",
       "invalidCredentials": "Invalid email or password",
       "phone": "Phone number is too short",
-      "resetPasswordFailed": "Failed to reset password"
+      "resetPasswordFailed": "Failed to reset password",
+      "verificationCode": "Verification code must be 6 digits"
     }
   },
   "welcome": {

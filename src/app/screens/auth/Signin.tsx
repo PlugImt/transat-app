@@ -160,7 +160,7 @@ export const Signin = () => {
                         {loginError && (
                             <Button
                                 label={t('auth.resetPassword')}
-                                onPress={() => navigation.navigate('Auth', { screen: 'ResetPassword' })}
+                                onPress={() => navigation.navigate('Auth', { screen: 'ResetPassword', params: { email: watch('email') } })}
                                 disabled={isLoading}
                                 variant="link"
                             />

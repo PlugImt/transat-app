@@ -36,13 +36,15 @@ interface AuthContextType {
   resendCode: (email: string) => void;
   isVerifying: boolean;
   isResending: boolean;
-  resetPassword: (email: string) => Promise<{ success: boolean }>;
+  resetPassword: (
+    email: string,
+  ) => Promise<{ success: boolean; error?: string }>;
   changePassword: (
     email: string,
     verification_code: string,
     new_password: string,
     new_password_confirmation: string,
-  ) => Promise<{ success: boolean }>;
+  ) => Promise<{ success: boolean; error?: string }>;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(

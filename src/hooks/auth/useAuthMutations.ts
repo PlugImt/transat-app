@@ -121,12 +121,7 @@ export const useAuthMutations = () => {
       new_password: string;
       new_password_confirmation: string;
     }) => {
-      return await apiRequest(
-        "/api/auth/change-password",
-        "PATCH",
-        data,
-        true,
-      );
+      return await apiRequest("/api/auth/change-password", "PATCH", data, true);
     },
   });
 

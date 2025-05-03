@@ -9,4 +9,4 @@ export const QUERY_KEYS = {
     changePassword: ["auth", "changePassword"],
   },
   // ... rest of the existing code ...
-}; 
+};

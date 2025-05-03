@@ -149,7 +149,9 @@
       "invalidCredentials": "Invalid email or password",
       "phone": "Phone number is too short",
       "resetPasswordFailed": "Failed to reset password",
-      "verificationCode": "Verification code must be 6 digits"
+      "verificationCode": "Verification code must be 6 digits",
+      "tooManyRequests": "Too many requests. Please try again later",
+      "invalidVerificationCode": "Invalid verification code"
     }
   },
   "welcome": {

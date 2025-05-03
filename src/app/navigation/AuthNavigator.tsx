@@ -1,6 +1,6 @@
+import { ResetPassword } from "@/app/screens/auth/ResetPassword";
 import { Signin } from "@/app/screens/auth/Signin";
 import { Signup } from "@/app/screens/auth/Signup";
-import { ResetPassword } from "@/app/screens/auth/ResetPassword";
 import Welcome from "@/app/screens/auth/Welcome";
 import { screenOptions } from "@/navigation/navigationConfig";
 import type { AuthStackParamList } from "@/services/storage/types";

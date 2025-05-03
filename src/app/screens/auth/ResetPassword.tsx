@@ -3,17 +3,16 @@ import Input from "@/components/common/Input";
 import Page from "@/components/common/Page";
 import { useToast } from "@/components/common/Toast";
 import useAuth from "@/hooks/account/useAuth";
+import type { AuthStackParamList } from "@/services/storage/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import type { RouteProp } from "@react-navigation/native";
 import { useEffect, useRef, useState } from "react";
-import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Text, type TextInput, View } from "react-native";
 import { Animated as RNAnimated } from "react-native";
 import { z } from "zod";
-import type { AuthStackParamList } from "@/services/storage/types";
 
 type ResetPasswordRouteProp = RouteProp<AuthStackParamList, "ResetPassword">;
 
@@ -33,28 +32,29 @@ export const ResetPassword = () => {
   const newPasswordRef = useRef<TextInput>(null);
   const confirmPasswordRef = useRef<TextInput>(null);
 
-  const resetSchema = z.object({
-    email: z
-      .string()
-      .trim()
-      .email(t("auth.errors.email"))
-      .refine((email) => email.endsWith("@imt-atlantique.net"), {
-        message: t("auth.errors.imtOnly"),
-      }),
-    verificationCode: z.string().length(6, t("auth.errors.verificationCode")),
-    newPassword: z.string().min(6, t("auth.errors.password")),
-    confirmPassword: z.string().min(6, t("auth.errors.password")),
-  }).refine((data) => data.newPassword === data.confirmPassword, {
-    message: t("auth.errors.confirmPassword"),
-    path: ["confirmPassword"],
-  });
+  const resetSchema = z
+    .object({
+      email: z
+        .string()
+        .trim()
+        .email(t("auth.errors.email"))
+        .refine((email) => email.endsWith("@imt-atlantique.net"), {
+          message: t("auth.errors.imtOnly"),
+        }),
+      verificationCode: z.string().length(6, t("auth.errors.verificationCode")),
+      newPassword: z.string().min(6, t("auth.errors.password")),
+      confirmPassword: z.string().min(6, t("auth.errors.password")),
+    })
+    .refine((data) => data.newPassword === data.confirmPassword, {
+      message: t("auth.errors.confirmPassword"),
+      path: ["confirmPassword"],
+    });
 
   const {
     control,
     handleSubmit,
     formState: { errors },
     watch,
-    setValue,
   } = useForm({
     resolver: zodResolver(resetSchema),
     defaultValues: {
@@ -76,7 +76,8 @@ export const ResetPassword = () => {
     isVerifying ||
     !email ||
     !email.endsWith("@imt-atlantique.net") ||
-    (verificationCodeSent && (!verificationCode || !newPassword || !confirmPassword));
+    (verificationCodeSent &&
+      (!verificationCode || !newPassword || !confirmPassword));
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -102,6 +103,7 @@ export const ResetPassword = () => {
       } else {
         setResetError(response.error || t("auth.errors.resetPasswordFailed"));
       }
+      // biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
     } catch (error: any) {
       if (error.response?.status === 429) {
         setResetError(t("auth.errors.tooManyRequests"));
@@ -131,6 +133,7 @@ export const ResetPassword = () => {
       } else {
         setResetError(response.error || t("auth.errors.resetPasswordFailed"));
       }
+      // biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
     } catch (error: any) {
       if (error.response?.status === 429) {
         setResetError(t("auth.errors.tooManyRequests"));
@@ -255,13 +258,19 @@ export const ResetPassword = () => {
                 }
                 onPress={handleRequestCode}
                 disabled={isButtonDisabled || !canRequestCode}
-                className={isButtonDisabled || !canRequestCode ? "opacity-50" : ""}
+                className={
+                  isButtonDisabled || !canRequestCode ? "opacity-50" : ""
+                }
                 loading={isLoading}
               />
             ) : (
               <Button
                 size="lg"
-                label={isLoading ? t("auth.resettingPassword") : t("auth.resetPassword")}
+                label={
+                  isLoading
+                    ? t("auth.resettingPassword")
+                    : t("auth.resetPassword")
+                }
                 onPress={handleSubmit(handleResetPassword)}
                 disabled={isButtonDisabled}
                 className={isButtonDisabled ? "opacity-50" : ""}
@@ -280,4 +289,4 @@ export const ResetPassword = () => {
   );
 };
 
-export default ResetPassword; 
+export default ResetPassword;

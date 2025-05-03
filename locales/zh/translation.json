@@ -51,7 +51,7 @@
     "plugImtNote": "注：Plug'IMT 是由 IMT 学生创建的协会，但与学校无关。",
     "credits": "荣誉",
     "underConstruction": "施工中 🏗️",
-    "underConstructionDesc": "我们正努力尽快为您提供这项新功能。敬请期待！"
+    "underConstructionDesc": "This page is under construction. Please check back later."
   },
   "settings": {
     "settings": "设置",
@@ -74,7 +74,7 @@
     },
     "help": {
       "title": "帮助",
-      "description": "有任何具体问题、建议或议题？\n请使用下面的表格或加入 Whatsapp 群组🫶，告诉我们。",
+      "description": "If you encounter any issues, please contact us via the contact form in the app or on our WhatsApp group. We will do our best to help you.",
       "faq": "常见问题",
       "contactUs": "联系我们",
       "joinWhatsApp": "加入我们的 WhatsApp 群组",

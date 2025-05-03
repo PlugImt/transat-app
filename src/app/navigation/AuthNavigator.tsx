@@ -1,5 +1,6 @@
 import { Signin } from "@/app/screens/auth/Signin";
 import { Signup } from "@/app/screens/auth/Signup";
+import { ResetPassword } from "@/app/screens/auth/ResetPassword";
 import Welcome from "@/app/screens/auth/Welcome";
 import { screenOptions } from "@/navigation/navigationConfig";
 import type { AuthStackParamList } from "@/services/storage/types";
@@ -16,6 +17,7 @@ export const AuthNavigator = () => {
       <Stack.Screen name="Welcome" component={Welcome} />
       <Stack.Screen name="Signin" component={Signin} />
       <Stack.Screen name="Signup" component={Signup} />
+      <Stack.Screen name="ResetPassword" component={ResetPassword} />
     </Stack.Navigator>
   );
 };

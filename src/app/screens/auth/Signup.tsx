@@ -143,11 +143,18 @@ export const Signup = () => {
       >
         <Text className="h1">{t("auth.signUp")}</Text>
 
-        {signupError && (
-          <View className="bg-red-300 p-3 rounded-md">
-            <Text className="text-red-900">{signupError}</Text>
-          </View>
-        )}
+        {signupError ? (
+                <View className="bg-red-300 p-3 rounded-md my-4">
+                  <Text className="text-red-900">{signupError}</Text>
+                </View>
+            ) :
+            <View className="h-20">
+              <Text className="text-foreground/60 mt-2">
+                {t('auth.signUpDescription')}
+              </Text>
+            </View>
+        }
+
 
         <View className="flex flex-col gap-10">
           <Input

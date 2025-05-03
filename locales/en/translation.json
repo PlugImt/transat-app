@@ -125,6 +125,12 @@
     "signupSuccess": "Sign up successful",
     "signingUp": "Signing up...",
     "disconnected": "You have been disconnected",
+    "resetPassword": "Reset Password",
+    "resettingPassword": "Resetting password...",
+    "resetPasswordSuccess": "Password reset instructions have been sent to your email",
+    "signInDescription": "We're glad to see you again! Please enter your email and password to access Transat.",
+    "signUpDescription": "Join the Transat community! Fill in your details to create an account and start enjoying our services.",
+    "resetPasswordDescription": "Enter your email address to receive your one time code for resetting your password.",
     "errors": {
       "tokenSaveFailed": "Failed to save authentication token",
       "email": "Invalid email address",
@@ -138,7 +144,8 @@
       "accountExists": "An account with this email already exists",
       "signupFailed": "Failed to create account",
       "invalidCredentials": "Invalid email or password",
-      "phone": "Phone number is too short"
+      "phone": "Phone number is too short",
+      "resetPasswordFailed": "Failed to reset password"
     }
   },
   "welcome": {

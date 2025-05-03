@@ -14,7 +14,7 @@ export type AuthStackParamList = {
   Welcome: undefined;
   Signin: undefined;
   Signup: undefined;
-  ForgotPassword?: undefined;
+  ResetPassword: undefined;
 };
 
 export interface StorageService {

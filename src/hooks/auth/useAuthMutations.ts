@@ -101,6 +101,18 @@ export const useAuthMutations = () => {
     },
   });
 
+  const resetPasswordMutation = useMutation({
+    mutationKey: QUERY_KEYS.auth.resetPassword,
+    mutationFn: async (email: string) => {
+      return await apiRequest(
+        "/api/auth/reset-password",
+        "POST",
+        { email },
+        true,
+      );
+    },
+  });
+
   const logout = async () => {
     await storage.remove("token");
     await storage.remove("newf");
@@ -116,6 +128,7 @@ export const useAuthMutations = () => {
     register: registerMutation.mutateAsync,
     saveToken: saveTokenMutation.mutateAsync,
     saveExpoPushToken: saveExpoPushTokenMutation.mutateAsync,
+    resetPassword: resetPasswordMutation.mutateAsync,
     logout,
     isLoggingIn: loginMutation.isPending,
     isRegistering: registerMutation.isPending,

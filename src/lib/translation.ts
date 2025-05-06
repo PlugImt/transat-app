@@ -130,9 +130,7 @@ export async function translateText(
   text: string,
   targetLang: GoogleSupportedLanguages,
 ): Promise<string> {
-  const GOOGLE_API_KEY = process.env.EXPO_PUBLIC_GOOGLE_TRANSLATE_API_KEY;
-
-  if (!GOOGLE_API_KEY) {
+  if (!translationApiKey) {
     throw new Error(
       "Google Translate API key is not configured. Please add EXPO_PUBLIC_GOOGLE_TRANSLATE_API_KEY to your .env file",
     );
@@ -140,7 +138,7 @@ export async function translateText(
 
   try {
     const response = await axios.post<GoogleTranslateResponse>(
-      "https://translation.googleapis.com/language/translate/v2?key=AIzaSyCW20VSNtQ-NKO9ItLiEYRE9DsHby4PslQ", // TODO: replace with the env vars
+      `https://translation.googleapis.com/language/translate/v2?key=${translationApiKey}`, // TODO: replace with the env vars
       {
         q: text,
         target: targetLang,
@@ -178,7 +176,7 @@ export async function translateMultipleTexts(
 
   try {
     const response = await axios.post<GoogleTranslateResponse>(
-      "https://translation.googleapis.com/language/translate/v2?key=AIzaSyCW20VSNtQ-NKO9ItLiEYRE9DsHby4PslQ", // TODO: replace with the env vars
+      `https://translation.googleapis.com/language/translate/v2?key=${translationApiKey}`, // TODO: replace with the env vars
       {
         q: texts,
         target: targetLang,

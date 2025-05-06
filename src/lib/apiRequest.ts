@@ -1,7 +1,10 @@
 import { storage } from "@/services/storage/asyncStorage";
 import STORAGE_KEYS from "@/services/storage/constants";
+import { spanToTraceHeader } from "@sentry/core";
+import type { SpanStatus } from "@sentry/core";
+import * as Sentry from "@sentry/react-native";
 import axios from "axios";
-import type { AxiosInstance } from "axios";
+import type { AxiosInstance, AxiosRequestHeaders } from "axios";
 import { t } from "i18next";
 import { apiUrlDev, apiUrlProd } from "./config";
 
@@ -52,16 +55,65 @@ export async function apiRequest<T>(
   }
 
   const api = await getApiInstance();
-  const response = await api({
-    method,
-    url: `${endpoint}`,
-    data,
-    headers: { Authorization: `Bearer ${token}` },
-  });
 
-  if (response.status < 200 || response.status >= 300) {
-    throw new Error(t("common.errors.occurred"));
-  }
+  return Sentry.startSpan(
+    {
+      name: `API Request: ${method} ${endpoint}`,
+      op: "http.client",
+      forceTransaction: true,
+    },
+    async (span) => {
+      let sentryTraceHeaderValue: string | undefined;
 
-  return response.data;
+      if (span) {
+        try {
+          sentryTraceHeaderValue = spanToTraceHeader(span);
+        } catch (e) {
+          console.error(
+            "Sentry: Failed to generate sentry-trace header using spanToTraceHeader.",
+            e,
+          );
+        }
+      } else {
+        console.warn("Sentry: Span object was not available for tracing.");
+      }
+
+      const headers: AxiosRequestHeaders = {
+        Authorization: `Bearer ${token}`,
+      } as AxiosRequestHeaders;
+
+      if (sentryTraceHeaderValue) {
+        headers["x-sentry-trace"] = sentryTraceHeaderValue;
+      }
+
+      try {
+        const response = await api({
+          method,
+          url: `${endpoint}`,
+          data,
+          headers,
+        });
+
+        if (response.status < 200 || response.status >= 300) {
+          Sentry.captureMessage(
+            `API Error: ${response.status} on ${method} ${endpoint}`,
+            "error",
+          );
+          if (span) span.setStatus({ code: 2 } satisfies SpanStatus);
+          throw new Error(t("common.errors.occurred"));
+        }
+
+        if (span) span.setStatus({ code: 1 } satisfies SpanStatus);
+        return response.data;
+      } catch (error) {
+        Sentry.captureException(error);
+        if (span)
+          span.setStatus({
+            code: 2,
+            message: "Internal error",
+          } satisfies SpanStatus);
+        throw error;
+      }
+    },
+  );
 }

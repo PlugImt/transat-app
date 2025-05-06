@@ -25,11 +25,15 @@ export async function fetchWeather(): Promise<WeatherData> {
 
   if (currentLanguage !== "EN") {
     // Translate the weather condition
-    translatedCondition = await translateText(
-      weatherCondition,
-      // biome-ignore lint/suspicious/noExplicitAny: type DeepLSupportedLanguages which is string
-      currentLanguage as any,
-    );
+    try {
+      translatedCondition = await translateText(
+        weatherCondition,
+        // biome-ignore lint/suspicious/noExplicitAny: type DeepLSupportedLanguages which is string
+        currentLanguage.toLowerCase() as any,
+      );
+    } catch (error) {
+      console.error("Error translating weather condition", error);
+    }
   }
 
   return {

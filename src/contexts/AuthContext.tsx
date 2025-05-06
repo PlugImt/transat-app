@@ -1,6 +1,7 @@
 import { useAuthMutations } from "@/hooks/auth/useAuthMutations";
 import { useVerificationCode } from "@/hooks/auth/useVerificationCode";
 import type { Loading, NotLoggedIn, User } from "@/types/user";
+import * as Sentry from "@sentry/react-native";
 import type { AxiosError } from "axios";
 import {
   type FC,
@@ -87,6 +88,18 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
       await saveTokenMutation(response.token);
       const user = await refetchUser();
       setUser(user.data);
+      Sentry.setUser({
+        email: user.data?.email,
+        id: user.data?.id_newf,
+        username: `${user.data?.first_name} ${user.data?.last_name}`,
+      });
+      Sentry.addBreadcrumb({
+        message: "User logged in",
+        level: "info",
+        data: {
+          email: user.data?.email,
+        },
+      });
       return { success: true };
     } catch (error) {
       const axiosError = error as AxiosError<{ error: string }>;

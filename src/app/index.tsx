@@ -11,6 +11,7 @@ import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import * as Clipboard from "expo-clipboard";
 import * as Notifications from "expo-notifications";
+import { Provider } from "jotai";
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -50,27 +51,29 @@ export default function App() {
   const isDev = process.env.NODE_ENV === "development";
 
   return (
-    <ThemeProvider>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <QueryClientProvider client={queryClient}>
-          <BottomSheetModalProvider>
-            <AuthProvider>
-              <ToastProvider position="top">
-                {isDevServerSelected ? (
-                  <View className="fixed top-0 left-0 ">
-                    <Text className="text-white">
-                      Dev server selected: {apiUrlDev}
-                    </Text>
-                  </View>
-                ) : null}
+    <Provider>
+      <ThemeProvider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <QueryClientProvider client={queryClient}>
+            <BottomSheetModalProvider>
+              <AuthProvider>
+                <ToastProvider position="top">
+                  {isDevServerSelected ? (
+                    <View className="fixed top-0 left-0 ">
+                      <Text className="text-white">
+                        Dev server selected: {apiUrlDev}
+                      </Text>
+                    </View>
+                  ) : null}
 
-                <RootNavigator />
-              </ToastProvider>
-            </AuthProvider>
-          </BottomSheetModalProvider>
-          {isDev && <DevToolsBubble onCopy={_onCopy} />}
-        </QueryClientProvider>
-      </GestureHandlerRootView>
-    </ThemeProvider>
+                  <RootNavigator />
+                </ToastProvider>
+              </AuthProvider>
+            </BottomSheetModalProvider>
+            {isDev && <DevToolsBubble onCopy={_onCopy} />}
+          </QueryClientProvider>
+        </GestureHandlerRootView>
+      </ThemeProvider>
+    </Provider>
   );
 }

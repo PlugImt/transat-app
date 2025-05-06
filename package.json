@@ -50,6 +50,7 @@
     "expo-system-ui": "~4.0.7",
     "expo-web-browser": "~14.0.2",
     "i18next": "^24.2.2",
+    "jotai": "^2.12.3",
     "lottie-react-native": "^7.2.2",
     "lucide-react-native": "^0.474.0",
     "nativecn-ui": "^0.0.8",

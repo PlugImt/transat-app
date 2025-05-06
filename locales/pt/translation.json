@@ -144,7 +144,7 @@
   "welcome": {
     "subtitle": "Por Atlantes, para Atlantes 🐙",
     "login": "Iniciar sessão",
-    "signup": "Inscrever-se"
+    "register": "Inscrever-se"
   },
   "services": {
     "title": "Serviços",

@@ -144,7 +144,7 @@
   "welcome": {
     "subtitle": "Por los Atlantes, para los Atlantes 🐙",
     "login": "Iniciar sesión",
-    "signup": "Registro"
+    "register": "Registro"
   },
   "services": {
     "title": "Servicios",

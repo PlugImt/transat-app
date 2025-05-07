@@ -12,7 +12,6 @@
       "distribution": "internal",
       "env": {
         "EXPO_PUBLIC_API_URL": "https://transat.destimt.fr",
-        "EXPO_PUBLIC_WEATHER_API_KEY": "803a62d94787febf43f1356d165e72e3",
         "EXPO_PUBLIC_GOOGLE_TRANSLATE_API_KEY": "AIzaSyCW20VSNtQ-NKO9ItLiEYRE9DsHby4PslQ"
       }
     },
@@ -20,7 +19,6 @@
       "autoIncrement": true,
       "env": {
         "EXPO_PUBLIC_API_URL": "https://transat.destimt.fr",
-        "EXPO_PUBLIC_WEATHER_API_KEY": "803a62d94787febf43f1356d165e72e3",
         "EXPO_PUBLIC_GOOGLE_TRANSLATE_API_KEY": "AIzaSyCW20VSNtQ-NKO9ItLiEYRE9DsHby4PslQ"
       }
     }

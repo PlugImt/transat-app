@@ -57,7 +57,11 @@ Pour participer au design de l'application, faites une demande pour modifier le 
 
 ## 🕹️ Technos utilisées
 
-<img src="https://skillicons.dev/icons?i=react,tailwind,golang,postgresql" alt="Les technologies utilisées" />
+<img src="https://skillicons.dev/icons?i=react,tailwind,golang,postgresql,sentry" alt="Les technologies utilisées" />
+
+## 🤝 Remerciements
+
+Merci à Sentry pour leur offre gratuite !
 
 ## 👋 Nous contacter
 <!-- Rejoignez le groupe Whatsapp de [Transat](https://chat.whatsapp.com/Hu2SjIL3ROx9y3BDcKNCyY) -->

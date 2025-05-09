@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Transat 2.0",
-    "slug": "transat-20",
+    "slug": "transat-2",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -67,7 +67,8 @@
         "@sentry/react-native/expo",
         {
           "url": "https://sentry.io/",
-          "project": "react-native",
+          "note": "Use SENTRY_AUTH_TOKEN env to authenticate with Sentry.",
+          "project": "transat-app",
           "organization": "plugimt"
         }
       ]

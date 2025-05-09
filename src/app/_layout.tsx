@@ -22,6 +22,8 @@ Sentry.init({
 
   // uncomment the line below to enable Spotlight (https://spotlightjs.com)
   spotlight: __DEV__,
+
+  environment: __DEV__ ? "development" : "production",
 });
 
 export default function Layout() {

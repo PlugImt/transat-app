@@ -12,6 +12,7 @@ import WashingMachineWidget, {
 import useAuth from "@/hooks/account/useAuth";
 import { useUser } from "@/hooks/account/useUser";
 import { QUERY_KEYS } from "@/lib/queryKeys";
+import { isDinner, isLunch, isWeekend } from "@/lib/utils";
 import type { AppStackParamList } from "@/services/storage/types";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
@@ -173,7 +174,9 @@ export const HomeLoading = () => {
     <Page className="gap-6">
       <Text className="h1 m-4">{t("common.welcome")}</Text>
       <WeatherSkeleton />
-      <RestaurantWidgetLoading />
+      {!isWeekend() && !isLunch() && !isDinner() ? (
+        <RestaurantWidgetLoading />
+      ) : null}
       <WashingMachineWidgetLoading />
     </Page>
   );

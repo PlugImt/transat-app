@@ -81,16 +81,7 @@ interface TabsContentProps extends React.ComponentPropsWithoutRef<typeof View> {
 function TabsContent({ value, className, ...props }: TabsContentProps) {
   const { activeTab } = useContext(TabsContext);
 
-  if (value === activeTab)
-    return (
-      <View
-        className={cn(
-          "border border-border mt-2 px-4 py-4 rounded-xl",
-          className,
-        )}
-        {...props}
-      />
-    );
+  if (value === activeTab) return <View className={cn(className)} {...props} />;
 
   return null;
 }

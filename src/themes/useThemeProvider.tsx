@@ -8,6 +8,10 @@ type ThemeType = {
   primary: string;
   secondary: string;
   muted: string;
+  destructive: string;
+  success: string;
+  warning: string;
+  input: string;
 };
 
 const ThemeContext = createContext<ThemeType | undefined>(undefined);
@@ -18,8 +22,16 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const colorScheme = "dark";
   const themeColors = colorScheme === "dark" ? colors.dark : colors.light;
 
+  // Add the shared colors to the theme
+  const extendedColors = {
+    ...themeColors,
+    destructive: colors.shared.destructive.DEFAULT,
+    success: colors.shared.success.DEFAULT,
+    warning: colors.shared.warning.DEFAULT,
+  };
+
   return (
-    <ThemeContext.Provider value={themeColors}>
+    <ThemeContext.Provider value={extendedColors}>
       {children}
     </ThemeContext.Provider>
   );

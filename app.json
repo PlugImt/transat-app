@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Transat 2.0",
-    "slug": "transat-2",
+    "name": "Transat",
+    "slug": "Transat",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -18,7 +18,7 @@
         "tinted": "./assets/images/ios-icon-tint.png"
       },
       "supportsTablet": true,
-      "bundleIdentifier": "fr.luclu7.transat",
+      "bundleIdentifier": "fr.resel.transat",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
@@ -28,7 +28,7 @@
         "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.yohann69.transat2_0",
+      "package": "com.Transat",
       "googleServicesFile": "./google-services.json",
       "permissions": ["android.permission.RECORD_AUDIO"]
     },
@@ -81,9 +81,9 @@
         "origin": false
       },
       "eas": {
-        "projectId": "9567d031-3154-4723-998b-ebde847d2ae5"
+        "projectId": "04d25877-7d89-4041-8e48-209ceee3a640"
       }
     },
-    "owner": "yohann69"
+    "owner": "plugimt"
   }
 }

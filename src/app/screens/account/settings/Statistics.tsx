@@ -5,21 +5,16 @@ import Page from "@/components/common/Page";
 import { Button } from "@/components/common/Button";
 import { Text } from "react-native";
 import { useTheme } from "@/themes/useThemeProvider";
-import { Activity, Server } from "lucide-react-native";
+import { Activity, Server, Users } from "lucide-react-native";
 
 // Types for the statistics data
-interface EndpointStatistic {
-  endpoint: string;
-  method: string;
+interface UserStatistic {
+  email: string;
   request_count: number;
   avg_duration_ms: number;
-  min_duration_ms: number;
-  max_duration_ms: number;
   success_rate_percent: number;
   first_request: string;
   last_request: string;
-  success_count: number;
-  error_count: number;
 }
 
 interface GlobalStatistic {
@@ -47,7 +42,7 @@ export const Statistics = () => {
   const { t } = useTranslation();
   const theme = useTheme();
   const [globalStats, setGlobalStats] = useState<GlobalStatistic | null>(null);
-  const [endpointStats, setEndpointStats] = useState<EndpointStatistic[]>([]);
+  const [topUsers, setTopUsers] = useState<UserStatistic[]>([]);
   const [serverStatus, setServerStatus] = useState<ServerStatus>({
     status: "offline",
     latency: 0,
@@ -120,8 +115,8 @@ export const Statistics = () => {
       const globalData = await globalResponse.json();
       setGlobalStats(globalData.statistics);
 
-      // Fetch endpoint statistics
-      const endpointResponse = await fetch(`${API_BASE_URL}/api/statistics/endpoints`, {
+      // Fetch top users statistics
+      const topUsersResponse = await fetch(`${API_BASE_URL}/api/statistics/top-users`, {
         method: "GET",
         mode: "cors",
         headers: {
@@ -129,12 +124,12 @@ export const Statistics = () => {
         }
       });
 
-      if (!endpointResponse.ok) {
-        throw new Error(`Failed to fetch endpoint statistics: ${endpointResponse.status}`);
+      if (!topUsersResponse.ok) {
+        throw new Error(`Failed to fetch top users statistics: ${topUsersResponse.status}`);
       }
 
-      const endpointData = await endpointResponse.json();
-      setEndpointStats(endpointData.statistics);
+      const topUsersData = await topUsersResponse.json();
+      setTopUsers(topUsersData.statistics);
 
       setStatsLastLoaded(new Date().toISOString());
       setLoading(false);
@@ -155,6 +150,21 @@ export const Statistics = () => {
       second: '2-digit'
     };
     return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+  // Format email to hide parts for privacy
+  const formatEmail = (email: string) => {
+    if (!email) return "Anonymous";
+    
+    const [username, domain] = email.split('@');
+    if (!domain) return email;
+    
+    // Hide parts of the username and domain for privacy
+    const maskedUsername = username.length > 3 
+      ? username.substring(0, 2) + '***' 
+      : username;
+    
+    return `${maskedUsername}@${domain}`;
   };
 
   useEffect(() => {
@@ -294,7 +304,63 @@ export const Statistics = () => {
                 </View>
               </View>
 
-            
+              {/* Top Users Card */}
+              {topUsers.length > 0 && (
+                <View className="bg-card rounded-lg p-4 mb-4">
+                  <View className="flex-row items-center mb-4">
+                    <Users color={theme.foreground} size={22} />
+                    <Text className="h3 ml-2">{t("statistics.topUsers.title", "Top 10 Users")}</Text>
+                  </View>
+                  
+                  {topUsers.map((user, index) => (
+                    <View 
+                      key={index}
+                      className="bg-background/20 rounded-lg p-3 mb-2"
+                    >
+                      <View className="flex-row justify-between items-center mb-2">
+                        <View className="flex-row items-center">
+                          <Text className="text-primary font-bold mr-2">#{index + 1}</Text>
+                          <Text className="text-foreground font-medium">{formatEmail(user.email)}</Text>
+                        </View>
+                        <Text className="text-foreground font-bold">{user.request_count} {t("statistics.topUsers.requests", "requests")}</Text>
+                      </View>
+                      
+                      <View className="flex-row justify-between mb-2">
+                        <View>
+                          <Text className="text-foreground/60 text-xs">{t("statistics.topUsers.avgTime", "Avg Response Time")}</Text>
+                          <Text className="text-foreground">{user.avg_duration_ms.toFixed(2)} ms</Text>
+                        </View>
+                        
+                        <View>
+                          <Text className="text-foreground/60 text-xs">{t("statistics.topUsers.successRate", "Success Rate")}</Text>
+                          <Text className={`text-foreground ${
+                            user.success_rate_percent > 90
+                              ? "text-green-500"
+                              : user.success_rate_percent > 75
+                                ? "text-amber-500"
+                                : "text-red-500"
+                          }`}>
+                            {user.success_rate_percent.toFixed(1)}%
+                          </Text>
+                        </View>
+                      </View>
+                      
+                      <View className="flex-row justify-between">
+                        <View>
+                          <Text className="text-foreground/60 text-xs">{t("statistics.topUsers.firstSeen", "First Seen")}</Text>
+                          <Text className="text-foreground text-xs">{formatDate(user.first_request)}</Text>
+                        </View>
+                        
+                        <View>
+                          <Text className="text-foreground/60 text-xs">{t("statistics.topUsers.lastSeen", "Last Seen")}</Text>
+                          <Text className="text-foreground text-xs">{formatDate(user.last_request)}</Text>
+                        </View>
+                      </View>
+                    </View>
+                  ))}
+                </View>
+              )}
+              
               <Text className="text-center text-foreground/60 text-xs mb-4">
                 {t("statistics.lastUpdated", "Statistics last updated:")} {formatDate(statsLastLoaded)}
               </Text>

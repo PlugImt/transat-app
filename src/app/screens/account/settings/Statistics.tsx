@@ -152,19 +152,27 @@ export const Statistics = () => {
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
-  // Format email to hide parts for privacy
+  // Format email to display as "First Name + First Letter of Last Name"
   const formatEmail = (email: string) => {
     if (!email) return "Anonymous";
     
-    const [username, domain] = email.split('@');
-    if (!domain) return email;
+    // Split email to get the name part (before @)
+    const namePart = email.split('@')[0];
+    if (!namePart || !email.includes("@imt-atlantique.net")) {
+      return "User"; // Default if not following expected pattern
+    }
     
-    // Hide parts of the username and domain for privacy
-    const maskedUsername = username.length > 3 
-      ? username.substring(0, 2) + '***' 
-      : username;
+    // Split name part by dot to get first name and last name
+    const nameParts = namePart.split('.');
+    if (nameParts.length < 2) {
+      return nameParts[0]; // If there's no dot, just return the name part
+    }
     
-    return `${maskedUsername}@${domain}`;
+    // Format as "First Name + First Letter of Last Name."
+    const firstName = nameParts[0].charAt(0).toUpperCase() + nameParts[0].slice(1);
+    const lastNameInitial = nameParts[1].charAt(0).toUpperCase();
+    
+    return `${firstName} ${lastNameInitial}.`;
   };
 
   useEffect(() => {

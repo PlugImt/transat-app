@@ -7,6 +7,7 @@ import Help from "@/app/screens/account/settings/Help";
 import Language from "@/app/screens/account/settings/Language";
 import Notifications from "@/app/screens/account/settings/Notifications";
 import Settings from "@/app/screens/account/settings/Settings";
+import Statistics from "@/app/screens/account/settings/Statistics";
 import { Clubs } from "@/app/screens/services/Clubs";
 import Games from "@/app/screens/services/Games";
 import { Restaurant } from "@/app/screens/services/Restaurant";
@@ -62,6 +63,7 @@ const AccountStackScreen = () => (
     <AccountStack.Screen name="Language" component={Language} />
     <AccountStack.Screen name="About" component={About} />
     <AccountStack.Screen name="Help" component={Help} />
+    <AccountStack.Screen name="Statistics" component={Statistics} />
   </AccountStack.Navigator>
 );
 

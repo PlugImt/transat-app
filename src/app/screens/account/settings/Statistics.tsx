@@ -1,0 +1,317 @@
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { ScrollView, View, RefreshControl } from "react-native";
+import Page from "@/components/common/Page";
+import { Button } from "@/components/common/Button";
+import { Text } from "react-native";
+import { useTheme } from "@/themes/useThemeProvider";
+import { Activity, Server } from "lucide-react-native";
+
+// Types for the statistics data
+interface EndpointStatistic {
+  endpoint: string;
+  method: string;
+  request_count: number;
+  avg_duration_ms: number;
+  min_duration_ms: number;
+  max_duration_ms: number;
+  success_rate_percent: number;
+  first_request: string;
+  last_request: string;
+  success_count: number;
+  error_count: number;
+}
+
+interface GlobalStatistic {
+  total_request_count: number;
+  global_avg_duration_ms: number;
+  global_min_duration_ms: number;
+  global_max_duration_ms: number;
+  global_success_rate_percent: number;
+  first_request: string;
+  last_request: string;
+  success_count: number;
+  error_count: number;
+}
+
+interface ServerStatus {
+  status: "online" | "offline";
+  latency: number;
+  timestamp: string;
+}
+
+// Define API base URL
+const API_BASE_URL = "https://transat.destimt.fr";
+
+export const Statistics = () => {
+  const { t } = useTranslation();
+  const theme = useTheme();
+  const [globalStats, setGlobalStats] = useState<GlobalStatistic | null>(null);
+  const [endpointStats, setEndpointStats] = useState<EndpointStatistic[]>([]);
+  const [serverStatus, setServerStatus] = useState<ServerStatus>({
+    status: "offline",
+    latency: 0,
+    timestamp: new Date().toISOString(),
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
+  const [statsLastLoaded, setStatsLastLoaded] = useState<string>(new Date().toISOString());
+
+  // Function to fetch server status
+  const checkServerStatus = async () => {
+    const startTime = Date.now();
+    try {
+      const response = await fetch(`${API_BASE_URL}/status`, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          "Accept": "application/json"
+        }
+      });
+      const endTime = Date.now();
+      const latency = endTime - startTime;
+
+      setServerStatus({
+        status: response.ok ? "online" : "offline",
+        latency,
+        timestamp: new Date().toISOString(),
+      });
+
+      return response.ok;
+    } catch (err) {
+      setServerStatus({
+        status: "offline",
+        latency: 0,
+        timestamp: new Date().toISOString(),
+      });
+      return false;
+    }
+  };
+
+  // Function to fetch statistics
+  const fetchStatistics = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      // Check server status first
+      const isServerOnline = await checkServerStatus();
+
+      if (!isServerOnline) {
+        setLoading(false);
+        setError("Server is offline. Cannot fetch statistics.");
+        return;
+      }
+
+      // Fetch global statistics
+      const globalResponse = await fetch(`${API_BASE_URL}/api/statistics/global`, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          "Accept": "application/json"
+        }
+      });
+
+      if (!globalResponse.ok) {
+        throw new Error(`Failed to fetch global statistics: ${globalResponse.status}`);
+      }
+
+      const globalData = await globalResponse.json();
+      setGlobalStats(globalData.statistics);
+
+      // Fetch endpoint statistics
+      const endpointResponse = await fetch(`${API_BASE_URL}/api/statistics/endpoints`, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          "Accept": "application/json"
+        }
+      });
+
+      if (!endpointResponse.ok) {
+        throw new Error(`Failed to fetch endpoint statistics: ${endpointResponse.status}`);
+      }
+
+      const endpointData = await endpointResponse.json();
+      setEndpointStats(endpointData.statistics);
+
+      setStatsLastLoaded(new Date().toISOString());
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      setError(`Failed to fetch statistics: ${err instanceof Error ? err.message : String(err)}`);
+    }
+  };
+
+  // Format date
+  const formatDate = (dateString: string) => {
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+  useEffect(() => {
+    fetchStatistics();
+
+    // Set up periodic status checks
+    const statusCheckInterval = setInterval(() => {
+      checkServerStatus();
+    }, 10000); // Check every 10 seconds
+
+    return () => {
+      clearInterval(statusCheckInterval);
+    };
+  }, []);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await fetchStatistics();
+    setRefreshing(false);
+  };
+
+  return (
+    <Page>
+      <ScrollView
+        className="flex-1 px-4"
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
+        <Text className="h1 my-4">{t("statistics.title", "Statistics")}</Text>
+
+        {/* Server Status Card */}
+        <View className="bg-card rounded-lg p-4 mb-4">
+          <View className="flex-row items-center justify-between mb-2">
+            <View className="flex-row items-center">
+              <Server color={theme.foreground} size={22} />
+              <Text className="h3 ml-2">{t("statistics.serverStatus", "Server Status")}</Text>
+            </View>
+            <View className="flex-row items-center">
+              <View
+                className={`h-3 w-3 rounded-full mr-2 ${
+                  serverStatus.status === "online" ? "bg-green-500" : "bg-red-500"
+                }`}
+              />
+              <Text className="text-foreground">
+                {serverStatus.status === "online" ? t("statistics.online", "Online") : t("statistics.offline", "Offline")}
+              </Text>
+            </View>
+          </View>
+          
+          <View className="flex-row justify-between mt-2">
+            <View>
+              <Text className="text-foreground/60 text-sm">{t("statistics.latency", "Latency")}</Text>
+              <Text className="text-foreground font-medium">{serverStatus.latency} ms</Text>
+            </View>
+            <View>
+              <Text className="text-foreground/60 text-sm">{t("statistics.lastChecked", "Last Checked")}</Text>
+              <Text className="text-foreground font-medium">{formatDate(serverStatus.timestamp)}</Text>
+            </View>
+          </View>
+        </View>
+
+        {/* Error display */}
+        {error && (
+          <View className="bg-red-500/10 border-l-4 border-red-500 p-4 rounded-md mb-4">
+            <Text className="text-red-500 font-medium">{error}</Text>
+          </View>
+        )}
+
+        {/* Loading state */}
+        {loading ? (
+          <View className="bg-card rounded-lg p-8 items-center justify-center mb-4">
+            <Activity size={32} color={theme.primary} className="mb-4" />
+            <Text className="text-foreground/60">{t("statistics.loading", "Loading statistics...")}</Text>
+          </View>
+        ) : (
+          globalStats && (
+            <>
+              {/* Global Stats Card */}
+              <View className="bg-card rounded-lg p-4 mb-4">
+                <Text className="h3 mb-4">{t("statistics.globalStats", "Global Statistics")}</Text>
+                
+                <View className="flex-row flex-wrap justify-between mb-4">
+                  <View className="w-[48%] bg-background/20 rounded-lg p-3 mb-2">
+                    <Text className="text-foreground/60 text-xs">{t("statistics.totalRequests", "Total Requests")}</Text>
+                    <Text className="text-primary text-xl font-bold">{globalStats.total_request_count}</Text>
+                  </View>
+                  
+                  <View className="w-[48%] bg-background/20 rounded-lg p-3 mb-2">
+                    <Text className="text-foreground/60 text-xs">{t("statistics.successRate", "Success Rate")}</Text>
+                    <Text 
+                      className={`text-xl font-bold ${
+                        globalStats.global_success_rate_percent > 95 
+                          ? "text-green-500" 
+                          : globalStats.global_success_rate_percent > 80 
+                            ? "text-amber-500" 
+                            : "text-red-500"
+                      }`}
+                    >
+                      {globalStats.global_success_rate_percent.toFixed(1)}%
+                    </Text>
+                  </View>
+                  
+                  <View className="w-[48%] bg-background/20 rounded-lg p-3 mb-2">
+                    <Text className="text-foreground/60 text-xs">{t("statistics.avgResponseTime", "Avg Response Time")}</Text>
+                    <Text className="text-primary text-xl font-bold">
+                      {globalStats.global_avg_duration_ms.toFixed(1)} <Text className="text-xs text-foreground/60">ms</Text>
+                    </Text>
+                  </View>
+                  
+                  <View className="w-[48%] bg-background/20 rounded-lg p-3 mb-2">
+                    <Text className="text-foreground/60 text-xs">{t("statistics.maxResponseTime", "Max Response Time")}</Text>
+                    <Text className={`text-xl font-bold ${
+                      globalStats.global_max_duration_ms < 500 ? "text-amber-500" : "text-red-500"
+                    }`}>
+                      {globalStats.global_max_duration_ms} <Text className="text-xs text-foreground/60">ms</Text>
+                    </Text>
+                  </View>
+                </View>
+                
+                <View className="flex-row justify-between mb-4">
+                  <View className="w-[48%] bg-background/20 rounded-lg p-3">
+                    <Text className="text-foreground/60 text-xs">{t("statistics.successfulRequests", "Successful Requests")}</Text>
+                    <Text className="text-green-500 text-xl font-bold">{globalStats.success_count}</Text>
+                  </View>
+                  
+                  <View className="w-[48%] bg-background/20 rounded-lg p-3">
+                    <Text className="text-foreground/60 text-xs">{t("statistics.errorRequests", "Error Requests")}</Text>
+                    <Text className="text-red-500 text-xl font-bold">{globalStats.error_count}</Text>
+                  </View>
+                </View>
+                
+                {/* First Request */}
+                <View className="items-center mt-4">
+                  <Text className="text-foreground/60 text-xs mb-1">{t("statistics.firstRequest", "First Request")}</Text>
+                  <Text className="text-foreground">{formatDate(globalStats.first_request)}</Text>
+                </View>
+              </View>
+
+            
+              <Text className="text-center text-foreground/60 text-xs mb-4">
+                {t("statistics.lastUpdated", "Statistics last updated:")} {formatDate(statsLastLoaded)}
+              </Text>
+            </>
+          )
+        )}
+        
+        <Button
+          label={t("statistics.refresh", "Refresh Statistics")}
+          onPress={onRefresh}
+          disabled={refreshing}
+          loading={refreshing}
+          className="mb-8"
+        />
+      </ScrollView>
+    </Page>
+  );
+};
+
+export default Statistics; 

@@ -6,6 +6,7 @@ import {
   Info,
   Server,
   Shield,
+  BarChart,
 } from "lucide-react-native";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -129,6 +130,12 @@ export const Settings = () => {
             title={t("settings.about.title")}
             subtitle={t("common.knowMore")}
             onPress={() => navigation.navigate("About")}
+          />
+          <SettingsItem
+            icon={<BarChart color={theme.foreground} size={22} />}
+            title={t("settings.statistics.title", "Statistics")}
+            subtitle={t("settings.statistics.subtitle", "View system statistics")}
+            onPress={() => navigation.navigate("Statistics")}
           />
 
           {process.env.NODE_ENV === "development" && (

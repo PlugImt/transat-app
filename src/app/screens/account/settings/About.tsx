@@ -27,6 +27,7 @@ export const About = () => {
 
   return (
     <Page
+      goBack
       onConfettiTrigger={(trigger) => {
         triggerConfettiRef.current = trigger;
       }}

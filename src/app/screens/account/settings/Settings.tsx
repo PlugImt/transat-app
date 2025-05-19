@@ -69,13 +69,13 @@ export const Settings = () => {
   };
 
   return (
-    <Page className="gap-6" refreshing={isPending} onRefresh={refetch}>
+    <Page goBack className="gap-6" refreshing={isPending} onRefresh={refetch}>
       <Text className="h1 m-4">{t("settings.settings")}</Text>
 
       <AccountCard user={user} />
 
       <View className="gap-2">
-        <Text className="h3">{t("common.appearance")}</Text>
+        <Text className="h3 ml-4">{t("common.appearance")}</Text>
         <View className="bg-card rounded-lg px-4 py-2">
           <SettingsItem
             icon={<Globe color={theme.foreground} size={22} />}
@@ -95,7 +95,9 @@ export const Settings = () => {
       </View>
 
       <View className="gap-2">
-        <Text className="h3">{t("settings.notifications.notifications")}</Text>
+        <Text className="h3 ml-4">
+          {t("settings.notifications.notifications")}
+        </Text>
         <View className="bg-card rounded-lg px-4 py-2">
           <SettingsItem
             icon={<Bell color={theme.foreground} size={22} />}
@@ -106,7 +108,7 @@ export const Settings = () => {
       </View>
 
       <View className="gap-2">
-        <Text className="h3">{t("account.security")}</Text>
+        <Text className="h3 ml-4">{t("account.security")}</Text>
         <View className="bg-card rounded-lg px-4 py-2">
           <SettingsItem
             icon={<Shield color={theme.foreground} size={22} />}
@@ -117,7 +119,7 @@ export const Settings = () => {
       </View>
 
       <View className="gap-2">
-        <Text className="h3">{t("common.other")}</Text>
+        <Text className="h3 ml-4">{t("common.other")}</Text>
         <View className="bg-card rounded-lg px-4 py-2 gap-4">
           <SettingsItem
             icon={<HelpCircle color={theme.foreground} size={22} />}

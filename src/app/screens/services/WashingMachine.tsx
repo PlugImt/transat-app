@@ -46,7 +46,7 @@ export const WashingMachine: FC = () => {
 
   if (isError) {
     return (
-      <Page refreshing={isPending} onRefresh={refetch}>
+      <Page goBack refreshing={isPending} onRefresh={refetch}>
         <Text className="h1 m-4">{t("services.washingMachine.title")}</Text>
         <View className="min-h-screen flex justify-center items-center">
           <Text className="text-red-500 text-center h1">{error?.message}</Text>
@@ -57,7 +57,7 @@ export const WashingMachine: FC = () => {
 
   if (!data || data.length === 0) {
     return (
-      <Page refreshing={isPending} onRefresh={refetch}>
+      <Page goBack refreshing={isPending} onRefresh={refetch}>
         <Text className="h1 m-4">{t("services.washingMachine.title")}</Text>
         <View className="min-h-screen flex justify-center items-center ">
           <Text className="text-foreground text-center h1">
@@ -79,12 +79,12 @@ export const WashingMachine: FC = () => {
   );
 
   return (
-    <Page onRefresh={refetch} refreshing={isFetching} className="gap-6">
+    <Page goBack onRefresh={refetch} refreshing={isFetching} className="gap-6">
       {header}
 
       {washingMachines?.length > 0 && (
         <View className="flex-col gap-4">
-          <Text className="text-foreground text-xl font-bold">
+          <Text className="text-foreground text-xl font-bold ml-4">
             {t("services.washingMachine.washingMachine")}
           </Text>
           {washingMachines.map(
@@ -103,7 +103,7 @@ export const WashingMachine: FC = () => {
 
       {dryers?.length > 0 && (
         <View className="flex-col gap-4">
-          <Text className="text-foreground text-xl font-bold">
+          <Text className="text-foreground text-xl font-bold ml-4">
             {t("services.washingMachine.dryer")}
           </Text>
           {dryers.map(
@@ -135,7 +135,7 @@ const WashingMachineLoading = ({ header }: WashingMachineLoadingProps) => {
   const nbMachines = 4;
 
   return (
-    <Page className="gap-6">
+    <Page goBack className="gap-6">
       {header}
 
       <View className="flex-col gap-4">

@@ -24,7 +24,7 @@ export const Notifications = () => {
   };
 
   return (
-    <Page className="gap-6" refreshing={isPending} onRefresh={onRefresh}>
+    <Page goBack className="gap-6" refreshing={isPending} onRefresh={onRefresh}>
       <Text className="h1 m-4">
         {t("settings.notifications.notifications")}
       </Text>

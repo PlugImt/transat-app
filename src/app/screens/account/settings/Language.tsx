@@ -136,7 +136,7 @@ export const Language = () => {
   };
 
   return (
-    <Page>
+    <Page goBack>
       <Text className="h1 m-4">{t("settings.language.language")}</Text>
       <View className="bg-card rounded-lg px-4 py-2">
         {languages.map((language) => (

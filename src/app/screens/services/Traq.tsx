@@ -94,10 +94,10 @@ export const Traq = () => {
   }
 
   return (
-    <Page refreshing={isPending} onRefresh={refetch} className="gap-4">
+    <Page goBack refreshing={isPending} onRefresh={refetch} className="gap-4">
       {header}
 
-      <View className="flex-row justify-between items-center">
+      <View className="flex-row justify-between items-center ml-4">
         <Text className="h2">{t("common.filter")}</Text>
         {selectedTags.length > 0 && (
           <Badge
@@ -107,7 +107,11 @@ export const Traq = () => {
           />
         )}
       </View>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        className="ml-4"
+      >
         {uniqueTags.map((tag) => (
           <Badge
             key={tag}
@@ -154,7 +158,7 @@ interface TraqLoadingProps {
 
 const TraqLoading = ({ header }: TraqLoadingProps) => {
   return (
-    <Page className="gap-4">
+    <Page goBack className="gap-4">
       {header}
       <View className="flex-row justify-between items-center">
         <TextSkeleton lines={1} variant="h2" lastLineWidth={100} />

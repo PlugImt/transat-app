@@ -66,7 +66,7 @@ export function WashingMachineWidget() {
 
   return (
     <View className="flex flex-col gap-2">
-      <Text className="h3">{t("services.washingMachine.title")}</Text>
+      <Text className="h3 ml-4">{t("services.washingMachine.title")}</Text>
       <TouchableOpacity
         onPress={() => navigation.navigate("WashingMachine")}
         className="px-6 py-4 rounded-lg bg-card flex-row justify-between gap-6"

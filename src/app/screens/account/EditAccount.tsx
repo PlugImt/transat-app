@@ -115,7 +115,7 @@ export const EditProfile = () => {
   }
 
   return (
-    <Page className="gap-8" refreshing={isPending} onRefresh={refetch}>
+    <Page goBack className="gap-8" refreshing={isPending} onRefresh={refetch}>
       <View className="flex-row items-center justify-between m-4">
         <Text className="h1">{t("account.editProfile")}</Text>
         <Button
@@ -224,7 +224,7 @@ const EditProfileLoading = () => {
   const navigation = useNavigation();
 
   return (
-    <Page className="gap-8">
+    <Page goBack className="gap-8">
       <View className="flex-row items-center justify-between m-4">
         <Text className="h1">{t("account.editProfile")}</Text>
         <Button

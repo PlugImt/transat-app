@@ -64,16 +64,16 @@ export const Restaurant = () => {
 
   const header = (
     <View className="flex-row gap-2 justify-between items-center">
-      <Text className="h1 m-4">{t("services.restaurant.title")}</Text>
+      {/*<Text className="h1 m-4">{t("services.restaurant.title")}</Text>*/}
 
-      <AboutModal
-        title={t("services.restaurant.title")}
-        description={t("services.restaurant.about")}
-        openingHours={openingHoursData}
-        location={t("services.restaurant.location")}
-        price={t("services.restaurant.price")}
-        additionalInfo={t("services.restaurant.additionalInfo")}
-      />
+      {/*<AboutModal*/}
+      {/*  title={t("services.restaurant.title")}*/}
+      {/*  description={t("services.restaurant.about")}*/}
+      {/*  openingHours={openingHoursData}*/}
+      {/*  location={t("services.restaurant.location")}*/}
+      {/*  price={t("services.restaurant.price")}*/}
+      {/*  additionalInfo={t("services.restaurant.additionalInfo")}*/}
+      {/*/>*/}
     </View>
   );
 
@@ -137,8 +137,21 @@ export const Restaurant = () => {
   }
 
   return (
-    <Page refreshing={isPending} onRefresh={refetch}>
-      {header}
+    <Page
+      refreshing={isPending}
+      onRefresh={refetch}
+      goBack
+      title={t("services.restaurant.title")}
+      about={ <AboutModal
+          title={t("services.restaurant.title")}
+          description={t("services.restaurant.about")}
+          openingHours={openingHoursData}
+          location={t("services.restaurant.location")}
+          price={t("services.restaurant.price")}
+          additionalInfo={t("services.restaurant.additionalInfo")}
+      />}
+    >
+      {/*{header}*/}
 
       <View className="flex flex-col gap-8">
         <View className="flex flex-col gap-4">

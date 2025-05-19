@@ -70,7 +70,7 @@ export const ChangePassword = () => {
   };
 
   return (
-    <Page className="gap-8">
+    <Page goBack className="gap-8">
       <Text className="h1">Change Password</Text>
 
       <Input

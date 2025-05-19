@@ -4,7 +4,13 @@ import { useNavigation } from "@react-navigation/native";
 import { ArrowLeft } from "lucide-react-native";
 import { type ReactNode, useState } from "react";
 import { useRef } from "react";
-import { Dimensions, RefreshControl, ScrollView, View } from "react-native";
+import {
+  Dimensions,
+  RefreshControl,
+  ScrollView,
+  Text,
+  View,
+} from "react-native";
 import ConfettiCannon from "react-native-confetti-cannon";
 
 type PageProps = {
@@ -13,6 +19,8 @@ type PageProps = {
   onRefresh?: () => void;
   className?: string;
   goBack?: boolean;
+  title?: string;
+    about?: ReactNode;
   footer?: ReactNode;
   confetti?: boolean;
   onConfettiTrigger?: (trigger: () => void) => void;
@@ -24,6 +32,8 @@ export default function Page({
   onRefresh,
   className,
   goBack,
+  title,
+    about,
   footer,
   confetti = false,
   onConfettiTrigger,
@@ -60,16 +70,25 @@ export default function Page({
       >
         <View
           className={cn(
-            "bg-background px-5 pt-8 flex flex-col gap-2 pb-12",
+            "bg-background px-5 pt-14 flex flex-col gap-2 pb-12",
             className,
           )}
         >
-          {goBack && (
-            <ArrowLeft
-              color={theme.foreground}
-              onPress={() => navigation.goBack()}
-            />
-          )}
+          <View className="flex-row gap-5 justify-between items-center">
+            <View className="flex flex-row items-center justify-center">
+            {goBack && (
+              <ArrowLeft
+                color={theme.foreground}
+                onPress={() => navigation.goBack()}
+              />
+            )}
+            {title && <Text className="h1 ml-4">{title}</Text>}
+            </View>
+
+            {about}
+          </View>
+
+
           {children}
         </View>
       </ScrollView>

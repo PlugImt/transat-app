@@ -53,7 +53,7 @@ export function RestaurantWidget() {
         menu &&
         (menu.accompSoir.length > 0 || menu.grilladesSoir.length > 0)) ? (
         <>
-          <Text className="h3">{title}</Text>
+          <Text className="h3 ml-4">{title}</Text>
           <TouchableOpacity
             onPress={() => navigation.navigate("Restaurant")}
             className="px-6 py-4 rounded-lg bg-card flex flex-col gap-6"

@@ -209,7 +209,7 @@ export const Statistics = () => {
   };
 
   return (
-    <Page refreshing={refreshing} onRefresh={onRefresh}>
+    <Page goBack refreshing={refreshing} onRefresh={onRefresh}>
       <View className="flex-row gap-2 justify-between items-center">
         <Text className="h1 my-4">{t("statistics.title", "Statistics")}</Text>
       </View>

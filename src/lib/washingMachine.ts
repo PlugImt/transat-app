@@ -2,20 +2,10 @@ import type { MachineData } from "@/types/washingMachine";
 import { t } from "i18next";
 
 export async function fetchWashingMachines(): Promise<
-  MachineData[] | undefined
+  (MachineData & { type: "WASHING MACHINE" | "DRYER" })[]
 > {
   const response = await fetch(
-    "https://status.wi-line.fr/update_machine_ext.php",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-      },
-      body: new URLSearchParams({
-        action: "READ_LIST_STATUS",
-        serial_centrale: "65e4444c3471550a789e2138a9e28eff",
-      }).toString(),
-    },
+    "https://transat.destimt.fr/api/washingmachines",
   );
 
   if (!response.ok) {
@@ -23,5 +13,21 @@ export async function fetchWashingMachines(): Promise<
   }
 
   const data = await response.json();
-  return data.machine_info_status.machine_list as MachineData[];
+  if (!data.success) {
+    throw new Error(t("common.errors.unableToFetch"));
+  }
+
+  // Flatten and add type
+  const washingMachines = (data.data.washing_machine || []).map(
+    (machine: MachineData) => ({
+      ...machine,
+      type: "WASHING MACHINE" as const,
+    }),
+  );
+  const dryers = (data.data.dryer || []).map((machine: MachineData) => ({
+    ...machine,
+    type: "DRYER" as const,
+  }));
+
+  return [...washingMachines, ...dryers];
 }

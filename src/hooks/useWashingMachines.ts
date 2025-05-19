@@ -1,5 +1,6 @@
 import { QUERY_KEYS } from "@/lib/queryKeys";
 import { fetchWashingMachines } from "@/lib/washingMachine";
+import type { MachineData } from "@/types/washingMachine";
 import { useQuery } from "@tanstack/react-query";
 
 export function useWashingMachines() {
@@ -9,7 +10,9 @@ export function useWashingMachines() {
   });
 
   return {
-    data: data,
+    data: data as
+      | (MachineData & { type: "WASHING MACHINE" | "DRYER" })[]
+      | undefined,
     isPending,
     isFetching,
     isError,

@@ -4,6 +4,7 @@ import WashingMachineCard, {
   WashingMachineCardSkeleton,
 } from "@/components/custom/card/WashingMachineCard";
 import { useWashingMachines } from "@/hooks/useWashingMachines";
+import type { MachineData } from "@/types/washingMachine";
 import { type FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
@@ -13,8 +14,17 @@ export const WashingMachine: FC = () => {
   const [_aboutPopupVisible, _setAboutPopupVisible] = useState(false);
   const openingHoursData = [{ day: "24/7", lunch: "", dinner: "" }];
 
-  const { data, isPending, isFetching, isError, error, refetch } =
-    useWashingMachines();
+  const {
+    data: rawData,
+    isPending,
+    isFetching,
+    isError,
+    error,
+    refetch,
+  } = useWashingMachines();
+  const data = rawData as
+    | (MachineData & { type: "WASHING MACHINE" | "DRYER" })[]
+    | undefined;
 
   const header = (
     <View className="flex-row gap-2 justify-between items-center">
@@ -58,12 +68,14 @@ export const WashingMachine: FC = () => {
     );
   }
 
-  // Group washing machines and dryers separately
+  // Group washing machines and dryers separately using the new 'type' property
   const washingMachines = data?.filter(
-    (machine) => machine.nom_type.trim() === "LAVE LINGE",
+    (machine: MachineData & { type: "WASHING MACHINE" | "DRYER" }) =>
+      machine.type === "WASHING MACHINE",
   );
   const dryers = data?.filter(
-    (machine) => machine.nom_type.trim() !== "LAVE LINGE",
+    (machine: MachineData & { type: "WASHING MACHINE" | "DRYER" }) =>
+      machine.type === "DRYER",
   );
 
   return (
@@ -75,15 +87,17 @@ export const WashingMachine: FC = () => {
           <Text className="text-foreground text-xl font-bold">
             {t("services.washingMachine.washingMachine")}
           </Text>
-          {washingMachines.map((item) => (
-            <WashingMachineCard
-              key={item.machine_id}
-              number={item.selecteur_machine}
-              type={t("services.washingMachine.washingMachine")}
-              status={item.time_before_off}
-              icon={"WASHING MACHINE"}
-            />
-          ))}
+          {washingMachines.map(
+            (item: MachineData & { type: "WASHING MACHINE" | "DRYER" }) => (
+              <WashingMachineCard
+                key={item.number}
+                number={item.number.toString()}
+                type={t("services.washingMachine.washingMachine")}
+                status={item.time_left}
+                icon={"WASHING MACHINE"}
+              />
+            ),
+          )}
         </View>
       )}
 
@@ -92,15 +106,17 @@ export const WashingMachine: FC = () => {
           <Text className="text-foreground text-xl font-bold">
             {t("services.washingMachine.dryer")}
           </Text>
-          {dryers.map((item) => (
-            <WashingMachineCard
-              key={item.machine_id}
-              number={item.selecteur_machine}
-              type={t("services.washingMachine.dryer")}
-              status={item.time_before_off}
-              icon={"DRYER"}
-            />
-          ))}
+          {dryers.map(
+            (item: MachineData & { type: "WASHING MACHINE" | "DRYER" }) => (
+              <WashingMachineCard
+                key={item.number}
+                number={item.number.toString()}
+                type={t("services.washingMachine.dryer")}
+                status={item.time_left}
+                icon={"DRYER"}
+              />
+            ),
+          )}
         </View>
       )}
     </Page>

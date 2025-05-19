@@ -2,6 +2,7 @@ import { TextSkeleton } from "@/components/Skeleton";
 import { useWashingMachines } from "@/hooks/useWashingMachines";
 import type { AppStackParamList } from "@/services/storage/types";
 import { useTheme } from "@/themes/useThemeProvider";
+import type { MachineData } from "@/types/washingMachine";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { WashingMachineIcon, Wind } from "lucide-react-native";
@@ -16,7 +17,10 @@ export function WashingMachineWidget() {
   const navigation = useNavigation<AppScreenNavigationProp>();
   const theme = useTheme();
 
-  const { data, isPending, isError, error } = useWashingMachines();
+  const { data: rawData, isPending, isError, error } = useWashingMachines();
+  const data = rawData as
+    | (MachineData & { type: "WASHING MACHINE" | "DRYER" })[]
+    | undefined;
 
   const [totalWashers, setTotalWashers] = useState<number>(0);
   const [totalDryers, setTotalDryers] = useState<number>(0);
@@ -26,21 +30,28 @@ export function WashingMachineWidget() {
   useEffect(() => {
     if (data) {
       const washingMachines = data.filter(
-        (machine) => machine.nom_type.trim() === "LAVE LINGE",
+        (machine: MachineData & { type: "WASHING MACHINE" | "DRYER" }) =>
+          machine.type === "WASHING MACHINE",
       );
       const dryers = data.filter(
-        (machine) => machine.nom_type.trim() !== "LAVE LINGE",
+        (machine: MachineData & { type: "WASHING MACHINE" | "DRYER" }) =>
+          machine.type === "DRYER",
       );
 
       setTotalWashers(washingMachines.length);
       setTotalDryers(dryers.length);
 
       setAvailableWashers(
-        washingMachines.filter((machine) => machine.time_before_off === 0)
-          .length,
+        washingMachines.filter(
+          (machine: MachineData & { type: "WASHING MACHINE" | "DRYER" }) =>
+            machine.available,
+        ).length,
       );
       setAvailableDryers(
-        dryers.filter((machine) => machine.time_before_off === 0).length,
+        dryers.filter(
+          (machine: MachineData & { type: "WASHING MACHINE" | "DRYER" }) =>
+            machine.available,
+        ).length,
       );
     }
   }, [data]);

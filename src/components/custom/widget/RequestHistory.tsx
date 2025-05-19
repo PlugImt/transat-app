@@ -1,7 +1,6 @@
 import { RequestHistorySkeleton } from "@/components/Skeleton";
 import type { SupportRequest } from "@/lib/support";
 import { useTheme } from "@/themes/useThemeProvider";
-import { format } from "date-fns";
 import {
   Check,
   ChevronDown,
@@ -80,7 +79,6 @@ export const RequestHistory = ({
       {requests.map((request) => {
         const { icon, text, color } = getStatusInfo(request.status);
         const isExpanded = expandedRequest === request.id;
-        const requestDate = new Date(request.created_at);
 
         return (
           <View key={request.id} className="bg-card rounded-lg p-4">

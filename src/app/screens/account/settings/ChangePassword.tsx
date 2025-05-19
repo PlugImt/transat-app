@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Keyboard, Text } from "react-native";
+import { Keyboard } from "react-native";
 import { z } from "zod";
 
 export const ChangePassword = () => {
@@ -70,9 +70,7 @@ export const ChangePassword = () => {
   };
 
   return (
-    <Page goBack className="gap-8">
-      <Text className="h1">Change Password</Text>
-
+    <Page goBack className="gap-8" title={t("account.changePassword")}>
       <Input
         label={t("account.currentPassword")}
         control={passwordControl}

@@ -51,22 +51,8 @@ export const Traq = () => {
     );
   }, [traq, selectedTags]);
 
-  const header = (
-    <View className="flex-row gap-2 justify-between items-center">
-      <Text className="h1 m-4">{t("services.traq.title")}</Text>
-
-      <AboutModal
-        title={t("services.traq.title")}
-        description={t("services.traq.about")}
-        openingHours={t("services.traq.openingHours")}
-        location={t("services.traq.location")}
-        additionalInfo={t("services.traq.additionalInfo")}
-      />
-    </View>
-  );
-
   if (isPending) {
-    return <TraqLoading header={header} />;
+    return <TraqLoading />;
   }
 
   if (isError && error) {
@@ -94,9 +80,22 @@ export const Traq = () => {
   }
 
   return (
-    <Page goBack refreshing={isPending} onRefresh={refetch} className="gap-4">
-      {header}
-
+    <Page
+      goBack
+      refreshing={isPending}
+      onRefresh={refetch}
+      className="gap-4"
+      title={t("services.traq.title")}
+      about={
+        <AboutModal
+          title={t("services.traq.title")}
+          description={t("services.traq.about")}
+          openingHours={t("services.traq.openingHours")}
+          location={t("services.traq.location")}
+          additionalInfo={t("services.traq.additionalInfo")}
+        />
+      }
+    >
       <View className="flex-row justify-between items-center ml-4">
         <Text className="h2">{t("common.filter")}</Text>
         {selectedTags.length > 0 && (
@@ -152,14 +151,24 @@ export const Traq = () => {
 
 export default Traq;
 
-interface TraqLoadingProps {
-  header: React.ReactNode;
-}
+const TraqLoading = () => {
+  const { t } = useTranslation();
 
-const TraqLoading = ({ header }: TraqLoadingProps) => {
   return (
-    <Page goBack className="gap-4">
-      {header}
+    <Page
+      goBack
+      className="gap-4"
+      title={t("services.traq.title")}
+      about={
+        <AboutModal
+          title={t("services.traq.title")}
+          description={t("services.traq.about")}
+          openingHours={t("services.traq.openingHours")}
+          location={t("services.traq.location")}
+          additionalInfo={t("services.traq.additionalInfo")}
+        />
+      }
+    >
       <View className="flex-row justify-between items-center">
         <TextSkeleton lines={1} variant="h2" lastLineWidth={100} />
       </View>

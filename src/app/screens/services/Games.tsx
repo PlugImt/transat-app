@@ -6,8 +6,7 @@ export const Games = () => {
   const { t } = useTranslation();
 
   return (
-    <Page>
-      <Text className="h1 m-4">{t("games.title")}</Text>
+    <Page title={t("games.title")}>
       <View className="min-h-screen flex justify-center items-center ">
         <Text className="text-foreground text-center h1 -mt-60">
           {t("common.underConstruction")}

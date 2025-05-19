@@ -26,22 +26,8 @@ export const WashingMachine: FC = () => {
     | (MachineData & { type: "WASHING MACHINE" | "DRYER" })[]
     | undefined;
 
-  const header = (
-    <View className="flex-row gap-2 justify-between items-center">
-      <Text className="h1 m-4">{t("services.washingMachine.title")}</Text>
-      <AboutModal
-        title={t("services.washingMachine.title")}
-        description={t("services.washingMachine.about")}
-        openingHours={openingHoursData}
-        location={t("services.washingMachine.location")}
-        price={t("services.washingMachine.price")}
-        additionalInfo={t("services.washingMachine.additionalInfo")}
-      />
-    </View>
-  );
-
   if (isPending) {
-    return <WashingMachineLoading header={header} />;
+    return <WashingMachineLoading />;
   }
 
   if (isError) {
@@ -79,9 +65,23 @@ export const WashingMachine: FC = () => {
   );
 
   return (
-    <Page goBack onRefresh={refetch} refreshing={isFetching} className="gap-6">
-      {header}
-
+    <Page
+      goBack
+      onRefresh={refetch}
+      refreshing={isFetching}
+      className="gap-6"
+      title={t("services.washingMachine.title")}
+      about={
+        <AboutModal
+          title={t("services.washingMachine.title")}
+          description={t("services.washingMachine.about")}
+          openingHours={openingHoursData}
+          location={t("services.washingMachine.location")}
+          price={t("services.washingMachine.price")}
+          additionalInfo={t("services.washingMachine.additionalInfo")}
+        />
+      }
+    >
       {washingMachines?.length > 0 && (
         <View className="flex-col gap-4">
           <Text className="text-foreground text-xl font-bold ml-4">
@@ -125,19 +125,28 @@ export const WashingMachine: FC = () => {
 
 export default WashingMachine;
 
-interface WashingMachineLoadingProps {
-  header: React.ReactNode;
-}
-
-const WashingMachineLoading = ({ header }: WashingMachineLoadingProps) => {
+const WashingMachineLoading = () => {
   const { t } = useTranslation();
+  const openingHoursData = [{ day: "24/7", lunch: "", dinner: "" }];
 
   const nbMachines = 4;
 
   return (
-    <Page goBack className="gap-6">
-      {header}
-
+    <Page
+      goBack
+      className="gap-6"
+      title={t("services.washingMachine.title")}
+      about={
+        <AboutModal
+          title={t("services.washingMachine.title")}
+          description={t("services.washingMachine.about")}
+          openingHours={openingHoursData}
+          location={t("services.washingMachine.location")}
+          price={t("services.washingMachine.price")}
+          additionalInfo={t("services.washingMachine.additionalInfo")}
+        />
+      }
+    >
       <View className="flex-col gap-4">
         <Text className="text-foreground text-xl font-bold">
           {t("services.washingMachine.washingMachine")}

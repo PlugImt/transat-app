@@ -1,13 +1,16 @@
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/themes/useThemeProvider";
 import { useNavigation } from "@react-navigation/native";
+import { BlurView } from "expo-blur";
 import { ArrowLeft } from "lucide-react-native";
 import { type ReactNode, useState } from "react";
 import { useRef } from "react";
 import {
   Dimensions,
+  Platform,
   RefreshControl,
   ScrollView,
+  StatusBar,
   Text,
   View,
 } from "react-native";
@@ -20,7 +23,8 @@ type PageProps = {
   className?: string;
   goBack?: boolean;
   title?: string;
-    about?: ReactNode;
+  about?: ReactNode;
+  newfName?: string;
   footer?: ReactNode;
   confetti?: boolean;
   onConfettiTrigger?: (trigger: () => void) => void;
@@ -33,7 +37,8 @@ export default function Page({
   className,
   goBack,
   title,
-    about,
+  about,
+  newfName,
   footer,
   confetti = false,
   onConfettiTrigger,
@@ -43,6 +48,8 @@ export default function Page({
   const confettiRef = useRef<ConfettiCannon>(null);
   const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
   const [confettiTriggered, setConfettiTriggered] = useState(false);
+  const statusBarHeight =
+    Platform.OS === "ios" ? 44 : StatusBar.currentHeight || 0;
 
   // Expose the confetti trigger function to parent components
   if (onConfettiTrigger) {
@@ -56,9 +63,45 @@ export default function Page({
 
   return (
     <View style={{ flex: 1, backgroundColor: theme.background }}>
+      {/* Sticky Header */}
+      <BlurView
+        intensity={50}
+        tint="dark"
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 10,
+          paddingTop: statusBarHeight + 10,
+          paddingBottom: 10,
+          paddingHorizontal: 20,
+          backgroundColor: "#030202E5", // Semi-transparent background
+        }}
+      >
+        <View className="flex-row justify-between items-center">
+          <View className="flex flex-row items-center justify-center">
+            {goBack && (
+              <ArrowLeft
+                color={theme.foreground}
+                onPress={() => navigation.goBack()}
+              />
+            )}
+            {title && (
+              <Text className="h1 ml-4">
+                {title}
+                {newfName && <Text className="text-primary"> {newfName}</Text>}
+              </Text>
+            )}
+          </View>
+          {about}
+        </View>
+      </BlurView>
+
       <ScrollView
         style={{ flex: 1, backgroundColor: theme.background }}
         automaticallyAdjustKeyboardInsets
+        contentContainerStyle={{ paddingTop: statusBarHeight + 60 }} // Add padding to account for the sticky header
         refreshControl={
           <RefreshControl
             refreshing={refreshing}
@@ -70,25 +113,10 @@ export default function Page({
       >
         <View
           className={cn(
-            "bg-background px-5 pt-14 flex flex-col gap-2 pb-12",
+            "bg-background px-5 flex flex-col gap-2 pb-12",
             className,
           )}
         >
-          <View className="flex-row gap-5 justify-between items-center">
-            <View className="flex flex-row items-center justify-center">
-            {goBack && (
-              <ArrowLeft
-                color={theme.foreground}
-                onPress={() => navigation.goBack()}
-              />
-            )}
-            {title && <Text className="h1 ml-4">{title}</Text>}
-            </View>
-
-            {about}
-          </View>
-
-
           {children}
         </View>
       </ScrollView>

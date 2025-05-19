@@ -115,16 +115,13 @@ export const EditProfile = () => {
   }
 
   return (
-    <Page goBack className="gap-8" refreshing={isPending} onRefresh={refetch}>
-      <View className="flex-row items-center justify-between m-4">
-        <Text className="h1">{t("account.editProfile")}</Text>
-        <Button
-          label={t("common.cancel")}
-          onPress={() => navigation.goBack()}
-          size="sm"
-          variant="ghost"
-        />
-      </View>
+    <Page
+      goBack
+      className="gap-8"
+      refreshing={isPending}
+      onRefresh={refetch}
+      title={t("account.editProfile")}
+    >
       <View className="items-center">
         <TouchableOpacity
           className="relative"
@@ -205,6 +202,12 @@ export const EditProfile = () => {
         />
       </View>
 
+      <Button
+        label={t("common.cancel")}
+        onPress={() => navigation.goBack()}
+        size="lg"
+        variant="ghost"
+      />
       <Button
         size="lg"
         label={t("common.save")}

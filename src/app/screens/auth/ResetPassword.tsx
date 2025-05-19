@@ -166,7 +166,7 @@ export const ResetPassword = () => {
   }, [fadeAnim, slideAnim]);
 
   return (
-    <Page goBack>
+    <Page goBack title={t("auth.resetPassword")}>
       <RNAnimated.View
         style={{
           opacity: fadeAnim,
@@ -174,8 +174,6 @@ export const ResetPassword = () => {
           flex: 1,
         }}
       >
-        <Text className="h1">{t("auth.resetPassword")}</Text>
-
         {resetError ? (
           <View className="bg-red-300 p-3 rounded-md my-4">
             <Text className="text-red-900">{resetError}</Text>

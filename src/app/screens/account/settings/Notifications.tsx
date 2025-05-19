@@ -24,11 +24,13 @@ export const Notifications = () => {
   };
 
   return (
-    <Page goBack className="gap-6" refreshing={isPending} onRefresh={onRefresh}>
-      <Text className="h1 m-4">
-        {t("settings.notifications.notifications")}
-      </Text>
-
+    <Page
+      goBack
+      className="gap-6"
+      refreshing={isPending}
+      onRefresh={onRefresh}
+      title={t("settings.notifications.notifications")}
+    >
       <View className="gap-2">
         <Text className="h2 mx-4">{t("services.title")}</Text>
         <View className="bg-card rounded-lg px-6 py-6 gap-6">

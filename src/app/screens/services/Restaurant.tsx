@@ -7,46 +7,48 @@ import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Image, Text, View } from "react-native";
 
+const { t } = useTranslation();
+
+const openingHoursData = [
+  {
+    day: " ",
+    lunch: t("services.restaurant.lunch"),
+    dinner: t("services.restaurant.dinner"),
+  },
+  {
+    day: t("common.days.monday"),
+    lunch: "11h30-13h30",
+    dinner: "18h30-19h45",
+  },
+  {
+    day: t("common.days.tuesday"),
+    lunch: "11h30-13h30",
+    dinner: "18h30-19h45",
+  },
+  {
+    day: t("common.days.wednesday"),
+    lunch: "11h30-13h30",
+    dinner: "18h30-19h45",
+  },
+  {
+    day: t("common.days.thursday"),
+    lunch: "11h30-13h30",
+    dinner: "18h30-19h45",
+  },
+  {
+    day: t("common.days.friday"),
+    lunch: "11h30-13h30",
+    dinner: t("services.restaurant.closed"),
+  },
+  {
+    day: t("common.days.weekend"),
+    lunch: t("services.restaurant.closed"),
+    dinner: t("services.restaurant.closed"),
+  },
+];
+
 export const Restaurant = () => {
   const { t } = useTranslation();
-
-  const openingHoursData = [
-    {
-      day: " ",
-      lunch: t("services.restaurant.lunch"),
-      dinner: t("services.restaurant.dinner"),
-    },
-    {
-      day: t("common.days.monday"),
-      lunch: "11h30-13h30",
-      dinner: "18h30-19h45",
-    },
-    {
-      day: t("common.days.tuesday"),
-      lunch: "11h30-13h30",
-      dinner: "18h30-19h45",
-    },
-    {
-      day: t("common.days.wednesday"),
-      lunch: "11h30-13h30",
-      dinner: "18h30-19h45",
-    },
-    {
-      day: t("common.days.thursday"),
-      lunch: "11h30-13h30",
-      dinner: "18h30-19h45",
-    },
-    {
-      day: t("common.days.friday"),
-      lunch: "11h30-13h30",
-      dinner: t("services.restaurant.closed"),
-    },
-    {
-      day: t("common.days.weekend"),
-      lunch: t("services.restaurant.closed"),
-      dinner: t("services.restaurant.closed"),
-    },
-  ];
 
   const {
     data: menu,
@@ -62,30 +64,27 @@ export const Restaurant = () => {
     [menu?.updated_date],
   );
 
-  const header = (
-    <View className="flex-row gap-2 justify-between items-center">
-      {/*<Text className="h1 m-4">{t("services.restaurant.title")}</Text>*/}
-
-      {/*<AboutModal*/}
-      {/*  title={t("services.restaurant.title")}*/}
-      {/*  description={t("services.restaurant.about")}*/}
-      {/*  openingHours={openingHoursData}*/}
-      {/*  location={t("services.restaurant.location")}*/}
-      {/*  price={t("services.restaurant.price")}*/}
-      {/*  additionalInfo={t("services.restaurant.additionalInfo")}*/}
-      {/*/>*/}
-    </View>
-  );
-
   if (isPending) {
-    return <RestaurantLoading header={header} />;
+    return <RestaurantLoading />;
   }
 
   if (weekend) {
     return (
-      <Page refreshing={isPending} onRefresh={refetch}>
-        {header}
-
+      <Page
+        refreshing={isPending}
+        onRefresh={refetch}
+        title={t("services.restaurant.title")}
+        about={
+          <AboutModal
+            title={t("services.restaurant.title")}
+            description={t("services.restaurant.about")}
+            openingHours={openingHoursData}
+            location={t("services.restaurant.location")}
+            price={t("services.restaurant.price")}
+            additionalInfo={t("services.restaurant.additionalInfo")}
+          />
+        }
+      >
         <View className="min-h-full flex justify-center items-center gap-4">
           <Image
             source={require("@/assets/images/Logos/restaurant.png")}
@@ -103,9 +102,21 @@ export const Restaurant = () => {
 
   if (outOfHours) {
     return (
-      <Page refreshing={isPending} onRefresh={refetch}>
-        {header}
-
+      <Page
+        refreshing={isPending}
+        onRefresh={refetch}
+        title={t("services.restaurant.title")}
+        about={
+          <AboutModal
+            title={t("services.restaurant.title")}
+            description={t("services.restaurant.about")}
+            openingHours={openingHoursData}
+            location={t("services.restaurant.location")}
+            price={t("services.restaurant.price")}
+            additionalInfo={t("services.restaurant.additionalInfo")}
+          />
+        }
+      >
         <View className="min-h-full flex justify-center items-center gap-4">
           <Image
             source={require("@/assets/images/Logos/restaurant.png")}
@@ -126,9 +137,21 @@ export const Restaurant = () => {
 
   if (isError) {
     return (
-      <Page refreshing={isPending} onRefresh={refetch}>
-        {header}
-
+      <Page
+        refreshing={isPending}
+        onRefresh={refetch}
+        title={t("services.restaurant.title")}
+        about={
+          <AboutModal
+            title={t("services.restaurant.title")}
+            description={t("services.restaurant.about")}
+            openingHours={openingHoursData}
+            location={t("services.restaurant.location")}
+            price={t("services.restaurant.price")}
+            additionalInfo={t("services.restaurant.additionalInfo")}
+          />
+        }
+      >
         <View className="min-h-screen flex justify-center items-center ">
           <Text className="text-red-500 text-center h1">{error?.message}</Text>
         </View>
@@ -142,14 +165,16 @@ export const Restaurant = () => {
       onRefresh={refetch}
       goBack
       title={t("services.restaurant.title")}
-      about={ <AboutModal
+      about={
+        <AboutModal
           title={t("services.restaurant.title")}
           description={t("services.restaurant.about")}
           openingHours={openingHoursData}
           location={t("services.restaurant.location")}
           price={t("services.restaurant.price")}
           additionalInfo={t("services.restaurant.additionalInfo")}
-      />}
+        />
+      }
     >
       {/*{header}*/}
 
@@ -215,16 +240,23 @@ export const Restaurant = () => {
 
 export default Restaurant;
 
-interface RestaurantLoadingProps {
-  header: React.ReactNode;
-}
-
-const RestaurantLoading = ({ header }: RestaurantLoadingProps) => {
+const RestaurantLoading = () => {
   const { t } = useTranslation();
 
   return (
-    <Page>
-      {header}
+    <Page
+      title={t("services.restaurant.title")}
+      about={
+        <AboutModal
+          title={t("services.restaurant.title")}
+          description={t("services.restaurant.about")}
+          openingHours={openingHoursData}
+          location={t("services.restaurant.location")}
+          price={t("services.restaurant.price")}
+          additionalInfo={t("services.restaurant.additionalInfo")}
+        />
+      }
+    >
       <View className="flex flex-col gap-8">
         <View className="flex flex-col gap-4">
           <Text className="h3 ml-4">{t("services.restaurant.lunch")}</Text>

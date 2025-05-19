@@ -69,9 +69,13 @@ export const Settings = () => {
   };
 
   return (
-    <Page goBack className="gap-6" refreshing={isPending} onRefresh={refetch}>
-      <Text className="h1 m-4">{t("settings.settings")}</Text>
-
+    <Page
+      goBack
+      className="gap-6"
+      refreshing={isPending}
+      onRefresh={refetch}
+      title={t("settings.settings")}
+    >
       <AccountCard user={user} />
 
       <View className="gap-2">

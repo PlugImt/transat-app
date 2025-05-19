@@ -55,16 +55,19 @@ export const Account = () => {
   }
 
   return (
-    <Page refreshing={isUserFetching} onRefresh={refetch} className="gap-6">
-      <View className="flex-row justify-between items-center">
-        <Text className="h1 m-4">{t("common.account")}</Text>
+    <Page
+      refreshing={isUserFetching}
+      onRefresh={refetch}
+      className="gap-6"
+      title={t("common.account")}
+      about={
         <IconButton
           icon={<Settings color={theme.foreground} />}
           variant="link"
           onPress={() => navigation.navigate("Settings")}
         />
-      </View>
-
+      }
+    >
       <View className="items-center gap-2">
         <Avatar className="w-32 h-32">
           <AvatarImage
@@ -147,16 +150,16 @@ const AccountLoading = () => {
   const theme = useTheme();
   const { t } = useTranslation();
   return (
-    <Page>
-      <View className="flex-row justify-between items-center m-4">
-        <Text className="h1">{t("common.account")}</Text>
+    <Page
+      title={t("common.account")}
+      about={
         <IconButton
           disabled
           icon={<Settings color={theme.foreground} />}
           variant="link"
         />
-      </View>
-
+      }
+    >
       <View className="items-center gap-2">
         <Avatar className="w-32 h-32">
           <AvatarImage loading />

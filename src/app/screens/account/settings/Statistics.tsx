@@ -209,11 +209,12 @@ export const Statistics = () => {
   };
 
   return (
-    <Page goBack refreshing={refreshing} onRefresh={onRefresh}>
-      <View className="flex-row gap-2 justify-between items-center">
-        <Text className="h1 my-4">{t("statistics.title", "Statistics")}</Text>
-      </View>
-
+    <Page
+      goBack
+      refreshing={refreshing}
+      onRefresh={onRefresh}
+      title={t("statistics.title", "Statistics")}
+    >
       <View className="flex flex-col gap-8">
         <View className="flex flex-col gap-4">
           {/* Server Status Card */}

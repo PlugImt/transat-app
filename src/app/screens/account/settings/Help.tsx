@@ -157,8 +157,7 @@ const Help = () => {
   ];
 
   return (
-    <Page goBack className="gap-6">
-      <Text className="h1 m-4">{t("settings.help.title")}</Text>
+    <Page goBack className="gap-6" title={t("settings.help.title")}>
       <Text className="text-foreground/70 mx-4 mb-2">
         {t("settings.help.description")}
       </Text>

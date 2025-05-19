@@ -153,11 +153,13 @@ export const Home = () => {
   };
 
   return (
-    <Page refreshing={isFetching} onRefresh={refetch} className="gap-6">
-      <Text className="h1 m-4">
-        {t("common.welcome")}{" "}
-        <Text className="text-primary">{user?.first_name || "Newf"}</Text>
-      </Text>
+    <Page
+      refreshing={isFetching}
+      onRefresh={refetch}
+      className="gap-6"
+      title={t("common.welcome")}
+      newfName={user?.first_name || "Newf"}
+    >
       <WeatherWidget />
       <RestaurantWidget />
       <WashingMachineWidget />

@@ -102,7 +102,7 @@ export const Signin = () => {
   }, [fadeAnim, slideAnim]);
 
   return (
-    <Page goBack>
+    <Page goBack title={t("auth.signIn")}>
       <RNAnimated.View
         style={{
           opacity: fadeAnim,
@@ -110,8 +110,6 @@ export const Signin = () => {
           flex: 1,
         }}
       >
-        <Text className="h1">{t("auth.signIn")}</Text>
-
         {loginError ? (
           <View className="bg-red-300 p-3 rounded-md my-4">
             <Text className="text-red-900">{loginError}</Text>

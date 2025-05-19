@@ -7,7 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Check } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ActivityIndicator, Text, View } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import { SettingsItem } from "./SettingsItem";
 
 // Define the language object structure
@@ -136,8 +136,7 @@ export const Language = () => {
   };
 
   return (
-    <Page goBack>
-      <Text className="h1 m-4">{t("settings.language.language")}</Text>
+    <Page goBack title={t("settings.language.language")}>
       <View className="bg-card rounded-lg px-4 py-2">
         {languages.map((language) => (
           <SettingsItem

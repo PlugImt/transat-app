@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { ScrollView, View, RefreshControl } from "react-native";
-import Page from "@/components/common/Page";
 import { Button } from "@/components/common/Button";
-import { Text } from "react-native";
+import Page from "@/components/common/Page";
 import { useTheme } from "@/themes/useThemeProvider";
 import { Activity, Server, Users } from "lucide-react-native";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Text, View } from "react-native";
 
 // Types for the statistics data
 interface UserStatistic {
@@ -51,7 +50,9 @@ export const Statistics = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [refreshing, setRefreshing] = useState(false);
-  const [statsLastLoaded, setStatsLastLoaded] = useState<string>(new Date().toISOString());
+  const [statsLastLoaded, setStatsLastLoaded] = useState<string>(
+    new Date().toISOString(),
+  );
 
   // Function to fetch server status
   const checkServerStatus = async () => {
@@ -61,8 +62,8 @@ export const Statistics = () => {
         method: "GET",
         mode: "cors",
         headers: {
-          "Accept": "application/json"
-        }
+          Accept: "application/json",
+        },
       });
       const endTime = Date.now();
       const latency = endTime - startTime;
@@ -74,7 +75,7 @@ export const Statistics = () => {
       });
 
       return response.ok;
-    } catch (err) {
+    } catch (_err) {
       setServerStatus({
         status: "offline",
         latency: 0,
@@ -100,32 +101,42 @@ export const Statistics = () => {
       }
 
       // Fetch global statistics
-      const globalResponse = await fetch(`${API_BASE_URL}/api/statistics/global`, {
-        method: "GET",
-        mode: "cors",
-        headers: {
-          "Accept": "application/json"
-        }
-      });
+      const globalResponse = await fetch(
+        `${API_BASE_URL}/api/statistics/global`,
+        {
+          method: "GET",
+          mode: "cors",
+          headers: {
+            Accept: "application/json",
+          },
+        },
+      );
 
       if (!globalResponse.ok) {
-        throw new Error(`Failed to fetch global statistics: ${globalResponse.status}`);
+        throw new Error(
+          `Failed to fetch global statistics: ${globalResponse.status}`,
+        );
       }
 
       const globalData = await globalResponse.json();
       setGlobalStats(globalData.statistics);
 
       // Fetch top users statistics
-      const topUsersResponse = await fetch(`${API_BASE_URL}/api/statistics/top-users`, {
-        method: "GET",
-        mode: "cors",
-        headers: {
-          "Accept": "application/json"
-        }
-      });
+      const topUsersResponse = await fetch(
+        `${API_BASE_URL}/api/statistics/top-users`,
+        {
+          method: "GET",
+          mode: "cors",
+          headers: {
+            Accept: "application/json",
+          },
+        },
+      );
 
       if (!topUsersResponse.ok) {
-        throw new Error(`Failed to fetch top users statistics: ${topUsersResponse.status}`);
+        throw new Error(
+          `Failed to fetch top users statistics: ${topUsersResponse.status}`,
+        );
       }
 
       const topUsersData = await topUsersResponse.json();
@@ -135,19 +146,21 @@ export const Statistics = () => {
       setLoading(false);
     } catch (err) {
       setLoading(false);
-      setError(`Failed to fetch statistics: ${err instanceof Error ? err.message : String(err)}`);
+      setError(
+        `Failed to fetch statistics: ${err instanceof Error ? err.message : String(err)}`,
+      );
     }
   };
 
   // Format date
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit'
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
     };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
@@ -155,32 +168,33 @@ export const Statistics = () => {
   // Format email to display as "First Name + First Letter of Last Name"
   const formatEmail = (email: string) => {
     if (!email) return "Anonymous";
-    
+
     // Split email to get the name part (before @)
-    const namePart = email.split('@')[0];
+    const namePart = email.split("@")[0];
     if (!namePart || !email.includes("@imt-atlantique.net")) {
       return "User"; // Default if not following expected pattern
     }
-    
+
     // Split name part by dot to get first name and last name
-    const nameParts = namePart.split('.');
+    const nameParts = namePart.split(".");
     if (nameParts.length < 2) {
       return nameParts[0]; // If there's no dot, just return the name part
     }
-    
+
     // Format as "First Name + First Letter of Last Name."
-    const firstName = nameParts[0].charAt(0).toUpperCase() + nameParts[0].slice(1);
+    const firstName =
+      nameParts[0].charAt(0).toUpperCase() + nameParts[0].slice(1);
     const lastNameInitial = nameParts[1].charAt(0).toUpperCase();
-    
+
     return `${firstName} ${lastNameInitial}.`;
   };
 
   useEffect(() => {
-    fetchStatistics();
+    fetchStatistics().then((r) => r);
 
     // Set up periodic status checks
     const statusCheckInterval = setInterval(() => {
-      checkServerStatus();
+      checkServerStatus().then((r) => r);
     }, 10000); // Check every 10 seconds
 
     return () => {
@@ -195,197 +209,281 @@ export const Statistics = () => {
   };
 
   return (
-    <Page>
-      <ScrollView
-        className="flex-1 px-4"
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      >
+    <Page refreshing={refreshing} onRefresh={onRefresh}>
+      <View className="flex-row gap-2 justify-between items-center">
         <Text className="h1 my-4">{t("statistics.title", "Statistics")}</Text>
+      </View>
 
-        {/* Server Status Card */}
-        <View className="bg-card rounded-lg p-4 mb-4">
-          <View className="flex-row items-center justify-between mb-2">
-            <View className="flex-row items-center">
-              <Server color={theme.foreground} size={22} />
-              <Text className="h3 ml-2">{t("statistics.serverStatus", "Server Status")}</Text>
-            </View>
-            <View className="flex-row items-center">
-              <View
-                className={`h-3 w-3 rounded-full mr-2 ${
-                  serverStatus.status === "online" ? "bg-green-500" : "bg-red-500"
-                }`}
-              />
-              <Text className="text-foreground">
-                {serverStatus.status === "online" ? t("statistics.online", "Online") : t("statistics.offline", "Offline")}
-              </Text>
-            </View>
+      <View className="flex flex-col gap-8">
+        <View className="flex flex-col gap-4">
+          {/* Server Status Card */}
+          <View className="flex-row items-center">
+            <Server color={theme.foreground} size={22} />
+            <Text className="h3 ml-2">
+              {t("statistics.serverStatus", "Server Status")}
+            </Text>
           </View>
-          
-          <View className="flex-row justify-between mt-2">
-            <View>
-              <Text className="text-foreground/60 text-sm">{t("statistics.latency", "Latency")}</Text>
-              <Text className="text-foreground font-medium">{serverStatus.latency} ms</Text>
-            </View>
-            <View>
-              <Text className="text-foreground/60 text-sm">{t("statistics.lastChecked", "Last Checked")}</Text>
-              <Text className="text-foreground font-medium">{formatDate(serverStatus.timestamp)}</Text>
-            </View>
-          </View>
-        </View>
-
-        {/* Error display */}
-        {error && (
-          <View className="bg-red-500/10 border-l-4 border-red-500 p-4 rounded-md mb-4">
-            <Text className="text-red-500 font-medium">{error}</Text>
-          </View>
-        )}
-
-        {/* Loading state */}
-        {loading ? (
-          <View className="bg-card rounded-lg p-8 items-center justify-center mb-4">
-            <Activity size={32} color={theme.primary} className="mb-4" />
-            <Text className="text-foreground/60">{t("statistics.loading", "Loading statistics...")}</Text>
-          </View>
-        ) : (
-          globalStats && (
-            <>
-              {/* Global Stats Card */}
-              <View className="bg-card rounded-lg p-4 mb-4">
-                <Text className="h3 mb-4">{t("statistics.globalStats", "Global Statistics")}</Text>
-                
-                <View className="flex-row flex-wrap justify-between mb-4">
-                  <View className="w-[48%] bg-background/20 rounded-lg p-3 mb-2">
-                    <Text className="text-foreground/60 text-xs">{t("statistics.totalRequests", "Total Requests")}</Text>
-                    <Text className="text-primary text-xl font-bold">{globalStats.total_request_count}</Text>
-                  </View>
-                  
-                  <View className="w-[48%] bg-background/20 rounded-lg p-3 mb-2">
-                    <Text className="text-foreground/60 text-xs">{t("statistics.successRate", "Success Rate")}</Text>
-                    <Text 
-                      className={`text-xl font-bold ${
-                        globalStats.global_success_rate_percent > 95 
-                          ? "text-green-500" 
-                          : globalStats.global_success_rate_percent > 80 
-                            ? "text-amber-500" 
-                            : "text-red-500"
-                      }`}
-                    >
-                      {globalStats.global_success_rate_percent.toFixed(1)}%
-                    </Text>
-                  </View>
-                  
-                  <View className="w-[48%] bg-background/20 rounded-lg p-3 mb-2">
-                    <Text className="text-foreground/60 text-xs">{t("statistics.avgResponseTime", "Avg Response Time")}</Text>
-                    <Text className="text-primary text-xl font-bold">
-                      {globalStats.global_avg_duration_ms.toFixed(1)} <Text className="text-xs text-foreground/60">ms</Text>
-                    </Text>
-                  </View>
-                  
-                  <View className="w-[48%] bg-background/20 rounded-lg p-3 mb-2">
-                    <Text className="text-foreground/60 text-xs">{t("statistics.maxResponseTime", "Max Response Time")}</Text>
-                    <Text className={`text-xl font-bold ${
-                      globalStats.global_max_duration_ms < 500 ? "text-amber-500" : "text-red-500"
-                    }`}>
-                      {globalStats.global_max_duration_ms} <Text className="text-xs text-foreground/60">ms</Text>
-                    </Text>
-                  </View>
-                </View>
-                
-                <View className="flex-row justify-between mb-4">
-                  <View className="w-[48%] bg-background/20 rounded-lg p-3">
-                    <Text className="text-foreground/60 text-xs">{t("statistics.successfulRequests", "Successful Requests")}</Text>
-                    <Text className="text-green-500 text-xl font-bold">{globalStats.success_count}</Text>
-                  </View>
-                  
-                  <View className="w-[48%] bg-background/20 rounded-lg p-3">
-                    <Text className="text-foreground/60 text-xs">{t("statistics.errorRequests", "Error Requests")}</Text>
-                    <Text className="text-red-500 text-xl font-bold">{globalStats.error_count}</Text>
-                  </View>
-                </View>
-                
-                {/* First Request */}
-                <View className="items-center mt-4">
-                  <Text className="text-foreground/60 text-xs mb-1">{t("statistics.firstRequest", "First Request")}</Text>
-                  <Text className="text-foreground">{formatDate(globalStats.first_request)}</Text>
-                </View>
+          <View className="bg-card rounded-lg p-4 mb-4">
+            <View className="flex-row items-center justify-between mb-2">
+              <View className="flex-row items-center">
+                <View
+                  className={`h-3 w-3 rounded-full mr-2 ${
+                    serverStatus.status === "online"
+                      ? "bg-green-500"
+                      : "bg-red-500"
+                  }`}
+                />
+                <Text className="text-foreground">
+                  {serverStatus.status === "online"
+                    ? t("statistics.online", "Online")
+                    : t("statistics.offline", "Offline")}
+                </Text>
               </View>
+            </View>
 
-              {/* Top Users Card */}
-              {topUsers.length > 0 && (
-                <View className="bg-card rounded-lg p-4 mb-4">
-                  <View className="flex-row items-center mb-4">
-                    <Users color={theme.foreground} size={22} />
-                    <Text className="h3 ml-2">{t("statistics.topUsers.title", "Top 10 Users")}</Text>
-                  </View>
-                  
-                  {topUsers.map((user, index) => (
-                    <View 
-                      key={index}
-                      className="bg-background/20 rounded-lg p-3 mb-2"
-                    >
-                      <View className="flex-row justify-between items-center mb-2">
-                        <View className="flex-row items-center">
-                          <Text className="text-primary font-bold mr-2">#{index + 1}</Text>
-                          <Text className="text-foreground font-medium">{formatEmail(user.email)}</Text>
-                        </View>
-                        <Text className="text-foreground font-bold">{user.request_count} {t("statistics.topUsers.requests", "requests")}</Text>
-                      </View>
-                      
-                      <View className="flex-row justify-between mb-2">
-                        <View>
-                          <Text className="text-foreground/60 text-xs">{t("statistics.topUsers.avgTime", "Avg Response Time")}</Text>
-                          <Text className="text-foreground">{user.avg_duration_ms.toFixed(2)} ms</Text>
-                        </View>
-                        
-                        <View>
-                          <Text className="text-foreground/60 text-xs">{t("statistics.topUsers.successRate", "Success Rate")}</Text>
-                          <Text className={`text-foreground ${
-                            user.success_rate_percent > 90
-                              ? "text-green-500"
-                              : user.success_rate_percent > 75
-                                ? "text-amber-500"
-                                : "text-red-500"
-                          }`}>
-                            {user.success_rate_percent.toFixed(1)}%
-                          </Text>
-                        </View>
-                      </View>
-                      
-                      <View className="flex-row justify-between">
-                        <View>
-                          <Text className="text-foreground/60 text-xs">{t("statistics.topUsers.firstSeen", "First Seen")}</Text>
-                          <Text className="text-foreground text-xs">{formatDate(user.first_request)}</Text>
-                        </View>
-                        
-                        <View>
-                          <Text className="text-foreground/60 text-xs">{t("statistics.topUsers.lastSeen", "Last Seen")}</Text>
-                          <Text className="text-foreground text-xs">{formatDate(user.last_request)}</Text>
-                        </View>
-                      </View>
-                    </View>
-                  ))}
-                </View>
-              )}
-              
-              <Text className="text-center text-foreground/60 text-xs mb-4">
-                {t("statistics.lastUpdated", "Statistics last updated:")} {formatDate(statsLastLoaded)}
+            <View className="flex-row justify-between mt-2">
+              <View>
+                <Text className="text-foreground/60 text-sm">
+                  {t("statistics.latency", "Latency")}
+                </Text>
+                <Text className="text-foreground font-medium">
+                  {serverStatus.latency} ms
+                </Text>
+              </View>
+              <View>
+                <Text className="text-foreground/60 text-sm">
+                  {t("statistics.lastChecked", "Last Checked")}
+                </Text>
+                <Text className="text-foreground font-medium">
+                  {formatDate(serverStatus.timestamp)}
+                </Text>
+              </View>
+            </View>
+          </View>
+
+          {/* Error display */}
+          {error && (
+            <View className="bg-red-500/10 border-l-4 border-red-500 p-4 rounded-md mb-4">
+              <Text className="text-red-500 font-medium">{error}</Text>
+            </View>
+          )}
+
+          {/* Loading state */}
+          {loading ? (
+            <View className="bg-card rounded-lg p-8 items-center justify-center mb-4">
+              <Activity size={32} color={theme.primary} className="mb-4" />
+              <Text className="text-foreground/60">
+                {t("statistics.loading", "Loading statistics...")}
               </Text>
-            </>
-          )
-        )}
-        
-        <Button
-          label={t("statistics.refresh", "Refresh Statistics")}
-          onPress={onRefresh}
-          disabled={refreshing}
-          loading={refreshing}
-          className="mb-8"
-        />
-      </ScrollView>
+            </View>
+          ) : (
+            globalStats && (
+              <>
+                {/* Global Stats Card */}
+                <Text className="h3 ml-4">
+                  {t("statistics.globalStats", "Global Statistics")}
+                </Text>
+
+                <View className="bg-card rounded-lg p-4 mb-4">
+                  <View className="flex-row flex-wrap justify-between mb-4">
+                    <View className="w-[48%] bg-background/20 rounded-lg p-3 mb-2">
+                      <Text className="text-foreground/60 text-xs">
+                        {t("statistics.totalRequests", "Total Requests")}
+                      </Text>
+                      <Text className="text-primary text-xl font-bold">
+                        {globalStats.total_request_count}
+                      </Text>
+                    </View>
+
+                    <View className="w-[48%] bg-background/20 rounded-lg p-3 mb-2">
+                      <Text className="text-foreground/60 text-xs">
+                        {t("statistics.successRate", "Success Rate")}
+                      </Text>
+                      <Text
+                        className={`text-xl font-bold ${
+                          globalStats.global_success_rate_percent > 95
+                            ? "text-green-500"
+                            : globalStats.global_success_rate_percent > 80
+                              ? "text-amber-500"
+                              : "text-red-500"
+                        }`}
+                      >
+                        {globalStats.global_success_rate_percent.toFixed(1)}%
+                      </Text>
+                    </View>
+
+                    <View className="w-[48%] bg-background/20 rounded-lg p-3 mb-2">
+                      <Text className="text-foreground/60 text-xs">
+                        {t("statistics.avgResponseTime", "Avg Response Time")}
+                      </Text>
+                      <Text className="text-primary text-xl font-bold">
+                        {globalStats.global_avg_duration_ms.toFixed(1)}{" "}
+                        <Text className="text-xs text-foreground/60">ms</Text>
+                      </Text>
+                    </View>
+
+                    <View className="w-[48%] bg-background/20 rounded-lg p-3 mb-2">
+                      <Text className="text-foreground/60 text-xs">
+                        {t("statistics.maxResponseTime", "Max Response Time")}
+                      </Text>
+                      <Text
+                        className={`text-xl font-bold ${
+                          globalStats.global_max_duration_ms < 500
+                            ? "text-amber-500"
+                            : "text-red-500"
+                        }`}
+                      >
+                        {globalStats.global_max_duration_ms}{" "}
+                        <Text className="text-xs text-foreground/60">ms</Text>
+                      </Text>
+                    </View>
+                  </View>
+
+                  <View className="flex-row justify-between mb-4">
+                    <View className="w-[48%] bg-background/20 rounded-lg p-3">
+                      <Text className="text-foreground/60 text-xs">
+                        {t(
+                          "statistics.successfulRequests",
+                          "Successful Requests",
+                        )}
+                      </Text>
+                      <Text className="text-green-500 text-xl font-bold">
+                        {globalStats.success_count}
+                      </Text>
+                    </View>
+
+                    <View className="w-[48%] bg-background/20 rounded-lg p-3">
+                      <Text className="text-foreground/60 text-xs">
+                        {t("statistics.errorRequests", "Error Requests")}
+                      </Text>
+                      <Text className="text-red-500 text-xl font-bold">
+                        {globalStats.error_count}
+                      </Text>
+                    </View>
+                  </View>
+
+                  {/* First Request */}
+                  <View className="items-center mt-4">
+                    <Text className="text-foreground/60 text-xs mb-1">
+                      {t("statistics.firstRequest", "First Request")}
+                    </Text>
+                    <Text className="text-foreground">
+                      {formatDate(globalStats.first_request)}
+                    </Text>
+                  </View>
+                </View>
+
+                {/* Top Users Card */}
+                {topUsers.length > 0 && (
+                  <>
+                    <View className="flex-row items-center mb-4">
+                      <Users color={theme.foreground} size={22} />
+                      <Text className="h3 ml-2">
+                        {t("statistics.topUsers.title", "Top 10 Users")}
+                      </Text>
+                    </View>
+                    <View className="bg-card rounded-lg p-4 mb-4">
+                      {topUsers.map((user, index) => (
+                        <View
+                          key={index}
+                          className="bg-background/20 rounded-lg p-3 mb-2"
+                        >
+                          <View className="flex-row justify-between items-center mb-2">
+                            <View className="flex-row items-center">
+                              <Text className="text-primary font-bold mr-2">
+                                #{index + 1}
+                              </Text>
+                              <Text className="text-foreground font-medium">
+                                {formatEmail(user.email)}
+                              </Text>
+                            </View>
+                            <Text className="text-foreground font-bold">
+                              {user.request_count}{" "}
+                              {t("statistics.topUsers.requests", "requests")}
+                            </Text>
+                          </View>
+
+                          <View className="flex-row justify-between mb-2">
+                            <View>
+                              <Text className="text-foreground/60 text-xs">
+                                {t(
+                                  "statistics.topUsers.avgTime",
+                                  "Avg Response Time",
+                                )}
+                              </Text>
+                              <Text className="text-foreground">
+                                {user.avg_duration_ms.toFixed(2)} ms
+                              </Text>
+                            </View>
+
+                            <View>
+                              <Text className="text-foreground/60 text-xs">
+                                {t(
+                                  "statistics.topUsers.successRate",
+                                  "Success Rate",
+                                )}
+                              </Text>
+                              <Text
+                                className={`text-foreground ${
+                                  user.success_rate_percent > 90
+                                    ? "text-green-500"
+                                    : user.success_rate_percent > 75
+                                      ? "text-amber-500"
+                                      : "text-red-500"
+                                }`}
+                              >
+                                {user.success_rate_percent.toFixed(1)}%
+                              </Text>
+                            </View>
+                          </View>
+
+                          <View className="flex-row justify-between">
+                            <View>
+                              <Text className="text-foreground/60 text-xs">
+                                {t(
+                                  "statistics.topUsers.firstSeen",
+                                  "First Seen",
+                                )}
+                              </Text>
+                              <Text className="text-foreground text-xs">
+                                {formatDate(user.first_request)}
+                              </Text>
+                            </View>
+
+                            <View>
+                              <Text className="text-foreground/60 text-xs">
+                                {t("statistics.topUsers.lastSeen", "Last Seen")}
+                              </Text>
+                              <Text className="text-foreground text-xs">
+                                {formatDate(user.last_request)}
+                              </Text>
+                            </View>
+                          </View>
+                        </View>
+                      ))}
+                    </View>
+                  </>
+                )}
+
+                <Text className="text-center text-foreground/60 text-xs mb-4">
+                  {t("statistics.lastUpdated", "Statistics last updated:")}{" "}
+                  {formatDate(statsLastLoaded)}
+                </Text>
+              </>
+            )
+          )}
+
+          <Button
+            label={t("statistics.refresh", "Refresh Statistics")}
+            onPress={onRefresh}
+            disabled={refreshing}
+            loading={refreshing}
+            className="mb-8"
+          />
+        </View>
+      </View>
     </Page>
   );
 };
 
-export default Statistics; 
+export default Statistics;

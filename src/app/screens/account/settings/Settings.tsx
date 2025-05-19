@@ -1,12 +1,12 @@
 import { useQueryClient } from "@tanstack/react-query";
 import {
+  BarChart,
   Bell,
   Globe,
   HelpCircle,
   Info,
   Server,
   Shield,
-  BarChart,
 } from "lucide-react-native";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -134,7 +134,10 @@ export const Settings = () => {
           <SettingsItem
             icon={<BarChart color={theme.foreground} size={22} />}
             title={t("settings.statistics.title", "Statistics")}
-            subtitle={t("settings.statistics.subtitle", "View system statistics")}
+            subtitle={t(
+              "settings.statistics.subtitle",
+              "View system statistics",
+            )}
             onPress={() => navigation.navigate("Statistics")}
           />
 

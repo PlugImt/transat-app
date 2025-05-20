@@ -49,7 +49,7 @@ export default function Page({
   const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
   const [confettiTriggered, setConfettiTriggered] = useState(false);
   const statusBarHeight =
-    Platform.OS === "ios" ? 44 : StatusBar.currentHeight || 0;
+    Platform.OS === "ios" ? 0 : StatusBar.currentHeight || 0;
 
   // Expose the confetti trigger function to parent components
   if (onConfettiTrigger) {

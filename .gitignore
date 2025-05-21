@@ -40,6 +40,7 @@ app-example
 
 *.apk
 *.aab
+*.ipa
 Transat Firebase Service Account.json
 
 .env
@@ -50,6 +51,3 @@ Transat Firebase Service Account.json
 
 android/
 ios/
-
-*.ipa
-*.apk

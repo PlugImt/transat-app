@@ -69,7 +69,7 @@ export function WashingMachineWidget() {
       <Text className="h3 ml-4">{t("services.washingMachine.title")}</Text>
       <TouchableOpacity
         onPress={() => navigation.navigate("WashingMachine")}
-        className="px-6 py-4 rounded-lg bg-card flex-row justify-between gap-6"
+        className="px-6 py-4 rounded-lg bg-card flex-row justify-between gap-6 overflow-hidden"
       >
         <View className="items-center">
           <WashingMachineIcon

@@ -8,7 +8,7 @@ import type { StackNavigationProp } from "@react-navigation/stack";
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -26,6 +26,13 @@ export function RestaurantWidget() {
     () => (menu?.updated_date ? outOfService(menu.updated_date) : false),
     [menu?.updated_date],
   );
+  const updatedToday: boolean = useMemo(
+    () =>
+      menu?.updated_date
+        ? new Date(menu.updated_date).getDay() === new Date().getDay()
+        : false,
+    [menu?.updated_date],
+  );
 
   const title =
     !weekend && lunch
@@ -38,26 +45,48 @@ export function RestaurantWidget() {
     return <RestaurantWidgetLoading />;
   }
 
-  if (error || weekend || outOfHours || (!lunch && !dinner)) {
+  if (error || weekend || outOfHours || (!lunch && !dinner) || !updatedToday) {
     return (
       <View className="flex flex-col gap-2">
         <Text className="h3 ml-4">{t("services.restaurant.title")}</Text>
-        <View className="px-6 py-4 rounded-lg bg-card flex flex-col gap-6">
-          {weekend ? (
-            <Text className="text-lg text-foreground font-bold text-center">
-              {t("services.restaurant.closedWeekends")}
-            </Text>
-          ) : (
-            <>
-              <Text className="text-lg text-foreground font-bold text-center">
-                {t("services.restaurant.closedNight.title")}
-              </Text>
+        <View className="px-6 py-4 rounded-lg bg-card flex flex-row gap-6 items-center overflow-hidden">
+          <Image
+            source={require("@/assets/images/Logos/restaurant_bw.png")}
+            className="w-24 h-24"
+          />
+          <View className="flex flex-col gap-2">
+            {weekend ? (
+              <>
+                <Text className="text-lg text-foreground font-bold text-center text-wrap">
+                  {t("services.restaurant.closedWeekends")}
+                </Text>
 
-              <Text className="text-foreground text-center">
-                {t("services.restaurant.closedNight.description")}
-              </Text>
-            </>
-          )}
+                <Text className="text-foreground text-center text-wrap">
+                  {t("services.restaurant.closedNight.description")}
+                </Text>
+              </>
+            ) : !updatedToday ? (
+              <>
+                <Text className="text-lg text-foreground font-bold text-center text-wrap">
+                  {t("services.restaurant.closedUpdated.title")}
+                </Text>
+
+                <Text className="text-foreground text-center text-wrap">
+                  {t("services.restaurant.closedUpdated.description")}
+                </Text>
+              </>
+            ) : (
+              <>
+                <Text className="text-lg text-foreground font-bold text-center text-wrap">
+                  {t("services.restaurant.closedNight.title")}
+                </Text>
+
+                <Text className="text-foreground text-center text-wrap">
+                  {t("services.restaurant.closedNight.description")}
+                </Text>
+              </>
+            )}
+          </View>
         </View>
       </View>
     );

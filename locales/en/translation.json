@@ -211,7 +211,11 @@
       "closedWeekends": "The restaurant is closed on weekends",
       "closedNight": {
         "title": "The restaurant is closed",
-        "description": "Come back at 11am to see today's menu"
+        "description": "Come back tomorrow to see the menu"
+      },
+      "closedUpdated": {
+        "title": "The restaurant is closed",
+        "description": "The menu hasn't been updated yet. Check back later."
       },
       "location": "Next to the gym",
       "about": "API prepares fresh and homemade dishes daily—even the fruit salad! The menu changes every day for lunch and dinner.",

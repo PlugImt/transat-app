@@ -99,9 +99,13 @@ export default function Page({
       </BlurView>
 
       <ScrollView
-        style={{ flex: 1, backgroundColor: theme.background }}
+        style={{
+          flex: 1,
+          backgroundColor: theme.background,
+          marginTop: statusBarHeight + 60,
+        }}
         automaticallyAdjustKeyboardInsets
-        contentContainerStyle={{ paddingTop: statusBarHeight + 60 }} // Add padding to account for the sticky header
+        contentContainerStyle={{ paddingTop: 10 }} // Add padding to account for the sticky header
         refreshControl={
           <RefreshControl
             refreshing={refreshing}

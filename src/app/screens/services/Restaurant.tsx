@@ -7,46 +7,6 @@ import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Image, Text, View } from "react-native";
 
-const { t } = useTranslation();
-
-const openingHoursData = [
-  {
-    day: " ",
-    lunch: t("services.restaurant.lunch"),
-    dinner: t("services.restaurant.dinner"),
-  },
-  {
-    day: t("common.days.monday"),
-    lunch: "11h30-13h30",
-    dinner: "18h30-19h45",
-  },
-  {
-    day: t("common.days.tuesday"),
-    lunch: "11h30-13h30",
-    dinner: "18h30-19h45",
-  },
-  {
-    day: t("common.days.wednesday"),
-    lunch: "11h30-13h30",
-    dinner: "18h30-19h45",
-  },
-  {
-    day: t("common.days.thursday"),
-    lunch: "11h30-13h30",
-    dinner: "18h30-19h45",
-  },
-  {
-    day: t("common.days.friday"),
-    lunch: "11h30-13h30",
-    dinner: t("services.restaurant.closed"),
-  },
-  {
-    day: t("common.days.weekend"),
-    lunch: t("services.restaurant.closed"),
-    dinner: t("services.restaurant.closed"),
-  },
-];
-
 export const Restaurant = () => {
   const { t } = useTranslation();
 
@@ -63,6 +23,44 @@ export const Restaurant = () => {
     () => (menu?.updated_date ? outOfService(menu.updated_date) : false),
     [menu?.updated_date],
   );
+
+  const openingHoursData = [
+    {
+      day: " ",
+      lunch: t("services.restaurant.lunch"),
+      dinner: t("services.restaurant.dinner"),
+    },
+    {
+      day: t("common.days.monday"),
+      lunch: "11h30-13h30",
+      dinner: "18h30-19h45",
+    },
+    {
+      day: t("common.days.tuesday"),
+      lunch: "11h30-13h30",
+      dinner: "18h30-19h45",
+    },
+    {
+      day: t("common.days.wednesday"),
+      lunch: "11h30-13h30",
+      dinner: "18h30-19h45",
+    },
+    {
+      day: t("common.days.thursday"),
+      lunch: "11h30-13h30",
+      dinner: "18h30-19h45",
+    },
+    {
+      day: t("common.days.friday"),
+      lunch: "11h30-13h30",
+      dinner: t("services.restaurant.closed"),
+    },
+    {
+      day: t("common.days.weekend"),
+      lunch: t("services.restaurant.closed"),
+      dinner: t("services.restaurant.closed"),
+    },
+  ];
 
   if (isPending) {
     return <RestaurantLoading />;
@@ -242,6 +240,44 @@ export default Restaurant;
 
 const RestaurantLoading = () => {
   const { t } = useTranslation();
+
+  const openingHoursData = [
+    {
+      day: " ",
+      lunch: t("services.restaurant.lunch"),
+      dinner: t("services.restaurant.dinner"),
+    },
+    {
+      day: t("common.days.monday"),
+      lunch: "11h30-13h30",
+      dinner: "18h30-19h45",
+    },
+    {
+      day: t("common.days.tuesday"),
+      lunch: "11h30-13h30",
+      dinner: "18h30-19h45",
+    },
+    {
+      day: t("common.days.wednesday"),
+      lunch: "11h30-13h30",
+      dinner: "18h30-19h45",
+    },
+    {
+      day: t("common.days.thursday"),
+      lunch: "11h30-13h30",
+      dinner: "18h30-19h45",
+    },
+    {
+      day: t("common.days.friday"),
+      lunch: "11h30-13h30",
+      dinner: t("services.restaurant.closed"),
+    },
+    {
+      day: t("common.days.weekend"),
+      lunch: t("services.restaurant.closed"),
+      dinner: t("services.restaurant.closed"),
+    },
+  ];
 
   return (
     <Page

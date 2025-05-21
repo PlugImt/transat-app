@@ -47,3 +47,6 @@ Transat Firebase Service Account.json
 .vscode/
 
 .env.local
+
+android/
+ios/

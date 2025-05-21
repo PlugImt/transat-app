@@ -50,3 +50,6 @@ Transat Firebase Service Account.json
 
 android/
 ios/
+
+*.ipa
+*.apk

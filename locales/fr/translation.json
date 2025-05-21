@@ -51,14 +51,15 @@
     "plugImtNote": "NOTE: Plug'IMT est une association créée par des étudiants de l'IMT mais n'est pas affilié à l'école",
     "credits": "Crédits",
     "underConstruction": "En cours de développement 🏗️",
-    "underConstructionDesc": "De nouvelles fonctionnalités arrivent bientôt ;)"
+    "underConstructionDesc": "De nouvelles fonctionnalités arrivent bientôt ;)",
+    "refresh": "Actualiser"
   },
   "settings": {
     "settings": "Paramètres",
     "logout": "Déconnexion",
     "devServer": "Serveur de développement",
     "devServerDescription": "Utiliser localhost",
-    "logoutDesc": "Êtes-vous sûr(e) de vouloir vous déconnecter ?",
+    "logoutDesc": "Êtes-vous sûr(e) de vouloir vous déconnecter ?",
     "logoutConfirm": "Me déconnecter",
     "notifications": {
       "notifications": "Notifications",
@@ -86,6 +87,10 @@
       "messageRequired": "Vous ne pouvez pas envoyer de message vide",
       "messageSent": "Merci pour votre commentaire, nous vous répondrons dans les plus brefs délais !",
       "messageFailed": "L'envoi de votre message a échoué, veuillez réessayer plus tard ou nous contacter via WhatsApp.",
+      "addImage": "Ajouter une capture d'écran",
+      "removeImage": "Supprimer l'image",
+      "imageUploadFailed": "Échec du téléchargement de l'image, veuillez réessayer",
+      "imageSent": "Capture d'écran téléchargée avec succès",
       "faq1Question": "Comment changer mon mot de passe ?",
       "faq1Answer": "Pour modifier votre mot de passe, allez dans les paramètres du compte et cliquez sur « Modifier le mot de passe ». Saisissez votre mot de passe actuel et le nouveau mot de passe que vous souhaitez définir.",
       "faq2Question": "Comment supprimer mon compte ?",
@@ -93,7 +98,12 @@
       "faq3Question": "Cette application a-t-elle été créée par des étudiants de l'IMT ?",
       "faq3Answer": "Oui, cette application a été développée par des étudiants de l'IMT dans le cadre d'un projet visant à améliorer l'expérience des étudiants sur le campus. Nous travaillons constamment à l'ajout de nouvelles fonctionnalités et à l'amélioration de l'application en fonction de vos commentaires.",
       "faq4Question": "Comment contribuer ?",
-      "faq4Answer": "Si vous souhaitez contribuer au développement de cette application, vous pouvez rejoindre notre équipe en nous contactant sur notre groupe WhatsApp. Toute aide est la bienvenue, qu'il s'agisse de développement, de conception ou de test."
+      "faq4Answer": "Si vous souhaitez contribuer au développement de cette application, vous pouvez rejoindre notre équipe en nous contactant sur notre groupe WhatsApp. Toute aide est la bienvenue, qu'il s'agisse de développement, de conception ou de test.",
+      "history": "Historique",
+      "previousRequests": "Demandes précédentes",
+      "requestsDescription": "Voici toutes les demandes que vous avez envoyées à notre équipe d'assistance et leur état.",
+      "joinCommunity": "Obtenez des réponses plus rapides de notre communauté",
+      "requestsPending": "Récupération de vos demandes..."
     },
     "contactSupport": "Contacter le support",
     "appearance": "Apparence",
@@ -138,13 +148,27 @@
       "accountExists": "Un compte avec cet email existe déjà",
       "signupFailed": "Échec de la création du compte",
       "invalidCredentials": "Email ou mot de passe invalide",
-      "phone": "Le numéro de téléphone est trop court"
-    }
+      "phone": "Le numéro de téléphone est trop court",
+      "resetPasswordFailed": "Échec de la réinitialisation du mot de passe",
+      "verificationCode": "Le code de vérification doit comporter 6 chiffres",
+      "tooManyRequests": "Trop de demandes. Veuillez réessayer plus tard",
+      "invalidVerificationCode": "Code de vérification invalide"
+    },
+    "resetPassword": "Réinitialiser le mot de passe",
+    "resettingPassword": "Réinitialisation du mot de passe...",
+    "resetPasswordSuccess": "Les instructions de réinitialisation du mot de passe ont été envoyées à votre email",
+    "signInDescription": "Nous sommes heureux de vous revoir ! Veuillez saisir votre email et votre mot de passe pour accéder à Transat.",
+    "signUpDescription": "Rejoignez la communauté Transat ! Remplissez vos coordonnées pour créer un compte et commencer à profiter de nos services.",
+    "resetPasswordDescription": "Entrez votre adresse email pour recevoir votre code à usage unique pour réinitialiser votre mot de passe.",
+    "requestVerificationCode": "Demander un code de vérification",
+    "newPassword": "Nouveau mot de passe",
+    "requestCodeCooldown": "Veuillez attendre {{seconds}} secondes avant de demander un nouveau code"
   },
   "welcome": {
     "subtitle": "Par les Atlantes, pour les Atlantes 🐙",
     "login": "Connexion",
-    "register": "S'inscrire"
+    "register": "S'inscrire",
+    "signup": "S'inscrire"
   },
   "services": {
     "title": "Services",
@@ -186,7 +210,11 @@
       "location": "À côté du gymnase",
       "about": "API prépare des plats frais et faits maison quotidiennement—même la salade de fruits ! Le menu change tous les jours pour le déjeuner et le dîner.",
       "price": "3,95€ pour une entrée, un plat principal et un dessert.",
-      "additionalInfo": "Vous pouvez échanger une entrée contre un dessert. Des plats supplémentaires sont disponibles, pour un coût supplémentaire. Vous avez encore faim ? Demandez aux serveurs ! Après 19h45, la nourriture supplémentaire au dîner est gratuite."
+      "additionalInfo": "Vous pouvez échanger une entrée contre un dessert. Des plats supplémentaires sont disponibles, pour un coût supplémentaire. Vous avez encore faim ? Demandez aux serveurs ! Après 19h45, la nourriture supplémentaire au dîner est gratuite.",
+      "closedUpdated": {
+        "title": "Nous n'avons pas encore le menu",
+        "description": "Le menu n'a pas été mis à jour. Revenez plus tard."
+      }
     },
     "washingMachine": {
       "title": "Laverie",

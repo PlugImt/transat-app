@@ -51,7 +51,8 @@
     "plugImtNote": "NOTA: Plug'IMT es una asociación creada por estudiantes de IMT pero no está afiliada a la escuela",
     "credits": "Créditos",
     "underConstruction": "En construcción 🏗️",
-    "underConstructionDesc": "This page is under construction. Please check back later."
+    "underConstructionDesc": "This page is under construction. Please check back later.",
+    "refresh": "Actualizar"
   },
   "settings": {
     "settings": "Configuración",
@@ -86,6 +87,10 @@
       "messageRequired": "No se puede enviar un mensaje vacío",
       "messageSent": "Gracias por su comentario, nos pondremos en contacto con usted lo antes posible.",
       "messageFailed": "No se ha podido enviar el mensaje, inténtelo más tarde o póngase en contacto con nosotros a través de WhatsApp.",
+      "addImage": "Añadir captura de pantalla",
+      "removeImage": "Eliminar imagen",
+      "imageUploadFailed": "Error al subir la imagen, inténtelo de nuevo",
+      "imageSent": "Captura de pantalla subida con éxito",
       "faq1Question": "¿Cómo cambiar mi contraseña?",
       "faq1Answer": "Para cambiar su contraseña, vaya a la configuración de la cuenta y haga clic en \"Cambiar contraseña\". Introduce tu contraseña actual y la nueva contraseña que quieras establecer.",
       "faq2Question": "¿Cómo eliminar mi cuenta?",
@@ -93,7 +98,13 @@
       "faq3Question": "¿Esta aplicación está hecha por estudiantes de IMT?",
       "faq3Answer": "Sí, esta aplicación ha sido desarrollada por estudiantes de IMT como parte de un proyecto para mejorar la experiencia de los estudiantes en el campus. Trabajamos constantemente para añadir nuevas funciones y mejorar la aplicación en función de tus comentarios.",
       "faq4Question": "¿Cómo contribuir?",
-      "faq4Answer": "Si quieres contribuir al desarrollo de esta app, puedes unirte a nuestro equipo contactando con nosotros en nuestro grupo de WhatsApp. Agradecemos cualquier ayuda, ya sea en desarrollo, diseño o pruebas."
+      "faq4Answer": "Si quieres contribuir al desarrollo de esta app, puedes unirte a nuestro equipo contactando con nosotros en nuestro grupo de WhatsApp. Agradecemos cualquier ayuda, ya sea en desarrollo, diseño o pruebas.",
+      "history": "Historial",
+      "previousRequests": "Solicitudes anteriores",
+      "requestsDescription": "Aquí están todas las solicitudes que ha enviado a nuestro equipo de soporte y su estado.",
+      "joinWhatsApp": "Únete a nuestro grupo de WhatsApp",
+      "joinCommunity": "Obtenga respuestas más rápidas de nuestra comunidad",
+      "requestsPending": "Obteniendo sus solicitudes..."
     },
     "contactSupport": "Contactar con soporte",
     "appearance": "Apariencia",
@@ -138,13 +149,27 @@
       "accountExists": "Ya existe una cuenta con este correo electrónico",
       "signupFailed": "Error al crear la cuenta",
       "invalidCredentials": "Correo electrónico o contraseña inválidos",
-      "phone": "El número de teléfono es demasiado corto"
-    }
+      "phone": "El número de teléfono es demasiado corto",
+      "resetPasswordFailed": "Error al restablecer la contraseña",
+      "verificationCode": "El código de verificación debe tener 6 dígitos",
+      "tooManyRequests": "Demasiadas solicitudes. Por favor, inténtelo de nuevo más tarde",
+      "invalidVerificationCode": "Código de verificación inválido"
+    },
+    "resetPassword": "Restablecer contraseña",
+    "resettingPassword": "Restableciendo contraseña...",
+    "resetPasswordSuccess": "Las instrucciones para restablecer la contraseña se han enviado a su correo electrónico",
+    "signInDescription": "¡Nos alegra verte de nuevo! Introduce tu correo electrónico y contraseña para acceder a Transat.",
+    "signUpDescription": "¡Únete a la comunidad Transat! Completa tus datos para crear una cuenta y comenzar a disfrutar de nuestros servicios.",
+    "resetPasswordDescription": "Ingrese su dirección de correo electrónico para recibir su código único para restablecer su contraseña.",
+    "requestVerificationCode": "Solicitar código de verificación",
+    "newPassword": "Nueva contraseña",
+    "requestCodeCooldown": "Espere {{seconds}} segundos antes de solicitar un nuevo código"
   },
   "welcome": {
     "subtitle": "Por los Atlantes, para los Atlantes 🐙",
     "login": "Iniciar sesión",
-    "register": "Registro"
+    "register": "Registro",
+    "signup": "Registro"
   },
   "services": {
     "title": "Servicios",
@@ -186,7 +211,11 @@
       "location": "Junto al gimnasio",
       "about": "API prepara platos frescos y caseros diariamente—¡incluso la ensalada de frutas! El menú cambia todos los días para el almuerzo y la cena.",
       "price": "3,95€ por un entrante, un plato principal y un postre.",
-      "additionalInfo": "Puedes cambiar un entrante por un postre. Hay platos adicionales disponibles, por un coste adicional. ¿Aún tienes hambre? ¡Pregunta a los camareros! Después de las 19:45, la comida adicional en la cena es gratis."
+      "additionalInfo": "Puedes cambiar un entrante por un postre. Hay platos adicionales disponibles, por un coste adicional. ¿Aún tienes hambre? ¡Pregunta a los camareros! Después de las 19:45, la comida adicional en la cena es gratis.",
+      "closedUpdated": {
+        "title": "Aún no tenemos el menú",
+        "description": "El menú no se ha actualizado. Vuelva más tarde."
+      }
     },
     "washingMachine": {
       "title": "Lavandería",

@@ -51,7 +51,8 @@
     "plugImtNote": "注：Plug'IMT 是由 IMT 学生创建的协会，但与学校无关。",
     "credits": "荣誉",
     "underConstruction": "施工中 🏗️",
-    "underConstructionDesc": "This page is under construction. Please check back later."
+    "underConstructionDesc": "This page is under construction. Please check back later.",
+    "refresh": "刷新"
   },
   "settings": {
     "settings": "设置",
@@ -93,7 +94,16 @@
       "faq3Question": "这个应用程序是由 IMT 学生制作的吗？",
       "faq3Answer": "是的，此应用程序由 IMT 学生开发，是改善学生校园体验项目的一部分。我们将不断根据您的反馈意见增加新功能，改进应用程序。",
       "faq4Question": "如何捐款？",
-      "faq4Answer": "如果您想为本应用程序的开发做出贡献，可以通过我们的 WhatsApp 群组联系我们，加入我们的团队。我们欢迎任何帮助，无论是在开发、设计还是测试方面。"
+      "faq4Answer": "如果您想为本应用程序的开发做出贡献，可以通过我们的 WhatsApp 群组联系我们，加入我们的团队。我们欢迎任何帮助，无论是在开发、设计还是测试方面。",
+      "history": "历史",
+      "previousRequests": "以前的请求",
+      "requestsDescription": "这里是您发送给我们支持团队的所有请求及其状态。",
+      "joinCommunity": "从我们的社区获得更快的回应",
+      "requestsPending": "正在获取您的请求...",
+      "addImage": "添加截图",
+      "removeImage": "删除图片",
+      "imageUploadFailed": "图片上传失败，请重试",
+      "imageSent": "截图上传成功"
     },
     "contactSupport": "支持联系人",
     "appearance": "外观",
@@ -138,13 +148,27 @@
       "accountExists": "该电子邮件帐户已经存在",
       "signupFailed": "创建账户失败",
       "invalidCredentials": "电子邮件或密码无效",
-      "phone": "电话号码太短"
-    }
+      "phone": "电话号码太短",
+      "resetPasswordFailed": "重置密码失败",
+      "verificationCode": "验证码必须为6位数字",
+      "tooManyRequests": "请求过多。请稍后再试",
+      "invalidVerificationCode": "验证码无效"
+    },
+    "resetPassword": "重置密码",
+    "resettingPassword": "正在重置密码...",
+    "resetPasswordSuccess": "重置密码的说明已发送到您的电子邮件",
+    "signInDescription": "很高兴再次见到您！请输入您的电子邮件和密码以访问Transat。",
+    "signUpDescription": "加入Transat社区！填写您的详细信息以创建帐户并开始享受我们的服务。",
+    "resetPasswordDescription": "输入您的电子邮件地址以接收用于重置密码的一次性代码。",
+    "requestVerificationCode": "请求验证码",
+    "newPassword": "新密码",
+    "requestCodeCooldown": "请等待{{seconds}}秒后再请求新代码"
   },
   "welcome": {
     "subtitle": "由亚特兰蒂斯人创作，为亚特兰蒂斯人服务 🐙",
     "login": "登录",
-    "register": "注册"
+    "register": "注册",
+    "signup": "注册"
   },
   "services": {
     "title": "服务",
@@ -186,7 +210,11 @@
       "location": "体育馆旁",
       "about": "API 每天都会准备新鲜的自制菜肴，就连水果沙拉也不例外！午餐和晚餐的菜单每天更换。",
       "price": "前菜、主菜和甜点的价格为 3.95 欧元。",
-      "additionalInfo": "您可以将开胃菜换成甜点。如需额外收费，还可提供其他菜肴。还饿吗？问问服务员吧！晚餐 7:45 后，加餐免费。"
+      "additionalInfo": "您可以将开胃菜换成甜点。如需额外收费，还可提供其他菜肴。还饿吗？问问服务员吧！晚餐 7:45 后，加餐免费。",
+      "closedUpdated": {
+        "title": "我们还没有菜单",
+        "description": "菜单尚未更新。请稍后再查看。"
+      }
     },
     "washingMachine": {
       "title": "洗衣房",

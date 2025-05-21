@@ -51,7 +51,8 @@
     "plugImtNote": "NOTA: A Plug'IMT é uma associação criada por estudantes do IMT, mas não está associada à escola",
     "credits": "Créditos",
     "underConstruction": "Em construção 🏗️",
-    "underConstructionDesc": "Estamos a trabalhar arduamente para lhe apresentar esta nova funcionalidade o mais rapidamente possível. Fique atento!"
+    "underConstructionDesc": "Estamos a trabalhar arduamente para lhe apresentar esta nova funcionalidade o mais rapidamente possível. Fique atento!",
+    "refresh": "Atualizar"
   },
   "settings": {
     "settings": "Definições",
@@ -86,6 +87,10 @@
       "messageRequired": "Não é possível enviar uma mensagem vazia",
       "messageSent": "Obrigado pela sua opinião, entraremos em contacto consigo o mais rapidamente possível!",
       "messageFailed": "Não foi possível enviar a sua mensagem, tente novamente mais tarde ou contacte-nos através do WhatsApp",
+      "addImage": "Adicionar captura de ecrã",
+      "removeImage": "Remover imagem",
+      "imageUploadFailed": "Falha ao carregar a imagem, tente novamente",
+      "imageSent": "Captura de ecrã carregada com sucesso",
       "faq1Question": "Como alterar a minha palavra-passe?",
       "faq1Answer": "Para alterar a sua palavra-passe, vá às definições da conta e clique em \"Alterar palavra-passe\". Introduza a sua palavra-passe atual e a nova palavra-passe que pretende definir.",
       "faq2Question": "Como eliminar a minha conta?",
@@ -93,7 +98,13 @@
       "faq3Question": "Esta aplicação foi criada por estudantes do IMT?",
       "faq3Answer": "Sim, esta aplicação foi desenvolvida por estudantes do IMT como parte de um projeto para melhorar a experiência dos estudantes no campus. Estamos constantemente a trabalhar para adicionar novas funcionalidades e melhorar a aplicação com base no seu feedback.",
       "faq4Question": "Como contribuir?",
-      "faq4Answer": "Se quiser contribuir para o desenvolvimento desta aplicação, pode juntar-se à nossa equipa contactando-nos através do nosso grupo do WhatsApp. Qualquer ajuda é bem-vinda, quer seja no desenvolvimento, na conceção ou nos testes."
+      "faq4Answer": "Se quiser contribuir para o desenvolvimento desta aplicação, pode juntar-se à nossa equipa contactando-nos através do nosso grupo do WhatsApp. Qualquer ajuda é bem-vinda, quer seja no desenvolvimento, na conceção ou nos testes.",
+      "history": "Histórico",
+      "previousRequests": "Pedidos anteriores",
+      "requestsDescription": "Aqui estão todos os pedidos que você enviou para nossa equipe de suporte e seu status.",
+      "joinWhatsApp": "Junte-se ao nosso grupo do WhatsApp",
+      "joinCommunity": "Obtenha respostas mais rápidas da nossa comunidade",
+      "requestsPending": "Buscando seus pedidos..."
     },
     "contactSupport": "Contacto de apoio",
     "appearance": "Aparência",
@@ -138,13 +149,27 @@
       "accountExists": "Já existe uma conta com este e-mail",
       "signupFailed": "Falha ao criar a conta",
       "invalidCredentials": "E-mail ou palavra-passe inválidos",
-      "phone": "O número de telefone é demasiado curto"
-    }
+      "phone": "O número de telefone é demasiado curto",
+      "resetPasswordFailed": "Falha ao redefinir a senha",
+      "verificationCode": "O código de verificação deve ter 6 dígitos",
+      "tooManyRequests": "Muitas solicitações. Por favor, tente novamente mais tarde",
+      "invalidVerificationCode": "Código de verificação inválido"
+    },
+    "resetPassword": "Redefinir senha",
+    "resettingPassword": "Redefinindo senha...",
+    "resetPasswordSuccess": "As instruções para redefinir a senha foram enviadas para o seu e-mail",
+    "signInDescription": "Estamos felizes em vê-lo novamente! Por favor, insira seu e-mail e senha para acessar o Transat.",
+    "signUpDescription": "Junte-se à comunidade Transat! Preencha seus dados para criar uma conta e começar a desfrutar dos nossos serviços.",
+    "resetPasswordDescription": "Digite seu endereço de e-mail para receber seu código de uso único para redefinir sua senha.",
+    "requestVerificationCode": "Solicitar código de verificação",
+    "newPassword": "Nova senha",
+    "requestCodeCooldown": "Aguarde {{seconds}} segundos antes de solicitar um novo código"
   },
   "welcome": {
     "subtitle": "Por Atlantes, para Atlantes 🐙",
     "login": "Iniciar sessão",
-    "register": "Inscrever-se"
+    "register": "Inscrever-se",
+    "signup": "Inscrever-se"
   },
   "services": {
     "title": "Serviços",
@@ -186,7 +211,11 @@
       "location": "Junto ao ginásio",
       "about": "A API prepara diariamente pratos frescos e caseiros - até a salada de frutas! A ementa muda todos os dias ao almoço e ao jantar.",
       "price": "3,95 € para uma entrada, prato principal e sobremesa.",
-      "additionalInfo": "É possível trocar uma entrada por uma sobremesa. Estão disponíveis pratos adicionais por um custo adicional. Ainda tem fome? Pergunte aos empregados! Depois das 19:45, a comida adicional ao jantar é gratuita."
+      "additionalInfo": "É possível trocar uma entrada por uma sobremesa. Estão disponíveis pratos adicionais por um custo adicional. Ainda tem fome? Pergunte aos empregados! Depois das 19:45, a comida adicional ao jantar é gratuita.",
+      "closedUpdated": {
+        "title": "Ainda não temos o cardápio",
+        "description": "O cardápio não foi atualizado. Volte mais tarde."
+      }
     },
     "washingMachine": {
       "title": "Lavandaria",

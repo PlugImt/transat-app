@@ -51,7 +51,8 @@
     "plugImtNote": "ANMERKUNG: Plug'IMT ist ein Verein, der von IMT-Studenten gegründet wurde, aber nicht mit der Schule verbunden ist.",
     "credits": "Credits",
     "underConstruction": "Under construction 🏗️",
-    "underConstructionDesc": "This page is under construction. Please check back later."
+    "underConstructionDesc": "This page is under construction. Please check back later.",
+    "refresh": "Aktualisieren"
   },
   "settings": {
     "settings": "Einstellungen",
@@ -93,7 +94,17 @@
       "faq3Question": "Wurde diese App von IMT-Studenten erstellt?",
       "faq3Answer": "Ja, diese App wurde von IMT-Studenten als Teil eines Projekts zur Verbesserung der Studentenerfahrung auf dem Campus entwickelt. Wir arbeiten ständig daran, neue Funktionen hinzuzufügen und die App auf der Grundlage Ihres Feedbacks zu verbessern.",
       "faq4Question": "Wie kann ich mich beteiligen?",
-      "faq4Answer": "Wenn Sie an der Entwicklung dieser App mitwirken möchten, können Sie unserem Team beitreten, indem Sie uns über unsere WhatsApp-Gruppe kontaktieren. Wir freuen uns über jede Hilfe, egal ob bei der Entwicklung, beim Design oder beim Testen."
+      "faq4Answer": "Wenn Sie an der Entwicklung dieser App mitwirken möchten, können Sie unserem Team beitreten, indem Sie uns über unsere WhatsApp-Gruppe kontaktieren. Wir freuen uns über jede Hilfe, egal ob bei der Entwicklung, beim Design oder beim Testen.",
+      "history": "Verlauf",
+      "previousRequests": "Frühere Anfragen",
+      "requestsDescription": "Hier sind alle Anfragen, die Sie an unser Support-Team gesendet haben, und deren Status.",
+      "joinWhatsApp": "Treten Sie unserer WhatsApp-Gruppe bei",
+      "joinCommunity": "Erhalten Sie schnellere Antworten von unserer Community",
+      "requestsPending": "Ihre Anfragen werden abgerufen...",
+      "addImage": "Screenshot hinzufügen",
+      "removeImage": "Bild entfernen",
+      "imageUploadFailed": "Fehler beim Hochladen des Bildes, bitte versuchen Sie es erneut",
+      "imageSent": "Screenshot erfolgreich hochgeladen"
     },
     "contactSupport": "Kontakt Support",
     "appearance": "Appearance",
@@ -138,13 +149,27 @@
       "accountExists": "Ein Konto mit dieser E-Mail existiert bereits",
       "signupFailed": "Failed to create account",
       "invalidCredentials": "Ungültige E-Mail oder ungültiges Kennwort",
-      "phone": "Telefonnummer ist zu kurz"
-    }
+      "phone": "Telefonnummer ist zu kurz",
+      "resetPasswordFailed": "Fehler beim Zurücksetzen des Passworts",
+      "verificationCode": "Der Verifizierungscode muss 6 Ziffern haben",
+      "tooManyRequests": "Zu viele Anfragen. Bitte versuchen Sie es später erneut",
+      "invalidVerificationCode": "Ungültiger Verifizierungscode"
+    },
+    "resetPassword": "Passwort zurücksetzen",
+    "resettingPassword": "Passwort wird zurückgesetzt...",
+    "resetPasswordSuccess": "Die Anweisungen zum Zurücksetzen des Passworts wurden an Ihre E-Mail gesendet",
+    "signInDescription": "Wir freuen uns, Sie wiederzusehen! Bitte geben Sie Ihre E-Mail und Ihr Passwort ein, um auf Transat zuzugreifen.",
+    "signUpDescription": "Treten Sie der Transat-Community bei! Füllen Sie Ihre Daten aus, um ein Konto zu erstellen und unsere Dienste zu nutzen.",
+    "resetPasswordDescription": "Geben Sie Ihre E-Mail-Adresse ein, um Ihren Einmalcode zum Zurücksetzen Ihres Passworts zu erhalten.",
+    "requestVerificationCode": "Verifizierungscode anfordern",
+    "newPassword": "Neues Passwort",
+    "requestCodeCooldown": "Bitte warten Sie {{seconds}} Sekunden, bevor Sie einen neuen Code anfordern"
   },
   "welcome": {
     "subtitle": "By Atlantes, for Atlantes 🐙.",
     "login": "Login",
-    "register": "Register"
+    "register": "Register",
+    "signup": "Registrieren"
   },
   "services": {
     "title": "Dienste",
@@ -186,7 +211,11 @@
       "location": "Next to the gym",
       "about": "API bereitet frische und hausgemachte Gerichte zu, darunter auch den Obstsalat! Das Menü wechselt täglich für Mittag- und Abendessen.",
       "price": "3,95 € für einen Starter, Hauptgang und Nachtisch.",
-      "additionalInfo": "Sie können einen Starter gegen ein Dessert eintauschen. Zusätzliche Gerichte sind gegen Aufpreis erhältlich. Noch immer hungrig? Fragen Sie die Kellner! Nach 7:45 PM ist zusätzliches Essen zum Abendessen kostenlos."
+      "additionalInfo": "Sie können einen Starter gegen ein Dessert eintauschen. Zusätzliche Gerichte sind gegen Aufpreis erhältlich. Noch immer hungrig? Fragen Sie die Kellner! Nach 7:45 PM ist zusätzliches Essen zum Abendessen kostenlos.",
+      "closedUpdated": {
+        "title": "Wir haben noch kein Menü",
+        "description": "Das Menü wurde nicht aktualisiert. Schauen Sie später wieder vorbei."
+      }
     },
     "washingMachine": {
       "title": "Wäscherei",

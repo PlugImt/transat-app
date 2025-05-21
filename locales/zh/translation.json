@@ -23,7 +23,7 @@
     "verificationSuccess": "验证成功",
     "save": "节省",
     "send": "发送",
-    "or": "金色",
+    "or": "或",
     "saveChanges": "保存更改",
     "success": "成功",
     "error": "错误",
@@ -116,7 +116,7 @@
     }
   },
   "auth": {
-    "signIn": "登录",
+    "signIn": "欢迎回来",
     "signInSuccess": "成功登录",
     "signingIn": "登录...",
     "signUp": "注册",
@@ -205,7 +205,7 @@
       "closedWeekends": "餐厅周末不营业",
       "closedNight": {
         "title": "餐厅已关闭",
-        "description": "请于上午 11 时返回查看今天的菜单"
+        "description": "明天再来查看菜单"
       },
       "location": "体育馆旁",
       "about": "API 每天都会准备新鲜的自制菜肴，就连水果沙拉也不例外！午餐和晚餐的菜单每天更换。",

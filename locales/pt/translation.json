@@ -23,7 +23,7 @@
     "verificationSuccess": "Verificação bem sucedida",
     "save": "Guardar",
     "send": "Enviar",
-    "or": "Ouro",
+    "or": "Ou",
     "saveChanges": "Guardar alterações",
     "success": "Sucesso",
     "error": "Erro",
@@ -117,7 +117,7 @@
     }
   },
   "auth": {
-    "signIn": "Iniciar sessão",
+    "signIn": "Bem-vindo de volta",
     "signInSuccess": "Iniciar sessão com êxito",
     "signingIn": "Iniciar sessão...",
     "signUp": "Inscrever-se",
@@ -206,7 +206,7 @@
       "closedWeekends": "O restaurante está fechado aos fins-de-semana",
       "closedNight": {
         "title": "O restaurante está fechado",
-        "description": "Volte às 11h00 para ver o menu de hoje"
+        "description": "Volte amanhã para ver o menu"
       },
       "location": "Junto ao ginásio",
       "about": "A API prepara diariamente pratos frescos e caseiros - até a salada de frutas! A ementa muda todos os dias ao almoço e ao jantar.",

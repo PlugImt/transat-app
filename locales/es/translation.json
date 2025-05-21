@@ -23,7 +23,7 @@
     "verificationSuccess": "Verificación exitosa",
     "save": "Guardar",
     "send": "Enviar",
-    "or": "Oro",
+    "or": "O",
     "saveChanges": "Guardar cambios",
     "success": "Éxito",
     "error": "Error",
@@ -117,7 +117,7 @@
     }
   },
   "auth": {
-    "signIn": "Iniciar sesión",
+    "signIn": "Bienvenido de nuevo",
     "signInSuccess": "Sesión iniciada con éxito",
     "signingIn": "Iniciando sesión...",
     "signUp": "Registro",
@@ -206,7 +206,7 @@
       "closedWeekends": "El restaurante está cerrado los fines de semana",
       "closedNight": {
         "title": "El restaurante está cerrado",
-        "description": "Vuelve a las 11h para ver el menú del día"
+        "description": "Vuelve mañana para ver el menú"
       },
       "location": "Junto al gimnasio",
       "about": "API prepara platos frescos y caseros diariamente—¡incluso la ensalada de frutas! El menú cambia todos los días para el almuerzo y la cena.",

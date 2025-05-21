@@ -33,10 +33,10 @@ $ git clone https://github.com/PlugImt/Transat.git
 $ cd Transat
 
 # Installer les dépendances
-$ npm install
+$ npm i --legacy-peer-deps
 
 # Lancer l'application
-$ npm run start
+$ npx expo start --tunnel --clear
 ```
 
 Vous aurez ensuite besoin d'installer l'applicationmobile [Expo Go](https://expo.dev/go) qui vous permettra de visualiser les changements apportés au projet en temps réel.

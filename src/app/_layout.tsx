@@ -4,6 +4,7 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, View } from "react-native";
 
 Sentry.init({
+  enabled: !__DEV__,
   dsn: "https://d9bfff43750553d324f8ba16461dbd76@o4509277512859648.ingest.de.sentry.io/4509277515022416",
 
   // Adds more context data to events (IP address, cookies, user, etc.)

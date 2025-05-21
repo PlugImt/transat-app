@@ -8,7 +8,7 @@ import type { StackNavigationProp } from "@react-navigation/stack";
 import { WashingMachineIcon, Wind } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Dimensions, Text, TouchableOpacity, View } from 'react-native';
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -71,7 +71,9 @@ export function WashingMachineWidget() {
         onPress={() => navigation.navigate("WashingMachine")}
         className="px-6 py-4 rounded-lg bg-card flex-row justify-between gap-6 overflow-hidden"
       >
-        <View className="items-center">
+        <View className="items-center"
+              style={{ maxWidth: (Dimensions.get('window').width/2) - 50 }}
+        >
           <WashingMachineIcon
             size={40}
             color={availableWashers === 0 ? theme.muted : theme.primary}
@@ -82,12 +84,14 @@ export function WashingMachineWidget() {
           <Text
             className="text-foreground flex-1"
             ellipsizeMode="tail"
-            numberOfLines={1}
+            numberOfLines={2}
           >
             {t("services.washingMachine.machineAvailable")}
           </Text>
         </View>
-        <View className="items-center">
+        <View className="items-center"
+              style={{ maxWidth: (Dimensions.get('window').width/2) - 50 }}
+        >
           <Wind
             size={40}
             color={availableDryers === 0 ? theme.muted : theme.primary}
@@ -98,7 +102,7 @@ export function WashingMachineWidget() {
           <Text
             className="text-foreground flex-1"
             ellipsizeMode="tail"
-            numberOfLines={1}
+            numberOfLines={2}
           >
             {t("services.washingMachine.dryerAvailable")}
           </Text>

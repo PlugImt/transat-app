@@ -6,9 +6,9 @@ import { useTheme } from "@/themes/useThemeProvider";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Image, Text, TouchableOpacity, View, Dimensions } from "react-native";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -54,34 +54,58 @@ export function RestaurantWidget() {
             source={require("@/assets/images/Logos/restaurant_bw.png")}
             className="w-24 h-24"
           />
-          <View className="flex flex-col gap-2">
+          <View className="flex flex-col gap-2" style={{ maxWidth: Dimensions.get('window').width - 200 }}>
             {weekend ? (
               <>
-                <Text className="text-lg text-foreground font-bold text-center text-wrap">
-                  {t("services.restaurant.closedWeekends")}
+                <Text 
+                  className="text-lg text-foreground font-bold text-center"
+                  numberOfLines={2}
+                  ellipsizeMode="tail"
+                >
+                  {t("services.restaurant.closedNight.title")}
                 </Text>
 
-                <Text className="text-foreground text-center text-wrap">
+                <Text 
+                  className="text-foreground text-center"
+                  numberOfLines={3}
+                  ellipsizeMode="tail"
+                >
                   {t("services.restaurant.closedNight.description")}
                 </Text>
               </>
             ) : !updatedToday ? (
               <>
-                <Text className="text-lg text-foreground font-bold text-center text-wrap">
+                <Text 
+                  className="text-lg text-foreground font-bold text-center"
+                  numberOfLines={2}
+                  ellipsizeMode="tail"
+                >
                   {t("services.restaurant.closedUpdated.title")}
                 </Text>
 
-                <Text className="text-foreground text-center text-wrap">
+                <Text 
+                  className="text-foreground text-center"
+                  numberOfLines={3}
+                  ellipsizeMode="tail"
+                >
                   {t("services.restaurant.closedUpdated.description")}
                 </Text>
               </>
             ) : (
               <>
-                <Text className="text-lg text-foreground font-bold text-center text-wrap">
-                  {t("services.restaurant.closedNight.title")}
+                <Text 
+                  className="text-lg text-foreground font-bold text-center"
+                  numberOfLines={2}
+                  ellipsizeMode="tail"
+                >
+                  {t("services.restaurant.closedWeekends")}
                 </Text>
 
-                <Text className="text-foreground text-center text-wrap">
+                <Text 
+                  className="text-foreground text-center"
+                  numberOfLines={3}
+                  ellipsizeMode="tail"
+                >
                   {t("services.restaurant.closedNight.description")}
                 </Text>
               </>

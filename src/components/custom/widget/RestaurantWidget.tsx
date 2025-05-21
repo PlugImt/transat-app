@@ -39,7 +39,28 @@ export function RestaurantWidget() {
   }
 
   if (error || weekend || outOfHours || (!lunch && !dinner)) {
-    return null;
+    return (
+      <View className="flex flex-col gap-2">
+        <Text className="h3 ml-4">{t("services.restaurant.title")}</Text>
+        <View className="px-6 py-4 rounded-lg bg-card flex flex-col gap-6">
+          {weekend ? (
+            <Text className="text-lg text-foreground font-bold text-center">
+              {t("services.restaurant.closedWeekends")}
+            </Text>
+          ) : (
+            <>
+              <Text className="text-lg text-foreground font-bold text-center">
+                {t("services.restaurant.closedNight.title")}
+              </Text>
+
+              <Text className="text-foreground text-center">
+                {t("services.restaurant.closedNight.description")}
+              </Text>
+            </>
+          )}
+        </View>
+      </View>
+    );
   }
 
   return (

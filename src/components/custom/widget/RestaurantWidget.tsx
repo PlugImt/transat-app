@@ -30,9 +30,9 @@ export function RestaurantWidget() {
     () =>
       menu?.updated_date
         ? new Date(menu.updated_date).getDay() === new Date().getDay()
-        : false,
+        : true,
     [menu?.updated_date],
-  );
+  ); // TODO: fix this because the menu date is undefined/NaN so it's never displayed
 
   const title =
     !weekend && lunch

@@ -82,7 +82,7 @@ export function WashingMachineWidget() {
             {availableWashers}/{totalWashers}
           </Text>
           <Text
-            className="text-foreground flex-1"
+            className="text-foreground flex-1 text-center"
             ellipsizeMode="tail"
             numberOfLines={2}
           >
@@ -100,7 +100,7 @@ export function WashingMachineWidget() {
             {availableDryers}/{totalDryers}
           </Text>
           <Text
-            className="text-foreground flex-1"
+            className="text-foreground flex-1 text-center"
             ellipsizeMode="tail"
             numberOfLines={2}
           >
@@ -131,7 +131,7 @@ export const WashingMachineWidgetLoading = () => {
           <TextSkeleton variant="lg" lines={1} lastLineWidth={32} />
 
           <Text
-            className="text-foreground flex-1"
+            className="text-foreground flex-1 text-center"
             ellipsizeMode="tail"
             numberOfLines={1}
           >
@@ -142,7 +142,7 @@ export const WashingMachineWidgetLoading = () => {
           <Wind size={40} color={theme.muted} />
           <TextSkeleton variant="lg" lines={1} lastLineWidth={32} />
           <Text
-            className="text-foreground flex-1"
+            className="text-foreground flex-1 text-center"
             ellipsizeMode="tail"
             numberOfLines={1}
           >

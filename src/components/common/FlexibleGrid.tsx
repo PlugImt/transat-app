@@ -1,25 +1,20 @@
 import React from 'react';
 import { View, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
 import type { ServicePreference } from '@/services/storage/widgetPreferences';
-import { Maximize, Minimize } from 'lucide-react-native';
-import { useTheme } from '@/themes/useThemeProvider';
 
 interface FlexibleGridProps {
   data: ServicePreference[];
   onPress: (item: ServicePreference) => void;
-  onToggleSize: (id: string) => void;
   renderCard: (item: ServicePreference, width: number) => React.ReactNode;
 }
 
 const FlexibleGrid: React.FC<FlexibleGridProps> = ({
   data,
   onPress,
-  onToggleSize,
   renderCard,
 }) => {
-  const theme = useTheme();
   const screenWidth = Dimensions.get('window').width;
-  const padding = 20; // Padding from screen edges
+  const padding = 20; // Padding from screen edges  
   const gap = 10; // Gap between cards
   const fullWidth = screenWidth - (padding * 2);
   const halfWidth = (fullWidth - gap) / 2;
@@ -58,58 +53,21 @@ const FlexibleGrid: React.FC<FlexibleGridProps> = ({
     const cardWidth = item.size === 'full' ? fullWidth : halfWidth;
     
     return (
-      <View
+      <TouchableOpacity
         key={item.id}
+        onPress={() => onPress(item)}
+        activeOpacity={0.8}
         style={{
           width: cardWidth,
-          position: 'relative',
         }}
       >
-        <TouchableOpacity
-          onPress={() => onPress(item)}
-          activeOpacity={0.8}
-          style={{ position: 'relative' }}
-        >
-          {renderCard(item, cardWidth)}
-          
-          {/* Size toggle button */}
-          <TouchableOpacity
-            onPress={() => onToggleSize(item.id)}
-            style={{
-              position: 'absolute',
-              top: 8,
-              right: 8,
-              backgroundColor: theme.card,
-              borderRadius: 6,
-              padding: 4,
-              opacity: 0.9,
-              elevation: 2,
-              shadowColor: '#000',
-              shadowOffset: { width: 0, height: 1 },
-              shadowOpacity: 0.2,
-              shadowRadius: 2,
-            }}
-          >
-            {item.size === 'full' ? (
-              <Minimize size={16} color={theme.foreground} />
-            ) : (
-              <Maximize size={16} color={theme.foreground} />
-            )}
-          </TouchableOpacity>
-        </TouchableOpacity>
-      </View>
+        {renderCard(item, cardWidth)}
+      </TouchableOpacity>
     );
   };
 
   return (
-    <ScrollView
-      contentContainerStyle={{
-        paddingHorizontal: padding,
-        paddingTop: 10,
-        paddingBottom: 50,
-      }}
-      showsVerticalScrollIndicator={false}
-    >
+    <ScrollView showsVerticalScrollIndicator={false}>
       {rows.map((row, rowIndex) => (
         <View
           key={rowIndex}
@@ -119,6 +77,7 @@ const FlexibleGrid: React.FC<FlexibleGridProps> = ({
             alignItems: 'flex-start',
             marginBottom: gap,
             gap: gap,
+            // paddingHorizontal: padding,
           }}
         >
           {row.map((item) => renderGridItem(item))}

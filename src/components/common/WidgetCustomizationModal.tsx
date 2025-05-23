@@ -4,7 +4,7 @@ import type {
   WidgetPreference,
 } from "@/services/storage/widgetPreferences";
 import { useTheme } from "@/themes/useThemeProvider";
-import { Check, Settings, X } from "lucide-react-native";
+import { Check, Maximize, Minimize, Settings, X } from "lucide-react-native";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -105,6 +105,16 @@ const WidgetCustomizationModal = ({
         ),
       );
     }
+  };
+
+  const toggleServiceSize = (id: string) => {
+    setLocalServices((prev) =>
+      prev.map((service) =>
+        service.id === id
+          ? { ...service, size: service.size === "full" ? "half" : "full" }
+          : service,
+      ),
+    );
   };
 
   const handleReorder = (newData: WidgetPreference[] | ServicePreference[]) => {
@@ -219,7 +229,21 @@ const WidgetCustomizationModal = ({
               {getDisplayName(item)}
             </Text>
           </View>
-          <View className="flex-row items-center">
+          <View className="flex-row items-center gap-2">
+            <TouchableOpacity
+              onPress={() => toggleServiceSize(item.id)}
+              style={{
+                padding: 8,
+                borderRadius: 6,
+                backgroundColor: theme.muted,
+              }}
+            >
+              {item.size === 'full' ? (
+                <Minimize size={16} color={theme.foreground} />
+              ) : (
+                <Maximize size={16} color={theme.foreground} />
+              )}
+            </TouchableOpacity>
             <Switch
               value={item.enabled}
               onValueChange={() => toggleWidgetEnabled(item.id)}

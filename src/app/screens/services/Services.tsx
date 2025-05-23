@@ -29,10 +29,6 @@ export const Services = () => {
     navigation.navigate(service.screen as any);
   };
 
-  const handleToggleSize = async (serviceId: string) => {
-    await toggleServiceSize(serviceId);
-  };
-
   const renderServiceCard = (item: ServicePreference, width: number) => (
     <Card
       image={item.image}
@@ -60,7 +56,6 @@ export const Services = () => {
         <FlexibleGrid
           data={enabledServices}
           onPress={handleServicePress}
-          onToggleSize={handleToggleSize}
           renderCard={renderServiceCard}
         />
         <View style={{ alignItems: "center", width: "100%" }}>

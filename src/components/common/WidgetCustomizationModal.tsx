@@ -1,7 +1,6 @@
 import { Button } from "@/components/common/Button";
 import { useTheme } from "@/themes/useThemeProvider";
 import type { WidgetPreference, ServicePreference } from "@/services/storage/widgetPreferences";
-import { BlurView } from "expo-blur";
 import { Check, Settings, X, Plus, Minus } from "lucide-react-native";
 import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
@@ -49,18 +48,23 @@ const WidgetCustomizationModal = ({
   const { height: screenHeight } = Dimensions.get("window");
   const statusBarHeight = Platform.OS === "ios" ? 0 : StatusBar.currentHeight || 0;
   
-  // This ref tracks if the modal was previously visible
   const wasPreviouslyVisible = useRef(false);
 
   useEffect(() => {
-    // If the modal is now visible AND it was not previously visible, then it's just been opened.
     if (visible && !wasPreviouslyVisible.current) {
-      setLocalWidgets([...initialWidgets].sort((a, b) => a.order - b.order));
-      setLocalServices([...initialServices].sort((a, b) => a.order - b.order));
+      const sortedWidgets = [...initialWidgets].sort((a, b) => a.order - b.order);
+      const sortedServices = [...initialServices].sort((a, b) => a.order - b.order);
+      setLocalWidgets(sortedWidgets);
+      setLocalServices(sortedServices);
+      // console.log('Modal opened, localWidgets:', sortedWidgets);
+      // console.log('Modal opened, localServices:', sortedServices);
     }
-    // Update the ref to the current visibility state for the next render.
     wasPreviouslyVisible.current = visible;
   }, [visible, initialWidgets, initialServices]);
+
+  // console.log('Rendering WidgetCustomizationModal, visible:', visible);
+  // console.log('Current localWidgets:', localWidgets);
+  // console.log('Current localServices:', localServices);
 
   const handleSave = () => {
     if (type === 'widgets' && onUpdateWidgets) {
@@ -230,30 +234,30 @@ const WidgetCustomizationModal = ({
     >
       <View style={{ flex: 1, backgroundColor: theme.background }}>
         {/* Header */}
-        <BlurView
-          intensity={50}
-          tint="dark"
+        <View
           style={{
             paddingTop: statusBarHeight + 10,
             paddingBottom: 10,
             paddingHorizontal: 20,
-            backgroundColor: "#030202E5",
+            backgroundColor: theme.card,
+            borderBottomWidth: 1,
+            borderBottomColor: theme.muted,
           }}
         >
           <View className="flex-row justify-between items-center">
             <TouchableOpacity onPress={onClose}>
               <X color={theme.foreground} size={24} />
             </TouchableOpacity>
-            <Text className="h2 text-foreground">{title}</Text>
+            <Text className="h2" style={{ color: theme.foreground }}>{title}</Text>
             <TouchableOpacity onPress={handleSave}>
               <Check color={theme.primary} size={24} />
             </TouchableOpacity>
           </View>
-        </BlurView>
+        </View>
 
         {/* Content */}
-        <View style={{ flex: 1, padding: 20, marginTop: 10 }}>
-          <Text className="text-foreground mb-4">
+        <View style={{ flex: 1, paddingHorizontal: 20, paddingTop: 20, backgroundColor: theme.background }}>
+          <Text style={{ color: theme.foreground, marginBottom: 16, fontSize: 16 }}>
             {t("common.customizeHint")}
           </Text>
           
@@ -281,7 +285,10 @@ const WidgetCustomizationModal = ({
         </View>
 
         {/* Footer */}
-        <View className="p-5 border-t border-muted">
+        <View 
+          className="p-5 border-t" 
+          style={{ borderColor: theme.muted, backgroundColor: theme.background }}
+        >
           <Button
             label={t("common.save")}
             onPress={handleSave}

@@ -19,6 +19,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import { Edit, GraduationCap } from "lucide-react-native";
+import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Keyboard, Text, TouchableOpacity, View } from "react-native";
@@ -57,11 +58,31 @@ export const EditProfile = () => {
     control: userControl,
     handleSubmit: handleUserSubmit,
     formState: { errors: userErrors, isValid: isUserValid },
+    reset,
   } = useForm({
     resolver: zodResolver(userSchema),
-    defaultValues: user,
+    defaultValues: {
+      first_name: "",
+      last_name: "",
+      phone_number: "",
+      email: "",
+      graduation_year: undefined as number | undefined,
+    },
     mode: "onChange",
   });
+
+  // Reset form with user data when it becomes available
+  useEffect(() => {
+    if (user) {
+      reset({
+        first_name: user.first_name || "",
+        last_name: user.last_name || "",
+        phone_number: user.phone_number || "",
+        email: user.email || "",
+        graduation_year: user.graduation_year || undefined,
+      });
+    }
+  }, [user, reset]);
 
   const currentMonth = new Date().getMonth(); // 0-based, so 8 is September
   const currentYear = new Date().getFullYear();
@@ -195,7 +216,7 @@ export const EditProfile = () => {
               placeholder={t("account.selectGraduationYear")}
               icon={<GraduationCap color={theme.foreground} size={20} />}
               options={yearOptions}
-              value={value?.toString()}
+              value={value ? value.toString() : undefined}
               onValueChange={(value) => onChange(Number(value))}
             />
           )}

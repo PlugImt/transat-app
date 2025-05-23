@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export type WidgetType = "weather" | "restaurant" | "washingMachine";
 export type ServiceType = "washingMachine" | "restaurant" | "traq";
+export type ServiceSize = "full" | "half";
 
 export interface WidgetPreference {
   id: WidgetType;
@@ -15,6 +16,7 @@ export interface ServicePreference {
   name: string;
   enabled: boolean;
   order: number;
+  size: ServiceSize;
   // biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
   image: any;
   screen: string;
@@ -35,6 +37,7 @@ const defaultServices: ServicePreference[] = [
     name: "Washing Machine",
     enabled: true,
     order: 0,
+    size: "full",
     image: require("@/assets/images/Logos/machine_large.png"),
     screen: "WashingMachine",
   },
@@ -43,6 +46,7 @@ const defaultServices: ServicePreference[] = [
     name: "Restaurant",
     enabled: true,
     order: 1,
+    size: "full",
     image: require("@/assets/images/Logos/restaurant_large.png"),
     screen: "Restaurant",
   },
@@ -51,6 +55,7 @@ const defaultServices: ServicePreference[] = [
     name: "Traq",
     enabled: true,
     order: 2,
+    size: "full",
     image: require("@/assets/images/Logos/traq_large.png"),
     screen: "Traq",
   },

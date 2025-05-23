@@ -1,6 +1,7 @@
 import {
   type ServicePreference,
   type WidgetPreference,
+  type ServiceSize,
   getHomeWidgetPreferences,
   getServicePreferences,
   saveHomeWidgetPreferences,
@@ -96,6 +97,16 @@ export const useServicePreferences = () => {
     await saveServicePreferences(updated);
   };
 
+  const toggleServiceSize = async (serviceId: string) => {
+    const updated = services.map((service) =>
+      service.id === serviceId
+        ? { ...service, size: (service.size === "full" ? "half" : "full") as ServiceSize }
+        : service,
+    );
+    setServices(updated);
+    await saveServicePreferences(updated);
+  };
+
   const enabledServices = services.filter((service) => service.enabled);
 
   return {
@@ -104,6 +115,7 @@ export const useServicePreferences = () => {
     loading,
     updateOrder,
     toggleService,
+    toggleServiceSize,
     refreshPreferences: loadPreferences,
   };
 };

@@ -13,13 +13,14 @@ interface CardProps {
   description?: string;
   image?: ImageSourcePropType | null;
   animation?: string;
+  width?: number;
   onPress: () => void;
 }
 
-const Card = ({ title, description, image, onPress }: CardProps) => {
+const Card = ({ title, description, image, width, onPress }: CardProps) => {
   const [imageHeight, setImageHeight] = useState(200);
   const screenWidth = Dimensions.get("window").width;
-  const imageWidth = screenWidth - 40;
+  const imageWidth = width || screenWidth - 40;
 
   useEffect(() => {
     if (image && typeof image !== "number") {

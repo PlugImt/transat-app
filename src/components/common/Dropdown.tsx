@@ -2,7 +2,7 @@ import { useTheme } from "@/themes/useThemeProvider";
 import { Picker } from "@react-native-picker/picker";
 import { ChevronDown } from "lucide-react-native";
 import type React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Platform, Text, TouchableOpacity, View } from "react-native";
 import {
   BottomSheet,
   BottomSheetProvider,
@@ -29,35 +29,52 @@ const Dropdown = ({
   const theme = useTheme();
 
   return (
-    <BottomSheetProvider>
-      <View className="gap-1.5">
-        <Text className="text-foreground/70 text-sm">{label}</Text>
-        <BottomSheetTrigger>
-          <TouchableOpacity className="flex-row items-center justify-between bg-muted/70 rounded-lg px-3 h-12">
-            <View className="flex-row items-center gap-2">
-              {icon ? icon : null}
-              <Text className="text-foreground">
-                {value ? value : placeholder}
-              </Text>
-            </View>
-            <ChevronDown color={theme.foreground} size={20} />
-          </TouchableOpacity>
-        </BottomSheetTrigger>
-
-        <BottomSheet>
-          <Text className="h2">{placeholder}</Text>
+    <View className="gap-1.5">
+      <Text className="text-foreground/70 text-sm">{label}</Text>
+      {Platform.OS === "android" ? (
+        <View className="bg-muted/70 rounded-lg h-12 justify-center">
           <Picker
             selectedValue={value}
             onValueChange={onValueChange}
             mode="dropdown"
+            style={{ color: theme.foreground }}
+            itemStyle={{ backgroundColor: theme.card, color: theme.foreground, fontSize: 16 }}
+            dropdownIconColor={theme.foreground}
           >
             {options.map((option) => (
               <Picker.Item key={option} label={option} value={option} />
             ))}
           </Picker>
-        </BottomSheet>
-      </View>
-    </BottomSheetProvider>
+        </View>
+      ) : (
+        <BottomSheetProvider>
+          <BottomSheetTrigger>
+            <TouchableOpacity className="flex-row items-center justify-between bg-muted/70 rounded-lg px-3 h-12">
+              <View className="flex-row items-center gap-2">
+                {icon ? icon : null}
+                <Text className="text-foreground">
+                  {value ? value : placeholder}
+                </Text>
+              </View>
+              <ChevronDown color={theme.foreground} size={20} />
+            </TouchableOpacity>
+          </BottomSheetTrigger>
+
+          <BottomSheet>
+            <Text className="h2">{placeholder}</Text>
+            <Picker
+              selectedValue={value}
+              onValueChange={onValueChange}
+              mode="dropdown"
+            >
+              {options.map((option) => (
+                <Picker.Item key={option} label={option} value={option} />
+              ))}
+            </Picker>
+          </BottomSheet>
+        </BottomSheetProvider>
+      )}
+    </View>
   );
 };
 

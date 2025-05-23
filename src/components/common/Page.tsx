@@ -3,7 +3,7 @@ import { useTheme } from "@/themes/useThemeProvider";
 import { useNavigation } from "@react-navigation/native";
 import { BlurView } from "expo-blur";
 import { ArrowLeft } from "lucide-react-native";
-import { type ReactNode, useState, useRef } from "react";
+import { type ReactNode, useRef, useState } from "react";
 import {
   Dimensions,
   Platform,
@@ -70,7 +70,10 @@ export default function Page({
           backgroundColor: theme.background,
           marginTop: statusBarHeight + 60,
         },
-        className: cn("bg-background px-5 flex flex-col gap-2 pb-12", className),
+        className: cn(
+          "bg-background px-5 flex flex-col gap-2 pb-12",
+          className,
+        ),
       }
     : {
         style: {

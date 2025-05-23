@@ -1,6 +1,6 @@
+import { Button } from "@/components/common/Button";
 import Page from "@/components/common/Page";
 import WidgetCustomizationModal from "@/components/common/WidgetCustomizationModal";
-import { Button } from "@/components/common/Button";
 import {
   WeatherSkeleton,
   WeatherWidget,
@@ -25,15 +25,15 @@ import { useIsFetching, useQueryClient } from "@tanstack/react-query";
 import Constants from "expo-constants";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
-import { Settings } from "lucide-react-native";
-import React, { useEffect, useMemo, useState } from "react";
+import type React from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Platform, Text, TouchableOpacity, View } from "react-native";
 import DraggableFlatList, {
-  RenderItemParams,
+  type RenderItemParams,
   ScaleDecorator,
-} from 'react-native-draggable-flatlist';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+} from "react-native-draggable-flatlist";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -103,7 +103,12 @@ export const Home = () => {
   const theme = useTheme();
 
   const { saveExpoPushToken } = useAuth();
-  const { enabledWidgets, widgets, updateOrder, loading: widgetsLoading } = useHomeWidgetPreferences();
+  const {
+    enabledWidgets,
+    widgets,
+    updateOrder,
+    loading: widgetsLoading,
+  } = useHomeWidgetPreferences();
 
   const [_expoPushToken, setExpoPushToken] = useState("");
   const [_notificationOpened, setNotificationOpened] = useState(false);
@@ -143,7 +148,8 @@ export const Home = () => {
 
         const screen =
           lastNotificationResponse.notification.request.content.data.screen;
-        if (screen && typeof screen === 'string') {
+        if (screen && typeof screen === "string") {
+          // biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
           navigation.navigate(screen as any);
         }
       }
@@ -177,11 +183,11 @@ export const Home = () => {
 
   const getWidgetComponent = (widgetId: string) => {
     switch (widgetId) {
-      case 'weather':
+      case "weather":
         return <WeatherWidget />;
-      case 'restaurant':
+      case "restaurant":
         return <RestaurantWidget />;
-      case 'washingMachine':
+      case "washingMachine":
         return <WashingMachineWidget />;
       default:
         return null;
@@ -189,14 +195,20 @@ export const Home = () => {
   };
 
   const draggableWidgets: DraggableWidgetItem[] = useMemo(() => {
-    return enabledWidgets.map(widget => ({
-      id: widget.id,
-      key: widget.id,
-      component: getWidgetComponent(widget.id),
-    })).filter(item => item.component !== null);
-  }, [enabledWidgets]);
+    return enabledWidgets
+      .map((widget) => ({
+        id: widget.id,
+        key: widget.id,
+        component: getWidgetComponent(widget.id),
+      }))
+      .filter((item) => item.component !== null);
+  }, [enabledWidgets, getWidgetComponent]);
 
-  const renderWidget = ({ item, drag, isActive }: RenderItemParams<DraggableWidgetItem>) => {
+  const renderWidget = ({
+    item,
+    drag,
+    isActive,
+  }: RenderItemParams<DraggableWidgetItem>) => {
     return (
       <ScaleDecorator>
         <TouchableOpacity
@@ -215,15 +227,19 @@ export const Home = () => {
   };
 
   const handleDragEnd = async ({ data }: { data: DraggableWidgetItem[] }) => {
-    const reorderedWidgets = data.map((item, index) => {
-      const originalWidget = enabledWidgets.find(w => w.id === item.id);
-      return originalWidget ? { ...originalWidget, order: index } : null;
-    }).filter(Boolean) as WidgetPreference[];
+    const reorderedWidgets = data
+      .map((item, index) => {
+        const originalWidget = enabledWidgets.find((w) => w.id === item.id);
+        return originalWidget ? { ...originalWidget, order: index } : null;
+      })
+      .filter(Boolean) as WidgetPreference[];
 
     await updateOrder(reorderedWidgets);
   };
 
-  const handleCustomizationSave = async (updatedWidgets: WidgetPreference[]) => {
+  const handleCustomizationSave = async (
+    updatedWidgets: WidgetPreference[],
+  ) => {
     await updateOrder(updatedWidgets);
     setShowCustomizationModal(false);
   };
@@ -247,13 +263,24 @@ export const Home = () => {
             keyExtractor={(item) => item.key}
             renderItem={renderWidget}
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ gap: 24, paddingTop: 10, paddingBottom: 12 }}
+            contentContainerStyle={{
+              gap: 24,
+              paddingTop: 10,
+              paddingBottom: 12,
+            }}
             ListEmptyComponent={
-              <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 50 }}>
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginTop: 50,
+                }}
+              >
                 <Text style={{ fontSize: 16, color: theme.foreground }}>
                   {t("common.noWidgetsEnabled")}
                 </Text>
-                <Button 
+                <Button
                   label={t("common.customizeWidgets")}
                   onPress={() => setShowCustomizationModal(true)}
                   variant="link"
@@ -263,12 +290,15 @@ export const Home = () => {
             }
           />
         </GestureHandlerRootView>
-        <Button
+        <View style={{ alignItems: "center", width: "100%" }}>
+          <Button
             label={t("common.customizeWidgets")}
             variant="ghost"
             onPress={() => setShowCustomizationModal(true)}
             className="mb-4"
-        />
+            size="sm"
+          />
+        </View>
       </Page>
 
       <WidgetCustomizationModal

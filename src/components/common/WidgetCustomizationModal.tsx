@@ -1,24 +1,26 @@
 import { Button } from "@/components/common/Button";
+import type {
+  ServicePreference,
+  WidgetPreference,
+} from "@/services/storage/widgetPreferences";
 import { useTheme } from "@/themes/useThemeProvider";
-import type { WidgetPreference, ServicePreference } from "@/services/storage/widgetPreferences";
-import { Check, Settings, X, Plus, Minus } from "lucide-react-native";
-import { useState, useEffect, useRef } from "react";
+import { Check, Settings, X } from "lucide-react-native";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Modal,
+  Platform,
+  StatusBar,
+  Switch,
   Text,
   TouchableOpacity,
   View,
-  Switch,
-  StatusBar,
-  Platform,
-  Dimensions,
 } from "react-native";
 import DraggableFlatList, {
-  RenderItemParams,
+  type RenderItemParams,
   ScaleDecorator,
-} from 'react-native-draggable-flatlist';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+} from "react-native-draggable-flatlist";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 interface WidgetCustomizationModalProps {
   visible: boolean;
@@ -28,7 +30,7 @@ interface WidgetCustomizationModalProps {
   onUpdateWidgets?: (widgets: WidgetPreference[]) => void;
   onUpdateServices?: (services: ServicePreference[]) => void;
   title: string;
-  type: 'widgets' | 'services';
+  type: "widgets" | "services";
 }
 
 const WidgetCustomizationModal = ({
@@ -45,15 +47,19 @@ const WidgetCustomizationModal = ({
   const theme = useTheme();
   const [localWidgets, setLocalWidgets] = useState<WidgetPreference[]>([]);
   const [localServices, setLocalServices] = useState<ServicePreference[]>([]);
-  const { height: screenHeight } = Dimensions.get("window");
-  const statusBarHeight = Platform.OS === "ios" ? 0 : StatusBar.currentHeight || 0;
-  
+  const statusBarHeight =
+    Platform.OS === "ios" ? 0 : StatusBar.currentHeight || 0;
+
   const wasPreviouslyVisible = useRef(false);
 
   useEffect(() => {
     if (visible && !wasPreviouslyVisible.current) {
-      const sortedWidgets = [...initialWidgets].sort((a, b) => a.order - b.order);
-      const sortedServices = [...initialServices].sort((a, b) => a.order - b.order);
+      const sortedWidgets = [...initialWidgets].sort(
+        (a, b) => a.order - b.order,
+      );
+      const sortedServices = [...initialServices].sort(
+        (a, b) => a.order - b.order,
+      );
       setLocalWidgets(sortedWidgets);
       setLocalServices(sortedServices);
       // console.log('Modal opened, localWidgets:', sortedWidgets);
@@ -67,13 +73,13 @@ const WidgetCustomizationModal = ({
   // console.log('Current localServices:', localServices);
 
   const handleSave = () => {
-    if (type === 'widgets' && onUpdateWidgets) {
+    if (type === "widgets" && onUpdateWidgets) {
       // Reorder the widgets based on their order property
       const orderedWidgets = localWidgets
         .map((widget, index) => ({ ...widget, order: index }))
         .sort((a, b) => a.order - b.order);
       onUpdateWidgets(orderedWidgets);
-    } else if (type === 'services' && onUpdateServices) {
+    } else if (type === "services" && onUpdateServices) {
       // Reorder the services based on their order property
       const orderedServices = localServices
         .map((service, index) => ({ ...service, order: index }))
@@ -84,27 +90,25 @@ const WidgetCustomizationModal = ({
   };
 
   const toggleWidgetEnabled = (id: string) => {
-    if (type === 'widgets') {
-      setLocalWidgets(prev => 
-        prev.map(widget => 
-          widget.id === id 
-            ? { ...widget, enabled: !widget.enabled }
-            : widget
-        )
+    if (type === "widgets") {
+      setLocalWidgets((prev) =>
+        prev.map((widget) =>
+          widget.id === id ? { ...widget, enabled: !widget.enabled } : widget,
+        ),
       );
     } else {
-      setLocalServices(prev => 
-        prev.map(service => 
-          service.id === id 
+      setLocalServices((prev) =>
+        prev.map((service) =>
+          service.id === id
             ? { ...service, enabled: !service.enabled }
-            : service
-        )
+            : service,
+        ),
       );
     }
   };
 
   const handleReorder = (newData: WidgetPreference[] | ServicePreference[]) => {
-    if (type === 'widgets') {
+    if (type === "widgets") {
       setLocalWidgets(newData as WidgetPreference[]);
     } else {
       setLocalServices(newData as ServicePreference[]);
@@ -112,32 +116,35 @@ const WidgetCustomizationModal = ({
   };
 
   const getDisplayName = (item: WidgetPreference | ServicePreference) => {
-    if (type === 'widgets') {
+    if (type === "widgets") {
       switch (item.id) {
-        case 'weather':
-          return t('services.weather') || 'Weather';
-        case 'restaurant':
-          return t('services.restaurant.title');
-        case 'washingMachine':
-          return t('services.washingMachine.title');
-        default:
-          return item.name;
-      }
-    } else {
-      switch (item.id) {
-        case 'washingMachine':
-          return t('services.washingMachine.title');
-        case 'restaurant':
-          return t('services.restaurant.title');
-        case 'traq':
-          return t('services.traq.title');
+        case "weather":
+          return t("services.weather") || "Weather";
+        case "restaurant":
+          return t("services.restaurant.title");
+        case "washingMachine":
+          return t("services.washingMachine.title");
         default:
           return item.name;
       }
     }
+    switch (item.id) {
+      case "washingMachine":
+        return t("services.washingMachine.title");
+      case "restaurant":
+        return t("services.restaurant.title");
+      case "traq":
+        return t("services.traq.title");
+      default:
+        return item.name;
+    }
   };
 
-  const renderWidgetItem = ({ item, drag, isActive }: RenderItemParams<WidgetPreference>) => (
+  const renderWidgetItem = ({
+    item,
+    drag,
+    isActive,
+  }: RenderItemParams<WidgetPreference>) => (
     <ScaleDecorator>
       <TouchableOpacity
         onLongPress={drag}
@@ -147,28 +154,26 @@ const WidgetCustomizationModal = ({
           transform: [{ scale: isActive ? 1.02 : 1 }],
         }}
       >
-        <View className={`flex-row items-center justify-between p-4 rounded-lg mb-2 ${
-          item.enabled ? 'bg-card' : 'bg-card opacity-60'
-        }`}>
+        <View
+          className={`flex-row items-center justify-between p-4 rounded-lg mb-2 ${
+            item.enabled ? "bg-card" : "bg-card opacity-60"
+          }`}
+        >
           <View className="flex-row items-center flex-1">
-            <Settings size={20} color={theme.foreground} style={{ marginRight: 12 }} />
-            <Text className={`font-medium flex-1 ${
-              item.enabled ? 'text-foreground' : 'text-muted-foreground'
-            }`}>
+            <Settings
+              size={20}
+              color={theme.foreground}
+              style={{ marginRight: 12 }}
+            />
+            <Text
+              className={`font-medium flex-1 ${
+                item.enabled ? "text-foreground" : "text-muted-foreground"
+              }`}
+            >
               {getDisplayName(item)}
             </Text>
           </View>
           <View className="flex-row items-center">
-            <TouchableOpacity
-              onPress={() => toggleWidgetEnabled(item.id)}
-              style={{ marginRight: 8 }}
-            >
-              {item.enabled ? (
-                <Minus size={20} color="#F44336" />
-              ) : (
-                <Plus size={20} color={theme.primary} />
-              )}
-            </TouchableOpacity>
             <Switch
               value={item.enabled}
               onValueChange={() => toggleWidgetEnabled(item.id)}
@@ -181,7 +186,11 @@ const WidgetCustomizationModal = ({
     </ScaleDecorator>
   );
 
-  const renderServiceItem = ({ item, drag, isActive }: RenderItemParams<ServicePreference>) => (
+  const renderServiceItem = ({
+    item,
+    drag,
+    isActive,
+  }: RenderItemParams<ServicePreference>) => (
     <ScaleDecorator>
       <TouchableOpacity
         onLongPress={drag}
@@ -191,28 +200,26 @@ const WidgetCustomizationModal = ({
           transform: [{ scale: isActive ? 1.02 : 1 }],
         }}
       >
-        <View className={`flex-row items-center justify-between p-4 rounded-lg mb-2 ${
-          item.enabled ? 'bg-card' : 'bg-card opacity-60'
-        }`}>
+        <View
+          className={`flex-row items-center justify-between p-4 rounded-lg mb-2 ${
+            item.enabled ? "bg-card" : "bg-card opacity-60"
+          }`}
+        >
           <View className="flex-row items-center flex-1">
-            <Settings size={20} color={theme.foreground} style={{ marginRight: 12 }} />
-            <Text className={`font-medium flex-1 ${
-              item.enabled ? 'text-foreground' : 'text-muted-foreground'
-            }`}>
+            <Settings
+              size={20}
+              color={theme.foreground}
+              style={{ marginRight: 12 }}
+            />
+            <Text
+              className={`font-medium flex-1 ${
+                item.enabled ? "text-foreground" : "text-muted-foreground"
+              }`}
+            >
               {getDisplayName(item)}
             </Text>
           </View>
           <View className="flex-row items-center">
-            <TouchableOpacity
-              onPress={() => toggleWidgetEnabled(item.id)}
-              style={{ marginRight: 8 }}
-            >
-              {item.enabled ? (
-                <Minus size={20} color="#F44336" />
-              ) : (
-                <Plus size={20} color={theme.primary} />
-              )}
-            </TouchableOpacity>
             <Switch
               value={item.enabled}
               onValueChange={() => toggleWidgetEnabled(item.id)}
@@ -248,7 +255,9 @@ const WidgetCustomizationModal = ({
             <TouchableOpacity onPress={onClose}>
               <X color={theme.foreground} size={24} />
             </TouchableOpacity>
-            <Text className="h2" style={{ color: theme.foreground }}>{title}</Text>
+            <Text className="h2" style={{ color: theme.foreground }}>
+              {title}
+            </Text>
             <TouchableOpacity onPress={handleSave}>
               <Check color={theme.primary} size={24} />
             </TouchableOpacity>
@@ -256,13 +265,22 @@ const WidgetCustomizationModal = ({
         </View>
 
         {/* Content */}
-        <View style={{ flex: 1, paddingHorizontal: 20, paddingTop: 20, backgroundColor: theme.background }}>
-          <Text style={{ color: theme.foreground, marginBottom: 16, fontSize: 16 }}>
+        <View
+          style={{
+            flex: 1,
+            paddingHorizontal: 20,
+            paddingTop: 20,
+            backgroundColor: theme.background,
+          }}
+        >
+          <Text
+            style={{ color: theme.foreground, marginBottom: 16, fontSize: 16 }}
+          >
             {t("common.customizeHint")}
           </Text>
-          
+
           <GestureHandlerRootView style={{ flex: 1 }}>
-            {type === 'widgets' ? (
+            {type === "widgets" ? (
               <DraggableFlatList
                 data={localWidgets}
                 onDragEnd={({ data }) => handleReorder(data)}
@@ -285,9 +303,12 @@ const WidgetCustomizationModal = ({
         </View>
 
         {/* Footer */}
-        <View 
-          className="p-5 border-t" 
-          style={{ borderColor: theme.muted, backgroundColor: theme.background }}
+        <View
+          className="p-5 border-t"
+          style={{
+            borderColor: theme.muted,
+            backgroundColor: theme.background,
+          }}
         >
           <Button
             label={t("common.save")}
@@ -305,4 +326,4 @@ const WidgetCustomizationModal = ({
   );
 };
 
-export default WidgetCustomizationModal; 
+export default WidgetCustomizationModal;

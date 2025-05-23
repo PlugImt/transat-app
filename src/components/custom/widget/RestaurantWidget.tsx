@@ -6,9 +6,9 @@ import { useTheme } from "@/themes/useThemeProvider";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { Image, Text, TouchableOpacity, View, Dimensions } from "react-native";
+import { Dimensions, Image, Text, TouchableOpacity, View } from "react-native";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -54,10 +54,13 @@ export function RestaurantWidget() {
             source={require("@/assets/images/Logos/restaurant_bw.png")}
             className="w-24 h-24"
           />
-          <View className="flex flex-col gap-2" style={{ maxWidth: Dimensions.get('window').width - 200 }}>
+          <View
+            className="flex flex-col gap-2"
+            style={{ maxWidth: Dimensions.get("window").width - 200 }}
+          >
             {weekend ? (
               <>
-                <Text 
+                <Text
                   className="text-lg text-foreground font-bold text-center"
                   numberOfLines={2}
                   ellipsizeMode="tail"
@@ -65,7 +68,7 @@ export function RestaurantWidget() {
                   {t("services.restaurant.closedNight.title")}
                 </Text>
 
-                <Text 
+                <Text
                   className="text-foreground text-center"
                   numberOfLines={3}
                   ellipsizeMode="tail"
@@ -75,7 +78,7 @@ export function RestaurantWidget() {
               </>
             ) : !updatedToday ? (
               <>
-                <Text 
+                <Text
                   className="text-lg text-foreground font-bold text-center"
                   numberOfLines={2}
                   ellipsizeMode="tail"
@@ -83,7 +86,7 @@ export function RestaurantWidget() {
                   {t("services.restaurant.closedUpdated.title")}
                 </Text>
 
-                <Text 
+                <Text
                   className="text-foreground text-center"
                   numberOfLines={3}
                   ellipsizeMode="tail"
@@ -93,7 +96,7 @@ export function RestaurantWidget() {
               </>
             ) : (
               <>
-                <Text 
+                <Text
                   className="text-lg text-foreground font-bold text-center"
                   numberOfLines={2}
                   ellipsizeMode="tail"
@@ -101,7 +104,7 @@ export function RestaurantWidget() {
                   {t("services.restaurant.closedWeekends")}
                 </Text>
 
-                <Text 
+                <Text
                   className="text-foreground text-center"
                   numberOfLines={3}
                   ellipsizeMode="tail"

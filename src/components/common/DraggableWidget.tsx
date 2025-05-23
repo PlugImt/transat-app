@@ -1,18 +1,17 @@
-import { type ReactNode } from 'react';
-import { View } from 'react-native';
-import { 
+import type { ReactNode } from "react";
+import { View } from "react-native";
+import {
   GestureHandlerRootView,
   PanGestureHandler,
-  State,
   type PanGestureHandlerGestureEvent,
-} from 'react-native-gesture-handler';
+} from "react-native-gesture-handler";
 import Animated, {
   useAnimatedGestureHandler,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
   runOnJS,
-} from 'react-native-reanimated';
+} from "react-native-reanimated";
 
 interface DraggableWidgetProps {
   children: ReactNode;
@@ -22,37 +21,37 @@ interface DraggableWidgetProps {
   delayLongPress?: number;
 }
 
-const DraggableWidget = ({ 
-  children, 
-  onDragStart, 
-  onDragEnd, 
+const DraggableWidget = ({
+  children,
+  onDragStart,
+  onDragEnd,
   disabled = false,
-  delayLongPress = 200 
 }: DraggableWidgetProps) => {
   const translateX = useSharedValue(0);
   const translateY = useSharedValue(0);
   const scale = useSharedValue(1);
 
-  const gestureHandler = useAnimatedGestureHandler<PanGestureHandlerGestureEvent>({
-    onStart: () => {
-      scale.value = withSpring(1.05);
-      if (onDragStart) {
-        runOnJS(onDragStart)();
-      }
-    },
-    onActive: (event) => {
-      translateX.value = event.translationX;
-      translateY.value = event.translationY;
-    },
-    onEnd: () => {
-      translateX.value = withSpring(0);
-      translateY.value = withSpring(0);
-      scale.value = withSpring(1);
-      if (onDragEnd) {
-        runOnJS(onDragEnd)();
-      }
-    },
-  });
+  const gestureHandler =
+    useAnimatedGestureHandler<PanGestureHandlerGestureEvent>({
+      onStart: () => {
+        scale.value = withSpring(1.05);
+        if (onDragStart) {
+          runOnJS(onDragStart)();
+        }
+      },
+      onActive: (event) => {
+        translateX.value = event.translationX;
+        translateY.value = event.translationY;
+      },
+      onEnd: () => {
+        translateX.value = withSpring(0);
+        translateY.value = withSpring(0);
+        scale.value = withSpring(1);
+        if (onDragEnd) {
+          runOnJS(onDragEnd)();
+        }
+      },
+    });
 
   const animatedStyle = useAnimatedStyle(() => {
     return {
@@ -80,12 +79,10 @@ const DraggableWidget = ({
         activeOffsetY={[-10, 10]}
         minDist={5}
       >
-        <Animated.View style={animatedStyle}>
-          {children}
-        </Animated.View>
+        <Animated.View style={animatedStyle}>{children}</Animated.View>
       </PanGestureHandler>
     </GestureHandlerRootView>
   );
 };
 
-export default DraggableWidget; 
+export default DraggableWidget;

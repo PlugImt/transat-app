@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Dimensions,
   Image,
@@ -20,8 +20,6 @@ const Card = ({ title, description, image, onPress }: CardProps) => {
   const [imageHeight, setImageHeight] = useState(200);
   const screenWidth = Dimensions.get("window").width;
   const imageWidth = screenWidth - 40;
-
-  const animation_ref = useRef(null);
 
   useEffect(() => {
     if (image && typeof image !== "number") {

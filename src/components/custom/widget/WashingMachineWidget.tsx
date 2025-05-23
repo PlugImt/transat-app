@@ -8,7 +8,7 @@ import type { StackNavigationProp } from "@react-navigation/stack";
 import { WashingMachineIcon, Wind } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Dimensions, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Text, TouchableOpacity, View } from "react-native";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -71,8 +71,9 @@ export function WashingMachineWidget() {
         onPress={() => navigation.navigate("WashingMachine")}
         className="px-6 py-4 rounded-lg bg-card flex-row justify-between gap-6 overflow-hidden"
       >
-        <View className="items-center"
-              style={{ maxWidth: (Dimensions.get('window').width/2) - 50 }}
+        <View
+          className="items-center"
+          style={{ maxWidth: Dimensions.get("window").width / 2 - 50 }}
         >
           <WashingMachineIcon
             size={40}
@@ -89,8 +90,9 @@ export function WashingMachineWidget() {
             {t("services.washingMachine.machineAvailable")}
           </Text>
         </View>
-        <View className="items-center"
-              style={{ maxWidth: (Dimensions.get('window').width/2) - 50 }}
+        <View
+          className="items-center"
+          style={{ maxWidth: Dimensions.get("window").width / 2 - 50 }}
         >
           <Wind
             size={40}

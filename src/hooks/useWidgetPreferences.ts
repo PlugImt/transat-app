@@ -1,19 +1,19 @@
-import { useEffect, useState } from 'react';
 import {
-  type WidgetPreference,
   type ServicePreference,
+  type WidgetPreference,
   getHomeWidgetPreferences,
-  saveHomeWidgetPreferences,
   getServicePreferences,
+  saveHomeWidgetPreferences,
   saveServicePreferences,
-} from '@/services/storage/widgetPreferences';
+} from "@/services/storage/widgetPreferences";
+import { useEffect, useState } from "react";
 
 export const useHomeWidgetPreferences = () => {
   const [widgets, setWidgets] = useState<WidgetPreference[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadPreferences().then(r => r);
+    loadPreferences().then((r) => r);
   }, []);
 
   const loadPreferences = async () => {
@@ -22,7 +22,7 @@ export const useHomeWidgetPreferences = () => {
       const preferences = await getHomeWidgetPreferences();
       setWidgets(preferences.sort((a, b) => a.order - b.order));
     } catch (error) {
-      console.error('Error loading widget preferences:', error);
+      console.error("Error loading widget preferences:", error);
     } finally {
       setLoading(false);
     }
@@ -38,16 +38,14 @@ export const useHomeWidgetPreferences = () => {
   };
 
   const toggleWidget = async (widgetId: string) => {
-    const updated = widgets.map(widget =>
-      widget.id === widgetId 
-        ? { ...widget, enabled: !widget.enabled }
-        : widget
+    const updated = widgets.map((widget) =>
+      widget.id === widgetId ? { ...widget, enabled: !widget.enabled } : widget,
     );
     setWidgets(updated);
     await saveHomeWidgetPreferences(updated);
   };
 
-  const enabledWidgets = widgets.filter(widget => widget.enabled);
+  const enabledWidgets = widgets.filter((widget) => widget.enabled);
 
   return {
     widgets,
@@ -64,7 +62,7 @@ export const useServicePreferences = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadPreferences().then(r => r);
+    loadPreferences().then((r) => r);
   }, []);
 
   const loadPreferences = async () => {
@@ -73,7 +71,7 @@ export const useServicePreferences = () => {
       const preferences = await getServicePreferences();
       setServices(preferences.sort((a, b) => a.order - b.order));
     } catch (error) {
-      console.error('Error loading service preferences:', error);
+      console.error("Error loading service preferences:", error);
     } finally {
       setLoading(false);
     }
@@ -89,16 +87,16 @@ export const useServicePreferences = () => {
   };
 
   const toggleService = async (serviceId: string) => {
-    const updated = services.map(service =>
-      service.id === serviceId 
+    const updated = services.map((service) =>
+      service.id === serviceId
         ? { ...service, enabled: !service.enabled }
-        : service
+        : service,
     );
     setServices(updated);
     await saveServicePreferences(updated);
   };
 
-  const enabledServices = services.filter(service => service.enabled);
+  const enabledServices = services.filter((service) => service.enabled);
 
   return {
     services,
@@ -108,4 +106,4 @@ export const useServicePreferences = () => {
     toggleService,
     refreshPreferences: loadPreferences,
   };
-}; 
+};

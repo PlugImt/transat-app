@@ -38,7 +38,11 @@ const Dropdown = ({
             onValueChange={onValueChange}
             mode="dropdown"
             style={{ color: theme.foreground }}
-            itemStyle={{ backgroundColor: theme.card, color: theme.foreground, fontSize: 16 }}
+            itemStyle={{
+              backgroundColor: theme.card,
+              color: theme.foreground,
+              fontSize: 16,
+            }}
             dropdownIconColor={theme.foreground}
           >
             {options.map((option) => (

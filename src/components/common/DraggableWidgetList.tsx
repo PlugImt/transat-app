@@ -1,10 +1,10 @@
-import { type ReactNode } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import type { ReactNode } from "react";
+import { TouchableOpacity, View } from "react-native";
 import DraggableFlatList, {
-  RenderItemParams,
+  type RenderItemParams,
   ScaleDecorator,
-} from 'react-native-draggable-flatlist';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+} from "react-native-draggable-flatlist";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 interface DraggableItem {
   id: string;
@@ -18,12 +18,16 @@ interface DraggableWidgetListProps {
   isEditMode?: boolean;
 }
 
-const DraggableWidgetList = ({ 
-  data, 
-  onDragEnd, 
-  isEditMode = false 
+const DraggableWidgetList = ({
+  data,
+  onDragEnd,
+  isEditMode = false,
 }: DraggableWidgetListProps) => {
-  const renderItem = ({ item, drag, isActive }: RenderItemParams<DraggableItem>) => {
+  const renderItem = ({
+    item,
+    drag,
+    isActive,
+  }: RenderItemParams<DraggableItem>) => {
     return (
       <ScaleDecorator>
         <TouchableOpacity
@@ -45,9 +49,7 @@ const DraggableWidgetList = ({
     return (
       <View className="gap-6">
         {data.map((item) => (
-          <View key={item.key}>
-            {item.component}
-          </View>
+          <View key={item.key}>{item.component}</View>
         ))}
       </View>
     );
@@ -67,4 +69,4 @@ const DraggableWidgetList = ({
   );
 };
 
-export default DraggableWidgetList; 
+export default DraggableWidgetList;

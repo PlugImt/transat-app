@@ -1,7 +1,7 @@
 import {
   type ServicePreference,
-  type WidgetPreference,
   type ServiceSize,
+  type WidgetPreference,
   getHomeWidgetPreferences,
   getServicePreferences,
   saveHomeWidgetPreferences,
@@ -100,7 +100,10 @@ export const useServicePreferences = () => {
   const toggleServiceSize = async (serviceId: string) => {
     const updated = services.map((service) =>
       service.id === serviceId
-        ? { ...service, size: (service.size === "full" ? "half" : "full") as ServiceSize }
+        ? {
+            ...service,
+            size: (service.size === "full" ? "half" : "full") as ServiceSize,
+          }
         : service,
     );
     setServices(updated);

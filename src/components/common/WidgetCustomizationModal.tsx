@@ -238,7 +238,7 @@ const WidgetCustomizationModal = ({
                 backgroundColor: theme.muted,
               }}
             >
-              {item.size === 'full' ? (
+              {item.size === "full" ? (
                 <Minimize size={16} color={theme.foreground} />
               ) : (
                 <Maximize size={16} color={theme.foreground} />

@@ -1,14 +1,14 @@
 import { Button } from "@/components/common/Button";
 import Card from "@/components/common/Card";
+import FlexibleGrid from "@/components/common/FlexibleGrid";
 import Page from "@/components/common/Page";
 import WidgetCustomizationModal from "@/components/common/WidgetCustomizationModal";
-import FlexibleGrid from "@/components/common/FlexibleGrid";
 import { useServicePreferences } from "@/hooks/useWidgetPreferences";
 import type { AppStackParamList } from "@/services/storage/types";
 import type { ServicePreference } from "@/services/storage/widgetPreferences";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 
@@ -17,15 +17,16 @@ type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 export const Services = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<AppScreenNavigationProp>();
-  const { enabledServices, services, updateOrder, toggleServiceSize, loading } = useServicePreferences();
-  
+  const { enabledServices, services, updateOrder, toggleServiceSize, loading } =
+    useServicePreferences();
+
   const [showCustomizationModal, setShowCustomizationModal] = useState(false);
 
   // Memoize the services prop for the modal
   const memoizedServicesForModal = useMemo(() => services, [services]);
 
   const handleServicePress = (service: ServicePreference) => {
-    console.log('Service card pressed:', service.screen);
+    console.log("Service card pressed:", service.screen);
     navigation.navigate(service.screen as any);
   };
 
@@ -37,7 +38,9 @@ export const Services = () => {
     />
   );
 
-  const handleCustomizationSave = async (updatedServices: ServicePreference[]) => {
+  const handleCustomizationSave = async (
+    updatedServices: ServicePreference[],
+  ) => {
     await updateOrder(updatedServices);
     setShowCustomizationModal(false);
   };

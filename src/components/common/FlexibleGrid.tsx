@@ -1,6 +1,6 @@
-import React from 'react';
-import { View, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
-import type { ServicePreference } from '@/services/storage/widgetPreferences';
+import type { ServicePreference } from "@/services/storage/widgetPreferences";
+import type React from "react";
+import { Dimensions, ScrollView, TouchableOpacity, View } from "react-native";
 
 interface FlexibleGridProps {
   data: ServicePreference[];
@@ -13,10 +13,10 @@ const FlexibleGrid: React.FC<FlexibleGridProps> = ({
   onPress,
   renderCard,
 }) => {
-  const screenWidth = Dimensions.get('window').width;
-  const padding = 20; // Padding from screen edges  
+  const screenWidth = Dimensions.get("window").width;
+  const padding = 20; // Padding from screen edges
   const gap = 10; // Gap between cards
-  const fullWidth = screenWidth - (padding * 2);
+  const fullWidth = screenWidth - padding * 2;
   const halfWidth = (fullWidth - gap) / 2;
 
   // Create rows for the grid layout
@@ -26,8 +26,8 @@ const FlexibleGrid: React.FC<FlexibleGridProps> = ({
     let currentRowWidth = 0;
 
     data.forEach((item) => {
-      const itemWidth = item.size === 'full' ? fullWidth : halfWidth;
-      
+      const itemWidth = item.size === "full" ? fullWidth : halfWidth;
+
       // If adding this item would exceed the row width, start a new row
       if (currentRowWidth + itemWidth > fullWidth && currentRow.length > 0) {
         rows.push(currentRow);
@@ -50,8 +50,8 @@ const FlexibleGrid: React.FC<FlexibleGridProps> = ({
   const rows = createRows();
 
   const renderGridItem = (item: ServicePreference) => {
-    const cardWidth = item.size === 'full' ? fullWidth : halfWidth;
-    
+    const cardWidth = item.size === "full" ? fullWidth : halfWidth;
+
     return (
       <TouchableOpacity
         key={item.id}
@@ -72,9 +72,9 @@ const FlexibleGrid: React.FC<FlexibleGridProps> = ({
         <View
           key={rowIndex}
           style={{
-            flexDirection: 'row',
-            justifyContent: 'flex-start',
-            alignItems: 'flex-start',
+            flexDirection: "row",
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
             marginBottom: gap,
             gap: gap,
             // paddingHorizontal: padding,
@@ -87,4 +87,4 @@ const FlexibleGrid: React.FC<FlexibleGridProps> = ({
   );
 };
 
-export default FlexibleGrid; 
+export default FlexibleGrid;

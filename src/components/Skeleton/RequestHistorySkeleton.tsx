@@ -10,8 +10,11 @@ export const RequestHistorySkeleton = ({
 }: RequestHistorySkeletonProps) => {
   return (
     <View className="gap-4">
-      {Array.from({ length: count }).map((_, index) => (
-        <View key={index} className="bg-card rounded-lg p-4">
+      {Array.from(
+        { length: count },
+        (_, index) => `skeleton-${index}-${Date.now()}`,
+      ).map((key) => (
+        <View key={key} className="bg-card rounded-lg p-4">
           <View className="flex-row justify-between items-center mb-3">
             <Skeleton height={20} width={120} variant="rounded" />
             <Skeleton height={16} width={80} variant="rounded" />

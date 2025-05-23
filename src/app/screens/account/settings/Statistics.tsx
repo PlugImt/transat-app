@@ -2,7 +2,7 @@ import { Button } from "@/components/common/Button";
 import Page from "@/components/common/Page";
 import { useTheme } from "@/themes/useThemeProvider";
 import { Activity, Server, Users } from "lucide-react-native";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
 
@@ -55,7 +55,7 @@ export const Statistics = () => {
   );
 
   // Function to fetch server status
-  const checkServerStatus = async () => {
+  const checkServerStatus = useCallback(async () => {
     const startTime = Date.now();
     try {
       const response = await fetch(`${API_BASE_URL}/status`, {
@@ -83,10 +83,10 @@ export const Statistics = () => {
       });
       return false;
     }
-  };
+  }, []);
 
   // Function to fetch statistics
-  const fetchStatistics = async () => {
+  const fetchStatistics = useCallback(async () => {
     setLoading(true);
     setError(null);
 
@@ -150,7 +150,7 @@ export const Statistics = () => {
         `Failed to fetch statistics: ${err instanceof Error ? err.message : String(err)}`,
       );
     }
-  };
+  }, [checkServerStatus]);
 
   // Format date
   const formatDate = (dateString: string) => {
@@ -200,7 +200,7 @@ export const Statistics = () => {
     return () => {
       clearInterval(statusCheckInterval);
     };
-  }, []);
+  }, [fetchStatistics, checkServerStatus]);
 
   const onRefresh = async () => {
     setRefreshing(true);
@@ -386,7 +386,7 @@ export const Statistics = () => {
                     <View className="bg-card rounded-lg p-4 mb-4">
                       {topUsers.map((user, index) => (
                         <View
-                          key={index}
+                          key={user.email}
                           className="bg-background/20 rounded-lg p-3 mb-2"
                         >
                           <View className="flex-row justify-between items-center mb-2">

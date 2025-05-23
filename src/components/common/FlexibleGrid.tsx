@@ -15,8 +15,8 @@ const FlexibleGrid: React.FC<FlexibleGridProps> = ({
 }) => {
   const screenWidth = Dimensions.get("window").width;
   const padding = 20; // Padding from screen edges
-  const gap =15; // Gap between cards
-  const fullWidth = screenWidth - (padding * 2) + 5;
+  const gap = 15; // Gap between cards
+  const fullWidth = screenWidth - padding * 2 + 5;
   const halfWidth = (fullWidth - gap) / 2;
 
   // Create rows for the grid layout
@@ -25,7 +25,7 @@ const FlexibleGrid: React.FC<FlexibleGridProps> = ({
     let currentRow: ServicePreference[] = [];
     let currentRowWidth = 0;
 
-    data.forEach((item) => {
+    for (const item of data) {
       const itemWidth = item.size === "full" ? fullWidth : halfWidth;
 
       // If adding this item would exceed the row width, start a new row
@@ -37,7 +37,7 @@ const FlexibleGrid: React.FC<FlexibleGridProps> = ({
         currentRow.push(item);
         currentRowWidth += itemWidth + (currentRow.length > 1 ? gap : 0);
       }
-    });
+    }
 
     // Add the last row if it has items
     if (currentRow.length > 0) {
@@ -68,9 +68,9 @@ const FlexibleGrid: React.FC<FlexibleGridProps> = ({
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      {rows.map((row, rowIndex) => (
+      {rows.map((row) => (
         <View
-          key={rowIndex}
+          key={row.map((item) => item.id).join("-")}
           style={{
             flexDirection: "row",
             justifyContent: "flex-start",

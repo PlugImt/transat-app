@@ -17,7 +17,7 @@ type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 export const Services = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<AppScreenNavigationProp>();
-  const { enabledServices, services, updateOrder, toggleServiceSize, loading } =
+  const { enabledServices, services, updateOrder, loading } =
     useServicePreferences();
 
   const [showCustomizationModal, setShowCustomizationModal] = useState(false);
@@ -27,6 +27,7 @@ export const Services = () => {
 
   const handleServicePress = (service: ServicePreference) => {
     console.log("Service card pressed:", service.screen);
+    // biome-ignore lint/suspicious/noExplicitAny: Service screen typing needs to be fixed properly
     navigation.navigate(service.screen as any);
   };
 

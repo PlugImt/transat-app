@@ -26,7 +26,7 @@ import Constants from "expo-constants";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import type React from "react";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Platform, Text, TouchableOpacity, View } from "react-native";
 import DraggableFlatList, {
@@ -181,7 +181,7 @@ export const Home = () => {
     ]);
   };
 
-  const getWidgetComponent = (widgetId: string) => {
+  const getWidgetComponent = useCallback((widgetId: string) => {
     switch (widgetId) {
       case "weather":
         return <WeatherWidget />;
@@ -192,7 +192,7 @@ export const Home = () => {
       default:
         return null;
     }
-  };
+  }, []);
 
   const draggableWidgets: DraggableWidgetItem[] = useMemo(() => {
     return enabledWidgets

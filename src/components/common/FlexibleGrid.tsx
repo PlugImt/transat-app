@@ -15,8 +15,8 @@ const FlexibleGrid: React.FC<FlexibleGridProps> = ({
 }) => {
   const screenWidth = Dimensions.get("window").width;
   const padding = 20; // Padding from screen edges
-  const gap = 10; // Gap between cards
-  const fullWidth = screenWidth - padding * 2;
+  const gap =15; // Gap between cards
+  const fullWidth = screenWidth - (padding * 2) + 5;
   const halfWidth = (fullWidth - gap) / 2;
 
   // Create rows for the grid layout
@@ -75,7 +75,7 @@ const FlexibleGrid: React.FC<FlexibleGridProps> = ({
             flexDirection: "row",
             justifyContent: "flex-start",
             alignItems: "flex-start",
-            marginBottom: gap,
+            // marginBottom: gap,
             gap: gap,
             // paddingHorizontal: padding,
           }}

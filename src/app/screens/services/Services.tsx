@@ -34,7 +34,7 @@ export const Services = () => {
     <Card
       image={item.image}
       width={width}
-      onPress={() => {}} // Empty function since parent handles navigation
+      onPress={() => handleServicePress(item)}
     />
   );
 

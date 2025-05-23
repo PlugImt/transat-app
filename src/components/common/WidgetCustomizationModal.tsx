@@ -276,15 +276,15 @@ const WidgetCustomizationModal = ({
           }}
         >
           <View className="flex-row justify-between items-center">
-            <TouchableOpacity onPress={onClose}>
-              <X color={theme.foreground} size={24} />
-            </TouchableOpacity>
+            {/*<TouchableOpacity onPress={onClose}>*/}
+            {/*  <X color={theme.foreground} size={24} />*/}
+            {/*</TouchableOpacity>*/}
             <Text className="h2" style={{ color: theme.foreground }}>
               {title}
             </Text>
-            <TouchableOpacity onPress={handleSave}>
-              <Check color={theme.primary} size={24} />
-            </TouchableOpacity>
+            {/*<TouchableOpacity onPress={handleSave}>*/}
+            {/*  <Check color={theme.primary} size={24} />*/}
+            {/*</TouchableOpacity>*/}
           </View>
         </View>
 

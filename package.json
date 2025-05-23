@@ -52,7 +52,6 @@
     "expo-web-browser": "~14.1.6",
     "i18next": "^24.2.2",
     "jotai": "^2.12.3",
-    "lottie-react-native": "7.2.2",
     "lucide-react-native": "^0.511.0",
     "nativecn-ui": "^0.0.8",
     "nativewind": "^4.1.23",
@@ -82,6 +81,7 @@
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@biomejs/biome": "1.9.4",
+    "@expo/cli": "^0.24.13",
     "@types/react": "~19.0.10",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.3.3"

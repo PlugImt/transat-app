@@ -1,4 +1,3 @@
-import LottieView from "lottie-react-native";
 import { useEffect, useRef, useState } from "react";
 import {
   Dimensions,
@@ -17,7 +16,7 @@ interface CardProps {
   onPress: () => void;
 }
 
-const Card = ({ title, description, image, animation, onPress }: CardProps) => {
+const Card = ({ title, description, image, onPress }: CardProps) => {
   const [imageHeight, setImageHeight] = useState(200);
   const screenWidth = Dimensions.get("window").width;
   const imageWidth = screenWidth - 40;
@@ -65,20 +64,6 @@ const Card = ({ title, description, image, animation, onPress }: CardProps) => {
               borderRadius: 10,
               backgroundColor: "#181010",
             }}
-          />
-        )}
-        {animation && (
-          <LottieView
-            ref={animation_ref}
-            loop={true}
-            style={{
-              width: imageWidth,
-              height: imageHeight,
-              borderRadius: 10,
-              backgroundColor: "#181010",
-            }}
-            autoPlay
-            source={animation}
           />
         )}
         {title && (

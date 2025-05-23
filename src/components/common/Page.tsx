@@ -3,8 +3,7 @@ import { useTheme } from "@/themes/useThemeProvider";
 import { useNavigation } from "@react-navigation/native";
 import { BlurView } from "expo-blur";
 import { ArrowLeft } from "lucide-react-native";
-import { type ReactNode, useState } from "react";
-import { useRef } from "react";
+import { type ReactNode, useState, useRef } from "react";
 import {
   Dimensions,
   Platform,
@@ -28,6 +27,7 @@ type PageProps = {
   footer?: ReactNode;
   confetti?: boolean;
   onConfettiTrigger?: (trigger: () => void) => void;
+  disableScroll?: boolean;
 };
 
 export default function Page({
@@ -42,6 +42,7 @@ export default function Page({
   footer,
   confetti = false,
   onConfettiTrigger,
+  disableScroll = false,
 }: PageProps) {
   const navigation = useNavigation();
   const theme = useTheme();
@@ -60,6 +61,34 @@ export default function Page({
       }
     });
   }
+
+  const ContentWrapper = disableScroll ? View : ScrollView;
+  const contentWrapperProps = disableScroll
+    ? {
+        style: {
+          flex: 1,
+          backgroundColor: theme.background,
+          marginTop: statusBarHeight + 60,
+        },
+        className: cn("bg-background px-5 flex flex-col gap-2 pb-12", className),
+      }
+    : {
+        style: {
+          flex: 1,
+          backgroundColor: theme.background,
+          marginTop: statusBarHeight + 60,
+        },
+        automaticallyAdjustKeyboardInsets: true,
+        contentContainerStyle: { paddingTop: 10 },
+        refreshControl: (
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            colors={[theme.primary]}
+            progressBackgroundColor={theme.background}
+          />
+        ),
+      };
 
   return (
     <View style={{ flex: 1, backgroundColor: theme.background }}>
@@ -98,32 +127,20 @@ export default function Page({
         </View>
       </BlurView>
 
-      <ScrollView
-        style={{
-          flex: 1,
-          backgroundColor: theme.background,
-          marginTop: statusBarHeight + 60,
-        }}
-        automaticallyAdjustKeyboardInsets
-        contentContainerStyle={{ paddingTop: 10 }} // Add padding to account for the sticky header
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-            colors={[theme.primary]}
-            progressBackgroundColor={theme.background}
-          />
-        }
-      >
-        <View
-          className={cn(
-            "bg-background px-5 flex flex-col gap-2 pb-12",
-            className,
-          )}
-        >
-          {children}
-        </View>
-      </ScrollView>
+      <ContentWrapper {...contentWrapperProps}>
+        {disableScroll ? (
+          children
+        ) : (
+          <View
+            className={cn(
+              "bg-background px-5 flex flex-col gap-2 pb-12",
+              className,
+            )}
+          >
+            {children}
+          </View>
+        )}
+      </ContentWrapper>
       {footer && <View className="bg-background px-5 py-4">{footer}</View>}
 
       {confetti && (

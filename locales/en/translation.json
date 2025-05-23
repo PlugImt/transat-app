@@ -31,6 +31,7 @@
     "customizeWidgets": "Customize Widgets",
     "customizeServices": "Customize Services",
     "customizeHint": "Toggle widgets on/off and drag to reorder them. Long press and drag to reorder items.",
+    "noWidgetsEnabled": "No widgets enabled. Customize to add some!",
     "errors": {
       "occurred": "An error occurred",
       "unableToFetch": "Unable to fetch data"

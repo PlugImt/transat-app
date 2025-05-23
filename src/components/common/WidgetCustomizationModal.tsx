@@ -3,7 +3,7 @@ import { useTheme } from "@/themes/useThemeProvider";
 import type { WidgetPreference, ServicePreference } from "@/services/storage/widgetPreferences";
 import { BlurView } from "expo-blur";
 import { Check, Settings, X, Plus, Minus } from "lucide-react-native";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Modal,
@@ -24,8 +24,8 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 interface WidgetCustomizationModalProps {
   visible: boolean;
   onClose: () => void;
-  widgets?: WidgetPreference[];
-  services?: ServicePreference[];
+  widgets: WidgetPreference[];
+  services: ServicePreference[];
   onUpdateWidgets?: (widgets: WidgetPreference[]) => void;
   onUpdateServices?: (services: ServicePreference[]) => void;
   title: string;
@@ -35,8 +35,8 @@ interface WidgetCustomizationModalProps {
 const WidgetCustomizationModal = ({
   visible,
   onClose,
-  widgets = [],
-  services = [],
+  widgets: initialWidgets = [],
+  services: initialServices = [],
   onUpdateWidgets,
   onUpdateServices,
   title,
@@ -48,14 +48,19 @@ const WidgetCustomizationModal = ({
   const [localServices, setLocalServices] = useState<ServicePreference[]>([]);
   const { height: screenHeight } = Dimensions.get("window");
   const statusBarHeight = Platform.OS === "ios" ? 0 : StatusBar.currentHeight || 0;
+  
+  // This ref tracks if the modal was previously visible
+  const wasPreviouslyVisible = useRef(false);
 
-  // Initialize local state when modal becomes visible
   useEffect(() => {
-    if (visible) {
-      setLocalWidgets([...widgets]);
-      setLocalServices([...services]);
+    // If the modal is now visible AND it was not previously visible, then it's just been opened.
+    if (visible && !wasPreviouslyVisible.current) {
+      setLocalWidgets([...initialWidgets].sort((a, b) => a.order - b.order));
+      setLocalServices([...initialServices].sort((a, b) => a.order - b.order));
     }
-  }, [visible, widgets, services]);
+    // Update the ref to the current visibility state for the next render.
+    wasPreviouslyVisible.current = visible;
+  }, [visible, initialWidgets, initialServices]);
 
   const handleSave = () => {
     if (type === 'widgets' && onUpdateWidgets) {

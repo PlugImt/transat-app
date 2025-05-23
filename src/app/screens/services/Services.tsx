@@ -23,7 +23,7 @@ type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 interface DraggableServiceItem {
   id: string;
   key: string;
-  component: React.ReactNode;
+  service: ServicePreference;
 }
 
 export const Services = () => {
@@ -34,46 +34,46 @@ export const Services = () => {
   
   const [showCustomizationModal, setShowCustomizationModal] = useState(false);
 
-  const getServiceComponent = (service: ServicePreference) => {
-    return (
-      <Card
-        image={service.image}
-        onPress={() => navigation.navigate(service.screen as any)}
-      />
-    );
-  };
+  // Memoize the services prop for the modal
+  const memoizedServicesForModal = useMemo(() => services, [services]);
 
   const draggableServices: DraggableServiceItem[] = useMemo(() => {
     return enabledServices.map(service => ({
       id: service.id,
       key: service.id,
-      component: getServiceComponent(service),
+      service: service,
     }));
-  }, [enabledServices, navigation]);
+  }, [enabledServices]);
 
   const renderService = ({ item, drag, isActive }: RenderItemParams<DraggableServiceItem>) => {
     return (
       <ScaleDecorator>
-        <TouchableOpacity
-          onLongPress={drag}
-          delayLongPress={200}
+        <View
           style={{
             opacity: isActive ? 0.8 : 1,
             transform: [{ scale: isActive ? 1.02 : 1 }],
           }}
-          activeOpacity={1}
         >
-          {item.component}
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate(item.service.screen as any)}
+            onLongPress={drag}
+            delayLongPress={200}
+            activeOpacity={0.7}
+          >
+            <Card
+              image={item.service.image}
+              onPress={() => {}} // Empty function since we handle press in TouchableOpacity
+            />
+          </TouchableOpacity>
+        </View>
       </ScaleDecorator>
     );
   };
 
   const handleDragEnd = async ({ data }: { data: DraggableServiceItem[] }) => {
     const reorderedServices = data.map((item, index) => {
-      const originalService = enabledServices.find(s => s.id === item.id);
-      return originalService ? { ...originalService, order: index } : null;
-    }).filter(Boolean) as ServicePreference[];
+      return { ...item.service, order: index };
+    });
 
     await updateOrder(reorderedServices);
   };
@@ -109,9 +109,10 @@ export const Services = () => {
             label={t("common.customizeServices")}
             variant="outlined"
             onPress={() => setShowCustomizationModal(true)}
-            className="mb-4"
+            className="mb-4 mx-5"
           />
         }
+        disableScroll
       >
         <GestureHandlerRootView style={{ flex: 1 }}>
           <DraggableFlatList
@@ -120,7 +121,7 @@ export const Services = () => {
             keyExtractor={(item) => item.key}
             renderItem={renderService}
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ gap: 10, paddingBottom: 50 }}
+            contentContainerStyle={{ gap: 10, paddingTop: 10, paddingBottom: 50 }}
           />
         </GestureHandlerRootView>
       </Page>
@@ -128,7 +129,8 @@ export const Services = () => {
       <WidgetCustomizationModal
         visible={showCustomizationModal}
         onClose={() => setShowCustomizationModal(false)}
-        services={services}
+        widgets={[]}
+        services={memoizedServicesForModal || []}
         onUpdateServices={handleCustomizationSave}
         title={t("common.customizeServices")}
         type="services"

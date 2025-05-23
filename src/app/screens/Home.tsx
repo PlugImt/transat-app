@@ -112,6 +112,9 @@ export const Home = () => {
   const [showCustomizationModal, setShowCustomizationModal] = useState(false);
   const navigation = useNavigation<AppScreenNavigationProp>();
 
+  // Memoize the widgets prop for the modal
+  const memoizedWidgetsForModal = useMemo(() => widgets, [widgets]);
+
   useEffect(() => {
     registerForPushNotificationsAsync()
       .then(async (token) => {
@@ -242,7 +245,6 @@ export const Home = () => {
       <Page
         refreshing={isFetching}
         onRefresh={refetch}
-        className="gap-6"
         title={t("common.welcome")}
         newfName={user?.first_name || "Newf"}
         about={settingsButton}
@@ -251,9 +253,10 @@ export const Home = () => {
             label={t("common.customizeWidgets")}
             variant="outlined"
             onPress={() => setShowCustomizationModal(true)}
-            className="mb-4"
+            className="mb-4 mx-5"
           />
         }
+        disableScroll
       >
         <GestureHandlerRootView style={{ flex: 1 }}>
           <DraggableFlatList
@@ -262,7 +265,20 @@ export const Home = () => {
             keyExtractor={(item) => item.key}
             renderItem={renderWidget}
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ gap: 24 }}
+            contentContainerStyle={{ gap: 24, paddingTop: 10, paddingBottom: 12 }}
+            ListEmptyComponent={
+              <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 50 }}>
+                <Text style={{ fontSize: 16, color: theme.foreground }}>
+                  {t("common.noWidgetsEnabled")}
+                </Text>
+                <Button 
+                  label={t("common.customizeWidgets")}
+                  onPress={() => setShowCustomizationModal(true)}
+                  variant="link"
+                  className="mt-4"
+                />
+              </View>
+            }
           />
         </GestureHandlerRootView>
       </Page>
@@ -270,7 +286,8 @@ export const Home = () => {
       <WidgetCustomizationModal
         visible={showCustomizationModal}
         onClose={() => setShowCustomizationModal(false)}
-        widgets={widgets}
+        widgets={memoizedWidgetsForModal}
+        services={[]}
         onUpdateWidgets={handleCustomizationSave}
         title={t("common.customizeWidgets")}
         type="widgets"

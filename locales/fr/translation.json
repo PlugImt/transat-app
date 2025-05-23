@@ -31,6 +31,7 @@
     "customizeWidgets": "Personnaliser les widgets",
     "customizeServices": "Personnaliser les services",
     "customizeHint": "Activez/désactivez les widgets et faites-les glisser pour les réorganiser. Appuyez longuement et faites glisser pour réorganiser les éléments.",
+    "noWidgetsEnabled": "Aucun widget activé. Personnalisez pour en ajouter !",
     "errors": {
       "occurred": "Une erreur est survenue",
       "unableToFetch": "Impossible de récupérer les données"

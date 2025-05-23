@@ -28,6 +28,9 @@
     "success": "Succès",
     "error": "Erreur",
     "info": "Information",
+    "customizeWidgets": "Personnaliser les widgets",
+    "customizeServices": "Personnaliser les services",
+    "customizeHint": "Activez/désactivez les widgets et faites-les glisser pour les réorganiser. Appuyez longuement et faites glisser pour réorganiser les éléments.",
     "errors": {
       "occurred": "Une erreur est survenue",
       "unableToFetch": "Impossible de récupérer les données"
@@ -173,6 +176,7 @@
   "services": {
     "title": "Services",
     "market": "Marché",
+    "weather": "Météo",
     "traq": {
       "title": "Traq",
       "about": "🍺 Le Traq (Traquenard) est le bar étudiant de l'école où vous pouvez déguster différentes boissons.",

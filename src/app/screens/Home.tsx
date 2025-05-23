@@ -1,4 +1,6 @@
 import Page from "@/components/common/Page";
+import WidgetCustomizationModal from "@/components/common/WidgetCustomizationModal";
+import { Button } from "@/components/common/Button";
 import {
   WeatherSkeleton,
   WeatherWidget,
@@ -11,18 +13,27 @@ import WashingMachineWidget, {
 } from "@/components/custom/widget/WashingMachineWidget";
 import useAuth from "@/hooks/account/useAuth";
 import { useUser } from "@/hooks/account/useUser";
+import { useHomeWidgetPreferences } from "@/hooks/useWidgetPreferences";
 import { QUERY_KEYS } from "@/lib/queryKeys";
 import { isDinner, isLunch, isWeekend } from "@/lib/utils";
 import type { AppStackParamList } from "@/services/storage/types";
+import type { WidgetPreference } from "@/services/storage/widgetPreferences";
+import { useTheme } from "@/themes/useThemeProvider";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
 import Constants from "expo-constants";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
-import { useEffect, useState } from "react";
+import { Settings } from "lucide-react-native";
+import React, { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Platform, Text } from "react-native";
+import { Platform, Text, TouchableOpacity, View } from "react-native";
+import DraggableFlatList, {
+  RenderItemParams,
+  ScaleDecorator,
+} from 'react-native-draggable-flatlist';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -80,16 +91,25 @@ async function registerForPushNotificationsAsync() {
   }
 }
 
+interface DraggableWidgetItem {
+  id: string;
+  key: string;
+  component: React.ReactNode;
+}
+
 export const Home = () => {
   const { data: user } = useUser();
   const { t } = useTranslation();
+  const theme = useTheme();
 
   const { saveExpoPushToken } = useAuth();
+  const { enabledWidgets, widgets, updateOrder, loading: widgetsLoading } = useHomeWidgetPreferences();
 
   const [_expoPushToken, setExpoPushToken] = useState("");
   const [_notificationOpened, setNotificationOpened] = useState(false);
   // biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
   const [_notificationData, setNotificationData] = useState<any>(null);
+  const [showCustomizationModal, setShowCustomizationModal] = useState(false);
   const navigation = useNavigation<AppScreenNavigationProp>();
 
   useEffect(() => {
@@ -120,8 +140,8 @@ export const Home = () => {
 
         const screen =
           lastNotificationResponse.notification.request.content.data.screen;
-        if (screen) {
-          navigation.navigate(screen);
+        if (screen && typeof screen === 'string') {
+          navigation.navigate(screen as any);
         }
       }
     };
@@ -152,18 +172,110 @@ export const Home = () => {
     ]);
   };
 
-  return (
-    <Page
-      refreshing={isFetching}
-      onRefresh={refetch}
-      className="gap-6"
-      title={t("common.welcome")}
-      newfName={user?.first_name || "Newf"}
+  const getWidgetComponent = (widgetId: string) => {
+    switch (widgetId) {
+      case 'weather':
+        return <WeatherWidget />;
+      case 'restaurant':
+        return <RestaurantWidget />;
+      case 'washingMachine':
+        return <WashingMachineWidget />;
+      default:
+        return null;
+    }
+  };
+
+  const draggableWidgets: DraggableWidgetItem[] = useMemo(() => {
+    return enabledWidgets.map(widget => ({
+      id: widget.id,
+      key: widget.id,
+      component: getWidgetComponent(widget.id),
+    })).filter(item => item.component !== null);
+  }, [enabledWidgets]);
+
+  const renderWidget = ({ item, drag, isActive }: RenderItemParams<DraggableWidgetItem>) => {
+    return (
+      <ScaleDecorator>
+        <TouchableOpacity
+          onLongPress={drag}
+          delayLongPress={200}
+          style={{
+            opacity: isActive ? 0.8 : 1,
+            transform: [{ scale: isActive ? 1.02 : 1 }],
+          }}
+          activeOpacity={1}
+        >
+          {item.component}
+        </TouchableOpacity>
+      </ScaleDecorator>
+    );
+  };
+
+  const handleDragEnd = async ({ data }: { data: DraggableWidgetItem[] }) => {
+    const reorderedWidgets = data.map((item, index) => {
+      const originalWidget = enabledWidgets.find(w => w.id === item.id);
+      return originalWidget ? { ...originalWidget, order: index } : null;
+    }).filter(Boolean) as WidgetPreference[];
+
+    await updateOrder(reorderedWidgets);
+  };
+
+  const handleCustomizationSave = async (updatedWidgets: WidgetPreference[]) => {
+    await updateOrder(updatedWidgets);
+    setShowCustomizationModal(false);
+  };
+
+  const settingsButton = (
+    <TouchableOpacity
+      onPress={() => setShowCustomizationModal(true)}
     >
-      <WeatherWidget />
-      <RestaurantWidget />
-      <WashingMachineWidget />
-    </Page>
+      <Settings color={theme.foreground} size={20} />
+    </TouchableOpacity>
+  );
+
+  if (widgetsLoading) {
+    return <HomeLoading />;
+  }
+
+  return (
+    <>
+      <Page
+        refreshing={isFetching}
+        onRefresh={refetch}
+        className="gap-6"
+        title={t("common.welcome")}
+        newfName={user?.first_name || "Newf"}
+        about={settingsButton}
+        footer={
+          <Button
+            label={t("common.customizeWidgets")}
+            variant="outlined"
+            onPress={() => setShowCustomizationModal(true)}
+            className="mb-4"
+          />
+        }
+      >
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <DraggableFlatList
+            data={draggableWidgets}
+            onDragEnd={handleDragEnd}
+            keyExtractor={(item) => item.key}
+            renderItem={renderWidget}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ gap: 24 }}
+          />
+        </GestureHandlerRootView>
+      </Page>
+
+      <WidgetCustomizationModal
+        visible={showCustomizationModal}
+        onClose={() => setShowCustomizationModal(false)}
+        widgets={widgets}
+        onUpdateWidgets={handleCustomizationSave}
+        title={t("common.customizeWidgets")}
+        type="widgets"
+      />
+    </>
   );
 };
 

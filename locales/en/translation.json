@@ -28,6 +28,9 @@
     "success": "Success",
     "error": "Error",
     "info": "Information",
+    "customizeWidgets": "Customize Widgets",
+    "customizeServices": "Customize Services",
+    "customizeHint": "Toggle widgets on/off and drag to reorder them. Long press and drag to reorder items.",
     "errors": {
       "occurred": "An error occurred",
       "unableToFetch": "Unable to fetch data"
@@ -179,6 +182,7 @@
   "services": {
     "title": "Services",
     "market": "Market",
+    "weather": "Weather",
     "traq": {
       "title": "Traq'",
       "about": "🍺 The Traq (Traquenard) is the student bar where you can enjoy various drinks.",

@@ -83,14 +83,6 @@ export const Services = () => {
     setShowCustomizationModal(false);
   };
 
-  const settingsButton = (
-    <TouchableOpacity
-      onPress={() => setShowCustomizationModal(true)}
-    >
-      <Settings color={theme.foreground} size={20} />
-    </TouchableOpacity>
-  );
-
   if (loading) {
     return (
       <Page title={t("services.title")}>
@@ -101,19 +93,7 @@ export const Services = () => {
 
   return (
     <>
-      <Page 
-        title={t("services.title")}
-        about={settingsButton}
-        footer={
-          <Button
-            label={t("common.customizeServices")}
-            variant="outlined"
-            onPress={() => setShowCustomizationModal(true)}
-            className="mb-4 mx-5"
-          />
-        }
-        disableScroll
-      >
+      <Page title={t("services.title")}>
         <GestureHandlerRootView style={{ flex: 1 }}>
           <DraggableFlatList
             data={draggableServices}
@@ -122,6 +102,12 @@ export const Services = () => {
             renderItem={renderService}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{ gap: 10, paddingTop: 10, paddingBottom: 50 }}
+          />
+          <Button
+              label={t("common.customizeServices")}
+              variant="ghost"
+              onPress={() => setShowCustomizationModal(true)}
+              className="mb-4"
           />
         </GestureHandlerRootView>
       </Page>

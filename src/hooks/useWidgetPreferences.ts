@@ -13,7 +13,7 @@ export const useHomeWidgetPreferences = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadPreferences();
+    loadPreferences().then(r => r);
   }, []);
 
   const loadPreferences = async () => {
@@ -64,7 +64,7 @@ export const useServicePreferences = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadPreferences();
+    loadPreferences().then(r => r);
   }, []);
 
   const loadPreferences = async () => {

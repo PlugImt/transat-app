@@ -228,14 +228,6 @@ export const Home = () => {
     setShowCustomizationModal(false);
   };
 
-  const settingsButton = (
-    <TouchableOpacity
-      onPress={() => setShowCustomizationModal(true)}
-    >
-      <Settings color={theme.foreground} size={20} />
-    </TouchableOpacity>
-  );
-
   if (widgetsLoading) {
     return <HomeLoading />;
   }
@@ -247,16 +239,6 @@ export const Home = () => {
         onRefresh={refetch}
         title={t("common.welcome")}
         newfName={user?.first_name || "Newf"}
-        about={settingsButton}
-        footer={
-          <Button
-            label={t("common.customizeWidgets")}
-            variant="outlined"
-            onPress={() => setShowCustomizationModal(true)}
-            className="mb-4 mx-5"
-          />
-        }
-        disableScroll
       >
         <GestureHandlerRootView style={{ flex: 1 }}>
           <DraggableFlatList
@@ -281,6 +263,12 @@ export const Home = () => {
             }
           />
         </GestureHandlerRootView>
+        <Button
+            label={t("common.customizeWidgets")}
+            variant="ghost"
+            onPress={() => setShowCustomizationModal(true)}
+            className="mb-4"
+        />
       </Page>
 
       <WidgetCustomizationModal

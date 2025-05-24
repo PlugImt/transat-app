@@ -1,4 +1,4 @@
-import { useTheme } from "@/themes/useThemeProvider";
+import { useTheme } from "@/contexts/ThemeContext";
 import { Clock, EuroIcon, Info, MapPin, Plus } from "lucide-react-native";
 import type React from "react";
 import { useTranslation } from "react-i18next";
@@ -30,7 +30,7 @@ export const AboutModal: React.FC<AboutModalProps> = ({
   additionalInfo,
 }) => {
   const { t } = useTranslation();
-  const theme = useTheme();
+  const { theme } = useTheme();
 
   return (
     <Dialog>

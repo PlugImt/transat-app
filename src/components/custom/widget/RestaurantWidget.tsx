@@ -2,7 +2,7 @@ import { TextSkeleton } from "@/components/Skeleton";
 import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
 import { isDinner, isLunch, isWeekend, outOfService } from "@/lib/utils";
 import type { AppStackParamList } from "@/services/storage/types";
-import { useTheme } from "@/themes/useThemeProvider";
+import { useTheme } from "@/contexts/ThemeContext";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
@@ -14,7 +14,7 @@ type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
 export function RestaurantWidget() {
   const { t } = useTranslation();
-  const theme = useTheme();
+  const { theme } = useTheme();
 
   const navigation = useNavigation<AppScreenNavigationProp>();
   const { data: menu, isPending, error } = useRestaurantMenu();
@@ -270,7 +270,7 @@ export function RestaurantWidget() {
 export default RestaurantWidget;
 
 export const RestaurantWidgetLoading = () => {
-  const theme = useTheme();
+  const { theme } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation<AppScreenNavigationProp>();
 

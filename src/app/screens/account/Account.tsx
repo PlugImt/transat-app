@@ -12,7 +12,7 @@ import { useUser } from "@/hooks/account/useUser";
 import { QUERY_KEYS } from "@/lib/queryKeys";
 import { getStudentYear } from "@/lib/utils";
 import type { AccountNavigation } from "@/services/storage/types";
-import { useTheme } from "@/themes/useThemeProvider";
+import { useTheme } from "@/contexts/ThemeContext";
 import { useNavigation } from "@react-navigation/native";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
 import { Lock, Mail, Medal, Phone, Settings } from "lucide-react-native";
@@ -20,7 +20,7 @@ import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
 
 export const Account = () => {
-  const theme = useTheme();
+  const { theme } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation<AccountNavigation>();
   const queryClient = useQueryClient();
@@ -147,7 +147,7 @@ export const Account = () => {
 export default Account;
 
 const AccountLoading = () => {
-  const theme = useTheme();
+  const { theme } = useTheme();
   const { t } = useTranslation();
   return (
     <Page

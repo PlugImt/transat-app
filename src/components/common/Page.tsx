@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { useTheme } from "@/themes/useThemeProvider";
+import { useTheme } from "@/contexts/ThemeContext";
 import { useNavigation } from "@react-navigation/native";
 import { BlurView } from "expo-blur";
 import { ArrowLeft } from "lucide-react-native";
@@ -45,7 +45,7 @@ export default function Page({
   disableScroll = false,
 }: PageProps) {
   const navigation = useNavigation();
-  const theme = useTheme();
+  const { theme, actualTheme } = useTheme();
   const confettiRef = useRef<ConfettiCannon>(null);
   const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
   const [confettiTriggered, setConfettiTriggered] = useState(false);
@@ -98,7 +98,7 @@ export default function Page({
       {/* Sticky Header */}
       <BlurView
         intensity={50}
-        tint="dark"
+        tint={actualTheme}
         style={{
           position: "absolute",
           top: 0,
@@ -108,7 +108,7 @@ export default function Page({
           paddingTop: statusBarHeight + 10,
           paddingBottom: 10,
           paddingHorizontal: 20,
-          backgroundColor: "#030202E5", // Semi-transparent background
+          backgroundColor: theme.background + "E5", // Semi-transparent background with theme color
         }}
       >
         <View className="flex-row justify-between items-center">
@@ -120,9 +120,9 @@ export default function Page({
               />
             )}
             {title && (
-              <Text className="h1 ml-4">
+              <Text className="h1 ml-4" style={{ color: theme.foreground }}>
                 {title}
-                {newfName && <Text className="text-primary"> {newfName}</Text>}
+                {newfName && <Text style={{ color: theme.primary }}> {newfName}</Text>}
               </Text>
             )}
           </View>

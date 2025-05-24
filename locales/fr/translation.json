@@ -113,7 +113,19 @@
       "requestsPending": "Récupération de vos demandes..."
     },
     "contactSupport": "Contacter le support",
-    "appearance": "Apparence",
+    "appearance": {
+      "title": "Apparence",
+      "theme": "Thème",
+      "system": "Système",
+      "systemDescription": "Suivre les paramètres système",
+      "light": "Clair",
+      "lightDescription": "Thème clair",
+      "dark": "Sombre",
+      "darkDescription": "Thème sombre",
+      "preview": "Aperçu",
+      "sampleCard": "Carte d'exemple",
+      "sampleText": "Voici comment le texte apparaîtra dans le thème sélectionné."
+    },
     "language": {
       "language": "Langue",
       "selectLanguage": "Sélectionner la langue",

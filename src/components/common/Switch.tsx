@@ -1,11 +1,11 @@
 import { Switch as NativeSwitch } from "react-native";
 
-import { useTheme } from "@/themes/useThemeProvider";
+import { useTheme } from "@/contexts/ThemeContext";
 
 function Switch({
   ...props
 }: React.ComponentPropsWithoutRef<typeof NativeSwitch>) {
-  const theme = useTheme();
+  const { theme } = useTheme();
 
   const trackColor = props.trackColor || {
     false: theme.muted,

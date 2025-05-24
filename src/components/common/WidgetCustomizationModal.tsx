@@ -3,7 +3,7 @@ import type {
   ServicePreference,
   WidgetPreference,
 } from "@/services/storage/widgetPreferences";
-import { useTheme } from "@/themes/useThemeProvider";
+import { useTheme } from "@/contexts/ThemeContext";
 import { Maximize, Minimize, Settings } from "lucide-react-native";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -44,7 +44,7 @@ const WidgetCustomizationModal = ({
   type,
 }: WidgetCustomizationModalProps) => {
   const { t } = useTranslation();
-  const theme = useTheme();
+  const { theme } = useTheme();
   const [localWidgets, setLocalWidgets] = useState<WidgetPreference[]>([]);
   const [localServices, setLocalServices] = useState<ServicePreference[]>([]);
   const statusBarHeight =
@@ -188,7 +188,7 @@ const WidgetCustomizationModal = ({
               value={item.enabled}
               onValueChange={() => toggleWidgetEnabled(item.id)}
               trackColor={{ false: theme.muted, true: theme.primary }}
-              thumbColor={item.enabled ? "#fff" : "#f4f3f4"}
+              thumbColor={item.enabled ? theme.background : theme.muted}
             />
           </View>
         </View>
@@ -248,7 +248,7 @@ const WidgetCustomizationModal = ({
               value={item.enabled}
               onValueChange={() => toggleWidgetEnabled(item.id)}
               trackColor={{ false: theme.muted, true: theme.primary }}
-              thumbColor={item.enabled ? "#fff" : "#f4f3f4"}
+              thumbColor={item.enabled ? theme.background : theme.muted}
             />
           </View>
         </View>

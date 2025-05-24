@@ -1,4 +1,4 @@
-import { useTheme } from "@/themes/useThemeProvider";
+import { useTheme } from "@/contexts/ThemeContext";
 import { BottomSheetModal, BottomSheetView } from "@gorhom/bottom-sheet";
 import type React from "react";
 import { cloneElement, createContext, useContext, useRef } from "react";
@@ -12,7 +12,7 @@ import Animated, {
 
 // Context pour gérer l'état du bottom sheet
 interface BottomSheetContextType {
-  bottomSheetRef: React.RefObject<BottomSheetModal>;
+  bottomSheetRef: React.RefObject<BottomSheetModal | null>;
   handleBottomSheet: (open: boolean) => void;
 }
 const BottomSheetContext = createContext<BottomSheetContextType | undefined>(
@@ -30,7 +30,7 @@ export const useBottomSheet = () => {
 // Composant qui déclenche l'ouverture du bottom sheet
 export function BottomSheetTrigger({
   children,
-}: { children: React.ReactElement }) {
+}: { children: React.ReactElement<{ onPress?: () => void }> }) {
   const { handleBottomSheet } = useBottomSheet();
   return cloneElement(children, { onPress: () => handleBottomSheet(true) });
 }
@@ -59,7 +59,7 @@ export function BottomSheetProvider({
 // Composant principal du bottom sheet
 export function BottomSheet({ children }: { children: React.ReactNode }) {
   const { bottomSheetRef, handleBottomSheet } = useBottomSheet();
-  const theme = useTheme();
+  const { theme } = useTheme();
   const opacity = useSharedValue(0);
 
   // Configuration du geste de fermeture
@@ -91,7 +91,7 @@ export function BottomSheet({ children }: { children: React.ReactNode }) {
         <Animated.View
           style={[
             style,
-            { backgroundColor: "rgba(0, 0, 0, 1)" },
+            { backgroundColor: theme.background + "80" },
             animatedBackdropStyle,
           ]}
           onTouchEnd={() => handleBottomSheet(false)}

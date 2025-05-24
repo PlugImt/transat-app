@@ -1,6 +1,6 @@
 import { Button } from "@/components/common/Button";
 import Page from "@/components/common/Page";
-import { useTheme } from "@/themes/useThemeProvider";
+import { useTheme } from "@/contexts/ThemeContext";
 import { Activity, Server, Users } from "lucide-react-native";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -39,7 +39,7 @@ const API_BASE_URL = "https://transat.destimt.fr";
 
 export const Statistics = () => {
   const { t } = useTranslation();
-  const theme = useTheme();
+  const { theme } = useTheme();
   const [globalStats, setGlobalStats] = useState<GlobalStatistic | null>(null);
   const [topUsers, setTopUsers] = useState<UserStatistic[]>([]);
   const [serverStatus, setServerStatus] = useState<ServerStatus>({

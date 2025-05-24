@@ -2,6 +2,7 @@ import { Home } from "@/app/screens/Home";
 import Account from "@/app/screens/account/Account";
 import EditProfile from "@/app/screens/account/EditAccount";
 import About from "@/app/screens/account/settings/About";
+import { Appearance } from "@/app/screens/account/settings/Appearance";
 import ChangePassword from "@/app/screens/account/settings/ChangePassword";
 import Help from "@/app/screens/account/settings/Help";
 import Language from "@/app/screens/account/settings/Language";
@@ -14,6 +15,7 @@ import { Restaurant } from "@/app/screens/services/Restaurant";
 import { Services } from "@/app/screens/services/Services";
 import { Traq } from "@/app/screens/services/Traq";
 import { WashingMachine } from "@/app/screens/services/WashingMachine";
+import { useTheme } from "@/contexts/ThemeContext";
 import type { BottomTabParamList } from "@/types/navigation";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -61,6 +63,7 @@ const AccountStackScreen = () => (
     <AccountStack.Screen name="ChangePassword" component={ChangePassword} />
     <AccountStack.Screen name="Notifications" component={Notifications} />
     <AccountStack.Screen name="Language" component={Language} />
+    <AccountStack.Screen name="Appearance" component={Appearance} />
     <AccountStack.Screen name="About" component={About} />
     <AccountStack.Screen name="Help" component={Help} />
     <AccountStack.Screen name="Statistics" component={Statistics} />
@@ -69,14 +72,22 @@ const AccountStackScreen = () => (
 
 export const BottomTabNavigator = () => {
   const { t } = useTranslation();
+  const { theme } = useTheme();
 
   return (
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: "#ec7f32",
+        tabBarActiveTintColor: theme.primary,
+        tabBarInactiveTintColor: theme.muted,
         tabBarShowLabel: true,
-        tabBarStyle: styles.tabBar,
+        tabBarStyle: {
+          backgroundColor: theme.card,
+          borderTopWidth: 0,
+          paddingTop: 8,
+          height: 60,
+          paddingBottom: 0,
+        },
       }}
     >
       <Tab.Screen
@@ -121,7 +132,6 @@ export const BottomTabNavigator = () => {
 
 const styles = StyleSheet.create({
   tabBar: {
-    backgroundColor: "#0D0505",
     borderTopWidth: 0,
     paddingTop: 8,
     height: 60,

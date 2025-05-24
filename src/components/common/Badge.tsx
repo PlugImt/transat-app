@@ -2,7 +2,7 @@ import { type VariantProps, cva } from "class-variance-authority";
 import { Text, TouchableOpacity, type View } from "react-native";
 
 import { cn } from "@/lib/utils";
-import { useTheme } from "@/themes/useThemeProvider";
+import { useTheme } from "@/contexts/ThemeContext";
 import type { LucideIcon } from "lucide-react-native";
 import type React from "react";
 
@@ -70,7 +70,7 @@ function Badge({
   icon: Icon,
   ...props
 }: BadgeProps) {
-  const theme = useTheme();
+  const { theme } = useTheme();
   return (
     <TouchableOpacity
       className={cn(
@@ -97,7 +97,7 @@ interface BadgeLoadingProps {
 }
 
 export const BadgeLoading = ({ className }: BadgeLoadingProps) => {
-  const theme = useTheme();
+  const { theme } = useTheme();
   return (
     <Badge
       label=""

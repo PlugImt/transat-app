@@ -1,7 +1,7 @@
 import { TextSkeleton } from "@/components/Skeleton";
 import { Avatar, AvatarImage } from "@/components/common/Avatar";
 import Badge from "@/components/common/Badge";
-import { useTheme } from "@/themes/useThemeProvider";
+import { useTheme } from "@/contexts/ThemeContext";
 import { BadgeEuro, Beer, CircleX, Clock } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { Dimensions, Image, Text, View } from "react-native";
@@ -32,7 +32,7 @@ const TraqCard = ({
   priceHalf,
 }: CardProps) => {
   const { t } = useTranslation();
-  const theme = useTheme();
+  const { theme } = useTheme();
 
   return (
     <View className="px-6 py-8 rounded-lg bg-card gap-6 relative items-center">
@@ -115,7 +115,7 @@ export default TraqCard;
 
 export const TraqCardLoading = () => {
   const { t } = useTranslation();
-  const theme = useTheme();
+  const { theme } = useTheme();
 
   return (
     <View className="px-6 py-8 rounded-lg bg-card gap-6 relative items-center">

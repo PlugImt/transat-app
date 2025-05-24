@@ -6,7 +6,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/common/Tabs";
-import { useTheme } from "@/themes/useThemeProvider";
+import { useTheme } from "@/contexts/ThemeContext";
 import {
   ChevronDown,
   ChevronUp,
@@ -18,7 +18,7 @@ import { useTranslation } from "react-i18next";
 import { Linking, Text, TouchableOpacity, View } from "react-native";
 
 const Help = () => {
-  const theme = useTheme();
+  const { theme } = useTheme();
   const { t } = useTranslation();
 
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);

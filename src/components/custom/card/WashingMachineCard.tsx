@@ -1,5 +1,5 @@
 import { TextSkeleton } from "@/components/Skeleton";
-import { useTheme } from "@/themes/useThemeProvider";
+import { useTheme } from "@/contexts/ThemeContext";
 import { useWashingMachineNotifications } from "@/hooks/useWashingMachineNotifications";
 import { Bell, BellRing, WashingMachineIcon, Wind } from "lucide-react-native";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -247,7 +247,7 @@ const WashingMachineCard = ({
   icon,
 }: WashingMachineProps) => {
   const { t } = useTranslation();
-  const theme = useTheme();
+  const { theme } = useTheme();
 
   const [timeRemaining, setTimeRemaining] = useState<number>(status);
   const [progressPercentage, setProgressPercentage] = useState<number>(0);
@@ -403,7 +403,7 @@ interface WashingMachineCardSkeletonProps {
 export const WashingMachineCardSkeleton = ({
   icon,
 }: WashingMachineCardSkeletonProps) => {
-  const theme = useTheme();
+  const { theme } = useTheme();
 
   return (
     <View className="px-6 py-4 rounded-lg bg-card flex-row justify-between gap-6 items-center">

@@ -5,6 +5,7 @@ import {
   Globe,
   HelpCircle,
   Info,
+  Palette,
   Server,
   Shield,
 } from "lucide-react-native";
@@ -22,18 +23,18 @@ import Page from "@/components/common/Page";
 import { Switch } from "@/components/common/Switch";
 import { useToast } from "@/components/common/Toast";
 import { AccountCard } from "@/components/custom/card/AccountCard";
+import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";
 import { useUser } from "@/hooks/account/useUser";
 import { QUERY_KEYS } from "@/lib/queryKeys";
 import { storage } from "@/services/storage/asyncStorage";
 import STORAGE_KEYS from "@/services/storage/constants";
 import type { SettingsNavigation } from "@/services/storage/types";
-import { useTheme } from "@/themes/useThemeProvider";
 import { useNavigation } from "@react-navigation/native";
 import SettingsItem from "./SettingsItem";
 
 export const Settings = () => {
-  const theme = useTheme();
+  const { theme, themeMode } = useTheme();
   const { t, i18n } = useTranslation();
   const { logout } = useAuth();
   const { toast } = useToast();
@@ -80,7 +81,19 @@ export const Settings = () => {
 
       <View className="gap-2">
         <Text className="h3 ml-4">{t("common.appearance")}</Text>
-        <View className="bg-card rounded-lg px-4 py-2">
+        <View className="bg-card rounded-lg px-4 py-2 gap-4">
+          <SettingsItem
+            icon={<Palette color={theme.foreground} size={22} />}
+            title={t("settings.appearance.title", "Theme")}
+            subtitle={
+              themeMode === "system" 
+                ? t("settings.appearance.system", "System")
+                : themeMode === "light" 
+                ? t("settings.appearance.light", "Light")
+                : t("settings.appearance.dark", "Dark")
+            }
+            onPress={() => navigation.navigate("Appearance")}
+          />
           <SettingsItem
             icon={<Globe color={theme.foreground} size={22} />}
             title={t("settings.language.language")}

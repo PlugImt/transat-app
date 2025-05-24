@@ -119,7 +119,19 @@
       "faq4Answer": "If you want to contribute to the development of this app, you can join our team by contacting us on our WhatsApp group. We welcome any help, whether it's in development, design, or testing."
     },
     "contactSupport": "Contact support",
-    "appearance": "Appearance",
+    "appearance": {
+      "title": "Appearance",
+      "theme": "Theme",
+      "system": "System",
+      "systemDescription": "Follow system setting",
+      "light": "Light",
+      "lightDescription": "Light theme",
+      "dark": "Dark",
+      "darkDescription": "Dark theme",
+      "preview": "Preview",
+      "sampleCard": "Sample Card",
+      "sampleText": "This is how text will appear in the selected theme."
+    },
     "language": {
       "language": "Language",
       "selectLanguage": "Select language",

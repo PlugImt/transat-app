@@ -30,7 +30,7 @@ Sentry.init({
 export default function Layout() {
   return (
     <View className="flex-1 bg-background">
-      <StatusBar style="light" translucent={true} backgroundColor="#070402C6" />
+      <StatusBar style="auto" translucent={true} />
       <SafeAreaView className="flex-1 bg-background">
         <Slot />
       </SafeAreaView>

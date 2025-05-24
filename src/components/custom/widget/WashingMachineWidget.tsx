@@ -1,7 +1,7 @@
 import { TextSkeleton } from "@/components/Skeleton";
 import { useWashingMachines } from "@/hooks/useWashingMachines";
 import type { AppStackParamList } from "@/services/storage/types";
-import { useTheme } from "@/themes/useThemeProvider";
+import { useTheme } from "@/contexts/ThemeContext";
 import type { MachineData } from "@/types/washingMachine";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
@@ -15,7 +15,7 @@ type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 export function WashingMachineWidget() {
   const { t } = useTranslation();
   const navigation = useNavigation<AppScreenNavigationProp>();
-  const theme = useTheme();
+  const { theme } = useTheme();
 
   const { data: rawData, isPending, isError, error } = useWashingMachines();
   const data = rawData as
@@ -119,7 +119,7 @@ export default WashingMachineWidget;
 export const WashingMachineWidgetLoading = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<AppScreenNavigationProp>();
-  const theme = useTheme();
+  const { theme } = useTheme();
 
   return (
     <View className="flex flex-col gap-2">

@@ -2,7 +2,7 @@ import Page from "@/components/common/Page";
 import { useUpdateLanguage } from "@/hooks/account/useUpdateLanguage";
 import i18n from "@/i18n";
 import type { SettingsNavigation } from "@/services/storage/types";
-import { useTheme } from "@/themes/useThemeProvider";
+import { useTheme } from "@/contexts/ThemeContext";
 import { useNavigation } from "@react-navigation/native";
 import { Check } from "lucide-react-native";
 import { useEffect, useState } from "react";
@@ -35,7 +35,7 @@ const languageNativeNames: Record<string, string> = {
 };
 
 export const Language = () => {
-  const theme = useTheme();
+  const { theme } = useTheme();
   const { t } = useTranslation();
   const currentLanguage = i18n.language;
   const navigation = useNavigation<SettingsNavigation>();

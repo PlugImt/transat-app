@@ -11,30 +11,31 @@ module.exports = {
     },
     extend: {
       colors: {
-        border: colors.dark.muted,
-        input: colors.dark.input,
-        background: colors.dark.background,
-        foreground: colors.dark.foreground,
+        // Light theme colors (default)
+        border: colors.light.muted,
+        input: colors.light.input,
+        background: colors.light.background,
+        foreground: colors.light.foreground,
         primary: {
-          DEFAULT: colors.dark.primary,
-          foreground: colors.dark.foreground,
+          DEFAULT: colors.light.primary,
+          foreground: colors.light.foreground,
         },
         secondary: {
-          DEFAULT: colors.dark.secondary,
-          foreground: "#95b5df",
+          DEFAULT: colors.light.secondary,
+          foreground: colors.light.foreground,
         },
         card: {
-          DEFAULT: colors.dark.card,
-          foreground: colors.dark.foreground,
+          DEFAULT: colors.light.card,
+          foreground: colors.light.foreground,
         },
         lightCard: {
-          DEFAULT: "#1e1515",
-          foreground: colors.dark.foreground,
+          DEFAULT: colors.light.card,
+          foreground: colors.light.foreground,
         },
         ...colors.shared,
         muted: {
-          DEFAULT: colors.dark.muted,
-          foreground: "#8A8A8A",
+          DEFAULT: colors.light.muted,
+          foreground: colors.light.muted,
         },
       },
       borderRadius: {

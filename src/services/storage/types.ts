@@ -64,6 +64,7 @@ type SettingsStackParamList = {
   ChangePassword: undefined;
   Notifications: undefined;
   Language: undefined;
+  Appearance: undefined;
   About: undefined;
   Help: undefined;
   Statistics: undefined;

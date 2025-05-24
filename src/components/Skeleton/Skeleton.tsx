@@ -1,4 +1,4 @@
-import { useTheme } from "@/themes/useThemeProvider";
+import { useTheme } from "@/contexts/ThemeContext";
 import { type VariantProps, cva } from "class-variance-authority";
 import { useEffect, useRef } from "react";
 import { Animated, type View } from "react-native";
@@ -33,7 +33,7 @@ export function Skeleton({
   style,
   ...props
 }: SkeletonProps) {
-  const theme = useTheme();
+  const { theme } = useTheme();
   const opacity = useRef(new Animated.Value(0.5)).current;
 
   useEffect(() => {

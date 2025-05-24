@@ -1,3 +1,4 @@
+import { useTheme } from "@/contexts/ThemeContext";
 import { useEffect, useState } from "react";
 import {
   Dimensions,
@@ -19,6 +20,7 @@ interface CardProps {
 
 const Card = ({ title, description, image, width, onPress }: CardProps) => {
   const [imageHeight, setImageHeight] = useState(200);
+  const { theme } = useTheme();
   const screenWidth = Dimensions.get("window").width;
   const imageWidth = width || screenWidth - 40;
 
@@ -61,7 +63,7 @@ const Card = ({ title, description, image, width, onPress }: CardProps) => {
               width: imageWidth,
               height: imageHeight,
               borderRadius: 10,
-              backgroundColor: "#181010",
+              backgroundColor: theme.card,
             }}
           />
         )}
@@ -73,7 +75,7 @@ const Card = ({ title, description, image, width, onPress }: CardProps) => {
               fontSize: 18,
               fontWeight: "600",
               marginBottom: 4,
-              color: "#000",
+              color: theme.foreground,
             }}
           >
             {title}
@@ -85,7 +87,7 @@ const Card = ({ title, description, image, width, onPress }: CardProps) => {
             ellipsizeMode="tail"
             style={{
               fontSize: 14,
-              color: "#666",
+              color: theme.muted,
               fontWeight: "300",
               marginBottom: 8,
             }}

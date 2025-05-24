@@ -1,12 +1,12 @@
 const colors = {
   light: {
     background: "#FFFFFF",
-    foreground: "#000000",
-    card: "#FAFAFA",
-    input: "#1E151549",
+    foreground: "#1A1A1A",
+    card: "#F8F9FA",
+    input: "#F5F5F5",
     primary: "#ec7f32",
     secondary: "#0049a8",
-    muted: "#F5F5F5",
+    muted: "#6B7280",
   },
   dark: {
     background: "#070402",

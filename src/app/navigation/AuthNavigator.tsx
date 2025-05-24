@@ -4,7 +4,7 @@ import { Signup } from "@/app/screens/auth/Signup";
 import Welcome from "@/app/screens/auth/Welcome";
 import { screenOptions } from "@/navigation/navigationConfig";
 import type { AuthStackParamList } from "@/services/storage/types";
-import { useTheme } from "@/themes/useThemeProvider";
+import { useTheme } from "@/contexts/ThemeContext";
 import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator<AuthStackParamList>();

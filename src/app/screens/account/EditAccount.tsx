@@ -13,7 +13,7 @@ import { useUpdateAccount } from "@/hooks/account/useUpdateAccount";
 import { useUpdateProfilePicture } from "@/hooks/account/useUpdateProfilePicture";
 import { useUser } from "@/hooks/account/useUser";
 import { QUERY_KEYS } from "@/lib/queryKeys";
-import { useTheme } from "@/themes/useThemeProvider";
+import { useTheme } from "@/contexts/ThemeContext";
 import type { User } from "@/types/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
@@ -26,7 +26,7 @@ import { Keyboard, Text, TouchableOpacity, View } from "react-native";
 import { z } from "zod";
 
 export const EditProfile = () => {
-  const theme = useTheme();
+  const { theme } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation();
   const { toast } = useToast();
@@ -244,7 +244,7 @@ export default EditProfile;
 
 const EditProfileLoading = () => {
   const { t } = useTranslation();
-  const theme = useTheme();
+  const { theme } = useTheme();
   const navigation = useNavigation();
 
   return (

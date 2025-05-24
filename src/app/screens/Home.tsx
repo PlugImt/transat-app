@@ -19,7 +19,7 @@ import { isDinner, isLunch, isWeekend } from "@/lib/utils";
 import type { AppStackParamList } from "@/services/storage/types";
 import type { WidgetPreference } from "@/services/storage/widgetPreferences";
 import { washingMachineNotificationService } from "@/services/notifications/washingMachineNotifications";
-import { useTheme } from "@/themes/useThemeProvider";
+import { useTheme } from "@/contexts/ThemeContext";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
@@ -101,7 +101,7 @@ interface DraggableWidgetItem {
 export const Home = () => {
   const { data: user } = useUser();
   const { t } = useTranslation();
-  const theme = useTheme();
+  const { theme } = useTheme();
 
   const { saveExpoPushToken } = useAuth();
   const {

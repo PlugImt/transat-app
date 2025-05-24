@@ -1,4 +1,4 @@
-import { useTheme } from "@/themes/useThemeProvider";
+import { useTheme } from "@/contexts/ThemeContext";
 import { Text, TouchableOpacity, View } from "react-native";
 
 interface Props {

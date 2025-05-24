@@ -1,4 +1,4 @@
-import { useTheme } from "@/themes/useThemeProvider";
+import { useTheme } from "@/contexts/ThemeContext";
 import { Picker } from "@react-native-picker/picker";
 import { ChevronDown } from "lucide-react-native";
 import type React from "react";
@@ -26,7 +26,7 @@ const Dropdown = ({
   label,
   placeholder,
 }: DropdownProps) => {
-  const theme = useTheme();
+  const { theme } = useTheme();
 
   return (
     <View className="gap-1.5">
@@ -95,7 +95,7 @@ export const DropdownLoading = ({
   placeholder,
   icon,
 }: DropdownLoadingProps) => {
-  const theme = useTheme();
+  const { theme } = useTheme();
   return (
     <View className="gap-1.5 opacity-50">
       <Text className="text-foreground/70 text-sm">{label}</Text>

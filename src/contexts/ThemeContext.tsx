@@ -23,6 +23,9 @@ type ThemeType = {
   secondary: string;
   muted: string;
   border: string;
+  backdrop: string;
+  overlay: string;
+  errorBackground: string;
   destructive: string;
   success: string;
   warning: string;

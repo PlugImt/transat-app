@@ -107,7 +107,7 @@ export default function Page({
           paddingTop: statusBarHeight + 10,
           paddingBottom: 10,
           paddingHorizontal: 20,
-          backgroundColor: theme.background + "E5", // Semi-transparent background with theme color
+          backgroundColor: theme.overlay, // Semi-transparent background with theme color
         }}
       >
         <View className="flex-row justify-between items-center">

@@ -84,7 +84,7 @@ function DialogContent({
       >
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={{ backgroundColor: theme.background + "BF" }}
+          style={{ backgroundColor: theme.backdrop }}
           className="flex flex-1 justify-center items-center w-full"
         >
           <View

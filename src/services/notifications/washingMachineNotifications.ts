@@ -159,7 +159,7 @@ class WashingMachineNotificationService {
           await Notifications.cancelScheduledNotificationAsync(
             notification.notificationId,
           );
-        } catch (error) {
+        } catch (_error) {
           // Notification might already be gone, ignore error
         }
         this.notifications.delete(machineNumber);

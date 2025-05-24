@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 export function useWashingMachineNotifications(machineNumber: string) {
   const [isNotificationSet, setIsNotificationSet] = useState(false);
-  const [forceUpdate, setForceUpdate] = useState(0);
+  const [_forceUpdate, setForceUpdate] = useState(0);
 
   useEffect(() => {
     // Check initial state
@@ -19,7 +19,7 @@ export function useWashingMachineNotifications(machineNumber: string) {
     const interval = setInterval(checkNotificationState, 2000);
 
     return () => clearInterval(interval);
-  }, [machineNumber, forceUpdate]);
+  }, [machineNumber]);
 
   const scheduleNotification = async (
     machineType: string,

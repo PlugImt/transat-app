@@ -48,11 +48,7 @@ export function RestaurantWidget() {
   if (error || weekend || outOfHours || (!lunch && !dinner) || !updatedToday) {
     return (
       <View className="flex flex-col gap-2">
-        <Text
-          style={{ color: theme.foreground }}
-          className="h3 ml-4"
-          style={{ color: theme.foreground }}
-        >
+        <Text style={{ color: theme.foreground }} className="h3 ml-4">
           {t("services.restaurant.title")}
         </Text>
         <View

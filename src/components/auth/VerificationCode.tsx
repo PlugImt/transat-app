@@ -80,7 +80,7 @@ export const VerificationCodeModal: React.FC<VerificationCodeModalProps> = ({
     >
       <View
         className="flex-1 items-center justify-center"
-        style={{ backgroundColor: `${theme.background}80` }}
+        style={{ backgroundColor: theme.backdrop }}
       >
         <View
           className="w-5/6 items-center rounded-lg p-5"
@@ -99,7 +99,7 @@ export const VerificationCodeModal: React.FC<VerificationCodeModalProps> = ({
           {error && (
             <View
               className="mb-4 w-full rounded-md p-2.5"
-              style={{ backgroundColor: theme.destructive + "20" }}
+              style={{ backgroundColor: theme.errorBackground }}
             >
               <Text
                 className="text-center"

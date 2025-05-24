@@ -11,6 +11,9 @@ const colors = {
     secondary: "#0049a8",
     muted: "#6B7280",
     border: "#E5E7EB",
+    backdrop: "#FFFFFF75",
+    overlay: "#FFFFFFE5",
+    errorBackground: "#F4433620",
   },
   dark: {
     background: "#070402",
@@ -24,6 +27,9 @@ const colors = {
     secondary: "#0049a8",
     muted: "#494949",
     border: "#374151",
+    backdrop: "#07040280",
+    overlay: "#070402E5",
+    errorBackground: "#F4433620",
   },
   shared: {
     destructive: {

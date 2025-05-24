@@ -91,7 +91,7 @@ export function BottomSheet({ children }: { children: React.ReactNode }) {
         <Animated.View
           style={[
             style,
-            { backgroundColor: theme.background + "80" },
+            { backgroundColor: theme.backdrop },
             animatedBackdropStyle,
           ]}
           onTouchEnd={() => handleBottomSheet(false)}

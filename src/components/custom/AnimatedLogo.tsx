@@ -8,14 +8,12 @@ interface AnimatedLogoProps {
   onLogoPress?: (x: number, y: number) => void;
   showSubtitle?: boolean;
   showCampusApp?: boolean;
-  size?: number;
 }
 
 export const AnimatedLogo = ({
   onLogoPress,
   showSubtitle = true,
   showCampusApp = false,
-  size = 70,
 }: AnimatedLogoProps) => {
   const { t } = useTranslation();
   const { theme } = useTheme();

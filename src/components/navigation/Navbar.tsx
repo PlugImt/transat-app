@@ -21,7 +21,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { GridIcon, LucideHome, Play, User } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
-import { StyleSheet } from "react-native";
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -129,14 +128,5 @@ export const BottomTabNavigator = () => {
     </Tab.Navigator>
   );
 };
-
-const styles = StyleSheet.create({
-  tabBar: {
-    borderTopWidth: 0,
-    paddingTop: 8,
-    height: 60,
-    paddingBottom: 0,
-  },
-});
 
 export default BottomTabNavigator;

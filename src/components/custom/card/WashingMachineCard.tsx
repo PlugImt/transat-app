@@ -1,7 +1,6 @@
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/themes/useThemeProvider";
-import * as Notifications from "expo-notifications";
-import { SchedulableTriggerInputTypes } from "expo-notifications";
+import { useWashingMachineNotifications } from "@/hooks/useWashingMachineNotifications";
 import { Bell, BellRing, WashingMachineIcon, Wind } from "lucide-react-native";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -22,14 +21,7 @@ interface WashingMachineProps {
   icon: "WASHING MACHINE" | "DRYER";
 }
 
-// Configure notifications
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: true,
-  }),
-});
+// Notifications are now handled by the notification service
 
 const getIcon = (icon: "WASHING MACHINE" | "DRYER", color: ColorValue) => {
   switch (icon) {
@@ -258,9 +250,15 @@ const WashingMachineCard = ({
   const theme = useTheme();
 
   const [timeRemaining, setTimeRemaining] = useState<number>(status);
-  const [notificationSet, setNotificationSet] = useState<boolean>(false);
-  const [notificationId, setNotificationId] = useState<string | null>(null);
   const [progressPercentage, setProgressPercentage] = useState<number>(0);
+
+  // Use the notification hook
+  const {
+    isNotificationSet,
+    scheduleNotification,
+    cancelNotification,
+    shouldDisableButton: shouldDisableNotificationButton,
+  } = useWashingMachineNotifications(number);
 
   const formatTime = useCallback((seconds: number): string => {
     const minutes = Math.floor(seconds / 60);
@@ -307,53 +305,31 @@ const WashingMachineCard = ({
     setProgressPercentage(progress);
   }, [timeRemaining, status, icon]);
 
-  const scheduleNotification = useCallback(
-    async (minutes: number) => {
-      if (notificationId) {
-        await Notifications.cancelScheduledNotificationAsync(notificationId);
-      }
-
-      // Calculate when to notify (5 minutes before completion)
-      const notificationTriggerTime = Math.max(timeRemaining - minutes * 60, 1);
-
-      if (timeRemaining > minutes * 60) {
-        const id = await Notifications.scheduleNotificationAsync({
-          content: {
-            title: t("services.washingMachine.almostDone", { number }),
-            body: t("services.washingMachine.almostDoneBody", {
-              type,
-              minutes,
-            }),
-          },
-          trigger: {
-            type: SchedulableTriggerInputTypes.TIME_INTERVAL,
-            seconds: notificationTriggerTime,
-          },
-        });
-        setNotificationId(id);
-        setNotificationSet(true);
-      }
-    },
-    [notificationId, timeRemaining, t, number, type],
-  );
+  // Check if notification button should be disabled
+  const shouldDisableButton = status === 0 || shouldDisableNotificationButton(timeRemaining);
 
   const handleSetNotification = useCallback(async () => {
-    await scheduleNotification(MINUTES_BEFORE_NOTIFICATION);
-  }, [scheduleNotification]);
+    const success = await scheduleNotification(
+      type,
+      timeRemaining,
+      MINUTES_BEFORE_NOTIFICATION
+    );
+    
+    if (!success) {
+      // Could show an error message here
+      console.warn("Could not schedule notification - not enough time remaining");
+    }
+  }, [scheduleNotification, type, timeRemaining]);
 
   const handleBellPress = useCallback(async () => {
-    if (status === 0) return;
+    if (shouldDisableButton) return;
 
-    if (notificationSet) {
-      if (notificationId) {
-        await Notifications.cancelScheduledNotificationAsync(notificationId);
-      }
-      setNotificationId(null);
-      setNotificationSet(false);
+    if (isNotificationSet) {
+      await cancelNotification();
     } else {
       await handleSetNotification();
     }
-  }, [notificationId, notificationSet, status, handleSetNotification]);
+  }, [isNotificationSet, shouldDisableButton, cancelNotification, handleSetNotification]);
 
   return (
     <View className="relative px-6 py-4 rounded-lg bg-card overflow-hidden">
@@ -389,11 +365,11 @@ const WashingMachineCard = ({
 
         <Dialog>
           <DialogTrigger>
-            <TouchableOpacity onPress={handleBellPress} disabled={status === 0}>
-              {notificationSet ? (
-                <BellRing color={status === 0 ? theme.muted : theme.primary} />
+            <TouchableOpacity onPress={handleBellPress} disabled={shouldDisableButton}>
+              {isNotificationSet ? (
+                <BellRing color={shouldDisableButton ? theme.muted : theme.primary} />
               ) : (
-                <Bell color={status === 0 ? theme.muted : theme.primary} />
+                <Bell color={shouldDisableButton ? theme.muted : theme.primary} />
               )}
             </TouchableOpacity>
           </DialogTrigger>

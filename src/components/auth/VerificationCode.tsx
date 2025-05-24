@@ -1,5 +1,5 @@
-import { useAuth } from "@/hooks/account/useAuth";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useAuth } from "@/hooks/account/useAuth";
 import type React from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -78,16 +78,35 @@ export const VerificationCodeModal: React.FC<VerificationCodeModalProps> = ({
       visible={isVisible}
       onRequestClose={onClose}
     >
-      <View className="flex-1 items-center justify-center" style={{ backgroundColor: `${theme.background}80` }}>
-        <View className="w-5/6 items-center rounded-lg p-5" style={{ backgroundColor: theme.card }}>
-          <Text className="h1" style={{ color: theme.foreground }}>{t("auth.verificationCode")}</Text>
-          <Text className="mb-5 text-center text-l p-2" style={{ color: theme.foreground }}>
+      <View
+        className="flex-1 items-center justify-center"
+        style={{ backgroundColor: `${theme.background}80` }}
+      >
+        <View
+          className="w-5/6 items-center rounded-lg p-5"
+          style={{ backgroundColor: theme.card }}
+        >
+          <Text className="h1" style={{ color: theme.foreground }}>
+            {t("auth.verificationCode")}
+          </Text>
+          <Text
+            className="mb-5 text-center text-l p-2"
+            style={{ color: theme.foreground }}
+          >
             {t("auth.enterVerificationCode")}
           </Text>
 
           {error && (
-            <View className="mb-4 w-full rounded-md p-2.5" style={{ backgroundColor: theme.destructive + '20' }}>
-              <Text className="text-center" style={{ color: theme.destructive }}>{error}</Text>
+            <View
+              className="mb-4 w-full rounded-md p-2.5"
+              style={{ backgroundColor: theme.destructive + "20" }}
+            >
+              <Text
+                className="text-center"
+                style={{ color: theme.destructive }}
+              >
+                {error}
+              </Text>
             </View>
           )}
 
@@ -104,13 +123,16 @@ export const VerificationCodeModal: React.FC<VerificationCodeModalProps> = ({
               <View
                 key={index}
                 className="mx-1 flex h-[50px] w-[40px] items-center justify-center rounded-md border"
-                style={{ 
+                style={{
                   backgroundColor: theme.input,
-                  borderColor: isFocused ? theme.primary : theme.muted 
+                  borderColor: isFocused ? theme.primary : theme.muted,
                 }}
                 onLayout={getCellOnLayoutHandler(index)}
               >
-                <Text className="text-center text-2xl" style={{ color: theme.foreground }}>
+                <Text
+                  className="text-center text-2xl"
+                  style={{ color: theme.foreground }}
+                >
                   {symbol || (isFocused ? <Cursor /> : null)}
                 </Text>
               </View>

@@ -1,27 +1,39 @@
-import { cn } from "@/lib/utils";
+import { useTheme } from "@/contexts/ThemeContext";
 import { Text, View } from "react-native";
 
-type DividerProps = {
+interface DividerProps {
   label?: string;
   className?: string;
-};
+}
 
-const Divider = ({ label, className }: DividerProps) => {
+export default function Divider({ label, className }: DividerProps) {
+  const { theme } = useTheme();
+
   if (label) {
     return (
-      <View className={cn("flex-row items-center my-2", className)}>
-        <View className="h-px rounded-full bg-muted/60 flex-1" />
-        <Text className="text-foreground/60 text-sm mx-3">{label}</Text>
-        <View className="h-px rounded-full bg-muted/60 flex-1" />
+      <View className="flex-row items-center">
+        <View
+          style={{ backgroundColor: theme.muted + "99" }}
+          className="h-px rounded-full flex-1"
+        />
+        <Text
+          style={{ color: theme.foreground + "99" }}
+          className="text-sm mx-3"
+        >
+          {label}
+        </Text>
+        <View
+          style={{ backgroundColor: theme.muted + "99" }}
+          className="h-px rounded-full flex-1"
+        />
       </View>
     );
   }
 
   return (
     <View
-      className={`h-px rounded-full bg-muted/60 w-full my-2 ${className || ""}`}
+      style={{ backgroundColor: theme.muted + "99" }}
+      className={`h-px rounded-full w-full my-2 ${className || ""}`}
     />
   );
-};
-
-export default Divider;
+}

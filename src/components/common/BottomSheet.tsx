@@ -100,7 +100,14 @@ export function BottomSheet({ children }: { children: React.ReactNode }) {
     >
       <GestureDetector gesture={gesture}>
         <Animated.View>
-          <BottomSheetView className="bg-card px-5 pt-8 gap-2">
+          <BottomSheetView
+            style={{
+              backgroundColor: theme.card,
+              paddingHorizontal: 20,
+              paddingTop: 32,
+              gap: 8,
+            }}
+          >
             {children}
           </BottomSheetView>
         </Animated.View>

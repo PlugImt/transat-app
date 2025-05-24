@@ -42,7 +42,10 @@ export const About = () => {
         <AnimatedLogo onLogoPress={handleLogoPress} showCampusApp={true} />
 
         <View className="gap-6 px-4 mt-4">
-          <View className="bg-card rounded-lg px-6 py-6">
+          <View
+            className=" rounded-lg px-6 py-6"
+            style={{ backgroundColor: theme.card }}
+          >
             <Text className="text-foreground/60 mb-4">
               {t("common.credits")}
             </Text>

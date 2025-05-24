@@ -1,6 +1,7 @@
 import Divider from "@/components/common/Divider";
 import Page from "@/components/common/Page";
 import { Switch } from "@/components/common/Switch";
+import { useTheme } from "@/contexts/ThemeContext";
 import useNotification from "@/hooks/account/useNotification";
 import { QUERY_KEYS } from "@/lib/queryKeys";
 import { useQueryClient } from "@tanstack/react-query";
@@ -9,6 +10,7 @@ import { Text, View } from "react-native";
 
 export const Notifications = () => {
   const { t } = useTranslation();
+  const { theme } = useTheme();
   const queryClient = useQueryClient();
   const {
     data: notifications,
@@ -33,13 +35,19 @@ export const Notifications = () => {
     >
       <View className="gap-2">
         <Text className="h2 mx-4">{t("services.title")}</Text>
-        <View className="bg-card rounded-lg px-6 py-6 gap-6">
+        <View
+          style={{ backgroundColor: theme.card }}
+          className="rounded-lg px-6 py-6 gap-6"
+        >
           <View className="flex-row justify-between gap-4 items-center">
             <View className="gap-1 flex-1">
-              <Text className="text-foreground">
+              <Text style={{ color: theme.foreground }}>
                 {t("services.restaurant.title")}
               </Text>
-              <Text className="text-sm text-foreground/60">
+              <Text
+                style={{ color: theme.foreground + "99" }}
+                className="text-sm"
+              >
                 {t("settings.notifications.toggleRestaurant")}
               </Text>
             </View>
@@ -52,10 +60,13 @@ export const Notifications = () => {
           <Divider />
           <View className="flex-row justify-between gap-4 items-center">
             <View className="gap-1 flex-1">
-              <Text className="text-foreground">
+              <Text style={{ color: theme.foreground }}>
                 {t("services.traq.title")}
               </Text>
-              <Text className="text-sm text-foreground/60">
+              <Text
+                style={{ color: theme.foreground + "99" }}
+                className="text-sm"
+              >
                 {t("settings.notifications.toggleTraq")}
               </Text>
             </View>

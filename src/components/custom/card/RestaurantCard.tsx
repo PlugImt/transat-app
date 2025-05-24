@@ -32,17 +32,24 @@ const RestaurantCard = ({ title, meals, icon }: CardProps) => {
   }
 
   return (
-    <View className="px-6 py-4 rounded-lg bg-card flex flex-col gap-6">
+    <View
+      style={{ backgroundColor: theme.card }}
+      className="px-6 py-4 rounded-lg flex flex-col gap-6"
+    >
       <View className="flex flex-row items-center gap-2">
         {getIcon()}
-        <Text className="text-lg font-bold text-primary" ellipsizeMode="tail">
+        <Text
+          className="text-lg font-bold"
+          style={{ color: theme.primary }}
+          ellipsizeMode="tail"
+        >
           {title}
         </Text>
       </View>
 
       <View className="flex flex-col gap-4">
         {meals.map((item) => (
-          <Text key={item} className="text-foreground">
+          <Text key={item} style={{ color: theme.foreground }}>
             {item}
           </Text>
         ))}
@@ -55,19 +62,27 @@ export default RestaurantCard;
 
 interface RestaurantCardLoadingProps {
   title: string;
-  icon: JSX.Element | null;
+  icon: React.ReactElement | null;
 }
 
 export const RestaurantCardLoading = ({
   title,
   icon,
 }: RestaurantCardLoadingProps) => {
+  const { theme } = useTheme();
   const skeletonCount = Math.floor(Math.random() * 3) + 1;
   return (
-    <View className="px-6 py-4 rounded-lg bg-card flex flex-col gap-6">
+    <View
+      style={{ backgroundColor: theme.card }}
+      className="px-6 py-4 rounded-lg flex flex-col gap-6"
+    >
       <View className="flex flex-row items-center gap-2">
         {icon}
-        <Text className="text-lg font-bold text-primary" ellipsizeMode="tail">
+        <Text
+          className="text-lg font-bold"
+          style={{ color: theme.primary }}
+          ellipsizeMode="tail"
+        >
           {title}
         </Text>
       </View>

@@ -1,9 +1,9 @@
 import { Button } from "@/components/common/Button";
+import { useTheme } from "@/contexts/ThemeContext";
 import type {
   ServicePreference,
   WidgetPreference,
 } from "@/services/storage/widgetPreferences";
-import { useTheme } from "@/contexts/ThemeContext";
 import { Maximize, Minimize, Settings } from "lucide-react-native";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";

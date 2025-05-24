@@ -1,3 +1,4 @@
+import { useTheme } from "@/contexts/ThemeContext";
 import { forwardRef } from "react";
 import { Controller, type FieldValues, type Path } from "react-hook-form";
 import { Text, TextInput, View } from "react-native";
@@ -36,6 +37,8 @@ const Input = forwardRef(
     }: InputProps<T>,
     ref: React.Ref<TextInput>,
   ) => {
+    const { theme } = useTheme();
+
     if (loading) {
       return (
         <InputLoading
@@ -50,7 +53,10 @@ const Input = forwardRef(
     return (
       <View className={cn("gap-1.5", className)}>
         {label && (
-          <Text className={cn("text-sm text-foreground/70", labelClasses)}>
+          <Text
+            className={cn("text-sm", labelClasses)}
+            style={{ color: theme.foreground + "B3" }}
+          >
             {label}
           </Text>
         )}
@@ -62,11 +68,14 @@ const Input = forwardRef(
             <TextInput
               ref={ref}
               editable={!disabled}
-              className={cn(
-                inputClasses,
-                "py-2.5 px-4 rounded-lg bg-input placeholder:text-stone-400 text-foreground h-12",
-                error && "border border-red-500",
-              )}
+              style={{
+                backgroundColor: theme.input,
+                color: theme.foreground,
+                borderColor: error ? "#ef4444" : "transparent",
+                borderWidth: error ? 1 : 0,
+              }}
+              className={cn(inputClasses, "py-2.5 px-4 rounded-lg h-12")}
+              placeholderTextColor={theme.foreground + "66"}
               onChangeText={onChange}
               onBlur={onBlur}
               value={value}
@@ -96,20 +105,27 @@ export const InputLoading = ({
   labelClasses,
   inputClasses,
 }: InputLoadingProps) => {
+  const { theme } = useTheme();
+
   return (
     <View className={cn("gap-1.5 opacity-50", className)}>
       {label && (
-        <Text className={cn("text-sm text-foreground/70", labelClasses)}>
+        <Text
+          className={cn("text-sm", labelClasses)}
+          style={{ color: theme.foreground + "B3" }}
+        >
           {label}
         </Text>
       )}
 
       <TextInput
         editable={false}
-        className={cn(
-          inputClasses,
-          "py-2.5 px-4 rounded-lg bg-input placeholder:text-stone-400",
-        )}
+        style={{
+          backgroundColor: theme.input,
+          color: theme.foreground,
+        }}
+        className={cn(inputClasses, "py-2.5 px-4 rounded-lg")}
+        placeholderTextColor={theme.foreground + "66"}
       />
     </View>
   );

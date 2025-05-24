@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
 import { washingMachineNotificationService } from "@/services/notifications/washingMachineNotifications";
+import { useEffect, useState } from "react";
 
 export function useWashingMachineNotifications(machineNumber: string) {
   const [isNotificationSet, setIsNotificationSet] = useState(false);
@@ -8,7 +8,8 @@ export function useWashingMachineNotifications(machineNumber: string) {
   useEffect(() => {
     // Check initial state
     const checkNotificationState = () => {
-      const isSet = washingMachineNotificationService.isNotificationSet(machineNumber);
+      const isSet =
+        washingMachineNotificationService.isNotificationSet(machineNumber);
       setIsNotificationSet(isSet);
     };
 
@@ -23,34 +24,39 @@ export function useWashingMachineNotifications(machineNumber: string) {
   const scheduleNotification = async (
     machineType: string,
     timeRemaining: number,
-    minutesBefore: number = 5
+    minutesBefore = 5,
   ): Promise<boolean> => {
-    const success = await washingMachineNotificationService.scheduleNotification(
-      machineNumber,
-      machineType,
-      timeRemaining,
-      minutesBefore
-    );
-    
+    const success =
+      await washingMachineNotificationService.scheduleNotification(
+        machineNumber,
+        machineType,
+        timeRemaining,
+        minutesBefore,
+      );
+
     if (success) {
-      setForceUpdate(prev => prev + 1);
+      setForceUpdate((prev) => prev + 1);
     }
-    
+
     return success;
   };
 
   const cancelNotification = async (): Promise<boolean> => {
-    const success = await washingMachineNotificationService.cancelNotification(machineNumber);
-    
+    const success =
+      await washingMachineNotificationService.cancelNotification(machineNumber);
+
     if (success) {
-      setForceUpdate(prev => prev + 1);
+      setForceUpdate((prev) => prev + 1);
     }
-    
+
     return success;
   };
 
   const shouldDisableButton = (timeRemaining: number): boolean => {
-    return washingMachineNotificationService.shouldDisableNotificationButton(machineNumber, timeRemaining);
+    return washingMachineNotificationService.shouldDisableNotificationButton(
+      machineNumber,
+      timeRemaining,
+    );
   };
 
   return {
@@ -59,4 +65,4 @@ export function useWashingMachineNotifications(machineNumber: string) {
     cancelNotification,
     shouldDisableButton,
   };
-} 
+}

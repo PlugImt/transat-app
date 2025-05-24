@@ -2,9 +2,9 @@ import { ResetPassword } from "@/app/screens/auth/ResetPassword";
 import { Signin } from "@/app/screens/auth/Signin";
 import { Signup } from "@/app/screens/auth/Signup";
 import Welcome from "@/app/screens/auth/Welcome";
+import { useTheme } from "@/contexts/ThemeContext";
 import { screenOptions } from "@/navigation/navigationConfig";
 import type { AuthStackParamList } from "@/services/storage/types";
-import { useTheme } from "@/contexts/ThemeContext";
 import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator<AuthStackParamList>();

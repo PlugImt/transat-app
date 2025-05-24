@@ -1,8 +1,14 @@
-import React, { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import { useColorScheme, type ColorSchemeName } from "react-native";
-import colors from "@/themes/colors";
 import { storage } from "@/services/storage/asyncStorage";
 import STORAGE_KEYS from "@/services/storage/constants";
+import colors from "@/themes/colors";
+import {
+  type ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { type ColorSchemeName, useColorScheme } from "react-native";
 
 export type ThemeMode = "system" | "light" | "dark";
 
@@ -35,7 +41,10 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   // Determine the actual theme based on mode and system preference
-  const getActualTheme = (mode: ThemeMode, systemScheme: ColorSchemeName): "light" | "dark" => {
+  const getActualTheme = (
+    mode: ThemeMode,
+    systemScheme: ColorSchemeName,
+  ): "light" | "dark" => {
     if (mode === "system") {
       return systemScheme === "light" ? "light" : "dark";
     }
@@ -102,4 +111,4 @@ export const useTheme = () => {
     throw new Error("useTheme must be used within a ThemeProvider");
   }
   return context;
-}; 
+};

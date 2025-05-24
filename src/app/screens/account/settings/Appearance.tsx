@@ -1,10 +1,10 @@
 import { Check, Moon, Smartphone, Sun } from "lucide-react-native";
-import React from "react";
+import type React from "react";
 import { useTranslation } from "react-i18next";
 import { Text, TouchableOpacity, View } from "react-native";
 
 import Page from "@/components/common/Page";
-import { useTheme, type ThemeMode } from "@/contexts/ThemeContext";
+import { type ThemeMode, useTheme } from "@/contexts/ThemeContext";
 
 export const Appearance = () => {
   const { t } = useTranslation();
@@ -19,7 +19,10 @@ export const Appearance = () => {
     {
       mode: "system",
       title: t("settings.appearance.system", "System"),
-      description: t("settings.appearance.systemDescription", "Follow system setting"),
+      description: t(
+        "settings.appearance.systemDescription",
+        "Follow system setting",
+      ),
       icon: <Smartphone color={theme.foreground} size={24} />,
     },
     {
@@ -47,23 +50,33 @@ export const Appearance = () => {
       className="gap-6"
     >
       <View className="gap-2">
-        <Text className="h3 ml-4">{t("settings.appearance.theme", "Theme")}</Text>
-        <View className="bg-card rounded-lg px-4 py-2">
+        <Text className="h3 ml-4">
+          {t("settings.appearance.theme", "Theme")}
+        </Text>
+        <View
+          style={{ backgroundColor: theme.card }}
+          className="rounded-lg px-4 py-2"
+        >
           {themeOptions.map((option, index) => (
             <TouchableOpacity
               key={option.mode}
               onPress={() => handleThemeChange(option.mode)}
               className={`flex-row items-center justify-between py-4 ${
-                index < themeOptions.length - 1 ? "border-b border-muted/20" : ""
+                index < themeOptions.length - 1
+                  ? "border-b border-muted/20"
+                  : ""
               }`}
             >
               <View className="flex-row items-center flex-1">
                 <View className="mr-3">{option.icon}</View>
                 <View className="flex-1">
-                  <Text className="text-foreground font-medium text-base">
+                  <Text
+                    style={{ color: theme.foreground }}
+                    className="font-medium text-base"
+                  >
                     {option.title}
                   </Text>
-                  <Text className="text-muted text-sm mt-1">
+                  <Text style={{ color: theme.muted }} className="text-sm mt-1">
                     {option.description}
                   </Text>
                 </View>
@@ -77,16 +90,24 @@ export const Appearance = () => {
       </View>
 
       <View className="gap-2">
-        <Text className="h3 ml-4">{t("settings.appearance.preview", "Preview")}</Text>
-        <View className="bg-card rounded-lg p-4">
+        <Text className="h3 ml-4">
+          {t("settings.appearance.preview", "Preview")}
+        </Text>
+        <View
+          style={{ backgroundColor: theme.card }}
+          className="rounded-lg p-4"
+        >
           <View className="flex-row items-center justify-between mb-3">
-            <Text className="text-foreground font-semibold">
+            <Text style={{ color: theme.foreground }} className="font-semibold">
               {t("settings.appearance.sampleCard", "Sample Card")}
             </Text>
             <View className="bg-primary rounded-full w-8 h-8" />
           </View>
-          <Text className="text-muted text-sm mb-2">
-            {t("settings.appearance.sampleText", "This is how text will appear in the selected theme.")}
+          <Text style={{ color: theme.muted }} className="text-sm mb-2">
+            {t(
+              "settings.appearance.sampleText",
+              "This is how text will appear in the selected theme.",
+            )}
           </Text>
           <View className="flex-row gap-2">
             <View className="bg-success w-4 h-4 rounded" />
@@ -97,4 +118,4 @@ export const Appearance = () => {
       </View>
     </Page>
   );
-}; 
+};

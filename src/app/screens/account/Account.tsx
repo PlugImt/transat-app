@@ -8,11 +8,11 @@ import { Button, IconButton } from "@/components/common/Button";
 import InfoItem from "@/components/common/InfoItem";
 import Page from "@/components/common/Page";
 import ErrorPage from "@/components/custom/ErrorPage";
+import { useTheme } from "@/contexts/ThemeContext";
 import { useUser } from "@/hooks/account/useUser";
 import { QUERY_KEYS } from "@/lib/queryKeys";
 import { getStudentYear } from "@/lib/utils";
 import type { AccountNavigation } from "@/services/storage/types";
-import { useTheme } from "@/contexts/ThemeContext";
 import { useNavigation } from "@react-navigation/native";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
 import { Lock, Mail, Medal, Phone, Settings } from "lucide-react-native";
@@ -82,7 +82,10 @@ export const Account = () => {
         </Avatar>
 
         <View className="gap-1 justify-center items-center">
-          <Text className="text-2xl font-bold text-foreground">
+          <Text
+            className="text-2xl font-bold "
+            style={{ color: theme.foreground }}
+          >
             {user?.first_name} {user?.last_name}
           </Text>
           {user?.graduation_year && (
@@ -92,7 +95,10 @@ export const Account = () => {
           )}
         </View>
       </View>
-      <View className="bg-card rounded-lg px-6 py-4 gap-4">
+      <View
+        className=" rounded-lg px-6 py-4 gap-4"
+        style={{ backgroundColor: theme.card }}
+      >
         <Text className="h3">{t("account.contactInfo")}</Text>
         <InfoItem
           icon={<Mail color={theme.foreground} size={20} />}
@@ -106,7 +112,10 @@ export const Account = () => {
         />
       </View>
 
-      <View className="bg-card rounded-lg px-6 py-4 gap-4">
+      <View
+        className=" rounded-lg px-6 py-4 gap-4"
+        style={{ backgroundColor: theme.card }}
+      >
         <Text className="h3">{t("account.infos")}</Text>
 
         <InfoItem
@@ -170,7 +179,10 @@ const AccountLoading = () => {
           <TextSkeleton className="w-24 items-center" lines={1} />
         </View>
       </View>
-      <View className="bg-card rounded-lg px-6 py-4 gap-4">
+      <View
+        className=" rounded-lg px-6 py-4 gap-4"
+        style={{ backgroundColor: theme.card }}
+      >
         <Text className="h3">{t("account.contactInfo")}</Text>
         <InfoItem
           icon={<Mail color={theme.foreground} size={20} />}
@@ -182,7 +194,10 @@ const AccountLoading = () => {
         />
       </View>
 
-      <View className="bg-card rounded-lg px-6 py-4 gap-4">
+      <View
+        className=" rounded-lg px-6 py-4 gap-4"
+        style={{ backgroundColor: theme.card }}
+      >
         <Text className="h3">{t("account.infos")}</Text>
 
         <InfoItem

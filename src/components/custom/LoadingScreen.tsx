@@ -1,3 +1,4 @@
+import { useTheme } from "@/contexts/ThemeContext";
 import { View } from "react-native";
 import SkeletonLoadingScreen from "./SkeletonLoadingScreen";
 
@@ -10,8 +11,13 @@ export default function LoadingScreen({
   type = "default",
   items = 3,
 }: LoadingScreenProps = {}) {
+  const { theme } = useTheme();
+
   return (
-    <View className="bg-background px-5 justify-center items-center gap-2 h-screen">
+    <View
+      style={{ backgroundColor: theme.background }}
+      className=" px-5 justify-center items-center gap-2 h-screen"
+    >
       <SkeletonLoadingScreen type={type} items={items} />
     </View>
   );

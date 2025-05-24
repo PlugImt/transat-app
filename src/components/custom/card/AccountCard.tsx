@@ -4,6 +4,7 @@ import {
   AvatarImage,
 } from "@/components/common/Avatar";
 import { Button } from "@/components/common/Button";
+import { useTheme } from "@/contexts/ThemeContext";
 import type { AccountNavigation } from "@/services/storage/types";
 import type { User } from "@/types/user";
 import { useNavigation } from "@react-navigation/native";
@@ -16,13 +17,14 @@ interface Props {
 
 export const AccountCard = ({ user }: Props) => {
   const navigation = useNavigation<AccountNavigation>();
+  const { theme } = useTheme();
 
   if (!user) {
     return null;
   }
 
   return (
-    <View className="bg-card rounded-lg p-4">
+    <View style={{ backgroundColor: theme.card }} className="rounded-lg p-4">
       <View className="flex-row items-center gap-4">
         <Avatar className="w-16 h-16">
           <AvatarImage source={{ uri: user.profile_picture }} />
@@ -32,8 +34,10 @@ export const AccountCard = ({ user }: Props) => {
           </AvatarFallback>
         </Avatar>
         <View className="flex-1">
-          <Text className="h3">{`${user.first_name} ${user.last_name}`}</Text>
-          <Text className="text-foreground/70">{user.email}</Text>
+          <Text className="h3" style={{ color: theme.foreground }}>
+            {`${user.first_name} ${user.last_name}`}
+          </Text>
+          <Text style={{ color: theme.foreground + "B3" }}>{user.email}</Text>
         </View>
         <Button
           label={t("common.edit")}

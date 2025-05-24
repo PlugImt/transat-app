@@ -306,18 +306,21 @@ const WashingMachineCard = ({
   }, [timeRemaining, status, icon]);
 
   // Check if notification button should be disabled
-  const shouldDisableButton = status === 0 || shouldDisableNotificationButton(timeRemaining);
+  const shouldDisableButton =
+    status === 0 || shouldDisableNotificationButton(timeRemaining);
 
   const handleSetNotification = useCallback(async () => {
     const success = await scheduleNotification(
       type,
       timeRemaining,
-      MINUTES_BEFORE_NOTIFICATION
+      MINUTES_BEFORE_NOTIFICATION,
     );
-    
+
     if (!success) {
       // Could show an error message here
-      console.warn("Could not schedule notification - not enough time remaining");
+      console.warn(
+        "Could not schedule notification - not enough time remaining",
+      );
     }
   }, [scheduleNotification, type, timeRemaining]);
 
@@ -329,10 +332,18 @@ const WashingMachineCard = ({
     } else {
       await handleSetNotification();
     }
-  }, [isNotificationSet, shouldDisableButton, cancelNotification, handleSetNotification]);
+  }, [
+    isNotificationSet,
+    shouldDisableButton,
+    cancelNotification,
+    handleSetNotification,
+  ]);
 
   return (
-    <View className="relative px-6 py-4 rounded-lg bg-card overflow-hidden">
+    <View
+      className="relative px-6 py-4 rounded-lg  overflow-hidden"
+      style={{ backgroundColor: theme.card }}
+    >
       {status > 0 && (
         <View
           className={`absolute left-0 top-0 h-[200%] ${icon === "DRYER" ? "bg-primary/10" : "bg-blue-500/10"}`}
@@ -345,13 +356,18 @@ const WashingMachineCard = ({
       <View className="flex-row justify-between gap-6 items-center z-10">
         <View className="flex-row items-center gap-2">
           {getIcon(icon, theme.primary)}
-          <Text className="text-foreground font-bold" numberOfLines={1}>
+          <Text
+            style={{ color: theme.foreground }}
+            className="font-bold"
+            numberOfLines={1}
+          >
             N°{number}
           </Text>
         </View>
 
         <Text
-          className="text-foreground flex-1"
+          style={{ color: theme.foreground }}
+          className="flex-1"
           ellipsizeMode="tail"
           numberOfLines={1}
         >
@@ -365,11 +381,18 @@ const WashingMachineCard = ({
 
         <Dialog>
           <DialogTrigger>
-            <TouchableOpacity onPress={handleBellPress} disabled={shouldDisableButton}>
+            <TouchableOpacity
+              onPress={handleBellPress}
+              disabled={shouldDisableButton}
+            >
               {isNotificationSet ? (
-                <BellRing color={shouldDisableButton ? theme.muted : theme.primary} />
+                <BellRing
+                  color={shouldDisableButton ? theme.muted : theme.primary}
+                />
               ) : (
-                <Bell color={shouldDisableButton ? theme.muted : theme.primary} />
+                <Bell
+                  color={shouldDisableButton ? theme.muted : theme.primary}
+                />
               )}
             </TouchableOpacity>
           </DialogTrigger>
@@ -381,7 +404,7 @@ const WashingMachineCard = ({
             confirmLabel={t("settings.notifications.setNotification")}
             onConfirm={handleSetNotification}
           >
-            <Text className="text-foreground">
+            <Text style={{ color: theme.foreground }}>
               {t("services.washingMachine.getNotificationDesc", {
                 type: type.toLowerCase(),
                 minutes: MINUTES_BEFORE_NOTIFICATION,
@@ -406,10 +429,15 @@ export const WashingMachineCardSkeleton = ({
   const { theme } = useTheme();
 
   return (
-    <View className="px-6 py-4 rounded-lg bg-card flex-row justify-between gap-6 items-center">
+    <View
+      style={{ backgroundColor: theme.card }}
+      className="px-6 py-4 rounded-lg flex-row justify-between gap-6 items-center"
+    >
       <View className="flex-row items-center gap-2">
         {getIcon(icon, theme.muted)}
-        <Text className="text-muted-foreground font-bold">N°--</Text>
+        <Text style={{ color: theme.muted }} className="font-bold">
+          N°--
+        </Text>
       </View>
       <TextSkeleton lines={1} lastLineWidth={100} />
 

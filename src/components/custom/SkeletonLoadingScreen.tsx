@@ -1,3 +1,4 @@
+import { useTheme } from "@/contexts/ThemeContext";
 import { View } from "react-native";
 import { CardSkeleton, ProfileSkeleton, TextSkeleton } from "../Skeleton";
 
@@ -10,8 +11,13 @@ export function SkeletonLoadingScreen({
   type = "default",
   items = 3,
 }: SkeletonLoadingScreenProps) {
+  const { theme } = useTheme();
+
   return (
-    <View className="bg-background px-5 justify-center items-center h-screen">
+    <View
+      style={{ backgroundColor: theme.background }}
+      className=" px-5 justify-center items-center h-screen"
+    >
       {type === "default" && (
         <View className="w-full max-w-md">
           <TextSkeleton lines={1} width="60%" variant="h1" className="mb-6" />

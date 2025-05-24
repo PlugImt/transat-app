@@ -224,7 +224,10 @@ export const Statistics = () => {
               {t("statistics.serverStatus", "Server Status")}
             </Text>
           </View>
-          <View className="bg-card rounded-lg p-4 mb-4">
+          <View
+            className=" rounded-lg p-4 mb-4"
+            style={{ backgroundColor: theme.card }}
+          >
             <View className="flex-row items-center justify-between mb-2">
               <View className="flex-row items-center">
                 <View
@@ -234,7 +237,7 @@ export const Statistics = () => {
                       : "bg-red-500"
                   }`}
                 />
-                <Text className="text-foreground">
+                <Text style={{ color: theme.foreground }}>
                   {serverStatus.status === "online"
                     ? t("statistics.online", "Online")
                     : t("statistics.offline", "Offline")}
@@ -247,7 +250,10 @@ export const Statistics = () => {
                 <Text className="text-foreground/60 text-sm">
                   {t("statistics.latency", "Latency")}
                 </Text>
-                <Text className="text-foreground font-medium">
+                <Text
+                  className="font-medium"
+                  style={{ color: theme.foreground }}
+                >
                   {serverStatus.latency} ms
                 </Text>
               </View>
@@ -255,7 +261,10 @@ export const Statistics = () => {
                 <Text className="text-foreground/60 text-sm">
                   {t("statistics.lastChecked", "Last Checked")}
                 </Text>
-                <Text className="text-foreground font-medium">
+                <Text
+                  className=" font-medium"
+                  style={{ color: theme.foreground }}
+                >
                   {formatDate(serverStatus.timestamp)}
                 </Text>
               </View>
@@ -271,7 +280,10 @@ export const Statistics = () => {
 
           {/* Loading state */}
           {loading ? (
-            <View className="bg-card rounded-lg p-8 items-center justify-center mb-4">
+            <View
+              className=" rounded-lg p-8 items-center justify-center mb-4"
+              style={{ backgroundColor: theme.card }}
+            >
               <Activity size={32} color={theme.primary} className="mb-4" />
               <Text className="text-foreground/60">
                 {t("statistics.loading", "Loading statistics...")}
@@ -285,7 +297,10 @@ export const Statistics = () => {
                   {t("statistics.globalStats", "Global Statistics")}
                 </Text>
 
-                <View className="bg-card rounded-lg p-4 mb-4">
+                <View
+                  className=" rounded-lg p-4 mb-4"
+                  style={{ backgroundColor: theme.card }}
+                >
                   <View className="flex-row flex-wrap justify-between mb-4">
                     <View className="w-[48%] bg-background/20 rounded-lg p-3 mb-2">
                       <Text className="text-foreground/60 text-xs">
@@ -368,7 +383,7 @@ export const Statistics = () => {
                     <Text className="text-foreground/60 text-xs mb-1">
                       {t("statistics.firstRequest", "First Request")}
                     </Text>
-                    <Text className="text-foreground">
+                    <Text style={{ color: theme.foreground }}>
                       {formatDate(globalStats.first_request)}
                     </Text>
                   </View>
@@ -383,7 +398,10 @@ export const Statistics = () => {
                         {t("statistics.topUsers.title", "Top 10 Users")}
                       </Text>
                     </View>
-                    <View className="bg-card rounded-lg p-4 mb-4">
+                    <View
+                      className=" rounded-lg p-4 mb-4"
+                      style={{ backgroundColor: theme.card }}
+                    >
                       {topUsers.map((user, index) => (
                         <View
                           key={user.email}
@@ -394,11 +412,17 @@ export const Statistics = () => {
                               <Text className="text-primary font-bold mr-2">
                                 #{index + 1}
                               </Text>
-                              <Text className="text-foreground font-medium">
+                              <Text
+                                className=" font-medium"
+                                style={{ color: theme.foreground }}
+                              >
                                 {formatEmail(user.email)}
                               </Text>
                             </View>
-                            <Text className="text-foreground font-bold">
+                            <Text
+                              className=" font-bold"
+                              style={{ color: theme.foreground }}
+                            >
                               {user.request_count}{" "}
                               {t("statistics.topUsers.requests", "requests")}
                             </Text>
@@ -412,7 +436,7 @@ export const Statistics = () => {
                                   "Avg Response Time",
                                 )}
                               </Text>
-                              <Text className="text-foreground">
+                              <Text style={{ color: theme.foreground }}>
                                 {user.avg_duration_ms.toFixed(2)} ms
                               </Text>
                             </View>

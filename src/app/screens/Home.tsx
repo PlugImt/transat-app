@@ -11,15 +11,15 @@ import RestaurantWidget, {
 import WashingMachineWidget, {
   WashingMachineWidgetLoading,
 } from "@/components/custom/widget/WashingMachineWidget";
+import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";
 import { useUser } from "@/hooks/account/useUser";
 import { useHomeWidgetPreferences } from "@/hooks/useWidgetPreferences";
 import { QUERY_KEYS } from "@/lib/queryKeys";
 import { isDinner, isLunch, isWeekend } from "@/lib/utils";
+import { washingMachineNotificationService } from "@/services/notifications/washingMachineNotifications";
 import type { AppStackParamList } from "@/services/storage/types";
 import type { WidgetPreference } from "@/services/storage/widgetPreferences";
-import { washingMachineNotificationService } from "@/services/notifications/washingMachineNotifications";
-import { useTheme } from "@/contexts/ThemeContext";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
@@ -124,12 +124,12 @@ export const Home = () => {
   useEffect(() => {
     // Initialize notification service
     washingMachineNotificationService.initialize();
-    
+
     // Clean up old notifications periodically
     const cleanupInterval = setInterval(() => {
       washingMachineNotificationService.cleanup();
     }, 60000); // Check every minute
-    
+
     registerForPushNotificationsAsync()
       .then(async (token) => {
         console.log("Retrieved Expo Push Token:", token);
@@ -141,7 +141,7 @@ export const Home = () => {
         console.error("Error retrieving token:", error);
         setExpoPushToken(`${error}`);
       });
-      
+
     return () => {
       clearInterval(cleanupInterval);
     };

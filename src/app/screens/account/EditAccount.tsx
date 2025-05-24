@@ -9,11 +9,11 @@ import Input, { InputLoading } from "@/components/common/Input";
 import Page from "@/components/common/Page";
 import { useToast } from "@/components/common/Toast";
 import ErrorPage from "@/components/custom/ErrorPage";
+import { useTheme } from "@/contexts/ThemeContext";
 import { useUpdateAccount } from "@/hooks/account/useUpdateAccount";
 import { useUpdateProfilePicture } from "@/hooks/account/useUpdateProfilePicture";
 import { useUser } from "@/hooks/account/useUser";
 import { QUERY_KEYS } from "@/lib/queryKeys";
-import { useTheme } from "@/contexts/ThemeContext";
 import type { User } from "@/types/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
@@ -169,7 +169,10 @@ export const EditProfile = () => {
         </TouchableOpacity>
       </View>
 
-      <View className="bg-card rounded-lg px-6 py-4 gap-4">
+      <View
+        className=" rounded-lg px-6 py-4 gap-4"
+        style={{ backgroundColor: theme.card }}
+      >
         <Text className="h3">{t("account.personalInfo")}</Text>
 
         <Input
@@ -266,7 +269,10 @@ const EditProfileLoading = () => {
         </TouchableOpacity>
       </View>
 
-      <View className="bg-card rounded-lg px-6 py-4 gap-4">
+      <View
+        className=" rounded-lg px-6 py-4 gap-4"
+        style={{ backgroundColor: theme.card }}
+      >
         <Text className="h3">{t("account.personalInfo")}</Text>
 
         <InputLoading label={t("account.firstName")} />

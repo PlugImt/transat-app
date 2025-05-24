@@ -1,3 +1,4 @@
+import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
@@ -18,12 +19,18 @@ export default function ErrorPage({
 }: Props) {
   const { t } = useTranslation();
   const { logout } = useAuth();
+  const { theme } = useTheme();
 
   return (
-    <View className="bg-background px-5 justify-center items-center gap-6 h-screen">
+    <View
+      style={{ backgroundColor: theme.background }}
+      className=" px-5 justify-center items-center gap-6 h-screen"
+    >
       <View className="gap-2 justify-center items-center">
-        <Text className="h3">{t("common.errors.occurred")}</Text>
-        <Text className="text-foreground/70">{error?.message}</Text>
+        <Text className="h3" style={{ color: theme.foreground }}>
+          {t("common.errors.occurred")}
+        </Text>
+        <Text style={{ color: theme.foreground + "B3" }}>{error?.message}</Text>
       </View>
       <Button
         label="Réessayer"

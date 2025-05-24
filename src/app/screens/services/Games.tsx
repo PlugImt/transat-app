@@ -1,17 +1,22 @@
 import Page from "@/components/common/Page";
+import { useTheme } from "@/contexts/ThemeContext";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
 
 export const Games = () => {
   const { t } = useTranslation();
+  const { theme } = useTheme();
 
   return (
     <Page title={t("games.title")}>
       <View className="min-h-screen flex justify-center items-center ">
-        <Text className="text-foreground text-center h1 -mt-60">
+        <Text
+          className="text-center h1 -mt-60"
+          style={{ color: theme.foreground }}
+        >
           {t("common.underConstruction")}
         </Text>
-        <Text className="text-foreground text-center p-2.5">
+        <Text className="text-center p-2.5" style={{ color: theme.foreground }}>
           {t("common.underConstructionDesc")}
         </Text>
       </View>

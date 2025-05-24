@@ -1,3 +1,4 @@
+import { useTheme } from "@/contexts/ThemeContext";
 import { View } from "react-native";
 import Skeleton from "./Skeleton";
 import TextSkeleton from "./TextSkeleton";
@@ -19,10 +20,16 @@ export function CardSkeleton({
   width = "100%",
   height,
 }: CardSkeletonProps) {
+  const { theme } = useTheme();
+
   return (
     <View
-      className={`bg-card p-4 rounded-lg ${className}`}
-      style={{ width, height }}
+      style={{
+        backgroundColor: theme.card,
+        width,
+        height,
+      }}
+      className={`p-4 rounded-lg ${className}`}
     >
       {hasHeader && (
         <View className="flex-row items-center mb-4">

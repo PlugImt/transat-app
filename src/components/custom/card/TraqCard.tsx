@@ -35,7 +35,10 @@ const TraqCard = ({
   const { theme } = useTheme();
 
   return (
-    <View className="px-6 py-8 rounded-lg bg-card gap-6 relative items-center">
+    <View
+      style={{ backgroundColor: theme.card }}
+      className="px-6 py-8 rounded-lg gap-6 relative items-center"
+    >
       <Image
         source={{ uri: image }}
         resizeMode="contain"
@@ -58,9 +61,14 @@ const TraqCard = ({
       </View>
 
       <View>
-        <Text className="h2 text-primary text-center">{name}</Text>
+        <Text className="h2 text-center" style={{ color: theme.primary }}>
+          {name}
+        </Text>
         {description && (
-          <Text className="text-sm text-foreground text-center">
+          <Text
+            className="text-sm text-center"
+            style={{ color: theme.foreground }}
+          >
             {description}
           </Text>
         )}
@@ -71,11 +79,13 @@ const TraqCard = ({
           <View className="flex-row justify-between items-center">
             <View className="flex-row items-center gap-2">
               <Beer size={18} color={theme.foreground} />
-              <Text className="font-bold text-foreground">
+              <Text className="font-bold" style={{ color: theme.foreground }}>
                 {t("services.traq.alcohol")}
               </Text>
             </View>
-            <Text className="font-bold text-foreground">{alcohol}°</Text>
+            <Text className="font-bold" style={{ color: theme.foreground }}>
+              {alcohol}°
+            </Text>
           </View>
         )}
 
@@ -83,12 +93,12 @@ const TraqCard = ({
           <View className="flex flex-row justify-between items-center">
             <View className="flex flex-row items-center gap-2 ">
               <BadgeEuro size={18} color={theme.foreground} />
-              <Text className="font-bold text-foreground">
+              <Text className="font-bold" style={{ color: theme.foreground }}>
                 {t("services.traq.price")}{" "}
                 {alcohol && alcohol > 0 ? " (50cl)" : ""}
               </Text>
             </View>
-            <Text className="font-bold text-foreground">
+            <Text className="font-bold" style={{ color: theme.foreground }}>
               {price > 0 ? `${price}€` : t("common.free")}
             </Text>
           </View>
@@ -98,12 +108,14 @@ const TraqCard = ({
           <View className="flex flex-row justify-between items-center">
             <View className="flex flex-row items-center gap-2 ">
               <BadgeEuro size={18} color={theme.foreground} />
-              <Text className="font-bold text-foreground">
+              <Text className="font-bold" style={{ color: theme.foreground }}>
                 {t("services.traq.priceHalf")}{" "}
                 {alcohol && alcohol > 0 ? " (25cl)" : ""}
               </Text>
             </View>
-            <Text className="font-bold text-foreground">{priceHalf}€</Text>
+            <Text className="font-bold" style={{ color: theme.foreground }}>
+              {priceHalf}€
+            </Text>
           </View>
         )}
       </View>
@@ -118,7 +130,10 @@ export const TraqCardLoading = () => {
   const { theme } = useTheme();
 
   return (
-    <View className="px-6 py-8 rounded-lg bg-card gap-6 relative items-center">
+    <View
+      style={{ backgroundColor: theme.card }}
+      className="px-6 py-8 rounded-lg gap-6 relative items-center"
+    >
       <Avatar className="w-40 h-40">
         <AvatarImage loading />
       </Avatar>
@@ -132,7 +147,7 @@ export const TraqCardLoading = () => {
         <View className="flex-row justify-between items-center">
           <View className="flex-row items-center gap-2">
             <Beer size={18} color={theme.foreground} />
-            <Text className="font-bold text-foreground">
+            <Text className="font-bold" style={{ color: theme.foreground }}>
               {t("services.traq.alcohol")}
             </Text>
           </View>
@@ -142,7 +157,7 @@ export const TraqCardLoading = () => {
         <View className="flex flex-row justify-between items-center">
           <View className="flex flex-row items-center gap-2 ">
             <BadgeEuro size={18} color={theme.foreground} />
-            <Text className="font-bold text-foreground">
+            <Text className="font-bold" style={{ color: theme.foreground }}>
               {t("services.traq.price")}
             </Text>
           </View>

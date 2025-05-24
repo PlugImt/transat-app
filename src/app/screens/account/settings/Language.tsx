@@ -1,8 +1,8 @@
 import Page from "@/components/common/Page";
+import { useTheme } from "@/contexts/ThemeContext";
 import { useUpdateLanguage } from "@/hooks/account/useUpdateLanguage";
 import i18n from "@/i18n";
 import type { SettingsNavigation } from "@/services/storage/types";
-import { useTheme } from "@/contexts/ThemeContext";
 import { useNavigation } from "@react-navigation/native";
 import { Check } from "lucide-react-native";
 import { useEffect, useState } from "react";
@@ -137,7 +137,10 @@ export const Language = () => {
 
   return (
     <Page goBack title={t("settings.language.language")}>
-      <View className="bg-card rounded-lg px-4 py-2">
+      <View
+        className=" rounded-lg px-4 py-2"
+        style={{ backgroundColor: theme.card }}
+      >
         {languages.map((language) => (
           <SettingsItem
             key={language.code}

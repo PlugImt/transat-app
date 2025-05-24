@@ -56,7 +56,7 @@ const Dropdown = ({
             <TouchableOpacity className="flex-row items-center justify-between bg-muted/70 rounded-lg px-3 h-12">
               <View className="flex-row items-center gap-2">
                 {icon ? icon : null}
-                <Text className="text-foreground">
+                <Text style={{ color: theme.foreground }}>
                   {value ? value : placeholder}
                 </Text>
               </View>
@@ -102,7 +102,7 @@ export const DropdownLoading = ({
       <View className="flex-row items-center justify-between bg-muted/70 rounded-lg px-3 h-12 gap-2">
         <View className="flex-row items-center gap-2">
           {icon ? icon : null}
-          <Text className="text-foreground">{placeholder}</Text>
+          <Text style={{ color: theme.foreground }}>{placeholder}</Text>
         </View>
         <ChevronDown color={theme.foreground} size={20} />
       </View>

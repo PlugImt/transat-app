@@ -14,7 +14,11 @@ export const RequestHistorySkeleton = ({
         { length: count },
         (_, index) => `skeleton-${index}-${Date.now()}`,
       ).map((key) => (
-        <View key={key} className="bg-card rounded-lg p-4">
+        <View
+          key={key}
+          className="rounded-lg p-4"
+          style={{ backgroundColor: theme.card }}
+        >
           <View className="flex-row justify-between items-center mb-3">
             <Skeleton height={20} width={120} variant="rounded" />
             <Skeleton height={16} width={80} variant="rounded" />

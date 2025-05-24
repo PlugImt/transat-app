@@ -81,16 +81,19 @@ export const Settings = () => {
 
       <View className="gap-2">
         <Text className="h3 ml-4">{t("common.appearance")}</Text>
-        <View className="bg-card rounded-lg px-4 py-2 gap-4">
+        <View
+          className=" rounded-lg px-4 py-2 gap-4"
+          style={{ backgroundColor: theme.card }}
+        >
           <SettingsItem
             icon={<Palette color={theme.foreground} size={22} />}
             title={t("settings.appearance.title", "Theme")}
             subtitle={
-              themeMode === "system" 
+              themeMode === "system"
                 ? t("settings.appearance.system", "System")
-                : themeMode === "light" 
-                ? t("settings.appearance.light", "Light")
-                : t("settings.appearance.dark", "Dark")
+                : themeMode === "light"
+                  ? t("settings.appearance.light", "Light")
+                  : t("settings.appearance.dark", "Dark")
             }
             onPress={() => navigation.navigate("Appearance")}
           />
@@ -115,7 +118,10 @@ export const Settings = () => {
         <Text className="h3 ml-4">
           {t("settings.notifications.notifications")}
         </Text>
-        <View className="bg-card rounded-lg px-4 py-2">
+        <View
+          className=" rounded-lg px-4 py-2"
+          style={{ backgroundColor: theme.card }}
+        >
           <SettingsItem
             icon={<Bell color={theme.foreground} size={22} />}
             title="Notifications"
@@ -126,7 +132,10 @@ export const Settings = () => {
 
       <View className="gap-2">
         <Text className="h3 ml-4">{t("account.security")}</Text>
-        <View className="bg-card rounded-lg px-4 py-2">
+        <View
+          className=" rounded-lg px-4 py-2"
+          style={{ backgroundColor: theme.card }}
+        >
           <SettingsItem
             icon={<Shield color={theme.foreground} size={22} />}
             title={t("account.changePassword")}
@@ -137,7 +146,10 @@ export const Settings = () => {
 
       <View className="gap-2">
         <Text className="h3 ml-4">{t("common.other")}</Text>
-        <View className="bg-card rounded-lg px-4 py-2 gap-4">
+        <View
+          className=" rounded-lg px-4 py-2 gap-4"
+          style={{ backgroundColor: theme.card }}
+        >
           <SettingsItem
             icon={<HelpCircle color={theme.foreground} size={22} />}
             title={t("settings.help.title")}
@@ -195,7 +207,9 @@ export const Settings = () => {
             confirmLabel={t("settings.logoutConfirm")}
             onConfirm={handleLogout}
           >
-            <Text className="text-foreground">{t("settings.logoutDesc")}</Text>
+            <Text style={{ color: theme.foreground }}>
+              {t("settings.logoutDesc")}
+            </Text>
           </DialogContent>
         </Dialog>
 

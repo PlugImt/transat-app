@@ -1,3 +1,4 @@
+import { useTheme } from "@/contexts/ThemeContext";
 import { cloneElement, createContext, useContext, useState } from "react";
 import {
   KeyboardAvoidingView,
@@ -58,6 +59,7 @@ function DialogContent({
   isPending,
 }: DialogContentProps) {
   const { open, setOpen } = useDialog();
+  const { theme } = useTheme();
 
   const handleCancel = () => {
     onCancel?.();
@@ -82,10 +84,19 @@ function DialogContent({
       >
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
-          className="flex flex-1 justify-center items-center bg-background/75 w-full"
+          style={{ backgroundColor: theme.background + "BF" }}
+          className="flex flex-1 justify-center items-center w-full"
         >
-          <View className="border border-border bg-background rounded-lg p-6 shadow-lg w-11/12 max-h-[80%] gap-8">
-            <Text className="h2">{title}</Text>
+          <View
+            style={{
+              backgroundColor: theme.background,
+              borderColor: theme.muted,
+            }}
+            className="border rounded-lg p-6 shadow-lg w-11/12 max-h-[80%] gap-8"
+          >
+            <Text className="h2" style={{ color: theme.foreground }}>
+              {title}
+            </Text>
             <ScrollView keyboardShouldPersistTaps="handled">
               <TouchableWithoutFeedback className="pr-6">
                 <View className={className}>{children}</View>

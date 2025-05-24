@@ -1,4 +1,5 @@
 import { TextSkeleton } from "@/components/Skeleton";
+import { useTheme } from "@/contexts/ThemeContext";
 import { useWeather } from "@/hooks/useWeather";
 import i18n from "@/i18n";
 import { format } from "date-fns";
@@ -24,6 +25,7 @@ import { Avatar, AvatarImage } from "../common/Avatar";
 
 export function WeatherWidget() {
   const { data: weatherNantes, isPending, isError } = useWeather();
+  const { theme } = useTheme();
 
   const date = new Date();
 
@@ -73,15 +75,18 @@ export function WeatherWidget() {
   }
 
   return (
-    <View className="p-6 rounded-lg bg-card flex-row justify-between gap-6">
+    <View
+      style={{ backgroundColor: theme.card }}
+      className="p-6 rounded-lg flex-row justify-between gap-6"
+    >
       <View>
-        <Text className="h3">
+        <Text className="h3" style={{ color: theme.foreground }}>
           {format(date, "PPP", { locale: getLocale() })}
         </Text>
-        <Text className="h1 text-white font-semibold">
+        <Text className="h1 font-semibold" style={{ color: theme.foreground }}>
           {Math.round(weatherNantes?.temperature ?? 0)}°C
         </Text>
-        <Text className="h3 text-primary font-semibold">
+        <Text className="h3 font-semibold" style={{ color: theme.primary }}>
           {weatherNantes?.condition ?? ""}
         </Text>
       </View>
@@ -102,8 +107,13 @@ export function WeatherWidget() {
 export default WeatherWidget;
 
 export const WeatherSkeleton = () => {
+  const { theme } = useTheme();
+
   return (
-    <View className="p-6 rounded-lg bg-card flex-row justify-between gap-6">
+    <View
+      style={{ backgroundColor: theme.card }}
+      className="p-6 rounded-lg flex-row justify-between gap-6"
+    >
       <View className="gap-2">
         <TextSkeleton variant="h3" className="w-64" lines={1} />
         <TextSkeleton variant="h1" className="w-32" lines={1} />

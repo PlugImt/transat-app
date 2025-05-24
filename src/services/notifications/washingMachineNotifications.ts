@@ -1,5 +1,5 @@
-import * as Notifications from "expo-notifications";
 import { storage } from "@/services/storage/asyncStorage";
+import * as Notifications from "expo-notifications";
 
 export interface WashingMachineNotificationState {
   machineNumber: string;
@@ -24,23 +24,24 @@ Notifications.setNotificationHandler({
 });
 
 class WashingMachineNotificationService {
-  private notifications: Map<string, WashingMachineNotificationState> = new Map();
+  private notifications: Map<string, WashingMachineNotificationState> =
+    new Map();
 
   async initialize() {
     // Load persisted notifications from storage
-    const stored = await storage.get<Record<string, WashingMachineNotificationState>>(
-      NOTIFICATION_STORAGE_KEY
-    );
-    
+    const stored = await storage.get<
+      Record<string, WashingMachineNotificationState>
+    >(NOTIFICATION_STORAGE_KEY);
+
     if (stored) {
       // Filter out expired notifications
       const now = Date.now();
       const activeNotifications = Object.entries(stored).filter(
-        ([_, notification]) => notification.endTime > now
+        ([_, notification]) => notification.endTime > now,
       );
-      
+
       this.notifications = new Map(activeNotifications);
-      
+
       // Clean up expired notifications from storage
       if (activeNotifications.length !== Object.keys(stored).length) {
         await this.saveToStorage();
@@ -57,7 +58,7 @@ class WashingMachineNotificationService {
     machineNumber: string,
     machineType: string,
     timeRemaining: number,
-    minutesBefore: number = 5
+    minutesBefore = 5,
   ): Promise<boolean> {
     try {
       // Cancel existing notification for this machine
@@ -69,8 +70,9 @@ class WashingMachineNotificationService {
       }
 
       const now = Date.now();
-      const endTime = now + (timeRemaining * 1000);
-      const notificationTime = now + ((timeRemaining - minutesBefore * 60) * 1000);
+      const endTime = now + timeRemaining * 1000;
+      const notificationTime =
+        now + (timeRemaining - minutesBefore * 60) * 1000;
 
       // Schedule the local notification
       const notificationId = await Notifications.scheduleNotificationAsync({
@@ -108,13 +110,15 @@ class WashingMachineNotificationService {
   async cancelNotification(machineNumber: string): Promise<boolean> {
     try {
       const notification = this.notifications.get(machineNumber);
-      
+
       if (notification) {
-        await Notifications.cancelScheduledNotificationAsync(notification.notificationId);
+        await Notifications.cancelScheduledNotificationAsync(
+          notification.notificationId,
+        );
         this.notifications.delete(machineNumber);
         await this.saveToStorage();
       }
-      
+
       return true;
     } catch (error) {
       console.error("Error canceling notification:", error);
@@ -126,15 +130,20 @@ class WashingMachineNotificationService {
     return this.notifications.has(machineNumber);
   }
 
-  getNotificationState(machineNumber: string): WashingMachineNotificationState | null {
+  getNotificationState(
+    machineNumber: string,
+  ): WashingMachineNotificationState | null {
     return this.notifications.get(machineNumber) || null;
   }
 
   // Check if the notification should be disabled (when we're within the notification window)
-  shouldDisableNotificationButton(machineNumber: string, timeRemaining: number): boolean {
+  shouldDisableNotificationButton(
+    machineNumber: string,
+    timeRemaining: number,
+  ): boolean {
     const notification = this.notifications.get(machineNumber);
     if (!notification) return false;
-    
+
     // Disable button if we're within the notification window
     return timeRemaining <= notification.minutesBefore * 60;
   }
@@ -147,7 +156,9 @@ class WashingMachineNotificationService {
     for (const [machineNumber, notification] of this.notifications.entries()) {
       if (notification.endTime <= now) {
         try {
-          await Notifications.cancelScheduledNotificationAsync(notification.notificationId);
+          await Notifications.cancelScheduledNotificationAsync(
+            notification.notificationId,
+          );
         } catch (error) {
           // Notification might already be gone, ignore error
         }
@@ -162,4 +173,5 @@ class WashingMachineNotificationService {
   }
 }
 
-export const washingMachineNotificationService = new WashingMachineNotificationService(); 
+export const washingMachineNotificationService =
+  new WashingMachineNotificationService();

@@ -3,7 +3,7 @@ import { type VariantProps, cva } from "class-variance-authority";
 import { useEffect, useRef } from "react";
 import { Animated, type View } from "react-native";
 
-const skeletonVariants = cva("bg-muted rounded-md overflow-hidden", {
+const skeletonVariants = cva("rounded-md overflow-hidden", {
   variants: {
     variant: {
       default: "",

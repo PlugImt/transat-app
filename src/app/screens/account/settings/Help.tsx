@@ -67,7 +67,10 @@ const Help = () => {
         </TabsList>
 
         <TabsContent value="faq">
-          <View className="bg-card rounded-lg p-2">
+          <View
+            className=" rounded-lg p-2"
+            style={{ backgroundColor: theme.card }}
+          >
             {faqs.map((faq, index) => (
               <View key={faq.question} className="px-4 py-2">
                 <TouchableOpacity
@@ -76,7 +79,10 @@ const Help = () => {
                 >
                   <View className="flex-row items-center gap-2 flex-1">
                     <HelpCircle size={20} color={theme.foreground} />
-                    <Text className="text-foreground font-medium">
+                    <Text
+                      className=" font-medium"
+                      style={{ color: theme.foreground }}
+                    >
                       {faq.question}
                     </Text>
                   </View>
@@ -104,7 +110,10 @@ const Help = () => {
 
         <TabsContent value="contact" className="gap-4">
           <View className="gap-2">
-            <View className="bg-card rounded-lg px-4 py-2">
+            <View
+              className="rounded-lg px-4 py-2"
+              style={{ backgroundColor: theme.card }}
+            >
               <TouchableOpacity
                 className="flex-row justify-between items-center py-4"
                 onPress={openWhatsApp}
@@ -112,7 +121,7 @@ const Help = () => {
                 <View className="flex-row items-center gap-3">
                   <SquareArrowOutUpRight size={22} color={theme.foreground} />
                   <View className="ml-2.5">
-                    <Text className="text-foreground">
+                    <Text style={{ color: theme.foreground }}>
                       {t("settings.help.joinWhatsApp")}
                     </Text>
                     <Text className="text-sm break-words text-foreground/60">

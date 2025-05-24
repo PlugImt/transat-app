@@ -42,30 +42,38 @@ export const AboutModal: React.FC<AboutModalProps> = ({
         confirmLabel={t("common.close")}
         className="gap-8"
       >
-        <Text className="text-foreground">{description}</Text>
+        <Text style={{ color: theme.foreground }}>{description}</Text>
 
         {openingHours && (
           <View className="gap-2">
             <View className="flex-row items-center gap-2">
               <Clock size={20} color={theme.primary} />
-              <Text className="text-foreground font-bold">
+              <Text style={{ color: theme.foreground }} className="font-bold">
                 {t("services.openingHours")}
               </Text>
             </View>
 
             {typeof openingHours === "string" ? (
-              <Text className="text-foreground">{openingHours}</Text>
+              <Text style={{ color: theme.foreground }}>{openingHours}</Text>
             ) : (
               openingHours.map((item) => (
                 <View
                   key={item.day}
                   className="flex-row justify-between w-full"
                 >
-                  <Text className="text-foreground w-1/3">{item.day}</Text>
-                  <Text className="text-foreground w-1/3 text-right">
+                  <Text style={{ color: theme.foreground }} className="w-1/3">
+                    {item.day}
+                  </Text>
+                  <Text
+                    style={{ color: theme.foreground }}
+                    className="w-1/3 text-right"
+                  >
                     {item.lunch}
                   </Text>
-                  <Text className="text-foreground w-1/3 text-right">
+                  <Text
+                    style={{ color: theme.foreground }}
+                    className="w-1/3 text-right"
+                  >
                     {item.dinner}
                   </Text>
                 </View>
@@ -78,12 +86,12 @@ export const AboutModal: React.FC<AboutModalProps> = ({
           <View className="gap-2">
             <View className="flex-row items-center gap-2">
               <MapPin size={20} color={theme.primary} />
-              <Text className="text-foreground font-bold">
+              <Text style={{ color: theme.foreground }} className="font-bold">
                 {t("services.location")}
               </Text>
             </View>
 
-            <Text className="text-foreground">{location}</Text>
+            <Text style={{ color: theme.foreground }}>{location}</Text>
           </View>
         )}
 
@@ -91,12 +99,12 @@ export const AboutModal: React.FC<AboutModalProps> = ({
           <View className="gap-2">
             <View className="flex-row items-center gap-2">
               <EuroIcon size={20} color={theme.primary} />
-              <Text className="text-foreground font-bold">
+              <Text style={{ color: theme.foreground }} className="font-bold">
                 {t("services.price")}
               </Text>
             </View>
 
-            <Text className="text-foreground">{price}</Text>
+            <Text style={{ color: theme.foreground }}>{price}</Text>
           </View>
         )}
 
@@ -104,12 +112,12 @@ export const AboutModal: React.FC<AboutModalProps> = ({
           <View className="gap-2">
             <View className="flex-row items-center gap-2">
               <Plus size={20} color={theme.primary} />
-              <Text className="text-foreground font-bold">
+              <Text style={{ color: theme.foreground }} className="font-bold">
                 {t("services.additionalInfo")}
               </Text>
             </View>
 
-            <Text className="text-foreground">{additionalInfo}</Text>
+            <Text style={{ color: theme.foreground }}>{additionalInfo}</Text>
           </View>
         )}
       </DialogContent>

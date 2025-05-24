@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
 import { useTheme } from "@/contexts/ThemeContext";
+import { cn } from "@/lib/utils";
 import { useNavigation } from "@react-navigation/native";
 import { BlurView } from "expo-blur";
 import { ArrowLeft } from "lucide-react-native";
@@ -69,11 +69,10 @@ export default function Page({
           flex: 1,
           backgroundColor: theme.background,
           marginTop: statusBarHeight + 60,
+          paddingHorizontal: 20,
+          paddingBottom: 48,
         },
-        className: cn(
-          "bg-background px-5 flex flex-col gap-2 pb-12",
-          className,
-        ),
+        className: cn("flex flex-col gap-2", className),
       }
     : {
         style: {
@@ -122,7 +121,9 @@ export default function Page({
             {title && (
               <Text className="h1 ml-4" style={{ color: theme.foreground }}>
                 {title}
-                {newfName && <Text style={{ color: theme.primary }}> {newfName}</Text>}
+                {newfName && (
+                  <Text style={{ color: theme.primary }}> {newfName}</Text>
+                )}
               </Text>
             )}
           </View>
@@ -135,16 +136,28 @@ export default function Page({
           children
         ) : (
           <View
-            className={cn(
-              "bg-background px-5 flex flex-col gap-2 pb-12",
-              className,
-            )}
+            style={{
+              backgroundColor: theme.background,
+              paddingHorizontal: 20,
+              paddingBottom: 48,
+            }}
+            className={cn("flex flex-col gap-2", className)}
           >
             {children}
           </View>
         )}
       </ContentWrapper>
-      {footer && <View className="bg-background px-5 py-4">{footer}</View>}
+      {footer && (
+        <View
+          style={{
+            backgroundColor: theme.background,
+            paddingHorizontal: 20,
+            paddingVertical: 16,
+          }}
+        >
+          {footer}
+        </View>
+      )}
 
       {confetti && (
         <View style={{ zIndex: confettiTriggered ? 50 : -10 }}>

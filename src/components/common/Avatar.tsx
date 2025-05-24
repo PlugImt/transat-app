@@ -1,4 +1,5 @@
 import { Skeleton } from "@/components/Skeleton";
+import { useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/lib/utils";
 import { forwardRef, useState } from "react";
 import { Image, Text, View } from "react-native";
@@ -59,20 +60,28 @@ AvatarImage.displayName = "AvatarImage";
 const AvatarFallback = forwardRef<
   React.ElementRef<typeof View>,
   React.ComponentPropsWithoutRef<typeof View> & { textClassname?: string }
->(({ children, className, textClassname, ...props }, ref) => (
-  <View
-    ref={ref}
-    className={cn(
-      "flex h-full w-full items-center justify-center rounded-full bg-muted",
-      className,
-    )}
-    {...props}
-  >
-    <Text className={cn("text-foreground text-4xl font-bold", textClassname)}>
-      {children}
-    </Text>
-  </View>
-));
+>(({ children, className, textClassname, ...props }, ref) => {
+  const { theme } = useTheme();
+
+  return (
+    <View
+      ref={ref}
+      style={{ backgroundColor: theme.muted }}
+      className={cn(
+        "flex h-full w-full items-center justify-center rounded-full",
+        className,
+      )}
+      {...props}
+    >
+      <Text
+        style={{ color: theme.foreground }}
+        className={cn("text-4xl font-bold", textClassname)}
+      >
+        {children}
+      </Text>
+    </View>
+  );
+});
 AvatarFallback.displayName = "AvatarFallback";
 
 const AvatarLoading = ({ className }: AvatarImageProps) => (

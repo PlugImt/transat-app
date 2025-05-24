@@ -1,7 +1,7 @@
 import { TextSkeleton } from "@/components/Skeleton";
+import { useTheme } from "@/contexts/ThemeContext";
 import { useWashingMachines } from "@/hooks/useWashingMachines";
 import type { AppStackParamList } from "@/services/storage/types";
-import { useTheme } from "@/contexts/ThemeContext";
 import type { MachineData } from "@/types/washingMachine";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
@@ -69,7 +69,8 @@ export function WashingMachineWidget() {
       <Text className="h3 ml-4">{t("services.washingMachine.title")}</Text>
       <TouchableOpacity
         onPress={() => navigation.navigate("WashingMachine")}
-        className="px-6 py-4 rounded-lg bg-card flex-row justify-between gap-6 overflow-hidden"
+        style={{ backgroundColor: theme.card }}
+        className="px-6 py-4 rounded-lg flex-row justify-between gap-6 overflow-hidden"
       >
         <View
           className="items-center"
@@ -79,11 +80,15 @@ export function WashingMachineWidget() {
             size={40}
             color={availableWashers === 0 ? theme.muted : theme.primary}
           />
-          <Text className="text-lg font-bold text-foreground">
+          <Text
+            style={{ color: theme.foreground }}
+            className="text-lg font-bold"
+          >
             {availableWashers}/{totalWashers}
           </Text>
           <Text
-            className="text-foreground flex-1 text-center"
+            style={{ color: theme.foreground }}
+            className="flex-1 text-center"
             ellipsizeMode="tail"
             numberOfLines={2}
           >
@@ -98,11 +103,15 @@ export function WashingMachineWidget() {
             size={40}
             color={availableDryers === 0 ? theme.muted : theme.primary}
           />
-          <Text className="text-lg font-bold text-foreground">
+          <Text
+            style={{ color: theme.foreground }}
+            className="text-lg font-bold"
+          >
             {availableDryers}/{totalDryers}
           </Text>
           <Text
-            className="text-foreground flex-1 text-center"
+            style={{ color: theme.foreground }}
+            className="flex-1 text-center"
             ellipsizeMode="tail"
             numberOfLines={2}
           >
@@ -126,14 +135,16 @@ export const WashingMachineWidgetLoading = () => {
       <Text className="h3">{t("services.washingMachine.title")}</Text>
       <TouchableOpacity
         onPress={() => navigation.navigate("WashingMachine")}
-        className="px-6 py-4 rounded-lg bg-card flex-row justify-between gap-6"
+        style={{ backgroundColor: theme.card }}
+        className="px-6 py-4 rounded-lg flex-row justify-between gap-6"
       >
         <View className="items-center gap-2">
           <WashingMachineIcon size={40} color={theme.muted} />
           <TextSkeleton variant="lg" lines={1} lastLineWidth={32} />
 
           <Text
-            className="text-foreground flex-1 text-center"
+            style={{ color: theme.foreground }}
+            className="flex-1 text-center"
             ellipsizeMode="tail"
             numberOfLines={1}
           >
@@ -144,7 +155,8 @@ export const WashingMachineWidgetLoading = () => {
           <Wind size={40} color={theme.muted} />
           <TextSkeleton variant="lg" lines={1} lastLineWidth={32} />
           <Text
-            className="text-foreground flex-1 text-center"
+            style={{ color: theme.foreground }}
+            className="flex-1 text-center"
             ellipsizeMode="tail"
             numberOfLines={1}
           >

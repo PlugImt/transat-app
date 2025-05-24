@@ -1,3 +1,4 @@
+import { useTheme } from "@/contexts/ThemeContext";
 import { View } from "react-native";
 import Skeleton from "./Skeleton";
 import TextSkeleton from "./TextSkeleton";
@@ -19,12 +20,14 @@ export function WidgetSkeleton({
   listItems = 3,
   className,
 }: WidgetSkeletonProps) {
+  const { theme } = useTheme();
+
   return (
     <View className={`flex flex-col gap-2 ${className}`}>
       {title && (
         <TextSkeleton lines={1} width="40%" variant="h2" className="mb-1" />
       )}
-      <View className="bg-card p-4 rounded-lg">
+      <View style={{ backgroundColor: theme.card }} className="p-4 rounded-lg">
         {contentType === "default" && (
           <TextSkeleton lines={4} width="100%" spacing={8} />
         )}

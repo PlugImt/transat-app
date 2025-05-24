@@ -3,6 +3,7 @@ import { Button } from "@/components/common/Button";
 import Input from "@/components/common/Input";
 import Page from "@/components/common/Page";
 import { useToast } from "@/components/common/Toast";
+import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";
 import i18n from "@/i18n";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,6 +23,7 @@ export const Signup = () => {
   const navigation = useNavigation();
   const { register, saveToken, isLoading } = useAuth();
   const { t } = useTranslation();
+  const { theme } = useTheme();
   const { toast } = useToast();
 
   const [signupError, setSignupError] = useState<string | null>(null);
@@ -147,7 +149,7 @@ export const Signup = () => {
           </View>
         ) : (
           <View className="h-20">
-            <Text className="text-foreground/60 mt-2">
+            <Text style={{ color: theme.foreground + "99" }} className="mt-2">
               {t("auth.signUpDescription")}
             </Text>
           </View>

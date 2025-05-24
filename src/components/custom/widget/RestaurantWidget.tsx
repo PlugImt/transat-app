@@ -1,8 +1,8 @@
 import { TextSkeleton } from "@/components/Skeleton";
+import { useTheme } from "@/contexts/ThemeContext";
 import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
 import { isDinner, isLunch, isWeekend, outOfService } from "@/lib/utils";
 import type { AppStackParamList } from "@/services/storage/types";
-import { useTheme } from "@/contexts/ThemeContext";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
@@ -48,8 +48,17 @@ export function RestaurantWidget() {
   if (error || weekend || outOfHours || (!lunch && !dinner) || !updatedToday) {
     return (
       <View className="flex flex-col gap-2">
-        <Text className="h3 ml-4">{t("services.restaurant.title")}</Text>
-        <View className="px-6 py-4 rounded-lg bg-card flex flex-row gap-6 items-center overflow-hidden">
+        <Text
+          style={{ color: theme.foreground }}
+          className="h3 ml-4"
+          style={{ color: theme.foreground }}
+        >
+          {t("services.restaurant.title")}
+        </Text>
+        <View
+          style={{ backgroundColor: theme.card }}
+          className="px-6 py-4 rounded-lg flex flex-row gap-6 items-center overflow-hidden"
+        >
           <Image
             source={require("@/assets/images/Logos/restaurant_bw.png")}
             className="w-24 h-24"
@@ -61,7 +70,8 @@ export function RestaurantWidget() {
             {weekend ? (
               <>
                 <Text
-                  className="text-lg text-foreground font-bold text-center"
+                  className="text-lg font-bold text-center"
+                  style={{ color: theme.foreground }}
                   numberOfLines={2}
                   ellipsizeMode="tail"
                 >
@@ -69,7 +79,8 @@ export function RestaurantWidget() {
                 </Text>
 
                 <Text
-                  className="text-foreground text-center"
+                  className="text-center"
+                  style={{ color: theme.foreground }}
                   numberOfLines={3}
                   ellipsizeMode="tail"
                 >
@@ -79,7 +90,8 @@ export function RestaurantWidget() {
             ) : !updatedToday ? (
               <>
                 <Text
-                  className="text-lg text-foreground font-bold text-center"
+                  className="text-lg font-bold text-center"
+                  style={{ color: theme.foreground }}
                   numberOfLines={2}
                   ellipsizeMode="tail"
                 >
@@ -87,7 +99,8 @@ export function RestaurantWidget() {
                 </Text>
 
                 <Text
-                  className="text-foreground text-center"
+                  className="text-center"
+                  style={{ color: theme.foreground }}
                   numberOfLines={3}
                   ellipsizeMode="tail"
                 >
@@ -97,7 +110,8 @@ export function RestaurantWidget() {
             ) : (
               <>
                 <Text
-                  className="text-lg text-foreground font-bold text-center"
+                  className="text-lg font-bold text-center"
+                  style={{ color: theme.foreground }}
                   numberOfLines={2}
                   ellipsizeMode="tail"
                 >
@@ -105,7 +119,8 @@ export function RestaurantWidget() {
                 </Text>
 
                 <Text
-                  className="text-foreground text-center"
+                  className="text-center"
+                  style={{ color: theme.foreground }}
                   numberOfLines={3}
                   ellipsizeMode="tail"
                 >
@@ -130,10 +145,13 @@ export function RestaurantWidget() {
         menu &&
         (menu.accompSoir.length > 0 || menu.grilladesSoir.length > 0)) ? (
         <>
-          <Text className="h3 ml-4">{title}</Text>
+          <Text style={{ color: theme.foreground }} className="h3 ml-4">
+            {title}
+          </Text>
           <TouchableOpacity
             onPress={() => navigation.navigate("Restaurant")}
-            className="px-6 py-4 rounded-lg bg-card flex flex-col gap-6"
+            style={{ backgroundColor: theme.card }}
+            className="px-6 py-4 rounded-lg flex flex-col gap-6"
           >
             {lunch ? (
               <>
@@ -142,7 +160,8 @@ export function RestaurantWidget() {
                     <View className="flex flex-row items-center gap-2">
                       <Beef color={theme.primary} />
                       <Text
-                        className="text-lg font-bold text-primary"
+                        style={{ color: theme.primary }}
+                        className="text-lg font-bold"
                         ellipsizeMode="tail"
                       >
                         {t("services.restaurant.grill")}
@@ -150,7 +169,7 @@ export function RestaurantWidget() {
                     </View>
 
                     {menu.grilladesMidi.map((item) => (
-                      <Text key={item} className="text-foreground">
+                      <Text key={item} style={{ color: theme.foreground }}>
                         {item}
                       </Text>
                     ))}
@@ -162,7 +181,8 @@ export function RestaurantWidget() {
                     <View className="flex flex-row items-center gap-2">
                       <ChefHat color={theme.primary} />
                       <Text
-                        className="text-lg font-bold text-primary"
+                        style={{ color: theme.primary }}
+                        className="text-lg font-bold"
                         ellipsizeMode="tail"
                       >
                         {t("services.restaurant.migrator")}
@@ -170,7 +190,7 @@ export function RestaurantWidget() {
                     </View>
 
                     {menu.migrateurs.map((item) => (
-                      <Text key={item} className="text-foreground">
+                      <Text key={item} style={{ color: theme.foreground }}>
                         {item}
                       </Text>
                     ))}
@@ -182,7 +202,8 @@ export function RestaurantWidget() {
                     <View className="flex flex-row items-center gap-2">
                       <Vegan color={theme.primary} />
                       <Text
-                        className="text-lg font-bold text-primary"
+                        style={{ color: theme.primary }}
+                        className="text-lg font-bold"
                         ellipsizeMode="tail"
                       >
                         {t("services.restaurant.vegetarian")}
@@ -190,7 +211,7 @@ export function RestaurantWidget() {
                     </View>
 
                     {menu.cibo.map((item) => (
-                      <Text key={item} className="text-foreground">
+                      <Text key={item} style={{ color: theme.foreground }}>
                         {item}
                       </Text>
                     ))}
@@ -202,7 +223,8 @@ export function RestaurantWidget() {
                     <View className="flex flex-row items-center gap-2">
                       <Soup color={theme.primary} />
                       <Text
-                        className="text-lg font-bold text-primary"
+                        style={{ color: theme.primary }}
+                        className="text-lg font-bold"
                         ellipsizeMode="tail"
                       >
                         {t("services.restaurant.sideDishes")}
@@ -210,7 +232,7 @@ export function RestaurantWidget() {
                     </View>
 
                     {menu.accompMidi.map((item) => (
-                      <Text key={item} className="text-foreground">
+                      <Text key={item} style={{ color: theme.foreground }}>
                         {item}
                       </Text>
                     ))}
@@ -224,7 +246,8 @@ export function RestaurantWidget() {
                     <View className="flex flex-row items-center gap-2">
                       <Beef color={theme.primary} />
                       <Text
-                        className="text-lg font-bold text-primary"
+                        style={{ color: theme.primary }}
+                        className="text-lg font-bold"
                         ellipsizeMode="tail"
                       >
                         {t("services.restaurant.grill")}
@@ -232,7 +255,7 @@ export function RestaurantWidget() {
                     </View>
 
                     {menu.grilladesSoir.map((item) => (
-                      <Text key={item} className="text-foreground">
+                      <Text key={item} style={{ color: theme.foreground }}>
                         {item}
                       </Text>
                     ))}
@@ -244,7 +267,8 @@ export function RestaurantWidget() {
                     <View className="flex flex-row items-center gap-2">
                       <Soup color={theme.primary} />
                       <Text
-                        className="text-lg font-bold text-primary"
+                        style={{ color: theme.primary }}
+                        className="text-lg font-bold"
                         ellipsizeMode="tail"
                       >
                         {t("services.restaurant.sideDishes")}
@@ -252,7 +276,7 @@ export function RestaurantWidget() {
                     </View>
 
                     {menu.accompSoir.map((item) => (
-                      <Text key={item} className="text-foreground">
+                      <Text key={item} style={{ color: theme.foreground }}>
                         {item}
                       </Text>
                     ))}
@@ -281,13 +305,15 @@ export const RestaurantWidgetLoading = () => {
       <TextSkeleton lines={1} lastLineWidth={128} />
       <TouchableOpacity
         onPress={() => navigation.navigate("Restaurant")}
-        className="px-6 py-4 rounded-lg bg-card flex flex-col gap-6"
+        style={{ backgroundColor: theme.card }}
+        className="px-6 py-4 rounded-lg flex flex-col gap-6"
       >
         <View className="flex flex-col gap-2">
           <View className="flex flex-row items-center gap-2">
             <Beef color={theme.primary} />
             <Text
-              className="text-lg font-bold text-primary"
+              style={{ color: theme.primary }}
+              className="text-lg font-bold"
               ellipsizeMode="tail"
             >
               {t("services.restaurant.grill")}
@@ -303,7 +329,8 @@ export const RestaurantWidgetLoading = () => {
           <View className="flex flex-row items-center gap-2">
             <ChefHat color={theme.primary} />
             <Text
-              className="text-lg font-bold text-primary"
+              style={{ color: theme.primary }}
+              className="text-lg font-bold"
               ellipsizeMode="tail"
             >
               {t("services.restaurant.migrator")}
@@ -319,7 +346,8 @@ export const RestaurantWidgetLoading = () => {
           <View className="flex flex-row items-center gap-2">
             <Vegan color={theme.primary} />
             <Text
-              className="text-lg font-bold text-primary"
+              style={{ color: theme.primary }}
+              className="text-lg font-bold"
               ellipsizeMode="tail"
             >
               {t("services.restaurant.vegetarian")}
@@ -335,7 +363,8 @@ export const RestaurantWidgetLoading = () => {
           <View className="flex flex-row items-center gap-2">
             <Soup color={theme.primary} />
             <Text
-              className="text-lg font-bold text-primary"
+              style={{ color: theme.primary }}
+              className="text-lg font-bold"
               ellipsizeMode="tail"
             >
               {t("services.restaurant.sideDishes")}

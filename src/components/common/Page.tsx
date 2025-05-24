@@ -114,12 +114,12 @@ export default function Page({
           <View className="flex flex-row items-center justify-center">
             {goBack && (
               <ArrowLeft
-                color={theme.foreground}
+                color={theme.text}
                 onPress={() => navigation.goBack()}
               />
             )}
             {title && (
-              <Text className="h1 ml-4" style={{ color: theme.foreground }}>
+              <Text className="h1 ml-4" style={{ color: theme.text }}>
                 {title}
                 {newfName && (
                   <Text style={{ color: theme.primary }}> {newfName}</Text>
@@ -167,7 +167,7 @@ export default function Page({
             origin={{ x: screenWidth / 2, y: screenHeight - 200 }}
             autoStart={false}
             fadeOut={false}
-            colors={[theme.primary, theme.secondary, theme.foreground]}
+            colors={[theme.primary, theme.secondary, theme.text]}
             explosionSpeed={400}
             fallSpeed={4000}
             autoStartDelay={-1}

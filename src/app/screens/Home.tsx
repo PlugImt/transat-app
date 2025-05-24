@@ -290,7 +290,7 @@ export const Home = () => {
                   marginTop: 50,
                 }}
               >
-                <Text style={{ fontSize: 16, color: theme.foreground }}>
+                <Text style={{ fontSize: 16, color: theme.text }}>
                   {t("common.noWidgetsEnabled")}
                 </Text>
                 <Button

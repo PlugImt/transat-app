@@ -48,7 +48,7 @@ export function RestaurantWidget() {
   if (error || weekend || outOfHours || (!lunch && !dinner) || !updatedToday) {
     return (
       <View className="flex flex-col gap-2">
-        <Text style={{ color: theme.foreground }} className="h3 ml-4">
+        <Text style={{ color: theme.text }} className="h3 ml-4">
           {t("services.restaurant.title")}
         </Text>
         <View
@@ -67,7 +67,7 @@ export function RestaurantWidget() {
               <>
                 <Text
                   className="text-lg font-bold text-center"
-                  style={{ color: theme.foreground }}
+                  style={{ color: theme.text }}
                   numberOfLines={2}
                   ellipsizeMode="tail"
                 >
@@ -76,7 +76,7 @@ export function RestaurantWidget() {
 
                 <Text
                   className="text-center"
-                  style={{ color: theme.foreground }}
+                  style={{ color: theme.text }}
                   numberOfLines={3}
                   ellipsizeMode="tail"
                 >
@@ -87,7 +87,7 @@ export function RestaurantWidget() {
               <>
                 <Text
                   className="text-lg font-bold text-center"
-                  style={{ color: theme.foreground }}
+                  style={{ color: theme.text }}
                   numberOfLines={2}
                   ellipsizeMode="tail"
                 >
@@ -96,7 +96,7 @@ export function RestaurantWidget() {
 
                 <Text
                   className="text-center"
-                  style={{ color: theme.foreground }}
+                  style={{ color: theme.text }}
                   numberOfLines={3}
                   ellipsizeMode="tail"
                 >
@@ -107,7 +107,7 @@ export function RestaurantWidget() {
               <>
                 <Text
                   className="text-lg font-bold text-center"
-                  style={{ color: theme.foreground }}
+                  style={{ color: theme.text }}
                   numberOfLines={2}
                   ellipsizeMode="tail"
                 >
@@ -116,7 +116,7 @@ export function RestaurantWidget() {
 
                 <Text
                   className="text-center"
-                  style={{ color: theme.foreground }}
+                  style={{ color: theme.text }}
                   numberOfLines={3}
                   ellipsizeMode="tail"
                 >
@@ -141,7 +141,7 @@ export function RestaurantWidget() {
         menu &&
         (menu.accompSoir.length > 0 || menu.grilladesSoir.length > 0)) ? (
         <>
-          <Text style={{ color: theme.foreground }} className="h3 ml-4">
+          <Text style={{ color: theme.text }} className="h3 ml-4">
             {title}
           </Text>
           <TouchableOpacity
@@ -165,7 +165,7 @@ export function RestaurantWidget() {
                     </View>
 
                     {menu.grilladesMidi.map((item) => (
-                      <Text key={item} style={{ color: theme.foreground }}>
+                      <Text key={item} style={{ color: theme.text }}>
                         {item}
                       </Text>
                     ))}
@@ -186,7 +186,7 @@ export function RestaurantWidget() {
                     </View>
 
                     {menu.migrateurs.map((item) => (
-                      <Text key={item} style={{ color: theme.foreground }}>
+                      <Text key={item} style={{ color: theme.text }}>
                         {item}
                       </Text>
                     ))}
@@ -207,7 +207,7 @@ export function RestaurantWidget() {
                     </View>
 
                     {menu.cibo.map((item) => (
-                      <Text key={item} style={{ color: theme.foreground }}>
+                      <Text key={item} style={{ color: theme.text }}>
                         {item}
                       </Text>
                     ))}
@@ -228,7 +228,7 @@ export function RestaurantWidget() {
                     </View>
 
                     {menu.accompMidi.map((item) => (
-                      <Text key={item} style={{ color: theme.foreground }}>
+                      <Text key={item} style={{ color: theme.text }}>
                         {item}
                       </Text>
                     ))}
@@ -251,7 +251,7 @@ export function RestaurantWidget() {
                     </View>
 
                     {menu.grilladesSoir.map((item) => (
-                      <Text key={item} style={{ color: theme.foreground }}>
+                      <Text key={item} style={{ color: theme.text }}>
                         {item}
                       </Text>
                     ))}
@@ -272,7 +272,7 @@ export function RestaurantWidget() {
                     </View>
 
                     {menu.accompSoir.map((item) => (
-                      <Text key={item} style={{ color: theme.foreground }}>
+                      <Text key={item} style={{ color: theme.text }}>
                         {item}
                       </Text>
                     ))}

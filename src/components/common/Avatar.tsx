@@ -74,7 +74,7 @@ const AvatarFallback = forwardRef<
       {...props}
     >
       <Text
-        style={{ color: theme.foreground }}
+        style={{ color: theme.text }}
         className={cn("text-4xl font-bold", textClassname)}
       >
         {children}

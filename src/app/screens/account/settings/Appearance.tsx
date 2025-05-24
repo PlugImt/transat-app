@@ -23,19 +23,19 @@ export const Appearance = () => {
         "settings.appearance.systemDescription",
         "Follow system setting",
       ),
-      icon: <Smartphone color={theme.foreground} size={24} />,
+      icon: <Smartphone color={theme.text} size={24} />,
     },
     {
       mode: "light",
       title: t("settings.appearance.light", "Light"),
       description: t("settings.appearance.lightDescription", "Light theme"),
-      icon: <Sun color={theme.foreground} size={24} />,
+      icon: <Sun color={theme.text} size={24} />,
     },
     {
       mode: "dark",
       title: t("settings.appearance.dark", "Dark"),
       description: t("settings.appearance.darkDescription", "Dark theme"),
-      icon: <Moon color={theme.foreground} size={24} />,
+      icon: <Moon color={theme.text} size={24} />,
     },
   ];
 
@@ -50,7 +50,7 @@ export const Appearance = () => {
       className="gap-6"
     >
       <View className="gap-2">
-        <Text className="h3 ml-4" style={{ color: theme.foreground }}>
+        <Text className="h3 ml-4" style={{ color: theme.text }}>
           {t("settings.appearance.theme", "Theme")}
         </Text>
         <View
@@ -71,7 +71,7 @@ export const Appearance = () => {
                 <View className="mr-3">{option.icon}</View>
                 <View className="flex-1">
                   <Text
-                    style={{ color: theme.foreground }}
+                    style={{ color: theme.text }}
                     className="font-medium text-base"
                   >
                     {option.title}
@@ -90,7 +90,7 @@ export const Appearance = () => {
       </View>
 
       <View className="gap-2">
-        <Text className="h3 ml-4" style={{ color: theme.foreground }}>
+        <Text className="h3 ml-4" style={{ color: theme.text }}>
           {t("settings.appearance.preview", "Preview")}
         </Text>
         <View
@@ -98,7 +98,7 @@ export const Appearance = () => {
           className="rounded-lg p-4"
         >
           <View className="flex-row items-center justify-between mb-3">
-            <Text style={{ color: theme.foreground }} className="font-semibold">
+            <Text style={{ color: theme.text }} className="font-semibold">
               {t("settings.appearance.sampleCard", "Sample Card")}
             </Text>
             <View className="bg-primary rounded-full w-8 h-8" />

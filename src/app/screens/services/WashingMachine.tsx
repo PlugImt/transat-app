@@ -48,7 +48,7 @@ export const WashingMachine: FC = () => {
       <Page goBack refreshing={isPending} onRefresh={refetch}>
         <Text className="h1 m-4">{t("services.washingMachine.title")}</Text>
         <View className="min-h-screen flex justify-center items-center ">
-          <Text style={{ color: theme.foreground }} className="text-center h1">
+          <Text style={{ color: theme.text }} className="text-center h1">
             {t("services.washingMachine.noMachine")}
           </Text>
         </View>
@@ -87,7 +87,7 @@ export const WashingMachine: FC = () => {
       {washingMachines?.length > 0 && (
         <View className="flex-col gap-4">
           <Text
-            style={{ color: theme.foreground }}
+            style={{ color: theme.text }}
             className="text-xl font-bold ml-4"
           >
             {t("services.washingMachine.washingMachine")}
@@ -109,7 +109,7 @@ export const WashingMachine: FC = () => {
       {dryers?.length > 0 && (
         <View className="flex-col gap-4">
           <Text
-            style={{ color: theme.foreground }}
+            style={{ color: theme.text }}
             className="text-xl font-bold ml-4"
           >
             {t("services.washingMachine.dryer")}
@@ -157,7 +157,7 @@ const WashingMachineLoading = () => {
       }
     >
       <View className="flex-col gap-4">
-        <Text style={{ color: theme.foreground }} className="text-xl font-bold">
+        <Text style={{ color: theme.text }} className="text-xl font-bold">
           {t("services.washingMachine.washingMachine")}
         </Text>
         {[...Array(nbMachines).keys()].map((index) => (
@@ -166,7 +166,7 @@ const WashingMachineLoading = () => {
       </View>
 
       <View className="flex-col gap-4">
-        <Text style={{ color: theme.foreground }} className="text-xl font-bold">
+        <Text style={{ color: theme.text }} className="text-xl font-bold">
           {t("services.washingMachine.dryer")}
         </Text>
         {[...Array(nbMachines).keys()].map((index) => (

@@ -25,10 +25,10 @@ export const SettingsItem = ({
       <View className="flex-row items-center gap-3">
         {icon}
         <View className="ml-2.5">
-          <Text style={{ color: theme.foreground }}>{title}</Text>
+          <Text style={{ color: theme.text }}>{title}</Text>
           {subtitle && (
             <Text
-              style={{ color: theme.foregroundSecondary }}
+              style={{ color: theme.textSecondary }}
               className="text-sm break-words"
             >
               {subtitle}

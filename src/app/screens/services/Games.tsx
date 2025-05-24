@@ -10,13 +10,10 @@ export const Games = () => {
   return (
     <Page title={t("games.title")}>
       <View className="min-h-screen flex justify-center items-center ">
-        <Text
-          className="text-center h1 -mt-60"
-          style={{ color: theme.foreground }}
-        >
+        <Text className="text-center h1 -mt-60" style={{ color: theme.text }}>
           {t("common.underConstruction")}
         </Text>
-        <Text className="text-center p-2.5" style={{ color: theme.foreground }}>
+        <Text className="text-center p-2.5" style={{ color: theme.text }}>
           {t("common.underConstructionDesc")}
         </Text>
       </View>

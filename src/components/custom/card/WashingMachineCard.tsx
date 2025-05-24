@@ -357,7 +357,7 @@ const WashingMachineCard = ({
         <View className="flex-row items-center gap-2">
           {getIcon(icon, theme.primary)}
           <Text
-            style={{ color: theme.foreground }}
+            style={{ color: theme.text }}
             className="font-bold"
             numberOfLines={1}
           >
@@ -366,7 +366,7 @@ const WashingMachineCard = ({
         </View>
 
         <Text
-          style={{ color: theme.foreground }}
+          style={{ color: theme.text }}
           className="flex-1"
           ellipsizeMode="tail"
           numberOfLines={1}
@@ -404,7 +404,7 @@ const WashingMachineCard = ({
             confirmLabel={t("settings.notifications.setNotification")}
             onConfirm={handleSetNotification}
           >
-            <Text style={{ color: theme.foreground }}>
+            <Text style={{ color: theme.text }}>
               {t("services.washingMachine.getNotificationDesc", {
                 type: type.toLowerCase(),
                 minutes: MINUTES_BEFORE_NOTIFICATION,

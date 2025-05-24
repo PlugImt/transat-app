@@ -86,12 +86,12 @@ export const VerificationCodeModal: React.FC<VerificationCodeModalProps> = ({
           className="w-5/6 items-center rounded-lg p-5"
           style={{ backgroundColor: theme.card }}
         >
-          <Text className="h1" style={{ color: theme.foreground }}>
+          <Text className="h1" style={{ color: theme.text }}>
             {t("auth.verificationCode")}
           </Text>
           <Text
             className="mb-5 text-center text-l p-2"
-            style={{ color: theme.foreground }}
+            style={{ color: theme.text }}
           >
             {t("auth.enterVerificationCode")}
           </Text>
@@ -131,7 +131,7 @@ export const VerificationCodeModal: React.FC<VerificationCodeModalProps> = ({
               >
                 <Text
                   className="text-center text-2xl"
-                  style={{ color: theme.foreground }}
+                  style={{ color: theme.text }}
                 >
                   {symbol || (isFocused ? <Cursor /> : null)}
                 </Text>

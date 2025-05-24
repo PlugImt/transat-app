@@ -9,7 +9,7 @@ function Switch({
 
   const trackColor = props.trackColor || {
     false: theme.muted,
-    true: theme.foreground,
+    true: theme.text,
   };
   const thumbColor = props.thumbColor || theme.background;
   const ios_backgroundColor = props.ios_backgroundColor || theme.background;

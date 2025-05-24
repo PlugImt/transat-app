@@ -16,10 +16,7 @@ export default function Divider({ label, className }: DividerProps) {
           style={{ backgroundColor: theme.border }}
           className="h-px rounded-full flex-1"
         />
-        <Text
-          style={{ color: theme.foregroundSecondary }}
-          className="text-sm mx-3"
-        >
+        <Text style={{ color: theme.textSecondary }} className="text-sm mx-3">
           {label}
         </Text>
         <View

@@ -34,10 +34,10 @@ export const AccountCard = ({ user }: Props) => {
           </AvatarFallback>
         </Avatar>
         <View className="flex-1">
-          <Text className="h3" style={{ color: theme.foreground }}>
+          <Text className="h3" style={{ color: theme.text }}>
             {`${user.first_name} ${user.last_name}`}
           </Text>
-          <Text style={{ color: theme.foregroundSecondary }}>{user.email}</Text>
+          <Text style={{ color: theme.textSecondary }}>{user.email}</Text>
         </View>
         <Button
           label={t("common.edit")}

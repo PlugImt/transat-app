@@ -94,7 +94,7 @@ function DialogContent({
             }}
             className="border rounded-lg p-6 shadow-lg w-11/12 max-h-[80%] gap-8"
           >
-            <Text className="h2" style={{ color: theme.foreground }}>
+            <Text className="h2" style={{ color: theme.text }}>
               {title}
             </Text>
             <ScrollView keyboardShouldPersistTaps="handled">

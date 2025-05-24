@@ -49,7 +49,7 @@ const RestaurantCard = ({ title, meals, icon }: CardProps) => {
 
       <View className="flex flex-col gap-4">
         {meals.map((item) => (
-          <Text key={item} style={{ color: theme.foreground }}>
+          <Text key={item} style={{ color: theme.text }}>
             {item}
           </Text>
         ))}

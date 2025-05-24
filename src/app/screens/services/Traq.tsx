@@ -99,7 +99,7 @@ export const Traq = () => {
       }
     >
       <View className="flex-row justify-between items-center ml-4">
-        <Text className="h2" style={{ color: theme.foreground }}>
+        <Text className="h2" style={{ color: theme.text }}>
           {t("common.filter")}
         </Text>
         {selectedTags.length > 0 && (

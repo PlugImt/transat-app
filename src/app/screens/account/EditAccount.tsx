@@ -164,7 +164,7 @@ export const EditProfile = () => {
             className="absolute bottom-0 right-0 bg-muted p-2 rounded-full"
             onPress={handleUpdateProfilePicture}
           >
-            <Edit color={theme.foreground} size={16} />
+            <Edit color={theme.text} size={16} />
           </TouchableOpacity>
         </TouchableOpacity>
       </View>
@@ -173,7 +173,7 @@ export const EditProfile = () => {
         className=" rounded-lg px-6 py-4 gap-4"
         style={{ backgroundColor: theme.card }}
       >
-        <Text className="h3" style={{ color: theme.foreground }}>
+        <Text className="h3" style={{ color: theme.text }}>
           {t("account.personalInfo")}
         </Text>
 
@@ -219,7 +219,7 @@ export const EditProfile = () => {
             <Dropdown
               label={t("account.graduationYear")}
               placeholder={t("account.selectGraduationYear")}
-              icon={<GraduationCap color={theme.foreground} size={20} />}
+              icon={<GraduationCap color={theme.text} size={20} />}
               options={yearOptions}
               value={value ? value.toString() : undefined}
               onValueChange={(value) => onChange(Number(value))}
@@ -231,11 +231,9 @@ export const EditProfile = () => {
       <Button
         label={t("common.cancel")}
         onPress={() => navigation.goBack()}
-        size="lg"
-        variant="ghost"
+        variant="outlined"
       />
       <Button
-        size="lg"
         label={t("common.save")}
         onPress={handleUserSubmit(handleUpdateAccount)}
         loading={isUpdatingAccount}
@@ -275,7 +273,7 @@ const EditProfileLoading = () => {
         className=" rounded-lg px-6 py-4 gap-4"
         style={{ backgroundColor: theme.card }}
       >
-        <Text className="h3" style={{ color: theme.foreground }}>
+        <Text className="h3" style={{ color: theme.text }}>
           {t("account.personalInfo")}
         </Text>
 
@@ -287,7 +285,7 @@ const EditProfileLoading = () => {
         <DropdownLoading
           label={t("account.graduationYear")}
           placeholder={t("account.selectGraduationYear")}
-          icon={<GraduationCap color={theme.foreground} size={20} />}
+          icon={<GraduationCap color={theme.text} size={20} />}
         />
       </View>
 

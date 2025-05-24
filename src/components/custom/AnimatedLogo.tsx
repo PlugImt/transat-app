@@ -60,14 +60,14 @@ export const AnimatedLogo = ({
           Transat
         </Text>
         {showSubtitle && (
-          <Text className="h3 text-center" style={{ color: theme.foreground }}>
+          <Text className="h3 text-center" style={{ color: theme.text }}>
             {t("welcome.subtitle")}
           </Text>
         )}
         {showCampusApp && (
           <Text
             className="text-center mb-4"
-            style={{ color: theme.foregroundSecondary }}
+            style={{ color: theme.textSecondary }}
           >
             {t("common.campusApp")}
           </Text>

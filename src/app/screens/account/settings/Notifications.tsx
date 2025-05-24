@@ -34,7 +34,7 @@ export const Notifications = () => {
       title={t("settings.notifications.notifications")}
     >
       <View className="gap-2">
-        <Text className="h2 mx-4" style={{ color: theme.foreground }}>
+        <Text className="h2 mx-4" style={{ color: theme.text }}>
           {t("services.title")}
         </Text>
         <View
@@ -43,13 +43,10 @@ export const Notifications = () => {
         >
           <View className="flex-row justify-between gap-4 items-center">
             <View className="gap-1 flex-1">
-              <Text style={{ color: theme.foreground }}>
+              <Text style={{ color: theme.text }}>
                 {t("services.restaurant.title")}
               </Text>
-              <Text
-                style={{ color: theme.foregroundSecondary }}
-                className="text-sm"
-              >
+              <Text style={{ color: theme.textSecondary }} className="text-sm">
                 {t("settings.notifications.toggleRestaurant")}
               </Text>
             </View>
@@ -62,13 +59,10 @@ export const Notifications = () => {
           <Divider />
           <View className="flex-row justify-between gap-4 items-center">
             <View className="gap-1 flex-1">
-              <Text style={{ color: theme.foreground }}>
+              <Text style={{ color: theme.text }}>
                 {t("services.traq.title")}
               </Text>
-              <Text
-                style={{ color: theme.foregroundSecondary }}
-                className="text-sm"
-              >
+              <Text style={{ color: theme.textSecondary }} className="text-sm">
                 {t("settings.notifications.toggleTraq")}
               </Text>
             </View>

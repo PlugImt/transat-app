@@ -15,22 +15,22 @@ module.exports = {
         border: colors.light.muted,
         input: colors.light.input,
         background: colors.light.background,
-        foreground: colors.light.foreground,
+        foreground: colors.light.text,
         primary: {
           DEFAULT: colors.light.primary,
-          foreground: colors.light.foreground,
+          foreground: colors.light.text,
         },
         secondary: {
           DEFAULT: colors.light.secondary,
-          foreground: colors.light.foreground,
+          foreground: colors.light.text,
         },
         card: {
           DEFAULT: colors.light.card,
-          foreground: colors.light.foreground,
+          foreground: colors.light.text,
         },
         lightCard: {
           DEFAULT: colors.light.card,
-          foreground: colors.light.foreground,
+          foreground: colors.light.text,
         },
         ...colors.shared,
         muted: {

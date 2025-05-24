@@ -75,7 +75,7 @@ const Card = ({ title, description, image, width, onPress }: CardProps) => {
               fontSize: 18,
               fontWeight: "600",
               marginBottom: 4,
-              color: theme.foreground,
+              color: theme.text,
             }}
           >
             {title}

@@ -14,9 +14,9 @@ export type ThemeMode = "system" | "light" | "dark";
 
 type ThemeType = {
   background: string;
-  foreground: string;
-  foregroundSecondary: string;
-  foregroundTertiary: string;
+  text: string;
+  textSecondary: string;
+  textTertiary: string;
   foregroundPlaceholder: string;
   card: string;
   primary: string;
@@ -84,7 +84,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
       }
     };
 
-    loadThemePreference();
+    loadThemePreference().then(r => r);
   }, []);
 
   // Save theme preference to storage

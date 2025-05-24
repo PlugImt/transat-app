@@ -66,7 +66,7 @@ export function WashingMachineWidget() {
 
   return (
     <View className="flex flex-col gap-2">
-      <Text className="h3 ml-4" style={{ color: theme.foreground }}>
+      <Text className="h3 ml-4" style={{ color: theme.text }}>
         {t("services.washingMachine.title")}
       </Text>
       <TouchableOpacity
@@ -82,14 +82,11 @@ export function WashingMachineWidget() {
             size={40}
             color={availableWashers === 0 ? theme.muted : theme.primary}
           />
-          <Text
-            style={{ color: theme.foreground }}
-            className="text-lg font-bold"
-          >
+          <Text style={{ color: theme.text }} className="text-lg font-bold">
             {availableWashers}/{totalWashers}
           </Text>
           <Text
-            style={{ color: theme.foreground }}
+            style={{ color: theme.text }}
             className="flex-1 text-center"
             ellipsizeMode="tail"
             numberOfLines={2}
@@ -105,14 +102,11 @@ export function WashingMachineWidget() {
             size={40}
             color={availableDryers === 0 ? theme.muted : theme.primary}
           />
-          <Text
-            style={{ color: theme.foreground }}
-            className="text-lg font-bold"
-          >
+          <Text style={{ color: theme.text }} className="text-lg font-bold">
             {availableDryers}/{totalDryers}
           </Text>
           <Text
-            style={{ color: theme.foreground }}
+            style={{ color: theme.text }}
             className="flex-1 text-center"
             ellipsizeMode="tail"
             numberOfLines={2}
@@ -145,7 +139,7 @@ export const WashingMachineWidgetLoading = () => {
           <TextSkeleton variant="lg" lines={1} lastLineWidth={32} />
 
           <Text
-            style={{ color: theme.foreground }}
+            style={{ color: theme.text }}
             className="flex-1 text-center"
             ellipsizeMode="tail"
             numberOfLines={1}
@@ -157,7 +151,7 @@ export const WashingMachineWidgetLoading = () => {
           <Wind size={40} color={theme.muted} />
           <TextSkeleton variant="lg" lines={1} lastLineWidth={32} />
           <Text
-            style={{ color: theme.foreground }}
+            style={{ color: theme.text }}
             className="flex-1 text-center"
             ellipsizeMode="tail"
             numberOfLines={1}

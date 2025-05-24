@@ -165,24 +165,23 @@ const WidgetCustomizationModal = ({
         }}
       >
         <View
-          className={`flex-row items-center justify-between p-4 rounded-lg mb-2 ${
-            item.enabled
-              ? { backgroundColor: theme.card }
-              : { backgroundColor: theme.card, opacity: 0.6 }
-          }`}
+          className="flex-row items-center justify-between p-4 rounded-lg mb-2"
+          style={{
+            backgroundColor: item.enabled ? theme.card : theme.backdrop,
+          }}
         >
           <View className="flex-row items-center flex-1">
             <Settings
               size={20}
-              color={theme.foreground}
+              color={theme.text}
               style={{ marginRight: 12 }}
             />
             <Text
-              className={`font-medium flex-1 ${
-                item.enabled
-                  ? { color: theme.foreground }
-                  : { color: theme.muted }
-              }`}
+              style={{
+                color: item.enabled ? theme.text : theme.textSecondary,
+                fontWeight: "500",
+                flex: 1,
+              }}
             >
               {getDisplayName(item)}
             </Text>
@@ -191,7 +190,7 @@ const WidgetCustomizationModal = ({
             <Switch
               value={item.enabled}
               onValueChange={() => toggleWidgetEnabled(item.id)}
-              trackColor={{ false: theme.muted, true: theme.primary }}
+              trackColor={{ false: theme.backdrop, true: theme.primary }}
               thumbColor={item.enabled ? theme.background : theme.muted}
             />
           </View>
@@ -215,24 +214,23 @@ const WidgetCustomizationModal = ({
         }}
       >
         <View
-          className={`flex-row items-center justify-between p-4 rounded-lg mb-2 ${
-            item.enabled
-              ? { backgroundColor: theme.card }
-              : { backgroundColor: theme.card, opacity: 0.6 }
-          }`}
+          className="flex-row items-center justify-between p-4 rounded-lg mb-2"
+          style={{
+            backgroundColor: item.enabled ? theme.card : theme.backdrop,
+          }}
         >
           <View className="flex-row items-center flex-1">
             <Settings
               size={20}
-              color={theme.foreground}
+              color={theme.text}
               style={{ marginRight: 12 }}
             />
             <Text
-              className={`font-medium flex-1 ${
-                item.enabled
-                  ? { color: theme.foreground }
-                  : { color: theme.muted }
-              }`}
+              style={{
+                color: item.enabled ? theme.text : theme.textSecondary,
+                fontWeight: "500",
+                flex: 1,
+              }}
             >
               {getDisplayName(item)}
             </Text>
@@ -243,19 +241,19 @@ const WidgetCustomizationModal = ({
               style={{
                 padding: 8,
                 borderRadius: 6,
-                backgroundColor: theme.muted,
+                backgroundColor: theme.textTertiary,
               }}
             >
               {item.size === "full" ? (
-                <Minimize size={16} color={theme.foreground} />
+                <Minimize size={16} color={theme.background} />
               ) : (
-                <Maximize size={16} color={theme.foreground} />
+                <Maximize size={16} color={theme.background} />
               )}
             </TouchableOpacity>
             <Switch
               value={item.enabled}
               onValueChange={() => toggleWidgetEnabled(item.id)}
-              trackColor={{ false: theme.muted, true: theme.primary }}
+              trackColor={{ false: theme.backdrop, true: theme.primary }}
               thumbColor={item.enabled ? theme.background : theme.muted}
             />
           </View>
@@ -285,9 +283,9 @@ const WidgetCustomizationModal = ({
         >
           <View className="flex-row justify-between items-center">
             {/*<TouchableOpacity onPress={onClose}>*/}
-            {/*  <X color={theme.foreground} size={24} />*/}
+            {/*  <X color={theme.text} size={24} />*/}
             {/*</TouchableOpacity>*/}
-            <Text className="h2" style={{ color: theme.foreground }}>
+            <Text className="h2" style={{ color: theme.text }}>
               {title}
             </Text>
             {/*<TouchableOpacity onPress={handleSave}>*/}
@@ -305,9 +303,7 @@ const WidgetCustomizationModal = ({
             backgroundColor: theme.background,
           }}
         >
-          <Text
-            style={{ color: theme.foreground, marginBottom: 16, fontSize: 16 }}
-          >
+          <Text style={{ color: theme.text, marginBottom: 16, fontSize: 16 }}>
             {t("common.customizeHint")}
           </Text>
 
@@ -336,17 +332,15 @@ const WidgetCustomizationModal = ({
 
         {/* Footer */}
         <View
-          className="p-5 border-t"
           style={{
-            borderColor: theme.muted,
+            padding: 20,
+            borderTopWidth: 1,
+            borderColor: theme.border,
             backgroundColor: theme.background,
+            gap: 12,
           }}
         >
-          <Button
-            label={t("common.save")}
-            onPress={handleSave}
-            className="mb-2"
-          />
+          <Button label={t("common.save")} onPress={handleSave} />
           <Button
             label={t("common.cancel")}
             variant="outlined"

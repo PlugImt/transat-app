@@ -52,7 +52,7 @@ const Help = () => {
 
   return (
     <Page goBack className="gap-6" title={t("settings.help.title")}>
-      <Text className="mx-4 mb-2" style={{ color: theme.foregroundSecondary }}>
+      <Text className="mx-4 mb-2" style={{ color: theme.textSecondary }}>
         {t("settings.help.description")}
       </Text>
 
@@ -78,10 +78,10 @@ const Help = () => {
                   className="flex-row justify-between items-center py-3"
                 >
                   <View className="flex-row items-center gap-2 flex-1">
-                    <HelpCircle size={20} color={theme.foreground} />
+                    <HelpCircle size={20} color={theme.text} />
                     <Text
                       className=" font-medium"
-                      style={{ color: theme.foreground }}
+                      style={{ color: theme.text }}
                     >
                       {faq.question}
                     </Text>
@@ -95,7 +95,7 @@ const Help = () => {
 
                 {expandedFaq === index && (
                   <View className="pl-8 pr-4 pb-2">
-                    <Text style={{ color: theme.foregroundSecondary }}>
+                    <Text style={{ color: theme.textSecondary }}>
                       {faq.answer}
                     </Text>
                   </View>
@@ -121,14 +121,14 @@ const Help = () => {
                 onPress={openWhatsApp}
               >
                 <View className="flex-row items-center gap-3">
-                  <SquareArrowOutUpRight size={22} color={theme.foreground} />
+                  <SquareArrowOutUpRight size={22} color={theme.text} />
                   <View className="ml-2.5">
-                    <Text style={{ color: theme.foreground }}>
+                    <Text style={{ color: theme.text }}>
                       {t("settings.help.joinWhatsApp")}
                     </Text>
                     <Text
                       className="text-sm break-words"
-                      style={{ color: theme.foregroundSecondary }}
+                      style={{ color: theme.textSecondary }}
                     >
                       {t("settings.help.joinCommunity")}
                     </Text>

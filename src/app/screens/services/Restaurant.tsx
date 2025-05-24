@@ -90,7 +90,7 @@ export const Restaurant = () => {
             source={require("@/assets/images/Logos/restaurant.png")}
             className="w-40 h-40 filter grayscale"
           />
-          <Text className="h1 text-center" style={{ color: theme.foreground }}>
+          <Text className="h1 text-center" style={{ color: theme.text }}>
             {weekend
               ? t("services.restaurant.closedWeekends")
               : t("services.restaurant.noData")}

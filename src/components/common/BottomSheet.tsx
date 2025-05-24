@@ -78,7 +78,7 @@ export function BottomSheet({ children }: { children: React.ReactNode }) {
     <BottomSheetModal
       ref={bottomSheetRef}
       backgroundStyle={{ backgroundColor: theme.card }}
-      handleIndicatorStyle={{ backgroundColor: theme.foreground }}
+      handleIndicatorStyle={{ backgroundColor: theme.text }}
       enableDismissOnClose
       enablePanDownToClose
       index={0}

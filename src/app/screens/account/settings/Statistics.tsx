@@ -219,8 +219,8 @@ export const Statistics = () => {
         <View className="flex flex-col gap-4">
           {/* Server Status Card */}
           <View className="flex-row items-center">
-            <Server color={theme.foreground} size={22} />
-            <Text className="h3 ml-2" style={{ color: theme.foreground }}>
+            <Server color={theme.text} size={22} />
+            <Text className="h3 ml-2" style={{ color: theme.text }}>
               {t("statistics.serverStatus", "Server Status")}
             </Text>
           </View>
@@ -237,7 +237,7 @@ export const Statistics = () => {
                       : "bg-red-500"
                   }`}
                 />
-                <Text style={{ color: theme.foreground }}>
+                <Text style={{ color: theme.text }}>
                   {serverStatus.status === "online"
                     ? t("statistics.online", "Online")
                     : t("statistics.offline", "Offline")}
@@ -249,28 +249,22 @@ export const Statistics = () => {
               <View>
                 <Text
                   className="text-sm"
-                  style={{ color: theme.foregroundSecondary }}
+                  style={{ color: theme.textSecondary }}
                 >
                   {t("statistics.latency", "Latency")}
                 </Text>
-                <Text
-                  className="font-medium"
-                  style={{ color: theme.foreground }}
-                >
+                <Text className="font-medium" style={{ color: theme.text }}>
                   {serverStatus.latency} ms
                 </Text>
               </View>
               <View>
                 <Text
                   className=" text-sm"
-                  style={{ color: theme.foregroundSecondary }}
+                  style={{ color: theme.textSecondary }}
                 >
                   {t("statistics.lastChecked", "Last Checked")}
                 </Text>
-                <Text
-                  className=" font-medium"
-                  style={{ color: theme.foreground }}
-                >
+                <Text className=" font-medium" style={{ color: theme.text }}>
                   {formatDate(serverStatus.timestamp)}
                 </Text>
               </View>
@@ -291,7 +285,7 @@ export const Statistics = () => {
               style={{ backgroundColor: theme.card }}
             >
               <Activity size={32} color={theme.primary} className="mb-4" />
-              <Text style={{ color: theme.foregroundSecondary }}>
+              <Text style={{ color: theme.textSecondary }}>
                 {t("statistics.loading", "Loading statistics...")}
               </Text>
             </View>
@@ -299,7 +293,7 @@ export const Statistics = () => {
             globalStats && (
               <>
                 {/* Global Stats Card */}
-                <Text className="h3 ml-4" style={{ color: theme.foreground }}>
+                <Text className="h3 ml-4" style={{ color: theme.text }}>
                   {t("statistics.globalStats", "Global Statistics")}
                 </Text>
 
@@ -311,7 +305,7 @@ export const Statistics = () => {
                     <View className="w-[48%] bg-background/20 rounded-lg p-3 mb-2">
                       <Text
                         className=" text-xs"
-                        style={{ color: theme.foregroundSecondary }}
+                        style={{ color: theme.textSecondary }}
                       >
                         {t("statistics.totalRequests", "Total Requests")}
                       </Text>
@@ -326,7 +320,7 @@ export const Statistics = () => {
                     <View className="w-[48%] bg-background/20 rounded-lg p-3 mb-2">
                       <Text
                         className=" text-xs"
-                        style={{ color: theme.foregroundSecondary }}
+                        style={{ color: theme.textSecondary }}
                       >
                         {t("statistics.successRate", "Success Rate")}
                       </Text>
@@ -346,7 +340,7 @@ export const Statistics = () => {
                     <View className="w-[48%] bg-background/20 rounded-lg p-3 mb-2">
                       <Text
                         className=" text-xs"
-                        style={{ color: theme.foregroundSecondary }}
+                        style={{ color: theme.textSecondary }}
                       >
                         {t("statistics.avgResponseTime", "Avg Response Time")}
                       </Text>
@@ -357,7 +351,7 @@ export const Statistics = () => {
                         {globalStats.global_avg_duration_ms.toFixed(1)}{" "}
                         <Text
                           className="text-xs  "
-                          style={{ color: theme.foregroundSecondary }}
+                          style={{ color: theme.textSecondary }}
                         >
                           ms
                         </Text>
@@ -367,7 +361,7 @@ export const Statistics = () => {
                     <View className="w-[48%] bg-background/20 rounded-lg p-3 mb-2">
                       <Text
                         className=" text-xs"
-                        style={{ color: theme.foregroundSecondary }}
+                        style={{ color: theme.textSecondary }}
                       >
                         {t("statistics.maxResponseTime", "Max Response Time")}
                       </Text>
@@ -381,7 +375,7 @@ export const Statistics = () => {
                         {globalStats.global_max_duration_ms}{" "}
                         <Text
                           className="text-xs  "
-                          style={{ color: theme.foregroundSecondary }}
+                          style={{ color: theme.textSecondary }}
                         >
                           ms
                         </Text>
@@ -391,7 +385,7 @@ export const Statistics = () => {
 
                   <View className="flex-row justify-between mb-4">
                     <View className="w-[48%] bg-background/20 rounded-lg p-3">
-                      <Text style={{ color: theme.foregroundSecondary }}>
+                      <Text style={{ color: theme.textSecondary }}>
                         {t(
                           "statistics.successfulRequests",
                           "Successful Requests",
@@ -403,7 +397,7 @@ export const Statistics = () => {
                     </View>
 
                     <View className="w-[48%] bg-background/20 rounded-lg p-3">
-                      <Text style={{ color: theme.foregroundSecondary }}>
+                      <Text style={{ color: theme.textSecondary }}>
                         {t("statistics.errorRequests", "Error Requests")}
                       </Text>
                       <Text className="text-red-500 text-xl font-bold">
@@ -416,11 +410,11 @@ export const Statistics = () => {
                   <View className="items-center mt-4">
                     <Text
                       className=" text-xs mb-1"
-                      style={{ color: theme.foregroundSecondary }}
+                      style={{ color: theme.textSecondary }}
                     >
                       {t("statistics.firstRequest", "First Request")}
                     </Text>
-                    <Text style={{ color: theme.foreground }}>
+                    <Text style={{ color: theme.text }}>
                       {formatDate(globalStats.first_request)}
                     </Text>
                   </View>
@@ -430,11 +424,8 @@ export const Statistics = () => {
                 {topUsers.length > 0 && (
                   <>
                     <View className="flex-row items-center mb-4">
-                      <Users color={theme.foreground} size={22} />
-                      <Text
-                        className="h3 ml-2 "
-                        style={{ color: theme.foreground }}
-                      >
+                      <Users color={theme.text} size={22} />
+                      <Text className="h3 ml-2 " style={{ color: theme.text }}>
                         {t("statistics.topUsers.title", "Top 10 Users")}
                       </Text>
                     </View>
@@ -457,14 +448,14 @@ export const Statistics = () => {
                               </Text>
                               <Text
                                 className=" font-medium"
-                                style={{ color: theme.foreground }}
+                                style={{ color: theme.text }}
                               >
                                 {formatEmail(user.email)}
                               </Text>
                             </View>
                             <Text
                               className=" font-bold"
-                              style={{ color: theme.foreground }}
+                              style={{ color: theme.text }}
                             >
                               {user.request_count}{" "}
                               {t("statistics.topUsers.requests", "requests")}
@@ -473,23 +464,19 @@ export const Statistics = () => {
 
                           <View className="flex-row justify-between mb-2">
                             <View>
-                              <Text
-                                style={{ color: theme.foregroundSecondary }}
-                              >
+                              <Text style={{ color: theme.textSecondary }}>
                                 {t(
                                   "statistics.topUsers.avgTime",
                                   "Avg Response Time",
                                 )}
                               </Text>
-                              <Text style={{ color: theme.foreground }}>
+                              <Text style={{ color: theme.text }}>
                                 {user.avg_duration_ms.toFixed(2)} ms
                               </Text>
                             </View>
 
                             <View>
-                              <Text
-                                style={{ color: theme.foregroundSecondary }}
-                              >
+                              <Text style={{ color: theme.textSecondary }}>
                                 {t(
                                   "statistics.topUsers.successRate",
                                   "Success Rate",
@@ -503,7 +490,7 @@ export const Statistics = () => {
                                       ? "text-amber-500"
                                       : "text-red-500"
                                 }`}
-                                style={{ color: theme.foregroundSecondary }}
+                                style={{ color: theme.textSecondary }}
                               >
                                 {user.success_rate_percent.toFixed(1)}%
                               </Text>
@@ -512,9 +499,7 @@ export const Statistics = () => {
 
                           <View className="flex-row justify-between">
                             <View>
-                              <Text
-                                style={{ color: theme.foregroundSecondary }}
-                              >
+                              <Text style={{ color: theme.textSecondary }}>
                                 {t(
                                   "statistics.topUsers.firstSeen",
                                   "First Seen",
@@ -522,21 +507,19 @@ export const Statistics = () => {
                               </Text>
                               <Text
                                 className="text-xs"
-                                style={{ color: theme.foregroundSecondary }}
+                                style={{ color: theme.textSecondary }}
                               >
                                 {formatDate(user.first_request)}
                               </Text>
                             </View>
 
                             <View>
-                              <Text
-                                style={{ color: theme.foregroundSecondary }}
-                              >
+                              <Text style={{ color: theme.textSecondary }}>
                                 {t("statistics.topUsers.lastSeen", "Last Seen")}
                               </Text>
                               <Text
                                 className="text-xs"
-                                style={{ color: theme.foregroundSecondary }}
+                                style={{ color: theme.textSecondary }}
                               >
                                 {formatDate(user.last_request)}
                               </Text>
@@ -550,7 +533,7 @@ export const Statistics = () => {
 
                 <Text
                   className="text-center text-xs mb-4"
-                  style={{ color: theme.foregroundSecondary }}
+                  style={{ color: theme.textSecondary }}
                 >
                   {t("statistics.lastUpdated", "Statistics last updated:")}{" "}
                   {formatDate(statsLastLoaded)}

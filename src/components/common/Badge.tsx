@@ -82,7 +82,7 @@ function Badge({
       onPress={onPress}
       activeOpacity={onPress ? 0.2 : 1}
     >
-      {Icon && <Icon size={14} color={theme.foreground} />}
+      {Icon && <Icon size={14} color={theme.text} />}
       <Text className={cn(badgeTextVariants({ variant, size }), labelClasses)}>
         {label}
       </Text>

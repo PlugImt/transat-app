@@ -35,7 +35,7 @@ export const About = () => {
       footer={
         <Text
           className="text-center  italic"
-          style={{ color: theme.foregroundTertiary }}
+          style={{ color: theme.textTertiary }}
         >
           {t("common.plugImtNote")}
         </Text>
@@ -49,7 +49,7 @@ export const About = () => {
             className=" rounded-lg px-6 py-6"
             style={{ backgroundColor: theme.card }}
           >
-            <Text className="mb-4" style={{ color: theme.foregroundSecondary }}>
+            <Text className="mb-4" style={{ color: theme.textSecondary }}>
               {t("common.credits")}
             </Text>
             <View className="flex-row flex-wrap gap-2">

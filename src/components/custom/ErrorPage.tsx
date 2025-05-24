@@ -27,12 +27,10 @@ export default function ErrorPage({
       className=" px-5 justify-center items-center gap-6 h-screen"
     >
       <View className="gap-2 justify-center items-center">
-        <Text className="h3" style={{ color: theme.foreground }}>
+        <Text className="h3" style={{ color: theme.text }}>
           {t("common.errors.occurred")}
         </Text>
-        <Text style={{ color: theme.foregroundSecondary }}>
-          {error?.message}
-        </Text>
+        <Text style={{ color: theme.textSecondary }}>{error?.message}</Text>
       </View>
       <Button
         label="Réessayer"

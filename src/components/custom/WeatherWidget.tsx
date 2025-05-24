@@ -80,10 +80,10 @@ export function WeatherWidget() {
       className="p-6 rounded-lg flex-row justify-between gap-6"
     >
       <View>
-        <Text className="h3" style={{ color: theme.foreground }}>
+        <Text className="h3" style={{ color: theme.text }}>
           {format(date, "PPP", { locale: getLocale() })}
         </Text>
-        <Text className="h1 font-semibold" style={{ color: theme.foreground }}>
+        <Text className="h1 font-semibold" style={{ color: theme.text }}>
           {Math.round(weatherNantes?.temperature ?? 0)}°C
         </Text>
         <Text className="h3 font-semibold" style={{ color: theme.primary }}>

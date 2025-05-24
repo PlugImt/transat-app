@@ -15,7 +15,7 @@ const InfoItem = ({ icon, label, value }: InfoItemProps) => {
     <View className="flex-row items-center gap-4">
       {icon}
       <View className="gap-0.5 w-full">
-        <Text className="text-sm" style={{ color: theme.foreground }}>
+        <Text className="text-sm" style={{ color: theme.text }}>
           {label}
         </Text>
         {value ? (

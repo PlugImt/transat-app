@@ -70,7 +70,7 @@ function TabsTrigger({
           { "text-background": activeTab === value },
           textClasses,
         )}
-        style={{ color: theme.foreground }}
+        style={{ color: theme.text }}
       >
         {title}
       </Text>

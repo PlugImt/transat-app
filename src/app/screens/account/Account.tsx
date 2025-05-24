@@ -62,7 +62,7 @@ export const Account = () => {
       title={t("common.account")}
       about={
         <IconButton
-          icon={<Settings color={theme.foreground} />}
+          icon={<Settings color={theme.text} />}
           variant="link"
           onPress={() => navigation.navigate("Settings")}
         />
@@ -82,17 +82,11 @@ export const Account = () => {
         </Avatar>
 
         <View className="gap-1 justify-center items-center">
-          <Text
-            className="text-2xl font-bold "
-            style={{ color: theme.foreground }}
-          >
+          <Text className="text-2xl font-bold " style={{ color: theme.text }}>
             {user?.first_name} {user?.last_name}
           </Text>
           {user?.graduation_year && (
-            <Text
-              style={{ color: theme.foregroundSecondary }}
-              className="text-base"
-            >
+            <Text style={{ color: theme.textSecondary }} className="text-base">
               {getStudentYear(user?.graduation_year)}
             </Text>
           )}
@@ -102,16 +96,16 @@ export const Account = () => {
         className=" rounded-lg px-6 py-4 gap-4"
         style={{ backgroundColor: theme.card }}
       >
-        <Text className="h3" style={{ color: theme.foreground }}>
+        <Text className="h3" style={{ color: theme.text }}>
           {t("account.contactInfo")}
         </Text>
         <InfoItem
-          icon={<Mail color={theme.foreground} size={20} />}
+          icon={<Mail color={theme.text} size={20} />}
           label={t("account.email")}
           value={user?.email || t("account.notProvided")}
         />
         <InfoItem
-          icon={<Phone color={theme.foreground} size={20} />}
+          icon={<Phone color={theme.text} size={20} />}
           label={t("account.phone")}
           value={user?.phone_number || t("account.notProvided")}
         />
@@ -121,18 +115,18 @@ export const Account = () => {
         className=" rounded-lg px-6 py-4 gap-4"
         style={{ backgroundColor: theme.card }}
       >
-        <Text className="h3" style={{ color: theme.foreground }}>
+        <Text className="h3" style={{ color: theme.text }}>
           {t("account.infos")}
         </Text>
 
         <InfoItem
-          icon={<Medal color={theme.foreground} size={20} />}
+          icon={<Medal color={theme.text} size={20} />}
           label={t("account.registration")}
           value={`n°${user?.id_newf}/${user?.total_newf} ${t("account.newf")}`}
         />
 
         <InfoItem
-          icon={<Lock color={theme.foreground} size={20} />}
+          icon={<Lock color={theme.text} size={20} />}
           label={t("account.passwordUpdated")}
           value={
             user?.password_updated_date
@@ -171,7 +165,7 @@ const AccountLoading = () => {
       about={
         <IconButton
           disabled
-          icon={<Settings color={theme.foreground} />}
+          icon={<Settings color={theme.text} />}
           variant="link"
         />
       }
@@ -192,11 +186,11 @@ const AccountLoading = () => {
       >
         <Text className="h3">{t("account.contactInfo")}</Text>
         <InfoItem
-          icon={<Mail color={theme.foreground} size={20} />}
+          icon={<Mail color={theme.text} size={20} />}
           label={t("account.email")}
         />
         <InfoItem
-          icon={<Phone color={theme.foreground} size={20} />}
+          icon={<Phone color={theme.text} size={20} />}
           label={t("account.phone")}
         />
       </View>
@@ -208,12 +202,12 @@ const AccountLoading = () => {
         <Text className="h3">{t("account.infos")}</Text>
 
         <InfoItem
-          icon={<Medal color={theme.foreground} size={20} />}
+          icon={<Medal color={theme.text} size={20} />}
           label={t("account.registration")}
         />
 
         <InfoItem
-          icon={<Lock color={theme.foreground} size={20} />}
+          icon={<Lock color={theme.text} size={20} />}
           label={t("account.passwordUpdated")}
         />
         <Button

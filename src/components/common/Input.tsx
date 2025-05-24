@@ -55,7 +55,7 @@ const Input = forwardRef(
         {label && (
           <Text
             className={cn("text-sm", labelClasses)}
-            style={{ color: theme.foregroundSecondary }}
+            style={{ color: theme.textSecondary }}
           >
             {label}
           </Text>
@@ -70,12 +70,12 @@ const Input = forwardRef(
               editable={!disabled}
               style={{
                 backgroundColor: theme.input,
-                color: theme.foreground,
+                color: theme.text,
                 borderColor: error ? "#ef4444" : "transparent",
                 borderWidth: error ? 1 : 0,
               }}
               className={cn(inputClasses, "py-2.5 px-4 rounded-lg h-12")}
-              placeholderTextColor={theme.foregroundPlaceholder}
+              placeholderTextColor={theme.textPlaceholder}
               onChangeText={onChange}
               onBlur={onBlur}
               value={value}
@@ -112,7 +112,7 @@ export const InputLoading = ({
       {label && (
         <Text
           className={cn("text-sm", labelClasses)}
-          style={{ color: theme.foregroundSecondary }}
+          style={{ color: theme.textSecondary }}
         >
           {label}
         </Text>
@@ -122,10 +122,10 @@ export const InputLoading = ({
         editable={false}
         style={{
           backgroundColor: theme.input,
-          color: theme.foreground,
+          color: theme.text,
         }}
         className={cn(inputClasses, "py-2.5 px-4 rounded-lg")}
-        placeholderTextColor={theme.foregroundPlaceholder}
+        placeholderTextColor={theme.textPlaceholder}
       />
     </View>
   );

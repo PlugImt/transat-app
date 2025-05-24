@@ -80,7 +80,7 @@ export const Settings = () => {
       <AccountCard user={user} />
 
       <View className="gap-2">
-        <Text className="h3 ml-4" style={{ color: theme.foreground }}>
+        <Text className="h3 ml-4" style={{ color: theme.text }}>
           {t("common.appearance")}
         </Text>
         <View
@@ -88,7 +88,7 @@ export const Settings = () => {
           style={{ backgroundColor: theme.card }}
         >
           <SettingsItem
-            icon={<Palette color={theme.foreground} size={22} />}
+            icon={<Palette color={theme.text} size={22} />}
             title={t("settings.appearance.title", "Theme")}
             subtitle={
               themeMode === "system"
@@ -100,7 +100,7 @@ export const Settings = () => {
             onPress={() => navigation.navigate("Appearance")}
           />
           <SettingsItem
-            icon={<Globe color={theme.foreground} size={22} />}
+            icon={<Globe color={theme.text} size={22} />}
             title={t("settings.language.language")}
             subtitle={t(
               `settings.language.${
@@ -117,7 +117,7 @@ export const Settings = () => {
       </View>
 
       <View className="gap-2">
-        <Text className="h3 ml-4" style={{ color: theme.foreground }}>
+        <Text className="h3 ml-4" style={{ color: theme.text }}>
           {t("settings.notifications.notifications")}
         </Text>
         <View
@@ -125,7 +125,7 @@ export const Settings = () => {
           style={{ backgroundColor: theme.card }}
         >
           <SettingsItem
-            icon={<Bell color={theme.foreground} size={22} />}
+            icon={<Bell color={theme.text} size={22} />}
             title="Notifications"
             onPress={() => navigation.navigate("Notifications")}
           />
@@ -133,7 +133,7 @@ export const Settings = () => {
       </View>
 
       <View className="gap-2">
-        <Text className="h3 ml-4" style={{ color: theme.foreground }}>
+        <Text className="h3 ml-4" style={{ color: theme.text }}>
           {t("account.security")}
         </Text>
         <View
@@ -141,7 +141,7 @@ export const Settings = () => {
           style={{ backgroundColor: theme.card }}
         >
           <SettingsItem
-            icon={<Shield color={theme.foreground} size={22} />}
+            icon={<Shield color={theme.text} size={22} />}
             title={t("account.changePassword")}
             onPress={() => navigation.navigate("ChangePassword")}
           />
@@ -149,7 +149,7 @@ export const Settings = () => {
       </View>
 
       <View className="gap-2">
-        <Text className="h3 ml-4" style={{ color: theme.foreground }}>
+        <Text className="h3 ml-4" style={{ color: theme.text }}>
           {t("common.other")}
         </Text>
         <View
@@ -157,19 +157,19 @@ export const Settings = () => {
           style={{ backgroundColor: theme.card }}
         >
           <SettingsItem
-            icon={<HelpCircle color={theme.foreground} size={22} />}
+            icon={<HelpCircle color={theme.text} size={22} />}
             title={t("settings.help.title")}
             subtitle={t("settings.contactSupport")}
             onPress={() => navigation.navigate("Help")}
           />
           <SettingsItem
-            icon={<Info color={theme.foreground} size={22} />}
+            icon={<Info color={theme.text} size={22} />}
             title={t("settings.about.title")}
             subtitle={t("common.knowMore")}
             onPress={() => navigation.navigate("About")}
           />
           <SettingsItem
-            icon={<BarChart color={theme.foreground} size={22} />}
+            icon={<BarChart color={theme.text} size={22} />}
             title={t("settings.statistics.title", "Statistics")}
             subtitle={t(
               "settings.statistics.subtitle",
@@ -180,7 +180,7 @@ export const Settings = () => {
 
           {process.env.NODE_ENV === "development" && (
             <SettingsItem
-              icon={<Server color={theme.foreground} size={22} />}
+              icon={<Server color={theme.text} size={22} />}
               title={t("settings.devServer")}
               subtitle={t("settings.devServerDescription")}
               onPress={() => {}}
@@ -213,7 +213,7 @@ export const Settings = () => {
             confirmLabel={t("settings.logoutConfirm")}
             onConfirm={handleLogout}
           >
-            <Text style={{ color: theme.foreground }}>
+            <Text style={{ color: theme.text }}>
               {t("settings.logoutDesc")}
             </Text>
           </DialogContent>

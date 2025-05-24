@@ -30,7 +30,7 @@ const Dropdown = ({
 
   return (
     <View className="gap-1.5">
-      <Text className=" text-sm" style={{ color: theme.foregroundSecondary }}>
+      <Text className=" text-sm" style={{ color: theme.textSecondary }}>
         {label}
       </Text>
       {Platform.OS === "android" ? (
@@ -39,13 +39,13 @@ const Dropdown = ({
             selectedValue={value}
             onValueChange={onValueChange}
             mode="dropdown"
-            style={{ color: theme.foreground }}
+            style={{ color: theme.text }}
             itemStyle={{
               backgroundColor: theme.card,
-              color: theme.foreground,
+              color: theme.text,
               fontSize: 16,
             }}
-            dropdownIconColor={theme.foreground}
+            dropdownIconColor={theme.text}
           >
             {options.map((option) => (
               <Picker.Item key={option} label={option} value={option} />
@@ -58,11 +58,11 @@ const Dropdown = ({
             <TouchableOpacity className="flex-row items-center justify-between bg-muted/70 rounded-lg px-3 h-12">
               <View className="flex-row items-center gap-2">
                 {icon ? icon : null}
-                <Text style={{ color: theme.foreground }}>
+                <Text style={{ color: theme.text }}>
                   {value ? value : placeholder}
                 </Text>
               </View>
-              <ChevronDown color={theme.foreground} size={20} />
+              <ChevronDown color={theme.text} size={20} />
             </TouchableOpacity>
           </BottomSheetTrigger>
 
@@ -100,15 +100,15 @@ export const DropdownLoading = ({
   const { theme } = useTheme();
   return (
     <View className="gap-1.5 opacity-50">
-      <Text className="text-sm" style={{ color: theme.foregroundSecondary }}>
+      <Text className="text-sm" style={{ color: theme.textSecondary }}>
         {label}
       </Text>
       <View className="flex-row items-center justify-between bg-muted/70 rounded-lg px-3 h-12 gap-2">
         <View className="flex-row items-center gap-2">
           {icon ? icon : null}
-          <Text style={{ color: theme.foreground }}>{placeholder}</Text>
+          <Text style={{ color: theme.text }}>{placeholder}</Text>
         </View>
-        <ChevronDown color={theme.foreground} size={20} />
+        <ChevronDown color={theme.text} size={20} />
       </View>
     </View>
   );

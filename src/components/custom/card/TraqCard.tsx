@@ -65,10 +65,7 @@ const TraqCard = ({
           {name}
         </Text>
         {description && (
-          <Text
-            className="text-sm text-center"
-            style={{ color: theme.foreground }}
-          >
+          <Text className="text-sm text-center" style={{ color: theme.text }}>
             {description}
           </Text>
         )}
@@ -78,12 +75,12 @@ const TraqCard = ({
         {alcohol !== undefined && alcohol > 0 && (
           <View className="flex-row justify-between items-center">
             <View className="flex-row items-center gap-2">
-              <Beer size={18} color={theme.foreground} />
-              <Text className="font-bold" style={{ color: theme.foreground }}>
+              <Beer size={18} color={theme.text} />
+              <Text className="font-bold" style={{ color: theme.text }}>
                 {t("services.traq.alcohol")}
               </Text>
             </View>
-            <Text className="font-bold" style={{ color: theme.foreground }}>
+            <Text className="font-bold" style={{ color: theme.text }}>
               {alcohol}°
             </Text>
           </View>
@@ -92,13 +89,13 @@ const TraqCard = ({
         {price !== undefined && (
           <View className="flex flex-row justify-between items-center">
             <View className="flex flex-row items-center gap-2 ">
-              <BadgeEuro size={18} color={theme.foreground} />
-              <Text className="font-bold" style={{ color: theme.foreground }}>
+              <BadgeEuro size={18} color={theme.text} />
+              <Text className="font-bold" style={{ color: theme.text }}>
                 {t("services.traq.price")}{" "}
                 {alcohol && alcohol > 0 ? " (50cl)" : ""}
               </Text>
             </View>
-            <Text className="font-bold" style={{ color: theme.foreground }}>
+            <Text className="font-bold" style={{ color: theme.text }}>
               {price > 0 ? `${price}€` : t("common.free")}
             </Text>
           </View>
@@ -107,13 +104,13 @@ const TraqCard = ({
         {priceHalf !== undefined && priceHalf > 0 && (
           <View className="flex flex-row justify-between items-center">
             <View className="flex flex-row items-center gap-2 ">
-              <BadgeEuro size={18} color={theme.foreground} />
-              <Text className="font-bold" style={{ color: theme.foreground }}>
+              <BadgeEuro size={18} color={theme.text} />
+              <Text className="font-bold" style={{ color: theme.text }}>
                 {t("services.traq.priceHalf")}{" "}
                 {alcohol && alcohol > 0 ? " (25cl)" : ""}
               </Text>
             </View>
-            <Text className="font-bold" style={{ color: theme.foreground }}>
+            <Text className="font-bold" style={{ color: theme.text }}>
               {priceHalf}€
             </Text>
           </View>
@@ -146,8 +143,8 @@ export const TraqCardLoading = () => {
       <View className="w-full px-4 gap-2">
         <View className="flex-row justify-between items-center">
           <View className="flex-row items-center gap-2">
-            <Beer size={18} color={theme.foreground} />
-            <Text className="font-bold" style={{ color: theme.foreground }}>
+            <Beer size={18} color={theme.text} />
+            <Text className="font-bold" style={{ color: theme.text }}>
               {t("services.traq.alcohol")}
             </Text>
           </View>
@@ -156,8 +153,8 @@ export const TraqCardLoading = () => {
 
         <View className="flex flex-row justify-between items-center">
           <View className="flex flex-row items-center gap-2 ">
-            <BadgeEuro size={18} color={theme.foreground} />
-            <Text className="font-bold" style={{ color: theme.foreground }}>
+            <BadgeEuro size={18} color={theme.text} />
+            <Text className="font-bold" style={{ color: theme.text }}>
               {t("services.traq.price")}
             </Text>
           </View>

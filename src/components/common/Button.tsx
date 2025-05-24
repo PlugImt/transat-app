@@ -1,63 +1,23 @@
 import { Skeleton } from "@/components/Skeleton";
-import { cn } from "@/lib/utils";
-import { type VariantProps, cva } from "class-variance-authority";
+import { useTheme } from "@/contexts/ThemeContext";
 import type { ComponentPropsWithoutRef } from "react";
 import { Text, TouchableOpacity } from "react-native";
 
-const buttonVariants = cva(
-  "flex flex-row items-center justify-center rounded-xl gap-2",
-  {
-    variants: {
-      variant: {
-        default: "bg-primary",
-        secondary: "bg-secondary",
-        outlined: "border border-primary",
-        destructive: "bg-destructive",
-        ghost: "bg-muted",
-        link: "text-primary underline-offset-4",
-        disabled: "bg-muted",
-      },
-      size: {
-        default: "h-10 px-4",
-        sm: "h-8 px-2",
-        lg: "h-12 px-8",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  },
-);
-
-const buttonTextVariants = cva("text-center font-medium", {
-  variants: {
-    variant: {
-      default: "text-primary-foreground",
-      secondary: "text-secondary-foreground",
-      outlined: "text-primary",
-      destructive: "text-destructive-foreground",
-      ghost: "text-primary-foreground",
-      link: "text-primary-foreground underline",
-      disabled: "text-muted",
-    },
-    size: {
-      default: "text-base",
-      sm: "text-sm",
-      lg: "text-xl",
-    },
-  },
-  defaultVariants: {
-    variant: "default",
-    size: "default",
-  },
-});
+type ButtonVariant =
+  | "default"
+  | "secondary"
+  | "outlined"
+  | "destructive"
+  | "ghost"
+  | "link";
+type ButtonSize = "default" | "sm" | "lg";
 
 interface ButtonProps
-  extends ComponentPropsWithoutRef<typeof TouchableOpacity>,
-    VariantProps<typeof buttonVariants> {
+  extends ComponentPropsWithoutRef<typeof TouchableOpacity> {
   label: string;
   labelClasses?: string;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
   icon?: React.ReactNode;
   loading?: boolean;
 }
@@ -66,26 +26,119 @@ function Button({
   label,
   labelClasses,
   className,
-  variant,
-  size,
+  variant = "default",
+  size = "default",
   icon,
   loading,
   ...props
 }: ButtonProps) {
+  const { theme } = useTheme();
   const isDisabled = props.disabled || loading;
+
+  // Get button styles based on variant and theme
+  const getButtonStyle = () => {
+    let backgroundColor = theme.primary;
+    let borderColor = "transparent";
+    let borderWidth = 0;
+
+    switch (variant) {
+      case "secondary":
+        backgroundColor = theme.secondary;
+        break;
+      case "outlined":
+        backgroundColor = "transparent";
+        borderColor = theme.primary;
+        borderWidth = 1;
+        break;
+      case "destructive":
+        backgroundColor = theme.destructive;
+        break;
+      case "ghost":
+        backgroundColor = theme.backdrop;
+        break;
+      case "link":
+        backgroundColor = "transparent";
+        break;
+      default:
+        backgroundColor = theme.primary;
+    }
+
+    return {
+      backgroundColor,
+      borderColor,
+      borderWidth,
+    };
+  };
+
+  // Get text color based on variant and theme
+  const getTextColor = () => {
+    switch (variant) {
+      case "outlined":
+        return theme.primary;
+      case "ghost":
+        return theme.text;
+      case "link":
+        return theme.primary;
+      default:
+        return "#FFFFFF"; // White text for filled buttons
+    }
+  };
+
+  // Get size-based styles
+  const getSizeStyles = () => {
+    switch (size) {
+      case "sm":
+        return {
+          height: 32,
+          paddingHorizontal: 8,
+          fontSize: 14,
+        };
+      case "lg":
+        return {
+          height: 48,
+          paddingHorizontal: 32,
+          fontSize: 18,
+        };
+      default:
+        return {
+          height: 40,
+          paddingHorizontal: 16,
+          fontSize: 16,
+        };
+    }
+  };
+
+  const buttonStyle = getButtonStyle();
+  const textColor = getTextColor();
+  const sizeStyles = getSizeStyles();
+
   return (
     <TouchableOpacity
-      className={cn(
-        buttonVariants({ variant, size, className }),
-        isDisabled && "opacity-50",
-      )}
+      style={[
+        {
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+          borderRadius: 12,
+          gap: 8,
+          ...buttonStyle,
+          ...sizeStyles,
+          opacity: isDisabled ? 0.5 : 1,
+        },
+      ]}
+      className={className}
       {...props}
       disabled={isDisabled}
     >
       <Text
-        className={cn(
-          buttonTextVariants({ variant, size, className: labelClasses }),
-        )}
+        style={{
+          color: textColor,
+          fontSize: sizeStyles.fontSize,
+          fontWeight: "500",
+          textAlign: "center",
+          textDecorationLine: variant === "link" ? "underline" : "none",
+        }}
+        className={labelClasses}
       >
         {label}
       </Text>
@@ -109,19 +162,87 @@ interface IconButtonProps extends Omit<ButtonProps, "label" | "labelClasses"> {
 
 function IconButton({
   icon,
-  variant,
-  size,
+  variant = "default",
+  size = "default",
   loading,
+  className,
   ...props
 }: IconButtonProps) {
-  const className = "flex items-center justify-center rounded-full";
+  const { theme } = useTheme();
   const isDisabled = props.disabled || loading;
+
+  // Get button styles based on variant and theme
+  const getButtonStyle = () => {
+    let backgroundColor = theme.primary;
+    let borderColor = "transparent";
+    let borderWidth = 0;
+
+    switch (variant) {
+      case "secondary":
+        backgroundColor = theme.secondary;
+        break;
+      case "outlined":
+        backgroundColor = "transparent";
+        borderColor = theme.primary;
+        borderWidth = 1;
+        break;
+      case "destructive":
+        backgroundColor = theme.destructive;
+        break;
+      case "ghost":
+        backgroundColor = theme.muted;
+        break;
+      case "link":
+        backgroundColor = "transparent";
+        break;
+      default:
+        backgroundColor = theme.primary;
+    }
+
+    return {
+      backgroundColor,
+      borderColor,
+      borderWidth,
+    };
+  };
+
+  // Get size-based styles
+  const getSizeStyles = () => {
+    switch (size) {
+      case "sm":
+        return {
+          height: 32,
+          width: 32,
+        };
+      case "lg":
+        return {
+          height: 48,
+          width: 48,
+        };
+      default:
+        return {
+          height: 40,
+          width: 40,
+        };
+    }
+  };
+
+  const buttonStyle = getButtonStyle();
+  const sizeStyles = getSizeStyles();
+
   return (
     <TouchableOpacity
-      className={cn(
-        buttonVariants({ variant, size, className }),
-        isDisabled && "opacity-50",
-      )}
+      style={[
+        {
+          alignItems: "center",
+          justifyContent: "center",
+          borderRadius: 20, // Fully rounded for icon buttons
+          ...buttonStyle,
+          ...sizeStyles,
+          opacity: isDisabled ? 0.5 : 1,
+        },
+      ]}
+      className={className}
       {...props}
       disabled={isDisabled}
     >
@@ -139,4 +260,4 @@ function IconButton({
   );
 }
 
-export { Button, IconButton, buttonVariants, buttonTextVariants };
+export { Button, IconButton };

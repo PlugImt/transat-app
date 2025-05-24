@@ -13,17 +13,17 @@ export default function Divider({ label, className }: DividerProps) {
     return (
       <View className="flex-row items-center">
         <View
-          style={{ backgroundColor: theme.muted + "99" }}
+          style={{ backgroundColor: theme.border }}
           className="h-px rounded-full flex-1"
         />
         <Text
-          style={{ color: theme.foreground + "99" }}
+          style={{ color: theme.foregroundSecondary }}
           className="text-sm mx-3"
         >
           {label}
         </Text>
         <View
-          style={{ backgroundColor: theme.muted + "99" }}
+          style={{ backgroundColor: theme.border }}
           className="h-px rounded-full flex-1"
         />
       </View>
@@ -32,7 +32,7 @@ export default function Divider({ label, className }: DividerProps) {
 
   return (
     <View
-      style={{ backgroundColor: theme.muted + "99" }}
+      style={{ backgroundColor: theme.border }}
       className={`h-px rounded-full w-full my-2 ${className || ""}`}
     />
   );

@@ -1,3 +1,4 @@
+import { useTheme } from "@/contexts/ThemeContext";
 import { createContext, useContext, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 
@@ -52,6 +53,7 @@ function TabsTrigger({
   ...props
 }: TabsTriggerProps) {
   const { activeTab, setActiveTab } = useContext(TabsContext);
+  const { theme } = useTheme();
 
   return (
     <TouchableOpacity
@@ -68,6 +70,7 @@ function TabsTrigger({
           { "text-background": activeTab === value },
           textClasses,
         )}
+        style={{ color: theme.foreground }}
       >
         {title}
       </Text>

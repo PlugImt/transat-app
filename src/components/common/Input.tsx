@@ -55,7 +55,7 @@ const Input = forwardRef(
         {label && (
           <Text
             className={cn("text-sm", labelClasses)}
-            style={{ color: theme.foreground + "B3" }}
+            style={{ color: theme.foregroundSecondary }}
           >
             {label}
           </Text>
@@ -75,7 +75,7 @@ const Input = forwardRef(
                 borderWidth: error ? 1 : 0,
               }}
               className={cn(inputClasses, "py-2.5 px-4 rounded-lg h-12")}
-              placeholderTextColor={theme.foreground + "66"}
+              placeholderTextColor={theme.foregroundPlaceholder}
               onChangeText={onChange}
               onBlur={onBlur}
               value={value}
@@ -112,7 +112,7 @@ export const InputLoading = ({
       {label && (
         <Text
           className={cn("text-sm", labelClasses)}
-          style={{ color: theme.foreground + "B3" }}
+          style={{ color: theme.foregroundSecondary }}
         >
           {label}
         </Text>
@@ -125,7 +125,7 @@ export const InputLoading = ({
           color: theme.foreground,
         }}
         className={cn(inputClasses, "py-2.5 px-4 rounded-lg")}
-        placeholderTextColor={theme.foreground + "66"}
+        placeholderTextColor={theme.foregroundPlaceholder}
       />
     </View>
   );

@@ -118,7 +118,7 @@ export const Signin = () => {
           </View>
         ) : (
           <View className="h-20">
-            <Text style={{ color: theme.foreground + "99" }} className="mt-2">
+            <Text style={{ color: theme.foregroundSecondary }} className="mt-2">
               {t("auth.signInDescription")}
             </Text>
           </View>

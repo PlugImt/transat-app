@@ -50,7 +50,7 @@ export const Appearance = () => {
       className="gap-6"
     >
       <View className="gap-2">
-        <Text className="h3 ml-4">
+        <Text className="h3 ml-4" style={{ color: theme.foreground }}>
           {t("settings.appearance.theme", "Theme")}
         </Text>
         <View
@@ -90,7 +90,7 @@ export const Appearance = () => {
       </View>
 
       <View className="gap-2">
-        <Text className="h3 ml-4">
+        <Text className="h3 ml-4" style={{ color: theme.foreground }}>
           {t("settings.appearance.preview", "Preview")}
         </Text>
         <View

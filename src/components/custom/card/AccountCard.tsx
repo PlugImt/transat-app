@@ -37,7 +37,7 @@ export const AccountCard = ({ user }: Props) => {
           <Text className="h3" style={{ color: theme.foreground }}>
             {`${user.first_name} ${user.last_name}`}
           </Text>
-          <Text style={{ color: theme.foreground + "B3" }}>{user.email}</Text>
+          <Text style={{ color: theme.foregroundSecondary }}>{user.email}</Text>
         </View>
         <Button
           label={t("common.edit")}

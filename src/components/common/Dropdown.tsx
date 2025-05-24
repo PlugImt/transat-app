@@ -30,7 +30,9 @@ const Dropdown = ({
 
   return (
     <View className="gap-1.5">
-      <Text className="text-foreground/70 text-sm">{label}</Text>
+      <Text className=" text-sm" style={{ color: theme.foregroundSecondary }}>
+        {label}
+      </Text>
       {Platform.OS === "android" ? (
         <View className="bg-muted/70 rounded-lg h-12 justify-center">
           <Picker
@@ -98,7 +100,9 @@ export const DropdownLoading = ({
   const { theme } = useTheme();
   return (
     <View className="gap-1.5 opacity-50">
-      <Text className="text-foreground/70 text-sm">{label}</Text>
+      <Text className="text-sm" style={{ color: theme.foregroundSecondary }}>
+        {label}
+      </Text>
       <View className="flex-row items-center justify-between bg-muted/70 rounded-lg px-3 h-12 gap-2">
         <View className="flex-row items-center gap-2">
           {icon ? icon : null}

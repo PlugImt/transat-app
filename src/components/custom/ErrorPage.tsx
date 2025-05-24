@@ -30,7 +30,9 @@ export default function ErrorPage({
         <Text className="h3" style={{ color: theme.foreground }}>
           {t("common.errors.occurred")}
         </Text>
-        <Text style={{ color: theme.foreground + "B3" }}>{error?.message}</Text>
+        <Text style={{ color: theme.foregroundSecondary }}>
+          {error?.message}
+        </Text>
       </View>
       <Button
         label="Réessayer"

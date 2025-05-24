@@ -1,6 +1,7 @@
 import Page from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
 import RestaurantCard from "@/components/custom/card/RestaurantCard";
+import { useTheme } from "@/contexts/ThemeContext";
 import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
 import { isWeekend, outOfService } from "@/lib/utils";
 import { useMemo } from "react";
@@ -9,6 +10,7 @@ import { Image, Text, View } from "react-native";
 
 export const Restaurant = () => {
   const { t } = useTranslation();
+  const { theme } = useTheme();
 
   const {
     data: menu,
@@ -88,7 +90,7 @@ export const Restaurant = () => {
             source={require("@/assets/images/Logos/restaurant.png")}
             className="w-40 h-40 filter grayscale"
           />
-          <Text className="h1 text-center">
+          <Text className="h1 text-center" style={{ color: theme.foreground }}>
             {weekend
               ? t("services.restaurant.closedWeekends")
               : t("services.restaurant.noData")}

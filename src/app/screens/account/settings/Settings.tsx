@@ -80,7 +80,9 @@ export const Settings = () => {
       <AccountCard user={user} />
 
       <View className="gap-2">
-        <Text className="h3 ml-4">{t("common.appearance")}</Text>
+        <Text className="h3 ml-4" style={{ color: theme.foreground }}>
+          {t("common.appearance")}
+        </Text>
         <View
           className=" rounded-lg px-4 py-2 gap-4"
           style={{ backgroundColor: theme.card }}
@@ -115,7 +117,7 @@ export const Settings = () => {
       </View>
 
       <View className="gap-2">
-        <Text className="h3 ml-4">
+        <Text className="h3 ml-4" style={{ color: theme.foreground }}>
           {t("settings.notifications.notifications")}
         </Text>
         <View
@@ -131,7 +133,9 @@ export const Settings = () => {
       </View>
 
       <View className="gap-2">
-        <Text className="h3 ml-4">{t("account.security")}</Text>
+        <Text className="h3 ml-4" style={{ color: theme.foreground }}>
+          {t("account.security")}
+        </Text>
         <View
           className=" rounded-lg px-4 py-2"
           style={{ backgroundColor: theme.card }}
@@ -145,7 +149,9 @@ export const Settings = () => {
       </View>
 
       <View className="gap-2">
-        <Text className="h3 ml-4">{t("common.other")}</Text>
+        <Text className="h3 ml-4" style={{ color: theme.foreground }}>
+          {t("common.other")}
+        </Text>
         <View
           className=" rounded-lg px-4 py-2 gap-4"
           style={{ backgroundColor: theme.card }}

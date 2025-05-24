@@ -15,10 +15,14 @@ export type ThemeMode = "system" | "light" | "dark";
 type ThemeType = {
   background: string;
   foreground: string;
+  foregroundSecondary: string;
+  foregroundTertiary: string;
+  foregroundPlaceholder: string;
   card: string;
   primary: string;
   secondary: string;
   muted: string;
+  border: string;
   destructive: string;
   success: string;
   warning: string;

@@ -66,7 +66,9 @@ export function WashingMachineWidget() {
 
   return (
     <View className="flex flex-col gap-2">
-      <Text className="h3 ml-4">{t("services.washingMachine.title")}</Text>
+      <Text className="h3 ml-4" style={{ color: theme.foreground }}>
+        {t("services.washingMachine.title")}
+      </Text>
       <TouchableOpacity
         onPress={() => navigation.navigate("WashingMachine")}
         style={{ backgroundColor: theme.card }}

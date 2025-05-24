@@ -166,7 +166,9 @@ const WidgetCustomizationModal = ({
       >
         <View
           className={`flex-row items-center justify-between p-4 rounded-lg mb-2 ${
-            item.enabled ? "bg-card" : "bg-card opacity-60"
+            item.enabled
+              ? { backgroundColor: theme.card }
+              : { backgroundColor: theme.card, opacity: 0.6 }
           }`}
         >
           <View className="flex-row items-center flex-1">
@@ -177,7 +179,9 @@ const WidgetCustomizationModal = ({
             />
             <Text
               className={`font-medium flex-1 ${
-                item.enabled ? "text-foreground" : "text-muted-foreground"
+                item.enabled
+                  ? { color: theme.foreground }
+                  : { color: theme.muted }
               }`}
             >
               {getDisplayName(item)}
@@ -212,7 +216,9 @@ const WidgetCustomizationModal = ({
       >
         <View
           className={`flex-row items-center justify-between p-4 rounded-lg mb-2 ${
-            item.enabled ? "bg-card" : "bg-card opacity-60"
+            item.enabled
+              ? { backgroundColor: theme.card }
+              : { backgroundColor: theme.card, opacity: 0.6 }
           }`}
         >
           <View className="flex-row items-center flex-1">
@@ -223,7 +229,9 @@ const WidgetCustomizationModal = ({
             />
             <Text
               className={`font-medium flex-1 ${
-                item.enabled ? "text-foreground" : "text-muted-foreground"
+                item.enabled
+                  ? { color: theme.foreground }
+                  : { color: theme.muted }
               }`}
             >
               {getDisplayName(item)}

@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { Linking, ScrollView, Text, View } from "react-native";
 
 export const About = () => {
-  const _theme = useTheme();
+  const { theme } = useTheme();
   const { t } = useTranslation();
   const triggerConfettiRef = useRef<(() => void) | null>(null);
 
@@ -33,7 +33,10 @@ export const About = () => {
       }}
       confetti={true}
       footer={
-        <Text className="text-center text-foreground/40 italic">
+        <Text
+          className="text-center  italic"
+          style={{ color: theme.foregroundTertiary }}
+        >
           {t("common.plugImtNote")}
         </Text>
       }
@@ -46,7 +49,7 @@ export const About = () => {
             className=" rounded-lg px-6 py-6"
             style={{ backgroundColor: theme.card }}
           >
-            <Text className="text-foreground/60 mb-4">
+            <Text className="mb-4" style={{ color: theme.foregroundSecondary }}>
               {t("common.credits")}
             </Text>
             <View className="flex-row flex-wrap gap-2">

@@ -173,7 +173,9 @@ export const EditProfile = () => {
         className=" rounded-lg px-6 py-4 gap-4"
         style={{ backgroundColor: theme.card }}
       >
-        <Text className="h3">{t("account.personalInfo")}</Text>
+        <Text className="h3" style={{ color: theme.foreground }}>
+          {t("account.personalInfo")}
+        </Text>
 
         <Input
           control={userControl}
@@ -273,7 +275,9 @@ const EditProfileLoading = () => {
         className=" rounded-lg px-6 py-4 gap-4"
         style={{ backgroundColor: theme.card }}
       >
-        <Text className="h3">{t("account.personalInfo")}</Text>
+        <Text className="h3" style={{ color: theme.foreground }}>
+          {t("account.personalInfo")}
+        </Text>
 
         <InputLoading label={t("account.firstName")} />
         <InputLoading label={t("account.lastName")} />

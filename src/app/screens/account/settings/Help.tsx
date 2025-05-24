@@ -52,7 +52,7 @@ const Help = () => {
 
   return (
     <Page goBack className="gap-6" title={t("settings.help.title")}>
-      <Text className="text-foreground/70 mx-4 mb-2">
+      <Text className="mx-4 mb-2" style={{ color: theme.foregroundSecondary }}>
         {t("settings.help.description")}
       </Text>
 
@@ -95,7 +95,9 @@ const Help = () => {
 
                 {expandedFaq === index && (
                   <View className="pl-8 pr-4 pb-2">
-                    <Text className="text-foreground/70">{faq.answer}</Text>
+                    <Text style={{ color: theme.foregroundSecondary }}>
+                      {faq.answer}
+                    </Text>
                   </View>
                 )}
                 {index < faqs.length - 1 && expandedFaq !== index && (
@@ -124,7 +126,10 @@ const Help = () => {
                     <Text style={{ color: theme.foreground }}>
                       {t("settings.help.joinWhatsApp")}
                     </Text>
-                    <Text className="text-sm break-words text-foreground/60">
+                    <Text
+                      className="text-sm break-words"
+                      style={{ color: theme.foregroundSecondary }}
+                    >
                       {t("settings.help.joinCommunity")}
                     </Text>
                   </View>

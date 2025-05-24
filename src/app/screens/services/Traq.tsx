@@ -4,6 +4,7 @@ import Page from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
 import ErrorPage from "@/components/custom/ErrorPage";
 import TraqCard, { TraqCardLoading } from "@/components/custom/card/TraqCard";
+import { useTheme } from "@/contexts/ThemeContext";
 import { useTraq } from "@/hooks/useTraq";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -11,6 +12,7 @@ import { ScrollView, Text, View } from "react-native";
 
 export const Traq = () => {
   const { t } = useTranslation();
+  const { theme } = useTheme();
   const { data: traq, isPending, refetch, error, isError } = useTraq();
 
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -97,7 +99,9 @@ export const Traq = () => {
       }
     >
       <View className="flex-row justify-between items-center ml-4">
-        <Text className="h2">{t("common.filter")}</Text>
+        <Text className="h2" style={{ color: theme.foreground }}>
+          {t("common.filter")}
+        </Text>
         {selectedTags.length > 0 && (
           <Badge
             label={t("common.clearAll")}

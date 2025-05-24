@@ -89,7 +89,10 @@ export const Account = () => {
             {user?.first_name} {user?.last_name}
           </Text>
           {user?.graduation_year && (
-            <Text className="text-base text-foreground/80">
+            <Text
+              style={{ color: theme.foregroundSecondary }}
+              className="text-base"
+            >
               {getStudentYear(user?.graduation_year)}
             </Text>
           )}
@@ -99,7 +102,9 @@ export const Account = () => {
         className=" rounded-lg px-6 py-4 gap-4"
         style={{ backgroundColor: theme.card }}
       >
-        <Text className="h3">{t("account.contactInfo")}</Text>
+        <Text className="h3" style={{ color: theme.foreground }}>
+          {t("account.contactInfo")}
+        </Text>
         <InfoItem
           icon={<Mail color={theme.foreground} size={20} />}
           label={t("account.email")}
@@ -116,7 +121,9 @@ export const Account = () => {
         className=" rounded-lg px-6 py-4 gap-4"
         style={{ backgroundColor: theme.card }}
       >
-        <Text className="h3">{t("account.infos")}</Text>
+        <Text className="h3" style={{ color: theme.foreground }}>
+          {t("account.infos")}
+        </Text>
 
         <InfoItem
           icon={<Medal color={theme.foreground} size={20} />}

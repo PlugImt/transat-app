@@ -69,7 +69,7 @@ export const AnimatedLogo = ({
         {showCampusApp && (
           <Text
             className="text-center mb-4"
-            style={{ color: theme.foreground + "99" }}
+            style={{ color: theme.foregroundSecondary }}
           >
             {t("common.campusApp")}
           </Text>

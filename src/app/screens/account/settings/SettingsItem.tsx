@@ -28,7 +28,7 @@ export const SettingsItem = ({
           <Text style={{ color: theme.foreground }}>{title}</Text>
           {subtitle && (
             <Text
-              style={{ color: theme.foreground + "99" }}
+              style={{ color: theme.foregroundSecondary }}
               className="text-sm break-words"
             >
               {subtitle}

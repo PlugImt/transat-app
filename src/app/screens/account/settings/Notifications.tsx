@@ -34,7 +34,9 @@ export const Notifications = () => {
       title={t("settings.notifications.notifications")}
     >
       <View className="gap-2">
-        <Text className="h2 mx-4">{t("services.title")}</Text>
+        <Text className="h2 mx-4" style={{ color: theme.foreground }}>
+          {t("services.title")}
+        </Text>
         <View
           style={{ backgroundColor: theme.card }}
           className="rounded-lg px-6 py-6 gap-6"
@@ -45,7 +47,7 @@ export const Notifications = () => {
                 {t("services.restaurant.title")}
               </Text>
               <Text
-                style={{ color: theme.foreground + "99" }}
+                style={{ color: theme.foregroundSecondary }}
                 className="text-sm"
               >
                 {t("settings.notifications.toggleRestaurant")}
@@ -64,7 +66,7 @@ export const Notifications = () => {
                 {t("services.traq.title")}
               </Text>
               <Text
-                style={{ color: theme.foreground + "99" }}
+                style={{ color: theme.foregroundSecondary }}
                 className="text-sm"
               >
                 {t("settings.notifications.toggleTraq")}

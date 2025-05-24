@@ -84,7 +84,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
       }
     };
 
-    loadThemePreference().then(r => r);
+    loadThemePreference().then((r) => r);
   }, []);
 
   // Save theme preference to storage

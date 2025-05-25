@@ -132,6 +132,32 @@
       "english": "Anglais",
       "french": "Français",
       "spanish": "Espagnol"
+    },
+    "legal": {
+      "title": "Légal",
+      "subtitle": "Conditions d'utilisation et politique de confidentialité",
+      "termsOfUse": "Conditions d'utilisation",
+      "termsDescription": "Veuillez lire attentivement ces conditions d'utilisation avant d'utiliser notre application.",
+      "acceptance": "1. Acceptation des conditions",
+      "acceptanceText": "En utilisant cette application, vous acceptez d'être lié par ces conditions d'utilisation. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser l'application.",
+      "userAccount": "2. Compte utilisateur",
+      "userAccountText": "Vous êtes responsable du maintien de la confidentialité de vos informations de compte et de toutes les activités qui se produisent sous votre compte. Vous devez nous informer immédiatement de toute utilisation non autorisée de votre compte.",
+      "privacy": "3. Confidentialité",
+      "privacyText": "Votre vie privée est importante pour nous. Veuillez consulter notre politique de confidentialité pour comprendre comment nous collectons, utilisons et protégeons vos informations.",
+      "liability": "4. Limitation de responsabilité",
+      "liabilityText": "Cette application est fournie 'en l'état' sans aucune garantie. Nous ne sommes pas responsables des dommages résultant de l'utilisation de cette application.",
+      "modifications": "5. Modifications",
+      "modificationsText": "Nous nous réservons le droit de modifier ces conditions à tout moment. Les modifications prendront effet immédiatement après leur publication dans l'application.",
+      "privacyPolicy": "Politique de confidentialité",
+      "privacyPolicyDescription": "Cette politique de confidentialité explique comment nous collectons, utilisons et protégeons vos informations personnelles.",
+      "dataCollection": "1. Collecte de données",
+      "dataCollectionText": "Nous collectons les informations que vous nous fournissez directement, par exemple lorsque vous créez un compte, utilisez nos services ou nous contactez pour obtenir de l'aide.",
+      "dataUsage": "2. Comment nous utilisons vos données",
+      "dataUsageText": "Nous utilisons vos informations pour fournir et améliorer nos services, communiquer avec vous et assurer la sécurité de notre plateforme.",
+      "dataSecurity": "3. Sécurité des données",
+      "dataSecurityText": "Nous mettons en place des mesures de sécurité appropriées pour protéger vos informations personnelles contre l'accès, la modification, la divulgation ou la destruction non autorisés.",
+      "contact": "Nous contacter",
+      "contactText": "Si vous avez des questions concernant ces conditions ou notre politique de confidentialité, veuillez nous contacter via la section d'aide ou rejoindre notre groupe WhatsApp."
     }
   },
   "auth": {

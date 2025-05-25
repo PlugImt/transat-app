@@ -2,6 +2,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import {
   BarChart,
   Bell,
+  FileText,
   Globe,
   HelpCircle,
   Info,
@@ -176,6 +177,12 @@ export const Settings = () => {
               "View system statistics",
             )}
             onPress={() => navigation.navigate("Statistics")}
+          />
+          <SettingsItem
+            icon={<FileText color={theme.text} size={22} />}
+            title={t("settings.legal.title")}
+            subtitle={t("settings.legal.subtitle")}
+            onPress={() => navigation.navigate("Legal")}
           />
 
           {process.env.NODE_ENV === "development" && (

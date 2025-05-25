@@ -6,6 +6,7 @@ import { Appearance } from "@/app/screens/account/settings/Appearance";
 import ChangePassword from "@/app/screens/account/settings/ChangePassword";
 import Help from "@/app/screens/account/settings/Help";
 import Language from "@/app/screens/account/settings/Language";
+import Legal from "@/app/screens/account/settings/Legal";
 import Notifications from "@/app/screens/account/settings/Notifications";
 import Settings from "@/app/screens/account/settings/Settings";
 import Statistics from "@/app/screens/account/settings/Statistics";
@@ -66,6 +67,7 @@ const AccountStackScreen = () => (
     <AccountStack.Screen name="About" component={About} />
     <AccountStack.Screen name="Help" component={Help} />
     <AccountStack.Screen name="Statistics" component={Statistics} />
+    <AccountStack.Screen name="Legal" component={Legal} />
   </AccountStack.Navigator>
 );
 

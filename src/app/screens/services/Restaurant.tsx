@@ -123,7 +123,7 @@ export const Restaurant = () => {
             className="w-40 h-40 filter grayscale"
           />
           <View className="gap-2">
-            <Text className="h1 text-center">
+            <Text className="h1 text-center" style={{ color: theme.text }}>
               {t("services.restaurant.closedNight.title")}
             </Text>
             <Text className="h3 text-center text-muted-foreground">
@@ -180,7 +180,9 @@ export const Restaurant = () => {
 
       <View className="flex flex-col gap-8">
         <View className="flex flex-col gap-4">
-          <Text className="h3 ml-4">{t("services.restaurant.lunch")}</Text>
+          <Text className="h3 ml-4" style={{ color: theme.text }}>
+            {t("services.restaurant.lunch")}
+          </Text>
 
           {menu?.grilladesMidi && menu.grilladesMidi.length > 0 && (
             <RestaurantCard
@@ -215,7 +217,9 @@ export const Restaurant = () => {
         {(menu?.grilladesSoir?.length ?? 0) > 0 ||
         (menu?.accompSoir?.length ?? 0) > 0 ? (
           <View className="flex flex-col gap-4">
-            <Text className="h3 ml-4">{t("services.restaurant.dinner")}</Text>
+            <Text className="h3 ml-4" style={{ color: theme.text }}>
+              {t("services.restaurant.dinner")}
+            </Text>
 
             {menu?.grilladesSoir && menu.grilladesSoir.length > 0 && (
               <RestaurantCard

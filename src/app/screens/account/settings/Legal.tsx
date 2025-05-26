@@ -1,4 +1,3 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView, Text, View } from "react-native";
 
@@ -21,7 +20,7 @@ export const Legal = () => {
             <Text className="body-medium" style={{ color: theme.text }}>
               {t("settings.legal.termsDescription")}
             </Text>
-            
+
             <View className="gap-4">
               <View className="gap-2">
                 <Text className="h4" style={{ color: theme.text }}>
@@ -78,7 +77,7 @@ export const Legal = () => {
             <Text className="body-medium" style={{ color: theme.text }}>
               {t("settings.legal.privacyPolicyDescription")}
             </Text>
-            
+
             <View className="gap-4">
               <View className="gap-2">
                 <Text className="h4" style={{ color: theme.text }}>
@@ -124,4 +123,4 @@ export const Legal = () => {
   );
 };
 
-export default Legal; 
+export default Legal;

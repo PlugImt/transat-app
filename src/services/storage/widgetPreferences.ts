@@ -101,13 +101,20 @@ export const getServicePreferences = async (): Promise<ServicePreference[]> => {
     if (stored) {
       const storedServices = JSON.parse(stored);
       // Check if the new olimtpe service exists, if not add it
-      const hasOlimtpe = storedServices.some((service: ServicePreference) => service.id === "olimtpe");
+      const hasOlimtpe = storedServices.some(
+        (service: ServicePreference) => service.id === "olimtpe",
+      );
       if (!hasOlimtpe) {
-        const olimtpeService = defaultServices.find(service => service.id === "olimtpe");
+        const olimtpeService = defaultServices.find(
+          (service) => service.id === "olimtpe",
+        );
         if (olimtpeService) {
           storedServices.push(olimtpeService);
           // Save the updated services back to storage
-          await AsyncStorage.setItem(SERVICES_KEY, JSON.stringify(storedServices));
+          await AsyncStorage.setItem(
+            SERVICES_KEY,
+            JSON.stringify(storedServices),
+          );
         }
       }
       return storedServices;

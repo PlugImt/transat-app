@@ -1,7 +1,6 @@
 import Page from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
 import { useTheme } from "@/contexts/ThemeContext";
-import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Image, Text, View } from "react-native";
 
@@ -27,16 +26,16 @@ export const Olimtpe = () => {
           className="w-40 h-40"
           resizeMode="contain"
         />
-        
+
         <View className="gap-4 max-w-md">
           <Text className="h1 text-center" style={{ color: theme.text }}>
             {t("services.olimtpe.welcome")}
           </Text>
-          
+
           <Text className="body text-center text-muted-foreground">
             {t("services.olimtpe.description")}
           </Text>
-          
+
           <View className="bg-primary/10 p-4 rounded-lg">
             <Text className="h3 text-center" style={{ color: theme.primary }}>
               {t("services.olimtpe.services")}
@@ -56,12 +55,15 @@ export const Olimtpe = () => {
               </Text>
             </View>
           </View>
-          
+
           <View className="bg-secondary/10 p-4 rounded-lg">
             <Text className="h3 text-center" style={{ color: theme.text }}>
               {t("services.olimtpe.contact")}
             </Text>
-            <Text className="body text-center mt-2" style={{ color: theme.text }}>
+            <Text
+              className="body text-center mt-2"
+              style={{ color: theme.text }}
+            >
               {t("services.olimtpe.contactInfo")}
             </Text>
           </View>
@@ -69,4 +71,4 @@ export const Olimtpe = () => {
       </View>
     </Page>
   );
-}; 
+};

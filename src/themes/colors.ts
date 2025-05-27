@@ -1,9 +1,6 @@
 import type { ThemeType } from "@/contexts/ThemeContext";
 
-type SharedColors = Pick<
-  ThemeType,
-  "destructive" | "success" | "warning" | "info"
->;
+type SharedColors = Pick<ThemeType, "destructive" | "success" | "warning">;
 type SpecificColors = Omit<ThemeType, keyof SharedColors>;
 
 const colors = {

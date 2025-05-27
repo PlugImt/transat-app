@@ -29,7 +29,7 @@ import * as Notifications from "expo-notifications";
 import type React from "react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Platform, RefreshControl, Text, TouchableOpacity, View } from "react-native";
+import { Platform, Text, TouchableOpacity, View } from "react-native";
 import DraggableFlatList, {
   type RenderItemParams,
   ScaleDecorator,
@@ -302,7 +302,14 @@ export const Home = () => {
             </View>
           }
           ListFooterComponent={
-            <View style={{ alignItems: "center", width: "100%", marginTop: 20, marginBottom: 20 }}>
+            <View
+              style={{
+                alignItems: "center",
+                width: "100%",
+                marginTop: 20,
+                marginBottom: 20,
+              }}
+            >
               <Button
                 label={t("common.customizeWidgets")}
                 variant="ghost"

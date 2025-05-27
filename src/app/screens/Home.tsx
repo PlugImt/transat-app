@@ -29,7 +29,7 @@ import * as Notifications from "expo-notifications";
 import type React from "react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Platform, Text, TouchableOpacity, View } from "react-native";
+import { Platform, RefreshControl, Text, TouchableOpacity, View } from "react-native";
 import DraggableFlatList, {
   type RenderItemParams,
   ScaleDecorator,
@@ -262,47 +262,46 @@ export const Home = () => {
   }
 
   return (
-    <>
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <Page
+        disableScroll={true}
         refreshing={isFetching}
         onRefresh={refetch}
         title={t("common.welcome")}
         newfName={user?.first_name || "Newf"}
       >
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <DraggableFlatList
-            data={draggableWidgets}
-            onDragEnd={handleDragEnd}
-            keyExtractor={(item) => item.key}
-            renderItem={renderWidget}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={{
-              gap: 24,
-              paddingTop: 10,
-              paddingBottom: 12,
-            }}
-            ListEmptyComponent={
-              <View
-                style={{
-                  flex: 1,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  marginTop: 50,
-                }}
-              >
-                <Text style={{ fontSize: 16, color: theme.text }}>
-                  {t("common.noWidgetsEnabled")}
-                </Text>
-                <Button
-                  label={t("common.customizeWidgets")}
-                  onPress={() => setShowCustomizationModal(true)}
-                  variant="link"
-                  className="mt-4"
-                />
-              </View>
-            }
-          />
-        </GestureHandlerRootView>
+        <DraggableFlatList
+          data={draggableWidgets}
+          onDragEnd={handleDragEnd}
+          keyExtractor={(item) => item.key}
+          renderItem={renderWidget}
+          showsVerticalScrollIndicator={true}
+          contentContainerStyle={{
+            gap: 24,
+            paddingTop: 10,
+            paddingBottom: 12,
+          }}
+          ListEmptyComponent={
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop: 50,
+              }}
+            >
+              <Text style={{ fontSize: 16, color: theme.text }}>
+                {t("common.noWidgetsEnabled")}
+              </Text>
+              <Button
+                label={t("common.customizeWidgets")}
+                onPress={() => setShowCustomizationModal(true)}
+                variant="link"
+                className="mt-4"
+              />
+            </View>
+          }
+        />
         <View style={{ alignItems: "center", width: "100%" }}>
           <Button
             label={t("common.customizeWidgets")}
@@ -318,12 +317,12 @@ export const Home = () => {
         visible={showCustomizationModal}
         onClose={() => setShowCustomizationModal(false)}
         widgets={memoizedWidgetsForModal}
-        services={[]}
         onUpdateWidgets={handleCustomizationSave}
+        services={[]}
         title={t("common.customizeWidgets")}
         type="widgets"
       />
-    </>
+    </GestureHandlerRootView>
   );
 };
 

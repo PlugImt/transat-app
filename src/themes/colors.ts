@@ -1,3 +1,11 @@
+import type { ThemeType } from "@/contexts/ThemeContext";
+
+type SharedColors = Pick<
+  ThemeType,
+  "destructive" | "success" | "warning" | "info"
+>;
+type SpecificColors = Omit<ThemeType, keyof SharedColors>;
+
 const colors = {
   light: {
     background: "#FFFFFF",
@@ -14,7 +22,8 @@ const colors = {
     backdrop: "rgba(112,117,129,0.05)",
     overlay: "#FFFFFFE5",
     errorBackground: "#F4433620",
-  },
+    onSurface: "#d1d5db",
+  } satisfies SpecificColors,
   dark: {
     background: "#070402",
     text: "#ffe6cc",
@@ -30,7 +39,8 @@ const colors = {
     backdrop: "rgba(44,39,38,0.4)",
     overlay: "#070402E5",
     errorBackground: "#F4433620",
-  },
+    onSurface: "#1e1515",
+  } satisfies SpecificColors,
   shared: {
     destructive: {
       DEFAULT: "#F44336",

@@ -47,6 +47,7 @@ export type AppStackParamList = {
   BottomTabNavigator: undefined;
   Clubs: undefined;
   Traq: undefined;
+  Olimtpe: undefined;
   Account: undefined;
 };
 

@@ -145,6 +145,8 @@ const WidgetCustomizationModal = ({
         return t("services.restaurant.title");
       case "traq":
         return t("services.traq.title");
+      case "olimtpe":
+        return t("services.olimtpe.title");
       default:
         return item.name;
     }

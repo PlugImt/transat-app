@@ -267,6 +267,23 @@
         "description": "菜单尚未更新。请稍后再查看。"
       }
     },
+    "olimtpe": {
+      "title": "OL'IMT'PE",
+      "welcome": "欢迎来到 OL'IMT'PE！",
+      "description": "您在 IMT Atlantique 的奥林匹克和体育中心。发现我们所有的设施和服务，享受积极健康的学生生活。",
+      "about": "🏅 OL'IMT'PE 是 IMT Atlantique 的体育中心，为学生和工作人员提供各种体育设施和活动。",
+      "location": "体育综合体，IMT Atlantique 校园",
+      "price": "持有效学生证的学生免费入场",
+      "additionalInfo": "提供设备租赁。某些活动可能需要提前预订。查看开放时间和可用活动。",
+      "services": "我们的服务",
+      "service1": "健身中心和健身房设备",
+      "service2": "运动场和球场",
+      "service3": "团体健身课程",
+      "service4": "设备租赁",
+      "contact": "联系方式",
+      "contactInfo": "在体育综合体访问我们或查看我们的网站获取更多信息",
+      "closed": "关闭"
+    },
     "washingMachine": {
       "title": "洗衣房",
       "washingMachine": "洗衣机",

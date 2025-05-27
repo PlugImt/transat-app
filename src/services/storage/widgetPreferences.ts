@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export type WidgetType = "weather" | "restaurant" | "washingMachine";
-export type ServiceType = "washingMachine" | "restaurant" | "traq";
+export type ServiceType = "washingMachine" | "restaurant" | "traq" | "olimtpe";
 export type ServiceSize = "full" | "half";
 
 export interface WidgetPreference {
@@ -59,6 +59,15 @@ const defaultServices: ServicePreference[] = [
     image: require("@/assets/images/Logos/traq_large.png"),
     screen: "Traq",
   },
+  {
+    id: "olimtpe",
+    name: "OL'IMT'PE",
+    enabled: true,
+    order: 3,
+    size: "full",
+    image: require("@/assets/images/Logos/olimtpe.png"),
+    screen: "Olimtpe",
+  },
 ];
 
 export const getHomeWidgetPreferences = async (): Promise<
@@ -90,7 +99,18 @@ export const getServicePreferences = async (): Promise<ServicePreference[]> => {
   try {
     const stored = await AsyncStorage.getItem(SERVICES_KEY);
     if (stored) {
-      return JSON.parse(stored);
+      const storedServices = JSON.parse(stored);
+      // Check if the new olimtpe service exists, if not add it
+      const hasOlimtpe = storedServices.some((service: ServicePreference) => service.id === "olimtpe");
+      if (!hasOlimtpe) {
+        const olimtpeService = defaultServices.find(service => service.id === "olimtpe");
+        if (olimtpeService) {
+          storedServices.push(olimtpeService);
+          // Save the updated services back to storage
+          await AsyncStorage.setItem(SERVICES_KEY, JSON.stringify(storedServices));
+        }
+      }
+      return storedServices;
     }
     return defaultServices;
   } catch (error) {

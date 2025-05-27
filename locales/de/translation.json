@@ -268,6 +268,23 @@
         "description": "Das Menü wurde nicht aktualisiert. Schauen Sie später wieder vorbei."
       }
     },
+    "olimtpe": {
+      "title": "OL'IMT'PE",
+      "welcome": "Willkommen bei OL'IMT'PE!",
+      "description": "Ihr olympisches und Sportzentrum an der IMT Atlantique. Entdecken Sie alle unsere Einrichtungen und Dienstleistungen für ein aktives und gesundes Studentenleben.",
+      "about": "🏅 OL'IMT'PE ist das Sportzentrum der IMT Atlantique und bietet verschiedene Sporteinrichtungen und -aktivitäten für Studenten und Mitarbeiter.",
+      "location": "Sportkomplex, Campus IMT Atlantique",
+      "price": "Kostenloser Zugang für Studenten mit gültigem Studentenausweis",
+      "additionalInfo": "Ausrüstungsverleih verfügbar. Für manche Aktivitäten ist eine Voranmeldung erforderlich. Überprüfen Sie die Öffnungszeiten und verfügbaren Aktivitäten.",
+      "services": "Unsere Dienstleistungen",
+      "service1": "Fitnesscenter und Fitnessgeräte",
+      "service2": "Sportplätze und -plätze",
+      "service3": "Gruppen-Fitnesskurse",
+      "service4": "Ausrüstungsverleih",
+      "contact": "Kontakt",
+      "contactInfo": "Besuchen Sie uns im Sportkomplex oder schauen Sie auf unsere Website für weitere Informationen",
+      "closed": "Geschlossen"
+    },
     "washingMachine": {
       "title": "Wäscherei",
       "washingMachine": "Waschmaschine",

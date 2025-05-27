@@ -268,6 +268,23 @@
         "description": "Le menu n'a pas été mis à jour. Revenez plus tard."
       }
     },
+    "olimtpe": {
+      "title": "OL'IMT'PE",
+      "welcome": "Bienvenue à OL'IMT'PE !",
+      "description": "Votre centre olympique et sportif à IMT Atlantique. Découvrez toutes nos installations et services pour une vie étudiante active et saine.",
+      "about": "🏅 OL'IMT'PE est le centre sportif d'IMT Atlantique, offrant diverses installations et activités sportives pour les étudiants et le personnel.",
+      "location": "Complexe sportif, campus IMT Atlantique",
+      "price": "Accès gratuit pour les étudiants avec carte étudiante valide",
+      "additionalInfo": "Location d'équipement disponible. Certaines activités peuvent nécessiter une réservation préalable. Consultez les horaires d'ouverture et les activités disponibles.",
+      "services": "Nos Services",
+      "service1": "Centre de fitness et équipements de gym",
+      "service2": "Terrains et courts de sport",
+      "service3": "Cours de fitness collectifs",
+      "service4": "Location d'équipement",
+      "contact": "Contact",
+      "contactInfo": "Rendez-vous au complexe sportif ou consultez notre site web pour plus d'informations",
+      "closed": "Fermé"
+    },
     "washingMachine": {
       "title": "Laverie",
       "washingMachine": "Lave-linge",

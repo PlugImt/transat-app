@@ -301,16 +301,17 @@ export const Home = () => {
               />
             </View>
           }
+          ListFooterComponent={
+            <View style={{ alignItems: "center", width: "100%", marginTop: 20, marginBottom: 20 }}>
+              <Button
+                label={t("common.customizeWidgets")}
+                variant="ghost"
+                onPress={() => setShowCustomizationModal(true)}
+                size="sm"
+              />
+            </View>
+          }
         />
-        <View style={{ alignItems: "center", width: "100%" }}>
-          <Button
-            label={t("common.customizeWidgets")}
-            variant="ghost"
-            onPress={() => setShowCustomizationModal(true)}
-            className="mb-4"
-            size="sm"
-          />
-        </View>
       </Page>
 
       <WidgetCustomizationModal

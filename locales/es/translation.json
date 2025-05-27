@@ -28,6 +28,13 @@
     "success": "Éxito",
     "error": "Error",
     "info": "Información",
+    "customizeWidgets": "Personalizar Widgets",
+    "customizeServices": "Personalizar Servicios",
+    "customizeHint": "Activa/desactiva widgets y arrástralos para reordenarlos. Mantén presionado y arrastra para reordenar los elementos.",
+    "noWidgetsEnabled": "No hay widgets activados. ¡Personaliza para agregar algunos!",
+    "resizeToFull": "Redimensionar a ancho completo",
+    "resizeToHalf": "Redimensionar a la mitad del ancho",
+    "cardSizeToggled": "Tamaño de la tarjeta cambiado",
     "errors": {
       "occurred": "Ha ocurrido un error",
       "unableToFetch": "Imposible recuperar los datos"
@@ -51,7 +58,7 @@
     "plugImtNote": "NOTA: Plug'IMT es una asociación creada por estudiantes de IMT pero no está afiliada a la escuela",
     "credits": "Créditos",
     "underConstruction": "En construcción 🏗️",
-    "underConstructionDesc": "This page is under construction. Please check back later.",
+    "underConstructionDesc": "Estamos trabajando duro para ofrecerte esta nueva función lo antes posible. ¡Mantente atento!",
     "refresh": "Actualizar"
   },
   "settings": {
@@ -75,7 +82,7 @@
     },
     "help": {
       "title": "Ayuda",
-      "description": "If you encounter any issues, please contact us via the contact form in the app or on our WhatsApp group. We will do our best to help you.",
+      "description": "¿Alguna pregunta, sugerencia o problema específico?\nHáznoslo saber usando el formulario a continuación o uniéndote al grupo de Whatsapp 🫶",
       "faq": "PREGUNTAS FRECUENTES",
       "contactUs": "Póngase en contacto con nosotros",
       "joinWhatsApp": "Únase a nuestro grupo de WhatsApp",
@@ -103,16 +110,59 @@
       "previousRequests": "Solicitudes anteriores",
       "requestsDescription": "Aquí están todas las solicitudes que ha enviado a nuestro equipo de soporte y su estado.",
       "joinCommunity": "Obtenga respuestas más rápidas de nuestra comunidad",
-      "requestsPending": "Obteniendo sus solicitudes..."
+      "requestsPending": "Obteniendo sus solicitudes...",
+      "status": {
+        "pending": "Pendiente",
+        "in_progress": "En progreso",
+        "resolved": "Resuelto"
+      }
     },
     "contactSupport": "Contactar con soporte",
-    "appearance": "Apariencia",
+    "appearance": {
+      "title": "Apariencia",
+      "theme": "Tema",
+      "system": "Sistema",
+      "systemDescription": "Seguir la configuración del sistema",
+      "light": "Claro",
+      "lightDescription": "Tema claro",
+      "dark": "Oscuro",
+      "darkDescription": "Tema oscuro",
+      "preview": "Vista previa",
+      "sampleCard": "Tarjeta de Ejemplo",
+      "sampleText": "Así es como se verá el texto en el tema seleccionado."
+    },
     "language": {
       "language": "Idioma",
       "selectLanguage": "Seleccionar idioma",
       "english": "Inglés",
       "french": "Francés",
       "spanish": "Español"
+    },
+    "legal": {
+      "title": "Legal",
+      "subtitle": "Condiciones de uso y política de privacidad",
+      "termsOfUse": "Condiciones de Uso",
+      "termsDescription": "Por favor, lea estas condiciones de uso atentamente antes de usar nuestra aplicación.",
+      "acceptance": "1. Aceptación de las Condiciones",
+      "acceptanceText": "Al usar esta aplicación, usted acepta estar sujeto a estas condiciones de uso. Si no está de acuerdo con estas condiciones, por favor, no use la aplicación.",
+      "userAccount": "2. Cuenta de Usuario",
+      "userAccountText": "Usted es responsable de mantener la confidencialidad de la información de su cuenta y de todas las actividades que ocurran bajo su cuenta. Debe notificarnos inmediatamente cualquier uso no autorizado de su cuenta.",
+      "privacy": "3. Privacidad",
+      "privacyText": "Su privacidad es importante para nosotros. Por favor, revise nuestra Política de Privacidad para entender cómo recopilamos, usamos y protegemos su información.",
+      "liability": "4. Limitación de Responsabilidad",
+      "liabilityText": "Esta aplicación se proporciona 'tal cual' sin ninguna garantía. No somos responsables de ningún daño que surja del uso de esta aplicación.",
+      "modifications": "5. Modificaciones",
+      "modificationsText": "Nos reservamos el derecho de modificar estas condiciones en cualquier momento. Los cambios entrarán en vigor inmediatamente después de su publicación en la aplicación.",
+      "privacyPolicy": "Política de Privacidad",
+      "privacyPolicyDescription": "Esta política de privacidad explica cómo recopilamos, usamos y protegemos su información personal.",
+      "dataCollection": "1. Recopilación de Datos",
+      "dataCollectionText": "Recopilamos la información que usted nos proporciona directamente, como cuando crea una cuenta, usa nuestros servicios o se contacta con nosotros para obtener soporte.",
+      "dataUsage": "2. Cómo Usamos Sus Datos",
+      "dataUsageText": "Usamos su información para proporcionar y mejorar nuestros servicios, comunicarnos con usted y garantizar la seguridad de nuestra plataforma.",
+      "dataSecurity": "3. Seguridad de los Datos",
+      "dataSecurityText": "Implementamos medidas de seguridad apropiadas para proteger su información personal contra el acceso no autorizado, alteración, divulgación o destrucción.",
+      "contact": "Contáctenos",
+      "contactText": "Si tiene alguna pregunta sobre estas condiciones o nuestra política de privacidad, contáctenos a través de la sección de ayuda o únase a nuestro grupo de WhatsApp."
     }
   },
   "auth": {
@@ -173,6 +223,7 @@
   "services": {
     "title": "Servicios",
     "market": "Mercado",
+    "weather": "Clima",
     "traq": {
       "title": "Traq",
       "about": "🍺 El Traq (Traquenard) es el bar estudiantil de la escuela donde puedes degustar diferentes bebidas.",

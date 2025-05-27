@@ -85,7 +85,11 @@
       "description": "Vous avez une question, une suggestion ou un problème particulier ?\nFaites-le nous savoir en utilisant le formulaire ci-dessous ou en rejoignant le groupe WhatsApp 🫶",
       "faq": "FAQ",
       "contactUs": "Nous contacter",
+      "history": "Historique",
+      "previousRequests": "Demandes précédentes",
+      "requestsDescription": "Voici toutes les demandes que vous avez envoyées à notre équipe d'assistance et leur état.",
       "joinWhatsApp": "Rejoindre notre groupe WhatsApp",
+      "joinCommunity": "Obtenez des réponses plus rapides de notre communauté",
       "subject": "Sujet",
       "subjectPlaceholder": "Problème avec le menu",
       "subjectRequired": "Veuillez fournir une brève description, cela nous aidera à comprendre votre message.",
@@ -98,6 +102,13 @@
       "removeImage": "Supprimer l'image",
       "imageUploadFailed": "Échec du téléchargement de l'image, veuillez réessayer",
       "imageSent": "Capture d'écran téléchargée avec succès",
+      "noRequests": "Vous n'avez pas encore envoyé de demandes",
+      "requestsPending": "Récupération de vos demandes...",
+      "status": {
+        "pending": "En attente",
+        "in_progress": "En cours",
+        "resolved": "Résolu"
+      },
       "faq1Question": "Comment changer mon mot de passe ?",
       "faq1Answer": "Pour modifier votre mot de passe, allez dans les paramètres du compte et cliquez sur « Modifier le mot de passe ». Saisissez votre mot de passe actuel et le nouveau mot de passe que vous souhaitez définir.",
       "faq2Question": "Comment supprimer mon compte ?",
@@ -105,12 +116,7 @@
       "faq3Question": "Cette application a-t-elle été créée par des étudiants de l'IMT ?",
       "faq3Answer": "Oui, cette application a été développée par des étudiants de l'IMT dans le cadre d'un projet visant à améliorer l'expérience des étudiants sur le campus. Nous travaillons constamment à l'ajout de nouvelles fonctionnalités et à l'amélioration de l'application en fonction de vos commentaires.",
       "faq4Question": "Comment contribuer ?",
-      "faq4Answer": "Si vous souhaitez contribuer au développement de cette application, vous pouvez rejoindre notre équipe en nous contactant sur notre groupe WhatsApp. Toute aide est la bienvenue, qu'il s'agisse de développement, de conception ou de test.",
-      "history": "Historique",
-      "previousRequests": "Demandes précédentes",
-      "requestsDescription": "Voici toutes les demandes que vous avez envoyées à notre équipe d'assistance et leur état.",
-      "joinCommunity": "Obtenez des réponses plus rapides de notre communauté",
-      "requestsPending": "Récupération de vos demandes..."
+      "faq4Answer": "Si vous souhaitez contribuer au développement de cette application, vous pouvez rejoindre notre équipe en nous contactant sur notre groupe WhatsApp. Toute aide est la bienvenue, qu'il s'agisse de développement, de conception ou de test."
     },
     "contactSupport": "Contacter le support",
     "appearance": {

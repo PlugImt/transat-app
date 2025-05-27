@@ -28,13 +28,20 @@
     "success": "Sucesso",
     "error": "Erro",
     "info": "Informações",
+    "customizeWidgets": "Personalizar Widgets",
+    "customizeServices": "Personalizar Serviços",
+    "customizeHint": "Ative/desative widgets e arraste para reordená-los. Pressione longamente e arraste para reordenar os itens.",
+    "noWidgetsEnabled": "Nenhum widget ativado. Personalize para adicionar alguns!",
+    "resizeToFull": "Redimensionar para largura total",
+    "resizeToHalf": "Redimensionar para meia largura",
+    "cardSizeToggled": "Tamanho do cartão alterado",
     "errors": {
       "occurred": "Ocorreu um erro",
       "unableToFetch": "Não é possível obter dados"
     },
     "knowMore": "Saber mais sobre a Transat",
     "close": "Fechar",
-    "clearAll": "Limpo",
+    "clearAll": "Limpar tudo",
     "filter": "Filtro",
     "days": {
       "monday": "Segunda-feira",
@@ -103,16 +110,59 @@
       "previousRequests": "Pedidos anteriores",
       "requestsDescription": "Aqui estão todos os pedidos que você enviou para nossa equipe de suporte e seu status.",
       "joinCommunity": "Obtenha respostas mais rápidas da nossa comunidade",
-      "requestsPending": "Buscando seus pedidos..."
+      "requestsPending": "Buscando seus pedidos...",
+      "status": {
+        "pending": "Pendente",
+        "in_progress": "Em progresso",
+        "resolved": "Resolvido"
+      }
     },
     "contactSupport": "Contacto de apoio",
-    "appearance": "Aparência",
+    "appearance": {
+      "title": "Aparência",
+      "theme": "Tema",
+      "system": "Sistema",
+      "systemDescription": "Seguir as configurações do sistema",
+      "light": "Claro",
+      "lightDescription": "Tema claro",
+      "dark": "Escuro",
+      "darkDescription": "Tema escuro",
+      "preview": "Pré-visualização",
+      "sampleCard": "Cartão de Exemplo",
+      "sampleText": "É assim que o texto aparecerá no tema selecionado."
+    },
     "language": {
       "language": "Língua",
       "selectLanguage": "Selecionar a língua",
       "english": "Inglês",
       "french": "francês",
       "spanish": "espanhol"
+    },
+    "legal": {
+      "title": "Legal",
+      "subtitle": "Termos de uso e política de privacidade",
+      "termsOfUse": "Termos de Uso",
+      "termsDescription": "Por favor, leia estes termos de uso cuidadosamente antes de usar nosso aplicativo.",
+      "acceptance": "1. Aceitação dos Termos",
+      "acceptanceText": "Ao usar este aplicativo, você concorda em ficar vinculado por estes termos de uso. Se você não concorda com estes termos, por favor, não use o aplicativo.",
+      "userAccount": "2. Conta de Usuário",
+      "userAccountText": "Você é responsável por manter a confidencialidade das informações da sua conta e por todas as atividades que ocorrem sob sua conta. Você deve nos notificar imediatamente sobre qualquer uso não autorizado da sua conta.",
+      "privacy": "3. Privacidade",
+      "privacyText": "Sua privacidade é importante para nós. Por favor, revise nossa Política de Privacidade para entender como coletamos, usamos e protegemos suas informações.",
+      "liability": "4. Limitação de Responsabilidade",
+      "liabilityText": "Este aplicativo é fornecido 'como está' sem quaisquer garantias. Não somos responsáveis por quaisquer danos decorrentes do uso deste aplicativo.",
+      "modifications": "5. Modificações",
+      "modificationsText": "Reservamo-nos o direito de modificar estes termos a qualquer momento. As alterações entrarão em vigor imediatamente após a publicação no aplicativo.",
+      "privacyPolicy": "Política de Privacidade",
+      "privacyPolicyDescription": "Esta política de privacidade explica como coletamos, usamos e protegemos suas informações pessoais.",
+      "dataCollection": "1. Coleta de Dados",
+      "dataCollectionText": "Coletamos informações que você nos fornece diretamente, como quando você cria uma conta, usa nossos serviços ou entra em contato conosco para obter suporte.",
+      "dataUsage": "2. Como Usamos Seus Dados",
+      "dataUsageText": "Usamos suas informações para fornecer e melhorar nossos serviços, comunicar com você e garantir a segurança de nossa plataforma.",
+      "dataSecurity": "3. Segurança dos Dados",
+      "dataSecurityText": "Implementamos medidas de segurança apropriadas para proteger suas informações pessoais contra acesso não autorizado, alteração, divulgação ou destruição.",
+      "contact": "Contate-Nos",
+      "contactText": "Se você tiver alguma dúvida sobre estes termos ou nossa política de privacidade, entre em contato conosco através da seção de ajuda ou junte-se ao nosso grupo do WhatsApp."
     }
   },
   "auth": {
@@ -173,6 +223,7 @@
   "services": {
     "title": "Serviços",
     "market": "Mercado",
+    "weather": "Clima",
     "traq": {
       "title": "Traq'",
       "about": "O Traq (Traquenard) é o bar dos estudantes onde podes desfrutar de várias bebidas.",
@@ -182,7 +233,7 @@
       "price": "Preço",
       "priceHalf": "Meia (25cl)",
       "alcohol": "Álcool",
-      "limited": "Limitada",
+      "limited": "Limitado",
       "outOfStock": "Fora de stock",
       "noItemsFound": "Nenhum item encontrado"
     },
@@ -234,7 +285,7 @@
       "location": "No âmbito do MDE, após as caixas de correio"
     },
     "openingHours": "Horário de funcionamento",
-    "location": "Aluguer",
+    "location": "Localização",
     "price": "Preço",
     "additionalInfo": "Informações adicionais"
   },
@@ -248,7 +299,7 @@
     "phone": "Telefone",
     "email": "Correio eletrónico",
     "contactInfo": "Informações pessoais",
-    "graduation": "Grau",
+    "graduation": "Ano de Formatura",
     "notProvided": "Não fornecido",
     "security": "Segurança",
     "deleteAccount": "Eliminar a conta",

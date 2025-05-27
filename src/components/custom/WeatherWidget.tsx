@@ -92,7 +92,7 @@ export function WeatherWidget() {
       </View>
       <View className="items-center justify-center">
         <View
-          className="w-24 h-24 rounded-lg"
+          className="w-24 h-24 rounded-md"
           style={{ backgroundColor: theme.onSurface }}
         >
           <Image

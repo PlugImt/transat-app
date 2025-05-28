@@ -37,9 +37,12 @@ $ npm i
 
 # Lancer l'application
 $ npm run android # ou iOS
+
+# Au prochain lancement
+$ npm run start
 ```
 
-Vous aurez ensuite besoin d'installer l'applicationmobile [Expo Go](https://expo.dev/go) qui vous permettra de visualiser les changements apportés au projet en temps réel.
+Le `npm run android|ios` va compiler une development build, qui sera ensuite lancé au `npm run start` plus tard. Il n'est nécessaire de lancer la compilation de la dev build que quand il y a des grands changements dans l'application.
 
 ### 🌎 Traductions
 The app isn't available in your language yet? You can help us translate it!

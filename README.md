@@ -27,16 +27,16 @@ Pour clôner le projet et lancer l'application, vous aurez besoin d'installer [G
 
 ```bash
 # Clôner le projet
-$ git clone https://github.com/PlugImt/Transat.git
+$ git clone https://github.com/PlugImt/transat-app.git
 
 # Se déplacer dans le projet
 $ cd Transat
 
 # Installer les dépendances
-$ npm i --legacy-peer-deps
+$ npm i
 
 # Lancer l'application
-$ npx expo start --tunnel --clear
+$ npm run android # ou iOS
 ```
 
 Vous aurez ensuite besoin d'installer l'applicationmobile [Expo Go](https://expo.dev/go) qui vous permettra de visualiser les changements apportés au projet en temps réel.

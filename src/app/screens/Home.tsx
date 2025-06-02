@@ -8,6 +8,9 @@ import {
 import RestaurantWidget, {
   RestaurantWidgetLoading,
 } from "@/components/custom/widget/RestaurantWidget";
+import EmploiDuTempsWidget, {
+  EmploiDuTempsWidgetLoading,
+} from "@/components/custom/widget/EmploiDuTempsWidget";
 import WashingMachineWidget, {
   WashingMachineWidgetLoading,
 } from "@/components/custom/widget/WashingMachineWidget";
@@ -175,6 +178,10 @@ export const Home = () => {
     useIsFetching({
       queryKey: QUERY_KEYS.restaurantMenu,
     }) > 0;
+  const isEmploiDuTempsFetching =
+    useIsFetching({
+      queryKey: QUERY_KEYS.emploiDuTemps,
+    }) > 0;
   const isWashingMachinesFetching =
     useIsFetching({
       queryKey: QUERY_KEYS.washingMachines,
@@ -184,11 +191,12 @@ export const Home = () => {
       queryKey: QUERY_KEYS.weather,
     }) > 0;
   const isFetching =
-    isMenuFetching || isWashingMachinesFetching || isWeatherFetching;
+    isMenuFetching || isEmploiDuTempsFetching || isWashingMachinesFetching || isWeatherFetching;
 
   const refetch = async () => {
     await Promise.all([
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.restaurantMenu }),
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.emploiDuTemps }),
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.washingMachines }),
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.weather }),
     ]);
@@ -200,6 +208,8 @@ export const Home = () => {
         return <WeatherWidget />;
       case "restaurant":
         return <RestaurantWidget />;
+      case "emploiDuTemps":
+        return <EmploiDuTempsWidget />;
       case "washingMachine":
         return <WashingMachineWidget />;
       default:
@@ -346,6 +356,7 @@ export const HomeLoading = () => {
       {!isWeekend() && !isLunch() && !isDinner() ? (
         <RestaurantWidgetLoading />
       ) : null}
+      <EmploiDuTempsWidgetLoading />
       <WashingMachineWidgetLoading />
     </Page>
   );

@@ -40,6 +40,7 @@ export type AppStackParamList = {
   Home: undefined;
   WashingMachine: undefined;
   Restaurant: undefined;
+  EmploiDuTemps: undefined;
   Games: undefined;
   Profile: {
     userId: string;

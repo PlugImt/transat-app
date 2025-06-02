@@ -14,6 +14,7 @@ import { Clubs } from "@/app/screens/services/Clubs";
 import Games from "@/app/screens/services/Games";
 import { Olimtpe } from "@/app/screens/services/Olimtpe";
 import { Restaurant } from "@/app/screens/services/Restaurant";
+import { EmploiDuTemps } from "@/app/screens/services/EmploiDuTemps";
 import { Services } from "@/app/screens/services/Services";
 import { Traq } from "@/app/screens/services/Traq";
 import { WashingMachine } from "@/app/screens/services/WashingMachine";
@@ -34,6 +35,7 @@ const HomeStackScreen = () => (
     <ServicesStack.Screen name="WashingMachine" component={WashingMachine} />
     <ServicesStack.Screen name="Restaurant" component={Restaurant} />
     <ServicesStack.Screen name="Olimtpe" component={Olimtpe} />
+    <ServicesStack.Screen name="EmploiDuTemps" component={EmploiDuTemps} />
   </HomeStack.Navigator>
 );
 
@@ -43,6 +45,7 @@ const ServicesStackScreen = () => (
     <ServicesStack.Screen name="ServicesScreen" component={Services} />
     <ServicesStack.Screen name="WashingMachine" component={WashingMachine} />
     <ServicesStack.Screen name="Restaurant" component={Restaurant} />
+    <ServicesStack.Screen name="EmploiDuTemps" component={EmploiDuTemps} />
     <ServicesStack.Screen name="Clubs" component={Clubs} />
     <ServicesStack.Screen name="Traq" component={Traq} />
     <ServicesStack.Screen name="Olimtpe" component={Olimtpe} />

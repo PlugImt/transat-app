@@ -259,6 +259,12 @@
         "title": "Le restaurant est fermé",
         "description": "Revenez demain pour voir le menu"
       },
+      "emploiDuTemps": {
+        "title": "Emploi du temps",
+        "description": "L'emploi du temps est mis à jour quotidiennement pour vous informer de vos cours à venir.",
+        "noData": "Aucune donnée disponible pour aujourd'hui",
+        "loading": "Chargement de l'emploi du temps..."
+      },
       "location": "À côté du gymnase",
       "about": "API prépare des plats frais et faits maison quotidiennement—même la salade de fruits ! Le menu change tous les jours pour le déjeuner et le dîner.",
       "price": "3,95€ pour une entrée, un plat principal et un dessert.",

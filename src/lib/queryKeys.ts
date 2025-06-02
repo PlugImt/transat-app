@@ -1,5 +1,6 @@
 export const QUERY_KEYS = {
   restaurantMenu: ["restaurantMenu"],
+  emploiDuTemps: ["emploiDuTemps"],
   washingMachines: ["washingMachines"],
   weather: ["weather"],
   user: ["user"],

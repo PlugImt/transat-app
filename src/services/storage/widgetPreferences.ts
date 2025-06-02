@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export type WidgetType = "weather" | "restaurant" | "washingMachine";
-export type ServiceType = "washingMachine" | "restaurant" | "traq" | "olimtpe";
+export type WidgetType = "weather" | "restaurant" | "emploiDuTemps" | "washingMachine";
+export type ServiceType = "washingMachine" | "restaurant" | "emploiDuTemps" | "traq" | "olimtpe";
 export type ServiceSize = "full" | "half";
 
 export interface WidgetPreference {
@@ -28,7 +28,8 @@ const SERVICES_KEY = "services_preferences";
 const defaultHomeWidgets: WidgetPreference[] = [
   { id: "weather", name: "Weather", enabled: true, order: 0 },
   { id: "restaurant", name: "Restaurant", enabled: true, order: 1 },
-  { id: "washingMachine", name: "Washing Machine", enabled: true, order: 2 },
+  { id: "emploiDuTemps", name: "Emploi du Temps", enabled: true, order: 2 },
+  { id: "washingMachine", name: "Washing Machine", enabled: true, order: 3 },
 ];
 
 const defaultServices: ServicePreference[] = [
@@ -51,10 +52,19 @@ const defaultServices: ServicePreference[] = [
     screen: "Restaurant",
   },
   {
+    id: "emploiDuTemps",
+    name: "Emploi du Temps",
+    enabled: true,
+    order: 2,
+    size: "full",
+    image: require("@/assets/images/Logos/restaurant_large.png"),
+    screen: "EmploiDuTemps",
+  },
+  {
     id: "traq",
     name: "Traq",
     enabled: true,
-    order: 2,
+    order: 3,
     size: "full",
     image: require("@/assets/images/Logos/traq_large.png"),
     screen: "Traq",
@@ -63,7 +73,7 @@ const defaultServices: ServicePreference[] = [
     id: "olimtpe",
     name: "OL'IMT'PE",
     enabled: true,
-    order: 3,
+    order: 4,
     size: "full",
     image: require("@/assets/images/Logos/olimtpe.png"),
     screen: "Olimtpe",

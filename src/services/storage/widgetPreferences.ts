@@ -66,7 +66,7 @@ const defaultServices: ServicePreference[] = [
     enabled: true,
     order: 2,
     size: "full",
-    image: require("@/assets/images/Logos/restaurant_large.png"),
+    image: require("@/assets/images/Logos/edt_large.png"),
     screen: "EmploiDuTemps",
   },
   {

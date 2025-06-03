@@ -10,13 +10,7 @@ import { Image, Text, View } from "react-native";
 export const EmploiDuTemps = () => {
   const { t } = useTranslation();
 
-  const {
-    data: menu,
-    isPending,
-    refetch,
-    error,
-    isError,
-  } = useEmploiDuTemps();
+  const { data: menu, isPending, refetch, error, isError } = useEmploiDuTemps();
 
   const weekend: boolean = useMemo(() => isWeekend(), []);
   const outOfHours: boolean = useMemo(
@@ -180,13 +174,13 @@ export const EmploiDuTemps = () => {
         <View className="flex flex-col gap-4">
           <Text className="h3 ml-4">{t("services.restaurant.lunch")}</Text>
         </View>
-          <View className="flex flex-col gap-4">
-            <Text className="h3 ml-4">{t("services.restaurant.dinner")}</Text>
-              <EmploiDuTempsCard
-                title={t("services.restaurant.grill")}
-                icon={"Beef"}
-              />
-          </View>
+        <View className="flex flex-col gap-4">
+          <Text className="h3 ml-4">{t("services.restaurant.dinner")}</Text>
+          <EmploiDuTempsCard
+            title={t("services.restaurant.grill")}
+            icon={"Beef"}
+          />
+        </View>
       </View>
     </Page>
   );

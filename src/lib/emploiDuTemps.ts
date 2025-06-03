@@ -4,7 +4,9 @@ import { apiRequest } from "./apiRequest";
 
 const TARGET_URL = "/api/emploiDuTemps";
 
-export async function getEmploiDuTemps(): Promise<EmploiDuTempsData | undefined> {
+export async function getEmploiDuTemps(): Promise<
+  EmploiDuTempsData | undefined
+> {
   // retrieve the language from the local storage
   const currentLanguage = i18n.language.toLowerCase();
 

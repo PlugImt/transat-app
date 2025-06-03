@@ -87,7 +87,9 @@ export const About = () => {
               />
               <Button
                 label="Pacôme"
-                onPress={() => handleOpenLink("https://github.com/PacomeCailleteau")}
+                onPress={() =>
+                  handleOpenLink("https://github.com/PacomeCailleteau")
+                }
                 variant="outlined"
               />
               <Button

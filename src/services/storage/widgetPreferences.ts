@@ -1,7 +1,16 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export type WidgetType = "weather" | "restaurant" | "emploiDuTemps" | "washingMachine";
-export type ServiceType = "washingMachine" | "restaurant" | "emploiDuTemps" | "traq" | "olimtpe";
+export type WidgetType =
+  | "weather"
+  | "restaurant"
+  | "emploiDuTemps"
+  | "washingMachine";
+export type ServiceType =
+  | "washingMachine"
+  | "restaurant"
+  | "emploiDuTemps"
+  | "traq"
+  | "olimtpe";
 export type ServiceSize = "full" | "half";
 
 export interface WidgetPreference {

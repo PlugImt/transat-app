@@ -1,5 +1,5 @@
-import { QUERY_KEYS } from "@/lib/queryKeys";
 import { getEmploiDuTemps } from "@/lib/emploiDuTemps";
+import { QUERY_KEYS } from "@/lib/queryKeys";
 import { useQuery } from "@tanstack/react-query";
 
 export const useEmploiDuTemps = () => {

@@ -5,12 +5,12 @@ import {
   WeatherSkeleton,
   WeatherWidget,
 } from "@/components/custom/WeatherWidget";
-import RestaurantWidget, {
-  RestaurantWidgetLoading,
-} from "@/components/custom/widget/RestaurantWidget";
 import EmploiDuTempsWidget, {
   EmploiDuTempsWidgetLoading,
 } from "@/components/custom/widget/EmploiDuTempsWidget";
+import RestaurantWidget, {
+  RestaurantWidgetLoading,
+} from "@/components/custom/widget/RestaurantWidget";
 import WashingMachineWidget, {
   WashingMachineWidgetLoading,
 } from "@/components/custom/widget/WashingMachineWidget";
@@ -191,7 +191,10 @@ export const Home = () => {
       queryKey: QUERY_KEYS.weather,
     }) > 0;
   const isFetching =
-    isMenuFetching || isEmploiDuTempsFetching || isWashingMachinesFetching || isWeatherFetching;
+    isMenuFetching ||
+    isEmploiDuTempsFetching ||
+    isWashingMachinesFetching ||
+    isWeatherFetching;
 
   const refetch = async () => {
     await Promise.all([

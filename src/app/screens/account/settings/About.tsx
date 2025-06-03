@@ -85,6 +85,16 @@ export const About = () => {
                 onPress={() => handleOpenLink("https://github.com/maxbodin")}
                 variant="outlined"
               />
+              <Button
+                label="Pacôme"
+                onPress={() => handleOpenLink("https://github.com/PacomeCailleteau")}
+                variant="outlined"
+              />
+              <Button
+                label="Marina"
+                onPress={() => handleOpenLink("https://github.com/Enockii")}
+                variant="outlined"
+              />
             </View>
           </View>
         </View>

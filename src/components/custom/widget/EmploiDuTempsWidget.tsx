@@ -34,7 +34,7 @@ export function EmploiDuTempsWidget() {
     [menu?.updated_date],
   ); // TODO: fix this because the menu date is undefined/NaN so it's never displayed
 
-  const title = t("services.emploiDuTemps.title")
+  const title = t("services.emploiDuTemps.title");
 
   if (isPending) {
     return <EmploiDuTempsWidgetLoading />;
@@ -135,7 +135,7 @@ export function EmploiDuTempsWidget() {
         style={{ backgroundColor: theme.card }}
         className="px-6 py-4 rounded-lg flex flex-col gap-6"
       >
-        { menu?.updated_date }
+        {menu?.updated_date}
       </TouchableOpacity>
     </View>
   );

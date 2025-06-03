@@ -34,12 +34,7 @@ export function EmploiDuTempsWidget() {
     [menu?.updated_date],
   ); // TODO: fix this because the menu date is undefined/NaN so it's never displayed
 
-  const title =
-    !weekend && lunch
-      ? t("services.restaurant.widgetLunch")
-      : !weekend && dinner
-        ? t("services.restaurant.widgetDinner")
-        : "";
+  const title = t("services.emploiDuTemps.title")
 
   if (isPending) {
     return <EmploiDuTempsWidgetLoading />;
@@ -48,8 +43,13 @@ export function EmploiDuTempsWidget() {
   if (error || weekend || outOfHours || (!lunch && !dinner) || !updatedToday) {
     return (
       <View className="flex flex-col gap-2">
-        <Text className="h3 ml-4">{t("services.restaurant.title")}</Text>
-        <View className="px-6 py-4 rounded-lg bg-card flex flex-row gap-6 items-center overflow-hidden">
+        <Text style={{ color: theme.text }} className="h3 ml-4">
+          {t("services.restaurant.title")}
+        </Text>
+        <View
+          style={{ backgroundColor: theme.card }}
+          className="px-6 py-4 rounded-lg flex flex-row gap-6 items-center overflow-hidden"
+        >
           <Image
             source={require("@/assets/images/Logos/restaurant_bw.png")}
             className="w-24 h-24"
@@ -61,7 +61,8 @@ export function EmploiDuTempsWidget() {
             {weekend ? (
               <>
                 <Text
-                  className="text-lg text-foreground font-bold text-center"
+                  className="text-lg font-bold text-center"
+                  style={{ color: theme.text }}
                   numberOfLines={2}
                   ellipsizeMode="tail"
                 >
@@ -69,7 +70,8 @@ export function EmploiDuTempsWidget() {
                 </Text>
 
                 <Text
-                  className="text-foreground text-center"
+                  className="text-center"
+                  style={{ color: theme.text }}
                   numberOfLines={3}
                   ellipsizeMode="tail"
                 >
@@ -79,7 +81,8 @@ export function EmploiDuTempsWidget() {
             ) : !updatedToday ? (
               <>
                 <Text
-                  className="text-lg text-foreground font-bold text-center"
+                  className="text-lg font-bold text-center"
+                  style={{ color: theme.text }}
                   numberOfLines={2}
                   ellipsizeMode="tail"
                 >
@@ -87,7 +90,8 @@ export function EmploiDuTempsWidget() {
                 </Text>
 
                 <Text
-                  className="text-foreground text-center"
+                  className="text-center"
+                  style={{ color: theme.text }}
                   numberOfLines={3}
                   ellipsizeMode="tail"
                 >
@@ -97,7 +101,8 @@ export function EmploiDuTempsWidget() {
             ) : (
               <>
                 <Text
-                  className="text-lg text-foreground font-bold text-center"
+                  className="text-lg font-bold text-center"
+                  style={{ color: theme.text }}
                   numberOfLines={2}
                   ellipsizeMode="tail"
                 >
@@ -105,7 +110,8 @@ export function EmploiDuTempsWidget() {
                 </Text>
 
                 <Text
-                  className="text-foreground text-center"
+                  className="text-center"
+                  style={{ color: theme.text }}
                   numberOfLines={3}
                   ellipsizeMode="tail"
                 >
@@ -119,7 +125,20 @@ export function EmploiDuTempsWidget() {
     );
   }
 
-  return <View className="flex flex-col gap-2">{Coucou}</View>;
+  return (
+    <View className="flex flex-col gap-2">
+      <Text style={{ color: theme.text }} className="h3 ml-4">
+        {title}
+      </Text>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Restaurant")}
+        style={{ backgroundColor: theme.card }}
+        className="px-6 py-4 rounded-lg flex flex-col gap-6"
+      >
+        { menu?.updated_date }
+      </TouchableOpacity>
+    </View>
+  );
 }
 
 export default EmploiDuTempsWidget;

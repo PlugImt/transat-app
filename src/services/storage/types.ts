@@ -57,6 +57,7 @@ type AccountStackParamList = {
   EditProfile: undefined;
   Settings: undefined;
   ChangePassword: undefined;
+  Feedback: undefined;
 };
 export type AccountNavigation = StackNavigationProp<AccountStackParamList>;
 

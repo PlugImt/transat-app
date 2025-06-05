@@ -1,6 +1,7 @@
 import { Home } from "@/app/screens/Home";
 import Account from "@/app/screens/account/Account";
 import EditProfile from "@/app/screens/account/EditAccount";
+import Feedback from "@/app/screens/account/Feedback";
 import About from "@/app/screens/account/settings/About";
 import { Appearance } from "@/app/screens/account/settings/Appearance";
 import ChangePassword from "@/app/screens/account/settings/ChangePassword";
@@ -65,6 +66,7 @@ const AccountStackScreen = () => (
   <AccountStack.Navigator screenOptions={{ headerShown: false }}>
     <AccountStack.Screen name="AccountScreen" component={Account} />
     <AccountStack.Screen name="EditProfile" component={EditProfile} />
+    <AccountStack.Screen name="Feedback" component={Feedback} />
     <AccountStack.Screen name="Settings" component={Settings} />
     <AccountStack.Screen name="ChangePassword" component={ChangePassword} />
     <AccountStack.Screen name="Notifications" component={Notifications} />

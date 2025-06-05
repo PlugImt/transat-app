@@ -17,7 +17,11 @@ Sentry.init({
   replaysSessionSampleRate: 0.1,
   replaysOnErrorSampleRate: 1,
   integrations: [
-    Sentry.mobileReplayIntegration(),
+    Sentry.mobileReplayIntegration({
+      maskAllText: false,
+      maskAllImages: false,
+      maskAllVectors: false,
+    }),
     Sentry.feedbackIntegration(),
   ],
 

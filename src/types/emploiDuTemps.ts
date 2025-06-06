@@ -1,6 +1,12 @@
 import type { User } from "@/types/user";
 
 export interface EmploiDuTempsData {
+  courses: Course[];
+  user_email: User["email"];
+  created_at: string;
+}
+
+export interface Course {
   id: number;
   date: Date;
   titre: string;
@@ -9,6 +15,5 @@ export interface EmploiDuTempsData {
   profs: string;
   salles: string;
   groupe: string;
-  user_email: User["email"];
   created_at: string;
 }

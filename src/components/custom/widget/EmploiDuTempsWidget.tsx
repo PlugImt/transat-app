@@ -1,12 +1,14 @@
-import { TextSkeleton } from "@/components/Skeleton";
-import { useTheme } from "@/contexts/ThemeContext";
-import { useEmploiDuTemps } from "@/hooks/useEmploiDuTemps";
-import type { AppStackParamList } from "@/services/storage/types";
-import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
+import { TextSkeleton } from '@/components/Skeleton';
+import { useTheme } from '@/contexts/ThemeContext';
+import { useEmploiDuTemps } from '@/hooks/useEmploiDuTemps';
+import type { AppStackParamList } from '@/services/storage/types';
+import { useNavigation } from '@react-navigation/native';
+import type { StackNavigationProp } from '@react-navigation/stack';
 
-import { useTranslation } from "react-i18next";
-import { Text, TouchableOpacity, View } from "react-native";
+import { useUser } from '@/hooks/account/useUser';
+import type { Course } from '@/types/emploiDuTemps';
+import { useTranslation } from 'react-i18next';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -14,12 +16,48 @@ export function EmploiDuTempsWidget() {
   const { t } = useTranslation();
   const { theme } = useTheme();
 
+  const { data: user } = useUser();
+
   const navigation = useNavigation<AppScreenNavigationProp>();
-  const { data: edt, isPending, error } = useEmploiDuTemps();
+
+  const {
+    data: edt,
+    isPending: isPendingEdt,
+    error,
+  } = useEmploiDuTemps(user?.email || "");
+
+  const edtWithMockData = {
+    ...edt,
+    courses: [
+      ...(edt?.courses || []),
+      {
+        id: 1,
+        date: new Date(),
+        titre: "Méthodes Numériques - Cours 1",
+        heure_debut: "08:00",
+        heure_fin: "10:00",
+        profs: "M. Dupont",
+        salles: "NA-J144 (V-40)",
+        groupe: "Groupe A",
+        created_at: new Date().toISOString(),
+      },
+      {
+        id: 2,
+        date: new Date(),
+        titre: "Physique",
+        heure_debut: "10:30",
+        heure_fin: "12:30",
+        profs: "Mme Martin",
+        salles: "Salle 102",
+        groupe: "Groupe B",
+        created_at: new Date().toISOString(),
+      },
+    ],
+  };
 
   const title = t("services.emploiDuTemps.title");
 
-  if (isPending) {
+  if (isPendingEdt) {
     return <EmploiDuTempsWidgetLoading />;
   }
 
@@ -60,10 +98,44 @@ export function EmploiDuTempsWidget() {
       </Text>
       <TouchableOpacity
         onPress={() => navigation.navigate("EmploiDuTemps")}
-        style={{ backgroundColor: theme.card }}
-        className="px-6 py-4 rounded-lg flex flex-col gap-6"
+        className="rounded-lg flex flex-col gap-3"
       >
-        {edt?.updated_date}
+        {edtWithMockData?.courses.map((course: Course) => (
+          <View
+            key={course.id}
+            className="flex flex-col rounded-lg gap-1.5 py-2"
+            style={{ backgroundColor: theme.card }}
+          >
+            <Text
+              className="text-base ml-4"
+              style={{ color: theme.text }}
+              ellipsizeMode="tail"
+            >
+              {course.titre}
+            </Text>
+            <View className="flex flex-row items-center gap-2">
+              <Text
+                className="text-sm ml-4"
+                style={{ color: theme.text }}
+                ellipsizeMode="tail"
+              >
+                {course.heure_debut} - {course.heure_fin}
+              </Text>
+              <View>
+                <Text
+                  className="pl-1 pr-1 rounded-md text-base ml-4"
+                  style={{
+                    backgroundColor: theme.primary,
+                    color: theme.background,
+                  }}
+                  ellipsizeMode="tail"
+                >
+                  {course.salles}
+                </Text>
+              </View>
+            </View>
+          </View>
+        ))}
       </TouchableOpacity>
     </View>
   );

@@ -57,10 +57,11 @@ function TabsTrigger({
 
   return (
     <TouchableOpacity
-      className={cn("px-8 py-3 rounded-md flex-1 bg-muted", {
-        "bg-foreground": activeTab === value,
-        className,
-      })}
+      className={cn("px-8 py-3 rounded-md flex-1", className)}
+      style={{
+        backgroundColor:
+          activeTab === value ? theme.foregroundPlaceholder : theme.card,
+      }}
       onPress={() => setActiveTab(value)}
       {...props}
     >

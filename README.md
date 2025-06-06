@@ -5,50 +5,26 @@
     Transat
 </h1>
 
-<h4 align="center">L'application du campus pour l'IMT Atlantique de Nantes</h4>
+<h4 align="center">L'application du campus de Nantes d'IMT Atlantique</h4>
 
 <p align="center">
   <a href="#🛠️-participer-au-développement">Participer</a> •
   <a href="#🕹️-technos-utilisées">Technos</a> •
   <a href="#👋-nous-contacter">Contact</a> •
-  <a href="#🤠-crédits">Crédit</a> •
-  <a href="#©-licence">Licence</a> •
+  <a href="#🤠-crédits">Crédits</a> •
+  <a href="#licence">Licence</a>
 </p>
 
-![Screenshot de l'appli](/assets/preview.png)
-
-> **NOTE:** Plug'IMT est une association créée par des étudiants de l'IMT mais n'est pas affilié à l'école
+> **NOTE:** Plug'IMT est un club créé par des étudiants d'IMT Atlantique mais n'est pas affilié à l'école
 
 ## 🛠️ Participer au développement
 
-### Code
-
-Pour clôner le projet et lancer l'application, vous aurez besoin d'installer [Git](https://git-scm.com) et [Node.js](https://nodejs.org/en/download/) (qui installe [npm](http://npmjs.com)). Depuis votre terminal:
-
-```bash
-# Clôner le projet
-$ git clone https://github.com/PlugImt/transat-app.git
-
-# Se déplacer dans le projet
-$ cd Transat
-
-# Installer les dépendances
-$ npm i
-
-# Lancer l'application
-$ npm run android # ou iOS
-
-# Au prochain lancement
-$ npm run start
-```
-
-Le `npm run android|ios` va compiler une development build, qui sera ensuite lancé au `npm run start` plus tard. Il n'est nécessaire de lancer la compilation de la dev build que quand il y a des grands changements dans l'application.
+Voir la page [Première configuration de l'environnement sur la documentation](https://docs.transat.dev/app/2-premier-lancement/)
 
 ### 🌎 Traductions
-The app isn't available in your language yet? You can help us translate it!
+L’application n’est pas encore disponible dans votre langue ? Vous pouvez nous aider à la traduire !
 
 => [Crowdin translation project](https://crowdin.com/project/transat/invite?h=818cd265f3f9d6680d0caab9d29998ee2225755)
-
 
 <!-- ### Design
 
@@ -60,19 +36,14 @@ Pour participer au design de l'application, faites une demande pour modifier le 
 
 ## 🕹️ Technos utilisées
 
-<img src="https://skillicons.dev/icons?i=react,tailwind,golang,postgresql,sentry" alt="Les technologies utilisées" />
+<img src="https://skillicons.dev/icons?i=react,tailwind,typescript,golang,postgresql,sentry" alt="Les technologies utilisées" />
 
 ## 🤝 Remerciements
 
 Merci à Sentry pour leur offre gratuite !
 
-## 👋 Nous contacter
-<!-- Rejoignez le groupe Whatsapp de [Transat](https://chat.whatsapp.com/Hu2SjIL3ROx9y3BDcKNCyY) -->
-
-            
-<!-- ## 🫶 Soutenir l'association
-
-Contribuez à la cagnotte Lydia -->
+<!--## 👋 Nous contacter
+ Rejoignez le groupe Whatsapp de [Transat](https://chat.whatsapp.com/Hu2SjIL3ROx9y3BDcKNCyY) -->
 
 ## 🤠 Crédits
 
@@ -136,6 +107,6 @@ Contribuez à la cagnotte Lydia -->
 </table>
 <!-- readme: collaborators,contributors -end -->
 
-## © Licence
+## Licence
 
 [MIT](LICENSE)

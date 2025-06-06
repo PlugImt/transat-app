@@ -68,7 +68,7 @@ const Help = () => {
 
         <TabsContent value="faq">
           <View
-            className=" rounded-lg p-2"
+            className="rounded-lg p-2"
             style={{ backgroundColor: theme.card }}
           >
             {faqs.map((faq, index) => (
@@ -77,12 +77,9 @@ const Help = () => {
                   onPress={() => toggleFaq(index)}
                   className="flex-row justify-between items-center py-3"
                 >
-                  <View className="flex-row items-center gap-2 flex-1">
+                  <View className="flex-row items-center gap-2 flex-1 max-w-[80%]">
                     <HelpCircle size={20} color={theme.text} />
-                    <Text
-                      className=" font-medium"
-                      style={{ color: theme.text }}
-                    >
+                    <Text className="font-medium" style={{ color: theme.text }}>
                       {faq.question}
                     </Text>
                   </View>
@@ -122,7 +119,7 @@ const Help = () => {
               >
                 <View className="flex-row items-center gap-3">
                   <SquareArrowOutUpRight size={22} color={theme.text} />
-                  <View className="ml-2.5">
+                  <View className="ml-2.5 max-w-[80%]">
                     <Text style={{ color: theme.text }}>
                       {t("settings.help.joinWhatsApp")}
                     </Text>

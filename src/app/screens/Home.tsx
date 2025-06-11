@@ -5,9 +5,8 @@ import {
   WeatherSkeleton,
   WeatherWidget,
 } from "@/components/custom/WeatherWidget";
-import EmploiDuTempsWidget, {
-  EmploiDuTempsWidgetLoading,
-} from "@/components/custom/widget/EmploiDuTempsWidget";
+import EmploiDuTempsWidget from "@/components/custom/widget/EmploiDuTempsWidget";
+import { EmploiDuTempsWidgetLoading } from "@/components/custom/widget/EmploiDuTempsWidgetLoading";
 import RestaurantWidget, {
   RestaurantWidgetLoading,
 } from "@/components/custom/widget/RestaurantWidget";

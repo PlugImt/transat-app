@@ -15,7 +15,14 @@ import { getStudentYear } from "@/lib/utils";
 import type { AccountNavigation } from "@/services/storage/types";
 import { useNavigation } from "@react-navigation/native";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
-import { Lock, Mail, Medal, Phone, Settings } from "lucide-react-native";
+import {
+  Lock,
+  Mail,
+  Medal,
+  MessageSquare,
+  Phone,
+  Settings,
+} from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
 
@@ -146,6 +153,26 @@ export const Account = () => {
         <Button
           label={t("account.editProfile")}
           onPress={navigateToEditProfile}
+          size="sm"
+          variant="outlined"
+        />
+      </View>
+
+      <View
+        className=" rounded-lg px-6 py-4 gap-4"
+        style={{ backgroundColor: theme.card }}
+      >
+        <Text className="h3" style={{ color: theme.text }}>
+          {t("settings.feedback.sectionTitle")}
+        </Text>
+        <InfoItem
+          icon={<MessageSquare color={theme.text} size={20} />}
+          label={t("settings.feedback.giveFeedback")}
+          value={t("settings.feedback.helpImprove")}
+        />
+        <Button
+          label={t("settings.feedback.sendFeedback")}
+          onPress={() => navigation.navigate("Feedback")}
           size="sm"
           variant="outlined"
         />

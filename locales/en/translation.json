@@ -118,6 +118,25 @@
       "faq4Question": "How to contribute?",
       "faq4Answer": "If you want to contribute to the development of this app, you can join our team by contacting us on our WhatsApp group. We welcome any help, whether it's in development, design, or testing."
     },
+    "feedback": {
+      "title": "Feedback",
+      "sectionTitle": "Feedback",
+      "giveFeedback": "Give your feedback",
+      "helpImprove": "Help us improve the app",
+      "sendFeedback": "Send feedback",
+      "yourOpinionMatters": "Your opinion matters",
+      "helpDescription": "Help us improve the app by sharing your comments and suggestions",
+      "commentsLabel": "Comments",
+      "commentsPlaceholder": "Share your feedback, suggestions or bug reports...",
+      "sending": "Sending...",
+      "send": "Send feedback",
+      "privacyNote": "💡 Your feedback helps us improve the app. All information is handled confidentially.",
+      "successTitle": "Feedback sent",
+      "successMessage": "Thank you for your feedback! We will get back to you as soon as possible.",
+      "errorTitle": "Error",
+      "errorMessage": "An error occurred while sending your feedback. Please try again.",
+      "minLengthError": "Comment must contain at least 10 characters"
+    },
     "contactSupport": "Contact support",
     "appearance": {
       "title": "Appearance",
@@ -267,6 +286,22 @@
       "about": "API prepares fresh and homemade dishes daily—even the fruit salad! The menu changes every day for lunch and dinner.",
       "price": "3.95 € for a starter, main course and dessert.",
       "additionalInfo": "You can exchange a starter for a dessert. Additional dishes are available for an extra cost. Still hungry? Ask the servers! After 7:45 PM, additional food at dinner is free."
+    },
+    "emploiDuTemps": {
+      "title": "Schedule",
+      "description": "The schedule is updated daily to inform you of your upcoming classes.",
+      "noData": "No data available for today",
+      "loading": "Loading schedule...",
+      "noEdt": {
+        "title": "An error occurred while retrieving the schedule.",
+        "description": "Please refer to PASS."
+      },
+      "noCourses": {
+        "morningTitle": "No classes scheduled for this morning",
+        "afternoonTitle": "No classes scheduled for this afternoon",
+        "dayTitle": "No classes scheduled for today",
+        "description": "Please check PASS."
+      }
     },
     "olimtpe": {
       "title": "OL'IMT'PE",

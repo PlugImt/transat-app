@@ -163,6 +163,25 @@
       "dataSecurityText": "Implementamos medidas de segurança apropriadas para proteger suas informações pessoais contra acesso não autorizado, alteração, divulgação ou destruição.",
       "contact": "Contate-Nos",
       "contactText": "Se você tiver alguma dúvida sobre estes termos ou nossa política de privacidade, entre em contato conosco através da seção de ajuda ou junte-se ao nosso grupo do WhatsApp."
+    },
+    "feedback": {
+      "title": "Feedback",
+      "sectionTitle": "Feedback",
+      "giveFeedback": "Dê o seu feedback",
+      "helpImprove": "Ajude-nos a melhorar a aplicação",
+      "sendFeedback": "Enviar feedback",
+      "yourOpinionMatters": "A sua opinião importa",
+      "helpDescription": "Ajude-nos a melhorar a aplicação partilhando os seus comentários e sugestões",
+      "commentsLabel": "Comentários",
+      "commentsPlaceholder": "Partilhe os seus comentários, sugerências ou relatórios de bugs...",
+      "sending": "Enviando...",
+      "send": "Enviar feedback",
+      "privacyNote": "💡 Os seus comentários ajudam-nos a melhorar a aplicação. Toda a informação é tratada de forma confidencial.",
+      "successTitle": "Feedback enviado",
+      "successMessage": "Obrigado pelo seu feedback! Entraremos em contacto o mais breve possível.",
+      "errorTitle": "Erro",
+      "errorMessage": "Ocorreu um erro ao enviar o seu feedback. Por favor, tente novamente.",
+      "minLengthError": "O comentário deve conter pelo menos 10 caracteres"
     }
   },
   "auth": {
@@ -267,6 +286,22 @@
         "description": "O cardápio não foi atualizado. Volte mais tarde."
       }
     },
+    "emploiDuTemps": {
+      "title": "Horário",
+      "description": "O horário é atualizado diariamente para informar sobre suas próximas aulas.",
+      "noData": "Nenhum dado disponível para hoje",
+      "loading": "Carregando horário...",
+      "noEdt": {
+        "title": "Ocorreu um erro ao recuperar o horário.",
+        "description": "Por favor, consulte o PASS."
+      },
+      "noCourses": {
+        "morningTitle": "Nenhuma aula programada para esta manhã",
+        "afternoonTitle": "Nenhuma aula programada para esta tarde",
+        "dayTitle": "Nenhuma aula programada para hoje",
+        "description": "Por favor, verifique o PASS."
+      }
+    },
     "olimtpe": {
       "title": "OL'IMT'PE",
       "welcome": "Bem-vindo ao OL'IMT'PE!",
@@ -347,5 +382,6 @@
     "firstYear": "1º ano",
     "secondYear": "2º ano",
     "thirdYear": "3º ano"
-  }
+  },
+  "contactSupport": "Contacto de apoio"
 }

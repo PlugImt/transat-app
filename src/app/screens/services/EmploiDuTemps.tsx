@@ -1,6 +1,7 @@
 import Page from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
 import EmploiDuTempsCard from "@/components/custom/card/EmploiDuTempsCard";
+import useAuth from "@/hooks/account/useAuth";
 import { useEmploiDuTemps } from "@/hooks/useEmploiDuTemps";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
@@ -8,7 +9,11 @@ import { Text, View } from "react-native";
 export const EmploiDuTemps = () => {
   const { t } = useTranslation();
 
-  const { data: edt, isPending, refetch, error, isError } = useEmploiDuTemps();
+  const { user } = useAuth();
+
+  const { refetch, isError, isPending, error } = useEmploiDuTemps(
+    user?.email || "",
+  );
 
   if (isPending) {
     return <EmploiDuTempsLoading />;

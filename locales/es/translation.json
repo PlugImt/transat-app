@@ -117,6 +117,25 @@
         "resolved": "Resuelto"
       }
     },
+    "feedback": {
+      "title": "Feedback",
+      "sectionTitle": "Feedback",
+      "giveFeedback": "Danos tu opinión",
+      "helpImprove": "Ayúdanos a mejorar la aplicación",
+      "sendFeedback": "Enviar feedback",
+      "yourOpinionMatters": "Tu opinión importa",
+      "helpDescription": "Ayúdanos a mejorar la aplicación compartiendo tus comentarios y sugerencias",
+      "commentsLabel": "Comentarios",
+      "commentsPlaceholder": "Comparte tus comentarios, sugerencias o reportes de errores...",
+      "sending": "Enviando...",
+      "send": "Enviar feedback",
+      "privacyNote": "💡 Tus comentarios nos ayudan a mejorar la aplicación. Toda la información se maneja de forma confidencial.",
+      "successTitle": "Feedback enviado",
+      "successMessage": "¡Gracias por tu comentario! Te responderemos lo antes posible.",
+      "errorTitle": "Error",
+      "errorMessage": "Ocurrió un error al enviar tu feedback. Por favor, inténtalo de nuevo.",
+      "minLengthError": "El comentario debe contener al menos 10 caracteres"
+    },
     "contactSupport": "Contactar con soporte",
     "appearance": {
       "title": "Apariencia",
@@ -265,6 +284,22 @@
       "closedUpdated": {
         "title": "Aún no tenemos el menú",
         "description": "El menú no se ha actualizado. Vuelva más tarde."
+      }
+    },
+    "emploiDuTemps": {
+      "title": "Horario",
+      "description": "El horario se actualiza diariamente para informarte sobre tus próximas clases.",
+      "noData": "No hay datos disponibles para hoy",
+      "loading": "Cargando horario...",
+      "noEdt": {
+        "title": "Se produjo un error al recuperar el horario.",
+        "description": "Por favor, consulta PASS."
+      },
+      "noCourses": {
+        "morningTitle": "No hay clases programadas para esta mañana",
+        "afternoonTitle": "No hay clases programadas para esta tarde",
+        "dayTitle": "No hay clases programadas para hoy",
+        "description": "Por favor, revisa PASS."
       }
     },
     "olimtpe": {

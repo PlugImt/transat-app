@@ -116,7 +116,7 @@ export async function uploadImage(): Promise<string> {
       throw new Error(t("account.profilePictureUpdateFailed"));
     }
 
-    return apiUrl + uploadResponse.data.url;
+    return uploadResponse.data.url;
   } catch (error) {
     console.error("Image upload failed:", error);
     throw new Error(t("account.profilePictureUpdateFailed"));

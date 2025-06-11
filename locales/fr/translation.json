@@ -275,13 +275,13 @@
       "loading": "Chargement de l'emploi du temps...",
       "noEdt": {
         "title": "Une erreur est survenue lors de la récupération de l’emploi du temps.",
-        "description": "Veuillez vérifier sur PASS."
+        "description": "Veuillez vous référer à PASS."
       },
       "noCourses": {
         "morningTitle": "Aucun cours prévu pour ce matin",
         "afternoonTitle": "Aucun cours prévu pour cette après-midi",
         "dayTitle": "Aucun cours prévu pour aujourd'hui",
-        "description": "(Veuillez vérifier sur PASS)"
+        "description": "Veuillez vérifier sur PASS."
       }
     },
     "olimtpe": {

@@ -268,6 +268,22 @@
       "price": "3.95 € for a starter, main course and dessert.",
       "additionalInfo": "You can exchange a starter for a dessert. Additional dishes are available for an extra cost. Still hungry? Ask the servers! After 7:45 PM, additional food at dinner is free."
     },
+    "emploiDuTemps": {
+      "title": "Schedule",
+      "description": "The schedule is updated daily to inform you of your upcoming classes.",
+      "noData": "No data available for today",
+      "loading": "Loading schedule...",
+      "noEdt": {
+        "title": "An error occurred while retrieving the schedule.",
+        "description": "Please refer to PASS."
+      },
+      "noCourses": {
+        "morningTitle": "No classes scheduled for this morning",
+        "afternoonTitle": "No classes scheduled for this afternoon",
+        "dayTitle": "No classes scheduled for today",
+        "description": "Please check PASS."
+      }
+    },
     "olimtpe": {
       "title": "OL'IMT'PE",
       "welcome": "Welcome to OL'IMT'PE!",

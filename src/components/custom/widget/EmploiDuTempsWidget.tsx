@@ -26,67 +26,138 @@ export function EmploiDuTempsWidget() {
     error,
   } = useEmploiDuTemps(user?.email || "");
 
-  const edtWithMockData = {
-    ...edt,
-    courses: [
-      ...(edt?.courses || []),
-      {
-        id: 1,
-        date: new Date(),
-        titre: "Méthodes Numériques - Cours 1",
-        heure_debut: "08:00",
-        heure_fin: "10:00",
-        profs: "M. Dupont",
-        salles: "NA-J144 (V-40)",
-        groupe: "Groupe A",
-        created_at: new Date().toISOString(),
-      },
-      {
-        id: 2,
-        date: new Date(),
-        titre: "Physique",
-        heure_debut: "10:30",
-        heure_fin: "12:30",
-        profs: "Mme Martin",
-        salles: "Salle 102",
-        groupe: "Groupe B",
-        created_at: new Date().toISOString(),
-      },
-    ],
+  const CUT_OFF_HOUR = 12;
+  const CUT_OFF_MINUTE = 30;
+
+  const now = new Date();
+  const isMorningNow =
+    now.getHours() < CUT_OFF_HOUR ||
+    (now.getHours() === CUT_OFF_HOUR && now.getMinutes() < CUT_OFF_MINUTE);
+
+  const parseTimeToDate = (timeStr: string) => {
+    const [hours, minutes] = timeStr.split(":").map(Number);
+    const date = new Date();
+    date.setHours(hours, minutes, 0, 0);
+    return date;
   };
 
-  const title = t("services.emploiDuTemps.title");
+  const cutoff = new Date();
+  cutoff.setHours(CUT_OFF_HOUR, CUT_OFF_MINUTE, 0, 0);
+
+  const isInMorning = (course: Course) => {
+    const heureDebut = parseTimeToDate(course.heure_debut);
+    return heureDebut < cutoff;
+  };
+
+  const isInAfternoon = (course: Course) => {
+    const heureFin = parseTimeToDate(course.heure_fin);
+    return heureFin > cutoff;
+  };
+
+  const morningCourses: Course[] | undefined =
+    edt?.courses?.filter(isInMorning);
+  const afternoonCourses: Course[] | undefined =
+    edt?.courses?.filter(isInAfternoon);
+
+  const filteredCourses: Course[] | undefined = isMorningNow
+    ? morningCourses
+    : afternoonCourses;
+
+  const noCoursesMorning = morningCourses?.length === 0;
+  const noCoursesAfternoon = afternoonCourses?.length === 0;
+  const noCoursesToday = !morningCourses?.length && !afternoonCourses?.length;
 
   if (isPendingEdt) {
     return <EmploiDuTempsWidgetLoading />;
   }
 
-  if (error) {
+  if (
+    error ||
+    noCoursesToday ||
+    (isMorningNow && noCoursesMorning) ||
+    (!isMorningNow && noCoursesAfternoon)
+  ) {
     return (
       <View className="flex flex-col gap-2 mr-2">
         <Text style={{ color: theme.text }} className="h3 ml-4">
           {t("services.emploiDuTemps.title")}
         </Text>
-
-        <View className="flex flex-col">
-          <>
-            <Text
-              className="text-base ml-4"
-              style={{ color: theme.text }}
-              ellipsizeMode="tail"
-            >
-              {t("services.emploiDuTemps.noEdt.title")}
-            </Text>
-
-            <Text
-              className="text-base ml-4 bold"
-              style={{ color: theme.primary }}
-              ellipsizeMode="tail"
-            >
-              {t("services.emploiDuTemps.noEdt.description")}
-            </Text>
-          </>
-        </View>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("EmploiDuTemps")}
+          className="rounded-lg flex flex-col gap-3"
+        >
+          <View className="flex flex-col">
+            {error ? (
+              <>
+                <Text
+                  className="text-base ml-4"
+                  style={{ color: theme.text }}
+                  ellipsizeMode="tail"
+                >
+                  {t("services.emploiDuTemps.noEdt.title")}
+                </Text>
+                <Text
+                  className="text-base ml-4 font-bold"
+                  style={{ color: theme.primary }}
+                  ellipsizeMode="tail"
+                >
+                  {t("services.emploiDuTemps.noEdt.description")}
+                </Text>
+              </>
+            ) : noCoursesToday ? (
+              <>
+                <Text
+                  className="text-base ml-4"
+                  style={{ color: theme.text }}
+                  ellipsizeMode="tail"
+                >
+                  {t("services.emploiDuTemps.noCourses.dayTitle")}
+                </Text>
+                <Text
+                  className="text-base ml-4 italic"
+                  style={{ color: theme.text }}
+                  ellipsizeMode="tail"
+                >
+                  {t("services.emploiDuTemps.noCourses.description")}
+                </Text>
+              </>
+            ) : isMorningNow && noCoursesMorning ? (
+              <>
+                <Text
+                  className="text-base ml-4"
+                  style={{ color: theme.text }}
+                  ellipsizeMode="tail"
+                >
+                  {t("services.emploiDuTemps.noCourses.morningTitle")}
+                </Text>
+                <Text
+                  className="text-base ml-4 italic"
+                  style={{ color: theme.text }}
+                  ellipsizeMode="tail"
+                >
+                  {t("services.emploiDuTemps.noCourses.description")}
+                </Text>
+              </>
+            ) : (
+              <>
+                <Text
+                  className="text-base ml-4"
+                  style={{ color: theme.text }}
+                  ellipsizeMode="tail"
+                >
+                  {t("services.emploiDuTemps.noCourses.afternoonTitle")}
+                </Text>
+                <Text
+                  className="text-base ml-4 italic"
+                  style={{ color: theme.text }}
+                  ellipsizeMode="tail"
+                >
+                  {t("services.emploiDuTemps.noCourses.description")}
+                </Text>
+              </>
+            )}
+          </View>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -94,13 +165,14 @@ export function EmploiDuTempsWidget() {
   return (
     <View className="flex flex-col gap-2">
       <Text style={{ color: theme.text }} className="h3 ml-4">
-        {title}
+        {t("services.emploiDuTemps.title")}
       </Text>
+
       <TouchableOpacity
         onPress={() => navigation.navigate("EmploiDuTemps")}
         className="rounded-lg flex flex-col gap-3"
       >
-        {edtWithMockData?.courses.map((course: Course) => (
+        {filteredCourses?.map((course: Course) => (
           <View
             key={course.id}
             className="flex flex-col rounded-lg gap-1.5 py-2"

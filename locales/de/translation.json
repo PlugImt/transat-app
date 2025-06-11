@@ -268,6 +268,22 @@
         "description": "Das Menü wurde nicht aktualisiert. Schauen Sie später wieder vorbei."
       }
     },
+    "emploiDuTemps": {
+      "title": "Stundenplan",
+      "description": "Der Stundenplan wird täglich aktualisiert, um Sie über Ihre kommenden Kurse zu informieren.",
+      "noData": "Keine Daten für heute verfügbar",
+      "loading": "Stundenplan wird geladen...",
+      "noEdt": {
+        "title": "Beim Abrufen des Stundenplans ist ein Fehler aufgetreten.",
+        "description": "Bitte sehen Sie in PASS nach."
+      },
+      "noCourses": {
+        "morningTitle": "Keine Kurse für heute Morgen geplant",
+        "afternoonTitle": "Keine Kurse für heute Nachmittag geplant",
+        "dayTitle": "Heute sind keine Kurse geplant",
+        "description": "Bitte überprüfen Sie PASS."
+      }
+    },
     "olimtpe": {
       "title": "OL'IMT'PE",
       "welcome": "Willkommen bei OL'IMT'PE!",

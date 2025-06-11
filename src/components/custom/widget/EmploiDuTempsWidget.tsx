@@ -1,14 +1,14 @@
-import { TextSkeleton } from '@/components/Skeleton';
-import { useTheme } from '@/contexts/ThemeContext';
-import { useEmploiDuTemps } from '@/hooks/useEmploiDuTemps';
-import type { AppStackParamList } from '@/services/storage/types';
-import { useNavigation } from '@react-navigation/native';
-import type { StackNavigationProp } from '@react-navigation/stack';
+import { TextSkeleton } from "@/components/Skeleton";
+import { useTheme } from "@/contexts/ThemeContext";
+import { useEmploiDuTemps } from "@/hooks/useEmploiDuTemps";
+import type { AppStackParamList } from "@/services/storage/types";
+import { useNavigation } from "@react-navigation/native";
+import type { StackNavigationProp } from "@react-navigation/stack";
 
-import { useUser } from '@/hooks/account/useUser';
-import type { Course } from '@/types/emploiDuTemps';
-import { useTranslation } from 'react-i18next';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { useUser } from "@/hooks/account/useUser";
+import type { Course } from "@/types/emploiDuTemps";
+import { useTranslation } from "react-i18next";
+import { Text, TouchableOpacity, View } from "react-native";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 

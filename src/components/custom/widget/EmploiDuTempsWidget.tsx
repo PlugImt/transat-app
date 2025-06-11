@@ -5,7 +5,7 @@ import type { AppStackParamList } from "@/services/storage/types";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 
-import { useUser } from "@/hooks/account/useUser";
+import { useAuth } from "@/hooks/account/useAuth";
 import type { Course } from "@/types/emploiDuTemps";
 import { useTranslation } from "react-i18next";
 import { Text, TouchableOpacity, View } from "react-native";
@@ -16,9 +16,9 @@ export function EmploiDuTempsWidget() {
   const { t } = useTranslation();
   const { theme } = useTheme();
 
-  const { data: user } = useUser();
-
   const navigation = useNavigation<AppScreenNavigationProp>();
+
+  const { user } = useAuth();
 
   const {
     data: edt,
@@ -217,7 +217,6 @@ export default EmploiDuTempsWidget;
 
 export const EmploiDuTempsWidgetLoading = () => {
   const { theme } = useTheme();
-  const { t } = useTranslation();
   const navigation = useNavigation<AppScreenNavigationProp>();
 
   const skeletonCount = () => Math.floor(Math.random() * 3) + 1;

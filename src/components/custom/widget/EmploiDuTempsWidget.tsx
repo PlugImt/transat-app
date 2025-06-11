@@ -1,14 +1,14 @@
-import { TextSkeleton } from "@/components/Skeleton";
-import { useTheme } from "@/contexts/ThemeContext";
-import { useEmploiDuTemps } from "@/hooks/useEmploiDuTemps";
-import { isDinner, isLunch, isWeekend, outOfService } from "@/lib/utils";
-import type { AppStackParamList } from "@/services/storage/types";
-import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
-import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
-import { useMemo } from "react";
-import { useTranslation } from "react-i18next";
-import { Dimensions, Image, Text, TouchableOpacity, View } from "react-native";
+import { TextSkeleton } from '@/components/Skeleton';
+import { useTheme } from '@/contexts/ThemeContext';
+import { useEmploiDuTemps } from '@/hooks/useEmploiDuTemps';
+import type { AppStackParamList } from '@/services/storage/types';
+import { useNavigation } from '@react-navigation/native';
+import type { StackNavigationProp } from '@react-navigation/stack';
+
+import { useUser } from '@/hooks/account/useUser';
+import type { Course } from '@/types/emploiDuTemps';
+import { useTranslation } from 'react-i18next';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -16,111 +16,148 @@ export function EmploiDuTempsWidget() {
   const { t } = useTranslation();
   const { theme } = useTheme();
 
+  const { data: user } = useUser();
+
   const navigation = useNavigation<AppScreenNavigationProp>();
-  const { data: menu, isPending, error } = useEmploiDuTemps();
 
-  const weekend: boolean = useMemo(() => isWeekend(), []);
-  const lunch: boolean = useMemo(() => isLunch(), []);
-  const dinner: boolean = useMemo(() => isDinner(), []);
-  const outOfHours: boolean = useMemo(
-    () => (menu?.updated_date ? outOfService(menu.updated_date) : false),
-    [menu?.updated_date],
-  );
-  const updatedToday: boolean = useMemo(
-    () =>
-      menu?.updated_date
-        ? new Date(menu.updated_date).getDay() === new Date().getDay()
-        : true,
-    [menu?.updated_date],
-  ); // TODO: fix this because the menu date is undefined/NaN so it's never displayed
+  const {
+    data: edt,
+    isPending: isPendingEdt,
+    error,
+  } = useEmploiDuTemps(user?.email || "");
 
-  const title = t("services.emploiDuTemps.title");
+  const CUT_OFF_HOUR = 12;
+  const CUT_OFF_MINUTE = 30;
 
-  if (isPending) {
+  const now = new Date();
+  const isMorningNow =
+    now.getHours() < CUT_OFF_HOUR ||
+    (now.getHours() === CUT_OFF_HOUR && now.getMinutes() < CUT_OFF_MINUTE);
+
+  const parseTimeToDate = (timeStr: string) => {
+    const [hours, minutes] = timeStr.split(":").map(Number);
+    const date = new Date();
+    date.setHours(hours, minutes, 0, 0);
+    return date;
+  };
+
+  const cutoff = new Date();
+  cutoff.setHours(CUT_OFF_HOUR, CUT_OFF_MINUTE, 0, 0);
+
+  const isInMorning = (course: Course) => {
+    const heureDebut = parseTimeToDate(course.heure_debut);
+    return heureDebut < cutoff;
+  };
+
+  const isInAfternoon = (course: Course) => {
+    const heureFin = parseTimeToDate(course.heure_fin);
+    return heureFin > cutoff;
+  };
+
+  const morningCourses: Course[] | undefined =
+    edt?.courses?.filter(isInMorning);
+  const afternoonCourses: Course[] | undefined =
+    edt?.courses?.filter(isInAfternoon);
+
+  const filteredCourses: Course[] | undefined = isMorningNow
+    ? morningCourses
+    : afternoonCourses;
+
+  const noCoursesMorning = morningCourses?.length === 0;
+  const noCoursesAfternoon = afternoonCourses?.length === 0;
+  const noCoursesToday = !morningCourses?.length && !afternoonCourses?.length;
+
+  if (isPendingEdt) {
     return <EmploiDuTempsWidgetLoading />;
   }
 
-  if (error || weekend || outOfHours || (!lunch && !dinner) || !updatedToday) {
+  if (
+    error ||
+    noCoursesToday ||
+    (isMorningNow && noCoursesMorning) ||
+    (!isMorningNow && noCoursesAfternoon)
+  ) {
     return (
-      <View className="flex flex-col gap-2">
+      <View className="flex flex-col gap-2 mr-2">
         <Text style={{ color: theme.text }} className="h3 ml-4">
-          {t("services.restaurant.title")}
+          {t("services.emploiDuTemps.title")}
         </Text>
-        <View
-          style={{ backgroundColor: theme.card }}
-          className="px-6 py-4 rounded-lg flex flex-row gap-6 items-center overflow-hidden"
+        <TouchableOpacity
+          onPress={() => navigation.navigate("EmploiDuTemps")}
+          className="rounded-lg flex flex-col gap-3"
         >
-          <Image
-            source={require("@/assets/images/Logos/restaurant_bw.png")}
-            className="w-24 h-24"
-          />
-          <View
-            className="flex flex-col gap-2"
-            style={{ maxWidth: Dimensions.get("window").width - 200 }}
-          >
-            {weekend ? (
+          <View className="flex flex-col">
+            {error ? (
               <>
                 <Text
-                  className="text-lg font-bold text-center"
+                  className="text-base ml-4"
                   style={{ color: theme.text }}
-                  numberOfLines={2}
                   ellipsizeMode="tail"
                 >
-                  {t("services.restaurant.closedNight.title")}
+                  {t("services.emploiDuTemps.noEdt.title")}
                 </Text>
-
                 <Text
-                  className="text-center"
-                  style={{ color: theme.text }}
-                  numberOfLines={3}
+                  className="text-base ml-4 font-bold"
+                  style={{ color: theme.primary }}
                   ellipsizeMode="tail"
                 >
-                  {t("services.restaurant.closedNight.description")}
+                  {t("services.emploiDuTemps.noEdt.description")}
                 </Text>
               </>
-            ) : !updatedToday ? (
+            ) : noCoursesToday ? (
               <>
                 <Text
-                  className="text-lg font-bold text-center"
+                  className="text-base ml-4"
                   style={{ color: theme.text }}
-                  numberOfLines={2}
                   ellipsizeMode="tail"
                 >
-                  {t("services.restaurant.closedUpdated.title")}
+                  {t("services.emploiDuTemps.noCourses.dayTitle")}
                 </Text>
-
                 <Text
-                  className="text-center"
+                  className="text-base ml-4 italic"
                   style={{ color: theme.text }}
-                  numberOfLines={3}
                   ellipsizeMode="tail"
                 >
-                  {t("services.restaurant.closedUpdated.description")}
+                  {t("services.emploiDuTemps.noCourses.description")}
+                </Text>
+              </>
+            ) : isMorningNow && noCoursesMorning ? (
+              <>
+                <Text
+                  className="text-base ml-4"
+                  style={{ color: theme.text }}
+                  ellipsizeMode="tail"
+                >
+                  {t("services.emploiDuTemps.noCourses.morningTitle")}
+                </Text>
+                <Text
+                  className="text-base ml-4 italic"
+                  style={{ color: theme.text }}
+                  ellipsizeMode="tail"
+                >
+                  {t("services.emploiDuTemps.noCourses.description")}
                 </Text>
               </>
             ) : (
               <>
                 <Text
-                  className="text-lg font-bold text-center"
+                  className="text-base ml-4"
                   style={{ color: theme.text }}
-                  numberOfLines={2}
                   ellipsizeMode="tail"
                 >
-                  {t("services.restaurant.closedWeekends")}
+                  {t("services.emploiDuTemps.noCourses.afternoonTitle")}
                 </Text>
-
                 <Text
-                  className="text-center"
+                  className="text-base ml-4 italic"
                   style={{ color: theme.text }}
-                  numberOfLines={3}
                   ellipsizeMode="tail"
                 >
-                  {t("services.restaurant.closedNight.description")}
+                  {t("services.emploiDuTemps.noCourses.description")}
                 </Text>
               </>
             )}
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -128,14 +165,49 @@ export function EmploiDuTempsWidget() {
   return (
     <View className="flex flex-col gap-2">
       <Text style={{ color: theme.text }} className="h3 ml-4">
-        {title}
+        {t("services.emploiDuTemps.title")}
       </Text>
+
       <TouchableOpacity
-        onPress={() => navigation.navigate("Restaurant")}
-        style={{ backgroundColor: theme.card }}
-        className="px-6 py-4 rounded-lg flex flex-col gap-6"
+        onPress={() => navigation.navigate("EmploiDuTemps")}
+        className="rounded-lg flex flex-col gap-3"
       >
-        {menu?.updated_date}
+        {filteredCourses?.map((course: Course) => (
+          <View
+            key={course.id}
+            className="flex flex-col rounded-lg gap-1.5 py-2"
+            style={{ backgroundColor: theme.card }}
+          >
+            <Text
+              className="text-base ml-4"
+              style={{ color: theme.text }}
+              ellipsizeMode="tail"
+            >
+              {course.titre}
+            </Text>
+            <View className="flex flex-row items-center gap-2">
+              <Text
+                className="text-sm ml-4"
+                style={{ color: theme.text }}
+                ellipsizeMode="tail"
+              >
+                {course.heure_debut} - {course.heure_fin}
+              </Text>
+              <View>
+                <Text
+                  className="pl-1 pr-1 rounded-md text-base ml-4"
+                  style={{
+                    backgroundColor: theme.primary,
+                    color: theme.background,
+                  }}
+                  ellipsizeMode="tail"
+                >
+                  {course.salles}
+                </Text>
+              </View>
+            </View>
+          </View>
+        ))}
       </TouchableOpacity>
     </View>
   );
@@ -155,67 +227,28 @@ export const EmploiDuTempsWidgetLoading = () => {
       <TextSkeleton lines={1} lastLineWidth={128} />
       <TouchableOpacity
         onPress={() => navigation.navigate("EmploiDuTemps")}
-        className="px-6 py-4 rounded-lg bg-card flex flex-col gap-6"
+        className="px-6 py-4 rounded-lg flex flex-col gap-6"
+        style={{ backgroundColor: theme.card }}
       >
         <View className="flex flex-col gap-2">
-          <View className="flex flex-row items-center gap-2">
-            <Beef color={theme.primary} />
-            <Text
-              className="text-lg font-bold text-primary"
-              ellipsizeMode="tail"
-            >
-              {t("services.restaurant.grill")}
-            </Text>
-          </View>
-
           {[...Array(skeletonCount()).keys()].map((index) => (
             <TextSkeleton lines={1} key={index} />
           ))}
         </View>
 
         <View className="flex flex-col gap-2">
-          <View className="flex flex-row items-center gap-2">
-            <ChefHat color={theme.primary} />
-            <Text
-              className="text-lg font-bold text-primary"
-              ellipsizeMode="tail"
-            >
-              {t("services.restaurant.migrator")}
-            </Text>
-          </View>
-
           {[...Array(skeletonCount()).keys()].map((index) => (
             <TextSkeleton lines={1} key={index} />
           ))}
         </View>
 
         <View className="flex flex-col gap-2">
-          <View className="flex flex-row items-center gap-2">
-            <Vegan color={theme.primary} />
-            <Text
-              className="text-lg font-bold text-primary"
-              ellipsizeMode="tail"
-            >
-              {t("services.restaurant.vegetarian")}
-            </Text>
-          </View>
-
           {[...Array(skeletonCount()).keys()].map((index) => (
             <TextSkeleton lines={1} key={index} />
           ))}
         </View>
 
         <View className="flex flex-col gap-2">
-          <View className="flex flex-row items-center gap-2">
-            <Soup color={theme.primary} />
-            <Text
-              className="text-lg font-bold text-primary"
-              ellipsizeMode="tail"
-            >
-              {t("services.restaurant.sideDishes")}
-            </Text>
-          </View>
-
           {[...Array(skeletonCount()).keys()].map((index) => (
             <TextSkeleton lines={1} key={index} />
           ))}

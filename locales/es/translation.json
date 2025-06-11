@@ -286,6 +286,22 @@
         "description": "El menú no se ha actualizado. Vuelva más tarde."
       }
     },
+    "emploiDuTemps": {
+      "title": "Horario",
+      "description": "El horario se actualiza diariamente para informarte sobre tus próximas clases.",
+      "noData": "No hay datos disponibles para hoy",
+      "loading": "Cargando horario...",
+      "noEdt": {
+        "title": "Se produjo un error al recuperar el horario.",
+        "description": "Por favor, consulta PASS."
+      },
+      "noCourses": {
+        "morningTitle": "No hay clases programadas para esta mañana",
+        "afternoonTitle": "No hay clases programadas para esta tarde",
+        "dayTitle": "No hay clases programadas para hoy",
+        "description": "Por favor, revisa PASS."
+      }
+    },
     "olimtpe": {
       "title": "OL'IMT'PE",
       "welcome": "¡Bienvenido a OL'IMT'PE!",

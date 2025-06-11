@@ -12,6 +12,7 @@ export interface User {
   total_newf?: number;
   password_updated_date?: string;
   language?: string;
+  pass_id?: number;
 }
 
 export interface Password {

@@ -291,7 +291,17 @@
       "title": "Emploi du temps",
       "description": "L'emploi du temps est mis à jour quotidiennement pour vous informer de vos cours à venir.",
       "noData": "Aucune donnée disponible pour aujourd'hui",
-      "loading": "Chargement de l'emploi du temps..."
+      "loading": "Chargement de l'emploi du temps...",
+      "noEdt": {
+        "title": "Une erreur est survenue lors de la récupération de l’emploi du temps.",
+        "description": "Veuillez vous référer à PASS."
+      },
+      "noCourses": {
+        "morningTitle": "Aucun cours prévu pour ce matin",
+        "afternoonTitle": "Aucun cours prévu pour cette après-midi",
+        "dayTitle": "Aucun cours prévu pour aujourd'hui",
+        "description": "Veuillez vérifier sur PASS."
+      }
     },
     "olimtpe": {
       "title": "OL'IMT'PE",

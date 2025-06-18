@@ -1,13 +1,64 @@
-import Page from "@/components/common/Page";
-import { AboutModal } from "@/components/custom/AboutModal";
-import EmploiDuTempsCard from "@/components/custom/card/EmploiDuTempsCard";
-import useAuth from "@/hooks/account/useAuth";
-import { useEmploiDuTemps } from "@/hooks/useEmploiDuTemps";
-import { useTranslation } from "react-i18next";
-import { Text, View } from "react-native";
+import Page from '@/components/common/Page';
+import { AboutModal } from '@/components/custom/AboutModal';
+import { useEmploiDuTemps } from '@/hooks/useEmploiDuTemps';
+import useAuth from '@/hooks/account/useAuth';
+import { useTranslation } from 'react-i18next';
+import { Text, View } from 'react-native';
+import { useTheme } from '@/contexts/ThemeContext';
+import { Horaires } from '@/components/custom/Horaires';
+import i18n from '@/i18n';
+import { ar, de, es, fr, hi, it, ja, ko, nl, pl, pt, ru, sv, tr, zhCN } from 'date-fns/locale';
+import { Course } from '@/types/emploiDuTemps';
+import { Cours } from '@/app/screens/services/Cours';
 
 export const EmploiDuTemps = () => {
-  const { t } = useTranslation();
+    const { t } = useTranslation();
+    const { theme } = useTheme();
+  const date = new Date();
+
+  // TODO : A mettre en commun
+  const getLocale = () => {
+    switch (i18n.language) {
+      case "fr":
+        return fr;
+      case "de":
+        return de;
+      case "es":
+        return es;
+      case "zh":
+        return zhCN;
+      case "ru":
+        return ru;
+      case "it":
+        return it;
+      case "ja":
+        return ja;
+      case "ko":
+        return ko;
+      case "pt":
+        return pt;
+      case "nl":
+        return nl;
+      case "ar":
+        return ar;
+      case "hi":
+        return hi;
+      case "sv":
+        return sv;
+      case "tr":
+        return tr;
+      case "pl":
+        return pl;
+      default:
+        return undefined;
+    }
+  };
+  //const locale = getLocale();
+  const locale = "fr-FR";
+  const weekday = new Intl.DateTimeFormat(locale, { weekday: 'long' }).format(date); // mercredi
+  const month = new Intl.DateTimeFormat(locale, { month: 'long' }).format(date);     // juin
+  const year = date.getFullYear();                                                   // 2025
+  const dayNumber = date.getDate();
 
   const { user } = useAuth();
 
@@ -15,24 +66,34 @@ export const EmploiDuTemps = () => {
     user?.email || "",
   );
 
+  const course: Course = {
+    salles: 'J144',
+    id: 0,
+    date: new Date(),
+    titre: 'Méthodes numériques',
+    heure_debut: '8h00',
+    heure_fin: '9h15',
+    profs: 'Frédéric Jourdan',
+    groupe: '',
+    created_at: '',
+  }
+
   if (isPending) {
     return <EmploiDuTempsLoading />;
   }
 
   if (isError) {
     return (
-      <Page
+        <Page
+        goBack
         refreshing={isPending}
         onRefresh={refetch}
         title={t("services.emploiDuTemps.title")}
         about={
           <AboutModal
             title={t("services.emploiDuTemps.title")}
-            description={t("services.restaurant.about")}
-            openingHours="TEMP"
-            location={t("services.restaurant.location")}
-            price={t("services.restaurant.price")}
-            additionalInfo={t("services.restaurant.additionalInfo")}
+            description={t("services.emploiDuTemps.about")}
+            additionalInfo={t("services.emploiDuTemps.additionalInfo")}
           />
         }
       >
@@ -45,34 +106,46 @@ export const EmploiDuTemps = () => {
 
   return (
     <Page
+      goBack
       refreshing={isPending}
       onRefresh={refetch}
-      goBack
       title={t("services.emploiDuTemps.title")}
       about={
         <AboutModal
           title={t("services.emploiDuTemps.title")}
-          description={t("services.restaurant.about")}
-          openingHours="TEMP"
-          location={t("services.restaurant.location")}
-          price={t("services.restaurant.price")}
-          additionalInfo={t("services.restaurant.additionalInfo")}
+          description={t("services.emploiDuTemps.about")}
+          additionalInfo={t("services.emploiDuTemps.additionalInfo")}
         />
       }
+      className="flex-col gap-16 p-5"
     >
       {/*{header}*/}
+      <View className="flex-row items-center gap-2 justify-end">
+        <View>
+          <Text style={{ color: theme.text }} className="h2 text-right font-medium">
+            {weekday}
+          </Text>
+          <Text style={{ color: theme.text }} className="text-right text-sm">
+            {month} {year}
+          </Text>
+        </View>
+        <View className="rounded-xl items-center justify-center" style={{ backgroundColor: theme.secondary }}>
+          <Text style={{ color: theme.text }} className="text-2xl font-semibold p-3">
+            {dayNumber}
+          </Text>
+        </View>
+      </View>
 
-      <View className="flex flex-col gap-8">
-        <View className="flex flex-col gap-4">
-          <Text className="h3 ml-4">{t("services.restaurant.lunch")}</Text>
+      {/*{content}*/}
+      <View className="flex-row">
+        <Horaires />
+
+        {/*{edt}*/}
+        <View className="flex-col w-full gap-1">
+          <Cours course={course} />
+          <Cours course={course} />
         </View>
-        <View className="flex flex-col gap-4">
-          <Text className="h3 ml-4">{t("services.restaurant.dinner")}</Text>
-          <EmploiDuTempsCard
-            title={t("services.restaurant.grill")}
-            icon={"Beef"}
-          />
-        </View>
+
       </View>
     </Page>
   );
@@ -81,44 +154,26 @@ export const EmploiDuTemps = () => {
 export default EmploiDuTemps;
 
 const EmploiDuTempsLoading = () => {
-  const { t } = useTranslation();
+    const { t } = useTranslation();
+    const { theme } = useTheme();
 
   return (
     <Page
+      goBack
       title={t("services.emploiDuTemps.title")}
       about={
         <AboutModal
           title={t("services.emploiDuTemps.title")}
-          description={t("services.restaurant.about")}
-          openingHours="TEMP"
-          location={t("services.restaurant.location")}
-          price={t("services.restaurant.price")}
-          additionalInfo={t("services.restaurant.additionalInfo")}
+          description={t("services.emploiDuTemps.about")}
+          additionalInfo={t("services.emploiDuTemps.additionalInfo")}
         />
       }
     >
-      <View className="flex flex-col gap-8">
-        <View className="flex flex-col gap-4">
-          <Text className="h3 ml-4">{t("services.restaurant.lunch")}</Text>
-
-          <EmploiDuTempsCard
-            title={t("services.restaurant.grill")}
-            icon={"Beef"}
-          />
-          <EmploiDuTempsCard
-            title={t("services.restaurant.migrator")}
-            icon={"ChefHat"}
-          />
-          <EmploiDuTempsCard
-            title={t("services.restaurant.vegetarian")}
-            icon={"Vegan"}
-          />
-          <EmploiDuTempsCard
-            title={t("services.restaurant.sideDishes")}
-            icon={"Soup"}
-          />
+        <View className="flex-col">
+            <Text className="text-center" style={{ color: theme.text }}>
+                Loading....
+            </Text>
         </View>
-      </View>
     </Page>
   );
 };

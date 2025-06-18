@@ -1,6 +1,7 @@
-import { useTheme } from "@/contexts/ThemeContext";
-import type { Course } from "@/types/emploiDuTemps";
-import { Text, View } from "react-native";
+import { useTheme } from '@/contexts/ThemeContext';
+import type { Course } from '@/types/emploiDuTemps';
+import { Text, View } from 'react-native';
+import TagSalleCours from '@/components/custom/TagSalleCours';
 
 export function EmploiDuTempsWidgetCourse({ course }: { course: Course }) {
   const { theme } = useTheme();
@@ -25,18 +26,7 @@ export function EmploiDuTempsWidgetCourse({ course }: { course: Course }) {
         >
           {course.heure_debut} - {course.heure_fin}
         </Text>
-        <View>
-          <Text
-            className="pl-1 pr-1 rounded-md text-base ml-4"
-            style={{
-              backgroundColor: theme.primary,
-              color: theme.background,
-            }}
-            ellipsizeMode="tail"
-          >
-            {course.salles}
-          </Text>
-        </View>
+        <TagSalleCours salles={course.salles}/>
       </View>
     </View>
   );

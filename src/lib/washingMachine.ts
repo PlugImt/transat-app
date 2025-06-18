@@ -1,5 +1,5 @@
-import type { MachineData } from "@/types/washingMachine";
 import { t } from "i18next";
+import type { MachineData } from "@/types/washingMachine";
 
 export async function fetchWashingMachines(): Promise<
   (MachineData & { type: "WASHING MACHINE" | "DRYER" })[]

@@ -1,8 +1,8 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { apiRequest, getAPIUrl } from "@/lib/apiRequest";
 import { QUERY_KEYS } from "@/lib/queryKeys";
 import { storage } from "@/services/storage/asyncStorage";
 import type { NotLoggedIn, User } from "@/types/user";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 interface LoginResponse {
   token: string;
@@ -58,7 +58,11 @@ export const useAuthMutations = () => {
       email,
       password,
       language,
-    }: { email: string; password: string; language: string }) => {
+    }: {
+      email: string;
+      password: string;
+      language: string;
+    }) => {
       const apiUrl = await getAPIUrl();
 
       return await apiRequest(

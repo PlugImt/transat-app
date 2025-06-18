@@ -1,6 +1,6 @@
+import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEYS } from "@/lib/queryKeys";
 import { getTraq } from "@/lib/traq";
-import { useQuery } from "@tanstack/react-query";
 
 export const useTraq = () => {
   const { data, isPending, refetch, error, isError } = useQuery({

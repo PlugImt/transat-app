@@ -2,14 +2,14 @@ import type React from "react";
 import { useEffect } from "react";
 import { Pressable, StyleSheet } from "react-native";
 import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming,
-  withSequence,
-  withDelay,
   Easing,
   Extrapolate,
   interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+  withDelay,
+  withSequence,
+  withTiming,
 } from "react-native-reanimated";
 
 interface LogoAnimationProps {

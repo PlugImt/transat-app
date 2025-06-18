@@ -1,3 +1,4 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { addNotification, getNotificationsState } from "@/lib/notification";
 import { QUERY_KEYS } from "@/lib/queryKeys";
 import { storage } from "@/services/storage/asyncStorage";
@@ -5,7 +6,6 @@ import {
   type NotificationType,
   NotificationTypeValues,
 } from "@/types/notification";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 function useNotification() {
   const queryClient = useQueryClient();

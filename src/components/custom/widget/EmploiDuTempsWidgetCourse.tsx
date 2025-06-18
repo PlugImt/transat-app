@@ -1,6 +1,6 @@
+import { Text, View } from "react-native";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Course } from "@/types/emploiDuTemps";
-import { Text, View } from "react-native";
 
 export function EmploiDuTempsWidgetCourse({ course }: { course: Course }) {
   const { theme } = useTheme();

@@ -6,11 +6,11 @@ import {
   type PanGestureHandlerGestureEvent,
 } from "react-native-gesture-handler";
 import Animated, {
+  runOnJS,
   useAnimatedGestureHandler,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
-  runOnJS,
 } from "react-native-reanimated";
 
 interface DraggableWidgetProps {

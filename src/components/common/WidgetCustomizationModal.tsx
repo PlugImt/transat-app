@@ -1,9 +1,3 @@
-import { Button } from "@/components/common/Button";
-import { useTheme } from "@/contexts/ThemeContext";
-import type {
-  ServicePreference,
-  WidgetPreference,
-} from "@/services/storage/widgetPreferences";
 import { Maximize, Minimize, Settings } from "lucide-react-native";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -21,6 +15,12 @@ import DraggableFlatList, {
   ScaleDecorator,
 } from "react-native-draggable-flatlist";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { Button } from "@/components/common/Button";
+import { useTheme } from "@/contexts/ThemeContext";
+import type {
+  ServicePreference,
+  WidgetPreference,
+} from "@/services/storage/widgetPreferences";
 
 interface WidgetCustomizationModalProps {
   visible: boolean;

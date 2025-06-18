@@ -1,3 +1,12 @@
+import {
+  ChevronDown,
+  ChevronUp,
+  HelpCircle,
+  SquareArrowOutUpRight,
+} from "lucide-react-native";
+import { useId, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Linking, Text, TouchableOpacity, View } from "react-native";
 import Divider from "@/components/common/Divider";
 import Page from "@/components/common/Page";
 import {
@@ -7,19 +16,12 @@ import {
   TabsTrigger,
 } from "@/components/common/Tabs";
 import { useTheme } from "@/contexts/ThemeContext";
-import {
-  ChevronDown,
-  ChevronUp,
-  HelpCircle,
-  SquareArrowOutUpRight,
-} from "lucide-react-native";
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Linking, Text, TouchableOpacity, View } from "react-native";
 
 const Help = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
+  const faqId = useId();
+  const contactId = useId();
 
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
 
@@ -56,11 +58,11 @@ const Help = () => {
         {t("settings.help.description")}
       </Text>
 
-      <Tabs defaultValue="faq">
+      <Tabs defaultValue={faqId}>
         <TabsList>
-          <TabsTrigger id="faq" title={t("settings.help.faq")} value="faq" />
+          <TabsTrigger id={faqId} title={t("settings.help.faq")} value="faq" />
           <TabsTrigger
-            id="contact"
+            id={contactId}
             title={t("settings.help.contactUs")}
             value="contact"
           />

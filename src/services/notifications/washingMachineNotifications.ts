@@ -1,5 +1,5 @@
-import { storage } from "@/services/storage/asyncStorage";
 import * as Notifications from "expo-notifications";
+import { storage } from "@/services/storage/asyncStorage";
 
 export interface WashingMachineNotificationState {
   machineNumber: string;

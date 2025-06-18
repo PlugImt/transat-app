@@ -1,8 +1,8 @@
-import LogoAnimation from "@/components/animations/LogoAnimation";
-import { useTheme } from "@/contexts/ThemeContext";
 import { useCallback, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Animated as RNAnimated, Text, View } from "react-native";
+import LogoAnimation from "@/components/animations/LogoAnimation";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface AnimatedLogoProps {
   onLogoPress?: (x: number, y: number) => void;

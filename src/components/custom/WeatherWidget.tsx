@@ -1,7 +1,3 @@
-import { TextSkeleton } from "@/components/Skeleton";
-import { useTheme } from "@/contexts/ThemeContext";
-import { useWeather } from "@/hooks/useWeather";
-import i18n from "@/i18n";
 import { format } from "date-fns";
 import {
   ar,
@@ -21,6 +17,10 @@ import {
   zhCN,
 } from "date-fns/locale";
 import { Image, Text, View } from "react-native";
+import { TextSkeleton } from "@/components/Skeleton";
+import { useTheme } from "@/contexts/ThemeContext";
+import { useWeather } from "@/hooks/useWeather";
+import i18n from "@/i18n";
 import { Avatar, AvatarImage } from "../common/Avatar";
 
 export function WeatherWidget() {

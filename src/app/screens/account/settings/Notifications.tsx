@@ -1,12 +1,12 @@
+import { useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
+import { Text, View } from "react-native";
 import Divider from "@/components/common/Divider";
 import Page from "@/components/common/Page";
 import { Switch } from "@/components/common/Switch";
 import { useTheme } from "@/contexts/ThemeContext";
 import useNotification from "@/hooks/account/useNotification";
 import { QUERY_KEYS } from "@/lib/queryKeys";
-import { useQueryClient } from "@tanstack/react-query";
-import { useTranslation } from "react-i18next";
-import { Text, View } from "react-native";
 
 export const Notifications = () => {
   const { t } = useTranslation();

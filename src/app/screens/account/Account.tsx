@@ -1,18 +1,3 @@
-import { TextSkeleton } from "@/components/Skeleton";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/common/Avatar";
-import { Button, IconButton } from "@/components/common/Button";
-import InfoItem from "@/components/common/InfoItem";
-import Page from "@/components/common/Page";
-import ErrorPage from "@/components/custom/ErrorPage";
-import { useTheme } from "@/contexts/ThemeContext";
-import { useUser } from "@/hooks/account/useUser";
-import { QUERY_KEYS } from "@/lib/queryKeys";
-import { getStudentYear } from "@/lib/utils";
-import type { AccountNavigation } from "@/services/storage/types";
 import { useNavigation } from "@react-navigation/native";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
 import {
@@ -25,6 +10,21 @@ import {
 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/common/Avatar";
+import { Button, IconButton } from "@/components/common/Button";
+import InfoItem from "@/components/common/InfoItem";
+import Page from "@/components/common/Page";
+import ErrorPage from "@/components/custom/ErrorPage";
+import { TextSkeleton } from "@/components/Skeleton";
+import { useTheme } from "@/contexts/ThemeContext";
+import { useUser } from "@/hooks/account/useUser";
+import { QUERY_KEYS } from "@/lib/queryKeys";
+import { getStudentYear } from "@/lib/utils";
+import type { AccountNavigation } from "@/services/storage/types";
 
 export const Account = () => {
   const { theme } = useTheme();

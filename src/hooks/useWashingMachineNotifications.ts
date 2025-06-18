@@ -1,5 +1,5 @@
-import { washingMachineNotificationService } from "@/services/notifications/washingMachineNotifications";
 import { useEffect, useState } from "react";
+import { washingMachineNotificationService } from "@/services/notifications/washingMachineNotifications";
 
 export function useWashingMachineNotifications(machineNumber: string) {
   const [isNotificationSet, setIsNotificationSet] = useState(false);

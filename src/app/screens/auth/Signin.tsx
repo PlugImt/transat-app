@@ -1,10 +1,3 @@
-import { VerificationCodeModal } from "@/components/auth/VerificationCode";
-import { Button } from "@/components/common/Button";
-import Input from "@/components/common/Input";
-import Page from "@/components/common/Page";
-import { useToast } from "@/components/common/Toast";
-import { useTheme } from "@/contexts/ThemeContext";
-import useAuth from "@/hooks/account/useAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useRef, useState } from "react";
@@ -17,6 +10,13 @@ import {
   View,
 } from "react-native";
 import { z } from "zod";
+import { VerificationCodeModal } from "@/components/auth/VerificationCode";
+import { Button } from "@/components/common/Button";
+import Input from "@/components/common/Input";
+import Page from "@/components/common/Page";
+import { useToast } from "@/components/common/Toast";
+import { useTheme } from "@/contexts/ThemeContext";
+import useAuth from "@/hooks/account/useAuth";
 
 export const Signin = () => {
   const navigation = useNavigation();

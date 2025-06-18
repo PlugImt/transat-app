@@ -1,3 +1,18 @@
+import { useNavigation } from "@react-navigation/native";
+import type { StackNavigationProp } from "@react-navigation/stack";
+import { useIsFetching, useQueryClient } from "@tanstack/react-query";
+import Constants from "expo-constants";
+import * as Device from "expo-device";
+import * as Notifications from "expo-notifications";
+import type React from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Platform, Text, TouchableOpacity, View } from "react-native";
+import DraggableFlatList, {
+  type RenderItemParams,
+  ScaleDecorator,
+} from "react-native-draggable-flatlist";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Button } from "@/components/common/Button";
 import Page from "@/components/common/Page";
 import WidgetCustomizationModal from "@/components/common/WidgetCustomizationModal";
@@ -22,21 +37,6 @@ import { isDinner, isLunch, isWeekend } from "@/lib/utils";
 import { washingMachineNotificationService } from "@/services/notifications/washingMachineNotifications";
 import type { AppStackParamList } from "@/services/storage/types";
 import type { WidgetPreference } from "@/services/storage/widgetPreferences";
-import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
-import { useIsFetching, useQueryClient } from "@tanstack/react-query";
-import Constants from "expo-constants";
-import * as Device from "expo-device";
-import * as Notifications from "expo-notifications";
-import type React from "react";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Platform, Text, TouchableOpacity, View } from "react-native";
-import DraggableFlatList, {
-  type RenderItemParams,
-  ScaleDecorator,
-} from "react-native-draggable-flatlist";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 

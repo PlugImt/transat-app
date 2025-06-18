@@ -1,10 +1,10 @@
-import { Button } from "@/components/common/Button";
-import Page from "@/components/common/Page";
-import { useTheme } from "@/contexts/ThemeContext";
 import { Activity, Server, Users } from "lucide-react-native";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
+import { Button } from "@/components/common/Button";
+import Page from "@/components/common/Page";
+import { useTheme } from "@/contexts/ThemeContext";
 
 // Types for the statistics data
 interface UserStatistic {

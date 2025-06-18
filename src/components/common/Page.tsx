@@ -1,5 +1,3 @@
-import { useTheme } from "@/contexts/ThemeContext";
-import { cn } from "@/lib/utils";
 import { useNavigation } from "@react-navigation/native";
 import { BlurView } from "expo-blur";
 import { ArrowLeft } from "lucide-react-native";
@@ -14,6 +12,8 @@ import {
   View,
 } from "react-native";
 import ConfettiCannon from "react-native-confetti-cannon";
+import { useTheme } from "@/contexts/ThemeContext";
+import { cn } from "@/lib/utils";
 
 type PageProps = {
   children: ReactNode;

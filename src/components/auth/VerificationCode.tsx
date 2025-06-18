@@ -1,7 +1,5 @@
-import { useTheme } from "@/contexts/ThemeContext";
-import { useAuth } from "@/hooks/account/useAuth";
 import type React from "react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   ActivityIndicator,
@@ -16,6 +14,8 @@ import {
   useBlurOnFulfill,
   useClearByFocusCell,
 } from "react-native-confirmation-code-field";
+import { useTheme } from "@/contexts/ThemeContext";
+import { useAuth } from "@/hooks/account/useAuth";
 
 interface VerificationCodeModalProps {
   isVisible: boolean;
@@ -49,14 +49,7 @@ export const VerificationCodeModal: React.FC<VerificationCodeModalProps> = ({
     }
   }, [isVisible]);
 
-  // Auto-submit when code is complete
-  useEffect(() => {
-    if (value.length === CELL_COUNT) {
-      handleVerify();
-    }
-  }, [value]);
-
-  const handleVerify = async () => {
+  const handleVerify = useCallback(async () => {
     if (value.length !== CELL_COUNT) return;
 
     setError(null);
@@ -64,7 +57,14 @@ export const VerificationCodeModal: React.FC<VerificationCodeModalProps> = ({
     if (!success) {
       setError(t("common.verificationFailed"));
     }
-  };
+  }, [value, verifyCode, email, t]);
+
+  // Auto-submit when code is complete
+  useEffect(() => {
+    if (value.length === CELL_COUNT) {
+      handleVerify();
+    }
+  }, [value, handleVerify]);
 
   const requestNewCode = async () => {
     setError(null);

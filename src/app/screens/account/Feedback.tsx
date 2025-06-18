@@ -1,7 +1,3 @@
-import { Button } from "@/components/common/Button";
-import Page from "@/components/common/Page";
-import { useTheme } from "@/contexts/ThemeContext";
-import { useUser } from "@/hooks/account/useUser";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as Sentry from "@sentry/react-native";
 import { MessageSquare, Send } from "lucide-react-native";
@@ -18,6 +14,10 @@ import {
   View,
 } from "react-native";
 import { z } from "zod";
+import { Button } from "@/components/common/Button";
+import Page from "@/components/common/Page";
+import { useTheme } from "@/contexts/ThemeContext";
+import { useUser } from "@/hooks/account/useUser";
 
 const feedbackSchema = z.object({
   message: z.string().min(10, "settings.feedback.minLengthError"),

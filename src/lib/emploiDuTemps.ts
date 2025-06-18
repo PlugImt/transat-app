@@ -1,5 +1,5 @@
-import type { EmploiDuTempsData } from "@/types/emploiDuTemps";
 import i18n from "i18next";
+import type { EmploiDuTempsData } from "@/types/emploiDuTemps";
 import { apiRequest } from "./apiRequest";
 
 const TARGET_URL = "/api/planning/users/:email/courses/today";

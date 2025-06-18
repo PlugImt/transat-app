@@ -1,5 +1,3 @@
-import { useTheme } from "@/contexts/ThemeContext";
-import { useAuth } from "@/hooks/account/useAuth";
 import type React from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -16,6 +14,8 @@ import {
   useBlurOnFulfill,
   useClearByFocusCell,
 } from "react-native-confirmation-code-field";
+import { useTheme } from "@/contexts/ThemeContext";
+import { useAuth } from "@/hooks/account/useAuth";
 
 interface VerificationCodeModalProps {
   isVisible: boolean;

@@ -1,3 +1,8 @@
+import { useNavigation } from "@react-navigation/native";
+import type { StackNavigationProp } from "@react-navigation/stack";
+import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { View } from "react-native";
 import { Button } from "@/components/common/Button";
 import Card from "@/components/common/Card";
 import FlexibleGrid from "@/components/common/FlexibleGrid";
@@ -6,11 +11,6 @@ import WidgetCustomizationModal from "@/components/common/WidgetCustomizationMod
 import { useServicePreferences } from "@/hooks/useWidgetPreferences";
 import type { AppStackParamList } from "@/services/storage/types";
 import type { ServicePreference } from "@/services/storage/widgetPreferences";
-import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
-import { useMemo, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { View } from "react-native";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 

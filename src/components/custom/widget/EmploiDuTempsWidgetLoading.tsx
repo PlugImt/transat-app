@@ -1,8 +1,8 @@
-import { TextSkeleton } from "@/components/Skeleton";
-import type { AppScreenNavigationProp } from "@/components/custom/widget/EmploiDuTempsWidget";
-import { useTheme } from "@/contexts/ThemeContext";
 import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity, View } from "react-native";
+import type { AppScreenNavigationProp } from "@/components/custom/widget/EmploiDuTempsWidget";
+import { TextSkeleton } from "@/components/Skeleton";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export const EmploiDuTempsWidgetLoading = () => {
   const { theme } = useTheme();

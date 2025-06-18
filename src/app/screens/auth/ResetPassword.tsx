@@ -1,18 +1,22 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import type { RouteProp } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import {
+  Animated as RNAnimated,
+  Text,
+  type TextInput,
+  View,
+} from "react-native";
+import { z } from "zod";
 import { Button } from "@/components/common/Button";
 import Input from "@/components/common/Input";
 import Page from "@/components/common/Page";
 import { useToast } from "@/components/common/Toast";
 import useAuth from "@/hooks/account/useAuth";
 import type { AuthStackParamList } from "@/services/storage/types";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigation, useRoute } from "@react-navigation/native";
-import type { RouteProp } from "@react-navigation/native";
-import { useEffect, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import { Text, type TextInput, View } from "react-native";
-import { Animated as RNAnimated } from "react-native";
-import { z } from "zod";
 
 type ResetPasswordRouteProp = RouteProp<AuthStackParamList, "ResetPassword">;
 

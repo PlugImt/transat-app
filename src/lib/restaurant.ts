@@ -1,5 +1,5 @@
-import type { MenuData } from "@/types/restaurant";
 import i18n from "i18next";
+import type { MenuData } from "@/types/restaurant";
 import { apiRequest } from "./apiRequest";
 
 const TARGET_URL = "/api/restaurant";

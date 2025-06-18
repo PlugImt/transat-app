@@ -1,6 +1,3 @@
-import { TextSkeleton } from "@/components/Skeleton";
-import { useTheme } from "@/contexts/ThemeContext";
-import { useWashingMachineNotifications } from "@/hooks/useWashingMachineNotifications";
 import { Bell, BellRing, WashingMachineIcon, Wind } from "lucide-react-native";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -11,6 +8,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { TextSkeleton } from "@/components/Skeleton";
+import { useTheme } from "@/contexts/ThemeContext";
+import { useWashingMachineNotifications } from "@/hooks/useWashingMachineNotifications";
 import Badge, { BadgeLoading } from "../../common/Badge";
 import { Dialog, DialogContent, DialogTrigger } from "../../common/Dialog";
 

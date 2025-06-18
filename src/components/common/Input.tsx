@@ -1,7 +1,7 @@
-import { useTheme } from "@/contexts/ThemeContext";
 import { forwardRef } from "react";
 import { Controller, type FieldValues, type Path } from "react-hook-form";
 import { Text, TextInput, View } from "react-native";
+import { useTheme } from "@/contexts/ThemeContext";
 
 import { cn } from "@/lib/utils";
 

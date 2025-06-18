@@ -1,6 +1,6 @@
-import type { ServicePreference } from "@/services/storage/widgetPreferences";
 import type React from "react";
 import { Dimensions, ScrollView, TouchableOpacity, View } from "react-native";
+import type { ServicePreference } from "@/services/storage/widgetPreferences";
 
 interface FlexibleGridProps {
   data: ServicePreference[];

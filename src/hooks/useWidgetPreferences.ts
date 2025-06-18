@@ -1,13 +1,13 @@
+import { useEffect, useState } from "react";
 import {
-  type ServicePreference,
-  type ServiceSize,
-  type WidgetPreference,
   getHomeWidgetPreferences,
   getServicePreferences,
+  type ServicePreference,
+  type ServiceSize,
   saveHomeWidgetPreferences,
   saveServicePreferences,
+  type WidgetPreference,
 } from "@/services/storage/widgetPreferences";
-import { useEffect, useState } from "react";
 
 export const useHomeWidgetPreferences = () => {
   const [widgets, setWidgets] = useState<WidgetPreference[]>([]);

@@ -100,8 +100,8 @@ export async function uploadImage(): Promise<string> {
       uri: image.uri,
       name: image.uri.split("/").pop() || "image.jpg",
       type: `image/${image.uri.split(".").pop()}` || "image/jpeg",
-      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    } as any);
+      // horrible mais bon euh
+    } as unknown as Blob);
 
     const apiUrl = await getAPIUrl();
 

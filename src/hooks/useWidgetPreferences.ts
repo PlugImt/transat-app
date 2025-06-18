@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   getHomeWidgetPreferences,
   getServicePreferences,
@@ -13,11 +13,7 @@ export const useHomeWidgetPreferences = () => {
   const [widgets, setWidgets] = useState<WidgetPreference[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    loadPreferences().then((r) => r);
-  }, []);
-
-  const loadPreferences = async () => {
+  const loadPreferences = useCallback(async () => {
     setLoading(true);
     try {
       const preferences = await getHomeWidgetPreferences();
@@ -27,7 +23,11 @@ export const useHomeWidgetPreferences = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    loadPreferences().then((r) => r);
+  }, [loadPreferences]);
 
   const updateOrder = async (newOrder: WidgetPreference[]) => {
     const updatedWidgets = newOrder.map((widget, index) => ({
@@ -62,11 +62,7 @@ export const useServicePreferences = () => {
   const [services, setServices] = useState<ServicePreference[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    loadPreferences().then((r) => r);
-  }, []);
-
-  const loadPreferences = async () => {
+  const loadPreferences = useCallback(async () => {
     setLoading(true);
     try {
       const preferences = await getServicePreferences();
@@ -76,7 +72,11 @@ export const useServicePreferences = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    loadPreferences().then((r) => r);
+  }, [loadPreferences]);
 
   const updateOrder = async (newOrder: ServicePreference[]) => {
     const updatedServices = newOrder.map((service, index) => ({

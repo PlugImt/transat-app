@@ -34,97 +34,95 @@ const getIcon = (icon: "WASHING MACHINE" | "DRYER", color: ColorValue) => {
   }
 };
 
+const Bubble = ({ index }: { index: number }) => {
+  const positionY = useRef(new Animated.Value(20)).current;
+  const positionX = useRef(new Animated.Value(Math.random() * 100)).current;
+  const scale = useRef(new Animated.Value(Math.random() * 0.5 + 0.5)).current;
+  const opacity = useRef(new Animated.Value(Math.random() * 0.3 + 0.2)).current;
+
+  useEffect(() => {
+    const moveBubble = () => {
+      const duration = Math.random() * 4000 + 3000;
+
+      Animated.parallel([
+        Animated.sequence([
+          Animated.timing(positionY, {
+            toValue: 120,
+            duration,
+            useNativeDriver: true,
+          }),
+          Animated.timing(positionY, {
+            toValue: 20,
+            duration: 0,
+            useNativeDriver: true,
+          }),
+        ]),
+        Animated.sequence([
+          Animated.timing(positionX, {
+            toValue: Math.random() * 100,
+            duration: duration / 2,
+            useNativeDriver: true,
+          }),
+          Animated.timing(positionX, {
+            toValue: Math.random() * 100,
+            duration: duration / 2,
+            useNativeDriver: true,
+          }),
+        ]),
+        Animated.sequence([
+          Animated.timing(opacity, {
+            toValue: Math.random() * 0.3 + 0.2,
+            duration: duration / 2,
+            useNativeDriver: true,
+          }),
+          Animated.timing(opacity, {
+            toValue: Math.random() * 0.3 + 0.2,
+            duration: duration / 2,
+            useNativeDriver: true,
+          }),
+        ]),
+      ]).start(moveBubble);
+    };
+
+    moveBubble();
+
+    return () => {
+      positionY.stopAnimation();
+      positionX.stopAnimation();
+      opacity.stopAnimation();
+    };
+  }, [opacity, positionX, positionY]);
+
+  return (
+    <Animated.View
+      key={`bubble-${index}`}
+      style={{
+        position: "absolute",
+        transform: [
+          {
+            translateX: positionX.interpolate({
+              inputRange: [0, 100],
+              outputRange: [0, 100],
+            }),
+          },
+          {
+            translateY: positionY,
+          },
+          {
+            scale: scale,
+          },
+        ],
+        width: 8,
+        height: 8,
+        borderRadius: 20,
+        backgroundColor: "white",
+        opacity,
+      }}
+    />
+  );
+};
+
 const BubbleAnimation = () => {
-  const bubbles = [...Array(4)].map((_, i) => {
-    const positionY = useRef(new Animated.Value(20)).current;
-    const positionX = useRef(new Animated.Value(Math.random() * 100)).current;
-    const scale = useRef(new Animated.Value(Math.random() * 0.5 + 0.5)).current;
-    const opacity = useRef(
-      new Animated.Value(Math.random() * 0.3 + 0.2),
-    ).current;
-
-    useEffect(() => {
-      const moveBubble = () => {
-        const duration = Math.random() * 4000 + 3000;
-
-        Animated.parallel([
-          Animated.sequence([
-            Animated.timing(positionY, {
-              toValue: 120,
-              duration,
-              useNativeDriver: true,
-            }),
-            Animated.timing(positionY, {
-              toValue: 20,
-              duration: 0,
-              useNativeDriver: true,
-            }),
-          ]),
-          Animated.sequence([
-            Animated.timing(positionX, {
-              toValue: Math.random() * 100,
-              duration: duration / 2,
-              useNativeDriver: true,
-            }),
-            Animated.timing(positionX, {
-              toValue: Math.random() * 100,
-              duration: duration / 2,
-              useNativeDriver: true,
-            }),
-          ]),
-          Animated.sequence([
-            Animated.timing(opacity, {
-              toValue: Math.random() * 0.3 + 0.2,
-              duration: duration / 2,
-              useNativeDriver: true,
-            }),
-            Animated.timing(opacity, {
-              toValue: Math.random() * 0.3 + 0.2,
-              duration: duration / 2,
-              useNativeDriver: true,
-            }),
-          ]),
-        ]).start(moveBubble);
-      };
-
-      moveBubble();
-
-      return () => {
-        positionY.stopAnimation();
-        positionX.stopAnimation();
-        opacity.stopAnimation();
-      };
-    }, [opacity, positionX, positionY]);
-
-    return (
-      <Animated.View
-        key={`bubble-${i}-${Math.random().toString(36).slice(2, 11)}`}
-        style={{
-          position: "absolute",
-          transform: [
-            {
-              translateX: positionX.interpolate({
-                inputRange: [0, 100],
-                outputRange: [0, 100],
-              }),
-            },
-            {
-              translateY: positionY,
-            },
-            {
-              scale: scale,
-            },
-          ],
-          width: 8,
-          height: 8,
-          borderRadius: 20,
-          backgroundColor: "white",
-          opacity,
-        }}
-      />
-    );
-  });
-
   return (
     <View
       style={{
@@ -134,93 +132,94 @@ const BubbleAnimation = () => {
         opacity: 0.3,
       }}
     >
-      {bubbles}
+      <Bubble key="bubble-0" index={0} />
+      <Bubble key="bubble-1" index={1} />
+      <Bubble key="bubble-2" index={2} />
+      <Bubble key="bubble-3" index={3} />
     </View>
   );
 };
 
+const WindPattern = ({ index }: { index: number }) => {
+  const translateX = useRef(new Animated.Value(-30)).current;
+  const translateY = useRef(new Animated.Value(Math.random() * 100)).current;
+  const opacity = useRef(new Animated.Value(Math.random() * 0.3 + 0.2)).current;
+
+  useEffect(() => {
+    const moveWind = () => {
+      const duration = Math.random() * 3000 + 2000;
+
+      Animated.parallel([
+        Animated.sequence([
+          Animated.timing(translateX, {
+            toValue: 100,
+            duration,
+            useNativeDriver: true,
+          }),
+          Animated.timing(translateX, {
+            toValue: -30,
+            duration: 0,
+            useNativeDriver: true,
+          }),
+        ]),
+        Animated.sequence([
+          Animated.timing(translateY, {
+            toValue: Math.random() * 100,
+            duration: 0,
+            useNativeDriver: true,
+          }),
+        ]),
+        Animated.sequence([
+          Animated.timing(opacity, {
+            toValue: Math.random() * 0.3 + 0.2,
+            duration: duration / 2,
+            useNativeDriver: true,
+          }),
+          Animated.timing(opacity, {
+            toValue: Math.random() * 0.3 + 0.2,
+            duration: duration / 2,
+            useNativeDriver: true,
+          }),
+        ]),
+      ]).start(moveWind);
+    };
+
+    moveWind();
+
+    return () => {
+      translateX.stopAnimation();
+      translateY.stopAnimation();
+      opacity.stopAnimation();
+    };
+  }, [opacity, translateX, translateY]);
+
+  return (
+    <Animated.View
+      key={`wind-${index}`}
+      style={{
+        position: "absolute",
+        transform: [
+          {
+            translateX: translateX.interpolate({
+              inputRange: [-30, 130],
+              outputRange: [-15, 130],
+            }),
+          },
+          {
+            translateY: translateY,
+          },
+        ],
+        width: 40,
+        height: 3,
+        backgroundColor: "white",
+        borderRadius: 5,
+        opacity,
+      }}
+    />
+  );
+};
+
 const WindAnimation = () => {
-  const windPatterns = [...Array(3)].map((_, i) => {
-    const translateX = useRef(new Animated.Value(-30)).current;
-    const translateY = useRef(new Animated.Value(Math.random() * 100)).current;
-    const opacity = useRef(
-      new Animated.Value(Math.random() * 0.3 + 0.2),
-    ).current;
-
-    useEffect(() => {
-      const moveWind = () => {
-        const duration = Math.random() * 3000 + 2000;
-
-        Animated.parallel([
-          Animated.sequence([
-            Animated.timing(translateX, {
-              toValue: 100,
-              duration,
-              useNativeDriver: true, // Use native driver for better performance
-            }),
-            Animated.timing(translateX, {
-              toValue: -30,
-              duration: 0,
-              useNativeDriver: true,
-            }),
-          ]),
-          Animated.sequence([
-            Animated.timing(translateY, {
-              toValue: Math.random() * 100,
-              duration: 0,
-              useNativeDriver: true,
-            }),
-          ]),
-          Animated.sequence([
-            Animated.timing(opacity, {
-              toValue: Math.random() * 0.3 + 0.2,
-              duration: duration / 2,
-              useNativeDriver: true,
-            }),
-            Animated.timing(opacity, {
-              toValue: Math.random() * 0.3 + 0.2,
-              duration: duration / 2,
-              useNativeDriver: true,
-            }),
-          ]),
-        ]).start(moveWind);
-      };
-
-      moveWind();
-
-      return () => {
-        translateX.stopAnimation();
-        translateY.stopAnimation();
-        opacity.stopAnimation();
-      };
-    }, [opacity, translateX, translateY]);
-
-    return (
-      <Animated.View
-        key={`wind-${i}-${Math.random().toString(36).slice(2, 11)}`}
-        style={{
-          position: "absolute",
-          transform: [
-            {
-              translateX: translateX.interpolate({
-                inputRange: [-30, 130],
-                outputRange: [-15, 130],
-              }),
-            },
-            {
-              translateY: translateY,
-            },
-          ],
-          width: 40,
-          height: 3,
-          backgroundColor: "white",
-          borderRadius: 5,
-          opacity,
-        }}
-      />
-    );
-  });
-
   return (
     <View
       style={{
@@ -230,7 +229,9 @@ const WindAnimation = () => {
         opacity: 0.2,
       }}
     >
-      {windPatterns}
+      <WindPattern key="wind-0" index={0} />
+      <WindPattern key="wind-1" index={1} />
+      <WindPattern key="wind-2" index={2} />
     </View>
   );
 };

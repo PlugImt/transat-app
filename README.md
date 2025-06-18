@@ -102,6 +102,13 @@ Merci à Sentry pour leur offre gratuite !
                     <sub><b>Pacôme CAILLETEAU</b></sub>
                 </a>
             </td>
+            <td align="center">
+                <a href="https://github.com/Enockii">
+                    <img src="https://avatars.githubusercontent.com/u/98472937?v=4" width="100;" alt="Enockii"/>
+                    <br />
+                    <sub><b>Marina</b></sub>
+                </a>
+            </td>
 		</tr>
 	<tbody>
 </table>

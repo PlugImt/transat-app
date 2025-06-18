@@ -91,14 +91,19 @@ export function WeatherWidget() {
         </Text>
       </View>
       <View className="items-center justify-center">
-        <Image
-          className="w-24 h-24 rounded-lg"
-          source={{
-            uri: weatherNantes?.img
-              ? `https://openweathermap.org/img/wn/${weatherNantes.img}@4x.png`
-              : undefined,
-          }}
-        />
+        <View
+          className="w-24 h-24 rounded-md"
+          style={{ backgroundColor: theme.onSurface }}
+        >
+          <Image
+            className="w-24 h-24"
+            source={{
+              uri: weatherNantes?.img
+                ? `https://openweathermap.org/img/wn/${weatherNantes.img}@4x.png`
+                : undefined,
+            }}
+          />
+        </View>
       </View>
     </View>
   );

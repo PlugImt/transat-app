@@ -1,10 +1,12 @@
+import { fetchWashingMachines } from "@/api";
 import { TextSkeleton } from "@/components/Skeleton";
+import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
 import { MachineData } from "@/dto";
-import { useWashingMachines } from "@/hooks/useWashingMachines";
 import type { AppStackParamList } from "@/services/storage/types";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
+import { useQuery } from "@tanstack/react-query";
 import { WashingMachineIcon, Wind } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -17,10 +19,11 @@ export function WashingMachineWidget() {
   const navigation = useNavigation<AppScreenNavigationProp>();
   const { theme } = useTheme();
 
-  const { data: rawData, isPending, isError, error } = useWashingMachines();
-  const data = rawData as
-    | (MachineData & { type: "WASHING MACHINE" | "DRYER" })[]
-    | undefined;
+  const { data = [], isPending, isFetching, isError, error, refetch } = useQuery({
+    queryFn: () => fetchWashingMachines(),
+    queryKey: QUERY_KEYS.washingMachines,
+    initialData: []
+  });
 
   const [totalWashers, setTotalWashers] = useState<number>(0);
   const [totalDryers, setTotalDryers] = useState<number>(0);

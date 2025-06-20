@@ -1,5 +1,5 @@
-import { QUERY_KEYS } from "@/lib/queryKeys";
-import { fetchWeather } from "@/lib/weather";
+import { fetchWeather } from "@/api";
+import { QUERY_KEYS } from "@/constants";
 import { useQuery } from "@tanstack/react-query";
 
 export const useWeather = () => {

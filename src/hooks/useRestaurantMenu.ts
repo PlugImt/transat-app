@@ -1,5 +1,5 @@
-import { QUERY_KEYS } from "@/lib/queryKeys";
-import { getRestaurant } from "@/lib/restaurant";
+import { getRestaurant } from "@/api";
+import { QUERY_KEYS } from "@/constants";
 import { useQuery } from "@tanstack/react-query";
 
 export const useRestaurantMenu = () => {

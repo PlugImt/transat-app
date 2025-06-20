@@ -1,5 +1,5 @@
-import { QUERY_KEYS } from "@/lib/queryKeys";
-import { getTraq } from "@/lib/traq";
+import { getTraq } from "@/api";
+import { QUERY_KEYS } from "@/constants";
 import { useQuery } from "@tanstack/react-query";
 
 export const useTraq = () => {

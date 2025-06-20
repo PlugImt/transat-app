@@ -27,7 +27,7 @@ import { AccountCard } from "@/components/custom/card/AccountCard";
 import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";
 import { useUser } from "@/hooks/account/useUser";
-import { QUERY_KEYS } from "@/lib/queryKeys";
+import { QUERY_KEYS } from "@/constants";
 import { storage } from "@/services/storage/asyncStorage";
 import STORAGE_KEYS from "@/services/storage/constants";
 import type { SettingsNavigation } from "@/services/storage/types";

@@ -1,5 +1,5 @@
-import { getEmploiDuTempsToday } from "@/lib/emploiDuTemps";
-import { QUERY_KEYS } from "@/lib/queryKeys";
+import { getEmploiDuTempsToday } from "@/api";
+import { QUERY_KEYS } from "@/constants";
 import { skipToken, useQuery } from "@tanstack/react-query";
 
 export const useEmploiDuTemps = (email?: string) => {

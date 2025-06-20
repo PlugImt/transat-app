@@ -17,8 +17,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";
 import { useUser } from "@/hooks/account/useUser";
 import { useHomeWidgetPreferences } from "@/hooks/useWidgetPreferences";
-import { QUERY_KEYS } from "@/lib/queryKeys";
-import { isDinner, isLunch, isWeekend } from "@/lib/utils";
+import { QUERY_KEYS } from "@/constants";
 import { washingMachineNotificationService } from "@/services/notifications/washingMachineNotifications";
 import type { AppStackParamList } from "@/services/storage/types";
 import type { WidgetPreference } from "@/services/storage/widgetPreferences";
@@ -37,6 +36,7 @@ import DraggableFlatList, {
   ScaleDecorator,
 } from "react-native-draggable-flatlist";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { isDinner, isLunch, isWeekend } from "@/utils";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 

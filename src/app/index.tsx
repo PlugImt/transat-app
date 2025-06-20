@@ -4,7 +4,6 @@ import "./global.css";
 import { ToastProvider } from "@/components/common/Toast";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
-import { apiUrlDev } from "@/lib/config";
 import { storage } from "@/services/storage/asyncStorage";
 import STORAGE_KEYS from "@/services/storage/constants";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
@@ -17,6 +16,7 @@ import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { DevToolsBubble } from "react-native-react-query-devtools";
+import { apiEnv } from "@/config";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -63,7 +63,7 @@ function App() {
                   {isDevServerSelected ? (
                     <View className="fixed top-0 left-0 ">
                       <Text className="text-white">
-                        Dev server selected: {apiUrlDev}
+                        Dev server selected: {apiEnv.API_URL_DEV}
                       </Text>
                     </View>
                   ) : null}

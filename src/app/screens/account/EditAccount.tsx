@@ -13,8 +13,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { useUpdateAccount } from "@/hooks/account/useUpdateAccount";
 import { useUpdateProfilePicture } from "@/hooks/account/useUpdateProfilePicture";
 import { useUser } from "@/hooks/account/useUser";
-import { QUERY_KEYS } from "@/lib/queryKeys";
-import type { User } from "@/types/user";
+import { QUERY_KEYS } from "@/constants";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
@@ -24,6 +23,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Keyboard, Text, TouchableOpacity, View } from "react-native";
 import { z } from "zod";
+import { User } from "@/dto";
 
 export const EditProfile = () => {
   const { theme } = useTheme();

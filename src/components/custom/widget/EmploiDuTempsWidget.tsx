@@ -7,9 +7,9 @@ import type { StackNavigationProp } from "@react-navigation/stack";
 import { EmploiDuTempsWidgetCourse } from "@/components/custom/widget/EmploiDuTempsWidgetCourse";
 import { EmploiDuTempsWidgetLoading } from "@/components/custom/widget/EmploiDuTempsWidgetLoading";
 import { useAuth } from "@/hooks/account/useAuth";
-import type { Course } from "@/types/emploiDuTemps";
 import { useTranslation } from "react-i18next";
 import { Text, TouchableOpacity, View } from "react-native";
+import { Course } from "@/dto";
 
 export type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 

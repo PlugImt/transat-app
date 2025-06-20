@@ -1,5 +1,5 @@
-import { QUERY_KEYS } from "@/lib/queryKeys";
-import { updatePassword } from "@/lib/user";
+import { updatePassword } from "@/api";
+import { QUERY_KEYS } from "@/constants";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export function useChangePassword() {

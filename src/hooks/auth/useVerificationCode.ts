@@ -1,4 +1,4 @@
-import { apiRequest } from "@/lib/apiRequest";
+import { apiRequest } from "@/api";
 import { useMutation } from "@tanstack/react-query";
 
 interface VerifyCodeParams {

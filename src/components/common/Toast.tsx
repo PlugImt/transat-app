@@ -1,7 +1,6 @@
+import { cn } from "@/utils";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { Animated, Text, View } from "react-native";
-
-import { cn } from "@/lib/utils";
 
 const variants = {
   default: "bg-foreground",

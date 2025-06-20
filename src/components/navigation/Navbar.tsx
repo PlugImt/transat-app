@@ -20,7 +20,7 @@ import { Services } from "@/app/screens/services/Services";
 import { Traq } from "@/app/screens/services/Traq";
 import { WashingMachine } from "@/app/screens/services/WashingMachine";
 import { useTheme } from "@/contexts/ThemeContext";
-import type { BottomTabParamList } from "@/types/navigation";
+import { BottomTabParamList } from "@/types";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { GridIcon, LucideHome, Play, User } from "lucide-react-native";

@@ -1,7 +1,7 @@
-import { QUERY_KEYS } from "@/lib/queryKeys";
-import { updateProfilePicture } from "@/lib/user";
-import { uploadImage } from "@/lib/utils";
+import { updateProfilePicture } from "@/api";
+import { QUERY_KEYS } from "@/constants";
 import { storage } from "@/services/storage/asyncStorage";
+import { uploadImage } from "@/utils";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { t } from "i18next";
 

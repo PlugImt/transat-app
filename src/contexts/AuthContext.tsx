@@ -1,6 +1,6 @@
+import { Loading, NotLoggedIn, User } from "@/dto";
 import { useAuthMutations } from "@/hooks/auth/useAuthMutations";
 import { useVerificationCode } from "@/hooks/auth/useVerificationCode";
-import type { Loading, NotLoggedIn, User } from "@/types/user";
 import * as Sentry from "@sentry/react-native";
 import type { AxiosError } from "axios";
 import {

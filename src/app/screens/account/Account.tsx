@@ -10,8 +10,7 @@ import Page from "@/components/common/Page";
 import ErrorPage from "@/components/custom/ErrorPage";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useUser } from "@/hooks/account/useUser";
-import { QUERY_KEYS } from "@/lib/queryKeys";
-import { getStudentYear } from "@/lib/utils";
+import { QUERY_KEYS } from "@/constants";
 import type { AccountNavigation } from "@/services/storage/types";
 import { useNavigation } from "@react-navigation/native";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
@@ -25,6 +24,7 @@ import {
 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
+import { getStudentYear } from "@/utils";
 
 export const Account = () => {
   const { theme } = useTheme();

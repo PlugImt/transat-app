@@ -1,7 +1,7 @@
-import { apiRequest, getAPIUrl } from "@/lib/apiRequest";
-import { QUERY_KEYS } from "@/lib/queryKeys";
+import { apiRequest, getAPIUrl } from "@/api";
+import { QUERY_KEYS } from "@/constants";
+import { NotLoggedIn, User } from "@/dto";
 import { storage } from "@/services/storage/asyncStorage";
-import type { NotLoggedIn, User } from "@/types/user";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 interface LoginResponse {

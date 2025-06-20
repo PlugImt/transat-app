@@ -4,8 +4,8 @@ import WashingMachineCard, {
   WashingMachineCardSkeleton,
 } from "@/components/custom/card/WashingMachineCard";
 import { useTheme } from "@/contexts/ThemeContext";
+import { MachineData } from "@/dto";
 import { useWashingMachines } from "@/hooks/useWashingMachines";
-import type { MachineData } from "@/types/washingMachine";
 import { type FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";

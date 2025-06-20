@@ -1,7 +1,7 @@
-import { QUERY_KEYS } from "@/lib/queryKeys";
-import { fetchWashingMachines } from "@/lib/washingMachine";
-import type { MachineData } from "@/types/washingMachine";
+import { QUERY_KEYS } from "@/constants";
 import { useQuery } from "@tanstack/react-query";
+import { MachineData } from "@/dto";
+import { fetchWashingMachines } from "@/api";
 
 export function useWashingMachines() {
   const { data, isPending, isFetching, isError, error, refetch } = useQuery({

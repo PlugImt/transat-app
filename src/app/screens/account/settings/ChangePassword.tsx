@@ -2,9 +2,9 @@ import { Button } from "@/components/common/Button";
 import Input from "@/components/common/Input";
 import Page from "@/components/common/Page";
 import { useToast } from "@/components/common/Toast";
+import { PasswordChange } from "@/dto";
 import { useChangePassword } from "@/hooks/account/useChangePassword";
 import { useUser } from "@/hooks/account/useUser";
-import type { Password } from "@/types/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
 import { useForm } from "react-hook-form";
@@ -46,7 +46,7 @@ export const ChangePassword = () => {
     },
   });
 
-  const handleChangePassword = (data: Password) => {
+  const handleChangePassword = (data: PasswordChange) => {
     Keyboard.dismiss();
     changePassword(
       {

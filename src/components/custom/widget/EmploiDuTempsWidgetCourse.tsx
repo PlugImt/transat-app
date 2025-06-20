@@ -1,5 +1,5 @@
 import { useTheme } from "@/contexts/ThemeContext";
-import type { Course } from "@/types/emploiDuTemps";
+import { Course } from "@/dto";
 import { Text, View } from "react-native";
 
 export function EmploiDuTempsWidgetCourse({ course }: { course: Course }) {

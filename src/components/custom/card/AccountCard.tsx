@@ -5,17 +5,17 @@ import {
 } from "@/components/common/Avatar";
 import { Button } from "@/components/common/Button";
 import { useTheme } from "@/contexts/ThemeContext";
+import { User } from "@/dto";
 import type { AccountNavigation } from "@/services/storage/types";
-import type { User } from "@/types/user";
 import { useNavigation } from "@react-navigation/native";
 import { t } from "i18next";
 import { Text, View } from "react-native";
 
-interface Props {
+interface AccountCardProps {
   user?: User;
 }
 
-export const AccountCard = ({ user }: Props) => {
+export const AccountCard = ({ user }: AccountCardProps) => {
   const navigation = useNavigation<AccountNavigation>();
   const { theme } = useTheme();
 

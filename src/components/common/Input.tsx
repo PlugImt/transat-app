@@ -1,9 +1,9 @@
 import { useTheme } from "@/contexts/ThemeContext";
+import { cn } from "@/utils";
 import { forwardRef } from "react";
 import { Controller, type FieldValues, type Path } from "react-hook-form";
 import { Text, TextInput, View } from "react-native";
 
-import { cn } from "@/lib/utils";
 
 export interface InputProps<T extends FieldValues>
   extends Omit<

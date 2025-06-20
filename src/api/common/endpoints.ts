@@ -4,7 +4,7 @@ export const API_ROUTES : Record<Route, ApiRoute> = {
     weather: "/api/weather",
     emploiDuTemps: "/api/edt",
     restaurant: "/api/restaurant/menu",
-    traq: "/api/traq",
+    traq: "/api/traq/",
     translation: "/api/translate",
     washingMachines: "/api/washingmachines",
     login: "/api/auth/login",

@@ -1,6 +1,6 @@
 import { API_ROUTES, apiRequest, Method } from "@/api";
 import i18n from "i18next";
-import { MenuData } from "@/dto";
+import type { MenuData } from "@/dto";
 
 export const getRestaurant = async () => {
 	const currentLanguage = i18n.language.toLowerCase();

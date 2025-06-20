@@ -1,5 +1,5 @@
 import { t } from "i18next";
-import { MachineData, MachinesApiResponse, MachineWithType } from "@/dto";
+import type { MachineData, MachinesApiResponse, MachineWithType } from "@/dto";
 import { API_ROUTES, apiRequest, Method } from "@/api";
 
 export const fetchWashingMachines = async (): Promise<MachineWithType[]> => {

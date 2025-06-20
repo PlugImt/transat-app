@@ -1,6 +1,6 @@
 import { API_ROUTES, apiRequest, Method } from "@/api";
 import { storage } from "@/services/storage/asyncStorage";
-import { UpdatePasswordPayload, UpdateProfilePictureResponse, UpdateUserPayload, User } from "@/dto";
+import type { UpdatePasswordPayload, UpdateProfilePictureResponse, UpdateUserPayload, User } from "@/dto";
 
 export const fetchUser = async (): Promise<User> => {
 	const data = await apiRequest<User>(API_ROUTES.user);
@@ -25,6 +25,6 @@ export const updateProfilePicture = async (imageUrl: string) => {
 	return response.profile_picture;
 };
 
-export const updatePassword = async (data: UpdatePasswordPayload) => {
+export const updatePassword = async (_: UpdatePasswordPayload) => {
 	return await apiRequest(API_ROUTES.changePassword, Method.PATCH);
 };

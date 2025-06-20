@@ -1,6 +1,6 @@
 import { apiRequest, Method } from "@/api";
 import i18n from "i18next";
-import { EmploiDuTempsData } from "@/dto";
+import type { EmploiDuTempsData } from "@/dto";
 
 const TARGET_URL = "/api/planning/users/:email/courses/today";
 

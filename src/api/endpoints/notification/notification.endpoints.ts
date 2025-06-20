@@ -1,5 +1,5 @@
 import { API_ROUTES, apiRequest, Method } from "@/api";
-import { NotificationType } from "@/dto";
+import type { NotificationType } from "@/dto";
 
 export const addNotification = async (
     service: NotificationType,

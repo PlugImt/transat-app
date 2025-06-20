@@ -12,7 +12,7 @@ export function TagSalleCours({salles} : TagSalleCoursProps) {
   return (
     <View>
       <Text
-        className="pl-1 pr-1 rounded-md text-base ml-4 text-center w-fit"
+        className="px-2 rounded-md text-base ml-4 text-center w-fit"
         style={{
           backgroundColor: theme.primary,
           color: theme.background,

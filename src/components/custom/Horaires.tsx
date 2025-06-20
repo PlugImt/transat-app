@@ -4,6 +4,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 export function Horaires() {
   const { theme } = useTheme();
   return <View className="flex-col items-end">
+
     <View className="flex-row gap-1">
       <Text style={{ color: theme.text }}>8h</Text>
       <Text style={{ color: theme.text }} className="font-bold">-</Text>

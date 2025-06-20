@@ -10,10 +10,11 @@ import i18n from '@/i18n';
 import { ar, de, es, fr, hi, it, ja, ko, nl, pl, pt, ru, sv, tr, zhCN } from 'date-fns/locale';
 import { Course } from '@/types/emploiDuTemps';
 import { Cours } from '@/app/screens/services/Cours';
+import { useEffect, useState } from 'react';
 
 export const EmploiDuTemps = () => {
-    const { t } = useTranslation();
-    const { theme } = useTheme();
+  const { t } = useTranslation();
+  const { theme } = useTheme();
   const date = new Date();
 
   // TODO : A mettre en commun
@@ -55,9 +56,9 @@ export const EmploiDuTemps = () => {
   };
   //const locale = getLocale();
   const locale = "fr-FR";
-  const weekday = new Intl.DateTimeFormat(locale, { weekday: 'long' }).format(date); // mercredi
-  const month = new Intl.DateTimeFormat(locale, { month: 'long' }).format(date);     // juin
-  const year = date.getFullYear();                                                   // 2025
+  const weekday = new Intl.DateTimeFormat(locale, { weekday: 'long' }).format(date);
+  const month = new Intl.DateTimeFormat(locale, { month: 'long' }).format(date);
+  const year = date.getFullYear();
   const dayNumber = date.getDate();
 
   const { user } = useAuth();
@@ -77,6 +78,61 @@ export const EmploiDuTemps = () => {
     groupe: '',
     created_at: '',
   }
+
+  const course2: Course = {
+    salles: 'J144',
+    id: 0,
+    date: new Date(),
+    titre: 'Méthodes numériques',
+    heure_debut: '9h30',
+    heure_fin: '10h45',
+    profs: 'Frédéric Jourdan',
+    groupe: '',
+    created_at: '',
+  }
+
+  const course3: Course = {
+    salles: 'J144',
+    id: 0,
+    date: new Date(),
+    titre: 'Méthodes numériques',
+    heure_debut: '13h30',
+    heure_fin: '16h45',
+    profs: 'Frédéric Jourdan',
+    groupe: '',
+    created_at: '',
+  }
+
+  let courses: Course[] = [
+    course, course2, course3
+  ]
+
+  const HOUR_HEIGHT = 60; // 60 pixels = 1 heure
+  const START_HOUR = 8;
+  const END_HOUR = 18;
+  const TOTAL_HOURS = END_HOUR - START_HOUR;
+
+  const toMinutes = (heure: string) => {
+    const [h, m] = heure.split(/[h:]/).map(Number);
+    return h * 60 + m;
+  };
+
+  function getNowTimeForLine() {
+    const currentHour = date.getHours();
+    const currentMinutes = date.getMinutes();
+    const minutesSinceStart = (currentHour - START_HOUR) * 60 + currentMinutes;
+    return (minutesSinceStart / 60) * HOUR_HEIGHT;
+  }
+
+  const [nowTimeLine, setNowTimeForLine] = useState(getNowTimeForLine());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setNowTimeForLine(getNowTimeForLine());
+    }, 60000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   if (isPending) {
     return <EmploiDuTempsLoading />;
@@ -137,16 +193,63 @@ export const EmploiDuTemps = () => {
       </View>
 
       {/*{content}*/}
-      <View className="flex-row">
-        <Horaires />
+      <View className="flex-row h-full">
+        {/* PARTIE horaire */}
+        <View>
+          {Array.from({ length: TOTAL_HOURS }).map((_, index) => {
+            const hour = START_HOUR + index;
+            return (
+              <View key={hour} className="justify-start items-end pr-2">
+                {/* heure */}
+                <View style={{ height: HOUR_HEIGHT / 4 }} >
+                  <Text style={{ color: theme.text }}>{hour}h</Text>
+                </View>
 
-        {/*{edt}*/}
-        <View className="flex-col w-full gap-1">
-          <Cours course={course} />
-          <Cours course={course} />
+                {/* tirets (quart d’heure) */}
+                {Array.from({ length: 3 }).map((_, i) => (
+                  <View key={i} style={{ height: HOUR_HEIGHT / 4 }}>
+                    <Text style={{ color: theme.text }}>-</Text>
+                  </View>
+                ))}
+              </View>
+            );
+          })}
         </View>
 
+        {/* PARTIE cours */}
+        <View className="flex-1 relative pt-4">
+          {/* ligne heure actuelle */}
+          <View
+            style={{ top: nowTimeLine, backgroundColor: theme.destructive }}
+            className="absolute -left-2 right-0 h-1 z-50"
+          />
+
+          {/* ligne horaire dans le fond */}
+          {Array.from({ length: TOTAL_HOURS }).map((_, index) => (
+            <View key={index} style={{ height: HOUR_HEIGHT, borderColor: theme.card }} className="border-t" />
+          ))}
+
+          {/* cours */}
+          {courses.map((cours, i) => {
+            const startInMin = toMinutes(cours.heure_debut);
+            const endInMin = toMinutes(cours.heure_fin);
+            const baseInMin = START_HOUR * 60 - 14; // pour décalage top, pour synchro sur les heures
+            const top = ((startInMin - baseInMin) / 60) * HOUR_HEIGHT;
+            const height = ((endInMin - startInMin) / 60) * HOUR_HEIGHT;
+
+            return (
+              <View
+                key={i}
+                style={{ top, height }}
+                className="absolute left-0 right-0 px-2"
+              >
+                <Cours course={cours} />
+              </View>
+            );
+          })}
+        </View>
       </View>
+
     </Page>
   );
 };

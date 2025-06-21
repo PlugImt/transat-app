@@ -1,5 +1,4 @@
 import { useTheme } from "@/contexts/ThemeContext";
-import { useEmploiDuTemps } from "@/hooks/useEmploiDuTemps";
 import type { AppStackParamList } from "@/services/storage/types";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
@@ -10,6 +9,9 @@ import { useAuth } from "@/hooks/account/useAuth";
 import { useTranslation } from "react-i18next";
 import { Text, TouchableOpacity, View } from "react-native";
 import { Course } from "@/dto";
+import { skipToken, useQuery } from "@tanstack/react-query";
+import { QUERY_KEYS } from "@/constants";
+import { getEmploiDuTempsToday } from "@/api";
 
 export type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -21,11 +23,11 @@ export function EmploiDuTempsWidget() {
 
   const { user } = useAuth();
 
-  const {
-    data: edt,
-    isPending: isPendingEdt,
-    error,
-  } = useEmploiDuTemps(user?.email || "");
+  const { data: edt, isPending: isPendingEdt, error } = useQuery({
+    queryKey: QUERY_KEYS.emploiDuTemps,
+    queryFn: user?.email ? () => getEmploiDuTempsToday(user.email) : skipToken,
+    enabled: !!user?.email,
+	});
 
   const CUT_OFF_HOUR = 12;
   const CUT_OFF_MINUTE = 30;

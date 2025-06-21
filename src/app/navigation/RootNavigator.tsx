@@ -6,7 +6,7 @@ import { screenOptions } from "@/navigation/navigationConfig";
 import type { RootStackParamList } from "@/services/storage/types";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useEffect, useState } from "react";
-import { HomeLoading } from "../screens/Home";
+import { HomeLoading } from "../screens/home/Home";
 
 const Stack = createStackNavigator<RootStackParamList>();
 

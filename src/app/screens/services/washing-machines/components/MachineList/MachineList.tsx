@@ -1,6 +1,6 @@
 import WashingMachineCard from "@/components/custom/card/WashingMachineCard";
 import { useTheme } from "@/contexts/ThemeContext";
-import { MachineData } from "@/dto";
+import type { MachineData } from "@/dto";
 import { View, Text } from "react-native";
 
 interface MachineProps {

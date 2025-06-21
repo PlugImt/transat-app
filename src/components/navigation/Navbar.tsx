@@ -1,4 +1,4 @@
-import { Home } from "@/app/screens/Home";
+import { Home } from "@/app/screens";
 import Account from "@/app/screens/account/Account";
 import EditProfile from "@/app/screens/account/EditAccount";
 import Feedback from "@/app/screens/account/Feedback";
@@ -11,10 +11,7 @@ import Legal from "@/app/screens/account/settings/Legal";
 import Notifications from "@/app/screens/account/settings/Notifications";
 import Settings from "@/app/screens/account/settings/Settings";
 import Statistics from "@/app/screens/account/settings/Statistics";
-import { WashingMachines, Clubs, Games, Traq } from "@/app/screens/services";
-import { EmploiDuTemps } from "@/app/screens/services/EmploiDuTemps";
-import { Olimtpe } from "@/app/screens/services/Olimtpe";
-import { Restaurant } from "@/app/screens/services/Restaurant";
+import { WashingMachines, Clubs, Games, Traq, Restaurant, Olimtpe, EmploiDuTemps } from "@/app/screens/services";
 import { Services } from "@/app/screens/services/Services";
 import { useTheme } from "@/contexts/ThemeContext";
 import { BottomTabParamList } from "@/types";

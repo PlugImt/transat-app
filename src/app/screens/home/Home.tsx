@@ -40,7 +40,7 @@ import { isDinner, isLunch, isWeekend } from "@/utils";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
-function handleRegistrationError(errorMessage: string) {
+const handleRegistrationError = (errorMessage: string) => {
   if (Platform.OS === "web") {
     console.error(errorMessage);
   }
@@ -48,7 +48,7 @@ function handleRegistrationError(errorMessage: string) {
   throw new Error(errorMessage);
 }
 
-async function registerForPushNotificationsAsync() {
+const registerForPushNotificationsAsync = async () => {
   if (Platform.OS === "android") {
     await Notifications.setNotificationChannelAsync("default", {
       name: "default",

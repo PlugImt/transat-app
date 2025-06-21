@@ -1,6 +1,5 @@
 import { BadgeLoading } from "@/components/common/Badge";
 import Page from "@/components/common/Page";
-import { AboutModal } from "@/components/custom/AboutModal";
 import { TraqCardLoading } from "@/components/custom/card/TraqCard";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTranslation } from "react-i18next";

@@ -1,5 +1,5 @@
 import TraqCard from "@/components/custom/card/TraqCard";
-import { TraqArticle } from "@/dto/traq";
+import type { TraqArticle } from "@/dto/traq";
 import { View } from "react-native";
 
 interface TraqListProps {

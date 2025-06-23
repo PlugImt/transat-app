@@ -1,6 +1,6 @@
-import { storage } from "@/services/storage/asyncStorage";
-import type { Password, User } from "@/types/user";
-import { apiRequest } from "./apiRequest";
+import { storage } from '@/services/storage/asyncStorage';
+import type { Password, User } from '@/types/user';
+import { apiRequest } from './apiRequest';
 
 export async function fetchUser(): Promise<User> {
   const data = await apiRequest<User>("/api/newf/me");
@@ -17,7 +17,7 @@ export async function updateUser(data: User) {
     first_name: data.first_name,
     last_name: data.last_name,
     phone_number: data.phone_number,
-    graduation_year: data.graduation_year,
+    graduation_year: data.scolarity?.graduation_year,
     language: data.language,
   });
 }

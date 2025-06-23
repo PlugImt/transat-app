@@ -1,30 +1,19 @@
-import { TextSkeleton } from "@/components/Skeleton";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/common/Avatar";
-import { Button, IconButton } from "@/components/common/Button";
-import InfoItem from "@/components/common/InfoItem";
-import Page from "@/components/common/Page";
-import ErrorPage from "@/components/custom/ErrorPage";
-import { useTheme } from "@/contexts/ThemeContext";
-import { useUser } from "@/hooks/account/useUser";
-import { QUERY_KEYS } from "@/lib/queryKeys";
-import { getStudentYear } from "@/lib/utils";
-import type { AccountNavigation } from "@/services/storage/types";
-import { useNavigation } from "@react-navigation/native";
-import { useIsFetching, useQueryClient } from "@tanstack/react-query";
-import {
-  Lock,
-  Mail,
-  Medal,
-  MessageSquare,
-  Phone,
-  Settings,
-} from "lucide-react-native";
-import { useTranslation } from "react-i18next";
-import { Text, View } from "react-native";
+import { TextSkeleton } from '@/components/Skeleton';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar';
+import { Button, IconButton } from '@/components/common/Button';
+import InfoItem from '@/components/common/InfoItem';
+import Page from '@/components/common/Page';
+import ErrorPage from '@/components/custom/ErrorPage';
+import { useTheme } from '@/contexts/ThemeContext';
+import { useUser } from '@/hooks/account/useUser';
+import { QUERY_KEYS } from '@/lib/queryKeys';
+import { getStudentYear } from '@/lib/utils';
+import type { AccountNavigation } from '@/services/storage/types';
+import { useNavigation } from '@react-navigation/native';
+import { useIsFetching, useQueryClient } from '@tanstack/react-query';
+import { Lock, Mail, Medal, MessageSquare, Phone, Settings } from 'lucide-react-native';
+import { useTranslation } from 'react-i18next';
+import { Text, View } from 'react-native';
 
 export const Account = () => {
   const { theme } = useTheme();
@@ -92,9 +81,9 @@ export const Account = () => {
           <Text className="text-2xl font-bold " style={{ color: theme.text }}>
             {user?.first_name} {user?.last_name}
           </Text>
-          {user?.graduation_year && (
+          {user?.scolarity?.graduation_year && (
             <Text style={{ color: theme.textSecondary }} className="text-base">
-              {getStudentYear(user?.graduation_year)}
+              {getStudentYear(user?.scolarity?.graduation_year)}
             </Text>
           )}
         </View>

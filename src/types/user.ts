@@ -6,6 +6,7 @@ export interface User {
   last_name: string;
   phone_number: string;
   email: string;
+  scolarity?: Scolarity;
   graduation_year?: number;
   profile_picture?: string;
   id_newf?: number;
@@ -21,3 +22,16 @@ export interface Password {
   new_password: string;
   new_password_confirmation: string;
 }
+
+export interface Scolarity {
+  graduation_year: number;
+  branch: typeof branch;
+  group: string;
+}
+
+export const branch = {
+  fise: "FISE",
+  fil: "FIL",
+  fit: "FIT",
+  fip: "FIP",
+};

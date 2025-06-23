@@ -118,10 +118,11 @@ export const EmploiDuTemps = () => {
   };
 
   function getNowTimeForLine() {
-    const currentHour = date.getHours();
-    const currentMinutes = date.getMinutes();
+    const now = new Date();
+    const currentHour = now.getHours();
+    const currentMinutes = now.getMinutes();
     const minutesSinceStart = (currentHour - START_HOUR) * 60 + currentMinutes;
-    return (minutesSinceStart / 60) * HOUR_HEIGHT;
+    return (minutesSinceStart / 60) * HOUR_HEIGHT + 16; // 16 car cest le padding top pour que les cours soient alignés avec les horaires
   }
 
   const [nowTimeLine, setNowTimeForLine] = useState(getNowTimeForLine());
@@ -221,7 +222,7 @@ export const EmploiDuTemps = () => {
           {/* ligne heure actuelle */}
           <View
             style={{ top: nowTimeLine, backgroundColor: theme.destructive }}
-            className="absolute -left-2 right-0 h-1 z-50"
+            className="absolute -left-2 right-0 h-0.5 z-50"
           />
 
           {/* ligne horaire dans le fond */}

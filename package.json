@@ -85,7 +85,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
-    "@biomejs/biome": "1.9.4",
+    "@biomejs/biome": "2.0.0",
     "@expo/cli": "^0.24.13",
     "@types/react": "~19.0.10",
     "tailwindcss": "^3.4.17",

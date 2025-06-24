@@ -94,10 +94,13 @@ export const getHomeWidgetPreferences = async (): Promise<
 > => {
   try {
     const stored = await AsyncStorage.getItem(HOME_WIDGETS_KEY);
-    if (stored) {
-      return JSON.parse(stored);
-    }
-    return defaultHomeWidgets;
+    const parsed: WidgetPreference[] = JSON.parse(stored || "[]");
+
+    const newWidgets = defaultHomeWidgets.filter(
+      (widget) => !parsed.some((w: WidgetPreference) => w.id === widget.id),
+    );
+
+    return [...parsed, ...newWidgets];
   } catch (error) {
     console.error("Error getting home widget preferences:", error);
     return defaultHomeWidgets;
@@ -117,28 +120,13 @@ export const saveHomeWidgetPreferences = async (
 export const getServicePreferences = async (): Promise<ServicePreference[]> => {
   try {
     const stored = await AsyncStorage.getItem(SERVICES_KEY);
-    if (stored) {
-      const storedServices = JSON.parse(stored);
-      // Check if the new olimtpe service exists, if not add it
-      const hasOlimtpe = storedServices.some(
-        (service: ServicePreference) => service.id === "olimtpe",
-      );
-      if (!hasOlimtpe) {
-        const olimtpeService = defaultServices.find(
-          (service) => service.id === "olimtpe",
-        );
-        if (olimtpeService) {
-          storedServices.push(olimtpeService);
-          // Save the updated services back to storage
-          await AsyncStorage.setItem(
-            SERVICES_KEY,
-            JSON.stringify(storedServices),
-          );
-        }
-      }
-      return storedServices;
-    }
-    return defaultServices;
+    const parsed: ServicePreference[] = JSON.parse(stored || "[]");
+
+    const newServices = defaultServices.filter(
+      (service) => !parsed.some((s: ServicePreference) => s.id === service.id),
+    );
+
+    return [...parsed, ...newServices];
   } catch (error) {
     console.error("Error getting service preferences:", error);
     return defaultServices;

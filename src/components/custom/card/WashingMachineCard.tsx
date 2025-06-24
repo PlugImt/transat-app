@@ -39,11 +39,12 @@ const Bubble = ({ index }: { index: number }) => {
   const positionX = useRef(new Animated.Value(Math.random() * 100)).current;
   const scale = useRef(new Animated.Value(Math.random() * 0.5 + 0.5)).current;
   const opacity = useRef(new Animated.Value(Math.random() * 0.3 + 0.2)).current;
+  const animationRef = useRef<Animated.CompositeAnimation | null>(null);
 
   useEffect(() => {
-    const moveBubble = () => {
-      const duration = Math.random() * 4000 + 3000;
+    const duration = Math.random() * 4000 + 3000;
 
+    const bubbleAnimation = Animated.loop(
       Animated.parallel([
         Animated.sequence([
           Animated.timing(positionY, {
@@ -81,12 +82,16 @@ const Bubble = ({ index }: { index: number }) => {
             useNativeDriver: true,
           }),
         ]),
-      ]).start(moveBubble);
-    };
+      ]),
+    );
 
-    moveBubble();
+    animationRef.current = bubbleAnimation;
+    bubbleAnimation.start();
 
     return () => {
+      if (animationRef.current) {
+        animationRef.current.stop();
+      }
       positionY.stopAnimation();
       positionX.stopAnimation();
       opacity.stopAnimation();
@@ -144,11 +149,12 @@ const WindPattern = ({ index }: { index: number }) => {
   const translateX = useRef(new Animated.Value(-30)).current;
   const translateY = useRef(new Animated.Value(Math.random() * 100)).current;
   const opacity = useRef(new Animated.Value(Math.random() * 0.3 + 0.2)).current;
+  const animationRef = useRef<Animated.CompositeAnimation | null>(null);
 
   useEffect(() => {
-    const moveWind = () => {
-      const duration = Math.random() * 3000 + 2000;
+    const duration = Math.random() * 3000 + 2000;
 
+    const windAnimation = Animated.loop(
       Animated.parallel([
         Animated.sequence([
           Animated.timing(translateX, {
@@ -181,12 +187,16 @@ const WindPattern = ({ index }: { index: number }) => {
             useNativeDriver: true,
           }),
         ]),
-      ]).start(moveWind);
-    };
+      ]),
+    );
 
-    moveWind();
+    animationRef.current = windAnimation;
+    windAnimation.start();
 
     return () => {
+      if (animationRef.current) {
+        animationRef.current.stop();
+      }
       translateX.stopAnimation();
       translateY.stopAnimation();
       opacity.stopAnimation();

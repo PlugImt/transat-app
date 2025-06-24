@@ -28,6 +28,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     destructive: colors.shared.destructive.DEFAULT,
     success: colors.shared.success.DEFAULT,
     warning: colors.shared.warning.DEFAULT,
+    foreground: colors.shared.info.DEFAULT,
   };
 
   return (

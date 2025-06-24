@@ -15,6 +15,7 @@ import { Button } from "@/components/common/Button";
 import Input from "@/components/common/Input";
 import Page from "@/components/common/Page";
 import { useToast } from "@/components/common/Toast";
+import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";
 import type { AuthStackParamList } from "@/services/storage/types";
 
@@ -31,6 +32,8 @@ export const ResetPassword = () => {
   const [verificationCodeSent, setVerificationCodeSent] = useState(false);
   const [canRequestCode, setCanRequestCode] = useState(true);
   const [countdown, setCountdown] = useState(0);
+
+  const { theme } = useTheme();
 
   const verificationCodeRef = useRef<TextInput>(null);
   const newPasswordRef = useRef<TextInput>(null);
@@ -84,7 +87,7 @@ export const ResetPassword = () => {
       (!verificationCode || !newPassword || !confirmPassword));
 
   useEffect(() => {
-    let timer: NodeJS.Timeout;
+    let timer: ReturnType<typeof setInterval>;
     if (countdown > 0) {
       timer = setInterval(() => {
         setCountdown((prev) => prev - 1);

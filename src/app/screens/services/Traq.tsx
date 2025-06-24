@@ -1,14 +1,14 @@
-import { TextSkeleton } from "@/components/Skeleton";
-import Badge, { BadgeLoading } from "@/components/common/Badge";
-import Page from "@/components/common/Page";
-import { AboutModal } from "@/components/custom/AboutModal";
-import ErrorPage from "@/components/custom/ErrorPage";
-import TraqCard, { TraqCardLoading } from "@/components/custom/card/TraqCard";
-import { useTheme } from "@/contexts/ThemeContext";
-import { useTraq } from "@/hooks/useTraq";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView, Text, View } from "react-native";
+import Badge, { BadgeLoading } from "@/components/common/Badge";
+import Page from "@/components/common/Page";
+import { AboutModal } from "@/components/custom/AboutModal";
+import TraqCard, { TraqCardLoading } from "@/components/custom/card/TraqCard";
+import ErrorPage from "@/components/custom/ErrorPage";
+import { TextSkeleton } from "@/components/Skeleton";
+import { useTheme } from "@/contexts/ThemeContext";
+import { useTraq } from "@/hooks/useTraq";
 
 export const Traq = () => {
   const { t } = useTranslation();

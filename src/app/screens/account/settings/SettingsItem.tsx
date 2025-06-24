@@ -1,5 +1,5 @@
-import { useTheme } from "@/contexts/ThemeContext";
 import { Text, TouchableOpacity, View } from "react-native";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface Props {
   icon?: React.ReactNode;

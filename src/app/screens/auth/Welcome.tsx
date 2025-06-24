@@ -1,12 +1,12 @@
-import { Button } from "@/components/common/Button";
-import Page from "@/components/common/Page";
-import { AnimatedLogo } from "@/components/custom/AnimatedLogo";
-import type { AuthStackParamList } from "@/services/storage/types";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Animated as RNAnimated, View } from "react-native";
+import { Button } from "@/components/common/Button";
+import Page from "@/components/common/Page";
+import { AnimatedLogo } from "@/components/custom/AnimatedLogo";
+import type { AuthStackParamList } from "@/services/storage/types";
 
 type LoginScreenNavigationProp = StackNavigationProp<AuthStackParamList>;
 

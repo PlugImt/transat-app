@@ -1,5 +1,5 @@
-import { useTheme } from "@/contexts/ThemeContext";
 import { View } from "react-native";
+import { useTheme } from "@/contexts/ThemeContext";
 import Skeleton from "./Skeleton";
 import TextSkeleton from "./TextSkeleton";
 

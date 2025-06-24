@@ -1,10 +1,10 @@
-import { TextSkeleton } from "@/components/Skeleton";
-import { Avatar, AvatarImage } from "@/components/common/Avatar";
-import Badge from "@/components/common/Badge";
-import { useTheme } from "@/contexts/ThemeContext";
 import { BadgeEuro, Beer, CircleX, Clock } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { Dimensions, Image, Text, View } from "react-native";
+import { Avatar, AvatarImage } from "@/components/common/Avatar";
+import Badge from "@/components/common/Badge";
+import { TextSkeleton } from "@/components/Skeleton";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface CardProps {
   image: string;

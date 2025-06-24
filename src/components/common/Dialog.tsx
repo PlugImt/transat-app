@@ -1,4 +1,3 @@
-import { useTheme } from "@/contexts/ThemeContext";
 import { cloneElement, createContext, useContext, useState } from "react";
 import {
   KeyboardAvoidingView,
@@ -9,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import { useTheme } from "@/contexts/ThemeContext";
 import { Button } from "./Button";
 
 interface DialogContextType {

@@ -1,11 +1,11 @@
+import type { SpanStatus } from "@sentry/core";
+import { spanToTraceHeader } from "@sentry/core";
+import * as Sentry from "@sentry/react-native";
+import type { AxiosInstance, AxiosRequestHeaders } from "axios";
+import axios from "axios";
+import { t } from "i18next";
 import { storage } from "@/services/storage/asyncStorage";
 import STORAGE_KEYS from "@/services/storage/constants";
-import { spanToTraceHeader } from "@sentry/core";
-import type { SpanStatus } from "@sentry/core";
-import * as Sentry from "@sentry/react-native";
-import axios from "axios";
-import type { AxiosInstance, AxiosRequestHeaders } from "axios";
-import { t } from "i18next";
 import { apiUrlDev, apiUrlProd } from "./config";
 
 let apiInstance: AxiosInstance | null = null;

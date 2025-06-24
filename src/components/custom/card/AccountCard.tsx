@@ -1,3 +1,6 @@
+import { useNavigation } from "@react-navigation/native";
+import { t } from "i18next";
+import { Text, View } from "react-native";
 import {
   Avatar,
   AvatarFallback,
@@ -7,9 +10,6 @@ import { Button } from "@/components/common/Button";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { AccountNavigation } from "@/services/storage/types";
 import type { User } from "@/types/user";
-import { useNavigation } from "@react-navigation/native";
-import { t } from "i18next";
-import { Text, View } from "react-native";
 
 interface Props {
   user?: User;

@@ -1,5 +1,5 @@
-import { useTheme } from "@/contexts/ThemeContext";
 import { View } from "react-native";
+import { useTheme } from "@/contexts/ThemeContext";
 import { CardSkeleton, ProfileSkeleton, TextSkeleton } from "../Skeleton";
 
 export interface SkeletonLoadingScreenProps {

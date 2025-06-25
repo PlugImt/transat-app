@@ -289,18 +289,22 @@
     },
     "emploiDuTemps": {
       "title": "Stundenplan",
-      "description": "Der Stundenplan wird täglich aktualisiert, um Sie über Ihre kommenden Kurse zu informieren.",
+      "description": "Der Stundenplan wird täglich aktualisiert, um Sie über Ihre bevorstehenden Kurse zu informieren.",
+      "about": "Der Stundenplan wird täglich aktualisiert, um Sie über Ihre bevorstehenden Kurse zu informieren.",
+      "additionalInfo": "Wenn Sie irgendwelche Unstimmigkeiten bemerken, teilen Sie uns diese bitte über das Feedback-Formular mit. ",
       "noData": "Keine Daten für heute verfügbar",
-      "loading": "Stundenplan wird geladen...",
+      "loading": "Der Stundenplan wurde geladen...",
+      "nextDay": "Nächster Tag",
+      "previousDay": "Vorheriger Tag",
       "noEdt": {
-        "title": "Beim Abrufen des Stundenplans ist ein Fehler aufgetreten.",
-        "description": "Bitte sehen Sie in PASS nach."
+        "title": "Beim Abrufen des Stundenplans ist ein Fehler aufgetreten",
+        "description": "Bitte beziehen Sie sich auf PASS".
       },
       "noCourses": {
-        "morningTitle": "Keine Kurse für heute Morgen geplant",
-        "afternoonTitle": "Keine Kurse für heute Nachmittag geplant",
-        "dayTitle": "Heute sind keine Kurse geplant",
-        "description": "Bitte überprüfen Sie PASS."
+        "morningTitle": "Kein Kurs für heute Morgen geplant",
+        "afternoonTitle": "Kein Kurs für heute Nachmittag geplant",
+        "dayTitle": "Kein Kurs für heute geplant",
+        "description": "Bitte schauen Sie in PASS nach."
       }
     },
     "olimtpe": {

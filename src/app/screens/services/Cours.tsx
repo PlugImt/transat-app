@@ -3,12 +3,12 @@ import { Text, View } from 'react-native';
 import TagSalleCours from '@/components/custom/TagSalleCours';
 import { useTheme } from '@/contexts/ThemeContext';
 
-export function Cours(props: { course: Course }) {
+export function Cours(props: { course: Course, isOver: boolean }) {
   const { theme } = useTheme();
   return (
     <View
       style={{ backgroundColor: theme.card, borderColor: theme.text }}
-      className="flex-col justify-center items-center rounded-br-xl rounded-tr-2xl p-1 border-l-2 h-full">
+      className={`flex-col justify-center items-center rounded-br-xl rounded-tr-2xl p-1 border-l-2 h-full ${props.isOver ? "opacity-40" : ""}`}>
       <Text style={{ color: theme.text }} className="font-bold">
         {props.course.titre}
       </Text>

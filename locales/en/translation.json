@@ -288,18 +288,22 @@
       "additionalInfo": "You can exchange a starter for a dessert. Additional dishes are available for an extra cost. Still hungry? Ask the servers! After 7:45 PM, additional food at dinner is free."
     },
     "emploiDuTemps": {
-      "title": "Schedule",
-      "description": "The schedule is updated daily to inform you of your upcoming classes.",
+      "title": "Timetable",
+      "description": "The timetable is updated daily to inform you of your upcoming classes.",
+      "about": "The timetable is updated daily to inform you of your upcoming classes.",
+      "additionalInfo": "If you notice any inconsistencies, please let us know using the feedback form. ",
       "noData": "No data available for today",
-      "loading": "Loading schedule...",
+      "loading": "Loading the timetable...",
+      "nextDay": "Next day",
+      "previousDay": "Previous day",
       "noEdt": {
-        "title": "An error occurred while retrieving the schedule.",
+        "title": "An error has occurred while retrieving the timetable.",
         "description": "Please refer to PASS."
       },
       "noCourses": {
-        "morningTitle": "No classes scheduled for this morning",
-        "afternoonTitle": "No classes scheduled for this afternoon",
-        "dayTitle": "No classes scheduled for today",
+        "morningTitle": "No courses scheduled for this morning.",
+        "afternoonTitle": "No courses scheduled for this afternoon.",
+        "dayTitle": "No courses scheduled for today.",
         "description": "Please check PASS."
       }
     },

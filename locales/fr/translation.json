@@ -294,6 +294,8 @@
       "additionalInfo": "Si vous observez la moindre incohérence, veuillez nous le faire remonter via le formulaire de feedback.",
       "noData": "Aucune donnée disponible pour aujourd'hui",
       "loading": "Chargement de l'emploi du temps...",
+      "nextDay": "Jour suivant",
+      "previousDay": "Jour précédent",
       "noEdt": {
         "title": "Une erreur est survenue lors de la récupération de l’emploi du temps.",
         "description": "Veuillez vous référer à PASS."

@@ -24,9 +24,9 @@ export const TimetableCourseWidget = ({ course }: { course: Course }) => {
           style={{ color: theme.text }}
           ellipsizeMode="tail"
         >
-          {course.start} - {course.end}
+          {course.start_time} - {course.end_time}
         </Text>
-        <TagCourseRoom rooms={course.rooms} />
+        <TagCourseRoom rooms={course.room} />
       </View>
     </View>
   );

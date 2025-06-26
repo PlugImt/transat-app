@@ -14,9 +14,9 @@ export function Cours(props: { course: Course, isOver: boolean }) {
       </Text>
       <View className="flex-row gap-1">
         <Text style={{ color: theme.text }}>
-          {props.course.start} - {props.course.end}
+          {props.course.start_time} - {props.course.end_time}
         </Text>
-        <TagCourseRoom rooms={props.course.rooms} />
+        <TagCourseRoom rooms={props.course.room} />
       </View>
       <Text style={{ color: theme.text }}>{props.course.teacher}</Text>
     </View>

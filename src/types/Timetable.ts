@@ -10,10 +10,10 @@ export interface Course {
   id: number;
   date: Date;
   title: string;
-  start: string;
-  end: string;
+  start_time: string;
+  end_time: string;
   teacher: string;
-  rooms: string;
+  room: string;
   groupe: string;
   created_at: string;
 }

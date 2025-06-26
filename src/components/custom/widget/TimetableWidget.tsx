@@ -46,12 +46,12 @@ export function TimetableWidget() {
   cutoff.setHours(CUT_OFF_HOUR, CUT_OFF_MINUTE, 0, 0);
 
   const isInMorning = (course: Course) => {
-    const heureDebut = parseTimeToDate(course.start);
+    const heureDebut = parseTimeToDate(course.start_time);
     return heureDebut < cutoff;
   };
 
   const isInAfternoon = (course: Course) => {
-    const heureFin = parseTimeToDate(course.end);
+    const heureFin = parseTimeToDate(course.end_time);
     return heureFin > cutoff;
   };
 

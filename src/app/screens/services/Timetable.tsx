@@ -62,60 +62,60 @@ export const Timetable = () => {
   /* DONNEES DE TESTS */
   // TODO : A supprimer
   const course: Course = {
-    rooms: 'J144',
+    room: 'J144',
     id: 0,
     date: new Date(),
     title: 'Méthodes numériques',
-    start: '8h00',
-    end: '9h15',
+    start_time: '8h00',
+    end_time: '9h15',
     teacher: 'Frédéric Jourdan',
     groupe: '',
     created_at: '',
   };
 
   const course2: Course = {
-    rooms: 'J144',
+    room: 'J144',
     id: 0,
     date: new Date(),
     title: 'Méthodes numériques',
-    start: '9h30',
-    end: '10h45',
+    start_time: '9h30',
+    end_time: '10h45',
     teacher: 'Frédéric Jourdan',
     groupe: '',
     created_at: '',
   };
 
   const course3: Course = {
-    rooms: 'J144',
+    room: 'J144',
     id: 0,
     date: new Date(),
     title: 'Méthodes numériques',
-    start: '13h30',
-    end: '16h45',
+    start_time: '13h30',
+    end_time: '16h45',
     teacher: 'Frédéric Jourdan',
     groupe: '',
     created_at: '',
   };
 
   const course4: Course = {
-    rooms: 'J144',
+    room: 'J144',
     id: 0,
     date: new Date(new Date().setDate(new Date().getDate() + 1)),
     title: 'SOUTENANCE ESE',
-    start: '8h00',
-    end: '12h15',
+    start_time: '8h00',
+    end_time: '12h15',
     teacher: 'Janis Truc',
     groupe: '',
     created_at: '',
   };
 
   const course5: Course = {
-    rooms: 'J144',
+    room: 'J144',
     id: 0,
     date: new Date(new Date().setDate(new Date().getDate() + 1)),
     title: 'SOUTENANCE ESE',
-    start: '13h30',
-    end: '17h45',
+    start_time: '13h30',
+    end_time: '17h45',
     teacher: 'Janis Truc',
     groupe: '',
     created_at: '',
@@ -126,7 +126,7 @@ export const Timetable = () => {
   /* / DONNEES DE TEST */
 
 
-  const filteredCourses = edt?.courses?.filter(course =>
+  const filteredCourses = courses.filter(course =>
     new Date(course.date).toDateString() === selectedDate.toDateString(),
   );
 
@@ -148,9 +148,12 @@ export const Timetable = () => {
     const currentHour = now.getHours();
     const currentMinutes = now.getMinutes();
     const [h, m] = heureFin.split(/[h:]/).map(Number);
-    if (currentHour > h)
-      return true;
-    return currentHour === h && currentMinutes > m;
+    if (now.getDay() === selectedDate.getDay() && now.getMonth() === selectedDate.getMonth() && now.getFullYear() === selectedDate.getFullYear()) {
+      if (currentHour > h)
+        return true;
+      return currentHour === h && currentMinutes > m;
+    }
+    return false
   }
 
   function getNowTimeForLine() {
@@ -301,8 +304,8 @@ export const Timetable = () => {
 
               {/* cours */}
               {filteredCourses?.map((cours, i) => {
-                const startInMin = toMinutes(cours.start);
-                const endInMin = toMinutes(cours.end);
+                const startInMin = toMinutes(cours.start_time);
+                const endInMin = toMinutes(cours.end_time);
                 const baseInMin = START_HOUR * 60 - 14; // pour décalage top, pour synchro sur les heures
                 const top = ((startInMin - baseInMin) / 60) * HOUR_HEIGHT;
                 const height = ((endInMin - startInMin) / 60) * HOUR_HEIGHT;
@@ -313,7 +316,7 @@ export const Timetable = () => {
                     style={{ top, height }}
                     className="absolute left-0 right-0 px-2"
                   >
-                    <Cours course={cours} isOver={isCourseOver(cours.end)} />
+                    <Cours course={cours} isOver={isCourseOver(cours.end_time)} />
                   </View>
                 );
               })}

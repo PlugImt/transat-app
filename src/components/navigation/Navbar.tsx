@@ -24,7 +24,7 @@ import { Restaurant } from '@/app/screens/services/Restaurant';
 import { Services } from '@/app/screens/services/Services';
 import { Traq } from '@/app/screens/services/Traq';
 import { WashingMachine } from '@/app/screens/services/WashingMachine';
-import HomeworkDetails from '@/components/custom/widget/homework/HomeworkDetails';
+import HomeworkDetails from '@/components/custom/HomeworkDetails';
 import { useTheme } from '@/contexts/ThemeContext';
 import type { BottomTabParamList } from '@/types/navigation';
 

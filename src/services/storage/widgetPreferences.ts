@@ -1,4 +1,4 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export type WidgetType =
   | "weather"
@@ -78,7 +78,7 @@ const defaultServices: ServicePreference[] = [
     enabled: true,
     order: 3,
     size: "full",
-    image: require("@/assets/images/Logos/edt_large.png"),
+    image: require("@/assets/images/Logos/devoirs_large.png"),
     screen: "Homework",
   },
   {

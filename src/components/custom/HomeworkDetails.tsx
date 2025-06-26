@@ -1,12 +1,14 @@
-import type { RouteProp } from "@react-navigation/native";
-import { useRoute } from "@react-navigation/native";
-import { format } from "date-fns";
-import { enUS, fr } from "date-fns/locale";
-import { useTranslation } from "react-i18next";
-import { ScrollView, Text, View } from "react-native";
-import Page from "@/components/common/Page";
-import { useTheme } from "@/contexts/ThemeContext";
-import type { AppStackParamList } from "@/services/storage/types";
+import type { RouteProp } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
+import { format } from 'date-fns';
+import { enUS, fr } from 'date-fns/locale';
+import { CheckCircle, Circle } from 'lucide-react-native';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import Page from '@/components/common/Page';
+import { useTheme } from '@/contexts/ThemeContext';
+import type { AppStackParamList } from '@/services/storage/types';
 
 type HomeworkDetailsRouteProp = RouteProp<AppStackParamList, "HomeworkDetails">;
 
@@ -25,6 +27,12 @@ export default function HomeworkDetails() {
   const updatedAt = format(new Date(homework.updated_at), "PPP '—' p", {
     locale,
   });
+
+  const [isDone, setIsDone] = useState(homework.done);
+  const toggleDone = () => setIsDone(!isDone);
+
+  const now = new Date();
+  const isLate = !homework.done && new Date(homework.deadline) < now;
 
   const isEdited = homework.created_at !== homework.updated_at;
 
@@ -53,7 +61,28 @@ export default function HomeworkDetails() {
           >
             📅 {t("services.homework.deadline")} : {deadline}
           </Text>
+          {isLate && (
+            <Text className="text-sm font-bold text-red-500">
+              ⚠️ {t("services.homework.late")}
+            </Text>
+          )}
 
+          <TouchableOpacity
+            onPress={toggleDone}
+            className="flex-row items-center gap-2 mt-2"
+            hitSlop={{ top: 15, bottom: 15, left: 15, right: 15 }}
+          >
+            {isDone ? (
+              <CheckCircle color={theme.primary} size={22} />
+            ) : (
+              <Circle color={theme.text} size={22} />
+            )}
+            <Text style={{ color: theme.text }}>
+              {isDone
+                ? t("services.homework.markAsDone")
+                : t("services.homework.markDone")}
+            </Text>
+          </TouchableOpacity>
           <View className="h-[1px] bg-gray-400 my-3" />
 
           <Text className="text-sm" style={{ color: theme.text }}>

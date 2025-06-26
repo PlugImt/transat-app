@@ -1,10 +1,10 @@
-import { useTranslation } from "react-i18next";
-import { Text, View } from "react-native";
-import Page from "@/components/common/Page";
-import { AboutModal } from "@/components/custom/AboutModal";
-import EmploiDuTempsCard from "@/components/custom/card/EmploiDuTempsCard";
-import useAuth from "@/hooks/account/useAuth";
-import { useEmploiDuTemps } from "@/hooks/useEmploiDuTemps";
+import { useTranslation } from 'react-i18next';
+import { Text, View } from 'react-native';
+import Page from '@/components/common/Page';
+import { AboutModal } from '@/components/custom/AboutModal';
+import EmploiDuTempsCard from '@/components/custom/card/EmploiDuTempsCard';
+import useAuth from '@/hooks/account/useAuth';
+import { useEmploiDuTemps } from '@/hooks/useEmploiDuTemps';
 
 export const EmploiDuTemps = () => {
   const { t } = useTranslation();

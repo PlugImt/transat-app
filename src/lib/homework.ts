@@ -1,4 +1,4 @@
-import type { Homework } from "@/types/homework";
+import type { Homework } from '@/types/homework';
 
 export const getHomeworks = async (userId: number): Promise<Homework[]> => {
   await new Promise((res) => setTimeout(res, 500));
@@ -11,6 +11,7 @@ export const getHomeworks = async (userId: number): Promise<Homework[]> => {
       title: "Exercice sur les intégrales",
       description: "Faire les exercices 3 à 6 du chapitre 4.",
       deadline: new Date(Date.now() + 2 * 86400000),
+      done: false,
       created_at: new Date(),
       updated_at: new Date(),
     },
@@ -21,6 +22,7 @@ export const getHomeworks = async (userId: number): Promise<Homework[]> => {
       title: "Compte-rendu TP optique",
       description: "Remettre un PDF avec les mesures et calculs.",
       deadline: new Date(Date.now() + 4 * 86400000),
+      done: false,
       created_at: new Date(),
       updated_at: new Date(),
     },
@@ -31,6 +33,7 @@ export const getHomeworks = async (userId: number): Promise<Homework[]> => {
       title: "Projet de programmation",
       description: "Développer une application de gestion de tâches.",
       deadline: new Date(Date.now() + 7 * 86400000),
+      done: false,
       created_at: new Date(),
       updated_at: new Date(),
     },
@@ -41,6 +44,7 @@ export const getHomeworks = async (userId: number): Promise<Homework[]> => {
       title: "Rapport de laboratoire",
       description: "Analyser les résultats des expériences de la semaine.",
       deadline: new Date(Date.now() + 3 * 86400000),
+      done: false,
       created_at: new Date(),
       updated_at: new Date(),
     },
@@ -52,6 +56,7 @@ export const getHomeworks = async (userId: number): Promise<Homework[]> => {
       description:
         "Rédiger un essai de 1500 mots sur les causes et conséquences.",
       deadline: new Date(Date.now() + 5 * 86400000),
+      done: false,
       created_at: new Date(),
       updated_at: new Date(),
     },
@@ -63,6 +68,7 @@ export const getHomeworks = async (userId: number): Promise<Homework[]> => {
       description:
         "Préparer une présentation sur la biodiversité de la région.",
       deadline: new Date(Date.now() + 6 * 86400000),
+      done: false,
       created_at: new Date(),
       updated_at: new Date(),
     },
@@ -74,6 +80,41 @@ export const getHomeworks = async (userId: number): Promise<Homework[]> => {
       description:
         "Rédiger une critique du texte de Kant sur la morale. Rédiger une critique du texte de Kant sur la morale. Rédiger une critique du texte de Kant sur la morale. Rédiger une critique du texte de Kant sur la morale.",
       deadline: new Date(Date.now() + 8 * 86400000),
+      done: false,
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 8,
+      author: userId,
+      course_name: "Histoire de l'art",
+      title: "Analyse d'une œuvre d'art",
+      description:
+        "Choisir une œuvre et en faire une analyse détaillée de ses éléments.",
+      deadline: new Date(Date.now() + 2 * 86900000),
+      done: false,
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 9,
+      author: userId,
+      course_name: "Géographie",
+      title: "Étude d'un territoire",
+      description: "Préparer un exposé sur les enjeux géopolitiques actuels.",
+      deadline: new Date(Date.now() - 9 * 86400000),
+      done: false,
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 10,
+      author: userId,
+      course_name: "Économie",
+      title: "Analyse d'un marché",
+      description: "Étudier les tendances du marché local et global.",
+      deadline: new Date(Date.now() - 17 * 86400000),
+      done: false,
       created_at: new Date(),
       updated_at: new Date(),
     },

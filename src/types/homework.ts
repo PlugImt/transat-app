@@ -1,4 +1,4 @@
-import type { User } from "@/types/user";
+import type { User } from '@/types/user';
 
 export interface Homework {
   id: number;
@@ -7,6 +7,7 @@ export interface Homework {
   title: string;
   description: string;
   deadline: Date;
+  done: boolean;
   created_at: Date;
   updated_at: Date;
 }

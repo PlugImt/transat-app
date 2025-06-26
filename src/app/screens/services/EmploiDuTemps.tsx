@@ -234,7 +234,7 @@ export const EmploiDuTemps = () => {
                   </Text>
                 </View>
                 <View className="rounded-xl items-center justify-center" style={{ backgroundColor: theme.secondary }}>
-                  <Text style={{ color: theme.text }} className="text-2xl font-semibold p-3">
+                  <Text className="text-2xl font-semibold p-3 text-white">
                     {dayNumber}
                   </Text>
                 </View>

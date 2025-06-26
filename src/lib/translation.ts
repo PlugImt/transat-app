@@ -1,5 +1,5 @@
-import { translationApiKey } from "@/lib/config";
 import axios from "axios";
+import { translationApiKey } from "@/lib/config";
 
 type GoogleTranslateResponse = {
   data: {

@@ -1,6 +1,7 @@
 export const QUERY_KEYS = {
   restaurantMenu: ["restaurantMenu"],
   emploiDuTemps: ["emploiDuTemps"],
+  homework: ["homework"],
   washingMachines: ["washingMachines"],
   weather: ["weather"],
   user: ["user"],
@@ -12,5 +13,7 @@ export const QUERY_KEYS = {
     register: ["auth", "register"],
     saveToken: ["auth", "saveToken"],
     saveExpoPushToken: ["auth", "saveExpoPushToken"],
+    changePassword: ["auth", "changePassword"],
+    resetPassword: ["auth", "resetPassword"],
   },
 };

@@ -1,14 +1,9 @@
-import { useTheme } from "@/contexts/ThemeContext";
-import { BottomSheetModal, BottomSheetView } from "@gorhom/bottom-sheet";
-import type React from "react";
-import { cloneElement, createContext, useContext, useRef } from "react";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import Animated, {
-  runOnJS,
-  withTiming,
-  useAnimatedStyle,
-  useSharedValue,
-} from "react-native-reanimated";
+import { BottomSheetModal, BottomSheetView } from '@gorhom/bottom-sheet';
+import type React from 'react';
+import { cloneElement, createContext, useContext, useRef } from 'react';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import { useTheme } from '@/contexts/ThemeContext';
 
 // Context pour gérer l'état du bottom sheet
 interface BottomSheetContextType {
@@ -30,7 +25,9 @@ export const useBottomSheet = () => {
 // Composant qui déclenche l'ouverture du bottom sheet
 export function BottomSheetTrigger({
   children,
-}: { children: React.ReactElement<{ onPress?: () => void }> }) {
+}: {
+  children: React.ReactElement<{ onPress?: () => void }>;
+}) {
   const { handleBottomSheet } = useBottomSheet();
   return cloneElement(children, { onPress: () => handleBottomSheet(true) });
 }
@@ -38,7 +35,9 @@ export function BottomSheetTrigger({
 // Provider qui gère l'état global du bottom sheet
 export function BottomSheetProvider({
   children,
-}: { children: React.ReactNode }) {
+}: {
+  children: React.ReactNode;
+}) {
   const bottomSheetRef = useRef<BottomSheetModal>(null);
 
   const handleBottomSheet = (open: boolean) => {

@@ -1,10 +1,10 @@
-import { storage } from "@/services/storage/asyncStorage";
 import axios from "axios";
 import { type ClassValue, clsx } from "clsx";
 import * as FileSystem from "expo-file-system";
 import * as ImagePicker from "expo-image-picker";
 import { t } from "i18next";
 import { twMerge } from "tailwind-merge";
+import { storage } from "@/services/storage/asyncStorage";
 import { getAPIUrl } from "./apiRequest";
 
 /**
@@ -100,8 +100,8 @@ export async function uploadImage(): Promise<string> {
       uri: image.uri,
       name: image.uri.split("/").pop() || "image.jpg",
       type: `image/${image.uri.split(".").pop()}` || "image/jpeg",
-      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    } as any);
+      // horrible mais bon euh
+    } as unknown as Blob);
 
     const apiUrl = await getAPIUrl();
 

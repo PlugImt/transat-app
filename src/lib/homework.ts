@@ -1,0 +1,81 @@
+import type { Homework } from "@/types/homework";
+
+export const getHomeworks = async (userId: number): Promise<Homework[]> => {
+  await new Promise((res) => setTimeout(res, 500));
+
+  return [
+    {
+      id: 1,
+      author: userId,
+      course_name: "Mathématiques",
+      title: "Exercice sur les intégrales",
+      description: "Faire les exercices 3 à 6 du chapitre 4.",
+      deadline: new Date(Date.now() + 2 * 86400000),
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 2,
+      author: userId,
+      course_name: "Physique",
+      title: "Compte-rendu TP optique",
+      description: "Remettre un PDF avec les mesures et calculs.",
+      deadline: new Date(Date.now() + 4 * 86400000),
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 4,
+      author: userId,
+      course_name: "Informatique",
+      title: "Projet de programmation",
+      description: "Développer une application de gestion de tâches.",
+      deadline: new Date(Date.now() + 7 * 86400000),
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 3,
+      author: userId,
+      course_name: "Chimie",
+      title: "Rapport de laboratoire",
+      description: "Analyser les résultats des expériences de la semaine.",
+      deadline: new Date(Date.now() + 3 * 86400000),
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 5,
+      author: userId,
+      course_name: "Histoire",
+      title: "Devoir sur la Révolution française",
+      description:
+        "Rédiger un essai de 1500 mots sur les causes et conséquences.",
+      deadline: new Date(Date.now() + 5 * 86400000),
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 6,
+      author: userId,
+      course_name: "Biologie",
+      title: "Étude de cas sur l'écosystème local",
+      description:
+        "Préparer une présentation sur la biodiversité de la région.",
+      deadline: new Date(Date.now() + 6 * 86400000),
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 7,
+      author: userId,
+      course_name: "Philosophie",
+      title: "Analyse d'un texte philosophique",
+      description:
+        "Rédiger une critique du texte de Kant sur la morale. Rédiger une critique du texte de Kant sur la morale. Rédiger une critique du texte de Kant sur la morale. Rédiger une critique du texte de Kant sur la morale.",
+      deadline: new Date(Date.now() + 8 * 86400000),
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+  ];
+};

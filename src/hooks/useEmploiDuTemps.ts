@@ -1,6 +1,6 @@
+import { skipToken, useQuery } from "@tanstack/react-query";
 import { getEmploiDuTempsToday } from "@/lib/emploiDuTemps";
 import { QUERY_KEYS } from "@/lib/queryKeys";
-import { skipToken, useQuery } from "@tanstack/react-query";
 
 export const useEmploiDuTemps = (email?: string) => {
   const { data, isPending, refetch, error, isError } = useQuery({

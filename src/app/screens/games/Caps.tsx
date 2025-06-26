@@ -1,5 +1,5 @@
-import Page from "@/components/common/Page";
 import { Text } from "react-native";
+import Page from "@/components/common/Page";
 
 export const Caps = () => {
   return (

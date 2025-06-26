@@ -303,6 +303,14 @@
         "description": "Veuillez vérifier sur PASS."
       }
     },
+    "homework": {
+      "title": "Devoirs",
+      "author": "Auteur",
+      "createdAt": "Créé le",
+      "updatedAt": "Modifié le",
+      "deadline": "Deadline",
+      "noHomework": "Aucun devoir à venir."
+    },
     "olimtpe": {
       "title": "OL'IMT'PE",
       "welcome": "Bienvenue à OL'IMT'PE !",
@@ -347,6 +355,8 @@
   },
   "account": {
     "graduationYear": "Année de diplôme",
+    "branch": "Filière",
+    "group": "Groupe",
     "promotion": "Promotion",
     "campus": "Campus",
     "phone": "Téléphone",
@@ -373,6 +383,8 @@
     "noToken": "Jeton d'authentification non trouvé",
     "selectCampus": "Sélectionner le campus",
     "selectGraduationYear": "Sélectionner l'année de diplôme",
+    "selectBranch": "Sélectionner la filière",
+    "selectGroup": "Sélectionner le groupe",
     "newf": "utilisateurs",
     "registration": "Inscription",
     "infos": "Informations",

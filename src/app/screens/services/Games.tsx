@@ -1,7 +1,7 @@
-import Page from "@/components/common/Page";
-import { useTheme } from "@/contexts/ThemeContext";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
+import Page from "@/components/common/Page";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export const Games = () => {
   const { t } = useTranslation();

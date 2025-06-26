@@ -1,7 +1,7 @@
-import { Skeleton } from "@/components/Skeleton";
-import { useTheme } from "@/contexts/ThemeContext";
 import type { ComponentPropsWithoutRef } from "react";
 import { Text, TouchableOpacity } from "react-native";
+import { Skeleton } from "@/components/Skeleton";
+import { useTheme } from "@/contexts/ThemeContext";
 
 type ButtonVariant =
   | "default"

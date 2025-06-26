@@ -1,25 +1,29 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar';
-import { Button } from '@/components/common/Button';
-import Dropdown, { DropdownLoading } from '@/components/common/Dropdown';
-import Input, { InputLoading } from '@/components/common/Input';
-import Page from '@/components/common/Page';
-import { useToast } from '@/components/common/Toast';
-import ErrorPage from '@/components/custom/ErrorPage';
-import { useTheme } from '@/contexts/ThemeContext';
-import { useUpdateAccount } from '@/hooks/account/useUpdateAccount';
-import { useUpdateProfilePicture } from '@/hooks/account/useUpdateProfilePicture';
-import { useUser } from '@/hooks/account/useUser';
-import { QUERY_KEYS } from '@/lib/queryKeys';
-import type { User } from '@/types/user';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useNavigation } from '@react-navigation/native';
-import { useQueryClient } from '@tanstack/react-query';
-import { Edit, GraduationCap } from 'lucide-react-native';
-import { useEffect } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
-import { Keyboard, Text, TouchableOpacity, View } from 'react-native';
-import { z } from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigation } from "@react-navigation/native";
+import { useQueryClient } from "@tanstack/react-query";
+import { Edit, GraduationCap } from "lucide-react-native";
+import { useEffect } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { Keyboard, Text, TouchableOpacity, View } from "react-native";
+import { z } from "zod";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/common/Avatar";
+import { Button } from "@/components/common/Button";
+import Dropdown, { DropdownLoading } from "@/components/common/Dropdown";
+import Input, { InputLoading } from "@/components/common/Input";
+import Page from "@/components/common/Page";
+import { useToast } from "@/components/common/Toast";
+import ErrorPage from "@/components/custom/ErrorPage";
+import { useTheme } from "@/contexts/ThemeContext";
+import { useUpdateAccount } from "@/hooks/account/useUpdateAccount";
+import { useUpdateProfilePicture } from "@/hooks/account/useUpdateProfilePicture";
+import { useUser } from "@/hooks/account/useUser";
+import { QUERY_KEYS } from "@/lib/queryKeys";
+import type { User } from "@/types/user";
 
 export const EditProfile = () => {
   const { theme } = useTheme();
@@ -50,7 +54,7 @@ export const EditProfile = () => {
     scolarity: z
       .object({
         graduation_year: z.number().optional(),
-        branch: z.string().optional(),
+        branch: z.enum(["FISE", "FIL", "FIT", "FIP"]).optional(),
         group: z.string().optional(),
       })
       .optional(),
@@ -59,7 +63,7 @@ export const EditProfile = () => {
   const {
     control: userControl,
     handleSubmit: handleUserSubmit,
-    formState: { errors: userErrors, isValid: isUserValid },
+    formState: { errors: userErrors, isValid: isUserValid, isDirty },
     reset,
   } = useForm({
     resolver: zodResolver(userSchema),
@@ -68,7 +72,11 @@ export const EditProfile = () => {
       last_name: "",
       phone_number: "",
       email: "",
-      graduation_year: undefined as number | undefined,
+      scolarity: {
+        graduation_year: undefined as number | undefined,
+        branch: undefined as Branch | undefined,
+        group: "",
+      },
     },
     mode: "onChange",
   });
@@ -81,7 +89,11 @@ export const EditProfile = () => {
         last_name: user.last_name || "",
         phone_number: user.phone_number || "",
         email: user.email || "",
-        graduation_year: user.graduation_year || undefined,
+        scolarity: {
+          graduation_year: user.scolarity?.graduation_year ?? undefined,
+          branch: user.scolarity?.branch ?? undefined,
+          group: user.scolarity?.group || "",
+        },
       });
     }
   }, [user, reset]);
@@ -203,6 +215,8 @@ export const EditProfile = () => {
           autoCapitalize="none"
           textContentType="emailAddress"
           error={userErrors.email?.message}
+          disabled={true}
+          className="opacity-50"
         />
 
         <Input
@@ -216,7 +230,35 @@ export const EditProfile = () => {
 
         <Controller
           control={userControl}
-          name="graduation_year"
+          name="scolarity.branch"
+          render={({ field: { onChange, value } }) => (
+            <Dropdown
+              label={t("account.branch")}
+              placeholder={t("account.selectBranch")}
+              options={["FISE", "FIL", "FIT", "FIP"]}
+              value={value}
+              onValueChange={onChange}
+            />
+          )}
+        />
+
+        <Controller
+          control={userControl}
+          name="scolarity.group"
+          render={({ field: { onChange, value } }) => (
+            <Dropdown
+              label={t("account.group")}
+              placeholder={t("account.selectGroup")}
+              options={["1", "2", "3", "4", "5"]}
+              value={value}
+              onValueChange={onChange}
+            />
+          )}
+        />
+
+        <Controller
+          control={userControl}
+          name="scolarity.graduation_year"
           render={({ field: { onChange, value } }) => (
             <Dropdown
               label={t("account.graduationYear")}
@@ -239,7 +281,7 @@ export const EditProfile = () => {
         label={t("common.save")}
         onPress={handleUserSubmit(handleUpdateAccount)}
         loading={isUpdatingAccount}
-        disabled={!isUserValid}
+        disabled={!isUserValid || !isDirty}
       />
     </Page>
   );

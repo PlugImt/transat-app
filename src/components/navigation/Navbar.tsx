@@ -1,4 +1,7 @@
-import { Home } from "@/app/screens/Home";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
+import { GridIcon, LucideHome, Play, User } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
 import Account from "@/app/screens/account/Account";
 import EditProfile from "@/app/screens/account/EditAccount";
 import Feedback from "@/app/screens/account/Feedback";
@@ -11,6 +14,7 @@ import Legal from "@/app/screens/account/settings/Legal";
 import Notifications from "@/app/screens/account/settings/Notifications";
 import Settings from "@/app/screens/account/settings/Settings";
 import Statistics from "@/app/screens/account/settings/Statistics";
+import { Home } from "@/app/screens/Home";
 import { Clubs } from "@/app/screens/services/Clubs";
 import { EmploiDuTemps } from "@/app/screens/services/EmploiDuTemps";
 import Games from "@/app/screens/services/Games";
@@ -21,10 +25,6 @@ import { Traq } from "@/app/screens/services/Traq";
 import { WashingMachine } from "@/app/screens/services/WashingMachine";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { BottomTabParamList } from "@/types/navigation";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createStackNavigator } from "@react-navigation/stack";
-import { GridIcon, LucideHome, Play, User } from "lucide-react-native";
-import { useTranslation } from "react-i18next";
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -37,6 +37,8 @@ const HomeStackScreen = () => (
     <ServicesStack.Screen name="Restaurant" component={Restaurant} />
     <ServicesStack.Screen name="Olimtpe" component={Olimtpe} />
     <ServicesStack.Screen name="EmploiDuTemps" component={EmploiDuTemps} />
+    <ServicesStack.Screen name="Homework" component={Homework} />
+    <ServicesStack.Screen name="HomeworkDetails" component={HomeworkDetails} />
   </HomeStack.Navigator>
 );
 
@@ -47,6 +49,8 @@ const ServicesStackScreen = () => (
     <ServicesStack.Screen name="WashingMachine" component={WashingMachine} />
     <ServicesStack.Screen name="Restaurant" component={Restaurant} />
     <ServicesStack.Screen name="EmploiDuTemps" component={EmploiDuTemps} />
+    <ServicesStack.Screen name="Homework" component={Homework} />
+    <ServicesStack.Screen name="HomeworkDetails" component={HomeworkDetails} />
     <ServicesStack.Screen name="Clubs" component={Clubs} />
     <ServicesStack.Screen name="Traq" component={Traq} />
     <ServicesStack.Screen name="Olimtpe" component={Olimtpe} />

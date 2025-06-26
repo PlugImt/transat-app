@@ -1,7 +1,7 @@
-import { useTheme } from "@/contexts/ThemeContext";
-import useAuth from "@/hooks/account/useAuth";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
+import { useTheme } from "@/contexts/ThemeContext";
+import useAuth from "@/hooks/account/useAuth";
 import { Button } from "../common/Button";
 
 type Props = {

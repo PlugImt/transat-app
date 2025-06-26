@@ -4,11 +4,13 @@ export type WidgetType =
   | "weather"
   | "restaurant"
   | "emploiDuTemps"
+  | "homework"
   | "washingMachine";
 export type ServiceType =
   | "washingMachine"
   | "restaurant"
   | "emploiDuTemps"
+  | "homework"
   | "traq"
   | "olimtpe";
 export type ServiceSize = "full" | "half";
@@ -38,7 +40,8 @@ const defaultHomeWidgets: WidgetPreference[] = [
   { id: "weather", name: "Weather", enabled: true, order: 0 },
   { id: "restaurant", name: "Restaurant", enabled: true, order: 1 },
   { id: "emploiDuTemps", name: "Emploi du Temps", enabled: true, order: 2 },
-  { id: "washingMachine", name: "Washing Machine", enabled: true, order: 3 },
+  { id: "homework", name: "Homework", enabled: true, order: 3 },
+  { id: "washingMachine", name: "Washing Machine", enabled: true, order: 4 },
 ];
 
 const defaultServices: ServicePreference[] = [
@@ -70,10 +73,19 @@ const defaultServices: ServicePreference[] = [
     screen: "EmploiDuTemps",
   },
   {
+    id: "homework",
+    name: "Homework",
+    enabled: true,
+    order: 3,
+    size: "full",
+    image: require("@/assets/images/Logos/edt_large.png"),
+    screen: "Homework",
+  },
+  {
     id: "traq",
     name: "Traq",
     enabled: true,
-    order: 3,
+    order: 4,
     size: "full",
     image: require("@/assets/images/Logos/traq_large.png"),
     screen: "Traq",
@@ -82,7 +94,7 @@ const defaultServices: ServicePreference[] = [
     id: "olimtpe",
     name: "OL'IMT'PE",
     enabled: true,
-    order: 4,
+    order: 5,
     size: "full",
     image: require("@/assets/images/Logos/olimtpe.png"),
     screen: "Olimtpe",

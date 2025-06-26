@@ -1,3 +1,6 @@
+import { type FC, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Text, View } from "react-native";
 import Page from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
 import WashingMachineCard, {
@@ -6,9 +9,6 @@ import WashingMachineCard, {
 import { useTheme } from "@/contexts/ThemeContext";
 import { useWashingMachines } from "@/hooks/useWashingMachines";
 import type { MachineData } from "@/types/washingMachine";
-import { type FC, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Text, View } from "react-native";
 
 export const WashingMachine: FC = () => {
   const { t } = useTranslation();

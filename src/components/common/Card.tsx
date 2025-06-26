@@ -1,4 +1,3 @@
-import { useTheme } from "@/contexts/ThemeContext";
 import { useEffect, useState } from "react";
 import {
   Dimensions,
@@ -8,6 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface CardProps {
   title?: string;

@@ -1,11 +1,11 @@
+import type { SpanStatus } from "@sentry/core";
+import { spanToTraceHeader } from "@sentry/core";
+import * as Sentry from "@sentry/react-native";
+import type { AxiosInstance, AxiosRequestHeaders } from "axios";
+import axios from "axios";
+import { t } from "i18next";
 import { storage } from "@/services/storage/asyncStorage";
 import STORAGE_KEYS from "@/services/storage/constants";
-import { spanToTraceHeader } from "@sentry/core";
-import type { SpanStatus } from "@sentry/core";
-import * as Sentry from "@sentry/react-native";
-import axios from "axios";
-import type { AxiosInstance, AxiosRequestHeaders } from "axios";
-import { t } from "i18next";
 import { apiUrlDev, apiUrlProd } from "./config";
 
 let apiInstance: AxiosInstance | null = null;
@@ -27,7 +27,14 @@ export async function getApiInstance(): Promise<AxiosInstance> {
 
     apiInstance.interceptors.request.use(async (config) => {
       if (process.env.NODE_ENV === "development") {
-        console.log("Using API base:", baseURL, "fetching:", config.url);
+        console.log(
+          "Using API base:",
+          baseURL,
+          "fetching:",
+          config.url,
+          "method:",
+          config.method,
+        );
       }
       return config;
     });

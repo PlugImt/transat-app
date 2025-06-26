@@ -5,7 +5,7 @@ import { apiRequest } from "./apiRequest";
 export async function fetchWeather(): Promise<WeatherData> {
   const currentLanguage = i18n.language.toUpperCase();
   const data = await apiRequest<WeatherDataApi>(
-    `/api/weather?language=${currentLanguage}`,
+    `/weather?language=${currentLanguage}`,
   );
 
   return {

@@ -1,8 +1,8 @@
-import type { Timetable } from '@/types/Timetable';
+import type { Timetable } from '@/types/timetable';
 import i18n from 'i18next';
 import { apiRequest } from './apiRequest';
 
-const TARGET_URL = "/api/planning/users/:email/courses/today";
+const TARGET_URL = "/planning/users/:email/courses/today";
 
 export async function getTimetableToday(
   email: string,
@@ -10,13 +10,13 @@ export async function getTimetableToday(
   // retrieve the language from the local storage
   const currentLanguage = i18n.language.toLowerCase();
 
-  TARGET_URL.replace(":email", email);
+  const url = TARGET_URL.replace(":email", email);
 
   const queryParams = new URLSearchParams();
   queryParams.append("language", currentLanguage);
 
   return await apiRequest<Timetable>(
-    `${TARGET_URL}?${queryParams.toString()}`,
+    `${url}?${queryParams.toString()}`,
     "GET",
   );
 }

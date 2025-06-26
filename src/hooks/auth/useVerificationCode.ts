@@ -10,7 +10,7 @@ export const useVerificationCode = () => {
   const verifyMutation = useMutation({
     mutationFn: async ({ email, verification_code }: VerifyCodeParams) => {
       return await apiRequest<{ token: string }>(
-        "/api/auth/verify-account",
+        "/auth/verify-account",
         "POST",
         { email, verification_code },
         true,
@@ -21,7 +21,7 @@ export const useVerificationCode = () => {
   const resendCodeMutation = useMutation({
     mutationFn: async (email: string) => {
       return await apiRequest(
-        "/api/auth/verification-code",
+        "/auth/verification-code",
         "POST",
         { email },
         true,

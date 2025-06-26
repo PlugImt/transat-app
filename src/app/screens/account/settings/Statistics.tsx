@@ -102,7 +102,7 @@ export const Statistics = () => {
 
       // Fetch global statistics
       const globalResponse = await fetch(
-        `${API_BASE_URL}/api/statistics/global`,
+        `${API_BASE_URL}/statistics/global`,
         {
           method: "GET",
           mode: "cors",
@@ -123,7 +123,7 @@ export const Statistics = () => {
 
       // Fetch top users statistics
       const topUsersResponse = await fetch(
-        `${API_BASE_URL}/api/statistics/top-users`,
+        `${API_BASE_URL}/statistics/top-users`,
         {
           method: "GET",
           mode: "cors",

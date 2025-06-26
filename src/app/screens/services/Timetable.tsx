@@ -5,9 +5,9 @@ import useAuth from '@/hooks/account/useAuth';
 import { useTranslation } from 'react-i18next';
 import { Pressable, Text, View } from 'react-native';
 import { useTheme } from '@/contexts/ThemeContext';
-import type { Course } from '@/types/Timetable';
+import type { Course } from '@/types/timetable';
 import { Cours } from '@/app/screens/services/Cours';
-import { useEffect, useState } from 'react';
+import { Key, useEffect, useState } from 'react';
 import { Button } from '@/components/common/Button';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
@@ -69,8 +69,9 @@ export const Timetable = () => {
     start_time: '8h00',
     end_time: '9h15',
     teacher: 'Frédéric Jourdan',
-    groupe: '',
+    group: '',
     created_at: '',
+    user_email: '',
   };
 
   const course2: Course = {
@@ -81,8 +82,9 @@ export const Timetable = () => {
     start_time: '9h30',
     end_time: '10h45',
     teacher: 'Frédéric Jourdan',
-    groupe: '',
+    group: '',
     created_at: '',
+    user_email: '',
   };
 
   const course3: Course = {
@@ -93,8 +95,9 @@ export const Timetable = () => {
     start_time: '13h30',
     end_time: '16h45',
     teacher: 'Frédéric Jourdan',
-    groupe: '',
+    group: '',
     created_at: '',
+    user_email: '',
   };
 
   const course4: Course = {
@@ -105,8 +108,9 @@ export const Timetable = () => {
     start_time: '8h00',
     end_time: '12h15',
     teacher: 'Janis Truc',
-    groupe: '',
+    group: '',
     created_at: '',
+    user_email: '',
   };
 
   const course5: Course = {
@@ -117,16 +121,28 @@ export const Timetable = () => {
     start_time: '13h30',
     end_time: '17h45',
     teacher: 'Janis Truc',
-    groupe: '',
+    group: '',
     created_at: '',
+    user_email: '',
   };
   const courses: Course[] = [
     course, course2, course3, course4, course5,
   ];
   /* / DONNEES DE TEST */
 
-
-  const filteredCourses = courses.filter(course =>
+  const isoToHourString = (isoString: string): string => {
+    const date = new Date(isoString);
+    const hours = date.getUTCHours().toString().padStart(2, '0');
+    const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+    return `${hours}h${minutes}`;
+  };
+  const parsedEdt = edt?.map(course => ({
+    ...course,
+    date: new Date(course.date),
+    start_time: isoToHourString(course.start_time),
+    end_time: isoToHourString(course.end_time),
+  }));
+  const filteredCourses = parsedEdt?.filter(course =>
     new Date(course.date).toDateString() === selectedDate.toDateString(),
   );
 
@@ -153,7 +169,7 @@ export const Timetable = () => {
         return true;
       return currentHour === h && currentMinutes > m;
     }
-    return false
+    return false;
   }
 
   function getNowTimeForLine() {
@@ -303,7 +319,7 @@ export const Timetable = () => {
               ))}
 
               {/* cours */}
-              {filteredCourses?.map((cours, i) => {
+              {filteredCourses?.map((cours: Course, i: number) => {
                 const startInMin = toMinutes(cours.start_time);
                 const endInMin = toMinutes(cours.end_time);
                 const baseInMin = START_HOUR * 60 - 14; // pour décalage top, pour synchro sur les heures

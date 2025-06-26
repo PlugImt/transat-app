@@ -1,4 +1,4 @@
-import { Course } from '@/types/Timetable';
+import { Course } from '@/types/timetable';
 import { Text, View } from 'react-native';
 import { useTheme } from '@/contexts/ThemeContext';
 import { TagCourseRoom } from '@/components/custom/TagCourseRoom';

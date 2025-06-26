@@ -22,7 +22,7 @@ export const useAuthMutations = () => {
       if (!token) return null as NotLoggedIn;
 
       try {
-        const userData = await apiRequest<User>("/api/newf/me");
+        const userData = await apiRequest<User>("/newf/me");
         await storage.set("newf", userData);
         return userData;
       } catch (_error) {
@@ -41,7 +41,7 @@ export const useAuthMutations = () => {
     mutationKey: QUERY_KEYS.auth.login,
     mutationFn: async ({ email, password }) => {
       return await apiRequest<LoginResponse>(
-        "/api/auth/login",
+        "/auth/login",
         "POST",
         {
           email,
@@ -62,7 +62,7 @@ export const useAuthMutations = () => {
       const apiUrl = await getAPIUrl();
 
       return await apiRequest(
-        `${apiUrl}/api/auth/register`,
+        `${apiUrl}/auth/register`,
         "POST",
         {
           email,
@@ -81,7 +81,7 @@ export const useAuthMutations = () => {
     mutationKey: QUERY_KEYS.auth.saveToken,
     mutationFn: async (token: string) => {
       await storage.set("token", token);
-      const userData = await apiRequest<User>("/api/newf/me");
+      const userData = await apiRequest<User>("/newf/me");
       await storage.set("newf", userData);
       return userData;
     },
@@ -93,7 +93,7 @@ export const useAuthMutations = () => {
       const expoPushToken = await storage.get("expoPushToken");
       if (expoPushToken === token) return true;
 
-      await apiRequest("/api/newf/me", "PATCH", {
+      await apiRequest("/newf/me", "PATCH", {
         notification_token: token,
       });
       await storage.set("expoPushToken", token);
@@ -105,7 +105,7 @@ export const useAuthMutations = () => {
     mutationKey: QUERY_KEYS.auth.resetPassword,
     mutationFn: async (email: string) => {
       return await apiRequest(
-        "/api/auth/verification-code",
+        "/auth/verification-code",
         "POST",
         { email },
         true,
@@ -121,7 +121,7 @@ export const useAuthMutations = () => {
       new_password: string;
       new_password_confirmation: string;
     }) => {
-      return await apiRequest("/api/auth/change-password", "PATCH", data, true);
+      return await apiRequest("/auth/change-password", "PATCH", data, true);
     },
   });
 

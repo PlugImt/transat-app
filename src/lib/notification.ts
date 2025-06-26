@@ -1,7 +1,7 @@
 import type { NotificationType } from "@/types/notification";
 import { apiRequest } from "./apiRequest";
 
-const NOTIFICATION_API = "/api/newf/notifications/subscriptions";
+const NOTIFICATION_API = "/newf/notifications/subscriptions";
 
 export const addNotification = async (
   service: NotificationType,

@@ -7,7 +7,7 @@ import type { StackNavigationProp } from '@react-navigation/stack';
 import { TimetableCourseWidget } from '@/components/custom/widget/TimetableCourseWidget';
 import { TimetableLoadingWidget } from '@/components/custom/widget/TimetableLoadingWidget';
 import { useAuth } from '@/hooks/account/useAuth';
-import type { Course } from '@/types/Timetable';
+import type { Course } from '@/types/timetable';
 import { useTranslation } from 'react-i18next';
 import { Text, TouchableOpacity, View } from 'react-native';
 

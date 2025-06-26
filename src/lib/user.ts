@@ -3,17 +3,17 @@ import type { Password, User } from "@/types/user";
 import { apiRequest } from "./apiRequest";
 
 export async function fetchUser(): Promise<User> {
-  const data = await apiRequest<User>("/api/newf/me");
+  const data = await apiRequest<User>("/newf/me");
   await storage.set("newf", data);
   return data;
 }
 
 export async function updateLanguage(language: string) {
-  return apiRequest("/api/newf/me", "PATCH", { language });
+  return apiRequest("/newf/me", "PATCH", { language });
 }
 
 export async function updateUser(data: User) {
-  return apiRequest<User>("/api/newf/me", "PATCH", {
+  return apiRequest<User>("/newf/me", "PATCH", {
     first_name: data.first_name,
     last_name: data.last_name,
     phone_number: data.phone_number,
@@ -24,7 +24,7 @@ export async function updateUser(data: User) {
 
 export async function updateProfilePicture(imageUrl: string) {
   const response = await apiRequest<{ profile_picture: string }>(
-    "/api/newf/me",
+    "/newf/me",
     "PATCH",
     { profile_picture: imageUrl },
   );
@@ -32,7 +32,7 @@ export async function updateProfilePicture(imageUrl: string) {
 }
 
 export async function updatePassword(data: Password) {
-  return apiRequest("/api/auth/change-password", "PATCH", {
+  return apiRequest("/auth/change-password", "PATCH", {
     email: data.email,
     password: data.password,
     new_password: data.new_password,

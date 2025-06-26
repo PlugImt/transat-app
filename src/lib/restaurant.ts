@@ -2,7 +2,7 @@ import type { MenuData } from "@/types/restaurant";
 import i18n from "i18next";
 import { apiRequest } from "./apiRequest";
 
-const TARGET_URL = "/api/restaurant";
+const TARGET_URL = "/restaurant";
 
 export async function getRestaurant(): Promise<MenuData | undefined> {
   // retrieve the language from the local storage

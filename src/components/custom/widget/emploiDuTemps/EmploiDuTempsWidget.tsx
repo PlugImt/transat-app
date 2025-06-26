@@ -1,14 +1,14 @@
-import { useNavigation } from '@react-navigation/native';
-import type { StackNavigationProp } from '@react-navigation/stack';
-import { useTranslation } from 'react-i18next';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { EmploiDuTempsWidgetCourse } from '@/components/custom/widget/emploiDuTemps/EmploiDuTempsWidgetCourse';
-import { EmploiDuTempsWidgetLoading } from '@/components/custom/widget/emploiDuTemps/EmploiDuTempsWidgetLoading';
-import { useTheme } from '@/contexts/ThemeContext';
-import { useAuth } from '@/hooks/account/useAuth';
-import { useEmploiDuTemps } from '@/hooks/useEmploiDuTemps';
-import type { AppStackParamList } from '@/services/storage/types';
-import type { Course } from '@/types/emploiDuTemps';
+import { useNavigation } from "@react-navigation/native";
+import type { StackNavigationProp } from "@react-navigation/stack";
+import { useTranslation } from "react-i18next";
+import { Text, TouchableOpacity, View } from "react-native";
+import { EmploiDuTempsWidgetCourse } from "@/components/custom/widget/emploiDuTemps/EmploiDuTempsWidgetCourse";
+import { EmploiDuTempsWidgetLoading } from "@/components/custom/widget/emploiDuTemps/EmploiDuTempsWidgetLoading";
+import { useTheme } from "@/contexts/ThemeContext";
+import { useAuth } from "@/hooks/account/useAuth";
+import { useEmploiDuTemps } from "@/hooks/useEmploiDuTemps";
+import type { AppStackParamList } from "@/services/storage/types";
+import type { Course } from "@/types/emploiDuTemps";
 
 export type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 

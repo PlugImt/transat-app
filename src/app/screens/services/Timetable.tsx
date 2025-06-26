@@ -16,7 +16,7 @@ export const Timetable = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
   const { user } = useAuth();
-  const { refetch, isError, isPending, error } = useTimetable(
+  const { data: edt, refetch, isPending: isPendingEdt, isError, error } = useTimetable(
     user?.email || '',
   );
 
@@ -120,14 +120,13 @@ export const Timetable = () => {
     groupe: '',
     created_at: '',
   };
-
-  /* / DONNEES DE TEST */
-
   const courses: Course[] = [
     course, course2, course3, course4, course5,
   ];
+  /* / DONNEES DE TEST */
 
-  const filteredCourses = courses.filter(course =>
+
+  const filteredCourses = edt?.courses?.filter(course =>
     new Date(course.date).toDateString() === selectedDate.toDateString(),
   );
 
@@ -175,36 +174,14 @@ export const Timetable = () => {
   /* </Cours et date> */
 
 
-  if (isPending) {
+  if (isPendingEdt) {
     return <TimetableLoading />;
-  }
-
-  if (isError) {
-    return (
-      <Page
-        goBack
-        refreshing={isPending}
-        onRefresh={refetch}
-        title={t('services.timetable.title')}
-        about={
-          <AboutModal
-            title={t('services.timetable.title')}
-            description={t('services.timetable.about')}
-            additionalInfo={t('services.timetable.additionalInfo')}
-          />
-        }
-      >
-        <View className="min-h-screen flex justify-center items-center ">
-          <Text className="text-red-500 text-center h1">{error?.message}</Text>
-        </View>
-      </Page>
-    );
   }
 
   return (
     <Page
       goBack
-      refreshing={isPending}
+      refreshing={isPendingEdt}
       onRefresh={refetch}
       title={t('services.timetable.title')}
       about={
@@ -218,53 +195,63 @@ export const Timetable = () => {
     >
 
       {/*{header : jour}*/}
-      <Pressable
-        onPress={() => setSelectedDate(new Date())}
-      >
-        {({ pressed }) =>
-          (
-            <View className="gap-2">
-              <View className={`flex-row items-center gap-2 justify-end ${pressed ? 'opacity-60' : ''}`}>
-                <View>
-                  <Text style={{ color: theme.text }} className="h2 text-right font-medium">
-                    {weekday}
-                  </Text>
-                  <Text style={{ color: theme.text }} className="text-right text-sm">
-                    {month} {year}
-                  </Text>
-                </View>
-                <View className="rounded-xl items-center justify-center" style={{ backgroundColor: theme.secondary }}>
+      <View className="gap-2">
+        {(edt === null || isError) && (
+          <View>
+            <Text style={{ color: theme.textTertiary }} className="italic">
+              {t('services.timetable.noEdt.title')}
+              {t('services.timetable.noEdt.description')}
+            </Text>
+            <Text style={{ color: theme.destructive }} className="italic">{error?.message}</Text>
+          </View>
+        )}
+        <View className="flex-row items-center gap-2 justify-end">
+          <View>
+            <Text style={{ color: theme.text }} className="h2 text-right font-medium">
+              {weekday}
+            </Text>
+            <Text style={{ color: theme.text }} className="text-right text-sm">
+              {month} {year}
+            </Text>
+          </View>
+          <Pressable
+            onPress={() => setSelectedDate(new Date())}
+          >
+            {({ pressed }) =>
+              (
+                <View className={`rounded-xl items-center justify-center ${pressed ? 'opacity-60' : ''}`}
+                      style={{ backgroundColor: theme.secondary }}>
                   <Text className="text-2xl font-semibold p-3 text-white">
                     {dayNumber}
                   </Text>
                 </View>
-              </View>
-              {/*{jour navi}*/}
-              <View className="flex-row justify-between items-center">
-                <Button
-                  onPress={() => setSelectedDate(prev => new Date(prev.getFullYear(), prev.getMonth(), prev.getDate() - 1))}
-                  label="<"
-                  style={{
-                    backgroundColor: theme.primary,
-                    paddingHorizontal: 16,
-                    paddingVertical: 6,
-                    borderRadius: 12,
-                  }}
-                />
-                <Button
-                  onPress={() => setSelectedDate(prev => new Date(prev.getFullYear(), prev.getMonth(), prev.getDate() + 1))}
-                  label=">"
-                  style={{
-                    backgroundColor: theme.primary,
-                    paddingHorizontal: 16,
-                    paddingVertical: 6,
-                    borderRadius: 12,
-                  }}
-                />
-              </View>
-            </View>
-          )}
-      </Pressable>
+              )}
+          </Pressable>
+        </View>
+        {/*{jour navi}*/}
+        <View className="flex-row justify-between items-center">
+          <Button
+            onPress={() => setSelectedDate(prev => new Date(prev.getFullYear(), prev.getMonth(), prev.getDate() - 1))}
+            label="<"
+            style={{
+              backgroundColor: theme.primary,
+              paddingHorizontal: 16,
+              paddingVertical: 6,
+              borderRadius: 12,
+            }}
+          />
+          <Button
+            onPress={() => setSelectedDate(prev => new Date(prev.getFullYear(), prev.getMonth(), prev.getDate() + 1))}
+            label=">"
+            style={{
+              backgroundColor: theme.primary,
+              paddingHorizontal: 16,
+              paddingVertical: 6,
+              borderRadius: 12,
+            }}
+          />
+        </View>
+      </View>
 
       {/*{content edt}*/}
       <View className="h-full">
@@ -313,7 +300,7 @@ export const Timetable = () => {
               ))}
 
               {/* cours */}
-              {filteredCourses.map((cours, i) => {
+              {filteredCourses?.map((cours, i) => {
                 const startInMin = toMinutes(cours.start);
                 const endInMin = toMinutes(cours.end);
                 const baseInMin = START_HOUR * 60 - 14; // pour décalage top, pour synchro sur les heures

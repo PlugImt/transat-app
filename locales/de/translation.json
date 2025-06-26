@@ -298,7 +298,7 @@
       "previousDay": "Vorheriger Tag",
       "noEdt": {
         "title": "Beim Abrufen des Stundenplans ist ein Fehler aufgetreten",
-        "description": "Bitte beziehen Sie sich auf PASS".
+        "description": "Bitte beziehen Sie sich auf PASS"
       },
       "noCourses": {
         "morningTitle": "Kein Kurs für heute Morgen geplant",

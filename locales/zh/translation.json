@@ -286,7 +286,7 @@
         "description": "菜单尚未更新。请稍后再查看。"
       }
     },
-    "emploiDuTemps": {
+    "timetable": {
       "title": "课程表",
       "description": "课程表每日更新，通知您即将开始的课程",
       "about": "课程表每日更新，通知您即将开始的课程",

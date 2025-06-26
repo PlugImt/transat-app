@@ -1,9 +1,9 @@
 import { useTheme } from '@/contexts/ThemeContext';
-import type { Course } from '@/types/emploiDuTemps';
+import type { Course } from '@/types/Timetable';
 import { Text, View } from 'react-native';
-import TagSalleCours from '@/components/custom/TagSalleCours';
+import { TagCourseRoom } from '@/components/custom/TagCourseRoom';
 
-export function EmploiDuTempsWidgetCourse({ course }: { course: Course }) {
+export const TimetableCourseWidget = ({ course }: { course: Course }) => {
   const { theme } = useTheme();
 
   return (
@@ -16,7 +16,7 @@ export function EmploiDuTempsWidgetCourse({ course }: { course: Course }) {
         style={{ color: theme.text }}
         ellipsizeMode="tail"
       >
-        {course.titre}
+        {course.title}
       </Text>
       <View className="flex flex-row items-center gap-2">
         <Text
@@ -24,10 +24,10 @@ export function EmploiDuTempsWidgetCourse({ course }: { course: Course }) {
           style={{ color: theme.text }}
           ellipsizeMode="tail"
         >
-          {course.heure_debut} - {course.heure_fin}
+          {course.start} - {course.end}
         </Text>
-        <TagSalleCours salles={course.salles}/>
+        <TagCourseRoom rooms={course.rooms} />
       </View>
     </View>
   );
-}
+};

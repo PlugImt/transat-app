@@ -286,7 +286,7 @@
         "description": "El menú no se ha actualizado. Vuelva más tarde."
       }
     },
-    "emploiDuTemps": {
+    "timetable": {
       "title": "Horario",
       "description": "El horario se actualiza diariamente para informarte de tus próximas clases.",
       "about": "El horario se actualiza diariamente para informarte de tus próximas clases.",

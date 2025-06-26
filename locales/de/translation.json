@@ -287,7 +287,7 @@
         "description": "Das Menü wurde nicht aktualisiert. Schauen Sie später wieder vorbei."
       }
     },
-    "emploiDuTemps": {
+    "timetable": {
       "title": "Stundenplan",
       "description": "Der Stundenplan wird täglich aktualisiert, um Sie über Ihre bevorstehenden Kurse zu informieren.",
       "about": "Der Stundenplan wird täglich aktualisiert, um Sie über Ihre bevorstehenden Kurse zu informieren.",

@@ -286,8 +286,8 @@
         "description": "O cardápio não foi atualizado. Volte mais tarde."
       }
     },
-    "emploiDuTemps": {
-      "title": "Timetable",
+    "timetable": {
+      "title": "Horário",
       "description": "O horário é atualizado diariamente para informá-lo sobre suas próximas aulas.",
       "about": "O horário é atualizado diariamente para informá-lo sobre suas próximas aulas.",
       "additionalInfo": "Se você notar alguma inconsistência, informe-nos usando o formulário de feedback. ",

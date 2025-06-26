@@ -3,12 +3,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export type WidgetType =
   | "weather"
   | "restaurant"
-  | "emploiDuTemps"
+  | "timetable"
   | "washingMachine";
 export type ServiceType =
   | "washingMachine"
   | "restaurant"
-  | "emploiDuTemps"
+  | "timetable"
   | "traq"
   | "olimtpe";
 export type ServiceSize = "full" | "half";
@@ -37,7 +37,7 @@ const SERVICES_KEY = "services_preferences";
 const defaultHomeWidgets: WidgetPreference[] = [
   { id: "weather", name: "Weather", enabled: true, order: 0 },
   { id: "restaurant", name: "Restaurant", enabled: true, order: 1 },
-  { id: "emploiDuTemps", name: "Emploi du Temps", enabled: true, order: 2 },
+  { id: "timetable", name: "Timetable", enabled: true, order: 2 },
   { id: "washingMachine", name: "Washing Machine", enabled: true, order: 3 },
 ];
 
@@ -61,13 +61,13 @@ const defaultServices: ServicePreference[] = [
     screen: "Restaurant",
   },
   {
-    id: "emploiDuTemps",
-    name: "Emploi du Temps",
+    id: "timetable",
+    name: "Timetable",
     enabled: true,
     order: 2,
     size: "full",
     image: require("@/assets/images/Logos/edt_large.png"),
-    screen: "EmploiDuTemps",
+    screen: "Timetable",
   },
   {
     id: "traq",

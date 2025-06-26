@@ -5,8 +5,8 @@ import {
   WeatherSkeleton,
   WeatherWidget,
 } from "@/components/custom/WeatherWidget";
-import EmploiDuTempsWidget from "@/components/custom/widget/EmploiDuTempsWidget";
-import { EmploiDuTempsWidgetLoading } from "@/components/custom/widget/EmploiDuTempsWidgetLoading";
+import TimetableWidget from "@/components/custom/widget/TimetableWidget";
+import { TimetableLoadingWidget } from "@/components/custom/widget/TimetableLoadingWidget";
 import RestaurantWidget, {
   RestaurantWidgetLoading,
 } from "@/components/custom/widget/RestaurantWidget";
@@ -177,9 +177,9 @@ export const Home = () => {
     useIsFetching({
       queryKey: QUERY_KEYS.restaurantMenu,
     }) > 0;
-  const isEmploiDuTempsFetching =
+  const isTimetableFetching =
     useIsFetching({
-      queryKey: QUERY_KEYS.emploiDuTemps,
+      queryKey: QUERY_KEYS.timetable,
     }) > 0;
   const isWashingMachinesFetching =
     useIsFetching({
@@ -191,14 +191,14 @@ export const Home = () => {
     }) > 0;
   const isFetching =
     isMenuFetching ||
-    isEmploiDuTempsFetching ||
+    isTimetableFetching ||
     isWashingMachinesFetching ||
     isWeatherFetching;
 
   const refetch = async () => {
     await Promise.all([
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.restaurantMenu }),
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.emploiDuTemps }),
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.timetable }),
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.washingMachines }),
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.weather }),
     ]);
@@ -210,8 +210,8 @@ export const Home = () => {
         return <WeatherWidget />;
       case "restaurant":
         return <RestaurantWidget />;
-      case "emploiDuTemps":
-        return <EmploiDuTempsWidget />;
+      case "timetable":
+        return <TimetableWidget />;
       case "washingMachine":
         return <WashingMachineWidget />;
       default:
@@ -358,7 +358,7 @@ export const HomeLoading = () => {
       {!isWeekend() && !isLunch() && !isDinner() ? (
         <RestaurantWidgetLoading />
       ) : null}
-      <EmploiDuTempsWidgetLoading />
+      <TimetableLoadingWidget />
       <WashingMachineWidgetLoading />
     </Page>
   );

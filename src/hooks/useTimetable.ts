@@ -1,11 +1,11 @@
-import { getEmploiDuTempsToday } from "@/lib/emploiDuTemps";
+import { getTimetableToday } from "@/lib/timetable";
 import { QUERY_KEYS } from "@/lib/queryKeys";
 import { skipToken, useQuery } from "@tanstack/react-query";
 
-export const useEmploiDuTemps = (email?: string) => {
+export const useTimetable = (email?: string) => {
   const { data, isPending, refetch, error, isError } = useQuery({
-    queryKey: QUERY_KEYS.emploiDuTemps,
-    queryFn: email ? () => getEmploiDuTempsToday(email) : skipToken,
+    queryKey: QUERY_KEYS.timetable,
+    queryFn: email ? () => getTimetableToday(email) : skipToken,
     enabled: !!email,
   });
 

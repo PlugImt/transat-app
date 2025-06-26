@@ -1,19 +1,19 @@
-import { useTheme } from "@/contexts/ThemeContext";
-import { useEmploiDuTemps } from "@/hooks/useEmploiDuTemps";
-import type { AppStackParamList } from "@/services/storage/types";
-import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
+import { useTheme } from '@/contexts/ThemeContext';
+import { useTimetable } from '@/hooks/useTimetable';
+import type { AppStackParamList } from '@/services/storage/types';
+import { useNavigation } from '@react-navigation/native';
+import type { StackNavigationProp } from '@react-navigation/stack';
 
-import { EmploiDuTempsWidgetCourse } from "@/components/custom/widget/EmploiDuTempsWidgetCourse";
-import { EmploiDuTempsWidgetLoading } from "@/components/custom/widget/EmploiDuTempsWidgetLoading";
-import { useAuth } from "@/hooks/account/useAuth";
-import type { Course } from "@/types/emploiDuTemps";
-import { useTranslation } from "react-i18next";
-import { Text, TouchableOpacity, View } from "react-native";
+import { TimetableCourseWidget } from '@/components/custom/widget/TimetableCourseWidget';
+import { TimetableLoadingWidget } from '@/components/custom/widget/TimetableLoadingWidget';
+import { useAuth } from '@/hooks/account/useAuth';
+import type { Course } from '@/types/Timetable';
+import { useTranslation } from 'react-i18next';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 export type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
-export function EmploiDuTempsWidget() {
+export function TimetableWidget() {
   const { t } = useTranslation();
   const { theme } = useTheme();
 
@@ -25,7 +25,7 @@ export function EmploiDuTempsWidget() {
     data: edt,
     isPending: isPendingEdt,
     error,
-  } = useEmploiDuTemps(user?.email || "");
+  } = useTimetable(user?.email || '');
 
   const CUT_OFF_HOUR = 12;
   const CUT_OFF_MINUTE = 30;
@@ -36,7 +36,7 @@ export function EmploiDuTempsWidget() {
     (now.getHours() === CUT_OFF_HOUR && now.getMinutes() < CUT_OFF_MINUTE);
 
   const parseTimeToDate = (timeStr: string) => {
-    const [hours, minutes] = timeStr.split(":").map(Number);
+    const [hours, minutes] = timeStr.split(':').map(Number);
     const date = new Date();
     date.setHours(hours, minutes, 0, 0);
     return date;
@@ -46,12 +46,12 @@ export function EmploiDuTempsWidget() {
   cutoff.setHours(CUT_OFF_HOUR, CUT_OFF_MINUTE, 0, 0);
 
   const isInMorning = (course: Course) => {
-    const heureDebut = parseTimeToDate(course.heure_debut);
+    const heureDebut = parseTimeToDate(course.start);
     return heureDebut < cutoff;
   };
 
   const isInAfternoon = (course: Course) => {
-    const heureFin = parseTimeToDate(course.heure_fin);
+    const heureFin = parseTimeToDate(course.end);
     return heureFin > cutoff;
   };
 
@@ -69,7 +69,7 @@ export function EmploiDuTempsWidget() {
   const noCoursesToday = !morningCourses?.length && !afternoonCourses?.length;
 
   if (isPendingEdt) {
-    return <EmploiDuTempsWidgetLoading />;
+    return <TimetableLoadingWidget />;
   }
 
   if (
@@ -81,10 +81,10 @@ export function EmploiDuTempsWidget() {
     return (
       <View className="flex flex-col gap-2 mr-2">
         <Text style={{ color: theme.text }} className="h3 ml-4">
-          {t("services.emploiDuTemps.title")}
+          {t('services.timetable.title')}
         </Text>
         <TouchableOpacity
-          onPress={() => navigation.navigate("EmploiDuTemps")}
+          onPress={() => navigation.navigate('Timetable')}
           className="rounded-lg flex flex-col gap-3"
         >
           <View className="flex flex-col">
@@ -95,14 +95,14 @@ export function EmploiDuTempsWidget() {
                   style={{ color: theme.text }}
                   ellipsizeMode="tail"
                 >
-                  {t("services.emploiDuTemps.noEdt.title")}
+                  {t('services.timetable.noEdt.title')}
                 </Text>
                 <Text
                   className="text-base ml-4 font-bold"
                   style={{ color: theme.primary }}
                   ellipsizeMode="tail"
                 >
-                  {t("services.emploiDuTemps.noEdt.description")}
+                  {t('services.timetable.noEdt.description')}
                 </Text>
               </>
             ) : noCoursesToday ? (
@@ -112,14 +112,14 @@ export function EmploiDuTempsWidget() {
                   style={{ color: theme.text }}
                   ellipsizeMode="tail"
                 >
-                  {t("services.emploiDuTemps.noCourses.dayTitle")}
+                  {t('services.timetable.noCourses.dayTitle')}
                 </Text>
                 <Text
                   className="text-base ml-4 italic"
                   style={{ color: theme.text }}
                   ellipsizeMode="tail"
                 >
-                  {t("services.emploiDuTemps.noCourses.description")}
+                  {t('services.timetable.noCourses.description')}
                 </Text>
               </>
             ) : isMorningNow && noCoursesMorning ? (
@@ -129,14 +129,14 @@ export function EmploiDuTempsWidget() {
                   style={{ color: theme.text }}
                   ellipsizeMode="tail"
                 >
-                  {t("services.emploiDuTemps.noCourses.morningTitle")}
+                  {t('services.timetable.noCourses.morningTitle')}
                 </Text>
                 <Text
                   className="text-base ml-4 italic"
                   style={{ color: theme.text }}
                   ellipsizeMode="tail"
                 >
-                  {t("services.emploiDuTemps.noCourses.description")}
+                  {t('services.timetable.noCourses.description')}
                 </Text>
               </>
             ) : (
@@ -146,14 +146,14 @@ export function EmploiDuTempsWidget() {
                   style={{ color: theme.text }}
                   ellipsizeMode="tail"
                 >
-                  {t("services.emploiDuTemps.noCourses.afternoonTitle")}
+                  {t('services.timetable.noCourses.afternoonTitle')}
                 </Text>
                 <Text
                   className="text-base ml-4 italic"
                   style={{ color: theme.text }}
                   ellipsizeMode="tail"
                 >
-                  {t("services.emploiDuTemps.noCourses.description")}
+                  {t('services.timetable.noCourses.description')}
                 </Text>
               </>
             )}
@@ -166,19 +166,19 @@ export function EmploiDuTempsWidget() {
   return (
     <View className="flex flex-col gap-2">
       <Text style={{ color: theme.text }} className="h3 ml-4">
-        {t("services.emploiDuTemps.title")}
+        {t('services.timetable.title')}
       </Text>
 
       <TouchableOpacity
-        onPress={() => navigation.navigate("EmploiDuTemps")}
+        onPress={() => navigation.navigate('Timetable')}
         className="rounded-lg flex flex-col gap-3"
       >
         {filteredCourses?.map((course: Course) => (
-          <EmploiDuTempsWidgetCourse key={course.id} course={course} />
+          <TimetableCourseWidget key={course.id} course={course} />
         ))}
       </TouchableOpacity>
     </View>
   );
 }
 
-export default EmploiDuTempsWidget;
+export default TimetableWidget;

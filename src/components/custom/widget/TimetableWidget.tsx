@@ -78,10 +78,6 @@ export function TimetableWidget() {
   const afternoonCourses: Course[] | undefined =
     parsedEdt?.filter(isInAfternoon);
 
-  console.log("parsedEdt", parsedEdt);
-  console.log("morningCourses", morningCourses)
-  console.log("afternonCourses", afternoonCourses)
-
   const filteredCourses: Course[] | undefined = isMorningNow
     ? morningCourses
     : afternoonCourses;

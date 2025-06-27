@@ -8,7 +8,7 @@ export function Cours(props: { course: Course, isOver: boolean }) {
   return (
     <View
       style={{ backgroundColor: theme.card, borderColor: theme.text }}
-      className={`flex-col justify-center items-center rounded-br-xl rounded-tr-2xl p-1 border-l-2 h-full ${props.isOver ? 'opacity-40' : ''}`}>
+      className={`flex-col justify-center items-center rounded-br-xl rounded-tr-2xl p-1 border-l-2 h-full ${props.isOver ? 'opacity-60' : ''}`}>
       <Text style={{ color: theme.text }} className="font-bold">
         {props.course.title}
       </Text>

@@ -1,3 +1,14 @@
+import { Locale } from "date-fns";
+import {
+  ar, de, es, fr, hi, it, ja, ko,
+  nl, pl, pt, ru, sv, tr, zhCN,
+} from "date-fns/locale";
+
+const localeMap: Record<string, Locale> = {
+  fr, de, es, zh: zhCN, ru, it, ja, ko,
+  pt, nl, ar, hi, sv, tr, pl,
+};
+
 /**
  * Checks if the current time is before 2 PM
  */
@@ -37,3 +48,7 @@ export const outOfService = (lastUpdate: string) => {
   );
   return updateDay < today;
 };
+
+export const getDateFnsLocale = (language: string): Locale | undefined => {
+  return localeMap[language];
+}

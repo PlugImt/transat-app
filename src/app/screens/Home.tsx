@@ -1,45 +1,34 @@
-import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
-import { useIsFetching, useQueryClient } from "@tanstack/react-query";
-import Constants from "expo-constants";
-import * as Device from "expo-device";
-import * as Notifications from "expo-notifications";
-import type React from "react";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Platform, Text, TouchableOpacity, View } from "react-native";
-import DraggableFlatList, {
-  type RenderItemParams,
-  ScaleDecorator,
-} from "react-native-draggable-flatlist";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { Button } from "@/components/common/Button";
-import Page from "@/components/common/Page";
-import WidgetCustomizationModal from "@/components/common/WidgetCustomizationModal";
-import {
-  WeatherSkeleton,
-  WeatherWidget,
-} from "@/components/custom/WeatherWidget";
-import TimetableWidget from "@/components/custom/widget/TimetableWidget";
-import { TimetableLoadingWidget } from "@/components/custom/widget/TimetableLoadingWidget";
-import { HomeworkWidget } from "@/components/custom/widget/homework/HomeworkWidget";
-import { HomeworkWidgetLoading } from "@/components/custom/widget/homework/HomeworkWidgetLoading";
-import {
-  RestaurantWidget,
-  RestaurantWidgetLoading,
-} from "@/components/custom/widget/RestaurantWidget";
-import WashingMachineWidget, {
-  WashingMachineWidgetLoading,
-} from "@/components/custom/widget/WashingMachineWidget";
-import { useTheme } from "@/contexts/ThemeContext";
-import useAuth from "@/hooks/account/useAuth";
-import { useUser } from "@/hooks/account/useUser";
-import { useHomeWidgetPreferences } from "@/hooks/useWidgetPreferences";
-import { QUERY_KEYS } from "@/lib/queryKeys";
-import { isDinner, isLunch, isWeekend } from "@/lib/utils";
-import { washingMachineNotificationService } from "@/services/notifications/washingMachineNotifications";
-import type { AppStackParamList } from "@/services/storage/types";
-import type { WidgetPreference } from "@/services/storage/widgetPreferences";
+import { useNavigation } from '@react-navigation/native';
+import type { StackNavigationProp } from '@react-navigation/stack';
+import { useIsFetching, useQueryClient } from '@tanstack/react-query';
+import Constants from 'expo-constants';
+import * as Device from 'expo-device';
+import * as Notifications from 'expo-notifications';
+import type React from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Platform, Text, TouchableOpacity, View } from 'react-native';
+import DraggableFlatList, { type RenderItemParams, ScaleDecorator } from 'react-native-draggable-flatlist';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { Button } from '@/components/common/Button';
+import Page from '@/components/common/Page';
+import WidgetCustomizationModal from '@/components/common/WidgetCustomizationModal';
+import { WeatherSkeleton, WeatherWidget } from '@/components/custom/WeatherWidget';
+import { HomeworkWidget } from '@/components/custom/widget/homework/HomeworkWidget';
+import { HomeworkWidgetLoading } from '@/components/custom/widget/homework/HomeworkWidgetLoading';
+import { RestaurantWidget, RestaurantWidgetLoading } from '@/components/custom/widget/RestaurantWidget';
+import { TimetableLoadingWidget } from '@/components/custom/widget/TimetableLoadingWidget';
+import TimetableWidget from '@/components/custom/widget/TimetableWidget';
+import WashingMachineWidget, { WashingMachineWidgetLoading } from '@/components/custom/widget/WashingMachineWidget';
+import { useTheme } from '@/contexts/ThemeContext';
+import useAuth from '@/hooks/account/useAuth';
+import { useUser } from '@/hooks/account/useUser';
+import { useHomeWidgetPreferences } from '@/hooks/useWidgetPreferences';
+import { QUERY_KEYS } from '@/lib/queryKeys';
+import { isDinner, isLunch, isWeekend } from '@/lib/utils';
+import { washingMachineNotificationService } from '@/services/notifications/washingMachineNotifications';
+import type { AppStackParamList } from '@/services/storage/types';
+import type { WidgetPreference } from '@/services/storage/widgetPreferences';
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -183,7 +172,6 @@ export const Home = () => {
   const isTimetableFetching =
     useIsFetching({
       queryKey: QUERY_KEYS.timetable,
-      queryKey: QUERY_KEYS.emploiDuTemps,
     }) > 0;
   const isHomeworkFetching =
     useIsFetching({

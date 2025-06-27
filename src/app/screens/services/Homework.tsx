@@ -201,31 +201,42 @@ export const Homework = () => {
         </View>
 
         <View className="flex flex-col gap-8 px-4 pb-4">
-          {Object.entries(groupedHomeworks)
-            .sort(([a], [b]) =>
-              sortBy === "deadline"
-                ? new Date(a).getTime() - new Date(b).getTime()
-                : a.localeCompare(b),
-            )
-            .map(([groupKey, homeworks]) => (
-              <View key={groupKey} className="flex flex-col gap-4">
-                <View
-                  className="px-3 py-1 rounded-md self-start"
-                  style={{ backgroundColor: theme.secondary }}
-                >
-                  <Text className="text-sm font-semibold text-white">
-                    {sortBy === "deadline"
-                      ? format(new Date(groupKey), "EEEE dd MMMM", {
-                          locale,
-                        }).replace(/^./, (c) => c.toUpperCase())
-                      : groupKey}
-                  </Text>
+          {Object.keys(groupedHomeworks).length === 0 ? (
+            <View className="items-center justify-center mt-6">
+              <Text
+                style={{ color: theme.text }}
+                className="text-center italic"
+              >
+                {t("services.homework.noHomework")}
+              </Text>
+            </View>
+          ) : (
+            Object.entries(groupedHomeworks)
+              .sort(([a], [b]) =>
+                sortBy === "deadline"
+                  ? new Date(a).getTime() - new Date(b).getTime()
+                  : a.localeCompare(b),
+              )
+              .map(([groupKey, homeworks]) => (
+                <View key={groupKey} className="flex flex-col gap-4">
+                  <View
+                    className="px-3 py-1 rounded-md self-start"
+                    style={{ backgroundColor: theme.secondary }}
+                  >
+                    <Text className="text-sm font-semibold text-white">
+                      {sortBy === "deadline"
+                        ? format(new Date(groupKey), "EEEE dd MMMM", {
+                            locale,
+                          }).replace(/^./, (c) => c.toUpperCase())
+                        : groupKey}
+                    </Text>
+                  </View>
+                  {homeworks.map((hw) => (
+                    <HomeworkCard key={hw.id} homework={hw} />
+                  ))}
                 </View>
-                {homeworks.map((hw) => (
-                  <HomeworkCard key={hw.id} homework={hw} />
-                ))}
-              </View>
-            ))}
+              ))
+          )}
         </View>
       </ScrollView>
     </Page>

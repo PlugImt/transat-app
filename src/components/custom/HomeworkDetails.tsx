@@ -1,14 +1,14 @@
-import type { RouteProp } from '@react-navigation/native';
-import { useRoute } from '@react-navigation/native';
-import { format } from 'date-fns';
-import { enUS, fr } from 'date-fns/locale';
-import { CheckCircle, Circle } from 'lucide-react-native';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import Page from '@/components/common/Page';
-import { useTheme } from '@/contexts/ThemeContext';
-import type { AppStackParamList } from '@/services/storage/types';
+import type { RouteProp } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
+import { format } from "date-fns";
+import { enUS, fr } from "date-fns/locale";
+import { CheckCircle, Circle } from "lucide-react-native";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import Page from "@/components/common/Page";
+import { useTheme } from "@/contexts/ThemeContext";
+import type { AppStackParamList } from "@/services/storage/types";
 
 type HomeworkDetailsRouteProp = RouteProp<AppStackParamList, "HomeworkDetails">;
 

@@ -1,4 +1,4 @@
-import type { Homework } from '@/types/homework';
+import type { Homework } from "@/types/homework";
 
 export const getHomeworks = async (userId: number): Promise<Homework[]> => {
   await new Promise((res) => setTimeout(res, 500));

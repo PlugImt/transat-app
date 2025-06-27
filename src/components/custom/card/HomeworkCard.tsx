@@ -1,14 +1,14 @@
-import { useNavigation } from '@react-navigation/native';
-import type { StackNavigationProp } from '@react-navigation/stack';
-import { format } from 'date-fns';
-import { enUS, fr } from 'date-fns/locale';
-import { CheckCircle, Circle } from 'lucide-react-native';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { useTheme } from '@/contexts/ThemeContext';
-import type { AppStackParamList } from '@/services/storage/types';
-import type { Homework } from '@/types/homework';
+import { useNavigation } from "@react-navigation/native";
+import type { StackNavigationProp } from "@react-navigation/stack";
+import { format } from "date-fns";
+import { enUS, fr } from "date-fns/locale";
+import { CheckCircle, Circle } from "lucide-react-native";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Text, TouchableOpacity, View } from "react-native";
+import { useTheme } from "@/contexts/ThemeContext";
+import type { AppStackParamList } from "@/services/storage/types";
+import type { Homework } from "@/types/homework";
 
 interface Props {
   homework: Homework;

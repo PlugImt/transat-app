@@ -45,19 +45,42 @@ export function TimetableWidget() {
   cutoff.setHours(CUT_OFF_HOUR, CUT_OFF_MINUTE, 0, 0);
 
   const isInMorning = (course: Course) => {
-    const heureDebut = parseTimeToDate(course.start_time);
-    return heureDebut < cutoff;
+    const [startHour, startMinute] = course.start_time.split('h').map(Number);
+    return (
+      startHour < CUT_OFF_HOUR ||
+      (startHour === CUT_OFF_HOUR && startMinute < CUT_OFF_MINUTE)
+    );
   };
 
   const isInAfternoon = (course: Course) => {
-    const heureFin = parseTimeToDate(course.end_time);
-    return heureFin > cutoff;
+    const [endHour, endMinute] = course.end_time.split('h').map(Number);
+    return (
+      endHour > CUT_OFF_HOUR ||
+      (endHour === CUT_OFF_HOUR && endMinute >= CUT_OFF_MINUTE)
+    );
   };
 
+  const isoToHourString = (isoString: string): string => {
+    const date = new Date(isoString);
+    const hours = date.getUTCHours().toString().padStart(2, '0');
+    const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+    return `${hours}h${minutes}`;
+  };
+  const parsedEdt = edt?.map(course => ({
+    ...course,
+    date: new Date(course.date),
+    start_time: isoToHourString(course.start_time),
+    end_time: isoToHourString(course.end_time),
+  }));
+
   const morningCourses: Course[] | undefined =
-    edt?.courses?.filter(isInMorning);
+    parsedEdt?.filter(isInMorning);
   const afternoonCourses: Course[] | undefined =
-    edt?.courses?.filter(isInAfternoon);
+    parsedEdt?.filter(isInAfternoon);
+
+  console.log("parsedEdt", parsedEdt);
+  console.log("morningCourses", morningCourses)
+  console.log("afternonCourses", afternoonCourses)
 
   const filteredCourses: Course[] | undefined = isMorningNow
     ? morningCourses

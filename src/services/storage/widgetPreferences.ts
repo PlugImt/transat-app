@@ -1,14 +1,16 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export type WidgetType =
   | "weather"
   | "restaurant"
   | "timetable"
+  | "homework"
   | "washingMachine";
 export type ServiceType =
   | "washingMachine"
   | "restaurant"
   | "timetable"
+  | "homework"
   | "traq"
   | "olimtpe";
 export type ServiceSize = "full" | "half";
@@ -39,6 +41,7 @@ const defaultHomeWidgets: WidgetPreference[] = [
   { id: "restaurant", name: "Restaurant", enabled: true, order: 1 },
   { id: "timetable", name: "Timetable", enabled: true, order: 2 },
   { id: "washingMachine", name: "Washing Machine", enabled: true, order: 3 },
+  { id: "homework", name: "Homework", enabled: true, order: 4 },
 ];
 
 const defaultServices: ServicePreference[] = [
@@ -70,10 +73,19 @@ const defaultServices: ServicePreference[] = [
     screen: "Timetable",
   },
   {
+    id: "homework",
+    name: "Homework",
+    enabled: true,
+    order: 3,
+    size: "full",
+    image: require("@/assets/images/Logos/devoirs_large.png"),
+    screen: "Homework",
+  },
+  {
     id: "traq",
     name: "Traq",
     enabled: true,
-    order: 3,
+    order: 4,
     size: "full",
     image: require("@/assets/images/Logos/traq_large.png"),
     screen: "Traq",
@@ -82,7 +94,7 @@ const defaultServices: ServicePreference[] = [
     id: "olimtpe",
     name: "OL'IMT'PE",
     enabled: true,
-    order: 4,
+    order: 5,
     size: "full",
     image: require("@/assets/images/Logos/olimtpe.png"),
     screen: "Olimtpe",
@@ -94,10 +106,13 @@ export const getHomeWidgetPreferences = async (): Promise<
 > => {
   try {
     const stored = await AsyncStorage.getItem(HOME_WIDGETS_KEY);
-    if (stored) {
-      return JSON.parse(stored);
-    }
-    return defaultHomeWidgets;
+    const parsed: WidgetPreference[] = JSON.parse(stored || "[]");
+
+    const newWidgets = defaultHomeWidgets.filter(
+      (widget) => !parsed.some((w: WidgetPreference) => w.id === widget.id),
+    );
+
+    return [...parsed, ...newWidgets];
   } catch (error) {
     console.error("Error getting home widget preferences:", error);
     return defaultHomeWidgets;
@@ -117,28 +132,13 @@ export const saveHomeWidgetPreferences = async (
 export const getServicePreferences = async (): Promise<ServicePreference[]> => {
   try {
     const stored = await AsyncStorage.getItem(SERVICES_KEY);
-    if (stored) {
-      const storedServices = JSON.parse(stored);
-      // Check if the new olimtpe service exists, if not add it
-      const hasOlimtpe = storedServices.some(
-        (service: ServicePreference) => service.id === "olimtpe",
-      );
-      if (!hasOlimtpe) {
-        const olimtpeService = defaultServices.find(
-          (service) => service.id === "olimtpe",
-        );
-        if (olimtpeService) {
-          storedServices.push(olimtpeService);
-          // Save the updated services back to storage
-          await AsyncStorage.setItem(
-            SERVICES_KEY,
-            JSON.stringify(storedServices),
-          );
-        }
-      }
-      return storedServices;
-    }
-    return defaultServices;
+    const parsed: ServicePreference[] = JSON.parse(stored || "[]");
+
+    const newServices = defaultServices.filter(
+      (service) => !parsed.some((s: ServicePreference) => s.id === service.id),
+    );
+
+    return [...parsed, ...newServices];
   } catch (error) {
     console.error("Error getting service preferences:", error);
     return defaultServices;

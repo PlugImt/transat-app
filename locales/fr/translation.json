@@ -307,6 +307,25 @@
         "description": "Veuillez vérifier sur PASS."
       }
     },
+    "homework": {
+      "title": "Devoirs",
+      "author": "Auteur",
+      "createdAt": "Créé le",
+      "updatedAt": "Modifié le",
+      "deadline": "Deadline",
+      "noHomework": "Aucun devoir à venir.",
+      "late": "Ce devoir est en retard",
+      "shortLate": "En retard",
+      "done": "Fait",
+      "markDone": "Marquer comme fait",
+      "markAsDone": "Devoir marqué comme fait",
+      "all": "Tous",
+      "todo": "À faire",
+      "sortByDeadline": "Trier par date limite",
+      "sortBySubject": "Trier par matière",
+      "filters": "Filtres",
+      "allSubjects": "Toutes les matières"
+    },
     "olimtpe": {
       "title": "OL'IMT'PE",
       "welcome": "Bienvenue à OL'IMT'PE !",
@@ -351,6 +370,8 @@
   },
   "account": {
     "graduationYear": "Année de diplôme",
+    "branch": "Filière",
+    "group": "Groupe",
     "promotion": "Promotion",
     "campus": "Campus",
     "phone": "Téléphone",
@@ -377,6 +398,8 @@
     "noToken": "Jeton d'authentification non trouvé",
     "selectCampus": "Sélectionner le campus",
     "selectGraduationYear": "Sélectionner l'année de diplôme",
+    "selectBranch": "Sélectionner la filière",
+    "selectGroup": "Sélectionner le groupe",
     "newf": "utilisateurs",
     "registration": "Inscription",
     "infos": "Informations",

@@ -1,27 +1,3 @@
-import { Button } from "@/components/common/Button";
-import Page from "@/components/common/Page";
-import WidgetCustomizationModal from "@/components/common/WidgetCustomizationModal";
-import {
-  WeatherSkeleton,
-  WeatherWidget,
-} from "@/components/custom/WeatherWidget";
-import TimetableWidget from "@/components/custom/widget/TimetableWidget";
-import { TimetableLoadingWidget } from "@/components/custom/widget/TimetableLoadingWidget";
-import RestaurantWidget, {
-  RestaurantWidgetLoading,
-} from "@/components/custom/widget/RestaurantWidget";
-import WashingMachineWidget, {
-  WashingMachineWidgetLoading,
-} from "@/components/custom/widget/WashingMachineWidget";
-import { useTheme } from "@/contexts/ThemeContext";
-import useAuth from "@/hooks/account/useAuth";
-import { useUser } from "@/hooks/account/useUser";
-import { useHomeWidgetPreferences } from "@/hooks/useWidgetPreferences";
-import { QUERY_KEYS } from "@/lib/queryKeys";
-import { isDinner, isLunch, isWeekend } from "@/lib/utils";
-import { washingMachineNotificationService } from "@/services/notifications/washingMachineNotifications";
-import type { AppStackParamList } from "@/services/storage/types";
-import type { WidgetPreference } from "@/services/storage/widgetPreferences";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
@@ -37,6 +13,33 @@ import DraggableFlatList, {
   ScaleDecorator,
 } from "react-native-draggable-flatlist";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { Button } from "@/components/common/Button";
+import Page from "@/components/common/Page";
+import WidgetCustomizationModal from "@/components/common/WidgetCustomizationModal";
+import {
+  WeatherSkeleton,
+  WeatherWidget,
+} from "@/components/custom/WeatherWidget";
+import TimetableWidget from "@/components/custom/widget/TimetableWidget";
+import { TimetableLoadingWidget } from "@/components/custom/widget/TimetableLoadingWidget";
+import { HomeworkWidget } from "@/components/custom/widget/homework/HomeworkWidget";
+import { HomeworkWidgetLoading } from "@/components/custom/widget/homework/HomeworkWidgetLoading";
+import {
+  RestaurantWidget,
+  RestaurantWidgetLoading,
+} from "@/components/custom/widget/RestaurantWidget";
+import WashingMachineWidget, {
+  WashingMachineWidgetLoading,
+} from "@/components/custom/widget/WashingMachineWidget";
+import { useTheme } from "@/contexts/ThemeContext";
+import useAuth from "@/hooks/account/useAuth";
+import { useUser } from "@/hooks/account/useUser";
+import { useHomeWidgetPreferences } from "@/hooks/useWidgetPreferences";
+import { QUERY_KEYS } from "@/lib/queryKeys";
+import { isDinner, isLunch, isWeekend } from "@/lib/utils";
+import { washingMachineNotificationService } from "@/services/notifications/washingMachineNotifications";
+import type { AppStackParamList } from "@/services/storage/types";
+import type { WidgetPreference } from "@/services/storage/widgetPreferences";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -180,6 +183,11 @@ export const Home = () => {
   const isTimetableFetching =
     useIsFetching({
       queryKey: QUERY_KEYS.timetable,
+      queryKey: QUERY_KEYS.emploiDuTemps,
+    }) > 0;
+  const isHomeworkFetching =
+    useIsFetching({
+      queryKey: QUERY_KEYS.homework,
     }) > 0;
   const isWashingMachinesFetching =
     useIsFetching({
@@ -192,12 +200,14 @@ export const Home = () => {
   const isFetching =
     isMenuFetching ||
     isTimetableFetching ||
+    isHomeworkFetching ||
     isWashingMachinesFetching ||
     isWeatherFetching;
 
   const refetch = async () => {
     await Promise.all([
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.restaurantMenu }),
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.homework }),
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.timetable }),
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.washingMachines }),
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.weather }),
@@ -212,6 +222,8 @@ export const Home = () => {
         return <RestaurantWidget />;
       case "timetable":
         return <TimetableWidget />;
+      case "homework":
+        return <HomeworkWidget />;
       case "washingMachine":
         return <WashingMachineWidget />;
       default:
@@ -359,6 +371,7 @@ export const HomeLoading = () => {
         <RestaurantWidgetLoading />
       ) : null}
       <TimetableLoadingWidget />
+      <HomeworkWidgetLoading />
       <WashingMachineWidgetLoading />
     </Page>
   );

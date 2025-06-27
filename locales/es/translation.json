@@ -350,6 +350,10 @@
   },
   "account": {
     "graduationYear": "Año de graduación",
+    "branch": "Especialidad",
+    "selectBranch": "Seleccionar especialidad",
+    "group": "Grupo",
+    "selectGroup": "Seleccionar grupo",
     "promotion": "Promoción",
     "campus": "Campus",
     "phone": "Teléfono",

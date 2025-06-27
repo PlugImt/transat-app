@@ -1,30 +1,32 @@
-import { Home } from "@/app/screens/Home";
-import Account from "@/app/screens/account/Account";
-import EditProfile from "@/app/screens/account/EditAccount";
-import Feedback from "@/app/screens/account/Feedback";
-import About from "@/app/screens/account/settings/About";
-import { Appearance } from "@/app/screens/account/settings/Appearance";
-import ChangePassword from "@/app/screens/account/settings/ChangePassword";
-import Help from "@/app/screens/account/settings/Help";
-import Language from "@/app/screens/account/settings/Language";
-import Legal from "@/app/screens/account/settings/Legal";
-import Notifications from "@/app/screens/account/settings/Notifications";
-import Settings from "@/app/screens/account/settings/Settings";
-import Statistics from "@/app/screens/account/settings/Statistics";
-import { Clubs } from "@/app/screens/services/Clubs";
-import { Timetable } from "@/app/screens/services/Timetable";
-import Games from "@/app/screens/services/Games";
-import { Olimtpe } from "@/app/screens/services/Olimtpe";
-import { Restaurant } from "@/app/screens/services/Restaurant";
-import { Services } from "@/app/screens/services/Services";
-import { Traq } from "@/app/screens/services/Traq";
-import { WashingMachine } from "@/app/screens/services/WashingMachine";
-import { useTheme } from "@/contexts/ThemeContext";
-import type { BottomTabParamList } from "@/types/navigation";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createStackNavigator } from "@react-navigation/stack";
-import { GridIcon, LucideHome, Play, User } from "lucide-react-native";
-import { useTranslation } from "react-i18next";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import { GridIcon, LucideHome, Play, User } from 'lucide-react-native';
+import { useTranslation } from 'react-i18next';
+import Account from '@/app/screens/account/Account';
+import EditProfile from '@/app/screens/account/EditAccount';
+import Feedback from '@/app/screens/account/Feedback';
+import About from '@/app/screens/account/settings/About';
+import { Appearance } from '@/app/screens/account/settings/Appearance';
+import ChangePassword from '@/app/screens/account/settings/ChangePassword';
+import Help from '@/app/screens/account/settings/Help';
+import Language from '@/app/screens/account/settings/Language';
+import Legal from '@/app/screens/account/settings/Legal';
+import Notifications from '@/app/screens/account/settings/Notifications';
+import Settings from '@/app/screens/account/settings/Settings';
+import Statistics from '@/app/screens/account/settings/Statistics';
+import { Home } from '@/app/screens/Home';
+import { Clubs } from '@/app/screens/services/Clubs';
+import Games from '@/app/screens/services/Games';
+import Homework from '@/app/screens/services/Homework';
+import { Olimtpe } from '@/app/screens/services/Olimtpe';
+import { Restaurant } from '@/app/screens/services/Restaurant';
+import { Services } from '@/app/screens/services/Services';
+import { Timetable } from '@/app/screens/services/Timetable';
+import { Traq } from '@/app/screens/services/Traq';
+import { WashingMachine } from '@/app/screens/services/WashingMachine';
+import HomeworkDetails from '@/components/custom/HomeworkDetails';
+import { useTheme } from '@/contexts/ThemeContext';
+import type { BottomTabParamList } from '@/types/navigation';
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -37,6 +39,8 @@ const HomeStackScreen = () => (
     <ServicesStack.Screen name="Restaurant" component={Restaurant} />
     <ServicesStack.Screen name="Olimtpe" component={Olimtpe} />
     <ServicesStack.Screen name="Timetable" component={Timetable} />
+    <ServicesStack.Screen name="Homework" component={Homework} />
+    <ServicesStack.Screen name="HomeworkDetails" component={HomeworkDetails} />
   </HomeStack.Navigator>
 );
 
@@ -47,6 +51,8 @@ const ServicesStackScreen = () => (
     <ServicesStack.Screen name="WashingMachine" component={WashingMachine} />
     <ServicesStack.Screen name="Restaurant" component={Restaurant} />
     <ServicesStack.Screen name="Timetable" component={Timetable} />
+    <ServicesStack.Screen name="Homework" component={Homework} />
+    <ServicesStack.Screen name="HomeworkDetails" component={HomeworkDetails} />
     <ServicesStack.Screen name="Clubs" component={Clubs} />
     <ServicesStack.Screen name="Traq" component={Traq} />
     <ServicesStack.Screen name="Olimtpe" component={Olimtpe} />

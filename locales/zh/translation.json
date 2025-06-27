@@ -350,6 +350,10 @@
   },
   "account": {
     "graduationYear": "毕业年份",
+    "branch": "专业方向",
+    "selectBranch": "选择专业方向",
+    "group": "小组",
+    "selectGroup": "选择小组",
     "promotion": "就读年级",
     "campus": "校园",
     "phone": "电话",

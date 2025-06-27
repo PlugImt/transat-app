@@ -1,4 +1,5 @@
 import { View } from "react-native";
+import { useTheme } from "@/contexts/ThemeContext";
 import Skeleton from "./Skeleton";
 
 interface RequestHistorySkeletonProps {
@@ -8,6 +9,8 @@ interface RequestHistorySkeletonProps {
 export const RequestHistorySkeleton = ({
   count = 3,
 }: RequestHistorySkeletonProps) => {
+  const { theme } = useTheme();
+
   return (
     <View className="gap-4">
       {Array.from(

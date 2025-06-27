@@ -1,6 +1,6 @@
 import { getTimetableToday } from "@/lib/timetable";
-import { QUERY_KEYS } from "@/lib/queryKeys";
 import { skipToken, useQuery } from "@tanstack/react-query";
+import { QUERY_KEYS } from "@/lib/queryKeys";
 
 export const useTimetable = (email?: string) => {
   const { data, isPending, refetch, error, isError } = useQuery({

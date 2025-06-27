@@ -6,7 +6,7 @@ export interface User {
   last_name: string;
   phone_number: string;
   email: string;
-  graduation_year?: number;
+  scolarity?: Scolarity;
   profile_picture?: string;
   id_newf?: number;
   total_newf?: number;
@@ -21,3 +21,18 @@ export interface Password {
   new_password: string;
   new_password_confirmation: string;
 }
+
+export interface Scolarity {
+  graduation_year?: number;
+  branch?: Branch;
+  group?: string;
+}
+
+export const branch = {
+  fise: "FISE",
+  fil: "FIL",
+  fit: "FIT",
+  fip: "FIP",
+} as const;
+
+export type Branch = (typeof branch)[keyof typeof branch];

@@ -1,5 +1,5 @@
-import { CardStyleInterpolators } from "@react-navigation/stack";
 import type { StackNavigationOptions } from "@react-navigation/stack";
+import { CardStyleInterpolators } from "@react-navigation/stack";
 
 export const screenOptions: StackNavigationOptions = {
   headerShown: false,

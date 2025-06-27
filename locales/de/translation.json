@@ -351,6 +351,10 @@
   },
   "account": {
     "graduationYear": "Abschlussjahr",
+    "branch": "Studiengang",
+    "selectBranch": "Studiengang auswählen",
+    "group": "Gruppe",
+    "selectGroup": "Gruppe auswählen",
     "promotion": "Förderung",
     "campus": "Campus",
     "phone": "Telefon",

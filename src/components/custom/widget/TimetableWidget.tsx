@@ -1,15 +1,14 @@
-import { useTheme } from '@/contexts/ThemeContext';
-import { useTimetable } from '@/hooks/useTimetable';
-import type { AppStackParamList } from '@/services/storage/types';
-import { useNavigation } from '@react-navigation/native';
-import type { StackNavigationProp } from '@react-navigation/stack';
-
-import { TimetableCourseWidget } from '@/components/custom/widget/TimetableCourseWidget';
-import { TimetableLoadingWidget } from '@/components/custom/widget/TimetableLoadingWidget';
-import { useAuth } from '@/hooks/account/useAuth';
-import type { Course } from '@/types/timetable';
-import { useTranslation } from 'react-i18next';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { useNavigation } from "@react-navigation/native";
+import type { StackNavigationProp } from "@react-navigation/stack";
+import { useTranslation } from "react-i18next";
+import { Text, TouchableOpacity, View } from "react-native";
+import { TimetableCourseWidget } from "@/components/custom/widget/TimetableCourseWidget";
+import { TimetableLoadingWidget } from "@/components/custom/widget/TimetableLoadingWidget";
+import { useTheme } from "@/contexts/ThemeContext";
+import { useAuth } from "@/hooks/account/useAuth";
+import { useTimetable } from "@/hooks/useTimetable";
+import type { AppStackParamList } from "@/services/storage/types";
+import type { Course } from "@/types/timetable";
 
 export type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -98,7 +97,7 @@ export function TimetableWidget() {
                   {t('services.timetable.noEdt.title')}
                 </Text>
                 <Text
-                  className="text-base ml-4 font-bold"
+                  className="text-sm ml-4 font-bold"
                   style={{ color: theme.primary }}
                   ellipsizeMode="tail"
                 >
@@ -115,7 +114,7 @@ export function TimetableWidget() {
                   {t('services.timetable.noCourses.dayTitle')}
                 </Text>
                 <Text
-                  className="text-base ml-4 italic"
+                  className="text-sm ml-4 italic"
                   style={{ color: theme.text }}
                   ellipsizeMode="tail"
                 >
@@ -132,7 +131,7 @@ export function TimetableWidget() {
                   {t('services.timetable.noCourses.morningTitle')}
                 </Text>
                 <Text
-                  className="text-base ml-4 italic"
+                  className="text-sm ml-4 italic"
                   style={{ color: theme.text }}
                   ellipsizeMode="tail"
                 >
@@ -149,7 +148,7 @@ export function TimetableWidget() {
                   {t('services.timetable.noCourses.afternoonTitle')}
                 </Text>
                 <Text
-                  className="text-base ml-4 italic"
+                  className="text-sm ml-4 italic"
                   style={{ color: theme.text }}
                   ellipsizeMode="tail"
                 >

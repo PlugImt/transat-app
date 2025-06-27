@@ -13,13 +13,22 @@ export async function updateLanguage(language: string) {
 }
 
 export async function updateUser(data: User) {
-  return apiRequest<User>("/newf/me", "PATCH", {
-    first_name: data.first_name,
-    last_name: data.last_name,
-    phone_number: data.phone_number,
-    graduation_year: data.graduation_year,
-    language: data.language,
-  });
+  try {
+    return apiRequest<User>("/newf/me", "PATCH", {
+      first_name: data.first_name,
+      last_name: data.last_name,
+      phone_number: data.phone_number,
+      scolarity: {
+        graduation_year: data.scolarity?.graduation_year,
+        branch: data.scolarity?.branch,
+        group: data.scolarity?.group,
+      },
+      language: data.language,
+    });
+  } catch (error) {
+    console.error("Error updating user:", error);
+    throw new Error("Failed to update user information");
+  }
 }
 
 export async function updateProfilePicture(imageUrl: string) {

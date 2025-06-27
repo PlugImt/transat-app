@@ -351,6 +351,10 @@
   },
   "account": {
     "graduationYear": "Graduation year",
+    "branch": "Branch",
+    "selectBranch": "Select your branch",
+    "group": "Group",
+    "selectGroup": "Select your group",
     "promotion": "Promotion",
     "campus": "Campus",
     "phone": "Phone",

@@ -1,8 +1,8 @@
-import { TextSkeleton } from "@/components/Skeleton";
-import type { AppScreenNavigationProp } from "@/components/custom/widget/TimetableWidget";
-import { useTheme } from "@/contexts/ThemeContext";
 import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity, View } from "react-native";
+import type { AppScreenNavigationProp } from "@/components/custom/widget/TimetableWidget";
+import { TextSkeleton } from "@/components/Skeleton";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export const TimetableLoadingWidget = () => {
   const { theme } = useTheme();

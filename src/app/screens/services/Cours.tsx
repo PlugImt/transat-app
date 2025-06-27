@@ -18,7 +18,7 @@ export function Cours(props: { course: Course, isOver: boolean }) {
         </Text>
         <TagCourseRoom rooms={props.course.room} />
       </View>
-      <Text style={{ color: theme.text }}>{props.course.teacher}</Text>
+      <Text style={{ color: theme.text }} className="text-center">{props.course.teacher}</Text>
     </View>
   );
 }

@@ -92,7 +92,7 @@ export const getHomeworks = async (userId: number): Promise<Homework[]> => {
       description:
         "Choisir une œuvre et en faire une analyse détaillée de ses éléments.",
       deadline: new Date(Date.now() + 2 * 86900000),
-      done: false,
+      done: true,
       created_at: new Date(),
       updated_at: new Date(),
     },

@@ -1,10 +1,9 @@
-import { useTheme } from "@/contexts/ThemeContext";
-import { type VariantProps, cva } from "class-variance-authority";
-import { Text, TouchableOpacity, type View } from "react-native";
-
-import { cn } from "@/lib/utils";
+import { cva, type VariantProps } from "class-variance-authority";
 import type { LucideIcon } from "lucide-react-native";
 import type React from "react";
+import { Text, TouchableOpacity, type View } from "react-native";
+import { useTheme } from "@/contexts/ThemeContext";
+import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
   "flex flex-row items-center rounded-xl justify-center",

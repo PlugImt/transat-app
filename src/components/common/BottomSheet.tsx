@@ -1,9 +1,14 @@
-import { BottomSheetModal, BottomSheetView } from '@gorhom/bottom-sheet';
-import type React from 'react';
-import { cloneElement, createContext, useContext, useRef } from 'react';
-import { Gesture, GestureDetector } from 'react-native-gesture-handler';
-import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { useTheme } from '@/contexts/ThemeContext';
+import { BottomSheetModal, BottomSheetView } from "@gorhom/bottom-sheet";
+import type React from "react";
+import { cloneElement, createContext, useContext, useRef } from "react";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import Animated, {
+  runOnJS,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
+import { useTheme } from "@/contexts/ThemeContext";
 
 // Context pour gérer l'état du bottom sheet
 interface BottomSheetContextType {

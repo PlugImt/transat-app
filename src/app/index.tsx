@@ -1,11 +1,6 @@
 import { RootNavigator } from "@/app/navigation/RootNavigator";
 import "../i18n";
 import "./global.css";
-import { ToastProvider } from "@/components/common/Toast";
-import { AuthProvider } from "@/contexts/AuthContext";
-import { ThemeProvider } from "@/contexts/ThemeContext";
-import { storage } from "@/services/storage/asyncStorage";
-import STORAGE_KEYS from "@/services/storage/constants";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import * as Sentry from "@sentry/react-native";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -16,7 +11,12 @@ import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { DevToolsBubble } from "react-native-react-query-devtools";
+import { ToastProvider } from "@/components/common/Toast";
 import { apiEnv } from "@/config";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { ThemeProvider } from "@/contexts/ThemeContext";
+import { storage } from "@/services/storage/asyncStorage";
+import STORAGE_KEYS from "@/services/storage/constants";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({

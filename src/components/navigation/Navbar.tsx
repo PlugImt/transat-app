@@ -1,3 +1,7 @@
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
+import { GridIcon, LucideHome, Play, User } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
 import { Home } from "@/app/screens";
 import Account from "@/app/screens/account/Account";
 import EditProfile from "@/app/screens/account/EditAccount";
@@ -11,14 +15,19 @@ import Legal from "@/app/screens/account/settings/Legal";
 import Notifications from "@/app/screens/account/settings/Notifications";
 import Settings from "@/app/screens/account/settings/Settings";
 import Statistics from "@/app/screens/account/settings/Statistics";
-import { WashingMachines, Clubs, Games, Traq, Restaurant, Olimtpe, Timetable, Homework } from "@/app/screens/services";
+import {
+  Clubs,
+  Games,
+  Homework,
+  Olimtpe,
+  Restaurant,
+  Timetable,
+  Traq,
+  WashingMachines,
+} from "@/app/screens/services";
 import { Services } from "@/app/screens/services/Services";
 import { useTheme } from "@/contexts/ThemeContext";
-import { BottomTabParamList } from "@/types";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createStackNavigator } from "@react-navigation/stack";
-import { GridIcon, LucideHome, Play, User } from "lucide-react-native";
-import { useTranslation } from "react-i18next";
+import type { BottomTabParamList } from "@/types";
 import HomeworkDetails from "../custom/HomeworkDetails";
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();

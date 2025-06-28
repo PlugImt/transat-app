@@ -1,1 +1,1 @@
-export * from './timetable.endpoints';
+export * from "./timetable.endpoints";

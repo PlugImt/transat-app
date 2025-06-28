@@ -1,9 +1,3 @@
-import { fetchWashingMachines } from "@/api";
-import { TextSkeleton } from "@/components/Skeleton";
-import { QUERY_KEYS } from "@/constants";
-import { useTheme } from "@/contexts/ThemeContext";
-import { MachineData } from "@/dto";
-import type { AppStackParamList } from "@/services/storage/types";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { useQuery } from "@tanstack/react-query";
@@ -11,6 +5,12 @@ import { WashingMachineIcon, Wind } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Dimensions, Text, TouchableOpacity, View } from "react-native";
+import { fetchWashingMachines } from "@/api";
+import { TextSkeleton } from "@/components/Skeleton";
+import { QUERY_KEYS } from "@/constants";
+import { useTheme } from "@/contexts/ThemeContext";
+import type { MachineData } from "@/dto";
+import type { AppStackParamList } from "@/services/storage/types";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -19,10 +19,17 @@ export function WashingMachineWidget() {
   const navigation = useNavigation<AppScreenNavigationProp>();
   const { theme } = useTheme();
 
-  const { data = [], isPending, isFetching, isError, error, refetch } = useQuery({
+  const {
+    data = [],
+    isPending,
+    isFetching,
+    isError,
+    error,
+    refetch,
+  } = useQuery({
     queryFn: () => fetchWashingMachines(),
     queryKey: QUERY_KEYS.washingMachines,
-    initialData: []
+    initialData: [],
   });
 
   const [totalWashers, setTotalWashers] = useState<number>(0);

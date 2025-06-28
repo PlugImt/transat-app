@@ -1,1 +1,1 @@
-export * from './TraqList';
+export * from "./TraqList";

@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import { courseSchema } from '../course';
+import { z } from "zod";
+import { courseSchema } from "../course";
 
 export const timetableSchema = z.array(courseSchema);
 

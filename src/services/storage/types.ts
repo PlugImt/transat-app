@@ -1,6 +1,6 @@
-import { Homework } from "@/dto";
 import type { NavigatorScreenParams } from "@react-navigation/core";
 import type { StackNavigationProp } from "@react-navigation/stack";
+import type { Homework } from "@/dto";
 
 export type StorageItemValue = string | object | null;
 

@@ -24,7 +24,7 @@ export function TimetableWidget() {
     data: edt,
     isPending: isPendingEdt,
     error,
-  } = useTimetable(user?.email || '');
+  } = useTimetable(user?.email || "");
 
   const CUT_OFF_HOUR = 12;
   const CUT_OFF_MINUTE = 30;
@@ -35,7 +35,7 @@ export function TimetableWidget() {
     (now.getHours() === CUT_OFF_HOUR && now.getMinutes() < CUT_OFF_MINUTE);
 
   const parseTimeToDate = (timeStr: string) => {
-    const [hours, minutes] = timeStr.split(':').map(Number);
+    const [hours, minutes] = timeStr.split(":").map(Number);
     const date = new Date();
     date.setHours(hours, minutes, 0, 0);
     return date;
@@ -45,7 +45,7 @@ export function TimetableWidget() {
   cutoff.setHours(CUT_OFF_HOUR, CUT_OFF_MINUTE, 0, 0);
 
   const isInMorning = (course: Course) => {
-    const [startHour, startMinute] = course.start_time.split('h').map(Number);
+    const [startHour, startMinute] = course.start_time.split("h").map(Number);
     return (
       startHour < CUT_OFF_HOUR ||
       (startHour === CUT_OFF_HOUR && startMinute < CUT_OFF_MINUTE)
@@ -53,7 +53,7 @@ export function TimetableWidget() {
   };
 
   const isInAfternoon = (course: Course) => {
-    const [endHour, endMinute] = course.end_time.split('h').map(Number);
+    const [endHour, endMinute] = course.end_time.split("h").map(Number);
     return (
       endHour > CUT_OFF_HOUR ||
       (endHour === CUT_OFF_HOUR && endMinute >= CUT_OFF_MINUTE)
@@ -62,8 +62,8 @@ export function TimetableWidget() {
 
   const isoToHourString = (isoString: string): string => {
     const date = new Date(isoString);
-    const hours = date.getUTCHours().toString().padStart(2, '0');
-    const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+    const hours = date.getUTCHours().toString().padStart(2, "0");
+    const minutes = date.getUTCMinutes().toString().padStart(2, "0");
     return `${hours}h${minutes}`;
   };
   const parsedEdt = edt?.map((course: Course) => ({
@@ -73,8 +73,7 @@ export function TimetableWidget() {
     end_time: isoToHourString(course.end_time),
   }));
 
-  const morningCourses: Course[] | undefined =
-    parsedEdt?.filter(isInMorning);
+  const morningCourses: Course[] | undefined = parsedEdt?.filter(isInMorning);
   const afternoonCourses: Course[] | undefined =
     parsedEdt?.filter(isInAfternoon);
 
@@ -99,10 +98,10 @@ export function TimetableWidget() {
     return (
       <View className="flex flex-col gap-2 mr-2">
         <Text style={{ color: theme.text }} className="h3 ml-4">
-          {t('services.timetable.title')}
+          {t("services.timetable.title")}
         </Text>
         <TouchableOpacity
-          onPress={() => navigation.navigate('Timetable')}
+          onPress={() => navigation.navigate("Timetable")}
           className="rounded-lg flex flex-col gap-3"
         >
           <View className="flex flex-col">
@@ -113,14 +112,14 @@ export function TimetableWidget() {
                   style={{ color: theme.text }}
                   ellipsizeMode="tail"
                 >
-                  {t('services.timetable.noEdt.title')}
+                  {t("services.timetable.noEdt.title")}
                 </Text>
                 <Text
                   className="text-sm ml-4 font-bold"
                   style={{ color: theme.primary }}
                   ellipsizeMode="tail"
                 >
-                  {t('services.timetable.noEdt.description')}
+                  {t("services.timetable.noEdt.description")}
                 </Text>
               </>
             ) : noCoursesToday ? (
@@ -130,14 +129,14 @@ export function TimetableWidget() {
                   style={{ color: theme.text }}
                   ellipsizeMode="tail"
                 >
-                  {t('services.timetable.noCourses.dayTitle')}
+                  {t("services.timetable.noCourses.dayTitle")}
                 </Text>
                 <Text
                   className="text-sm ml-4 italic"
                   style={{ color: theme.text }}
                   ellipsizeMode="tail"
                 >
-                  {t('services.timetable.noCourses.description')}
+                  {t("services.timetable.noCourses.description")}
                 </Text>
               </>
             ) : isMorningNow && noCoursesMorning ? (
@@ -147,14 +146,14 @@ export function TimetableWidget() {
                   style={{ color: theme.text }}
                   ellipsizeMode="tail"
                 >
-                  {t('services.timetable.noCourses.morningTitle')}
+                  {t("services.timetable.noCourses.morningTitle")}
                 </Text>
                 <Text
                   className="text-sm ml-4 italic"
                   style={{ color: theme.text }}
                   ellipsizeMode="tail"
                 >
-                  {t('services.timetable.noCourses.description')}
+                  {t("services.timetable.noCourses.description")}
                 </Text>
               </>
             ) : (
@@ -164,14 +163,14 @@ export function TimetableWidget() {
                   style={{ color: theme.text }}
                   ellipsizeMode="tail"
                 >
-                  {t('services.timetable.noCourses.afternoonTitle')}
+                  {t("services.timetable.noCourses.afternoonTitle")}
                 </Text>
                 <Text
                   className="text-sm ml-4 italic"
                   style={{ color: theme.text }}
                   ellipsizeMode="tail"
                 >
-                  {t('services.timetable.noCourses.description')}
+                  {t("services.timetable.noCourses.description")}
                 </Text>
               </>
             )}
@@ -184,11 +183,11 @@ export function TimetableWidget() {
   return (
     <View className="flex flex-col gap-2">
       <Text style={{ color: theme.text }} className="h3 ml-4">
-        {t('services.timetable.title')}
+        {t("services.timetable.title")}
       </Text>
 
       <TouchableOpacity
-        onPress={() => navigation.navigate('Timetable')}
+        onPress={() => navigation.navigate("Timetable")}
         className="rounded-lg flex flex-col gap-3"
       >
         {filteredCourses?.map((course: Course) => (

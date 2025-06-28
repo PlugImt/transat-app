@@ -1,7 +1,7 @@
-import { useTheme } from '@/contexts/ThemeContext';
-import type { Course } from '@/types/timetable';
-import { Text, View } from 'react-native';
-import { TagCourseRoom } from '@/components/custom/TagCourseRoom';
+import { Text, View } from "react-native";
+import { TagCourseRoom } from "@/components/custom/TagCourseRoom";
+import { useTheme } from "@/contexts/ThemeContext";
+import type { Course } from "@/types/timetable";
 
 export const TimetableCourseWidget = ({ course }: { course: Course }) => {
   const { theme } = useTheme();

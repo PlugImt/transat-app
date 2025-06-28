@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 import { useTheme } from "@/contexts/ThemeContext";
-import { Homework } from "@/dto";
+import type { Homework } from "@/dto";
 
 export function HomeworkWidgetItem({ homework }: { homework: Homework }) {
   const { theme } = useTheme();

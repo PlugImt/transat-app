@@ -1,6 +1,6 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateUser } from "@/api";
 import { QUERY_KEYS } from "@/constants";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { storage } from "@/services/storage/asyncStorage";
 
 export function useUpdateAccount() {

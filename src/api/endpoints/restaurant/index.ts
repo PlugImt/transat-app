@@ -1,1 +1,1 @@
-export * from './restaurant.endpoints';
+export * from "./restaurant.endpoints";

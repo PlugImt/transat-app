@@ -1,7 +1,3 @@
-import { getRestaurant } from "@/api";
-import { QUERY_KEYS } from "@/constants";
-import { useTheme } from "@/contexts/ThemeContext";
-import { isDinner, isLunch, isWeekend, outOfService } from "@/utils";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { useQuery } from "@tanstack/react-query";
@@ -9,8 +5,12 @@ import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Dimensions, Image, Text, TouchableOpacity, View } from "react-native";
+import { getRestaurant } from "@/api";
 import { TextSkeleton } from "@/components/Skeleton";
+import { QUERY_KEYS } from "@/constants";
+import { useTheme } from "@/contexts/ThemeContext";
 import type { AppStackParamList } from "@/services/storage/types";
+import { isDinner, isLunch, isWeekend, outOfService } from "@/utils";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -19,11 +19,15 @@ export function RestaurantWidget() {
   const { theme } = useTheme();
 
   const navigation = useNavigation<AppScreenNavigationProp>();
-	const { data : menu, isPending, error } = useQuery({
-		queryKey: QUERY_KEYS.restaurantMenu,
-		queryFn: () => getRestaurant(),
-	});
-  
+  const {
+    data: menu,
+    isPending,
+    error,
+  } = useQuery({
+    queryKey: QUERY_KEYS.restaurantMenu,
+    queryFn: () => getRestaurant(),
+  });
+
   const weekend: boolean = useMemo(() => isWeekend(), []);
   const lunch: boolean = useMemo(() => isLunch(), []);
   const dinner: boolean = useMemo(() => isDinner(), []);

@@ -11,8 +11,6 @@ export type NotLoggedIn = z.infer<typeof notLoggedInSchema>;
 export const loadingSchema = z.undefined();
 export type Loading = z.infer<typeof loadingSchema>;
 
-
-
 export const userSchema = z.object({
   first_name: z.string(),
   last_name: z.string(),
@@ -72,4 +70,6 @@ export const updateProfilePictureResponseSchema = z.object({
   profile_picture: z.string().url(),
 });
 
-export type UpdateProfilePictureResponse = z.infer<typeof updateProfilePictureResponseSchema>;
+export type UpdateProfilePictureResponse = z.infer<
+  typeof updateProfilePictureResponseSchema
+>;

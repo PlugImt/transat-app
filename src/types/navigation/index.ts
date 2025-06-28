@@ -1,1 +1,1 @@
-export { default as BottomTabParamList } from './navigation.types';
+export { default as BottomTabParamList } from "./navigation.types";

@@ -1,1 +1,1 @@
-export * from './Traq';
+export * from "./Traq";

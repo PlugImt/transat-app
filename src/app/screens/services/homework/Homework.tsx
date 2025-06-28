@@ -1,20 +1,20 @@
 import { Picker } from "@react-native-picker/picker";
+import { skipToken, useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { enUS, fr } from "date-fns/locale";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView, Text, View } from "react-native";
+import { getHomeworks } from "@/api";
 import { Button } from "@/components/common/Button";
 import Page from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
 import HomeworkCard from "@/components/custom/card/HomeworkCard";
+import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
+import type { Homework as HomeworkType } from "@/dto";
 import useAuth from "@/hooks/account/useAuth";
 import { ErrorState, LoadingState } from "./components";
-import { type Homework as HomeworkType } from "@/dto";
-import { skipToken, useQuery } from "@tanstack/react-query";
-import { QUERY_KEYS } from "@/constants";
-import { getHomeworks } from "@/api";
 
 export const Homework = () => {
   const { t, i18n } = useTranslation();
@@ -90,8 +90,11 @@ export const Homework = () => {
 
   if (isPending) return <LoadingState />;
 
-  if (isError) return <ErrorState error={error} onRefresh={refetch} refreshing={isPending} />
-  
+  if (isError)
+    return (
+      <ErrorState error={error} onRefresh={refetch} refreshing={isPending} />
+    );
+
   return (
     <Page
       refreshing={isPending}

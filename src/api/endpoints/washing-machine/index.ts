@@ -1,1 +1,1 @@
-export * from './washing-machine.endpoints';
+export * from "./washing-machine.endpoints";

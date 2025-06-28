@@ -1,8 +1,8 @@
-import { getAPIUrl } from "@/api";
-import { storage } from "@/services/storage/asyncStorage";
 import axios from "axios";
 import * as ImagePicker from "expo-image-picker";
 import { t } from "i18next";
+import { getAPIUrl } from "@/api";
+import { storage } from "@/services/storage/asyncStorage";
 
 /**
  * Opens the gallery, lets the user pick an image, and uploads it to the API.

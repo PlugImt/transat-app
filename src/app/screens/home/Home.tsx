@@ -1,27 +1,3 @@
-import { Button } from "@/components/common/Button";
-import Page from "@/components/common/Page";
-import WidgetCustomizationModal from "@/components/common/WidgetCustomizationModal";
-import {
-  WeatherSkeleton,
-  WeatherWidget,
-} from "@/components/custom/WeatherWidget";
-import { HomeworkWidget } from "@/components/custom/widget/homework/HomeworkWidget";
-import { HomeworkWidgetLoading } from "@/components/custom/widget/homework/HomeworkWidgetLoading";
-import {
-  RestaurantWidget,
-  RestaurantWidgetLoading,
-} from "@/components/custom/widget/RestaurantWidget";
-import WashingMachineWidget, {
-  WashingMachineWidgetLoading,
-} from "@/components/custom/widget/WashingMachineWidget";
-import { useTheme } from "@/contexts/ThemeContext";
-import useAuth from "@/hooks/account/useAuth";
-import { useUser } from "@/hooks/account/useUser";
-import { useHomeWidgetPreferences } from "@/hooks/useWidgetPreferences";
-import { QUERY_KEYS } from "@/constants";
-import { washingMachineNotificationService } from "@/services/notifications/washingMachineNotifications";
-import type { AppStackParamList } from "@/services/storage/types";
-import type { WidgetPreference } from "@/services/storage/widgetPreferences";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
@@ -37,9 +13,33 @@ import DraggableFlatList, {
   ScaleDecorator,
 } from "react-native-draggable-flatlist";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { isDinner, isLunch, isWeekend } from "@/utils";
-import TimetableWidget from "@/components/custom/widget/TimetableWidget";
+import { Button } from "@/components/common/Button";
+import Page from "@/components/common/Page";
+import WidgetCustomizationModal from "@/components/common/WidgetCustomizationModal";
+import {
+  WeatherSkeleton,
+  WeatherWidget,
+} from "@/components/custom/WeatherWidget";
+import { HomeworkWidget } from "@/components/custom/widget/homework/HomeworkWidget";
+import { HomeworkWidgetLoading } from "@/components/custom/widget/homework/HomeworkWidgetLoading";
+import {
+  RestaurantWidget,
+  RestaurantWidgetLoading,
+} from "@/components/custom/widget/RestaurantWidget";
 import { TimetableLoadingWidget } from "@/components/custom/widget/TimetableLoadingWidget";
+import TimetableWidget from "@/components/custom/widget/TimetableWidget";
+import WashingMachineWidget, {
+  WashingMachineWidgetLoading,
+} from "@/components/custom/widget/WashingMachineWidget";
+import { QUERY_KEYS } from "@/constants";
+import { useTheme } from "@/contexts/ThemeContext";
+import useAuth from "@/hooks/account/useAuth";
+import { useUser } from "@/hooks/account/useUser";
+import { useHomeWidgetPreferences } from "@/hooks/useWidgetPreferences";
+import { washingMachineNotificationService } from "@/services/notifications/washingMachineNotifications";
+import type { AppStackParamList } from "@/services/storage/types";
+import type { WidgetPreference } from "@/services/storage/widgetPreferences";
+import { isDinner, isLunch, isWeekend } from "@/utils";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -49,7 +49,7 @@ const handleRegistrationError = (errorMessage: string) => {
   }
   // if (Device.isDevice) alert(errorMessage);
   throw new Error(errorMessage);
-}
+};
 
 const registerForPushNotificationsAsync = async () => {
   if (Platform.OS === "android") {
@@ -95,7 +95,7 @@ const registerForPushNotificationsAsync = async () => {
   } else {
     handleRegistrationError("Must use physical device for push notifications");
   }
-}
+};
 
 interface DraggableWidgetItem {
   id: string;

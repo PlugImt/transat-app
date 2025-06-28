@@ -1,1 +1,1 @@
-export * from './homework.endpoints';
+export * from "./homework.endpoints";

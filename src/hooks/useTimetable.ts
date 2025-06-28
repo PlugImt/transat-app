@@ -1,6 +1,6 @@
+import { skipToken, useQuery } from "@tanstack/react-query";
 import { getTimetableForWeek, getTimetableToday } from "@/api";
 import { QUERY_KEYS } from "@/constants";
-import { skipToken, useQuery } from "@tanstack/react-query";
 
 // Existing hook for the 'today' endpoint
 export const useTimetable = (email?: string) => {
@@ -29,7 +29,7 @@ const getWeekId = (d: Date): string => {
 
   // Format to YYYY-MM-DD to use as a stable cache key
   return monday.toISOString().slice(0, 10);
-}
+};
 
 /**
  * A React Query hook to fetch timetable data for the week containing the given date.
@@ -46,7 +46,7 @@ export const useTimetableForWeek = (email?: string, date?: Date) => {
     queryKey: [QUERY_KEYS.timetable, email, weekId],
 
     // Use the new getTimetableForWeek function for the API call
-    queryFn: (email && date) ? () => getTimetableForWeek(email, date) : skipToken,
+    queryFn: email && date ? () => getTimetableForWeek(email, date) : skipToken,
 
     // The query is enabled only when all required parameters are available
     enabled: !!email && !!date && !!weekId,

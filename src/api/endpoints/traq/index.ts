@@ -1,1 +1,1 @@
-export * from './traq.endpoints';
+export * from "./traq.endpoints";

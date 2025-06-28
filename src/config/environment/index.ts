@@ -1,1 +1,1 @@
-export { apiEnv } from './environment.configuration';
+export { apiEnv } from "./environment.configuration";

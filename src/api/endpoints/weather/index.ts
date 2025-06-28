@@ -1,1 +1,1 @@
-export * from './weather.endpoints';
+export * from "./weather.endpoints";

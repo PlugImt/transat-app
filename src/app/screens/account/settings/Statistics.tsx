@@ -101,16 +101,13 @@ export const Statistics = () => {
       }
 
       // Fetch global statistics
-      const globalResponse = await fetch(
-        `${API_BASE_URL}/statistics/global`,
-        {
-          method: "GET",
-          mode: "cors",
-          headers: {
-            Accept: "application/json",
-          },
+      const globalResponse = await fetch(`${API_BASE_URL}/statistics/global`, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          Accept: "application/json",
         },
-      );
+      });
 
       if (!globalResponse.ok) {
         throw new Error(

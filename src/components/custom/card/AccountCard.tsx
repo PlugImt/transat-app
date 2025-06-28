@@ -1,3 +1,6 @@
+import { useNavigation } from "@react-navigation/native";
+import { t } from "i18next";
+import { Text, View } from "react-native";
 import {
   Avatar,
   AvatarFallback,
@@ -5,11 +8,8 @@ import {
 } from "@/components/common/Avatar";
 import { Button } from "@/components/common/Button";
 import { useTheme } from "@/contexts/ThemeContext";
-import { User } from "@/dto";
+import type { User } from "@/dto";
 import type { AccountNavigation } from "@/services/storage/types";
-import { useNavigation } from "@react-navigation/native";
-import { t } from "i18next";
-import { Text, View } from "react-native";
 
 interface AccountCardProps {
   user?: User;

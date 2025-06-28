@@ -1,7 +1,7 @@
-import { TextSkeleton } from '@/components/Skeleton';
-import { useTheme } from '@/contexts/ThemeContext';
-import { Beef, ChefHat, Soup, Vegan } from 'lucide-react-native';
-import { Text, View } from 'react-native';
+import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
+import { Text, View } from "react-native";
+import { TextSkeleton } from "@/components/Skeleton";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface CardProps {
   title: string;

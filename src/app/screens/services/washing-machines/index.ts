@@ -1,1 +1,1 @@
-export { default as WashingMachines } from './WashingMachines';
+export { default as WashingMachines } from "./WashingMachines";

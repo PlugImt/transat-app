@@ -1,8 +1,8 @@
-import { API_ROUTES, apiRequest, getAPIUrl, Method } from "@/api";
-import { QUERY_KEYS } from "@/constants";
-import { NotLoggedIn, User } from "@/dto";
-import { storage } from "@/services/storage/asyncStorage";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { API_ROUTES, apiRequest, Method } from "@/api";
+import { QUERY_KEYS } from "@/constants";
+import type { NotLoggedIn, User } from "@/dto";
+import { storage } from "@/services/storage/asyncStorage";
 
 interface LoginResponse {
   token: string;
@@ -123,7 +123,12 @@ export const useAuthMutations = () => {
       new_password: string;
       new_password_confirmation: string;
     }) => {
-      return await apiRequest(API_ROUTES.changePassword, Method.PATCH, data, true);
+      return await apiRequest(
+        API_ROUTES.changePassword,
+        Method.PATCH,
+        data,
+        true,
+      );
     },
   });
 

@@ -1,6 +1,6 @@
-import { Text } from 'react-native';
-import { useTheme } from '@/contexts/ThemeContext';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
+import { Text } from "react-native";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export interface TagCourseRoomProps {
   rooms?: string;
@@ -19,7 +19,7 @@ export const TagCourseRoom = ({ rooms }: TagCourseRoomProps) => {
         }}
         ellipsizeMode="tail"
       >
-        {rooms ?? t('services.notProvided')}
+        {rooms ?? t("services.notProvided")}
       </Text>
     );
   }

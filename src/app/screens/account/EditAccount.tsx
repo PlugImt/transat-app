@@ -1,3 +1,12 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigation } from "@react-navigation/native";
+import { useQueryClient } from "@tanstack/react-query";
+import { Edit, GraduationCap } from "lucide-react-native";
+import { useEffect } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { Keyboard, Text, TouchableOpacity, View } from "react-native";
+import { z } from "zod";
 import {
   Avatar,
   AvatarFallback,
@@ -9,22 +18,13 @@ import Input, { InputLoading } from "@/components/common/Input";
 import Page from "@/components/common/Page";
 import { useToast } from "@/components/common/Toast";
 import ErrorPage from "@/components/custom/ErrorPage";
+import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
+import type { User } from "@/dto";
+import type { Branch } from "@/enums";
 import { useUpdateAccount } from "@/hooks/account/useUpdateAccount";
 import { useUpdateProfilePicture } from "@/hooks/account/useUpdateProfilePicture";
 import { useUser } from "@/hooks/account/useUser";
-import { QUERY_KEYS } from "@/constants";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigation } from "@react-navigation/native";
-import { useQueryClient } from "@tanstack/react-query";
-import { Edit, GraduationCap } from "lucide-react-native";
-import { useEffect } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import { Keyboard, Text, TouchableOpacity, View } from "react-native";
-import { z } from "zod";
-import { User } from "@/dto";
-import { Branch } from "@/enums";
 
 export const EditProfile = () => {
   const { theme } = useTheme();

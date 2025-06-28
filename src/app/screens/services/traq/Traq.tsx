@@ -1,74 +1,95 @@
-import Page from "@/components/common/Page";
-import ErrorPage from "@/components/custom/ErrorPage";
+import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { AboutSection, LoadingState, NoItemsFound, TraqFilter, TraqList } from "./components";
-import { useQuery } from "@tanstack/react-query";
-import { QUERY_KEYS } from "@/constants";
 import { getTraq } from "@/api";
+import Page from "@/components/common/Page";
+import ErrorPage from "@/components/custom/ErrorPage";
+import { QUERY_KEYS } from "@/constants";
+import {
+  AboutSection,
+  LoadingState,
+  NoItemsFound,
+  TraqFilter,
+  TraqList,
+} from "./components";
 
 export const Traq = () => {
-	const { t } = useTranslation();
-	
-	const { data: traq, isPending, refetch, error, isError } = useQuery({
-		queryKey: QUERY_KEYS.traq,
-		queryFn: () => getTraq(),
-		initialData: []
-	});
+  const { t } = useTranslation();
 
-	const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const {
+    data: traq,
+    isPending,
+    refetch,
+    error,
+    isError,
+  } = useQuery({
+    queryKey: QUERY_KEYS.traq,
+    queryFn: () => getTraq(),
+    initialData: [],
+  });
 
-	const tags = useMemo(() => {
-		if (!traq) return [];
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-		const tagSet = new Set<string>();
-		for (const article of traq) {
-			if (article.traq_type) {
-				tagSet.add(article.traq_type);
-			}
-		}
+  const tags = useMemo(() => {
+    if (!traq) return [];
 
-    	return Array.from(tagSet);
-  	}, [traq]);
+    const tagSet = new Set<string>();
+    for (const article of traq) {
+      if (article.traq_type) {
+        tagSet.add(article.traq_type);
+      }
+    }
 
-	const filteredArticles = useMemo(() => {
-		if (!traq) return [];
-		if (selectedTags.length === 0) return traq;
+    return Array.from(tagSet);
+  }, [traq]);
 
-		return traq.filter(
-			(article) => article.traq_type && selectedTags.includes(article.traq_type),
-		);
-	}, [traq, selectedTags]);
+  const filteredArticles = useMemo(() => {
+    if (!traq) return [];
+    if (selectedTags.length === 0) return traq;
 
-	if (isPending) {
-		return <LoadingState/>
-	}
+    return traq.filter(
+      (article) =>
+        article.traq_type && selectedTags.includes(article.traq_type),
+    );
+  }, [traq, selectedTags]);
 
-	if (isError && error) {
-		return (
-			<ErrorPage
-				error={
-					error || ({ message: t("common.errors.unableToFetch") } as Error)
-				}
-				refetch={refetch}
-				isRefetching={isPending}
-			/>
-		);
-	}
+  if (isPending) {
+    return <LoadingState />;
+  }
 
-	return (
-		<Page
-			goBack
-			refreshing={isPending}
-			onRefresh={refetch}
-			className="gap-4"
-			title={t("services.traq.title")}
-			about={<AboutSection/>}
-		>
-			<TraqFilter tags={tags} selected={selectedTags} setSelected={setSelectedTags} />
-			{filteredArticles.length === 0 ? <NoItemsFound /> : <TraqList items={filteredArticles} />}
-		</Page>
-	);
+  if (isError && error) {
+    return (
+      <ErrorPage
+        error={
+          error || ({ message: t("common.errors.unableToFetch") } as Error)
+        }
+        refetch={refetch}
+        isRefetching={isPending}
+      />
+    );
+  }
+
+  return (
+    <Page
+      goBack
+      refreshing={isPending}
+      onRefresh={refetch}
+      className="gap-4"
+      title={t("services.traq.title")}
+      about={<AboutSection />}
+    >
+      <TraqFilter
+        tags={tags}
+        selected={selectedTags}
+        setSelected={setSelectedTags}
+      />
+      {filteredArticles.length === 0 ? (
+        <NoItemsFound />
+      ) : (
+        <TraqList items={filteredArticles} />
+      )}
+    </Page>
+  );
 };
 
 export default Traq;

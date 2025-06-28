@@ -1,9 +1,9 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { t } from "i18next";
 import { updateProfilePicture } from "@/api";
 import { QUERY_KEYS } from "@/constants";
 import { storage } from "@/services/storage/asyncStorage";
 import { uploadImage } from "@/utils";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { t } from "i18next";
 
 export function useUpdateProfilePicture() {
   const queryClient = useQueryClient();

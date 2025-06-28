@@ -1,4 +1,4 @@
-import { apiRequest, getAPIUrl } from "@/api";
+import { API_ROUTES, apiRequest, getAPIUrl, Method } from "@/api";
 import { QUERY_KEYS } from "@/constants";
 import { NotLoggedIn, User } from "@/dto";
 import { storage } from "@/services/storage/asyncStorage";
@@ -22,7 +22,7 @@ export const useAuthMutations = () => {
       if (!token) return null as NotLoggedIn;
 
       try {
-        const userData = await apiRequest<User>("/api/newf/me");
+        const userData = await apiRequest<User>(API_ROUTES.user);
         await storage.set("newf", userData);
         return userData;
       } catch (_error) {
@@ -41,8 +41,8 @@ export const useAuthMutations = () => {
     mutationKey: QUERY_KEYS.auth.login,
     mutationFn: async ({ email, password }) => {
       return await apiRequest<LoginResponse>(
-        "/api/auth/login",
-        "POST",
+        API_ROUTES.login,
+        Method.POST,
         {
           email,
           password,
@@ -63,11 +63,9 @@ export const useAuthMutations = () => {
       password: string;
       language: string;
     }) => {
-      const apiUrl = await getAPIUrl();
-
       return await apiRequest(
-        `${apiUrl}/api/auth/register`,
-        "POST",
+        API_ROUTES.register,
+        Method.POST,
         {
           email,
           password,
@@ -85,7 +83,7 @@ export const useAuthMutations = () => {
     mutationKey: QUERY_KEYS.auth.saveToken,
     mutationFn: async (token: string) => {
       await storage.set("token", token);
-      const userData = await apiRequest<User>("/api/newf/me");
+      const userData = await apiRequest<User>(API_ROUTES.user);
       await storage.set("newf", userData);
       return userData;
     },
@@ -97,7 +95,7 @@ export const useAuthMutations = () => {
       const expoPushToken = await storage.get("expoPushToken");
       if (expoPushToken === token) return true;
 
-      await apiRequest("/api/newf/me", "PATCH", {
+      await apiRequest(API_ROUTES.user, "PATCH", {
         notification_token: token,
       });
       await storage.set("expoPushToken", token);
@@ -109,8 +107,8 @@ export const useAuthMutations = () => {
     mutationKey: QUERY_KEYS.auth.resetPassword,
     mutationFn: async (email: string) => {
       return await apiRequest(
-        "/api/auth/verification-code",
-        "POST",
+        API_ROUTES.verifyCode,
+        Method.POST,
         { email },
         true,
       );
@@ -125,7 +123,7 @@ export const useAuthMutations = () => {
       new_password: string;
       new_password_confirmation: string;
     }) => {
-      return await apiRequest("/api/auth/change-password", "PATCH", data, true);
+      return await apiRequest(API_ROUTES.changePassword, Method.PATCH, data, true);
     },
   });
 

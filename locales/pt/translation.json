@@ -286,20 +286,24 @@
         "description": "O cardápio não foi atualizado. Volte mais tarde."
       }
     },
-    "emploiDuTemps": {
+    "timetable": {
       "title": "Horário",
-      "description": "O horário é atualizado diariamente para informar sobre suas próximas aulas.",
-      "noData": "Nenhum dado disponível para hoje",
-      "loading": "Carregando horário...",
+      "description": "O horário é atualizado diariamente para informá-lo sobre suas próximas aulas.",
+      "about": "O horário é atualizado diariamente para informá-lo sobre suas próximas aulas.",
+      "additionalInfo": "Se você notar alguma inconsistência, informe-nos usando o formulário de feedback. ",
+      "noData": "Não há dados disponíveis para hoje",
+      "loading": "Carregando o horário...",
+      "nextDay": "Próximo dia",
+      "previousDay": "Dia anterior",
       "noEdt": {
         "title": "Ocorreu um erro ao recuperar o horário.",
-        "description": "Por favor, consulte o PASS."
+        "description": "Consulte o PASS."
       },
       "noCourses": {
-        "morningTitle": "Nenhuma aula programada para esta manhã",
-        "afternoonTitle": "Nenhuma aula programada para esta tarde",
-        "dayTitle": "Nenhuma aula programada para hoje",
-        "description": "Por favor, verifique o PASS."
+        "morningTitle": "Nenhum curso programado para esta manhã.",
+        "afternoonTitle": "Nenhum curso programado para esta tarde.",
+        "dayTitle": "Nenhum curso programado para hoje.",
+        "description": "Consulte o PASS."
       }
     },
     "olimtpe": {

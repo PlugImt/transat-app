@@ -65,6 +65,7 @@
     "react-native": "0.79.2",
     "react-native-confetti-cannon": "^1.5.2",
     "react-native-confirmation-code-field": "^7.4.0",
+    "react-native-date-picker": "^5.0.13",
     "react-native-draggable-flatlist": "^4.0.3",
     "react-native-gesture-handler": "~2.24.0",
     "react-native-lottie-loader": "^1.0.0",

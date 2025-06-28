@@ -2,7 +2,8 @@ export const API_ROUTES : Record<Route, ApiRoute> = {
     user: "/api/newf/me",
     notifications: "/api/newf/notifications/subscriptions",
     weather: "/api/weather",
-    emploiDuTemps: "/api/edt",
+    planning_today: "/api/planning/users/:email/courses/today",
+    planning_week: "/api/planning/users/:email/courses",
     restaurant: "/api/restaurant/menu",
     traq: "/api/traq/",
     translation: "/api/translate",
@@ -12,7 +13,8 @@ export const API_ROUTES : Record<Route, ApiRoute> = {
     logout: "/api/auth/logout",
     saveToken: "/api/auth/token",
     saveExpoPushToken: "/api/auth/expo-push-token",
-    verifyCode: "/api/auth/verify-code",
+    verifyCode: "/api/auth/verification-code",
+    verifyAccount: '/api/auth/verify-account',
     resendCode: "/api/auth/resend-code",
     resetPassword: "/api/auth/reset-password",
     changePassword: "/api/auth/change-password"
@@ -23,7 +25,8 @@ type Route =
   | "user"
   | "notifications"
   | "weather"
-  | "emploiDuTemps"
+  | "planning_today"
+  | "planning_week"
   | "restaurant"
   | "traq"
   | "translation"
@@ -34,6 +37,7 @@ type Route =
   | "saveToken"
   | "saveExpoPushToken"
   | "verifyCode"
+  | "verifyAccount"
   | "resendCode"
   | "resetPassword"
   | "changePassword"

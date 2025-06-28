@@ -41,7 +41,7 @@ export type AppStackParamList = {
   Home: undefined;
   WashingMachine: undefined;
   Restaurant: undefined;
-  EmploiDuTemps: undefined;
+  Timetable: undefined;
   Homework: undefined;
   HomeworkDetails: { homework: Homework };
   Games: undefined;

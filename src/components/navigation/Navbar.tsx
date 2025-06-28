@@ -11,7 +11,7 @@ import Legal from "@/app/screens/account/settings/Legal";
 import Notifications from "@/app/screens/account/settings/Notifications";
 import Settings from "@/app/screens/account/settings/Settings";
 import Statistics from "@/app/screens/account/settings/Statistics";
-import { WashingMachines, Clubs, Games, Traq, Restaurant, Olimtpe, EmploiDuTemps, Homework } from "@/app/screens/services";
+import { WashingMachines, Clubs, Games, Traq, Restaurant, Olimtpe, Timetable, Homework } from "@/app/screens/services";
 import { Services } from "@/app/screens/services/Services";
 import { useTheme } from "@/contexts/ThemeContext";
 import { BottomTabParamList } from "@/types";
@@ -31,7 +31,7 @@ const HomeStackScreen = () => (
     <ServicesStack.Screen name="WashingMachine" component={WashingMachines} />
     <ServicesStack.Screen name="Restaurant" component={Restaurant} />
     <ServicesStack.Screen name="Olimtpe" component={Olimtpe} />
-    <ServicesStack.Screen name="EmploiDuTemps" component={EmploiDuTemps} />
+    <ServicesStack.Screen name="Timetable" component={Timetable} />
     <ServicesStack.Screen name="Homework" component={Homework} />
     <ServicesStack.Screen name="HomeworkDetails" component={HomeworkDetails} />
   </HomeStack.Navigator>
@@ -43,7 +43,7 @@ const ServicesStackScreen = () => (
     <ServicesStack.Screen name="ServicesScreen" component={Services} />
     <ServicesStack.Screen name="WashingMachine" component={WashingMachines} />
     <ServicesStack.Screen name="Restaurant" component={Restaurant} />
-    <ServicesStack.Screen name="EmploiDuTemps" component={EmploiDuTemps} />
+    <ServicesStack.Screen name="Timetable" component={Timetable} />
     <ServicesStack.Screen name="Homework" component={Homework} />
     <ServicesStack.Screen name="HomeworkDetails" component={HomeworkDetails} />
     <ServicesStack.Screen name="Clubs" component={Clubs} />

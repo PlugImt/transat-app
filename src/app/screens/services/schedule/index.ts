@@ -1,1 +1,1 @@
-export { default as EmploiDuTemps } from './EmploiDuTemps';
+export { Timetable } from './Timetable';

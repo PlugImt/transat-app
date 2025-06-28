@@ -1,7 +1,7 @@
-import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
-import { Text, View } from "react-native";
-import { TextSkeleton } from "@/components/Skeleton";
-import { useTheme } from "@/contexts/ThemeContext";
+import { TextSkeleton } from '@/components/Skeleton';
+import { useTheme } from '@/contexts/ThemeContext';
+import { Beef, ChefHat, Soup, Vegan } from 'lucide-react-native';
+import { Text, View } from 'react-native';
 
 interface CardProps {
   title: string;
@@ -9,7 +9,7 @@ interface CardProps {
   icon: string;
 }
 
-const EmploiDuTempsCard = ({ title, meals, icon }: CardProps) => {
+const TimetableCard = ({ title, meals, icon }: CardProps) => {
   const { theme } = useTheme();
 
   function getIcon() {
@@ -28,7 +28,7 @@ const EmploiDuTempsCard = ({ title, meals, icon }: CardProps) => {
   }
 
   if (!meals) {
-    return <EmploiDuTempsCardLoading title={title} icon={getIcon()} />;
+    return <TimetableCardLoading title={title} icon={getIcon()} />;
   }
 
   return (
@@ -58,17 +58,17 @@ const EmploiDuTempsCard = ({ title, meals, icon }: CardProps) => {
   );
 };
 
-export default EmploiDuTempsCard;
+export default TimetableCard;
 
-interface EmploiDuTempsCardLoadingProps {
+interface TimetableCardLoadingProps {
   title: string;
   icon: React.ReactElement | null;
 }
 
-export const EmploiDuTempsCardLoading = ({
+export const TimetableCardLoading = ({
   title,
   icon,
-}: EmploiDuTempsCardLoadingProps) => {
+}: TimetableCardLoadingProps) => {
   const { theme } = useTheme();
   const skeletonCount = Math.floor(Math.random() * 3) + 1;
   return (

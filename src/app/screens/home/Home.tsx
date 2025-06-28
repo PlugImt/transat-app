@@ -5,8 +5,6 @@ import {
   WeatherSkeleton,
   WeatherWidget,
 } from "@/components/custom/WeatherWidget";
-import EmploiDuTempsWidget from "@/components/custom/widget/emploiDuTemps/EmploiDuTempsWidget";
-import { EmploiDuTempsWidgetLoading } from "@/components/custom/widget/emploiDuTemps/EmploiDuTempsWidgetLoading";
 import { HomeworkWidget } from "@/components/custom/widget/homework/HomeworkWidget";
 import { HomeworkWidgetLoading } from "@/components/custom/widget/homework/HomeworkWidgetLoading";
 import {
@@ -40,6 +38,8 @@ import DraggableFlatList, {
 } from "react-native-draggable-flatlist";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { isDinner, isLunch, isWeekend } from "@/utils";
+import TimetableWidget from "@/components/custom/widget/TimetableWidget";
+import { TimetableLoadingWidget } from "@/components/custom/widget/TimetableLoadingWidget";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -180,9 +180,9 @@ export const Home = () => {
     useIsFetching({
       queryKey: QUERY_KEYS.restaurantMenu,
     }) > 0;
-  const isEmploiDuTempsFetching =
+  const isTimetableFetching =
     useIsFetching({
-      queryKey: QUERY_KEYS.emploiDuTemps,
+      queryKey: QUERY_KEYS.timetable,
     }) > 0;
   const isHomeworkFetching =
     useIsFetching({
@@ -198,7 +198,7 @@ export const Home = () => {
     }) > 0;
   const isFetching =
     isMenuFetching ||
-    isEmploiDuTempsFetching ||
+    isTimetableFetching ||
     isHomeworkFetching ||
     isWashingMachinesFetching ||
     isWeatherFetching;
@@ -206,8 +206,8 @@ export const Home = () => {
   const refetch = async () => {
     await Promise.all([
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.restaurantMenu }),
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.emploiDuTemps }),
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.homework }),
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.timetable }),
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.washingMachines }),
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.weather }),
     ]);
@@ -219,8 +219,8 @@ export const Home = () => {
         return <WeatherWidget />;
       case "restaurant":
         return <RestaurantWidget />;
-      case "emploiDuTemps":
-        return <EmploiDuTempsWidget />;
+      case "timetable":
+        return <TimetableWidget />;
       case "homework":
         return <HomeworkWidget />;
       case "washingMachine":
@@ -369,7 +369,7 @@ export const HomeLoading = () => {
       {!isWeekend() && !isLunch() && !isDinner() ? (
         <RestaurantWidgetLoading />
       ) : null}
-      <EmploiDuTempsWidgetLoading />
+      <TimetableLoadingWidget />
       <HomeworkWidgetLoading />
       <WashingMachineWidgetLoading />
     </Page>

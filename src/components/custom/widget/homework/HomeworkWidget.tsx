@@ -4,10 +4,13 @@ import { useTranslation } from "react-i18next";
 import { Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/hooks/account/useAuth";
-import { useHomework } from "@/hooks/useHomework"; // à créer
 import type { AppStackParamList } from "@/services/storage/types";
 import { HomeworkWidgetItem } from "./HomeworkWidgetItem";
 import { HomeworkWidgetLoading } from "./HomeworkWidgetLoading";
+import { Homework } from "@/dto";
+import { QUERY_KEYS } from "@/constants";
+import { skipToken, useQuery } from "@tanstack/react-query";
+import { getHomeworks } from "@/api";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -17,9 +20,14 @@ export function HomeworkWidget() {
   const { user } = useAuth();
   const navigation = useNavigation<AppScreenNavigationProp>();
 
-  const { data: homeworks, isPending, error } = useHomework(user?.id_newf);
-
-  const upcomingHomeworks = homeworks
+  const userId = user?.id_newf;
+  const { data, isPending, refetch, error, isError } = useQuery({
+    queryKey: [...QUERY_KEYS.homework, userId],
+    queryFn: userId ? () => getHomeworks(userId) : skipToken,
+    enabled: !!userId,
+  });
+  
+  const upcomingHomeworks = data
     ?.filter((hw: Homework) => new Date(hw.deadline) >= new Date())
     .sort(
       (a: Homework, b: Homework) =>

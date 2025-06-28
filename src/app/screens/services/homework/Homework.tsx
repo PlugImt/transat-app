@@ -10,9 +10,11 @@ import { AboutModal } from "@/components/custom/AboutModal";
 import HomeworkCard from "@/components/custom/card/HomeworkCard";
 import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";
-import { useHomework } from "@/hooks/useHomework";
 import { ErrorState, LoadingState } from "./components";
 import { type Homework as HomeworkType } from "@/dto";
+import { skipToken, useQuery } from "@tanstack/react-query";
+import { QUERY_KEYS } from "@/constants";
+import { getHomeworks } from "@/api";
 
 export const Homework = () => {
   const { t, i18n } = useTranslation();
@@ -20,9 +22,12 @@ export const Homework = () => {
   const { user } = useAuth();
   const locale = i18n.language === "fr" ? fr : enUS;
 
-  const { data, refetch, isPending, isError, error } = useHomework(
-    user?.id_newf,
-  );
+  const userId = user?.id_newf;
+  const { data, isPending, refetch, error, isError } = useQuery({
+    queryKey: [...QUERY_KEYS.homework, userId],
+    queryFn: userId ? () => getHomeworks(userId) : skipToken,
+    enabled: !!userId,
+  });
 
   const [selectedSubject, setSelectedSubject] = useState<string>("");
   const [showDone, setShowDone] = useState<null | boolean>(null); // null = tous, true = faits, false = non faits

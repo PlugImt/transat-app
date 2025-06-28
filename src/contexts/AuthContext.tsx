@@ -1,15 +1,15 @@
 import { Loading, NotLoggedIn, User } from "@/dto";
-import { useAuthMutations } from "@/hooks/auth/useAuthMutations";
-import { useVerificationCode } from "@/hooks/auth/useVerificationCode";
 import * as Sentry from "@sentry/react-native";
 import type { AxiosError } from "axios";
 import {
-  type FC,
   createContext,
+  type FC,
   useCallback,
   useEffect,
   useState,
 } from "react";
+import { useAuthMutations } from "@/hooks/auth/useAuthMutations";
+import { useVerificationCode } from "@/hooks/auth/useVerificationCode";
 
 interface AuthContextType {
   user: User | null | undefined;

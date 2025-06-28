@@ -1,7 +1,7 @@
+import { forwardRef, useState } from "react";
 import { Skeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";
-import { forwardRef, useState } from "react";
 import { Image, Text, View } from "react-native";
 
 const Avatar = forwardRef<

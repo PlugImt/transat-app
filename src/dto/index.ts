@@ -3,4 +3,7 @@ export * from './washing-machine';
 export * from './user';
 export * from './schedule';
 export * from './notification';
+export * from './scolarity';
+export * from './branch';
 export * from './menu';
+export * from './homework';

@@ -1,4 +1,3 @@
-import { TextSkeleton } from "@/components/Skeleton";
 import {
   Avatar,
   AvatarFallback,
@@ -8,6 +7,7 @@ import { Button, IconButton } from "@/components/common/Button";
 import InfoItem from "@/components/common/InfoItem";
 import Page from "@/components/common/Page";
 import ErrorPage from "@/components/custom/ErrorPage";
+import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useUser } from "@/hooks/account/useUser";
 import { QUERY_KEYS } from "@/constants";
@@ -92,9 +92,9 @@ export const Account = () => {
           <Text className="text-2xl font-bold " style={{ color: theme.text }}>
             {user?.first_name} {user?.last_name}
           </Text>
-          {user?.graduation_year && (
+          {user?.scolarity?.graduation_year && (
             <Text style={{ color: theme.textSecondary }} className="text-base">
-              {getStudentYear(user?.graduation_year)}
+              {getStudentYear(user?.scolarity?.graduation_year)}
             </Text>
           )}
         </View>

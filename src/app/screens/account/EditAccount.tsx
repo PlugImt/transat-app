@@ -24,6 +24,7 @@ import { useTranslation } from "react-i18next";
 import { Keyboard, Text, TouchableOpacity, View } from "react-native";
 import { z } from "zod";
 import { User } from "@/dto";
+import { Branch } from "@/enums";
 
 export const EditProfile = () => {
   const { theme } = useTheme();
@@ -51,13 +52,19 @@ export const EditProfile = () => {
       .refine((email) => email.endsWith("@imt-atlantique.net"), {
         message: t("auth.errors.imtOnly"),
       }),
-    graduation_year: z.number().optional(),
+    scolarity: z
+      .object({
+        graduation_year: z.number().optional(),
+        branch: z.enum(["FISE", "FIL", "FIT", "FIP"]).optional(),
+        group: z.string().optional(),
+      })
+      .optional(),
   });
 
   const {
     control: userControl,
     handleSubmit: handleUserSubmit,
-    formState: { errors: userErrors, isValid: isUserValid },
+    formState: { errors: userErrors, isValid: isUserValid, isDirty },
     reset,
   } = useForm({
     resolver: zodResolver(userSchema),
@@ -66,7 +73,11 @@ export const EditProfile = () => {
       last_name: "",
       phone_number: "",
       email: "",
-      graduation_year: undefined as number | undefined,
+      scolarity: {
+        graduation_year: undefined as number | undefined,
+        branch: undefined as Branch | undefined,
+        group: "",
+      },
     },
     mode: "onChange",
   });
@@ -79,7 +90,11 @@ export const EditProfile = () => {
         last_name: user.last_name || "",
         phone_number: user.phone_number || "",
         email: user.email || "",
-        graduation_year: user.graduation_year || undefined,
+        scolarity: {
+          graduation_year: user.scolarity?.graduation_year ?? undefined,
+          branch: user.scolarity?.branch ?? undefined,
+          group: user.scolarity?.group || "",
+        },
       });
     }
   }, [user, reset]);
@@ -201,6 +216,8 @@ export const EditProfile = () => {
           autoCapitalize="none"
           textContentType="emailAddress"
           error={userErrors.email?.message}
+          disabled={true}
+          className="opacity-50"
         />
 
         <Input
@@ -214,7 +231,35 @@ export const EditProfile = () => {
 
         <Controller
           control={userControl}
-          name="graduation_year"
+          name="scolarity.branch"
+          render={({ field: { onChange, value } }) => (
+            <Dropdown
+              label={t("account.branch")}
+              placeholder={t("account.selectBranch")}
+              options={["FISE", "FIL", "FIT", "FIP"]}
+              value={value}
+              onValueChange={onChange}
+            />
+          )}
+        />
+
+        <Controller
+          control={userControl}
+          name="scolarity.group"
+          render={({ field: { onChange, value } }) => (
+            <Dropdown
+              label={t("account.group")}
+              placeholder={t("account.selectGroup")}
+              options={["1", "2", "3", "4", "5"]}
+              value={value}
+              onValueChange={onChange}
+            />
+          )}
+        />
+
+        <Controller
+          control={userControl}
+          name="scolarity.graduation_year"
           render={({ field: { onChange, value } }) => (
             <Dropdown
               label={t("account.graduationYear")}
@@ -237,7 +282,7 @@ export const EditProfile = () => {
         label={t("common.save")}
         onPress={handleUserSubmit(handleUpdateAccount)}
         loading={isUpdatingAccount}
-        disabled={!isUserValid}
+        disabled={!isUserValid || !isDirty}
       />
     </Page>
   );

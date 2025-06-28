@@ -1,8 +1,8 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import i18n from "@/i18n";
 import { QUERY_KEYS } from "@/constants";
 import { storage } from "@/services/storage/asyncStorage";
 import STORAGE_KEYS from "@/services/storage/constants";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateLanguage } from "@/api";
 
 export function useUpdateLanguage() {

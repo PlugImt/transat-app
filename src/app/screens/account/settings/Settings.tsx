@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import {
   BarChart,
@@ -13,7 +14,6 @@ import {
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
-
 import { Button } from "@/components/common/Button";
 import {
   Dialog,
@@ -31,7 +31,6 @@ import { QUERY_KEYS } from "@/constants";
 import { storage } from "@/services/storage/asyncStorage";
 import STORAGE_KEYS from "@/services/storage/constants";
 import type { SettingsNavigation } from "@/services/storage/types";
-import { useNavigation } from "@react-navigation/native";
 import SettingsItem from "./SettingsItem";
 
 export const Settings = () => {

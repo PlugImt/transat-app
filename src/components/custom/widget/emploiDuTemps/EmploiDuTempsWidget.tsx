@@ -2,9 +2,6 @@ import { useTheme } from "@/contexts/ThemeContext";
 import type { AppStackParamList } from "@/services/storage/types";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
-
-import { EmploiDuTempsWidgetCourse } from "@/components/custom/widget/EmploiDuTempsWidgetCourse";
-import { EmploiDuTempsWidgetLoading } from "@/components/custom/widget/EmploiDuTempsWidgetLoading";
 import { useAuth } from "@/hooks/account/useAuth";
 import { useTranslation } from "react-i18next";
 import { Text, TouchableOpacity, View } from "react-native";
@@ -12,6 +9,8 @@ import { Course } from "@/dto";
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { QUERY_KEYS } from "@/constants";
 import { getEmploiDuTempsToday } from "@/api";
+import { EmploiDuTempsWidgetLoading } from "./EmploiDuTempsWidgetLoading";
+import { EmploiDuTempsWidgetCourse } from "./EmploiDuTempsWidgetCourse";
 
 export type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -100,7 +99,7 @@ export function EmploiDuTempsWidget() {
                   {t("services.emploiDuTemps.noEdt.title")}
                 </Text>
                 <Text
-                  className="text-base ml-4 font-bold"
+                  className="text-sm ml-4 font-bold"
                   style={{ color: theme.primary }}
                   ellipsizeMode="tail"
                 >
@@ -117,7 +116,7 @@ export function EmploiDuTempsWidget() {
                   {t("services.emploiDuTemps.noCourses.dayTitle")}
                 </Text>
                 <Text
-                  className="text-base ml-4 italic"
+                  className="text-sm ml-4 italic"
                   style={{ color: theme.text }}
                   ellipsizeMode="tail"
                 >
@@ -134,7 +133,7 @@ export function EmploiDuTempsWidget() {
                   {t("services.emploiDuTemps.noCourses.morningTitle")}
                 </Text>
                 <Text
-                  className="text-base ml-4 italic"
+                  className="text-sm ml-4 italic"
                   style={{ color: theme.text }}
                   ellipsizeMode="tail"
                 >
@@ -151,7 +150,7 @@ export function EmploiDuTempsWidget() {
                   {t("services.emploiDuTemps.noCourses.afternoonTitle")}
                 </Text>
                 <Text
-                  className="text-base ml-4 italic"
+                  className="text-sm ml-4 italic"
                   style={{ color: theme.text }}
                   ellipsizeMode="tail"
                 >

@@ -1,7 +1,7 @@
-import { useTheme } from "@/contexts/ThemeContext";
-import { type VariantProps, cva } from "class-variance-authority";
+import { cva, type VariantProps } from "class-variance-authority";
 import { useEffect, useRef } from "react";
 import { Animated, type View } from "react-native";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const skeletonVariants = cva("rounded-md overflow-hidden", {
   variants: {

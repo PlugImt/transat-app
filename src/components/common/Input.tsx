@@ -1,8 +1,8 @@
-import { useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";
 import { forwardRef } from "react";
 import { Controller, type FieldValues, type Path } from "react-hook-form";
 import { Text, TextInput, View } from "react-native";
+import { useTheme } from "@/contexts/ThemeContext";
 
 
 export interface InputProps<T extends FieldValues>
@@ -75,7 +75,7 @@ const Input = forwardRef(
                 borderWidth: error ? 1 : 0,
               }}
               className={cn(inputClasses, "py-2.5 px-4 rounded-lg h-12")}
-              placeholderTextColor={theme.textPlaceholder}
+              placeholderTextColor={theme.textSecondary}
               onChangeText={onChange}
               onBlur={onBlur}
               value={value}
@@ -125,7 +125,7 @@ export const InputLoading = ({
           color: theme.text,
         }}
         className={cn(inputClasses, "py-2.5 px-4 rounded-lg")}
-        placeholderTextColor={theme.textPlaceholder}
+        placeholderTextColor={theme.textSecondary}
       />
     </View>
   );

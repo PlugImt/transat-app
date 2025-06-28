@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { scolaritySchema } from "../scolarity";
 
 //
 // — Base types
@@ -10,12 +11,15 @@ export type NotLoggedIn = z.infer<typeof notLoggedInSchema>;
 export const loadingSchema = z.undefined();
 export type Loading = z.infer<typeof loadingSchema>;
 
+
+
 export const userSchema = z.object({
   first_name: z.string(),
   last_name: z.string(),
   phone_number: z.string(),
   email: z.string().email(),
   graduation_year: z.number().optional(),
+  scolarity: scolaritySchema.optional(),
   profile_picture: z.string().url().optional(),
   id_newf: z.number().optional(),
   total_newf: z.number().optional(),

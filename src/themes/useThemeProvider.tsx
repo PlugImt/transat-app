@@ -1,4 +1,4 @@
-import { type ReactNode, createContext, useContext } from "react";
+import { createContext, type ReactNode, useContext } from "react";
 import colors from "./colors";
 
 type ThemeType = {
@@ -28,6 +28,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     destructive: colors.shared.destructive.DEFAULT,
     success: colors.shared.success.DEFAULT,
     warning: colors.shared.warning.DEFAULT,
+    foreground: colors.shared.info.DEFAULT,
   };
 
   return (

@@ -1,3 +1,4 @@
+import { Homework } from "@/dto";
 import type { NavigatorScreenParams } from "@react-navigation/core";
 import type { StackNavigationProp } from "@react-navigation/stack";
 
@@ -41,6 +42,8 @@ export type AppStackParamList = {
   WashingMachine: undefined;
   Restaurant: undefined;
   EmploiDuTemps: undefined;
+  Homework: undefined;
+  HomeworkDetails: { homework: Homework };
   Games: undefined;
   Profile: {
     userId: string;

@@ -58,7 +58,11 @@ export const useAuthMutations = () => {
       email,
       password,
       language,
-    }: { email: string; password: string; language: string }) => {
+    }: {
+      email: string;
+      password: string;
+      language: string;
+    }) => {
       const apiUrl = await getAPIUrl();
 
       return await apiRequest(

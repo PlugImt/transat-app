@@ -1,7 +1,6 @@
 import { useTheme } from "@/contexts/ThemeContext";
 import { type VariantProps, cva } from "class-variance-authority";
 import { Text, TouchableOpacity, type View } from "react-native";
-
 import type { LucideIcon } from "lucide-react-native";
 import type React from "react";
 import { cn } from "@/utils";

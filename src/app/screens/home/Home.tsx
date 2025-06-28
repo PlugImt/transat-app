@@ -5,9 +5,12 @@ import {
   WeatherSkeleton,
   WeatherWidget,
 } from "@/components/custom/WeatherWidget";
-import EmploiDuTempsWidget from "@/components/custom/widget/EmploiDuTempsWidget";
-import { EmploiDuTempsWidgetLoading } from "@/components/custom/widget/EmploiDuTempsWidgetLoading";
-import RestaurantWidget, {
+import EmploiDuTempsWidget from "@/components/custom/widget/emploiDuTemps/EmploiDuTempsWidget";
+import { EmploiDuTempsWidgetLoading } from "@/components/custom/widget/emploiDuTemps/EmploiDuTempsWidgetLoading";
+import { HomeworkWidget } from "@/components/custom/widget/homework/HomeworkWidget";
+import { HomeworkWidgetLoading } from "@/components/custom/widget/homework/HomeworkWidgetLoading";
+import {
+  RestaurantWidget,
   RestaurantWidgetLoading,
 } from "@/components/custom/widget/RestaurantWidget";
 import WashingMachineWidget, {
@@ -181,6 +184,10 @@ export const Home = () => {
     useIsFetching({
       queryKey: QUERY_KEYS.emploiDuTemps,
     }) > 0;
+  const isHomeworkFetching =
+    useIsFetching({
+      queryKey: QUERY_KEYS.homework,
+    }) > 0;
   const isWashingMachinesFetching =
     useIsFetching({
       queryKey: QUERY_KEYS.washingMachines,
@@ -192,6 +199,7 @@ export const Home = () => {
   const isFetching =
     isMenuFetching ||
     isEmploiDuTempsFetching ||
+    isHomeworkFetching ||
     isWashingMachinesFetching ||
     isWeatherFetching;
 
@@ -199,6 +207,7 @@ export const Home = () => {
     await Promise.all([
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.restaurantMenu }),
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.emploiDuTemps }),
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.homework }),
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.washingMachines }),
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.weather }),
     ]);
@@ -212,6 +221,8 @@ export const Home = () => {
         return <RestaurantWidget />;
       case "emploiDuTemps":
         return <EmploiDuTempsWidget />;
+      case "homework":
+        return <HomeworkWidget />;
       case "washingMachine":
         return <WashingMachineWidget />;
       default:
@@ -359,6 +370,7 @@ export const HomeLoading = () => {
         <RestaurantWidgetLoading />
       ) : null}
       <EmploiDuTempsWidgetLoading />
+      <HomeworkWidgetLoading />
       <WashingMachineWidgetLoading />
     </Page>
   );

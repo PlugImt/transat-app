@@ -14,7 +14,7 @@ import { isDinner, isLunch, isWeekend, outOfService } from "@/utils";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
-export function RestaurantWidget() {
+export const RestaurantWidget = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
 

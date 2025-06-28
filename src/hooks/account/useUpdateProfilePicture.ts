@@ -5,7 +5,7 @@ import { QUERY_KEYS } from "@/constants";
 import { storage } from "@/services/storage/asyncStorage";
 import { uploadImage } from "@/utils";
 
-export function useUpdateProfilePicture() {
+export const useUpdateProfilePicture = () => {
   const queryClient = useQueryClient();
 
   return useMutation({

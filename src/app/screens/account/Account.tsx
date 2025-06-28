@@ -17,8 +17,8 @@ import {
 } from "@/components/common/Avatar";
 import { Button, IconButton } from "@/components/common/Button";
 import InfoItem from "@/components/common/InfoItem";
-import Page from "@/components/common/Page";
-import ErrorPage from "@/components/custom/ErrorPage";
+import { Page } from "@/components/common/Page";
+import { ErrorPage } from "@/components/custom/ErrorPage";
 import { TextSkeleton } from "@/components/Skeleton";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";

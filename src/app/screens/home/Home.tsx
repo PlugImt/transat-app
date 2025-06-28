@@ -14,7 +14,7 @@ import DraggableFlatList, {
 } from "react-native-draggable-flatlist";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Button } from "@/components/common/Button";
-import Page from "@/components/common/Page";
+import { Page } from "@/components/common/Page";
 import WidgetCustomizationModal from "@/components/common/WidgetCustomizationModal";
 import {
   WeatherSkeleton,

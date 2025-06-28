@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { ScrollView, View } from "react-native";
 import { BadgeLoading } from "@/components/common/Badge";
-import Page from "@/components/common/Page";
+import { Page } from "@/components/common/Page";
 import { TraqCardLoading } from "@/components/custom/card/TraqCard";
 import { TextSkeleton } from "@/components/Skeleton";
 import { AboutSection } from "../AboutSection";

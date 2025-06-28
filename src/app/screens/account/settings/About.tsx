@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Linking, ScrollView, Text, View } from "react-native";
 import { Button } from "@/components/common/Button";
-import Page from "@/components/common/Page";
+import { Page } from "@/components/common/Page";
 import { AnimatedLogo } from "@/components/custom/AnimatedLogo";
 import { useTheme } from "@/contexts/ThemeContext";
 

@@ -14,14 +14,14 @@ import { HomeworkWidgetLoading } from "./HomeworkWidgetLoading";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
-export function HomeworkWidget() {
+export const HomeworkWidget = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
   const { user } = useAuth();
   const navigation = useNavigation<AppScreenNavigationProp>();
 
   const userId = user?.id_newf;
-  const { data, isPending, refetch, error, isError } = useQuery({
+  const { data, isPending, error } = useQuery({
     queryKey: [...QUERY_KEYS.homework, userId],
     queryFn: userId ? () => getHomeworks(userId) : skipToken,
     enabled: !!userId,

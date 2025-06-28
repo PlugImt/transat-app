@@ -12,7 +12,7 @@ interface CardProps {
 const RestaurantCard = ({ title, meals, icon }: CardProps) => {
   const { theme } = useTheme();
 
-  function getIcon() {
+  const getIcon = () => {
     switch (icon) {
       case "Soup":
         return <Soup color={theme.primary} />;

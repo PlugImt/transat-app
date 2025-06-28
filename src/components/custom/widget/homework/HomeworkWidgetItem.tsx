@@ -2,7 +2,7 @@ import { Text, View } from "react-native";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Homework } from "@/dto";
 
-export function HomeworkWidgetItem({ homework }: { homework: Homework }) {
+export const HomeworkWidgetItem = ({ homework }: { homework: Homework }) => {
   const { theme } = useTheme();
 
   const formatDateTime = (dateStr: Date | string) => {

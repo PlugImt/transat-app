@@ -1,5 +1,5 @@
 import { Text } from "react-native";
-import Page from "@/components/common/Page";
+import { Page } from "@/components/common/Page";
 
 export const Clubs = () => {
   return (

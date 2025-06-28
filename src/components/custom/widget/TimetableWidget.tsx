@@ -8,11 +8,11 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/hooks/account/useAuth";
 import { useTimetable } from "@/hooks/useTimetable";
 import type { AppStackParamList } from "@/services/storage/types";
-import type { Course } from "@/types/timetable";
+import { Course } from "@/dto";
 
 export type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
-export function TimetableWidget() {
+export const TimetableWidget = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
 
@@ -33,13 +33,6 @@ export function TimetableWidget() {
   const isMorningNow =
     now.getHours() < CUT_OFF_HOUR ||
     (now.getHours() === CUT_OFF_HOUR && now.getMinutes() < CUT_OFF_MINUTE);
-
-  const parseTimeToDate = (timeStr: string) => {
-    const [hours, minutes] = timeStr.split(":").map(Number);
-    const date = new Date();
-    date.setHours(hours, minutes, 0, 0);
-    return date;
-  };
 
   const cutoff = new Date();
   cutoff.setHours(CUT_OFF_HOUR, CUT_OFF_MINUTE, 0, 0);

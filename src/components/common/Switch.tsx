@@ -2,9 +2,9 @@ import { Switch as NativeSwitch } from "react-native";
 
 import { useTheme } from "@/contexts/ThemeContext";
 
-function Switch({
+export const Switch = ({
   ...props
-}: React.ComponentPropsWithoutRef<typeof NativeSwitch>) {
+}: React.ComponentPropsWithoutRef<typeof NativeSwitch>) => {
   const { theme } = useTheme();
 
   const trackColor = props.trackColor || {
@@ -23,5 +23,3 @@ function Switch({
     />
   );
 }
-
-export { Switch };

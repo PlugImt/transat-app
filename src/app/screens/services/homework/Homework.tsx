@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { ScrollView, Text, View } from "react-native";
 import { getHomeworks } from "@/api";
 import { Button } from "@/components/common/Button";
-import Page from "@/components/common/Page";
+import { Page } from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
 import HomeworkCard from "@/components/custom/card/HomeworkCard";
 import { QUERY_KEYS } from "@/constants";

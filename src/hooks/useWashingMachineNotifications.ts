@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { washingMachineNotificationService } from "@/services/notifications/washingMachineNotifications";
 
-export function useWashingMachineNotifications(machineNumber: string) {
+export const useWashingMachineNotifications = (machineNumber: string) => {
   const [isNotificationSet, setIsNotificationSet] = useState(false);
   const [_forceUpdate, setForceUpdate] = useState(0);
 

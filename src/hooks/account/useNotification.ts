@@ -4,7 +4,7 @@ import { QUERY_KEYS } from "@/constants";
 import { type NotificationType, NotificationTypeValues } from "@/dto";
 import { storage } from "@/services/storage/asyncStorage";
 
-function useNotification() {
+const useNotification = () => {
   const queryClient = useQueryClient();
 
   /**

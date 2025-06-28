@@ -3,7 +3,7 @@ import { updateUser } from "@/api";
 import { QUERY_KEYS } from "@/constants";
 import { storage } from "@/services/storage/asyncStorage";
 
-export function useUpdateAccount() {
+export const useUpdateAccount = () => {
   const queryClient = useQueryClient();
 
   return useMutation({

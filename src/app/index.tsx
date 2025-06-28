@@ -27,7 +27,7 @@ Notifications.setNotificationHandler({
     shouldShowList: true,
   }),
 });
-function App() {
+const App = () => {
   const queryClient = new QueryClient();
 
   const _onCopy = async (text: string) => {

@@ -2,8 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { getTraq } from "@/api";
-import Page from "@/components/common/Page";
-import ErrorPage from "@/components/custom/ErrorPage";
+import { Page } from "@/components/common/Page";
+import { ErrorPage } from "@/components/custom/ErrorPage";
 import { QUERY_KEYS } from "@/constants";
 import {
   AboutSection,

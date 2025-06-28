@@ -7,10 +7,10 @@ export interface SkeletonLoadingScreenProps {
   items?: number;
 }
 
-export function SkeletonLoadingScreen({
+export const SkeletonLoadingScreen = ({
   type = "default",
   items = 3,
-}: SkeletonLoadingScreenProps) {
+}: SkeletonLoadingScreenProps) => {
   const { theme } = useTheme();
 
   return (

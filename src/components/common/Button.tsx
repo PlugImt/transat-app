@@ -22,7 +22,7 @@ interface ButtonProps
   loading?: boolean;
 }
 
-function Button({
+const Button = ({
   label,
   labelClasses,
   className,
@@ -31,7 +31,7 @@ function Button({
   icon,
   loading,
   ...props
-}: ButtonProps) {
+}: ButtonProps) => {
   const { theme } = useTheme();
   const isDisabled = props.disabled || loading;
 
@@ -160,14 +160,14 @@ interface IconButtonProps extends Omit<ButtonProps, "label" | "labelClasses"> {
   icon: React.ReactNode;
 }
 
-function IconButton({
+const IconButton = ({
   icon,
   variant = "default",
   size = "default",
   loading,
   className,
   ...props
-}: IconButtonProps) {
+}: IconButtonProps) => {
   const { theme } = useTheme();
   const isDisabled = props.disabled || loading;
 

@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
-import Page from "@/components/common/Page";
+import { Page } from "@/components/common/Page";
 import { WashingMachineCardSkeleton } from "@/components/custom/card/WashingMachineCard";
 import { useTheme } from "@/contexts/ThemeContext";
 import { AboutSection } from "../AboutSection";

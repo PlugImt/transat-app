@@ -2,7 +2,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
 import Divider from "@/components/common/Divider";
-import Page from "@/components/common/Page";
+import { Page } from "@/components/common/Page";
 import { Switch } from "@/components/common/Switch";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";

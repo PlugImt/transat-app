@@ -16,7 +16,7 @@ interface TabsProps {
   defaultValue: string;
   children: React.ReactNode;
 }
-function Tabs({ defaultValue, children }: TabsProps) {
+const Tabs = ({ defaultValue, children }: TabsProps) => {
   const [activeTab, setActiveTab] = useState(defaultValue);
 
   return (
@@ -26,10 +26,10 @@ function Tabs({ defaultValue, children }: TabsProps) {
   );
 }
 
-function TabsList({
+const TabsList = ({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<typeof View>) {
+}: React.ComponentPropsWithoutRef<typeof View>) => {
   return (
     <View
       className={cn("flex flex-row justify-center gap-4", className)}
@@ -44,13 +44,13 @@ interface TabsTriggerProps
   title: string;
   textClasses?: string;
 }
-function TabsTrigger({
+const TabsTrigger = ({
   value,
   title,
   className,
   textClasses,
   ...props
-}: TabsTriggerProps) {
+}: TabsTriggerProps) => {
   const { activeTab, setActiveTab } = useContext(TabsContext);
   const { theme } = useTheme();
 

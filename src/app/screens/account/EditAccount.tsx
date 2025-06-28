@@ -15,9 +15,9 @@ import {
 import { Button } from "@/components/common/Button";
 import Dropdown, { DropdownLoading } from "@/components/common/Dropdown";
 import Input, { InputLoading } from "@/components/common/Input";
-import Page from "@/components/common/Page";
+import { Page } from "@/components/common/Page";
 import { useToast } from "@/components/common/Toast";
-import ErrorPage from "@/components/custom/ErrorPage";
+import { ErrorPage } from "@/components/custom/ErrorPage";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { User } from "@/dto";

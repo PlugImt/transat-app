@@ -10,13 +10,13 @@ export interface ProfileSkeletonProps {
   className?: string;
 }
 
-export function ProfileSkeleton({
+export const ProfileSkeleton = ({
   showAvatar = true,
   avatarSize = 80,
   showInfo = true,
   infoLines = 2,
   className,
-}: ProfileSkeletonProps) {
+}: ProfileSkeletonProps) => {
   return (
     <View className={`flex ${className}`}>
       <View className="flex-row items-center">

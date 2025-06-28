@@ -15,7 +15,7 @@ import {
 } from "react-native";
 import { z } from "zod";
 import { Button } from "@/components/common/Button";
-import Page from "@/components/common/Page";
+import { Page } from "@/components/common/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useUser } from "@/hooks/account/useUser";
 

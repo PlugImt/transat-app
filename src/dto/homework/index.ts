@@ -1,11 +1,9 @@
 import { z } from "zod";
-import { userSchema } from "@/dto";
 
-const idNewfSchema = userSchema.shape.id_newf;
-
+// TODO : Use useSchema here in order to set the author
 export const homeworkSchema = z.object({
   id: z.number(),
-  author: idNewfSchema,
+  author: z.number().optional(),
   course_name: z.string(),
   title: z.string(),
   description: z.string(),

@@ -4,7 +4,7 @@ import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { AppScreenNavigationProp } from "../TimetableWidget";
 
-export function HomeworkWidgetLoading() {
+export const HomeworkWidgetLoading = () => {
   const { theme } = useTheme();
   const navigation = useNavigation<AppScreenNavigationProp>();
 

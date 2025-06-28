@@ -23,7 +23,7 @@ import { useWeather } from "@/hooks/useWeather";
 import i18n from "@/i18n";
 import { Avatar, AvatarImage } from "../common/Avatar";
 
-export function WeatherWidget() {
+export const WeatherWidget = () => {
   const { data: weatherNantes, isPending, isError } = useWeather();
   const { theme } = useTheme();
 

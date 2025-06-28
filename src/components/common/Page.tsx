@@ -30,7 +30,7 @@ type PageProps = {
   disableScroll?: boolean;
 };
 
-export default function Page({
+export const Page = ({
   children,
   refreshing = false,
   onRefresh,
@@ -43,7 +43,7 @@ export default function Page({
   confetti = false,
   onConfettiTrigger,
   disableScroll = false,
-}: PageProps) {
+}: PageProps) => {
   const navigation = useNavigation();
   const { theme, actualTheme } = useTheme();
   const confettiRef = useRef<ConfettiCannon>(null);

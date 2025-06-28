@@ -5,7 +5,7 @@ import i18n from "@/i18n";
 import { storage } from "@/services/storage/asyncStorage";
 import STORAGE_KEYS from "@/services/storage/constants";
 
-export function useUpdateLanguage() {
+export const useUpdateLanguage = () => {
   const queryClient = useQueryClient();
 
   return useMutation({

@@ -11,7 +11,7 @@ export interface TextSkeletonProps {
   variant?: "h1" | "h2" | "h3" | "lg" | "sm" | "default";
 }
 
-export function TextSkeleton({
+export const TextSkeleton = ({
   lines = 3,
   width = "100%",
   lastLineWidth = "70%",
@@ -19,7 +19,7 @@ export function TextSkeleton({
   variant = "default",
   spacing = 8,
   className,
-}: TextSkeletonProps) {
+}: TextSkeletonProps) => {
   const lineHeightMap = {
     h1: 30,
     h2: 24,

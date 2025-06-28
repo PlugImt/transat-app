@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Pressable, Text, View } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
@@ -8,15 +8,22 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
-import { Cours } from "@/app/screens/services/Cours";
+import { Cours } from "./components";
 import { Button } from "@/components/common/Button";
-import Page from "@/components/common/Page";
+import { Page } from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
 import { useTheme } from "@/contexts/ThemeContext";
-import type { Course } from "@/dto";
 import useAuth from "@/hooks/account/useAuth";
 import { useTimetableForWeek } from "@/hooks/useTimetable";
+import type { Course } from "@/dto";
 import { LoadingState } from "./components";
+
+
+/* Gérer la date pour la ligne rouge = heure actuelle */
+const HOUR_HEIGHT = 60; // 60 pixels = 1 heure
+const START_HOUR = 8;
+const END_HOUR = 18;
+const TOTAL_HOURS = END_HOUR - START_HOUR;
 
 export const Timetable = () => {
   const { t } = useTranslation();
@@ -84,7 +91,7 @@ export const Timetable = () => {
   };
 
   // This logic processes the data for the entire week
-  const parsedEdt = edt?.map((course: Course) => ({
+  const parsedEdt = edt?.map((course) => ({
     ...course,
     date: new Date(course.date),
     start_time: isoToHourString(course.start_time),
@@ -93,15 +100,10 @@ export const Timetable = () => {
 
   // This crucial filter selects courses for the currently displayed 'selectedDate' from the weekly data
   const filteredCourses = parsedEdt?.filter(
-    (course: Course) =>
+    (course) =>
       new Date(course.date).toDateString() === selectedDate.toDateString(),
   );
 
-  /* Gérer la date pour la ligne rouge = heure actuelle */
-  const HOUR_HEIGHT = 60; // 60 pixels = 1 heure
-  const START_HOUR = 8;
-  const END_HOUR = 18;
-  const TOTAL_HOURS = END_HOUR - START_HOUR;
   const isToday = selectedDate.toDateString() === new Date().toDateString();
 
   const toMinutes = (heure: string) => {
@@ -109,7 +111,7 @@ export const Timetable = () => {
     return h * 60 + m;
   };
 
-  function isCourseOver(heureFin: string) {
+  const isCourseOver = (heureFin: string) => {
     const now = new Date();
     // Use toDateString for robust comparison across year/month/day
     if (now.toDateString() === selectedDate.toDateString()) {
@@ -122,23 +124,23 @@ export const Timetable = () => {
     return now > selectedDate; // Mark courses on past days as over
   }
 
-  function getNowTimeForLine() {
+  const getNowTimeForLine = useCallback(() => {
     const now = new Date();
     const currentHour = now.getHours();
     const currentMinutes = now.getMinutes();
     const minutesSinceStart = (currentHour - START_HOUR) * 60 + currentMinutes;
-    return (minutesSinceStart / 60) * HOUR_HEIGHT + 10; // +10 for alignment
-  }
+    return (minutesSinceStart / 60) * HOUR_HEIGHT + 10;
+  }, []);
 
   const [nowTimeLine, setNowTimeForLine] = useState(getNowTimeForLine());
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
+    const interval = setInterval(() => {
       setNowTimeForLine(getNowTimeForLine());
     }, 20000);
 
-    return () => clearInterval(intervalId);
-  }, []);
+    return () => clearInterval(interval);
+  }, [getNowTimeForLine]);
   /* </Cours et date> */
 
   // Show loading state only on initial fetch for a week, not on background refetches
@@ -286,7 +288,7 @@ export const Timetable = () => {
 
                 return (
                   <View
-                    key={i}
+                    key={cours.id}
                     style={{ top, height }}
                     className="absolute left-0 right-0 px-2"
                   >

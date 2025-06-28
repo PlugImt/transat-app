@@ -59,7 +59,7 @@ export interface BadgeProps
   icon?: LucideIcon;
 }
 
-function Badge({
+const Badge = ({
   label,
   labelClasses,
   className,
@@ -68,7 +68,7 @@ function Badge({
   onPress,
   icon: Icon,
   ...props
-}: BadgeProps) {
+}: BadgeProps) => {
   const { theme } = useTheme();
   return (
     <TouchableOpacity

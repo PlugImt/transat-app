@@ -28,7 +28,7 @@ import {
 import { Services } from "@/app/screens/services/Services";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { BottomTabParamList } from "@/types";
-import HomeworkDetails from "../custom/HomeworkDetails";
+import { HomeworkDetails } from "../custom/HomeworkDetails";
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 

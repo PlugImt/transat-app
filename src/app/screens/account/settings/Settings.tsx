@@ -20,7 +20,7 @@ import {
   DialogContent,
   DialogTrigger,
 } from "@/components/common/Dialog";
-import Page from "@/components/common/Page";
+import { Page } from "@/components/common/Page";
 import { Switch } from "@/components/common/Switch";
 import { useToast } from "@/components/common/Toast";
 import { AccountCard } from "@/components/custom/card/AccountCard";

@@ -6,7 +6,7 @@ interface DividerProps {
   className?: string;
 }
 
-export default function Divider({ label, className }: DividerProps) {
+export const Divider = ({ label, className }: DividerProps) => {
   const { theme } = useTheme();
 
   if (label) {

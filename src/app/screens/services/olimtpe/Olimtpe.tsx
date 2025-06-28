@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Image, Text, View } from "react-native";
-import Page from "@/components/common/Page";
+import { Page } from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
 import { useTheme } from "@/contexts/ThemeContext";
 

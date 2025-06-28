@@ -12,14 +12,14 @@ export interface WidgetSkeletonProps {
   className?: string;
 }
 
-export function WidgetSkeleton({
+export const WidgetSkeleton = ({
   title = true,
   contentType = "default",
   gridColumns = 2,
   gridItems = 4,
   listItems = 3,
   className,
-}: WidgetSkeletonProps) {
+}: WidgetSkeletonProps) => {
   const { theme } = useTheme();
 
   return (

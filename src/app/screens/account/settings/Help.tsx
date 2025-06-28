@@ -8,7 +8,7 @@ import { useId, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Linking, Text, TouchableOpacity, View } from "react-native";
 import Divider from "@/components/common/Divider";
-import Page from "@/components/common/Page";
+import { Page } from "@/components/common/Page";
 import {
   Tabs,
   TabsContent,

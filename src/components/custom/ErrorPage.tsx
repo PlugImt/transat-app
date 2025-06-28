@@ -4,19 +4,19 @@ import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";
 import { Button } from "../common/Button";
 
-type Props = {
+type ErrorPageProps = {
   error: Error;
   refetch: () => void;
   isRefetching: boolean;
   isAccountPage?: boolean;
 };
 
-export default function ErrorPage({
+export const ErrorPage = ({
   error,
   refetch,
   isRefetching,
   isAccountPage = false,
-}: Props) {
+}: ErrorPageProps) => {
   const { t } = useTranslation();
   const { logout } = useAuth();
   const { theme } = useTheme();

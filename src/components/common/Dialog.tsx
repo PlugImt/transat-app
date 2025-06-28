@@ -18,7 +18,7 @@ interface DialogContextType {
 
 const DialogContext = createContext<DialogContextType | undefined>(undefined);
 
-function Dialog({ children }: { children: React.ReactNode }) {
+const Dialog = ({ children }: { children: React.ReactNode }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -29,7 +29,7 @@ function Dialog({ children }: { children: React.ReactNode }) {
 }
 
 // biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
-function DialogTrigger({ children }: any) {
+const DialogTrigger = ({ children }: any) => {
   const { setOpen } = useDialog();
 
   return cloneElement(children, { onPress: () => setOpen(true) });
@@ -47,7 +47,7 @@ type DialogContentProps = {
   disableConfirm?: boolean;
 };
 
-function DialogContent({
+const DialogContent = ({
   className,
   children,
   cancelLabel,
@@ -57,7 +57,7 @@ function DialogContent({
   disableConfirm,
   title,
   isPending,
-}: DialogContentProps) {
+}: DialogContentProps) => {
   const { open, setOpen } = useDialog();
   const { theme } = useTheme();
 

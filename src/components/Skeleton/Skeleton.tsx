@@ -24,7 +24,7 @@ export interface SkeletonProps
   animated?: boolean;
 }
 
-export function Skeleton({
+export const Skeleton = ({
   className,
   variant,
   width,
@@ -32,7 +32,7 @@ export function Skeleton({
   animated = true,
   style,
   ...props
-}: SkeletonProps) {
+}: SkeletonProps) => {
   const { theme } = useTheme();
   const opacity = useRef(new Animated.Value(0.5)).current;
 

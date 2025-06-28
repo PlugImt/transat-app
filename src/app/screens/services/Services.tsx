@@ -6,7 +6,7 @@ import { View } from "react-native";
 import { Button } from "@/components/common/Button";
 import Card from "@/components/common/Card";
 import FlexibleGrid from "@/components/common/FlexibleGrid";
-import Page from "@/components/common/Page";
+import { Page } from "@/components/common/Page";
 import WidgetCustomizationModal from "@/components/common/WidgetCustomizationModal";
 import { useServicePreferences } from "@/hooks/useWidgetPreferences";
 import type { AppStackParamList } from "@/services/storage/types";

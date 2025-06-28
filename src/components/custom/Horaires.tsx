@@ -1,7 +1,7 @@
 import { Text, View } from "react-native";
 import { useTheme } from "@/contexts/ThemeContext";
 
-export function Horaires() {
+export const Horaires = () => {
   const { theme } = useTheme();
   return (
     <View className="flex-col items-end">

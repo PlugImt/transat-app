@@ -32,14 +32,14 @@ interface ToastProps {
   showProgress?: boolean;
 }
 
-function Toast({
+const Toast = ({
   id,
   message,
   onHide,
   variant = "default",
   duration = 3000,
   showProgress = true,
-}: ToastProps) {
+}: ToastProps) => {
   const opacity = useRef(new Animated.Value(0)).current;
   const progress = useRef(new Animated.Value(0)).current;
 
@@ -126,13 +126,13 @@ interface ToastContextProps {
 const ToastContext = createContext<ToastContextProps | undefined>(undefined);
 
 // TODO: refactor to pass position to Toast instead of ToastProvider
-function ToastProvider({
+const ToastProvider = ({
   children,
   position = "top",
 }: {
   children: React.ReactNode;
   position?: "top" | "bottom";
-}) {
+}) => {
   const [messages, setMessages] = useState<ToastMessage[]>([]);
 
   const toast: ToastContextProps["toast"] = (
@@ -184,7 +184,7 @@ function ToastProvider({
   );
 }
 
-function useToast() {
+const useToast = () => {
   const context = useContext(ToastContext);
   if (!context) {
     throw new Error("useToast must be used within ToastProvider");

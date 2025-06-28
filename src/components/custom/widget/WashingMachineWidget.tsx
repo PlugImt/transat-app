@@ -14,7 +14,7 @@ import type { AppStackParamList } from "@/services/storage/types";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
-export function WashingMachineWidget() {
+export const WashingMachineWidget = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<AppScreenNavigationProp>();
   const { theme } = useTheme();
@@ -22,10 +22,8 @@ export function WashingMachineWidget() {
   const {
     data = [],
     isPending,
-    isFetching,
     isError,
     error,
-    refetch,
   } = useQuery({
     queryFn: () => fetchWashingMachines(),
     queryKey: QUERY_KEYS.washingMachines,

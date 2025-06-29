@@ -12,7 +12,7 @@ import colors from "@/themes/colors";
 
 export type ThemeMode = "system" | "light" | "dark";
 
-type ThemeType = {
+export type ThemeType = {
   background: string;
   text: string;
   textSecondary: string;
@@ -30,6 +30,7 @@ type ThemeType = {
   success: string;
   warning: string;
   input: string;
+  onSurface: string;
 };
 
 type ThemeContextType = {

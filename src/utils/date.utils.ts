@@ -37,3 +37,40 @@ export const outOfService = (lastUpdate: string) => {
   );
   return updateDay < today;
 };
+
+export const toYYYYMMDD = (date: Date): string => {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
+export const formatDate = (dateString: string) => {
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  };
+  return new Date(dateString).toLocaleDateString(undefined, options);
+};
+
+export const isoToHourString = (isoString: string): string => {
+  const date = new Date(isoString);
+  const hours = date.getUTCHours().toString().padStart(2, "0");
+  const minutes = date.getUTCMinutes().toString().padStart(2, "0");
+  return `${hours}h${minutes}`;
+};
+
+export const getWeekId = (d: Date): string => {
+  const date = new Date(d); 
+  const day = date.getDay(); // 0=Sun, 1=Mon, ...
+  const diff = date.getDate() - day + (day === 0 ? -6 : 1); // Adjust when day is Sunday
+  const monday = new Date(date.setDate(diff));
+
+  // Format to YYYY-MM-DD to use as a stable cache key
+  // TODO : Use Format here
+  return monday.toISOString().slice(0, 10);
+};

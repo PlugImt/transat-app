@@ -20,7 +20,9 @@ export const HomeworkDetails = () => {
 
   const locale = i18n.language === "fr" ? fr : enUS;
 
-  const deadline = format(new Date(homework.deadline), "PPP '—' p", { locale });
+  const deadline = format(new Date(homework.deadline), "PPP '—' p", {
+    locale
+  });
   const createdAt = format(new Date(homework.created_at), "PPP '—' p", {
     locale,
   });

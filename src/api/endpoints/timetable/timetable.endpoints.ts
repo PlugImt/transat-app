@@ -3,6 +3,7 @@ import { API_ROUTES } from "@/api/common";
 import { Method } from "@/api/enums";
 import { apiRequest } from "@/api/helpers";
 import type { Timetable } from "@/dto";
+import { toYYYYMMDD } from "@/utils";
 
 export const getTimetableToday = async (email: string): Promise<Timetable> => {
   // retrieve the language from the local storage
@@ -14,14 +15,6 @@ export const getTimetableToday = async (email: string): Promise<Timetable> => {
     `${url}?${queryParams.toString()}`,
     Method.GET,
   );
-};
-
-// Helper to format a Date object to 'YYYY-MM-DD' string
-const toYYYYMMDD = (date: Date): string => {
-  const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, "0");
-  const day = date.getDate().toString().padStart(2, "0");
-  return `${year}-${month}-${day}`;
 };
 
 /**

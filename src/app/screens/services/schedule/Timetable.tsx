@@ -17,6 +17,7 @@ import useAuth from "@/hooks/account/useAuth";
 import { useTimetableForWeek } from "@/hooks/useTimetable";
 import type { Course } from "@/dto";
 import { LoadingState } from "./components";
+import { isoToHourString } from "@/utils";
 
 
 /* Gérer la date pour la ligne rouge = heure actuelle */
@@ -82,13 +83,6 @@ export const Timetable = () => {
   );
   const year = selectedDate.getFullYear();
   const dayNumber = selectedDate.getDate();
-
-  const isoToHourString = (isoString: string): string => {
-    const date = new Date(isoString);
-    const hours = date.getUTCHours().toString().padStart(2, "0");
-    const minutes = date.getUTCMinutes().toString().padStart(2, "0");
-    return `${hours}h${minutes}`;
-  };
 
   // This logic processes the data for the entire week
   const parsedEdt = edt?.map((course) => ({

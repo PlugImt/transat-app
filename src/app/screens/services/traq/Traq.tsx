@@ -1,10 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { getTraq } from "@/api";
 import { Page } from "@/components/common/Page";
 import { ErrorPage } from "@/components/custom/ErrorPage";
-import { QUERY_KEYS } from "@/constants";
+import { useTraq } from "@/hooks/useTraq";
 import {
   AboutSection,
   LoadingState,
@@ -16,17 +14,7 @@ import {
 export const Traq = () => {
   const { t } = useTranslation();
 
-  const {
-    data: traq,
-    isPending,
-    refetch,
-    error,
-    isError,
-  } = useQuery({
-    queryKey: QUERY_KEYS.traq,
-    queryFn: () => getTraq(),
-    initialData: [],
-  });
+  const { traq, refetch, isPending, isError, error } = useTraq();
 
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 

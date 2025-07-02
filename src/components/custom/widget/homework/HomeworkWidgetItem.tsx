@@ -5,6 +5,7 @@ import type { Homework } from "@/dto";
 export const HomeworkWidgetItem = ({ homework }: { homework: Homework }) => {
   const { theme } = useTheme();
 
+  // TODO: Relocate this function to date.utils
   const formatDateTime = (dateStr: Date | string) => {
     const date = new Date(dateStr);
     const day = date.toLocaleDateString(undefined, {
@@ -50,4 +51,4 @@ export const HomeworkWidgetItem = ({ homework }: { homework: Homework }) => {
       </View>
     </View>
   );
-}
+};

@@ -8,17 +8,15 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
-import { Cours } from "./components";
 import { Button } from "@/components/common/Button";
 import { Page } from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
 import { useTheme } from "@/contexts/ThemeContext";
+import type { Course } from "@/dto";
 import useAuth from "@/hooks/account/useAuth";
 import { useTimetableForWeek } from "@/hooks/useTimetable";
-import type { Course } from "@/dto";
-import { LoadingState } from "./components";
 import { isoToHourString } from "@/utils";
-
+import { Cours, LoadingState } from "./components";
 
 /* Gérer la date pour la ligne rouge = heure actuelle */
 const HOUR_HEIGHT = 60; // 60 pixels = 1 heure
@@ -116,7 +114,7 @@ export const Timetable = () => {
       return currentHour === h && currentMinutes > m;
     }
     return now > selectedDate; // Mark courses on past days as over
-  }
+  };
 
   const getNowTimeForLine = useCallback(() => {
     const now = new Date();

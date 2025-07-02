@@ -1,12 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
-import { fetchWashingMachines } from "@/api";
 import { Page } from "@/components/common/Page";
-import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
-import type { MachineWithType } from "@/dto";
+import { useWashingMachines } from "@/hooks/useWashingMachines";
 import {
   AboutSection,
   ErrorState,
@@ -20,17 +17,15 @@ export const WashingMachines = () => {
   const [_aboutPopupVisible, _setAboutPopupVisible] = useState(false);
 
   const {
-    data = [],
-    isPending,
-    isFetching,
-    isError,
+    dryers,
+    washingMachines,
     error,
+    isEmpty,
+    isError,
+    isFetching,
+    isPending,
     refetch,
-  } = useQuery({
-    queryFn: () => fetchWashingMachines(),
-    queryKey: QUERY_KEYS.washingMachines,
-    initialData: [],
-  });
+  } = useWashingMachines();
 
   if (isPending) return <WashingMachineLoadingState />;
 
@@ -42,15 +37,6 @@ export const WashingMachines = () => {
         onRefresh={refetch}
       />
     );
-
-  const washingMachines = data?.filter(
-    (machine: MachineWithType) => machine.type === "WASHING MACHINE",
-  );
-  const dryers = data?.filter(
-    (machine: MachineWithType) => machine.type === "DRYER",
-  );
-
-  const isEmpty = washingMachines.length === 0 && dryers.length === 0;
 
   return (
     <Page

@@ -5,10 +5,10 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { TimetableCourseWidget } from "@/components/custom/widget/TimetableCourseWidget";
 import { TimetableLoadingWidget } from "@/components/custom/widget/TimetableLoadingWidget";
 import { useTheme } from "@/contexts/ThemeContext";
+import type { Course } from "@/dto";
 import { useAuth } from "@/hooks/account/useAuth";
 import { useTimetable } from "@/hooks/useTimetable";
 import type { AppStackParamList } from "@/services/storage/types";
-import { Course } from "@/dto";
 
 export type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -189,6 +189,6 @@ export const TimetableWidget = () => {
       </TouchableOpacity>
     </View>
   );
-}
+};
 
 export default TimetableWidget;

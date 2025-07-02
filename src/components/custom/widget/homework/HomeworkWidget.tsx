@@ -1,13 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
-import { skipToken, useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { Text, TouchableOpacity, View } from "react-native";
-import { getHomeworks } from "@/api";
-import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Homework } from "@/dto";
-import { useAuth } from "@/hooks/account/useAuth";
+import { useHomework } from "@/hooks/useHomework";
 import type { AppStackParamList } from "@/services/storage/types";
 import { HomeworkWidgetItem } from "./HomeworkWidgetItem";
 import { HomeworkWidgetLoading } from "./HomeworkWidgetLoading";
@@ -17,22 +14,8 @@ type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 export const HomeworkWidget = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const { user } = useAuth();
   const navigation = useNavigation<AppScreenNavigationProp>();
-
-  const userId = user?.id_newf;
-  const { data, isPending, error } = useQuery({
-    queryKey: [...QUERY_KEYS.homework, userId],
-    queryFn: userId ? () => getHomeworks(userId) : skipToken,
-    enabled: !!userId,
-  });
-
-  const upcomingHomeworks = data
-    ?.filter((hw: Homework) => new Date(hw.deadline) >= new Date())
-    .sort(
-      (a: Homework, b: Homework) =>
-        new Date(a.deadline).getTime() - new Date(b.deadline).getTime(),
-    );
+  const { upcomingHomeworks, isPending, error } = useHomework();
 
   if (isPending) return <HomeworkWidgetLoading />;
 
@@ -64,4 +47,4 @@ export const HomeworkWidget = () => {
       </TouchableOpacity>
     </View>
   );
-}
+};

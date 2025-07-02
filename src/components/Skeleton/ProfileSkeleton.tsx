@@ -41,6 +41,6 @@ export const ProfileSkeleton = ({
       </View>
     </View>
   );
-}
+};
 
 export default ProfileSkeleton;

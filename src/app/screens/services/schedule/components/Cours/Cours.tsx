@@ -15,10 +15,7 @@ export const Cours = ({ course, isOver }: CoursProps) => {
       style={{ backgroundColor: theme.card, borderColor: theme.text }}
       className={`
         flex-col justify-center items-center rounded-br-xl rounded-tr-2xl p-1 border-l-2 h-full 
-        ${isOver
-          ? "opacity-60"
-          : ""
-        }
+        ${isOver ? "opacity-60" : ""}
       `}
     >
       <Text style={{ color: theme.text }} className="font-bold">
@@ -35,4 +32,4 @@ export const Cours = ({ course, isOver }: CoursProps) => {
       </Text>
     </View>
   );
-}
+};

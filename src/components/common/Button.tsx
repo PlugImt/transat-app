@@ -154,7 +154,7 @@ const Button = ({
       )}
     </TouchableOpacity>
   );
-}
+};
 
 interface IconButtonProps extends Omit<ButtonProps, "label" | "labelClasses"> {
   icon: React.ReactNode;
@@ -258,6 +258,6 @@ const IconButton = ({
       )}
     </TouchableOpacity>
   );
-}
+};
 
 export { Button, IconButton };

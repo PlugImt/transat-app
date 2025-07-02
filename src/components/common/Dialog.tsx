@@ -26,14 +26,14 @@ const Dialog = ({ children }: { children: React.ReactNode }) => {
       {children}
     </DialogContext.Provider>
   );
-}
+};
 
 // biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
 const DialogTrigger = ({ children }: any) => {
   const { setOpen } = useDialog();
 
   return cloneElement(children, { onPress: () => setOpen(true) });
-}
+};
 
 type DialogContentProps = {
   className?: string;
@@ -126,7 +126,7 @@ const DialogContent = ({
       </TouchableWithoutFeedback>
     </Modal>
   );
-}
+};
 
 const useDialog = () => {
   const context = useContext(DialogContext);

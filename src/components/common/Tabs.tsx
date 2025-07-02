@@ -24,7 +24,7 @@ const Tabs = ({ defaultValue, children }: TabsProps) => {
       {children}
     </TabsContext.Provider>
   );
-}
+};
 
 const TabsList = ({
   className,
@@ -36,7 +36,7 @@ const TabsList = ({
       {...props}
     />
   );
-}
+};
 
 interface TabsTriggerProps
   extends React.ComponentPropsWithoutRef<typeof TouchableOpacity> {
@@ -76,7 +76,7 @@ const TabsTrigger = ({
       </Text>
     </TouchableOpacity>
   );
-}
+};
 
 interface TabsContentProps extends React.ComponentPropsWithoutRef<typeof View> {
   value: string;

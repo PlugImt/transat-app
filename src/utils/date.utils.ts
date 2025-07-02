@@ -65,7 +65,7 @@ export const isoToHourString = (isoString: string): string => {
 };
 
 export const getWeekId = (d: Date): string => {
-  const date = new Date(d); 
+  const date = new Date(d);
   const day = date.getDay(); // 0=Sun, 1=Mon, ...
   const diff = date.getDate() - day + (day === 0 ? -6 : 1); // Adjust when day is Sunday
   const monday = new Date(date.setDate(diff));

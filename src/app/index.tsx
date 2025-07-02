@@ -78,6 +78,6 @@ const App = () => {
       </ThemeProvider>
     </Provider>
   );
-}
+};
 
 export default Sentry.wrap(App);

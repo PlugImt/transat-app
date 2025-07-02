@@ -33,4 +33,4 @@ export const Divider = ({ label, className }: DividerProps) => {
       className={`h-px rounded-full w-full my-2 ${className || ""}`}
     />
   );
-}
+};

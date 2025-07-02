@@ -47,4 +47,4 @@ export const ErrorPage = ({
       )}
     </View>
   );
-}
+};

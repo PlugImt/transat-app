@@ -21,7 +21,7 @@ export const HomeworkDetails = () => {
   const locale = i18n.language === "fr" ? fr : enUS;
 
   const deadline = format(new Date(homework.deadline), "PPP '—' p", {
-    locale
+    locale,
   });
   const createdAt = format(new Date(homework.created_at), "PPP '—' p", {
     locale,
@@ -104,4 +104,4 @@ export const HomeworkDetails = () => {
       </ScrollView>
     </Page>
   );
-}
+};

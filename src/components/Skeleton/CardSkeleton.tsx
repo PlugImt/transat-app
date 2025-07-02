@@ -47,6 +47,6 @@ export const CardSkeleton = ({
       <TextSkeleton lines={contentLines} width="100%" spacing={8} />
     </View>
   );
-}
+};
 
 export default CardSkeleton;

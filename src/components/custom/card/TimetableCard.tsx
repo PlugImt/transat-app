@@ -25,7 +25,7 @@ const TimetableCard = ({ title, meals, icon }: CardProps) => {
       default:
         return null;
     }
-  }
+  };
 
   if (!meals) {
     return <TimetableCardLoading title={title} icon={getIcon()} />;

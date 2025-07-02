@@ -84,6 +84,6 @@ export const WidgetSkeleton = ({
       </View>
     </View>
   );
-}
+};
 
 export default WidgetSkeleton;

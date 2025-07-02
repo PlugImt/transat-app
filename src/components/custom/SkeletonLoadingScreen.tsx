@@ -64,6 +64,6 @@ export const SkeletonLoadingScreen = ({
       )}
     </View>
   );
-}
+};
 
 export default SkeletonLoadingScreen;

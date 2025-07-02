@@ -65,4 +65,4 @@ export const useWashingMachineNotifications = (machineNumber: string) => {
     cancelNotification,
     shouldDisableButton,
   };
-}
+};

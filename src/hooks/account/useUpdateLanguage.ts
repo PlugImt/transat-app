@@ -19,4 +19,4 @@ export const useUpdateLanguage = () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.user] });
     },
   });
-}
+};

@@ -24,4 +24,4 @@ export const useUpdateProfilePicture = () => {
       queryClient.setQueryData([QUERY_KEYS.user], updatedUser);
     },
   });
-}
+};

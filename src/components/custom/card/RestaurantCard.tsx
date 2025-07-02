@@ -25,7 +25,7 @@ const RestaurantCard = ({ title, meals, icon }: CardProps) => {
       default:
         return null;
     }
-  }
+  };
 
   if (!meals) {
     return <RestaurantCardLoading title={title} icon={getIcon()} />;

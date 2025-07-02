@@ -113,6 +113,6 @@ const useNotification = () => {
     toggleNotification: toggleNotification.mutate,
     isToggling: toggleNotification.isPending,
   };
-}
+};
 
 export default useNotification;

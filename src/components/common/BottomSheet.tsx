@@ -35,7 +35,7 @@ export const BottomSheetTrigger = ({
 }) => {
   const { handleBottomSheet } = useBottomSheet();
   return cloneElement(children, { onPress: () => handleBottomSheet(true) });
-}
+};
 
 // Provider qui gère l'état global du bottom sheet
 export const BottomSheetProvider = ({
@@ -58,7 +58,7 @@ export const BottomSheetProvider = ({
       {children}
     </BottomSheetContext.Provider>
   );
-}
+};
 
 // Composant principal du bottom sheet
 export const BottomSheet = ({ children }: { children: React.ReactNode }) => {
@@ -118,4 +118,4 @@ export const BottomSheet = ({ children }: { children: React.ReactNode }) => {
       </GestureDetector>
     </BottomSheetModal>
   );
-}
+};

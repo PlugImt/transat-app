@@ -22,4 +22,4 @@ export const Switch = ({
       {...props}
     />
   );
-}
+};

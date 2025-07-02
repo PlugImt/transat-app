@@ -13,4 +13,4 @@ export const useUpdateAccount = () => {
       queryClient.setQueryData([QUERY_KEYS.user], updatedUser);
     },
   });
-}
+};

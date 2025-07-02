@@ -1,12 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Image, Text, View } from "react-native";
-import { getRestaurant } from "@/api";
 import { Page } from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
-import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useMenuRestaurant } from "@/hooks/useMenuRestaurant";
 import { getOpeningHoursData, isWeekend, outOfService } from "@/utils";
 import { LoadingState, RestaurantMenu } from "./components";
 
@@ -15,16 +13,7 @@ export const Restaurant = () => {
   const { theme } = useTheme();
   const openingHoursData = useMemo(() => getOpeningHoursData(t), [t]);
 
-  const {
-    data: menu,
-    isPending,
-    refetch,
-    error,
-    isError,
-  } = useQuery({
-    queryKey: QUERY_KEYS.restaurantMenu,
-    queryFn: () => getRestaurant(),
-  });
+  const { menu, isPending, refetch, isError, error } = useMenuRestaurant();
 
   const weekend: boolean = useMemo(() => isWeekend(), []);
   const outOfHours: boolean = useMemo(
@@ -32,7 +21,7 @@ export const Restaurant = () => {
     [menu?.updated_date],
   );
 
-  if (isPending) {
+  if (isPending || !menu) {
     return <LoadingState />;
   }
 

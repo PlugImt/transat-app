@@ -90,7 +90,7 @@ const Badge = ({
       </Text>
     </TouchableOpacity>
   );
-}
+};
 
 export default Badge;
 

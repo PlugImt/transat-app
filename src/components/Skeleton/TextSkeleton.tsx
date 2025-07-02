@@ -40,6 +40,6 @@ export const TextSkeleton = ({
       ))}
     </View>
   );
-}
+};
 
 export default TextSkeleton;

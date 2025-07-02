@@ -99,7 +99,7 @@ const Toast = ({
       )}
     </Animated.View>
   );
-}
+};
 
 type ToastVariant = keyof typeof variants;
 
@@ -182,7 +182,7 @@ const ToastProvider = ({
       </View>
     </ToastContext.Provider>
   );
-}
+};
 
 const useToast = () => {
   const context = useContext(ToastContext);
@@ -190,6 +190,6 @@ const useToast = () => {
     throw new Error("useToast must be used within ToastProvider");
   }
   return context;
-}
+};
 
 export { ToastProvider, type ToastVariant, Toast, variants, useToast };

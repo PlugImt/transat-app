@@ -102,7 +102,7 @@ export const WeatherWidget = () => {
       </View>
     </View>
   );
-}
+};
 
 export default WeatherWidget;
 

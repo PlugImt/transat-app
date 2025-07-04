@@ -12,9 +12,9 @@ import { Text, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { DevToolsBubble } from "react-native-react-query-devtools";
 import { ToastProvider } from "@/components/common/Toast";
+import { apiEnv } from "@/config";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
-import { apiUrlDev } from "@/lib/config";
 import { storage } from "@/services/storage/asyncStorage";
 import STORAGE_KEYS from "@/services/storage/constants";
 
@@ -27,7 +27,7 @@ Notifications.setNotificationHandler({
     shouldShowList: true,
   }),
 });
-function App() {
+const App = () => {
   const queryClient = new QueryClient();
 
   const _onCopy = async (text: string) => {
@@ -63,7 +63,7 @@ function App() {
                   {isDevServerSelected ? (
                     <View className="fixed top-0 left-0 ">
                       <Text className="text-white">
-                        Dev server selected: {apiUrlDev}
+                        Dev server selected: {apiEnv.API_URL_DEV}
                       </Text>
                     </View>
                   ) : null}
@@ -78,6 +78,6 @@ function App() {
       </ThemeProvider>
     </Provider>
   );
-}
+};
 
 export default Sentry.wrap(App);

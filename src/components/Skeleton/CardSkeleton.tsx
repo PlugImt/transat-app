@@ -12,14 +12,14 @@ export interface CardSkeletonProps {
   height?: number | "auto" | `${number}%`;
 }
 
-export function CardSkeleton({
+export const CardSkeleton = ({
   hasHeader = true,
   hasIcon = false,
   contentLines = 3,
   className,
   width = "100%",
   height,
-}: CardSkeletonProps) {
+}: CardSkeletonProps) => {
   const { theme } = useTheme();
 
   return (
@@ -47,6 +47,6 @@ export function CardSkeleton({
       <TextSkeleton lines={contentLines} width="100%" spacing={8} />
     </View>
   );
-}
+};
 
 export default CardSkeleton;

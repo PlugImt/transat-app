@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { QUERY_KEYS } from "@/lib/queryKeys";
-import { updatePassword } from "@/lib/user";
+import { updatePassword } from "@/api";
+import { QUERY_KEYS } from "@/constants";
 
-export function useChangePassword() {
+export const useChangePassword = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -11,4 +11,4 @@ export function useChangePassword() {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.user] });
     },
   });
-}
+};

@@ -1,6 +1,6 @@
 import type { NavigatorScreenParams } from "@react-navigation/core";
 import type { StackNavigationProp } from "@react-navigation/stack";
-import type { Homework } from "@/types/homework";
+import type { Homework } from "@/dto";
 
 export type StorageItemValue = string | object | null;
 
@@ -41,7 +41,7 @@ export type AppStackParamList = {
   Home: undefined;
   WashingMachine: undefined;
   Restaurant: undefined;
-  EmploiDuTemps: undefined;
+  Timetable: undefined;
   Homework: undefined;
   HomeworkDetails: { homework: Homework };
   Games: undefined;

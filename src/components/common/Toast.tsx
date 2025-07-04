@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { Animated, Text, View } from "react-native";
-
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils";
 
 const variants = {
   default: "bg-foreground",
@@ -33,14 +32,14 @@ interface ToastProps {
   showProgress?: boolean;
 }
 
-function Toast({
+const Toast = ({
   id,
   message,
   onHide,
   variant = "default",
   duration = 3000,
   showProgress = true,
-}: ToastProps) {
+}: ToastProps) => {
   const opacity = useRef(new Animated.Value(0)).current;
   const progress = useRef(new Animated.Value(0)).current;
 
@@ -100,7 +99,7 @@ function Toast({
       )}
     </Animated.View>
   );
-}
+};
 
 type ToastVariant = keyof typeof variants;
 
@@ -127,13 +126,13 @@ interface ToastContextProps {
 const ToastContext = createContext<ToastContextProps | undefined>(undefined);
 
 // TODO: refactor to pass position to Toast instead of ToastProvider
-function ToastProvider({
+const ToastProvider = ({
   children,
   position = "top",
 }: {
   children: React.ReactNode;
   position?: "top" | "bottom";
-}) {
+}) => {
   const [messages, setMessages] = useState<ToastMessage[]>([]);
 
   const toast: ToastContextProps["toast"] = (
@@ -183,14 +182,14 @@ function ToastProvider({
       </View>
     </ToastContext.Provider>
   );
-}
+};
 
-function useToast() {
+const useToast = () => {
   const context = useContext(ToastContext);
   if (!context) {
     throw new Error("useToast must be used within ToastProvider");
   }
   return context;
-}
+};
 
 export { ToastProvider, type ToastVariant, Toast, variants, useToast };

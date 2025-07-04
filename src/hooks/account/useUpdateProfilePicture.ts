@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { t } from "i18next";
-import { QUERY_KEYS } from "@/lib/queryKeys";
-import { updateProfilePicture } from "@/lib/user";
-import { uploadImage } from "@/lib/utils";
+import { updateProfilePicture } from "@/api";
+import { QUERY_KEYS } from "@/constants";
 import { storage } from "@/services/storage/asyncStorage";
+import { uploadImage } from "@/utils";
 
-export function useUpdateProfilePicture() {
+export const useUpdateProfilePicture = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -24,4 +24,4 @@ export function useUpdateProfilePicture() {
       queryClient.setQueryData([QUERY_KEYS.user], updatedUser);
     },
   });
-}
+};

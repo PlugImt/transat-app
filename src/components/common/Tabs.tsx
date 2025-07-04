@@ -1,8 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "@/contexts/ThemeContext";
-
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils";
 
 interface TabsContextProps {
   activeTab: string;
@@ -17,7 +16,7 @@ interface TabsProps {
   defaultValue: string;
   children: React.ReactNode;
 }
-function Tabs({ defaultValue, children }: TabsProps) {
+const Tabs = ({ defaultValue, children }: TabsProps) => {
   const [activeTab, setActiveTab] = useState(defaultValue);
 
   return (
@@ -25,19 +24,19 @@ function Tabs({ defaultValue, children }: TabsProps) {
       {children}
     </TabsContext.Provider>
   );
-}
+};
 
-function TabsList({
+const TabsList = ({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<typeof View>) {
+}: React.ComponentPropsWithoutRef<typeof View>) => {
   return (
     <View
       className={cn("flex flex-row justify-center gap-4", className)}
       {...props}
     />
   );
-}
+};
 
 interface TabsTriggerProps
   extends React.ComponentPropsWithoutRef<typeof TouchableOpacity> {
@@ -45,13 +44,13 @@ interface TabsTriggerProps
   title: string;
   textClasses?: string;
 }
-function TabsTrigger({
+const TabsTrigger = ({
   value,
   title,
   className,
   textClasses,
   ...props
-}: TabsTriggerProps) {
+}: TabsTriggerProps) => {
   const { activeTab, setActiveTab } = useContext(TabsContext);
   const { theme } = useTheme();
 
@@ -77,7 +76,7 @@ function TabsTrigger({
       </Text>
     </TouchableOpacity>
   );
-}
+};
 
 interface TabsContentProps extends React.ComponentPropsWithoutRef<typeof View> {
   value: string;

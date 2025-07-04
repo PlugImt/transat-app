@@ -6,7 +6,7 @@ interface DividerProps {
   className?: string;
 }
 
-export default function Divider({ label, className }: DividerProps) {
+export const Divider = ({ label, className }: DividerProps) => {
   const { theme } = useTheme();
 
   if (label) {
@@ -33,4 +33,4 @@ export default function Divider({ label, className }: DividerProps) {
       className={`h-px rounded-full w-full my-2 ${className || ""}`}
     />
   );
-}
+};

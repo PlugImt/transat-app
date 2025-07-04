@@ -3,7 +3,7 @@ import { Check } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ActivityIndicator, View } from "react-native";
-import Page from "@/components/common/Page";
+import { Page } from "@/components/common/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useUpdateLanguage } from "@/hooks/account/useUpdateLanguage";
 import i18n from "@/i18n";

@@ -2,6 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { GridIcon, LucideHome, Play, User } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
+import { Home } from "@/app/screens";
 import Account from "@/app/screens/account/Account";
 import EditProfile from "@/app/screens/account/EditAccount";
 import Feedback from "@/app/screens/account/Feedback";
@@ -14,19 +15,20 @@ import Legal from "@/app/screens/account/settings/Legal";
 import Notifications from "@/app/screens/account/settings/Notifications";
 import Settings from "@/app/screens/account/settings/Settings";
 import Statistics from "@/app/screens/account/settings/Statistics";
-import { Home } from "@/app/screens/Home";
-import { Clubs } from "@/app/screens/services/Clubs";
-import { EmploiDuTemps } from "@/app/screens/services/EmploiDuTemps";
-import Games from "@/app/screens/services/Games";
-import Homework from "@/app/screens/services/Homework";
-import { Olimtpe } from "@/app/screens/services/Olimtpe";
-import { Restaurant } from "@/app/screens/services/Restaurant";
+import {
+  Clubs,
+  Games,
+  Homework,
+  Olimtpe,
+  Restaurant,
+  Timetable,
+  Traq,
+  WashingMachines,
+} from "@/app/screens/services";
 import { Services } from "@/app/screens/services/Services";
-import { Traq } from "@/app/screens/services/Traq";
-import { WashingMachine } from "@/app/screens/services/WashingMachine";
-import HomeworkDetails from "@/components/custom/widget/homework/HomeworkDetails";
 import { useTheme } from "@/contexts/ThemeContext";
-import type { BottomTabParamList } from "@/types/navigation";
+import type { BottomTabParamList } from "@/types";
+import { HomeworkDetails } from "../custom/HomeworkDetails";
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -35,10 +37,10 @@ const HomeStack = createStackNavigator();
 const HomeStackScreen = () => (
   <HomeStack.Navigator screenOptions={{ headerShown: false }}>
     <HomeStack.Screen name="HomeScreen" component={Home} />
-    <ServicesStack.Screen name="WashingMachine" component={WashingMachine} />
+    <ServicesStack.Screen name="WashingMachine" component={WashingMachines} />
     <ServicesStack.Screen name="Restaurant" component={Restaurant} />
     <ServicesStack.Screen name="Olimtpe" component={Olimtpe} />
-    <ServicesStack.Screen name="EmploiDuTemps" component={EmploiDuTemps} />
+    <ServicesStack.Screen name="Timetable" component={Timetable} />
     <ServicesStack.Screen name="Homework" component={Homework} />
     <ServicesStack.Screen name="HomeworkDetails" component={HomeworkDetails} />
   </HomeStack.Navigator>
@@ -48,9 +50,9 @@ const ServicesStack = createStackNavigator();
 const ServicesStackScreen = () => (
   <ServicesStack.Navigator screenOptions={{ headerShown: false }}>
     <ServicesStack.Screen name="ServicesScreen" component={Services} />
-    <ServicesStack.Screen name="WashingMachine" component={WashingMachine} />
+    <ServicesStack.Screen name="WashingMachine" component={WashingMachines} />
     <ServicesStack.Screen name="Restaurant" component={Restaurant} />
-    <ServicesStack.Screen name="EmploiDuTemps" component={EmploiDuTemps} />
+    <ServicesStack.Screen name="Timetable" component={Timetable} />
     <ServicesStack.Screen name="Homework" component={Homework} />
     <ServicesStack.Screen name="HomeworkDetails" component={HomeworkDetails} />
     <ServicesStack.Screen name="Clubs" component={Clubs} />

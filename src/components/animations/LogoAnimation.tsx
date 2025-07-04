@@ -94,7 +94,7 @@ const LogoAnimation: React.FC<LogoAnimationProps> = ({
       <Animated.View style={[styles.container, animatedStyle]}>
         <Animated.Image
           source={require("@/assets/images/icon.png")}
-          style={[styles.icon, { width: 110, height: 110 }]}
+          style={[styles.icon]}
         />
       </Animated.View>
     </Pressable>
@@ -119,6 +119,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   icon: {
+    width: 110,
+    height: 110,
     resizeMode: "contain",
   },
 });

@@ -1,10 +1,11 @@
 import { Text, View } from "react-native";
 import { useTheme } from "@/contexts/ThemeContext";
-import type { Homework } from "@/types/homework";
+import type { Homework } from "@/dto";
 
-export function HomeworkWidgetItem({ homework }: { homework: Homework }) {
+export const HomeworkWidgetItem = ({ homework }: { homework: Homework }) => {
   const { theme } = useTheme();
 
+  // TODO: Relocate this function to date.utils
   const formatDateTime = (dateStr: Date | string) => {
     const date = new Date(dateStr);
     const day = date.toLocaleDateString(undefined, {
@@ -50,4 +51,4 @@ export function HomeworkWidgetItem({ homework }: { homework: Homework }) {
       </View>
     </View>
   );
-}
+};

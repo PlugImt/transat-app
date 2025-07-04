@@ -1,13 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { addNotification, getNotificationsState } from "@/lib/notification";
-import { QUERY_KEYS } from "@/lib/queryKeys";
+import { addNotification, getNotificationsState } from "@/api";
+import { QUERY_KEYS } from "@/constants";
+import { type NotificationType, NotificationTypeValues } from "@/dto";
 import { storage } from "@/services/storage/asyncStorage";
-import {
-  type NotificationType,
-  NotificationTypeValues,
-} from "@/types/notification";
 
-function useNotification() {
+const useNotification = () => {
   const queryClient = useQueryClient();
 
   /**
@@ -116,6 +113,6 @@ function useNotification() {
     toggleNotification: toggleNotification.mutate,
     isToggling: toggleNotification.isPending,
   };
-}
+};
 
 export default useNotification;

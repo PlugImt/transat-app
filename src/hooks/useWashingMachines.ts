@@ -1,22 +1,32 @@
 import { useQuery } from "@tanstack/react-query";
-import { QUERY_KEYS } from "@/lib/queryKeys";
-import { fetchWashingMachines } from "@/lib/washingMachine";
-import type { MachineData } from "@/types/washingMachine";
+import { fetchWashingMachines } from "@/api";
+import { QUERY_KEYS } from "@/constants";
+import type { MachineWithType } from "@/dto";
 
-export function useWashingMachines() {
-  const { data, isPending, isFetching, isError, error, refetch } = useQuery({
+export const useWashingMachines = () => {
+  const {
+    data = [],
+    isPending,
+    isFetching,
+    isError,
+    error,
+    refetch,
+  } = useQuery({
     queryFn: () => fetchWashingMachines(),
     queryKey: QUERY_KEYS.washingMachines,
+    initialData: [],
   });
 
   return {
-    data: data as
-      | (MachineData & { type: "WASHING MACHINE" | "DRYER" })[]
-      | undefined,
+    washingMachines: data.filter(
+      (machine: MachineWithType) => machine.type === "WASHING MACHINE",
+    ),
+    dryers: data.filter((machine: MachineWithType) => machine.type === "DRYER"),
+    isEmpty: data.length === 0,
     isPending,
     isFetching,
     isError,
     error,
     refetch,
   };
-}
+};

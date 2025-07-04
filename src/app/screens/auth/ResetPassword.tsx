@@ -13,7 +13,7 @@ import {
 import { z } from "zod";
 import { Button } from "@/components/common/Button";
 import Input from "@/components/common/Input";
-import Page from "@/components/common/Page";
+import { Page } from "@/components/common/Page";
 import { useToast } from "@/components/common/Toast";
 import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";

@@ -132,8 +132,8 @@ const WidgetCustomizationModal = ({
           return t("services.weather") || "Weather";
         case "restaurant":
           return t("services.restaurant.title");
-        case "emploiDuTemps":
-          return t("services.emploiDuTemps.title");
+        case "timetable":
+          return t("services.timetable.title");
         case "homework":
           return t("services.homework.title");
         case "washingMachine":
@@ -147,8 +147,8 @@ const WidgetCustomizationModal = ({
         return t("services.washingMachine.title");
       case "restaurant":
         return t("services.restaurant.title");
-      case "emploiDuTemps":
-        return t("services.emploiDuTemps.title");
+      case "timetable":
+        return t("services.timetable.title");
       case "homework":
         return t("services.homework.title");
       case "traq":

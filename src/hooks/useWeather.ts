@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { QUERY_KEYS } from "@/lib/queryKeys";
-import { fetchWeather } from "@/lib/weather";
+import { fetchWeather } from "@/api";
+import { QUERY_KEYS } from "@/constants";
 
 export const useWeather = () => {
   const { data, isPending, error, isError } = useQuery({

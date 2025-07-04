@@ -286,20 +286,24 @@
         "description": "菜单尚未更新。请稍后再查看。"
       }
     },
-    "emploiDuTemps": {
+    "timetable": {
       "title": "课程表",
-      "description": "课程表每天更新，以通知您即将进行的课程。",
-      "noData": "今天没有可用的数据",
-      "loading": "正在加载课程表...",
+      "description": "课程表每日更新，通知您即将开始的课程",
+      "about": "课程表每日更新，通知您即将开始的课程",
+      "additionalInfo": "如果您发现任何不一致之处，请使用反馈表告知我们",
+      "noData": "今天没有可用数据",
+      "loading": "正在加载课程表......",
+      "nextDay": "下一天",
+      "previousDay": "前一天",
       "noEdt": {
-        "title": "获取课程表时发生错误。",
-        "description": "请参考 PASS。"
+        "title": "在检索课程表时发生错误",
+        "description": "请参考 PASS."
       },
       "noCourses": {
-        "morningTitle": "今天早上没有安排课程",
-        "afternoonTitle": "今天下午没有安排课程",
-        "dayTitle": "今天没有安排课程",
-        "description": "请在 PASS 上查看。"
+        "morningTitle": "今天上午没有课程安排。",
+        "afternoonTitle": "今天下午没有课程安排。",
+        "dayTitle": "今天没有课程安排。",
+        "description": "请查阅 PASS。"
       }
     },
     "olimtpe": {

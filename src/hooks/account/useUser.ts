@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { QUERY_KEYS } from "@/lib/queryKeys";
-import { fetchUser } from "@/lib/user";
+import { fetchUser } from "@/api";
+import { QUERY_KEYS } from "@/constants";
 
 export const useUser = () => {
   const { data, isPending, error, isError } = useQuery({

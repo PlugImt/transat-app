@@ -28,21 +28,21 @@ export const useBottomSheet = () => {
 };
 
 // Composant qui déclenche l'ouverture du bottom sheet
-export function BottomSheetTrigger({
+export const BottomSheetTrigger = ({
   children,
 }: {
   children: React.ReactElement<{ onPress?: () => void }>;
-}) {
+}) => {
   const { handleBottomSheet } = useBottomSheet();
   return cloneElement(children, { onPress: () => handleBottomSheet(true) });
-}
+};
 
 // Provider qui gère l'état global du bottom sheet
-export function BottomSheetProvider({
+export const BottomSheetProvider = ({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}) => {
   const bottomSheetRef = useRef<BottomSheetModal>(null);
 
   const handleBottomSheet = (open: boolean) => {
@@ -58,10 +58,10 @@ export function BottomSheetProvider({
       {children}
     </BottomSheetContext.Provider>
   );
-}
+};
 
 // Composant principal du bottom sheet
-export function BottomSheet({ children }: { children: React.ReactNode }) {
+export const BottomSheet = ({ children }: { children: React.ReactNode }) => {
   const { bottomSheetRef, handleBottomSheet } = useBottomSheet();
   const { theme } = useTheme();
   const opacity = useSharedValue(0);
@@ -118,4 +118,4 @@ export function BottomSheet({ children }: { children: React.ReactNode }) {
       </GestureDetector>
     </BottomSheetModal>
   );
-}
+};

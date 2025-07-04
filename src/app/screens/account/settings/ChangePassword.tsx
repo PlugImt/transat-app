@@ -6,11 +6,11 @@ import { Keyboard } from "react-native";
 import { z } from "zod";
 import { Button } from "@/components/common/Button";
 import Input from "@/components/common/Input";
-import Page from "@/components/common/Page";
+import { Page } from "@/components/common/Page";
 import { useToast } from "@/components/common/Toast";
+import type { PasswordChange } from "@/dto";
 import { useChangePassword } from "@/hooks/account/useChangePassword";
 import { useUser } from "@/hooks/account/useUser";
-import type { Password } from "@/types/user";
 
 export const ChangePassword = () => {
   const { t } = useTranslation();
@@ -46,7 +46,7 @@ export const ChangePassword = () => {
     },
   });
 
-  const handleChangePassword = (data: Password) => {
+  const handleChangePassword = (data: PasswordChange) => {
     Keyboard.dismiss();
     changePassword(
       {

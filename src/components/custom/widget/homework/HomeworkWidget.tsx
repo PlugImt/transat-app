@@ -3,29 +3,19 @@ import type { StackNavigationProp } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "@/contexts/ThemeContext";
-import { useAuth } from "@/hooks/account/useAuth";
-import { useHomework } from "@/hooks/useHomework"; // à créer
+import type { Homework } from "@/dto";
+import { useHomework } from "@/hooks/useHomework";
 import type { AppStackParamList } from "@/services/storage/types";
-import type { Homework } from "@/types/homework";
 import { HomeworkWidgetItem } from "./HomeworkWidgetItem";
 import { HomeworkWidgetLoading } from "./HomeworkWidgetLoading";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
-export function HomeworkWidget() {
+export const HomeworkWidget = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const { user } = useAuth();
   const navigation = useNavigation<AppScreenNavigationProp>();
-
-  const { data: homeworks, isPending, error } = useHomework(user?.id_newf);
-
-  const upcomingHomeworks = homeworks
-    ?.filter((hw: Homework) => new Date(hw.deadline) >= new Date())
-    .sort(
-      (a: Homework, b: Homework) =>
-        new Date(a.deadline).getTime() - new Date(b.deadline).getTime(),
-    );
+  const { upcomingHomeworks, isPending, error } = useHomework();
 
   if (isPending) return <HomeworkWidgetLoading />;
 
@@ -57,4 +47,4 @@ export function HomeworkWidget() {
       </TouchableOpacity>
     </View>
   );
-}
+};

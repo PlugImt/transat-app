@@ -3,8 +3,9 @@ import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
 import { Button } from "@/components/common/Button";
-import Page from "@/components/common/Page";
+import { Page } from "@/components/common/Page";
 import { useTheme } from "@/contexts/ThemeContext";
+import { formatDate } from "@/utils";
 
 // Types for the statistics data
 interface UserStatistic {
@@ -101,16 +102,13 @@ export const Statistics = () => {
       }
 
       // Fetch global statistics
-      const globalResponse = await fetch(
-        `${API_BASE_URL}/api/statistics/global`,
-        {
-          method: "GET",
-          mode: "cors",
-          headers: {
-            Accept: "application/json",
-          },
+      const globalResponse = await fetch(`${API_BASE_URL}/statistics/global`, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          Accept: "application/json",
         },
-      );
+      });
 
       if (!globalResponse.ok) {
         throw new Error(
@@ -123,7 +121,7 @@ export const Statistics = () => {
 
       // Fetch top users statistics
       const topUsersResponse = await fetch(
-        `${API_BASE_URL}/api/statistics/top-users`,
+        `${API_BASE_URL}/statistics/top-users`,
         {
           method: "GET",
           mode: "cors",
@@ -151,19 +149,6 @@ export const Statistics = () => {
       );
     }
   }, [checkServerStatus]);
-
-  // Format date
-  const formatDate = (dateString: string) => {
-    const options: Intl.DateTimeFormatOptions = {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-    };
-    return new Date(dateString).toLocaleDateString(undefined, options);
-  };
 
   // Format email to display as "First Name + First Letter of Last Name"
   const formatEmail = (email: string) => {

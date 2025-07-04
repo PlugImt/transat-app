@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { updateLanguage } from "@/api";
+import { QUERY_KEYS } from "@/constants";
 import i18n from "@/i18n";
-import { QUERY_KEYS } from "@/lib/queryKeys";
-import { updateLanguage } from "@/lib/user";
 import { storage } from "@/services/storage/asyncStorage";
 import STORAGE_KEYS from "@/services/storage/constants";
 
-export function useUpdateLanguage() {
+export const useUpdateLanguage = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -19,4 +19,4 @@ export function useUpdateLanguage() {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.user] });
     },
   });
-}
+};

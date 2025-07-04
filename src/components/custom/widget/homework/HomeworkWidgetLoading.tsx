@@ -1,10 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity, View } from "react-native";
-import type { AppScreenNavigationProp } from "@/components/custom/widget/emploiDuTemps/EmploiDuTempsWidget";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
+import type { AppScreenNavigationProp } from "../TimetableWidget";
 
-export function HomeworkWidgetLoading() {
+export const HomeworkWidgetLoading = () => {
   const { theme } = useTheme();
   const navigation = useNavigation<AppScreenNavigationProp>();
 
@@ -44,4 +44,4 @@ export function HomeworkWidgetLoading() {
       </TouchableOpacity>
     </View>
   );
-}
+};

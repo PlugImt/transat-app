@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/apiRequest";
+import { API_ROUTES, apiRequest, Method } from "@/api";
 
 interface VerifyCodeParams {
   email: string;
@@ -10,9 +10,10 @@ export const useVerificationCode = () => {
   const verifyMutation = useMutation({
     mutationFn: async ({ email, verification_code }: VerifyCodeParams) => {
       return await apiRequest<{ token: string }>(
-        "/api/auth/verify-account",
-        "POST",
+        API_ROUTES.verifyAccount,
+        Method.POST,
         { email, verification_code },
+        {},
         true,
       );
     },
@@ -21,9 +22,10 @@ export const useVerificationCode = () => {
   const resendCodeMutation = useMutation({
     mutationFn: async (email: string) => {
       return await apiRequest(
-        "/api/auth/verification-code",
-        "POST",
+        API_ROUTES.verifyCode,
+        Method.POST,
         { email },
+        {},
         true,
       );
     },

@@ -3,7 +3,7 @@ import type { LucideIcon } from "lucide-react-native";
 import type React from "react";
 import { Text, TouchableOpacity, type View } from "react-native";
 import { useTheme } from "@/contexts/ThemeContext";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils";
 
 const badgeVariants = cva(
   "flex flex-row items-center rounded-xl justify-center",
@@ -59,7 +59,7 @@ export interface BadgeProps
   icon?: LucideIcon;
 }
 
-function Badge({
+const Badge = ({
   label,
   labelClasses,
   className,
@@ -68,7 +68,7 @@ function Badge({
   onPress,
   icon: Icon,
   ...props
-}: BadgeProps) {
+}: BadgeProps) => {
   const { theme } = useTheme();
   return (
     <TouchableOpacity
@@ -90,7 +90,7 @@ function Badge({
       </Text>
     </TouchableOpacity>
   );
-}
+};
 
 export default Badge;
 

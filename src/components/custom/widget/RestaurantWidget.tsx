@@ -6,18 +6,19 @@ import { useTranslation } from "react-i18next";
 import { Dimensions, Image, Text, TouchableOpacity, View } from "react-native";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
-import { useRestaurantMenu } from "@/hooks/useRestaurantMenu";
-import { isDinner, isLunch, isWeekend, outOfService } from "@/lib/utils";
+import { useMenuRestaurant } from "@/hooks/useMenuRestaurant";
 import type { AppStackParamList } from "@/services/storage/types";
+import { isDinner, isLunch, isWeekend, outOfService } from "@/utils";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
-export function RestaurantWidget() {
+export const RestaurantWidget = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
 
   const navigation = useNavigation<AppScreenNavigationProp>();
-  const { data: menu, isPending, error } = useRestaurantMenu();
+
+  const { menu, error, isPending } = useMenuRestaurant();
 
   const weekend: boolean = useMemo(() => isWeekend(), []);
   const lunch: boolean = useMemo(() => isLunch(), []);
@@ -285,7 +286,7 @@ export function RestaurantWidget() {
       ) : null}
     </View>
   );
-}
+};
 
 export default RestaurantWidget;
 

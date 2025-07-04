@@ -7,9 +7,9 @@ import {
   useEffect,
   useState,
 } from "react";
+import type { Loading, NotLoggedIn, User } from "@/dto";
 import { useAuthMutations } from "@/hooks/auth/useAuthMutations";
 import { useVerificationCode } from "@/hooks/auth/useVerificationCode";
-import type { Loading, NotLoggedIn, User } from "@/types/user";
 
 interface AuthContextType {
   user: User | null | undefined;

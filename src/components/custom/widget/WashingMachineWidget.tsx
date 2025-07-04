@@ -8,19 +8,16 @@ import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useWashingMachines } from "@/hooks/useWashingMachines";
 import type { AppStackParamList } from "@/services/storage/types";
-import type { MachineData } from "@/types/washingMachine";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
-export function WashingMachineWidget() {
+export const WashingMachineWidget = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<AppScreenNavigationProp>();
   const { theme } = useTheme();
 
-  const { data: rawData, isPending, isError, error } = useWashingMachines();
-  const data = rawData as
-    | (MachineData & { type: "WASHING MACHINE" | "DRYER" })[]
-    | undefined;
+  const { dryers, washingMachines, isPending, isError, error } =
+    useWashingMachines();
 
   const [totalWashers, setTotalWashers] = useState<number>(0);
   const [totalDryers, setTotalDryers] = useState<number>(0);
@@ -28,39 +25,20 @@ export function WashingMachineWidget() {
   const [availableDryers, setAvailableDryers] = useState<number>(0);
 
   useEffect(() => {
-    if (data) {
-      const washingMachines = data.filter(
-        (machine: MachineData & { type: "WASHING MACHINE" | "DRYER" }) =>
-          machine.type === "WASHING MACHINE",
-      );
-      const dryers = data.filter(
-        (machine: MachineData & { type: "WASHING MACHINE" | "DRYER" }) =>
-          machine.type === "DRYER",
-      );
+    setTotalWashers(washingMachines.length);
+    setTotalDryers(dryers.length);
 
-      setTotalWashers(washingMachines.length);
-      setTotalDryers(dryers.length);
-
-      setAvailableWashers(
-        washingMachines.filter(
-          (machine: MachineData & { type: "WASHING MACHINE" | "DRYER" }) =>
-            machine.available,
-        ).length,
-      );
-      setAvailableDryers(
-        dryers.filter(
-          (machine: MachineData & { type: "WASHING MACHINE" | "DRYER" }) =>
-            machine.available,
-        ).length,
-      );
-    }
-  }, [data]);
+    setAvailableWashers(
+      washingMachines.filter((washer) => washer.available).length,
+    );
+    setAvailableDryers(dryers.filter((dryer) => dryer.available).length);
+  }, [dryers, washingMachines]);
 
   if (isPending) {
     return <WashingMachineWidgetLoading />;
   }
 
-  if (isError || error || !data) {
+  if (isError || error || !dryers || !washingMachines) {
     return null;
   }
 
@@ -117,7 +95,7 @@ export function WashingMachineWidget() {
       </TouchableOpacity>
     </View>
   );
-}
+};
 
 export default WashingMachineWidget;
 

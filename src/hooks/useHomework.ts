@@ -9,7 +9,7 @@ export const useHomework = () => {
 
   const userId = user?.id_newf;
 
-  const { data, isPending, error } = useQuery({
+  const { data, isPending, refetch, isError, error } = useQuery({
     queryKey: [...QUERY_KEYS.homework, userId],
     queryFn: userId ? () => getHomeworks(userId) : skipToken,
     enabled: !!userId,
@@ -22,5 +22,5 @@ export const useHomework = () => {
         new Date(a.deadline).getTime() - new Date(b.deadline).getTime(),
     );
 
-  return { upcomingHomeworks, isPending, error };
+  return { data, upcomingHomeworks, isPending, error, refetch, isError };
 };

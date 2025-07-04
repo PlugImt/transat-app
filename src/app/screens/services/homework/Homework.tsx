@@ -15,6 +15,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import type { Homework as HomeworkType } from "@/dto";
 import useAuth from "@/hooks/account/useAuth";
 import { ErrorState, LoadingState } from "./components";
+import { useHomework } from "@/hooks/useHomework";
 
 export const Homework = () => {
   const { t, i18n } = useTranslation();
@@ -23,11 +24,7 @@ export const Homework = () => {
   const locale = i18n.language === "fr" ? fr : enUS;
 
   const userId = user?.id_newf;
-  const { data, isPending, refetch, error, isError } = useQuery({
-    queryKey: [...QUERY_KEYS.homework, userId],
-    queryFn: userId ? () => getHomeworks(userId) : skipToken,
-    enabled: !!userId,
-  });
+  const { data, isPending, refetch, error, isError } = useHomework();
 
   const [selectedSubject, setSelectedSubject] = useState<string>("");
   const [showDone, setShowDone] = useState<null | boolean>(null); // null = tous, true = faits, false = non faits

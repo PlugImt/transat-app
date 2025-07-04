@@ -47,6 +47,7 @@ export const useAuthMutations = () => {
           email,
           password,
         },
+        {},
         true,
       );
     },
@@ -71,6 +72,7 @@ export const useAuthMutations = () => {
           password,
           language,
         },
+        {},
         true,
       );
     },
@@ -110,6 +112,7 @@ export const useAuthMutations = () => {
         API_ROUTES.verifyCode,
         Method.POST,
         { email },
+        {},
         true,
       );
     },
@@ -127,6 +130,7 @@ export const useAuthMutations = () => {
         API_ROUTES.changePassword,
         Method.PATCH,
         data,
+        {},
         true,
       );
     },

@@ -6,11 +6,13 @@ import { storage } from "@/services/storage/asyncStorage";
 import { Method } from "../enums";
 import type { ApiMethod } from "../types";
 import { getApiInstance } from "./api-instance";
+import { AxiosRequestConfig } from "axios";
 
 export const apiRequest = async <T>(
   endpoint: string,
   method: ApiMethod = Method.GET,
   data?: unknown,
+  config: AxiosRequestConfig = {},
   isAnonymous = false,
 ): Promise<T> => {
   const token = await storage.get("token");
@@ -18,6 +20,7 @@ export const apiRequest = async <T>(
   if (!token && !isAnonymous) {
     throw new Error(t("account.noToken"));
   }
+  
 
   const api = await getApiInstance();
 
@@ -47,6 +50,7 @@ export const apiRequest = async <T>(
           url: endpoint,
           method,
           data,
+          ...config,
           headers,
         });
 

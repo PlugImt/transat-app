@@ -21,7 +21,7 @@ export const updateUser = async (data: UpdateUserPayload) => {
   return await apiRequest<UpdateUserPayload>(
     API_ROUTES.user,
     Method.PATCH,
-    data,
+    { ...data }, 
   );
 };
 

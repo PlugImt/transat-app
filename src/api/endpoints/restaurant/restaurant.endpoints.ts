@@ -1,15 +1,21 @@
 import i18n from "i18next";
 import { API_ROUTES, apiRequest, Method } from "@/api";
 import type { MenuData } from "@/dto";
+import { AxiosRequestConfig } from "axios";
 
 export const getRestaurant = async () => {
   const currentLanguage = i18n.language.toLowerCase();
 
-  const queryParams = new URLSearchParams();
-  queryParams.append("language", currentLanguage);
-
+  const config: AxiosRequestConfig = {
+    params: {
+      language: currentLanguage
+    }
+  }
+  
   return await apiRequest<MenuData>(
-    `${API_ROUTES.restaurant}?${queryParams.toString()}`,
+    `${API_ROUTES.restaurant}`,
     Method.GET,
+    {},
+    { ...config }
   );
 };

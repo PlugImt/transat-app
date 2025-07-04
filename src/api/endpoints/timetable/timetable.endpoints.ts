@@ -6,15 +6,14 @@ import type { Timetable } from "@/dto";
 import { toYYYYMMDD } from "@/utils";
 
 export const getTimetableToday = async (email: string): Promise<Timetable> => {
-  // retrieve the language from the local storage
   const currentLanguage = i18n.language.toLowerCase();
   const url = API_ROUTES.planning_today.replace(":email", email);
-  const queryParams = new URLSearchParams();
-  queryParams.append("language", currentLanguage);
-  return await apiRequest<Timetable>(
-    `${url}?${queryParams.toString()}`,
-    Method.GET,
-  );
+
+  return await apiRequest<Timetable>(url, Method.GET, {}, {
+    params: {
+      language: currentLanguage,
+    },
+  });
 };
 
 /**
@@ -49,13 +48,11 @@ export const getTimetableForWeek = async (
 
   const url = API_ROUTES.planning_week.replace(":email", email);
 
-  const queryParams = new URLSearchParams();
-  queryParams.append("start", startDate);
-  queryParams.append("end", endDate);
-  queryParams.append("language", currentLanguage);
-
-  return await apiRequest<Timetable>(
-    `${url}?${queryParams.toString()}`,
-    Method.GET,
-  );
+  return await apiRequest<Timetable>(url, Method.GET, {
+    params: {
+      start: startDate,
+      end: endDate,
+      language: currentLanguage,
+    },
+  });
 };

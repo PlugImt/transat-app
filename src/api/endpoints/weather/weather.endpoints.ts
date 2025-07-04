@@ -1,4 +1,4 @@
-import { API_ROUTES, apiRequest } from "@/api";
+import { API_ROUTES, apiRequest, Method } from "@/api";
 import type { WeatherData } from "@/dto";
 import i18n from "@/i18n";
 
@@ -10,8 +10,16 @@ interface WeatherResult {
 
 export const fetchWeather = async (): Promise<WeatherResult> => {
   const currentLanguage = i18n.language.toUpperCase();
+
   const data = await apiRequest<WeatherData>(
-    `${API_ROUTES.weather}?language=${currentLanguage}`,
+    API_ROUTES.weather,
+    Method.GET,
+    {},
+    {
+      params: {
+        language: currentLanguage,
+      },
+    },
   );
 
   return {

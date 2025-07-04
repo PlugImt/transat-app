@@ -20,24 +20,19 @@ export const getNotificationsState = async (
   services?: NotificationType[],
 ): Promise<boolean | NotificationType[]> => {
   try {
-    const queryParams = new URLSearchParams();
+    const params: Record<string, string | string[]> = {};
 
     if (service) {
-      queryParams.append("service", service.trim());
+      params.service = service.trim();
     } else if (services?.length) {
-      for (const s of services) {
-        queryParams.append("services", s.trim());
-      }
+      params.services = services.map((s) => s.trim());
     }
 
-    const queryString = queryParams.toString();
-    const fullUrl = queryString
-      ? `${API_ROUTES.notifications}?${queryString}`
-      : API_ROUTES.notifications;
-
     const response = await apiRequest<{ services: NotificationType[] }>(
-      fullUrl,
+      API_ROUTES.notifications,
       Method.GET,
+      {},
+      { params },
     );
 
     return service ? response.services.includes(service) : response.services;

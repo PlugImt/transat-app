@@ -13,6 +13,7 @@ export const useVerificationCode = () => {
         API_ROUTES.verifyAccount,
         Method.POST,
         { email, verification_code },
+        {},
         true,
       );
     },
@@ -24,6 +25,7 @@ export const useVerificationCode = () => {
         API_ROUTES.verifyCode,
         Method.POST,
         { email },
+        {},
         true,
       );
     },

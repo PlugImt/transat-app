@@ -18,11 +18,9 @@ export const updateLanguage = async (language: string) => {
 };
 
 export const updateUser = async (data: UpdateUserPayload) => {
-  return await apiRequest<UpdateUserPayload>(
-    API_ROUTES.user,
-    Method.PATCH,
-    { ...data }, 
-  );
+  return await apiRequest<UpdateUserPayload>(API_ROUTES.user, Method.PATCH, {
+    ...data,
+  });
 };
 
 export const updateProfilePicture = async (imageUrl: string) => {

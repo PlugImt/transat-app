@@ -271,7 +271,7 @@ export const Timetable = () => {
                   className="border-t"
                 />
               ))}
-              {filteredCourses?.map((cours: Course, i: number) => {
+              {filteredCourses?.map((cours: Course) => {
                 const startInMin = toMinutes(cours.start_time);
                 const endInMin = toMinutes(cours.end_time);
                 const baseInMin = START_HOUR * 60 - 14;

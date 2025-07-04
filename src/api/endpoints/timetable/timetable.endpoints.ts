@@ -9,11 +9,16 @@ export const getTimetableToday = async (email: string): Promise<Timetable> => {
   const currentLanguage = i18n.language.toLowerCase();
   const url = API_ROUTES.planning_today.replace(":email", email);
 
-  return await apiRequest<Timetable>(url, Method.GET, {}, {
-    params: {
-      language: currentLanguage,
+  return await apiRequest<Timetable>(
+    url,
+    Method.GET,
+    {},
+    {
+      params: {
+        language: currentLanguage,
+      },
     },
-  });
+  );
 };
 
 /**

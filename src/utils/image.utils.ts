@@ -38,7 +38,7 @@ export const uploadImage = async (): Promise<string> => {
       uri: image.uri,
       name: image.uri.split("/").pop() || "image.jpg",
       type: `image/${image.uri.split(".").pop()}` || "image/jpeg",
-    } as any);
+    } as unknown as Blob);
 
     const apiUrl = await getAPIUrl();
 

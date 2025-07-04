@@ -1,12 +1,12 @@
 import type { SpanStatus } from "@sentry/core";
 import { spanToTraceHeader } from "@sentry/core";
 import * as Sentry from "@sentry/react-native";
+import type { AxiosRequestConfig } from "axios";
 import { t } from "i18next";
 import { storage } from "@/services/storage/asyncStorage";
 import { Method } from "../enums";
 import type { ApiMethod } from "../types";
 import { getApiInstance } from "./api-instance";
-import { AxiosRequestConfig } from "axios";
 
 export const apiRequest = async <T>(
   endpoint: string,
@@ -20,7 +20,6 @@ export const apiRequest = async <T>(
   if (!token && !isAnonymous) {
     throw new Error(t("account.noToken"));
   }
-  
 
   const api = await getApiInstance();
 

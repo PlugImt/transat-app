@@ -21,7 +21,7 @@ export const userSchema = z.object({
   profile_picture: z.string().url().optional(),
   id_newf: z.number().optional(),
   total_newf: z.number().optional(),
-  password_updated_date: z.string().optional(),
+  password_updated_date: z.date().optional(),
   language: z.string().optional(),
   pass_id: z.number().optional(),
 });

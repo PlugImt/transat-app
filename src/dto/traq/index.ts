@@ -7,7 +7,7 @@ export const traqArticleSchema = z.object({
   limited: z.boolean(),
   alcohol: z.number(),
   outOfStock: z.boolean(),
-  creation_date: z.string(),
+  creation_date: z.date(),
   picture: z.string(),
   description: z.string(),
   price: z.number(),

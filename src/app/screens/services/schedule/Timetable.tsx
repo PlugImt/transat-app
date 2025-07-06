@@ -234,7 +234,10 @@ export const Timetable = () => {
                       <Text style={{ color: theme.text }}>{hour}h</Text>
                     </View>
                     {Array.from({ length: 3 }).map((_, i) => (
-                      <View key={i} style={{ height: HOUR_HEIGHT / 4 }}>
+                      <View
+                        key={i.toString()}
+                        style={{ height: HOUR_HEIGHT / 4 }}
+                      >
                         <Text style={{ color: theme.text }}>-</Text>
                       </View>
                     ))}
@@ -264,13 +267,16 @@ export const Timetable = () => {
                   />
                 </>
               )}
-              {Array.from({ length: TOTAL_HOURS }).map((_, index) => (
-                <View
-                  key={index}
-                  style={{ height: HOUR_HEIGHT, borderColor: theme.card }}
-                  className="border-t"
-                />
-              ))}
+              {Array.from({ length: TOTAL_HOURS }).map((_, index) => {
+                const hour = START_HOUR + index;
+                return (
+                  <View
+                    key={hour}
+                    style={{ height: HOUR_HEIGHT, borderColor: theme.card }}
+                    className="border-t"
+                  />
+                );
+              })}
               {filteredCourses?.map((cours: Course) => {
                 const startInMin = toMinutes(cours.start_time);
                 const endInMin = toMinutes(cours.end_time);

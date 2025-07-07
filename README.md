@@ -103,6 +103,13 @@ Merci à Sentry pour leur offre gratuite !
                 </a>
             </td>
             <td align="center">
+                <a href="https://github.com/anthony-eluecque">
+                    <img src="https://avatars.githubusercontent.com/u/95444282?v=4" width="100;" alt="anthony-eluecque"/>
+                    <br />
+                    <sub><b>Antho</b></sub>
+                </a>
+            </td>
+            <td align="center">
                 <a href="https://github.com/Enockii">
                     <img src="https://avatars.githubusercontent.com/u/98472937?v=4" width="100;" alt="Enockii"/>
                     <br />

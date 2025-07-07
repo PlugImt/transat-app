@@ -1,12 +1,15 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Image, Text, View } from "react-native";
+import {
+  LoadingState,
+  RestaurantMenu,
+} from "@/app/screens/services/restaurant/components";
 import { Page } from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useMenuRestaurant } from "@/hooks/useMenuRestaurant";
 import { getOpeningHoursData, isWeekend, outOfService } from "@/utils";
-import { LoadingState, RestaurantMenu } from "./components";
 
 export const Restaurant = () => {
   const { t } = useTranslation();

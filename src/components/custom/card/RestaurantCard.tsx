@@ -1,11 +1,13 @@
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
 import { Text, View } from "react-native";
+import { Star } from "@/components/common/Star";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
+import type { menuItemSchema } from "@/dto";
 
 interface CardProps {
   title: string;
-  meals?: string[];
+  meals?: (typeof menuItemSchema)[];
   icon: string;
 }
 
@@ -49,9 +51,21 @@ const RestaurantCard = ({ title, meals, icon }: CardProps) => {
 
       <View className="flex flex-col gap-4">
         {meals.map((item) => (
-          <Text key={item} style={{ color: theme.text }}>
-            {item}
-          </Text>
+            <View className="flex flex-row justify-between items-start gap-5" key={item.id}>
+              <Text
+                  key={item.id}
+                  style={{ color: theme.text }}
+                  className="flex-1"
+              >
+                {item.name}
+              </Text>
+              <Star
+                  max={5}
+                  value={item.average_rating}
+                  layout={"filled"}
+                  size={'default'}
+              />
+            </View>
         ))}
       </View>
     </View>

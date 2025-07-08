@@ -1,18 +1,19 @@
 import type { RouteProp } from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
 import { Star, Utensils } from "lucide-react-native";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { FlatList, Text, View } from "react-native";
+import { Alert, FlatList, Text, View } from "react-native";
 import { LoadingState } from "@/app/screens/services/restaurant/components";
 import { ReviewItem } from "@/app/screens/services/restaurant/components/MenuRating";
 import { Button } from "@/components/common/Button";
 import { Page } from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
 import { useTheme } from "@/contexts/ThemeContext";
-import { userMenuRating } from "@/hooks/useMenuRestaurant";
+import { userMenuRating, usePostRestaurantReview } from "@/hooks/useMenuRestaurant";
 import type { AppStackParamList } from "@/services/storage/types";
 import { getOpeningHoursData } from "@/utils";
+import { ReviewDialog } from '@/app/screens/services/restaurant/components/MenuReviewDialog/ReviewDialog';
 
 type RestaurantReviewsRouteProp = RouteProp<
   AppStackParamList,
@@ -25,6 +26,7 @@ export const RestaurantReviews = () => {
   const route = useRoute<RestaurantReviewsRouteProp>();
   const { id } = route.params;
   const openingHoursData = useMemo(() => getOpeningHoursData(t), [t]);
+  const [showReviewDialog, setShowReviewDialog] = useState(false);
 
   const {
     rating: reviewData,
@@ -33,6 +35,24 @@ export const RestaurantReviews = () => {
     isError,
     error,
   } = userMenuRating(id);
+
+  const postReviewMutation = usePostRestaurantReview(id);
+
+  const handleSubmitReview = async (rating: number, comment?: string) => {
+    try {
+      await postReviewMutation.mutateAsync({ rating, comment });
+      setShowReviewDialog(false);
+      Alert.alert(
+        t("common.success", "Succès"),
+        t("services.restaurant.reviews.reviewPosted", "Votre avis a été publié avec succès !"),
+      );
+    } catch (error) {
+      Alert.alert(
+        t("common.error", "Erreur"),
+        t("services.restaurant.reviews.reviewError", "Une erreur est survenue lors de la publication de votre avis."),
+      );
+    }
+  };
 
   if (isPending || !reviewData) {
     return <LoadingState />;
@@ -109,10 +129,7 @@ export const RestaurantReviews = () => {
             className="px-4 py-2"
             style={{ backgroundColor: "#E6D3B8", borderRadius: 8 }}
             labelClasses="text-sm"
-            onPress={() => {
-              // TODO: will be implemented in the future
-              console.log("Open rating modal");
-            }}
+            onPress={() => setShowReviewDialog(true)}
           />
         </View>
 
@@ -147,6 +164,13 @@ export const RestaurantReviews = () => {
           </View>
         )}
       </View>
+
+      <ReviewDialog
+        visible={showReviewDialog}
+        onClose={() => setShowReviewDialog(false)}
+        onSubmit={handleSubmitReview}
+        isLoading={postReviewMutation.isPending}
+      />
     </Page>
   );
 };

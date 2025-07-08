@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
-import { getRestaurant, getRestaurantRating } from "@/api";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getRestaurant, getRestaurantRating, postRestaurantReview } from "@/api";
 import { QUERY_KEYS } from "@/constants";
 
 export const useMenuRestaurant = () => {
@@ -43,4 +43,18 @@ export const userMenuRating = (id: number) => {
     error,
     isError,
   };
+};
+
+export const usePostRestaurantReview = (id: number) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ rating, comment }: { rating: number; comment?: string }) =>
+      postRestaurantReview(id, rating, comment),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [...QUERY_KEYS.restaurantRating, id],
+      });
+    },
+  });
 };

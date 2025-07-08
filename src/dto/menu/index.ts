@@ -16,6 +16,15 @@ export const menuDataSchema = z.object({
   updated_date: z.date(),
 });
 
+export const reviewSchema = z.object({
+  first_name: z.string(),
+  last_name: z.string(),
+  profile_picture: z.string().url().nullable(),
+  rating: z.number(),
+  comment: z.string(),
+  date: z.string(),
+});
+
 export const restaurantReviewSchema = z.object({
   id_restaurant_articles: z.number(),
   first_time_served: z.string().nullable(),
@@ -24,9 +33,10 @@ export const restaurantReviewSchema = z.object({
   average_rating: z.number().nullable(),
   total_ratings: z.number(),
   times_served: z.number(),
-  recent_reviews: z.array(z.any()).optional(), // TODO; Improve this 
+  recent_reviews: z.array(reviewSchema).optional(),
 });
 
 export type MenuData = z.infer<typeof menuDataSchema>;
 export type MenuItem = z.infer<typeof menuItemSchema>;
+export type Review = z.infer<typeof reviewSchema>;
 export type RestaurantReview = z.infer<typeof restaurantReviewSchema>;

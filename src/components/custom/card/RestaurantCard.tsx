@@ -1,11 +1,11 @@
-import { useNavigation } from '@react-navigation/native';
-import type { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from "@react-navigation/native";
+import type { StackNavigationProp } from "@react-navigation/stack";
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
 import { Text, TouchableOpacity, View } from "react-native";
 import { Star } from "@/components/common/Star";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
-import { MenuItem } from '@/dto';
+import type { MenuItem } from "@/dto";
 
 type NavigationProp = StackNavigationProp<{
   RestaurantReviews: { id: number };
@@ -61,7 +61,9 @@ const RestaurantCard = ({ title, meals, icon }: CardProps) => {
           <TouchableOpacity
             className="flex flex-row justify-between items-start gap-5"
             key={item.id}
-            onPress={() => navigation.navigate("RestaurantReviews", { id: item.id })}
+            onPress={() =>
+              navigation.navigate("RestaurantReviews", { id: item.id })
+            }
           >
             <Text
               key={item.id}

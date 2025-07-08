@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { getRestaurant, getRestaurantRating } from '@/api';
+import { getRestaurant, getRestaurantRating } from "@/api";
 import { QUERY_KEYS } from "@/constants";
-import type { RestaurantReview } from '@/dto';
 
 export const useMenuRestaurant = () => {
   const {

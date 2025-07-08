@@ -22,7 +22,7 @@ export const getRestaurant = async () => {
 
 export const getRestaurantRating = async (id: number) => {
   return await apiRequest<RestaurantReview>(
-    API_ROUTES.restaurantRating.replace(':id', id.toString()),
+    API_ROUTES.restaurantRating.replace(":id", id.toString()),
     Method.GET,
   );
 };

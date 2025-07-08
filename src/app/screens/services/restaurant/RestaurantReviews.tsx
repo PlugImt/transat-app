@@ -1,20 +1,23 @@
 import type { RouteProp } from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
+import { Star, Utensils } from "lucide-react-native";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { Image, Text, View } from "react-native";
-import {
-  LoadingState,
-  RestaurantMenu,
-} from "@/app/screens/services/restaurant/components";
+import { FlatList, Text, View } from "react-native";
+import { LoadingState } from "@/app/screens/services/restaurant/components";
+import { ReviewItem } from "@/app/screens/services/restaurant/components/MenuRating";
+import { Button } from "@/components/common/Button";
 import { Page } from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
 import { useTheme } from "@/contexts/ThemeContext";
-import { useMenuRestaurant, userMenuRating } from '@/hooks/useMenuRestaurant';
+import { userMenuRating } from "@/hooks/useMenuRestaurant";
 import type { AppStackParamList } from "@/services/storage/types";
-import { getOpeningHoursData, isWeekend, outOfService } from "@/utils";
+import { getOpeningHoursData } from "@/utils";
 
-type RestaurantReviewsRouteProp = RouteProp<AppStackParamList, "RestaurantReviews">;
+type RestaurantReviewsRouteProp = RouteProp<
+  AppStackParamList,
+  "RestaurantReviews"
+>;
 
 export const RestaurantReviews = () => {
   const { t } = useTranslation();
@@ -23,7 +26,13 @@ export const RestaurantReviews = () => {
   const { id } = route.params;
   const openingHoursData = useMemo(() => getOpeningHoursData(t), [t]);
 
-  const { rating: reviewData, isPending, refetch, isError, error } = userMenuRating(id);
+  const {
+    rating: reviewData,
+    isPending,
+    refetch,
+    isError,
+    error,
+  } = userMenuRating(id);
 
   if (isPending || !reviewData) {
     return <LoadingState />;
@@ -53,6 +62,9 @@ export const RestaurantReviews = () => {
     );
   }
 
+  const averageRating = reviewData.average_rating || 0;
+  const totalReviews = reviewData.total_ratings;
+
   return (
     <Page
       refreshing={isPending}
@@ -70,55 +82,71 @@ export const RestaurantReviews = () => {
         />
       }
     >
-        <View className="flex flex-col gap-6 p-4">
-          <View className="flex flex-col gap-2">
-            <Text className="text-2xl font-bold" style={{ color: theme.text }}>
+      <View className="flex flex-col gap-6">
+        <View className="flex flex-row justify-between items-start">
+          <View className="flex-1 flex-col mr-3">
+            <Text
+              className="text-2xl font-bold flex-wrap"
+              style={{ color: theme.text }}
+            >
               {reviewData.name}
             </Text>
-            <Text className="text-sm" style={{ color: theme.textSecondary }}>
-              {t("services.restaurant.reviews.menuItem", "Menu Item ID:")} {id}
-            </Text>
-          </View>
-
-          <View className="flex flex-col gap-4">
-            <Text className="text-xl font-semibold" style={{ color: theme.text }}>
-              {t("services.restaurant.reviews.title", "Rating & Reviews")}
-            </Text>
-            
-            <View className="flex flex-row items-center gap-3">
-              <Text className="text-3xl font-bold" style={{ color: theme.primary }}>
-                {reviewData.average_rating ? reviewData.average_rating.toFixed(1) : "N/A"}
+            <View className="flex flex-row items-center gap-2 mt-1">
+              <Utensils size={16} color={theme.textSecondary} />
+              <Text
+                className="text-sm flex-wrap"
+                style={{ color: theme.textSecondary }}
+                numberOfLines={2}
+              >
+                {reviewData.times_served} services
               </Text>
-              <View className="flex flex-col">
-                <Text className="text-base" style={{ color: theme.text }}>
-                  / 5.0
-                </Text>
-                <Text className="text-sm" style={{ color: theme.textSecondary }}>
-                  {reviewData.total_ratings} {t("services.restaurant.reviews.ratings", "ratings")}
-                </Text>
-              </View>
-            </View>
-
-            <View className="flex flex-col gap-2">
-              <Text className="text-base font-medium" style={{ color: theme.text }}>
-                {t("services.restaurant.reviews.servingInfo", "Serving Information")}
-              </Text>
-              <Text className="text-sm" style={{ color: theme.textSecondary }}>
-                {t("services.restaurant.reviews.timesServed", "Times served:")} {reviewData.times_served}
-              </Text>
-              {reviewData.first_time_served && (
-                <Text className="text-sm" style={{ color: theme.textSecondary }}>
-                  {t("services.restaurant.reviews.firstServed", "First served:")} {new Date(reviewData.first_time_served).toLocaleDateString()}
-                </Text>
-              )}
-              {reviewData.last_time_served && (
-                <Text className="text-sm" style={{ color: theme.textSecondary }}>
-                  {t("services.restaurant.reviews.lastServed", "Last served:")} {new Date(reviewData.last_time_served).toLocaleDateString()}
-                </Text>
-              )}
             </View>
           </View>
+
+          <Button
+            label={t("services.restaurant.reviews.rate", "Noter")}
+            size="sm"
+            className="px-4 py-2"
+            style={{ backgroundColor: "#E6D3B8", borderRadius: 8 }}
+            labelClasses="text-sm"
+            onPress={() => {
+              // TODO: will be implemented in the future
+              console.log("Open rating modal");
+            }}
+          />
         </View>
+
+        {/* Overall Rating */}
+        <View className="flex flex-row items-center gap-3">
+          <Star size={20} color={theme.text} fill={theme.text} />
+          <Text className="text-xl font-bold" style={{ color: theme.text }}>
+            {averageRating.toFixed(1)} • {totalReviews} avis
+          </Text>
+        </View>
+
+        {/* Reviews List */}
+        {reviewData.recent_reviews && reviewData.recent_reviews.length > 0 ? (
+          <FlatList
+            data={reviewData.recent_reviews}
+            keyExtractor={(_, index) => `review-${index}`}
+            renderItem={({ item }) => <ReviewItem review={item} />}
+            scrollEnabled={false}
+            showsVerticalScrollIndicator={false}
+          />
+        ) : (
+          <View className="flex items-center justify-center py-8">
+            <Text
+              className="text-center"
+              style={{ color: theme.textSecondary }}
+            >
+              {t(
+                "services.restaurant.reviews.noReviews",
+                "Aucun avis pour le moment",
+              )}
+            </Text>
+          </View>
+        )}
+      </View>
     </Page>
   );
 };

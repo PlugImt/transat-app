@@ -12,7 +12,7 @@ const colors = {
     muted: "#6B7280",
     border: "#E5E7EB",
     backdrop: "rgba(112,117,129,0.05)",
-    overlay: "f5f4f2E5",
+    overlay: "#f5f4f2E5",
     errorBackground: "#F4433620",
   },
   dark: {

@@ -1,18 +1,18 @@
 const colors = {
   light: {
-    background: "#FFFFFF",
+    background: "#f5f4f2",
     text: "#1A1A1A",
     textSecondary: "#6B7280",
     textTertiary: "#9CA3AF",
     foregroundPlaceholder: "#D1D5DB",
-    card: "#f5f4f2",
+    card: "#FFFFFF",
     input: "#e3e3e3",
     primary: "#ec7f32",
     secondary: "#0049a8",
     muted: "#6B7280",
     border: "#E5E7EB",
     backdrop: "rgba(112,117,129,0.05)",
-    overlay: "#FFFFFFE5",
+    overlay: "f5f4f2E5",
     errorBackground: "#F4433620",
   },
   dark: {

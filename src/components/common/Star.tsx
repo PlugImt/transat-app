@@ -40,7 +40,7 @@ const Star = ({
 
   const getStarColor = (isFilled: boolean) => {
     if (value === 0) return theme.textSecondary;
-    if (isDisabled) return theme.textSecondary;
+    // if (isDisabled) return theme.textSecondary;
     return isFilled ? theme.primary : theme.textSecondary;
   };
 

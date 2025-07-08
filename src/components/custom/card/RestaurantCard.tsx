@@ -1,18 +1,25 @@
+import { useNavigation } from '@react-navigation/native';
+import type { StackNavigationProp } from '@react-navigation/stack';
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { Star } from "@/components/common/Star";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
-import type { menuItemSchema } from "@/dto";
+import { MenuItem } from '@/dto';
+
+type NavigationProp = StackNavigationProp<{
+  RestaurantReviews: { id: number };
+}>;
 
 interface CardProps {
   title: string;
-  meals?: (typeof menuItemSchema)[];
+  meals?: MenuItem[];
   icon: string;
 }
 
 const RestaurantCard = ({ title, meals, icon }: CardProps) => {
   const { theme } = useTheme();
+  const navigation = useNavigation<NavigationProp>();
 
   const getIcon = () => {
     switch (icon) {
@@ -51,21 +58,26 @@ const RestaurantCard = ({ title, meals, icon }: CardProps) => {
 
       <View className="flex flex-col gap-4">
         {meals.map((item) => (
-            <View className="flex flex-row justify-between items-start gap-5" key={item.id}>
-              <Text
-                  key={item.id}
-                  style={{ color: theme.text }}
-                  className="flex-1"
-              >
-                {item.name}
-              </Text>
-              <Star
-                  max={5}
-                  value={item.average_rating}
-                  layout={"filled"}
-                  size={'default'}
-              />
-            </View>
+          <TouchableOpacity
+            className="flex flex-row justify-between items-start gap-5"
+            key={item.id}
+            onPress={() => navigation.navigate("RestaurantReviews", { id: item.id })}
+          >
+            <Text
+              key={item.id}
+              style={{ color: theme.text }}
+              className="flex-1"
+            >
+              {item.name}
+            </Text>
+            <Star
+              max={5}
+              value={item.average_rating || 0}
+              layout={"filled"}
+              size={"default"}
+              disabled
+            />
+          </TouchableOpacity>
         ))}
       </View>
     </View>

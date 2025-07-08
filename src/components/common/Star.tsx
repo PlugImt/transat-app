@@ -20,6 +20,8 @@ interface StarProps extends ComponentPropsWithoutRef<typeof TouchableOpacity> {
   size?: StarSize;
   layout?: Layout;
   showValue?: boolean;
+  mode?: "display" | "review";
+  onRatingChange?: (rating: number) => void;
   onPress?: () => void;
 }
 
@@ -31,12 +33,20 @@ const Star = ({
   size = "default",
   layout = "split",
   showValue = true,
+  mode = "display",
+  onRatingChange,
   ...props
 }: StarProps) => {
   const { theme } = useTheme();
 
   const isDisabled = props.disabled;
   const starSize = size === "lg" ? 24 : size === "sm" ? 16 : 20;
+
+  const handleStarPress = (starIndex: number) => {
+    if (mode === "review" && onRatingChange && !isDisabled) {
+      onRatingChange(starIndex + 1);
+    }
+  };
 
   const getStarColor = (isFilled: boolean) => {
     if (value === 0) return theme.textSecondary;
@@ -74,6 +84,31 @@ const Star = ({
   };
 
   const renderSplitLayout = () => {
+    if (mode === "review") {
+      return (
+        <View className="flex-row">
+          {Array.from({ length: max }).map((_, index) => {
+            const isFilled = index < value;
+            return (
+              <TouchableOpacity
+                key={`review-star-${index}`}
+                onPress={() => handleStarPress(index)}
+                disabled={isDisabled}
+                style={{ marginRight: 2 }}
+              >
+                <LucidStar
+                  size={starSize}
+                  color={isFilled ? theme.primary : theme.textSecondary}
+                  fill={isFilled ? theme.primary : "transparent"}
+                />
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+      );
+    }
+
+    // Original display mode logic
     const fullStars = Math.floor(value);
     const hasHalfStar = value % 1 !== 0;
     const emptyStars = max - Math.ceil(value);
@@ -127,6 +162,19 @@ const Star = ({
       </View>
     );
   };
+
+  if (mode === "review") {
+    return (
+      <View className={`flex-row items-center ${className}`}>
+        {showValue && (
+          <Text className="mr-2" style={{ color: theme.primary }}>
+            {value}/{max}
+          </Text>
+        )}
+        {layout === "filled" ? renderFilledLayout() : renderSplitLayout()}
+      </View>
+    );
+  }
 
   return (
     <TouchableOpacity

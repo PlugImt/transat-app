@@ -6,14 +6,17 @@ import { useTranslation } from "react-i18next";
 import { Alert, FlatList, Text, View } from "react-native";
 import { LoadingState } from "@/app/screens/services/restaurant/components";
 import { ReviewItem } from "@/app/screens/services/restaurant/components/MenuRating";
+import { ReviewDialog } from "@/app/screens/services/restaurant/components/MenuReviewDialog/ReviewDialog";
 import { Button } from "@/components/common/Button";
 import { Page } from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
 import { useTheme } from "@/contexts/ThemeContext";
-import { userMenuRating, usePostRestaurantReview } from "@/hooks/useMenuRestaurant";
+import {
+  usePostRestaurantReview,
+  userMenuRating,
+} from "@/hooks/useMenuRestaurant";
 import type { AppStackParamList } from "@/services/storage/types";
 import { getOpeningHoursData } from "@/utils";
-import { ReviewDialog } from '@/app/screens/services/restaurant/components/MenuReviewDialog/ReviewDialog';
 
 type RestaurantReviewsRouteProp = RouteProp<
   AppStackParamList,
@@ -44,12 +47,18 @@ export const RestaurantReviews = () => {
       setShowReviewDialog(false);
       Alert.alert(
         t("common.success", "Succès"),
-        t("services.restaurant.reviews.reviewPosted", "Votre avis a été publié avec succès !"),
+        t(
+          "services.restaurant.reviews.reviewPosted",
+          "Votre avis a été publié avec succès !",
+        ),
       );
-    } catch (error) {
+    } catch (_error) {
       Alert.alert(
         t("common.error", "Erreur"),
-        t("services.restaurant.reviews.reviewError", "Une erreur est survenue lors de la publication de votre avis."),
+        t(
+          "services.restaurant.reviews.reviewError",
+          "Une erreur est survenue lors de la publication de votre avis.",
+        ),
       );
     }
   };

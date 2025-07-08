@@ -91,7 +91,7 @@ const Star = ({
             const isFilled = index < value;
             return (
               <TouchableOpacity
-                key={`review-star-${index}`}
+                key={`review-star-${index.toString()}`}
                 onPress={() => handleStarPress(index)}
                 disabled={isDisabled}
                 style={{ marginRight: 2 }}

@@ -54,7 +54,10 @@ const ServicesStackScreen = () => (
     <ServicesStack.Screen name="ServicesScreen" component={Services} />
     <ServicesStack.Screen name="WashingMachine" component={WashingMachines} />
     <ServicesStack.Screen name="Restaurant" component={Restaurant} />
-    <ServicesStack.Screen name="RestaurantReviews" component={RestaurantReviews} />
+    <ServicesStack.Screen
+      name="RestaurantReviews"
+      component={RestaurantReviews}
+    />
     <ServicesStack.Screen name="Timetable" component={Timetable} />
     <ServicesStack.Screen name="Homework" component={Homework} />
     <ServicesStack.Screen name="HomeworkDetails" component={HomeworkDetails} />

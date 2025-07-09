@@ -59,7 +59,15 @@
     "credits": "Credits",
     "underConstruction": "In Bearbeitung 🏗️",
     "underConstructionDesc": "Wir arbeiten hart daran, Ihnen diese neue Funktion so schnell wie möglich zur Verfügung zu stellen. Bleiben Sie dran!",
-    "refresh": "Aktualisieren"
+    "refresh": "Aktualisieren",
+    "timeAgo": {
+      "now": "gerade eben",
+      "minutes": "vor {{count}} Minute{{count, plural, one {} other {n}}}",
+      "hours": "vor {{count}} Stunde{{count, plural, one {} other {n}}}",
+      "days": "vor {{count}} Tag{{count, plural, one {} other {en}}}",
+      "months": "vor {{count}} Monat{{count, plural, one {} other {en}}}",
+      "years": "vor {{count}} Jahr{{count, plural, one {} other {en}}}"
+    }
   },
   "settings": {
     "settings": "Einstellungen",

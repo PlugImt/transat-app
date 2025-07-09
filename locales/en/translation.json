@@ -44,6 +44,14 @@
     "clearAll": "Clear",
     "filter": "Filter",
     "refresh": "Refresh",
+    "timeAgo": {
+      "now": "just now",
+      "minutes": "{{count}} minute{{count, plural, one {} other {s}}} ago",
+      "hours": "{{count}} hour{{count, plural, one {} other {s}}} ago",
+      "days": "{{count}} day{{count, plural, one {} other {s}}} ago",
+      "months": "{{count}} month{{count, plural, one {} other {s}}} ago",
+      "years": "{{count}} year{{count, plural, one {} other {s}}} ago"
+    },
     "days": {
       "monday": "Monday",
       "tuesday": "Tuesday",

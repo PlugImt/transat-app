@@ -302,6 +302,8 @@
       "reviews": {
         "rate": "Noter",
         "noReviews": "Aucun avis pour le moment",
+        "noReviewsTitle": "Aucune note n'a été donnée à ce plat",
+        "noReviewsSubtitle": "Sois le premier à le noter!",
         "servicesCount": "{{count}} services",
         "averageRating": "{{rating}} • {{count}} avis",
         "dialog": {

@@ -301,6 +301,8 @@
       "reviews": {
         "rate": "评价",
         "noReviews": "暂无评价",
+        "noReviewsTitle": "这道菜还没有评价",
+        "noReviewsSubtitle": "成为第一个评价的人！",
         "servicesCount": "{{count}} 个服务",
         "averageRating": "{{rating}} • {{count}} 条评价",
         "dialog": {

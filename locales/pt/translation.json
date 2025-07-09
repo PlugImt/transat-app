@@ -301,6 +301,8 @@
       "reviews": {
         "rate": "Avaliar",
         "noReviews": "Ainda não há avaliações",
+        "noReviewsTitle": "Nenhuma avaliação foi dada a este prato",
+        "noReviewsSubtitle": "Seja o primeiro a avaliá-lo!",
         "servicesCount": "{{count}} serviços",
         "averageRating": "{{rating}} • {{count}} avaliações",
         "dialog": {

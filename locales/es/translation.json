@@ -301,6 +301,8 @@
       "reviews": {
         "rate": "Calificar",
         "noReviews": "Aún no hay reseñas",
+        "noReviewsTitle": "No se ha dado ninguna calificación a este plato",
+        "noReviewsSubtitle": "¡Sé el primero en calificarlo!",
         "servicesCount": "{{count}} servicios",
         "averageRating": "{{rating}} • {{count}} reseñas",
         "dialog": {

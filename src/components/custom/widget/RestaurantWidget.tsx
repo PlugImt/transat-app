@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
-import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
+import { Beef, ChefHat, Soup, Star, Vegan } from "lucide-react-native";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Dimensions, Image, Text, TouchableOpacity, View } from "react-native";
@@ -8,9 +8,39 @@ import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useMenuRestaurant } from "@/hooks/useMenuRestaurant";
 import type { AppStackParamList } from "@/services/storage/types";
+import type { MenuItem } from "@/dto";
 import { isDinner, isLunch, isWeekend, outOfService } from "@/utils";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
+
+const MenuItemCard = ({ item }: { item: MenuItem }) => {
+  const { theme } = useTheme();
+  const navigation = useNavigation<AppScreenNavigationProp>();
+
+  const handlePress = () => {
+    navigation.navigate("RestaurantReviews", { id: item.id });
+  };
+
+  return (
+    <TouchableOpacity
+      onPress={handlePress}
+      className="flex flex-row items-center justify-between py-2"
+      activeOpacity={0.7}
+    >
+      <Text style={{ color: theme.text }} className="flex-1">
+        {item.name}
+      </Text>
+      {item.average_rating && (
+        <View className="flex flex-row items-center gap-1 ml-2">
+          <Star size={12} color="#FFD700" fill="#FFD700" />
+          <Text style={{ color: theme.textSecondary }} className="text-xs">
+            {item.average_rating.toFixed(1)}
+          </Text>
+        </View>
+      )}
+    </TouchableOpacity>
+  );
+};
 
 export const RestaurantWidget = () => {
   const { t } = useTranslation();
@@ -24,16 +54,29 @@ export const RestaurantWidget = () => {
   const lunch: boolean = useMemo(() => isLunch(), []);
   const dinner: boolean = useMemo(() => isDinner(), []);
   const outOfHours: boolean = useMemo(
-    () => (menu?.updated_date ? outOfService(menu.updated_date) : false),
+    () => (menu?.updated_date ? outOfService(menu.updated_date.toISOString()) : false),
     [menu?.updated_date],
   );
-  const updatedToday: boolean = useMemo(
-    () =>
-      menu?.updated_date
-        ? new Date(menu.updated_date).getDay() === new Date().getDay()
-        : true,
-    [menu?.updated_date],
-  ); // TODO: fix this because the menu date is undefined/NaN so it's never displayed
+  const updatedToday: boolean = useMemo(() => {
+    if (!menu?.updated_date) {
+      return false; // If no date available, assume not updated today
+    }
+
+    const menuDate = new Date(menu.updated_date);
+    const today = new Date();
+    
+    // Check if the dates are valid
+    if (isNaN(menuDate.getTime()) || isNaN(today.getTime())) {
+      return false;
+    }
+
+    // Compare year, month, and day
+    return (
+      menuDate.getFullYear() === today.getFullYear() &&
+      menuDate.getMonth() === today.getMonth() &&
+      menuDate.getDate() === today.getDate()
+    );
+  }, [menu?.updated_date]);
 
   const title =
     !weekend && lunch
@@ -166,9 +209,7 @@ export const RestaurantWidget = () => {
                     </View>
 
                     {menu.grilladesMidi.map((item) => (
-                      <Text key={item} style={{ color: theme.text }}>
-                        {item}
-                      </Text>
+                      <MenuItemCard key={item.id} item={item} />
                     ))}
                   </View>
                 )}
@@ -187,9 +228,7 @@ export const RestaurantWidget = () => {
                     </View>
 
                     {menu.migrateurs.map((item) => (
-                      <Text key={item} style={{ color: theme.text }}>
-                        {item}
-                      </Text>
+                      <MenuItemCard key={item.id} item={item} />
                     ))}
                   </View>
                 )}
@@ -208,9 +247,7 @@ export const RestaurantWidget = () => {
                     </View>
 
                     {menu.cibo.map((item) => (
-                      <Text key={item} style={{ color: theme.text }}>
-                        {item}
-                      </Text>
+                      <MenuItemCard key={item.id} item={item} />
                     ))}
                   </View>
                 )}
@@ -229,9 +266,7 @@ export const RestaurantWidget = () => {
                     </View>
 
                     {menu.accompMidi.map((item) => (
-                      <Text key={item} style={{ color: theme.text }}>
-                        {item}
-                      </Text>
+                      <MenuItemCard key={item.id} item={item} />
                     ))}
                   </View>
                 )}
@@ -252,9 +287,7 @@ export const RestaurantWidget = () => {
                     </View>
 
                     {menu.grilladesSoir.map((item) => (
-                      <Text key={item} style={{ color: theme.text }}>
-                        {item}
-                      </Text>
+                      <MenuItemCard key={item.id} item={item} />
                     ))}
                   </View>
                 )}
@@ -273,9 +306,7 @@ export const RestaurantWidget = () => {
                     </View>
 
                     {menu.accompSoir.map((item) => (
-                      <Text key={item} style={{ color: theme.text }}>
-                        {item}
-                      </Text>
+                      <MenuItemCard key={item.id} item={item} />
                     ))}
                   </View>
                 )}

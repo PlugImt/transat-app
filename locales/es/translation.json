@@ -59,7 +59,15 @@
     "credits": "Créditos",
     "underConstruction": "En construcción 🏗️",
     "underConstructionDesc": "Estamos trabajando duro para ofrecerte esta nueva función lo antes posible. ¡Mantente atento!",
-    "refresh": "Actualizar"
+    "refresh": "Actualizar",
+    "timeAgo": {
+      "now": "ahora mismo",
+      "minutes": "hace {{count}} minuto{{count, plural, one {} other {s}}}",
+      "hours": "hace {{count}} hora{{count, plural, one {} other {s}}}",
+      "days": "hace {{count}} día{{count, plural, one {} other {s}}}",
+      "months": "hace {{count}} mes{{count, plural, one {} other {es}}}",
+      "years": "hace {{count}} año{{count, plural, one {} other {s}}}"
+    }
   },
   "settings": {
     "settings": "Configuración",

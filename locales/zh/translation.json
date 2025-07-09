@@ -59,7 +59,15 @@
     "credits": "荣誉",
     "underConstruction": "施工中 🏗️",
     "underConstructionDesc": "我们正在努力尽快为您带来此新功能。敬请关注！",
-    "refresh": "刷新"
+    "refresh": "刷新",
+    "timeAgo": {
+      "now": "刚刚",
+      "minutes": "{{count}}分钟前",
+      "hours": "{{count}}小时前",
+      "days": "{{count}}天前",
+      "months": "{{count}}个月前",
+      "years": "{{count}}年前"
+    }
   },
   "settings": {
     "settings": "设置",

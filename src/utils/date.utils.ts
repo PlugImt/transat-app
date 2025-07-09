@@ -78,35 +78,35 @@ export const getWeekId = (d: Date): string => {
 /**
  * Returns a human-readable "time ago" string for a given date
  */
-export const getTimeAgo = (dateString: string): string => {
+export const getTimeAgo = (dateString: string, t: (key: string, options?: any) => string): string => {
   const now = new Date();
   const date = new Date(dateString);
   const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
 
   if (diffInSeconds < 60) {
-    return "à l'instant";
+    return t("common.timeAgo.now");
   }
 
   const diffInMinutes = Math.floor(diffInSeconds / 60);
   if (diffInMinutes < 60) {
-    return `il y a ${diffInMinutes} minute${diffInMinutes > 1 ? "s" : ""}`;
+    return t("common.timeAgo.minutes", { count: diffInMinutes });
   }
 
   const diffInHours = Math.floor(diffInMinutes / 60);
   if (diffInHours < 24) {
-    return `il y a ${diffInHours} heure${diffInHours > 1 ? "s" : ""}`;
+    return t("common.timeAgo.hours", { count: diffInHours });
   }
 
   const diffInDays = Math.floor(diffInHours / 24);
   if (diffInDays < 30) {
-    return `il y a ${diffInDays} jour${diffInDays > 1 ? "s" : ""}`;
+    return t("common.timeAgo.days", { count: diffInDays });
   }
 
   const diffInMonths = Math.floor(diffInDays / 30);
   if (diffInMonths < 12) {
-    return `il y a ${diffInMonths} mois`;
+    return t("common.timeAgo.months", { count: diffInMonths });
   }
 
   const diffInYears = Math.floor(diffInMonths / 12);
-  return `il y a ${diffInYears} an${diffInYears > 1 ? "s" : ""}`;
+  return t("common.timeAgo.years", { count: diffInYears });
 };

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
 import {
   Avatar,
@@ -10,8 +11,9 @@ import type { Review } from "@/dto";
 import { getTimeAgo } from "@/utils";
 
 export const ReviewItem = ({ review }: { review: Review }) => {
+  const { t } = useTranslation();
   const { theme } = useTheme();
-  const timeAgo = getTimeAgo(review.date);
+  const timeAgo = getTimeAgo(review.date, t);
 
   return (
     <View

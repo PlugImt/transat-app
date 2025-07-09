@@ -59,7 +59,15 @@
     "credits": "Crédits",
     "underConstruction": "En cours de développement 🏗️",
     "underConstructionDesc": "De nouvelles fonctionnalités arrivent bientôt ;)",
-    "refresh": "Actualiser"
+    "refresh": "Actualiser",
+    "timeAgo": {
+      "now": "à l'instant",
+      "minutes": "il y a {{count}} minute{{count, plural, one {} other {s}}}",
+      "hours": "il y a {{count}} heure{{count, plural, one {} other {s}}}",
+      "days": "il y a {{count}} jour{{count, plural, one {} other {s}}}",
+      "months": "il y a {{count}} mois",
+      "years": "il y a {{count}} an{{count, plural, one {} other {s}}}"
+    }
   },
   "settings": {
     "settings": "Paramètres",

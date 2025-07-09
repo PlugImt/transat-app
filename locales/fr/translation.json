@@ -285,6 +285,19 @@
       "closedUpdated": {
         "title": "Nous n'avons pas encore le menu",
         "description": "Le menu n'a pas été mis à jour. Revenez plus tard."
+      },
+      "reviews": {
+        "rate": "Noter",
+        "noReviews": "Aucun avis pour le moment",
+        "servicesCount": "{{count}} services",
+        "averageRating": "{{rating}} • {{count}} avis",
+        "dialog": {
+          "title": "Donnez votre avis",
+          "commentPlaceholder": "Décrivez ce que vous avez ressenti en mangeant ce plat",
+          "submit": "Noter",
+          "successMessage": "Votre avis a été publié avec succès !",
+          "errorMessage": "Une erreur est survenue lors de la publication de votre avis."
+        }
       }
     },
     "timetable": {

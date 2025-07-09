@@ -284,6 +284,19 @@
       "closedUpdated": {
         "title": "Ainda não temos o cardápio",
         "description": "O cardápio não foi atualizado. Volte mais tarde."
+      },
+      "reviews": {
+        "rate": "Avaliar",
+        "noReviews": "Ainda não há avaliações",
+        "servicesCount": "{{count}} serviços",
+        "averageRating": "{{rating}} • {{count}} avaliações",
+        "dialog": {
+          "title": "Dê a sua opinião",
+          "commentPlaceholder": "Descreva o que sentiu ao comer este prato",
+          "submit": "Avaliar",
+          "successMessage": "A sua avaliação foi publicada com sucesso!",
+          "errorMessage": "Ocorreu um erro ao publicar a sua avaliação."
+        }
       }
     },
     "timetable": {

@@ -3,7 +3,7 @@ import { useRoute } from "@react-navigation/native";
 import { Star, Utensils } from "lucide-react-native";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Alert, FlatList, Text, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import { LoadingState } from "@/app/screens/services/restaurant/components";
 import { ReviewItem } from "@/app/screens/services/restaurant/components/MenuRating";
 import { ReviewDialog } from "@/app/screens/services/restaurant/components/MenuReviewDialog/ReviewDialog";
@@ -46,19 +46,13 @@ export const RestaurantReviews = () => {
       await postReviewMutation.mutateAsync({ rating, comment });
       setShowReviewDialog(false);
       Alert.alert(
-        t("common.success", "Succès"),
-        t(
-          "services.restaurant.reviews.reviewPosted",
-          "Votre avis a été publié avec succès !",
-        ),
+        t("common.success"),
+        t("services.restaurant.reviews.dialog.successMessage"),
       );
     } catch (_error) {
       Alert.alert(
-        t("common.error", "Erreur"),
-        t(
-          "services.restaurant.reviews.reviewError",
-          "Une erreur est survenue lors de la publication de votre avis.",
-        ),
+        t("common.error"),
+        t("services.restaurant.reviews.dialog.errorMessage"),
       );
     }
   };
@@ -127,13 +121,13 @@ export const RestaurantReviews = () => {
                 style={{ color: theme.textSecondary }}
                 numberOfLines={2}
               >
-                {reviewData.times_served} services
+                {t("services.restaurant.reviews.servicesCount", { count: reviewData.times_served })}
               </Text>
             </View>
           </View>
 
           <Button
-            label={t("services.restaurant.reviews.rate", "Noter")}
+            label={t("services.restaurant.reviews.rate")}
             size="sm"
             className="px-4 py-2"
             style={{ backgroundColor: "#E6D3B8", borderRadius: 8 }}
@@ -146,7 +140,10 @@ export const RestaurantReviews = () => {
         <View className="flex flex-row items-center gap-3">
           <Star size={20} color={theme.text} fill={theme.text} />
           <Text className="text-xl font-bold" style={{ color: theme.text }}>
-            {averageRating.toFixed(1)} • {totalReviews} avis
+            {t("services.restaurant.reviews.averageRating", {
+              rating: averageRating.toFixed(1),
+              count: totalReviews
+            })}
           </Text>
         </View>
 
@@ -165,10 +162,7 @@ export const RestaurantReviews = () => {
               className="text-center"
               style={{ color: theme.textSecondary }}
             >
-              {t(
-                "services.restaurant.reviews.noReviews",
-                "Aucun avis pour le moment",
-              )}
+              {t("services.restaurant.reviews.noReviews")}
             </Text>
           </View>
         )}

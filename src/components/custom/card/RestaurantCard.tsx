@@ -66,7 +66,6 @@ const RestaurantCard = ({ title, meals, icon }: CardProps) => {
             }
           >
             <Text
-              key={item.id}
               style={{ color: theme.text }}
               className="flex-1"
             >

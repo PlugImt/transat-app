@@ -285,6 +285,19 @@
       "closedUpdated": {
         "title": "Wir haben noch kein Menü",
         "description": "Das Menü wurde nicht aktualisiert. Schauen Sie später wieder vorbei."
+      },
+      "reviews": {
+        "rate": "Bewerten",
+        "noReviews": "Noch keine Bewertungen",
+        "servicesCount": "{{count}} Services",
+        "averageRating": "{{rating}} • {{count}} Bewertungen",
+        "dialog": {
+          "title": "Geben Sie Ihre Bewertung ab",
+          "commentPlaceholder": "Beschreiben Sie, was Sie beim Essen dieses Gerichts empfunden haben",
+          "submit": "Bewerten",
+          "successMessage": "Ihre Bewertung wurde erfolgreich veröffentlicht!",
+          "errorMessage": "Beim Veröffentlichen Ihrer Bewertung ist ein Fehler aufgetreten."
+        }
       }
     },
     "timetable": {

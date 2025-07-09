@@ -284,6 +284,19 @@
       "closedUpdated": {
         "title": "Aún no tenemos el menú",
         "description": "El menú no se ha actualizado. Vuelva más tarde."
+      },
+      "reviews": {
+        "rate": "Calificar",
+        "noReviews": "Aún no hay reseñas",
+        "servicesCount": "{{count}} servicios",
+        "averageRating": "{{rating}} • {{count}} reseñas",
+        "dialog": {
+          "title": "Da tu opinión",
+          "commentPlaceholder": "Describe lo que sentiste al comer este plato",
+          "submit": "Calificar",
+          "successMessage": "¡Tu reseña ha sido publicada exitosamente!",
+          "errorMessage": "Ocurrió un error al publicar tu reseña."
+        }
       }
     },
     "timetable": {

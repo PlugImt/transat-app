@@ -284,6 +284,19 @@
       "closedUpdated": {
         "title": "我们还没有菜单",
         "description": "菜单尚未更新。请稍后再查看。"
+      },
+      "reviews": {
+        "rate": "评价",
+        "noReviews": "暂无评价",
+        "servicesCount": "{{count}} 个服务",
+        "averageRating": "{{rating}} • {{count}} 条评价",
+        "dialog": {
+          "title": "给出您的评价",
+          "commentPlaceholder": "描述您品尝这道菜时的感受",
+          "submit": "评价",
+          "successMessage": "您的评价已成功发布！",
+          "errorMessage": "发布评价时出错。"
+        }
       }
     },
     "timetable": {

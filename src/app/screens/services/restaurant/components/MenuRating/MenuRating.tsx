@@ -21,8 +21,8 @@ export const ReviewItem = ({ review }: { review: Review }) => {
       <Avatar className="w-12 h-12">
         <AvatarImage source={{ uri: review.profile_picture || undefined }} />
         <AvatarFallback textClassname="text-lg">
-          {review.first_name.charAt(0)}
-          {review.last_name.charAt(0)}
+          {review.first_name?.charAt(0) || ""}
+          {review.last_name?.charAt(0) || ""}
         </AvatarFallback>
       </Avatar>
 

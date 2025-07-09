@@ -62,10 +62,15 @@
     "refresh": "刷新",
     "timeAgo": {
       "now": "刚刚",
+      "minute": "{{count}}分钟前",
       "minutes": "{{count}}分钟前",
+      "hour": "{{count}}小时前",
       "hours": "{{count}}小时前",
+      "day": "{{count}}天前",
       "days": "{{count}}天前",
+      "month": "{{count}}个月前",
       "months": "{{count}}个月前",
+      "year": "{{count}}年前",
       "years": "{{count}}年前"
     }
   },

@@ -89,24 +89,29 @@ export const getTimeAgo = (dateString: string, t: (key: string, options?: any) =
 
   const diffInMinutes = Math.floor(diffInSeconds / 60);
   if (diffInMinutes < 60) {
-    return t("common.timeAgo.minutes", { count: diffInMinutes });
+    const key = diffInMinutes === 1 ? "common.timeAgo.minute" : "common.timeAgo.minutes";
+    return t(key, { count: diffInMinutes });
   }
 
   const diffInHours = Math.floor(diffInMinutes / 60);
   if (diffInHours < 24) {
-    return t("common.timeAgo.hours", { count: diffInHours });
+    const key = diffInHours === 1 ? "common.timeAgo.hour" : "common.timeAgo.hours";
+    return t(key, { count: diffInHours });
   }
 
   const diffInDays = Math.floor(diffInHours / 24);
   if (diffInDays < 30) {
-    return t("common.timeAgo.days", { count: diffInDays });
+    const key = diffInDays === 1 ? "common.timeAgo.day" : "common.timeAgo.days";
+    return t(key, { count: diffInDays });
   }
 
   const diffInMonths = Math.floor(diffInDays / 30);
   if (diffInMonths < 12) {
-    return t("common.timeAgo.months", { count: diffInMonths });
+    const key = diffInMonths === 1 ? "common.timeAgo.month" : "common.timeAgo.months";
+    return t(key, { count: diffInMonths });
   }
 
   const diffInYears = Math.floor(diffInMonths / 12);
-  return t("common.timeAgo.years", { count: diffInYears });
+  const key = diffInYears === 1 ? "common.timeAgo.year" : "common.timeAgo.years";
+  return t(key, { count: diffInYears });
 };

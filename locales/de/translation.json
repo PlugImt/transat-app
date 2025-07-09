@@ -62,11 +62,16 @@
     "refresh": "Aktualisieren",
     "timeAgo": {
       "now": "gerade eben",
-      "minutes": "vor {{count}} Minute{{count, plural, one {} other {n}}}",
-      "hours": "vor {{count}} Stunde{{count, plural, one {} other {n}}}",
-      "days": "vor {{count}} Tag{{count, plural, one {} other {en}}}",
-      "months": "vor {{count}} Monat{{count, plural, one {} other {en}}}",
-      "years": "vor {{count}} Jahr{{count, plural, one {} other {en}}}"
+      "minute": "vor {{count}} Minute",
+      "minutes": "vor {{count}} Minuten",
+      "hour": "vor {{count}} Stunde",
+      "hours": "vor {{count}} Stunden",
+      "day": "vor {{count}} Tag",
+      "days": "vor {{count}} Tagen",
+      "month": "vor {{count}} Monat",
+      "months": "vor {{count}} Monaten",
+      "year": "vor {{count}} Jahr",
+      "years": "vor {{count}} Jahren"
     }
   },
   "settings": {

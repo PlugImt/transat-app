@@ -62,11 +62,16 @@
     "refresh": "Atualizar",
     "timeAgo": {
       "now": "agora mesmo",
-      "minutes": "há {{count}} minuto{{count, plural, one {} other {s}}}",
-      "hours": "há {{count}} hora{{count, plural, one {} other {s}}}",
-      "days": "há {{count}} dia{{count, plural, one {} other {s}}}",
-      "months": "há {{count}} mês{{count, plural, one {} other {es}}}",
-      "years": "há {{count}} ano{{count, plural, one {} other {s}}}"
+      "minute": "há {{count}} minuto",
+      "minutes": "há {{count}} minutos",
+      "hour": "há {{count}} hora",
+      "hours": "há {{count}} horas",
+      "day": "há {{count}} dia",
+      "days": "há {{count}} dias",
+      "month": "há {{count}} mês",
+      "months": "há {{count}} meses",
+      "year": "há {{count}} ano",
+      "years": "há {{count}} anos"
     }
   },
   "settings": {

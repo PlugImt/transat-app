@@ -46,11 +46,16 @@
     "refresh": "Refresh",
     "timeAgo": {
       "now": "just now",
-      "minutes": "{{count}} minute{{count, plural, one {} other {s}}} ago",
-      "hours": "{{count}} hour{{count, plural, one {} other {s}}} ago",
-      "days": "{{count}} day{{count, plural, one {} other {s}}} ago",
-      "months": "{{count}} month{{count, plural, one {} other {s}}} ago",
-      "years": "{{count}} year{{count, plural, one {} other {s}}} ago"
+      "minute": "{{count}} minute ago",
+      "minutes": "{{count}} minutes ago",
+      "hour": "{{count}} hour ago",
+      "hours": "{{count}} hours ago",
+      "day": "{{count}} day ago",
+      "days": "{{count}} days ago",
+      "month": "{{count}} month ago",
+      "months": "{{count}} months ago",
+      "year": "{{count}} year ago",
+      "years": "{{count}} years ago"
     },
     "days": {
       "monday": "Monday",

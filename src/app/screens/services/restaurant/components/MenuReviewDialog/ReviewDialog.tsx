@@ -1,13 +1,7 @@
 import { X } from "lucide-react-native";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  Modal,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Modal, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { Button } from "@/components/common/Button";
 import { Star } from "@/components/common/Star";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -58,10 +52,7 @@ export const ReviewDialog = ({
         >
           {/* Header */}
           <View className="flex-row justify-between items-center mb-6">
-            <Text
-              className="text-xl font-bold"
-              style={{ color: theme.text }}
-            >
+            <Text className="text-xl font-bold" style={{ color: theme.text }}>
               {t("services.restaurant.reviews.dialog.title")}
             </Text>
             <TouchableOpacity
@@ -90,7 +81,9 @@ export const ReviewDialog = ({
           <TextInput
             value={comment}
             onChangeText={setComment}
-            placeholder={t("services.restaurant.reviews.dialog.commentPlaceholder")}
+            placeholder={t(
+              "services.restaurant.reviews.dialog.commentPlaceholder",
+            )}
             placeholderTextColor={theme.textSecondary}
             multiline
             numberOfLines={4}

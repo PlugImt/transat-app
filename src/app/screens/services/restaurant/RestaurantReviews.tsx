@@ -9,6 +9,7 @@ import { ReviewItem } from "@/app/screens/services/restaurant/components/MenuRat
 import { ReviewDialog } from "@/app/screens/services/restaurant/components/MenuReviewDialog/ReviewDialog";
 import { Button } from "@/components/common/Button";
 import { Page } from "@/components/common/Page";
+import { useToast } from "@/components/common/Toast";
 import { AboutModal } from "@/components/custom/AboutModal";
 import { useTheme } from "@/contexts/ThemeContext";
 import {
@@ -26,6 +27,7 @@ type RestaurantReviewsRouteProp = RouteProp<
 export const RestaurantReviews = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
+  const { toast } = useToast();
   const route = useRoute<RestaurantReviewsRouteProp>();
   const { id } = route.params;
   const openingHoursData = useMemo(() => getOpeningHoursData(t), [t]);
@@ -45,14 +47,14 @@ export const RestaurantReviews = () => {
     try {
       await postReviewMutation.mutateAsync({ rating, comment });
       setShowReviewDialog(false);
-      Alert.alert(
-        t("common.success"),
+      toast(
         t("services.restaurant.reviews.dialog.successMessage"),
+        "success"
       );
     } catch (_error) {
-      Alert.alert(
-        t("common.error"),
+      toast(
         t("services.restaurant.reviews.dialog.errorMessage"),
+        "destructive"
       );
     }
   };
@@ -121,7 +123,9 @@ export const RestaurantReviews = () => {
                 style={{ color: theme.textSecondary }}
                 numberOfLines={2}
               >
-                {t("services.restaurant.reviews.servicesCount", { count: reviewData.times_served })}
+                {t("services.restaurant.reviews.servicesCount", {
+                  count: reviewData.times_served,
+                })}
               </Text>
             </View>
           </View>
@@ -142,7 +146,7 @@ export const RestaurantReviews = () => {
           <Text className="text-xl font-bold" style={{ color: theme.text }}>
             {t("services.restaurant.reviews.averageRating", {
               rating: averageRating.toFixed(1),
-              count: totalReviews
+              count: totalReviews,
             })}
           </Text>
         </View>

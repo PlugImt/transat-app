@@ -65,10 +65,7 @@ const RestaurantCard = ({ title, meals, icon }: CardProps) => {
               navigation.navigate("RestaurantReviews", { id: item.id })
             }
           >
-            <Text
-              style={{ color: theme.text }}
-              className="flex-1"
-            >
+            <Text style={{ color: theme.text }} className="flex-1">
               {item.name}
             </Text>
             <Star

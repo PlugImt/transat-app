@@ -1,6 +1,6 @@
 import type { RouteProp } from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
-import { Star, Utensils } from "lucide-react-native";
+import { CookingPot, Star, Utensils } from "lucide-react-native";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FlatList, Text, View } from "react-native";
@@ -47,14 +47,11 @@ export const RestaurantReviews = () => {
     try {
       await postReviewMutation.mutateAsync({ rating, comment });
       setShowReviewDialog(false);
-      toast(
-        t("services.restaurant.reviews.dialog.successMessage"),
-        "success"
-      );
+      toast(t("services.restaurant.reviews.dialog.successMessage"), "success");
     } catch (_error) {
       toast(
         t("services.restaurant.reviews.dialog.errorMessage"),
-        "destructive"
+        "destructive",
       );
     }
   };
@@ -134,7 +131,7 @@ export const RestaurantReviews = () => {
             label={t("services.restaurant.reviews.rate")}
             size="sm"
             className="px-4 py-2"
-            style={{ backgroundColor: "#E6D3B8", borderRadius: 8 }}
+            style={{ backgroundColor: theme.primary, borderRadius: 8 }}
             labelClasses="text-sm"
             onPress={() => setShowReviewDialog(true)}
           />
@@ -161,13 +158,29 @@ export const RestaurantReviews = () => {
             showsVerticalScrollIndicator={false}
           />
         ) : (
-          <View className="flex items-center justify-center py-8">
+          <View className="flex items-center justify-center py-12  mx-4">
+            <View className="mb-6">
+              <CookingPot size={50} color={theme.primary} />
+            </View>
             <Text
-              className="text-center"
+              className="text-lg font-semibold text-center mb-2"
+              style={{ color: theme.text }}
+            >
+              {t("services.restaurant.reviews.noReviewsTitle")}
+            </Text>
+            <Text
+              className="text-center mb-6"
               style={{ color: theme.textSecondary }}
             >
-              {t("services.restaurant.reviews.noReviews")}
+              {t("services.restaurant.reviews.noReviewsSubtitle")}
             </Text>
+            <Button
+              label={t("services.restaurant.reviews.rate")}
+              onPress={() => setShowReviewDialog(true)}
+              className="px-8 py-3 w-full"
+              style={{ backgroundColor: theme.primary, borderRadius: 12 }}
+              labelClasses="text-base font-medium"
+            />
           </View>
         )}
       </View>

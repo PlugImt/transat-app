@@ -302,6 +302,8 @@
       "reviews": {
         "rate": "Bewerten",
         "noReviews": "Noch keine Bewertungen",
+        "noReviewsTitle": "Diesem Gericht wurde noch keine Bewertung gegeben",
+        "noReviewsSubtitle": "Seien Sie der Erste, der es bewertet!",
         "servicesCount": "{{count}} Services",
         "averageRating": "{{rating}} • {{count}} Bewertungen",
         "dialog": {

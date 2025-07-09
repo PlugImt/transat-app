@@ -302,6 +302,8 @@
       "reviews": {
         "rate": "Rate",
         "noReviews": "No reviews yet",
+        "noReviewsTitle": "No rating has been given to this dish",
+        "noReviewsSubtitle": "Be the first to rate it!",
         "servicesCount": "{{count}} services",
         "averageRating": "{{rating}} • {{count}} reviews",
         "dialog": {

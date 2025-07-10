@@ -30,7 +30,7 @@
     "info": "Información",
     "customizeWidgets": "Personalizar Widgets",
     "customizeServices": "Personalizar Servicios",
-    "customizeHint": "Activa/desactiva widgets y arrástralos para reordenarlos. Mantén presionado y arrastra para reordenar los elementos.",
+    "customizeHint": "Activa/desactiva servicios y arrástralos para reordenarlos",
     "noWidgetsEnabled": "No hay widgets activados. ¡Personaliza para agregar algunos!",
     "resizeToFull": "Redimensionar a ancho completo",
     "resizeToHalf": "Redimensionar a la mitad del ancho",

@@ -30,7 +30,7 @@
     "info": "信息",
     "customizeWidgets": "自定义小部件",
     "customizeServices": "自定义服务",
-    "customizeHint": "切换小部件的开关状态并通过拖动来重新排序。长按并拖动以重新排序项目。",
+    "customizeHint": "切换小部件的开关状态并通过拖动来重新排序",
     "noWidgetsEnabled": "没有启用的小部件。自定义添加一些吧！",
     "resizeToFull": "调整为全宽",
     "resizeToHalf": "调整为半宽",

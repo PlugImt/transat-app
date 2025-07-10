@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import type { ImageSourcePropType } from "react-native";
 
 export type WidgetType =
   | "weather"
@@ -13,7 +14,6 @@ export type ServiceType =
   | "homework"
   | "traq"
   | "olimtpe";
-export type ServiceSize = "full" | "half";
 
 export interface WidgetPreference {
   id: WidgetType;
@@ -27,9 +27,7 @@ export interface ServicePreference {
   name: string;
   enabled: boolean;
   order: number;
-  size: ServiceSize;
-  // biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
-  image: any;
+  image: ImageSourcePropType;
   screen: string;
 }
 
@@ -50,7 +48,6 @@ const defaultServices: ServicePreference[] = [
     name: "Washing Machine",
     enabled: true,
     order: 0,
-    size: "full",
     image: require("@/assets/images/Logos/machine_large.png"),
     screen: "WashingMachine",
   },
@@ -59,7 +56,6 @@ const defaultServices: ServicePreference[] = [
     name: "Restaurant",
     enabled: true,
     order: 1,
-    size: "full",
     image: require("@/assets/images/Logos/restaurant_large.png"),
     screen: "Restaurant",
   },
@@ -68,7 +64,6 @@ const defaultServices: ServicePreference[] = [
     name: "Timetable",
     enabled: true,
     order: 2,
-    size: "full",
     image: require("@/assets/images/Logos/edt_large.png"),
     screen: "Timetable",
   },
@@ -77,7 +72,6 @@ const defaultServices: ServicePreference[] = [
     name: "Homework",
     enabled: true,
     order: 3,
-    size: "full",
     image: require("@/assets/images/Logos/devoirs_large.png"),
     screen: "Homework",
   },
@@ -86,7 +80,6 @@ const defaultServices: ServicePreference[] = [
     name: "Traq",
     enabled: true,
     order: 4,
-    size: "full",
     image: require("@/assets/images/Logos/traq_large.png"),
     screen: "Traq",
   },
@@ -95,7 +88,6 @@ const defaultServices: ServicePreference[] = [
     name: "OL'IMT'PE",
     enabled: true,
     order: 5,
-    size: "full",
     image: require("@/assets/images/Logos/olimtpe.png"),
     screen: "Olimtpe",
   },

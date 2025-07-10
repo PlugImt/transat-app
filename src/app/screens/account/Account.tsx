@@ -67,7 +67,7 @@ export const Account = () => {
       onRefresh={refetch}
       className="gap-6"
       title={t("common.account")}
-      about={
+      header={
         <IconButton
           icon={<Settings color={theme.text} />}
           variant="link"

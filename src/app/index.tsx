@@ -72,7 +72,9 @@ const App = () => {
                 </ToastProvider>
               </AuthProvider>
             </BottomSheetModalProvider>
-            {isDev && <DevToolsBubble onCopy={_onCopy} />}
+            {isDev && (
+              <DevToolsBubble onCopy={_onCopy} queryClient={queryClient} />
+            )}
           </QueryClientProvider>
         </GestureHandlerRootView>
       </ThemeProvider>

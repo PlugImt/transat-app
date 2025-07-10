@@ -12,10 +12,9 @@ import DraggableFlatList, {
   type RenderItemParams,
   ScaleDecorator,
 } from "react-native-draggable-flatlist";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { Button } from "@/components/common/Button";
+
 import { Page } from "@/components/common/Page";
-import WidgetCustomizationModal from "@/components/common/WidgetCustomizationModal";
+import { WidgetCustomizationButton } from "@/components/common/WidgetCustomizationModal";
 import {
   WeatherSkeleton,
   WeatherWidget,
@@ -35,6 +34,7 @@ import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";
 import { useUser } from "@/hooks/account/useUser";
+import { useAnimatedHeader } from "@/hooks/useAnimatedHeader";
 import { useHomeWidgetPreferences } from "@/hooks/useWidgetPreferences";
 import { washingMachineNotificationService } from "@/services/notifications/washingMachineNotifications";
 import type { AppStackParamList } from "@/services/storage/types";
@@ -47,7 +47,7 @@ const handleRegistrationError = (errorMessage: string) => {
   if (Platform.OS === "web") {
     console.error(errorMessage);
   }
-  // if (Device.isDevice) alert(errorMessage);
+
   throw new Error(errorMessage);
 };
 
@@ -107,6 +107,7 @@ export const Home = () => {
   const { data: user } = useUser();
   const { t } = useTranslation();
   const { theme } = useTheme();
+  const { scrollHandler } = useAnimatedHeader();
 
   const { saveExpoPushToken } = useAuth();
   const {
@@ -120,11 +121,7 @@ export const Home = () => {
   const [_notificationOpened, setNotificationOpened] = useState(false);
   // biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
   const [_notificationData, setNotificationData] = useState<any>(null);
-  const [showCustomizationModal, setShowCustomizationModal] = useState(false);
   const navigation = useNavigation<AppScreenNavigationProp>();
-
-  // Memoize the widgets prop for the modal
-  const memoizedWidgetsForModal = useMemo(() => widgets, [widgets]);
 
   useEffect(() => {
     // Initialize notification service
@@ -273,11 +270,8 @@ export const Home = () => {
     await updateOrder(reorderedWidgets);
   };
 
-  const handleCustomizationSave = async (
-    updatedWidgets: WidgetPreference[],
-  ) => {
-    await updateOrder(updatedWidgets);
-    setShowCustomizationModal(false);
+  const handleCustomizationSave = async (updatedItems: any[]) => {
+    await updateOrder(updatedItems as WidgetPreference[]);
   };
 
   if (widgetsLoading) {
@@ -285,75 +279,61 @@ export const Home = () => {
   }
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <Page
-        disableScroll={true}
-        refreshing={isFetching}
-        onRefresh={refetch}
-        title={t("common.welcome")}
-        newfName={user?.first_name || "Newf"}
-      >
-        <DraggableFlatList
-          data={draggableWidgets}
-          onDragEnd={handleDragEnd}
-          keyExtractor={(item) => item.key}
-          renderItem={renderWidget}
-          showsVerticalScrollIndicator={true}
-          contentContainerStyle={{
-            gap: 24,
-            paddingTop: 10,
-            paddingBottom: 12,
-          }}
-          ListEmptyComponent={
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-                marginTop: 50,
-              }}
-            >
-              <Text style={{ fontSize: 16, color: theme.text }}>
-                {t("common.noWidgetsEnabled")}
-              </Text>
-              <Button
-                label={t("common.customizeWidgets")}
-                onPress={() => setShowCustomizationModal(true)}
-                variant="link"
-                className="mt-4"
-              />
-            </View>
-          }
-          ListFooterComponent={
-            <View
-              style={{
-                alignItems: "center",
-                width: "100%",
-                marginTop: 20,
-                marginBottom: 20,
-              }}
-            >
-              <Button
-                label={t("common.customizeWidgets")}
-                variant="ghost"
-                onPress={() => setShowCustomizationModal(true)}
-                size="sm"
-              />
-            </View>
-          }
-        />
-      </Page>
-
-      <WidgetCustomizationModal
-        visible={showCustomizationModal}
-        onClose={() => setShowCustomizationModal(false)}
-        widgets={memoizedWidgetsForModal}
-        onUpdateWidgets={handleCustomizationSave}
-        services={[]}
-        title={t("common.customizeWidgets")}
-        type="widgets"
+    <Page
+      asChildren
+      disableScroll={true}
+      refreshing={isFetching}
+      onRefresh={refetch}
+      header={
+        <Text className="h1 ml-4" style={{ color: theme.text }}>
+          {t("common.welcome")}
+          {user?.first_name && (
+            <Text style={{ color: theme.primary }}> {user.first_name}</Text>
+          )}
+        </Text>
+      }
+    >
+      <DraggableFlatList
+        data={draggableWidgets}
+        onDragEnd={handleDragEnd}
+        keyExtractor={(item) => item.key}
+        renderItem={renderWidget}
+        showsVerticalScrollIndicator={true}
+        onScroll={scrollHandler}
+        ListEmptyComponent={
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: 50,
+            }}
+          >
+            <Text style={{ fontSize: 16, color: theme.text }}>
+              {t("common.noWidgetsEnabled")}
+            </Text>
+            <WidgetCustomizationButton
+              items={widgets}
+              onUpdate={handleCustomizationSave}
+              title={t("common.customizeWidgets")}
+              buttonLabel={t("common.customizeWidgets")}
+              variant="ghost"
+              className="mt-4"
+            />
+          </View>
+        }
+        ListFooterComponent={
+          <WidgetCustomizationButton
+            items={widgets}
+            onUpdate={handleCustomizationSave}
+            title={t("common.customizeWidgets")}
+            buttonLabel={t("common.customizeWidgets")}
+            variant="ghost"
+            className="mt-8"
+          />
+        }
       />
-    </GestureHandlerRootView>
+    </Page>
   );
 };
 

@@ -30,7 +30,7 @@
     "info": "Information",
     "customizeWidgets": "Customize Widgets",
     "customizeServices": "Customize Services",
-    "customizeHint": "Toggle widgets on/off and drag to reorder them. Long press and drag to reorder items.",
+    "customizeHint": "Toggle services on/off and drag to reorder them",
     "noWidgetsEnabled": "No widgets enabled. Customize to add some!",
     "resizeToFull": "Resize to full width",
     "resizeToHalf": "Resize to half width",

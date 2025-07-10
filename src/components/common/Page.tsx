@@ -1,19 +1,11 @@
-import { useNavigation } from "@react-navigation/native";
-import { BlurView } from "expo-blur";
-import { ArrowLeft } from "lucide-react-native";
-import { type ReactNode, useRef, useState } from "react";
-import {
-  Dimensions,
-  Platform,
-  RefreshControl,
-  ScrollView,
-  StatusBar,
-  Text,
-  View,
-} from "react-native";
+import React, { type ReactNode, useRef, useState } from "react";
+import { Dimensions, RefreshControl, View } from "react-native";
 import ConfettiCannon from "react-native-confetti-cannon";
+import Animated from "react-native-reanimated";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useAnimatedHeader } from "@/hooks/useAnimatedHeader";
 import { cn } from "@/utils";
+import { HEADER_HEIGHT, Header } from "./Header";
 
 type PageProps = {
   children: ReactNode;
@@ -22,12 +14,12 @@ type PageProps = {
   className?: string;
   goBack?: boolean;
   title?: string;
-  about?: ReactNode;
-  newfName?: string;
+  header?: ReactNode;
   footer?: ReactNode;
   confetti?: boolean;
   onConfettiTrigger?: (trigger: () => void) => void;
   disableScroll?: boolean;
+  asChildren?: boolean;
 };
 
 export const Page = ({
@@ -37,20 +29,18 @@ export const Page = ({
   className,
   goBack,
   title,
-  about,
-  newfName,
+  header,
   footer,
   confetti = false,
   onConfettiTrigger,
   disableScroll = false,
+  asChildren = false,
 }: PageProps) => {
-  const navigation = useNavigation();
-  const { theme, actualTheme } = useTheme();
+  const { theme } = useTheme();
+  const { scrollHandler, headerShown } = useAnimatedHeader();
   const confettiRef = useRef<ConfettiCannon>(null);
   const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
   const [confettiTriggered, setConfettiTriggered] = useState(false);
-  const statusBarHeight =
-    Platform.OS === "ios" ? 0 : StatusBar.currentHeight || 0;
 
   // Expose the confetti trigger function to parent components
   if (onConfettiTrigger) {
@@ -62,91 +52,55 @@ export const Page = ({
     });
   }
 
-  const ContentWrapper = disableScroll ? View : ScrollView;
-  const contentWrapperProps = disableScroll
-    ? {
-        style: {
-          flex: 1,
-          backgroundColor: theme.background,
-          marginTop: statusBarHeight + 60,
-          paddingHorizontal: 20,
-          paddingBottom: 48,
-        },
-        className: cn("flex flex-col gap-2", className),
-      }
-    : {
-        style: {
-          flex: 1,
-          backgroundColor: theme.background,
-          marginTop: statusBarHeight + 60,
-        },
-        automaticallyAdjustKeyboardInsets: true,
-        contentContainerStyle: { paddingTop: 10 },
-        refreshControl: (
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-            colors={[theme.primary]}
-            progressBackgroundColor={theme.background}
-          />
-        ),
-      };
+  const contentWrapperProps = {
+    onScroll: scrollHandler,
+    refreshControl: onRefresh ? (
+      <RefreshControl
+        refreshing={refreshing}
+        onRefresh={onRefresh}
+        tintColor={theme.text}
+        colors={[theme.primary]}
+      />
+    ) : undefined,
+    className: "pb-10 px-5 gap-4",
+    contentContainerStyle: {
+      paddingBottom: footer ? 0 : 40,
+      paddingTop: HEADER_HEIGHT,
+    },
+  };
+
+  const getContent = () => {
+    if (asChildren) {
+      return React.cloneElement(children as React.ReactElement, {
+        ...contentWrapperProps,
+      });
+    }
+    if (disableScroll) {
+      return (
+        <View
+          className="pb-10 px-5 gap-4 flex-1"
+          style={{ paddingTop: HEADER_HEIGHT }}
+        >
+          {children}
+        </View>
+      );
+    }
+    return (
+      <Animated.ScrollView
+        {...contentWrapperProps}
+        className={cn(className, "flex-1")}
+      >
+        {children}
+      </Animated.ScrollView>
+    );
+  };
 
   return (
     <View style={{ flex: 1, backgroundColor: theme.background }}>
-      {/* Sticky Header */}
-      <BlurView
-        intensity={50}
-        tint={actualTheme}
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 10,
-          paddingTop: statusBarHeight + 10,
-          paddingBottom: 10,
-          paddingHorizontal: 20,
-          backgroundColor: theme.overlay, // Semi-transparent background with theme color
-        }}
-      >
-        <View className="flex-row justify-between items-center">
-          <View className="flex flex-row items-center justify-center">
-            {goBack && (
-              <ArrowLeft
-                color={theme.text}
-                onPress={() => navigation.goBack()}
-              />
-            )}
-            {title && (
-              <Text className="h1 ml-4" style={{ color: theme.text }}>
-                {title}
-                {newfName && (
-                  <Text style={{ color: theme.primary }}> {newfName}</Text>
-                )}
-              </Text>
-            )}
-          </View>
-          {about}
-        </View>
-      </BlurView>
-
-      <ContentWrapper {...contentWrapperProps}>
-        {disableScroll ? (
-          children
-        ) : (
-          <View
-            style={{
-              backgroundColor: theme.background,
-              paddingHorizontal: 20,
-              paddingBottom: 48,
-            }}
-            className={cn("flex flex-col gap-2", className)}
-          >
-            {children}
-          </View>
-        )}
-      </ContentWrapper>
+      <Header headerShown={headerShown} goBack={goBack} title={title}>
+        {header}
+      </Header>
+      {getContent()}
       {footer && (
         <View
           style={{

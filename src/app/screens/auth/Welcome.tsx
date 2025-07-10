@@ -2,7 +2,12 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { Animated as RNAnimated, View } from "react-native";
+import { View } from "react-native";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
 import { Button } from "@/components/common/Button";
 import { Page } from "@/components/common/Page";
 import { AnimatedLogo } from "@/components/custom/AnimatedLogo";
@@ -14,31 +19,24 @@ export const Welcome = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<LoginScreenNavigationProp>();
 
-  const fadeAnim = useRef(new RNAnimated.Value(0)).current;
+  const opacity = useSharedValue(0);
   const triggerConfettiRef = useRef<(() => void) | null>(null);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    opacity: opacity.value,
+  }));
 
   // Re-run animations when the screen comes back into focus
   useFocusEffect(
     useCallback(() => {
-      fadeAnim.setValue(0);
-      RNAnimated.timing(fadeAnim, {
-        toValue: 1,
-        duration: 1200,
-        useNativeDriver: true,
-      }).start();
+      opacity.value = 0;
+      opacity.value = withTiming(1, { duration: 1200 });
       return () => {};
-    }, [fadeAnim]),
+    }, [opacity]),
   );
 
-  const handleNavigation = (route: keyof AuthStackParamList) => {
-    // Fade out when navigating
-    RNAnimated.timing(fadeAnim, {
-      toValue: 0,
-      duration: 300,
-      useNativeDriver: true,
-    }).start(() => {
-      navigation.navigate(route);
-    });
+  const handleNavigation = (route: "Signin" | "Signup") => {
+    navigation.navigate(route);
   };
 
   const handleLogoPress = () => {
@@ -48,9 +46,9 @@ export const Welcome = () => {
   };
 
   const buttonsFooter = (
-    <RNAnimated.View
+    <Animated.View
       className="flex flex-row gap-4 w-full mb-9"
-      style={{ opacity: fadeAnim }}
+      style={animatedStyle}
     >
       <Button
         size="lg"
@@ -65,7 +63,7 @@ export const Welcome = () => {
         onPress={() => handleNavigation("Signup")}
         className="flex-1"
       />
-    </RNAnimated.View>
+    </Animated.View>
   );
 
   return (

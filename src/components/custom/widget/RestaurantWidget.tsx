@@ -180,7 +180,7 @@ export const RestaurantWidget = () => {
         <TouchableOpacity onPress={() => navigation.navigate("Restaurant")}>
           <Text
             style={{ color: theme.primary }}
-            className="text-sm font-medium"
+            className="text-sm font-medium px-4"
           >
             Voir plus
           </Text>
@@ -201,7 +201,7 @@ export const RestaurantWidget = () => {
                 {menu?.grilladesMidi && menu.grilladesMidi.length > 0 && (
                   <View className="flex flex-col gap-2">
                     <View className="flex flex-row items-center gap-2">
-                      <Beef  />
+                      <Beef />
                       <Text
                         // style={{ color: theme.primary }}
                         className="text-lg font-bold"
@@ -220,7 +220,7 @@ export const RestaurantWidget = () => {
                 {menu?.migrateurs && menu.migrateurs.length > 0 && (
                   <View className="flex flex-col gap-2">
                     <View className="flex flex-row items-center gap-2">
-                      <ChefHat  />
+                      <ChefHat />
                       <Text
                         // style={{ color: theme.primary }}
                         className="text-lg font-bold"
@@ -239,7 +239,7 @@ export const RestaurantWidget = () => {
                 {menu?.cibo && menu.cibo.length > 0 && (
                   <View className="flex flex-col gap-2">
                     <View className="flex flex-row items-center gap-2">
-                      <Vegan  />
+                      <Vegan />
                       <Text
                         // style={{ color: theme.primary }}
                         className="text-lg font-bold"
@@ -258,7 +258,7 @@ export const RestaurantWidget = () => {
                 {menu?.accompMidi && menu.accompMidi.length > 0 && (
                   <View className="flex flex-col gap-2">
                     <View className="flex flex-row items-center gap-2">
-                      <Soup  />
+                      <Soup />
                       <Text
                         // style={{ color: theme.primary }}
                         className="text-lg font-bold"
@@ -279,7 +279,7 @@ export const RestaurantWidget = () => {
                 {menu?.grilladesSoir && menu.grilladesSoir.length > 0 && (
                   <View className="flex flex-col gap-2">
                     <View className="flex flex-row items-center gap-2">
-                      <Beef  />
+                      <Beef />
                       <Text
                         // style={{ color: theme.primary }}
                         className="text-lg font-bold"
@@ -298,7 +298,7 @@ export const RestaurantWidget = () => {
                 {menu?.accompSoir && menu.accompSoir.length > 0 && (
                   <View className="flex flex-col gap-2">
                     <View className="flex flex-row items-center gap-2">
-                      <Soup  />
+                      <Soup />
                       <Text
                         // style={{ color: theme.primary }}
                         className="text-lg font-bold"
@@ -341,7 +341,7 @@ export const RestaurantWidgetLoading = () => {
       >
         <View className="flex flex-col gap-2">
           <View className="flex flex-row items-center gap-2">
-            <Beef  />
+            <Beef />
             <Text
               // style={{ color: theme.primary }}
               className="text-lg font-bold"
@@ -358,7 +358,7 @@ export const RestaurantWidgetLoading = () => {
 
         <View className="flex flex-col gap-2">
           <View className="flex flex-row items-center gap-2">
-            <ChefHat  />
+            <ChefHat />
             <Text
               // style={{ color: theme.primary }}
               className="text-lg font-bold"
@@ -375,7 +375,7 @@ export const RestaurantWidgetLoading = () => {
 
         <View className="flex flex-col gap-2">
           <View className="flex flex-row items-center gap-2">
-            <Vegan  />
+            <Vegan />
             <Text
               // style={{ color: theme.primary }}
               className="text-lg font-bold"
@@ -392,7 +392,7 @@ export const RestaurantWidgetLoading = () => {
 
         <View className="flex flex-col gap-2">
           <View className="flex flex-row items-center gap-2">
-            <Soup  />
+            <Soup />
             <Text
               // style={{ color: theme.primary }}
               className="text-lg font-bold"

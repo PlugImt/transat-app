@@ -13,7 +13,7 @@ export const menuDataSchema = z.object({
   accompMidi: z.array(menuItemSchema),
   grilladesSoir: z.array(menuItemSchema),
   accompSoir: z.array(menuItemSchema),
-  updated_date: z.date(),
+  updatedDate: z.date(),
 });
 
 export const reviewSchema = z.object({

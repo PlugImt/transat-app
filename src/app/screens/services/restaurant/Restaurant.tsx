@@ -21,8 +21,8 @@ export const Restaurant = () => {
   const weekend: boolean = useMemo(() => isWeekend(), []);
   const outOfHours: boolean = useMemo(
     () =>
-      menu?.updated_date ? outOfService(menu.updated_date.toString()) : false,
-    [menu?.updated_date],
+      menu?.updatedDate ? outOfService(menu.updatedDate.toString()) : false,
+    [menu?.updatedDate],
   );
 
   if (isPending || !menu) {

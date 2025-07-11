@@ -101,25 +101,24 @@ export const getTimeAgo = (
   const diffInHours = Math.floor(diffInMinutes / 60);
   if (diffInHours < 24) {
     const key =
-      diffInHours === 1 ? "common.timeAgo.hour" : "common.timeAgo.hours";
+      diffInHours <= 1 ? "common.timeAgo.hour" : "common.timeAgo.hours";
     return t(key, { count: diffInHours });
   }
 
   const diffInDays = Math.floor(diffInHours / 24);
   if (diffInDays < 30) {
-    const key = diffInDays === 1 ? "common.timeAgo.day" : "common.timeAgo.days";
+    const key = diffInDays <= 1 ? "common.timeAgo.day" : "common.timeAgo.days";
     return t(key, { count: diffInDays });
   }
 
   const diffInMonths = Math.floor(diffInDays / 30);
   if (diffInMonths < 12) {
     const key =
-      diffInMonths === 1 ? "common.timeAgo.month" : "common.timeAgo.months";
+      diffInMonths <= 1 ? "common.timeAgo.month" : "common.timeAgo.months";
     return t(key, { count: diffInMonths });
   }
 
   const diffInYears = Math.floor(diffInMonths / 12);
-  const key =
-    diffInYears === 1 ? "common.timeAgo.year" : "common.timeAgo.years";
+  const key = diffInYears <= 1 ? "common.timeAgo.year" : "common.timeAgo.years";
   return t(key, { count: diffInYears });
 };

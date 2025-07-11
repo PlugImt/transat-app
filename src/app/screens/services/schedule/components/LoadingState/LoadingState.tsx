@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
-import { Page } from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
+import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 
 export const LoadingState = () => {

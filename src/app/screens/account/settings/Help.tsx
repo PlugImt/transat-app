@@ -8,13 +8,13 @@ import { useId, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Linking, Text, TouchableOpacity, View } from "react-native";
 import { Divider } from "@/components/common/Divider";
-import { Page } from "@/components/common/Page";
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from "@/components/common/Tabs";
+import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 
 const Help = () => {

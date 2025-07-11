@@ -8,7 +8,7 @@ import DraggableFlatList, {
 } from "react-native-draggable-flatlist";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Button } from "@/components/common/Button";
-import { Page } from "@/components/common/Page";
+import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Preference } from "@/services/storage/widgetPreferences";
 

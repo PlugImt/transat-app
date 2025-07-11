@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
+import { Button } from "@/components/common/Button";
 import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";
-import { Button } from "../common/Button";
 
 type ErrorPageProps = {
   error: Error;

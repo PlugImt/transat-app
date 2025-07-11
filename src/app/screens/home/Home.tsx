@@ -10,15 +10,9 @@ import { useTranslation } from "react-i18next";
 import { Platform, Text } from "react-native";
 import Animated from "react-native-reanimated";
 import { IconButton } from "@/components/common/Button";
-import { Page } from "@/components/common/Page";
-import { PreferenceCustomizationButton } from "@/components/common/PreferenceCustomizationModal";
-import { Empty } from "@/components/custom/Empty";
-import {
-  WeatherSkeleton,
-  WeatherWidget,
-} from "@/components/custom/WeatherWidget";
 import { HomeworkWidget } from "@/components/custom/widget/homework/HomeworkWidget";
 import { HomeworkWidgetLoading } from "@/components/custom/widget/homework/HomeworkWidgetLoading";
+import { PreferenceCustomizationButton } from "@/components/custom/widget/PreferenceCustomizationModal";
 import {
   RestaurantWidget,
   RestaurantWidgetLoading,
@@ -28,6 +22,12 @@ import TimetableWidget from "@/components/custom/widget/TimetableWidget";
 import WashingMachineWidget, {
   WashingMachineWidgetLoading,
 } from "@/components/custom/widget/WashingMachineWidget";
+import {
+  WeatherSkeleton,
+  WeatherWidget,
+} from "@/components/custom/widget/WeatherWidget";
+import { Empty } from "@/components/page/Empty";
+import { Page } from "@/components/page/Page";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";

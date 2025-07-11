@@ -60,13 +60,14 @@ export const Page = ({
         onRefresh={onRefresh}
         tintColor={theme.text}
         colors={[theme.primary]}
+        progressViewOffset={HEADER_HEIGHT}
       />
     ) : undefined,
-    className: "pb-10 px-5 gap-4",
     contentContainerStyle: {
       paddingBottom: footer ? 0 : 40,
       paddingTop: HEADER_HEIGHT,
     },
+    contentContainerClassName: "gap-4 pb-10 px-5",
   };
 
   const getContent = () => {

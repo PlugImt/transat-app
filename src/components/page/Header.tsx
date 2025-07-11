@@ -29,7 +29,7 @@ export function Header({ headerShown, title, goBack, children }: HeaderProps) {
       transform: [
         {
           translateY: interpolate(
-            headerShown.value,
+            headerShown.value ?? 1,
             [0, 1],
             [-HEADER_HEIGHT, 0],
             Extrapolation.CLAMP,
@@ -42,7 +42,7 @@ export function Header({ headerShown, title, goBack, children }: HeaderProps) {
   const contentAnimatedStyle = useAnimatedStyle(() => {
     return {
       opacity: interpolate(
-        headerShown.value,
+        headerShown.value ?? 1,
         [0, 1],
         [0, 1],
         Extrapolation.CLAMP,

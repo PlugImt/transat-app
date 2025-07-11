@@ -9,8 +9,8 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { Button } from "@/components/common/Button";
-import { Page } from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
+import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Course } from "@/dto";
 import useAuth from "@/hooks/account/useAuth";

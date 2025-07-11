@@ -1,5 +1,5 @@
 import { Text, View } from "react-native";
-import { Page } from "@/components/common/Page";
+import { Page } from "@/components/page/Page";
 
 export const ErrorState = ({
   error,

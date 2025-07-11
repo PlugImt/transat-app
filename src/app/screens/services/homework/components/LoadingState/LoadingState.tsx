@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
-import { Page } from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
 import HomeworkCard from "@/components/custom/card/HomeworkCard";
+import { Page } from "@/components/page/Page";
 
 export const LoadingState = () => {
   const { t } = useTranslation();

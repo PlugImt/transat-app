@@ -9,8 +9,8 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { Button } from "@/components/common/Button";
-import { Page } from "@/components/common/Page";
 import { AnimatedLogo } from "@/components/custom/AnimatedLogo";
+import { Page } from "@/components/page/Page";
 import type { AuthStackParamList } from "@/services/storage/types";
 
 type LoginScreenNavigationProp = StackNavigationProp<AuthStackParamList>;

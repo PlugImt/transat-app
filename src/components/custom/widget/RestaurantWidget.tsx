@@ -201,9 +201,9 @@ export const RestaurantWidget = () => {
                 {menu?.grilladesMidi && menu.grilladesMidi.length > 0 && (
                   <View className="flex flex-col gap-2">
                     <View className="flex flex-row items-center gap-2">
-                      <Beef />
+                      <Beef color={theme.text} />
                       <Text
-                        // style={{ color: theme.primary }}
+                        style={{ color: theme.text }}
                         className="text-lg font-bold"
                         ellipsizeMode="tail"
                       >
@@ -220,9 +220,9 @@ export const RestaurantWidget = () => {
                 {menu?.migrateurs && menu.migrateurs.length > 0 && (
                   <View className="flex flex-col gap-2">
                     <View className="flex flex-row items-center gap-2">
-                      <ChefHat />
+                      <ChefHat color={theme.text} />
                       <Text
-                        // style={{ color: theme.primary }}
+                        style={{ color: theme.text }}
                         className="text-lg font-bold"
                         ellipsizeMode="tail"
                       >
@@ -239,9 +239,9 @@ export const RestaurantWidget = () => {
                 {menu?.cibo && menu.cibo.length > 0 && (
                   <View className="flex flex-col gap-2">
                     <View className="flex flex-row items-center gap-2">
-                      <Vegan />
+                      <Vegan color={theme.text} />
                       <Text
-                        // style={{ color: theme.primary }}
+                        style={{ color: theme.text }}
                         className="text-lg font-bold"
                         ellipsizeMode="tail"
                       >
@@ -258,9 +258,9 @@ export const RestaurantWidget = () => {
                 {menu?.accompMidi && menu.accompMidi.length > 0 && (
                   <View className="flex flex-col gap-2">
                     <View className="flex flex-row items-center gap-2">
-                      <Soup />
+                      <Soup color={theme.text} />
                       <Text
-                        // style={{ color: theme.primary }}
+                        style={{ color: theme.text }}
                         className="text-lg font-bold"
                         ellipsizeMode="tail"
                       >
@@ -279,9 +279,9 @@ export const RestaurantWidget = () => {
                 {menu?.grilladesSoir && menu.grilladesSoir.length > 0 && (
                   <View className="flex flex-col gap-2">
                     <View className="flex flex-row items-center gap-2">
-                      <Beef />
+                      <Beef color={theme.text} />
                       <Text
-                        // style={{ color: theme.primary }}
+                        style={{ color: theme.text }}
                         className="text-lg font-bold"
                         ellipsizeMode="tail"
                       >
@@ -298,9 +298,9 @@ export const RestaurantWidget = () => {
                 {menu?.accompSoir && menu.accompSoir.length > 0 && (
                   <View className="flex flex-col gap-2">
                     <View className="flex flex-row items-center gap-2">
-                      <Soup />
+                      <Soup color={theme.text} />
                       <Text
-                        // style={{ color: theme.primary }}
+                        style={{ color: theme.text }}
                         className="text-lg font-bold"
                         ellipsizeMode="tail"
                       >
@@ -346,9 +346,9 @@ export const RestaurantWidgetLoading = () => {
       >
         <View className="flex flex-col gap-2">
           <View className="flex flex-row items-center gap-2">
-            <Beef />
+            <Beef color={theme.text} />
             <Text
-              // style={{ color: theme.primary }}
+              style={{ color: theme.text }}
               className="text-lg font-bold"
               ellipsizeMode="tail"
             >
@@ -363,9 +363,9 @@ export const RestaurantWidgetLoading = () => {
 
         <View className="flex flex-col gap-2">
           <View className="flex flex-row items-center gap-2">
-            <ChefHat />
+            <ChefHat color={theme.text} />
             <Text
-              // style={{ color: theme.primary }}
+              style={{ color: theme.text }}
               className="text-lg font-bold"
               ellipsizeMode="tail"
             >
@@ -380,9 +380,9 @@ export const RestaurantWidgetLoading = () => {
 
         <View className="flex flex-col gap-2">
           <View className="flex flex-row items-center gap-2">
-            <Vegan />
+            <Vegan color={theme.text} />
             <Text
-              // style={{ color: theme.primary }}
+              style={{ color: theme.text }}
               className="text-lg font-bold"
               ellipsizeMode="tail"
             >
@@ -397,9 +397,9 @@ export const RestaurantWidgetLoading = () => {
 
         <View className="flex flex-col gap-2">
           <View className="flex flex-row items-center gap-2">
-            <Soup />
+            <Soup color={theme.text} />
             <Text
-              // style={{ color: theme.primary }}
+              style={{ color: theme.text }}
               className="text-lg font-bold"
               ellipsizeMode="tail"
             >

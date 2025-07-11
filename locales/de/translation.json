@@ -72,7 +72,8 @@
       "months": "vor {{count}} Monaten",
       "year": "vor {{count}} Jahr",
       "years": "vor {{count}} Jahren"
-    }
+    },
+    "seeMore": "Mehr sehen"
   },
   "settings": {
     "settings": "Einstellungen",

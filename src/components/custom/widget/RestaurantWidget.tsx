@@ -66,7 +66,7 @@ export const RestaurantWidget = () => {
     const today = new Date();
     
     // Check if the dates are valid
-    if (isNaN(menuDate.getTime()) || isNaN(today.getTime())) {
+    if (Number.isNaN(menuDate.getTime()) || Number.isNaN(today.getTime())) {
       return false;
     }
 

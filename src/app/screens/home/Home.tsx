@@ -15,6 +15,8 @@ import {
   RestaurantWidget,
   RestaurantWidgetLoading,
 } from "@/app/screens/services/restaurant/widget/RestaurantWidget";
+import { TimetableLoadingWidget } from "@/app/screens/services/schedule/widget/TimetableLoadingWidget";
+import TimetableWidget from "@/app/screens/services/schedule/widget/TimetableWidget";
 import WashingMachineWidget, {
   WashingMachineWidgetLoading,
 } from "@/app/screens/services/washing-machines/widget/WashingMachineWidget";
@@ -35,8 +37,6 @@ import { useHomeWidgetPreferences } from "@/hooks/usePreferences";
 import { washingMachineNotificationService } from "@/services/notifications/washingMachineNotifications";
 import type { AppStackParamList } from "@/services/storage/types";
 import { isDinner, isLunch, isWeekend } from "@/utils";
-import { TimetableLoadingWidget } from "../services/schedule/widget/TimetableLoadingWidget";
-import TimetableWidget from "../services/schedule/widget/TimetableWidget";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 

@@ -17,7 +17,7 @@ export const ErrorState = ({
       refreshing={refreshing}
       onRefresh={onRefresh}
       title={t("services.homework.title")}
-      about={
+      header={
         <AboutModal
           title={t("services.homework.title")}
           description={t("services.homework.about")}

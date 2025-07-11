@@ -12,7 +12,7 @@ export const Olimtpe = () => {
     <Page
       goBack
       title={t("services.olimtpe.title")}
-      about={
+      header={
         <AboutModal
           title={t("services.olimtpe.title")}
           description={t("services.olimtpe.about")}

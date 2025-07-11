@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
+import { AboutSection } from "@/app/screens/services/washing-machines/components/AboutSection";
 import { WashingMachineCardSkeleton } from "@/components/custom/card/WashingMachineCard";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
-import { AboutSection } from "../AboutSection";
 
 export const WashingMachineLoadingState = () => {
   const { t } = useTranslation();
@@ -15,7 +15,7 @@ export const WashingMachineLoadingState = () => {
       goBack
       className="gap-6"
       title={t("services.washingMachine.title")}
-      about={<AboutSection />}
+      header={<AboutSection />}
     >
       <View className="flex-col gap-4">
         <Text style={{ color: theme.text }} className="text-xl font-bold">

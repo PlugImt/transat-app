@@ -1,5 +1,5 @@
 import { RootNavigator } from "@/app/navigation/RootNavigator";
-import "../i18n";
+import "@/i18n";
 import "./global.css";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import * as Sentry from "@sentry/react-native";

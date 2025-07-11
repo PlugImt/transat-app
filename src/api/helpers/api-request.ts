@@ -3,10 +3,10 @@ import { spanToTraceHeader } from "@sentry/core";
 import * as Sentry from "@sentry/react-native";
 import type { AxiosRequestConfig } from "axios";
 import { t } from "i18next";
+import { Method } from "@/api/enums";
+import { getApiInstance } from "@/api/helpers/api-instance";
+import type { ApiMethod } from "@/api/types";
 import { storage } from "@/services/storage/asyncStorage";
-import { Method } from "../enums";
-import type { ApiMethod } from "../types";
-import { getApiInstance } from "./api-instance";
 
 export const apiRequest = async <T>(
   endpoint: string,

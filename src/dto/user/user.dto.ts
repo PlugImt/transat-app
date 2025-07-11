@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { scolaritySchema } from "../scolarity";
+import { scolaritySchema } from "@/dto/scolarity";
 
 //
 // — Base types

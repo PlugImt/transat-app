@@ -26,10 +26,10 @@ import {
   Traq,
   WashingMachines,
 } from "@/app/screens/services";
+import { HomeworkDetails } from "@/app/screens/services/homework/components/HomeworkDetails";
 import { Services } from "@/app/screens/services/Services";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { BottomTabParamList } from "@/types";
-import { HomeworkDetails } from "../../app/screens/services/homework/components/HomeworkDetails";
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 

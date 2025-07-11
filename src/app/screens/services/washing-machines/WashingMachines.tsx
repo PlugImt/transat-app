@@ -45,7 +45,7 @@ export const WashingMachines = () => {
       refreshing={isFetching}
       className="gap-6"
       title={t("services.washingMachine.title")}
-      about={<AboutSection />}
+      header={<AboutSection />}
     >
       {isEmpty ? (
         <View className="min-h-screen flex justify-center items-center">

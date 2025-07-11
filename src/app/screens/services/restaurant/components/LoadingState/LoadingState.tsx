@@ -13,7 +13,7 @@ export const LoadingState = () => {
   return (
     <Page
       title={t("services.restaurant.title")}
-      about={
+      header={
         <AboutModal
           title={t("services.restaurant.title")}
           description={t("services.restaurant.about")}

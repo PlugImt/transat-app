@@ -64,7 +64,7 @@ export const Traq = () => {
       onRefresh={refetch}
       className="gap-4"
       title={t("services.traq.title")}
-      about={<AboutSection />}
+      header={<AboutSection />}
     >
       <TraqFilter
         tags={tags}

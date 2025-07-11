@@ -12,7 +12,7 @@ export const LoadingState = () => {
     <Page
       goBack
       title={t("services.timetable.title")}
-      about={
+      header={
         <AboutModal
           title={t("services.timetable.title")}
           description={t("services.timetable.about")}

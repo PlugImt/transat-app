@@ -146,7 +146,7 @@ export const Timetable = () => {
       refreshing={isPendingEdt}
       onRefresh={refetch}
       title={t("services.timetable.title")}
-      about={
+      header={
         <AboutModal
           title={t("services.timetable.title")}
           description={t("services.timetable.about")}

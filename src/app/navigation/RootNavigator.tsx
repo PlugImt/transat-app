@@ -2,11 +2,11 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useEffect, useState } from "react";
 import { AppNavigator } from "@/app/navigation/AppNavigator";
 import { AuthNavigator } from "@/app/navigation/AuthNavigator";
+import { HomeLoading } from "@/app/screens/home/Home";
 import { useAuth } from "@/hooks/account/useAuth";
 import { i18nInitializedPromise } from "@/i18n";
 import { screenOptions } from "@/navigation/navigationConfig";
 import type { RootStackParamList } from "@/services/storage/types";
-import { HomeLoading } from "../screens/home/Home";
 
 const Stack = createStackNavigator<RootStackParamList>();
 

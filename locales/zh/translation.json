@@ -254,8 +254,8 @@
   },
   "services": {
     "title": "服务",
-    "noServicesEnabled": "没有启用的小部件",
-    "noServicesEnabledDescription": "您可以通过启用或禁用小部件来自定义它们",
+    "noServicesEnabled": "没有启用的服务",
+    "noServicesEnabledDescription": "您可以通过启用或禁用服务来自定义它们",
     "market": "市场",
     "weather": "天气",
     "traq": {

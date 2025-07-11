@@ -1,4 +1,4 @@
-import React, { type ReactNode, useRef, useState } from "react";
+import React, { type ReactNode, useEffect, useRef, useState } from "react";
 import { Dimensions, RefreshControl, View } from "react-native";
 import ConfettiCannon from "react-native-confetti-cannon";
 import Animated from "react-native-reanimated";
@@ -43,14 +43,16 @@ export const Page = ({
   const [confettiTriggered, setConfettiTriggered] = useState(false);
 
   // Expose the confetti trigger function to parent components
-  if (onConfettiTrigger) {
-    onConfettiTrigger(() => {
-      if (confettiRef.current) {
-        setConfettiTriggered(true);
-        confettiRef.current.start();
-      }
-    });
-  }
+  useEffect(() => {
+    if (onConfettiTrigger) {
+      onConfettiTrigger(() => {
+        if (confettiRef.current) {
+          setConfettiTriggered(true);
+          confettiRef.current.start();
+        }
+      });
+    }
+  }, [onConfettiTrigger]);
 
   const containerStyle = {
     paddingBottom: footer ? 0 : 40,
@@ -76,9 +78,11 @@ export const Page = ({
 
   const getContent = () => {
     if (asChildren) {
-      return React.cloneElement(children as React.ReactElement, {
-        ...contentWrapperProps,
-      });
+      return React.isValidElement(children)
+        ? React.cloneElement(children, {
+            ...contentWrapperProps,
+          })
+        : children;
     }
     if (disableScroll) {
       return (

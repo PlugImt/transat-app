@@ -160,7 +160,7 @@ export const PreferenceCustomizationButton = ({
 
   return (
     <>
-      {children &&
+      {React.isValidElement(children) &&
         React.cloneElement(children, { onPress: () => setVisible(true) })}
       <PreferenceCustomizationModal
         visible={visible}

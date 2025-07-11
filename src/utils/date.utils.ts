@@ -74,3 +74,51 @@ export const getWeekId = (d: Date): string => {
   // TODO : Use Format here
   return monday.toISOString().slice(0, 10);
 };
+
+/**
+ * Returns a human-readable "time ago" string for a given date
+ */
+export const getTimeAgo = (
+  dateString: string,
+  // biome-ignore lint/suspicious/noExplicitAny: can't do better here
+  t: (key: string, options?: any) => string,
+): string => {
+  const now = new Date();
+  const date = new Date(dateString);
+  const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+
+  if (diffInSeconds < 60) {
+    return t("common.timeAgo.now");
+  }
+
+  const diffInMinutes = Math.floor(diffInSeconds / 60);
+  if (diffInMinutes < 60) {
+    const key =
+      diffInMinutes <= 1 ? "common.timeAgo.minute" : "common.timeAgo.minutes";
+    return t(key, { count: diffInMinutes });
+  }
+
+  const diffInHours = Math.floor(diffInMinutes / 60);
+  if (diffInHours < 24) {
+    const key =
+      diffInHours <= 1 ? "common.timeAgo.hour" : "common.timeAgo.hours";
+    return t(key, { count: diffInHours });
+  }
+
+  const diffInDays = Math.floor(diffInHours / 24);
+  if (diffInDays < 30) {
+    const key = diffInDays <= 1 ? "common.timeAgo.day" : "common.timeAgo.days";
+    return t(key, { count: diffInDays });
+  }
+
+  const diffInMonths = Math.floor(diffInDays / 30);
+  if (diffInMonths < 12) {
+    const key =
+      diffInMonths <= 1 ? "common.timeAgo.month" : "common.timeAgo.months";
+    return t(key, { count: diffInMonths });
+  }
+
+  const diffInYears = Math.floor(diffInMonths / 12);
+  const key = diffInYears <= 1 ? "common.timeAgo.year" : "common.timeAgo.years";
+  return t(key, { count: diffInYears });
+};

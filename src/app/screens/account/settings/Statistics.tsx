@@ -36,7 +36,7 @@ interface ServerStatus {
 }
 
 // Define API base URL
-const API_BASE_URL = "https://transat.destimt.fr";
+const API_BASE_URL = "https://api.transat.dev";
 
 export const Statistics = () => {
   const { t } = useTranslation();

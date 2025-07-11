@@ -1,12 +1,15 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Image, Text, View } from "react-native";
+import {
+  LoadingState,
+  RestaurantMenu,
+} from "@/app/screens/services/restaurant/components";
 import { AboutModal } from "@/components/custom/AboutModal";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useMenuRestaurant } from "@/hooks/useMenuRestaurant";
 import { getOpeningHoursData, isWeekend, outOfService } from "@/utils";
-import { LoadingState, RestaurantMenu } from "./components";
 
 export const Restaurant = () => {
   const { t } = useTranslation();
@@ -17,8 +20,9 @@ export const Restaurant = () => {
 
   const weekend: boolean = useMemo(() => isWeekend(), []);
   const outOfHours: boolean = useMemo(
-    () => (menu?.updated_date ? outOfService(menu.updated_date) : false),
-    [menu?.updated_date],
+    () =>
+      menu?.updatedDate ? outOfService(menu.updatedDate.toString()) : false,
+    [menu?.updatedDate],
   );
 
   if (isPending || !menu) {
@@ -31,7 +35,7 @@ export const Restaurant = () => {
         refreshing={isPending}
         onRefresh={refetch}
         title={t("services.restaurant.title")}
-        about={
+        header={
           <AboutModal
             title={t("services.restaurant.title")}
             description={t("services.restaurant.about")}
@@ -63,7 +67,7 @@ export const Restaurant = () => {
         refreshing={isPending}
         onRefresh={refetch}
         title={t("services.restaurant.title")}
-        about={
+        header={
           <AboutModal
             title={t("services.restaurant.title")}
             description={t("services.restaurant.about")}
@@ -98,7 +102,7 @@ export const Restaurant = () => {
         refreshing={isPending}
         onRefresh={refetch}
         title={t("services.restaurant.title")}
-        about={
+        header={
           <AboutModal
             title={t("services.restaurant.title")}
             description={t("services.restaurant.about")}
@@ -122,7 +126,7 @@ export const Restaurant = () => {
       onRefresh={refetch}
       goBack
       title={t("services.restaurant.title")}
-      about={
+      header={
         <AboutModal
           title={t("services.restaurant.title")}
           description={t("services.restaurant.about")}

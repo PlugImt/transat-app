@@ -58,7 +58,21 @@
     "credits": "Créditos",
     "underConstruction": "Em construção 🏗️",
     "underConstructionDesc": "Estamos a trabalhar arduamente para lhe apresentar esta nova funcionalidade o mais rapidamente possível. Fique atento!",
-    "refresh": "Atualizar"
+    "refresh": "Atualizar",
+    "timeAgo": {
+      "now": "agora mesmo",
+      "minute": "há {{count}} minuto",
+      "minutes": "há {{count}} minutos",
+      "hour": "há {{count}} hora",
+      "hours": "há {{count}} horas",
+      "day": "há {{count}} dia",
+      "days": "há {{count}} dias",
+      "month": "há {{count}} mês",
+      "months": "há {{count}} meses",
+      "year": "há {{count}} ano",
+      "years": "há {{count}} anos"
+    },
+    "seeMore": "Ver mais"
   },
   "settings": {
     "settings": "Definições",
@@ -280,11 +294,26 @@
       },
       "location": "Junto ao ginásio",
       "about": "A API prepara diariamente pratos frescos e caseiros - até a salada de frutas! A ementa muda todos os dias ao almoço e ao jantar.",
-      "price": "3,95 € para uma entrada, prato principal e sobremesa.",
+      "price": "3,30 € para uma entrada, prato principal e sobremesa.",
       "additionalInfo": "É possível trocar uma entrada por uma sobremesa. Estão disponíveis pratos adicionais por um custo adicional. Ainda tem fome? Pergunte aos empregados! Depois das 19:45, a comida adicional ao jantar é gratuita.",
       "closedUpdated": {
         "title": "Ainda não temos o cardápio",
         "description": "O cardápio não foi atualizado. Volte mais tarde."
+      },
+      "reviews": {
+        "rate": "Avaliar",
+        "noReviews": "Ainda não há avaliações",
+        "noReviewsTitle": "Nenhuma avaliação foi dada a este prato",
+        "noReviewsSubtitle": "Seja o primeiro a avaliá-lo!",
+        "servicesCount": "{{count}} serviços",
+        "averageRating": "{{rating}} • {{count}} avaliações",
+        "dialog": {
+          "title": "Dê a sua opinião",
+          "commentPlaceholder": "Descreva o que sentiu ao comer este prato",
+          "submit": "Avaliar",
+          "successMessage": "A sua avaliação foi publicada com sucesso!",
+          "errorMessage": "Ocorreu um erro ao publicar a sua avaliação."
+        }
       }
     },
     "timetable": {

@@ -43,6 +43,19 @@
     "clearAll": "Clear",
     "filter": "Filter",
     "refresh": "Refresh",
+    "timeAgo": {
+      "now": "just now",
+      "minute": "{{count}} minute ago",
+      "minutes": "{{count}} minutes ago",
+      "hour": "{{count}} hour ago",
+      "hours": "{{count}} hours ago",
+      "day": "{{count}} day ago",
+      "days": "{{count}} days ago",
+      "month": "{{count}} month ago",
+      "months": "{{count}} months ago",
+      "year": "{{count}} year ago",
+      "years": "{{count}} years ago"
+    },
     "days": {
       "monday": "Monday",
       "tuesday": "Tuesday",
@@ -58,7 +71,8 @@
     "plugImtNote": "NOTE: Plug'IMT is an association created by IMT students but is not affiliated with the school",
     "credits": "Credits",
     "underConstruction": "Under construction 🏗️",
-    "underConstructionDesc": "We're working hard to bring you this new feature as soon as possible. Stay tuned!"
+    "underConstructionDesc": "We're working hard to bring you this new feature as soon as possible. Stay tuned!",
+    "seeMore": "See more"
   },
   "settings": {
     "settings": "Settings",
@@ -285,8 +299,23 @@
       },
       "location": "Next to the gym",
       "about": "API prepares fresh and homemade dishes daily—even the fruit salad! The menu changes every day for lunch and dinner.",
-      "price": "3.95 € for a starter, main course and dessert.",
-      "additionalInfo": "You can exchange a starter for a dessert. Additional dishes are available for an extra cost. Still hungry? Ask the servers! After 7:45 PM, additional food at dinner is free."
+      "price": "3.30€ (lunch) and 4.60 (dinner) for a starter, main course and dessert.",
+      "additionalInfo": "You can exchange a starter for a dessert. Additional dishes are available for an extra cost. Still hungry? Ask the servers! After 7:45 PM, additional food at dinner is free.",
+      "reviews": {
+        "rate": "Rate",
+        "noReviews": "No reviews yet",
+        "noReviewsTitle": "No rating has been given to this dish",
+        "noReviewsSubtitle": "Be the first to rate it!",
+        "servicesCount": "{{count}} services",
+        "averageRating": "{{rating}} • {{count}} reviews",
+        "dialog": {
+          "title": "Give your review",
+          "commentPlaceholder": "Describe what you felt while eating this dish",
+          "submit": "Rate",
+          "successMessage": "Your review has been posted successfully!",
+          "errorMessage": "An error occurred while posting your review."
+        }
+      }
     },
     "timetable": {
       "title": "Timetable",

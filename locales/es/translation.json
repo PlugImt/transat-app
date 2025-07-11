@@ -58,7 +58,21 @@
     "credits": "Créditos",
     "underConstruction": "En construcción 🏗️",
     "underConstructionDesc": "Estamos trabajando duro para ofrecerte esta nueva función lo antes posible. ¡Mantente atento!",
-    "refresh": "Actualizar"
+    "refresh": "Actualizar",
+    "timeAgo": {
+      "now": "ahora mismo",
+      "minute": "hace {{count}} minuto",
+      "minutes": "hace {{count}} minutos",
+      "hour": "hace {{count}} hora",
+      "hours": "hace {{count}} horas",
+      "day": "hace {{count}} día",
+      "days": "hace {{count}} días",
+      "month": "hace {{count}} mes",
+      "months": "hace {{count}} meses",
+      "year": "hace {{count}} año",
+      "years": "hace {{count}} años"
+    },
+    "seeMore": "Ver más"
   },
   "settings": {
     "settings": "Configuración",
@@ -280,11 +294,26 @@
       },
       "location": "Junto al gimnasio",
       "about": "API prepara platos frescos y caseros diariamente—¡incluso la ensalada de frutas! El menú cambia todos los días para el almuerzo y la cena.",
-      "price": "3,95€ por un entrante, un plato principal y un postre.",
+      "price": "3,30€ por un entrante, un plato principal y un postre.",
       "additionalInfo": "Puedes cambiar un entrante por un postre. Hay platos adicionales disponibles, por un coste adicional. ¿Aún tienes hambre? ¡Pregunta a los camareros! Después de las 19:45, la comida adicional en la cena es gratis.",
       "closedUpdated": {
         "title": "Aún no tenemos el menú",
         "description": "El menú no se ha actualizado. Vuelva más tarde."
+      },
+      "reviews": {
+        "rate": "Calificar",
+        "noReviews": "Aún no hay reseñas",
+        "noReviewsTitle": "No se ha dado ninguna calificación a este plato",
+        "noReviewsSubtitle": "¡Sé el primero en calificarlo!",
+        "servicesCount": "{{count}} servicios",
+        "averageRating": "{{rating}} • {{count}} reseñas",
+        "dialog": {
+          "title": "Da tu opinión",
+          "commentPlaceholder": "Describe lo que sentiste al comer este plato",
+          "submit": "Calificar",
+          "successMessage": "¡Tu reseña ha sido publicada exitosamente!",
+          "errorMessage": "Ocurrió un error al publicar tu reseña."
+        }
       }
     },
     "timetable": {

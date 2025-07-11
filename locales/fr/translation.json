@@ -58,7 +58,21 @@
     "credits": "Crédits",
     "underConstruction": "En cours de développement 🏗️",
     "underConstructionDesc": "De nouvelles fonctionnalités arrivent bientôt ;)",
-    "refresh": "Actualiser"
+    "refresh": "Actualiser",
+    "timeAgo": {
+      "now": "à l'instant",
+      "minute": "il y a {{count}} minute",
+      "minutes": "il y a {{count}} minutes",
+      "hour": "il y a {{count}} heure",
+      "hours": "il y a {{count}} heures",
+      "day": "il y a {{count}} jour",
+      "days": "il y a {{count}} jours",
+      "month": "il y a {{count}} mois",
+      "months": "il y a {{count}} mois",
+      "year": "il y a {{count}} an",
+      "years": "il y a {{count}} ans"
+    },
+    "seeMore": "Voir plus"
   },
   "settings": {
     "settings": "Paramètres",
@@ -281,11 +295,26 @@
       },
       "location": "À côté du gymnase",
       "about": "API prépare des plats frais et faits maison quotidiennement—même la salade de fruits ! Le menu change tous les jours pour le déjeuner et le dîner.",
-      "price": "3,95€ pour une entrée, un plat principal et un dessert.",
+      "price": "3,30€ (midi) et 4.60€ (soir) pour une entrée, un plat principal et un dessert.",
       "additionalInfo": "Vous pouvez échanger une entrée contre un dessert. Des plats supplémentaires sont disponibles, pour un coût supplémentaire. Vous avez encore faim ? Demandez aux serveurs ! Après 19h45, la nourriture supplémentaire au dîner est gratuite.",
       "closedUpdated": {
         "title": "Nous n'avons pas encore le menu",
         "description": "Le menu n'a pas été mis à jour. Revenez plus tard."
+      },
+      "reviews": {
+        "rate": "Noter",
+        "noReviews": "Aucun avis pour le moment",
+        "noReviewsTitle": "Aucune note n'a été donnée à ce plat",
+        "noReviewsSubtitle": "Sois le premier à le noter!",
+        "servicesCount": "{{count}} services",
+        "averageRating": "{{rating}} • {{count}} avis",
+        "dialog": {
+          "title": "Donnez votre avis",
+          "commentPlaceholder": "Décrivez ce que vous avez ressenti en mangeant ce plat",
+          "submit": "Noter",
+          "successMessage": "Votre avis a été publié avec succès !",
+          "errorMessage": "Une erreur est survenue lors de la publication de votre avis."
+        }
       }
     },
     "timetable": {

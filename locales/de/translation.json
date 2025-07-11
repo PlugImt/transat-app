@@ -58,7 +58,21 @@
     "credits": "Credits",
     "underConstruction": "In Bearbeitung 🏗️",
     "underConstructionDesc": "Wir arbeiten hart daran, Ihnen diese neue Funktion so schnell wie möglich zur Verfügung zu stellen. Bleiben Sie dran!",
-    "refresh": "Aktualisieren"
+    "refresh": "Aktualisieren",
+    "timeAgo": {
+      "now": "gerade eben",
+      "minute": "vor {{count}} Minute",
+      "minutes": "vor {{count}} Minuten",
+      "hour": "vor {{count}} Stunde",
+      "hours": "vor {{count}} Stunden",
+      "day": "vor {{count}} Tag",
+      "days": "vor {{count}} Tagen",
+      "month": "vor {{count}} Monat",
+      "months": "vor {{count}} Monaten",
+      "year": "vor {{count}} Jahr",
+      "years": "vor {{count}} Jahren"
+    },
+    "seeMore": "Mehr sehen"
   },
   "settings": {
     "settings": "Einstellungen",
@@ -281,11 +295,26 @@
       },
       "location": "Neben der Turnhalle",
       "about": "API bereitet frische und hausgemachte Gerichte zu, darunter auch den Obstsalat! Das Menü wechselt täglich für Mittag- und Abendessen.",
-      "price": "3,95 € für einen Starter, Hauptgang und Nachtisch.",
+      "price": "3,30 € für einen Starter, Hauptgang und Nachtisch.",
       "additionalInfo": "Sie können einen Starter gegen ein Dessert eintauschen. Zusätzliche Gerichte sind gegen Aufpreis erhältlich. Noch immer hungrig? Fragen Sie die Kellner! Nach 7:45 PM ist zusätzliches Essen zum Abendessen kostenlos.",
       "closedUpdated": {
         "title": "Wir haben noch kein Menü",
         "description": "Das Menü wurde nicht aktualisiert. Schauen Sie später wieder vorbei."
+      },
+      "reviews": {
+        "rate": "Bewerten",
+        "noReviews": "Noch keine Bewertungen",
+        "noReviewsTitle": "Diesem Gericht wurde noch keine Bewertung gegeben",
+        "noReviewsSubtitle": "Seien Sie der Erste, der es bewertet!",
+        "servicesCount": "{{count}} Services",
+        "averageRating": "{{rating}} • {{count}} Bewertungen",
+        "dialog": {
+          "title": "Geben Sie Ihre Bewertung ab",
+          "commentPlaceholder": "Beschreiben Sie, was Sie beim Essen dieses Gerichts empfunden haben",
+          "submit": "Bewerten",
+          "successMessage": "Ihre Bewertung wurde erfolgreich veröffentlicht!",
+          "errorMessage": "Beim Veröffentlichen Ihrer Bewertung ist ein Fehler aufgetreten."
+        }
       }
     },
     "timetable": {

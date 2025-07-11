@@ -94,7 +94,7 @@ export const getTimeAgo = (
   const diffInMinutes = Math.floor(diffInSeconds / 60);
   if (diffInMinutes < 60) {
     const key =
-      diffInMinutes === 1 ? "common.timeAgo.minute" : "common.timeAgo.minutes";
+      diffInMinutes <= 1 ? "common.timeAgo.minute" : "common.timeAgo.minutes";
     return t(key, { count: diffInMinutes });
   }
 

@@ -52,6 +52,13 @@ export const Page = ({
     });
   }
 
+  const containerStyle = {
+    paddingBottom: footer ? 0 : 40,
+    paddingTop: HEADER_HEIGHT,
+  };
+
+  const containerClassName = cn("flex-1 gap-4 px-5", className);
+
   const contentWrapperProps = {
     onScroll: scrollHandler,
     refreshControl: onRefresh ? (
@@ -63,11 +70,8 @@ export const Page = ({
         progressViewOffset={HEADER_HEIGHT}
       />
     ) : undefined,
-    contentContainerStyle: {
-      paddingBottom: footer ? 0 : 40,
-      paddingTop: HEADER_HEIGHT,
-    },
-    contentContainerClassName: cn("gap-4 pb-10 px-5", className),
+    contentContainerStyle: containerStyle,
+    contentContainerClassName: containerClassName,
   };
 
   const getContent = () => {
@@ -79,8 +83,8 @@ export const Page = ({
     if (disableScroll) {
       return (
         <View
-          className="flex-1"
-          style={{ paddingTop: HEADER_HEIGHT }}
+          className={containerClassName}
+          style={containerStyle}
           {...contentWrapperProps}
         >
           {children}
@@ -88,7 +92,7 @@ export const Page = ({
       );
     }
     return (
-      <Animated.ScrollView {...contentWrapperProps} className="flex-1">
+      <Animated.ScrollView {...contentWrapperProps}>
         {children}
       </Animated.ScrollView>
     );

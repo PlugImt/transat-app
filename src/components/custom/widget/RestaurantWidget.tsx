@@ -1,10 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
+import { LinearGradient } from "expo-linear-gradient";
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Dimensions, Image, Text, TouchableOpacity, View } from "react-native";
-
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { MenuItem } from "@/dto";
@@ -182,14 +182,14 @@ export const RestaurantWidget = () => {
             style={{ color: theme.primary }}
             className="text-sm font-medium px-4"
           >
-            Voir plus
+            {t("common.seeMore")}
           </Text>
         </TouchableOpacity>
       </View>
       <TouchableOpacity
         onPress={() => navigation.navigate("Restaurant")}
         style={{ backgroundColor: theme.card }}
-        className="px-6 py-4 rounded-lg overflow-hidden"
+        className="px-6 pt-4 rounded-lg overflow-hidden"
       >
         <View className="relative">
           <View
@@ -316,6 +316,11 @@ export const RestaurantWidget = () => {
               </>
             ) : null}
           </View>
+
+          <LinearGradient
+            colors={[theme.card, "transparent"]}
+            className="absolute left-0 right-0 bottom-0 h-[200px] transform rotate-180"
+          />
         </View>
       </TouchableOpacity>
     </View>

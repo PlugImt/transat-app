@@ -72,7 +72,8 @@
       "months": "{{count}}个月前",
       "year": "{{count}}年前",
       "years": "{{count}}年前"
-    }
+    },
+    "seeMore": "查看更多"
   },
   "settings": {
     "settings": "设置",

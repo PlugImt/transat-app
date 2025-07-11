@@ -72,7 +72,8 @@
       "months": "il y a {{count}} mois",
       "year": "il y a {{count}} an",
       "years": "il y a {{count}} ans"
-    }
+    },
+    "seeMore": "Voir plus"
   },
   "settings": {
     "settings": "Paramètres",

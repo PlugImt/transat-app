@@ -72,7 +72,8 @@
       "months": "há {{count}} meses",
       "year": "há {{count}} ano",
       "years": "há {{count}} anos"
-    }
+    },
+    "seeMore": "Ver mais"
   },
   "settings": {
     "settings": "Definições",

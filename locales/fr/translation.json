@@ -12,6 +12,7 @@
     "home": "Accueil",
     "account": "Compte",
     "freeToUse": "Libre",
+    "empty": "C'est bien vide par ici",
     "free": "Gratuit",
     "cancel": "Annuler",
     "closed": "Fermé",
@@ -31,10 +32,8 @@
     "customizeWidgets": "Personnaliser les widgets",
     "customizeServices": "Personnaliser les services",
     "customizeHint": "Activez/désactivez les services ou faites-les glisser pour les réorganiser",
-    "noWidgetsEnabled": "Aucun widget activé. Personnalisez pour en ajouter !",
-    "resizeToFull": "Redimensionner en pleine largeur",
-    "resizeToHalf": "Redimensionner en demi-largeur",
-    "cardSizeToggled": "Taille de la carte modifiée",
+    "noWidgetsEnabled": "Aucun widget activé",
+    "noWidgetsEnabledDescription": "Vous pouvez personnaliser les widgets en les activant ou les désactivant",
     "errors": {
       "occurred": "Une erreur est survenue",
       "unableToFetch": "Impossible de récupérer les données"
@@ -242,6 +241,8 @@
   },
   "services": {
     "title": "Services",
+    "noServicesEnabled": "Aucun service activé",
+    "noServicesEnabledDescription": "Vous pouvez personnaliser les services en les activant ou les désactivant",
     "market": "Marché",
     "weather": "Météo",
     "traq": {

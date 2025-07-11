@@ -4,17 +4,15 @@ import { useIsFetching, useQueryClient } from "@tanstack/react-query";
 import Constants from "expo-constants";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
-import type React from "react";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { Pencil } from "lucide-react-native";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Platform, Text, TouchableOpacity, View } from "react-native";
-import DraggableFlatList, {
-  type RenderItemParams,
-  ScaleDecorator,
-} from "react-native-draggable-flatlist";
-
+import { Platform, Text } from "react-native";
+import Animated from "react-native-reanimated";
+import { IconButton } from "@/components/common/Button";
 import { Page } from "@/components/common/Page";
-import { WidgetCustomizationButton } from "@/components/common/WidgetCustomizationModal";
+import { PreferenceCustomizationButton } from "@/components/common/PreferenceCustomizationModal";
+import { Empty } from "@/components/custom/Empty";
 import {
   WeatherSkeleton,
   WeatherWidget,
@@ -35,10 +33,9 @@ import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";
 import { useUser } from "@/hooks/account/useUser";
 import { useAnimatedHeader } from "@/hooks/useAnimatedHeader";
-import { useHomeWidgetPreferences } from "@/hooks/useWidgetPreferences";
+import { useHomeWidgetPreferences } from "@/hooks/usePreferences";
 import { washingMachineNotificationService } from "@/services/notifications/washingMachineNotifications";
 import type { AppStackParamList } from "@/services/storage/types";
-import type { WidgetPreference } from "@/services/storage/widgetPreferences";
 import { isDinner, isLunch, isWeekend } from "@/utils";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
@@ -97,12 +94,6 @@ const registerForPushNotificationsAsync = async () => {
   }
 };
 
-interface DraggableWidgetItem {
-  id: string;
-  key: string;
-  component: React.ReactNode;
-}
-
 export const Home = () => {
   const { data: user } = useUser();
   const { t } = useTranslation();
@@ -111,10 +102,10 @@ export const Home = () => {
 
   const { saveExpoPushToken } = useAuth();
   const {
-    enabledWidgets,
-    widgets,
+    preferences: widgets,
+    enabledPreferences: enabledWidgets,
+    loading,
     updateOrder,
-    loading: widgetsLoading,
   } = useHomeWidgetPreferences();
 
   const [_expoPushToken, setExpoPushToken] = useState("");
@@ -227,109 +218,46 @@ export const Home = () => {
     }
   }, []);
 
-  const draggableWidgets: DraggableWidgetItem[] = useMemo(() => {
-    return enabledWidgets
-      .map((widget) => ({
-        id: widget.id,
-        key: widget.id,
-        component: getWidgetComponent(widget.id),
-      }))
-      .filter((item) => item.component !== null);
-  }, [enabledWidgets, getWidgetComponent]);
-
-  const renderWidget = ({
-    item,
-    drag,
-    isActive,
-  }: RenderItemParams<DraggableWidgetItem>) => {
-    return (
-      <ScaleDecorator>
-        <TouchableOpacity
-          onLongPress={drag}
-          delayLongPress={200}
-          style={{
-            opacity: isActive ? 0.8 : 1,
-            transform: [{ scale: isActive ? 1.02 : 1 }],
-          }}
-          activeOpacity={1}
-        >
-          {item.component}
-        </TouchableOpacity>
-      </ScaleDecorator>
-    );
-  };
-
-  const handleDragEnd = async ({ data }: { data: DraggableWidgetItem[] }) => {
-    const reorderedWidgets = data
-      .map((item, index) => {
-        const originalWidget = enabledWidgets.find((w) => w.id === item.id);
-        return originalWidget ? { ...originalWidget, order: index } : null;
-      })
-      .filter(Boolean) as WidgetPreference[];
-
-    await updateOrder(reorderedWidgets);
-  };
-
-  const handleCustomizationSave = async (updatedItems: any[]) => {
-    await updateOrder(updatedItems as WidgetPreference[]);
-  };
-
-  if (widgetsLoading) {
+  if (loading) {
     return <HomeLoading />;
   }
 
   return (
     <Page
       asChildren
-      disableScroll={true}
       refreshing={isFetching}
       onRefresh={refetch}
-      header={
-        <Text className="h1 ml-4" style={{ color: theme.text }}>
+      title={
+        <Text className="font-bold text-3xl ml-4" style={{ color: theme.text }}>
           {t("common.welcome")}
           {user?.first_name && (
             <Text style={{ color: theme.primary }}> {user.first_name}</Text>
           )}
         </Text>
       }
+      header={
+        <PreferenceCustomizationButton
+          items={widgets}
+          title={t("common.customizeWidgets")}
+          onUpdate={updateOrder}
+        >
+          <IconButton
+            icon={<Pencil color={theme.text} size={20} />}
+            variant="link"
+          />
+        </PreferenceCustomizationButton>
+      }
     >
-      <DraggableFlatList
-        data={draggableWidgets}
-        onDragEnd={handleDragEnd}
-        keyExtractor={(item) => item.key}
-        renderItem={renderWidget}
+      <Animated.FlatList
+        data={enabledWidgets}
+        renderItem={({ item }) => getWidgetComponent(item.id)}
+        keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={true}
         onScroll={scrollHandler}
         ListEmptyComponent={
-          <View
-            style={{
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center",
-              marginTop: 50,
-            }}
-          >
-            <Text style={{ fontSize: 16, color: theme.text }}>
-              {t("common.noWidgetsEnabled")}
-            </Text>
-            <WidgetCustomizationButton
-              items={widgets}
-              onUpdate={handleCustomizationSave}
-              title={t("common.customizeWidgets")}
-              buttonLabel={t("common.customizeWidgets")}
-              variant="ghost"
-              className="mt-4"
-            />
-          </View>
-        }
-        ListFooterComponent={
-          <WidgetCustomizationButton
-            items={widgets}
-            onUpdate={handleCustomizationSave}
-            title={t("common.customizeWidgets")}
-            buttonLabel={t("common.customizeWidgets")}
-            variant="ghost"
-            className="mt-8"
+          <Empty
+            title={t("common.noWidgetsEnabled")}
+            description={t("common.noWidgetsEnabledDescription")}
           />
         }
       />
@@ -343,8 +271,7 @@ export const HomeLoading = () => {
   const { t } = useTranslation();
 
   return (
-    <Page className="gap-6">
-      <Text className="h1 m-4">{t("common.welcome")}</Text>
+    <Page className="gap-6" title={t("common.welcome")}>
       <WeatherSkeleton />
       {!isWeekend() && !isLunch() && !isDinner() ? (
         <RestaurantWidgetLoading />

@@ -1,7 +1,7 @@
 import { GripVertical } from "lucide-react-native";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Modal, Switch, TouchableOpacity, View } from "react-native";
+import { Modal, Switch, Text, TouchableOpacity, View } from "react-native";
 import DraggableFlatList, {
   type RenderItemParams,
   ScaleDecorator,
@@ -9,37 +9,30 @@ import DraggableFlatList, {
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Button } from "@/components/common/Button";
 import { Page } from "@/components/common/Page";
-import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
-import type {
-  ServicePreference,
-  WidgetPreference,
-} from "@/services/storage/widgetPreferences";
+import type { Preference } from "@/services/storage/widgetPreferences";
 
-type CustomizableItem = WidgetPreference | ServicePreference;
-
-interface WidgetCustomizationModalProps {
+interface PreferenceCustomizationModalProps {
   visible: boolean;
   onClose: () => void;
-  items: CustomizableItem[];
-  onUpdate: (items: CustomizableItem[]) => void;
+  items: Preference[];
   title: string;
+  onUpdate: (items: Preference[]) => void;
 }
 
-const WidgetCustomizationModal = ({
+const PreferenceCustomizationModal = ({
   visible,
   onClose,
-  items: initialItems = [],
   onUpdate,
+  items: initialItems = [],
   title,
-}: WidgetCustomizationModalProps) => {
+}: PreferenceCustomizationModalProps) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const [localItems, setLocalItems] =
-    useState<CustomizableItem[]>(initialItems);
+  const [localItems, setLocalItems] = useState<Preference[]>(initialItems);
 
   const handleSave = () => {
-    const orderedItems = localItems
+    const orderedItems: Preference[] = localItems
       .map((item, index) => ({ ...item, order: index }))
       .sort((a, b) => a.order - b.order);
     onUpdate(orderedItems);
@@ -54,7 +47,7 @@ const WidgetCustomizationModal = ({
     );
   };
 
-  const getDisplayName = (item: CustomizableItem) => {
+  const getDisplayName = (item: Preference) => {
     const translations: Record<string, string> = {
       weather: t("services.weather") || "Weather",
       restaurant: t("services.restaurant.title"),
@@ -71,7 +64,7 @@ const WidgetCustomizationModal = ({
     item,
     drag,
     isActive,
-  }: RenderItemParams<CustomizableItem>) => (
+  }: RenderItemParams<Preference>) => (
     <ScaleDecorator key={item.id}>
       <TouchableOpacity
         onLongPress={drag}
@@ -150,46 +143,34 @@ const WidgetCustomizationModal = ({
   );
 };
 
-// Composant wrapper avec bouton intégré
-interface WidgetCustomizationButtonProps {
-  items: CustomizableItem[];
-  onUpdate: (items: CustomizableItem[]) => void;
+interface PreferenceCustomizationButtonProps {
+  items: Preference[];
   title: string;
-  buttonLabel: string;
-  variant?: "ghost" | "outlined" | "default";
-  size?: "default" | "sm" | "lg";
-  className?: string;
+  children: React.ReactElement<{ onPress?: () => void }>;
+  onUpdate: (items: Preference[]) => void;
 }
 
-export const WidgetCustomizationButton = ({
+export const PreferenceCustomizationButton = ({
   items,
-  onUpdate,
   title,
-  buttonLabel,
-  variant = "ghost",
-  size = "sm",
-  className,
-}: WidgetCustomizationButtonProps) => {
+  children,
+  onUpdate,
+}: PreferenceCustomizationButtonProps) => {
   const [visible, setVisible] = useState(false);
 
   return (
     <>
-      <Button
-        label={buttonLabel}
-        variant={variant}
-        size={size}
-        onPress={() => setVisible(true)}
-        className={className}
-      />
-      <WidgetCustomizationModal
+      {children &&
+        React.cloneElement(children, { onPress: () => setVisible(true) })}
+      <PreferenceCustomizationModal
         visible={visible}
         onClose={() => setVisible(false)}
         items={items}
-        onUpdate={onUpdate}
         title={title}
+        onUpdate={onUpdate}
       />
     </>
   );
 };
 
-export default WidgetCustomizationModal;
+export default PreferenceCustomizationModal;

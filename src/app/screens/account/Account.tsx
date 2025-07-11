@@ -189,7 +189,7 @@ const AccountLoading = () => {
   return (
     <Page
       title={t("common.account")}
-      about={
+      header={
         <IconButton
           disabled
           icon={<Settings color={theme.text} />}

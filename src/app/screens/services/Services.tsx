@@ -1,40 +1,46 @@
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
+import { Pencil } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
+import Animated from "react-native-reanimated";
+import { IconButton } from "@/components/common/Button";
 import Card from "@/components/common/Card";
-import FlexibleGrid from "@/components/common/FlexibleGrid";
 import { Page } from "@/components/common/Page";
-import { WidgetCustomizationButton } from "@/components/common/WidgetCustomizationModal";
-import { useServicePreferences } from "@/hooks/useWidgetPreferences";
+import { PreferenceCustomizationButton } from "@/components/common/PreferenceCustomizationModal";
+import { Empty } from "@/components/custom/Empty";
+import { useTheme } from "@/contexts/ThemeContext";
+import { useAnimatedHeader } from "@/hooks/useAnimatedHeader";
+import { useServicePreferences } from "@/hooks/usePreferences";
 import type { AppStackParamList } from "@/services/storage/types";
-import type { ServicePreference } from "@/services/storage/widgetPreferences";
+import type { Preference } from "@/services/storage/widgetPreferences";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
 export const Services = () => {
   const { t } = useTranslation();
+  const { theme } = useTheme();
   const navigation = useNavigation<AppScreenNavigationProp>();
-  const { enabledServices, services, updateOrder, loading } =
-    useServicePreferences();
+  const { scrollHandler } = useAnimatedHeader();
+  const {
+    enabledPreferences: enabledServices,
+    preferences: services,
+    loading,
+    updateOrder,
+  } = useServicePreferences();
 
-  const handleServicePress = (service: ServicePreference) => {
-    console.log("Service card pressed:", service.screen);
+  const handleServicePress = (service: Preference) => {
     // biome-ignore lint/suspicious/noExplicitAny: Service screen typing needs to be fixed properly
     navigation.navigate(service.screen as any);
   };
 
-  const renderServiceCard = (item: ServicePreference, width: number) => (
+  const renderServiceCard = (item: Preference) => (
     <Card
       image={item.image}
-      width={width}
+      title={item.name}
       onPress={() => handleServicePress(item)}
     />
   );
-
-  const handleCustomizationSave = async (updatedItems: any[]) => {
-    await updateOrder(updatedItems as ServicePreference[]);
-  };
 
   if (loading) {
     return (
@@ -45,23 +51,35 @@ export const Services = () => {
   }
 
   return (
-    <Page title={t("services.title")}>
-      <FlexibleGrid
-        data={enabledServices}
-        onPress={handleServicePress}
-        renderCard={renderServiceCard}
-      />
-      <View style={{ alignItems: "center", width: "100%" }}>
-        <WidgetCustomizationButton
+    <Page
+      asChildren
+      title={t("services.title")}
+      header={
+        <PreferenceCustomizationButton
           items={services}
-          onUpdate={handleCustomizationSave}
           title={t("common.customizeServices")}
-          buttonLabel={t("common.customizeServices")}
-          variant="ghost"
-          size="sm"
-          className="mb-4"
-        />
-      </View>
+          onUpdate={updateOrder}
+        >
+          <IconButton
+            icon={<Pencil color={theme.text} size={20} />}
+            variant="link"
+          />
+        </PreferenceCustomizationButton>
+      }
+    >
+      <Animated.FlatList
+        data={enabledServices}
+        renderItem={({ item }) => renderServiceCard(item)}
+        keyExtractor={(item) => item.id}
+        showsVerticalScrollIndicator={true}
+        onScroll={scrollHandler}
+        ListEmptyComponent={
+          <Empty
+            title={t("services.noServicesEnabled")}
+            description={t("services.noServicesEnabledDescription")}
+          />
+        }
+      />
     </Page>
   );
 };

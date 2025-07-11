@@ -13,7 +13,7 @@ type PageProps = {
   onRefresh?: () => void;
   className?: string;
   goBack?: boolean;
-  title?: string;
+  title?: string | ReactNode;
   header?: ReactNode;
   footer?: ReactNode;
   confetti?: boolean;

@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { ArrowLeft } from "lucide-react-native";
 import type React from "react";
+import type { ReactNode } from "react";
 import { Text, View } from "react-native";
 import Animated, {
   Extrapolation,
@@ -14,7 +15,7 @@ export const HEADER_HEIGHT = 60;
 
 type HeaderProps = {
   headerShown: SharedValue<number>;
-  title?: string;
+  title?: string | ReactNode;
   goBack?: boolean;
   children?: React.ReactNode;
 };

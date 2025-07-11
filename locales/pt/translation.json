@@ -12,6 +12,7 @@
     "home": "Início",
     "account": "Conta",
     "freeToUse": "Grátis",
+    "empty": "Está vazio aqui",
     "free": "Grátis",
     "cancel": "Cancelar",
     "closed": "Fechado",
@@ -31,10 +32,8 @@
     "customizeWidgets": "Personalizar Widgets",
     "customizeServices": "Personalizar Serviços",
     "customizeHint": "Ative/desative serviços e arraste para reordená-los",
-    "noWidgetsEnabled": "Nenhum widget ativado. Personalize para adicionar alguns!",
-    "resizeToFull": "Redimensionar para largura total",
-    "resizeToHalf": "Redimensionar para meia largura",
-    "cardSizeToggled": "Tamanho do cartão alterado",
+    "noWidgetsEnabled": "Nenhum widget ativado",
+    "noWidgetsEnabledDescription": "Pode personalizar os widgets ativando ou desativando-os",
     "errors": {
       "occurred": "Ocorreu um erro",
       "unableToFetch": "Não é possível obter dados"
@@ -241,6 +240,8 @@
   },
   "services": {
     "title": "Serviços",
+    "noServicesEnabled": "Nenhum serviço ativado",
+    "noServicesEnabledDescription": "Pode personalizar os serviços ativando ou desativando-os",
     "market": "Mercado",
     "weather": "Clima",
     "traq": {

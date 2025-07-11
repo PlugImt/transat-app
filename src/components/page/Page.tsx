@@ -67,7 +67,7 @@ export const Page = ({
       paddingBottom: footer ? 0 : 40,
       paddingTop: HEADER_HEIGHT,
     },
-    contentContainerClassName: "gap-4 pb-10 px-5",
+    contentContainerClassName: cn("gap-4 pb-10 px-5", className),
   };
 
   const getContent = () => {
@@ -79,25 +79,23 @@ export const Page = ({
     if (disableScroll) {
       return (
         <View
-          className="pb-10 px-5 gap-4 flex-1"
+          className="flex-1"
           style={{ paddingTop: HEADER_HEIGHT }}
+          {...contentWrapperProps}
         >
           {children}
         </View>
       );
     }
     return (
-      <Animated.ScrollView
-        {...contentWrapperProps}
-        className={cn(className, "flex-1")}
-      >
+      <Animated.ScrollView {...contentWrapperProps} className="flex-1">
         {children}
       </Animated.ScrollView>
     );
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: theme.background }}>
+    <View style={{ backgroundColor: theme.background }} className="flex-1">
       <Header headerShown={headerShown} goBack={goBack} title={title}>
         {header}
       </Header>

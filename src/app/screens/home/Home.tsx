@@ -9,23 +9,21 @@ import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Platform, Text } from "react-native";
 import Animated from "react-native-reanimated";
-import { IconButton } from "@/components/common/Button";
-import { HomeworkWidget } from "@/components/custom/widget/homework/HomeworkWidget";
-import { HomeworkWidgetLoading } from "@/components/custom/widget/homework/HomeworkWidgetLoading";
-import { PreferenceCustomizationButton } from "@/components/custom/widget/PreferenceCustomizationModal";
+import { HomeworkWidget } from "@/app/screens/services/homework/widget/HomeworkWidget";
+import { HomeworkWidgetLoading } from "@/app/screens/services/homework/widget/HomeworkWidgetLoading";
 import {
   RestaurantWidget,
   RestaurantWidgetLoading,
-} from "@/components/custom/widget/RestaurantWidget";
-import { TimetableLoadingWidget } from "@/components/custom/widget/TimetableLoadingWidget";
-import TimetableWidget from "@/components/custom/widget/TimetableWidget";
+} from "@/app/screens/services/restaurant/widget/RestaurantWidget";
 import WashingMachineWidget, {
   WashingMachineWidgetLoading,
-} from "@/components/custom/widget/WashingMachineWidget";
+} from "@/app/screens/services/washing-machines/widget/WashingMachineWidget";
 import {
   WeatherSkeleton,
   WeatherWidget,
-} from "@/components/custom/widget/WeatherWidget";
+} from "@/app/screens/services/weather/widget/WeatherWidget";
+import { IconButton } from "@/components/common/Button";
+import { PreferenceCustomizationButton } from "@/components/custom/PreferenceCustomizationModal";
 import { Empty } from "@/components/page/Empty";
 import { Page } from "@/components/page/Page";
 import { QUERY_KEYS } from "@/constants";
@@ -37,6 +35,8 @@ import { useHomeWidgetPreferences } from "@/hooks/usePreferences";
 import { washingMachineNotificationService } from "@/services/notifications/washingMachineNotifications";
 import type { AppStackParamList } from "@/services/storage/types";
 import { isDinner, isLunch, isWeekend } from "@/utils";
+import { TimetableLoadingWidget } from "../services/schedule/widget/TimetableLoadingWidget";
+import TimetableWidget from "../services/schedule/widget/TimetableWidget";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -227,6 +227,7 @@ export const Home = () => {
       asChildren
       refreshing={isFetching}
       onRefresh={refetch}
+      className="gap-8"
       title={
         <Text className="font-bold text-3xl ml-4" style={{ color: theme.text }}>
           {t("common.welcome")}

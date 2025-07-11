@@ -28,6 +28,14 @@ export const useAnimatedHeader = () => {
             stiffness: 200,
           });
         }
+      } else {
+        // If we're in the bounce area (negative scroll), keep header visible
+        if (headerShown.value < 1) {
+          headerShown.value = withSpring(1, {
+            damping: 15,
+            stiffness: 200,
+          });
+        }
       }
 
       lastScrollY.value = currentScrollY;

@@ -6,7 +6,7 @@ import { View } from "react-native";
 import Animated from "react-native-reanimated";
 import { IconButton } from "@/components/common/Button";
 import Card from "@/components/common/Card";
-import { PreferenceCustomizationButton } from "@/components/custom/widget/PreferenceCustomizationModal";
+import { PreferenceCustomizationButton } from "@/components/custom/PreferenceCustomizationModal";
 import { Empty } from "@/components/page/Empty";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";

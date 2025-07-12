@@ -17,4 +17,6 @@ export const QUERY_KEYS = {
     resetPassword: ["auth", "resetPassword"],
     changePassword: ["auth", "changePassword"],
   },
+  homeWidgetPreferences: ["homeWidgetPreferences"],
+  servicePreferences: ["servicePreferences"],
 };

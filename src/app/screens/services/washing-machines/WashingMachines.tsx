@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
-import { Page } from "@/components/common/Page";
+import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useWashingMachines } from "@/hooks/useWashingMachines";
 import {
@@ -45,7 +45,7 @@ export const WashingMachines = () => {
       refreshing={isFetching}
       className="gap-6"
       title={t("services.washingMachine.title")}
-      about={<AboutSection />}
+      header={<AboutSection />}
     >
       {isEmpty ? (
         <View className="min-h-screen flex justify-center items-center">

@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Page } from "@/components/common/Page";
-import { ErrorPage } from "@/components/custom/ErrorPage";
+import { ErrorPage } from "@/components/page/ErrorPage";
+import { Page } from "@/components/page/Page";
 import { useTraq } from "@/hooks/useTraq";
 import {
   AboutSection,
@@ -64,7 +64,7 @@ export const Traq = () => {
       onRefresh={refetch}
       className="gap-4"
       title={t("services.traq.title")}
-      about={<AboutSection />}
+      header={<AboutSection />}
     >
       <TraqFilter
         tags={tags}

@@ -1,5 +1,5 @@
 import { RootNavigator } from "@/app/navigation/RootNavigator";
-import "../i18n";
+import "@/i18n";
 import "./global.css";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import * as Sentry from "@sentry/react-native";
@@ -61,7 +61,7 @@ const App = () => {
               <AuthProvider>
                 <ToastProvider position="top">
                   {isDevServerSelected ? (
-                    <View className="fixed top-0 left-0 ">
+                    <View className="fixed top-0 left-0">
                       <Text className="text-white">
                         Dev server selected: {apiEnv.API_URL_DEV}
                       </Text>
@@ -72,7 +72,9 @@ const App = () => {
                 </ToastProvider>
               </AuthProvider>
             </BottomSheetModalProvider>
-            {isDev && <DevToolsBubble onCopy={_onCopy} />}
+            {isDev && (
+              <DevToolsBubble onCopy={_onCopy} queryClient={queryClient} />
+            )}
           </QueryClientProvider>
         </GestureHandlerRootView>
       </ThemeProvider>

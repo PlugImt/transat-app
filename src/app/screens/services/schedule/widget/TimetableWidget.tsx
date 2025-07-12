@@ -2,13 +2,13 @@ import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { Text, TouchableOpacity, View } from "react-native";
-import { TimetableCourseWidget } from "@/components/custom/widget/TimetableCourseWidget";
-import { TimetableLoadingWidget } from "@/components/custom/widget/TimetableLoadingWidget";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Course } from "@/dto";
 import { useAuth } from "@/hooks/account/useAuth";
 import { useTimetable } from "@/hooks/useTimetable";
 import type { AppStackParamList } from "@/services/storage/types";
+import { TimetableCourseWidget } from "./TimetableCourseWidget";
+import { TimetableLoadingWidget } from "./TimetableLoadingWidget";
 
 export type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 

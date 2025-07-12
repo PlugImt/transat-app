@@ -8,11 +8,15 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import Badge, { BadgeLoading } from "@/components/common/Badge";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/common/Dialog";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useWashingMachineNotifications } from "@/hooks/useWashingMachineNotifications";
-import Badge, { BadgeLoading } from "../../common/Badge";
-import { Dialog, DialogContent, DialogTrigger } from "../../common/Dialog";
 
 interface WashingMachineProps {
   number: string;

@@ -17,11 +17,11 @@ import {
   zhCN,
 } from "date-fns/locale";
 import { Image, Text, View } from "react-native";
+import { Avatar, AvatarImage } from "@/components/common/Avatar";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useWeather } from "@/hooks/useWeather";
 import i18n from "@/i18n";
-import { Avatar, AvatarImage } from "../common/Avatar";
 
 export const WeatherWidget = () => {
   const { data: weatherNantes, isPending, isError } = useWeather();

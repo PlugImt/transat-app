@@ -47,4 +47,12 @@
   .h3 {
     @apply text-xl font-bold text-foreground;
   }
+
+  .lg {
+    @apply text-lg font-bold text-foreground;
+  }
+
+  .p {
+    @apply text-base font-medium text-foreground;
+  }
 }

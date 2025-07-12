@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
+import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
-import { TextSkeleton } from "../Skeleton";
 
 type InfoItemProps = {
   icon: React.ReactNode;

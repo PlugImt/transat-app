@@ -20,10 +20,10 @@ import {
   DialogContent,
   DialogTrigger,
 } from "@/components/common/Dialog";
-import { Page } from "@/components/common/Page";
 import { Switch } from "@/components/common/Switch";
 import { useToast } from "@/components/common/Toast";
 import { AccountCard } from "@/components/custom/card/AccountCard";
+import { Page } from "@/components/page/Page";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";

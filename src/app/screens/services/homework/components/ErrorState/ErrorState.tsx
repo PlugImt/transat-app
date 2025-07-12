@@ -1,7 +1,7 @@
 import { t } from "i18next";
 import { Text, View } from "react-native";
-import { Page } from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
+import { Page } from "@/components/page/Page";
 
 export const ErrorState = ({
   error,
@@ -17,7 +17,7 @@ export const ErrorState = ({
       refreshing={refreshing}
       onRefresh={onRefresh}
       title={t("services.homework.title")}
-      about={
+      header={
         <AboutModal
           title={t("services.homework.title")}
           description={t("services.homework.about")}

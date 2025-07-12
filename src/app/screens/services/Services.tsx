@@ -1,50 +1,46 @@
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
-import { useMemo, useState } from "react";
+import { Pencil } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
-import { Button } from "@/components/common/Button";
+import Animated from "react-native-reanimated";
+import { IconButton } from "@/components/common/Button";
 import Card from "@/components/common/Card";
-import FlexibleGrid from "@/components/common/FlexibleGrid";
-import { Page } from "@/components/common/Page";
-import WidgetCustomizationModal from "@/components/common/WidgetCustomizationModal";
-import { useServicePreferences } from "@/hooks/useWidgetPreferences";
+import { PreferenceCustomizationButton } from "@/components/custom/PreferenceCustomizationModal";
+import { Empty } from "@/components/page/Empty";
+import { Page } from "@/components/page/Page";
+import { useTheme } from "@/contexts/ThemeContext";
+import { useAnimatedHeader } from "@/hooks/useAnimatedHeader";
+import { useServicePreferences } from "@/hooks/usePreferences";
 import type { AppStackParamList } from "@/services/storage/types";
-import type { ServicePreference } from "@/services/storage/widgetPreferences";
+import type { Preference } from "@/services/storage/widgetPreferences";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
 export const Services = () => {
   const { t } = useTranslation();
+  const { theme } = useTheme();
   const navigation = useNavigation<AppScreenNavigationProp>();
-  const { enabledServices, services, updateOrder, loading } =
-    useServicePreferences();
+  const { scrollHandler } = useAnimatedHeader();
+  const {
+    enabledPreferences: enabledServices,
+    preferences: services,
+    loading,
+    updateOrder,
+  } = useServicePreferences();
 
-  const [showCustomizationModal, setShowCustomizationModal] = useState(false);
-
-  // Memoize the services prop for the modal
-  const memoizedServicesForModal = useMemo(() => services, [services]);
-
-  const handleServicePress = (service: ServicePreference) => {
-    console.log("Service card pressed:", service.screen);
+  const handleServicePress = (service: Preference) => {
     // biome-ignore lint/suspicious/noExplicitAny: Service screen typing needs to be fixed properly
     navigation.navigate(service.screen as any);
   };
 
-  const renderServiceCard = (item: ServicePreference, width: number) => (
+  const renderServiceCard = (item: Preference) => (
     <Card
       image={item.image}
-      width={width}
+      title={item.name}
       onPress={() => handleServicePress(item)}
     />
   );
-
-  const handleCustomizationSave = async (
-    updatedServices: ServicePreference[],
-  ) => {
-    await updateOrder(updatedServices);
-    setShowCustomizationModal(false);
-  };
 
   if (loading) {
     return (
@@ -55,34 +51,36 @@ export const Services = () => {
   }
 
   return (
-    <>
-      <Page title={t("services.title")}>
-        <FlexibleGrid
-          data={enabledServices}
-          onPress={handleServicePress}
-          renderCard={renderServiceCard}
-        />
-        <View style={{ alignItems: "center", width: "100%" }}>
-          <Button
-            label={t("common.customizeServices")}
-            variant="ghost"
-            onPress={() => setShowCustomizationModal(true)}
-            className="mb-4"
-            size="sm"
+    <Page
+      asChildren
+      title={t("services.title")}
+      header={
+        <PreferenceCustomizationButton
+          items={services}
+          title={t("common.customizeServices")}
+          onUpdate={updateOrder}
+        >
+          <IconButton
+            icon={<Pencil color={theme.text} size={20} />}
+            variant="link"
           />
-        </View>
-      </Page>
-
-      <WidgetCustomizationModal
-        visible={showCustomizationModal}
-        onClose={() => setShowCustomizationModal(false)}
-        widgets={[]}
-        services={memoizedServicesForModal || []}
-        onUpdateServices={handleCustomizationSave}
-        title={t("common.customizeServices")}
-        type="services"
+        </PreferenceCustomizationButton>
+      }
+    >
+      <Animated.FlatList
+        data={enabledServices}
+        renderItem={({ item }) => renderServiceCard(item)}
+        keyExtractor={(item) => item.id}
+        showsVerticalScrollIndicator={true}
+        onScroll={scrollHandler}
+        ListEmptyComponent={
+          <Empty
+            title={t("services.noServicesEnabled")}
+            description={t("services.noServicesEnabledDescription")}
+          />
+        }
       />
-    </>
+    </Page>
   );
 };
 

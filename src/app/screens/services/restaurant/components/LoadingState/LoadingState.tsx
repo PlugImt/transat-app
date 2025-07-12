@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
-import { Page } from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
 import RestaurantCard from "@/components/custom/card/RestaurantCard";
+import { Page } from "@/components/page/Page";
 import { getOpeningHoursData } from "@/utils";
 
 export const LoadingState = () => {
@@ -13,7 +13,7 @@ export const LoadingState = () => {
   return (
     <Page
       title={t("services.restaurant.title")}
-      about={
+      header={
         <AboutModal
           title={t("services.restaurant.title")}
           description={t("services.restaurant.about")}

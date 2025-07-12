@@ -12,6 +12,7 @@
     "home": "首页",
     "account": "账户",
     "freeToUse": "免费",
+    "empty": "这里空空如也",
     "free": "免费",
     "cancel": "取消",
     "closed": "关闭",
@@ -30,11 +31,9 @@
     "info": "信息",
     "customizeWidgets": "自定义小部件",
     "customizeServices": "自定义服务",
-    "customizeHint": "切换小部件的开关状态并通过拖动来重新排序。长按并拖动以重新排序项目。",
-    "noWidgetsEnabled": "没有启用的小部件。自定义添加一些吧！",
-    "resizeToFull": "调整为全宽",
-    "resizeToHalf": "调整为半宽",
-    "cardSizeToggled": "卡片大小已更改",
+    "customizeHint": "切换小部件的开关状态并通过拖动来重新排序",
+    "noWidgetsEnabled": "没有启用的小部件",
+    "noWidgetsEnabledDescription": "您可以通过启用或禁用小部件来自定义它们",
     "errors": {
       "occurred": "发生错误",
       "unableToFetch": "无法获取数据"
@@ -255,6 +254,8 @@
   },
   "services": {
     "title": "服务",
+    "noServicesEnabled": "没有启用的服务",
+    "noServicesEnabledDescription": "您可以通过启用或禁用服务来自定义它们",
     "market": "市场",
     "weather": "天气",
     "traq": {

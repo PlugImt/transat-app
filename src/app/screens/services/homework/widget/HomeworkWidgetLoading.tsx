@@ -1,10 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity, View } from "react-native";
-import type { AppScreenNavigationProp } from "@/components/custom/widget/TimetableWidget";
+import type { AppScreenNavigationProp } from "@/app/screens/services/schedule/widget/TimetableWidget";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 
-export const TimetableLoadingWidget = () => {
+export const HomeworkWidgetLoading = () => {
   const { theme } = useTheme();
   const navigation = useNavigation<AppScreenNavigationProp>();
 
@@ -14,7 +14,7 @@ export const TimetableLoadingWidget = () => {
     <View className="flex flex-col gap-2">
       <TextSkeleton lines={1} lastLineWidth={128} />
       <TouchableOpacity
-        onPress={() => navigation.navigate("Timetable")}
+        onPress={() => navigation.navigate("Homework")}
         className="px-6 py-4 rounded-lg flex flex-col gap-6"
         style={{ backgroundColor: theme.card }}
       >

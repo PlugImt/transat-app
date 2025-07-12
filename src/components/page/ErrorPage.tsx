@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
+import { Button } from "@/components/common/Button";
 import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";
-import { Button } from "../common/Button";
 
 type ErrorPageProps = {
   error: Error;
@@ -24,7 +24,7 @@ export const ErrorPage = ({
   return (
     <View
       style={{ backgroundColor: theme.background }}
-      className=" px-5 justify-center items-center gap-6 h-screen"
+      className="px-5 justify-center items-center gap-6 h-screen"
     >
       <View className="gap-2 justify-center items-center">
         <Text className="h3" style={{ color: theme.text }}>

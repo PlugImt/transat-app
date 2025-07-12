@@ -5,8 +5,8 @@ import {
   LoadingState,
   RestaurantMenu,
 } from "@/app/screens/services/restaurant/components";
-import { Page } from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
+import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useMenuRestaurant } from "@/hooks/useMenuRestaurant";
 import { getOpeningHoursData, isWeekend, outOfService } from "@/utils";
@@ -35,7 +35,7 @@ export const Restaurant = () => {
         refreshing={isPending}
         onRefresh={refetch}
         title={t("services.restaurant.title")}
-        about={
+        header={
           <AboutModal
             title={t("services.restaurant.title")}
             description={t("services.restaurant.about")}
@@ -67,7 +67,7 @@ export const Restaurant = () => {
         refreshing={isPending}
         onRefresh={refetch}
         title={t("services.restaurant.title")}
-        about={
+        header={
           <AboutModal
             title={t("services.restaurant.title")}
             description={t("services.restaurant.about")}
@@ -102,7 +102,7 @@ export const Restaurant = () => {
         refreshing={isPending}
         onRefresh={refetch}
         title={t("services.restaurant.title")}
-        about={
+        header={
           <AboutModal
             title={t("services.restaurant.title")}
             description={t("services.restaurant.about")}
@@ -126,7 +126,7 @@ export const Restaurant = () => {
       onRefresh={refetch}
       goBack
       title={t("services.restaurant.title")}
-      about={
+      header={
         <AboutModal
           title={t("services.restaurant.title")}
           description={t("services.restaurant.about")}

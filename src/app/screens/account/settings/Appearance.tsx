@@ -3,7 +3,7 @@ import type React from "react";
 import { useTranslation } from "react-i18next";
 import { Text, TouchableOpacity, View } from "react-native";
 
-import { Page } from "@/components/common/Page";
+import { Page } from "@/components/page/Page";
 import { type ThemeMode, useTheme } from "@/contexts/ThemeContext";
 
 export const Appearance = () => {

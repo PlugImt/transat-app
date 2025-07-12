@@ -5,9 +5,9 @@ import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView, Text, View } from "react-native";
 import { Button } from "@/components/common/Button";
-import { Page } from "@/components/common/Page";
 import { AboutModal } from "@/components/custom/AboutModal";
 import HomeworkCard from "@/components/custom/card/HomeworkCard";
+import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Homework as HomeworkType } from "@/dto";
 import { useHomework } from "@/hooks/useHomework";
@@ -92,7 +92,7 @@ export const Homework = () => {
       onRefresh={refetch}
       goBack
       title={t("services.homework.title")}
-      about={
+      header={
         <AboutModal
           title={t("services.homework.title")}
           description={t("services.homework.about")}

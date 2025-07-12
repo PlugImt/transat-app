@@ -8,9 +8,9 @@ import { LoadingState } from "@/app/screens/services/restaurant/components";
 import { ReviewItem } from "@/app/screens/services/restaurant/components/MenuRating";
 import { ReviewDialog } from "@/app/screens/services/restaurant/components/MenuReviewDialog/ReviewDialog";
 import { Button } from "@/components/common/Button";
-import { Page } from "@/components/common/Page";
 import { useToast } from "@/components/common/Toast";
 import { AboutModal } from "@/components/custom/AboutModal";
+import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import {
   usePostRestaurantReview,
@@ -66,7 +66,7 @@ export const RestaurantReviews = () => {
         refreshing={isPending}
         onRefresh={refetch}
         title={t("services.restaurant.title")}
-        about={
+        header={
           <AboutModal
             title={t("services.restaurant.title")}
             description={t("services.restaurant.about")}
@@ -93,7 +93,7 @@ export const RestaurantReviews = () => {
       onRefresh={refetch}
       goBack
       title={t("services.restaurant.title")}
-      about={
+      header={
         <AboutModal
           title={t("services.restaurant.title")}
           description={t("services.restaurant.about")}

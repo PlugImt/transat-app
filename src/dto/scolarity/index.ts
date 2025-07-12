@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { branchSchema } from "../branch";
+import { branchSchema } from "@/dto/branch";
 
 export const scolaritySchema = z.object({
   graduation_year: z.number().optional(),

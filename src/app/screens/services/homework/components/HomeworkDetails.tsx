@@ -6,7 +6,7 @@ import { CheckCircle, Circle } from "lucide-react-native";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
-import { Page } from "@/components/common/Page";
+import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { AppStackParamList } from "@/services/storage/types";
 

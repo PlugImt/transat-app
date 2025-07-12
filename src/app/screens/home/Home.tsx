@@ -4,41 +4,38 @@ import { useIsFetching, useQueryClient } from "@tanstack/react-query";
 import Constants from "expo-constants";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
-import type React from "react";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { Pencil } from "lucide-react-native";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Platform, Text, TouchableOpacity, View } from "react-native";
-import DraggableFlatList, {
-  type RenderItemParams,
-  ScaleDecorator,
-} from "react-native-draggable-flatlist";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { Button } from "@/components/common/Button";
-import { Page } from "@/components/common/Page";
-import WidgetCustomizationModal from "@/components/common/WidgetCustomizationModal";
-import {
-  WeatherSkeleton,
-  WeatherWidget,
-} from "@/components/custom/WeatherWidget";
-import { HomeworkWidget } from "@/components/custom/widget/homework/HomeworkWidget";
-import { HomeworkWidgetLoading } from "@/components/custom/widget/homework/HomeworkWidgetLoading";
+import { Platform, Text } from "react-native";
+import Animated from "react-native-reanimated";
+import { HomeworkWidget } from "@/app/screens/services/homework/widget/HomeworkWidget";
+import { HomeworkWidgetLoading } from "@/app/screens/services/homework/widget/HomeworkWidgetLoading";
 import {
   RestaurantWidget,
   RestaurantWidgetLoading,
-} from "@/components/custom/widget/RestaurantWidget";
-import { TimetableLoadingWidget } from "@/components/custom/widget/TimetableLoadingWidget";
-import TimetableWidget from "@/components/custom/widget/TimetableWidget";
+} from "@/app/screens/services/restaurant/widget/RestaurantWidget";
+import { TimetableLoadingWidget } from "@/app/screens/services/schedule/widget/TimetableLoadingWidget";
+import TimetableWidget from "@/app/screens/services/schedule/widget/TimetableWidget";
 import WashingMachineWidget, {
   WashingMachineWidgetLoading,
-} from "@/components/custom/widget/WashingMachineWidget";
+} from "@/app/screens/services/washing-machines/widget/WashingMachineWidget";
+import {
+  WeatherSkeleton,
+  WeatherWidget,
+} from "@/app/screens/services/weather/widget/WeatherWidget";
+import { IconButton } from "@/components/common/Button";
+import { PreferenceCustomizationButton } from "@/components/custom/PreferenceCustomizationModal";
+import { Empty } from "@/components/page/Empty";
+import { Page } from "@/components/page/Page";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";
 import { useUser } from "@/hooks/account/useUser";
-import { useHomeWidgetPreferences } from "@/hooks/useWidgetPreferences";
+import { useAnimatedHeader } from "@/hooks/useAnimatedHeader";
+import { useHomeWidgetPreferences } from "@/hooks/usePreferences";
 import { washingMachineNotificationService } from "@/services/notifications/washingMachineNotifications";
 import type { AppStackParamList } from "@/services/storage/types";
-import type { WidgetPreference } from "@/services/storage/widgetPreferences";
 import { isDinner, isLunch, isWeekend } from "@/utils";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
@@ -47,7 +44,7 @@ const handleRegistrationError = (errorMessage: string) => {
   if (Platform.OS === "web") {
     console.error(errorMessage);
   }
-  // if (Device.isDevice) alert(errorMessage);
+
   throw new Error(errorMessage);
 };
 
@@ -97,34 +94,25 @@ const registerForPushNotificationsAsync = async () => {
   }
 };
 
-interface DraggableWidgetItem {
-  id: string;
-  key: string;
-  component: React.ReactNode;
-}
-
 export const Home = () => {
   const { data: user } = useUser();
   const { t } = useTranslation();
   const { theme } = useTheme();
+  const { scrollHandler } = useAnimatedHeader();
 
   const { saveExpoPushToken } = useAuth();
   const {
-    enabledWidgets,
-    widgets,
+    preferences: widgets,
+    enabledPreferences: enabledWidgets,
+    loading,
     updateOrder,
-    loading: widgetsLoading,
   } = useHomeWidgetPreferences();
 
   const [_expoPushToken, setExpoPushToken] = useState("");
   const [_notificationOpened, setNotificationOpened] = useState(false);
   // biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
   const [_notificationData, setNotificationData] = useState<any>(null);
-  const [showCustomizationModal, setShowCustomizationModal] = useState(false);
   const navigation = useNavigation<AppScreenNavigationProp>();
-
-  // Memoize the widgets prop for the modal
-  const memoizedWidgetsForModal = useMemo(() => widgets, [widgets]);
 
   useEffect(() => {
     // Initialize notification service
@@ -230,130 +218,51 @@ export const Home = () => {
     }
   }, []);
 
-  const draggableWidgets: DraggableWidgetItem[] = useMemo(() => {
-    return enabledWidgets
-      .map((widget) => ({
-        id: widget.id,
-        key: widget.id,
-        component: getWidgetComponent(widget.id),
-      }))
-      .filter((item) => item.component !== null);
-  }, [enabledWidgets, getWidgetComponent]);
-
-  const renderWidget = ({
-    item,
-    drag,
-    isActive,
-  }: RenderItemParams<DraggableWidgetItem>) => {
-    return (
-      <ScaleDecorator>
-        <TouchableOpacity
-          onLongPress={drag}
-          delayLongPress={200}
-          style={{
-            opacity: isActive ? 0.8 : 1,
-            transform: [{ scale: isActive ? 1.02 : 1 }],
-          }}
-          activeOpacity={1}
-        >
-          {item.component}
-        </TouchableOpacity>
-      </ScaleDecorator>
-    );
-  };
-
-  const handleDragEnd = async ({ data }: { data: DraggableWidgetItem[] }) => {
-    const reorderedWidgets = data
-      .map((item, index) => {
-        const originalWidget = enabledWidgets.find((w) => w.id === item.id);
-        return originalWidget ? { ...originalWidget, order: index } : null;
-      })
-      .filter(Boolean) as WidgetPreference[];
-
-    await updateOrder(reorderedWidgets);
-  };
-
-  const handleCustomizationSave = async (
-    updatedWidgets: WidgetPreference[],
-  ) => {
-    await updateOrder(updatedWidgets);
-    setShowCustomizationModal(false);
-  };
-
-  if (widgetsLoading) {
+  if (loading) {
     return <HomeLoading />;
   }
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <Page
-        disableScroll={true}
-        refreshing={isFetching}
-        onRefresh={refetch}
-        title={t("common.welcome")}
-        newfName={user?.first_name || "Newf"}
-      >
-        <DraggableFlatList
-          data={draggableWidgets}
-          onDragEnd={handleDragEnd}
-          keyExtractor={(item) => item.key}
-          renderItem={renderWidget}
-          showsVerticalScrollIndicator={true}
-          contentContainerStyle={{
-            gap: 24,
-            paddingTop: 10,
-            paddingBottom: 12,
-          }}
-          ListEmptyComponent={
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-                marginTop: 50,
-              }}
-            >
-              <Text style={{ fontSize: 16, color: theme.text }}>
-                {t("common.noWidgetsEnabled")}
-              </Text>
-              <Button
-                label={t("common.customizeWidgets")}
-                onPress={() => setShowCustomizationModal(true)}
-                variant="link"
-                className="mt-4"
-              />
-            </View>
-          }
-          ListFooterComponent={
-            <View
-              style={{
-                alignItems: "center",
-                width: "100%",
-                marginTop: 20,
-                marginBottom: 20,
-              }}
-            >
-              <Button
-                label={t("common.customizeWidgets")}
-                variant="ghost"
-                onPress={() => setShowCustomizationModal(true)}
-                size="sm"
-              />
-            </View>
-          }
-        />
-      </Page>
-
-      <WidgetCustomizationModal
-        visible={showCustomizationModal}
-        onClose={() => setShowCustomizationModal(false)}
-        widgets={memoizedWidgetsForModal}
-        onUpdateWidgets={handleCustomizationSave}
-        services={[]}
-        title={t("common.customizeWidgets")}
-        type="widgets"
+    <Page
+      asChildren
+      refreshing={isFetching}
+      onRefresh={refetch}
+      className="gap-8"
+      title={
+        <Text className="font-bold text-3xl ml-4" style={{ color: theme.text }}>
+          {t("common.welcome")}
+          {user?.first_name && (
+            <Text style={{ color: theme.primary }}> {user.first_name}</Text>
+          )}
+        </Text>
+      }
+      header={
+        <PreferenceCustomizationButton
+          items={widgets}
+          title={t("common.customizeWidgets")}
+          onUpdate={updateOrder}
+        >
+          <IconButton
+            icon={<Pencil color={theme.text} size={20} />}
+            variant="link"
+          />
+        </PreferenceCustomizationButton>
+      }
+    >
+      <Animated.FlatList
+        data={enabledWidgets}
+        renderItem={({ item }) => getWidgetComponent(item.id)}
+        keyExtractor={(item) => item.id}
+        showsVerticalScrollIndicator={true}
+        onScroll={scrollHandler}
+        ListEmptyComponent={
+          <Empty
+            title={t("common.noWidgetsEnabled")}
+            description={t("common.noWidgetsEnabledDescription")}
+          />
+        }
       />
-    </GestureHandlerRootView>
+    </Page>
   );
 };
 
@@ -363,8 +272,7 @@ export const HomeLoading = () => {
   const { t } = useTranslation();
 
   return (
-    <Page className="gap-6">
-      <Text className="h1 m-4">{t("common.welcome")}</Text>
+    <Page className="gap-6" title={t("common.welcome")}>
       <WeatherSkeleton />
       {!isWeekend() && !isLunch() && !isDinner() ? (
         <RestaurantWidgetLoading />

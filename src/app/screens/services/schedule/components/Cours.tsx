@@ -1,5 +1,5 @@
 import { Text, View } from "react-native";
-import { TagCourseRoom } from "@/components/custom/TagCourseRoom";
+import { TagCourseRoom } from "@/app/screens/services/schedule/components/TagCourseRoom";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Course } from "@/dto";
 

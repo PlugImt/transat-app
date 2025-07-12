@@ -3,18 +3,18 @@ import { useNavigation } from "@react-navigation/native";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import {
-  Animated as RNAnimated,
-  Text,
-  type TextInput,
-  View,
-} from "react-native";
+import { Text, type TextInput, View } from "react-native";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
 import { z } from "zod";
 import { VerificationCodeModal } from "@/components/auth/VerificationCode";
 import { Button } from "@/components/common/Button";
 import Input from "@/components/common/Input";
-import { Page } from "@/components/common/Page";
 import { useToast } from "@/components/common/Toast";
+import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";
 
@@ -83,35 +83,24 @@ export const Signin = () => {
     }
   };
 
-  // Add animation values
-  const fadeAnim = useRef(new RNAnimated.Value(0)).current;
-  const slideAnim = useRef(new RNAnimated.Value(50)).current;
+  // Animation values with Reanimated
+  const opacity = useSharedValue(0);
+  const translateY = useSharedValue(50);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    opacity: opacity.value,
+    transform: [{ translateY: translateY.value }],
+  }));
 
   useEffect(() => {
     // Start animations
-    RNAnimated.parallel([
-      RNAnimated.timing(fadeAnim, {
-        toValue: 1,
-        duration: 800,
-        useNativeDriver: true,
-      }),
-      RNAnimated.timing(slideAnim, {
-        toValue: 0,
-        duration: 800,
-        useNativeDriver: true,
-      }),
-    ]).start();
-  }, [fadeAnim, slideAnim]);
+    opacity.value = withTiming(1, { duration: 800 });
+    translateY.value = withTiming(0, { duration: 800 });
+  }, [opacity, translateY]);
 
   return (
     <Page goBack title={t("auth.signIn")}>
-      <RNAnimated.View
-        style={{
-          opacity: fadeAnim,
-          transform: [{ translateY: slideAnim }],
-          flex: 1,
-        }}
-      >
+      <Animated.View style={[animatedStyle, { flex: 1 }]}>
         {loginError ? (
           <View className="bg-red-300 p-3 rounded-md my-4">
             <Text className="text-red-900">{loginError}</Text>
@@ -189,7 +178,7 @@ export const Signin = () => {
           email={verificationEmail}
           onClose={() => setVerificationModalVisible(false)}
         />
-      </RNAnimated.View>
+      </Animated.View>
     </Page>
   );
 };

@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { Text, View } from "react-native";
+import { View } from "react-native";
+import { Text } from "@/components/common/Text";
 import { AboutModal } from "@/components/custom/AboutModal";
 import RestaurantCard from "@/components/custom/card/RestaurantCard";
 import { Page } from "@/components/page/Page";
@@ -26,7 +27,9 @@ export const LoadingState = () => {
     >
       <View className="flex flex-col gap-8">
         <View className="flex flex-col gap-4">
-          <Text className="h3 ml-4">{t("services.restaurant.lunch")}</Text>
+          <Text className="ml-4" variant="h3">
+            {t("services.restaurant.lunch")}
+          </Text>
 
           <RestaurantCard
             title={t("services.restaurant.grill")}
@@ -47,7 +50,9 @@ export const LoadingState = () => {
         </View>
 
         <View className="flex flex-col gap-4">
-          <Text className="h3 ml-4">{t("services.restaurant.dinner")}</Text>
+          <Text className="ml-4" variant="h3">
+            {t("services.restaurant.dinner")}
+          </Text>
           <RestaurantCard
             title={t("services.restaurant.grill")}
             icon={"Beef"}

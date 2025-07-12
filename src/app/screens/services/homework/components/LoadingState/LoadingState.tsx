@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { Text, View } from "react-native";
+import { View } from "react-native";
+import { Text } from "@/components/common/Text";
 import { AboutModal } from "@/components/custom/AboutModal";
 import HomeworkCard from "@/components/custom/card/HomeworkCard";
 import { Page } from "@/components/page/Page";
@@ -22,7 +23,7 @@ export const LoadingState = () => {
       }
     >
       <View className="flex flex-col gap-4 mt-6 px-4">
-        <Text className="text-base italic text-center">
+        <Text className="italic text-center">
           {t("services.homework.loading")}
         </Text>
         <View className="flex flex-col gap-4">

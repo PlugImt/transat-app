@@ -1,12 +1,13 @@
 import { useNavigation } from "@react-navigation/native";
 import { t } from "i18next";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from "@/components/common/Avatar";
 import { Button } from "@/components/common/Button";
+import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { User } from "@/dto";
 import type { AccountNavigation } from "@/services/storage/types";
@@ -34,10 +35,8 @@ export const AccountCard = ({ user }: AccountCardProps) => {
           </AvatarFallback>
         </Avatar>
         <View className="flex-1">
-          <Text className="h3" style={{ color: theme.text }}>
-            {`${user.first_name} ${user.last_name}`}
-          </Text>
-          <Text style={{ color: theme.textSecondary }}>{user.email}</Text>
+          <Text variant="h3">{`${user.first_name} ${user.last_name}`}</Text>
+          <Text color="muted">{user.email}</Text>
         </View>
         <Button
           label={t("common.edit")}

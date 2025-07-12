@@ -1,8 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
-import { Text, TouchableOpacity, View } from "react-native";
-import { useTheme } from "@/contexts/ThemeContext";
+import { TouchableOpacity, View } from "react-native";
+import { Text } from "@/components/common/Text";
 import type { Course } from "@/dto";
 import { useAuth } from "@/hooks/account/useAuth";
 import { useTimetable } from "@/hooks/useTimetable";
@@ -14,7 +14,6 @@ export type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
 export const TimetableWidget = () => {
   const { t } = useTranslation();
-  const { theme } = useTheme();
 
   const navigation = useNavigation<AppScreenNavigationProp>();
 
@@ -90,7 +89,7 @@ export const TimetableWidget = () => {
   ) {
     return (
       <View className="flex flex-col gap-2 mr-2">
-        <Text style={{ color: theme.text }} className="h3 ml-4">
+        <Text className="ml-4" variant="h3">
           {t("services.timetable.title")}
         </Text>
         <TouchableOpacity
@@ -100,16 +99,12 @@ export const TimetableWidget = () => {
           <View className="flex flex-col">
             {error ? (
               <>
-                <Text
-                  className="text-base ml-4"
-                  style={{ color: theme.text }}
-                  ellipsizeMode="tail"
-                >
+                <Text className="ml-4" ellipsizeMode="tail">
                   {t("services.timetable.noEdt.title")}
                 </Text>
                 <Text
-                  className="text-sm ml-4 font-bold"
-                  style={{ color: theme.primary }}
+                  className="ml-4 font-bold"
+                  color="primary"
                   ellipsizeMode="tail"
                 >
                   {t("services.timetable.noEdt.description")}
@@ -117,52 +112,28 @@ export const TimetableWidget = () => {
               </>
             ) : noCoursesToday ? (
               <>
-                <Text
-                  className="text-base ml-4"
-                  style={{ color: theme.text }}
-                  ellipsizeMode="tail"
-                >
+                <Text className="ml-4" ellipsizeMode="tail">
                   {t("services.timetable.noCourses.dayTitle")}
                 </Text>
-                <Text
-                  className="text-sm ml-4 italic"
-                  style={{ color: theme.text }}
-                  ellipsizeMode="tail"
-                >
+                <Text className="ml-4 italic" variant="sm" ellipsizeMode="tail">
                   {t("services.timetable.noCourses.description")}
                 </Text>
               </>
             ) : isMorningNow && noCoursesMorning ? (
               <>
-                <Text
-                  className="text-base ml-4"
-                  style={{ color: theme.text }}
-                  ellipsizeMode="tail"
-                >
+                <Text className="ml-4" ellipsizeMode="tail">
                   {t("services.timetable.noCourses.morningTitle")}
                 </Text>
-                <Text
-                  className="text-sm ml-4 italic"
-                  style={{ color: theme.text }}
-                  ellipsizeMode="tail"
-                >
+                <Text className="ml-4 italic" variant="sm" ellipsizeMode="tail">
                   {t("services.timetable.noCourses.description")}
                 </Text>
               </>
             ) : (
               <>
-                <Text
-                  className="text-base ml-4"
-                  style={{ color: theme.text }}
-                  ellipsizeMode="tail"
-                >
+                <Text className="ml-4" ellipsizeMode="tail">
                   {t("services.timetable.noCourses.afternoonTitle")}
                 </Text>
-                <Text
-                  className="text-sm ml-4 italic"
-                  style={{ color: theme.text }}
-                  ellipsizeMode="tail"
-                >
+                <Text className="ml-4 italic" variant="sm" ellipsizeMode="tail">
                   {t("services.timetable.noCourses.description")}
                 </Text>
               </>
@@ -175,7 +146,7 @@ export const TimetableWidget = () => {
 
   return (
     <View className="flex flex-col gap-2">
-      <Text style={{ color: theme.text }} className="h3 ml-4">
+      <Text className="ml-4" variant="h3">
         {t("services.timetable.title")}
       </Text>
 

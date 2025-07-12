@@ -4,18 +4,13 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import {
-  Animated as RNAnimated,
-  Text,
-  type TextInput,
-  View,
-} from "react-native";
+import { Animated as RNAnimated, type TextInput, View } from "react-native";
 import { z } from "zod";
 import { Button } from "@/components/common/Button";
 import Input from "@/components/common/Input";
+import { Text } from "@/components/common/Text";
 import { useToast } from "@/components/common/Toast";
 import { Page } from "@/components/page/Page";
-import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";
 import type { AuthStackParamList } from "@/services/storage/types";
 
@@ -32,8 +27,6 @@ export const ResetPassword = () => {
   const [verificationCodeSent, setVerificationCodeSent] = useState(false);
   const [canRequestCode, setCanRequestCode] = useState(true);
   const [countdown, setCountdown] = useState(0);
-
-  const { theme } = useTheme();
 
   const verificationCodeRef = useRef<TextInput>(null);
   const newPasswordRef = useRef<TextInput>(null);
@@ -187,7 +180,7 @@ export const ResetPassword = () => {
           </View>
         ) : (
           <View className="h-20">
-            <Text style={{ color: theme.textSecondary }} className="mt-2">
+            <Text color="textSecondary" className="mt-2">
               {t("auth.resetPasswordDescription")}
             </Text>
           </View>
@@ -283,10 +276,7 @@ export const ResetPassword = () => {
               />
             )}
             {!canRequestCode && (
-              <Text
-                style={{ color: theme.textSecondary }}
-                className="text-center"
-              >
+              <Text color="textSecondary" className="text-center">
                 {t("auth.requestCodeCooldown", { seconds: countdown })}
               </Text>
             )}

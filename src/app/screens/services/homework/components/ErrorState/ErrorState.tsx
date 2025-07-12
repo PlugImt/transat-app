@@ -1,5 +1,6 @@
 import { t } from "i18next";
-import { Text, View } from "react-native";
+import { View } from "react-native";
+import { Text } from "@/components/common/Text";
 import { AboutModal } from "@/components/custom/AboutModal";
 import { Page } from "@/components/page/Page";
 
@@ -29,7 +30,9 @@ export const ErrorState = ({
       }
     >
       <View className="min-h-screen flex justify-center items-center">
-        <Text className="text-red-500 text-center h1">{error?.message}</Text>
+        <Text variant="h1" className="text-center" color="destructive">
+          {error?.message}
+        </Text>
       </View>
     </Page>
   );

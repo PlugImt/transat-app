@@ -8,9 +8,10 @@ import * as Clipboard from "expo-clipboard";
 import * as Notifications from "expo-notifications";
 import { Provider } from "jotai";
 import { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { DevToolsBubble } from "react-native-react-query-devtools";
+import { Text } from "@/components/common/Text";
 import { ToastProvider } from "@/components/common/Toast";
 import { apiEnv } from "@/config";
 import { AuthProvider } from "@/contexts/AuthContext";
@@ -62,9 +63,7 @@ const App = () => {
                 <ToastProvider position="top">
                   {isDevServerSelected ? (
                     <View className="fixed top-0 left-0">
-                      <Text className="text-white">
-                        Dev server selected: {apiEnv.API_URL_DEV}
-                      </Text>
+                      <Text>Dev server selected: {apiEnv.API_URL_DEV}</Text>
                     </View>
                   ) : null}
 

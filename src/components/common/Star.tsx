@@ -1,6 +1,7 @@
 import { Star as LucidStar } from "lucide-react-native";
 import type { ComponentPropsWithoutRef } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
+import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 
 type StarVariant =
@@ -167,7 +168,7 @@ const Star = ({
     return (
       <View className={`flex-row items-center ${className}`}>
         {showValue && (
-          <Text className="mr-2" style={{ color: theme.primary }}>
+          <Text className="mr-2" color="primary">
             {value}/{max}
           </Text>
         )}
@@ -183,7 +184,7 @@ const Star = ({
       {...props}
     >
       {showValue && (
-        <Text className="mr-2" style={{ color: theme.primary }}>
+        <Text className="mr-2" color="primary">
           {value}/{max}
         </Text>
       )}

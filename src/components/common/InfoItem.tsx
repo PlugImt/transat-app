@@ -1,6 +1,6 @@
-import { Text, View } from "react-native";
+import { View } from "react-native";
+import { Text } from "@/components/common/Text";
 import { TextSkeleton } from "@/components/Skeleton";
-import { useTheme } from "@/contexts/ThemeContext";
 
 type InfoItemProps = {
   icon: React.ReactNode;
@@ -9,17 +9,15 @@ type InfoItemProps = {
 };
 
 const InfoItem = ({ icon, label, value }: InfoItemProps) => {
-  const { theme } = useTheme();
-
   return (
     <View className="flex-row items-center gap-4">
       {icon}
-      <View className="gap-0.5 w-full">
-        <Text className="text-sm" style={{ color: theme.text }}>
-          {label}
-        </Text>
+      <View className="flex-1">
+        <Text>{label}</Text>
         {value ? (
-          <Text className="text-sm text-muted-foreground/80">{value}</Text>
+          <Text color="muted" variant="sm">
+            {value}
+          </Text>
         ) : (
           <TextSkeleton lines={1} variant="sm" />
         )}

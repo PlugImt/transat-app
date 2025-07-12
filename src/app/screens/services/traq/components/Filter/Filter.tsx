@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import Badge from "@/components/common/Badge";
-import { useTheme } from "@/contexts/ThemeContext";
+import { Text } from "@/components/common/Text";
 
 interface TraqFilterProps {
   tags: string[];
@@ -15,7 +15,6 @@ export const TraqFilter = ({
   setSelected,
 }: TraqFilterProps) => {
   const { t } = useTranslation();
-  const { theme } = useTheme();
 
   const toggle = (tag: string) => {
     setSelected((prev) => {
@@ -29,9 +28,7 @@ export const TraqFilter = ({
   return (
     <>
       <View className="flex-row justify-between items-center ml-4">
-        <Text className="h2" style={{ color: theme.text }}>
-          {t("common.filter")}
-        </Text>
+        <Text variant="h2">{t("common.filter")}</Text>
         {selected.length > 0 && (
           <Badge
             label={t("common.clearAll")}

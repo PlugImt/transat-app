@@ -3,8 +3,9 @@ import { format } from "date-fns";
 import { enUS, fr } from "date-fns/locale";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Button } from "@/components/common/Button";
+import { Text } from "@/components/common/Text";
 import { AboutModal } from "@/components/custom/AboutModal";
 import HomeworkCard from "@/components/custom/card/HomeworkCard";
 import { Page } from "@/components/page/Page";
@@ -105,10 +106,7 @@ export const Homework = () => {
     >
       <ScrollView className="flex flex-col gap-4">
         <View className="px-4 pt-2 pb-0 mb-8">
-          <Text
-            className="font-semibold text-lg mb-2"
-            style={{ color: theme.text }}
-          >
+          <Text variant="lg" className="mb-2">
             {t("services.homework.filters")}
           </Text>
           <View
@@ -181,10 +179,7 @@ export const Homework = () => {
         <View className="flex flex-col gap-8 px-4 pb-4">
           {Object.keys(groupedHomeworks).length === 0 ? (
             <View className="items-center justify-center mt-6">
-              <Text
-                style={{ color: theme.text }}
-                className="text-center italic"
-              >
+              <Text className="text-center italic">
                 {t("services.homework.noHomework")}
               </Text>
             </View>
@@ -201,7 +196,7 @@ export const Homework = () => {
                     className="px-3 py-1 rounded-md self-start"
                     style={{ backgroundColor: theme.secondary }}
                   >
-                    <Text className="text-sm font-semibold text-white">
+                    <Text className="font-semibold" variant="sm">
                       {sortBy === "deadline"
                         ? format(new Date(groupKey), "EEEE dd MMMM", {
                             locale,

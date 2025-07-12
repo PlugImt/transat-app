@@ -3,11 +3,12 @@ import { useRoute } from "@react-navigation/native";
 import { CookingPot, Star, Utensils } from "lucide-react-native";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, View } from "react-native";
 import { LoadingState } from "@/app/screens/services/restaurant/components";
 import { ReviewItem } from "@/app/screens/services/restaurant/components/MenuRating";
 import { ReviewDialog } from "@/app/screens/services/restaurant/components/MenuReviewDialog/ReviewDialog";
 import { Button } from "@/components/common/Button";
+import { Text } from "@/components/common/Text";
 import { useToast } from "@/components/common/Toast";
 import { AboutModal } from "@/components/custom/AboutModal";
 import { Page } from "@/components/page/Page";
@@ -78,7 +79,9 @@ export const RestaurantReviews = () => {
         }
       >
         <View className="min-h-screen flex justify-center items-center ">
-          <Text className="text-red-500 text-center h1">{error?.message}</Text>
+          <Text variant="h1" className="text-center" color="destructive">
+            {error?.message}
+          </Text>
         </View>
       </Page>
     );
@@ -107,17 +110,13 @@ export const RestaurantReviews = () => {
       <View className="flex flex-col gap-6">
         <View className="flex flex-row justify-between items-start">
           <View className="flex-1 flex-col mr-3">
-            <Text
-              className="text-2xl font-bold flex-wrap"
-              style={{ color: theme.text }}
-            >
-              {reviewData.name}
-            </Text>
+            <Text className="flex-wrap">{reviewData.name}</Text>
             <View className="flex flex-row items-center gap-2 mt-1">
               <Utensils size={16} color={theme.textSecondary} />
               <Text
-                className="text-sm flex-wrap"
-                style={{ color: theme.textSecondary }}
+                color="textSecondary"
+                variant="sm"
+                className="flex-wrap"
                 numberOfLines={2}
               >
                 {t("services.restaurant.reviews.servicesCount", {
@@ -140,7 +139,7 @@ export const RestaurantReviews = () => {
         {/* Overall Rating */}
         <View className="flex flex-row items-center gap-3">
           <Star size={20} color={theme.text} fill={theme.text} />
-          <Text className="text-xl font-bold" style={{ color: theme.text }}>
+          <Text variant="h3">
             {t("services.restaurant.reviews.averageRating", {
               rating: averageRating.toFixed(1),
               count: totalReviews,
@@ -162,16 +161,10 @@ export const RestaurantReviews = () => {
             <View className="mb-6">
               <CookingPot size={50} color={theme.primary} />
             </View>
-            <Text
-              className="text-lg font-semibold text-center mb-2"
-              style={{ color: theme.text }}
-            >
+            <Text variant="lg" className="text-center mb-2">
               {t("services.restaurant.reviews.noReviewsTitle")}
             </Text>
-            <Text
-              className="text-center mb-6"
-              style={{ color: theme.textSecondary }}
-            >
+            <Text color="textSecondary" className="text-center mb-6">
               {t("services.restaurant.reviews.noReviewsSubtitle")}
             </Text>
             <Button

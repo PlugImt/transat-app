@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
+import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";
 
@@ -66,11 +67,10 @@ const TabsTrigger = ({
     >
       <Text
         className={cn(
-          "font-medium text-center text-muted-foreground",
+          "text-center text-muted-foreground",
           { "text-background": activeTab === value },
           textClasses,
         )}
-        style={{ color: theme.text }}
       >
         {title}
       </Text>

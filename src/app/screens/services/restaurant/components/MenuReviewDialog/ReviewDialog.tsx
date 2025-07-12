@@ -1,9 +1,10 @@
 import { X } from "lucide-react-native";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Modal, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Modal, TextInput, TouchableOpacity, View } from "react-native";
 import { Button } from "@/components/common/Button";
 import { Star } from "@/components/common/Star";
+import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 
 interface ReviewDialogProps {
@@ -52,7 +53,7 @@ export const ReviewDialog = ({
         >
           {/* Header */}
           <View className="flex-row justify-between items-center mb-6">
-            <Text className="text-xl font-bold" style={{ color: theme.text }}>
+            <Text variant="h3">
               {t("services.restaurant.reviews.dialog.title")}
             </Text>
             <TouchableOpacity

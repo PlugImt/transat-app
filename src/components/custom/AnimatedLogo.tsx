@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { Animated as RNAnimated, Text, View } from "react-native";
+import { Animated as RNAnimated, View } from "react-native";
 import LogoAnimation from "@/components/animations/LogoAnimation";
-import { useTheme } from "@/contexts/ThemeContext";
+import { Text } from "@/components/common/Text";
 
 interface AnimatedLogoProps {
   onLogoPress?: (x: number, y: number) => void;
@@ -16,7 +16,6 @@ export const AnimatedLogo = ({
   showCampusApp = false,
 }: AnimatedLogoProps) => {
   const { t } = useTranslation();
-  const { theme } = useTheme();
   const fadeAnim = useRef(new RNAnimated.Value(0)).current;
   const slideAnim = useRef(new RNAnimated.Value(50)).current;
 
@@ -56,19 +55,16 @@ export const AnimatedLogo = ({
           transform: [{ translateY: slideAnim }],
         }}
       >
-        <Text className="h1 text-5xl" style={{ color: theme.primary }}>
+        <Text variant="h1" className="text-5xl" color="primary">
           Transat
         </Text>
         {showSubtitle && (
-          <Text className="h3 text-center" style={{ color: theme.text }}>
+          <Text className="text-center" variant="h3" color="muted">
             {t("welcome.subtitle")}
           </Text>
         )}
         {showCampusApp && (
-          <Text
-            className="text-center mb-4"
-            style={{ color: theme.textSecondary }}
-          >
+          <Text className="text-center mb-4" color="textSecondary">
             {t("common.campusApp")}
           </Text>
         )}

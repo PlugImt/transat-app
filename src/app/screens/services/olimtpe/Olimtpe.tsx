@@ -1,12 +1,11 @@
 import { useTranslation } from "react-i18next";
-import { Image, Text, View } from "react-native";
+import { Image, View } from "react-native";
+import { Text } from "@/components/common/Text";
 import { AboutModal } from "@/components/custom/AboutModal";
 import { Page } from "@/components/page/Page";
-import { useTheme } from "@/contexts/ThemeContext";
 
 export const Olimtpe = () => {
   const { t } = useTranslation();
-  const { theme } = useTheme();
 
   return (
     <Page
@@ -22,48 +21,45 @@ export const Olimtpe = () => {
     >
       <View className="min-h-full flex justify-center items-center gap-8 p-4">
         <Image
-          source={require("@/assets/images/Logos/olimtpe.png")}
+          source={require("@/assets/images/services/olimtpe.png")}
           className="w-40 h-40"
           resizeMode="contain"
         />
 
         <View className="gap-4 max-w-md">
-          <Text className="h1 text-center" style={{ color: theme.text }}>
+          <Text variant="h1" className="text-center">
             {t("services.olimtpe.welcome")}
           </Text>
 
-          <Text className="body text-center text-muted-foreground">
+          <Text className="text-center" color="muted">
             {t("services.olimtpe.description")}
           </Text>
 
           <View className="bg-primary/10 p-4 rounded-lg">
-            <Text className="h3 text-center" style={{ color: theme.primary }}>
+            <Text variant="h3" className="text-center" color="primary">
               {t("services.olimtpe.services")}
             </Text>
             <View className="mt-2 gap-2">
-              <Text className="body text-center" style={{ color: theme.text }}>
+              <Text className="text-center">
                 • {t("services.olimtpe.service1")}
               </Text>
-              <Text className="body text-center" style={{ color: theme.text }}>
+              <Text className="text-center">
                 • {t("services.olimtpe.service2")}
               </Text>
-              <Text className="body text-center" style={{ color: theme.text }}>
+              <Text className="text-center">
                 • {t("services.olimtpe.service3")}
               </Text>
-              <Text className="body text-center" style={{ color: theme.text }}>
+              <Text className="text-center">
                 • {t("services.olimtpe.service4")}
               </Text>
             </View>
           </View>
 
           <View className="bg-secondary/10 p-4 rounded-lg">
-            <Text className="h3 text-center" style={{ color: theme.text }}>
+            <Text variant="h3" className="text-center">
               {t("services.olimtpe.contact")}
             </Text>
-            <Text
-              className="body text-center mt-2"
-              style={{ color: theme.text }}
-            >
+            <Text className="text-center mt-2" color="muted">
               {t("services.olimtpe.contactInfo")}
             </Text>
           </View>

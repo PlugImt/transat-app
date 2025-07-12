@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Text, type TextInput, View } from "react-native";
+import { type TextInput, View } from "react-native";
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -13,16 +13,15 @@ import { z } from "zod";
 import { VerificationCodeModal } from "@/components/auth/VerificationCode";
 import { Button } from "@/components/common/Button";
 import Input from "@/components/common/Input";
+import { Text } from "@/components/common/Text";
 import { useToast } from "@/components/common/Toast";
 import { Page } from "@/components/page/Page";
-import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";
 
 export const Signin = () => {
   const navigation = useNavigation();
   const { login, isLoading } = useAuth();
   const { t } = useTranslation();
-  const { theme } = useTheme();
   const { toast } = useToast();
 
   const [loginError, setLoginError] = useState<string | null>(null);
@@ -107,7 +106,7 @@ export const Signin = () => {
           </View>
         ) : (
           <View className="h-20">
-            <Text style={{ color: theme.textSecondary }} className="mt-2">
+            <Text color="textSecondary" className="mt-2">
               {t("auth.signInDescription")}
             </Text>
           </View>

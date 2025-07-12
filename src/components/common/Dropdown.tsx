@@ -1,7 +1,8 @@
 import { Picker } from "@react-native-picker/picker";
 import { ChevronDown } from "lucide-react-native";
 import type React from "react";
-import { Platform, Text, TouchableOpacity, View } from "react-native";
+import { Platform, TouchableOpacity, View } from "react-native";
+import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 import {
   BottomSheet,
@@ -30,7 +31,7 @@ const Dropdown = ({
 
   return (
     <View className="gap-1.5">
-      <Text className=" text-sm" style={{ color: theme.textSecondary }}>
+      <Text color="textSecondary" variant="sm">
         {label}
       </Text>
       {Platform.OS === "android" ? (
@@ -39,7 +40,6 @@ const Dropdown = ({
             selectedValue={value}
             onValueChange={onValueChange}
             mode="dropdown"
-            style={{ color: theme.text }}
             itemStyle={{
               backgroundColor: theme.card,
               color: theme.text,
@@ -58,16 +58,14 @@ const Dropdown = ({
             <TouchableOpacity className="flex-row items-center justify-between bg-muted/70 rounded-lg px-3 h-12">
               <View className="flex-row items-center gap-2">
                 {icon ? icon : null}
-                <Text style={{ color: theme.text }}>
-                  {value ? value : placeholder}
-                </Text>
+                <Text>{value ? value : placeholder}</Text>
               </View>
               <ChevronDown color={theme.text} size={20} />
             </TouchableOpacity>
           </BottomSheetTrigger>
 
           <BottomSheet>
-            <Text className="h2">{placeholder}</Text>
+            <Text variant="h2">{placeholder}</Text>
             <Picker
               selectedValue={value}
               onValueChange={onValueChange}
@@ -100,13 +98,13 @@ export const DropdownLoading = ({
   const { theme } = useTheme();
   return (
     <View className="gap-1.5 opacity-50">
-      <Text className="text-sm" style={{ color: theme.textSecondary }}>
+      <Text color="textSecondary" variant="sm">
         {label}
       </Text>
       <View className="flex-row items-center justify-between bg-muted/70 rounded-lg px-3 h-12 gap-2">
         <View className="flex-row items-center gap-2">
           {icon ? icon : null}
-          <Text style={{ color: theme.text }}>{placeholder}</Text>
+          <Text>{placeholder}</Text>
         </View>
         <ChevronDown color={theme.text} size={20} />
       </View>

@@ -1,8 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
-import { Text, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { Star } from "@/components/common/Star";
+import { Text } from "@/components/common/Text";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { MenuItem } from "@/dto";
@@ -65,9 +66,7 @@ const RestaurantCard = ({ title, meals, icon }: CardProps) => {
               navigation.navigate("RestaurantReviews", { id: item.id })
             }
           >
-            <Text style={{ color: theme.text }} className="flex-1">
-              {item.name}
-            </Text>
+            <Text className="flex-1">{item.name}</Text>
             <Star
               max={5}
               value={item.average_rating || 0}

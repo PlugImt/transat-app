@@ -1,5 +1,6 @@
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
-import { Text, View } from "react-native";
+import { View } from "react-native";
+import { Text } from "@/components/common/Text";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 
@@ -38,20 +39,14 @@ const TimetableCard = ({ title, meals, icon }: CardProps) => {
     >
       <View className="flex flex-row items-center gap-2">
         {getIcon()}
-        <Text
-          className="text-lg font-bold"
-          style={{ color: theme.primary }}
-          ellipsizeMode="tail"
-        >
+        <Text variant="lg" color="primary" ellipsizeMode="tail">
           {title}
         </Text>
       </View>
 
       <View className="flex flex-col gap-4">
         {meals.map((item) => (
-          <Text key={item} style={{ color: theme.text }}>
-            {item}
-          </Text>
+          <Text key={item}>{item}</Text>
         ))}
       </View>
     </View>
@@ -78,11 +73,7 @@ export const TimetableCardLoading = ({
     >
       <View className="flex flex-row items-center gap-2">
         {icon}
-        <Text
-          className="text-lg font-bold"
-          style={{ color: theme.primary }}
-          ellipsizeMode="tail"
-        >
+        <Text variant="lg" color="primary" ellipsizeMode="tail">
           {title}
         </Text>
       </View>

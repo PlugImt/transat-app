@@ -1,26 +1,28 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
-import { Animated, Text, View } from "react-native";
+import { Animated, View } from "react-native";
+import { Text } from "@/components/common/Text";
+import { type ThemeColorKeys, useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";
 
 const variants = {
-  default: "bg-foreground",
-  destructive: "bg-destructive",
-  success: "bg-green-500",
-  info: "bg-blue-500",
+  default: "card",
+  destructive: "destructive",
+  success: "success",
+  info: "info",
 };
 
 const textVariants = {
-  default: "text-background",
-  destructive: "text-destructive-foreground",
-  success: "text-green-100",
-  info: "text-blue-100",
+  default: "text",
+  destructive: "destructive.text",
+  success: "success.text",
+  info: "info.text",
 };
 
 const loadingVariants = {
-  default: "bg-primary",
-  destructive: "bg-destructive-foreground",
-  success: "bg-green-100",
-  info: "bg-blue-100",
+  default: "primary",
+  destructive: "destructive.text",
+  success: "success.text",
+  info: "info.text",
 };
 
 interface ToastProps {
@@ -40,6 +42,7 @@ const Toast = ({
   duration = 3000,
   showProgress = true,
 }: ToastProps) => {
+  const { theme } = useTheme();
   const opacity = useRef(new Animated.Value(0)).current;
   const progress = useRef(new Animated.Value(0)).current;
 
@@ -70,6 +73,7 @@ const Toast = ({
         "m-2 mb-1 p-4 rounded-lg shadow-md transform transition-all",
       )}
       style={{
+        backgroundColor: theme[variants[variant] as ThemeColorKeys],
         opacity,
         transform: [
           {
@@ -81,14 +85,19 @@ const Toast = ({
         ],
       }}
     >
-      <Text className={cn(textVariants[variant], "font-semibold text-center")}>
+      <Text
+        color={textVariants[variant] as ThemeColorKeys}
+        className="font-semibold text-center"
+      >
         {message}
       </Text>
       {showProgress && (
         <View className="mt-2 rounded">
           <Animated.View
-            className={cn(loadingVariants[variant], "h-2 opacity-30 rounded")}
+            className="h-2 opacity-30 rounded"
             style={{
+              backgroundColor:
+                theme[loadingVariants[variant] as ThemeColorKeys],
               width: progress.interpolate({
                 inputRange: [0, 1],
                 outputRange: ["0%", "100%"],

@@ -1,19 +1,18 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { Image, Text, View } from "react-native";
+import { Image, View } from "react-native";
 import {
   LoadingState,
   RestaurantMenu,
 } from "@/app/screens/services/restaurant/components";
+import { Text } from "@/components/common/Text";
 import { AboutModal } from "@/components/custom/AboutModal";
 import { Page } from "@/components/page/Page";
-import { useTheme } from "@/contexts/ThemeContext";
 import { useMenuRestaurant } from "@/hooks/useMenuRestaurant";
 import { getOpeningHoursData, isWeekend, outOfService } from "@/utils";
 
 export const Restaurant = () => {
   const { t } = useTranslation();
-  const { theme } = useTheme();
   const openingHoursData = useMemo(() => getOpeningHoursData(t), [t]);
 
   const { menu, isPending, refetch, isError, error } = useMenuRestaurant();
@@ -48,10 +47,10 @@ export const Restaurant = () => {
       >
         <View className="min-h-full flex justify-center items-center gap-4">
           <Image
-            source={require("@/assets/images/Logos/restaurant.png")}
+            source={require("@/assets/images/services/restaurant.png")}
             className="w-40 h-40 filter grayscale"
           />
-          <Text className="h1 text-center" style={{ color: theme.text }}>
+          <Text variant="h1" className="text-center">
             {weekend
               ? t("services.restaurant.closedWeekends")
               : t("services.restaurant.noData")}
@@ -80,14 +79,14 @@ export const Restaurant = () => {
       >
         <View className="min-h-full flex justify-center items-center gap-4">
           <Image
-            source={require("@/assets/images/Logos/restaurant.png")}
+            source={require("@/assets/images/services/restaurant.png")}
             className="w-40 h-40 filter grayscale"
           />
           <View className="gap-2">
-            <Text className="h1 text-center" style={{ color: theme.text }}>
+            <Text variant="h1" className="text-center">
               {t("services.restaurant.closedNight.title")}
             </Text>
-            <Text className="h3 text-center text-muted-foreground">
+            <Text className="text-center" color="muted">
               {t("services.restaurant.closedNight.description")}
             </Text>
           </View>
@@ -114,7 +113,9 @@ export const Restaurant = () => {
         }
       >
         <View className="min-h-screen flex justify-center items-center ">
-          <Text className="text-red-500 text-center h1">{error?.message}</Text>
+          <Text variant="h1" className="text-center" color="destructive">
+            {error?.message}
+          </Text>
         </View>
       </Page>
     );

@@ -2,10 +2,10 @@ import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { Pencil } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
-import { View } from "react-native";
+import { Image, View } from "react-native";
 import Animated from "react-native-reanimated";
 import { IconButton } from "@/components/common/Button";
-import Card from "@/components/common/Card";
+import LinkCard from "@/components/custom/LinkCard";
 import { PreferenceCustomizationButton } from "@/components/custom/PreferenceCustomizationModal";
 import { Empty } from "@/components/page/Empty";
 import { Page } from "@/components/page/Page";
@@ -35,10 +35,11 @@ export const Services = () => {
   };
 
   const renderServiceCard = (item: Preference) => (
-    <Card
-      image={item.image}
+    <LinkCard
       title={item.name}
+      description={item.description || ""}
       onPress={() => handleServicePress(item)}
+      image={<Image source={item.image} />}
     />
   );
 

@@ -3,7 +3,8 @@ import type { StackNavigationProp } from "@react-navigation/stack";
 import { WashingMachineIcon, Wind } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Dimensions, Text, TouchableOpacity, View } from "react-native";
+import { Dimensions, TouchableOpacity, View } from "react-native";
+import { Text } from "@/components/common/Text";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useWashingMachines } from "@/hooks/useWashingMachines";
@@ -44,7 +45,7 @@ export const WashingMachineWidget = () => {
 
   return (
     <View className="flex flex-col gap-2">
-      <Text className="h3 ml-4" style={{ color: theme.text }}>
+      <Text className="ml-4" variant="h3">
         {t("services.washingMachine.title")}
       </Text>
       <TouchableOpacity
@@ -60,11 +61,10 @@ export const WashingMachineWidget = () => {
             size={40}
             color={availableWashers === 0 ? theme.muted : theme.primary}
           />
-          <Text style={{ color: theme.text }} className="text-lg font-bold">
+          <Text variant="lg">
             {availableWashers}/{totalWashers}
           </Text>
           <Text
-            style={{ color: theme.text }}
             className="flex-1 text-center"
             ellipsizeMode="tail"
             numberOfLines={2}
@@ -80,11 +80,10 @@ export const WashingMachineWidget = () => {
             size={40}
             color={availableDryers === 0 ? theme.muted : theme.primary}
           />
-          <Text style={{ color: theme.text }} className="text-lg font-bold">
+          <Text variant="lg">
             {availableDryers}/{totalDryers}
           </Text>
           <Text
-            style={{ color: theme.text }}
             className="flex-1 text-center"
             ellipsizeMode="tail"
             numberOfLines={2}
@@ -106,7 +105,7 @@ export const WashingMachineWidgetLoading = () => {
 
   return (
     <View className="flex flex-col gap-2">
-      <Text className="h3">{t("services.washingMachine.title")}</Text>
+      <Text variant="h3">{t("services.washingMachine.title")}</Text>
       <TouchableOpacity
         onPress={() => navigation.navigate("WashingMachine")}
         style={{ backgroundColor: theme.card }}
@@ -117,7 +116,6 @@ export const WashingMachineWidgetLoading = () => {
           <TextSkeleton variant="lg" lines={1} lastLineWidth={32} />
 
           <Text
-            style={{ color: theme.text }}
             className="flex-1 text-center"
             ellipsizeMode="tail"
             numberOfLines={1}
@@ -129,7 +127,6 @@ export const WashingMachineWidgetLoading = () => {
           <Wind size={40} color={theme.muted} />
           <TextSkeleton variant="lg" lines={1} lastLineWidth={32} />
           <Text
-            style={{ color: theme.text }}
             className="flex-1 text-center"
             ellipsizeMode="tail"
             numberOfLines={1}

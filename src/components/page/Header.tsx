@@ -2,13 +2,14 @@ import { useNavigation } from "@react-navigation/native";
 import { ArrowLeft } from "lucide-react-native";
 import type React from "react";
 import type { ReactNode } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import Animated, {
   Extrapolation,
   interpolate,
   type SharedValue,
   useAnimatedStyle,
 } from "react-native-reanimated";
+import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 
 export const HEADER_HEIGHT = 60;
@@ -68,7 +69,7 @@ export function Header({ headerShown, title, goBack, children }: HeaderProps) {
               />
             )}
             {title && (
-              <Text className="h1 ml-4" style={{ color: theme.text }}>
+              <Text variant="h1" className="ml-4">
                 {title}
               </Text>
             )}

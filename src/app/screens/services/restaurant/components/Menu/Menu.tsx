@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
-import { Text, View } from "react-native";
+import { View } from "react-native";
+import { Text } from "@/components/common/Text";
 import RestaurantCard from "@/components/custom/card/RestaurantCard";
-import { useTheme } from "@/contexts/ThemeContext";
 import type { MenuData } from "@/dto";
 
 interface RestaurantMenuProps {
@@ -10,12 +10,11 @@ interface RestaurantMenuProps {
 
 export const RestaurantMenu = ({ menu }: RestaurantMenuProps) => {
   const { t } = useTranslation();
-  const { theme } = useTheme();
   return (
     <View className="flex flex-col gap-8">
       {/* Lunch */}
       <View className="flex flex-col gap-4">
-        <Text className="h3 ml-4" style={{ color: theme.text }}>
+        <Text className="ml-4" variant="h3">
           {t("services.restaurant.lunch")}
         </Text>
 
@@ -53,7 +52,7 @@ export const RestaurantMenu = ({ menu }: RestaurantMenuProps) => {
       {(menu?.grilladesSoir?.length ?? 0) > 0 ||
       (menu?.accompSoir?.length ?? 0) > 0 ? (
         <View className="flex flex-col gap-4">
-          <Text className="h3 ml-4" style={{ color: theme.text }}>
+          <Text className="ml-4" variant="h3">
             {t("services.restaurant.dinner")}
           </Text>
           {menu?.grilladesSoir?.length > 0 && (

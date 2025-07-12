@@ -261,6 +261,7 @@
     "weather": "Météo",
     "traq": {
       "title": "Traq",
+      "description": "Toutes les boissons proposées au bar",
       "about": "🍺 Le Traq (Traquenard) est le bar étudiant de l'école où vous pouvez déguster différentes boissons.",
       "location": "À l'intérieur de la MDE",
       "additionalInfo": "Pendant les événements, des shooters ou des cocktails peuvent être vendus. Veuillez consulter la page de l'événement pour plus d'informations.",
@@ -277,6 +278,7 @@
     "reservations": "Réservations",
     "restaurant": {
       "title": "Menu",
+      "description": "Découvre le menu du jour proposé au RU",
       "lunch": "Midi",
       "dinner": "Soir",
       "widgetLunch": "Menu du midi",
@@ -319,8 +321,8 @@
     },
     "timetable": {
       "title": "Emploi du temps",
-      "description": "L'emploi du temps est mis à jour quotidiennement pour vous informer de vos cours à venir.",
-      "about": "L'emploi du temps est mis à jour quotidiennement pour vous informer de vos cours à venir.",
+      "description": "Le même que sur PASS, le style en plus",
+      "about": "L'emploi du temps est mis à jour quotidiennement pour vous informer de vos cours à venir",
       "additionalInfo": "Si vous observez la moindre incohérence, veuillez nous le faire remonter via le formulaire de feedback.",
       "noData": "Aucune donnée disponible pour aujourd'hui",
       "loading": "Chargement de l'emploi du temps...",
@@ -339,6 +341,7 @@
     },
     "homework": {
       "title": "Devoirs",
+      "description": "Retrouve tous les devoirs à faire",
       "author": "Auteur",
       "createdAt": "Créé le",
       "updatedAt": "Modifié le",
@@ -358,8 +361,8 @@
     },
     "olimtpe": {
       "title": "OL'IMT'PE",
+      "description": "Signale un comportement anormal",
       "welcome": "Bienvenue à OL'IMT'PE !",
-      "description": "Votre centre olympique et sportif à IMT Atlantique. Découvrez toutes nos installations et services pour une vie étudiante active et saine.",
       "about": "🏅 OL'IMT'PE est le centre sportif d'IMT Atlantique, offrant diverses installations et activités sportives pour les étudiants et le personnel.",
       "location": "Complexe sportif, campus IMT Atlantique",
       "price": "Accès gratuit pour les étudiants avec carte étudiante valide",
@@ -375,6 +378,7 @@
     },
     "washingMachine": {
       "title": "Laverie",
+      "description": "Regarde la disponibilité des machines de la laverie",
       "washingMachine": "Lave-linge",
       "dryer": "Sèche-linge",
       "almostDone": "Machine {{number}} presque terminée !",

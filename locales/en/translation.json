@@ -261,6 +261,7 @@
     "weather": "Weather",
     "traq": {
       "title": "Traq'",
+      "description": "All the drinks available at the Traq",
       "about": "🍺 The Traq (Traquenard) is the student bar where you can enjoy various drinks.",
       "location": "Inside the MDE",
       "additionalInfo": "During events, shooters or cocktails may be sold. Please check the event page for more information.",
@@ -277,6 +278,7 @@
     "reservations": "Reservations",
     "restaurant": {
       "title": "Menu",
+      "description": "Discover the daily menu offered at the RU",
       "lunch": "Lunch",
       "dinner": "Dinner",
       "widgetLunch": "Lunch menu",
@@ -319,7 +321,7 @@
     },
     "timetable": {
       "title": "Timetable",
-      "description": "The timetable is updated daily to inform you of your upcoming classes.",
+      "description": "The same as on PASS, with a plus",
       "about": "The timetable is updated daily to inform you of your upcoming classes.",
       "additionalInfo": "If you notice any inconsistencies, please let us know using the feedback form. ",
       "noData": "No data available for today",
@@ -339,9 +341,8 @@
     },
     "olimtpe": {
       "title": "OL'IMT'PE",
+      "description": "Report abnormal behavior",
       "welcome": "Welcome to OL'IMT'PE!",
-      "description": "Your Olympic and sports center at IMT Atlantique. Discover all our facilities and services for an active and healthy student life.",
-      "about": "🏅 OL'IMT'PE is the sports center of IMT Atlantique, offering various sports facilities and activities for students and staff.",
       "location": "Sports complex, IMT Atlantique campus",
       "price": "Free access for students with valid student card",
       "additionalInfo": "Equipment rental available. Some activities may require advance booking. Check the schedule for opening hours and available activities.",
@@ -356,6 +357,7 @@
     },
     "washingMachine": {
       "title": "Laundry",
+      "description": "Check the availability of the laundry machines",
       "washingMachine": "Washing machine",
       "dryer": "Dryer",
       "almostDone": "Machine {{number}} almost done!",

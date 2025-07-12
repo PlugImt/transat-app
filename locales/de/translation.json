@@ -261,6 +261,7 @@
     "weather": "Wetter",
     "traq": {
       "title": "Traq'",
+      "description": "Alle Getränke, die am Traq verfügbar sind",
       "about": "🍺 Das Traq (Traquenard) ist die Studentenbar, in der Sie verschiedene Getränke genießen können.",
       "location": "In der MDE",
       "additionalInfo": "Während der Veranstaltungen können Shooter oder Cocktails verkauft werden. Weitere Informationen finden Sie auf der Veranstaltungsseite.",
@@ -277,6 +278,7 @@
     "reservations": "Reservierungen",
     "restaurant": {
       "title": "Menü",
+      "description": "Das tägliche Menü des Restaurants",
       "lunch": "Mittagessen",
       "dinner": "Abendessen",
       "widgetLunch": "Lunchmenü",
@@ -319,7 +321,7 @@
     },
     "timetable": {
       "title": "Stundenplan",
-      "description": "Der Stundenplan wird täglich aktualisiert, um Sie über Ihre bevorstehenden Kurse zu informieren.",
+      "description": "Der gleiche wie auf PASS, mit einem Plus",
       "about": "Der Stundenplan wird täglich aktualisiert, um Sie über Ihre bevorstehenden Kurse zu informieren.",
       "additionalInfo": "Wenn Sie irgendwelche Unstimmigkeiten bemerken, teilen Sie uns diese bitte über das Feedback-Formular mit. ",
       "noData": "Keine Daten für heute verfügbar",
@@ -340,7 +342,7 @@
     "olimtpe": {
       "title": "OL'IMT'PE",
       "welcome": "Willkommen bei OL'IMT'PE!",
-      "description": "Ihr olympisches und Sportzentrum an der IMT Atlantique. Entdecken Sie alle unsere Einrichtungen und Dienstleistungen für ein aktives und gesundes Studentenleben.",
+      "description": "Signale ein anormales Verhalten",
       "about": "🏅 OL'IMT'PE ist das Sportzentrum der IMT Atlantique und bietet verschiedene Sporteinrichtungen und -aktivitäten für Studenten und Mitarbeiter.",
       "location": "Sportkomplex, Campus IMT Atlantique",
       "price": "Kostenloser Zugang für Studenten mit gültigem Studentenausweis",
@@ -356,6 +358,7 @@
     },
     "washingMachine": {
       "title": "Wäscherei",
+      "description": "Überprüfe die Verfügbarkeit der Waschmaschinen und Trockner",
       "washingMachine": "Waschmaschine",
       "dryer": "Trockner",
       "almostDone": "Maschine {{number}} fast fertig!",

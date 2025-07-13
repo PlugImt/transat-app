@@ -12,7 +12,8 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/common/Avatar";
-import { Button } from "@/components/common/Button";
+import { Button, IconButton } from "@/components/common/Button";
+import Card from "@/components/common/Card";
 import Dropdown, { DropdownLoading } from "@/components/common/Dropdown";
 import Input, { InputLoading } from "@/components/common/Input";
 import { Text } from "@/components/common/Text";
@@ -154,7 +155,7 @@ export const EditProfile = () => {
   return (
     <Page
       goBack
-      className="gap-8"
+      className="gap-6"
       refreshing={isPending}
       onRefresh={refetch}
       title={t("account.editProfile")}
@@ -176,113 +177,114 @@ export const EditProfile = () => {
               {user.last_name.charAt(0)}
             </AvatarFallback>
           </Avatar>
-          <TouchableOpacity
-            className="absolute bottom-0 right-0 bg-muted p-2 rounded-full"
+          <IconButton
+            className="absolute bottom-0 right-0"
+            icon={<Edit color={theme.text} size={16} />}
             onPress={handleUpdateProfilePicture}
-          >
-            <Edit color={theme.text} size={16} />
-          </TouchableOpacity>
+          />
         </TouchableOpacity>
       </View>
 
-      <View
-        className=" rounded-lg px-6 py-4 gap-4"
-        style={{ backgroundColor: theme.card }}
-      >
-        <Text variant="h3">{t("account.personalInfo")}</Text>
+      <View className="gap-2">
+        <Text variant="h3" className="ml-4">
+          {t("account.personalInfo")}
+        </Text>
+        <Card>
+          <Input
+            control={userControl}
+            label={t("account.firstName")}
+            name="first_name"
+            returnKeyType="go"
+            textContentType="name"
+            error={userErrors.first_name?.message}
+          />
 
-        <Input
-          control={userControl}
-          label={t("account.firstName")}
-          name="first_name"
-          returnKeyType="go"
-          textContentType="name"
-          error={userErrors.first_name?.message}
-        />
+          <Input
+            control={userControl}
+            label={t("account.lastName")}
+            name="last_name"
+            textContentType="familyName"
+            error={userErrors.last_name?.message}
+          />
 
-        <Input
-          control={userControl}
-          label={t("account.lastName")}
-          name="last_name"
-          textContentType="familyName"
-          error={userErrors.last_name?.message}
-        />
+          <Input
+            control={userControl}
+            label={t("account.email")}
+            name="email"
+            autoCapitalize="none"
+            textContentType="emailAddress"
+            error={userErrors.email?.message}
+            disabled={true}
+            className="opacity-50"
+          />
 
-        <Input
-          control={userControl}
-          label={t("account.email")}
-          name="email"
-          autoCapitalize="none"
-          textContentType="emailAddress"
-          error={userErrors.email?.message}
-          disabled={true}
-          className="opacity-50"
-        />
+          <Input
+            control={userControl}
+            label={t("account.phone")}
+            name="phone_number"
+            textContentType="telephoneNumber"
+            error={userErrors.phone_number?.message}
+            keyboardType="phone-pad"
+          />
 
-        <Input
-          control={userControl}
-          label={t("account.phone")}
-          name="phone_number"
-          textContentType="telephoneNumber"
-          error={userErrors.phone_number?.message}
-          keyboardType="phone-pad"
-        />
+          <Controller
+            control={userControl}
+            name="scolarity.branch"
+            render={({ field: { onChange, value } }) => (
+              <Dropdown
+                label={t("account.branch")}
+                placeholder={t("account.selectBranch")}
+                options={["FISE", "FIL", "FIT", "FIP"]}
+                value={value}
+                onValueChange={onChange}
+              />
+            )}
+          />
 
-        <Controller
-          control={userControl}
-          name="scolarity.branch"
-          render={({ field: { onChange, value } }) => (
-            <Dropdown
-              label={t("account.branch")}
-              placeholder={t("account.selectBranch")}
-              options={["FISE", "FIL", "FIT", "FIP"]}
-              value={value}
-              onValueChange={onChange}
-            />
-          )}
-        />
+          <Controller
+            control={userControl}
+            name="scolarity.group"
+            render={({ field: { onChange, value } }) => (
+              <Dropdown
+                label={t("account.group")}
+                placeholder={t("account.selectGroup")}
+                options={["1", "2", "3", "4", "5"]}
+                value={value}
+                onValueChange={onChange}
+              />
+            )}
+          />
 
-        <Controller
-          control={userControl}
-          name="scolarity.group"
-          render={({ field: { onChange, value } }) => (
-            <Dropdown
-              label={t("account.group")}
-              placeholder={t("account.selectGroup")}
-              options={["1", "2", "3", "4", "5"]}
-              value={value}
-              onValueChange={onChange}
-            />
-          )}
-        />
-
-        <Controller
-          control={userControl}
-          name="scolarity.graduation_year"
-          render={({ field: { onChange, value } }) => (
-            <Dropdown
-              label={t("account.graduationYear")}
-              placeholder={t("account.selectGraduationYear")}
-              icon={<GraduationCap color={theme.text} size={20} />}
-              options={yearOptions}
-              value={value ? value.toString() : undefined}
-              onValueChange={(value) => onChange(Number(value))}
-            />
-          )}
-        />
+          <Controller
+            control={userControl}
+            name="scolarity.graduation_year"
+            render={({ field: { onChange, value } }) => (
+              <Dropdown
+                label={t("account.graduationYear")}
+                placeholder={t("account.selectGraduationYear")}
+                icon={<GraduationCap color={theme.text} size={20} />}
+                options={yearOptions}
+                value={value ? value.toString() : undefined}
+                onValueChange={(value) => onChange(Number(value))}
+              />
+            )}
+          />
+        </Card>
       </View>
 
-      <Button
-        label={t("common.cancel")}
-        onPress={() => navigation.goBack()}
-        variant="secondary"
-      />
-      <Button
-        label={t("common.save")}
-        onPress={handleUserSubmit(handleUpdateAccount)}
-        loading={isUpdatingAccount}
-        disabled={!isUserValid || !isDirty}
-      />
+      <View className="gap-2">
+        <Button
+          label={t("common.cancel")}
+          onPress={() => navigation.goBack()}
+          variant="secondary"
+        />
+        <Button
+          label={t("common.save")}
+          onPress={handleUserSubmit(handleUpdateAccount)}
+          loading={isUpdatingAccount}
+          disabled={!isUserValid || !isDirty}
+        />
+      </View>
     </Page>
   );
 };

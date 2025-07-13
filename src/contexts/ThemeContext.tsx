@@ -31,6 +31,10 @@ export type ThemeType = {
   success: string;
   warning: string;
   input: string;
+  destructiveText: string;
+  successText: string;
+  warningText: string;
+  infoText: string;
 };
 
 type ThemeContextType = {
@@ -68,6 +72,10 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     destructive: colors.shared.destructive.DEFAULT,
     success: colors.shared.success.DEFAULT,
     warning: colors.shared.warning.DEFAULT,
+    destructiveText: colors.shared.destructive.text,
+    successText: colors.shared.success.text,
+    warningText: colors.shared.warning.text,
+    infoText: colors.shared.info.text,
   };
 
   // Load theme preference from storage on startup

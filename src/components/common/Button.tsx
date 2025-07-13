@@ -1,7 +1,8 @@
-import type { ComponentPropsWithoutRef } from "react";
+import { type ComponentPropsWithoutRef, cloneElement } from "react";
 import { Text, TouchableOpacity, type ViewStyle } from "react-native";
 import { Skeleton } from "@/components/Skeleton";
 import { type ThemeType, useTheme } from "@/contexts/ThemeContext";
+import { cn } from "@/utils";
 
 type ButtonVariant = "default" | "secondary" | "destructive" | "ghost" | "link";
 type ButtonSize = "default" | "sm" | "lg";
@@ -78,7 +79,7 @@ const Button = ({
 };
 
 interface IconButtonProps extends Omit<ButtonProps, "label" | "labelClasses"> {
-  icon: React.ReactNode;
+  icon: React.ReactElement<{ color: string }>;
 }
 
 const IconButton = ({
@@ -94,6 +95,7 @@ const IconButton = ({
 
   const buttonStyle = getButtonStyle(variant, theme);
   const sizeStyles = getSizeStyles(size);
+  const iconColor = getTextColor(variant, theme);
 
   return (
     <TouchableOpacity
@@ -101,13 +103,12 @@ const IconButton = ({
         {
           alignItems: "center",
           justifyContent: "center",
-          borderRadius: 20,
           ...buttonStyle,
           ...sizeStyles,
           opacity: isDisabled ? 0.5 : 1,
         },
       ]}
-      className={className}
+      className={cn(className, "rounded-full aspect-square")}
       {...props}
       disabled={isDisabled}
     >
@@ -119,7 +120,9 @@ const IconButton = ({
           className="bg-white opacity-80"
         />
       ) : (
-        icon
+        cloneElement(icon, {
+          color: iconColor,
+        })
       )}
     </TouchableOpacity>
   );

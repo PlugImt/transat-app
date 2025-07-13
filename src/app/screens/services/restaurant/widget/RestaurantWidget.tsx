@@ -75,10 +75,11 @@ export const RestaurantWidget = () => {
         <Text className="ml-4" variant="h3">
           {t("services.restaurant.title")}
         </Text>
-        <Card className="flex flex-row gap-2 items-center">
+        <Card className="flex flex-row gap-4 items-center">
           <Image
             source={require("@/assets/images/services/restaurant.png")}
-            className="w-24 h-24 grayscale"
+            className="w-24 h-24"
+            style={{ tintColor: theme.muted }}
           />
           <View style={{ maxWidth: Dimensions.get("window").width - 200 }}>
             {weekend ? (

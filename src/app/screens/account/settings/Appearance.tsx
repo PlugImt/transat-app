@@ -5,6 +5,7 @@ import { TouchableOpacity, View } from "react-native";
 import { Text } from "@/components/common/Text";
 import { Page } from "@/components/page/Page";
 import { type ThemeMode, useTheme } from "@/contexts/ThemeContext";
+import SettingCategory from "./components/SettingCategory";
 
 export const Appearance = () => {
   const { t } = useTranslation();
@@ -49,40 +50,30 @@ export const Appearance = () => {
       title={t("settings.appearance.title", "Appearance")}
       className="gap-6"
     >
-      <View className="gap-2">
-        <Text className="ml-4" variant="h3">
-          {t("settings.appearance.theme", "Theme")}
-        </Text>
-        <View
-          style={{ backgroundColor: theme.card }}
-          className="rounded-lg px-4 py-2"
-        >
-          {themeOptions.map((option, index) => (
-            <TouchableOpacity
-              key={option.mode}
-              onPress={() => handleThemeChange(option.mode)}
-              className={`flex-row items-center justify-between py-4 ${
-                index < themeOptions.length - 1
-                  ? "border-b border-muted/20"
-                  : ""
-              }`}
-            >
-              <View className="flex-row items-center flex-1">
-                <View className="mr-3">{option.icon}</View>
-                <View className="flex-1">
-                  <Text>{option.title}</Text>
-                  <Text className="mt-1" color="muted">
-                    {option.description}
-                  </Text>
-                </View>
+      <SettingCategory title={t("settings.appearance.theme", "Theme")}>
+        {themeOptions.map((option, index) => (
+          <TouchableOpacity
+            key={option.mode}
+            onPress={() => handleThemeChange(option.mode)}
+            className={`flex-row items-center justify-between py-4 ${
+              index < themeOptions.length - 1 ? "border-b border-muted/20" : ""
+            }`}
+          >
+            <View className="flex-row items-center flex-1">
+              <View className="mr-3">{option.icon}</View>
+              <View className="flex-1">
+                <Text>{option.title}</Text>
+                <Text color="muted" variant="sm">
+                  {option.description}
+                </Text>
               </View>
-              {themeMode === option.mode && (
-                <Check color={theme.primary} size={20} />
-              )}
-            </TouchableOpacity>
-          ))}
-        </View>
-      </View>
+            </View>
+            {themeMode === option.mode && (
+              <Check color={theme.primary} size={20} />
+            )}
+          </TouchableOpacity>
+        ))}
+      </SettingCategory>
 
       <View className="gap-2">
         <Text className="ml-4" variant="h3">

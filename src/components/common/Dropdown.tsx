@@ -35,7 +35,10 @@ const Dropdown = ({
         {label}
       </Text>
       {Platform.OS === "android" ? (
-        <View className="bg-muted/70 rounded-lg h-12 justify-center">
+        <View
+          className="rounded-lg h-12 justify-center"
+          style={{ backgroundColor: theme.card }}
+        >
           <Picker
             selectedValue={value}
             onValueChange={onValueChange}
@@ -55,7 +58,10 @@ const Dropdown = ({
       ) : (
         <BottomSheetProvider>
           <BottomSheetTrigger>
-            <TouchableOpacity className="flex-row items-center justify-between bg-muted/70 rounded-lg px-3 h-12">
+            <TouchableOpacity
+              className="flex-row items-center justify-between rounded-lg px-3 h-12"
+              style={{ backgroundColor: theme.background }}
+            >
               <View className="flex-row items-center gap-2">
                 {icon ? icon : null}
                 <Text>{value ? value : placeholder}</Text>
@@ -70,6 +76,9 @@ const Dropdown = ({
               selectedValue={value}
               onValueChange={onValueChange}
               mode="dropdown"
+              itemStyle={{
+                color: theme.text,
+              }}
             >
               {options.map((option) => (
                 <Picker.Item key={option} label={option} value={option} />

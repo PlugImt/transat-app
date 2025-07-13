@@ -13,7 +13,6 @@ import {
 } from "lucide-react-native";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { View } from "react-native";
 import { Button } from "@/components/common/Button";
 import {
   Dialog,
@@ -32,6 +31,7 @@ import { useUser } from "@/hooks/account/useUser";
 import { storage } from "@/services/storage/asyncStorage";
 import STORAGE_KEYS from "@/services/storage/constants";
 import type { SettingsNavigation } from "@/services/storage/types";
+import SettingCategory from "./components/SettingCategory";
 import SettingsItem from "./SettingsItem";
 
 export const Settings = () => {
@@ -80,158 +80,112 @@ export const Settings = () => {
     >
       <AccountCard user={user} />
 
-      <View className="gap-2">
-        <Text className="ml-4" variant="h3">
-          {t("common.appearance")}
-        </Text>
-        <View
-          className=" rounded-lg px-4 py-2 gap-4"
-          style={{ backgroundColor: theme.card }}
-        >
-          <SettingsItem
-            icon={<Palette color={theme.text} size={22} />}
-            title={t("settings.appearance.title", "Theme")}
-            subtitle={
-              themeMode === "system"
-                ? t("settings.appearance.system", "System")
-                : themeMode === "light"
-                  ? t("settings.appearance.light", "Light")
-                  : t("settings.appearance.dark", "Dark")
-            }
-            onPress={() => navigation.navigate("Appearance")}
-          />
-          <SettingsItem
-            icon={<Globe color={theme.text} size={22} />}
-            title={t("settings.language.language")}
-            subtitle={t(
-              `settings.language.${
-                i18n.language === "fr"
-                  ? "french"
-                  : i18n.language === "en"
-                    ? "english"
-                    : "spanish"
-              }`,
-            )}
-            onPress={() => navigation.navigate("Language")}
-          />
-        </View>
-      </View>
-
-      <View className="gap-2">
-        <Text className="ml-4" variant="h3">
-          {t("settings.notifications.notifications")}
-        </Text>
-        <View
-          className=" rounded-lg px-4 py-2"
-          style={{ backgroundColor: theme.card }}
-        >
-          <SettingsItem
-            icon={<Bell color={theme.text} size={22} />}
-            title="Notifications"
-            onPress={() => navigation.navigate("Notifications")}
-          />
-        </View>
-      </View>
-
-      <View className="gap-2">
-        <Text className="ml-4" variant="h3">
-          {t("account.security")}
-        </Text>
-        <View
-          className=" rounded-lg px-4 py-2"
-          style={{ backgroundColor: theme.card }}
-        >
-          <SettingsItem
-            icon={<Shield color={theme.text} size={22} />}
-            title={t("account.changePassword")}
-            onPress={() => navigation.navigate("ChangePassword")}
-          />
-        </View>
-      </View>
-
-      <View className="gap-2">
-        <Text className="ml-4" variant="h3">
-          {t("common.other")}
-        </Text>
-        <View
-          className=" rounded-lg px-4 py-2 gap-4"
-          style={{ backgroundColor: theme.card }}
-        >
-          <SettingsItem
-            icon={<HelpCircle color={theme.text} size={22} />}
-            title={t("settings.help.title")}
-            subtitle={t("settings.contactSupport")}
-            onPress={() => navigation.navigate("Help")}
-          />
-          <SettingsItem
-            icon={<Info color={theme.text} size={22} />}
-            title={t("settings.about.title")}
-            subtitle={t("common.knowMore")}
-            onPress={() => navigation.navigate("About")}
-          />
-          <SettingsItem
-            icon={<BarChart color={theme.text} size={22} />}
-            title={t("settings.statistics.title", "Statistics")}
-            subtitle={t(
-              "settings.statistics.subtitle",
-              "View system statistics",
-            )}
-            onPress={() => navigation.navigate("Statistics")}
-          />
-          <SettingsItem
-            icon={<FileText color={theme.text} size={22} />}
-            title={t("settings.legal.title")}
-            subtitle={t("settings.legal.subtitle")}
-            onPress={() => navigation.navigate("Legal")}
-          />
-
-          {process.env.NODE_ENV === "development" && (
-            <SettingsItem
-              icon={<Server color={theme.text} size={22} />}
-              title={t("settings.devServer")}
-              subtitle={t("settings.devServerDescription")}
-              onPress={() => {}}
-              rightElement={
-                <Switch
-                  value={isDevServerSelected}
-                  onValueChange={handleDevServerToggle}
-                />
-              }
-            />
+      <SettingCategory title={t("common.appearance")}>
+        <SettingsItem
+          icon={<Palette color={theme.text} size={22} />}
+          title={t("settings.appearance.title", "Theme")}
+          subtitle={
+            themeMode === "system"
+              ? t("settings.appearance.system", "System")
+              : themeMode === "light"
+                ? t("settings.appearance.light", "Light")
+                : t("settings.appearance.dark", "Dark")
+          }
+          onPress={() => navigation.navigate("Appearance")}
+        />
+        <SettingsItem
+          icon={<Globe color={theme.text} size={22} />}
+          title={t("settings.language.language")}
+          subtitle={t(
+            `settings.language.${
+              i18n.language === "fr"
+                ? "french"
+                : i18n.language === "en"
+                  ? "english"
+                  : "spanish"
+            }`,
           )}
-        </View>
-      </View>
+          onPress={() => navigation.navigate("Language")}
+        />
+      </SettingCategory>
 
-      <View className="gap-2">
-        <Dialog>
-          <DialogTrigger>
-            <Button
-              label={t("settings.logout")}
-              onPress={handleLogout}
-              variant="destructive"
-              size="lg"
-            />
-          </DialogTrigger>
+      <SettingCategory title={t("settings.notifications.notifications")}>
+        <SettingsItem
+          icon={<Bell color={theme.text} size={22} />}
+          title="Notifications"
+          onPress={() => navigation.navigate("Notifications")}
+        />
+      </SettingCategory>
 
-          <DialogContent
-            title={t("settings.logout")}
-            className="gap-2"
-            cancelLabel={t("common.cancel")}
-            confirmLabel={t("settings.logoutConfirm")}
-            onConfirm={handleLogout}
-          >
-            <Text>{t("settings.logoutDesc")}</Text>
-          </DialogContent>
-        </Dialog>
+      <SettingCategory title={t("account.security")}>
+        <SettingsItem
+          icon={<Shield color={theme.text} size={22} />}
+          title={t("account.changePassword")}
+          onPress={() => navigation.navigate("ChangePassword")}
+        />
+      </SettingCategory>
 
-        {/* <Button
-                  label={t("account.deleteAccount")}
-                  onPress={handleDeleteAccount}
-                  variant="secondary"
-                  className="border-destructive"
-                  labelClasses="text-destructive"
-                /> */}
-      </View>
+      <SettingCategory title={t("common.other")}>
+        <SettingsItem
+          icon={<HelpCircle color={theme.text} size={22} />}
+          title={t("settings.help.title")}
+          subtitle={t("settings.contactSupport")}
+          onPress={() => navigation.navigate("Help")}
+        />
+        <SettingsItem
+          icon={<Info color={theme.text} size={22} />}
+          title={t("settings.about.title")}
+          subtitle={t("common.knowMore")}
+          onPress={() => navigation.navigate("About")}
+        />
+        <SettingsItem
+          icon={<BarChart color={theme.text} size={22} />}
+          title={t("settings.statistics.title", "Statistics")}
+          subtitle={t("settings.statistics.subtitle", "View system statistics")}
+          onPress={() => navigation.navigate("Statistics")}
+        />
+        <SettingsItem
+          icon={<FileText color={theme.text} size={22} />}
+          title={t("settings.legal.title")}
+          subtitle={t("settings.legal.subtitle")}
+          onPress={() => navigation.navigate("Legal")}
+        />
+
+        {process.env.NODE_ENV === "development" && (
+          <SettingsItem
+            icon={<Server color={theme.text} size={22} />}
+            title={t("settings.devServer")}
+            subtitle={t("settings.devServerDescription")}
+            onPress={() => {}}
+            rightElement={
+              <Switch
+                value={isDevServerSelected}
+                onValueChange={handleDevServerToggle}
+              />
+            }
+          />
+        )}
+      </SettingCategory>
+
+      <Dialog>
+        <DialogTrigger>
+          <Button
+            label={t("settings.logout")}
+            onPress={handleLogout}
+            variant="destructive"
+          />
+        </DialogTrigger>
+
+        <DialogContent
+          title={t("settings.logout")}
+          className="gap-2"
+          cancelLabel={t("common.cancel")}
+          confirmLabel={t("settings.logoutConfirm")}
+          onConfirm={handleLogout}
+        >
+          <Text>{t("settings.logoutDesc")}</Text>
+        </DialogContent>
+      </Dialog>
     </Page>
   );
 };

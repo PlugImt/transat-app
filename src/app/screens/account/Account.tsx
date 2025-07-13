@@ -16,6 +16,7 @@ import {
   AvatarImage,
 } from "@/components/common/Avatar";
 import { Button, IconButton } from "@/components/common/Button";
+import Card from "@/components/common/Card";
 import InfoItem from "@/components/common/InfoItem";
 import { Text } from "@/components/common/Text";
 import { ErrorPage } from "@/components/page/ErrorPage";
@@ -99,11 +100,14 @@ export const Account = () => {
             </Text>
           )}
         </View>
+        <Button
+          label={t("account.editProfile")}
+          onPress={navigateToEditProfile}
+          size="sm"
+          variant="secondary"
+        />
       </View>
-      <View
-        className=" rounded-lg px-6 py-4 gap-4"
-        style={{ backgroundColor: theme.card }}
-      >
+      <Card className="gap-4">
         <Text variant="h3">{t("account.contactInfo")}</Text>
         <InfoItem
           icon={<Mail color={theme.text} size={20} />}
@@ -115,12 +119,9 @@ export const Account = () => {
           label={t("account.phone")}
           value={user?.phone_number || t("account.notProvided")}
         />
-      </View>
+      </Card>
 
-      <View
-        className=" rounded-lg px-6 py-4 gap-4"
-        style={{ backgroundColor: theme.card }}
-      >
+      <Card className="gap-4">
         <Text variant="h3">{t("account.infos")}</Text>
 
         <InfoItem
@@ -147,18 +148,9 @@ export const Account = () => {
               : t("account.notProvided")
           }
         />
-        <Button
-          label={t("account.editProfile")}
-          onPress={navigateToEditProfile}
-          size="sm"
-          variant="secondary"
-        />
-      </View>
+      </Card>
 
-      <View
-        className=" rounded-lg px-6 py-4 gap-4"
-        style={{ backgroundColor: theme.card }}
-      >
+      <Card className="gap-4">
         <Text variant="h3">{t("settings.feedback.sectionTitle")}</Text>
         <InfoItem
           icon={<MessageSquare color={theme.text} size={20} />}
@@ -171,7 +163,7 @@ export const Account = () => {
           size="sm"
           variant="secondary"
         />
-      </View>
+      </Card>
     </Page>
   );
 };

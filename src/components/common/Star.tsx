@@ -50,9 +50,9 @@ const Star = ({
   };
 
   const getStarColor = (isFilled: boolean) => {
-    if (value === 0) return theme.textSecondary;
-    // if (isDisabled) return theme.textSecondary;
-    return isFilled ? theme.primary : theme.textSecondary;
+    if (value === 0) return theme.muted;
+    // if (isDisabled) return theme.muted;
+    return isFilled ? theme.primary : theme.muted;
   };
 
   const renderFilledLayout = () => {
@@ -99,7 +99,7 @@ const Star = ({
               >
                 <LucidStar
                   size={starSize}
-                  color={isFilled ? theme.primary : theme.textSecondary}
+                  color={isFilled ? theme.primary : theme.muted}
                   fill={isFilled ? theme.primary : "transparent"}
                 />
               </TouchableOpacity>

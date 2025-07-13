@@ -31,7 +31,7 @@ const Dropdown = ({
 
   return (
     <View className="gap-1.5">
-      <Text color="textSecondary" variant="sm">
+      <Text color="muted" variant="sm">
         {label}
       </Text>
       {Platform.OS === "android" ? (
@@ -98,7 +98,7 @@ export const DropdownLoading = ({
   const { theme } = useTheme();
   return (
     <View className="gap-1.5 opacity-50">
-      <Text color="textSecondary" variant="sm">
+      <Text color="muted" variant="sm">
         {label}
       </Text>
       <View className="flex-row items-center justify-between bg-muted/70 rounded-lg px-3 h-12 gap-2">

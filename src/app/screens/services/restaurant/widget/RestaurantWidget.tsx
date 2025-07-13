@@ -83,31 +83,31 @@ export const RestaurantWidget = () => {
           <View style={{ maxWidth: Dimensions.get("window").width - 200 }}>
             {weekend ? (
               <>
-                <Text variant="lg" numberOfLines={2} ellipsizeMode="tail">
+                <Text variant="lg" numberOfLines={2}>
                   {t("services.restaurant.closedNight.title")}
                 </Text>
 
-                <Text numberOfLines={3} ellipsizeMode="tail">
+                <Text numberOfLines={3}>
                   {t("services.restaurant.closedNight.description")}
                 </Text>
               </>
             ) : !updatedToday ? (
               <>
-                <Text variant="lg" numberOfLines={2} ellipsizeMode="tail">
+                <Text variant="lg" numberOfLines={2}>
                   {t("services.restaurant.closedUpdated.title")}
                 </Text>
 
-                <Text numberOfLines={3} ellipsizeMode="tail">
+                <Text numberOfLines={3}>
                   {t("services.restaurant.closedUpdated.description")}
                 </Text>
               </>
             ) : (
               <>
-                <Text variant="lg" numberOfLines={2} ellipsizeMode="tail">
+                <Text variant="lg" numberOfLines={2}>
                   {t("services.restaurant.closedWeekends")}
                 </Text>
 
-                <Text numberOfLines={3} ellipsizeMode="tail">
+                <Text numberOfLines={3}>
                   {t("services.restaurant.closedNight.description")}
                 </Text>
               </>
@@ -161,9 +161,7 @@ export const RestaurantWidget = () => {
                   <View className="flex flex-col gap-2">
                     <View className="flex flex-row items-center gap-2">
                       <Beef color={theme.text} />
-                      <Text variant="lg" ellipsizeMode="tail">
-                        {t("services.restaurant.grill")}
-                      </Text>
+                      <Text variant="lg">{t("services.restaurant.grill")}</Text>
                     </View>
 
                     {menu.grilladesMidi.map((item) => (
@@ -176,7 +174,7 @@ export const RestaurantWidget = () => {
                   <View className="flex flex-col gap-2">
                     <View className="flex flex-row items-center gap-2">
                       <ChefHat color={theme.text} />
-                      <Text variant="lg" ellipsizeMode="tail">
+                      <Text variant="lg">
                         {t("services.restaurant.migrator")}
                       </Text>
                     </View>
@@ -191,7 +189,7 @@ export const RestaurantWidget = () => {
                   <View className="flex flex-col gap-2">
                     <View className="flex flex-row items-center gap-2">
                       <Vegan color={theme.text} />
-                      <Text variant="lg" ellipsizeMode="tail">
+                      <Text variant="lg">
                         {t("services.restaurant.vegetarian")}
                       </Text>
                     </View>
@@ -206,7 +204,7 @@ export const RestaurantWidget = () => {
                   <View className="flex flex-col gap-2">
                     <View className="flex flex-row items-center gap-2">
                       <Soup color={theme.text} />
-                      <Text variant="lg" ellipsizeMode="tail">
+                      <Text variant="lg">
                         {t("services.restaurant.sideDishes")}
                       </Text>
                     </View>
@@ -223,9 +221,7 @@ export const RestaurantWidget = () => {
                   <View className="flex flex-col gap-2">
                     <View className="flex flex-row items-center gap-2">
                       <Beef color={theme.text} />
-                      <Text variant="lg" ellipsizeMode="tail">
-                        {t("services.restaurant.grill")}
-                      </Text>
+                      <Text variant="lg">{t("services.restaurant.grill")}</Text>
                     </View>
 
                     {menu.grilladesSoir.map((item) => (
@@ -238,7 +234,7 @@ export const RestaurantWidget = () => {
                   <View className="flex flex-col gap-2">
                     <View className="flex flex-row items-center gap-2">
                       <Soup color={theme.text} />
-                      <Text variant="lg" ellipsizeMode="tail">
+                      <Text variant="lg">
                         {t("services.restaurant.sideDishes")}
                       </Text>
                     </View>
@@ -282,9 +278,7 @@ export const RestaurantWidgetLoading = () => {
         <View className="flex flex-col gap-2">
           <View className="flex flex-row items-center gap-2">
             <Beef color={theme.text} />
-            <Text variant="lg" ellipsizeMode="tail">
-              {t("services.restaurant.grill")}
-            </Text>
+            <Text variant="lg">{t("services.restaurant.grill")}</Text>
           </View>
 
           {[...Array(skeletonCount()).keys()].map((index) => (
@@ -295,9 +289,7 @@ export const RestaurantWidgetLoading = () => {
         <View className="flex flex-col gap-2">
           <View className="flex flex-row items-center gap-2">
             <ChefHat color={theme.text} />
-            <Text variant="lg" ellipsizeMode="tail">
-              {t("services.restaurant.migrator")}
-            </Text>
+            <Text variant="lg">{t("services.restaurant.migrator")}</Text>
           </View>
 
           {[...Array(skeletonCount()).keys()].map((index) => (
@@ -308,9 +300,7 @@ export const RestaurantWidgetLoading = () => {
         <View className="flex flex-col gap-2">
           <View className="flex flex-row items-center gap-2">
             <Vegan color={theme.text} />
-            <Text variant="lg" ellipsizeMode="tail">
-              {t("services.restaurant.vegetarian")}
-            </Text>
+            <Text variant="lg">{t("services.restaurant.vegetarian")}</Text>
           </View>
 
           {[...Array(skeletonCount()).keys()].map((index) => (
@@ -321,9 +311,7 @@ export const RestaurantWidgetLoading = () => {
         <View className="flex flex-col gap-2">
           <View className="flex flex-row items-center gap-2">
             <Soup color={theme.text} />
-            <Text variant="lg" ellipsizeMode="tail">
-              {t("services.restaurant.sideDishes")}
-            </Text>
+            <Text variant="lg">{t("services.restaurant.sideDishes")}</Text>
           </View>
 
           {[...Array(skeletonCount()).keys()].map((index) => (

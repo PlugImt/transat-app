@@ -275,7 +275,7 @@ export const EditProfile = () => {
       <Button
         label={t("common.cancel")}
         onPress={() => navigation.goBack()}
-        variant="outlined"
+        variant="secondary"
       />
       <Button
         label={t("common.save")}

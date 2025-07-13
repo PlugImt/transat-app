@@ -1,15 +1,9 @@
 import type { ComponentPropsWithoutRef } from "react";
-import { Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity, type ViewStyle } from "react-native";
 import { Skeleton } from "@/components/Skeleton";
-import { useTheme } from "@/contexts/ThemeContext";
+import { type ThemeType, useTheme } from "@/contexts/ThemeContext";
 
-type ButtonVariant =
-  | "default"
-  | "secondary"
-  | "outlined"
-  | "destructive"
-  | "ghost"
-  | "link";
+type ButtonVariant = "default" | "secondary" | "destructive" | "ghost" | "link";
 type ButtonSize = "default" | "sm" | "lg";
 
 interface ButtonProps
@@ -35,93 +29,9 @@ const Button = ({
   const { theme } = useTheme();
   const isDisabled = props.disabled || loading;
 
-  const getButtonStyle = () => {
-    const buttonStyles: {
-      [key: string]: {
-        backgroundColor: string;
-        borderColor: string;
-        borderWidth: number;
-      };
-    } = {
-      default: {
-        backgroundColor: theme.primary,
-        borderColor: "transparent",
-        borderWidth: 0,
-      },
-      secondary: {
-        backgroundColor: theme.secondary,
-        borderColor: "transparent",
-        borderWidth: 0,
-      },
-      outlined: {
-        backgroundColor: "transparent",
-        borderColor: theme.primary,
-        borderWidth: 1,
-      },
-      destructive: {
-        backgroundColor: theme.destructive,
-        borderColor: "transparent",
-        borderWidth: 0,
-      },
-      ghost: {
-        backgroundColor: theme.backdrop,
-        borderColor: "transparent",
-        borderWidth: 0,
-      },
-      link: {
-        backgroundColor: "transparent",
-        borderColor: "transparent",
-        borderWidth: 0,
-      },
-    };
-
-    return buttonStyles[variant] || buttonStyles.default;
-  };
-
-  const getTextColor = () => {
-    const textColors: { [key: string]: string } = {
-      default: "#FFFFFF",
-      secondary: "#FFFFFF",
-      outlined: theme.primary,
-      destructive: "#FFFFFF",
-      ghost: theme.text,
-      link: theme.primary,
-    };
-
-    return textColors[variant] || textColors.default;
-  };
-
-  const getSizeStyles = () => {
-    const sizeStyles: {
-      [key: string]: {
-        height: number;
-        paddingHorizontal: number;
-        fontSize: number;
-      };
-    } = {
-      default: {
-        height: 40,
-        paddingHorizontal: 16,
-        fontSize: 16,
-      },
-      sm: {
-        height: 32,
-        paddingHorizontal: 8,
-        fontSize: 14,
-      },
-      lg: {
-        height: 48,
-        paddingHorizontal: 32,
-        fontSize: 18,
-      },
-    };
-
-    return sizeStyles[size] || sizeStyles.default;
-  };
-
-  const buttonStyle = getButtonStyle();
-  const textColor = getTextColor();
-  const sizeStyles = getSizeStyles();
+  const buttonStyle = getButtonStyle(variant, theme);
+  const textColor = getTextColor(variant, theme);
+  const sizeStyles = getSizeStyles(size);
 
   return (
     <TouchableOpacity
@@ -182,70 +92,8 @@ const IconButton = ({
   const { theme } = useTheme();
   const isDisabled = props.disabled || loading;
 
-  const getButtonStyle = () => {
-    const buttonStyles: {
-      [key: string]: {
-        backgroundColor: string;
-        borderColor: string;
-        borderWidth: number;
-      };
-    } = {
-      default: {
-        backgroundColor: theme.primary,
-        borderColor: "transparent",
-        borderWidth: 0,
-      },
-      secondary: {
-        backgroundColor: theme.secondary,
-        borderColor: "transparent",
-        borderWidth: 0,
-      },
-      outlined: {
-        backgroundColor: "transparent",
-        borderColor: theme.primary,
-        borderWidth: 1,
-      },
-      destructive: {
-        backgroundColor: theme.destructive,
-        borderColor: "transparent",
-        borderWidth: 0,
-      },
-      ghost: {
-        backgroundColor: theme.muted,
-        borderColor: "transparent",
-        borderWidth: 0,
-      },
-      link: {
-        backgroundColor: "transparent",
-        borderColor: "transparent",
-        borderWidth: 0,
-      },
-    };
-
-    return buttonStyles[variant] || buttonStyles.default;
-  };
-
-  const getSizeStyles = () => {
-    const sizeStyles: { [key: string]: { height: number; width: number } } = {
-      default: {
-        height: 40,
-        width: 40,
-      },
-      sm: {
-        height: 32,
-        width: 32,
-      },
-      lg: {
-        height: 48,
-        width: 48,
-      },
-    };
-
-    return sizeStyles[size] || sizeStyles.default;
-  };
-
-  const buttonStyle = getButtonStyle();
-  const sizeStyles = getSizeStyles();
+  const buttonStyle = getButtonStyle(variant, theme);
+  const sizeStyles = getSizeStyles(size);
 
   return (
     <TouchableOpacity
@@ -278,3 +126,67 @@ const IconButton = ({
 };
 
 export { Button, IconButton };
+
+const getButtonStyle = (variant: ButtonVariant, theme: ThemeType) => {
+  const buttonStyles: {
+    [key: string]: ViewStyle;
+  } = {
+    default: {
+      backgroundColor: theme.primary,
+    },
+    secondary: {
+      backgroundColor: `${theme.primary}40`, // 25% opacity (40 en hex = 25% en décimal)
+    },
+    destructive: {
+      backgroundColor: theme.destructive,
+    },
+    ghost: {
+      backgroundColor: theme.backdrop,
+    },
+    link: {
+      backgroundColor: "transparent",
+    },
+  };
+
+  return buttonStyles[variant] || buttonStyles.default;
+};
+
+const getTextColor = (variant: ButtonVariant, theme: ThemeType) => {
+  const textColors: { [key: string]: string } = {
+    default: "#FFFFFF",
+    secondary: theme.primary,
+    destructive: "#FFFFFF",
+    ghost: theme.text,
+    link: theme.primary,
+  };
+
+  return textColors[variant] || textColors.default;
+};
+
+const getSizeStyles = (size: ButtonSize) => {
+  const sizeStyles: {
+    [key: string]: {
+      height: number;
+      paddingHorizontal: number;
+      fontSize: number;
+    };
+  } = {
+    default: {
+      height: 36,
+      paddingHorizontal: 16,
+      fontSize: 16,
+    },
+    sm: {
+      height: 32,
+      paddingHorizontal: 8,
+      fontSize: 14,
+    },
+    lg: {
+      height: 48,
+      paddingHorizontal: 32,
+      fontSize: 18,
+    },
+  };
+
+  return sizeStyles[size] || sizeStyles.default;
+};

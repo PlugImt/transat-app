@@ -47,53 +47,53 @@ export const About = () => {
             className=" rounded-lg px-6 py-6"
             style={{ backgroundColor: theme.card }}
           >
-            <Text className="mb-4" color="textSecondary">
+            <Text className="mb-4" color="muted">
               {t("common.credits")}
             </Text>
             <View className="flex-row flex-wrap gap-2">
               <Button
                 label="Yohann"
                 onPress={() => handleOpenLink("https://github.com/yohann69")}
-                variant="outlined"
+                variant="secondary"
               />
               <Button
                 label="Enzo"
                 onPress={() => handleOpenLink("https://github.com/HeineZo")}
-                variant="outlined"
+                variant="secondary"
               />
               <Button
                 label="Lucie"
                 onPress={() => handleOpenLink("https://github.com/luclu7")}
-                variant="outlined"
+                variant="secondary"
               />
               <Button
                 label="Matis"
                 onPress={() => handleOpenLink("https://github.com/matisbyar")}
-                variant="outlined"
+                variant="secondary"
               />
               <Button
                 label="Zephyr"
                 onPress={() =>
                   handleOpenLink("https://github.com/zephyr-dassouli")
                 }
-                variant="outlined"
+                variant="secondary"
               />
               <Button
                 label="Maxime"
                 onPress={() => handleOpenLink("https://github.com/maxbodin")}
-                variant="outlined"
+                variant="secondary"
               />
               <Button
                 label="Pacôme"
                 onPress={() =>
                   handleOpenLink("https://github.com/PacomeCailleteau")
                 }
-                variant="outlined"
+                variant="secondary"
               />
               <Button
                 label="Marina"
                 onPress={() => handleOpenLink("https://github.com/Enockii")}
-                variant="outlined"
+                variant="secondary"
               />
             </View>
           </View>

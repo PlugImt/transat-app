@@ -3,7 +3,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";
 
 interface CardProps {
-  children: React.ReactNode;
+  children: React.ReactNode | React.ReactNode[];
   className?: string;
   onPress?: () => void;
 }

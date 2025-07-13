@@ -94,7 +94,7 @@ export const Account = () => {
             {user?.first_name} {user?.last_name}
           </Text>
           {user?.scolarity?.graduation_year && (
-            <Text color="textSecondary">
+            <Text color="muted">
               {getStudentYear(user?.scolarity?.graduation_year)}
             </Text>
           )}
@@ -151,7 +151,7 @@ export const Account = () => {
           label={t("account.editProfile")}
           onPress={navigateToEditProfile}
           size="sm"
-          variant="outlined"
+          variant="secondary"
         />
       </View>
 
@@ -169,7 +169,7 @@ export const Account = () => {
           label={t("settings.feedback.sendFeedback")}
           onPress={() => navigation.navigate("Feedback")}
           size="sm"
-          variant="outlined"
+          variant="secondary"
         />
       </View>
     </Page>
@@ -235,7 +235,7 @@ const AccountLoading = () => {
         <Button
           size="lg"
           label={t("account.editProfile")}
-          variant="outlined"
+          variant="secondary"
           disabled
         />
       </View>

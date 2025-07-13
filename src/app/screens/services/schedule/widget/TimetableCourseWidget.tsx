@@ -12,11 +12,9 @@ export const TimetableCourseWidget = ({ course }: { course: Course }) => {
       className="flex flex-col rounded-lg gap-1.5 py-2"
       style={{ backgroundColor: theme.card }}
     >
-      <Text className="ml-4" ellipsizeMode="tail">
-        {course.title}
-      </Text>
+      <Text className="ml-4">{course.title}</Text>
       <View className="flex flex-row items-center gap-2">
-        <Text className="ml-4" ellipsizeMode="tail">
+        <Text className="ml-4">
           {course.start_time} - {course.end_time}
         </Text>
         <TagCourseRoom rooms={course.room} />

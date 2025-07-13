@@ -180,7 +180,7 @@ export const ResetPassword = () => {
           </View>
         ) : (
           <View className="h-20">
-            <Text color="textSecondary" className="mt-2">
+            <Text color="muted" className="mt-2">
               {t("auth.resetPasswordDescription")}
             </Text>
           </View>
@@ -276,7 +276,7 @@ export const ResetPassword = () => {
               />
             )}
             {!canRequestCode && (
-              <Text color="textSecondary" className="text-center">
+              <Text color="muted" className="text-center">
                 {t("auth.requestCodeCooldown", { seconds: countdown })}
               </Text>
             )}

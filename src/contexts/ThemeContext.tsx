@@ -14,16 +14,15 @@ export type ThemeMode = "system" | "light" | "dark";
 
 export type ThemeColorKeys = keyof ReturnType<typeof useTheme>["theme"];
 
-type ThemeType = {
+export type ThemeType = {
   background: string;
   text: string;
-  textSecondary: string;
+  muted: string;
   textTertiary: string;
   foregroundPlaceholder: string;
   card: string;
   primary: string;
   secondary: string;
-  muted: string;
   border: string;
   backdrop: string;
   overlay: string;

@@ -30,11 +30,11 @@ export const ErrorPage = ({
         <Text className="h3" style={{ color: theme.text }}>
           {t("common.errors.occurred")}
         </Text>
-        <Text style={{ color: theme.textSecondary }}>{error?.message}</Text>
+        <Text style={{ color: theme.muted }}>{error?.message}</Text>
       </View>
       <Button
         label="Réessayer"
-        variant="outlined"
+        variant="secondary"
         onPress={refetch}
         loading={isRefetching}
       />

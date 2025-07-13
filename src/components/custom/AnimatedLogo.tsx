@@ -64,7 +64,7 @@ export const AnimatedLogo = ({
           </Text>
         )}
         {showCampusApp && (
-          <Text className="text-center mb-4" color="textSecondary">
+          <Text className="text-center mb-4" color="muted">
             {t("common.campusApp")}
           </Text>
         )}

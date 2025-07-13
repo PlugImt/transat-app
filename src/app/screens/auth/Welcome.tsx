@@ -58,7 +58,7 @@ export const Welcome = () => {
       />
       <Button
         size="lg"
-        variant="outlined"
+        variant="secondary"
         label={t("welcome.register")}
         onPress={() => handleNavigation("Signup")}
         className="flex-1"

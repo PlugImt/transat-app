@@ -227,7 +227,7 @@ export const Settings = () => {
         {/* <Button
                   label={t("account.deleteAccount")}
                   onPress={handleDeleteAccount}
-                  variant="outlined"
+                  variant="secondary"
                   className="border-destructive"
                   labelClasses="text-destructive"
                 /> */}

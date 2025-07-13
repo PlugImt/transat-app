@@ -37,6 +37,7 @@ export const Text = ({
     <RText
       style={{ color: theme[color ?? "text"] }}
       className={cn(getVariantClasses(variant), className)}
+      ellipsizeMode="tail"
       {...rest}
     >
       {children}

@@ -140,7 +140,7 @@ export const Signup = () => {
           </View>
         ) : (
           <View className="h-20">
-            <Text style={{ color: theme.textSecondary }} className="mt-2">
+            <Text style={{ color: theme.muted }} className="mt-2">
               {t("auth.signUpDescription")}
             </Text>
           </View>

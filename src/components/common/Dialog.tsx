@@ -106,7 +106,7 @@ const DialogContent = ({
                   <Button
                     onPress={handleCancel}
                     label={cancelLabel}
-                    variant="outlined"
+                    variant="secondary"
                   />
                 )}
                 {confirmLabel && (

@@ -17,7 +17,6 @@ export const TagCourseRoom = ({ rooms }: TagCourseRoomProps) => {
           backgroundColor: theme.primary,
           color: theme.background,
         }}
-        ellipsizeMode="tail"
       >
         {rooms ?? t("services.notProvided")}
       </Text>

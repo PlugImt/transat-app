@@ -17,7 +17,7 @@ export const Divider = ({ label, className }: DividerProps) => {
           style={{ backgroundColor: theme.border }}
           className="h-px rounded-full flex-1"
         />
-        <Text className="mx-3" color="textSecondary" variant="sm">
+        <Text className="mx-3" color="muted" variant="sm">
           {label}
         </Text>
         <View

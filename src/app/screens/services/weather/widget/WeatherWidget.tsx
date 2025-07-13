@@ -30,41 +30,26 @@ export const WeatherWidget = () => {
 
   const date = new Date();
 
+  const localeMap: { [key: string]: Locale } = {
+    fr,
+    de,
+    es,
+    zh: zhCN,
+    ru,
+    it,
+    ja,
+    ko,
+    pt,
+    nl,
+    ar,
+    hi,
+    sv,
+    tr,
+    pl,
+  };
+
   const getLocale = () => {
-    switch (i18n.language) {
-      case "fr":
-        return fr;
-      case "de":
-        return de;
-      case "es":
-        return es;
-      case "zh":
-        return zhCN;
-      case "ru":
-        return ru;
-      case "it":
-        return it;
-      case "ja":
-        return ja;
-      case "ko":
-        return ko;
-      case "pt":
-        return pt;
-      case "nl":
-        return nl;
-      case "ar":
-        return ar;
-      case "hi":
-        return hi;
-      case "sv":
-        return sv;
-      case "tr":
-        return tr;
-      case "pl":
-        return pl;
-      default:
-        return undefined;
-    }
+    return localeMap[i18n.language] || undefined;
   };
 
   if (isPending) {

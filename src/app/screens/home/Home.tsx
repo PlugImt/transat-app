@@ -201,22 +201,20 @@ export const Home = () => {
     ]);
   };
 
-  const getWidgetComponent = useCallback((widgetId: string) => {
-    switch (widgetId) {
-      case "weather":
-        return <WeatherWidget />;
-      case "restaurant":
-        return <RestaurantWidget />;
-      case "timetable":
-        return <TimetableWidget />;
-      case "homework":
-        return <HomeworkWidget />;
-      case "washingMachine":
-        return <WashingMachineWidget />;
-      default:
-        return null;
-    }
-  }, []);
+  const widgetComponents: { [key: string]: React.ReactElement } = {
+    weather: <WeatherWidget />,
+    restaurant: <RestaurantWidget />,
+    timetable: <TimetableWidget />,
+    homework: <HomeworkWidget />,
+    washingMachine: <WashingMachineWidget />,
+  };
+
+  const getWidgetComponent = useCallback(
+    (widgetId: string): React.ReactElement | null => {
+      return widgetComponents[widgetId] || null;
+    },
+    [],
+  );
 
   if (loading) {
     return <HomeLoading />;

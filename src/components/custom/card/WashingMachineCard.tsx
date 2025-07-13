@@ -25,17 +25,13 @@ interface WashingMachineProps {
   icon: "WASHING MACHINE" | "DRYER";
 }
 
-// Notifications are now handled by the notification service
-
 const getIcon = (icon: "WASHING MACHINE" | "DRYER", color: ColorValue) => {
-  switch (icon) {
-    case "WASHING MACHINE":
-      return <WashingMachineIcon size={24} color={color} />;
-    case "DRYER":
-      return <Wind size={24} color={color} />;
-    default:
-      return null;
-  }
+  const iconMap: { [key: string]: React.ReactElement } = {
+    "WASHING MACHINE": <WashingMachineIcon size={24} color={color} />,
+    DRYER: <Wind size={24} color={color} />,
+  };
+
+  return iconMap[icon] || null;
 };
 
 const Bubble = ({ index }: { index: number }) => {

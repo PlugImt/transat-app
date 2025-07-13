@@ -21,29 +21,22 @@ export const Text = ({
 }: TextProps) => {
   const { theme } = useTheme();
 
-  const getVariantClasses = () => {
-    switch (variant) {
-      case "h1":
-        return "text-3xl font-black";
-      case "h2":
-        return "text-2xl font-bold";
-      case "h3":
-        return "text-xl font-bold";
-      case "lg":
-        return "text-lg font-bold";
-      case "sm":
-        return "text-sm font-medium";
-      default:
-        return "text-base font-medium";
-    }
+  const variantClasses: { [key: string]: string } = {
+    h1: "text-3xl font-black",
+    h2: "text-2xl font-bold",
+    h3: "text-xl font-bold",
+    lg: "text-lg font-bold",
+    sm: "text-sm font-medium",
   };
 
-  const variantClasses = getVariantClasses();
+  function getVariantClasses(variant: string): string {
+    return variantClasses[variant] || "text-base font-medium";
+  }
 
   return (
     <RText
       style={{ color: theme[color ?? "text"] }}
-      className={cn(variantClasses, className)}
+      className={cn(getVariantClasses(variant), className)}
       {...rest}
     >
       {children}

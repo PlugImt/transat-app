@@ -39,19 +39,24 @@ const defaultHomeWidgets: Preference[] = [
     enabled: true,
     order: 1,
   },
-  {
-    id: "timetable",
-    name: t("services.timetable.title"),
-    enabled: true,
-    order: 2,
-  },
+  // {
+  //   id: "timetable",
+  //   name: t("services.timetable.title"),
+  //   enabled: true,
+  //   order: 2,
+  // },
   {
     id: "washingMachine",
     name: t("services.washingMachine.title"),
     enabled: true,
     order: 3,
   },
-  { id: "homework", name: "Homework", enabled: true, order: 4 },
+  // {
+  //   id: "homework",
+  //   name: "Homework",
+  //   enabled: true,
+  //   order: 4,
+  // },
 ];
 
 const defaultServices: Preference[] = [
@@ -73,24 +78,24 @@ const defaultServices: Preference[] = [
     screen: "Restaurant",
     description: t("services.restaurant.description"),
   },
-  {
-    id: "timetable",
-    name: t("services.timetable.title"),
-    enabled: true,
-    order: 2,
-    image: require("@/assets/images/services/edt.png"),
-    screen: "Timetable",
-    description: t("services.timetable.description"),
-  },
-  {
-    id: "homework",
-    name: t("services.homework.title"),
-    enabled: true,
-    order: 3,
-    image: require("@/assets/images/services/homework.png"),
-    screen: "Homework",
-    description: t("services.homework.description"),
-  },
+  // {
+  //   id: "timetable",
+  //   name: t("services.timetable.title"),
+  //   enabled: true,
+  //   order: 2,
+  //   image: require("@/assets/images/services/edt.png"),
+  //   screen: "Timetable",
+  //   description: t("services.timetable.description"),
+  // },
+  // {
+  //   id: "homework",
+  //   name: t("services.homework.title"),
+  //   enabled: true,
+  //   order: 3,
+  //   image: require("@/assets/images/services/homework.png"),
+  //   screen: "Homework",
+  //   description: t("services.homework.description"),
+  // },
   {
     id: "traq",
     name: t("services.traq.title"),
@@ -100,15 +105,15 @@ const defaultServices: Preference[] = [
     screen: "Traq",
     description: t("services.traq.description"),
   },
-  {
-    id: "olimtpe",
-    name: t("services.olimtpe.title"),
-    enabled: true,
-    order: 5,
-    image: require("@/assets/images/services/olimtpe.png"),
-    screen: "Olimtpe",
-    description: t("services.olimtpe.description"),
-  },
+  // {
+  //   id: "olimtpe",
+  //   name: t("services.olimtpe.title"),
+  //   enabled: true,
+  //   order: 5,
+  //   image: require("@/assets/images/services/olimtpe.png"),
+  //   screen: "Olimtpe",
+  //   description: t("services.olimtpe.description"),
+  // },
 ];
 
 const getPreferences = async (
@@ -141,11 +146,14 @@ const savePreferences = async (
 
 export const getHomeWidgetPreferences = async (): Promise<Preference[]> =>
   getPreferences(HOME_WIDGETS_KEY, defaultHomeWidgets);
+
 export const saveHomeWidgetPreferences = async (
   preferences: Preference[],
 ): Promise<void> => savePreferences(HOME_WIDGETS_KEY, preferences);
+
 export const getServicePreferences = async (): Promise<Preference[]> =>
   getPreferences(SERVICES_KEY, defaultServices);
+
 export const saveServicePreferences = async (
   preferences: Preference[],
 ): Promise<void> => savePreferences(SERVICES_KEY, preferences);

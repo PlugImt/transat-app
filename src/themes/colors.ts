@@ -26,7 +26,7 @@ const colors = {
     primary: "#ec7f32",
     secondary: "#0049a8",
     muted: "#494949",
-    border: "#374151",
+    border: "rgba(81,63,55,0.49)",
     backdrop: "rgba(44,39,38,0.4)",
     overlay: "#070402E5",
     errorBackground: "#F4433620",

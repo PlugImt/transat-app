@@ -31,7 +31,7 @@ export interface Preference {
 const HOME_WIDGETS_KEY = "home_widgets_preferences";
 const SERVICES_KEY = "services_preferences";
 
-const defaultHomeWidgets: Preference[] = [
+const getDefaultHomeWidgets = (): Preference[] => [
   { id: "weather", name: t("services.weather.title"), enabled: true, order: 0 },
   {
     id: "restaurant",
@@ -59,7 +59,7 @@ const defaultHomeWidgets: Preference[] = [
   // },
 ];
 
-const defaultServices: Preference[] = [
+const getDefaultServices = (): Preference[] => [
   {
     id: "washingMachine",
     name: t("services.washingMachine.title"),
@@ -118,18 +118,19 @@ const defaultServices: Preference[] = [
 
 const getPreferences = async (
   key: string,
-  defaultPrefs: Preference[],
+  getDefaultPrefs: () => Preference[],
 ): Promise<Preference[]> => {
   try {
     const stored = await AsyncStorage.getItem(key);
     const parsed: Preference[] = JSON.parse(stored || "[]");
+    const defaultPrefs = getDefaultPrefs();
     const newPrefs = defaultPrefs.filter(
       (pref) => !parsed.some((p: Preference) => p.id === pref.id),
     );
     return [...parsed, ...newPrefs];
   } catch (error) {
     console.error(`Error getting preferences for ${key}:`, error);
-    return defaultPrefs;
+    return getDefaultPrefs();
   }
 };
 
@@ -145,14 +146,14 @@ const savePreferences = async (
 };
 
 export const getHomeWidgetPreferences = async (): Promise<Preference[]> =>
-  getPreferences(HOME_WIDGETS_KEY, defaultHomeWidgets);
+  getPreferences(HOME_WIDGETS_KEY, getDefaultHomeWidgets);
 
 export const saveHomeWidgetPreferences = async (
   preferences: Preference[],
 ): Promise<void> => savePreferences(HOME_WIDGETS_KEY, preferences);
 
 export const getServicePreferences = async (): Promise<Preference[]> =>
-  getPreferences(SERVICES_KEY, defaultServices);
+  getPreferences(SERVICES_KEY, getDefaultServices);
 
 export const saveServicePreferences = async (
   preferences: Preference[],

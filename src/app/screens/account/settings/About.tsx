@@ -1,7 +1,8 @@
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { Linking, ScrollView, Text, View } from "react-native";
+import { Linking, ScrollView, View } from "react-native";
 import { Button } from "@/components/common/Button";
+import { Text } from "@/components/common/Text";
 import { AnimatedLogo } from "@/components/custom/AnimatedLogo";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -33,10 +34,7 @@ export const About = () => {
       }}
       confetti={true}
       footer={
-        <Text
-          className="text-center  italic"
-          style={{ color: theme.textTertiary }}
-        >
+        <Text className="text-center italic" color="muted">
           {t("common.plugImtNote")}
         </Text>
       }
@@ -49,7 +47,7 @@ export const About = () => {
             className=" rounded-lg px-6 py-6"
             style={{ backgroundColor: theme.card }}
           >
-            <Text className="mb-4" style={{ color: theme.textSecondary }}>
+            <Text className="mb-4" color="textSecondary">
               {t("common.credits")}
             </Text>
             <View className="flex-row flex-wrap gap-2">

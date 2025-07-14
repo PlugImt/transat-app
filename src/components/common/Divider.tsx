@@ -1,4 +1,5 @@
-import { Text, View } from "react-native";
+import { View } from "react-native";
+import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 
 interface DividerProps {
@@ -16,7 +17,7 @@ export const Divider = ({ label, className }: DividerProps) => {
           style={{ backgroundColor: theme.border }}
           className="h-px rounded-full flex-1"
         />
-        <Text style={{ color: theme.textSecondary }} className="text-sm mx-3">
+        <Text className="mx-3" color="textSecondary" variant="sm">
           {label}
         </Text>
         <View

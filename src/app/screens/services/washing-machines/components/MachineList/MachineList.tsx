@@ -1,6 +1,6 @@
-import { Text, View } from "react-native";
+import { View } from "react-native";
+import { Text } from "@/components/common/Text";
 import WashingMachineCard from "@/components/custom/card/WashingMachineCard";
-import { useTheme } from "@/contexts/ThemeContext";
 import type { MachineData } from "@/dto";
 
 interface MachineProps {
@@ -10,13 +10,11 @@ interface MachineProps {
 }
 
 export const MachineList = ({ title, items, icon }: MachineProps) => {
-  const { theme } = useTheme();
-
   if (items.length === 0) return null;
 
   return (
     <View className="flex-col gap-4">
-      <Text style={{ color: theme.text }} className="text-xl font-bold ml-4">
+      <Text className="ml-4" variant="h3">
         {title}
       </Text>
       {items.map((item) => (

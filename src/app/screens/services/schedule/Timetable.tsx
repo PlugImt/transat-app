@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, View } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
   runOnJS,
@@ -9,6 +9,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { Button } from "@/components/common/Button";
+import { Text } from "@/components/common/Text";
 import { AboutModal } from "@/components/custom/AboutModal";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -159,12 +160,12 @@ export const Timetable = () => {
       <View className="gap-2">
         {(edt === null || isError) && (
           <View>
-            <Text style={{ color: theme.textTertiary }} className="italic">
+            <Text color="muted" className="italic">
               {t("services.timetable.noEdt.title")}
               {t("services.timetable.noEdt.description")}
             </Text>
             {error && (
-              <Text style={{ color: theme.destructive }} className="italic">
+              <Text color="destructive" className="italic">
                 {error.message}
               </Text>
             )}
@@ -172,13 +173,10 @@ export const Timetable = () => {
         )}
         <View className="flex-row items-center gap-2 justify-end">
           <View>
-            <Text
-              style={{ color: theme.text }}
-              className="h2 text-right font-medium"
-            >
+            <Text className="text-right" variant="h2">
               {weekday}
             </Text>
-            <Text style={{ color: theme.text }} className="text-right text-sm">
+            <Text className="text-right">
               {month} {year}
             </Text>
           </View>
@@ -188,7 +186,7 @@ export const Timetable = () => {
                 className={`rounded-xl items-center justify-center ${pressed ? "opacity-60" : ""}`}
                 style={{ backgroundColor: theme.secondary }}
               >
-                <Text className="text-2xl font-semibold p-3 text-white">
+                <Text className="p-3 text-white" variant="h3">
                   {dayNumber}
                 </Text>
               </View>
@@ -231,14 +229,14 @@ export const Timetable = () => {
                 return (
                   <View key={hour} className="justify-start items-end pr-2">
                     <View style={{ height: HOUR_HEIGHT / 4 }}>
-                      <Text style={{ color: theme.text }}>{hour}h</Text>
+                      <Text>{hour}h</Text>
                     </View>
                     {Array.from({ length: 3 }).map((_, i) => (
                       <View
                         key={i.toString()}
                         style={{ height: HOUR_HEIGHT / 4 }}
                       >
-                        <Text style={{ color: theme.text }}>-</Text>
+                        <Text>-</Text>
                       </View>
                     ))}
                   </View>

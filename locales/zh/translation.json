@@ -276,6 +276,7 @@
     "reservations": "预订",
     "restaurant": {
       "title": "菜单",
+      "description": "发现RU提供的每日菜单",
       "lunch": "午餐",
       "dinner": "晚餐",
       "widgetLunch": "午餐菜单",
@@ -318,7 +319,7 @@
     },
     "timetable": {
       "title": "课程表",
-      "description": "课程表每日更新，通知您即将开始的课程",
+      "description": "与PASS相同，但更详细",
       "about": "课程表每日更新，通知您即将开始的课程",
       "additionalInfo": "如果您发现任何不一致之处，请使用反馈表告知我们",
       "noData": "今天没有可用数据",
@@ -339,7 +340,7 @@
     "olimtpe": {
       "title": "OL'IMT'PE",
       "welcome": "欢迎来到 OL'IMT'PE！",
-      "description": "您在 IMT Atlantique 的奥林匹克和体育中心。发现我们所有的设施和服务，享受积极健康的学生生活。",
+      "description": "报告异常行为",
       "about": "🏅 OL'IMT'PE 是 IMT Atlantique 的体育中心，为学生和工作人员提供各种体育设施和活动。",
       "location": "体育综合体，IMT Atlantique 校园",
       "price": "持有效学生证的学生免费入场",

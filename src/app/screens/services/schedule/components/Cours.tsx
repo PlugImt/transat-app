@@ -1,5 +1,6 @@
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { TagCourseRoom } from "@/app/screens/services/schedule/components/TagCourseRoom";
+import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Course } from "@/dto";
 
@@ -18,18 +19,14 @@ export const Cours = ({ course, isOver }: CoursProps) => {
         ${isOver ? "opacity-60" : ""}
       `}
     >
-      <Text style={{ color: theme.text }} className="font-bold">
-        {course.title}
-      </Text>
+      <Text className="font-bold">{course.title}</Text>
       <View className="flex-row gap-1">
-        <Text style={{ color: theme.text }}>
+        <Text>
           {course.start_time} - {course.end_time}
         </Text>
         <TagCourseRoom rooms={course.room} />
       </View>
-      <Text style={{ color: theme.text }} className="text-center">
-        {course.teacher}
-      </Text>
+      <Text className="text-center">{course.teacher}</Text>
     </View>
   );
 };

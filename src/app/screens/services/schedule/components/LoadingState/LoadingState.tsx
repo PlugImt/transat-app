@@ -1,12 +1,11 @@
 import { useTranslation } from "react-i18next";
-import { Text, View } from "react-native";
+import { View } from "react-native";
+import { Text } from "@/components/common/Text";
 import { AboutModal } from "@/components/custom/AboutModal";
 import { Page } from "@/components/page/Page";
-import { useTheme } from "@/contexts/ThemeContext";
 
 export const LoadingState = () => {
   const { t } = useTranslation();
-  const { theme } = useTheme();
 
   return (
     <Page
@@ -21,9 +20,7 @@ export const LoadingState = () => {
       }
     >
       <View className="flex-col">
-        <Text className="text-center" style={{ color: theme.text }}>
-          {t("services.timetable.loading")}
-        </Text>
+        <Text className="text-center">{t("services.timetable.loading")}</Text>
       </View>
     </Page>
   );

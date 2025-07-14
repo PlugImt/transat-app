@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import {
   Animated,
   type ColorValue,
-  Text,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -14,6 +13,7 @@ import {
   DialogContent,
   DialogTrigger,
 } from "@/components/common/Dialog";
+import { Text } from "@/components/common/Text";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useWashingMachineNotifications } from "@/hooks/useWashingMachineNotifications";
@@ -25,17 +25,13 @@ interface WashingMachineProps {
   icon: "WASHING MACHINE" | "DRYER";
 }
 
-// Notifications are now handled by the notification service
-
 const getIcon = (icon: "WASHING MACHINE" | "DRYER", color: ColorValue) => {
-  switch (icon) {
-    case "WASHING MACHINE":
-      return <WashingMachineIcon size={24} color={color} />;
-    case "DRYER":
-      return <Wind size={24} color={color} />;
-    default:
-      return null;
-  }
+  const iconMap: { [key: string]: React.ReactElement } = {
+    "WASHING MACHINE": <WashingMachineIcon size={24} color={color} />,
+    DRYER: <Wind size={24} color={color} />,
+  };
+
+  return iconMap[icon] || null;
 };
 
 const Bubble = ({ index }: { index: number }) => {
@@ -371,21 +367,12 @@ const WashingMachineCard = ({
       <View className="flex-row justify-between gap-6 items-center z-10">
         <View className="flex-row items-center gap-2">
           {getIcon(icon, theme.primary)}
-          <Text
-            style={{ color: theme.text }}
-            className="font-bold"
-            numberOfLines={1}
-          >
+          <Text className="font-bold" numberOfLines={1}>
             N°{number}
           </Text>
         </View>
 
-        <Text
-          style={{ color: theme.text }}
-          className="flex-1"
-          ellipsizeMode="tail"
-          numberOfLines={1}
-        >
+        <Text className="flex-1" ellipsizeMode="tail" numberOfLines={1}>
           {type}
         </Text>
 
@@ -419,7 +406,7 @@ const WashingMachineCard = ({
             confirmLabel={t("settings.notifications.setNotification")}
             onConfirm={handleSetNotification}
           >
-            <Text style={{ color: theme.text }}>
+            <Text>
               {t("services.washingMachine.getNotificationDesc", {
                 type: type.toLowerCase(),
                 minutes: MINUTES_BEFORE_NOTIFICATION,
@@ -450,7 +437,7 @@ export const WashingMachineCardSkeleton = ({
     >
       <View className="flex-row items-center gap-2">
         {getIcon(icon, theme.muted)}
-        <Text style={{ color: theme.muted }} className="font-bold">
+        <Text color="muted" className="font-bold">
           N°--
         </Text>
       </View>

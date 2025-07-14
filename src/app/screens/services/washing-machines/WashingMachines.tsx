@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Text, View } from "react-native";
+import { View } from "react-native";
+import { Text } from "@/components/common/Text";
 import { Page } from "@/components/page/Page";
-import { useTheme } from "@/contexts/ThemeContext";
 import { useWashingMachines } from "@/hooks/useWashingMachines";
 import {
   AboutSection,
@@ -13,7 +13,6 @@ import {
 
 export const WashingMachines = () => {
   const { t } = useTranslation();
-  const { theme } = useTheme();
   const [_aboutPopupVisible, _setAboutPopupVisible] = useState(false);
 
   const {
@@ -49,7 +48,7 @@ export const WashingMachines = () => {
     >
       {isEmpty ? (
         <View className="min-h-screen flex justify-center items-center">
-          <Text style={{ color: theme.text }} className="text-center h1">
+          <Text variant="h1" className="text-center">
             {t("services.washingMachine.noMachine")}
           </Text>
         </View>

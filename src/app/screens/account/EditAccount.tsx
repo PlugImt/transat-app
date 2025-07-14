@@ -5,7 +5,7 @@ import { Edit, GraduationCap } from "lucide-react-native";
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Keyboard, Text, TouchableOpacity, View } from "react-native";
+import { Keyboard, TouchableOpacity, View } from "react-native";
 import { z } from "zod";
 import {
   Avatar,
@@ -15,6 +15,7 @@ import {
 import { Button } from "@/components/common/Button";
 import Dropdown, { DropdownLoading } from "@/components/common/Dropdown";
 import Input, { InputLoading } from "@/components/common/Input";
+import { Text } from "@/components/common/Text";
 import { useToast } from "@/components/common/Toast";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
@@ -188,9 +189,7 @@ export const EditProfile = () => {
         className=" rounded-lg px-6 py-4 gap-4"
         style={{ backgroundColor: theme.card }}
       >
-        <Text className="h3" style={{ color: theme.text }}>
-          {t("account.personalInfo")}
-        </Text>
+        <Text variant="h3">{t("account.personalInfo")}</Text>
 
         <Input
           control={userControl}
@@ -298,7 +297,7 @@ const EditProfileLoading = () => {
   return (
     <Page goBack className="gap-8">
       <View className="flex-row items-center justify-between m-4">
-        <Text className="h1">{t("account.editProfile")}</Text>
+        <Text variant="h1">{t("account.editProfile")}</Text>
         <Button
           label={t("common.cancel")}
           onPress={() => navigation.goBack()}
@@ -318,9 +317,7 @@ const EditProfileLoading = () => {
         className=" rounded-lg px-6 py-4 gap-4"
         style={{ backgroundColor: theme.card }}
       >
-        <Text className="h3" style={{ color: theme.text }}>
-          {t("account.personalInfo")}
-        </Text>
+        <Text variant="h3">{t("account.personalInfo")}</Text>
 
         <InputLoading label={t("account.firstName")} />
         <InputLoading label={t("account.lastName")} />

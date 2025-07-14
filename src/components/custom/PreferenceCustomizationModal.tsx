@@ -1,13 +1,14 @@
 import { GripVertical } from "lucide-react-native";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Modal, Switch, Text, TouchableOpacity, View } from "react-native";
+import { Modal, Switch, TouchableOpacity, View } from "react-native";
 import DraggableFlatList, {
   type RenderItemParams,
   ScaleDecorator,
 } from "react-native-draggable-flatlist";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Button } from "@/components/common/Button";
+import { Text } from "@/components/common/Text";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Preference } from "@/services/storage/widgetPreferences";
@@ -47,19 +48,6 @@ const PreferenceCustomizationModal = ({
     );
   };
 
-  const getDisplayName = (item: Preference) => {
-    const translations: Record<string, string> = {
-      weather: t("services.weather") || "Weather",
-      restaurant: t("services.restaurant.title"),
-      timetable: t("services.timetable.title"),
-      homework: t("services.homework.title"),
-      washingMachine: t("services.washingMachine.title"),
-      traq: t("services.traq.title"),
-      olimtpe: t("services.olimtpe.title"),
-    };
-    return translations[item.id] || item.name;
-  };
-
   const renderItem = ({
     item,
     drag,
@@ -82,12 +70,8 @@ const PreferenceCustomizationModal = ({
         >
           <View className="flex-row items-center gap-2">
             <GripVertical size={20} color={theme.muted} />
-            <Text
-              style={{
-                color: item.enabled ? theme.text : theme.textSecondary,
-              }}
-            >
-              {getDisplayName(item)}
+            <Text color={item.enabled ? "text" : "textSecondary"}>
+              {item.name}
             </Text>
           </View>
           <Switch
@@ -109,15 +93,8 @@ const PreferenceCustomizationModal = ({
       onRequestClose={onClose}
     >
       <GestureHandlerRootView>
-        <Page disableScroll={true} title={title} className="py-4">
-          <Text
-            style={{
-              color: theme.text,
-            }}
-            className="px-2"
-          >
-            {t("common.customizeHint")}
-          </Text>
+        <Page disableScroll={true} title={title} className="py-4 flex-1">
+          <Text className="px-2">{t("common.customizeHint")}</Text>
 
           <View className="justify-between flex-1">
             <DraggableFlatList
@@ -126,7 +103,6 @@ const PreferenceCustomizationModal = ({
               keyExtractor={(item) => item.id}
               renderItem={renderItem}
               showsVerticalScrollIndicator={false}
-              className="overflow-visible"
             />
             <View className="gap-2">
               <Button label={t("common.save")} onPress={handleSave} />

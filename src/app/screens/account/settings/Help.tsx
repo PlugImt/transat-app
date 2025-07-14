@@ -6,7 +6,7 @@ import {
 } from "lucide-react-native";
 import { useId, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Linking, Text, TouchableOpacity, View } from "react-native";
+import { Linking, TouchableOpacity, View } from "react-native";
 import { Divider } from "@/components/common/Divider";
 import {
   Tabs,
@@ -14,6 +14,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/common/Tabs";
+import { Text } from "@/components/common/Text";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 
@@ -54,7 +55,7 @@ const Help = () => {
 
   return (
     <Page goBack className="gap-6" title={t("settings.help.title")}>
-      <Text className="mx-4 mb-2" style={{ color: theme.textSecondary }}>
+      <Text className="mx-4 mb-2" color="textSecondary">
         {t("settings.help.description")}
       </Text>
 
@@ -81,9 +82,7 @@ const Help = () => {
                 >
                   <View className="flex-row items-center gap-2 flex-1 max-w-[80%]">
                     <HelpCircle size={20} color={theme.text} />
-                    <Text className="font-medium" style={{ color: theme.text }}>
-                      {faq.question}
-                    </Text>
+                    <Text>{faq.question}</Text>
                   </View>
                   {expandedFaq === index ? (
                     <ChevronUp size={18} color={theme.muted} />
@@ -94,9 +93,7 @@ const Help = () => {
 
                 {expandedFaq === index && (
                   <View className="pl-8 pr-4 pb-2">
-                    <Text style={{ color: theme.textSecondary }}>
-                      {faq.answer}
-                    </Text>
+                    <Text color="textSecondary">{faq.answer}</Text>
                   </View>
                 )}
                 {index < faqs.length - 1 && expandedFaq !== index && (
@@ -122,12 +119,11 @@ const Help = () => {
                 <View className="flex-row items-center gap-3">
                   <SquareArrowOutUpRight size={22} color={theme.text} />
                   <View className="ml-2.5 max-w-[80%]">
-                    <Text style={{ color: theme.text }}>
-                      {t("settings.help.joinWhatsApp")}
-                    </Text>
+                    <Text>{t("settings.help.joinWhatsApp")}</Text>
                     <Text
-                      className="text-sm break-words"
-                      style={{ color: theme.textSecondary }}
+                      className="break-words"
+                      color="textSecondary"
+                      variant="sm"
                     >
                       {t("settings.help.joinCommunity")}
                     </Text>

@@ -260,6 +260,7 @@
     "weather": "Clima",
     "traq": {
       "title": "Traq",
+      "description": "Todas las bebidas disponibles en el Traq",
       "about": "🍺 El Traq (Traquenard) es el bar estudiantil de la escuela donde puedes degustar diferentes bebidas.",
       "location": "Dentro de la MDE",
       "additionalInfo": "Durante los eventos, pueden venderse chupitos o cócteles. Consulta la página del evento para más información.",
@@ -276,6 +277,7 @@
     "reservations": "Reservas",
     "restaurant": {
       "title": "Menú",
+      "description": "Descubre el menú diario ofrecido en el RU",
       "lunch": "Almuerzo",
       "dinner": "Cena",
       "widgetLunch": "Menú de almuerzo",
@@ -318,7 +320,7 @@
     },
     "timetable": {
       "title": "Horario",
-      "description": "El horario se actualiza diariamente para informarte de tus próximas clases.",
+      "description": "El mismo que en PASS, con un plus",
       "about": "El horario se actualiza diariamente para informarte de tus próximas clases.",
       "additionalInfo": "Si observas alguna incoherencia, háznoslo saber a través del formulario de comentarios. ",
       "noData": "No hay datos disponibles para hoy",
@@ -339,7 +341,7 @@
     "olimtpe": {
       "title": "OL'IMT'PE",
       "welcome": "¡Bienvenido a OL'IMT'PE!",
-      "description": "Tu centro olímpico y deportivo en IMT Atlantique. Descubre todas nuestras instalaciones y servicios para una vida estudiantil activa y saludable.",
+      "description": "Signale un comportamiento anormal",
       "about": "🏅 OL'IMT'PE es el centro deportivo de IMT Atlantique, que ofrece diversas instalaciones y actividades deportivas para estudiantes y personal.",
       "location": "Complejo deportivo, campus IMT Atlantique",
       "price": "Acceso gratuito para estudiantes con tarjeta estudiantil válida",
@@ -355,6 +357,7 @@
     },
     "washingMachine": {
       "title": "Lavandería",
+      "description": "Comprueba la disponibilidad de las lavadoras y secadoras",
       "washingMachine": "Lavadora",
       "dryer": "Secadora",
       "almostDone": "¡Máquina {{number}} casi terminada!",

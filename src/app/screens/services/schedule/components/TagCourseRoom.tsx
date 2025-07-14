@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Text } from "react-native";
+import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 
 export interface TagCourseRoomProps {
@@ -12,7 +12,7 @@ export const TagCourseRoom = ({ rooms }: TagCourseRoomProps) => {
     const { theme } = useTheme();
     return (
       <Text
-        className="px-2 rounded-md text-base ml-4 text-center w-fit"
+        className="px-2 rounded-md ml-4 text-center w-fit"
         style={{
           backgroundColor: theme.primary,
           color: theme.background,

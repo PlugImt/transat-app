@@ -9,7 +9,7 @@ import {
   Settings,
 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import {
   Avatar,
   AvatarFallback,
@@ -17,6 +17,7 @@ import {
 } from "@/components/common/Avatar";
 import { Button, IconButton } from "@/components/common/Button";
 import InfoItem from "@/components/common/InfoItem";
+import { Text } from "@/components/common/Text";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
 import { TextSkeleton } from "@/components/Skeleton";
@@ -89,11 +90,11 @@ export const Account = () => {
         </Avatar>
 
         <View className="gap-1 justify-center items-center">
-          <Text className="text-2xl font-bold " style={{ color: theme.text }}>
+          <Text variant="h2">
             {user?.first_name} {user?.last_name}
           </Text>
           {user?.scolarity?.graduation_year && (
-            <Text style={{ color: theme.textSecondary }} className="text-base">
+            <Text color="textSecondary">
               {getStudentYear(user?.scolarity?.graduation_year)}
             </Text>
           )}
@@ -103,9 +104,7 @@ export const Account = () => {
         className=" rounded-lg px-6 py-4 gap-4"
         style={{ backgroundColor: theme.card }}
       >
-        <Text className="h3" style={{ color: theme.text }}>
-          {t("account.contactInfo")}
-        </Text>
+        <Text variant="h3">{t("account.contactInfo")}</Text>
         <InfoItem
           icon={<Mail color={theme.text} size={20} />}
           label={t("account.email")}
@@ -122,9 +121,7 @@ export const Account = () => {
         className=" rounded-lg px-6 py-4 gap-4"
         style={{ backgroundColor: theme.card }}
       >
-        <Text className="h3" style={{ color: theme.text }}>
-          {t("account.infos")}
-        </Text>
+        <Text variant="h3">{t("account.infos")}</Text>
 
         <InfoItem
           icon={<Medal color={theme.text} size={20} />}
@@ -162,9 +159,7 @@ export const Account = () => {
         className=" rounded-lg px-6 py-4 gap-4"
         style={{ backgroundColor: theme.card }}
       >
-        <Text className="h3" style={{ color: theme.text }}>
-          {t("settings.feedback.sectionTitle")}
-        </Text>
+        <Text variant="h3">{t("settings.feedback.sectionTitle")}</Text>
         <InfoItem
           icon={<MessageSquare color={theme.text} size={20} />}
           label={t("settings.feedback.giveFeedback")}
@@ -211,7 +206,7 @@ const AccountLoading = () => {
         className=" rounded-lg px-6 py-4 gap-4"
         style={{ backgroundColor: theme.card }}
       >
-        <Text className="h3">{t("account.contactInfo")}</Text>
+        <Text variant="h3">{t("account.contactInfo")}</Text>
         <InfoItem
           icon={<Mail color={theme.text} size={20} />}
           label={t("account.email")}
@@ -226,7 +221,7 @@ const AccountLoading = () => {
         className=" rounded-lg px-6 py-4 gap-4"
         style={{ backgroundColor: theme.card }}
       >
-        <Text className="h3">{t("account.infos")}</Text>
+        <Text variant="h3">{t("account.infos")}</Text>
 
         <InfoItem
           icon={<Medal color={theme.text} size={20} />}

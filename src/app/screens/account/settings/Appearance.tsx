@@ -1,8 +1,8 @@
 import { Check, Moon, Smartphone, Sun } from "lucide-react-native";
 import type React from "react";
 import { useTranslation } from "react-i18next";
-import { Text, TouchableOpacity, View } from "react-native";
-
+import { TouchableOpacity, View } from "react-native";
+import { Text } from "@/components/common/Text";
 import { Page } from "@/components/page/Page";
 import { type ThemeMode, useTheme } from "@/contexts/ThemeContext";
 
@@ -50,7 +50,7 @@ export const Appearance = () => {
       className="gap-6"
     >
       <View className="gap-2">
-        <Text className="h3 ml-4" style={{ color: theme.text }}>
+        <Text className="ml-4" variant="h3">
           {t("settings.appearance.theme", "Theme")}
         </Text>
         <View
@@ -70,13 +70,8 @@ export const Appearance = () => {
               <View className="flex-row items-center flex-1">
                 <View className="mr-3">{option.icon}</View>
                 <View className="flex-1">
-                  <Text
-                    style={{ color: theme.text }}
-                    className="font-medium text-base"
-                  >
-                    {option.title}
-                  </Text>
-                  <Text style={{ color: theme.muted }} className="text-sm mt-1">
+                  <Text>{option.title}</Text>
+                  <Text className="mt-1" color="muted">
                     {option.description}
                   </Text>
                 </View>
@@ -90,7 +85,7 @@ export const Appearance = () => {
       </View>
 
       <View className="gap-2">
-        <Text className="h3 ml-4" style={{ color: theme.text }}>
+        <Text className="ml-4" variant="h3">
           {t("settings.appearance.preview", "Preview")}
         </Text>
         <View
@@ -98,12 +93,12 @@ export const Appearance = () => {
           className="rounded-lg p-4"
         >
           <View className="flex-row items-center justify-between mb-3">
-            <Text style={{ color: theme.text }} className="font-semibold">
+            <Text variant="lg">
               {t("settings.appearance.sampleCard", "Sample Card")}
             </Text>
             <View className="bg-primary rounded-full w-8 h-8" />
           </View>
-          <Text style={{ color: theme.muted }} className="text-sm mb-2">
+          <Text className="mb-2" color="muted" variant="sm">
             {t(
               "settings.appearance.sampleText",
               "This is how text will appear in the selected theme.",

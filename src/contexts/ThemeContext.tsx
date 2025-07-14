@@ -12,6 +12,8 @@ import colors from "@/themes/colors";
 
 export type ThemeMode = "system" | "light" | "dark";
 
+export type ThemeColorKeys = keyof ReturnType<typeof useTheme>["theme"];
+
 type ThemeType = {
   background: string;
   text: string;

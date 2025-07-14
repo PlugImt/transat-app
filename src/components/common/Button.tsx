@@ -35,77 +35,88 @@ const Button = ({
   const { theme } = useTheme();
   const isDisabled = props.disabled || loading;
 
-  // Get button styles based on variant and theme
   const getButtonStyle = () => {
-    let backgroundColor = theme.primary;
-    let borderColor = "transparent";
-    let borderWidth = 0;
-
-    switch (variant) {
-      case "secondary":
-        backgroundColor = theme.secondary;
-        break;
-      case "outlined":
-        backgroundColor = "transparent";
-        borderColor = theme.primary;
-        borderWidth = 1;
-        break;
-      case "destructive":
-        backgroundColor = theme.destructive;
-        break;
-      case "ghost":
-        backgroundColor = theme.backdrop;
-        break;
-      case "link":
-        backgroundColor = "transparent";
-        break;
-      default:
-        backgroundColor = theme.primary;
-    }
-
-    return {
-      backgroundColor,
-      borderColor,
-      borderWidth,
+    const buttonStyles: {
+      [key: string]: {
+        backgroundColor: string;
+        borderColor: string;
+        borderWidth: number;
+      };
+    } = {
+      default: {
+        backgroundColor: theme.primary,
+        borderColor: "transparent",
+        borderWidth: 0,
+      },
+      secondary: {
+        backgroundColor: theme.secondary,
+        borderColor: "transparent",
+        borderWidth: 0,
+      },
+      outlined: {
+        backgroundColor: "transparent",
+        borderColor: theme.primary,
+        borderWidth: 1,
+      },
+      destructive: {
+        backgroundColor: theme.destructive,
+        borderColor: "transparent",
+        borderWidth: 0,
+      },
+      ghost: {
+        backgroundColor: theme.backdrop,
+        borderColor: "transparent",
+        borderWidth: 0,
+      },
+      link: {
+        backgroundColor: "transparent",
+        borderColor: "transparent",
+        borderWidth: 0,
+      },
     };
+
+    return buttonStyles[variant] || buttonStyles.default;
   };
 
-  // Get text color based on variant and theme
   const getTextColor = () => {
-    switch (variant) {
-      case "outlined":
-        return theme.primary;
-      case "ghost":
-        return theme.text;
-      case "link":
-        return theme.primary;
-      default:
-        return "#FFFFFF"; // White text for filled buttons
-    }
+    const textColors: { [key: string]: string } = {
+      default: "#FFFFFF",
+      secondary: "#FFFFFF",
+      outlined: theme.primary,
+      destructive: "#FFFFFF",
+      ghost: theme.text,
+      link: theme.primary,
+    };
+
+    return textColors[variant] || textColors.default;
   };
 
-  // Get size-based styles
   const getSizeStyles = () => {
-    switch (size) {
-      case "sm":
-        return {
-          height: 32,
-          paddingHorizontal: 8,
-          fontSize: 14,
-        };
-      case "lg":
-        return {
-          height: 48,
-          paddingHorizontal: 32,
-          fontSize: 18,
-        };
-      default:
-        return {
-          height: 40,
-          paddingHorizontal: 16,
-          fontSize: 16,
-        };
-    }
+    const sizeStyles: {
+      [key: string]: {
+        height: number;
+        paddingHorizontal: number;
+        fontSize: number;
+      };
+    } = {
+      default: {
+        height: 40,
+        paddingHorizontal: 16,
+        fontSize: 16,
+      },
+      sm: {
+        height: 32,
+        paddingHorizontal: 8,
+        fontSize: 14,
+      },
+      lg: {
+        height: 48,
+        paddingHorizontal: 32,
+        fontSize: 18,
+      },
+    };
+
+    return sizeStyles[size] || sizeStyles.default;
   };
 
   const buttonStyle = getButtonStyle();
@@ -171,60 +182,66 @@ const IconButton = ({
   const { theme } = useTheme();
   const isDisabled = props.disabled || loading;
 
-  // Get button styles based on variant and theme
   const getButtonStyle = () => {
-    let backgroundColor = theme.primary;
-    let borderColor = "transparent";
-    let borderWidth = 0;
-
-    switch (variant) {
-      case "secondary":
-        backgroundColor = theme.secondary;
-        break;
-      case "outlined":
-        backgroundColor = "transparent";
-        borderColor = theme.primary;
-        borderWidth = 1;
-        break;
-      case "destructive":
-        backgroundColor = theme.destructive;
-        break;
-      case "ghost":
-        backgroundColor = theme.muted;
-        break;
-      case "link":
-        backgroundColor = "transparent";
-        break;
-      default:
-        backgroundColor = theme.primary;
-    }
-
-    return {
-      backgroundColor,
-      borderColor,
-      borderWidth,
+    const buttonStyles: {
+      [key: string]: {
+        backgroundColor: string;
+        borderColor: string;
+        borderWidth: number;
+      };
+    } = {
+      default: {
+        backgroundColor: theme.primary,
+        borderColor: "transparent",
+        borderWidth: 0,
+      },
+      secondary: {
+        backgroundColor: theme.secondary,
+        borderColor: "transparent",
+        borderWidth: 0,
+      },
+      outlined: {
+        backgroundColor: "transparent",
+        borderColor: theme.primary,
+        borderWidth: 1,
+      },
+      destructive: {
+        backgroundColor: theme.destructive,
+        borderColor: "transparent",
+        borderWidth: 0,
+      },
+      ghost: {
+        backgroundColor: theme.muted,
+        borderColor: "transparent",
+        borderWidth: 0,
+      },
+      link: {
+        backgroundColor: "transparent",
+        borderColor: "transparent",
+        borderWidth: 0,
+      },
     };
+
+    return buttonStyles[variant] || buttonStyles.default;
   };
 
-  // Get size-based styles
   const getSizeStyles = () => {
-    switch (size) {
-      case "sm":
-        return {
-          height: 32,
-          width: 32,
-        };
-      case "lg":
-        return {
-          height: 48,
-          width: 48,
-        };
-      default:
-        return {
-          height: 40,
-          width: 40,
-        };
-    }
+    const sizeStyles: { [key: string]: { height: number; width: number } } = {
+      default: {
+        height: 40,
+        width: 40,
+      },
+      sm: {
+        height: 32,
+        width: 32,
+      },
+      lg: {
+        height: 48,
+        width: 48,
+      },
+    };
+
+    return sizeStyles[size] || sizeStyles.default;
   };
 
   const buttonStyle = getButtonStyle();
@@ -236,7 +253,7 @@ const IconButton = ({
         {
           alignItems: "center",
           justifyContent: "center",
-          borderRadius: 20, // Fully rounded for icon buttons
+          borderRadius: 20,
           ...buttonStyle,
           ...sizeStyles,
           opacity: isDisabled ? 0.5 : 1,

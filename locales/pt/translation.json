@@ -260,6 +260,7 @@
     "weather": "Clima",
     "traq": {
       "title": "Traq'",
+      "description": "Todas as bebidas disponíveis no Traq",
       "about": "O Traq (Traquenard) é o bar dos estudantes onde podes desfrutar de várias bebidas.",
       "location": "Por dentro do MDE",
       "additionalInfo": "Durante os eventos, podem ser vendidos shooters ou cocktails. Para mais informações, consulte a página do evento.",
@@ -276,6 +277,7 @@
     "reservations": "Reservas",
     "restaurant": {
       "title": "Menu",
+      "description": "Descubra o menu diário oferecido no RU",
       "lunch": "Almoço",
       "dinner": "Jantar",
       "widgetLunch": "Menu de almoço",
@@ -318,7 +320,7 @@
     },
     "timetable": {
       "title": "Horário",
-      "description": "O horário é atualizado diariamente para informá-lo sobre suas próximas aulas.",
+      "description": "O mesmo que no PASS, com um plus",
       "about": "O horário é atualizado diariamente para informá-lo sobre suas próximas aulas.",
       "additionalInfo": "Se você notar alguma inconsistência, informe-nos usando o formulário de feedback. ",
       "noData": "Não há dados disponíveis para hoje",
@@ -339,7 +341,7 @@
     "olimtpe": {
       "title": "OL'IMT'PE",
       "welcome": "Bem-vindo ao OL'IMT'PE!",
-      "description": "O seu centro olímpico e desportivo no IMT Atlantique. Descubra todas as nossas instalações e serviços para uma vida estudantil ativa e saudável.",
+      "description": "Reporte um comportamento anormal",
       "about": "🏅 O OL'IMT'PE é o centro desportivo do IMT Atlantique, oferecendo várias instalações e atividades desportivas para estudantes e pessoal.",
       "location": "Complexo desportivo, campus IMT Atlantique",
       "price": "Acesso gratuito para estudantes com cartão de estudante válido",
@@ -355,6 +357,7 @@
     },
     "washingMachine": {
       "title": "Lavandaria",
+      "description": "Verifique a disponibilidade das máquinas de lavandaria e secagem",
       "washingMachine": "Máquina de lavar roupa",
       "dryer": "Secador",
       "almostDone": "Máquina {{number}} quase pronta!",

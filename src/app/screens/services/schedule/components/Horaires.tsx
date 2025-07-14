@@ -1,115 +1,91 @@
-import { Text, View } from "react-native";
-import { useTheme } from "@/contexts/ThemeContext";
+import { View } from "react-native";
+import { Text } from "@/components/common/Text";
 
 export const Horaires = () => {
-  const { theme } = useTheme();
   return (
     <View className="flex-col items-end">
       <View className="flex-row gap-1">
-        <Text style={{ color: theme.text }}>8h</Text>
-        <Text style={{ color: theme.text }} className="font-bold">
-          -
-        </Text>
+        <Text>8h</Text>
+        <Text className="font-bold">-</Text>
       </View>
-      <Text style={{ color: theme.text }}>-</Text>
-      <Text style={{ color: theme.text }}>-</Text>
-      <Text style={{ color: theme.text }}>-</Text>
+      <Text>-</Text>
+      <Text>-</Text>
 
       <View className="flex-row gap-1">
-        <Text style={{ color: theme.text }}>9h</Text>
-        <Text style={{ color: theme.text }} className="font-bold">
-          -
-        </Text>
+        <Text>9h</Text>
+        <Text className="font-bold">-</Text>
       </View>
-      <Text style={{ color: theme.text }}>-</Text>
-      <Text style={{ color: theme.text }}>-</Text>
-      <Text style={{ color: theme.text }}>-</Text>
+      <Text>-</Text>
+      <Text>-</Text>
+      <Text>-</Text>
 
       <View className="flex-row gap-1">
-        <Text style={{ color: theme.text }}>10h</Text>
-        <Text style={{ color: theme.text }} className="font-bold">
-          -
-        </Text>
+        <Text>10h</Text>
+        <Text className="font-bold">-</Text>
       </View>
-      <Text style={{ color: theme.text }}>-</Text>
-      <Text style={{ color: theme.text }}>-</Text>
-      <Text style={{ color: theme.text }}>-</Text>
+      <Text>-</Text>
+      <Text>-</Text>
+      <Text>-</Text>
 
       <View className="flex-row gap-1">
-        <Text style={{ color: theme.text }}>11h</Text>
-        <Text style={{ color: theme.text }} className="font-bold">
-          -
-        </Text>
+        <Text>11h</Text>
+        <Text className="font-bold">-</Text>
       </View>
-      <Text style={{ color: theme.text }}>-</Text>
-      <Text style={{ color: theme.text }}>-</Text>
-      <Text style={{ color: theme.text }}>-</Text>
+      <Text>-</Text>
+      <Text>-</Text>
+      <Text>-</Text>
 
       <View className="flex-row gap-1">
-        <Text style={{ color: theme.text }}>12h</Text>
-        <Text style={{ color: theme.text }} className="font-bold">
-          -
-        </Text>
+        <Text>12h</Text>
+        <Text className="font-bold">-</Text>
       </View>
-      <Text style={{ color: theme.text }}>-</Text>
-      <Text style={{ color: theme.text }}>-</Text>
-      <Text style={{ color: theme.text }}>-</Text>
+      <Text>-</Text>
+      <Text>-</Text>
+      <Text>-</Text>
 
       <View className="flex-row gap-1">
-        <Text style={{ color: theme.text }}>13h</Text>
-        <Text style={{ color: theme.text }} className="font-bold">
-          -
-        </Text>
+        <Text>13h</Text>
+        <Text className="font-bold">-</Text>
       </View>
-      <Text style={{ color: theme.text }}>-</Text>
-      <Text style={{ color: theme.text }}>-</Text>
-      <Text style={{ color: theme.text }}>-</Text>
+      <Text>-</Text>
+      <Text>-</Text>
+      <Text>-</Text>
 
       <View className="flex-row gap-1">
-        <Text style={{ color: theme.text }}>14h</Text>
-        <Text style={{ color: theme.text }} className="font-bold">
-          -
-        </Text>
+        <Text>14h</Text>
+        <Text className="font-bold">-</Text>
       </View>
-      <Text style={{ color: theme.text }}>-</Text>
-      <Text style={{ color: theme.text }}>-</Text>
-      <Text style={{ color: theme.text }}>-</Text>
+      <Text>-</Text>
+      <Text>-</Text>
+      <Text>-</Text>
 
       <View className="flex-row gap-1">
-        <Text style={{ color: theme.text }}>15h</Text>
-        <Text style={{ color: theme.text }} className="font-bold">
-          -
-        </Text>
+        <Text>15h</Text>
+        <Text className="font-bold">-</Text>
       </View>
-      <Text style={{ color: theme.text }}>-</Text>
-      <Text style={{ color: theme.text }}>-</Text>
-      <Text style={{ color: theme.text }}>-</Text>
+      <Text>-</Text>
+      <Text>-</Text>
+      <Text>-</Text>
 
       <View className="flex-row gap-1">
-        <Text style={{ color: theme.text }}>16h</Text>
-        <Text style={{ color: theme.text }} className="font-bold">
-          -
-        </Text>
+        <Text>16h</Text>
+        <Text className="font-bold">-</Text>
       </View>
-      <Text style={{ color: theme.text }}>-</Text>
-      <Text style={{ color: theme.text }}>-</Text>
-      <Text style={{ color: theme.text }}>-</Text>
+      <Text>-</Text>
+      <Text>-</Text>
+      <Text>-</Text>
 
       <View className="flex-row gap-1">
-        <Text style={{ color: theme.text }}>17h</Text>
-        <Text style={{ color: theme.text }} className="font-bold">
-          -
-        </Text>
+        <Text>17h</Text>
+        <Text className="font-bold">-</Text>
       </View>
-      <Text style={{ color: theme.text }}>-</Text>
-      <Text style={{ color: theme.text }}>-</Text>
-      <Text style={{ color: theme.text }}>-</Text>
+      <Text>-</Text>
+      <Text>-</Text>
+      <Text>-</Text>
 
       <View className="flex-row gap-1">
-        <Text style={{ color: theme.text }}>18h</Text>
-        <Text style={{ color: theme.text }} className="font-bold">
-          -
-        </Text>
+        <Text>18h</Text>
+        <Text className="font-bold">-</Text>
       </View>
     </View>
   );

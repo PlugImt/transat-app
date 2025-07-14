@@ -16,8 +16,9 @@ import {
   tr,
   zhCN,
 } from "date-fns/locale";
-import { Image, Text, View } from "react-native";
+import { Image, View } from "react-native";
 import { Avatar, AvatarImage } from "@/components/common/Avatar";
+import { Text } from "@/components/common/Text";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useWeather } from "@/hooks/useWeather";
@@ -29,41 +30,26 @@ export const WeatherWidget = () => {
 
   const date = new Date();
 
+  const localeMap: { [key: string]: Locale } = {
+    fr,
+    de,
+    es,
+    zh: zhCN,
+    ru,
+    it,
+    ja,
+    ko,
+    pt,
+    nl,
+    ar,
+    hi,
+    sv,
+    tr,
+    pl,
+  };
+
   const getLocale = () => {
-    switch (i18n.language) {
-      case "fr":
-        return fr;
-      case "de":
-        return de;
-      case "es":
-        return es;
-      case "zh":
-        return zhCN;
-      case "ru":
-        return ru;
-      case "it":
-        return it;
-      case "ja":
-        return ja;
-      case "ko":
-        return ko;
-      case "pt":
-        return pt;
-      case "nl":
-        return nl;
-      case "ar":
-        return ar;
-      case "hi":
-        return hi;
-      case "sv":
-        return sv;
-      case "tr":
-        return tr;
-      case "pl":
-        return pl;
-      default:
-        return undefined;
-    }
+    return localeMap[i18n.language] || undefined;
   };
 
   if (isPending) {
@@ -80,13 +66,11 @@ export const WeatherWidget = () => {
       className="p-6 rounded-lg flex-row justify-between gap-6"
     >
       <View>
-        <Text className="h3" style={{ color: theme.text }}>
-          {format(date, "PPP", { locale: getLocale() })}
-        </Text>
-        <Text className="h1 font-semibold" style={{ color: theme.text }}>
+        <Text variant="h3">{format(date, "PPP", { locale: getLocale() })}</Text>
+        <Text variant="h1">
           {Math.round(weatherNantes?.temperature ?? 0)}°C
         </Text>
-        <Text className="h3 font-semibold" style={{ color: theme.primary }}>
+        <Text variant="h3" color="primary">
           {weatherNantes?.condition ?? ""}
         </Text>
       </View>

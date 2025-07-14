@@ -1,19 +1,14 @@
 import type React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  ActivityIndicator,
-  Modal,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { ActivityIndicator, Modal, TouchableOpacity, View } from "react-native";
 import {
   CodeField,
   Cursor,
   useBlurOnFulfill,
   useClearByFocusCell,
 } from "react-native-confirmation-code-field";
+import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/hooks/account/useAuth";
 
@@ -86,13 +81,8 @@ export const VerificationCodeModal: React.FC<VerificationCodeModalProps> = ({
           className="w-5/6 items-center rounded-lg p-5"
           style={{ backgroundColor: theme.card }}
         >
-          <Text className="h1" style={{ color: theme.text }}>
-            {t("auth.verificationCode")}
-          </Text>
-          <Text
-            className="mb-5 text-center text-l p-2"
-            style={{ color: theme.text }}
-          >
+          <Text variant="h1">{t("auth.verificationCode")}</Text>
+          <Text className="mb-5 text-center p-2">
             {t("auth.enterVerificationCode")}
           </Text>
 
@@ -101,10 +91,7 @@ export const VerificationCodeModal: React.FC<VerificationCodeModalProps> = ({
               className="mb-4 w-full rounded-md p-2.5"
               style={{ backgroundColor: theme.errorBackground }}
             >
-              <Text
-                className="text-center"
-                style={{ color: theme.destructive }}
-              >
+              <Text className="text-center" color="destructive">
                 {error}
               </Text>
             </View>
@@ -129,10 +116,7 @@ export const VerificationCodeModal: React.FC<VerificationCodeModalProps> = ({
                 }}
                 onLayout={getCellOnLayoutHandler(index)}
               >
-                <Text
-                  className="text-center text-2xl"
-                  style={{ color: theme.text }}
-                >
+                <Text className="text-center text-2xl">
                   {symbol || (isFocused ? <Cursor /> : null)}
                 </Text>
               </View>

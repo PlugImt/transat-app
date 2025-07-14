@@ -1,10 +1,12 @@
-import { Text } from "react-native";
+import { Text } from "@/components/common/Text";
 import { Page } from "@/components/page/Page";
 
 export const Caps = () => {
   return (
     <Page>
-      <Text className="h1 m-4">Caps</Text>
+      <Text variant="h1" className="m-4">
+        Caps
+      </Text>
     </Page>
   );
 };

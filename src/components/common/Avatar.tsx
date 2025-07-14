@@ -1,5 +1,6 @@
 import { forwardRef, useState } from "react";
-import { Image, Text, View } from "react-native";
+import { Image, View } from "react-native";
+import { Text } from "@/components/common/Text";
 import { Skeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";
@@ -73,10 +74,7 @@ const AvatarFallback = forwardRef<
       )}
       {...props}
     >
-      <Text
-        style={{ color: theme.text }}
-        className={cn("text-4xl font-bold", textClassname)}
-      >
+      <Text className={cn("text-4xl font-bold", textClassname)}>
         {children}
       </Text>
     </View>

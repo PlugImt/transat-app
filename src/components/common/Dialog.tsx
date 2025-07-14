@@ -4,10 +4,10 @@ import {
   Modal,
   Platform,
   ScrollView,
-  Text,
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 import { Button } from "./Button";
 
@@ -94,9 +94,7 @@ const DialogContent = ({
             }}
             className="border rounded-lg p-6 shadow-lg w-11/12 max-h-[80%] gap-8"
           >
-            <Text className="h2" style={{ color: theme.text }}>
-              {title}
-            </Text>
+            <Text variant="h2">{title}</Text>
             <ScrollView keyboardShouldPersistTaps="handled">
               <TouchableWithoutFeedback className="pr-6">
                 <View className={className}>{children}</View>

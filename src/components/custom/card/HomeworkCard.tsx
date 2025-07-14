@@ -5,7 +5,8 @@ import { enUS, fr } from "date-fns/locale";
 import { CheckCircle, Circle } from "lucide-react-native";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Text, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
+import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Homework } from "@/dto";
 import type { AppStackParamList } from "@/services/storage/types";
@@ -50,10 +51,7 @@ export default function HomeworkCard({ homework }: Props) {
         />
         <View className="flex-1 p-4 gap-2">
           <View className="flex-row justify-between items-center">
-            <Text
-              className="text-base font-semibold flex-1"
-              style={{ color: theme.text }}
-            >
+            <Text className="font-semibold flex-1">
               {homework.course_name} — {homework.title}
             </Text>
 
@@ -76,11 +74,11 @@ export default function HomeworkCard({ homework }: Props) {
           </Text>
 
           <View className="flex flex-row justify-between items-center mt-2">
-            <Text className="text-xs italic" style={{ color: theme.primary }}>
+            <Text className="text-sm italic" style={{ color: theme.primary }}>
               📅 Deadline : {deadline}
             </Text>
             {isLate && (
-              <Text className="text-xs font-bold text-red-500">
+              <Text className="text-sm font-bold text-red-500">
                 ⚠️ {t("services.homework.shortLate")}
               </Text>
             )}

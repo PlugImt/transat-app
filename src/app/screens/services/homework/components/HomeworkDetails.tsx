@@ -5,7 +5,8 @@ import { enUS, fr } from "date-fns/locale";
 import { CheckCircle, Circle } from "lucide-react-native";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, TouchableOpacity, View } from "react-native";
+import { Text } from "@/components/common/Text";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { AppStackParamList } from "@/services/storage/types";
@@ -45,26 +46,17 @@ export const HomeworkDetails = () => {
         style={{ backgroundColor: theme.background }}
       >
         <View className="flex flex-col gap-4">
-          <Text className="text-xl font-bold" style={{ color: theme.text }}>
-            {homework.title}
-          </Text>
+          <Text variant="h3">{homework.title}</Text>
 
-          <Text className="text-base italic" style={{ color: theme.text }}>
-            {homework.course_name}
-          </Text>
+          <Text className="italic">{homework.course_name}</Text>
 
-          <Text className="text-base" style={{ color: theme.text }}>
-            {homework.description}
-          </Text>
+          <Text>{homework.description}</Text>
 
-          <Text
-            className="text-sm mt-4 italic"
-            style={{ color: theme.primary }}
-          >
+          <Text className="mt-4 italic" color="primary" variant="sm">
             📅 {t("services.homework.deadline")} : {deadline}
           </Text>
           {isLate && (
-            <Text className="text-sm font-bold text-red-500">
+            <Text color="destructive" variant="sm">
               ⚠️ {t("services.homework.late")}
             </Text>
           )}
@@ -79,7 +71,7 @@ export const HomeworkDetails = () => {
             ) : (
               <Circle color={theme.text} size={22} />
             )}
-            <Text style={{ color: theme.text }}>
+            <Text>
               {isDone
                 ? t("services.homework.markAsDone")
                 : t("services.homework.markDone")}
@@ -87,16 +79,16 @@ export const HomeworkDetails = () => {
           </TouchableOpacity>
           <View className="h-[1px] bg-gray-400 my-3" />
 
-          <Text className="text-sm" style={{ color: theme.text }}>
+          <Text variant="sm">
             🧑‍🏫 {t("services.homework.author")} : {homework.author}
           </Text>
 
-          <Text className="text-sm" style={{ color: theme.text }}>
+          <Text variant="sm">
             🕒 {t("services.homework.createdAt")} : {createdAt}
           </Text>
 
           {isEdited && (
-            <Text className="text-sm" style={{ color: theme.text }}>
+            <Text variant="sm">
               ✏️ {t("services.homework.updatedAt")} : {updatedAt}
             </Text>
           )}

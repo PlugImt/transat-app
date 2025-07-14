@@ -1,8 +1,9 @@
 import { BadgeEuro, Beer, CircleX, Clock } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
-import { Dimensions, Image, Text, View } from "react-native";
+import { Dimensions, Image, View } from "react-native";
 import { Avatar, AvatarImage } from "@/components/common/Avatar";
 import Badge from "@/components/common/Badge";
+import { Text } from "@/components/common/Text";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 
@@ -61,14 +62,10 @@ const TraqCard = ({
       </View>
 
       <View>
-        <Text className="h2 text-center" style={{ color: theme.primary }}>
+        <Text className="h2 text-center" color="primary">
           {name}
         </Text>
-        {description && (
-          <Text className="text-sm text-center" style={{ color: theme.text }}>
-            {description}
-          </Text>
-        )}
+        {description && <Text className="text-center">{description}</Text>}
       </View>
 
       <View className="w-full px-4 gap-2">
@@ -76,13 +73,9 @@ const TraqCard = ({
           <View className="flex-row justify-between items-center">
             <View className="flex-row items-center gap-2">
               <Beer size={18} color={theme.text} />
-              <Text className="font-bold" style={{ color: theme.text }}>
-                {t("services.traq.alcohol")}
-              </Text>
+              <Text className="font-bold">{t("services.traq.alcohol")}</Text>
             </View>
-            <Text className="font-bold" style={{ color: theme.text }}>
-              {alcohol}°
-            </Text>
+            <Text className="font-bold">{alcohol}°</Text>
           </View>
         )}
 
@@ -90,12 +83,12 @@ const TraqCard = ({
           <View className="flex flex-row justify-between items-center">
             <View className="flex flex-row items-center gap-2 ">
               <BadgeEuro size={18} color={theme.text} />
-              <Text className="font-bold" style={{ color: theme.text }}>
+              <Text className="font-bold">
                 {t("services.traq.price")}{" "}
                 {alcohol && alcohol > 0 ? " (50cl)" : ""}
               </Text>
             </View>
-            <Text className="font-bold" style={{ color: theme.text }}>
+            <Text className="font-bold">
               {price > 0 ? `${price}€` : t("common.free")}
             </Text>
           </View>
@@ -105,14 +98,12 @@ const TraqCard = ({
           <View className="flex flex-row justify-between items-center">
             <View className="flex flex-row items-center gap-2 ">
               <BadgeEuro size={18} color={theme.text} />
-              <Text className="font-bold" style={{ color: theme.text }}>
+              <Text className="font-bold">
                 {t("services.traq.priceHalf")}{" "}
                 {alcohol && alcohol > 0 ? " (25cl)" : ""}
               </Text>
             </View>
-            <Text className="font-bold" style={{ color: theme.text }}>
-              {priceHalf}€
-            </Text>
+            <Text className="font-bold">{priceHalf}€</Text>
           </View>
         )}
       </View>
@@ -144,9 +135,7 @@ export const TraqCardLoading = () => {
         <View className="flex-row justify-between items-center">
           <View className="flex-row items-center gap-2">
             <Beer size={18} color={theme.text} />
-            <Text className="font-bold" style={{ color: theme.text }}>
-              {t("services.traq.alcohol")}
-            </Text>
+            <Text className="font-bold">{t("services.traq.alcohol")}</Text>
           </View>
           <TextSkeleton lines={1} lastLineWidth={50} />
         </View>
@@ -154,9 +143,7 @@ export const TraqCardLoading = () => {
         <View className="flex flex-row justify-between items-center">
           <View className="flex flex-row items-center gap-2 ">
             <BadgeEuro size={18} color={theme.text} />
-            <Text className="font-bold" style={{ color: theme.text }}>
-              {t("services.traq.price")}
-            </Text>
+            <Text className="font-bold">{t("services.traq.price")}</Text>
           </View>
           <TextSkeleton lines={1} lastLineWidth={50} />
         </View>

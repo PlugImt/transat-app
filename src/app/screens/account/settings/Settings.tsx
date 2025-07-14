@@ -13,7 +13,7 @@ import {
 } from "lucide-react-native";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { Button } from "@/components/common/Button";
 import {
   Dialog,
@@ -21,6 +21,7 @@ import {
   DialogTrigger,
 } from "@/components/common/Dialog";
 import { Switch } from "@/components/common/Switch";
+import { Text } from "@/components/common/Text";
 import { useToast } from "@/components/common/Toast";
 import { AccountCard } from "@/components/custom/card/AccountCard";
 import { Page } from "@/components/page/Page";
@@ -80,7 +81,7 @@ export const Settings = () => {
       <AccountCard user={user} />
 
       <View className="gap-2">
-        <Text className="h3 ml-4" style={{ color: theme.text }}>
+        <Text className="ml-4" variant="h3">
           {t("common.appearance")}
         </Text>
         <View
@@ -117,7 +118,7 @@ export const Settings = () => {
       </View>
 
       <View className="gap-2">
-        <Text className="h3 ml-4" style={{ color: theme.text }}>
+        <Text className="ml-4" variant="h3">
           {t("settings.notifications.notifications")}
         </Text>
         <View
@@ -133,7 +134,7 @@ export const Settings = () => {
       </View>
 
       <View className="gap-2">
-        <Text className="h3 ml-4" style={{ color: theme.text }}>
+        <Text className="ml-4" variant="h3">
           {t("account.security")}
         </Text>
         <View
@@ -149,7 +150,7 @@ export const Settings = () => {
       </View>
 
       <View className="gap-2">
-        <Text className="h3 ml-4" style={{ color: theme.text }}>
+        <Text className="ml-4" variant="h3">
           {t("common.other")}
         </Text>
         <View
@@ -219,9 +220,7 @@ export const Settings = () => {
             confirmLabel={t("settings.logoutConfirm")}
             onConfirm={handleLogout}
           >
-            <Text style={{ color: theme.text }}>
-              {t("settings.logoutDesc")}
-            </Text>
+            <Text>{t("settings.logoutDesc")}</Text>
           </DialogContent>
         </Dialog>
 

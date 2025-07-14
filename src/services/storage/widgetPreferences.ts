@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { t } from "i18next";
 import type { ImageSourcePropType } from "react-native";
 
 export type WidgetType =
@@ -24,84 +25,73 @@ export interface Preference {
   order: number;
   image?: ImageSourcePropType;
   screen?: string;
+  description?: string;
 }
 
 const HOME_WIDGETS_KEY = "home_widgets_preferences";
 const SERVICES_KEY = "services_preferences";
 
-const defaultHomeWidgets: Preference[] = [
-  { id: "weather", name: "Weather", enabled: true, order: 0 },
-  { id: "restaurant", name: "Restaurant", enabled: true, order: 1 },
-  { id: "timetable", name: "Timetable", enabled: true, order: 2 },
-  { id: "washingMachine", name: "Washing Machine", enabled: true, order: 3 },
-  { id: "homework", name: "Homework", enabled: true, order: 4 },
-];
-
-const defaultServices: Preference[] = [
+const getDefaultHomeWidgets = (): Preference[] => [
+  { id: "weather", name: t("services.weather.title"), enabled: true, order: 0 },
+  {
+    id: "restaurant",
+    name: t("services.restaurant.title"),
+    enabled: true,
+    order: 1,
+  },
   {
     id: "washingMachine",
-    name: "Washing Machine",
+    name: t("services.washingMachine.title"),
+    enabled: true,
+    order: 3,
+  },
+];
+
+const getDefaultServices = (): Preference[] => [
+  {
+    id: "washingMachine",
+    name: t("services.washingMachine.title"),
     enabled: true,
     order: 0,
-    image: require("@/assets/images/Logos/machine_large.png"),
+    image: require("@/assets/images/services/washing_machine_dark.png"),
     screen: "WashingMachine",
+    description: t("services.washingMachine.description"),
   },
   {
     id: "restaurant",
-    name: "Restaurant",
+    name: t("services.restaurant.title"),
     enabled: true,
     order: 1,
-    image: require("@/assets/images/Logos/restaurant_large.png"),
+    image: require("@/assets/images/services/restaurant.png"),
     screen: "Restaurant",
-  },
-  {
-    id: "timetable",
-    name: "Timetable",
-    enabled: true,
-    order: 2,
-    image: require("@/assets/images/Logos/edt_large.png"),
-    screen: "Timetable",
-  },
-  {
-    id: "homework",
-    name: "Homework",
-    enabled: true,
-    order: 3,
-    image: require("@/assets/images/Logos/devoirs_large.png"),
-    screen: "Homework",
+    description: t("services.restaurant.description"),
   },
   {
     id: "traq",
-    name: "Traq",
+    name: t("services.traq.title"),
     enabled: true,
     order: 4,
-    image: require("@/assets/images/Logos/traq_large.png"),
+    image: require("@/assets/images/services/traq.png"),
     screen: "Traq",
-  },
-  {
-    id: "olimtpe",
-    name: "OL'IMT'PE",
-    enabled: true,
-    order: 5,
-    image: require("@/assets/images/Logos/olimtpe.png"),
-    screen: "Olimtpe",
+    description: t("services.traq.description"),
   },
 ];
 
 const getPreferences = async (
   key: string,
-  defaultPrefs: Preference[],
+  getDefaultPrefs: () => Preference[],
 ): Promise<Preference[]> => {
   try {
     const stored = await AsyncStorage.getItem(key);
     const parsed: Preference[] = JSON.parse(stored || "[]");
+    const defaultPrefs = getDefaultPrefs();
     const newPrefs = defaultPrefs.filter(
       (pref) => !parsed.some((p: Preference) => p.id === pref.id),
     );
     return [...parsed, ...newPrefs];
   } catch (error) {
     console.error(`Error getting preferences for ${key}:`, error);
-    return defaultPrefs;
+    return getDefaultPrefs();
   }
 };
 
@@ -117,12 +107,15 @@ const savePreferences = async (
 };
 
 export const getHomeWidgetPreferences = async (): Promise<Preference[]> =>
-  getPreferences(HOME_WIDGETS_KEY, defaultHomeWidgets);
+  getPreferences(HOME_WIDGETS_KEY, getDefaultHomeWidgets);
+
 export const saveHomeWidgetPreferences = async (
   preferences: Preference[],
 ): Promise<void> => savePreferences(HOME_WIDGETS_KEY, preferences);
+
 export const getServicePreferences = async (): Promise<Preference[]> =>
-  getPreferences(SERVICES_KEY, defaultServices);
+  getPreferences(SERVICES_KEY, getDefaultServices);
+
 export const saveServicePreferences = async (
   preferences: Preference[],
 ): Promise<void> => savePreferences(SERVICES_KEY, preferences);

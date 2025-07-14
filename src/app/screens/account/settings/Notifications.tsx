@@ -1,8 +1,9 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { Divider } from "@/components/common/Divider";
 import { Switch } from "@/components/common/Switch";
+import { Text } from "@/components/common/Text";
 import { Page } from "@/components/page/Page";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -34,7 +35,7 @@ export const Notifications = () => {
       title={t("settings.notifications.notifications")}
     >
       <View className="gap-2">
-        <Text className="h2 mx-4" style={{ color: theme.text }}>
+        <Text className="mx-4" variant="h2">
           {t("services.title")}
         </Text>
         <View
@@ -43,10 +44,8 @@ export const Notifications = () => {
         >
           <View className="flex-row justify-between gap-4 items-center">
             <View className="gap-1 flex-1">
-              <Text style={{ color: theme.text }}>
-                {t("services.restaurant.title")}
-              </Text>
-              <Text style={{ color: theme.textSecondary }} className="text-sm">
+              <Text>{t("services.restaurant.title")}</Text>
+              <Text variant="sm" color="textSecondary">
                 {t("settings.notifications.toggleRestaurant")}
               </Text>
             </View>
@@ -59,10 +58,8 @@ export const Notifications = () => {
           <Divider />
           <View className="flex-row justify-between gap-4 items-center">
             <View className="gap-1 flex-1">
-              <Text style={{ color: theme.text }}>
-                {t("services.traq.title")}
-              </Text>
-              <Text style={{ color: theme.textSecondary }} className="text-sm">
+              <Text>{t("services.traq.title")}</Text>
+              <Text variant="sm" color="textSecondary">
                 {t("settings.notifications.toggleTraq")}
               </Text>
             </View>

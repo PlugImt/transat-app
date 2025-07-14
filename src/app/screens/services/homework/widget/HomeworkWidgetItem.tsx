@@ -1,4 +1,5 @@
-import { Text, View } from "react-native";
+import { View } from "react-native";
+import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Homework } from "@/dto";
 
@@ -26,26 +27,14 @@ export const HomeworkWidgetItem = ({ homework }: { homework: Homework }) => {
       className="flex flex-col rounded-lg gap-1.5 py-2"
       style={{ backgroundColor: theme.card }}
     >
-      <Text
-        className="text-base ml-4 font-medium"
-        style={{ color: theme.text }}
-        ellipsizeMode="tail"
-      >
+      <Text className="ml-4" ellipsizeMode="tail">
         {homework.title}
       </Text>
-      <Text
-        className="text-sm ml-4 italic"
-        style={{ color: theme.text }}
-        ellipsizeMode="tail"
-      >
+      <Text className="ml-4" ellipsizeMode="tail">
         {homework.course_name}
       </Text>
       <View className="flex flex-row items-center gap-2 ml-4">
-        <Text
-          className="text-sm"
-          style={{ color: theme.primary }}
-          ellipsizeMode="tail"
-        >
+        <Text variant="sm" color="primary" ellipsizeMode="tail">
           📅 {formatDateTime(homework.deadline)}
         </Text>
       </View>

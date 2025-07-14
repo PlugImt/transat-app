@@ -9,12 +9,12 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-  Text,
   TextInput,
   View,
 } from "react-native";
 import { z } from "zod";
 import { Button } from "@/components/common/Button";
+import { Text } from "@/components/common/Text";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useUser } from "@/hooks/account/useUser";
@@ -106,16 +106,10 @@ export const Feedback = () => {
                 <MessageSquare color={theme.background} size={32} />
               </View>
               <View className="items-center gap-2">
-                <Text
-                  className="text-2xl font-bold text-center"
-                  style={{ color: theme.text }}
-                >
+                <Text variant="h2" className="text-center">
                   {t("settings.feedback.yourOpinionMatters")}
                 </Text>
-                <Text
-                  className="text-base text-center px-4"
-                  style={{ color: theme.textSecondary }}
-                >
+                <Text className="text-center px-4" color="textSecondary">
                   {t("settings.feedback.helpDescription")}
                 </Text>
               </View>
@@ -126,12 +120,7 @@ export const Feedback = () => {
               style={{ backgroundColor: theme.card }}
             >
               <View className="gap-2">
-                <Text
-                  className="text-sm font-medium"
-                  style={{ color: theme.text }}
-                >
-                  {t("settings.feedback.commentsLabel")}
-                </Text>
+                <Text variant="sm">{t("settings.feedback.commentsLabel")}</Text>
                 <Controller
                   control={control}
                   name="message"
@@ -154,10 +143,7 @@ export const Feedback = () => {
                   )}
                 />
                 {errors.message && (
-                  <Text
-                    className="text-sm"
-                    style={{ color: theme.destructive }}
-                  >
+                  <Text className="text-sm" color="destructive">
                     {t(errors.message.message as string)}
                   </Text>
                 )}
@@ -181,10 +167,7 @@ export const Feedback = () => {
               className="rounded-lg p-4"
               style={{ backgroundColor: theme.backdrop }}
             >
-              <Text
-                className="text-sm text-center"
-                style={{ color: theme.textSecondary }}
-              >
+              <Text className="text-sm text-center" color="textSecondary">
                 {t("settings.feedback.privacyNote")}
               </Text>
             </View>

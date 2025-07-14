@@ -1,6 +1,7 @@
 import { forwardRef } from "react";
 import { Controller, type FieldValues, type Path } from "react-hook-form";
-import { Text, TextInput, View } from "react-native";
+import { TextInput, View } from "react-native";
+import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";
 
@@ -52,10 +53,7 @@ const Input = forwardRef(
     return (
       <View className={cn("gap-1.5", className)}>
         {label && (
-          <Text
-            className={cn("text-sm", labelClasses)}
-            style={{ color: theme.textSecondary }}
-          >
+          <Text variant="sm" className={labelClasses} color="textSecondary">
             {label}
           </Text>
         )}
@@ -83,7 +81,11 @@ const Input = forwardRef(
           )}
         />
 
-        {error && <Text className="text-red-500 text-sm">{error}</Text>}
+        {error && (
+          <Text color="destructive" variant="sm">
+            {error}
+          </Text>
+        )}
       </View>
     );
   },
@@ -109,10 +111,7 @@ export const InputLoading = ({
   return (
     <View className={cn("gap-1.5 opacity-50", className)}>
       {label && (
-        <Text
-          className={cn("text-sm", labelClasses)}
-          style={{ color: theme.textSecondary }}
-        >
+        <Text variant="sm" className={labelClasses} color="textSecondary">
           {label}
         </Text>
       )}

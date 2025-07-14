@@ -1,11 +1,12 @@
 import { useTranslation } from "react-i18next";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from "@/components/common/Avatar";
 import { Star } from "@/components/common/Star";
+import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Review } from "@/dto";
 import { getTimeAgo } from "@/utils";
@@ -30,13 +31,10 @@ export const ReviewItem = ({ review }: { review: Review }) => {
 
       <View className="flex-1 gap-1">
         <View className="flex flex-row items-center justify-between">
-          <Text
-            className="font-semibold text-base"
-            style={{ color: theme.text }}
-          >
+          <Text className="font-semibold" variant="sm">
             {review.first_name} {review.last_name}
           </Text>
-          <Text className="text-sm" style={{ color: theme.textSecondary }}>
+          <Text variant="sm" color="textSecondary">
             {timeAgo}
           </Text>
         </View>
@@ -45,14 +43,12 @@ export const ReviewItem = ({ review }: { review: Review }) => {
           <View className="flex flex-row">
             <Star showValue={false} max={5} value={review.rating} />
           </View>
-          <Text className="text-sm" style={{ color: theme.textSecondary }}>
+          <Text variant="sm" color="textSecondary">
             ({review.rating})
           </Text>
         </View>
 
-        <Text className="text-sm leading-5" style={{ color: theme.text }}>
-          {review.comment}
-        </Text>
+        <Text variant="sm">{review.comment}</Text>
       </View>
     </View>
   );

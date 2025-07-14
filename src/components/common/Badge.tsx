@@ -1,7 +1,8 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import type { LucideIcon } from "lucide-react-native";
 import type React from "react";
-import { Text, TouchableOpacity, type View } from "react-native";
+import { TouchableOpacity, type View } from "react-native";
+import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";
 
@@ -40,7 +41,7 @@ const badgeTextVariants = cva("font-semibold text-center", {
     },
     size: {
       default: "text-base",
-      sm: "text-xs",
+      sm: "text-sm",
       lg: "text-lg",
     },
   },

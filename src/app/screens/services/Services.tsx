@@ -1,15 +1,13 @@
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
-import { Pencil } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
-import { View } from "react-native";
+import { Image, View } from "react-native";
 import Animated from "react-native-reanimated";
-import { IconButton } from "@/components/common/Button";
-import Card from "@/components/common/Card";
+import { Button } from "@/components/common/Button";
+import LinkCard from "@/components/custom/LinkCard";
 import { PreferenceCustomizationButton } from "@/components/custom/PreferenceCustomizationModal";
 import { Empty } from "@/components/page/Empty";
 import { Page } from "@/components/page/Page";
-import { useTheme } from "@/contexts/ThemeContext";
 import { useAnimatedHeader } from "@/hooks/useAnimatedHeader";
 import { useServicePreferences } from "@/hooks/usePreferences";
 import type { AppStackParamList } from "@/services/storage/types";
@@ -19,7 +17,6 @@ type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
 export const Services = () => {
   const { t } = useTranslation();
-  const { theme } = useTheme();
   const navigation = useNavigation<AppScreenNavigationProp>();
   const { scrollHandler } = useAnimatedHeader();
   const {
@@ -35,10 +32,11 @@ export const Services = () => {
   };
 
   const renderServiceCard = (item: Preference) => (
-    <Card
-      image={item.image}
+    <LinkCard
       title={item.name}
+      description={item.description || ""}
       onPress={() => handleServicePress(item)}
+      image={<Image source={item.image} />}
     />
   );
 
@@ -51,22 +49,7 @@ export const Services = () => {
   }
 
   return (
-    <Page
-      asChildren
-      title={t("services.title")}
-      header={
-        <PreferenceCustomizationButton
-          items={services}
-          title={t("common.customizeServices")}
-          onUpdate={updateOrder}
-        >
-          <IconButton
-            icon={<Pencil color={theme.text} size={20} />}
-            variant="link"
-          />
-        </PreferenceCustomizationButton>
-      }
-    >
+    <Page asChildren title={t("services.title")}>
       <Animated.FlatList
         data={enabledServices}
         renderItem={({ item }) => renderServiceCard(item)}
@@ -78,6 +61,19 @@ export const Services = () => {
             title={t("services.noServicesEnabled")}
             description={t("services.noServicesEnabledDescription")}
           />
+        }
+        ListFooterComponent={
+          <PreferenceCustomizationButton
+            items={services}
+            title={t("common.customizeServices")}
+            onUpdate={updateOrder}
+          >
+            <Button
+              label={t("common.customizeServices")}
+              variant="ghost"
+              size="sm"
+            />
+          </PreferenceCustomizationButton>
         }
       />
     </Page>

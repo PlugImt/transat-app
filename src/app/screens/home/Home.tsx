@@ -4,7 +4,6 @@ import { useIsFetching, useQueryClient } from "@tanstack/react-query";
 import Constants from "expo-constants";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
-import { Pencil } from "lucide-react-native";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Platform, Text } from "react-native";
@@ -24,7 +23,7 @@ import {
   WeatherSkeleton,
   WeatherWidget,
 } from "@/app/screens/services/weather/widget/WeatherWidget";
-import { IconButton } from "@/components/common/Button";
+import { Button } from "@/components/common/Button";
 import { PreferenceCustomizationButton } from "@/components/custom/PreferenceCustomizationModal";
 import { Empty } from "@/components/page/Empty";
 import { Page } from "@/components/page/Page";
@@ -201,22 +200,20 @@ export const Home = () => {
     ]);
   };
 
-  const getWidgetComponent = useCallback((widgetId: string) => {
-    switch (widgetId) {
-      case "weather":
-        return <WeatherWidget />;
-      case "restaurant":
-        return <RestaurantWidget />;
-      case "timetable":
-        return <TimetableWidget />;
-      case "homework":
-        return <HomeworkWidget />;
-      case "washingMachine":
-        return <WashingMachineWidget />;
-      default:
-        return null;
-    }
-  }, []);
+  const widgetComponents: { [key: string]: React.ReactElement } = {
+    weather: <WeatherWidget />,
+    restaurant: <RestaurantWidget />,
+    timetable: <TimetableWidget />,
+    homework: <HomeworkWidget />,
+    washingMachine: <WashingMachineWidget />,
+  };
+
+  const getWidgetComponent = useCallback(
+    (widgetId: string): React.ReactElement | null => {
+      return widgetComponents[widgetId] || null;
+    },
+    [],
+  );
 
   if (loading) {
     return <HomeLoading />;
@@ -236,18 +233,6 @@ export const Home = () => {
           )}
         </Text>
       }
-      header={
-        <PreferenceCustomizationButton
-          items={widgets}
-          title={t("common.customizeWidgets")}
-          onUpdate={updateOrder}
-        >
-          <IconButton
-            icon={<Pencil color={theme.text} size={20} />}
-            variant="link"
-          />
-        </PreferenceCustomizationButton>
-      }
     >
       <Animated.FlatList
         data={enabledWidgets}
@@ -260,6 +245,19 @@ export const Home = () => {
             title={t("common.noWidgetsEnabled")}
             description={t("common.noWidgetsEnabledDescription")}
           />
+        }
+        ListFooterComponent={
+          <PreferenceCustomizationButton
+            items={widgets}
+            title={t("common.customizeWidgets")}
+            onUpdate={updateOrder}
+          >
+            <Button
+              label={t("common.customizeWidgets")}
+              variant="ghost"
+              size="sm"
+            />
+          </PreferenceCustomizationButton>
         }
       />
     </Page>

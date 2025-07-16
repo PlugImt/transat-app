@@ -3,7 +3,7 @@ import type { StackNavigationProp } from "@react-navigation/stack";
 import { useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
-import Animated, {
+import {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
@@ -46,22 +46,17 @@ export const Welcome = () => {
   };
 
   const buttonsFooter = (
-    <Animated.View
-      className="flex flex-row gap-4 w-full mb-9"
-      style={animatedStyle}
-    >
+    <View className="gap-2">
       <Button
         label={t("welcome.login")}
         onPress={() => handleNavigation("Signin")}
-        className="flex-1"
       />
       <Button
         variant="secondary"
         label={t("welcome.register")}
         onPress={() => handleNavigation("Signup")}
-        className="flex-1"
       />
-    </Animated.View>
+    </View>
   );
 
   return (

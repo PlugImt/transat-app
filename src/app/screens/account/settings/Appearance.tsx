@@ -51,13 +51,11 @@ export const Appearance = () => {
       className="gap-6"
     >
       <SettingCategory title={t("settings.appearance.theme", "Theme")}>
-        {themeOptions.map((option, index) => (
+        {themeOptions.map((option) => (
           <TouchableOpacity
             key={option.mode}
             onPress={() => handleThemeChange(option.mode)}
-            className={`flex-row items-center justify-between py-4 ${
-              index < themeOptions.length - 1 ? "border-b border-muted/20" : ""
-            }`}
+            className="flex-row items-center justify-between py-4"
           >
             <View className="flex-row items-center flex-1">
               <View className="mr-3">{option.icon}</View>

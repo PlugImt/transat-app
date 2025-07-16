@@ -5,7 +5,7 @@ import { type ThemeType, useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";
 
 type ButtonVariant = "default" | "secondary" | "destructive" | "ghost" | "link";
-type ButtonSize = "default" | "sm" | "lg";
+type ButtonSize = "default" | "sm";
 
 interface ButtonProps
   extends ComponentPropsWithoutRef<typeof TouchableOpacity> {
@@ -159,7 +159,7 @@ const getTextColor = (variant: ButtonVariant, theme: ThemeType) => {
     default: "#FFFFFF",
     secondary: theme.primary,
     destructive: "#FFFFFF",
-    ghost: theme.text,
+    ghost: theme.muted,
     link: theme.primary,
   };
 
@@ -183,11 +183,6 @@ const getSizeStyles = (size: ButtonSize) => {
       height: 32,
       paddingHorizontal: 8,
       fontSize: 14,
-    },
-    lg: {
-      height: 48,
-      paddingHorizontal: 32,
-      fontSize: 18,
     },
   };
 

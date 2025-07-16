@@ -71,7 +71,6 @@ export const ReviewDialog = ({
               mode="review"
               value={rating}
               max={5}
-              size="lg"
               showValue={false}
               onRatingChange={setRating}
               disabled={isLoading}

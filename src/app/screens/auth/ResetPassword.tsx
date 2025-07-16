@@ -248,7 +248,6 @@ export const ResetPassword = () => {
           <View className="flex flex-col gap-2">
             {!verificationCodeSent ? (
               <Button
-                size="lg"
                 label={
                   isLoading
                     ? t("auth.resettingPassword")
@@ -263,7 +262,6 @@ export const ResetPassword = () => {
               />
             ) : (
               <Button
-                size="lg"
                 label={
                   isLoading
                     ? t("auth.resettingPassword")

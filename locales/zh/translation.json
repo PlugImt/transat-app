@@ -146,10 +146,13 @@
     },
     "language": {
       "language": "语言",
+      "currentLanguage": "当前语言",
+      "otherLanguages": "其他语言",
       "selectLanguage": "选择语言",
       "english": "英语",
       "french": "法语",
-      "spanish": "西班牙语"
+      "spanish": "西班牙语",
+      "selectLanguageError": "选择语言时发生错误"
     },
     "legal": {
       "title": "法律条款",

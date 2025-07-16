@@ -188,7 +188,6 @@ export const Signup = () => {
           />
           <View className="flex flex-col gap-2">
             <Button
-              size="lg"
               label={isLoading ? t("auth.signingUp") : t("auth.signUp")}
               onPress={handleSubmit(handleSignup)}
               disabled={isButtonDisabled}

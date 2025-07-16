@@ -33,7 +33,7 @@ const colors = {
     foregroundPlaceholder: "#52525B",
     card: "#1e1515",
     input: "#2D2222A3",
-    border: "#514F37A3",
+    border: "#403D3D",
     backdrop: "#2C272666",
     overlay: "#070402E5",
 

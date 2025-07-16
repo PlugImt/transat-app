@@ -142,7 +142,6 @@ export const Signin = () => {
 
           <View className="flex flex-col gap-2">
             <Button
-              size="lg"
               label={isLoading ? t("auth.signingIn") : t("common.signIn")}
               onPress={handleSubmit(handleLogin)}
               disabled={isButtonDisabled}

@@ -76,7 +76,7 @@ const DialogContent = ({
   return (
     <Modal
       transparent
-      animationType="slide"
+      animationType="fade"
       visible={open}
       onRequestClose={() => setOpen(false)}
     >

@@ -27,12 +27,13 @@ import { Page } from "@/components/page/Page";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";
+import { useLanguageOptions } from "@/hooks/account/useLanguageOptions";
 import { useUser } from "@/hooks/account/useUser";
 import { storage } from "@/services/storage/asyncStorage";
 import STORAGE_KEYS from "@/services/storage/constants";
 import type { SettingsNavigation } from "@/services/storage/types";
 import SettingCategory from "./components/SettingCategory";
-import SettingsItem from "./SettingsItem";
+import SettingsItem from "./components/SettingsItem";
 
 export const Settings = () => {
   const { theme, themeMode } = useTheme();
@@ -43,6 +44,7 @@ export const Settings = () => {
   const { data: user, isPending } = useUser();
   const navigation = useNavigation<SettingsNavigation>();
   const [isDevServerSelected, setIsDevServerSelected] = React.useState(false);
+  const { currentLanguageOption } = useLanguageOptions();
 
   useEffect(() => {
     const loadDevServerSetting = async () => {
@@ -70,6 +72,16 @@ export const Settings = () => {
     await queryClient.invalidateQueries({ queryKey: QUERY_KEYS.user });
   };
 
+  const getAppearanceSubtitle = () => {
+    const subtitles = {
+      system: t("settings.appearance.system", "System"),
+      light: t("settings.appearance.light", "Light"),
+      dark: t("settings.appearance.dark", "Dark"),
+    };
+
+    return subtitles[themeMode];
+  };
+
   return (
     <Page
       goBack
@@ -84,27 +96,13 @@ export const Settings = () => {
         <SettingsItem
           icon={<Palette color={theme.text} size={22} />}
           title={t("settings.appearance.title", "Theme")}
-          subtitle={
-            themeMode === "system"
-              ? t("settings.appearance.system", "System")
-              : themeMode === "light"
-                ? t("settings.appearance.light", "Light")
-                : t("settings.appearance.dark", "Dark")
-          }
+          subtitle={getAppearanceSubtitle()}
           onPress={() => navigation.navigate("Appearance")}
         />
         <SettingsItem
           icon={<Globe color={theme.text} size={22} />}
           title={t("settings.language.language")}
-          subtitle={t(
-            `settings.language.${
-              i18n.language === "fr"
-                ? "french"
-                : i18n.language === "en"
-                  ? "english"
-                  : "spanish"
-            }`,
-          )}
+          subtitle={currentLanguageOption?.name ?? ""}
           onPress={() => navigation.navigate("Language")}
         />
       </SettingCategory>

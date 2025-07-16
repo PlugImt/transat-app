@@ -51,13 +51,11 @@ export const Welcome = () => {
       style={animatedStyle}
     >
       <Button
-        size="lg"
         label={t("welcome.login")}
         onPress={() => handleNavigation("Signin")}
         className="flex-1"
       />
       <Button
-        size="lg"
         variant="secondary"
         label={t("welcome.register")}
         onPress={() => handleNavigation("Signup")}

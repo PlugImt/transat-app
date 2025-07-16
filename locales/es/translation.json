@@ -165,7 +165,10 @@
     },
     "language": {
       "language": "Idioma",
+      "currentLanguage": "Idioma actual",
+      "otherLanguages": "Otros idiomas",
       "selectLanguage": "Seleccionar idioma",
+      "selectLanguageError": "Ocurrió un error al seleccionar el idioma",
       "english": "Inglés",
       "french": "Francés",
       "spanish": "Español"

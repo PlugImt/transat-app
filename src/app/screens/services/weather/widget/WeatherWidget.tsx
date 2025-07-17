@@ -60,11 +60,11 @@ export const WeatherWidget = () => {
   }
 
   return (
-    <Card>
+    <Card className="flex-row justify-between items-center">
       <View>
-        <Text variant="h3">{format(date, "PPP", { locale: getLocale() })}</Text>
+        <Text>{format(date, "PPP", { locale: getLocale() })}</Text>
         <Text variant="h1">{Math.round(weather?.temperature ?? 0)}°C</Text>
-        <Text variant="h3" color="primary">
+        <Text variant="lg" color="muted">
           {weather?.condition ?? ""}
         </Text>
       </View>

@@ -179,7 +179,7 @@ export const EditProfile = () => {
           </Avatar>
           <IconButton
             className="absolute bottom-0 right-0"
-            icon={<Edit color={theme.text} size={16} />}
+            icon={<Edit size={16} />}
             onPress={handleUpdateProfilePicture}
           />
         </TouchableOpacity>

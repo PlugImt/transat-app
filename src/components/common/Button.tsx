@@ -93,7 +93,7 @@ const IconButton = ({
   const { theme } = useTheme();
   const isDisabled = props.disabled || loading;
 
-  const buttonStyle = getButtonStyle(variant, theme);
+  const buttonStyle = variant === "default" && getButtonStyle(variant, theme);
   const sizeStyles = getSizeStyles(size);
   const iconColor = getTextColor(variant, theme);
 

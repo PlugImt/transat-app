@@ -93,12 +93,6 @@ export const Account = () => {
             </Text>
           )}
         </View>
-        <Button
-          label={t("account.editProfile")}
-          onPress={navigateToEditProfile}
-          size="sm"
-          variant="secondary"
-        />
       </View>
       <Card className="gap-4">
         <Text variant="h3">{t("account.contactInfo")}</Text>
@@ -128,6 +122,12 @@ export const Account = () => {
           variant="secondary"
         />
       </Card>
+      <Button
+        label={t("account.editProfile")}
+        onPress={navigateToEditProfile}
+        size="sm"
+        variant="secondary"
+      />
     </Page>
   );
 };

@@ -95,6 +95,13 @@ export const About = () => {
               onPress={() => handleOpenLink("https://github.com/Enockii")}
               variant="secondary"
             />
+            <Button
+              label="Anthony"
+              onPress={() =>
+                handleOpenLink("https://github.com/anthony-eluecque")
+              }
+              variant="secondary"
+            />
           </View>
         </View>
       </View>

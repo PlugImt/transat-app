@@ -32,7 +32,7 @@ const HOME_WIDGETS_KEY = "home_widgets_preferences";
 const SERVICES_KEY = "services_preferences";
 
 const getDefaultHomeWidgets = (): Preference[] => [
-  { id: "weather", name: t("services.weather.title"), enabled: true, order: 0 },
+  { id: "weather", name: t("services.weather"), enabled: true, order: 0 },
   {
     id: "restaurant",
     name: t("services.restaurant.title"),

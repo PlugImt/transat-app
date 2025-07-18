@@ -5,7 +5,7 @@ import { TouchableOpacity, View } from "react-native";
 import { Text } from "@/components/common/Text";
 import type { Homework } from "@/dto";
 import { useHomework } from "@/hooks/useHomework";
-import type { AppStackParamList } from "@/services/storage/types";
+import type { AppStackParamList } from "@/types";
 import { HomeworkWidgetItem } from "./HomeworkWidgetItem";
 import { HomeworkWidgetLoading } from "./HomeworkWidgetLoading";
 

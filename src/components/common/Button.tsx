@@ -175,7 +175,7 @@ const getSizeStyles = (size: ButtonSize) => {
     };
   } = {
     default: {
-      height: 36,
+      height: 40,
       paddingHorizontal: 16,
       fontSize: 16,
     },

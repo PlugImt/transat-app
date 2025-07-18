@@ -48,6 +48,7 @@ export const Traq = () => {
   if (isError && error) {
     return (
       <ErrorPage
+        title={t("services.traq.title")}
         error={
           error || ({ message: t("common.errors.unableToFetch") } as Error)
         }
@@ -59,7 +60,6 @@ export const Traq = () => {
 
   return (
     <Page
-      goBack
       refreshing={isPending}
       onRefresh={refetch}
       className="gap-4"

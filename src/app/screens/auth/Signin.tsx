@@ -98,7 +98,7 @@ export const Signin = () => {
   }, [opacity, translateY]);
 
   return (
-    <Page goBack title={t("auth.signIn")}>
+    <Page title={t("auth.signIn")}>
       <Animated.View style={[animatedStyle, { flex: 1 }]}>
         {loginError ? (
           <View className="bg-red-300 p-3 rounded-md my-4">

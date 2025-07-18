@@ -1,10 +1,12 @@
 import { useTranslation } from "react-i18next";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { Button } from "@/components/common/Button";
-import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";
+import { Text } from "../common/Text";
+import { Page } from "./Page";
 
 type ErrorPageProps = {
+  title: string;
   error: Error;
   refetch: () => void;
   isRefetching: boolean;
@@ -12,6 +14,7 @@ type ErrorPageProps = {
 };
 
 export const ErrorPage = ({
+  title,
   error,
   refetch,
   isRefetching,
@@ -19,32 +22,36 @@ export const ErrorPage = ({
 }: ErrorPageProps) => {
   const { t } = useTranslation();
   const { logout } = useAuth();
-  const { theme } = useTheme();
 
   return (
-    <View
-      style={{ backgroundColor: theme.background }}
-      className="px-5 justify-center items-center gap-6 h-screen"
+    <Page
+      title={title}
+      disableScroll
+      className="flex-1 justify-center items-center"
     >
-      <View className="gap-2 justify-center items-center">
-        <Text className="h3" style={{ color: theme.text }}>
+      <View className="justify-center items-center">
+        <Text variant="h3" className="text-center">
           {t("common.errors.occurred")}
         </Text>
-        <Text style={{ color: theme.muted }}>{error?.message}</Text>
+        <Text color="muted" className="text-center">
+          {error?.message}
+        </Text>
       </View>
-      <Button
-        label="Réessayer"
-        variant="secondary"
-        onPress={refetch}
-        loading={isRefetching}
-      />
-      {isAccountPage && (
+      <View className="gap-2">
         <Button
-          label="Déconnexion"
-          variant="destructive"
-          onPress={() => logout()}
+          label="Réessayer"
+          variant="secondary"
+          onPress={refetch}
+          loading={isRefetching}
         />
-      )}
-    </View>
+        {isAccountPage && (
+          <Button
+            label="Déconnexion"
+            variant="destructive"
+            onPress={() => logout()}
+          />
+        )}
+      </View>
+    </Page>
   );
 };

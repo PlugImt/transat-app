@@ -116,6 +116,7 @@ export const EditProfile = () => {
   if ((isError && error) || !user) {
     return (
       <ErrorPage
+        title={t("account.editProfile")}
         error={
           error || ({ message: t("common.errors.unableToFetch") } as Error)
         }
@@ -127,7 +128,6 @@ export const EditProfile = () => {
 
   return (
     <Page
-      goBack
       className="gap-6"
       refreshing={isPending}
       onRefresh={refetch}
@@ -258,7 +258,7 @@ const EditProfileLoading = () => {
   const navigation = useNavigation();
 
   return (
-    <Page goBack className="gap-8">
+    <Page title={t("account.editProfile")} className="gap-8">
       <View className="flex-row items-center justify-between m-4">
         <Text variant="h1">{t("account.editProfile")}</Text>
         <Button

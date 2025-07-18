@@ -32,7 +32,7 @@ import { useUser } from "@/hooks/account/useUser";
 import { useAnimatedHeader } from "@/hooks/useAnimatedHeader";
 import { useHomeWidgetPreferences } from "@/hooks/usePreferences";
 import { laundryNotificationService } from "@/services/notifications/laundryNotifications";
-import type { AppStackParamList } from "@/services/storage/types";
+import type { AppStackParamList } from "@/types";
 import { isDinner, isLunch, isWeekend } from "@/utils";
 import LaundryWidget, {
   LaundryWidgetLoading,
@@ -224,8 +224,8 @@ export const Home = () => {
     <Page
       asChildren
       refreshing={isFetching}
-      onRefresh={refetch}
       className="gap-8"
+      onRefresh={refetch}
       title={
         <View className="flex-row gap-2 items-center">
           <Text variant="h1" color="text">

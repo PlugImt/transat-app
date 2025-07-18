@@ -91,7 +91,7 @@ const PreferenceCustomizationModal = ({
       onRequestClose={onClose}
     >
       <GestureHandlerRootView>
-        <Page disableScroll={true} title={title} className="py-4 flex-1">
+        <Page disableScroll title={title} className="py-4 flex-1">
           <Text className="px-2">{t("common.customizeHint")}</Text>
 
           <View className="justify-between flex-1">

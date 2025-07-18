@@ -12,7 +12,6 @@ type PageProps = {
   refreshing?: boolean;
   onRefresh?: () => void;
   className?: string;
-  goBack?: boolean;
   title?: string | ReactNode;
   header?: ReactNode;
   footer?: ReactNode;
@@ -27,7 +26,6 @@ export const Page = ({
   refreshing = false,
   onRefresh,
   className,
-  goBack,
   title,
   header,
   footer,
@@ -104,7 +102,7 @@ export const Page = ({
 
   return (
     <View style={{ backgroundColor: theme.background }} className="flex-1">
-      <Header headerShown={headerShown} goBack={goBack} title={title}>
+      <Header headerShown={headerShown} title={title}>
         {header}
       </Header>
       {getContent()}

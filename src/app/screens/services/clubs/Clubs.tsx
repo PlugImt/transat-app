@@ -3,7 +3,7 @@ import { Page } from "@/components/page/Page";
 
 export const Clubs = () => {
   return (
-    <Page goBack>
+    <Page>
       <Text variant="h1" className="m-4">
         Clubs
       </Text>

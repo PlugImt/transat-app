@@ -85,8 +85,6 @@ export const EditProfile = () => {
   const handleUpdateAccount = (data: User) => {
     Keyboard.dismiss();
 
-    console.log(data);
-
     updateAccount(data, {
       onSuccess: () => {
         toast(t("account.profileUpdated"), "success");

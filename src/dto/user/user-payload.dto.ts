@@ -8,7 +8,7 @@ export const updateUserPayloadSchema = z.object({
   last_name: z.string().nonempty(t("auth.errors.lastName")),
   phone_number: z
     .string()
-    .refine((val) => !val || (val.length >= 10 && val.length <= 13), {
+      .refine((val) => !val || /^\+?\d{8,15}$/.test(val), {
       message: t("auth.errors.phone"),
     })
     .optional(),

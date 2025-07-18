@@ -85,7 +85,8 @@ export const EditProfile = () => {
   const handleUpdateAccount = (data: User) => {
     Keyboard.dismiss();
     updateAccount(data, {
-      onSuccess: () => {
+      onSuccess: async () => {
+        await refetch();
         toast(t("account.profileUpdated"), "success");
         navigation.goBack();
       },
@@ -235,9 +236,7 @@ export const EditProfile = () => {
           label={t("common.save")}
           onPress={handleUserSubmit(handleUpdateAccount)}
           loading={isUpdatingAccount}
-          disabled={
-            !isDirty || !isUserValid || Object.keys(userErrors).length > 0
-          }
+          disabled={!isDirty || !isUserValid}
         />
 
         <Button

@@ -26,7 +26,6 @@ import { PreferenceCustomizationButton } from "@/components/custom/PreferenceCus
 import { Empty } from "@/components/page/Empty";
 import { Page } from "@/components/page/Page";
 import { QUERY_KEYS } from "@/constants";
-import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";
 import { useUser } from "@/hooks/account/useUser";
 import { useAnimatedHeader } from "@/hooks/useAnimatedHeader";
@@ -97,7 +96,6 @@ const registerForPushNotificationsAsync = async () => {
 export const Home = () => {
   const { data: user } = useUser();
   const { t } = useTranslation();
-  const { theme } = useTheme();
   const { scrollHandler } = useAnimatedHeader();
 
   const { saveExpoPushToken } = useAuth();

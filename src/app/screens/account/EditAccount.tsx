@@ -45,7 +45,7 @@ export const EditProfile = () => {
   const {
     control: userControl,
     handleSubmit: handleUserSubmit,
-    formState: { errors: userErrors, isValid: _isUserValid, isDirty },
+    formState: { errors: userErrors, isValid: isUserValid, isDirty },
     reset,
   } = useForm({
     resolver: zodResolver(updateUserPayloadSchema),
@@ -239,13 +239,13 @@ export const EditProfile = () => {
         label={t("common.save")}
         onPress={handleUserSubmit(handleUpdateAccount)}
         loading={isUpdatingAccount}
-        disabled={!isDirty || Object.keys(userErrors).length > 0}
+        disabled={!isDirty || !isUserValid || Object.keys(userErrors).length > 0}
       />
 
       <Button
         label={t("common.cancel")}
         onPress={() => navigation.goBack()}
-        variant="outlined"
+        variant="secondary"
       />
     </Page>
   );

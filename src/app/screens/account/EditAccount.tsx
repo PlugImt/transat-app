@@ -205,7 +205,7 @@ export const EditProfile = () => {
           name="formation_name"
           render={({ field: { onChange, value } }) => (
             <Dropdown
-              label={t("account.formation_name")}
+              label={t("account.formationName")}
               placeholder={t("account.selectBranch")}
               options={["FISE", "FIL", "FIT", "FIP"]}
               value={value}

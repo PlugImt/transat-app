@@ -368,7 +368,7 @@
   },
   "account": {
     "graduationYear": "Abschlussjahr",
-    "formation_name": "Studiengang",
+    "formationName": "Studiengang",
     "selectBranch": "Studiengang auswählen",
     "group": "Gruppe",
     "selectGroup": "Gruppe auswählen",

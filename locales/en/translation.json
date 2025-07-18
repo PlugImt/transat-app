@@ -367,7 +367,7 @@
   },
   "account": {
     "graduationYear": "Graduation year",
-    "formation_name": "Branch",
+    "formationName": "Branch",
     "selectBranch": "Select your branch",
     "group": "Group",
     "selectGroup": "Select your group",

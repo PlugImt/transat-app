@@ -80,10 +80,10 @@ Merci à Sentry pour leur offre gratuite !
                 </a>
             </td>
             <td align="center">
-                <a href="https://github.com/zephyr-dassouli">
-                    <img src="https://avatars.githubusercontent.com/u/145542064?v=4" width="100;" alt="zephyr-dassouli"/>
+                <a href="https://github.com/zephyrdassouli">
+                    <img src="https://avatars.githubusercontent.com/u/145542064?v=4" width="100;" alt="zephyrdassouli"/>
                     <br />
-                    <sub><b>Zephyr</b></sub>
+                    <sub><b>Zéphyr</b></sub>
                 </a>
             </td>
             <td align="center">

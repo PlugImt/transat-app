@@ -9,7 +9,7 @@ import { ScrollView, TouchableOpacity, View } from "react-native";
 import { Text } from "@/components/common/Text";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
-import type { AppStackParamList } from "@/services/storage/types";
+import type { AppStackParamList } from "@/types";
 
 type HomeworkDetailsRouteProp = RouteProp<AppStackParamList, "HomeworkDetails">;
 

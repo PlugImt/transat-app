@@ -6,7 +6,7 @@ import { Text } from "@/components/common/Text";
 import type { Course } from "@/dto";
 import { useAuth } from "@/hooks/account/useAuth";
 import { useTimetable } from "@/hooks/useTimetable";
-import type { AppStackParamList } from "@/services/storage/types";
+import type { AppStackParamList } from "@/types";
 import { TimetableCourseWidget } from "./TimetableCourseWidget";
 import { TimetableLoadingWidget } from "./TimetableLoadingWidget";
 

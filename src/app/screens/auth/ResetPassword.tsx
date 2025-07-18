@@ -12,7 +12,7 @@ import { Text } from "@/components/common/Text";
 import { useToast } from "@/components/common/Toast";
 import { Page } from "@/components/page/Page";
 import useAuth from "@/hooks/account/useAuth";
-import type { AuthStackParamList } from "@/services/storage/types";
+import type { AuthStackParamList } from "@/types";
 
 type ResetPasswordRouteProp = RouteProp<AuthStackParamList, "ResetPassword">;
 

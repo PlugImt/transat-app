@@ -31,13 +31,13 @@ import { useLanguageOptions } from "@/hooks/account/useLanguageOptions";
 import { useUser } from "@/hooks/account/useUser";
 import { storage } from "@/services/storage/asyncStorage";
 import STORAGE_KEYS from "@/services/storage/constants";
-import type { SettingsNavigation } from "@/services/storage/types";
+import type { SettingsNavigation } from "@/types";
 import SettingCategory from "./components/SettingCategory";
 import SettingsItem from "./components/SettingsItem";
 
 export const Settings = () => {
   const { theme, themeMode } = useTheme();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { logout } = useAuth();
   const { toast } = useToast();
   const queryClient = useQueryClient();

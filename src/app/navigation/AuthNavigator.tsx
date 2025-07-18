@@ -4,7 +4,7 @@ import { Signin } from "@/app/screens/auth/Signin";
 import { Signup } from "@/app/screens/auth/Signup";
 import Welcome from "@/app/screens/auth/Welcome";
 import { screenOptions } from "@/navigation/navigationConfig";
-import type { AuthStackParamList } from "@/services/storage/types";
+import type { AuthStackParamList } from "@/types";
 
 const Stack = createStackNavigator<AuthStackParamList>();
 

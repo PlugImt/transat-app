@@ -17,7 +17,7 @@ import {
   usePostRestaurantReview,
   userMenuRating,
 } from "@/hooks/useMenuRestaurant";
-import type { AppStackParamList } from "@/services/storage/types";
+import type { AppStackParamList } from "@/types";
 import { getOpeningHoursData } from "@/utils";
 
 type RestaurantReviewsRouteProp = RouteProp<

@@ -34,7 +34,7 @@ import { useUser } from "@/hooks/account/useUser";
 import { useAnimatedHeader } from "@/hooks/useAnimatedHeader";
 import { useHomeWidgetPreferences } from "@/hooks/usePreferences";
 import { washingMachineNotificationService } from "@/services/notifications/washingMachineNotifications";
-import type { AppStackParamList } from "@/services/storage/types";
+import type { AppStackParamList } from "@/types";
 import { isDinner, isLunch, isWeekend } from "@/utils";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
@@ -223,8 +223,8 @@ export const Home = () => {
     <Page
       asChildren
       refreshing={isFetching}
-      onRefresh={refetch}
       className="gap-8"
+      onRefresh={refetch}
       title={
         <Text className="font-bold text-3xl ml-4" style={{ color: theme.text }}>
           {t("common.welcome")}

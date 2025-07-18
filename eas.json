@@ -11,15 +11,13 @@
     "preview": {
       "distribution": "internal",
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://api.transat.dev",
-        "EXPO_PUBLIC_GOOGLE_TRANSLATE_API_KEY": "AIzaSyCW20VSNtQ-NKO9ItLiEYRE9DsHby4PslQ"
+        "EXPO_PUBLIC_API_URL": "https://api.transat.dev"
       }
     },
     "production": {
       "autoIncrement": true,
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://api.transat.dev",
-        "EXPO_PUBLIC_GOOGLE_TRANSLATE_API_KEY": "AIzaSyCW20VSNtQ-NKO9ItLiEYRE9DsHby4PslQ"
+        "EXPO_PUBLIC_API_URL": "https://api.transat.dev"
       }
     }
   },

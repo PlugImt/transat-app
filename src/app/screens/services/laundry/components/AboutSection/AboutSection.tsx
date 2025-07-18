@@ -7,12 +7,12 @@ export const AboutSection = () => {
 
   return (
     <AboutModal
-      title={t("services.washingMachine.title")}
-      description={t("services.washingMachine.about")}
+      title={t("services.laundry.title")}
+      description={t("services.laundry.about")}
       openingHours={openingHours}
-      location={t("services.washingMachine.location")}
-      price={t("services.washingMachine.price")}
-      additionalInfo={t("services.washingMachine.additionalInfo")}
+      location={t("services.laundry.location")}
+      price={t("services.laundry.price")}
+      additionalInfo={t("services.laundry.additionalInfo")}
     />
   );
 };

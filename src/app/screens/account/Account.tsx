@@ -9,6 +9,7 @@ import {
   AvatarImage,
 } from "@/components/common/Avatar";
 import { Button, IconButton } from "@/components/common/Button";
+import Card from "@/components/common/Card";
 import InfoItem from "@/components/common/InfoItem";
 import { Text } from "@/components/common/Text";
 import { ErrorPage } from "@/components/page/ErrorPage";
@@ -63,8 +64,8 @@ export const Account = () => {
       title={t("common.account")}
       header={
         <IconButton
-          icon={<Settings color={theme.text} />}
-          variant="link"
+          icon={<Settings />}
+          variant="ghost"
           onPress={() => navigation.navigate("Settings")}
         />
       }
@@ -87,16 +88,11 @@ export const Account = () => {
             {user?.first_name} {user?.last_name}
           </Text>
           {user?.graduation_year && (
-            <Text color="textSecondary">
-              {getStudentYear(user?.graduation_year)}
-            </Text>
+            <Text color="muted">{getStudentYear(user?.graduation_year)}</Text>
           )}
         </View>
       </View>
-      <View
-        className=" rounded-lg px-6 py-4 gap-4"
-        style={{ backgroundColor: theme.card }}
-      >
+      <Card className="gap-4">
         <Text variant="h3">{t("account.contactInfo")}</Text>
         <InfoItem
           icon={<Mail color={theme.text} size={20} />}
@@ -108,7 +104,7 @@ export const Account = () => {
           label={t("account.phone")}
           value={user?.phone_number || t("account.notProvided")}
         />
-      </View>
+      </Card>
 
       <View
         className=" rounded-lg px-6 py-4 gap-4"
@@ -144,7 +140,7 @@ export const Account = () => {
           label={t("account.editProfile")}
           onPress={navigateToEditProfile}
           size="sm"
-          variant="outlined"
+          variant="secondary"
         />
       </View>
     </Page>
@@ -159,13 +155,7 @@ const AccountLoading = () => {
   return (
     <Page
       title={t("common.account")}
-      header={
-        <IconButton
-          disabled
-          icon={<Settings color={theme.text} />}
-          variant="link"
-        />
-      }
+      header={<IconButton disabled icon={<Settings />} variant="ghost" />}
     >
       <View className="items-center gap-2">
         <Avatar className="w-32 h-32">
@@ -189,29 +179,6 @@ const AccountLoading = () => {
         <InfoItem
           icon={<Phone color={theme.text} size={20} />}
           label={t("account.phone")}
-        />
-      </View>
-
-      <View
-        className=" rounded-lg px-6 py-4 gap-4"
-        style={{ backgroundColor: theme.card }}
-      >
-        <Text variant="h3">{t("account.infos")}</Text>
-
-        <InfoItem
-          icon={<Medal color={theme.text} size={20} />}
-          label={t("account.registration")}
-        />
-
-        <InfoItem
-          icon={<Lock color={theme.text} size={20} />}
-          label={t("account.passwordUpdated")}
-        />
-        <Button
-          size="lg"
-          label={t("account.editProfile")}
-          variant="outlined"
-          disabled
         />
       </View>
     </Page>

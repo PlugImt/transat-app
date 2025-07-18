@@ -12,7 +12,6 @@ import {
 } from "lucide-react-native";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { View } from "react-native";
 import { Button } from "@/components/common/Button";
 import {
   Dialog,
@@ -27,21 +26,24 @@ import { Page } from "@/components/page/Page";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";
+import { useLanguageOptions } from "@/hooks/account/useLanguageOptions";
 import { useUser } from "@/hooks/account/useUser";
 import { storage } from "@/services/storage/asyncStorage";
 import STORAGE_KEYS from "@/services/storage/constants";
 import type { SettingsNavigation } from "@/services/storage/types";
-import SettingsItem from "./SettingsItem";
+import SettingCategory from "./components/SettingCategory";
+import SettingsItem from "./components/SettingsItem";
 
 export const Settings = () => {
   const { theme, themeMode } = useTheme();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { logout } = useAuth();
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const { data: user, isPending } = useUser();
   const navigation = useNavigation<SettingsNavigation>();
   const [isDevServerSelected, setIsDevServerSelected] = React.useState(false);
+  const { currentLanguageOption } = useLanguageOptions();
 
   useEffect(() => {
     const loadDevServerSetting = async () => {
@@ -69,6 +71,16 @@ export const Settings = () => {
     await queryClient.invalidateQueries({ queryKey: QUERY_KEYS.user });
   };
 
+  const getAppearanceSubtitle = () => {
+    const subtitles = {
+      system: t("settings.appearance.system", "System"),
+      light: t("settings.appearance.light", "Light"),
+      dark: t("settings.appearance.dark", "Dark"),
+    };
+
+    return subtitles[themeMode];
+  };
+
   return (
     <Page
       goBack
@@ -79,84 +91,39 @@ export const Settings = () => {
     >
       <AccountCard user={user} />
 
-      <View className="gap-2">
-        <Text className="ml-4" variant="h3">
-          {t("common.appearance")}
-        </Text>
-        <View
-          className=" rounded-lg px-4 py-2 gap-4"
-          style={{ backgroundColor: theme.card }}
-        >
-          <SettingsItem
-            icon={<Palette color={theme.text} size={22} />}
-            title={t("settings.appearance.title", "Theme")}
-            subtitle={
-              themeMode === "system"
-                ? t("settings.appearance.system", "System")
-                : themeMode === "light"
-                  ? t("settings.appearance.light", "Light")
-                  : t("settings.appearance.dark", "Dark")
-            }
-            onPress={() => navigation.navigate("Appearance")}
-          />
-          <SettingsItem
-            icon={<Globe color={theme.text} size={22} />}
-            title={t("settings.language.language")}
-            subtitle={t(
-              `settings.language.${
-                i18n.language === "fr"
-                  ? "french"
-                  : i18n.language === "en"
-                    ? "english"
-                    : "spanish"
-              }`,
-            )}
-            onPress={() => navigation.navigate("Language")}
-          />
-        </View>
-      </View>
+      <SettingCategory title={t("common.appearance")}>
+        <SettingsItem
+          icon={<Palette color={theme.text} size={22} />}
+          title={t("settings.appearance.title", "Theme")}
+          subtitle={getAppearanceSubtitle()}
+          onPress={() => navigation.navigate("Appearance")}
+        />
+        <SettingsItem
+          icon={<Globe color={theme.text} size={22} />}
+          title={t("settings.language.language")}
+          subtitle={currentLanguageOption?.name ?? ""}
+          onPress={() => navigation.navigate("Language")}
+        />
+      </SettingCategory>
 
-      <View className="gap-2">
-        <Text className="ml-4" variant="h3">
-          {t("settings.notifications.notifications")}
-        </Text>
-        <View
-          className=" rounded-lg px-4 py-2"
-          style={{ backgroundColor: theme.card }}
-        >
-          <SettingsItem
-            icon={<Bell color={theme.text} size={22} />}
-            title="Notifications"
-            onPress={() => navigation.navigate("Notifications")}
-          />
-        </View>
-      </View>
+      <SettingCategory title={t("settings.notifications.notifications")}>
+        <SettingsItem
+          icon={<Bell color={theme.text} size={22} />}
+          title="Notifications"
+          onPress={() => navigation.navigate("Notifications")}
+        />
+      </SettingCategory>
 
-      <View className="gap-2">
-        <Text className="ml-4" variant="h3">
-          {t("account.security")}
-        </Text>
-        <View
-          className=" rounded-lg px-4 py-2"
-          style={{ backgroundColor: theme.card }}
-        >
-          <SettingsItem
-            icon={<Shield color={theme.text} size={22} />}
-            title={t("account.changePassword")}
-            onPress={() => navigation.navigate("ChangePassword")}
-          />
-        </View>
-      </View>
+      <SettingCategory title={t("account.security")}>
+        <SettingsItem
+          icon={<Shield color={theme.text} size={22} />}
+          title={t("account.changePassword")}
+          onPress={() => navigation.navigate("ChangePassword")}
+        />
+      </SettingCategory>
 
-      <View className="gap-2">
-        <Text className="ml-4" variant="h3">
-          {t("common.other")}
-        </Text>
-        <View
-          className=" rounded-lg px-4 py-2 gap-4"
-          style={{ backgroundColor: theme.card }}
-        >
-          <SettingsItem
+      <SettingCategory title={t("common.other")}>
+      <SettingsItem
             icon={<HelpCircle color={theme.text} size={22} />}
             title={t("settings.help.title")}
             subtitle={t("settings.contactSupport")}
@@ -175,53 +142,42 @@ export const Settings = () => {
             onPress={() => navigation.navigate("Legal")}
           />
 
-          {process.env.NODE_ENV === "development" && (
-            <SettingsItem
-              icon={<Server color={theme.text} size={22} />}
-              title={t("settings.devServer")}
-              subtitle={t("settings.devServerDescription")}
-              onPress={() => {}}
-              rightElement={
-                <Switch
-                  value={isDevServerSelected}
-                  onValueChange={handleDevServerToggle}
-                />
-              }
-            />
-          )}
-        </View>
-      </View>
 
-      <View className="gap-2">
-        <Dialog>
-          <DialogTrigger>
-            <Button
-              label={t("settings.logout")}
-              onPress={handleLogout}
-              variant="destructive"
-              size="lg"
-            />
-          </DialogTrigger>
+        {process.env.NODE_ENV === "development" && (
+          <SettingsItem
+            icon={<Server color={theme.text} size={22} />}
+            title={t("settings.devServer")}
+            subtitle={t("settings.devServerDescription")}
+            onPress={() => {}}
+            rightElement={
+              <Switch
+                value={isDevServerSelected}
+                onValueChange={handleDevServerToggle}
+              />
+            }
+          />
+        )}
+      </SettingCategory>
 
-          <DialogContent
-            title={t("settings.logout")}
-            className="gap-2"
-            cancelLabel={t("common.cancel")}
-            confirmLabel={t("settings.logoutConfirm")}
-            onConfirm={handleLogout}
-          >
-            <Text>{t("settings.logoutDesc")}</Text>
-          </DialogContent>
-        </Dialog>
+      <Dialog>
+        <DialogTrigger>
+          <Button
+            label={t("settings.logout")}
+            onPress={handleLogout}
+            variant="destructive"
+          />
+        </DialogTrigger>
 
-        {/* <Button
-                  label={t("account.deleteAccount")}
-                  onPress={handleDeleteAccount}
-                  variant="outlined"
-                  className="border-destructive"
-                  labelClasses="text-destructive"
-                /> */}
-      </View>
+        <DialogContent
+          title={t("settings.logout")}
+          className="gap-2"
+          cancelLabel={t("common.cancel")}
+          confirmLabel={t("settings.logoutConfirm")}
+          onConfirm={handleLogout}
+        >
+          <Text>{t("settings.logoutDesc")}</Text>
+        </DialogContent>
+      </Dialog>
     </Page>
   );
 };

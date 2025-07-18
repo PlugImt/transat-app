@@ -61,7 +61,7 @@ export const ReviewDialog = ({
               className="p-1"
               disabled={isLoading}
             >
-              <X size={20} color={theme.textSecondary} />
+              <X size={20} color={theme.muted} />
             </TouchableOpacity>
           </View>
 
@@ -71,7 +71,6 @@ export const ReviewDialog = ({
               mode="review"
               value={rating}
               max={5}
-              size="lg"
               showValue={false}
               onRatingChange={setRating}
               disabled={isLoading}
@@ -85,7 +84,7 @@ export const ReviewDialog = ({
             placeholder={t(
               "services.restaurant.reviews.dialog.commentPlaceholder",
             )}
-            placeholderTextColor={theme.textSecondary}
+            placeholderTextColor={theme.muted}
             multiline
             numberOfLines={4}
             textAlignVertical="top"
@@ -104,7 +103,7 @@ export const ReviewDialog = ({
           <View className="flex-row gap-3">
             <Button
               label={t("common.cancel")}
-              variant="outlined"
+              variant="secondary"
               onPress={handleClose}
               disabled={isLoading}
               className="flex-1"

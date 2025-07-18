@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Keyboard, TouchableOpacity, View } from "react-native";
+import { z } from "zod";
 import {
   Avatar,
   AvatarFallback,
@@ -84,7 +85,6 @@ export const EditProfile = () => {
 
   const handleUpdateAccount = (data: User) => {
     Keyboard.dismiss();
-
     updateAccount(data, {
       onSuccess: () => {
         toast(t("account.profileUpdated"), "success");
@@ -129,7 +129,7 @@ export const EditProfile = () => {
   return (
     <Page
       goBack
-      className="gap-8"
+      className="gap-6"
       refreshing={isPending}
       onRefresh={refetch}
       title={t("account.editProfile")}
@@ -151,57 +151,55 @@ export const EditProfile = () => {
               {user.last_name.charAt(0)}
             </AvatarFallback>
           </Avatar>
-          <TouchableOpacity
-            className="absolute bottom-0 right-0 bg-muted p-2 rounded-full"
+          <IconButton
+            className="absolute bottom-0 right-0"
+            icon={<Edit size={16} />}
             onPress={handleUpdateProfilePicture}
-          >
-            <Edit color={theme.text} size={16} />
-          </TouchableOpacity>
+          />
         </TouchableOpacity>
       </View>
 
-      <View
-        className=" rounded-lg px-6 py-4 gap-4"
-        style={{ backgroundColor: theme.card }}
-      >
-        <Text variant="h3">{t("account.personalInfo")}</Text>
+      <View className="gap-2">
+        <Text variant="h3" className="ml-4">
+          {t("account.personalInfo")}
+        </Text>
+        <Card>
+          <Input
+            control={userControl}
+            label={t("account.firstName")}
+            name="first_name"
+            returnKeyType="go"
+            textContentType="name"
+            error={userErrors.first_name?.message}
+          />
 
-        <Input
-          control={userControl}
-          label={t("account.firstName")}
-          name="first_name"
-          returnKeyType="go"
-          textContentType="name"
-          error={userErrors.first_name?.message}
-        />
+          <Input
+            control={userControl}
+            label={t("account.lastName")}
+            name="last_name"
+            textContentType="familyName"
+            error={userErrors.last_name?.message}
+          />
 
-        <Input
-          control={userControl}
-          label={t("account.lastName")}
-          name="last_name"
-          textContentType="familyName"
-          error={userErrors.last_name?.message}
-        />
+          <Input
+            control={userControl}
+            label={t("account.email")}
+            name="email"
+            autoCapitalize="none"
+            textContentType="emailAddress"
+            error={userErrors.email?.message}
+            disabled={true}
+            className="opacity-50"
+          />
 
-        <Input
-          control={userControl}
-          label={t("account.email")}
-          name="email"
-          autoCapitalize="none"
-          textContentType="emailAddress"
-          error={userErrors.email?.message}
-          disabled={true}
-          className="opacity-50"
-        />
-
-        <Input
-          control={userControl}
-          label={t("account.phone")}
-          name="phone_number"
-          textContentType="telephoneNumber"
-          error={userErrors.phone_number?.message}
-          keyboardType="phone-pad"
-        />
+          <Input
+            control={userControl}
+            label={t("account.phone")}
+            name="phone_number"
+            textContentType="telephoneNumber"
+            error={userErrors.phone_number?.message}
+            keyboardType="phone-pad"
+          />
 
         <Controller
           control={userControl}
@@ -235,6 +233,7 @@ export const EditProfile = () => {
         />
       </View>
 
+      <View className="gap-2">
       <Button
         label={t("common.save")}
         onPress={handleUserSubmit(handleUpdateAccount)}
@@ -247,6 +246,7 @@ export const EditProfile = () => {
         onPress={() => navigation.goBack()}
         variant="secondary"
       />
+      </View>
     </Page>
   );
 };

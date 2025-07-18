@@ -8,8 +8,8 @@ import {
   View,
 } from "react-native";
 import { Text } from "@/components/common/Text";
-import { useTheme } from "@/contexts/ThemeContext";
 import { Button } from "./Button";
+import Card from "./Card";
 
 interface DialogContextType {
   open: boolean;
@@ -28,8 +28,11 @@ const Dialog = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-// biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
-const DialogTrigger = ({ children }: any) => {
+const DialogTrigger = ({
+  children,
+}: {
+  children: React.ReactElement<{ onPress?: () => void }>;
+}) => {
   const { setOpen } = useDialog();
 
   return cloneElement(children, { onPress: () => setOpen(true) });
@@ -59,7 +62,6 @@ const DialogContent = ({
   isPending,
 }: DialogContentProps) => {
   const { open, setOpen } = useDialog();
-  const { theme } = useTheme();
 
   const handleCancel = () => {
     onCancel?.();
@@ -74,7 +76,7 @@ const DialogContent = ({
   return (
     <Modal
       transparent
-      animationType="slide"
+      animationType="fade"
       visible={open}
       onRequestClose={() => setOpen(false)}
     >
@@ -84,16 +86,10 @@ const DialogContent = ({
       >
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={{ backgroundColor: theme.backdrop }}
+          style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
           className="flex flex-1 justify-center items-center w-full"
         >
-          <View
-            style={{
-              backgroundColor: theme.background,
-              borderColor: theme.muted,
-            }}
-            className="border rounded-lg p-6 shadow-lg w-11/12 max-h-[80%] gap-8"
-          >
+          <Card className="w-11/12 max-h-[80%] gap-6">
             <Text variant="h2">{title}</Text>
             <ScrollView keyboardShouldPersistTaps="handled">
               <TouchableWithoutFeedback className="pr-6">
@@ -101,12 +97,12 @@ const DialogContent = ({
               </TouchableWithoutFeedback>
             </ScrollView>
             {(cancelLabel || confirmLabel) && (
-              <View className="flex-row gap-4 justify-end">
+              <View className="gap-2">
                 {cancelLabel && (
                   <Button
                     onPress={handleCancel}
                     label={cancelLabel}
-                    variant="outlined"
+                    variant="secondary"
                   />
                 )}
                 {confirmLabel && (
@@ -119,7 +115,7 @@ const DialogContent = ({
                 )}
               </View>
             )}
-          </View>
+          </Card>
         </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
     </Modal>

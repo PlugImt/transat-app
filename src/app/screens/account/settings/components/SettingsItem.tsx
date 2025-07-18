@@ -21,12 +21,12 @@ export const SettingsItem = ({
       className="flex-row items-center justify-between py-4"
       onPress={() => onPress?.()}
     >
-      <View className="flex-row items-center gap-3">
+      <View className="flex-row items-center gap-3 flex-1">
         {icon}
-        <View className="ml-2.5">
+        <View className="ml-2.5 flex-1">
           <Text>{title}</Text>
           {subtitle && (
-            <Text className="break-words" color="textSecondary" variant="sm">
+            <Text color="muted" variant="sm">
               {subtitle}
             </Text>
           )}

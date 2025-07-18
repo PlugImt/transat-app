@@ -70,9 +70,7 @@ const PreferenceCustomizationModal = ({
         >
           <View className="flex-row items-center gap-2">
             <GripVertical size={20} color={theme.muted} />
-            <Text color={item.enabled ? "text" : "textSecondary"}>
-              {item.name}
-            </Text>
+            <Text color={item.enabled ? "text" : "muted"}>{item.name}</Text>
           </View>
           <Switch
             value={item.enabled}
@@ -108,7 +106,7 @@ const PreferenceCustomizationModal = ({
               <Button label={t("common.save")} onPress={handleSave} />
               <Button
                 label={t("common.cancel")}
-                variant="outlined"
+                variant="secondary"
                 onPress={onClose}
               />
             </View>

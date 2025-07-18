@@ -8,6 +8,7 @@ import {
   View,
 } from "react-native";
 import Badge, { BadgeLoading } from "@/components/common/Badge";
+import Card from "@/components/common/Card";
 import {
   Dialog,
   DialogContent,
@@ -16,9 +17,9 @@ import {
 import { Text } from "@/components/common/Text";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
-import { useWashingMachineNotifications } from "@/hooks/useWashingMachineNotifications";
+import { useLaundryNotifications } from "@/hooks/useLaundryNotifications";
 
-interface WashingMachineProps {
+interface LaundryProps {
   number: string;
   type: string;
   status: number;
@@ -251,25 +252,19 @@ const WASHING_MACHINE_DURATION = 40 * 60;
 const DRYER_DURATION = 40 * 60;
 const DRYER_DOUBLE_DURATION = 80 * 60;
 
-const WashingMachineCard = ({
-  number,
-  type,
-  status,
-  icon,
-}: WashingMachineProps) => {
+const LaundryCard = ({ number, type, status, icon }: LaundryProps) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
 
   const [timeRemaining, setTimeRemaining] = useState<number>(status);
   const [progressPercentage, setProgressPercentage] = useState<number>(0);
 
-  // Use the notification hook
   const {
     isNotificationSet,
     scheduleNotification,
     cancelNotification,
     shouldDisableButton: shouldDisableNotificationButton,
-  } = useWashingMachineNotifications(number);
+  } = useLaundryNotifications(number);
 
   const formatTime = useCallback((seconds: number): string => {
     const minutes = Math.floor(seconds / 60);
@@ -351,10 +346,7 @@ const WashingMachineCard = ({
   ]);
 
   return (
-    <View
-      className="relative px-6 py-4 rounded-lg  overflow-hidden"
-      style={{ backgroundColor: theme.card }}
-    >
+    <Card>
       {status > 0 && (
         <View
           className={`absolute left-0 top-0 h-[200%] ${icon === "DRYER" ? "bg-primary/10" : "bg-blue-500/10"}`}
@@ -372,7 +364,7 @@ const WashingMachineCard = ({
           </Text>
         </View>
 
-        <Text className="flex-1" ellipsizeMode="tail" numberOfLines={1}>
+        <Text className="flex-1" numberOfLines={1}>
           {type}
         </Text>
 
@@ -400,14 +392,14 @@ const WashingMachineCard = ({
           </DialogTrigger>
 
           <DialogContent
-            title={t("services.washingMachine.getNotification")}
+            title={t("services.laundry.getNotification")}
             className="gap-2"
             cancelLabel={t("common.cancel")}
             confirmLabel={t("settings.notifications.setNotification")}
             onConfirm={handleSetNotification}
           >
             <Text>
-              {t("services.washingMachine.getNotificationDesc", {
+              {t("services.laundry.getNotificationDesc", {
                 type: type.toLowerCase(),
                 minutes: MINUTES_BEFORE_NOTIFICATION,
               })}
@@ -415,19 +407,17 @@ const WashingMachineCard = ({
           </DialogContent>
         </Dialog>
       </View>
-    </View>
+    </Card>
   );
 };
 
-export default WashingMachineCard;
+export default LaundryCard;
 
-interface WashingMachineCardSkeletonProps {
+interface LaundryCardSkeletonProps {
   icon: "WASHING MACHINE" | "DRYER";
 }
 
-export const WashingMachineCardSkeleton = ({
-  icon,
-}: WashingMachineCardSkeletonProps) => {
+export const LaundryCardSkeleton = ({ icon }: LaundryCardSkeletonProps) => {
   const { theme } = useTheme();
 
   return (

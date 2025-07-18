@@ -42,6 +42,7 @@
     "expo-font": "~13.3.1",
     "expo-haptics": "~14.1.4",
     "expo-image-picker": "~16.1.4",
+    "expo-linear-gradient": "~14.1.5",
     "expo-linking": "~7.1.5",
     "expo-localization": "~16.1.5",
     "expo-network": "~7.1.5",
@@ -56,6 +57,7 @@
     "jotai": "^2.12.3",
     "lottie-react-native": "7.2.2",
     "lucide-react-native": "^0.511.0",
+    "moti": "^0.30.0",
     "nativecn-ui": "^0.0.8",
     "nativewind": "^4.1.23",
     "react": "19.0.0",
@@ -79,8 +81,7 @@
     "react-native-webview": "13.13.5",
     "styled-components": "^6.1.15",
     "tailwind-merge": "^3.0.1",
-    "zod": "^3.24.1",
-    "expo-linear-gradient": "~14.1.5"
+    "zod": "^3.24.1"
   },
   "overrides": {
     "react": "19.0.0"

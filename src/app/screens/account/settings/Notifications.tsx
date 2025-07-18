@@ -45,7 +45,7 @@ export const Notifications = () => {
           <View className="flex-row justify-between gap-4 items-center">
             <View className="gap-1 flex-1">
               <Text>{t("services.restaurant.title")}</Text>
-              <Text variant="sm" color="textSecondary">
+              <Text variant="sm" color="muted">
                 {t("settings.notifications.toggleRestaurant")}
               </Text>
             </View>
@@ -59,7 +59,7 @@ export const Notifications = () => {
           <View className="flex-row justify-between gap-4 items-center">
             <View className="gap-1 flex-1">
               <Text>{t("services.traq.title")}</Text>
-              <Text variant="sm" color="textSecondary">
+              <Text variant="sm" color="muted">
                 {t("settings.notifications.toggleTraq")}
               </Text>
             </View>

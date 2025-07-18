@@ -1,51 +1,61 @@
+const sharedColors = {
+  destructive: "#F44336",
+  success: "#4CAF50",
+  warning: "#FFC107",
+  info: "#2196F3",
+
+  primary: "#ec7f32",
+  secondary: "#0049a8",
+};
+
 const colors = {
   light: {
     background: "#f5f4f2",
     text: "#1A1A1A",
-    textSecondary: "#6B7280",
+    muted: "#6B7280",
     textTertiary: "#9CA3AF",
     foregroundPlaceholder: "#D1D5DB",
     card: "#FFFFFF",
     input: "#e3e3e3",
-    primary: "#ec7f32",
-    secondary: "#0049a8",
-    muted: "#6B7280",
     border: "#E5E7EB",
-    backdrop: "rgba(112,117,129,0.05)",
+    backdrop: "#7075810D",
     overlay: "#f5f4f2E5",
-    errorBackground: "#F4433620",
+
+    primary: sharedColors.primary,
+    secondary: sharedColors.secondary,
+    errorBackground: `${sharedColors.destructive}20`, // 20% opacity (20 en hex = 12.5% en décimal)
   },
   dark: {
     background: "#070402",
     text: "#ffe6cc",
-    textSecondary: "#A1A1AA",
+    muted: "#A1A1AA",
     textTertiary: "#71717A",
     foregroundPlaceholder: "#52525B",
     card: "#1e1515",
-    input: "rgba(45,34,34,0.64)",
-    primary: "#ec7f32",
-    secondary: "#0049a8",
-    muted: "#494949",
-    border: "rgba(81,63,55,0.49)",
-    backdrop: "rgba(44,39,38,0.4)",
+    input: "#2D2222A3",
+    border: "#403D3D",
+    backdrop: "#2C272666",
     overlay: "#070402E5",
-    errorBackground: "#F4433620",
+
+    primary: sharedColors.primary,
+    secondary: sharedColors.secondary,
+    errorBackground: `${sharedColors.destructive}20`, // 20% opacity (20 en hex = 12.5% en décimal)
   },
   shared: {
     destructive: {
-      DEFAULT: "#F44336",
+      DEFAULT: sharedColors.destructive,
       text: "#FFFFFF",
     },
     success: {
-      DEFAULT: "#4CAF50",
+      DEFAULT: sharedColors.success,
       text: "#FFFFFF",
     },
     warning: {
-      DEFAULT: "#FFC107",
+      DEFAULT: sharedColors.warning,
       text: "#000000",
     },
     info: {
-      DEFAULT: "#2196F3",
+      DEFAULT: sharedColors.info,
       text: "#FFFFFF",
     },
   },

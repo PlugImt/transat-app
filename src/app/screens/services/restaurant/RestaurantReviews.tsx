@@ -112,9 +112,9 @@ export const RestaurantReviews = () => {
           <View className="flex-1 flex-col mr-3">
             <Text className="flex-wrap">{reviewData.name}</Text>
             <View className="flex flex-row items-center gap-2 mt-1">
-              <Utensils size={16} color={theme.textSecondary} />
+              <Utensils size={16} color={theme.muted} />
               <Text
-                color="textSecondary"
+                color="muted"
                 variant="sm"
                 className="flex-wrap"
                 numberOfLines={2}
@@ -164,7 +164,7 @@ export const RestaurantReviews = () => {
             <Text variant="lg" className="text-center mb-2">
               {t("services.restaurant.reviews.noReviewsTitle")}
             </Text>
-            <Text color="textSecondary" className="text-center mb-6">
+            <Text color="muted" className="text-center mb-6">
               {t("services.restaurant.reviews.noReviewsSubtitle")}
             </Text>
             <Button

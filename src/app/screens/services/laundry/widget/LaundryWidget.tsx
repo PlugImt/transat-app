@@ -3,22 +3,22 @@ import type { StackNavigationProp } from "@react-navigation/stack";
 import { WashingMachineIcon, Wind } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Dimensions, TouchableOpacity, View } from "react-native";
+import { View } from "react-native";
+import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
-import { useWashingMachines } from "@/hooks/useWashingMachines";
+import { useLaundry } from "@/hooks/useLaundry";
 import type { AppStackParamList } from "@/services/storage/types";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
-export const WashingMachineWidget = () => {
+export const LaundryWidget = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<AppScreenNavigationProp>();
   const { theme } = useTheme();
 
-  const { dryers, washingMachines, isPending, isError, error } =
-    useWashingMachines();
+  const { dryers, washingMachines, isPending, isError, error } = useLaundry();
 
   const [totalWashers, setTotalWashers] = useState<number>(0);
   const [totalDryers, setTotalDryers] = useState<number>(0);
@@ -36,7 +36,7 @@ export const WashingMachineWidget = () => {
   }, [dryers, washingMachines]);
 
   if (isPending) {
-    return <WashingMachineWidgetLoading />;
+    return <LaundryWidgetLoading />;
   }
 
   if (isError || error || !dryers || !washingMachines) {
@@ -46,19 +46,15 @@ export const WashingMachineWidget = () => {
   return (
     <View className="flex flex-col gap-2">
       <Text className="ml-4" variant="h3">
-        {t("services.washingMachine.title")}
+        {t("services.laundry.title")}
       </Text>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("WashingMachine")}
-        style={{ backgroundColor: theme.card }}
-        className="px-6 py-4 rounded-lg flex-row justify-between gap-6 overflow-hidden"
+      <Card
+        onPress={() => navigation.navigate("Laundry")}
+        className="flex-row justify-between gap-6"
       >
-        <View
-          className="items-center"
-          style={{ maxWidth: Dimensions.get("window").width / 2 - 50 }}
-        >
+        <View className="items-center">
           <WashingMachineIcon
-            size={40}
+            size={32}
             color={availableWashers === 0 ? theme.muted : theme.primary}
           />
           <Text variant="lg">
@@ -66,18 +62,16 @@ export const WashingMachineWidget = () => {
           </Text>
           <Text
             className="flex-1 text-center"
-            ellipsizeMode="tail"
             numberOfLines={2}
+            variant="sm"
+            color="muted"
           >
-            {t("services.washingMachine.machineAvailable")}
+            {t("services.laundry.machineAvailable")}
           </Text>
         </View>
-        <View
-          className="items-center"
-          style={{ maxWidth: Dimensions.get("window").width / 2 - 50 }}
-        >
+        <View className="items-center">
           <Wind
-            size={40}
+            size={32}
             color={availableDryers === 0 ? theme.muted : theme.primary}
           />
           <Text variant="lg">
@@ -85,56 +79,58 @@ export const WashingMachineWidget = () => {
           </Text>
           <Text
             className="flex-1 text-center"
-            ellipsizeMode="tail"
             numberOfLines={2}
+            variant="sm"
+            color="muted"
           >
-            {t("services.washingMachine.dryerAvailable")}
+            {t("services.laundry.dryerAvailable")}
           </Text>
         </View>
-      </TouchableOpacity>
+      </Card>
     </View>
   );
 };
 
-export default WashingMachineWidget;
+export default LaundryWidget;
 
-export const WashingMachineWidgetLoading = () => {
+export const LaundryWidgetLoading = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<AppScreenNavigationProp>();
   const { theme } = useTheme();
 
   return (
     <View className="flex flex-col gap-2">
-      <Text variant="h3">{t("services.washingMachine.title")}</Text>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("WashingMachine")}
-        style={{ backgroundColor: theme.card }}
-        className="px-6 py-4 rounded-lg flex-row justify-between gap-6"
+      <Text variant="h3">{t("services.laundry.title")}</Text>
+      <Card
+        onPress={() => navigation.navigate("Laundry")}
+        className="flex-row justify-between gap-6"
       >
         <View className="items-center gap-2">
-          <WashingMachineIcon size={40} color={theme.muted} />
+          <WashingMachineIcon size={32} color={theme.muted} />
           <TextSkeleton variant="lg" lines={1} lastLineWidth={32} />
 
           <Text
             className="flex-1 text-center"
-            ellipsizeMode="tail"
             numberOfLines={1}
+            variant="sm"
+            color="muted"
           >
-            {t("services.washingMachine.machineAvailable")}
+            {t("services.laundry.machineAvailable")}
           </Text>
         </View>
         <View className="items-center gap-2">
-          <Wind size={40} color={theme.muted} />
+          <Wind size={32} color={theme.muted} />
           <TextSkeleton variant="lg" lines={1} lastLineWidth={32} />
           <Text
             className="flex-1 text-center"
-            ellipsizeMode="tail"
             numberOfLines={1}
+            variant="sm"
+            color="muted"
           >
-            {t("services.washingMachine.dryerAvailable")}
+            {t("services.laundry.dryerAvailable")}
           </Text>
         </View>
-      </TouchableOpacity>
+      </Card>
     </View>
   );
 };

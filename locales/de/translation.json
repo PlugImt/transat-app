@@ -147,7 +147,10 @@
     },
     "language": {
       "language": "Sprache",
+      "currentLanguage": "Aktuelle Sprache",
+      "otherLanguages": "Andere Sprachen",
       "selectLanguage": "Sprache wählen",
+      "selectLanguageError": "Beim Auswählen der Sprache ist ein Fehler aufgetreten",
       "english": "Englisch",
       "french": "Französisch",
       "spanish": "Spanisch"
@@ -337,7 +340,7 @@
       "contactInfo": "Besuchen Sie uns im Sportkomplex oder schauen Sie auf unsere Website für weitere Informationen",
       "closed": "Geschlossen"
     },
-    "washingMachine": {
+    "laundry": {
       "title": "Wäscherei",
       "description": "Überprüfe die Verfügbarkeit der Waschmaschinen und Trockner",
       "washingMachine": "Waschmaschine",

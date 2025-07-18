@@ -59,21 +59,12 @@ const TabsTrigger = ({
     <TouchableOpacity
       className={cn("px-8 py-3 rounded-md flex-1", className)}
       style={{
-        backgroundColor:
-          activeTab === value ? theme.foregroundPlaceholder : theme.card,
+        backgroundColor: activeTab === value ? theme.card : "transparent",
       }}
       onPress={() => setActiveTab(value)}
       {...props}
     >
-      <Text
-        className={cn(
-          "text-center text-muted-foreground",
-          { "text-background": activeTab === value },
-          textClasses,
-        )}
-      >
-        {title}
-      </Text>
+      <Text className={cn("text-center", textClasses)}>{title}</Text>
     </TouchableOpacity>
   );
 };

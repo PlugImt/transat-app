@@ -34,7 +34,7 @@ export const ReviewItem = ({ review }: { review: Review }) => {
           <Text className="font-semibold" variant="sm">
             {review.first_name} {review.last_name}
           </Text>
-          <Text variant="sm" color="textSecondary">
+          <Text variant="sm" color="muted">
             {timeAgo}
           </Text>
         </View>
@@ -43,7 +43,7 @@ export const ReviewItem = ({ review }: { review: Review }) => {
           <View className="flex flex-row">
             <Star showValue={false} max={5} value={review.rating} />
           </View>
-          <Text variant="sm" color="textSecondary">
+          <Text variant="sm" color="muted">
             ({review.rating})
           </Text>
         </View>

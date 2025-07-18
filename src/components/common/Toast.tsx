@@ -13,16 +13,16 @@ const variants = {
 
 const textVariants = {
   default: "text",
-  destructive: "destructive.text",
-  success: "success.text",
-  info: "info.text",
+  destructive: "destructiveText",
+  success: "successText",
+  info: "infoText",
 };
 
 const loadingVariants = {
   default: "primary",
-  destructive: "destructive.text",
-  success: "success.text",
-  info: "info.text",
+  destructive: "destructiveText",
+  success: "successText",
+  info: "infoText",
 };
 
 interface ToastProps {

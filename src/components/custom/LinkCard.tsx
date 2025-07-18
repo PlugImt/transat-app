@@ -6,18 +6,20 @@ import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 
 const ImageContainer = ({ children }: { children: React.ReactNode }) => {
-  if (isValidElement(children)) {
-    return (
-      <View className="h-16 w-16">
-        {cloneElement(
-          children as React.ReactElement<{ style: StyleProp<ImageStyle> }>,
-          {
-            style: { width: "100%", height: "100%", resizeMode: "contain" },
-          },
-        )}
-      </View>
-    );
+  if (!isValidElement(children)) {
+    return null;
   }
+
+  return (
+    <View className="h-16 w-16">
+      {cloneElement(
+        children as React.ReactElement<{ style: StyleProp<ImageStyle> }>,
+        {
+          style: { width: "100%", height: "100%", resizeMode: "contain" },
+        },
+      )}
+    </View>
+  );
 };
 
 interface LinkCardProps {

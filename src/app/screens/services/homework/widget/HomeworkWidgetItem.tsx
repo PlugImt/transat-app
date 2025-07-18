@@ -27,14 +27,10 @@ export const HomeworkWidgetItem = ({ homework }: { homework: Homework }) => {
       className="flex flex-col rounded-lg gap-1.5 py-2"
       style={{ backgroundColor: theme.card }}
     >
-      <Text className="ml-4" ellipsizeMode="tail">
-        {homework.title}
-      </Text>
-      <Text className="ml-4" ellipsizeMode="tail">
-        {homework.course_name}
-      </Text>
+      <Text className="ml-4">{homework.title}</Text>
+      <Text className="ml-4">{homework.course_name}</Text>
       <View className="flex flex-row items-center gap-2 ml-4">
-        <Text variant="sm" color="primary" ellipsizeMode="tail">
+        <Text variant="sm" color="primary">
           📅 {formatDateTime(homework.deadline)}
         </Text>
       </View>

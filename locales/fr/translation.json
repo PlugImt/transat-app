@@ -404,7 +404,7 @@
   },
   "account": {
     "graduationYear": "Année de diplôme",
-    "branch": "Filière",
+    "formation_name": "Filière",
     "group": "Groupe",
     "promotion": "Promotion",
     "campus": "Campus",

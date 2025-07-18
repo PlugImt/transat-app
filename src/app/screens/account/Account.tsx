@@ -93,9 +93,9 @@ export const Account = () => {
           <Text variant="h2">
             {user?.first_name} {user?.last_name}
           </Text>
-          {user?.scolarity?.graduation_year && (
+          {user?.graduation_year && (
             <Text color="textSecondary">
-              {getStudentYear(user?.scolarity?.graduation_year)}
+              {getStudentYear(user?.graduation_year)}
             </Text>
           )}
         </View>

@@ -383,7 +383,7 @@
   },
   "account": {
     "graduationYear": "Año de graduación",
-    "branch": "Especialidad",
+    "formation_name": "Especialidad",
     "selectBranch": "Seleccionar especialidad",
     "group": "Grupo",
     "selectGroup": "Seleccionar grupo",

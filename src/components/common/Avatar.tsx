@@ -28,26 +28,34 @@ interface AvatarImageProps
 const AvatarImage = forwardRef<
   React.ElementRef<typeof Image>,
   AvatarImageProps
->(({ className, loading = false, ...props }, ref) => {
+>(({ className, loading = false, source, ...props }, ref) => {
   const [hasError, setHasError] = useState(false);
   const [imageLoading, setImageLoading] = useState(true);
 
   const isLoading = loading || imageLoading;
 
-  if (hasError) {
+  // Check if source is valid - handle both URI objects and local images
+  const hasValidSource = source && (
+    typeof source === 'number' || // local image
+    (typeof source === 'object' && 'uri' in source && source.uri && source.uri.trim() !== '') // remote image
+  );
+  
+  // If no valid source or has error, don't render the image
+  if (!hasValidSource || hasError) {
     return null;
   }
 
   return (
-    <View className={cn("h-full w-full", className)}>
-      {isLoading && <AvatarLoading className="absolute inset-0 z-10" />}
+    <View className={cn("absolute inset-0 h-full w-full z-10", className)}>
+      {isLoading && <AvatarLoading className="absolute inset-0 z-20" />}
 
       <Image
         ref={ref}
+        source={source}
         onError={() => setHasError(true)}
         className={cn(
           "aspect-square h-full w-full",
-          isLoading ? "opacity-0" : "visible",
+          isLoading ? "opacity-0" : "opacity-100",
         )}
         onLoadStart={() => setImageLoading(true)}
         onLoadEnd={() => setImageLoading(false)}
@@ -69,7 +77,7 @@ const AvatarFallback = forwardRef<
       ref={ref}
       style={{ backgroundColor: theme.muted }}
       className={cn(
-        "flex h-full w-full items-center justify-center rounded-full",
+        "absolute inset-0 flex h-full w-full items-center justify-center rounded-full z-0",
         className,
       )}
       {...props}

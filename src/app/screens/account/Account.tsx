@@ -154,24 +154,6 @@ export const Account = () => {
           variant="outlined"
         />
       </View>
-
-      <View
-        className=" rounded-lg px-6 py-4 gap-4"
-        style={{ backgroundColor: theme.card }}
-      >
-        <Text variant="h3">{t("settings.feedback.sectionTitle")}</Text>
-        <InfoItem
-          icon={<MessageSquare color={theme.text} size={20} />}
-          label={t("settings.feedback.giveFeedback")}
-          value={t("settings.feedback.helpImprove")}
-        />
-        <Button
-          label={t("settings.feedback.sendFeedback")}
-          onPress={() => navigation.navigate("Feedback")}
-          size="sm"
-          variant="outlined"
-        />
-      </View>
     </Page>
   );
 };

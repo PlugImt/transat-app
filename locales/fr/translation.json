@@ -131,25 +131,6 @@
       "faq4Question": "Comment contribuer ?",
       "faq4Answer": "Si vous souhaitez contribuer au développement de cette application, vous pouvez rejoindre notre équipe en nous contactant sur notre groupe WhatsApp. Toute aide est la bienvenue, qu'il s'agisse de développement, de conception ou de test."
     },
-    "feedback": {
-      "title": "Feedback",
-      "sectionTitle": "Feedback",
-      "giveFeedback": "Donnez votre avis",
-      "helpImprove": "Aidez-nous à améliorer l'application",
-      "sendFeedback": "Envoyer un feedback",
-      "yourOpinionMatters": "Votre avis compte",
-      "helpDescription": "Aidez-nous à améliorer l'application en partageant vos commentaires et suggestions",
-      "commentsLabel": "Commentaires",
-      "commentsPlaceholder": "Partagez vos commentaires, suggestions ou signalements de bugs...",
-      "sending": "Envoi en cours...",
-      "send": "Envoyer le feedback",
-      "privacyNote": "💡 Vos commentaires nous aident à améliorer l'application. Toutes les informations sont traitées de manière confidentielle.",
-      "successTitle": "Feedback envoyé",
-      "successMessage": "Merci pour votre retour ! Nous vous répondrons dès que possible.",
-      "errorTitle": "Erreur",
-      "errorMessage": "Une erreur s'est produite lors de l'envoi de votre feedback. Veuillez réessayer.",
-      "minLengthError": "Le commentaire doit contenir au moins 10 caractères"
-    },
     "contactSupport": "Contacter le support",
     "appearance": {
       "title": "Apparence",

@@ -46,7 +46,6 @@ export const Appearance = () => {
 
   return (
     <Page
-      goBack
       title={t("settings.appearance.title", "Appearance")}
       className="gap-6"
     >

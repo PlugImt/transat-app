@@ -92,4 +92,14 @@ declare global {
   }
 }
 
+export const TAB_ROUTES = [
+  "Home",
+  "Services",
+  "Games",
+  "Account",
+  "Welcome",
+] as const;
+
+export type TabRoute = (typeof TAB_ROUTES)[number];
+
 export default StorageService;

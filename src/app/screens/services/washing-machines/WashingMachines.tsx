@@ -39,7 +39,6 @@ export const WashingMachines = () => {
 
   return (
     <Page
-      goBack
       onRefresh={refetch}
       refreshing={isFetching}
       className="gap-6"

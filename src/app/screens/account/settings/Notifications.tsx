@@ -28,7 +28,6 @@ export const Notifications = () => {
 
   return (
     <Page
-      goBack
       className="gap-6"
       refreshing={isPending}
       onRefresh={onRefresh}

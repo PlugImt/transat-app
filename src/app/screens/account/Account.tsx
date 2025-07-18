@@ -48,6 +48,7 @@ export const Account = () => {
   if (isError && error) {
     return (
       <ErrorPage
+        title={t("common.account")}
         error={error}
         refetch={refetch}
         isRefetching={isPending}

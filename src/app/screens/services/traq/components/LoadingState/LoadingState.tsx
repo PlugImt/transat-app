@@ -11,7 +11,6 @@ export const LoadingState = () => {
 
   return (
     <Page
-      goBack
       className="gap-4"
       title={t("services.traq.title")}
       header={<AboutSection />}

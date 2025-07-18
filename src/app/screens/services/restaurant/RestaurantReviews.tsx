@@ -94,7 +94,6 @@ export const RestaurantReviews = () => {
     <Page
       refreshing={isPending}
       onRefresh={refetch}
-      goBack
       title={t("services.restaurant.title")}
       header={
         <AboutModal

@@ -1,4 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { ArrowLeft } from "lucide-react-native";
 import type React from "react";
 import type { ReactNode } from "react";
@@ -11,23 +11,26 @@ import Animated, {
 } from "react-native-reanimated";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
+import { TAB_ROUTES, type TabRoute } from "@/services/storage/types";
 
 export const HEADER_HEIGHT = 60;
 
 type HeaderProps = {
   headerShown: SharedValue<number>;
   title?: string | ReactNode;
-  goBack?: boolean;
   children?: React.ReactNode;
 };
 
-export function Header({ headerShown, title, goBack, children }: HeaderProps) {
+export function Header({ headerShown, title, children }: HeaderProps) {
   const { theme } = useTheme();
   const navigation = useNavigation();
 
+  const route = useRoute();
+  const canGoBack = !TAB_ROUTES.includes(route.name as TabRoute);
+
   const headerAnimatedStyle = useAnimatedStyle(() => {
-    // If goBack is true, the header is not shown (here to compute the value every time)
-    const sharedValue = !goBack ? (headerShown.value ?? 1) : 1;
+    // If canGoBack is true, the header is not shown (here to compute the value every time)
+    const sharedValue = !canGoBack ? (headerShown.value ?? 1) : 1;
     return {
       transform: [
         {
@@ -43,8 +46,8 @@ export function Header({ headerShown, title, goBack, children }: HeaderProps) {
   });
 
   const contentAnimatedStyle = useAnimatedStyle(() => {
-    // If goBack is true, the header is not shown (here to compute the value every time)
-    const sharedValue = !goBack ? (headerShown.value ?? 1) : 1;
+    // If canGoBack is true, the header is not shown (here to compute the value every time)
+    const sharedValue = !canGoBack ? (headerShown.value ?? 1) : 1;
     return {
       opacity: interpolate(sharedValue, [0, 1], [0, 1], Extrapolation.CLAMP),
     };
@@ -60,9 +63,9 @@ export function Header({ headerShown, title, goBack, children }: HeaderProps) {
         className="flex flex-row justify-between items-center py-2.5 px-4 w-full flex-1"
       >
         <View className="flex flex-row items-center flex-1">
-          {(goBack || title) && (
+          {(canGoBack || title) && (
             <View className="flex flex-row items-center flex-1">
-              {goBack && (
+              {canGoBack && (
                 <ArrowLeft
                   color={theme.text}
                   onPress={() => navigation.goBack()}

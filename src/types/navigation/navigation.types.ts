@@ -1,9 +1,8 @@
 export type BottomTabParamList = {
-  Account: undefined;
-  Home: undefined;
-  Services: undefined;
-  Games: undefined;
-  Profile: undefined;
+  AccountScreen: undefined;
+  HomeScreen: undefined;
+  ServicesScreen: undefined;
+  GamesScreen: undefined;
 };
 
 export default BottomTabParamList;

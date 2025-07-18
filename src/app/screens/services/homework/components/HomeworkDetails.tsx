@@ -40,7 +40,7 @@ export const HomeworkDetails = () => {
   const isEdited = homework.created_at !== homework.updated_at;
 
   return (
-    <Page title={t("services.homework.title")} goBack>
+    <Page title={t("services.homework.title")}>
       <ScrollView
         className="flex-1 p-4"
         style={{ backgroundColor: theme.background }}

@@ -166,7 +166,7 @@ export const ResetPassword = () => {
   }, [fadeAnim, slideAnim]);
 
   return (
-    <Page goBack title={t("auth.resetPassword")}>
+    <Page title={t("auth.resetPassword")}>
       <RNAnimated.View
         style={{
           opacity: fadeAnim,

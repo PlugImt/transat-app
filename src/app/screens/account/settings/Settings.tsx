@@ -84,7 +84,6 @@ export const Settings = () => {
 
   return (
     <Page
-      goBack
       className="gap-6"
       refreshing={isPending}
       onRefresh={refetch}

@@ -196,7 +196,6 @@ export const Statistics = () => {
 
   return (
     <Page
-      goBack
       refreshing={refreshing}
       onRefresh={onRefresh}
       title={t("statistics.title", "Statistics")}

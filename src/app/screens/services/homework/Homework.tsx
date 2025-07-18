@@ -91,7 +91,6 @@ export const Homework = () => {
     <Page
       refreshing={isPending}
       onRefresh={refetch}
-      goBack
       title={t("services.homework.title")}
       header={
         <AboutModal
@@ -142,19 +141,19 @@ export const Homework = () => {
           <View className="flex-row flex-wrap gap-2 mt-3">
             <Button
               size="sm"
-              variant={showDone === null ? "default" : "outlined"}
+              variant={showDone === null ? "default" : "secondary"}
               label={t("services.homework.all")}
               onPress={() => setShowDone(null)}
             />
             <Button
               size="sm"
-              variant={showDone === false ? "default" : "outlined"}
+              variant={showDone === false ? "default" : "secondary"}
               label={t("services.homework.todo")}
               onPress={() => setShowDone(false)}
             />
             <Button
               size="sm"
-              variant={showDone === true ? "default" : "outlined"}
+              variant={showDone === true ? "default" : "secondary"}
               label={t("services.homework.done")}
               onPress={() => setShowDone(true)}
             />
@@ -163,13 +162,13 @@ export const Homework = () => {
           <View className="flex-row flex-wrap gap-2 mt-3">
             <Button
               size="sm"
-              variant={sortBy === "deadline" ? "default" : "outlined"}
+              variant={sortBy === "deadline" ? "default" : "secondary"}
               label={t("services.homework.sortByDeadline")}
               onPress={() => setSortBy("deadline")}
             />
             <Button
               size="sm"
-              variant={sortBy === "subject" ? "default" : "outlined"}
+              variant={sortBy === "subject" ? "default" : "secondary"}
               label={t("services.homework.sortBySubject")}
               onPress={() => setSortBy("subject")}
             />

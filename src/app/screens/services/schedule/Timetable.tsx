@@ -143,7 +143,6 @@ export const Timetable = () => {
 
   return (
     <Page
-      goBack
       refreshing={isPendingEdt}
       onRefresh={refetch}
       title={t("services.timetable.title")}

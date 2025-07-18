@@ -11,7 +11,6 @@ export const WashingMachineLoadingState = () => {
 
   return (
     <Page
-      goBack
       className="gap-6"
       title={t("services.washingMachine.title")}
       header={<AboutSection />}

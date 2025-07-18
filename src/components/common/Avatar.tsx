@@ -35,11 +35,14 @@ const AvatarImage = forwardRef<
   const isLoading = loading || imageLoading;
 
   // Check if source is valid - handle both URI objects and local images
-  const hasValidSource = source && (
-    typeof source === 'number' || // local image
-    (typeof source === 'object' && 'uri' in source && source.uri && source.uri.trim() !== '') // remote image
-  );
-  
+  const hasValidSource =
+    source &&
+    (typeof source === "number" || // local image
+      (typeof source === "object" &&
+        "uri" in source &&
+        source.uri &&
+        source.uri.trim() !== "")); // remote image
+
   // If no valid source or has error, don't render the image
   if (!hasValidSource || hasError) {
     return null;

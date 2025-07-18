@@ -26,11 +26,13 @@ export function Header({ headerShown, title, goBack, children }: HeaderProps) {
   const navigation = useNavigation();
 
   const headerAnimatedStyle = useAnimatedStyle(() => {
+    // If goBack is true, the header is not shown (here to compute the value every time)
+    const sharedValue = !goBack ? (headerShown.value ?? 1) : 1;
     return {
       transform: [
         {
           translateY: interpolate(
-            headerShown.value ?? 1,
+            sharedValue,
             [0, 1],
             [-HEADER_HEIGHT, 0],
             Extrapolation.CLAMP,
@@ -41,13 +43,10 @@ export function Header({ headerShown, title, goBack, children }: HeaderProps) {
   });
 
   const contentAnimatedStyle = useAnimatedStyle(() => {
+    // If goBack is true, the header is not shown (here to compute the value every time)
+    const sharedValue = !goBack ? (headerShown.value ?? 1) : 1;
     return {
-      opacity: interpolate(
-        headerShown.value ?? 1,
-        [0, 1],
-        [0, 1],
-        Extrapolation.CLAMP,
-      ),
+      opacity: interpolate(sharedValue, [0, 1], [0, 1], Extrapolation.CLAMP),
     };
   });
 

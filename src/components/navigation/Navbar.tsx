@@ -19,12 +19,12 @@ import {
   Clubs,
   Games,
   Homework,
+  Laundry,
   Olimtpe,
   Restaurant,
   RestaurantReviews,
   Timetable,
   Traq,
-  WashingMachines,
 } from "@/app/screens/services";
 import { HomeworkDetails } from "@/app/screens/services/homework/components/HomeworkDetails";
 import { Services } from "@/app/screens/services/Services";
@@ -38,7 +38,7 @@ const HomeStack = createStackNavigator();
 const HomeStackScreen = () => (
   <HomeStack.Navigator screenOptions={{ headerShown: false }}>
     <HomeStack.Screen name="HomeScreen" component={Home} />
-    <HomeStack.Screen name="WashingMachine" component={WashingMachines} />
+    <HomeStack.Screen name="Laundry" component={Laundry} />
     <HomeStack.Screen name="Restaurant" component={Restaurant} />
     <HomeStack.Screen name="RestaurantReviews" component={RestaurantReviews} />
     <HomeStack.Screen name="Olimtpe" component={Olimtpe} />
@@ -52,7 +52,7 @@ const ServicesStack = createStackNavigator();
 const ServicesStackScreen = () => (
   <ServicesStack.Navigator screenOptions={{ headerShown: false }}>
     <ServicesStack.Screen name="ServicesScreen" component={Services} />
-    <ServicesStack.Screen name="WashingMachine" component={WashingMachines} />
+    <ServicesStack.Screen name="Laundry" component={Laundry} />
     <ServicesStack.Screen name="Restaurant" component={Restaurant} />
     <ServicesStack.Screen
       name="RestaurantReviews"

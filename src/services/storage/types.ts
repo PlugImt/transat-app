@@ -39,7 +39,7 @@ export interface StorageService {
 // Main App Stack Types
 export type AppStackParamList = {
   Home: undefined;
-  WashingMachine: undefined;
+  Laundry: undefined;
   Restaurant: undefined;
   RestaurantReviews: { id: number };
   Timetable: undefined;

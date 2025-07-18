@@ -7,9 +7,9 @@ export type WidgetType =
   | "restaurant"
   | "timetable"
   | "homework"
-  | "washingMachine";
+  | "laundry";
 export type ServiceType =
-  | "washingMachine"
+  | "laundry"
   | "restaurant"
   | "timetable"
   | "homework"
@@ -40,8 +40,8 @@ const getDefaultHomeWidgets = (): Preference[] => [
     order: 1,
   },
   {
-    id: "washingMachine",
-    name: t("services.washingMachine.title"),
+    id: "laundry",
+    name: t("services.laundry.title"),
     enabled: true,
     order: 3,
   },
@@ -52,16 +52,16 @@ const getDefaultServices = (
 ): Preference[] => {
   return [
     {
-      id: "washingMachine",
-      name: t("services.washingMachine.title"),
+      id: "laundry",
+      name: t("services.laundry.title"),
       enabled: true,
       order: 0,
       image:
         themeMode === "dark"
           ? require("@/assets/images/services/washing_machine_light.png")
           : require("@/assets/images/services/washing_machine_dark.png"),
-      screen: "WashingMachine",
-      description: t("services.washingMachine.description"),
+      screen: "Laundry",
+      description: t("services.laundry.description"),
     },
     {
       id: "restaurant",

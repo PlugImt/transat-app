@@ -293,7 +293,10 @@
       "noData": "Il semble qu'il n'y ait pas de données à afficher",
       "noMeal": "Aucun repas",
       "closed": "Fermé",
-      "closedWeekends": "Le restaurant est fermé le week-end",
+      "closedWeekends": {
+        "title": "Le restaurant est fermé le week-end",
+        "description": "Revenez lundi pour découvrir le menu du jour"
+      },
       "closedNight": {
         "title": "Le restaurant est fermé",
         "description": "Revenez demain pour voir le menu"

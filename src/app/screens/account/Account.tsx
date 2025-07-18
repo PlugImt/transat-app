@@ -64,8 +64,8 @@ export const Account = () => {
       title={t("common.account")}
       header={
         <IconButton
-          icon={<Settings color={theme.text} />}
-          variant="link"
+          icon={<Settings />}
+          variant="ghost"
           onPress={() => navigation.navigate("Settings")}
         />
       }
@@ -140,13 +140,7 @@ const AccountLoading = () => {
   return (
     <Page
       title={t("common.account")}
-      header={
-        <IconButton
-          disabled
-          icon={<Settings color={theme.text} />}
-          variant="link"
-        />
-      }
+      header={<IconButton disabled icon={<Settings />} variant="ghost" />}
     >
       <View className="items-center gap-2">
         <Avatar className="w-32 h-32">

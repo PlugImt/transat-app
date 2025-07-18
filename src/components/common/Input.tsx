@@ -53,7 +53,7 @@ const Input = forwardRef(
     return (
       <View className={cn("gap-1.5", className)}>
         {label && (
-          <Text variant="sm" className={labelClasses} color="textSecondary">
+          <Text variant="sm" className={labelClasses} color="muted">
             {label}
           </Text>
         )}
@@ -72,7 +72,7 @@ const Input = forwardRef(
                 borderWidth: error ? 1 : 0,
               }}
               className={cn(inputClasses, "py-2.5 px-4 rounded-lg h-12")}
-              placeholderTextColor={theme.textSecondary}
+              placeholderTextColor={theme.muted}
               onChangeText={onChange}
               onBlur={onBlur}
               value={value}
@@ -111,7 +111,7 @@ export const InputLoading = ({
   return (
     <View className={cn("gap-1.5 opacity-50", className)}>
       {label && (
-        <Text variant="sm" className={labelClasses} color="textSecondary">
+        <Text variant="sm" className={labelClasses} color="muted">
           {label}
         </Text>
       )}
@@ -123,7 +123,7 @@ export const InputLoading = ({
           color: theme.text,
         }}
         className={cn(inputClasses, "py-2.5 px-4 rounded-lg")}
-        placeholderTextColor={theme.textSecondary}
+        placeholderTextColor={theme.muted}
       />
     </View>
   );

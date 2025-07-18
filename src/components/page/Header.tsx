@@ -58,23 +58,25 @@ export function Header({ headerShown, title, goBack, children }: HeaderProps) {
     >
       <Animated.View
         style={[contentAnimatedStyle, { height: HEADER_HEIGHT }]}
-        className="flex flex-row justify-between items-center py-2.5 px-4 w-full"
+        className="flex flex-row justify-between items-center py-2.5 px-4 w-full flex-1"
       >
-        {(goBack || title) && (
-          <View className="flex flex-row items-center">
-            {goBack && (
-              <ArrowLeft
-                color={theme.text}
-                onPress={() => navigation.goBack()}
-              />
-            )}
-            {title && (
-              <Text variant="h1" className="ml-4">
-                {title}
-              </Text>
-            )}
-          </View>
-        )}
+        <View className="flex flex-row items-center flex-1">
+          {(goBack || title) && (
+            <View className="flex flex-row items-center flex-1">
+              {goBack && (
+                <ArrowLeft
+                  color={theme.text}
+                  onPress={() => navigation.goBack()}
+                />
+              )}
+              {title && (
+                <Text variant="h1" className="ml-4 flex-1" numberOfLines={1}>
+                  {title}
+                </Text>
+              )}
+            </View>
+          )}
+        </View>
         {children}
       </Animated.View>
     </Animated.View>

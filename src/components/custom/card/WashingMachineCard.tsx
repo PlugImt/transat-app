@@ -372,7 +372,7 @@ const WashingMachineCard = ({
           </Text>
         </View>
 
-        <Text className="flex-1" ellipsizeMode="tail" numberOfLines={1}>
+        <Text className="flex-1" numberOfLines={1}>
           {type}
         </Text>
 

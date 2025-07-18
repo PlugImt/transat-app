@@ -106,7 +106,7 @@ export const Signin = () => {
           </View>
         ) : (
           <View className="h-20">
-            <Text color="textSecondary" className="mt-2">
+            <Text color="muted" className="mt-2">
               {t("auth.signInDescription")}
             </Text>
           </View>
@@ -142,7 +142,6 @@ export const Signin = () => {
 
           <View className="flex flex-col gap-2">
             <Button
-              size="lg"
               label={isLoading ? t("auth.signingIn") : t("common.signIn")}
               onPress={handleSubmit(handleLogin)}
               disabled={isButtonDisabled}

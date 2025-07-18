@@ -44,11 +44,7 @@ const RestaurantCard = ({ title, meals, icon }: CardProps) => {
     >
       <View className="flex flex-row items-center gap-2">
         {getIcon()}
-        <Text
-          className="text-lg font-bold"
-          style={{ color: theme.primary }}
-          ellipsizeMode="tail"
-        >
+        <Text className="text-lg font-bold" style={{ color: theme.primary }}>
           {title}
         </Text>
       </View>
@@ -97,11 +93,7 @@ export const RestaurantCardLoading = ({
     >
       <View className="flex flex-row items-center gap-2">
         {icon}
-        <Text
-          className="text-lg font-bold"
-          style={{ color: theme.primary }}
-          ellipsizeMode="tail"
-        >
+        <Text className="text-lg font-bold" style={{ color: theme.primary }}>
           {title}
         </Text>
       </View>

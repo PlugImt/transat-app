@@ -4,9 +4,10 @@ import {
   HelpCircle,
   SquareArrowOutUpRight,
 } from "lucide-react-native";
-import { useId, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Linking, TouchableOpacity, View } from "react-native";
+import Card from "@/components/common/Card";
 import { Divider } from "@/components/common/Divider";
 import {
   Tabs,
@@ -21,8 +22,6 @@ import { useTheme } from "@/contexts/ThemeContext";
 const Help = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
-  const faqId = useId();
-  const contactId = useId();
 
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
 
@@ -55,18 +54,14 @@ const Help = () => {
 
   return (
     <Page goBack className="gap-6" title={t("settings.help.title")}>
-      <Text className="mx-4 mb-2" color="textSecondary">
+      <Text className="mx-4 mb-2" color="muted">
         {t("settings.help.description")}
       </Text>
 
-      <Tabs defaultValue={faqId}>
+      <Tabs defaultValue="faq">
         <TabsList>
-          <TabsTrigger id={faqId} title={t("settings.help.faq")} value="faq" />
-          <TabsTrigger
-            id={contactId}
-            title={t("settings.help.contactUs")}
-            value="contact"
-          />
+          <TabsTrigger title={t("settings.help.faq")} value="faq" />
+          <TabsTrigger title={t("settings.help.contactUs")} value="contact" />
         </TabsList>
 
         <TabsContent value="faq">
@@ -93,7 +88,7 @@ const Help = () => {
 
                 {expandedFaq === index && (
                   <View className="pl-8 pr-4 pb-2">
-                    <Text color="textSecondary">{faq.answer}</Text>
+                    <Text color="muted">{faq.answer}</Text>
                   </View>
                 )}
                 {index < faqs.length - 1 && expandedFaq !== index && (
@@ -107,31 +102,17 @@ const Help = () => {
         </TabsContent>
 
         <TabsContent value="contact" className="gap-4">
-          <View className="gap-2">
-            <View
-              className="rounded-lg px-4 py-2"
-              style={{ backgroundColor: theme.card }}
-            >
-              <TouchableOpacity
-                className="flex-row justify-between items-center py-4"
-                onPress={openWhatsApp}
-              >
-                <View className="flex-row items-center gap-3">
-                  <SquareArrowOutUpRight size={22} color={theme.text} />
-                  <View className="ml-2.5 max-w-[80%]">
-                    <Text>{t("settings.help.joinWhatsApp")}</Text>
-                    <Text
-                      className="break-words"
-                      color="textSecondary"
-                      variant="sm"
-                    >
-                      {t("settings.help.joinCommunity")}
-                    </Text>
-                  </View>
-                </View>
-              </TouchableOpacity>
+          <Card onPress={openWhatsApp}>
+            <View className="flex-row items-center gap-3">
+              <SquareArrowOutUpRight size={22} color={theme.text} />
+              <View className="ml-2.5 max-w-[80%]">
+                <Text>{t("settings.help.joinWhatsApp")}</Text>
+                <Text className="break-words" color="muted" variant="sm">
+                  {t("settings.help.joinCommunity")}
+                </Text>
+              </View>
             </View>
-          </View>
+          </Card>
         </TabsContent>
       </Tabs>
     </Page>

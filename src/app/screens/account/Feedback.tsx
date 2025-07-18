@@ -109,7 +109,7 @@ export const Feedback = () => {
                 <Text variant="h2" className="text-center">
                   {t("settings.feedback.yourOpinionMatters")}
                 </Text>
-                <Text className="text-center px-4" color="textSecondary">
+                <Text className="text-center px-4" color="muted">
                   {t("settings.feedback.helpDescription")}
                 </Text>
               </View>
@@ -167,7 +167,7 @@ export const Feedback = () => {
               className="rounded-lg p-4"
               style={{ backgroundColor: theme.backdrop }}
             >
-              <Text className="text-sm text-center" color="textSecondary">
+              <Text className="text-sm text-center" color="muted">
                 {t("settings.feedback.privacyNote")}
               </Text>
             </View>

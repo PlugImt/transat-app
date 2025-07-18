@@ -7,8 +7,8 @@ import {
   AvatarImage,
 } from "@/components/common/Avatar";
 import { Button } from "@/components/common/Button";
+import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
-import { useTheme } from "@/contexts/ThemeContext";
 import type { User } from "@/dto";
 import type { AccountNavigation } from "@/services/storage/types";
 
@@ -18,14 +18,13 @@ interface AccountCardProps {
 
 export const AccountCard = ({ user }: AccountCardProps) => {
   const navigation = useNavigation<AccountNavigation>();
-  const { theme } = useTheme();
 
   if (!user) {
     return null;
   }
 
   return (
-    <View style={{ backgroundColor: theme.card }} className="rounded-lg p-4">
+    <Card>
       <View className="flex-row items-center gap-4">
         <Avatar className="w-16 h-16">
           <AvatarImage source={{ uri: user.profile_picture }} />
@@ -45,6 +44,6 @@ export const AccountCard = ({ user }: AccountCardProps) => {
           onPress={() => navigation.navigate("EditProfile")}
         />
       </View>
-    </View>
+    </Card>
   );
 };

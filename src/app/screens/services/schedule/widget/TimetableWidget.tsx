@@ -99,41 +99,37 @@ export const TimetableWidget = () => {
           <View className="flex flex-col">
             {error ? (
               <>
-                <Text className="ml-4" ellipsizeMode="tail">
+                <Text className="ml-4">
                   {t("services.timetable.noEdt.title")}
                 </Text>
-                <Text
-                  className="ml-4 font-bold"
-                  color="primary"
-                  ellipsizeMode="tail"
-                >
+                <Text className="ml-4 font-bold" color="primary">
                   {t("services.timetable.noEdt.description")}
                 </Text>
               </>
             ) : noCoursesToday ? (
               <>
-                <Text className="ml-4" ellipsizeMode="tail">
+                <Text className="ml-4">
                   {t("services.timetable.noCourses.dayTitle")}
                 </Text>
-                <Text className="ml-4 italic" variant="sm" ellipsizeMode="tail">
+                <Text className="ml-4 italic" variant="sm">
                   {t("services.timetable.noCourses.description")}
                 </Text>
               </>
             ) : isMorningNow && noCoursesMorning ? (
               <>
-                <Text className="ml-4" ellipsizeMode="tail">
+                <Text className="ml-4">
                   {t("services.timetable.noCourses.morningTitle")}
                 </Text>
-                <Text className="ml-4 italic" variant="sm" ellipsizeMode="tail">
+                <Text className="ml-4 italic" variant="sm">
                   {t("services.timetable.noCourses.description")}
                 </Text>
               </>
             ) : (
               <>
-                <Text className="ml-4" ellipsizeMode="tail">
+                <Text className="ml-4">
                   {t("services.timetable.noCourses.afternoonTitle")}
                 </Text>
-                <Text className="ml-4 italic" variant="sm" ellipsizeMode="tail">
+                <Text className="ml-4 italic" variant="sm">
                   {t("services.timetable.noCourses.description")}
                 </Text>
               </>

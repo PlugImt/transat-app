@@ -3,7 +3,8 @@ import type { StackNavigationProp } from "@react-navigation/stack";
 import { WashingMachineIcon, Wind } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Dimensions, TouchableOpacity, View } from "react-native";
+import { View } from "react-native";
+import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -48,17 +49,13 @@ export const WashingMachineWidget = () => {
       <Text className="ml-4" variant="h3">
         {t("services.washingMachine.title")}
       </Text>
-      <TouchableOpacity
+      <Card
         onPress={() => navigation.navigate("WashingMachine")}
-        style={{ backgroundColor: theme.card }}
-        className="px-6 py-4 rounded-lg flex-row justify-between gap-6 overflow-hidden"
+        className="flex-row justify-between gap-6"
       >
-        <View
-          className="items-center"
-          style={{ maxWidth: Dimensions.get("window").width / 2 - 50 }}
-        >
+        <View className="items-center">
           <WashingMachineIcon
-            size={40}
+            size={32}
             color={availableWashers === 0 ? theme.muted : theme.primary}
           />
           <Text variant="lg">
@@ -66,18 +63,16 @@ export const WashingMachineWidget = () => {
           </Text>
           <Text
             className="flex-1 text-center"
-            ellipsizeMode="tail"
             numberOfLines={2}
+            variant="sm"
+            color="muted"
           >
             {t("services.washingMachine.machineAvailable")}
           </Text>
         </View>
-        <View
-          className="items-center"
-          style={{ maxWidth: Dimensions.get("window").width / 2 - 50 }}
-        >
+        <View className="items-center">
           <Wind
-            size={40}
+            size={32}
             color={availableDryers === 0 ? theme.muted : theme.primary}
           />
           <Text variant="lg">
@@ -85,13 +80,14 @@ export const WashingMachineWidget = () => {
           </Text>
           <Text
             className="flex-1 text-center"
-            ellipsizeMode="tail"
             numberOfLines={2}
+            variant="sm"
+            color="muted"
           >
             {t("services.washingMachine.dryerAvailable")}
           </Text>
         </View>
-      </TouchableOpacity>
+      </Card>
     </View>
   );
 };
@@ -106,35 +102,36 @@ export const WashingMachineWidgetLoading = () => {
   return (
     <View className="flex flex-col gap-2">
       <Text variant="h3">{t("services.washingMachine.title")}</Text>
-      <TouchableOpacity
+      <Card
         onPress={() => navigation.navigate("WashingMachine")}
-        style={{ backgroundColor: theme.card }}
-        className="px-6 py-4 rounded-lg flex-row justify-between gap-6"
+        className="flex-row justify-between gap-6"
       >
         <View className="items-center gap-2">
-          <WashingMachineIcon size={40} color={theme.muted} />
+          <WashingMachineIcon size={32} color={theme.muted} />
           <TextSkeleton variant="lg" lines={1} lastLineWidth={32} />
 
           <Text
             className="flex-1 text-center"
-            ellipsizeMode="tail"
             numberOfLines={1}
+            variant="sm"
+            color="muted"
           >
             {t("services.washingMachine.machineAvailable")}
           </Text>
         </View>
         <View className="items-center gap-2">
-          <Wind size={40} color={theme.muted} />
+          <Wind size={32} color={theme.muted} />
           <TextSkeleton variant="lg" lines={1} lastLineWidth={32} />
           <Text
             className="flex-1 text-center"
-            ellipsizeMode="tail"
             numberOfLines={1}
+            variant="sm"
+            color="muted"
           >
             {t("services.washingMachine.dryerAvailable")}
           </Text>
         </View>
-      </TouchableOpacity>
+      </Card>
     </View>
   );
 };

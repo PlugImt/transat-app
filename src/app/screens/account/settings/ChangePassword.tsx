@@ -70,7 +70,12 @@ export const ChangePassword = () => {
   };
 
   return (
-    <Page goBack className="gap-8" title={t("account.changePassword")}>
+    <Page
+      goBack
+      className="gap-8"
+      title={t("account.changePassword")}
+      disableScroll
+    >
       <Input
         label={t("account.currentPassword")}
         control={passwordControl}
@@ -98,7 +103,6 @@ export const ChangePassword = () => {
         secureTextEntry
       />
       <Button
-        size="lg"
         label={t("account.changePassword")}
         onPress={handlePasswordSubmit(handleChangePassword)}
         disabled={isUpdatingPassword || !isPasswordValid}

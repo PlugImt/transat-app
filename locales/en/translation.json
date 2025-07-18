@@ -166,7 +166,10 @@
     },
     "language": {
       "language": "Language",
+      "currentLanguage": "Current language",
+      "otherLanguages": "Other languages",
       "selectLanguage": "Select language",
+      "selectLanguageError": "An error occurred while selecting the language",
       "english": "English",
       "french": "French",
       "spanish": "Spanish"

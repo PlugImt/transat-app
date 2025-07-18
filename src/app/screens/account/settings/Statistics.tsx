@@ -37,7 +37,7 @@ interface ServerStatus {
 }
 
 // Define API base URL
-const API_BASE_URL = "https://api.transat.dev";
+const API_BASE_URL = "https://develop.transat.dev";
 
 export const Statistics = () => {
   const { t } = useTranslation();
@@ -233,13 +233,13 @@ export const Statistics = () => {
 
             <View className="flex-row justify-between mt-2">
               <View>
-                <Text className="text-sm" color="textSecondary">
+                <Text className="text-sm" color="muted">
                   {t("statistics.latency", "Latency")}
                 </Text>
                 <Text className="font-medium">{serverStatus.latency} ms</Text>
               </View>
               <View>
-                <Text variant="sm" color="textSecondary">
+                <Text variant="sm" color="muted">
                   {t("statistics.lastChecked", "Last Checked")}
                 </Text>
                 <Text>{formatDate(serverStatus.timestamp)}</Text>
@@ -261,7 +261,7 @@ export const Statistics = () => {
               style={{ backgroundColor: theme.card }}
             >
               <Activity size={32} color={theme.primary} className="mb-4" />
-              <Text color="textSecondary">
+              <Text color="muted">
                 {t("statistics.loading", "Loading statistics...")}
               </Text>
             </View>
@@ -279,7 +279,7 @@ export const Statistics = () => {
                 >
                   <View className="flex-row flex-wrap justify-between mb-4">
                     <View className="w-[48%] bg-background/20 rounded-lg p-3 mb-2">
-                      <Text variant="sm" color="textSecondary">
+                      <Text variant="sm" color="muted">
                         {t("statistics.totalRequests", "Total Requests")}
                       </Text>
                       <Text variant="h3" color="primary">
@@ -288,7 +288,7 @@ export const Statistics = () => {
                     </View>
 
                     <View className="w-[48%] bg-background/20 rounded-lg p-3 mb-2">
-                      <Text variant="sm" color="textSecondary">
+                      <Text variant="sm" color="muted">
                         {t("statistics.successRate", "Success Rate")}
                       </Text>
                       <Text
@@ -306,19 +306,19 @@ export const Statistics = () => {
                     </View>
 
                     <View className="w-[48%] bg-background/20 rounded-lg p-3 mb-2">
-                      <Text variant="sm" color="textSecondary">
+                      <Text variant="sm" color="muted">
                         {t("statistics.avgResponseTime", "Avg Response Time")}
                       </Text>
                       <Text variant="h3" color="primary">
                         {globalStats.global_avg_duration_ms.toFixed(1)}{" "}
-                        <Text variant="sm" color="textSecondary">
+                        <Text variant="sm" color="muted">
                           ms
                         </Text>
                       </Text>
                     </View>
 
                     <View className="w-[48%] bg-background/20 rounded-lg p-3 mb-2">
-                      <Text variant="sm" color="textSecondary">
+                      <Text variant="sm" color="muted">
                         {t("statistics.maxResponseTime", "Max Response Time")}
                       </Text>
                       <Text
@@ -330,7 +330,7 @@ export const Statistics = () => {
                         }
                       >
                         {globalStats.global_max_duration_ms}{" "}
-                        <Text variant="sm" color="textSecondary">
+                        <Text variant="sm" color="muted">
                           ms
                         </Text>
                       </Text>
@@ -339,7 +339,7 @@ export const Statistics = () => {
 
                   <View className="flex-row justify-between mb-4">
                     <View className="w-[48%] bg-background/20 rounded-lg p-3">
-                      <Text color="textSecondary">
+                      <Text color="muted">
                         {t(
                           "statistics.successfulRequests",
                           "Successful Requests",
@@ -351,7 +351,7 @@ export const Statistics = () => {
                     </View>
 
                     <View className="w-[48%] bg-background/20 rounded-lg p-3">
-                      <Text color="textSecondary">
+                      <Text color="muted">
                         {t("statistics.errorRequests", "Error Requests")}
                       </Text>
                       <Text variant="h3" color="destructive">
@@ -362,7 +362,7 @@ export const Statistics = () => {
 
                   {/* First Request */}
                   <View className="items-center mt-4">
-                    <Text variant="sm" color="textSecondary" className="mb-1">
+                    <Text variant="sm" color="muted" className="mb-1">
                       {t("statistics.firstRequest", "First Request")}
                     </Text>
                     <Text>{formatDate(globalStats.first_request)}</Text>
@@ -402,7 +402,7 @@ export const Statistics = () => {
 
                           <View className="flex-row justify-between mb-2">
                             <View>
-                              <Text color="textSecondary">
+                              <Text color="muted">
                                 {t(
                                   "statistics.topUsers.avgTime",
                                   "Avg Response Time",
@@ -412,7 +412,7 @@ export const Statistics = () => {
                             </View>
 
                             <View>
-                              <Text color="textSecondary">
+                              <Text color="muted">
                                 {t(
                                   "statistics.topUsers.successRate",
                                   "Success Rate",
@@ -426,7 +426,7 @@ export const Statistics = () => {
                                       ? "text-amber-500"
                                       : "text-red-500"
                                 }
-                                color="textSecondary"
+                                color="muted"
                               >
                                 {user.success_rate_percent.toFixed(1)}%
                               </Text>
@@ -435,22 +435,22 @@ export const Statistics = () => {
 
                           <View className="flex-row justify-between">
                             <View>
-                              <Text color="textSecondary">
+                              <Text color="muted">
                                 {t(
                                   "statistics.topUsers.firstSeen",
                                   "First Seen",
                                 )}
                               </Text>
-                              <Text variant="sm" color="textSecondary">
+                              <Text variant="sm" color="muted">
                                 {formatDate(user.first_request)}
                               </Text>
                             </View>
 
                             <View>
-                              <Text color="textSecondary">
+                              <Text color="muted">
                                 {t("statistics.topUsers.lastSeen", "Last Seen")}
                               </Text>
-                              <Text variant="sm" color="textSecondary">
+                              <Text variant="sm" color="muted">
                                 {formatDate(user.last_request)}
                               </Text>
                             </View>
@@ -461,11 +461,7 @@ export const Statistics = () => {
                   </>
                 )}
 
-                <Text
-                  className="text-center mb-4"
-                  color="textSecondary"
-                  variant="sm"
-                >
+                <Text className="text-center mb-4" color="muted" variant="sm">
                   {t("statistics.lastUpdated", "Statistics last updated:")}{" "}
                   {formatDate(statsLastLoaded)}
                 </Text>

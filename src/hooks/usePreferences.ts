@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { QUERY_KEYS } from "@/constants";
+import { useTheme } from "@/contexts/ThemeContext";
 import {
   getHomeWidgetPreferences,
   getServicePreferences,
@@ -66,9 +67,12 @@ export const useHomeWidgetPreferences = () =>
     saveHomeWidgetPreferences,
   );
 
-export const useServicePreferences = () =>
-  usePreferences(
+export const useServicePreferences = () => {
+  const { actualTheme } = useTheme();
+
+  return usePreferences(
     QUERY_KEYS.servicePreferences,
-    getServicePreferences,
+    () => getServicePreferences(actualTheme),
     saveServicePreferences,
   );
+};

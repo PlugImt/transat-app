@@ -1,13 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
-import {
-  Lock,
-  Mail,
-  Medal,
-  MessageSquare,
-  Phone,
-  Settings,
-} from "lucide-react-native";
+import { Mail, MessageSquare, Phone, Settings } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import {
@@ -16,6 +9,7 @@ import {
   AvatarImage,
 } from "@/components/common/Avatar";
 import { Button, IconButton } from "@/components/common/Button";
+import Card from "@/components/common/Card";
 import InfoItem from "@/components/common/InfoItem";
 import { Text } from "@/components/common/Text";
 import { ErrorPage } from "@/components/page/ErrorPage";
@@ -70,8 +64,8 @@ export const Account = () => {
       title={t("common.account")}
       header={
         <IconButton
-          icon={<Settings color={theme.text} />}
-          variant="link"
+          icon={<Settings />}
+          variant="ghost"
           onPress={() => navigation.navigate("Settings")}
         />
       }
@@ -94,16 +88,13 @@ export const Account = () => {
             {user?.first_name} {user?.last_name}
           </Text>
           {user?.scolarity?.graduation_year && (
-            <Text color="textSecondary">
+            <Text color="muted">
               {getStudentYear(user?.scolarity?.graduation_year)}
             </Text>
           )}
         </View>
       </View>
-      <View
-        className=" rounded-lg px-6 py-4 gap-4"
-        style={{ backgroundColor: theme.card }}
-      >
+      <Card className="gap-4">
         <Text variant="h3">{t("account.contactInfo")}</Text>
         <InfoItem
           icon={<Mail color={theme.text} size={20} />}
@@ -115,50 +106,9 @@ export const Account = () => {
           label={t("account.phone")}
           value={user?.phone_number || t("account.notProvided")}
         />
-      </View>
+      </Card>
 
-      <View
-        className=" rounded-lg px-6 py-4 gap-4"
-        style={{ backgroundColor: theme.card }}
-      >
-        <Text variant="h3">{t("account.infos")}</Text>
-
-        <InfoItem
-          icon={<Medal color={theme.text} size={20} />}
-          label={t("account.registration")}
-          value={`n°${user?.id_newf}/${user?.total_newf} ${t("account.newf")}`}
-        />
-
-        <InfoItem
-          icon={<Lock color={theme.text} size={20} />}
-          label={t("account.passwordUpdated")}
-          value={
-            user?.password_updated_date
-              ? new Date(user?.password_updated_date)
-                  .toLocaleString("fr-FR", {
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "numeric",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    hour12: false,
-                  })
-                  .replace(",", "")
-              : t("account.notProvided")
-          }
-        />
-        <Button
-          label={t("account.editProfile")}
-          onPress={navigateToEditProfile}
-          size="sm"
-          variant="outlined"
-        />
-      </View>
-
-      <View
-        className=" rounded-lg px-6 py-4 gap-4"
-        style={{ backgroundColor: theme.card }}
-      >
+      <Card className="gap-4">
         <Text variant="h3">{t("settings.feedback.sectionTitle")}</Text>
         <InfoItem
           icon={<MessageSquare color={theme.text} size={20} />}
@@ -169,9 +119,15 @@ export const Account = () => {
           label={t("settings.feedback.sendFeedback")}
           onPress={() => navigation.navigate("Feedback")}
           size="sm"
-          variant="outlined"
+          variant="secondary"
         />
-      </View>
+      </Card>
+      <Button
+        label={t("account.editProfile")}
+        onPress={navigateToEditProfile}
+        size="sm"
+        variant="secondary"
+      />
     </Page>
   );
 };
@@ -184,13 +140,7 @@ const AccountLoading = () => {
   return (
     <Page
       title={t("common.account")}
-      header={
-        <IconButton
-          disabled
-          icon={<Settings color={theme.text} />}
-          variant="link"
-        />
-      }
+      header={<IconButton disabled icon={<Settings />} variant="ghost" />}
     >
       <View className="items-center gap-2">
         <Avatar className="w-32 h-32">
@@ -214,29 +164,6 @@ const AccountLoading = () => {
         <InfoItem
           icon={<Phone color={theme.text} size={20} />}
           label={t("account.phone")}
-        />
-      </View>
-
-      <View
-        className=" rounded-lg px-6 py-4 gap-4"
-        style={{ backgroundColor: theme.card }}
-      >
-        <Text variant="h3">{t("account.infos")}</Text>
-
-        <InfoItem
-          icon={<Medal color={theme.text} size={20} />}
-          label={t("account.registration")}
-        />
-
-        <InfoItem
-          icon={<Lock color={theme.text} size={20} />}
-          label={t("account.passwordUpdated")}
-        />
-        <Button
-          size="lg"
-          label={t("account.editProfile")}
-          variant="outlined"
-          disabled
         />
       </View>
     </Page>

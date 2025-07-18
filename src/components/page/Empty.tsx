@@ -21,7 +21,7 @@ export const Empty = ({ icon, title, description }: EmptyProps) => {
           {title ?? t("common.empty")}
         </Text>
         {description && (
-          <Text className="text-center" color="textSecondary" variant="lg">
+          <Text className="text-center" color="muted" variant="lg">
             {description}
           </Text>
         )}

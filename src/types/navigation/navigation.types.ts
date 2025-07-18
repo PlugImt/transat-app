@@ -71,3 +71,11 @@ declare global {
     interface RootParamList extends RootStackParamList {}
   }
 }
+
+export enum TabRoute {
+  Home = "Home",
+  Services = "Services",
+  Games = "Games",
+  Account = "Account",
+  Welcome = "Welcome",
+}

@@ -11,7 +11,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
-import { TAB_ROUTES, type TabRoute } from "@/services/storage/types";
+import { TabRoute } from "@/types";
 
 export const HEADER_HEIGHT = 60;
 
@@ -26,7 +26,7 @@ export function Header({ headerShown, title, children }: HeaderProps) {
   const navigation = useNavigation();
 
   const route = useRoute();
-  const canGoBack = !TAB_ROUTES.includes(route.name as TabRoute);
+  const canGoBack = !Object.values(TabRoute).includes(route.name as TabRoute);
 
   const headerAnimatedStyle = useAnimatedStyle(() => {
     // If canGoBack is true, the header is not shown (here to compute the value every time)

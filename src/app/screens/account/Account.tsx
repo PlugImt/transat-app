@@ -106,43 +106,12 @@ export const Account = () => {
         />
       </Card>
 
-      <View
-        className=" rounded-lg px-6 py-4 gap-4"
-        style={{ backgroundColor: theme.card }}
-      >
-        <Text variant="h3">{t("account.infos")}</Text>
-
-        <InfoItem
-          icon={<Medal color={theme.text} size={20} />}
-          label={t("account.registration")}
-          value={`n°${user?.id_newf}/${user?.total_newf} ${t("account.newf")}`}
-        />
-
-        <InfoItem
-          icon={<Lock color={theme.text} size={20} />}
-          label={t("account.passwordUpdated")}
-          value={
-            user?.password_updated_date
-              ? new Date(user?.password_updated_date)
-                  .toLocaleString("fr-FR", {
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "numeric",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    hour12: false,
-                  })
-                  .replace(",", "")
-              : t("account.notProvided")
-          }
-        />
-        <Button
-          label={t("account.editProfile")}
-          onPress={navigateToEditProfile}
-          size="sm"
-          variant="secondary"
-        />
-      </View>
+      <Button
+        label={t("account.editProfile")}
+        onPress={navigateToEditProfile}
+        size="sm"
+        variant="secondary"
+      />
     </Page>
   );
 };

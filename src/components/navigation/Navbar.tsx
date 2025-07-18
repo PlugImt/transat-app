@@ -14,7 +14,6 @@ import Language from "@/app/screens/account/settings/Language";
 import Legal from "@/app/screens/account/settings/Legal";
 import Notifications from "@/app/screens/account/settings/Notifications";
 import Settings from "@/app/screens/account/settings/Settings";
-import Statistics from "@/app/screens/account/settings/Statistics";
 import {
   Clubs,
   Games,
@@ -88,7 +87,6 @@ const AccountStackScreen = () => (
     <AccountStack.Screen name="Appearance" component={Appearance} />
     <AccountStack.Screen name="About" component={About} />
     <AccountStack.Screen name="Help" component={Help} />
-    <AccountStack.Screen name="Statistics" component={Statistics} />
     <AccountStack.Screen name="Legal" component={Legal} />
   </AccountStack.Navigator>
 );

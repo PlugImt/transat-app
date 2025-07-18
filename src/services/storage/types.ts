@@ -74,7 +74,6 @@ type SettingsStackParamList = {
   Appearance: undefined;
   About: undefined;
   Help: undefined;
-  Statistics: undefined;
   Legal: undefined;
 };
 export type SettingsNavigation = StackNavigationProp<SettingsStackParamList>;

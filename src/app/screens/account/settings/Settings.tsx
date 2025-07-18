@@ -170,15 +170,6 @@ export const Settings = () => {
             onPress={() => navigation.navigate("About")}
           />
           <SettingsItem
-            icon={<BarChart color={theme.text} size={22} />}
-            title={t("settings.statistics.title", "Statistics")}
-            subtitle={t(
-              "settings.statistics.subtitle",
-              "View system statistics",
-            )}
-            onPress={() => navigation.navigate("Statistics")}
-          />
-          <SettingsItem
             icon={<FileText color={theme.text} size={22} />}
             title={t("settings.legal.title")}
             subtitle={t("settings.legal.subtitle")}

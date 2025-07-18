@@ -3,15 +3,11 @@ import type { StackNavigationProp } from "@react-navigation/stack";
 import { useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
-import {
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from "react-native-reanimated";
+import { useSharedValue, withTiming } from "react-native-reanimated";
 import { Button } from "@/components/common/Button";
 import { AnimatedLogo } from "@/components/custom/AnimatedLogo";
 import { Page } from "@/components/page/Page";
-import type { AuthStackParamList } from "@/services/storage/types";
+import type { AuthStackParamList } from "@/types";
 
 type LoginScreenNavigationProp = StackNavigationProp<AuthStackParamList>;
 
@@ -21,10 +17,6 @@ export const Welcome = () => {
 
   const opacity = useSharedValue(0);
   const triggerConfettiRef = useRef<(() => void) | null>(null);
-
-  const animatedStyle = useAnimatedStyle(() => ({
-    opacity: opacity.value,
-  }));
 
   // Re-run animations when the screen comes back into focus
   useFocusEffect(

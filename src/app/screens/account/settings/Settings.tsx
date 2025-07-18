@@ -31,7 +31,7 @@ import { useLanguageOptions } from "@/hooks/account/useLanguageOptions";
 import { useUser } from "@/hooks/account/useUser";
 import { storage } from "@/services/storage/asyncStorage";
 import STORAGE_KEYS from "@/services/storage/constants";
-import type { SettingsNavigation } from "@/services/storage/types";
+import type { SettingsNavigation } from "@/types";
 import SettingCategory from "./components/SettingCategory";
 import SettingsItem from "./components/SettingsItem";
 
@@ -84,7 +84,6 @@ export const Settings = () => {
 
   return (
     <Page
-      goBack
       className="gap-6"
       refreshing={isPending}
       onRefresh={refetch}

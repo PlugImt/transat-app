@@ -70,12 +70,7 @@ export const ChangePassword = () => {
   };
 
   return (
-    <Page
-      goBack
-      className="gap-8"
-      title={t("account.changePassword")}
-      disableScroll
-    >
+    <Page className="gap-8" title={t("account.changePassword")} disableScroll>
       <Input
         label={t("account.currentPassword")}
         control={passwordControl}

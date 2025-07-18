@@ -1,7 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import { BottomTabNavigator } from "@/components/navigation/Navbar";
 import { screenOptions } from "@/navigation/navigationConfig";
-import type { AppStackParamList } from "@/services/storage/types";
+import type { AppStackParamList } from "@/types";
 
 const Stack = createStackNavigator<AppStackParamList>();
 

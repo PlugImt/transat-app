@@ -9,7 +9,6 @@ export const Olimtpe = () => {
 
   return (
     <Page
-      goBack
       title={t("services.olimtpe.title")}
       header={
         <AboutModal

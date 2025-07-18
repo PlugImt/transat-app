@@ -7,7 +7,7 @@ export const Legal = () => {
   const { t } = useTranslation();
 
   return (
-    <Page goBack className="gap-6" title={t("settings.legal.title")}>
+    <Page className="gap-6" title={t("settings.legal.title")}>
       <ScrollView className="flex-1 px-4" showsVerticalScrollIndicator={false}>
         <View className="gap-6">
           {/* Terms of Use Section */}

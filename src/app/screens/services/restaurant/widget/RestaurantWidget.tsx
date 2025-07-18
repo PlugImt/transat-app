@@ -11,7 +11,7 @@ import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { MenuItem } from "@/dto";
 import { useMenuRestaurant } from "@/hooks/useMenuRestaurant";
-import type { AppStackParamList } from "@/services/storage/types";
+import type { AppStackParamList } from "@/types";
 import { isDinner, isLunch, isWeekend, outOfService } from "@/utils";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;

@@ -132,7 +132,7 @@ export const Signup = () => {
   }, [opacity, translateY]);
 
   return (
-    <Page goBack title={t("auth.signUp")}>
+    <Page title={t("auth.signUp")}>
       <Animated.View style={[animatedStyle, { flex: 1 }]}>
         {signupError ? (
           <View className="bg-red-300 p-3 rounded-md my-4">

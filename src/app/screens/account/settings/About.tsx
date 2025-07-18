@@ -28,7 +28,6 @@ export const About = () => {
 
   return (
     <Page
-      goBack
       title={t("settings.about.title")}
       onConfettiTrigger={(trigger) => {
         triggerConfettiRef.current = trigger;

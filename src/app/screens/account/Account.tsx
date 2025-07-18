@@ -18,7 +18,7 @@ import { TextSkeleton } from "@/components/Skeleton";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useUser } from "@/hooks/account/useUser";
-import type { AccountNavigation } from "@/services/storage/types";
+import type { AccountNavigation } from "@/types";
 import { getStudentYear } from "@/utils";
 
 export const Account = () => {
@@ -48,6 +48,7 @@ export const Account = () => {
   if (isError && error) {
     return (
       <ErrorPage
+        title={t("common.account")}
         error={error}
         refetch={refetch}
         isRefetching={isPending}

@@ -39,7 +39,6 @@ export const Laundry = () => {
 
   return (
     <Page
-      goBack
       onRefresh={refetch}
       refreshing={isFetching}
       className="gap-6"

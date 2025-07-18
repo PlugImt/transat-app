@@ -11,7 +11,6 @@ export const LaundryLoadingState = () => {
 
   return (
     <Page
-      goBack
       className="gap-6"
       title={t("services.laundry.title")}
       header={<AboutSection />}

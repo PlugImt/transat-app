@@ -1,7 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import {
-  BarChart,
   Bell,
   FileText,
   Globe,

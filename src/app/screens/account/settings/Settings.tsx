@@ -37,7 +37,7 @@ import SettingsItem from "./components/SettingsItem";
 
 export const Settings = () => {
   const { theme, themeMode } = useTheme();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { logout } = useAuth();
   const { toast } = useToast();
   const queryClient = useQueryClient();

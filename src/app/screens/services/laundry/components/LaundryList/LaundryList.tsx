@@ -1,15 +1,15 @@
 import { View } from "react-native";
 import { Text } from "@/components/common/Text";
-import WashingMachineCard from "@/components/custom/card/WashingMachineCard";
+import LaundryCard from "@/components/custom/card/LaundryCard";
 import type { MachineData } from "@/dto";
 
-interface MachineProps {
+interface LaundryProps {
   title: string;
   items: MachineData[];
   icon: "WASHING MACHINE" | "DRYER";
 }
 
-export const MachineList = ({ title, items, icon }: MachineProps) => {
+export const LaundryList = ({ title, items, icon }: LaundryProps) => {
   if (items.length === 0) return null;
 
   return (
@@ -18,7 +18,7 @@ export const MachineList = ({ title, items, icon }: MachineProps) => {
         {title}
       </Text>
       {items.map((item) => (
-        <WashingMachineCard
+        <LaundryCard
           key={item.number}
           number={item.number.toString()}
           type={title}

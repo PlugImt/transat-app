@@ -3,7 +3,7 @@ export const QUERY_KEYS = {
   restaurantRating: ["restaurantRating"],
   timetable: ["timetable"],
   homework: ["homework"],
-  washingMachines: ["washingMachines"],
+  laundry: ["laundry"],
   weather: ["weather"],
   user: ["user"],
   traq: ["traq"],

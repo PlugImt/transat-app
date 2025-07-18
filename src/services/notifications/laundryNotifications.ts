@@ -1,7 +1,7 @@
 import * as Notifications from "expo-notifications";
 import { storage } from "@/services/storage/asyncStorage";
 
-export interface WashingMachineNotificationState {
+export interface LaundryNotificationState {
   machineNumber: string;
   notificationId: string;
   scheduledAt: number;
@@ -10,7 +10,7 @@ export interface WashingMachineNotificationState {
   endTime: number; // When the machine will be done
 }
 
-const NOTIFICATION_STORAGE_KEY = "washing_machine_notifications";
+const NOTIFICATION_STORAGE_KEY = "laundry_notifications";
 
 // Configure local notifications
 Notifications.setNotificationHandler({
@@ -23,15 +23,14 @@ Notifications.setNotificationHandler({
   }),
 });
 
-class WashingMachineNotificationService {
-  private notifications: Map<string, WashingMachineNotificationState> =
-    new Map();
+class LaundryNotificationService {
+  private notifications: Map<string, LaundryNotificationState> = new Map();
 
   async initialize() {
     // Load persisted notifications from storage
-    const stored = await storage.get<
-      Record<string, WashingMachineNotificationState>
-    >(NOTIFICATION_STORAGE_KEY);
+    const stored = await storage.get<Record<string, LaundryNotificationState>>(
+      NOTIFICATION_STORAGE_KEY,
+    );
 
     if (stored) {
       // Filter out expired notifications
@@ -88,7 +87,7 @@ class WashingMachineNotificationService {
       });
 
       // Save notification state
-      const notificationState: WashingMachineNotificationState = {
+      const notificationState: LaundryNotificationState = {
         machineNumber,
         notificationId,
         scheduledAt: now,
@@ -130,9 +129,7 @@ class WashingMachineNotificationService {
     return this.notifications.has(machineNumber);
   }
 
-  getNotificationState(
-    machineNumber: string,
-  ): WashingMachineNotificationState | null {
+  getNotificationState(machineNumber: string): LaundryNotificationState | null {
     return this.notifications.get(machineNumber) || null;
   }
 
@@ -173,5 +170,4 @@ class WashingMachineNotificationService {
   }
 }
 
-export const washingMachineNotificationService =
-  new WashingMachineNotificationService();
+export const laundryNotificationService = new LaundryNotificationService();

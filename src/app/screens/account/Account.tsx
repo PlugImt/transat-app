@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
-import { Lock, Mail, Medal, Phone, Settings } from "lucide-react-native";
+import { Mail, Phone, Settings } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import {

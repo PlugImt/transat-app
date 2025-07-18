@@ -123,25 +123,24 @@ export const Settings = () => {
       </SettingCategory>
 
       <SettingCategory title={t("common.other")}>
-      <SettingsItem
-            icon={<HelpCircle color={theme.text} size={22} />}
-            title={t("settings.help.title")}
-            subtitle={t("settings.contactSupport")}
-            onPress={() => navigation.navigate("Help")}
-          />
-          <SettingsItem
-            icon={<Info color={theme.text} size={22} />}
-            title={t("settings.about.title")}
-            subtitle={t("common.knowMore")}
-            onPress={() => navigation.navigate("About")}
-          />
-          <SettingsItem
-            icon={<FileText color={theme.text} size={22} />}
-            title={t("settings.legal.title")}
-            subtitle={t("settings.legal.subtitle")}
-            onPress={() => navigation.navigate("Legal")}
-          />
-
+        <SettingsItem
+          icon={<HelpCircle color={theme.text} size={22} />}
+          title={t("settings.help.title")}
+          subtitle={t("settings.contactSupport")}
+          onPress={() => navigation.navigate("Help")}
+        />
+        <SettingsItem
+          icon={<Info color={theme.text} size={22} />}
+          title={t("settings.about.title")}
+          subtitle={t("common.knowMore")}
+          onPress={() => navigation.navigate("About")}
+        />
+        <SettingsItem
+          icon={<FileText color={theme.text} size={22} />}
+          title={t("settings.legal.title")}
+          subtitle={t("settings.legal.subtitle")}
+          onPress={() => navigation.navigate("Legal")}
+        />
 
         {process.env.NODE_ENV === "development" && (
           <SettingsItem

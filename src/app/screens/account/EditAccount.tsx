@@ -6,13 +6,12 @@ import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Keyboard, TouchableOpacity, View } from "react-native";
-import { z } from "zod";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from "@/components/common/Avatar";
-import { Button } from "@/components/common/Button";
+import { Button, IconButton } from "@/components/common/Button";
 import Dropdown, { DropdownLoading } from "@/components/common/Dropdown";
 import Input, { InputLoading } from "@/components/common/Input";
 import { Text } from "@/components/common/Text";
@@ -163,43 +162,42 @@ export const EditProfile = () => {
         <Text variant="h3" className="ml-4">
           {t("account.personalInfo")}
         </Text>
-        <Card>
-          <Input
-            control={userControl}
-            label={t("account.firstName")}
-            name="first_name"
-            returnKeyType="go"
-            textContentType="name"
-            error={userErrors.first_name?.message}
-          />
+        <Input
+          control={userControl}
+          label={t("account.firstName")}
+          name="first_name"
+          returnKeyType="go"
+          textContentType="name"
+          error={userErrors.first_name?.message}
+        />
 
-          <Input
-            control={userControl}
-            label={t("account.lastName")}
-            name="last_name"
-            textContentType="familyName"
-            error={userErrors.last_name?.message}
-          />
+        <Input
+          control={userControl}
+          label={t("account.lastName")}
+          name="last_name"
+          textContentType="familyName"
+          error={userErrors.last_name?.message}
+        />
 
-          <Input
-            control={userControl}
-            label={t("account.email")}
-            name="email"
-            autoCapitalize="none"
-            textContentType="emailAddress"
-            error={userErrors.email?.message}
-            disabled={true}
-            className="opacity-50"
-          />
+        <Input
+          control={userControl}
+          label={t("account.email")}
+          name="email"
+          autoCapitalize="none"
+          textContentType="emailAddress"
+          error={userErrors.email?.message}
+          disabled={true}
+          className="opacity-50"
+        />
 
-          <Input
-            control={userControl}
-            label={t("account.phone")}
-            name="phone_number"
-            textContentType="telephoneNumber"
-            error={userErrors.phone_number?.message}
-            keyboardType="phone-pad"
-          />
+        <Input
+          control={userControl}
+          label={t("account.phone")}
+          name="phone_number"
+          textContentType="telephoneNumber"
+          error={userErrors.phone_number?.message}
+          keyboardType="phone-pad"
+        />
 
         <Controller
           control={userControl}
@@ -232,20 +230,21 @@ export const EditProfile = () => {
           )}
         />
       </View>
-
       <View className="gap-2">
-      <Button
-        label={t("common.save")}
-        onPress={handleUserSubmit(handleUpdateAccount)}
-        loading={isUpdatingAccount}
-        disabled={!isDirty || !isUserValid || Object.keys(userErrors).length > 0}
-      />
+        <Button
+          label={t("common.save")}
+          onPress={handleUserSubmit(handleUpdateAccount)}
+          loading={isUpdatingAccount}
+          disabled={
+            !isDirty || !isUserValid || Object.keys(userErrors).length > 0
+          }
+        />
 
-      <Button
-        label={t("common.cancel")}
-        onPress={() => navigation.goBack()}
-        variant="secondary"
-      />
+        <Button
+          label={t("common.cancel")}
+          onPress={() => navigation.goBack()}
+          variant="secondary"
+        />
       </View>
     </Page>
   );

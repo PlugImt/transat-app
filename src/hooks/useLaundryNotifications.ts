@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
-import { washingMachineNotificationService } from "@/services/notifications/washingMachineNotifications";
+import { laundryNotificationService } from "@/services/notifications/laundryNotifications";
 
-export const useWashingMachineNotifications = (machineNumber: string) => {
+export const useLaundryNotifications = (machineNumber: string) => {
   const [isNotificationSet, setIsNotificationSet] = useState(false);
   const [_forceUpdate, setForceUpdate] = useState(0);
 
   useEffect(() => {
     // Check initial state
     const checkNotificationState = () => {
-      const isSet =
-        washingMachineNotificationService.isNotificationSet(machineNumber);
+      const isSet = laundryNotificationService.isNotificationSet(machineNumber);
       setIsNotificationSet(isSet);
     };
 
@@ -26,13 +25,12 @@ export const useWashingMachineNotifications = (machineNumber: string) => {
     timeRemaining: number,
     minutesBefore = 5,
   ): Promise<boolean> => {
-    const success =
-      await washingMachineNotificationService.scheduleNotification(
-        machineNumber,
-        machineType,
-        timeRemaining,
-        minutesBefore,
-      );
+    const success = await laundryNotificationService.scheduleNotification(
+      machineNumber,
+      machineType,
+      timeRemaining,
+      minutesBefore,
+    );
 
     if (success) {
       setForceUpdate((prev) => prev + 1);
@@ -43,7 +41,7 @@ export const useWashingMachineNotifications = (machineNumber: string) => {
 
   const cancelNotification = async (): Promise<boolean> => {
     const success =
-      await washingMachineNotificationService.cancelNotification(machineNumber);
+      await laundryNotificationService.cancelNotification(machineNumber);
 
     if (success) {
       setForceUpdate((prev) => prev + 1);
@@ -53,7 +51,7 @@ export const useWashingMachineNotifications = (machineNumber: string) => {
   };
 
   const shouldDisableButton = (timeRemaining: number): boolean => {
-    return washingMachineNotificationService.shouldDisableNotificationButton(
+    return laundryNotificationService.shouldDisableNotificationButton(
       machineNumber,
       timeRemaining,
     );

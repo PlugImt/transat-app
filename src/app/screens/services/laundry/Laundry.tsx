@@ -3,15 +3,15 @@ import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { Text } from "@/components/common/Text";
 import { Page } from "@/components/page/Page";
-import { useWashingMachines } from "@/hooks/useWashingMachines";
+import { useLaundry } from "@/hooks/useLaundry";
 import {
   AboutSection,
   ErrorState,
-  MachineList,
-  WashingMachineLoadingState,
+  LaundryList,
+  LaundryLoadingState,
 } from "./components";
 
-export const WashingMachines = () => {
+export const Laundry = () => {
   const { t } = useTranslation();
   const [_aboutPopupVisible, _setAboutPopupVisible] = useState(false);
 
@@ -24,43 +24,42 @@ export const WashingMachines = () => {
     isFetching,
     isPending,
     refetch,
-  } = useWashingMachines();
+  } = useLaundry();
 
-  if (isPending) return <WashingMachineLoadingState />;
+  if (isPending) return <LaundryLoadingState />;
 
   if (isError)
     return (
       <ErrorState
         error={error}
-        title={t("services.washingMachine.title")}
+        title={t("services.laundry.title")}
         onRefresh={refetch}
       />
     );
 
   return (
     <Page
-      goBack
       onRefresh={refetch}
       refreshing={isFetching}
       className="gap-6"
-      title={t("services.washingMachine.title")}
+      title={t("services.laundry.title")}
       header={<AboutSection />}
     >
       {isEmpty ? (
         <View className="min-h-screen flex justify-center items-center">
           <Text variant="h1" className="text-center">
-            {t("services.washingMachine.noMachine")}
+            {t("services.laundry.noMachine")}
           </Text>
         </View>
       ) : (
         <>
-          <MachineList
-            title={t("services.washingMachine.washingMachine")}
+          <LaundryList
+            title={t("services.laundry.washingMachine")}
             items={washingMachines}
             icon="WASHING MACHINE"
           />
-          <MachineList
-            title={t("services.washingMachine.dryer")}
+          <LaundryList
+            title={t("services.laundry.dryer")}
             items={dryers}
             icon="DRYER"
           />
@@ -70,4 +69,4 @@ export const WashingMachines = () => {
   );
 };
 
-export default WashingMachines;
+export default Laundry;

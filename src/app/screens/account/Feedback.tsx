@@ -87,7 +87,7 @@ export const Feedback = () => {
   };
 
   return (
-    <Page title={t("settings.feedback.title")} className="flex-1" goBack>
+    <Page title={t("settings.feedback.title")} className="flex-1">
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         className="flex-1"

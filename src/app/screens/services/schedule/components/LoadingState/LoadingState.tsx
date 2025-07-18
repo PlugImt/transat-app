@@ -9,7 +9,6 @@ export const LoadingState = () => {
 
   return (
     <Page
-      goBack
       title={t("services.timetable.title")}
       header={
         <AboutModal

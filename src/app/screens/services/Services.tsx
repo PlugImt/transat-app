@@ -10,8 +10,8 @@ import { Empty } from "@/components/page/Empty";
 import { Page } from "@/components/page/Page";
 import { useAnimatedHeader } from "@/hooks/useAnimatedHeader";
 import { useServicePreferences } from "@/hooks/usePreferences";
-import type { AppStackParamList } from "@/services/storage/types";
 import type { Preference } from "@/services/storage/widgetPreferences";
+import type { AppStackParamList } from "@/types";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 

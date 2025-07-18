@@ -6,7 +6,7 @@ import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Platform, Text } from "react-native";
+import { Platform, View } from "react-native";
 import Animated from "react-native-reanimated";
 import { HomeworkWidget } from "@/app/screens/services/homework/widget/HomeworkWidget";
 import { HomeworkWidgetLoading } from "@/app/screens/services/homework/widget/HomeworkWidgetLoading";
@@ -16,14 +16,12 @@ import {
 } from "@/app/screens/services/restaurant/widget/RestaurantWidget";
 import { TimetableLoadingWidget } from "@/app/screens/services/schedule/widget/TimetableLoadingWidget";
 import TimetableWidget from "@/app/screens/services/schedule/widget/TimetableWidget";
-import WashingMachineWidget, {
-  WashingMachineWidgetLoading,
-} from "@/app/screens/services/washing-machines/widget/WashingMachineWidget";
 import {
   WeatherSkeleton,
   WeatherWidget,
 } from "@/app/screens/services/weather/widget/WeatherWidget";
 import { Button } from "@/components/common/Button";
+import { Text } from "@/components/common/Text";
 import { PreferenceCustomizationButton } from "@/components/custom/PreferenceCustomizationModal";
 import { Empty } from "@/components/page/Empty";
 import { Page } from "@/components/page/Page";
@@ -33,9 +31,12 @@ import useAuth from "@/hooks/account/useAuth";
 import { useUser } from "@/hooks/account/useUser";
 import { useAnimatedHeader } from "@/hooks/useAnimatedHeader";
 import { useHomeWidgetPreferences } from "@/hooks/usePreferences";
-import { washingMachineNotificationService } from "@/services/notifications/washingMachineNotifications";
-import type { AppStackParamList } from "@/services/storage/types";
+import { laundryNotificationService } from "@/services/notifications/laundryNotifications";
+import type { AppStackParamList } from "@/types";
 import { isDinner, isLunch, isWeekend } from "@/utils";
+import LaundryWidget, {
+  LaundryWidgetLoading,
+} from "../services/laundry/widget/LaundryWidget";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -115,11 +116,11 @@ export const Home = () => {
 
   useEffect(() => {
     // Initialize notification service
-    washingMachineNotificationService.initialize();
+    laundryNotificationService.initialize();
 
     // Clean up old notifications periodically
     const cleanupInterval = setInterval(() => {
-      washingMachineNotificationService.cleanup();
+      laundryNotificationService.cleanup();
     }, 60000); // Check every minute
 
     registerForPushNotificationsAsync()
@@ -175,9 +176,9 @@ export const Home = () => {
     useIsFetching({
       queryKey: QUERY_KEYS.homework,
     }) > 0;
-  const isWashingMachinesFetching =
+  const isLaundrysFetching =
     useIsFetching({
-      queryKey: QUERY_KEYS.washingMachines,
+      queryKey: QUERY_KEYS.laundry,
     }) > 0;
   const isWeatherFetching =
     useIsFetching({
@@ -187,7 +188,7 @@ export const Home = () => {
     isMenuFetching ||
     isTimetableFetching ||
     isHomeworkFetching ||
-    isWashingMachinesFetching ||
+    isLaundrysFetching ||
     isWeatherFetching;
 
   const refetch = async () => {
@@ -195,7 +196,7 @@ export const Home = () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.restaurantMenu }),
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.homework }),
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.timetable }),
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.washingMachines }),
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.laundry }),
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.weather }),
     ]);
   };
@@ -205,7 +206,7 @@ export const Home = () => {
     restaurant: <RestaurantWidget />,
     timetable: <TimetableWidget />,
     homework: <HomeworkWidget />,
-    washingMachine: <WashingMachineWidget />,
+    laundry: <LaundryWidget />,
   };
 
   const getWidgetComponent = useCallback(
@@ -223,15 +224,19 @@ export const Home = () => {
     <Page
       asChildren
       refreshing={isFetching}
-      onRefresh={refetch}
       className="gap-8"
+      onRefresh={refetch}
       title={
-        <Text className="font-bold text-3xl ml-4" style={{ color: theme.text }}>
-          {t("common.welcome")}
+        <View className="flex-row gap-2 items-center">
+          <Text variant="h1" color="text">
+            {t("common.welcome")}
+          </Text>
           {user?.first_name && (
-            <Text style={{ color: theme.primary }}> {user.first_name}</Text>
+            <Text variant="h1" color="primary">
+              {user.first_name}
+            </Text>
           )}
-        </Text>
+        </View>
       }
     >
       <Animated.FlatList
@@ -277,7 +282,7 @@ export const HomeLoading = () => {
       ) : null}
       <TimetableLoadingWidget />
       <HomeworkWidgetLoading />
-      <WashingMachineWidgetLoading />
+      <LaundryWidgetLoading />
     </Page>
   );
 };

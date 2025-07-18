@@ -19,12 +19,12 @@ import {
   Clubs,
   Games,
   Homework,
+  Laundry,
   Olimtpe,
   Restaurant,
   RestaurantReviews,
   Timetable,
   Traq,
-  WashingMachines,
 } from "@/app/screens/services";
 import { HomeworkDetails } from "@/app/screens/services/homework/components/HomeworkDetails";
 import { Services } from "@/app/screens/services/Services";
@@ -37,8 +37,8 @@ const Tab = createBottomTabNavigator<BottomTabParamList>();
 const HomeStack = createStackNavigator();
 const HomeStackScreen = () => (
   <HomeStack.Navigator screenOptions={{ headerShown: false }}>
-    <HomeStack.Screen name="HomeScreen" component={Home} />
-    <HomeStack.Screen name="WashingMachine" component={WashingMachines} />
+    <HomeStack.Screen name="Home" component={Home} />
+    <HomeStack.Screen name="Laundry" component={Laundry} />
     <HomeStack.Screen name="Restaurant" component={Restaurant} />
     <HomeStack.Screen name="RestaurantReviews" component={RestaurantReviews} />
     <HomeStack.Screen name="Olimtpe" component={Olimtpe} />
@@ -51,8 +51,8 @@ const HomeStackScreen = () => (
 const ServicesStack = createStackNavigator();
 const ServicesStackScreen = () => (
   <ServicesStack.Navigator screenOptions={{ headerShown: false }}>
-    <ServicesStack.Screen name="ServicesScreen" component={Services} />
-    <ServicesStack.Screen name="WashingMachine" component={WashingMachines} />
+    <ServicesStack.Screen name="Services" component={Services} />
+    <ServicesStack.Screen name="Laundry" component={Laundry} />
     <ServicesStack.Screen name="Restaurant" component={Restaurant} />
     <ServicesStack.Screen
       name="RestaurantReviews"
@@ -70,7 +70,7 @@ const ServicesStackScreen = () => (
 const GamesStack = createStackNavigator();
 const GamesStackScreen = () => (
   <GamesStack.Navigator screenOptions={{ headerShown: false }}>
-    <GamesStack.Screen name="GamesScreen" component={Games} />
+    <GamesStack.Screen name="Games" component={Games} />
   </GamesStack.Navigator>
 );
 
@@ -78,7 +78,7 @@ const AccountStack = createStackNavigator();
 
 const AccountStackScreen = () => (
   <AccountStack.Navigator screenOptions={{ headerShown: false }}>
-    <AccountStack.Screen name="AccountScreen" component={Account} />
+    <AccountStack.Screen name="Account" component={Account} />
     <AccountStack.Screen name="EditProfile" component={EditProfile} />
     <AccountStack.Screen name="Feedback" component={Feedback} />
     <AccountStack.Screen name="Settings" component={Settings} />
@@ -114,7 +114,7 @@ export const BottomTabNavigator = () => {
       }}
     >
       <Tab.Screen
-        name="Home"
+        name="HomeScreen"
         component={HomeStackScreen}
         options={{
           tabBarLabel: t("common.home"),
@@ -124,7 +124,7 @@ export const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Services"
+        name="ServicesScreen"
         component={ServicesStackScreen}
         options={{
           tabBarLabel: t("services.title"),
@@ -134,7 +134,7 @@ export const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Games"
+        name="GamesScreen"
         component={GamesStackScreen}
         options={{
           tabBarLabel: t("games.title"),
@@ -142,7 +142,7 @@ export const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Account"
+        name="AccountScreen"
         component={AccountStackScreen}
         options={{
           tabBarLabel: t("common.account"),

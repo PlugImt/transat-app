@@ -10,7 +10,7 @@ import { Button } from "@/components/common/Button";
 import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
 import type { User } from "@/dto";
-import type { AccountNavigation } from "@/services/storage/types";
+import type { AccountNavigation } from "@/types";
 
 interface AccountCardProps {
   user?: User;

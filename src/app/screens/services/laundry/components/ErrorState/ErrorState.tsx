@@ -11,7 +11,7 @@ export const ErrorState = ({
   title: string;
   onRefresh: () => void;
 }) => (
-  <Page goBack refreshing={false} onRefresh={onRefresh}>
+  <Page refreshing={false} onRefresh={onRefresh}>
     <Text variant="h1" className="m-4">
       {title}
     </Text>

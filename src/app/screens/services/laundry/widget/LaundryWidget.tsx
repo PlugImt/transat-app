@@ -8,18 +8,17 @@ import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
-import { useWashingMachines } from "@/hooks/useWashingMachines";
-import type { AppStackParamList } from "@/services/storage/types";
+import { useLaundry } from "@/hooks/useLaundry";
+import type { AppStackParamList } from "@/types";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
-export const WashingMachineWidget = () => {
+export const LaundryWidget = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<AppScreenNavigationProp>();
   const { theme } = useTheme();
 
-  const { dryers, washingMachines, isPending, isError, error } =
-    useWashingMachines();
+  const { dryers, washingMachines, isPending, isError, error } = useLaundry();
 
   const [totalWashers, setTotalWashers] = useState<number>(0);
   const [totalDryers, setTotalDryers] = useState<number>(0);
@@ -37,7 +36,7 @@ export const WashingMachineWidget = () => {
   }, [dryers, washingMachines]);
 
   if (isPending) {
-    return <WashingMachineWidgetLoading />;
+    return <LaundryWidgetLoading />;
   }
 
   if (isError || error || !dryers || !washingMachines) {
@@ -47,10 +46,10 @@ export const WashingMachineWidget = () => {
   return (
     <View className="flex flex-col gap-2">
       <Text className="ml-4" variant="h3">
-        {t("services.washingMachine.title")}
+        {t("services.laundry.title")}
       </Text>
       <Card
-        onPress={() => navigation.navigate("WashingMachine")}
+        onPress={() => navigation.navigate("Laundry")}
         className="flex-row justify-between gap-6"
       >
         <View className="items-center">
@@ -67,7 +66,7 @@ export const WashingMachineWidget = () => {
             variant="sm"
             color="muted"
           >
-            {t("services.washingMachine.machineAvailable")}
+            {t("services.laundry.machineAvailable")}
           </Text>
         </View>
         <View className="items-center">
@@ -84,7 +83,7 @@ export const WashingMachineWidget = () => {
             variant="sm"
             color="muted"
           >
-            {t("services.washingMachine.dryerAvailable")}
+            {t("services.laundry.dryerAvailable")}
           </Text>
         </View>
       </Card>
@@ -92,18 +91,18 @@ export const WashingMachineWidget = () => {
   );
 };
 
-export default WashingMachineWidget;
+export default LaundryWidget;
 
-export const WashingMachineWidgetLoading = () => {
+export const LaundryWidgetLoading = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<AppScreenNavigationProp>();
   const { theme } = useTheme();
 
   return (
     <View className="flex flex-col gap-2">
-      <Text variant="h3">{t("services.washingMachine.title")}</Text>
+      <Text variant="h3">{t("services.laundry.title")}</Text>
       <Card
-        onPress={() => navigation.navigate("WashingMachine")}
+        onPress={() => navigation.navigate("Laundry")}
         className="flex-row justify-between gap-6"
       >
         <View className="items-center gap-2">
@@ -116,7 +115,7 @@ export const WashingMachineWidgetLoading = () => {
             variant="sm"
             color="muted"
           >
-            {t("services.washingMachine.machineAvailable")}
+            {t("services.laundry.machineAvailable")}
           </Text>
         </View>
         <View className="items-center gap-2">
@@ -128,7 +127,7 @@ export const WashingMachineWidgetLoading = () => {
             variant="sm"
             color="muted"
           >
-            {t("services.washingMachine.dryerAvailable")}
+            {t("services.laundry.dryerAvailable")}
           </Text>
         </View>
       </Card>

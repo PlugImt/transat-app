@@ -11,7 +11,7 @@ import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useLanguageOptions } from "@/hooks/account/useLanguageOptions";
 import { useUpdateLanguage } from "@/hooks/account/useUpdateLanguage";
-import type { SettingsNavigation } from "@/services/storage/types";
+import type { SettingsNavigation } from "@/types";
 import SettingCategory from "./components/SettingCategory";
 import { SettingsItem } from "./components/SettingsItem";
 
@@ -36,7 +36,7 @@ export const Language = () => {
   };
 
   return (
-    <Page goBack title={t("settings.language.language")}>
+    <Page title={t("settings.language.language")}>
       {currentLanguageOption && (
         <MotiView
           animate={{

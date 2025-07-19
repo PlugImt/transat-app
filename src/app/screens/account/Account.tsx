@@ -41,7 +41,7 @@ export const Account = () => {
     navigation.navigate("EditProfile");
   };
 
-  if (isPending) {
+  if (!isPending) {
     return <AccountLoading />;
   }
 

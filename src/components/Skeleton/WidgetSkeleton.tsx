@@ -28,9 +28,7 @@ export const WidgetSkeleton = ({
         <TextSkeleton lines={1} width="40%" variant="h2" className="mb-1" />
       )}
       <View style={{ backgroundColor: theme.card }} className="p-4 rounded-lg">
-        {contentType === "default" && (
-          <TextSkeleton lines={4} width="100%" spacing={8} />
-        )}
+        {contentType === "default" && <TextSkeleton lines={4} width="100%" />}
 
         {contentType === "grid" && (
           <View className="flex-row flex-wrap">

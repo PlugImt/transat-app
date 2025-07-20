@@ -1,6 +1,10 @@
 import { type ComponentPropsWithoutRef, cloneElement } from "react";
-import { Text, TouchableOpacity, type ViewStyle } from "react-native";
-import { Skeleton } from "@/components/Skeleton";
+import {
+  ActivityIndicator,
+  TouchableOpacity,
+  type ViewStyle,
+} from "react-native";
+import { Text } from "@/components/common/Text";
 import { type ThemeType, useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";
 
@@ -14,7 +18,7 @@ interface ButtonProps
   variant?: ButtonVariant;
   size?: ButtonSize;
   icon?: React.ReactNode;
-  loading?: boolean;
+  isUpdating?: boolean;
 }
 
 const Button = ({
@@ -24,11 +28,11 @@ const Button = ({
   variant = "default",
   size = "default",
   icon,
-  loading,
+  isUpdating,
   ...props
 }: ButtonProps) => {
   const { theme } = useTheme();
-  const isDisabled = props.disabled || loading;
+  const isDisabled = props.disabled || isUpdating;
 
   const buttonStyle = getButtonStyle(variant, theme);
   const textColor = getTextColor(variant, theme);
@@ -38,42 +42,27 @@ const Button = ({
     <TouchableOpacity
       style={[
         {
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "center",
-          borderRadius: 12,
-          gap: 8,
           ...buttonStyle,
           ...sizeStyles,
           opacity: isDisabled ? 0.5 : 1,
         },
       ]}
-      className={className}
+      className={cn(
+        className,
+        "rounded-lg gap-2 flex-row items-center justify-center",
+      )}
       {...props}
       disabled={isDisabled}
     >
       <Text
         style={{
           color: textColor,
-          fontSize: sizeStyles.fontSize,
-          fontWeight: "500",
-          textAlign: "center",
-          textDecorationLine: variant === "link" ? "underline" : "none",
         }}
-        className={labelClasses}
+        className={cn(labelClasses, "text-center")}
       >
         {label}
       </Text>
-      {loading ? (
-        <Skeleton
-          width={20}
-          height={20}
-          variant="circle"
-          className="bg-white opacity-80"
-        />
-      ) : (
-        icon
-      )}
+      {isUpdating ? <ActivityIndicator color={textColor} /> : icon}
     </TouchableOpacity>
   );
 };
@@ -86,12 +75,12 @@ const IconButton = ({
   icon,
   variant = "default",
   size = "default",
-  loading,
+  isUpdating,
   className,
   ...props
 }: IconButtonProps) => {
   const { theme } = useTheme();
-  const isDisabled = props.disabled || loading;
+  const isDisabled = props.disabled || isUpdating;
 
   const buttonStyle = variant === "default" && getButtonStyle(variant, theme);
   const sizeStyles = getSizeStyles(size);
@@ -101,24 +90,20 @@ const IconButton = ({
     <TouchableOpacity
       style={[
         {
-          alignItems: "center",
-          justifyContent: "center",
           ...buttonStyle,
           ...sizeStyles,
           opacity: isDisabled ? 0.5 : 1,
         },
       ]}
-      className={cn(className, "rounded-full aspect-square")}
-      {...props}
+      className={cn(
+        className,
+        "rounded-full aspect-square items-center justify-center",
+      )}
       disabled={isDisabled}
+      {...props}
     >
-      {loading ? (
-        <Skeleton
-          width={20}
-          height={20}
-          variant="circle"
-          className="bg-white opacity-80"
-        />
+      {isUpdating ? (
+        <ActivityIndicator color={iconColor} />
       ) : (
         cloneElement(icon, {
           color: iconColor,
@@ -171,18 +156,15 @@ const getSizeStyles = (size: ButtonSize) => {
     [key: string]: {
       height: number;
       paddingHorizontal: number;
-      fontSize: number;
     };
   } = {
     default: {
       height: 40,
       paddingHorizontal: 16,
-      fontSize: 16,
     },
     sm: {
       height: 32,
       paddingHorizontal: 8,
-      fontSize: 14,
     },
   };
 

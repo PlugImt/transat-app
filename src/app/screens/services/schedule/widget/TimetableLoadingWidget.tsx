@@ -12,7 +12,7 @@ export const TimetableLoadingWidget = () => {
 
   return (
     <View className="flex flex-col gap-2">
-      <TextSkeleton lines={1} lastLineWidth={128} />
+      <TextSkeleton lastLineWidth={128} />
       <TouchableOpacity
         onPress={() => navigation.navigate("Timetable")}
         className="px-6 py-4 rounded-lg flex flex-col gap-6"
@@ -20,13 +20,13 @@ export const TimetableLoadingWidget = () => {
       >
         <View className="flex flex-col gap-2">
           {[...Array(skeletonCount()).keys()].map((index) => (
-            <TextSkeleton lines={1} key={index} />
+            <TextSkeleton key={index} />
           ))}
         </View>
 
         <View className="flex flex-col gap-2">
           {[...Array(skeletonCount()).keys()].map((index) => (
-            <TextSkeleton lines={1} key={index} />
+            <TextSkeleton key={index} />
           ))}
         </View>
 

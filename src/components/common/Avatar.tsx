@@ -1,7 +1,6 @@
 import { forwardRef, useState } from "react";
 import { Image, View } from "react-native";
 import { Text } from "@/components/common/Text";
-import { Skeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";
 
@@ -50,8 +49,6 @@ const AvatarImage = forwardRef<
 
   return (
     <View className={cn("absolute inset-0 h-full w-full z-10", className)}>
-      {isLoading && <AvatarLoading className="absolute inset-0 z-20" />}
-
       <Image
         ref={ref}
         source={source}
@@ -92,14 +89,5 @@ const AvatarFallback = forwardRef<
   );
 });
 AvatarFallback.displayName = "AvatarFallback";
-
-const AvatarLoading = ({ className }: AvatarImageProps) => (
-  <Skeleton
-    variant="circle"
-    width="100%"
-    height="100%"
-    className={cn("aspect-square h-full w-full", className)}
-  />
-);
 
 export { Avatar, AvatarImage, AvatarFallback };

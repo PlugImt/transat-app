@@ -24,9 +24,7 @@ export const WidgetSkeleton = ({
 
   return (
     <View className={`flex flex-col gap-2 ${className}`}>
-      {title && (
-        <TextSkeleton lines={1} width="40%" variant="h2" className="mb-1" />
-      )}
+      {title && <TextSkeleton width="40%" variant="h2" className="mb-1" />}
       <View style={{ backgroundColor: theme.card }} className="p-4 rounded-lg">
         {contentType === "default" && <TextSkeleton lines={4} width="100%" />}
 
@@ -44,8 +42,8 @@ export const WidgetSkeleton = ({
                   variant="rounded"
                   className="mb-2"
                 />
-                <TextSkeleton lines={1} width="80%" className="mb-1" />
-                <TextSkeleton lines={1} width="60%" variant="sm" />
+                <TextSkeleton width="80%" className="mb-1" />
+                <TextSkeleton width="60%" variant="sm" />
               </View>
             ))}
           </View>
@@ -67,13 +65,8 @@ export const WidgetSkeleton = ({
                   className="mr-3"
                 />
                 <View className="flex-1">
-                  <TextSkeleton
-                    lines={1}
-                    width="60%"
-                    variant="lg"
-                    className="mb-1"
-                  />
-                  <TextSkeleton lines={1} width="40%" variant="sm" />
+                  <TextSkeleton width="60%" variant="lg" className="mb-1" />
+                  <TextSkeleton width="40%" variant="sm" />
                 </View>
               </View>
             ))}

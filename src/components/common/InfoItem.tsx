@@ -19,7 +19,7 @@ const InfoItem = ({ icon, label, value }: InfoItemProps) => {
             {value}
           </Text>
         ) : (
-          <TextSkeleton lines={1} variant="sm" />
+          <TextSkeleton variant="sm" />
         )}
       </View>
     </View>

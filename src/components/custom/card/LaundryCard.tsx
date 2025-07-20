@@ -431,7 +431,7 @@ export const LaundryCardSkeleton = ({ icon }: LaundryCardSkeletonProps) => {
           N°--
         </Text>
       </View>
-      <TextSkeleton lines={1} lastLineWidth={100} />
+      <TextSkeleton lastLineWidth={100} />
 
       <BadgeLoading />
 

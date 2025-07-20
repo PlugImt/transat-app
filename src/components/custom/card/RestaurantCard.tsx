@@ -93,7 +93,7 @@ export const RestaurantCardLoading = ({
 
       <View className="flex flex-col gap-4">
         {[...Array(skeletonCount).keys()].map((index) => (
-          <TextSkeleton key={index} lines={1} />
+          <TextSkeleton key={index} />
         ))}
       </View>
     </View>

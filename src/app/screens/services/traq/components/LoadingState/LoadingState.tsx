@@ -16,7 +16,7 @@ export const LoadingState = () => {
       header={<AboutSection />}
     >
       <View className="flex-row justify-between items-center">
-        <TextSkeleton lines={1} variant="h2" lastLineWidth={100} />
+        <TextSkeleton variant="h2" lastLineWidth={100} />
       </View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {[...Array(3).keys()].map((index) => (

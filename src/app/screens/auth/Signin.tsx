@@ -125,7 +125,7 @@ export const Signin = () => {
             onPress={handleSubmit(handleLogin)}
             disabled={isButtonDisabled}
             className={isButtonDisabled ? "opacity-50" : ""}
-            loading={isLoading}
+            isUpdating={isLoading}
           />
 
           {loginError && (

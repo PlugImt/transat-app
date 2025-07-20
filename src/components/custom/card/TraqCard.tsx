@@ -1,10 +1,9 @@
 import { BadgeEuro, Beer, CircleX, Clock } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { Dimensions, Image, View } from "react-native";
-import { Avatar, AvatarImage } from "@/components/common/Avatar";
 import Badge from "@/components/common/Badge";
 import { Text } from "@/components/common/Text";
-import { TextSkeleton } from "@/components/Skeleton";
+import { AvatarSkeleton, TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 
 interface CardProps {
@@ -122,12 +121,10 @@ export const TraqCardLoading = () => {
       style={{ backgroundColor: theme.card }}
       className="px-6 py-8 rounded-lg gap-6 relative items-center"
     >
-      <Avatar className="w-40 h-40">
-        <AvatarImage loading />
-      </Avatar>
+      <AvatarSkeleton size={160} />
 
       <View className="gap-2 items-center justify-center">
-        <TextSkeleton variant="h2" lines={1} lastLineWidth={200} />
+        <TextSkeleton variant="h2" lastLineWidth={200} />
         <TextSkeleton variant="sm" lines={2} width={300} />
       </View>
 
@@ -137,7 +134,7 @@ export const TraqCardLoading = () => {
             <Beer size={18} color={theme.text} />
             <Text className="font-bold">{t("services.traq.alcohol")}</Text>
           </View>
-          <TextSkeleton lines={1} lastLineWidth={50} />
+          <TextSkeleton lastLineWidth={50} />
         </View>
 
         <View className="flex flex-row justify-between items-center">
@@ -145,7 +142,7 @@ export const TraqCardLoading = () => {
             <BadgeEuro size={18} color={theme.text} />
             <Text className="font-bold">{t("services.traq.price")}</Text>
           </View>
-          <TextSkeleton lines={1} lastLineWidth={50} />
+          <TextSkeleton lastLineWidth={50} />
         </View>
       </View>
     </View>

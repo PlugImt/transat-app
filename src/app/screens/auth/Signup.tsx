@@ -171,7 +171,7 @@ export const Signup = () => {
             onPress={handleSubmit(handleSignup)}
             disabled={isButtonDisabled}
             className={isButtonDisabled ? "opacity-50" : ""}
-            loading={isLoading}
+            isUpdating={isLoading}
           />
           <Button
             label={t("auth.gotAccount")}

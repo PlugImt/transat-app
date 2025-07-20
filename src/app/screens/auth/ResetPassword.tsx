@@ -258,7 +258,7 @@ export const ResetPassword = () => {
                 className={
                   isButtonDisabled || !canRequestCode ? "opacity-50" : ""
                 }
-                loading={isLoading}
+                isUpdating={isLoading}
               />
             ) : (
               <Button
@@ -270,7 +270,7 @@ export const ResetPassword = () => {
                 onPress={handleSubmit(handleResetPassword)}
                 disabled={isButtonDisabled}
                 className={isButtonDisabled ? "opacity-50" : ""}
-                loading={isLoading}
+                isUpdating={isLoading}
               />
             )}
             {!canRequestCode && (

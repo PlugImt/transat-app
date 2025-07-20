@@ -19,7 +19,6 @@ export type ThemeType = {
   text: string;
   muted: string;
   textTertiary: string;
-  foregroundPlaceholder: string;
   card: string;
   primary: string;
   secondary: string;

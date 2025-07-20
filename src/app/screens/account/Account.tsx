@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
-import { Mail, MessageSquare, Phone, Settings } from "lucide-react-native";
+import { Mail, Phone, Settings } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import {
@@ -88,10 +88,8 @@ export const Account = () => {
           <Text variant="h2">
             {user?.first_name} {user?.last_name}
           </Text>
-          {user?.scolarity?.graduation_year && (
-            <Text color="muted">
-              {getStudentYear(user?.scolarity?.graduation_year)}
-            </Text>
+          {user?.graduation_year && (
+            <Text color="muted">{getStudentYear(user?.graduation_year)}</Text>
           )}
         </View>
       </View>
@@ -109,20 +107,6 @@ export const Account = () => {
         />
       </Card>
 
-      <Card className="gap-4">
-        <Text variant="h3">{t("settings.feedback.sectionTitle")}</Text>
-        <InfoItem
-          icon={<MessageSquare color={theme.text} size={20} />}
-          label={t("settings.feedback.giveFeedback")}
-          value={t("settings.feedback.helpImprove")}
-        />
-        <Button
-          label={t("settings.feedback.sendFeedback")}
-          onPress={() => navigation.navigate("Feedback")}
-          size="sm"
-          variant="secondary"
-        />
-      </Card>
       <Button
         label={t("account.editProfile")}
         onPress={navigateToEditProfile}

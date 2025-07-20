@@ -95,7 +95,7 @@
     },
     "help": {
       "title": "Hilfe",
-      "description": "Haben Sie eine spezielle Frage, einen Vorschlag oder ein Problem?\nLassen Sie es uns über das untenstehende Formular wissen oder treten Sie der Whatsapp-Gruppe bei 🫶",
+      "description": "Haben Sie eine spezielle Frage, einen Vorschlag oder ein Problem?\nLassen Sie es uns über treten Sie der Whatsapp-Gruppe bei 🫶",
       "faq": "FAQ",
       "contactUs": "Kontaktieren Sie uns",
       "subject": "Betreff",
@@ -180,25 +180,6 @@
       "dataSecurityText": "Wir implementieren geeignete Sicherheitsmaßnahmen, um Ihre persönlichen Daten vor unbefugtem Zugriff, Änderung, Offenlegung oder Zerstörung zu schützen.",
       "contact": "Kontaktieren Sie uns",
       "contactText": "Wenn Sie Fragen zu diesen Bedingungen oder unserer Datenschutzrichtlinie haben, kontaktieren Sie uns bitte über den Hilfebereich oder treten Sie unserer WhatsApp-Gruppe bei."
-    },
-    "feedback": {
-      "title": "Feedback",
-      "sectionTitle": "Feedback",
-      "giveFeedback": "Geben Sie Ihr Feedback",
-      "helpImprove": "Helfen Sie uns, die App zu verbessern",
-      "sendFeedback": "Feedback senden",
-      "yourOpinionMatters": "Ihre Meinung zählt",
-      "helpDescription": "Helfen Sie uns, die App zu verbessern, indem Sie Ihre Kommentare und Vorschläge teilen",
-      "commentsLabel": "Kommentare",
-      "commentsPlaceholder": "Teilen Sie Ihr Feedback, Vorschläge oder Fehlerberichte mit...",
-      "sending": "Senden...",
-      "send": "Feedback senden",
-      "privacyNote": "💡 Ihr Feedback hilft uns, die App zu verbessern. Alle Informationen werden vertraulich behandelt.",
-      "successTitle": "Feedback gesendet",
-      "successMessage": "Vielen Dank für Ihr Feedback! Wir werden uns so schnell wie möglich bei Ihnen melden.",
-      "errorTitle": "Fehler",
-      "errorMessage": "Beim Senden Ihres Feedbacks ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
-      "minLengthError": "Der Kommentar muss mindestens 10 Zeichen enthalten"
     }
   },
   "auth": {
@@ -293,7 +274,10 @@
       "noData": "Es scheint keine Daten zum Anzeigen zu geben",
       "noMeal": "Keine Mahlzeit",
       "closed": "Geschlossen",
-      "closedWeekends": "Das Restaurant ist an Wochenenden geschlossen",
+      "closedWeekends": {
+        "title": "Das Restaurant ist an Wochenenden geschlossen",
+        "description": "Kommen Sie morgen zurück, um das Menü zu sehen"
+      },
       "closedNight": {
         "title": "Das Restaurant ist geschlossen",
         "description": "Kommen Sie morgen zurück, um das Menü zu sehen"
@@ -387,7 +371,7 @@
   },
   "account": {
     "graduationYear": "Abschlussjahr",
-    "branch": "Studiengang",
+    "formationName": "Studiengang",
     "selectBranch": "Studiengang auswählen",
     "group": "Gruppe",
     "selectGroup": "Gruppe auswählen",

@@ -1,7 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import {
-  BarChart,
   Bell,
   FileText,
   Globe,
@@ -134,12 +133,6 @@ export const Settings = () => {
           title={t("settings.about.title")}
           subtitle={t("common.knowMore")}
           onPress={() => navigation.navigate("About")}
-        />
-        <SettingsItem
-          icon={<BarChart color={theme.text} size={22} />}
-          title={t("settings.statistics.title", "Statistics")}
-          subtitle={t("settings.statistics.subtitle", "View system statistics")}
-          onPress={() => navigation.navigate("Statistics")}
         />
         <SettingsItem
           icon={<FileText color={theme.text} size={22} />}

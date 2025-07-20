@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { scolaritySchema } from "@/dto/scolarity";
+import { formationName } from "@/enums";
 
 //
 // — Base types
@@ -17,7 +17,7 @@ export const userSchema = z.object({
   phone_number: z.string(),
   email: z.string().email(),
   graduation_year: z.number().optional(),
-  scolarity: scolaritySchema.optional(),
+  formation_name: z.nativeEnum(formationName).optional(),
   profile_picture: z.string().url().optional(),
   id_newf: z.number().optional(),
   total_newf: z.number().optional(),

@@ -2,8 +2,9 @@ import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
 import { TouchableOpacity, View } from "react-native";
-import { Star } from "@/components/common/Star";
+import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
+import { Stars } from "@/components/custom/star/Stars";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { MenuItem } from "@/dto";
@@ -24,10 +25,10 @@ const RestaurantCard = ({ title, meals, icon }: CardProps) => {
 
   const getIcon = () => {
     const iconMap: { [key: string]: React.ReactElement } = {
-      Soup: <Soup color={theme.primary} />,
-      Beef: <Beef color={theme.primary} />,
-      Vegan: <Vegan color={theme.primary} />,
-      ChefHat: <ChefHat color={theme.primary} />,
+      Soup: <Soup color={theme.text} />,
+      Beef: <Beef color={theme.text} />,
+      Vegan: <Vegan color={theme.text} />,
+      ChefHat: <ChefHat color={theme.text} />,
     };
 
     return iconMap[icon] || null;
@@ -38,38 +39,30 @@ const RestaurantCard = ({ title, meals, icon }: CardProps) => {
   }
 
   return (
-    <View
-      style={{ backgroundColor: theme.card }}
-      className="px-6 py-4 rounded-lg flex flex-col gap-6"
-    >
-      <View className="flex flex-row items-center gap-2">
+    <Card>
+      <View className="flex-row items-center gap-2">
         {getIcon()}
-        <Text className="text-lg font-bold" style={{ color: theme.primary }}>
-          {title}
-        </Text>
+        <Text variant="lg">{title}</Text>
       </View>
 
-      <View className="flex flex-col gap-4">
+      <View className="flex-col gap-2">
         {meals.map((item) => (
           <TouchableOpacity
-            className="flex flex-row justify-between items-start gap-5"
+            className="flex-row justify-between gap-4 items-start"
             key={item.id}
             onPress={() =>
               navigation.navigate("RestaurantReviews", { id: item.id })
             }
           >
             <Text className="flex-1">{item.name}</Text>
-            <Star
-              max={5}
-              value={item.average_rating || 0}
-              layout={"filled"}
-              size={"default"}
-              disabled
-            />
+            <View className="flex-row items-center gap-1">
+              <Text color="primary">{item.average_rating}/5</Text>
+              <Stars max={1} value={1} />
+            </View>
           </TouchableOpacity>
         ))}
       </View>
-    </View>
+    </Card>
   );
 };
 

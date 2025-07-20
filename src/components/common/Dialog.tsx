@@ -1,3 +1,4 @@
+import { MotiView } from "moti";
 import { cloneElement, createContext, useContext, useState } from "react";
 import {
   KeyboardAvoidingView,
@@ -89,33 +90,57 @@ const DialogContent = ({
           style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
           className="flex flex-1 justify-center items-center w-full"
         >
-          <Card className="w-11/12 max-h-[80%] gap-6">
-            <Text variant="h2">{title}</Text>
-            <ScrollView keyboardShouldPersistTaps="handled">
-              <TouchableWithoutFeedback className="pr-6">
-                <View className={className}>{children}</View>
-              </TouchableWithoutFeedback>
-            </ScrollView>
-            {(cancelLabel || confirmLabel) && (
-              <View className="gap-2">
-                {cancelLabel && (
-                  <Button
-                    onPress={handleCancel}
-                    label={cancelLabel}
-                    variant="secondary"
-                  />
-                )}
-                {confirmLabel && (
-                  <Button
-                    onPress={handleConfirm}
-                    label={confirmLabel}
-                    loading={isPending}
-                    disabled={disableConfirm}
-                  />
-                )}
-              </View>
-            )}
-          </Card>
+          <MotiView
+            from={{
+              opacity: 0,
+              scale: 0.8,
+              translateY: 20,
+            }}
+            animate={{
+              opacity: open ? 1 : 0,
+              scale: open ? 1 : 0.8,
+              translateY: open ? 0 : 20,
+            }}
+            transition={{
+              type: "spring",
+              damping: 20,
+              stiffness: 300,
+            }}
+            className="w-[90%] max-h-[80%]"
+            onStartShouldSetResponder={() => true}
+            onResponderGrant={() => {}}
+            onResponderRelease={() => {}}
+          >
+            <Card className="w-full gap-6">
+              <Text variant="h2">{title}</Text>
+              <ScrollView keyboardShouldPersistTaps="handled">
+                <TouchableWithoutFeedback className="pr-6">
+                  <View className={className}>{children}</View>
+                </TouchableWithoutFeedback>
+              </ScrollView>
+              {(cancelLabel || confirmLabel) && (
+                <View className="flex-row items-center gap-2">
+                  {cancelLabel && (
+                    <Button
+                      onPress={handleCancel}
+                      label={cancelLabel}
+                      variant="secondary"
+                      className="flex-1"
+                    />
+                  )}
+                  {confirmLabel && (
+                    <Button
+                      onPress={handleConfirm}
+                      label={confirmLabel}
+                      loading={isPending}
+                      disabled={disableConfirm}
+                      className="flex-1"
+                    />
+                  )}
+                </View>
+              )}
+            </Card>
+          </MotiView>
         </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
     </Modal>

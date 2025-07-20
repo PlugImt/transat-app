@@ -1,1 +1,1 @@
-export * from "./branch.enum";
+export * from "./formationName.enum";

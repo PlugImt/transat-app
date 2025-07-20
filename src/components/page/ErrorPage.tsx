@@ -7,7 +7,7 @@ import { Page } from "./Page";
 
 type ErrorPageProps = {
   title: string;
-  error: Error;
+  error: Error | null;
   refetch: () => void;
   isRefetching: boolean;
   isAccountPage?: boolean;
@@ -33,9 +33,11 @@ export const ErrorPage = ({
         <Text variant="h3" className="text-center">
           {t("common.errors.occurred")}
         </Text>
-        <Text color="muted" className="text-center">
-          {error?.message}
-        </Text>
+        {error && (
+          <Text color="muted" className="text-center">
+            {error?.message}
+          </Text>
+        )}
       </View>
       <View className="gap-2">
         <Button

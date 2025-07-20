@@ -95,7 +95,7 @@
     },
     "help": {
       "title": "Ayuda",
-      "description": "¿Alguna pregunta, sugerencia o problema específico?\nHáznoslo saber usando el formulario a continuación o uniéndote al grupo de Whatsapp 🫶",
+      "description": "¿Alguna pregunta, sugerencia o problema específico?\nHáznoslo saber uniéndote al grupo de Whatsapp 🫶",
       "faq": "PREGUNTAS FRECUENTES",
       "contactUs": "Póngase en contacto con nosotros",
       "joinWhatsApp": "Únase a nuestro grupo de WhatsApp",
@@ -129,25 +129,6 @@
         "in_progress": "En progreso",
         "resolved": "Resuelto"
       }
-    },
-    "feedback": {
-      "title": "Feedback",
-      "sectionTitle": "Feedback",
-      "giveFeedback": "Danos tu opinión",
-      "helpImprove": "Ayúdanos a mejorar la aplicación",
-      "sendFeedback": "Enviar feedback",
-      "yourOpinionMatters": "Tu opinión importa",
-      "helpDescription": "Ayúdanos a mejorar la aplicación compartiendo tus comentarios y sugerencias",
-      "commentsLabel": "Comentarios",
-      "commentsPlaceholder": "Comparte tus comentarios, sugerencias o reportes de errores...",
-      "sending": "Enviando...",
-      "send": "Enviar feedback",
-      "privacyNote": "💡 Tus comentarios nos ayudan a mejorar la aplicación. Toda la información se maneja de forma confidencial.",
-      "successTitle": "Feedback enviado",
-      "successMessage": "¡Gracias por tu comentario! Te responderemos lo antes posible.",
-      "errorTitle": "Error",
-      "errorMessage": "Ocurrió un error al enviar tu feedback. Por favor, inténtalo de nuevo.",
-      "minLengthError": "El comentario debe contener al menos 10 caracteres"
     },
     "contactSupport": "Contactar con soporte",
     "appearance": {
@@ -292,7 +273,10 @@
       "noData": "Parece que no hay datos para mostrar",
       "noMeal": "Ninguna comida",
       "closed": "Cerrado",
-      "closedWeekends": "El restaurante está cerrado los fines de semana",
+      "closedWeekends": {
+        "title": "El restaurante está cerrado los fines de semana",
+        "description": "Vuelve el lunes para ver el menú del día"
+      },
       "closedNight": {
         "title": "El restaurante está cerrado",
         "description": "Vuelve mañana para ver el menú"
@@ -386,7 +370,7 @@
   },
   "account": {
     "graduationYear": "Año de graduación",
-    "branch": "Especialidad",
+    "formationName": "Especialidad",
     "selectBranch": "Seleccionar especialidad",
     "group": "Grupo",
     "selectGroup": "Seleccionar grupo",

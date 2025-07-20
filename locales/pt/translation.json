@@ -95,7 +95,7 @@
     },
     "help": {
       "title": "Ajuda",
-      "description": "Alguma pergunta, sugestão ou problema específico?\nDiga-nos usando o formulário abaixo ou juntando-se ao grupo de Whatsapp 🫶",
+      "description": "Alguma pergunta, sugestão ou problema específico?\nDiga-nos juntando-se ao grupo de Whatsapp 🫶",
       "faq": "PERGUNTAS FREQUENTES",
       "contactUs": "Contactar-nos",
       "joinWhatsApp": "Junte-se ao nosso grupo WhatsApp",
@@ -179,25 +179,6 @@
       "dataSecurityText": "Implementamos medidas de segurança apropriadas para proteger suas informações pessoais contra acesso não autorizado, alteração, divulgação ou destruição.",
       "contact": "Contate-Nos",
       "contactText": "Se você tiver alguma dúvida sobre estes termos ou nossa política de privacidade, entre em contato conosco através da seção de ajuda ou junte-se ao nosso grupo do WhatsApp."
-    },
-    "feedback": {
-      "title": "Feedback",
-      "sectionTitle": "Feedback",
-      "giveFeedback": "Dê o seu feedback",
-      "helpImprove": "Ajude-nos a melhorar a aplicação",
-      "sendFeedback": "Enviar feedback",
-      "yourOpinionMatters": "A sua opinião importa",
-      "helpDescription": "Ajude-nos a melhorar a aplicação partilhando os seus comentários e sugestões",
-      "commentsLabel": "Comentários",
-      "commentsPlaceholder": "Partilhe os seus comentários, sugerências ou relatórios de bugs...",
-      "sending": "Enviando...",
-      "send": "Enviar feedback",
-      "privacyNote": "💡 Os seus comentários ajudam-nos a melhorar a aplicação. Toda a informação é tratada de forma confidencial.",
-      "successTitle": "Feedback enviado",
-      "successMessage": "Obrigado pelo seu feedback! Entraremos em contacto o mais breve possível.",
-      "errorTitle": "Erro",
-      "errorMessage": "Ocorreu um erro ao enviar o seu feedback. Por favor, tente novamente.",
-      "minLengthError": "O comentário deve conter pelo menos 10 caracteres"
     }
   },
   "auth": {
@@ -292,7 +273,10 @@
       "noData": "Parece não haver dados para apresentar",
       "noMeal": "Sem refeição",
       "closed": "Fechado",
-      "closedWeekends": "O restaurante está fechado aos fins-de-semana",
+      "closedWeekends": {
+        "title": "O restaurante está fechado aos fins-de-semana",
+        "description": "Volte amanhã para ver o menu"
+      },
       "closedNight": {
         "title": "O restaurante está fechado",
         "description": "Volte amanhã para ver o menu"
@@ -386,7 +370,7 @@
   },
   "account": {
     "graduationYear": "Ano de graduação",
-    "branch": "Curso",
+    "formationName": "Curso",
     "selectBranch": "Selecionar curso",
     "group": "Grupo",
     "selectGroup": "Selecionar grupo",

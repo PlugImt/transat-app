@@ -95,7 +95,7 @@
     },
     "help": {
       "title": "Help",
-      "description": "Any specific question, suggestion or issue?\nLet us know using the form below or by joining the Whatsapp group 🫶",
+      "description": "Any specific question, suggestion or issue?\nLet us know by joining the Whatsapp group 🫶",
       "faq": "FAQ",
       "contactUs": "Contact us",
       "history": "History",
@@ -130,25 +130,6 @@
       "faq3Answer": "Yes, this app is developed by IMT students as part of a project to improve the student experience on campus. We are constantly working to add new features and improve the app based on your feedback.",
       "faq4Question": "How to contribute?",
       "faq4Answer": "If you want to contribute to the development of this app, you can join our team by contacting us on our WhatsApp group. We welcome any help, whether it's in development, design, or testing."
-    },
-    "feedback": {
-      "title": "Feedback",
-      "sectionTitle": "Feedback",
-      "giveFeedback": "Give your feedback",
-      "helpImprove": "Help us improve the app",
-      "sendFeedback": "Send feedback",
-      "yourOpinionMatters": "Your opinion matters",
-      "helpDescription": "Help us improve the app by sharing your comments and suggestions",
-      "commentsLabel": "Comments",
-      "commentsPlaceholder": "Share your feedback, suggestions or bug reports...",
-      "sending": "Sending...",
-      "send": "Send feedback",
-      "privacyNote": "💡 Your feedback helps us improve the app. All information is handled confidentially.",
-      "successTitle": "Feedback sent",
-      "successMessage": "Thank you for your feedback! We will get back to you as soon as possible.",
-      "errorTitle": "Error",
-      "errorMessage": "An error occurred while sending your feedback. Please try again.",
-      "minLengthError": "Comment must contain at least 10 characters"
     },
     "contactSupport": "Contact support",
     "appearance": {
@@ -293,7 +274,10 @@
       "noData": "There seems to be no data to display",
       "noMeal": "No meal",
       "closed": "Closed",
-      "closedWeekends": "The restaurant is closed on weekends",
+      "closedWeekends": {
+        "title": "The restaurant is closed on weekends",
+        "description": "Come back on Monday to see the menu"
+      },
       "closedNight": {
         "title": "The restaurant is closed",
         "description": "Come back tomorrow to see the menu"
@@ -386,7 +370,7 @@
   },
   "account": {
     "graduationYear": "Graduation year",
-    "branch": "Branch",
+    "formationName": "Branch",
     "selectBranch": "Select your branch",
     "group": "Group",
     "selectGroup": "Select your group",

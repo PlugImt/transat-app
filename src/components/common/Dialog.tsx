@@ -1,3 +1,4 @@
+import { MotiView } from "moti";
 import { cloneElement, createContext, useContext, useState } from "react";
 import {
   KeyboardAvoidingView,
@@ -89,7 +90,22 @@ const DialogContent = ({
           style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
           className="flex flex-1 justify-center items-center w-full"
         >
-          <View
+          <MotiView
+            from={{
+              opacity: 0,
+              scale: 0.8,
+              translateY: 20,
+            }}
+            animate={{
+              opacity: open ? 1 : 0,
+              scale: open ? 1 : 0.8,
+              translateY: open ? 0 : 20,
+            }}
+            transition={{
+              type: "spring",
+              damping: 20,
+              stiffness: 300,
+            }}
             className="w-[90%] max-h-[80%]"
             onStartShouldSetResponder={() => true}
             onResponderGrant={() => {}}
@@ -124,7 +140,7 @@ const DialogContent = ({
                 </View>
               )}
             </Card>
-          </View>
+          </MotiView>
         </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
     </Modal>

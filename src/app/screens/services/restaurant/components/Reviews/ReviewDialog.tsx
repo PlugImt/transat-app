@@ -1,120 +1,87 @@
-import { X } from "lucide-react-native";
+import { useRoute } from "@react-navigation/native";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Modal, TextInput, TouchableOpacity, View } from "react-native";
-import { Button } from "@/components/common/Button";
-import { Text } from "@/components/common/Text";
+import type { RestaurantReviewsRouteProp } from "@/app/screens";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/common/Dialog";
+import { Textarea } from "@/components/common/Textarea";
+import { useToast } from "@/components/common/Toast";
 import { Stars } from "@/components/custom/star/Stars";
-import { useTheme } from "@/contexts/ThemeContext";
+import { usePostRestaurantReview } from "@/hooks/useMenuRestaurant";
 
 interface ReviewDialogProps {
-  visible: boolean;
-  onClose: () => void;
-  onSubmit: (rating: number, comment?: string) => void;
-  isLoading?: boolean;
+  children: React.ReactElement<{ onPress?: () => void }>;
 }
 
-export const ReviewDialog = ({
-  visible,
-  onClose,
-  onSubmit,
-  isLoading = false,
-}: ReviewDialogProps) => {
+export const ReviewDialog = ({ children }: ReviewDialogProps) => {
   const { t } = useTranslation();
-  const { theme } = useTheme();
+  const { toast } = useToast();
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
 
-  const handleSubmit = () => {
-    if (rating >= 1 && rating <= 5) {
-      onSubmit(rating, comment.trim() || undefined);
-    }
-  };
+  const route = useRoute<RestaurantReviewsRouteProp>();
+  const { id } = route.params;
+
+  const { mutate: postReview, isPending: isPostingReview } =
+    usePostRestaurantReview(id);
 
   const handleClose = () => {
     setRating(0);
     setComment("");
-    onClose();
   };
 
   const isValid = rating >= 1 && rating <= 5;
 
+  const handleSubmitReview = (rating: number, comment?: string) => {
+    try {
+      postReview({ rating, comment });
+      toast(t("services.restaurant.reviews.dialog.successMessage"), "success");
+    } catch (_error) {
+      toast(
+        t("services.restaurant.reviews.dialog.errorMessage"),
+        "destructive",
+      );
+    }
+    handleClose();
+  };
+
+  const handleSubmit = () => {
+    if (rating >= 1 && rating <= 5) {
+      handleSubmitReview(rating, comment.trim() || undefined);
+    }
+  };
+
   return (
-    <Modal
-      visible={visible}
-      transparent
-      animationType="fade"
-      onRequestClose={handleClose}
-    >
-      <View className="flex-1 justify-center items-center bg-black/50 px-6">
-        <View
-          className="w-full max-w-sm p-6 rounded-2xl"
-          style={{ backgroundColor: theme.card }}
-        >
-          {/* Header */}
-          <View className="flex-row justify-between items-center mb-6">
-            <Text variant="h3">
-              {t("services.restaurant.reviews.dialog.title")}
-            </Text>
-            <TouchableOpacity
-              onPress={handleClose}
-              className="p-1"
-              disabled={isLoading}
-            >
-              <X size={20} color={theme.muted} />
-            </TouchableOpacity>
-          </View>
-
-          {/* Star Rating */}
-          <View className="items-center mb-6">
-            <Stars
-              value={rating}
-              onRatingChange={setRating}
-              disabled={isLoading}
-            />
-          </View>
-
-          {/* Comment Input */}
-          <TextInput
-            value={comment}
-            onChangeText={setComment}
-            placeholder={t(
-              "services.restaurant.reviews.dialog.commentPlaceholder",
-            )}
-            placeholderTextColor={theme.muted}
-            multiline
-            numberOfLines={4}
-            textAlignVertical="top"
-            editable={!isLoading}
-            className="p-4 mb-6 text-base rounded-lg"
-            style={{
-              backgroundColor: theme.background,
-              color: theme.text,
-              borderWidth: 1,
-              borderColor: theme.border,
-              minHeight: 100,
-            }}
-          />
-
-          {/* Action Buttons */}
-          <View className="flex-row gap-3">
-            <Button
-              label={t("common.cancel")}
-              variant="secondary"
-              onPress={handleClose}
-              disabled={isLoading}
-              className="flex-1"
-            />
-            <Button
-              label={t("services.restaurant.reviews.dialog.submit")}
-              onPress={handleSubmit}
-              disabled={!isValid || isLoading}
-              loading={isLoading}
-              className="flex-1"
-            />
-          </View>
-        </View>
-      </View>
-    </Modal>
+    <Dialog>
+      <DialogTrigger>{children}</DialogTrigger>
+      <DialogContent
+        title={t("services.restaurant.reviews.dialog.title")}
+        className="gap-4 items-center"
+        cancelLabel={t("common.cancel")}
+        confirmLabel={t("services.restaurant.reviews.dialog.submit")}
+        isPending={isPostingReview}
+        disableConfirm={!isValid}
+        onConfirm={handleSubmit}
+        onCancel={handleClose}
+      >
+        <Stars
+          value={rating}
+          onRatingChange={setRating}
+          disabled={isPostingReview}
+          size="lg"
+        />
+        <Textarea
+          value={comment}
+          onChangeText={setComment}
+          placeholder={t(
+            "services.restaurant.reviews.dialog.commentPlaceholder",
+          )}
+          disabled={isPostingReview}
+        />
+      </DialogContent>
+    </Dialog>
   );
 };

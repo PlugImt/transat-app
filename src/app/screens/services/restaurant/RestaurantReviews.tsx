@@ -1,7 +1,7 @@
 import type { RouteProp } from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
 import { CookingPot, Star, Utensils } from "lucide-react-native";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { FlatList, View } from "react-native";
 import {
@@ -11,19 +11,16 @@ import {
 import { ReviewDialog } from "@/app/screens/services/restaurant/components/Reviews/ReviewDialog";
 import { Button } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
-import { useToast } from "@/components/common/Toast";
 import { AboutModal } from "@/components/custom/AboutModal";
+import { Empty } from "@/components/page/Empty";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
-import {
-  usePostRestaurantReview,
-  userMenuRating,
-} from "@/hooks/useMenuRestaurant";
+import { userMenuRating } from "@/hooks/useMenuRestaurant";
 import type { AppStackParamList } from "@/types";
 import { getOpeningHoursData } from "@/utils";
 
-type RestaurantReviewsRouteProp = RouteProp<
+export type RestaurantReviewsRouteProp = RouteProp<
   AppStackParamList,
   "RestaurantReviews"
 >;
@@ -31,11 +28,9 @@ type RestaurantReviewsRouteProp = RouteProp<
 export const RestaurantReviews = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const { toast } = useToast();
   const route = useRoute<RestaurantReviewsRouteProp>();
   const { id } = route.params;
   const openingHoursData = useMemo(() => getOpeningHoursData(t), [t]);
-  const [showReviewDialog, setShowReviewDialog] = useState(false);
 
   const {
     rating: reviewData,
@@ -45,26 +40,11 @@ export const RestaurantReviews = () => {
     error,
   } = userMenuRating(id);
 
-  const postReviewMutation = usePostRestaurantReview(id);
-
-  const handleSubmitReview = async (rating: number, comment?: string) => {
-    try {
-      await postReviewMutation.mutateAsync({ rating, comment });
-      setShowReviewDialog(false);
-      toast(t("services.restaurant.reviews.dialog.successMessage"), "success");
-    } catch (_error) {
-      toast(
-        t("services.restaurant.reviews.dialog.errorMessage"),
-        "destructive",
-      );
-    }
-  };
-
-  if (isPending || !reviewData) {
+  if (isPending) {
     return <LoadingState />;
   }
 
-  if (isError) {
+  if (isError || !reviewData) {
     return (
       <ErrorPage
         title={t("services.restaurant.title")}
@@ -77,6 +57,8 @@ export const RestaurantReviews = () => {
 
   const averageRating = reviewData.average_rating || 0;
   const totalReviews = reviewData.total_ratings;
+  const hasReview =
+    reviewData.recent_reviews && reviewData.recent_reviews.length > 0;
 
   return (
     <Page
@@ -107,11 +89,14 @@ export const RestaurantReviews = () => {
           </View>
         </View>
 
-        <Button
-          label={t("services.restaurant.reviews.rate")}
-          onPress={() => setShowReviewDialog(true)}
-          variant="secondary"
-        />
+        {hasReview && (
+          <ReviewDialog>
+            <Button
+              label={t("services.restaurant.reviews.rate")}
+              variant="secondary"
+            />
+          </ReviewDialog>
+        )}
       </View>
 
       {/* Note global */}
@@ -126,40 +111,28 @@ export const RestaurantReviews = () => {
       </View>
 
       {/* Liste des avis */}
-      {reviewData.recent_reviews && reviewData.recent_reviews.length > 0 ? (
+      {hasReview ? (
         <FlatList
           data={reviewData.recent_reviews}
           renderItem={({ item }) => <ReviewItem review={item} />}
           scrollEnabled={false}
           showsVerticalScrollIndicator={false}
+          contentContainerClassName="gap-2"
         />
       ) : (
-        <View className="flex items-center justify-center py-12  mx-4">
-          <View className="mb-6">
-            <CookingPot size={50} color={theme.primary} />
-          </View>
-          <Text variant="lg" className="text-center mb-2">
-            {t("services.restaurant.reviews.noReviewsTitle")}
-          </Text>
-          <Text color="muted" className="text-center mb-6">
-            {t("services.restaurant.reviews.noReviewsSubtitle")}
-          </Text>
-          <Button
-            label={t("services.restaurant.reviews.rate")}
-            onPress={() => setShowReviewDialog(true)}
-            className="px-8 py-3 w-full"
-            style={{ backgroundColor: theme.primary, borderRadius: 12 }}
-            labelClasses="text-base font-medium"
-          />
-        </View>
+        <Empty
+          icon={<CookingPot size={50} color={theme.primary} />}
+          title={t("services.restaurant.reviews.noReviewsTitle")}
+          description={t("services.restaurant.reviews.noReviewsSubtitle")}
+        >
+          <ReviewDialog>
+            <Button
+              label={t("services.restaurant.reviews.rate")}
+              className="w-full"
+            />
+          </ReviewDialog>
+        </Empty>
       )}
-
-      <ReviewDialog
-        visible={showReviewDialog}
-        onClose={() => setShowReviewDialog(false)}
-        onSubmit={handleSubmitReview}
-        isLoading={postReviewMutation.isPending}
-      />
     </Page>
   );
 };

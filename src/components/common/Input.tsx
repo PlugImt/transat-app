@@ -88,6 +88,20 @@ const Input = forwardRef(
       );
     }
 
+    const commonTextInputProps = {
+      ref,
+      editable: !disabled,
+      style: {
+        backgroundColor: theme.input,
+        color: theme.text,
+        borderColor: error ? theme.destructive : "transparent",
+        borderWidth: error ? 1 : 0,
+      },
+      className: cn(inputClasses, "py-2.5 px-4 rounded-lg h-12"),
+      placeholderTextColor: theme.muted,
+      ...props,
+    };
+
     return (
       <View className={cn("gap-1.5", className)}>
         {label && (
@@ -102,38 +116,18 @@ const Input = forwardRef(
             name={name}
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
-                ref={ref}
-                editable={!disabled}
-                style={{
-                  backgroundColor: theme.input,
-                  color: theme.text,
-                  borderColor: error ? theme.destructive : "transparent",
-                  borderWidth: error ? 1 : 0,
-                }}
-                className={cn(inputClasses, "py-2.5 px-4 rounded-lg h-12")}
-                placeholderTextColor={theme.muted}
+                {...commonTextInputProps}
                 onChangeText={onChange}
                 onBlur={onBlur}
                 value={value}
-                {...props}
               />
             )}
           />
         ) : (
           <TextInput
-            ref={ref}
-            editable={!disabled}
-            style={{
-              backgroundColor: theme.input,
-              color: theme.text,
-              borderColor: error ? theme.destructive : "transparent",
-              borderWidth: error ? 1 : 0,
-            }}
-            className={cn(inputClasses, "py-2.5 px-4 rounded-lg h-12")}
-            placeholderTextColor={theme.muted}
+            {...commonTextInputProps}
             onChangeText={onChangeText}
-            value={value || ""}
-            {...props}
+            value={value ?? ""}
           />
         )}
 

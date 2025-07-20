@@ -29,7 +29,7 @@ export const Stars = ({
 }: StarProps) => {
   const starSize = STAR_SIZES[size];
   const fullStars = Math.floor(value);
-  const emptyStars = max - Math.ceil(value);
+  const emptyStars = max - fullStars;
 
   const handleStarPress = (starIndex: number) => {
     if (onRatingChange && !disabled) {

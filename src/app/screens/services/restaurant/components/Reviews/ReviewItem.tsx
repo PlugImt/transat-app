@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import {
@@ -54,8 +55,8 @@ export const ReviewItem = ({ review }: ReviewItemProps) => {
 };
 
 export const ReviewItemSkeleton = () => {
-  const rating = Math.floor(Math.random() * 5) + 1;
-  const lines = Math.floor(Math.random() * 5) + 1;
+  const rating = useMemo(() => Math.floor(Math.random() * 5) + 1, []);
+  const lines = useMemo(() => Math.floor(Math.random() * 5) + 1, []);
   return (
     <Card>
       <View className="flex-row gap-2">

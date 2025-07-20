@@ -44,11 +44,7 @@ export const SingleStar = ({
   };
 
   return (
-    <TouchableOpacity
-      key={`star-${index}`}
-      onPress={handlePress}
-      disabled={disabled}
-    >
+    <TouchableOpacity onPress={handlePress} disabled={disabled}>
       <LucidStar
         size={size}
         color={color}

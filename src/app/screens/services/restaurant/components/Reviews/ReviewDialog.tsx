@@ -1,7 +1,7 @@
 import { useRoute } from "@react-navigation/native";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import type { RestaurantReviewsRouteProp } from "@/app/screens";
+import type { RestaurantReviewsRouteProp } from "@/app/screens/services/restaurant/components/Reviews";
 import {
   Dialog,
   DialogContent,
@@ -36,16 +36,24 @@ export const ReviewDialog = ({ children }: ReviewDialogProps) => {
   const isValid = rating >= 1 && rating <= 5;
 
   const handleSubmitReview = (rating: number, comment?: string) => {
-    try {
-      postReview({ rating, comment });
-      toast(t("services.restaurant.reviews.dialog.successMessage"), "success");
-    } catch (_error) {
-      toast(
-        t("services.restaurant.reviews.dialog.errorMessage"),
-        "destructive",
-      );
-    }
-    handleClose();
+    postReview(
+      { rating, comment },
+      {
+        onSuccess: () => {
+          toast(
+            t("services.restaurant.reviews.dialog.successMessage"),
+            "success",
+          );
+          handleClose();
+        },
+        onError: () => {
+          toast(
+            t("services.restaurant.reviews.dialog.errorMessage"),
+            "destructive",
+          );
+        },
+      },
+    );
   };
 
   const handleSubmit = () => {

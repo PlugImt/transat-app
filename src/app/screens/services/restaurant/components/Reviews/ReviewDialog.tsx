@@ -3,8 +3,8 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Modal, TextInput, TouchableOpacity, View } from "react-native";
 import { Button } from "@/components/common/Button";
-import { Star } from "@/components/common/Star";
 import { Text } from "@/components/common/Text";
+import { Stars } from "@/components/custom/star/Stars";
 import { useTheme } from "@/contexts/ThemeContext";
 
 interface ReviewDialogProps {
@@ -67,11 +67,8 @@ export const ReviewDialog = ({
 
           {/* Star Rating */}
           <View className="items-center mb-6">
-            <Star
-              mode="review"
+            <Stars
               value={rating}
-              max={5}
-              showValue={false}
               onRatingChange={setRating}
               disabled={isLoading}
             />

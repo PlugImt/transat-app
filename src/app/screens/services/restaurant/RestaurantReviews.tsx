@@ -4,13 +4,16 @@ import { CookingPot, Star, Utensils } from "lucide-react-native";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FlatList, View } from "react-native";
-import { LoadingState } from "@/app/screens/services/restaurant/components";
-import { ReviewItem } from "@/app/screens/services/restaurant/components/MenuRating";
-import { ReviewDialog } from "@/app/screens/services/restaurant/components/MenuReviewDialog/ReviewDialog";
+import {
+  LoadingState,
+  ReviewItem,
+} from "@/app/screens/services/restaurant/components";
+import { ReviewDialog } from "@/app/screens/services/restaurant/components/Reviews/ReviewDialog";
 import { Button } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
 import { useToast } from "@/components/common/Toast";
 import { AboutModal } from "@/components/custom/AboutModal";
+import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import {
@@ -63,27 +66,12 @@ export const RestaurantReviews = () => {
 
   if (isError) {
     return (
-      <Page
-        refreshing={isPending}
-        onRefresh={refetch}
+      <ErrorPage
         title={t("services.restaurant.title")}
-        header={
-          <AboutModal
-            title={t("services.restaurant.title")}
-            description={t("services.restaurant.about")}
-            openingHours={openingHoursData}
-            location={t("services.restaurant.location")}
-            price={t("services.restaurant.price")}
-            additionalInfo={t("services.restaurant.additionalInfo")}
-          />
-        }
-      >
-        <View className="min-h-screen flex justify-center items-center ">
-          <Text variant="h1" className="text-center" color="destructive">
-            {error?.message}
-          </Text>
-        </View>
-      </Page>
+        error={error}
+        refetch={refetch}
+        isRefetching={isPending}
+      />
     );
   }
 
@@ -106,76 +94,65 @@ export const RestaurantReviews = () => {
         />
       }
     >
-      <View className="flex flex-col gap-6">
-        <View className="flex flex-row justify-between items-start">
-          <View className="flex-1 flex-col mr-3">
-            <Text className="flex-wrap">{reviewData.name}</Text>
-            <View className="flex flex-row items-center gap-2 mt-1">
-              <Utensils size={16} color={theme.muted} />
-              <Text
-                color="muted"
-                variant="sm"
-                className="flex-wrap"
-                numberOfLines={2}
-              >
-                {t("services.restaurant.reviews.servicesCount", {
-                  count: reviewData.times_served,
-                })}
-              </Text>
-            </View>
+      <View className="flex-row justify-between items-end gap-8">
+        <View className="flex-1 gap-1">
+          <Text variant="h3">{reviewData.name}</Text>
+          <View className="flex flex-row items-center gap-2">
+            <Utensils size={16} color={theme.muted} />
+            <Text color="muted" numberOfLines={2}>
+              {t("services.restaurant.reviews.servicesCount", {
+                count: reviewData.times_served,
+              })}
+            </Text>
           </View>
+        </View>
 
+        <Button
+          label={t("services.restaurant.reviews.rate")}
+          onPress={() => setShowReviewDialog(true)}
+          variant="secondary"
+        />
+      </View>
+
+      {/* Note global */}
+      <View className="flex-row items-center gap-1">
+        <Star size={20} color={theme.text} fill={theme.text} />
+        <Text variant="h3">
+          {t("services.restaurant.reviews.averageRating", {
+            rating: averageRating.toFixed(1),
+            count: totalReviews,
+          })}
+        </Text>
+      </View>
+
+      {/* Liste des avis */}
+      {reviewData.recent_reviews && reviewData.recent_reviews.length > 0 ? (
+        <FlatList
+          data={reviewData.recent_reviews}
+          renderItem={({ item }) => <ReviewItem review={item} />}
+          scrollEnabled={false}
+          showsVerticalScrollIndicator={false}
+        />
+      ) : (
+        <View className="flex items-center justify-center py-12  mx-4">
+          <View className="mb-6">
+            <CookingPot size={50} color={theme.primary} />
+          </View>
+          <Text variant="lg" className="text-center mb-2">
+            {t("services.restaurant.reviews.noReviewsTitle")}
+          </Text>
+          <Text color="muted" className="text-center mb-6">
+            {t("services.restaurant.reviews.noReviewsSubtitle")}
+          </Text>
           <Button
             label={t("services.restaurant.reviews.rate")}
-            size="sm"
-            className="px-4 py-2"
-            style={{ backgroundColor: theme.primary, borderRadius: 8 }}
-            labelClasses="text-sm"
             onPress={() => setShowReviewDialog(true)}
+            className="px-8 py-3 w-full"
+            style={{ backgroundColor: theme.primary, borderRadius: 12 }}
+            labelClasses="text-base font-medium"
           />
         </View>
-
-        {/* Overall Rating */}
-        <View className="flex flex-row items-center gap-3">
-          <Star size={20} color={theme.text} fill={theme.text} />
-          <Text variant="h3">
-            {t("services.restaurant.reviews.averageRating", {
-              rating: averageRating.toFixed(1),
-              count: totalReviews,
-            })}
-          </Text>
-        </View>
-
-        {/* Reviews List */}
-        {reviewData.recent_reviews && reviewData.recent_reviews.length > 0 ? (
-          <FlatList
-            data={reviewData.recent_reviews}
-            keyExtractor={(_, index) => `review-${index}`}
-            renderItem={({ item }) => <ReviewItem review={item} />}
-            scrollEnabled={false}
-            showsVerticalScrollIndicator={false}
-          />
-        ) : (
-          <View className="flex items-center justify-center py-12  mx-4">
-            <View className="mb-6">
-              <CookingPot size={50} color={theme.primary} />
-            </View>
-            <Text variant="lg" className="text-center mb-2">
-              {t("services.restaurant.reviews.noReviewsTitle")}
-            </Text>
-            <Text color="muted" className="text-center mb-6">
-              {t("services.restaurant.reviews.noReviewsSubtitle")}
-            </Text>
-            <Button
-              label={t("services.restaurant.reviews.rate")}
-              onPress={() => setShowReviewDialog(true)}
-              className="px-8 py-3 w-full"
-              style={{ backgroundColor: theme.primary, borderRadius: 12 }}
-              labelClasses="text-base font-medium"
-            />
-          </View>
-        )}
-      </View>
+      )}
 
       <ReviewDialog
         visible={showReviewDialog}

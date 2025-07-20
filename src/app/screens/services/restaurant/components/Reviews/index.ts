@@ -1,1 +1,3 @@
-export { ReviewItem } from "./ReviewItem";
+export * from "./RestaurantReviews";
+export * from "./ReviewDialog";
+export * from "./ReviewItem";

@@ -8,6 +8,7 @@ import {
 import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
 import { Stars } from "@/components/custom/star/Stars";
+import { TextSkeleton } from "@/components/Skeleton";
 import type { Review } from "@/dto";
 import { getTimeAgo } from "@/utils";
 
@@ -48,6 +49,34 @@ export const ReviewItem = ({ review }: ReviewItemProps) => {
       </View>
 
       <Text>{review.comment}</Text>
+    </Card>
+  );
+};
+
+export const ReviewItemSkeleton = () => {
+  const rating = Math.floor(Math.random() * 5) + 1;
+  const lines = Math.floor(Math.random() * 5) + 1;
+  return (
+    <Card>
+      <View className="flex-row gap-2">
+        <Avatar className="w-14 h-14">
+          <AvatarImage loading />
+        </Avatar>
+
+        <View className="flex-1">
+          <View className="flex-row items-center justify-between gap-4">
+            <TextSkeleton variant="lg" className="flex-1" />
+            <TextSkeleton variant="sm" />
+          </View>
+
+          <View className="flex-row items-center gap-1">
+            <Stars value={rating} size="sm" />
+            <Text color="muted">({rating})</Text>
+          </View>
+        </View>
+      </View>
+
+      <TextSkeleton lines={lines} />
     </Card>
   );
 };

@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 import { Home } from "@/app/screens";
 import Account from "@/app/screens/account/Account";
 import EditProfile from "@/app/screens/account/EditAccount";
-import Feedback from "@/app/screens/account/Feedback";
 import About from "@/app/screens/account/settings/About";
 import { Appearance } from "@/app/screens/account/settings/Appearance";
 import ChangePassword from "@/app/screens/account/settings/ChangePassword";
@@ -14,7 +13,6 @@ import Language from "@/app/screens/account/settings/Language";
 import Legal from "@/app/screens/account/settings/Legal";
 import Notifications from "@/app/screens/account/settings/Notifications";
 import Settings from "@/app/screens/account/settings/Settings";
-import Statistics from "@/app/screens/account/settings/Statistics";
 import {
   Clubs,
   Games,
@@ -80,7 +78,6 @@ const AccountStackScreen = () => (
   <AccountStack.Navigator screenOptions={{ headerShown: false }}>
     <AccountStack.Screen name="Account" component={Account} />
     <AccountStack.Screen name="EditProfile" component={EditProfile} />
-    <AccountStack.Screen name="Feedback" component={Feedback} />
     <AccountStack.Screen name="Settings" component={Settings} />
     <AccountStack.Screen name="ChangePassword" component={ChangePassword} />
     <AccountStack.Screen name="Notifications" component={Notifications} />
@@ -88,7 +85,6 @@ const AccountStackScreen = () => (
     <AccountStack.Screen name="Appearance" component={Appearance} />
     <AccountStack.Screen name="About" component={About} />
     <AccountStack.Screen name="Help" component={Help} />
-    <AccountStack.Screen name="Statistics" component={Statistics} />
     <AccountStack.Screen name="Legal" component={Legal} />
   </AccountStack.Navigator>
 );

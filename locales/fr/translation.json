@@ -95,7 +95,7 @@
     },
     "help": {
       "title": "Aide",
-      "description": "Vous avez une question, une suggestion ou un problème particulier ?\nFaites-le nous savoir en utilisant le formulaire ci-dessous ou en rejoignant le groupe WhatsApp 🫶",
+      "description": "Vous avez une question, une suggestion ou un problème particulier ?\nFaites-le nous savoir en rejoignant le groupe WhatsApp 🫶",
       "faq": "FAQ",
       "contactUs": "Nous contacter",
       "history": "Historique",
@@ -130,25 +130,6 @@
       "faq3Answer": "Oui, cette application a été développée par des étudiants de l'IMT dans le cadre d'un projet visant à améliorer l'expérience des étudiants sur le campus. Nous travaillons constamment à l'ajout de nouvelles fonctionnalités et à l'amélioration de l'application en fonction de vos commentaires.",
       "faq4Question": "Comment contribuer ?",
       "faq4Answer": "Si vous souhaitez contribuer au développement de cette application, vous pouvez rejoindre notre équipe en nous contactant sur notre groupe WhatsApp. Toute aide est la bienvenue, qu'il s'agisse de développement, de conception ou de test."
-    },
-    "feedback": {
-      "title": "Feedback",
-      "sectionTitle": "Feedback",
-      "giveFeedback": "Donnez votre avis",
-      "helpImprove": "Aidez-nous à améliorer l'application",
-      "sendFeedback": "Envoyer un feedback",
-      "yourOpinionMatters": "Votre avis compte",
-      "helpDescription": "Aidez-nous à améliorer l'application en partageant vos commentaires et suggestions",
-      "commentsLabel": "Commentaires",
-      "commentsPlaceholder": "Partagez vos commentaires, suggestions ou signalements de bugs...",
-      "sending": "Envoi en cours...",
-      "send": "Envoyer le feedback",
-      "privacyNote": "💡 Vos commentaires nous aident à améliorer l'application. Toutes les informations sont traitées de manière confidentielle.",
-      "successTitle": "Feedback envoyé",
-      "successMessage": "Merci pour votre retour ! Nous vous répondrons dès que possible.",
-      "errorTitle": "Erreur",
-      "errorMessage": "Une erreur s'est produite lors de l'envoi de votre feedback. Veuillez réessayer.",
-      "minLengthError": "Le commentaire doit contenir au moins 10 caractères"
     },
     "contactSupport": "Contacter le support",
     "appearance": {
@@ -410,7 +391,7 @@
   },
   "account": {
     "graduationYear": "Année de diplôme",
-    "branch": "Filière",
+    "formationName": "Filière",
     "group": "Groupe",
     "promotion": "Promotion",
     "campus": "Campus",

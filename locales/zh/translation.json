@@ -179,25 +179,6 @@
       "dataSecurityText": "我们采取适当的安全措施来保护您的个人信息，防止未经授权的访问、更改、披露或销毁。",
       "contact": "联系我们",
       "contactText": "如果您对这些条款或我们的隐私政策有任何疑问，请通过帮助部分联系我们或加入我们的WhatsApp群组。"
-    },
-    "feedback": {
-      "title": "反馈",
-      "sectionTitle": "反馈",
-      "giveFeedback": "给出反馈",
-      "helpImprove": "帮助我们改进应用程序",
-      "sendFeedback": "发送反馈",
-      "yourOpinionMatters": "您的意见很重要",
-      "helpDescription": "通过分享您的评论和建议帮助我们改进应用程序",
-      "commentsLabel": "评论",
-      "commentsPlaceholder": "分享您的反馈、建议或错误报告...",
-      "sending": "发送中...",
-      "send": "发送反馈",
-      "privacyNote": "💡 您的反馈帮助我们改进应用程序。所有信息都会保密处理。",
-      "successTitle": "反馈已发送",
-      "successMessage": "感谢您的反馈！我们会尽快回复您。",
-      "errorTitle": "错误",
-      "errorMessage": "发送反馈时发生错误。请重试。",
-      "minLengthError": "评论必须至少包含10个字符"
     }
   },
   "auth": {
@@ -387,7 +368,7 @@
   },
   "account": {
     "graduationYear": "毕业年份",
-    "branch": "专业方向",
+    "formationName": "专业方向",
     "selectBranch": "选择专业方向",
     "group": "小组",
     "selectGroup": "选择小组",

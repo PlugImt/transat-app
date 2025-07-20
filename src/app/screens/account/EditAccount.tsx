@@ -6,14 +6,12 @@ import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Keyboard, TouchableOpacity, View } from "react-native";
-import { z } from "zod";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from "@/components/common/Avatar";
 import { Button, IconButton } from "@/components/common/Button";
-import Card from "@/components/common/Card";
 import Dropdown, { DropdownLoading } from "@/components/common/Dropdown";
 import Input, { InputLoading } from "@/components/common/Input";
 import { Text } from "@/components/common/Text";
@@ -22,8 +20,8 @@ import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
-import type { User } from "@/dto";
-import type { Branch } from "@/enums";
+import { type User, updateUserPayloadSchema } from "@/dto";
+import type { formationName } from "@/enums";
 import { useUpdateAccount } from "@/hooks/account/useUpdateAccount";
 import { useUpdateProfilePicture } from "@/hooks/account/useUpdateProfilePicture";
 import { useUser } from "@/hooks/account/useUser";
@@ -44,42 +42,20 @@ export const EditProfile = () => {
     await queryClient.invalidateQueries({ queryKey: QUERY_KEYS.user });
   };
 
-  const userSchema = z.object({
-    first_name: z.string().nonempty(t("auth.errors.firstName")),
-    last_name: z.string().nonempty(t("auth.errors.lastName")),
-    phone_number: z.string().min(10, t("auth.errors.phone")).optional(),
-    email: z
-      .string()
-      .email(t("auth.errors.email"))
-      .refine((email) => email.endsWith("@imt-atlantique.net"), {
-        message: t("auth.errors.imtOnly"),
-      }),
-    scolarity: z
-      .object({
-        graduation_year: z.number().optional(),
-        branch: z.enum(["FISE", "FIL", "FIT", "FIP"]).optional(),
-        group: z.string().optional(),
-      })
-      .optional(),
-  });
-
   const {
     control: userControl,
     handleSubmit: handleUserSubmit,
     formState: { errors: userErrors, isValid: isUserValid, isDirty },
     reset,
   } = useForm({
-    resolver: zodResolver(userSchema),
+    resolver: zodResolver(updateUserPayloadSchema),
     defaultValues: {
       first_name: "",
       last_name: "",
       phone_number: "",
       email: "",
-      scolarity: {
-        graduation_year: undefined as number | undefined,
-        branch: undefined as Branch | undefined,
-        group: "",
-      },
+      graduation_year: undefined as number | undefined,
+      formation_name: undefined as formationName | undefined,
     },
     mode: "onChange",
   });
@@ -92,11 +68,8 @@ export const EditProfile = () => {
         last_name: user.last_name || "",
         phone_number: user.phone_number || "",
         email: user.email || "",
-        scolarity: {
-          graduation_year: user.scolarity?.graduation_year ?? undefined,
-          branch: user.scolarity?.branch ?? undefined,
-          group: user.scolarity?.group || "",
-        },
+        graduation_year: user?.graduation_year || undefined,
+        formation_name: user?.formation_name || undefined,
       });
     }
   }, [user, reset]);
@@ -112,7 +85,8 @@ export const EditProfile = () => {
   const handleUpdateAccount = (data: User) => {
     Keyboard.dismiss();
     updateAccount(data, {
-      onSuccess: () => {
+      onSuccess: async () => {
+        await refetch();
         toast(t("account.profileUpdated"), "success");
         navigation.goBack();
       },
@@ -189,100 +163,86 @@ export const EditProfile = () => {
         <Text variant="h3" className="ml-4">
           {t("account.personalInfo")}
         </Text>
-        <Card>
-          <Input
-            control={userControl}
-            label={t("account.firstName")}
-            name="first_name"
-            returnKeyType="go"
-            textContentType="name"
-            error={userErrors.first_name?.message}
-          />
-
-          <Input
-            control={userControl}
-            label={t("account.lastName")}
-            name="last_name"
-            textContentType="familyName"
-            error={userErrors.last_name?.message}
-          />
-
-          <Input
-            control={userControl}
-            label={t("account.email")}
-            name="email"
-            autoCapitalize="none"
-            textContentType="emailAddress"
-            error={userErrors.email?.message}
-            disabled={true}
-            className="opacity-50"
-          />
-
-          <Input
-            control={userControl}
-            label={t("account.phone")}
-            name="phone_number"
-            textContentType="telephoneNumber"
-            error={userErrors.phone_number?.message}
-            keyboardType="phone-pad"
-          />
-
-          <Controller
-            control={userControl}
-            name="scolarity.branch"
-            render={({ field: { onChange, value } }) => (
-              <Dropdown
-                label={t("account.branch")}
-                placeholder={t("account.selectBranch")}
-                options={["FISE", "FIL", "FIT", "FIP"]}
-                value={value}
-                onValueChange={onChange}
-              />
-            )}
-          />
-
-          <Controller
-            control={userControl}
-            name="scolarity.group"
-            render={({ field: { onChange, value } }) => (
-              <Dropdown
-                label={t("account.group")}
-                placeholder={t("account.selectGroup")}
-                options={["1", "2", "3", "4", "5"]}
-                value={value}
-                onValueChange={onChange}
-              />
-            )}
-          />
-
-          <Controller
-            control={userControl}
-            name="scolarity.graduation_year"
-            render={({ field: { onChange, value } }) => (
-              <Dropdown
-                label={t("account.graduationYear")}
-                placeholder={t("account.selectGraduationYear")}
-                icon={<GraduationCap color={theme.text} size={20} />}
-                options={yearOptions}
-                value={value ? value.toString() : undefined}
-                onValueChange={(value) => onChange(Number(value))}
-              />
-            )}
-          />
-        </Card>
-      </View>
-
-      <View className="gap-2">
-        <Button
-          label={t("common.cancel")}
-          onPress={() => navigation.goBack()}
-          variant="secondary"
+        <Input
+          control={userControl}
+          label={t("account.firstName")}
+          name="first_name"
+          returnKeyType="go"
+          textContentType="name"
+          error={userErrors.first_name?.message}
         />
+
+        <Input
+          control={userControl}
+          label={t("account.lastName")}
+          name="last_name"
+          textContentType="familyName"
+          error={userErrors.last_name?.message}
+        />
+
+        <Input
+          control={userControl}
+          label={t("account.email")}
+          name="email"
+          autoCapitalize="none"
+          textContentType="emailAddress"
+          error={userErrors.email?.message}
+          disabled={true}
+          className="opacity-50"
+        />
+
+        <Input
+          control={userControl}
+          label={t("account.phone")}
+          name="phone_number"
+          textContentType="telephoneNumber"
+          error={userErrors.phone_number?.message}
+          keyboardType="phone-pad"
+        />
+
+        <Controller
+          control={userControl}
+          name="formation_name"
+          render={({ field: { onChange, value } }) => (
+            <Dropdown
+              label={t("account.formationName")}
+              placeholder={t("account.selectBranch")}
+              options={["FISE", "FIL", "FIT", "FIP"]}
+              value={value}
+              onValueChange={onChange}
+            />
+          )}
+        />
+
+        <Controller
+          control={userControl}
+          name="graduation_year"
+          render={({ field: { onChange, value } }) => (
+            <Dropdown
+              label={t("account.graduationYear")}
+              placeholder={t("account.selectGraduationYear")}
+              icon={<GraduationCap color={theme.text} size={20} />}
+              options={yearOptions}
+              value={value ? value.toString() : undefined}
+              onValueChange={(value) =>
+                onChange(value ? Number(value) : undefined)
+              }
+            />
+          )}
+        />
+      </View>
+      <View className="gap-2">
         <Button
           label={t("common.save")}
           onPress={handleUserSubmit(handleUpdateAccount)}
           loading={isUpdatingAccount}
-          disabled={!isUserValid || !isDirty}
+          disabled={!isDirty || !isUserValid}
+        />
+
+        <Button
+          label={t("common.cancel")}
+          onPress={() => navigation.goBack()}
+          variant="secondary"
         />
       </View>
     </Page>

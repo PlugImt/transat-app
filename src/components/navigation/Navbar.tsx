@@ -20,11 +20,11 @@ import {
   Laundry,
   Olimtpe,
   Restaurant,
-  RestaurantReviews,
   Timetable,
   Traq,
 } from "@/app/screens/services";
 import { HomeworkDetails } from "@/app/screens/services/homework/components/HomeworkDetails";
+import { RestaurantReviews } from "@/app/screens/services/restaurant/components/Reviews";
 import { Services } from "@/app/screens/services/Services";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { BottomTabParamList } from "@/types";

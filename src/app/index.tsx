@@ -10,7 +10,7 @@ import { Provider } from "jotai";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { DevToolsBubble } from "react-native-react-query-devtools";
+// import { DevToolsBubble } from "react-native-react-query-devtools";
 import { Text } from "@/components/common/Text";
 import { ToastProvider } from "@/components/common/Toast";
 import { apiEnv } from "@/config";
@@ -51,7 +51,7 @@ const App = () => {
     fetchIsDevServerSelected();
   }, []);
 
-  const isDev = process.env.NODE_ENV === "development";
+  // const isDev = process.env.NODE_ENV === "development";
 
   return (
     <Provider>
@@ -71,9 +71,9 @@ const App = () => {
                 </ToastProvider>
               </AuthProvider>
             </BottomSheetModalProvider>
-            {isDev && (
+            {/* {isDev && (
               <DevToolsBubble onCopy={_onCopy} queryClient={queryClient} />
-            )}
+            )} */}
           </QueryClientProvider>
         </GestureHandlerRootView>
       </ThemeProvider>

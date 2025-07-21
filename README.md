@@ -44,7 +44,9 @@ Pour participer au design de l'application, faites une demande pour modifier le 
 Merci à Sentry pour leur offre gratuite !
 
 ## 👋 Nous contacter
- Rejoignez le groupe Whatsapp de [Transat](https://chat.whatsapp.com/Hu2SjIL3ROx9y3BDcKNCyY) 
+ Rejoignez le groupe [Whatsapp](https://chat.whatsapp.com/EJ2tv8M59kC4Dkgs3AvQBu) de Transat
+ 
+ Rejoignez le groupe [Discord](https://discord.gg/7BKkcgqf) de Transat
 
 ## 🤠 Crédits
 

@@ -22,12 +22,14 @@
 Voir la page [Première configuration de l'environnement sur la documentation](https://docs.transat.dev/app/2-premier-lancement/)
 
 <!-- ### 🌎 Traductions
+### 🌎 Traductions
+
 L’application n’est pas encore disponible dans votre langue ? Vous pouvez nous aider à la traduire !
 
 => [Crowdin translation project](https://crowdin.com/project/transat/invite?h=818cd265f3f9d6680d0caab9d29998ee2225755)
 -->
 
- ### 🎨 Design
+### 🎨 Design
 
 Pour participer au design de l'application, faites une demande pour modifier le fichier Figma 👇
 
@@ -44,7 +46,8 @@ Pour participer au design de l'application, faites une demande pour modifier le 
 Merci à Sentry pour leur offre gratuite !
 
 ## 👋 Nous contacter
- Rejoignez le groupe Whatsapp de [Transat](https://chat.whatsapp.com/Hu2SjIL3ROx9y3BDcKNCyY) 
+
+Rejoignez le groupe Whatsapp de [Transat](https://chat.whatsapp.com/Hu2SjIL3ROx9y3BDcKNCyY)
 
 ## 🤠 Crédits
 

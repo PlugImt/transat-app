@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import Badge, { BadgeLoading } from "@/components/common/Badge";
+import Badge, { BadgeSkeleton } from "@/components/common/Badge";
 import Card from "@/components/common/Card";
 import {
   Dialog,
@@ -311,7 +311,6 @@ const LaundryCard = ({ number, type, status, icon }: LaundryProps) => {
     setProgressPercentage(progress);
   }, [timeRemaining, status, icon]);
 
-  // Check if notification button should be disabled
   const shouldDisableButton =
     status === 0 || shouldDisableNotificationButton(timeRemaining);
 
@@ -373,39 +372,34 @@ const LaundryCard = ({ number, type, status, icon }: LaundryProps) => {
           variant={status === 0 ? "secondary" : "default"}
         />
 
-        <Dialog>
-          <DialogTrigger>
-            <TouchableOpacity
-              onPress={handleBellPress}
-              disabled={shouldDisableButton}
-            >
-              {isNotificationSet ? (
-                <BellRing
-                  color={shouldDisableButton ? theme.muted : theme.primary}
-                />
-              ) : (
-                <Bell
-                  color={shouldDisableButton ? theme.muted : theme.primary}
-                />
-              )}
-            </TouchableOpacity>
-          </DialogTrigger>
+        {!shouldDisableButton && (
+          <Dialog>
+            <DialogTrigger>
+              <TouchableOpacity onPress={handleBellPress}>
+                {isNotificationSet ? (
+                  <BellRing color={theme.primary} />
+                ) : (
+                  <Bell color={theme.primary} />
+                )}
+              </TouchableOpacity>
+            </DialogTrigger>
 
-          <DialogContent
-            title={t("services.laundry.getNotification")}
-            className="gap-2"
-            cancelLabel={t("common.cancel")}
-            confirmLabel={t("settings.notifications.setNotification")}
-            onConfirm={handleSetNotification}
-          >
-            <Text>
-              {t("services.laundry.getNotificationDesc", {
-                type: type.toLowerCase(),
-                minutes: MINUTES_BEFORE_NOTIFICATION,
-              })}
-            </Text>
-          </DialogContent>
-        </Dialog>
+            <DialogContent
+              title={t("services.laundry.getNotification")}
+              className="gap-2"
+              cancelLabel={t("common.cancel")}
+              confirmLabel={t("settings.notifications.setNotification")}
+              onConfirm={handleSetNotification}
+            >
+              <Text>
+                {t("services.laundry.getNotificationDesc", {
+                  type: type.toLowerCase(),
+                  minutes: MINUTES_BEFORE_NOTIFICATION,
+                })}
+              </Text>
+            </DialogContent>
+          </Dialog>
+        )}
       </View>
     </Card>
   );
@@ -433,7 +427,7 @@ export const LaundryCardSkeleton = ({ icon }: LaundryCardSkeletonProps) => {
       </View>
       <TextSkeleton lines={1} lastLineWidth={100} />
 
-      <BadgeLoading />
+      <BadgeSkeleton />
 
       <Bell color={theme.muted} />
     </View>

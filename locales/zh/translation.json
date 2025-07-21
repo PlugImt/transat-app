@@ -85,7 +85,7 @@
       "notifications": "通知",
       "fetchError": "无法获取通知设置",
       "updateError": "无法更新通知设置",
-      "setNotification": "设置通知",
+      "setNotification": "设置",
       "toggleRestaurant": "发布每日菜单时获得通知",
       "toggleTraq": "当 Traq' 上有新文章时，您会收到通知。"
     },

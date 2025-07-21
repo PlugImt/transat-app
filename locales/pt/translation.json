@@ -85,7 +85,7 @@
       "notifications": "Notificações",
       "fetchError": "Não é possível obter definições de notificação",
       "updateError": "Não é possível atualizar as definições de notificação",
-      "setNotification": "Definir notificação",
+      "setNotification": "Definir",
       "toggleRestaurant": "Ser notificado quando o menu diário for publicado",
       "toggleTraq": "Ser notificado quando um novo artigo estiver disponível no Traq'."
     },

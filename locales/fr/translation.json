@@ -85,7 +85,7 @@
       "notifications": "Notifications",
       "fetchError": "Impossible de récupérer les paramètres de notification",
       "updateError": "Impossible de mettre à jour les paramètres de notification",
-      "setNotification": "Définir une notification",
+      "setNotification": "Définir",
       "toggleRestaurant": "Être notifié lorsque le menu du jour est publié",
       "toggleTraq": "Être notifié lorsqu'un nouvel article est proposé au Traq'"
     },

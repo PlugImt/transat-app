@@ -57,7 +57,7 @@ export const Page = ({
     paddingTop: HEADER_HEIGHT,
   };
 
-  const containerClassName = cn("gap-4 px-5", className);
+  const containerClassName = cn("gap-6 px-5", className);
 
   const contentWrapperProps = {
     onScroll: scrollHandler,

@@ -272,7 +272,10 @@
       "noData": "似乎没有数据可显示",
       "noMeal": "无餐",
       "closed": "关闭",
-      "closedWeekends": "餐厅周末不营业",
+      "closedWeekends": {
+        "title": "餐厅周末不营业",
+        "description": "明天再来查看菜单"
+      },
       "closedNight": {
         "title": "餐厅已关闭",
         "description": "明天再来查看菜单"

@@ -6,3 +6,4 @@ export * from "./olimtpe";
 export * from "./restaurant";
 export * from "./schedule";
 export * from "./traq";
+export * from "./fourchettas";

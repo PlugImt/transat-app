@@ -20,11 +20,12 @@ import {
   Laundry,
   Olimtpe,
   Restaurant,
-  RestaurantReviews,
   Timetable,
   Traq,
+  Fourchettas,
 } from "@/app/screens/services";
 import { HomeworkDetails } from "@/app/screens/services/homework/components/HomeworkDetails";
+import { RestaurantReviews } from "@/app/screens/services/restaurant/components/Reviews";
 import { Services } from "@/app/screens/services/Services";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { BottomTabParamList } from "@/types";
@@ -62,6 +63,7 @@ const ServicesStackScreen = () => (
     <ServicesStack.Screen name="Clubs" component={Clubs} />
     <ServicesStack.Screen name="Traq" component={Traq} />
     <ServicesStack.Screen name="Olimtpe" component={Olimtpe} />
+    <ServicesStack.Screen name="Fourchettas" component={Fourchettas} />
   </ServicesStack.Navigator>
 );
 

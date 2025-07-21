@@ -274,7 +274,10 @@
       "noData": "Il semble qu'il n'y ait pas de données à afficher",
       "noMeal": "Aucun repas",
       "closed": "Fermé",
-      "closedWeekends": "Le restaurant est fermé le week-end",
+      "closedWeekends": {
+        "title": "Le restaurant est fermé le week-end",
+        "description": "Revenez lundi pour découvrir le menu du jour"
+      },
       "closedNight": {
         "title": "Le restaurant est fermé",
         "description": "Revenez demain pour voir le menu"
@@ -377,6 +380,13 @@
       "price": "Lavage : 2€, Séchage : 1€.",
       "additionalInfo": "Payez en pièces, par carte ou avec le portefeuille Monix (recommandé pour les bonus et les remboursements). Besoin de plus de temps de séchage ? Payez plusieurs sessions avant de commencer.",
       "location": "Sous la MDE, après les boîtes aux lettres"
+    },
+    "fourchettas": {
+      "title": "Fourchettas",
+      "welcome": "Prochains événements de Fourchettas",
+      "description": "Découvrez les événements de Fourchettas",
+      "about": "Fourchettas vous propose des événements où vous pouvez vous régaler à la MDE",
+      "orderButton": "Commander"
     },
     "openingHours": "Horaires d'ouverture",
     "location": "Emplacement",

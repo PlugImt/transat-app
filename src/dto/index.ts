@@ -6,3 +6,4 @@ export * from "./notification";
 export * from "./timetable";
 export * from "./user";
 export * from "./weather";
+export * from "./fourchettas";

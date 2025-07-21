@@ -59,6 +59,9 @@ export const usePostRestaurantReview = (id: number) => {
       queryClient.invalidateQueries({
         queryKey: [...QUERY_KEYS.restaurantRating, id],
       });
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.restaurantMenu,
+      });
     },
   });
 };

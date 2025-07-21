@@ -18,7 +18,7 @@ export const FourchettasOrder = () => {
 
     return (
         <Page
-            title={`Fourchettas Order for ID: ${id}`}
+            title={`Fourchettas Order ID: ${id}`}
 
         >
             <View className="flex-row justify-between items-end gap-8">

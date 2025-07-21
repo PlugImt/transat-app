@@ -12,12 +12,18 @@ import { getEventsUpcoming } from '@/api/endpoints/fourchettas/fourchettas.endpo
 import { useEffect, useState } from 'react';
 import { useUser } from '@/hooks/account/useUser';
 import type { Event } from '@/dto';
+import type { AppStackParamList } from "@/types";
+import type { StackNavigationProp } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native";
 
-//import type { Event } from "@/dto";
+type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
+
+
 export const Fourchettas = () => {
     const { data: user } = useUser();
     const { t } = useTranslation();
-
+  const navigation = useNavigation<AppScreenNavigationProp>();
+  
     const [events, setEvents] = useState<Event[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -63,6 +69,7 @@ export const Fourchettas = () => {
                 {loading ? (
                     <>
                         <FourchettasEventCardLoading />
+                        <FourchettasEventCardLoading />
                     </>
                 ) : events.length === 0 ? (
                     <Text className="text-center" color="muted">
@@ -79,7 +86,7 @@ export const Fourchettas = () => {
                         time={event.time}
                         form_closing_date={event.form_closing_date}
                         form_closing_time={event.form_closing_time}
-                        onPress={() => console.log('Order command ...' + event.id)}
+                        onPress={() => navigation.navigate("FourchettasOrder", { id: event.id })}
                     />
                 ))}
             </View>

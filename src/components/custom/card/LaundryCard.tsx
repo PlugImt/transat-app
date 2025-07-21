@@ -415,21 +415,16 @@ export const LaundryCardSkeleton = ({ icon }: LaundryCardSkeletonProps) => {
   const { theme } = useTheme();
 
   return (
-    <View
-      style={{ backgroundColor: theme.card }}
-      className="px-6 py-4 rounded-lg flex-row justify-between gap-6 items-center"
-    >
+    <Card className="flex-row justify-between gap-6 items-center">
       <View className="flex-row items-center gap-2">
         {getIcon(icon, theme.muted)}
         <Text color="muted" className="font-bold">
           N°--
         </Text>
       </View>
-      <TextSkeleton lines={1} lastLineWidth={100} />
+      <TextSkeleton lastLineWidth={100} />
 
-      <BadgeSkeleton />
-
-      <Bell color={theme.muted} />
-    </View>
+      <BadgeSkeleton label="Libre" variant="secondary" />
+    </Card>
   );
 };

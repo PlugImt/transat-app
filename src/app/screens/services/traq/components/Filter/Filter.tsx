@@ -1,7 +1,5 @@
-import { useTranslation } from "react-i18next";
-import { ScrollView, View } from "react-native";
+import { ScrollView } from "react-native";
 import Badge from "@/components/common/Badge";
-import { Text } from "@/components/common/Text";
 
 interface TraqFilterProps {
   tags: string[];
@@ -14,8 +12,6 @@ export const TraqFilter = ({
   selected,
   setSelected,
 }: TraqFilterProps) => {
-  const { t } = useTranslation();
-
   const toggle = (tag: string) => {
     setSelected((prev) => {
       if (prev.includes(tag)) {
@@ -26,32 +22,16 @@ export const TraqFilter = ({
   };
 
   return (
-    <>
-      <View className="flex-row justify-between items-center ml-4">
-        <Text variant="h2">{t("common.filter")}</Text>
-        {selected.length > 0 && (
-          <Badge
-            label={t("common.clearAll")}
-            variant="secondary"
-            onPress={() => setSelected([])}
-          />
-        )}
-      </View>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        className="ml-4"
-      >
-        {tags.map((tag) => (
-          <Badge
-            key={tag}
-            label={tag}
-            variant={selected.includes(tag) ? "secondary" : "light"}
-            onPress={() => toggle(tag)}
-            className="mr-2"
-          />
-        ))}
-      </ScrollView>
-    </>
+    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+      {tags.map((tag) => (
+        <Badge
+          key={tag}
+          label={tag}
+          variant={selected.includes(tag) ? "secondary" : "ghost"}
+          onPress={() => toggle(tag)}
+          className="mr-2"
+        />
+      ))}
+    </ScrollView>
   );
 };

@@ -8,7 +8,7 @@ import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
 import { useMenuRestaurant } from "@/hooks/useMenuRestaurant";
 import { getOpeningHoursData, isWeekend, outOfService } from "@/utils";
-import { RestaurantClosed } from "./components/Menu/RestaurantClosed";
+import { RestaurantClosed } from "./components/RestaurantMenu/RestaurantClosed";
 
 export const Restaurant = () => {
   const { t } = useTranslation();

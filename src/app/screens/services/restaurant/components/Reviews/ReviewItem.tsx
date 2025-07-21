@@ -9,7 +9,7 @@ import {
 import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
 import { Stars } from "@/components/custom/star/Stars";
-import { TextSkeleton } from "@/components/Skeleton";
+import { AvatarSkeleton, TextSkeleton } from "@/components/Skeleton";
 import type { Review } from "@/dto";
 import { getTimeAgo } from "@/utils";
 
@@ -60,14 +60,12 @@ export const ReviewItemSkeleton = () => {
   return (
     <Card>
       <View className="flex-row gap-2">
-        <Avatar className="w-14 h-14">
-          <AvatarImage loading />
-        </Avatar>
+        <AvatarSkeleton size={56} />
 
         <View className="flex-1">
           <View className="flex-row items-center justify-between gap-4">
-            <TextSkeleton variant="lg" className="flex-1" />
-            <TextSkeleton variant="sm" />
+            <TextSkeleton variant="lg" className="flex-1" lastLineWidth={130} />
+            <TextSkeleton variant="sm" lastLineWidth={80} />
           </View>
 
           <View className="flex-row items-center gap-1">

@@ -1,14 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Text, type TextInput, View } from "react-native";
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from "react-native-reanimated";
 import { z } from "zod";
 import { VerificationCodeModal } from "@/components/auth/VerificationCode";
 import { Button } from "@/components/common/Button";
@@ -116,99 +111,82 @@ export const Signup = () => {
     }
   };
 
-  // Animation values with Reanimated
-  const opacity = useSharedValue(0);
-  const translateY = useSharedValue(50);
-
-  const animatedStyle = useAnimatedStyle(() => ({
-    opacity: opacity.value,
-    transform: [{ translateY: translateY.value }],
-  }));
-
-  useEffect(() => {
-    // Start animations
-    opacity.value = withTiming(1, { duration: 800 });
-    translateY.value = withTiming(0, { duration: 800 });
-  }, [opacity, translateY]);
-
   return (
-    <Page title={t("auth.signUp")}>
-      <Animated.View style={[animatedStyle, { flex: 1 }]}>
-        {signupError ? (
-          <View className="bg-red-300 p-3 rounded-md my-4">
-            <Text className="text-red-900">{signupError}</Text>
-          </View>
-        ) : (
-          <View className="h-20">
-            <Text style={{ color: theme.muted }} className="mt-2">
-              {t("auth.signUpDescription")}
-            </Text>
-          </View>
-        )}
-
-        <View className="flex flex-col gap-10">
-          <Input
-            placeholder="christophe.lerouge@imt-atlantique.net"
-            control={control}
-            name="email"
-            textContentType="emailAddress"
-            autoCapitalize="none"
-            // autoFocus
-            label={t("auth.email")}
-            labelClasses="h3"
-            returnKeyType="next"
-            onSubmitEditing={() => passwordRef.current?.focus()}
-            error={errors.email?.message}
-          />
-          <Input
-            placeholder="••••••••••"
-            control={control}
-            name="password"
-            textContentType="newPassword"
-            labelClasses="h3"
-            label={t("auth.password")}
-            secureTextEntry
-            ref={passwordRef}
-            returnKeyType="next"
-            onSubmitEditing={() => confirmPasswordRef.current?.focus()}
-            error={errors.password?.message}
-          />
-          <Input
-            placeholder="••••••••••"
-            control={control}
-            name="confirmPassword"
-            textContentType="password"
-            label={t("auth.confirmPassword")}
-            labelClasses="h3"
-            secureTextEntry
-            ref={confirmPasswordRef}
-            returnKeyType="done"
-            onSubmitEditing={handleSubmit(handleSignup)}
-            error={errors.confirmPassword?.message}
-          />
-          <View className="flex flex-col gap-2">
-            <Button
-              label={isLoading ? t("auth.signingUp") : t("auth.signUp")}
-              onPress={handleSubmit(handleSignup)}
-              disabled={isButtonDisabled}
-              className={isButtonDisabled ? "opacity-50" : ""}
-              loading={isLoading}
-            />
-            <Button
-              label={t("auth.gotAccount")}
-              onPress={() => navigation.navigate("Auth", { screen: "Signin" })}
-              disabled={isLoading}
-              variant="link"
-            />
-          </View>
+    <Page title={t("auth.signUp")} disableScroll>
+      {signupError ? (
+        <View className="bg-red-300 p-3 rounded-md my-4">
+          <Text className="text-red-900">{signupError}</Text>
         </View>
+      ) : (
+        <View className="h-20">
+          <Text style={{ color: theme.muted }} className="mt-2">
+            {t("auth.signUpDescription")}
+          </Text>
+        </View>
+      )}
 
-        <VerificationCodeModal
-          isVisible={verificationModalVisible}
-          email={verificationEmail}
-          onClose={() => setVerificationModalVisible(false)}
+      <View className="flex flex-col gap-10">
+        <Input
+          placeholder="christophe.lerouge@imt-atlantique.net"
+          control={control}
+          name="email"
+          textContentType="emailAddress"
+          autoCapitalize="none"
+          // autoFocus
+          label={t("auth.email")}
+          labelClasses="h3"
+          returnKeyType="next"
+          onSubmitEditing={() => passwordRef.current?.focus()}
+          error={errors.email?.message}
         />
-      </Animated.View>
+        <Input
+          placeholder="••••••••••"
+          control={control}
+          name="password"
+          textContentType="newPassword"
+          labelClasses="h3"
+          label={t("auth.password")}
+          secureTextEntry
+          ref={passwordRef}
+          returnKeyType="next"
+          onSubmitEditing={() => confirmPasswordRef.current?.focus()}
+          error={errors.password?.message}
+        />
+        <Input
+          placeholder="••••••••••"
+          control={control}
+          name="confirmPassword"
+          textContentType="password"
+          label={t("auth.confirmPassword")}
+          labelClasses="h3"
+          secureTextEntry
+          ref={confirmPasswordRef}
+          returnKeyType="done"
+          onSubmitEditing={handleSubmit(handleSignup)}
+          error={errors.confirmPassword?.message}
+        />
+        <View className="flex flex-col gap-2">
+          <Button
+            label={isLoading ? t("auth.signingUp") : t("auth.signUp")}
+            onPress={handleSubmit(handleSignup)}
+            disabled={isButtonDisabled}
+            className={isButtonDisabled ? "opacity-50" : ""}
+            isUpdating={isLoading}
+          />
+          <Button
+            label={t("auth.gotAccount")}
+            onPress={() => navigation.navigate("Auth", { screen: "Signin" })}
+            disabled={isLoading}
+            variant="link"
+          />
+        </View>
+      </View>
+
+      <VerificationCodeModal
+        isVisible={verificationModalVisible}
+        email={verificationEmail}
+        onClose={() => setVerificationModalVisible(false)}
+      />
     </Page>
   );
 };

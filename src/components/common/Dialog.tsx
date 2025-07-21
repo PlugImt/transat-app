@@ -132,7 +132,7 @@ const DialogContent = ({
                     <Button
                       onPress={handleConfirm}
                       label={confirmLabel}
-                      loading={isPending}
+                      isUpdating={isPending}
                       disabled={disableConfirm}
                       className="flex-1"
                     />

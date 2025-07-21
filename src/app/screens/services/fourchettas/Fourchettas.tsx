@@ -27,10 +27,12 @@ export const Fourchettas = () => {
                 setLoading(true);
             },
             () => {
-                setLoading(false);
             },
             () => {},
-            (data: Event[]) => setEvents(data)
+            (data: Event[]) => {
+                setEvents(data);
+                setLoading(false);
+            }
         );
     }, []);
 

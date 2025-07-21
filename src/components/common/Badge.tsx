@@ -1,62 +1,79 @@
-import { cva, type VariantProps } from "class-variance-authority";
 import type { LucideIcon } from "lucide-react-native";
 import type React from "react";
-import { TouchableOpacity, type View } from "react-native";
+import { type TextStyle, TouchableOpacity, type ViewStyle } from "react-native";
 import { Text } from "@/components/common/Text";
-import { useTheme } from "@/contexts/ThemeContext";
+import { type ThemeType, useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";
 
-const badgeVariants = cva(
-  "flex flex-row items-center rounded-xl justify-center",
-  {
-    variants: {
-      variant: {
-        default: "bg-primary",
-        light: "bg-foreground",
-        secondary: "bg-secondary",
-        destructive: "bg-destructive",
-        success: "bg-green-500",
-      },
-      size: {
-        default: "px-4 py-1",
-        sm: "px-2.5 py-1.5",
-        lg: "px-4 py-2",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  },
-);
+type BadgeVariant = "default" | "secondary" | "destructive" | "ghost";
+type BadgeSize = "default" | "sm";
 
-const badgeTextVariants = cva("font-semibold text-center", {
-  variants: {
-    variant: {
-      default: "text-primary-foreground",
-      light: "text-background",
-      secondary: "text-foreground",
-      destructive: "text-destructive-foreground",
-      success: "text-green-100",
+const getBadgeStyle = (variant: BadgeVariant, theme: ThemeType) => {
+  const badgeStyles: {
+    [key: string]: ViewStyle;
+  } = {
+    default: {
+      backgroundColor: theme.primary,
     },
-    size: {
-      default: "text-base",
-      sm: "text-sm",
-      lg: "text-lg",
+    secondary: {
+      backgroundColor: `${theme.primary}40`, // 25% opacity (40 en hex = 25% en décimal)
     },
-  },
-  defaultVariants: {
-    variant: "default",
-    size: "default",
-  },
-});
+    destructive: {
+      backgroundColor: theme.destructive,
+    },
+    ghost: {
+      backgroundColor: theme.backdrop,
+    },
+  };
+
+  return badgeStyles[variant] || badgeStyles.default;
+};
+
+const getTextColor = (variant: BadgeVariant, theme: ThemeType) => {
+  const badgeTextStyles: {
+    [key: string]: TextStyle;
+  } = {
+    default: {
+      color: theme.primaryText,
+    },
+    secondary: {
+      color: theme.secondaryText,
+    },
+    destructive: {
+      color: theme.destructiveText,
+    },
+    ghost: {
+      color: theme.muted,
+    },
+  };
+
+  return badgeTextStyles[variant] || badgeTextStyles.default;
+};
+
+const getSize = (size: BadgeSize) => {
+  const badgeSize: {
+    [key: string]: ViewStyle;
+  } = {
+    default: {
+      paddingHorizontal: 16,
+      paddingVertical: 4,
+    },
+    sm: {
+      paddingHorizontal: 10,
+      paddingVertical: 6,
+    },
+  };
+  return badgeSize[size] || badgeSize.default;
+};
 
 export interface BadgeProps
-  extends React.ComponentPropsWithoutRef<typeof View>,
-    VariantProps<typeof badgeVariants> {
+  extends React.ComponentPropsWithoutRef<typeof TouchableOpacity> {
   label: string;
   labelClasses?: string;
+  variant?: BadgeVariant;
+  size?: BadgeSize;
   onPress?: () => void;
+  isDisabled?: boolean;
   icon?: LucideIcon;
 }
 
@@ -64,29 +81,38 @@ const Badge = ({
   label,
   labelClasses,
   className,
-  variant,
-  size,
+  variant = "default",
+  size = "default",
   onPress,
+  isDisabled,
   icon: Icon,
   ...props
 }: BadgeProps) => {
   const { theme } = useTheme();
+
+  const badgeStyle = getBadgeStyle(variant, theme);
+  const textColor = getTextColor(variant, theme);
+  const sizeStyles = getSize(size);
+
   return (
     <TouchableOpacity
       className={cn(
-        badgeVariants({ variant, size }),
         className,
-        "flex-row items-center gap-1.5",
+        "flex-row items-center rounded-xl justify-center gap-1.5",
       )}
-      {...props}
       onPress={onPress}
       activeOpacity={onPress ? 0.2 : 1}
+      style={[
+        {
+          ...badgeStyle,
+          ...sizeStyles,
+          opacity: isDisabled ? 0.5 : 1,
+        },
+      ]}
+      {...props}
     >
       {Icon && <Icon size={14} color={theme.text} />}
-      <Text
-        className={cn(badgeTextVariants({ variant, size }), labelClasses)}
-        style={{ color: "white" }}
-      >
+      <Text className={labelClasses} style={textColor}>
         {label}
       </Text>
     </TouchableOpacity>
@@ -95,16 +121,16 @@ const Badge = ({
 
 export default Badge;
 
-interface BadgeLoadingProps {
+interface BadgeSkeletonProps {
   className?: string;
 }
 
-export const BadgeLoading = ({ className }: BadgeLoadingProps) => {
+export const BadgeSkeleton = ({ className }: BadgeSkeletonProps) => {
   const { theme } = useTheme();
   return (
     <Badge
       label=""
-      variant="light"
+      variant="ghost"
       className={cn("bg-muted-foreground animate-pulse w-20", className)}
       labelClasses={`text-${theme.background} animate-pulse`}
     />

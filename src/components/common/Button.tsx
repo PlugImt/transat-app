@@ -11,6 +11,62 @@ import { cn } from "@/utils";
 type ButtonVariant = "default" | "secondary" | "destructive" | "ghost" | "link";
 type ButtonSize = "default" | "sm";
 
+const getButtonStyle = (variant: ButtonVariant, theme: ThemeType) => {
+  const buttonStyles: {
+    [key: string]: ViewStyle;
+  } = {
+    default: {
+      backgroundColor: theme.primary,
+    },
+    secondary: {
+      backgroundColor: `${theme.primary}40`, // 25% opacity (40 en hex = 25% en décimal)
+    },
+    destructive: {
+      backgroundColor: theme.destructive,
+    },
+    ghost: {
+      backgroundColor: theme.backdrop,
+    },
+    link: {
+      backgroundColor: "transparent",
+    },
+  };
+
+  return buttonStyles[variant] || buttonStyles.default;
+};
+
+const getTextColor = (variant: ButtonVariant, theme: ThemeType) => {
+  const textColors: { [key: string]: string } = {
+    default: theme.primaryText,
+    secondary: theme.secondaryText,
+    destructive: theme.destructiveText,
+    ghost: theme.muted,
+    link: theme.primary,
+  };
+
+  return textColors[variant] || textColors.default;
+};
+
+const getSizeStyles = (size: ButtonSize) => {
+  const sizeStyles: {
+    [key: string]: {
+      height: number;
+      paddingHorizontal: number;
+    };
+  } = {
+    default: {
+      height: 40,
+      paddingHorizontal: 16,
+    },
+    sm: {
+      height: 32,
+      paddingHorizontal: 8,
+    },
+  };
+
+  return sizeStyles[size] || sizeStyles.default;
+};
+
 interface ButtonProps
   extends ComponentPropsWithoutRef<typeof TouchableOpacity> {
   label: string;
@@ -114,59 +170,3 @@ const IconButton = ({
 };
 
 export { Button, IconButton };
-
-const getButtonStyle = (variant: ButtonVariant, theme: ThemeType) => {
-  const buttonStyles: {
-    [key: string]: ViewStyle;
-  } = {
-    default: {
-      backgroundColor: theme.primary,
-    },
-    secondary: {
-      backgroundColor: `${theme.primary}40`, // 25% opacity (40 en hex = 25% en décimal)
-    },
-    destructive: {
-      backgroundColor: theme.destructive,
-    },
-    ghost: {
-      backgroundColor: theme.backdrop,
-    },
-    link: {
-      backgroundColor: "transparent",
-    },
-  };
-
-  return buttonStyles[variant] || buttonStyles.default;
-};
-
-const getTextColor = (variant: ButtonVariant, theme: ThemeType) => {
-  const textColors: { [key: string]: string } = {
-    default: "#FFFFFF",
-    secondary: theme.primary,
-    destructive: "#FFFFFF",
-    ghost: theme.muted,
-    link: theme.primary,
-  };
-
-  return textColors[variant] || textColors.default;
-};
-
-const getSizeStyles = (size: ButtonSize) => {
-  const sizeStyles: {
-    [key: string]: {
-      height: number;
-      paddingHorizontal: number;
-    };
-  } = {
-    default: {
-      height: 40,
-      paddingHorizontal: 16,
-    },
-    sm: {
-      height: 32,
-      paddingHorizontal: 8,
-    },
-  };
-
-  return sizeStyles[size] || sizeStyles.default;
-};

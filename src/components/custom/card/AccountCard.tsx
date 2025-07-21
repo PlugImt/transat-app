@@ -1,11 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { t } from "i18next";
 import { View } from "react-native";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/common/Avatar";
+import Avatar from "@/components/common/Avatar";
 import { Button } from "@/components/common/Button";
 import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
@@ -26,13 +22,7 @@ export const AccountCard = ({ user }: AccountCardProps) => {
   return (
     <Card>
       <View className="flex-row items-center gap-4">
-        <Avatar className="w-16 h-16">
-          <AvatarImage source={{ uri: user.profile_picture }} />
-          <AvatarFallback>
-            {user.first_name.charAt(0)}
-            {user.last_name.charAt(0)}
-          </AvatarFallback>
-        </Avatar>
+        <Avatar user={user} />
         <View className="flex-1">
           <Text variant="h3">{`${user.first_name} ${user.last_name}`}</Text>
           <Text color="muted">{user.email}</Text>

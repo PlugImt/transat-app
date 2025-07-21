@@ -47,6 +47,7 @@ export const Welcome = () => {
         triggerConfettiRef.current = trigger;
       }}
       confetti={true}
+      className="gap-4"
     >
       <View className="flex flex-col items-center justify-center h-full">
         <AnimatedLogo onLogoPress={handleLogoPress} />

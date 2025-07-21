@@ -53,7 +53,7 @@ const Help = () => {
   ];
 
   return (
-    <Page className="gap-6" title={t("settings.help.title")}>
+    <Page title={t("settings.help.title")}>
       <Text className="mx-4 mb-2" color="muted">
         {t("settings.help.description")}
       </Text>

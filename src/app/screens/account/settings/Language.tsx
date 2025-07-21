@@ -36,7 +36,7 @@ export const Language = () => {
   };
 
   return (
-    <Page title={t("settings.language.language")}>
+    <Page title={t("settings.language.language")} className="gap-4">
       {currentLanguageOption && (
         <MotiView
           animate={{

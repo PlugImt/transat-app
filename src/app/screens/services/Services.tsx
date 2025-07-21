@@ -1,10 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
-import { Image, View } from "react-native";
+import { Image } from "react-native";
 import Animated from "react-native-reanimated";
 import { Button } from "@/components/common/Button";
-import LinkCard from "@/components/custom/LinkCard";
+import LinkCard, { LinkCardLoading } from "@/components/custom/LinkCard";
 import { PreferenceCustomizationButton } from "@/components/custom/PreferenceCustomizationModal";
 import { Empty } from "@/components/page/Empty";
 import { Page } from "@/components/page/Page";
@@ -22,7 +22,7 @@ export const Services = () => {
   const {
     enabledPreferences: enabledServices,
     preferences: services,
-    loading,
+    isPending,
     updateOrder,
   } = useServicePreferences();
 
@@ -40,12 +40,8 @@ export const Services = () => {
     />
   );
 
-  if (loading) {
-    return (
-      <Page title={t("services.title")}>
-        <View />
-      </Page>
-    );
+  if (isPending) {
+    return <ServicesLoading />;
   }
 
   return (
@@ -81,3 +77,15 @@ export const Services = () => {
 };
 
 export default Services;
+
+const ServicesLoading = () => {
+  const { t } = useTranslation();
+
+  return (
+    <Page title={t("services.title")}>
+      {Array.from({ length: 5 }).map((element) => (
+        <LinkCardLoading key={`service-loading-${element}`} />
+      ))}
+    </Page>
+  );
+};

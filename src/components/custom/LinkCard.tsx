@@ -4,6 +4,7 @@ import { type ImageStyle, type StyleProp, View } from "react-native";
 import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
+import { AvatarSkeleton, TextSkeleton } from "../Skeleton";
 
 const ImageContainer = ({ children }: { children: React.ReactNode }) => {
   if (!isValidElement(children)) {
@@ -50,3 +51,19 @@ const LinkCard = ({ onPress, image, title, description }: LinkCardProps) => {
 };
 
 export default LinkCard;
+
+export const LinkCardLoading = () => {
+  const { theme } = useTheme();
+  return (
+    <Card>
+      <View className="flex-row items-center gap-4">
+        <AvatarSkeleton size={64} />
+        <View className="flex-1">
+          <TextSkeleton variant="h3" lastLineWidth={100} />
+          <TextSkeleton variant="sm" width={175} lines={2} />
+        </View>
+        <ChevronRight color={theme.muted} />
+      </View>
+    </Card>
+  );
+};

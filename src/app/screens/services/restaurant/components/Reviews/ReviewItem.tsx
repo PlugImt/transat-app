@@ -1,16 +1,12 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/common/Avatar";
+import Avatar from "@/components/common/Avatar";
 import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
 import { Stars } from "@/components/custom/star/Stars";
 import { AvatarSkeleton, TextSkeleton } from "@/components/Skeleton";
-import type { Review } from "@/dto";
+import type { Review, User } from "@/dto";
 import { getTimeAgo } from "@/utils";
 
 interface ReviewItemProps {
@@ -24,13 +20,7 @@ export const ReviewItem = ({ review }: ReviewItemProps) => {
   return (
     <Card>
       <View className="flex-row gap-2">
-        <Avatar className="h-14 w-14">
-          <AvatarImage source={{ uri: review.profile_picture || undefined }} />
-          <AvatarFallback textClassname="text-lg">
-            {review.first_name?.charAt(0) || ""}
-            {review.last_name?.charAt(0) || ""}
-          </AvatarFallback>
-        </Avatar>
+        <Avatar user={review as unknown as User} size={56} />
 
         <View className="flex-1">
           <View className="flex-row items-center justify-between gap-4">

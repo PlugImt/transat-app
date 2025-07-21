@@ -83,7 +83,6 @@ export const Settings = () => {
 
   return (
     <Page
-      className="gap-6"
       refreshing={isPending}
       onRefresh={refetch}
       title={t("settings.settings")}

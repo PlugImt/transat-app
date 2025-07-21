@@ -166,7 +166,7 @@ export const ResetPassword = () => {
   }, [fadeAnim, slideAnim]);
 
   return (
-    <Page title={t("auth.resetPassword")}>
+    <Page title={t("auth.resetPassword")} className="gap-4">
       <RNAnimated.View
         style={{
           opacity: fadeAnim,

@@ -1,10 +1,10 @@
 import { BadgeEuro, Beer, CircleX, Clock } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
-import { Dimensions, Image, View } from "react-native";
-import { Avatar, AvatarImage } from "@/components/common/Avatar";
+import { Image, View } from "react-native";
 import Badge from "@/components/common/Badge";
+import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
-import { TextSkeleton } from "@/components/Skeleton";
+import { AvatarSkeleton, TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 
 interface CardProps {
@@ -18,9 +18,6 @@ interface CardProps {
   priceHalf?: number;
   onPress?: () => void;
 }
-
-const { width } = Dimensions.get("window");
-const cardWidth = width * 0.85;
 
 const TraqCard = ({
   image,
@@ -36,21 +33,14 @@ const TraqCard = ({
   const { theme } = useTheme();
 
   return (
-    <View
-      style={{ backgroundColor: theme.card }}
-      className="px-6 py-8 rounded-lg gap-6 relative items-center"
-    >
+    <Card className="relative items-center">
       <Image
         source={{ uri: image }}
         resizeMode="contain"
         className="w-4/5 h-[100px] rounded-lg"
-        style={{ width: cardWidth * 0.7 }}
       />
 
       <View className="absolute top-8 right-8 items-end gap-2">
-        {limited && (
-          <Badge label={t("services.traq.limited")} size="sm" icon={Clock} />
-        )}
         {outOfStock && (
           <Badge
             label={t("services.traq.outOfStock")}
@@ -59,16 +49,24 @@ const TraqCard = ({
             variant="destructive"
           />
         )}
+        {limited && (
+          <Badge
+            label={t("services.traq.limited")}
+            size="sm"
+            icon={Clock}
+            variant="ghost"
+          />
+        )}
       </View>
 
       <View>
-        <Text className="h2 text-center" color="primary">
+        <Text variant="h2" className="text-center">
           {name}
         </Text>
         {description && <Text className="text-center">{description}</Text>}
       </View>
 
-      <View className="w-full px-4 gap-2">
+      <View className="w-full p-4 gap-2">
         {alcohol !== undefined && alcohol > 0 && (
           <View className="flex-row justify-between items-center">
             <View className="flex-row items-center gap-2">
@@ -107,7 +105,7 @@ const TraqCard = ({
           </View>
         )}
       </View>
-    </View>
+    </Card>
   );
 };
 
@@ -118,16 +116,11 @@ export const TraqCardLoading = () => {
   const { theme } = useTheme();
 
   return (
-    <View
-      style={{ backgroundColor: theme.card }}
-      className="px-6 py-8 rounded-lg gap-6 relative items-center"
-    >
-      <Avatar className="w-40 h-40">
-        <AvatarImage loading />
-      </Avatar>
+    <Card className="items-center">
+      <AvatarSkeleton size={160} />
 
       <View className="gap-2 items-center justify-center">
-        <TextSkeleton variant="h2" lines={1} lastLineWidth={200} />
+        <TextSkeleton variant="h2" lastLineWidth={200} />
         <TextSkeleton variant="sm" lines={2} width={300} />
       </View>
 
@@ -137,7 +130,7 @@ export const TraqCardLoading = () => {
             <Beer size={18} color={theme.text} />
             <Text className="font-bold">{t("services.traq.alcohol")}</Text>
           </View>
-          <TextSkeleton lines={1} lastLineWidth={50} />
+          <TextSkeleton lastLineWidth={50} />
         </View>
 
         <View className="flex flex-row justify-between items-center">
@@ -145,9 +138,9 @@ export const TraqCardLoading = () => {
             <BadgeEuro size={18} color={theme.text} />
             <Text className="font-bold">{t("services.traq.price")}</Text>
           </View>
-          <TextSkeleton lines={1} lastLineWidth={50} />
+          <TextSkeleton lastLineWidth={50} />
         </View>
       </View>
-    </View>
+    </Card>
   );
 };

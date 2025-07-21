@@ -19,10 +19,6 @@ const colors = {
     border: "#E5E7EB",
     backdrop: "#7075810D",
     overlay: "#f5f4f2E5",
-
-    primary: sharedColors.primary,
-    secondary: sharedColors.secondary,
-    errorBackground: `${sharedColors.destructive}20`, // 20% opacity (20 en hex = 12.5% en décimal)
   },
   dark: {
     background: "#070402",
@@ -34,15 +30,20 @@ const colors = {
     border: "#403D3D",
     backdrop: "#2C272666",
     overlay: "#070402E5",
-
-    primary: sharedColors.primary,
-    secondary: sharedColors.secondary,
-    errorBackground: `${sharedColors.destructive}20`, // 20% opacity (20 en hex = 12.5% en décimal)
   },
   shared: {
+    primary: {
+      DEFAULT: sharedColors.primary,
+      text: "#FFFFFF",
+    },
+    secondary: {
+      DEFAULT: sharedColors.secondary,
+      text: sharedColors.primary,
+    },
     destructive: {
       DEFAULT: sharedColors.destructive,
       text: "#FFFFFF",
+      background: `${sharedColors.destructive}20`, // 20% opacity (20 en hex = 12.5% en décimal)
     },
     success: {
       DEFAULT: sharedColors.success,

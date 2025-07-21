@@ -44,7 +44,7 @@ export const ErrorPage = ({
           label="Réessayer"
           variant="secondary"
           onPress={refetch}
-          loading={isRefetching}
+          isUpdating={isRefetching}
         />
         {isAccountPage && (
           <Button

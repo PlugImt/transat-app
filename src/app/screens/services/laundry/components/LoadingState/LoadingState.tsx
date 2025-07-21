@@ -16,7 +16,7 @@ export const LaundryLoadingState = () => {
       header={<AboutSection />}
     >
       <View className="flex-col gap-4">
-        <Text variant="h3">{t("services.laundry.laundry")}</Text>
+        <Text variant="h3">{t("services.laundry.washingMachine")}</Text>
         {[...Array(nbMachines).keys()].map((index) => (
           <LaundryCardSkeleton key={index} icon="WASHING MACHINE" />
         ))}

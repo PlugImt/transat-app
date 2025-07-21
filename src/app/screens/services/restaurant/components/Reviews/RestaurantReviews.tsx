@@ -5,8 +5,8 @@ import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { FlatList, View } from "react-native";
 import {
-  LoadingState,
   ReviewItem,
+  ReviewItemSkeleton,
 } from "@/app/screens/services/restaurant/components";
 import { ReviewDialog } from "@/app/screens/services/restaurant/components/Reviews/ReviewDialog";
 import { Button } from "@/components/common/Button";
@@ -15,6 +15,7 @@ import { AboutModal } from "@/components/custom/AboutModal";
 import { Empty } from "@/components/page/Empty";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
+import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import { userMenuRating } from "@/hooks/useMenuRestaurant";
 import type { AppStackParamList } from "@/types";
@@ -41,7 +42,7 @@ export const RestaurantReviews = () => {
   } = userMenuRating(id);
 
   if (isPending) {
-    return <LoadingState />;
+    return <RestaurantReviewSkeleton />;
   }
 
   if (isError || !reviewData) {
@@ -138,3 +139,54 @@ export const RestaurantReviews = () => {
 };
 
 export default RestaurantReviews;
+
+const RestaurantReviewSkeleton = () => {
+  const { t } = useTranslation();
+  const { theme } = useTheme();
+  const openingHoursData = useMemo(() => getOpeningHoursData(t), [t]);
+
+  return (
+    <Page
+      title={t("services.restaurant.title")}
+      header={
+        <AboutModal
+          title={t("services.restaurant.title")}
+          description={t("services.restaurant.about")}
+          openingHours={openingHoursData}
+          location={t("services.restaurant.location")}
+          price={t("services.restaurant.price")}
+          additionalInfo={t("services.restaurant.additionalInfo")}
+        />
+      }
+    >
+      <View className="flex-row justify-between items-end gap-8">
+        <View className="flex-1 gap-1">
+          <TextSkeleton variant="h3" />
+          <View className="flex flex-row items-center gap-2">
+            <Utensils size={16} color={theme.muted} />
+            <TextSkeleton />
+          </View>
+        </View>
+
+        <Button
+          label={t("services.restaurant.reviews.rate")}
+          variant="secondary"
+          disabled
+        />
+      </View>
+
+      <View className="flex-row items-center gap-1">
+        <Star size={20} color={theme.text} fill={theme.text} />
+        <TextSkeleton variant="h3" lastLineWidth={130} />
+      </View>
+
+      <FlatList
+        data={Array.from({ length: 5 })}
+        renderItem={() => <ReviewItemSkeleton />}
+        scrollEnabled={false}
+        showsVerticalScrollIndicator={false}
+        contentContainerClassName="gap-2"
+      />
+    </Page>
+  );
+};

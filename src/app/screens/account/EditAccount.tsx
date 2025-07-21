@@ -18,6 +18,7 @@ import { Text } from "@/components/common/Text";
 import { useToast } from "@/components/common/Toast";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
+import { AvatarSkeleton } from "@/components/Skeleton";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
 import { type User, updateUserPayloadSchema } from "@/dto";
@@ -235,7 +236,7 @@ export const EditProfile = () => {
         <Button
           label={t("common.save")}
           onPress={handleUserSubmit(handleUpdateAccount)}
-          loading={isUpdatingAccount}
+          isUpdating={isUpdatingAccount}
           disabled={!isDirty || !isUserValid}
         />
 
@@ -269,9 +270,7 @@ const EditProfileLoading = () => {
       </View>
       <View className="items-center">
         <TouchableOpacity className="relative">
-          <Avatar className="w-32 h-32">
-            <AvatarImage loading />
-          </Avatar>
+          <AvatarSkeleton size={128} />
         </TouchableOpacity>
       </View>
 

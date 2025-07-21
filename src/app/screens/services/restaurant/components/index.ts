@@ -1,3 +1,3 @@
 export * from "./LoadingState";
-export * from "./Menu";
+export * from "./RestaurantMenu";
 export * from "./Reviews";

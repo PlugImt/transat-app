@@ -9,12 +9,10 @@ import { useTranslation } from "react-i18next";
 import { Platform, View } from "react-native";
 import Animated from "react-native-reanimated";
 import { HomeworkWidget } from "@/app/screens/services/homework/widget/HomeworkWidget";
-import { HomeworkWidgetLoading } from "@/app/screens/services/homework/widget/HomeworkWidgetLoading";
 import {
   RestaurantWidget,
   RestaurantWidgetLoading,
 } from "@/app/screens/services/restaurant/widget/RestaurantWidget";
-import { TimetableLoadingWidget } from "@/app/screens/services/schedule/widget/TimetableLoadingWidget";
 import TimetableWidget from "@/app/screens/services/schedule/widget/TimetableWidget";
 import {
   WeatherSkeleton,
@@ -102,7 +100,7 @@ export const Home = () => {
   const {
     preferences: widgets,
     enabledPreferences: enabledWidgets,
-    loading,
+    isPending,
     updateOrder,
   } = useHomeWidgetPreferences();
 
@@ -214,7 +212,7 @@ export const Home = () => {
     [],
   );
 
-  if (loading) {
+  if (isPending) {
     return <HomeLoading />;
   }
 
@@ -271,15 +269,12 @@ export default Home;
 
 export const HomeLoading = () => {
   const { t } = useTranslation();
-
   return (
-    <Page className="gap-6" title={t("common.welcome")}>
+    <Page className="gap-8" title={t("common.welcome")}>
       <WeatherSkeleton />
       {!isWeekend() && !isLunch() && !isDinner() ? (
         <RestaurantWidgetLoading />
       ) : null}
-      <TimetableLoadingWidget />
-      <HomeworkWidgetLoading />
       <LaundryWidgetLoading />
     </Page>
   );

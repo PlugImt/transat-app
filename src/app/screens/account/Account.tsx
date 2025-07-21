@@ -14,7 +14,7 @@ import InfoItem from "@/components/common/InfoItem";
 import { Text } from "@/components/common/Text";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
-import { TextSkeleton } from "@/components/Skeleton";
+import { AvatarSkeleton, TextSkeleton } from "@/components/Skeleton";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useUser } from "@/hooks/account/useUser";
@@ -122,25 +122,28 @@ export default Account;
 const AccountLoading = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
+  const navigation = useNavigation<AccountNavigation>();
+
   return (
     <Page
       title={t("common.account")}
-      header={<IconButton disabled icon={<Settings />} variant="ghost" />}
+      header={
+        <IconButton
+          icon={<Settings />}
+          variant="ghost"
+          onPress={() => navigation.navigate("Settings")}
+        />
+      }
     >
       <View className="items-center gap-2">
-        <Avatar className="w-32 h-32">
-          <AvatarImage loading />
-        </Avatar>
+        <AvatarSkeleton size={128} />
 
         <View className="gap-1 justify-center items-center">
-          <TextSkeleton className="w-64 items-center" lines={1} variant="h2" />
-          <TextSkeleton className="w-24 items-center" lines={1} />
+          <TextSkeleton className="w-64 items-center" variant="h2" />
+          <TextSkeleton className="w-48 items-center" />
         </View>
       </View>
-      <View
-        className=" rounded-lg px-6 py-4 gap-4"
-        style={{ backgroundColor: theme.card }}
-      >
+      <Card className="gap-4">
         <Text variant="h3">{t("account.contactInfo")}</Text>
         <InfoItem
           icon={<Mail color={theme.text} size={20} />}
@@ -150,7 +153,14 @@ const AccountLoading = () => {
           icon={<Phone color={theme.text} size={20} />}
           label={t("account.phone")}
         />
-      </View>
+      </Card>
+
+      <Button
+        label={t("account.editProfile")}
+        onPress={() => navigation.navigate("EditProfile")}
+        size="sm"
+        variant="secondary"
+      />
     </Page>
   );
 };

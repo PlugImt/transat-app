@@ -106,7 +106,7 @@ export const RestaurantWidget = () => {
             ) : (
               <>
                 <Text variant="lg" numberOfLines={2}>
-                  {t("services.restaurant.closedWeekends")}
+                  {t("services.restaurant.closedWeekends.title")}
                 </Text>
 
                 <Text numberOfLines={3}>

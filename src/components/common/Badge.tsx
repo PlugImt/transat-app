@@ -1,6 +1,6 @@
 import type { LucideIcon } from "lucide-react-native";
 import type React from "react";
-import { type TextStyle, TouchableOpacity, type ViewStyle } from "react-native";
+import { TouchableOpacity, type ViewStyle } from "react-native";
 import { Text } from "@/components/common/Text";
 import { type ThemeType, useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";
@@ -29,25 +29,14 @@ const getBadgeStyle = (variant: BadgeVariant, theme: ThemeType) => {
   return badgeStyles[variant] || badgeStyles.default;
 };
 
-const getTextColor = (variant: BadgeVariant, theme: ThemeType) => {
-  const badgeTextStyles: {
-    [key: string]: TextStyle;
-  } = {
-    default: {
-      color: theme.primaryText,
-    },
-    secondary: {
-      color: theme.secondaryText,
-    },
-    destructive: {
-      color: theme.destructiveText,
-    },
-    ghost: {
-      color: theme.muted,
-    },
+const getTextColor = (variant: BadgeVariant) => {
+  const badgeTextStyles: { [key in BadgeVariant]: keyof ThemeType } = {
+    default: "primaryText",
+    secondary: "secondaryText",
+    destructive: "destructiveText",
+    ghost: "muted",
   };
-
-  return badgeTextStyles[variant] || badgeTextStyles.default;
+  return badgeTextStyles[variant] || "primaryText";
 };
 
 const getSize = (size: BadgeSize) => {
@@ -91,7 +80,7 @@ const Badge = ({
   const { theme } = useTheme();
 
   const badgeStyle = getBadgeStyle(variant, theme);
-  const textColor = getTextColor(variant, theme);
+  const textColor = getTextColor(variant);
   const sizeStyles = getSize(size);
 
   return (
@@ -111,8 +100,8 @@ const Badge = ({
       ]}
       {...props}
     >
-      {Icon && <Icon size={14} color={theme.text} />}
-      <Text className={labelClasses} style={textColor}>
+      {Icon && <Icon size={14} color={theme[textColor]} />}
+      <Text className={labelClasses} color={textColor}>
         {label}
       </Text>
     </TouchableOpacity>
@@ -123,16 +112,20 @@ export default Badge;
 
 interface BadgeSkeletonProps {
   className?: string;
+  variant?: BadgeVariant;
+  label?: string;
 }
 
-export const BadgeSkeleton = ({ className }: BadgeSkeletonProps) => {
-  const { theme } = useTheme();
+export const BadgeSkeleton = ({
+  className,
+  label = "",
+  variant = "default",
+}: BadgeSkeletonProps) => {
   return (
     <Badge
-      label=""
-      variant="ghost"
-      className={cn("bg-muted-foreground animate-pulse w-20", className)}
-      labelClasses={`text-${theme.background} animate-pulse`}
+      label={label}
+      variant={variant}
+      className={cn("animate-pulse w-20", className)}
     />
   );
 };

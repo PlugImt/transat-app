@@ -35,7 +35,7 @@ const RestaurantCard = ({ title, meals, icon }: CardProps) => {
   };
 
   if (!meals) {
-    return <RestaurantCardLoading title={title} icon={getIcon()} />;
+    return <RestaurantCardSkeleton title={title} icon={getIcon()} />;
   }
 
   return (
@@ -68,27 +68,21 @@ const RestaurantCard = ({ title, meals, icon }: CardProps) => {
 
 export default RestaurantCard;
 
-interface RestaurantCardLoadingProps {
+interface RestaurantCardSkeletonProps {
   title: string;
   icon: React.ReactElement | null;
 }
 
-export const RestaurantCardLoading = ({
+export const RestaurantCardSkeleton = ({
   title,
   icon,
-}: RestaurantCardLoadingProps) => {
-  const { theme } = useTheme();
+}: RestaurantCardSkeletonProps) => {
   const skeletonCount = Math.floor(Math.random() * 3) + 1;
   return (
-    <View
-      style={{ backgroundColor: theme.card }}
-      className="px-6 py-4 rounded-lg flex flex-col gap-6"
-    >
-      <View className="flex flex-row items-center gap-2">
+    <Card>
+      <View className="flex-row items-center gap-2">
         {icon}
-        <Text className="text-lg font-bold" style={{ color: theme.primary }}>
-          {title}
-        </Text>
+        <Text variant="lg">{title}</Text>
       </View>
 
       <View className="flex flex-col gap-4">
@@ -96,6 +90,6 @@ export const RestaurantCardLoading = ({
           <TextSkeleton key={index} />
         ))}
       </View>
-    </View>
+    </Card>
   );
 };

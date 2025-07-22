@@ -27,8 +27,8 @@ export const FourchettasOrder = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
   const route = useRoute<FourchettasOrderRouteProp>();
-  const { id, orderId } = route.params;
-  console.log("FourchettasOrder ID:", id, "Order ID:", orderId);
+  const { id, orderUser } = route.params;
+  console.log("FourchettasOrder ID:", id, "Order User:", orderUser);
 
   const scrollViewRef = useRef<Animated.ScrollView>(null);
 
@@ -43,6 +43,14 @@ export const FourchettasOrder = () => {
   const [success, setSuccess] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    if (orderUser) {
+      setDishId(orderUser.dish_id);
+      setSideId(orderUser.side_id || 0);
+      setDrinkId(orderUser.drink_id || 0);
+    }
+  }, [orderUser]);
 
   function scrollToTop() {
     setTimeout(() => {
@@ -126,7 +134,11 @@ export const FourchettasOrder = () => {
             resizeMode="contain"
           />
           <Text variant="h1">Merci pour votre commande !!</Text>
-          <Text variant="h3">Commande passée avec succès !</Text>
+          <Text variant="h3">
+            {orderUser
+              ? "Commande modifiée avec succès !"
+              : "Commande passée avec succès !"}
+          </Text>
         </View>
       </Page>
     );
@@ -200,7 +212,11 @@ export const FourchettasOrder = () => {
                 side={sides.find((s) => s.id === sideId) || noSide}
                 drink={drinks.find((d) => d.id === drinkId) || noDrink}
               />
-              <Button label="Commander !!" onPress={order} className="w-2/3" />
+              <Button
+                label={orderUser ? "Modifier la commande !!" : "Commander !!"}
+                onPress={order}
+                className="w-2/3"
+              />
             </>
           )}
 

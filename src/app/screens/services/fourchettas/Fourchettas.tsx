@@ -37,25 +37,31 @@ export const Fourchettas = () => {
       () => {},
       () => {},
       (data: Event[]) => {
-        setEvents(data);
-        data.map(async (event, index) => {
+        const fetchOrderPromises = data.map(async (event) => {
           if (user?.phone_number && event.id) {
-            await GetOrderByPhoneAndEvent(
-              user.phone_number,
-              event.id,
-              () => {},
-              () => {},
-              () => {},
-              (orders: Order[]) => {
-                if (orders.length > 0) {
-                  event.orderedOfUser = orders[0];
-                  if (index === data.length - 1) {
-                    setLoading(false);
+            return new Promise<void>((resolve) => {
+              GetOrderByPhoneAndEvent(
+                user.phone_number,
+                event.id,
+                () => {},
+                () => {},
+                () => {},
+                (orders: Order[]) => {
+                  if (orders.length > 0) {
+                    event.orderedOfUser = orders[0];
+                    console.log(orders[0]);
                   }
-                }
-              },
-            );
+                  resolve();
+                },
+              );
+            });
           }
+          return Promise.resolve();
+        });
+
+        Promise.all(fetchOrderPromises).then(() => {
+          setLoading(false);
+          setEvents(data);
         });
       },
     );
@@ -102,7 +108,7 @@ export const Fourchettas = () => {
             onPress={() =>
               navigation.navigate("FourchettasOrder", {
                 id: event.id,
-                orderId: event.orderedOfUser?.id,
+                orderUser: event.orderedOfUser,
               })
             }
           />

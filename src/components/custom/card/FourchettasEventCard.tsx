@@ -45,7 +45,7 @@ const FourchettasEventCard = ({ event, onPress }: CardProps) => {
       </Text>
       <Button
         label={
-          event.orderedOfUser
+          event.orderedOfUser === undefined
             ? t("services.fourchettas.orderButton")
             : t("services.fourchettas.modifyOrderButton")
         }

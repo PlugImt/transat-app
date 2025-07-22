@@ -171,7 +171,7 @@ export const FourchettasOrder = () => {
 
   if (error) {
     return (
-      <Page title={t("services.fourchettas.title")} asChildren>
+      <Page title={t("services.fourchettas.orderTitle")} asChildren>
         <View className="flex flex-col items-center gap-4 h-full justify-center">
           <Image
             source={require("@/assets/images/services/fourchettas_dead.png")}
@@ -187,7 +187,7 @@ export const FourchettasOrder = () => {
 
   if (success) {
     return (
-      <Page title={`Fourchettas Order ID: ${id}`} asChildren>
+      <Page title={t("services.fourchettas.orderTitle")} asChildren>
         <View className="flex-col justify-center items-center h-full gap-8 w-full">
           <Image
             source={require("@/assets/images/services/fourchettas.png")}
@@ -206,7 +206,7 @@ export const FourchettasOrder = () => {
   }
 
   return (
-    <Page title={`Fourchettas Order ID: ${id}`} asChildren>
+    <Page title={t("services.fourchettas.orderTitle")} asChildren>
       <Animated.ScrollView ref={scrollViewRef}>
         <View className="flex-col justify-between items-center gap-8 w-full">
           {currentPage === 1 &&
@@ -306,8 +306,8 @@ export const FourchettasOrder = () => {
               <Button
                 label={
                   orderUser
-                    ? `${t("services.fourchettas.modifyOrder")}!!`
-                    : `${t("services.fourchettas.order")}!!`
+                    ? `${t("services.fourchettas.modifyOrderButton")}!!`
+                    : `${t("services.fourchettas.orderButton")}!!`
                 }
                 onPress={orderUser ? modifyOrder : order}
                 className="w-2/3"

@@ -392,6 +392,7 @@
       "nothing": "Rien",
       "noSideDesc": "J'ai une petite faim aujourd'hui",
       "noDrinkDesc": "De l'eau pour moi !",
+      "orderTitle": "Passer une commande",
       "orderThanks": "Merci pour votre commande !!",
       "orderSent": "Votre commande a été envoyée avec succès",
       "orderModified": "Votre commande a été modifiée avec succès",
@@ -410,7 +411,9 @@
       "StepShortDrink": "Boisson",
       "StepShortReciept": "Résumé",
       "orderButton": "Commander",
-      "modifyOrderButton": "Modifier la commande"
+      "modifyOrderButton": "Modifier la commande",
+      "ordering": "Commande en cours...",
+      "orderFailed": "Échec de la commande veuillez réessayer plus tard"
     },
     "openingHours": "Horaires d'ouverture",
     "location": "Emplacement",

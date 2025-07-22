@@ -5,9 +5,10 @@ import { useTranslation } from "react-i18next";
 import { View, Image } from "react-native";
 
 import { AboutModal } from "@/components/custom/AboutModal";
-import FourchettasEventCard from "@/components/custom/card/FourchettasEventCard";
-import { FourchettasEventCardLoading } from "@/components/custom/card/FourchettasEventCard";
-
+import {
+  FourchettasEventCard,
+  FourchettasEventCardLoading,
+} from "./components/FourchettasEventCard";
 import {
   getEventsUpcoming,
   GetOrderByPhoneAndEvent,

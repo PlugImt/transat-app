@@ -24,7 +24,7 @@ function correctDate(date: string): string {
   return `${split[2]}/${split[1]}/${split[0]}`;
 }
 
-const FourchettasEventCard = ({ event, onPress }: CardProps) => {
+export const FourchettasEventCard = ({ event, onPress }: CardProps) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
   const [timediff, setTimediff] = useState(
@@ -105,8 +105,6 @@ const FourchettasEventCard = ({ event, onPress }: CardProps) => {
     </View>
   );
 };
-
-export default FourchettasEventCard;
 
 export const FourchettasEventCardLoading = () => {
   const { t } = useTranslation();

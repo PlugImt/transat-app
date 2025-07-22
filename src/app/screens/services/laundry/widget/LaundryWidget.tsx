@@ -1,14 +1,14 @@
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { WashingMachineIcon, Wind } from "lucide-react-native";
-import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import Card from "@/components/common/Card";
+import CardGroup from "@/components/common/CardGroup";
 import { Text } from "@/components/common/Text";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
-import { useLaundry } from "@/hooks/useLaundry";
+import { useLaundryStats } from "@/hooks/useLaundry";
 import type { AppStackParamList } from "@/types";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
@@ -18,36 +18,29 @@ export const LaundryWidget = () => {
   const navigation = useNavigation<AppScreenNavigationProp>();
   const { theme } = useTheme();
 
-  const { dryers, washingMachines, isPending, isError, error } = useLaundry();
-
-  const [totalWashers, setTotalWashers] = useState<number>(0);
-  const [totalDryers, setTotalDryers] = useState<number>(0);
-  const [availableWashers, setAvailableWashers] = useState<number>(0);
-  const [availableDryers, setAvailableDryers] = useState<number>(0);
-
-  useEffect(() => {
-    setTotalWashers(washingMachines.length);
-    setTotalDryers(dryers.length);
-
-    setAvailableWashers(
-      washingMachines.filter((washer) => washer.available).length,
-    );
-    setAvailableDryers(dryers.filter((dryer) => dryer.available).length);
-  }, [dryers, washingMachines]);
+  const {
+    availableWashers,
+    totalWashers,
+    availableDryers,
+    totalDryers,
+    isPending,
+    isError,
+    error,
+  } = useLaundryStats();
 
   if (isPending) {
     return <LaundryWidgetLoading />;
   }
 
-  if (isError || error || !dryers || !washingMachines) {
+  if (isError || error) {
     return null;
   }
 
   return (
-    <View className="flex flex-col gap-2">
-      <Text className="ml-4" variant="h3">
-        {t("services.laundry.title")}
-      </Text>
+    <CardGroup
+      title={t("services.laundry.title")}
+      onPress={() => navigation.navigate("Laundry")}
+    >
       <Card
         onPress={() => navigation.navigate("Laundry")}
         className="flex-row justify-between gap-6"
@@ -62,7 +55,7 @@ export const LaundryWidget = () => {
           </Text>
           <Text
             className="flex-1 text-center"
-            numberOfLines={2}
+            numberOfLines={1}
             variant="sm"
             color="muted"
           >
@@ -79,7 +72,7 @@ export const LaundryWidget = () => {
           </Text>
           <Text
             className="flex-1 text-center"
-            numberOfLines={2}
+            numberOfLines={1}
             variant="sm"
             color="muted"
           >
@@ -87,7 +80,7 @@ export const LaundryWidget = () => {
           </Text>
         </View>
       </Card>
-    </View>
+    </CardGroup>
   );
 };
 
@@ -99,15 +92,17 @@ export const LaundryWidgetLoading = () => {
   const { theme } = useTheme();
 
   return (
-    <View className="flex flex-col gap-2">
-      <Text variant="h3">{t("services.laundry.title")}</Text>
+    <CardGroup
+      title={t("services.laundry.title")}
+      onPress={() => navigation.navigate("Laundry")}
+    >
       <Card
         onPress={() => navigation.navigate("Laundry")}
         className="flex-row justify-between gap-6"
       >
         <View className="items-center gap-2">
           <WashingMachineIcon size={32} color={theme.muted} />
-          <TextSkeleton variant="lg" lines={1} lastLineWidth={32} />
+          <TextSkeleton variant="lg" lastLineWidth={32} />
 
           <Text
             className="flex-1 text-center"
@@ -120,7 +115,7 @@ export const LaundryWidgetLoading = () => {
         </View>
         <View className="items-center gap-2">
           <Wind size={32} color={theme.muted} />
-          <TextSkeleton variant="lg" lines={1} lastLineWidth={32} />
+          <TextSkeleton variant="lg" lastLineWidth={32} />
           <Text
             className="flex-1 text-center"
             numberOfLines={1}
@@ -131,6 +126,6 @@ export const LaundryWidgetLoading = () => {
           </Text>
         </View>
       </Card>
-    </View>
+    </CardGroup>
   );
 };

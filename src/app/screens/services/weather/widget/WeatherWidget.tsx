@@ -17,10 +17,9 @@ import {
   zhCN,
 } from "date-fns/locale";
 import { Image, View } from "react-native";
-import { Avatar, AvatarImage } from "@/components/common/Avatar";
 import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
-import { TextSkeleton } from "@/components/Skeleton";
+import { AvatarSkeleton, TextSkeleton } from "@/components/Skeleton";
 import { useWeather } from "@/hooks/useWeather";
 import i18n from "@/i18n";
 
@@ -86,15 +85,13 @@ export default WeatherWidget;
 
 export const WeatherSkeleton = () => {
   return (
-    <Card>
-      <View className="gap-2">
-        <TextSkeleton variant="h3" className="w-64" lines={1} />
-        <TextSkeleton variant="h1" className="w-32" lines={1} />
-        <TextSkeleton variant="h3" className="w-32" lines={1} />
+    <Card className="flex-row justify-between items-center gap-0">
+      <View>
+        <TextSkeleton variant="h3" className="w-64" />
+        <TextSkeleton variant="h1" className="w-32" />
+        <TextSkeleton variant="h3" className="w-32" />
       </View>
-      <Avatar className="w-24 h-24">
-        <AvatarImage loading />
-      </Avatar>
+      <AvatarSkeleton size={64} />
     </Card>
   );
 };

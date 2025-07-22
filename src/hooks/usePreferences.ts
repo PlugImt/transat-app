@@ -15,7 +15,7 @@ const usePreferences = (
   saveFn: (prefs: Preference[]) => Promise<void>,
 ) => {
   const queryClient = useQueryClient();
-  const { data: preferences = [], isPending: loading } = useQuery({
+  const { data: preferences = [], isPending } = useQuery({
     queryKey,
     queryFn: getFn,
     select: (prefs) => prefs.sort((a, b) => a.order - b.order),
@@ -53,7 +53,7 @@ const usePreferences = (
   return {
     preferences,
     enabledPreferences,
-    loading,
+    isPending,
     updateOrder: updateOrderMutation.mutateAsync,
     toggle: toggleMutation.mutateAsync,
     refreshPreferences: () => queryClient.invalidateQueries({ queryKey }),

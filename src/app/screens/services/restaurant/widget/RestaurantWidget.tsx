@@ -6,6 +6,7 @@ import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Dimensions, Image, TouchableOpacity, View } from "react-native";
 import Card from "@/components/common/Card";
+import CardGroup from "@/components/common/CardGroup";
 import { Text } from "@/components/common/Text";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -105,7 +106,7 @@ export const RestaurantWidget = () => {
             ) : (
               <>
                 <Text variant="lg" numberOfLines={2}>
-                  {t("services.restaurant.closedWeekends")}
+                  {t("services.restaurant.closedWeekends.title")}
                 </Text>
 
                 <Text numberOfLines={3}>
@@ -146,115 +147,116 @@ export const RestaurantWidget = () => {
           </Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity
+      <Card
         onPress={() => navigation.navigate("Restaurant")}
-        style={{ backgroundColor: theme.card }}
-        className="px-6 pt-4 rounded-lg overflow-hidden"
+        className="relative overflow-hidden h-60"
       >
-        <View className="relative">
-          <View
-            style={{ maxHeight: 200, overflow: "hidden" }}
-            className="flex flex-col gap-6"
-          >
-            {lunch ? (
-              <>
-                {menu?.grilladesMidi && menu.grilladesMidi.length > 0 && (
-                  <View className="flex flex-col gap-2">
-                    <View className="flex flex-row items-center gap-2">
-                      <Beef color={theme.text} />
-                      <Text variant="lg">{t("services.restaurant.grill")}</Text>
-                    </View>
-
-                    {menu.grilladesMidi.map((item) => (
-                      <MenuItemCard key={item.id} item={item} />
-                    ))}
+        <View className="gap-6">
+          {lunch ? (
+            <>
+              {menu?.grilladesMidi && menu.grilladesMidi.length > 0 && (
+                <View className="gap-2">
+                  <View className="flex flex-row items-center gap-2">
+                    <Beef color={theme.text} />
+                    <Text variant="lg">{t("services.restaurant.grill")}</Text>
                   </View>
-                )}
 
-                {menu?.migrateurs && menu.migrateurs.length > 0 && (
-                  <View className="flex flex-col gap-2">
-                    <View className="flex flex-row items-center gap-2">
-                      <ChefHat color={theme.text} />
-                      <Text variant="lg">
-                        {t("services.restaurant.migrator")}
-                      </Text>
-                    </View>
+                  {menu.grilladesMidi.map((item) => (
+                    <MenuItemCard key={item.id} item={item} />
+                  ))}
+                </View>
+              )}
 
-                    {menu.migrateurs.map((item) => (
-                      <MenuItemCard key={item.id} item={item} />
-                    ))}
+              {menu?.migrateurs && menu.migrateurs.length > 0 && (
+                <View className="gap-2">
+                  <View className="flex flex-row items-center gap-2">
+                    <ChefHat color={theme.text} />
+                    <Text variant="lg">
+                      {t("services.restaurant.migrator")}
+                    </Text>
                   </View>
-                )}
 
-                {menu?.cibo && menu.cibo.length > 0 && (
-                  <View className="flex flex-col gap-2">
-                    <View className="flex flex-row items-center gap-2">
-                      <Vegan color={theme.text} />
-                      <Text variant="lg">
-                        {t("services.restaurant.vegetarian")}
-                      </Text>
-                    </View>
+                  {menu.migrateurs.map((item) => (
+                    <MenuItemCard key={item.id} item={item} />
+                  ))}
+                </View>
+              )}
 
-                    {menu.cibo.map((item) => (
-                      <MenuItemCard key={item.id} item={item} />
-                    ))}
+              {menu?.cibo && menu.cibo.length > 0 && (
+                <View className="gap-2">
+                  <View className="flex flex-row items-center gap-2">
+                    <Vegan color={theme.text} />
+                    <Text variant="lg">
+                      {t("services.restaurant.vegetarian")}
+                    </Text>
                   </View>
-                )}
 
-                {menu?.accompMidi && menu.accompMidi.length > 0 && (
-                  <View className="flex flex-col gap-2">
-                    <View className="flex flex-row items-center gap-2">
-                      <Soup color={theme.text} />
-                      <Text variant="lg">
-                        {t("services.restaurant.sideDishes")}
-                      </Text>
-                    </View>
+                  {menu.cibo.map((item) => (
+                    <MenuItemCard key={item.id} item={item} />
+                  ))}
+                </View>
+              )}
 
-                    {menu.accompMidi.map((item) => (
-                      <MenuItemCard key={item.id} item={item} />
-                    ))}
+              {menu?.accompMidi && menu.accompMidi.length > 0 && (
+                <View className="gap-2">
+                  <View className="flex flex-row items-center gap-2">
+                    <Soup color={theme.text} />
+                    <Text variant="lg">
+                      {t("services.restaurant.sideDishes")}
+                    </Text>
                   </View>
-                )}
-              </>
-            ) : dinner ? (
-              <>
-                {menu?.grilladesSoir && menu.grilladesSoir.length > 0 && (
-                  <View className="flex flex-col gap-2">
-                    <View className="flex flex-row items-center gap-2">
-                      <Beef color={theme.text} />
-                      <Text variant="lg">{t("services.restaurant.grill")}</Text>
-                    </View>
 
-                    {menu.grilladesSoir.map((item) => (
-                      <MenuItemCard key={item.id} item={item} />
-                    ))}
+                  {menu.accompMidi.map((item) => (
+                    <MenuItemCard key={item.id} item={item} />
+                  ))}
+                </View>
+              )}
+            </>
+          ) : dinner ? (
+            <>
+              {menu?.grilladesSoir && menu.grilladesSoir.length > 0 && (
+                <View className="gap-2">
+                  <View className="flex flex-row items-center gap-2">
+                    <Beef color={theme.text} />
+                    <Text variant="lg">{t("services.restaurant.grill")}</Text>
                   </View>
-                )}
 
-                {menu?.accompSoir && menu.accompSoir.length > 0 && (
-                  <View className="flex flex-col gap-2">
-                    <View className="flex flex-row items-center gap-2">
-                      <Soup color={theme.text} />
-                      <Text variant="lg">
-                        {t("services.restaurant.sideDishes")}
-                      </Text>
-                    </View>
+                  {menu.grilladesSoir.map((item) => (
+                    <MenuItemCard key={item.id} item={item} />
+                  ))}
+                </View>
+              )}
 
-                    {menu.accompSoir.map((item) => (
-                      <MenuItemCard key={item.id} item={item} />
-                    ))}
+              {menu?.accompSoir && menu.accompSoir.length > 0 && (
+                <View className="gap-2">
+                  <View className="flex flex-row items-center gap-2">
+                    <Soup color={theme.text} />
+                    <Text variant="lg">
+                      {t("services.restaurant.sideDishes")}
+                    </Text>
                   </View>
-                )}
-              </>
-            ) : null}
-          </View>
 
-          <LinearGradient
-            colors={[theme.card, "transparent"]}
-            className="absolute left-0 right-0 bottom-0 h-[200px] transform rotate-180"
-          />
+                  {menu.accompSoir.map((item) => (
+                    <MenuItemCard key={item.id} item={item} />
+                  ))}
+                </View>
+              )}
+            </>
+          ) : null}
         </View>
-      </TouchableOpacity>
+
+        <LinearGradient
+          colors={[`${theme.card}00`, theme.card, theme.card]}
+          locations={[0, 0.8, 1]}
+          style={{
+            height: 260,
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: 0,
+          }}
+        />
+      </Card>
     </View>
   );
 };
@@ -269,57 +271,71 @@ export const RestaurantWidgetLoading = () => {
   const skeletonCount = () => Math.floor(Math.random() * 3) + 1;
 
   return (
-    <View className="flex flex-col gap-2">
-      <TextSkeleton lines={1} lastLineWidth={128} />
-      <TouchableOpacity
+    <CardGroup
+      title={t("services.restaurant.title")}
+      onPress={() => navigation.navigate("Restaurant")}
+    >
+      <Card
         onPress={() => navigation.navigate("Restaurant")}
-        style={{ backgroundColor: theme.card }}
-        className="px-6 py-4 rounded-lg flex flex-col gap-6"
+        className="relative overflow-hidden h-60"
       >
-        <View className="flex flex-col gap-2">
-          <View className="flex flex-row items-center gap-2">
-            <Beef color={theme.text} />
-            <Text variant="lg">{t("services.restaurant.grill")}</Text>
+        <View className="gap-6">
+          <View className="gap-2">
+            <View className="flex flex-row items-center gap-2">
+              <Beef color={theme.text} />
+              <Text variant="lg">{t("services.restaurant.grill")}</Text>
+            </View>
+
+            {[...Array(skeletonCount()).keys()].map((index) => (
+              <TextSkeleton key={index} />
+            ))}
           </View>
 
-          {[...Array(skeletonCount()).keys()].map((index) => (
-            <TextSkeleton lines={1} key={index} />
-          ))}
-        </View>
+          <View className="gap-2">
+            <View className="flex flex-row items-center gap-2">
+              <ChefHat color={theme.text} />
+              <Text variant="lg">{t("services.restaurant.migrator")}</Text>
+            </View>
 
-        <View className="flex flex-col gap-2">
-          <View className="flex flex-row items-center gap-2">
-            <ChefHat color={theme.text} />
-            <Text variant="lg">{t("services.restaurant.migrator")}</Text>
+            {[...Array(skeletonCount()).keys()].map((index) => (
+              <TextSkeleton key={index} />
+            ))}
           </View>
 
-          {[...Array(skeletonCount()).keys()].map((index) => (
-            <TextSkeleton lines={1} key={index} />
-          ))}
-        </View>
+          <View className="gap-2">
+            <View className="flex flex-row items-center gap-2">
+              <Vegan color={theme.text} />
+              <Text variant="lg">{t("services.restaurant.vegetarian")}</Text>
+            </View>
 
-        <View className="flex flex-col gap-2">
-          <View className="flex flex-row items-center gap-2">
-            <Vegan color={theme.text} />
-            <Text variant="lg">{t("services.restaurant.vegetarian")}</Text>
+            {[...Array(skeletonCount()).keys()].map((index) => (
+              <TextSkeleton key={index} />
+            ))}
           </View>
 
-          {[...Array(skeletonCount()).keys()].map((index) => (
-            <TextSkeleton lines={1} key={index} />
-          ))}
-        </View>
+          <View className="gap-2">
+            <View className="flex flex-row items-center gap-2">
+              <Soup color={theme.text} />
+              <Text variant="lg">{t("services.restaurant.sideDishes")}</Text>
+            </View>
 
-        <View className="flex flex-col gap-2">
-          <View className="flex flex-row items-center gap-2">
-            <Soup color={theme.text} />
-            <Text variant="lg">{t("services.restaurant.sideDishes")}</Text>
+            {[...Array(skeletonCount()).keys()].map((index) => (
+              <TextSkeleton key={index} />
+            ))}
           </View>
-
-          {[...Array(skeletonCount()).keys()].map((index) => (
-            <TextSkeleton lines={1} key={index} />
-          ))}
         </View>
-      </TouchableOpacity>
-    </View>
+        <LinearGradient
+          colors={[`${theme.card}00`, theme.card, theme.card]}
+          locations={[0, 0.8, 1]}
+          style={{
+            height: 260,
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: 0,
+          }}
+        />
+      </Card>
+    </CardGroup>
   );
 };

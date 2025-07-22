@@ -30,3 +30,27 @@ export const useLaundry = () => {
     refetch,
   };
 };
+
+export const useLaundryStats = () => {
+  const { washingMachines, dryers, isPending, isError, error } = useLaundry();
+
+  const availableWashers = washingMachines.filter(
+    (machine: LaundryWithType) => machine.available,
+  ).length;
+  const totalWashers = washingMachines.length;
+
+  const availableDryers = dryers.filter(
+    (machine: LaundryWithType) => machine.available,
+  ).length;
+  const totalDryers = dryers.length;
+
+  return {
+    availableWashers,
+    totalWashers,
+    availableDryers,
+    totalDryers,
+    isPending,
+    isError,
+    error,
+  };
+};

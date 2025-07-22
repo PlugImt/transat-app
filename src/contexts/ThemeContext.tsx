@@ -21,16 +21,18 @@ export type ThemeType = {
   textTertiary: string;
   card: string;
   primary: string;
+  primaryText: string;
   secondary: string;
+  secondaryText: string;
   border: string;
   backdrop: string;
   overlay: string;
-  errorBackground: string;
   destructive: string;
   success: string;
   warning: string;
   input: string;
   destructiveText: string;
+  destructiveBackground: string;
   successText: string;
   warningText: string;
   infoText: string;
@@ -41,7 +43,6 @@ type ThemeContextType = {
   themeMode: ThemeMode;
   actualTheme: "light" | "dark";
   setThemeMode: (mode: ThemeMode) => void;
-  isLoading: boolean;
 };
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -49,7 +50,6 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const systemColorScheme = useColorScheme();
   const [themeMode, setThemeModeState] = useState<ThemeMode>("system");
-  const [isLoading, setIsLoading] = useState(true);
 
   // Determine the actual theme based on mode and system preference
   const getActualTheme = (
@@ -75,6 +75,11 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     successText: colors.shared.success.text,
     warningText: colors.shared.warning.text,
     infoText: colors.shared.info.text,
+    destructiveBackground: colors.shared.destructive.background,
+    primary: colors.shared.primary.DEFAULT,
+    primaryText: colors.shared.primary.text,
+    secondary: colors.shared.secondary.DEFAULT,
+    secondaryText: colors.shared.secondary.text,
   };
 
   // Load theme preference from storage on startup
@@ -87,8 +92,6 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
         }
       } catch (error) {
         console.warn("Failed to load theme preference:", error);
-      } finally {
-        setIsLoading(false);
       }
     };
 
@@ -110,7 +113,6 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     themeMode,
     actualTheme,
     setThemeMode,
-    isLoading,
   };
 
   return (

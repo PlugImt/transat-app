@@ -101,7 +101,7 @@ export const ChangePassword = () => {
         label={t("account.changePassword")}
         onPress={handlePasswordSubmit(handleChangePassword)}
         disabled={isUpdatingPassword || !isPasswordValid}
-        loading={isUpdatingPassword}
+        isUpdating={isUpdatingPassword}
       />
     </Page>
   );

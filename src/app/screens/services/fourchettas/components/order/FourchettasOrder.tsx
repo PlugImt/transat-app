@@ -1,7 +1,7 @@
 import type { RouteProp } from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
-import { View } from "react-native";
+import { View, Image } from "react-native";
 import { useRef, useEffect, useState } from "react";
 import Animated from "react-native-reanimated";
 
@@ -10,7 +10,8 @@ import { useTheme } from "@/contexts/ThemeContext";
 import type { AppStackParamList } from "@/types";
 import { useUser } from "@/hooks/account/useUser";
 import { FourchettasItemCard } from "./components/FourchettasItemCard";
-import { getItemsFromEventId } from "@/api/endpoints/fourchettas";
+import { RecipeOrder } from "./components/RecipeOrder";
+import { getItemsFromEventId, postOrder } from "@/api/endpoints/fourchettas";
 import { Item } from "@/dto";
 import { Text } from "@/components/common/Text";
 import { Button } from "@/components/common/Button";
@@ -38,6 +39,8 @@ export const FourchettasOrder = () => {
   const [sideId, setSideId] = useState<number>(0);
   const [drinkId, setDrinkId] = useState<number>(0);
 
+  const [success, setSuccess] = useState(false);
+
   const [currentPage, setCurrentPage] = useState(1);
 
   function scrollToTop() {
@@ -57,6 +60,26 @@ export const FourchettasOrder = () => {
       setCurrentPage(currentPage - 1);
       scrollToTop();
     }
+  }
+
+  function order() {
+    postOrder({
+      event_id: id,
+      name: user?.last_name || "",
+      firstName: user?.first_name || "",
+      phone: user?.phone_number || "",
+      dish_id: dishId || 0,
+      side_id: sideId,
+      drink_id: drinkId,
+      onRequestStart() {
+        console.log("Placing order...");
+      },
+      onRequestEnd() {},
+      onSuccess() {
+        setSuccess(true);
+      },
+      onError() {},
+    });
   }
 
   const noSide: Item = {
@@ -92,6 +115,22 @@ export const FourchettasOrder = () => {
     );
   }, [id]);
 
+  if (success) {
+    return (
+      <Page title={`Fourchettas Order ID: ${id}`} asChildren>
+        <View className="flex-col justify-center items-center h-full gap-8 w-full">
+          <Image
+            source={require("@/assets/images/services/fourchettas.png")}
+            style={{ width: 120, height: 120 }}
+            resizeMode="contain"
+          />
+          <Text variant="h1">Merci pour votre commande !!</Text>
+          <Text variant="h3">Commande passée avec succès !</Text>
+        </View>
+      </Page>
+    );
+  }
+
   return (
     <Page title={`Fourchettas Order ID: ${id}`} asChildren>
       <Animated.ScrollView ref={scrollViewRef}>
@@ -111,6 +150,7 @@ export const FourchettasOrder = () => {
               ))}
             </View>
           )}
+
           {currentPage === 2 && (
             <View className="w-full flex flex-col items-center gap-4">
               <Text variant="h1" className="text-center text-primary">
@@ -121,7 +161,6 @@ export const FourchettasOrder = () => {
                 selected={sideId === noSide.id}
                 onPress={() => setSideId(noSide.id)}
               />
-
               {sides.map((item) => (
                 <FourchettasItemCard
                   key={item.id}
@@ -132,6 +171,7 @@ export const FourchettasOrder = () => {
               ))}
             </View>
           )}
+
           {currentPage === 3 && (
             <View className="w-full flex flex-col items-center gap-4">
               <Text variant="h1" className="text-center text-primary">
@@ -142,7 +182,6 @@ export const FourchettasOrder = () => {
                 selected={drinkId === noDrink.id}
                 onPress={() => setDrinkId(noDrink.id)}
               />
-
               {drinks.map((item) => (
                 <FourchettasItemCard
                   key={item.id}
@@ -154,11 +193,14 @@ export const FourchettasOrder = () => {
             </View>
           )}
           {currentPage === 4 && (
-            <View className="w-full flex flex-col items-center gap-4">
-              <Text variant="h1" className="text-center text-primary">
-                Résumé de ta Commande :
-              </Text>
-            </View>
+            <>
+              <RecipeOrder
+                dish={dishes.find((d) => d.id === dishId) || null}
+                side={sides.find((s) => s.id === sideId) || noSide}
+                drink={drinks.find((d) => d.id === drinkId) || noDrink}
+              />
+              <Button label="Commander !!" onPress={order} className="w-2/3" />
+            </>
           )}
 
           <View className="flex-row justify-center items-center w-full gap-4">
@@ -169,8 +211,14 @@ export const FourchettasOrder = () => {
               disabled={currentPage === 1}
               variant="secondary"
             />
-            <Button label="Suivant" onPress={nextPage} className="w-1/3" />
+            <Button
+              label="Suivant"
+              onPress={nextPage}
+              disabled={currentPage === 4}
+              className="w-1/3"
+            />
           </View>
+
           <Steps
             steps={[
               { title: "Plat" },

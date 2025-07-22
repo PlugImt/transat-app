@@ -11,12 +11,16 @@ import type { AppStackParamList } from "@/types";
 import { useUser } from "@/hooks/account/useUser";
 import { FourchettasItemCard } from "./components/FourchettasItemCard";
 import { RecipeOrder } from "./components/RecipeOrder";
-import { getItemsFromEventId, postOrder } from "@/api/endpoints/fourchettas";
+import {
+  getItemsFromEventId,
+  postOrder,
+  updateOrderContentByPhoneAndEvent,
+} from "@/api/endpoints/fourchettas";
 import { Item } from "@/dto";
 import { Text } from "@/components/common/Text";
 import { Button } from "@/components/common/Button";
 import Steps from "@/components/custom/Steps";
-
+import { phoneWithoutSpaces } from "../../utils/common";
 export type FourchettasOrderRouteProp = RouteProp<
   AppStackParamList,
   "FourchettasOrder"
@@ -28,7 +32,6 @@ export const FourchettasOrder = () => {
   const { theme } = useTheme();
   const route = useRoute<FourchettasOrderRouteProp>();
   const { id, orderUser } = route.params;
-  console.log("FourchettasOrder ID:", id, "Order User:", orderUser);
 
   const scrollViewRef = useRef<Animated.ScrollView>(null);
 
@@ -76,10 +79,10 @@ export const FourchettasOrder = () => {
       event_id: id,
       name: user?.last_name || "",
       firstName: user?.first_name || "",
-      phone: user?.phone_number || "",
+      phone: phoneWithoutSpaces(user?.phone_number),
       dish_id: dishId || 0,
-      side_id: sideId,
-      drink_id: drinkId,
+      side_id: sideId || 0,
+      drink_id: drinkId || 0,
       onRequestStart() {
         console.log("Placing order...");
       },
@@ -89,6 +92,24 @@ export const FourchettasOrder = () => {
       },
       onError() {},
     });
+  }
+
+  function modifyOrder() {
+    updateOrderContentByPhoneAndEvent(
+      phoneWithoutSpaces(user?.phone_number),
+      id,
+      dishId || 0,
+      sideId,
+      drinkId,
+      () => {
+        console.log("Updating order...");
+      },
+      () => {},
+      () => {},
+      () => {
+        setSuccess(true);
+      },
+    );
   }
 
   const noSide: Item = {
@@ -214,7 +235,7 @@ export const FourchettasOrder = () => {
               />
               <Button
                 label={orderUser ? "Modifier la commande !!" : "Commander !!"}
-                onPress={order}
+                onPress={orderUser ? modifyOrder : order}
                 className="w-2/3"
               />
             </>

@@ -8,7 +8,7 @@ export interface Event {
   form_closing_time: string;
   img_url: string;
   deleting?: boolean;
-  orderedOfUser?: Order; // Indicates if the user has already ordered for this event
+  orderedOfUser?: Order;
 }
 
 export interface Item {

@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 
-import { Dimensions, Image, View } from "react-native";
+import { Image, View } from "react-native";
 
 import { useTheme } from "@/contexts/ThemeContext";
 
@@ -8,27 +8,44 @@ import { Text } from "@/components/common/Text";
 import { TextSkeleton, ImgSkeleton } from "@/components/Skeleton";
 import { Button } from "@/components/common/Button";
 import type { Event } from "@/dto";
+import { useEffect, useState } from "react";
+import { Counter } from "@/app/screens/services/fourchettas/components/Counter";
 interface CardProps {
   event: Event;
   onPress?: () => void;
 }
 
-const { width } = Dimensions.get("window");
-const cardWidth = width * 0.85;
+function DateFromTimestampAndTime(timestamp: string, time: string): Date {
+  return new Date(`${timestamp.split("T")[0]}T${time}.000Z`);
+}
+
+function correctDate(date: string): string {
+  const split = date.split("T")[0].split("-");
+  return `${split[2]}/${split[1]}/${split[0]}`;
+}
 
 const FourchettasEventCard = ({ event, onPress }: CardProps) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
 
+  const [number, setNumber] = useState(99);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setNumber((prev) => (prev <= 0 ? 99 : prev - 1));
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <View
       style={{ backgroundColor: theme.card }}
-      className="px-6 py-8 rounded-lg gap-6 relative items-center w-4/5"
+      className="px-6 py-8 rounded-lg gap-3 relative items-center w-10/12"
     >
       <Image
         source={{ uri: event.img_url }}
         resizeMode="contain"
-        className="w-20 h-20 rounded-lg"
+        className="w-28 h-28 rounded-lg"
       />
       <Text variant="h1" className="text-center" color="primary">
         {event.title}
@@ -36,13 +53,18 @@ const FourchettasEventCard = ({ event, onPress }: CardProps) => {
       <Text variant="lg" className="text-center">
         {event.description}
       </Text>
-      <Text variant="sm" className="text-center">
-        Le {event.date} à {event.time}
+      <Text variant="lg" className="text-center">
+        Le {correctDate(event.date)} à {event.time}
       </Text>
-      <Text variant="sm" className="text-center">
-        Clôture des commandes le {event.form_closing_date} à{" "}
-        {event.form_closing_time}
+      <Text variant="lg" className="text-center -mb-2" color="primary">
+        Fermeture des commandes dans:
       </Text>
+      <Counter
+        date={DateFromTimestampAndTime(
+          event.form_closing_date,
+          event.form_closing_time,
+        )}
+      />
       <Button
         label={
           event.orderedOfUser === undefined

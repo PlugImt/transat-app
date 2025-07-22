@@ -18,6 +18,16 @@ const RecipeOrder = ({ dish, side, drink }: ReciepeProps) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
 
+  if (typeof dish?.price === "string") {
+    dish.price = Number.parseFloat(dish.price);
+  }
+  if (typeof side?.price === "string") {
+    side.price = Number.parseFloat(side.price);
+  }
+  if (typeof drink?.price === "string") {
+    drink.price = Number.parseFloat(drink.price);
+  }
+
   if (!dish) {
     return <Text className="text-center text-red-500">Problème</Text>;
   }
@@ -104,9 +114,9 @@ const RecipeOrder = ({ dish, side, drink }: ReciepeProps) => {
             </Text>
             <Text variant="h3" className="w-20 text-center">
               {(
-                (dish.quantity || 0) +
-                (side.quantity || 0) +
-                (drink.quantity || 0)
+                (dish?.price || 0) +
+                (side?.price || 0) +
+                (drink?.price || 0)
               ).toFixed(2)}
               €
             </Text>

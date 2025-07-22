@@ -18,6 +18,7 @@ import type { Event, Order } from "@/dto";
 import type { AppStackParamList } from "@/types";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
+import { phoneWithoutSpaces } from "./utils/common";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -41,7 +42,7 @@ export const Fourchettas = () => {
           if (user?.phone_number && event.id) {
             return new Promise<void>((resolve) => {
               GetOrderByPhoneAndEvent(
-                user.phone_number,
+                phoneWithoutSpaces(user?.phone_number),
                 event.id,
                 () => {},
                 () => {},
@@ -49,7 +50,6 @@ export const Fourchettas = () => {
                 (orders: Order[]) => {
                   if (orders.length > 0) {
                     event.orderedOfUser = orders[0];
-                    console.log(orders[0]);
                   }
                   resolve();
                 },

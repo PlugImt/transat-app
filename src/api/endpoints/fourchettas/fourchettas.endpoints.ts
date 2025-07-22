@@ -88,7 +88,7 @@ function orderJson({
     name: name,
     firstname: firstName,
     phone: phone,
-    dish_id: dish_id,
+    dish_id: dish_id > 0 ? dish_id : null,
     side_id: side_id > 0 ? side_id : null,
     drink_id: drink_id > 0 ? drink_id : null,
   };
@@ -108,7 +108,7 @@ export async function postOrder({
   name,
   firstName,
   phone,
-  dish_id,
+  dish_id ,
   side_id,
   drink_id,
   onRequestStart = () => {},
@@ -129,7 +129,7 @@ export async function postOrder({
         name,
         firstName,
         phone,
-        dish_id,
+        dish_id ,
         side_id,
         drink_id,
       })
@@ -200,23 +200,19 @@ export async function updateOrderContentByPhoneAndEvent(
   onSuccess: () => void = () => {}
 ) {
   onRequestStart();
-  console.log(`[FOURCHETTAS API] PUT /orders/update/${event_id} with body: `, {
+  const payload = {
     phone,
-    dish_id,
-    side_id,
-    drink_id,
-  });
+    dish_id: dish_id > 0 ? dish_id : null,
+    side_id: side_id > 0 ? side_id : null,
+    drink_id: drink_id > 0 ? drink_id : null,
+  };
+  console.log(`[FOURCHETTAS API] PUT /orders/update/${event_id} with body: `, payload);
   fetch(`${api_url}/api/orders/update/${event_id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      phone,
-      dish_id,
-      side_id,
-      drink_id,
-    }),
+    body: JSON.stringify(payload),
   })
     .then((response) => {
       onRequestEnd();

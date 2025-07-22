@@ -36,7 +36,7 @@ function Counter({ date }: CounterProps) {
 
   return (
     <View
-      className={`flex-row-reverse items-center justify-between w-full ${timediff <= 0 ? "blur-md" : ""}`}
+      className={`flex-row-reverse items-center justify-between w-full ${timediff <= 0 ? "opacity-40" : ""}`}
     >
       <CounterElement
         key={"sec"}

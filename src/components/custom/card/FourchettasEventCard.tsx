@@ -27,6 +27,12 @@ function correctDate(date: string): string {
 const FourchettasEventCard = ({ event, onPress }: CardProps) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
+  const [timediff, setTimediff] = useState(
+    DateFromTimestampAndTime(
+      event.form_closing_date,
+      event.form_closing_time,
+    ).getTime() - Date.now(),
+  );
 
   const [number, setNumber] = useState(99);
 
@@ -50,7 +56,7 @@ const FourchettasEventCard = ({ event, onPress }: CardProps) => {
       <Text variant="h1" className="text-center" color="primary">
         {event.title}
       </Text>
-      <Text variant="lg" className="text-center">
+      <Text variant="lg" className="text-center font-semibold">
         {event.description}
       </Text>
       <Text variant="lg" className="text-center">
@@ -65,14 +71,37 @@ const FourchettasEventCard = ({ event, onPress }: CardProps) => {
           event.form_closing_time,
         )}
       />
-      <Button
-        label={
-          event.orderedOfUser === undefined
-            ? t("services.fourchettas.orderButton")
-            : t("services.fourchettas.modifyOrderButton")
-        }
-        onPress={onPress}
-      />
+      <View className="relative flex">
+        <Button
+          label={
+            event.orderedOfUser === undefined
+              ? t("services.fourchettas.orderButton")
+              : t("services.fourchettas.modifyOrderButton")
+          }
+          onPress={onPress}
+          disabled={timediff <= 0}
+        />
+        {timediff <= 0 && (
+          <Text
+            variant="sm"
+            className="absolute -right-8 -top-2 p-1 font-bold rounded-lg text-center"
+            style={{ backgroundColor: theme.warning }}
+            color="warningText"
+          >
+            Trop Tard !
+          </Text>
+        )}
+        {timediff <= 1000 * 60 * 60 * 5 && timediff > 0 && (
+          <Text
+            variant="sm"
+            className="absolute -right-4 -top-2 p-1 font-bold rounded-lg text-center"
+            style={{ backgroundColor: theme.warning }}
+            color="warningText"
+          >
+            Vite !!
+          </Text>
+        )}
+      </View>
     </View>
   );
 };
@@ -92,7 +121,12 @@ export const FourchettasEventCardLoading = () => {
       <TextSkeleton lastLineWidth={100} variant="h1" />
       <TextSkeleton textCenter variant="h2" lines={3} />
       <TextSkeleton variant="h3" />
-      <TextSkeleton variant="h3" />
+      <View className="flex-row items-center justify-between w-full">
+        <ImgSkeleton width={50} height={50} />
+        <ImgSkeleton width={50} height={50} />
+        <ImgSkeleton width={50} height={50} />
+        <ImgSkeleton width={50} height={50} />
+      </View>
 
       <Button label={t("services.fourchettas.orderButton")} disabled={true} />
     </View>

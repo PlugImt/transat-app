@@ -28,14 +28,10 @@ const RecipeOrder = ({ dish, side, drink }: ReciepeProps) => {
     drink.price = Number.parseFloat(drink.price);
   }
 
-  if (!dish) {
-    return <Text className="text-center text-red-500">Problème</Text>;
-  }
-
   return (
     <View className="w-full flex flex-col items-center gap-4">
       <Text variant="h1" className="text-center text-primary mb-3">
-        Résumé de ta commande pour{" "}
+        {t("services.fourchettas.recieptTitle")}{" "}
         <Text variant="h1" color={"primary"}>
           Fourchettas
         </Text>
@@ -46,7 +42,7 @@ const RecipeOrder = ({ dish, side, drink }: ReciepeProps) => {
         className=" border-border rounded-lg p-4 w-full max-w-sm"
       >
         <Text variant="h2" className="text-xl text-center mb-4">
-          Commande de{" "}
+          {t("services.fourchettas.orderOf")}{" "}
           <Text variant="h2" color={"primary"}>
             {user?.first_name}
             {user?.last_name}
@@ -56,13 +52,13 @@ const RecipeOrder = ({ dish, side, drink }: ReciepeProps) => {
         <View className="w-full">
           <View className="flex-row border-b border-border pb-2 mb-2">
             <Text variant="h3" className="flex-1 font-semibold">
-              Article
+              {t("services.fourchettas.article")}
             </Text>
             <Text variant="h3" className="w-20 text-center font-semibold">
-              Quantité
+              {t("services.fourchettas.quantity")}
             </Text>
             <Text variant="h3" className="w-16 text-right font-semibold">
-              Prix
+              {t("services.fourchettas.price")}
             </Text>
           </View>
 
@@ -110,7 +106,7 @@ const RecipeOrder = ({ dish, side, drink }: ReciepeProps) => {
 
           <View className="flex-row py-3 mt-2">
             <Text variant="h3" className="flex-1 font-bold">
-              TOTAL
+              {t("services.fourchettas.total")}
             </Text>
             <Text variant="h3" className="w-20 text-center">
               {(

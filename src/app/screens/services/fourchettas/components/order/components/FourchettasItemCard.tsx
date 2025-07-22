@@ -6,6 +6,7 @@ import { Image } from "react-native";
 import { X } from "lucide-react-native";
 
 import type { Item } from "@/dto";
+import { ImgSkeleton, TextSkeleton } from "@/components/Skeleton";
 
 interface FourchettasItemCardProps {
   item: Item;
@@ -68,4 +69,20 @@ function FourchettasItemCard({
   );
 }
 
-export { FourchettasItemCard };
+function FourchettasItemCardLoading() {
+  const { theme } = useTheme();
+
+  return (
+    <View
+      className="flex-col w-4/5 justify-between items-center p-4 gap-4 rounded-lg shadow"
+      style={{ backgroundColor: theme.card }}
+    >
+      <ImgSkeleton width={160} height={160} />
+      <TextSkeleton width={"50%"} textCenter />
+      <TextSkeleton width={"40%"} textCenter />
+      <TextSkeleton width={"100%"} textCenter />
+    </View>
+  );
+}
+
+export { FourchettasItemCard, FourchettasItemCardLoading };

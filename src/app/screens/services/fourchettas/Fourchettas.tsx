@@ -8,10 +8,13 @@ import { AboutModal } from "@/components/custom/AboutModal";
 import FourchettasEventCard from "@/components/custom/card/FourchettasEventCard";
 import { FourchettasEventCardLoading } from "@/components/custom/card/FourchettasEventCard";
 
-import { getEventsUpcoming } from "@/api/endpoints/fourchettas/fourchettas.endpoints";
+import {
+  getEventsUpcoming,
+  GetOrderByPhoneAndEvent,
+} from "@/api/endpoints/fourchettas/fourchettas.endpoints";
 import { useEffect, useState } from "react";
 import { useUser } from "@/hooks/account/useUser";
-import type { Event } from "@/dto";
+import type { Event, Order } from "@/dto";
 import type { AppStackParamList } from "@/types";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
@@ -35,10 +38,28 @@ export const Fourchettas = () => {
       () => {},
       (data: Event[]) => {
         setEvents(data);
-        setLoading(false);
+        data.map(async (event, index) => {
+          if (user?.phone_number && event.id) {
+            await GetOrderByPhoneAndEvent(
+              user.phone_number,
+              event.id,
+              () => {},
+              () => {},
+              () => {},
+              (orders: Order[]) => {
+                if (orders.length > 0) {
+                  event.orderedOfUser = orders[0];
+                  if (index === data.length - 1) {
+                    setLoading(false);
+                  }
+                }
+              },
+            );
+          }
+        });
       },
     );
-  }, []);
+  }, [user]);
 
   return (
     <Page
@@ -77,15 +98,12 @@ export const Fourchettas = () => {
         {events.map((event) => (
           <FourchettasEventCard
             key={event.id}
-            image={event.img_url}
-            title={event.title}
-            description={event.description}
-            date={event.date}
-            time={event.time}
-            form_closing_date={event.form_closing_date}
-            form_closing_time={event.form_closing_time}
+            event={event}
             onPress={() =>
-              navigation.navigate("FourchettasOrder", { id: event.id })
+              navigation.navigate("FourchettasOrder", {
+                id: event.id,
+                orderId: event.orderedOfUser?.id,
+              })
             }
           />
         ))}

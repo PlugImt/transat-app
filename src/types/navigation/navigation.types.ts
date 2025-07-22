@@ -36,7 +36,7 @@ export type AppStackParamList = {
   Olimtpe: undefined;
   Account: undefined;
   Fourchettas: undefined;
-  FourchettasOrder: { id: number };
+  FourchettasOrder: { id: number, orderId?: number };
 };
 
 type AccountStackParamList = {

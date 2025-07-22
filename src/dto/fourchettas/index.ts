@@ -8,6 +8,7 @@ export interface Event {
   form_closing_time: string;
   img_url: string;
   deleting?: boolean;
+  orderedOfUser?: Order; // Indicates if the user has already ordered for this event
 }
 
 export interface Item {
@@ -19,4 +20,19 @@ export interface Item {
   quantity: number;
   img_url: string;
   event_id: number;
+}
+
+export interface Order {
+  id: number;
+  name: string;
+  firstname: string;
+  phone: string;
+  event_id: number;
+  dish_id: number;
+  side_id: number;
+  drink_id: number;
+  created_at: string;
+  prepared: boolean;
+  delivered: boolean;
+  price?: number;
 }

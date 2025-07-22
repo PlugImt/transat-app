@@ -7,31 +7,16 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { Text } from "@/components/common/Text";
 import { TextSkeleton, ImgSkeleton } from "@/components/Skeleton";
 import { Button } from "@/components/common/Button";
-
+import type { Event } from "@/dto";
 interface CardProps {
-  title: string;
-  description: string;
-  date: string;
-  time: string;
-  form_closing_date: string;
-  form_closing_time: string;
-  image: string;
+  event: Event;
   onPress?: () => void;
 }
 
 const { width } = Dimensions.get("window");
 const cardWidth = width * 0.85;
 
-const FourchettasEventCard = ({
-  image,
-  title,
-  description,
-  date,
-  time,
-  form_closing_date,
-  form_closing_time,
-  onPress,
-}: CardProps) => {
+const FourchettasEventCard = ({ event, onPress }: CardProps) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
 
@@ -41,23 +26,31 @@ const FourchettasEventCard = ({
       className="px-6 py-8 rounded-lg gap-6 relative items-center w-4/5"
     >
       <Image
-        source={{ uri: image }}
+        source={{ uri: event.img_url }}
         resizeMode="contain"
         className="w-20 h-20 rounded-lg"
       />
       <Text variant="h1" className="text-center" color="primary">
-        {title}
+        {event.title}
       </Text>
       <Text variant="lg" className="text-center">
-        {description}
+        {event.description}
       </Text>
       <Text variant="sm" className="text-center">
-        Le {date} à {time}
+        Le {event.date} à {event.time}
       </Text>
       <Text variant="sm" className="text-center">
-        Clôture des commandes le {form_closing_date} à {form_closing_time}
+        Clôture des commandes le {event.form_closing_date} à{" "}
+        {event.form_closing_time}
       </Text>
-      <Button label={t("services.fourchettas.orderButton")} onPress={onPress} />
+      <Button
+        label={
+          event.orderedOfUser
+            ? t("services.fourchettas.orderButton")
+            : t("services.fourchettas.modifyOrderButton")
+        }
+        onPress={onPress}
+      />
     </View>
   );
 };

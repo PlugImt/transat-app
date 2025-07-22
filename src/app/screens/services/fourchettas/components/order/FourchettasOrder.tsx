@@ -27,7 +27,8 @@ export const FourchettasOrder = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
   const route = useRoute<FourchettasOrderRouteProp>();
-  const { id } = route.params;
+  const { id, orderId } = route.params;
+  console.log("FourchettasOrder ID:", id, "Order ID:", orderId);
 
   const scrollViewRef = useRef<Animated.ScrollView>(null);
 

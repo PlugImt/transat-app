@@ -1,4 +1,4 @@
-import type { Event,Item } from '@/dto';
+import type { Event,Item,Order } from '@/dto';
 
 
 const api_url = 'https://fourchettas.vercel.app';
@@ -151,5 +151,87 @@ export async function postOrder({
       onRequestEnd();
       onError();
       console.error("[FOURCHETTAS API] [Error] submitting order:", error);
+    });
+}
+
+export async function GetOrderByPhoneAndEvent(
+  phone: string,
+  event_id: number,
+  onRequestStart: () => void = () => {},
+  onRequestEnd: () => void = () => {},
+  onError: () => void = () => {},
+  onSuccess: (data: Order[]) => void = () => {}
+) {
+  onRequestStart();
+  console.log(`[FOURCHETTAS API] GET /orders/phone/${phone}/event/${event_id}`);
+  fetch(`${api_url}/api/orders/phone/${phone}/event/${event_id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    }
+  })
+    .then((response) => {
+      onRequestEnd();
+      if (!response.ok) {
+        onError();
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      onSuccess(data);
+    })
+    .catch((error) => {
+      onRequestEnd();
+      onError();
+      console.error("[FOURCHETTAS API] [Error] submitting order:", error);
+    });
+}
+
+export async function updateOrderContentByPhoneAndEvent(
+  phone: string,
+  event_id: number,
+  dish_id: number,
+  side_id: number,
+  drink_id: number,
+  onRequestStart: () => void = () => {},
+  onRequestEnd: () => void = () => {},
+  onError: () => void = () => {},
+  onSuccess: () => void = () => {}
+) {
+  onRequestStart();
+  console.log(`[FOURCHETTAS API] PUT /orders/update/${event_id} with body: `, {
+    phone,
+    dish_id,
+    side_id,
+    drink_id,
+  });
+  fetch(`${api_url}/api/orders/update/${event_id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      phone,
+      dish_id,
+      side_id,
+      drink_id,
+    }),
+  })
+    .then((response) => {
+      onRequestEnd();
+      if (!response.ok) {
+        onError();
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      onSuccess();
+    })
+    .catch((error) => {
+      onRequestEnd();
+      onError();
+      console.error("[FOURCHETTAS API] [Error] updating order:", error);
     });
 }

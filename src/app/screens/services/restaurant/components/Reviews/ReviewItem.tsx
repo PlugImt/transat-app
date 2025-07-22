@@ -60,23 +60,12 @@ export const ReviewItemSkeleton = () => {
   return (
     <Card>
       <View className="flex-row gap-2">
-<<<<<<< HEAD
-        <Avatar className="w-14 h-14">
-          <AvatarImage loading />
-        </Avatar>
-
-        <View className="flex-1">
-          <View className="flex-row items-center justify-between gap-4">
-            <TextSkeleton variant="lg" className="flex-1" />
-            <TextSkeleton variant="sm" />
-=======
         <AvatarSkeleton size={56} />
 
         <View className="flex-1">
           <View className="flex-row items-center justify-between gap-4">
             <TextSkeleton variant="lg" className="flex-1" lastLineWidth={130} />
             <TextSkeleton variant="sm" lastLineWidth={80} />
->>>>>>> master
           </View>
 
           <View className="flex-row items-center gap-1">

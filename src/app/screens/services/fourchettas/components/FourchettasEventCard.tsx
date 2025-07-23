@@ -98,7 +98,7 @@ export const FourchettasEventCard = ({ event, onPress }: CardProps) => {
             style={{ backgroundColor: theme.warning }}
             color="warningText"
           >
-            Vite !!
+            {t("services.fourchettas.hurryUp")}
           </Text>
         )}
       </View>

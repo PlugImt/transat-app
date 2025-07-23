@@ -16,7 +16,8 @@ function Steps({ steps, currentStep }: StepsProps) {
 
   return (
     <View
-      className={`shrink-0 flex-row items-start justify-between w-[${2.5 * (steps.length * 2 - 1)}rem]`}
+      className="shrink-0 flex-row items-start justify-between"
+      style={{ width: `${2.5 * (steps.length * 2 - 1)}rem` }}
     >
       {steps.map((step, index) => (
         <View

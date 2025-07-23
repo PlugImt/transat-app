@@ -60,7 +60,7 @@ export const FourchettasEventCard = ({ event, onPress }: CardProps) => {
         {event.description}
       </Text>
       <Text variant="lg" className="text-center">
-        Le {correctDate(event.date)} à {event.time}
+        {t("services.fourchettas.eventDateTime", { date: correctDate(event.date), time: event.time })}
       </Text>
       <Text variant="lg" className="text-center -mb-2" color="primary">
         Fermeture des commandes dans:

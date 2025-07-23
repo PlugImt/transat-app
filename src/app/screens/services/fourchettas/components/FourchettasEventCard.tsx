@@ -66,7 +66,7 @@ export const FourchettasEventCard = ({ event, onPress }: CardProps) => {
         })}
       </Text>
       <Text variant="lg" className="text-center -mb-2" color="primary">
-        Fermeture des commandes dans:
+        {t("services.fourchettas.orderClosingIn")}
       </Text>
       <Counter
         date={DateFromTimestampAndTime(

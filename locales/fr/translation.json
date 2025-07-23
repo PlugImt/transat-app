@@ -416,6 +416,7 @@
       "orderFailed": "Échec de la commande veuillez réessayer plus tard",
       "eventDateTime": "Le {{date}} à {{time}}",
       "hurryUp": "Vite !",
+      "orderClosingIn": "Fermeture des commandes dans:",
       "tooLate": "Trop tard",
       "next": "Suivant",
       "previous": "Précédent",

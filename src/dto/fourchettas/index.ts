@@ -8,7 +8,7 @@ export interface Event {
   form_closing_time: string;
   img_url: string;
   deleting?: boolean;
-  orderedOfUser?: Order;
+  orderuser?: Order;
 }
 
 export interface Item {

@@ -60,7 +60,10 @@ export const FourchettasEventCard = ({ event, onPress }: CardProps) => {
         {event.description}
       </Text>
       <Text variant="lg" className="text-center">
-        {t("services.fourchettas.eventDateTime", { date: correctDate(event.date), time: event.time })}
+        {t("services.fourchettas.eventDateTime", {
+          date: correctDate(event.date),
+          time: event.time,
+        })}
       </Text>
       <Text variant="lg" className="text-center -mb-2" color="primary">
         Fermeture des commandes dans:
@@ -74,7 +77,7 @@ export const FourchettasEventCard = ({ event, onPress }: CardProps) => {
       <View className="relative flex">
         <Button
           label={
-            event.orderedOfUser === undefined
+            event.orderuser === null
               ? t("services.fourchettas.orderButton")
               : t("services.fourchettas.modifyOrderButton")
           }

@@ -1,21 +1,14 @@
 import { Text } from "@/components/common/Text";
 import { Page } from "@/components/page/Page";
 import { useTranslation } from "react-i18next";
-
 import { View, Image } from "react-native";
-
 import { AboutModal } from "@/components/custom/AboutModal";
 import {
   FourchettasEventCard,
   FourchettasEventCardLoading,
 } from "./components/FourchettasEventCard";
-import {
-  getEventsUpcoming,
-  GetOrderByPhoneAndEvent,
-} from "@/api/endpoints/fourchettas/fourchettas.endpoints";
-import { useEffect, useState } from "react";
+import { useEventsUpcomingPhone } from "@/hooks/useFourchettas";
 import { useUser } from "@/hooks/account/useUser";
-import type { Event, Order } from "@/dto";
 import type { AppStackParamList } from "@/types";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
@@ -28,50 +21,19 @@ export const Fourchettas = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<AppScreenNavigationProp>();
 
-  const [events, setEvents] = useState<Event[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<boolean>(false);
+  const {
+    data: events = [],
+    isLoading,
+    isError,
+  } = useEventsUpcomingPhone(phoneWithoutSpaces(user?.phone_number ?? ""));
 
-  useEffect(() => {
-    getEventsUpcoming(
-      () => {
-        setLoading(true);
-      },
-      () => {},
-      () => {
-        setError(true);
-      },
-      (data: Event[]) => {
-        const fetchOrderPromises = data.map(async (event) => {
-          if (user?.phone_number && event.id) {
-            return new Promise<void>((resolve) => {
-              GetOrderByPhoneAndEvent(
-                phoneWithoutSpaces(user?.phone_number),
-                event.id,
-                () => {},
-                () => {},
-                () => {
-                  setError(true);
-                },
-                (orders: Order[]) => {
-                  if (orders.length > 0) {
-                    event.orderedOfUser = orders[0];
-                  }
-                  resolve();
-                },
-              );
-            });
-          }
-          return Promise.resolve();
-        });
-
-        Promise.all(fetchOrderPromises).then(() => {
-          setLoading(false);
-          setEvents(data);
-        });
-      },
+  if (!user?.phone_number) {
+    return (
+      <Page title={t("services.fourchettas.title")}>
+        <Text>{t("services.fourchettas.loginRequired")}</Text>
+      </Page>
     );
-  }, [user]);
+  }
 
   return (
     <Page
@@ -97,7 +59,7 @@ export const Fourchettas = () => {
         </View>
       </View>
       <View className="min-w-full w-full flex items-center gap-4">
-        {error ? (
+        {isError ? (
           <View className="flex flex-col items-center gap-4">
             <Image
               source={require("@/assets/images/services/fourchettas_dead.png")}
@@ -107,7 +69,7 @@ export const Fourchettas = () => {
               {t("services.fourchettas.apiError")}
             </Text>
           </View>
-        ) : loading ? (
+        ) : isLoading ? (
           <>
             <FourchettasEventCardLoading />
             <FourchettasEventCardLoading />
@@ -130,7 +92,7 @@ export const Fourchettas = () => {
               onPress={() =>
                 navigation.navigate("FourchettasOrder", {
                   id: evt.id,
-                  orderUser: evt.orderedOfUser,
+                  orderUser: evt.orderuser,
                 })
               }
             />

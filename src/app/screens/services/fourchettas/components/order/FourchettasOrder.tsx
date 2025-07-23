@@ -13,16 +13,13 @@ import {
   FourchettasItemCardLoading,
 } from "./components/FourchettasItemCard";
 import { RecipeOrder } from "./components/RecipeOrder";
-import {
-  getItemsFromEventId,
-  postOrder,
-  updateOrderContentByPhoneAndEvent,
-} from "@/api/endpoints/fourchettas";
+import { usePostOrder, useUpdateOrder } from "@/hooks/useFourchettas";
 import type { Item } from "@/dto";
 import { Text } from "@/components/common/Text";
 import { Button } from "@/components/common/Button";
 import Steps from "@/components/custom/Steps";
 import { phoneWithoutSpaces } from "../../utils/common";
+import { useItemsFromEventId } from "@/hooks/useFourchettas";
 
 export type FourchettasOrderRouteProp = RouteProp<
   AppStackParamList,
@@ -37,38 +34,20 @@ export const FourchettasOrder = () => {
 
   const scrollViewRef = useRef<Animated.ScrollView>(null);
 
-  const [dishes, setDishes] = useState<Item[]>([]);
-  const [sides, setSides] = useState<Item[]>([]);
-  const [drinks, setDrinks] = useState<Item[]>([]);
+  const { data: items = [], isLoading, isError } = useItemsFromEventId(id);
+
+  const dishes = items.filter((item) => item.type === "dish");
+  const sides = items.filter((item) => item.type === "side");
+  const drinks = items.filter((item) => item.type === "drink");
 
   const [dishId, setDishId] = useState<number | null>(null);
   const [sideId, setSideId] = useState<number>(0);
   const [drinkId, setDrinkId] = useState<number>(0);
-
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [postError, setPostError] = useState(false);
-  const [postLoading, setPostLoading] = useState(false);
   const [noDishSelected, setNoDishSelected] = useState(false);
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const [success, setSuccess] = useState(false);
 
-  useEffect(() => {
-    setLoading(true);
-    getItemsFromEventId(
-      id,
-      setDishes,
-      setSides,
-      setDrinks,
-      () => {
-        setError(true);
-      },
-      () => {
-        setLoading(false);
-      },
-    );
-  }, [id]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     if (orderUser) {
@@ -101,50 +80,47 @@ export const FourchettasOrder = () => {
     }
   }
 
+  const phone = phoneWithoutSpaces(user?.phone_number);
+  const postOrderMut = usePostOrder(phone);
+  const updateOrderMut = useUpdateOrder(phone);
+
+  const postLoading = postOrderMut.isPending || updateOrderMut.isPending;
+  const postError = postOrderMut.isError || updateOrderMut.isError;
+
   function order() {
-    setPostLoading(true);
-    postOrder({
-      event_id: id,
-      name: user?.last_name || "",
-      firstName: user?.first_name || "",
-      phone: phoneWithoutSpaces(user?.phone_number),
-      dish_id: dishId || 0,
-      side_id: sideId || 0,
-      drink_id: drinkId || 0,
-      onRequestStart() {
-        setPostError(false);
+    if (!dishId) return;
+
+    postOrderMut.mutate(
+      {
+        event_id: id,
+        name: user?.last_name || "",
+        firstName: user?.first_name || "",
+        phone,
+        dish_id: dishId,
+        side_id: sideId || 0,
+        drink_id: drinkId || 0,
       },
-      onRequestEnd() {},
-      onSuccess() {
-        setSuccess(true);
+      {
+        onSuccess: () => setSuccess(true),
       },
-      onError() {
-        setPostError(true);
-      },
-    });
-    setPostLoading(false);
+    );
   }
 
   function modifyOrder() {
-    setPostLoading(true);
-    updateOrderContentByPhoneAndEvent(
-      phoneWithoutSpaces(user?.phone_number),
-      id,
-      dishId || 0,
-      sideId,
-      drinkId,
-      () => {
-        setPostError(false);
+    if (!dishId) return;
+
+    updateOrderMut.mutate(
+      {
+        phone,
+        event_id: id,
+        dish_id: dishId,
+        side_id: sideId,
+        drink_id: drinkId,
       },
-      () => {},
-      () => {
-        setPostError(true);
-      },
-      () => {
-        setSuccess(true);
+      {
+        onSuccess: () => setSuccess(true),
       },
     );
-    setPostLoading(false);
   }
 
   const noSide: Item = {
@@ -169,7 +145,7 @@ export const FourchettasOrder = () => {
     event_id: id,
   };
 
-  if (error) {
+  if (isError) {
     return (
       <Page title={t("services.fourchettas.orderTitle")} asChildren>
         <View className="flex flex-col items-center gap-4 h-full justify-center">
@@ -210,7 +186,7 @@ export const FourchettasOrder = () => {
       <Animated.ScrollView ref={scrollViewRef}>
         <View className="flex-col justify-between items-center gap-8 w-full">
           {currentPage === 1 &&
-            (loading ? (
+            (isLoading ? (
               <>
                 <FourchettasItemCardLoading />
                 <FourchettasItemCardLoading />
@@ -327,7 +303,7 @@ export const FourchettasOrder = () => {
             <Button
               label={t("services.fourchettas.next")}
               onPress={nextPage}
-              disabled={currentPage === 4 || loading || noDishSelected}
+              disabled={currentPage === 4 || isLoading || noDishSelected}
               className="w-1/3"
             />
           </View>

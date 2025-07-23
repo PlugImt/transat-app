@@ -325,7 +325,7 @@ export const FourchettasOrder = () => {
               variant="secondary"
             />
             <Button
-              label="Suivant"
+              label={t("services.fourchettas.next")}
               onPress={nextPage}
               disabled={currentPage === 4 || loading || noDishSelected}
               className="w-1/3"

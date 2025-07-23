@@ -31,10 +31,6 @@ function CounterElement({
   const [lastNumber, setLastNumber] = useState(displayed_number);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  function addZeroIfNeeded(num: number): string {
-    return num < 10 ? `0${num}` : `${num}`;
-  }
-
   useEffect(() => {
     if (displayed_number !== lastNumber) {
       setIsAnimating(true);
@@ -74,7 +70,7 @@ function CounterElement({
         >
           <View className="flex-row items-center w-full h-full justify-center">
             <Text variant={variant} color="primary">
-              {addZeroIfNeeded(lastNumber)}
+              {lastNumber.toString().padStart(2, "0")}
             </Text>
           </View>
         </MotiView>
@@ -92,7 +88,7 @@ function CounterElement({
         >
           <View className="flex-row items-center">
             <Text variant={variant} color="primary">
-              {addZeroIfNeeded(displayed_number)}
+              {lastNumber.toString().padStart(2, "0")}
             </Text>
           </View>
         </MotiView>

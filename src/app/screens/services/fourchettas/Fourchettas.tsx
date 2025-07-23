@@ -9,17 +9,23 @@ import {
 } from "./components/FourchettasEventCard";
 import { useEventsUpcomingPhone } from "@/hooks/useFourchettas";
 import { useUser } from "@/hooks/account/useUser";
-import type { AppStackParamList } from "@/types";
-import type { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
+import { CompositeNavigationProp } from "@react-navigation/native";
+
 import { phoneWithoutSpaces } from "./utils/common";
+import { Button } from "@/components/common/Button";
+import type { AppStackParamList, BottomTabParamList } from "@/types";
+import type { StackNavigationProp } from "@react-navigation/stack";
+import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 
-type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
-
+type NavigationProp = CompositeNavigationProp<
+  StackNavigationProp<AppStackParamList>,
+  BottomTabNavigationProp<BottomTabParamList>
+>;
 export const Fourchettas = () => {
   const { data: user } = useUser();
   const { t } = useTranslation();
-  const navigation = useNavigation<AppScreenNavigationProp>();
+  const navigation = useNavigation<NavigationProp>();
 
   const {
     data: events = [],
@@ -27,10 +33,31 @@ export const Fourchettas = () => {
     isError,
   } = useEventsUpcomingPhone(phoneWithoutSpaces(user?.phone_number ?? ""));
 
-  if (!user?.phone_number) {
+  if (!user?.phone_number || user?.phone_number === "") {
     return (
-      <Page title={t("services.fourchettas.title")}>
-        <Text>{t("services.fourchettas.loginRequired")}</Text>
+      <Page title={t("services.fourchettas.title")} className="h-full">
+        <View className="flex flex-col items-center gap-4 h-full justify-center">
+          <Image
+            source={require("@/assets/images/services/fourchettas_dead.png")}
+            style={{ width: 200, height: 200 }}
+          />
+          <Text className="text-center w-3/4">
+            {t("services.fourchettas.noPhoneNumber")}
+          </Text>
+          <Button
+            className="bg-primary text-white px-4 py-2 rounded"
+            onPress={() => {
+              // Je n'ai pas réussi à trouver comment faire pour que le type soit reconnu
+              // Mais ça marche :)
+              // A l'aide !
+              // @ts-ignore
+              navigation.navigate("AccountScreen", {
+                screen: "EditProfile",
+              });
+            }}
+            label={t("services.fourchettas.addPhoneNumberButton")}
+          />
+        </View>{" "}
       </Page>
     );
   }

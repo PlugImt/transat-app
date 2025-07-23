@@ -418,7 +418,9 @@
       "hurryUp": "Vite !",
       "tooLate": "Trop tard",
       "next": "Suivant",
-      "previous": "Précédent"
+      "previous": "Précédent",
+      "noPhoneNumber": "Il faut avoir rentré son numéro de télephone dans Transat pour pouvoir commander chez Fourchettas ",
+      "addPhoneNumberButton": "Ajouter un numéro"
     },
     "openingHours": "Horaires d'ouverture",
     "location": "Emplacement",

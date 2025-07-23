@@ -147,7 +147,7 @@ export const FourchettasOrder = () => {
 
   if (isError) {
     return (
-      <Page title={t("services.fourchettas.orderTitle")} asChildren>
+      <Page title={t("services.fourchettas.orderTitle")}>
         <View className="flex flex-col items-center gap-4 h-full justify-center">
           <Image
             source={require("@/assets/images/services/fourchettas_dead.png")}
@@ -163,7 +163,7 @@ export const FourchettasOrder = () => {
 
   if (success) {
     return (
-      <Page title={t("services.fourchettas.orderTitle")} asChildren>
+      <Page title={t("services.fourchettas.orderTitle")}>
         <View className="flex-col justify-center items-center h-full gap-8 w-full">
           <Image
             source={require("@/assets/images/services/fourchettas.png")}

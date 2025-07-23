@@ -14,7 +14,6 @@ function Counter({ date }: CounterProps) {
   const [timediff, setTimediff] = useState(
     date.getTime() - currentDate.getTime(),
   );
-
   useEffect(() => {
     const interval = setInterval(() => {
       setTimediff((prev) => {
@@ -31,7 +30,9 @@ function Counter({ date }: CounterProps) {
 
   const seconds = Math.floor((timediff / 1000) % 60);
   const minutes = Math.floor((timediff / (1000 * 60)) % 60);
-  const hours = Math.floor((timediff / (1000 * 60 * 60)) % 24) - 2;
+  const hours =
+    Math.floor((timediff / (1000 * 60 * 60)) % 24) +
+    currentDate.getTimezoneOffset() / 60;
   const days = Math.floor(timediff / (1000 * 60 * 60 * 24));
 
   return (

@@ -18,7 +18,7 @@ import { useLaundryNotifications, useLaundryTimer } from "@/hooks/laundry";
 interface LaundryProps {
   number: string;
   type: string;
-  timeLeft: number;
+  initialTimeLeft: number;
   icon: "WASHING MACHINE" | "DRYER";
 }
 
@@ -33,12 +33,12 @@ const getIcon = (icon: "WASHING MACHINE" | "DRYER", color: string) => {
 
 const MINUTES_BEFORE_NOTIFICATION = 5;
 
-const LaundryCard = ({ number, type, timeLeft, icon }: LaundryProps) => {
+const LaundryCard = ({ number, type, initialTimeLeft, icon }: LaundryProps) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
 
   const { timeRemaining, progressPercentage, getMachineStatus } =
-    useLaundryTimer(timeLeft, icon);
+    useLaundryTimer(initialTimeLeft, icon);
 
   const {
     isNotificationSet,
@@ -48,7 +48,7 @@ const LaundryCard = ({ number, type, timeLeft, icon }: LaundryProps) => {
   } = useLaundryNotifications(number);
 
   const shouldDisableButton =
-    timeLeft === 0 || shouldDisableNotificationButton(timeRemaining);
+    initialTimeLeft === 0 || shouldDisableNotificationButton(timeRemaining);
 
   const handleSetNotification = useCallback(async () => {
     await scheduleNotification(
@@ -75,7 +75,7 @@ const LaundryCard = ({ number, type, timeLeft, icon }: LaundryProps) => {
 
   return (
     <Card className="overflow-hidden">
-      {timeLeft > 0 && (
+      {initialTimeLeft > 0 && (
         <View
           className="absolute left-0 top-0 h-[200%]"
           style={{
@@ -103,7 +103,7 @@ const LaundryCard = ({ number, type, timeLeft, icon }: LaundryProps) => {
 
         <Badge
           label={getMachineStatus(timeRemaining)}
-          variant={timeLeft === 0 ? "secondary" : "default"}
+          variant={initialTimeLeft === 0 ? "secondary" : "default"}
         />
 
         {!shouldDisableButton && (

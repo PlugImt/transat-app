@@ -20,7 +20,7 @@ export const LaundryList = ({ title, items, icon }: LaundryProps) => {
           key={item.number}
           number={item.number.toString()}
           type={title}
-          timeLeft={item.time_left}
+          initialTimeLeft={item.time_left}
           icon={icon}
         />
       ))}

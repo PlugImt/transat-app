@@ -6,10 +6,10 @@ const DRYER_DURATION = 40 * 60;
 const DRYER_DOUBLE_DURATION = 80 * 60;
 
 export function useLaundryTimer(
-  timeLeft: number,
+  initialTimeLeft: number,
   icon: "WASHING MACHINE" | "DRYER",
 ) {
-  const [timeRemaining, setTimeRemaining] = useState<number>(timeLeft);
+  const [timeRemaining, setTimeRemaining] = useState<number>(initialTimeLeft);
   const [progressPercentage, setProgressPercentage] = useState<number>(0);
 
   const formatTime = useCallback((seconds: number): string => {
@@ -27,16 +27,16 @@ export function useLaundryTimer(
   );
 
   useEffect(() => {
-    if (timeRemaining > 0 && timeLeft > 0) {
+    if (timeRemaining > 0 && initialTimeLeft > 0) {
       const timer = setInterval(() => {
         setTimeRemaining((prev) => prev - 1);
       }, 1000);
       return () => clearInterval(timer);
     }
-  }, [timeLeft, timeRemaining]);
+  }, [initialTimeLeft, timeRemaining]);
 
   useEffect(() => {
-    if (timeLeft === 0) {
+    if (initialTimeLeft === 0) {
       setProgressPercentage(0);
       return;
     }
@@ -55,7 +55,7 @@ export function useLaundryTimer(
       100,
     );
     setProgressPercentage(progress);
-  }, [timeRemaining, timeLeft, icon]);
+  }, [timeRemaining, initialTimeLeft, icon]);
 
   return {
     timeRemaining,

@@ -9,6 +9,16 @@ import { AvatarSkeleton, TextSkeleton } from "@/components/Skeleton";
 import type { Review, User } from "@/dto";
 import { getTimeAgo } from "@/utils";
 
+const mapReviewToUser = (review: Review): User => {
+  return {
+    first_name: review.first_name,
+    last_name: review.last_name,
+    profile_picture: review.profile_picture ?? undefined,
+    phone_number: "",
+    email: "",
+  };
+};
+
 interface ReviewItemProps {
   review: Review;
 }
@@ -20,7 +30,7 @@ export const ReviewItem = ({ review }: ReviewItemProps) => {
   return (
     <Card>
       <View className="flex-row gap-2">
-        <Avatar user={review as unknown as User} size={56} />
+        <Avatar user={mapReviewToUser(review)} size={56} />
 
         <View className="flex-1">
           <View className="flex-row items-center justify-between gap-4">

@@ -231,9 +231,8 @@
     "requestCodeCooldown": "Espere {{seconds}} segundos antes de solicitar un nuevo código"
   },
   "welcome": {
-    "subtitle": "Por los Atlantes, para los Atlantes 🐙",
-    "login": "Iniciar sesión",
-    "register": "Registro",
+    "subtitle": "Lo indispensable del campus en el mismo lugar",
+    "signin": "Iniciar sesión",
     "signup": "Registro"
   },
   "services": {

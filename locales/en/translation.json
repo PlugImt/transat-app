@@ -232,10 +232,9 @@
     }
   },
   "welcome": {
-    "subtitle": "By the Atlantes, for the Atlantes 🐙",
-    "login": "Login",
-    "signup": "Sign up",
-    "register": "Register"
+    "subtitle": "The essential of the campus in the same place",
+    "signin": "Login",
+    "signup": "Sign up"
   },
   "services": {
     "title": "Services",

@@ -88,7 +88,7 @@ export const FourchettasEventCard = ({ event, onPress }: CardProps) => {
             style={{ backgroundColor: theme.warning }}
             color="warningText"
           >
-            Trop Tard !
+            {t("services.fourchettas.tooLate")}
           </Text>
         )}
         {timediff <= 1000 * 60 * 60 * 5 && timediff > 0 && (

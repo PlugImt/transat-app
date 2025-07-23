@@ -27,6 +27,7 @@ import { HomeworkDetails } from "@/app/screens/services/homework/components/Home
 import { RestaurantReviews } from "@/app/screens/services/restaurant/components/Reviews";
 import { Services } from "@/app/screens/services/Services";
 import { useTheme } from "@/contexts/ThemeContext";
+import { screenOptions, tabBarOptions } from "@/navigation/navigationConfig";
 import type { BottomTabParamList } from "@/types";
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
@@ -34,7 +35,7 @@ const Tab = createBottomTabNavigator<BottomTabParamList>();
 // Create stack navigators for each tab
 const HomeStack = createStackNavigator();
 const HomeStackScreen = () => (
-  <HomeStack.Navigator screenOptions={{ headerShown: false }}>
+  <HomeStack.Navigator screenOptions={screenOptions}>
     <HomeStack.Screen name="Home" component={Home} />
     <HomeStack.Screen name="Laundry" component={Laundry} />
     <HomeStack.Screen name="Restaurant" component={Restaurant} />
@@ -48,7 +49,7 @@ const HomeStackScreen = () => (
 
 const ServicesStack = createStackNavigator();
 const ServicesStackScreen = () => (
-  <ServicesStack.Navigator screenOptions={{ headerShown: false }}>
+  <ServicesStack.Navigator screenOptions={screenOptions}>
     <ServicesStack.Screen name="Services" component={Services} />
     <ServicesStack.Screen name="Laundry" component={Laundry} />
     <ServicesStack.Screen name="Restaurant" component={Restaurant} />
@@ -67,7 +68,7 @@ const ServicesStackScreen = () => (
 
 const GamesStack = createStackNavigator();
 const GamesStackScreen = () => (
-  <GamesStack.Navigator screenOptions={{ headerShown: false }}>
+  <GamesStack.Navigator screenOptions={screenOptions}>
     <GamesStack.Screen name="Games" component={Games} />
   </GamesStack.Navigator>
 );
@@ -75,7 +76,7 @@ const GamesStackScreen = () => (
 const AccountStack = createStackNavigator();
 
 const AccountStackScreen = () => (
-  <AccountStack.Navigator screenOptions={{ headerShown: false }}>
+  <AccountStack.Navigator screenOptions={screenOptions}>
     <AccountStack.Screen name="Account" component={Account} />
     <AccountStack.Screen name="EditProfile" component={EditProfile} />
     <AccountStack.Screen name="Settings" component={Settings} />
@@ -94,21 +95,7 @@ export const BottomTabNavigator = () => {
   const { theme } = useTheme();
 
   return (
-    <Tab.Navigator
-      screenOptions={{
-        headerShown: false,
-        tabBarActiveTintColor: theme.primary,
-        tabBarInactiveTintColor: theme.muted,
-        tabBarShowLabel: true,
-        tabBarStyle: {
-          backgroundColor: theme.card,
-          borderTopWidth: 0,
-          paddingTop: 8,
-          height: 60,
-          paddingBottom: 0,
-        },
-      }}
-    >
+    <Tab.Navigator screenOptions={tabBarOptions(theme)}>
       <Tab.Screen
         name="HomeScreen"
         component={HomeStackScreen}

@@ -83,8 +83,9 @@ const ServicesLoading = () => {
 
   return (
     <Page title={t("services.title")}>
-      {Array.from({ length: 5 }).map((element) => (
-        <LinkCardLoading key={`service-loading-${element}`} />
+      {Array.from({ length: 5 }).map((_, index) => (
+        // biome-ignore lint/suspicious/noArrayIndexKey: static list
+        <LinkCardLoading key={`service-loading-${index}`} />
       ))}
     </Page>
   );

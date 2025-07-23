@@ -22,7 +22,8 @@ function Steps({ steps, currentStep }: StepsProps) {
       {steps.map((step, index) => (
         <View
           key={step.title}
-          className={`flex flex-col items-center w-[${5}rem]`}
+          style={{ width: `${5}rem` }}
+          className="flex flex-col items-center"
         >
           <View
             style={

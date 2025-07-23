@@ -9,6 +9,15 @@ import { laundryNotificationService } from "@/services/notifications/laundryNoti
 import type { AppStackParamList } from "@/types";
 import useAuth from "../account/useAuth";
 
+interface NotificationContent {
+  title?: string | null;
+  body?: string | null;
+  data: {
+    screen?: string;
+    [key: string]: unknown;
+  };
+}
+
 const handleRegistrationError = (errorMessage: string) => {
   if (Platform.OS === "web") {
     console.error(errorMessage);
@@ -65,8 +74,8 @@ export function usePushNotifications() {
 
   const [expoPushToken, setExpoPushToken] = useState("");
   const [notificationOpened, setNotificationOpened] = useState(false);
-  // biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
-  const [notificationData, setNotificationData] = useState<any>(null);
+  const [notificationData, setNotificationData] =
+    useState<NotificationContent | null>(null);
   const navigation = useNavigation<StackNavigationProp<AppStackParamList>>();
 
   useEffect(() => {
@@ -79,9 +88,10 @@ export function usePushNotifications() {
         setExpoPushToken(token ?? "");
         await saveExpoPushToken(token ?? "");
       })
-      // biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
-      .catch((error: any) => {
-        setExpoPushToken(`${error}`);
+      .catch((error: unknown) => {
+        const errorMessage =
+          error instanceof Error ? error.message : String(error);
+        setExpoPushToken(errorMessage);
       });
     return () => {
       clearInterval(cleanupInterval);
@@ -106,7 +116,7 @@ export function usePushNotifications() {
       }
     };
     checkInitialNotification();
-  }, [navigation.navigate]);
+  }, [navigation]);
 
   return { expoPushToken, notificationOpened, notificationData };
 }

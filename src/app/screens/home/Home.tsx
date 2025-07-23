@@ -1,6 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import Animated from "react-native-reanimated";
+import { LaundryWidgetLoading } from "@/app/screens/services/laundry/widget/LaundryWidget";
+import { RestaurantWidgetLoading } from "@/app/screens/services/restaurant/widget/RestaurantWidget";
+import { WeatherSkeleton } from "@/app/screens/services/weather/widget/WeatherWidget";
 import { Button } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
 import { PreferenceCustomizationButton } from "@/components/custom/PreferenceCustomizationModal";
@@ -83,15 +86,6 @@ export default Home;
 
 export const HomeLoading = () => {
   const { t } = useTranslation();
-  const {
-    WeatherSkeleton,
-  } = require("@/app/screens/services/weather/widget/WeatherWidget");
-  const {
-    RestaurantWidgetLoading,
-  } = require("@/app/screens/services/restaurant/widget/RestaurantWidget");
-  const {
-    LaundryWidgetLoading,
-  } = require("@/app/screens/services/laundry/widget/LaundryWidget");
   return (
     <Page className="gap-8" title={t("common.welcome")}>
       <WeatherSkeleton />

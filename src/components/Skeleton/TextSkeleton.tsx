@@ -33,7 +33,7 @@ export const TextSkeleton = ({
 
   return (
     <View
-      className={className + (textCenter ? "flex items-center" : "")}
+      className={`${className || ''}${textCenter ? ' flex items-center' : ''}`}
       style={{ gap, marginVertical: gap }}
     >
       {Array.from({ length: lines }, (_, index) => {

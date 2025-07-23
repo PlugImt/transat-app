@@ -318,7 +318,7 @@ export const FourchettasOrder = () => {
 
           <View className="flex-row justify-center items-center w-full gap-4">
             <Button
-              label="Précédent"
+              label={t("services.fourchettas.previous")}
               onPress={previousPage}
               className="w-1/3"
               disabled={currentPage === 1 || postLoading}

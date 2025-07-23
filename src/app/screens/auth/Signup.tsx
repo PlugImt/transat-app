@@ -112,7 +112,7 @@ export const Signup = () => {
   };
 
   return (
-    <Page title={t("auth.signUp")} disableScroll>
+    <Page title={t("auth.signUp")} disableScroll className="gap-4">
       {signupError ? (
         <View className="bg-red-300 p-3 rounded-md my-4">
           <Text className="text-red-900">{signupError}</Text>

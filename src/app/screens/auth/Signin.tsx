@@ -78,7 +78,7 @@ export const Signin = () => {
   };
 
   return (
-    <Page title={t("auth.signIn")} disableScroll>
+    <Page title={t("auth.signIn")} disableScroll className="gap-4">
       {loginError ? (
         <View className="bg-red-300 p-3 rounded-md my-4">
           <Text className="text-red-900">{loginError}</Text>

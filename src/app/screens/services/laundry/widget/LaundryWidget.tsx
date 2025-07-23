@@ -8,7 +8,7 @@ import CardGroup from "@/components/common/CardGroup";
 import { Text } from "@/components/common/Text";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
-import { useLaundryStats } from "@/hooks/useLaundry";
+import { useLaundryStats } from "@/hooks/laundry/useLaundry";
 import type { AppStackParamList } from "@/types";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;

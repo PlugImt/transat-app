@@ -1,7 +1,10 @@
+import { t } from "i18next";
 import { useEffect, useState } from "react";
+import { useToast } from "@/components/common/Toast";
 import { laundryNotificationService } from "@/services/notifications/laundryNotifications";
 
 export const useLaundryNotifications = (machineNumber: string) => {
+  const { toast } = useToast();
   const [isNotificationSet, setIsNotificationSet] = useState(false);
   const [_forceUpdate, setForceUpdate] = useState(0);
 
@@ -34,6 +37,8 @@ export const useLaundryNotifications = (machineNumber: string) => {
 
     if (success) {
       setForceUpdate((prev) => prev + 1);
+    } else {
+      toast(t("services.laundry.getNotificationError"), "destructive");
     }
 
     return success;

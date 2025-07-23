@@ -3,11 +3,7 @@ import { useIsFetching, useQueryClient } from "@tanstack/react-query";
 import { Mail, Phone, Settings } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/common/Avatar";
+import Avatar from "@/components/common/Avatar";
 import { Button, IconButton } from "@/components/common/Button";
 import Card from "@/components/common/Card";
 import InfoItem from "@/components/common/InfoItem";
@@ -45,7 +41,7 @@ export const Account = () => {
     return <AccountLoading />;
   }
 
-  if (isError && error) {
+  if ((isError && error) || !user) {
     return (
       <ErrorPage
         title={t("common.account")}
@@ -61,7 +57,6 @@ export const Account = () => {
     <Page
       refreshing={isUserFetching}
       onRefresh={refetch}
-      className="gap-6"
       title={t("common.account")}
       header={
         <IconButton
@@ -72,17 +67,7 @@ export const Account = () => {
       }
     >
       <View className="items-center gap-2">
-        <Avatar className="w-32 h-32">
-          <AvatarImage
-            source={{
-              uri: user?.profile_picture,
-            }}
-          />
-          <AvatarFallback>
-            {user?.first_name?.charAt(0)}
-            {user?.last_name?.charAt(0)}
-          </AvatarFallback>
-        </Avatar>
+        <Avatar user={user} size={128} />
 
         <View className="gap-1 justify-center items-center">
           <Text variant="h2">

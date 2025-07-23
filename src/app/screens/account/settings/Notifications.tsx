@@ -28,7 +28,6 @@ export const Notifications = () => {
 
   return (
     <Page
-      className="gap-6"
       refreshing={isPending}
       onRefresh={onRefresh}
       title={t("settings.notifications.notifications")}

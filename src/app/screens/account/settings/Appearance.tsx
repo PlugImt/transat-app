@@ -45,10 +45,7 @@ export const Appearance = () => {
   };
 
   return (
-    <Page
-      title={t("settings.appearance.title", "Appearance")}
-      className="gap-6"
-    >
+    <Page title={t("settings.appearance.title", "Appearance")}>
       <SettingCategory title={t("settings.appearance.theme", "Theme")}>
         {themeOptions.map((option) => (
           <TouchableOpacity

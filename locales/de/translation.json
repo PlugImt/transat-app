@@ -85,7 +85,7 @@
       "notifications": "Benachrichtigungen",
       "fetchError": "Benachrichtigungseinstellungen konnten nicht abgerufen werden",
       "updateError": "Benachrichtigungseinstellungen konnten nicht aktualisiert werden",
-      "setNotification": "Benachrichtigung einstellen",
+      "setNotification": "Einstellen",
       "toggleRestaurant": "Lassen Sie sich benachrichtigen, wenn das tägliche Menü veröffentlicht wird.",
       "toggleTraq": "Lassen Sie sich benachrichtigen, wenn ein neuer Artikel bei Traq' verfügbar ist."
     },

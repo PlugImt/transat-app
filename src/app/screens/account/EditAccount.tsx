@@ -6,11 +6,7 @@ import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Keyboard, TouchableOpacity, View } from "react-native";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/common/Avatar";
+import Avatar from "@/components/common/Avatar";
 import { Button, IconButton } from "@/components/common/Button";
 import Dropdown, { DropdownLoading } from "@/components/common/Dropdown";
 import Input, { InputLoading } from "@/components/common/Input";
@@ -130,7 +126,6 @@ export const EditProfile = () => {
 
   return (
     <Page
-      className="gap-6"
       refreshing={isPending}
       onRefresh={refetch}
       title={t("account.editProfile")}
@@ -140,22 +135,12 @@ export const EditProfile = () => {
           className="relative"
           onPress={handleUpdateProfilePicture}
         >
-          <Avatar className="w-32 h-32">
-            <AvatarImage
-              source={{
-                uri: user.profile_picture,
-              }}
-              loading={isUpdatingProfilePicture}
-            />
-            <AvatarFallback>
-              {user.first_name.charAt(0)}
-              {user.last_name.charAt(0)}
-            </AvatarFallback>
-          </Avatar>
+          <Avatar user={user} size={128} />
           <IconButton
             className="absolute bottom-0 right-0"
             icon={<Edit size={16} />}
             onPress={handleUpdateProfilePicture}
+            isUpdating={isUpdatingProfilePicture}
           />
         </TouchableOpacity>
       </View>
@@ -258,7 +243,7 @@ const EditProfileLoading = () => {
   const navigation = useNavigation();
 
   return (
-    <Page title={t("account.editProfile")} className="gap-8">
+    <Page title={t("account.editProfile")}>
       <View className="flex-row items-center justify-between m-4">
         <Text variant="h1">{t("account.editProfile")}</Text>
         <Button

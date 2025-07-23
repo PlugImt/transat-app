@@ -7,13 +7,13 @@ import { useTheme } from "@/contexts/ThemeContext";
 
 import { Text } from "@/components/common/Text";
 import type { Item } from "@/dto";
-interface ReciepeProps {
+interface RecipeProps {
   dish: Item | null;
   side: Item;
   drink: Item;
 }
 
-const RecipeOrder = ({ dish, side, drink }: ReciepeProps) => {
+const RecipeOrder = ({ dish, side, drink }: RecipeProps) => {
   const { data: user } = useUser();
   const { t } = useTranslation();
   const { theme } = useTheme();

@@ -8,7 +8,7 @@ import LinkCard, { LinkCardLoading } from "@/components/custom/LinkCard";
 import { PreferenceCustomizationButton } from "@/components/custom/PreferenceCustomizationModal";
 import { Empty } from "@/components/page/Empty";
 import { Page } from "@/components/page/Page";
-import { useAnimatedHeader } from "@/hooks/useAnimatedHeader";
+import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
 import { useServicePreferences } from "@/hooks/usePreferences";
 import type { Preference } from "@/services/storage/widgetPreferences";
 import type { AppStackParamList } from "@/types";

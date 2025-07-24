@@ -124,6 +124,13 @@ Merci à Sentry pour leur offre gratuite !
 </table>
 <!-- readme: collaborators,contributors -end -->
 
+
+## 📈 Stats
+
+
+![Alt](https://repobeats.axiom.co/api/embed/32f1e5d25406711ea3e74a046c5a7f4b01380b94.svg "Repobeats analytics image")
+
+
 ## Licence
 
 [MIT](LICENSE)

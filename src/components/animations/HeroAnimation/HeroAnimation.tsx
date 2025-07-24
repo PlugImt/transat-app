@@ -12,11 +12,9 @@ interface HeroAnimationProps {
   className?: string;
 }
 
-// Shared animation config function
-type Position = { top: number; left: number };
 const getAnimationConfig = (
   containerLayout: { width: number; height: number },
-  position: Position,
+  position: { top: number; left: number },
   index: number,
   baseDelay = 200,
 ) => ({
@@ -55,9 +53,9 @@ export const HeroAnimation = ({ className }: HeroAnimationProps) => {
       )}
       onLayout={(e) => setContainerLayout(e.nativeEvent.layout)}
     >
-      <Image source={Logo} className="w-[135px] h-[135px] z-10" />
+      <Image source={Logo} className="w-[135px] h-[135px] z-20" />
       {containerLayout &&
-        avatars.map(({ user, position }, index) => {
+        avatars.map(({ image, size, position }, index) => {
           const anim = getAnimationConfig(
             containerLayout,
             position,
@@ -65,13 +63,13 @@ export const HeroAnimation = ({ className }: HeroAnimationProps) => {
           );
           return (
             <MotiView
-              key={user.email}
+              key={`${position.top}-${position.left}`}
               from={anim.from}
               animate={anim.animate}
               transition={anim.transition}
-              className="absolute"
+              className="absolute z-10"
             >
-              <HeroAvatar user={user} index={index} />
+              <HeroAvatar image={image} size={size} index={index} />
             </MotiView>
           );
         })}

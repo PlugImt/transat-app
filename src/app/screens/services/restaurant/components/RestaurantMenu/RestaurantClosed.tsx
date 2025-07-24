@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Image } from "react-native";
+import Image from "@/components/common/Image";
 import { Empty } from "@/components/page/Empty";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useMenuRestaurant } from "@/hooks/useMenuRestaurant";
@@ -39,7 +39,7 @@ export const RestaurantClosed = () => {
       icon={
         <Image
           source={require("@/assets/images/services/restaurant.png")}
-          className="w-32 h-32"
+          size={100}
           style={{ tintColor: theme.muted }}
         />
       }

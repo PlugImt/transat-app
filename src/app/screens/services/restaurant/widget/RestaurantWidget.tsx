@@ -4,9 +4,10 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { Dimensions, Image, TouchableOpacity, View } from "react-native";
+import { Dimensions, TouchableOpacity, View } from "react-native";
 import Card from "@/components/common/Card";
 import CardGroup from "@/components/common/CardGroup";
+import Image from "@/components/common/Image";
 import { Text } from "@/components/common/Text";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -79,7 +80,7 @@ export const RestaurantWidget = () => {
         <Card className="flex flex-row gap-4 items-center">
           <Image
             source={require("@/assets/images/services/restaurant.png")}
-            className="w-24 h-24"
+            size={80}
             style={{ tintColor: theme.muted }}
           />
           <View style={{ maxWidth: Dimensions.get("window").width - 200 }}>

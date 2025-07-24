@@ -1,96 +1,69 @@
-import type { User } from "@/dto";
+import Dimitri from "@/assets/images/avatars/dimitri.jpeg";
+import Ninon from "@/assets/images/avatars/ninon.jpeg";
 
 type HeroAvatarType = {
-  user: User;
+  image: string;
   position: {
     top: number;
     left: number;
   };
+  size?: number;
 };
 
-export const useHeroAvatars = (): HeroAvatarType[] => [
+const avatars: HeroAvatarType[] = [
   {
-    user: {
-      first_name: "John",
-      last_name: "Doe",
-      phone_number: "1234567890",
-      email: "john.doe6@example.com",
-      graduation_year: 2025,
-      profile_picture: "https://picsum.photos/32",
-    },
+    image: Dimitri,
     position: {
       top: 55,
       left: 52,
     },
   },
   {
-    user: {
-      first_name: "Jane",
-      last_name: "Doe",
-      phone_number: "1234567890",
-      email: "john.doe5@example.com",
-      graduation_year: 2025,
-      profile_picture: "https://picsum.photos/32",
-    },
+    image: Ninon,
     position: {
       top: 64,
       left: 73,
     },
+    size: 40,
   },
   {
-    user: {
-      first_name: "John",
-      last_name: "Doe",
-      phone_number: "1234567890",
-      email: "john.doe4@example.com",
-      graduation_year: 2025,
-      profile_picture: "https://picsum.photos/32",
-    },
+    image: Dimitri,
     position: {
       top: 147,
-      left: 65,
+      left: 60,
     },
+    size: 48,
   },
   {
-    user: {
-      first_name: "Jane",
-      last_name: "Doe",
-      phone_number: "1234567890",
-      email: "john.do3@example.com",
-      graduation_year: 2025,
-      profile_picture: "https://picsum.photos/32",
-    },
+    image: Ninon,
     position: {
       top: 69,
       left: 148,
     },
+    size: 26,
   },
   {
-    user: {
-      first_name: "John",
-      last_name: "Doe",
-      phone_number: "1234567890",
-      email: "john.doe2@example.com",
-      graduation_year: 2025,
-      profile_picture: "https://picsum.photos/32",
-    },
+    image: Dimitri,
     position: {
       top: -14,
       left: 243,
     },
+    size: 48,
   },
   {
-    user: {
-      first_name: "Jane",
-      last_name: "Doe",
-      phone_number: "1234567890",
-      email: "john.doe1@example.com",
-      graduation_year: 2025,
-      profile_picture: "https://picsum.photos/32",
-    },
+    image: Ninon,
     position: {
       top: 90,
-      left: 239,
+      left: 296,
     },
+    size: 38,
   },
 ];
+
+export const useHeroAvatars = (): HeroAvatarType[] =>
+  avatars.slice().sort((a, b) => {
+    if (a.position.top !== b.position.top) {
+      return b.position.top - a.position.top; // top décroissant (du plus bas au plus haut)
+    }
+    return a.position.left - b.position.left; // left croissant (du plus à gauche au plus à droite)
+  });

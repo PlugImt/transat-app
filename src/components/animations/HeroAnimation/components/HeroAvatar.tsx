@@ -1,21 +1,25 @@
 import { MotiView } from "moti";
-import Avatar from "@/components/common/Avatar";
+import Image from "@/components/common/Image";
 import { useTheme } from "@/contexts/ThemeContext";
-import type { User } from "@/dto";
 import { useFloatAnimation, useHeroAvatars } from "../hooks";
 
 interface HeroAvatarProps {
-  user: User;
+  image: string;
+  size?: number;
   index?: number;
 }
 
-export const HeroAvatar = ({ user, index = 0 }: HeroAvatarProps) => {
+export const HeroAvatar = ({
+  image,
+  size = 32,
+  index = 0,
+}: HeroAvatarProps) => {
   const { theme } = useTheme();
   const avatars = useHeroAvatars();
 
   const amplitude = 2;
-  const baseDuration = 4000;
-  const duration = baseDuration + (index % 4) * 400; // 4s à 5s
+  const baseDuration = 6000;
+  const duration = baseDuration + (index % 4) * 400; // 6s à 7s
   const direction = index % 2 === 0 ? 1 : -1;
   const phase = (index * Math.PI * 2) / avatars.length;
   const animatedStyle = useFloatAnimation(
@@ -26,10 +30,10 @@ export const HeroAvatar = ({ user, index = 0 }: HeroAvatarProps) => {
   );
   return (
     <MotiView style={animatedStyle}>
-      <Avatar
-        size={32}
-        user={user}
-        className="border"
+      <Image
+        source={image}
+        size={size}
+        className="rounded-full border"
         style={{ borderColor: theme.border }}
       />
     </MotiView>

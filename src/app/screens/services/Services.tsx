@@ -3,6 +3,7 @@ import type { StackNavigationProp } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { Image } from "react-native";
 import Animated from "react-native-reanimated";
+// import Image from "@/components/common/Image";
 import { Button } from "@/components/common/Button";
 import LinkCard, { LinkCardLoading } from "@/components/custom/LinkCard";
 import { PreferenceCustomizationButton } from "@/components/custom/PreferenceCustomizationModal";

@@ -1,5 +1,6 @@
 import { Image, View } from "react-native";
 import Logo from "@/assets/images/icon.png";
+import { cn } from "@/utils";
 
 interface HeroAnimationProps {
   className?: string;
@@ -7,7 +8,7 @@ interface HeroAnimationProps {
 
 export const HeroAnimation = ({ className }: HeroAnimationProps) => {
   return (
-    <View className={className}>
+    <View className={cn("relative", className)}>
       <Image source={Logo} className="w-[135px] h-[135px]" />
     </View>
   );

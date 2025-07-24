@@ -15,7 +15,7 @@ import useAuth from "@/hooks/account/useAuth";
 
 export const Signin = () => {
   const navigation = useNavigation();
-  const { login, isLoading } = useAuth();
+  const { login, isPending } = useAuth();
   const { t } = useTranslation();
   const { toast } = useToast();
 
@@ -55,7 +55,7 @@ export const Signin = () => {
   const password = watch("password");
 
   const isButtonDisabled =
-    isLoading ||
+    isPending ||
     !email ||
     !password ||
     password.length < 6 ||
@@ -121,11 +121,11 @@ export const Signin = () => {
 
         <View className="flex flex-col gap-2">
           <Button
-            label={isLoading ? t("auth.signingIn") : t("common.signIn")}
+            label={isPending ? t("auth.signingIn") : t("common.signIn")}
             onPress={handleSubmit(handleLogin)}
             disabled={isButtonDisabled}
             className={isButtonDisabled ? "opacity-50" : ""}
-            isUpdating={isLoading}
+            isUpdating={isPending}
           />
 
           {loginError && (
@@ -137,14 +137,14 @@ export const Signin = () => {
                   params: { email: watch("email") },
                 })
               }
-              disabled={isLoading}
+              disabled={isPending}
               variant="link"
             />
           )}
           <Button
             label={t("auth.noAccount")}
             onPress={() => navigation.navigate("Auth", { screen: "Signup" })}
-            disabled={isLoading}
+            disabled={isPending}
             variant="link"
           />
         </View>

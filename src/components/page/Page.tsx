@@ -3,7 +3,7 @@ import { Dimensions, RefreshControl, View } from "react-native";
 import ConfettiCannon from "react-native-confetti-cannon";
 import Animated from "react-native-reanimated";
 import { useTheme } from "@/contexts/ThemeContext";
-import { useAnimatedHeader } from "@/hooks/useAnimatedHeader";
+import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
 import { cn } from "@/utils";
 import { HEADER_HEIGHT, Header } from "./Header";
 

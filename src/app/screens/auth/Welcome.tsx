@@ -3,7 +3,7 @@ import type { StackNavigationProp } from "@react-navigation/stack";
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
-import { HeroAnimation } from "@/components/animations/HeroAnimation";
+import { HeroAnimation } from "@/components/animations/HeroAnimation/HeroAnimation";
 import { Button } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
 import { Page } from "@/components/page/Page";
@@ -51,7 +51,7 @@ export const Welcome = () => {
       className="gap-2 items-center flex-1"
       footer={buttonsFooter}
     >
-      <HeroAnimation className="mt-40" />
+      <HeroAnimation />
       <View className="items-center justify-center gap-2">
         <Text variant="h1" className="text-center">
           Transat

@@ -22,9 +22,11 @@ import {
   Restaurant,
   Timetable,
   Traq,
+  Fourchettas,
 } from "@/app/screens/services";
 import { HomeworkDetails } from "@/app/screens/services/homework/components/HomeworkDetails";
 import { RestaurantReviews } from "@/app/screens/services/restaurant/components/Reviews";
+import { FourchettasOrder } from "@/app/screens/services/fourchettas/components/order/FourchettasOrder";
 import { Services } from "@/app/screens/services/Services";
 import { useTheme } from "@/contexts/ThemeContext";
 import { screenOptions, tabBarOptions } from "@/navigation/navigationConfig";
@@ -63,6 +65,11 @@ const ServicesStackScreen = () => (
     <ServicesStack.Screen name="Clubs" component={Clubs} />
     <ServicesStack.Screen name="Traq" component={Traq} />
     <ServicesStack.Screen name="Olimtpe" component={Olimtpe} />
+    <ServicesStack.Screen name="Fourchettas" component={Fourchettas} />
+    <ServicesStack.Screen
+      name="FourchettasOrder"
+      component={FourchettasOrder}
+    />
   </ServicesStack.Navigator>
 );
 

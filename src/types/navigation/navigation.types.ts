@@ -1,6 +1,6 @@
 import type { NavigatorScreenParams } from "@react-navigation/core";
 import type { StackNavigationProp } from "@react-navigation/stack";
-import type { Homework } from "@/dto";
+import type { Homework, Order } from "@/dto";
 
 export type BottomTabParamList = {
   AccountScreen: undefined;
@@ -35,6 +35,8 @@ export type AppStackParamList = {
   Traq: undefined;
   Olimtpe: undefined;
   Account: undefined;
+  Fourchettas: undefined;
+  FourchettasOrder: { id: number, orderUser?: Order };
 };
 
 type AccountStackParamList = {

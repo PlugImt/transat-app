@@ -7,14 +7,16 @@ export type WidgetType =
   | "restaurant"
   | "timetable"
   | "homework"
-  | "laundry";
+  | "laundry"
+  | "fourchettas";
 export type ServiceType =
   | "laundry"
   | "restaurant"
   | "timetable"
   | "homework"
   | "traq"
-  | "olimtpe";
+  | "olimtpe"
+  | "fourchettas";
 
 export type PreferenceId = WidgetType | ServiceType;
 
@@ -80,6 +82,15 @@ const getDefaultServices = (
       image: require("@/assets/images/services/traq.png"),
       screen: "Traq",
       description: t("services.traq.description"),
+    },
+    {
+      id: "fourchettas",
+      name: t("services.fourchettas.title"),
+      enabled: true,
+      order: 4,
+      image: require("@/assets/images/services/fourchettas.png"),
+      screen: "Fourchettas",
+      description: t("services.fourchettas.description"),
     },
   ];
 };

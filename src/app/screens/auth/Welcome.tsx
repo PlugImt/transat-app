@@ -1,6 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
-import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { HeroAnimation } from "@/components/animations/HeroAnimation/HeroAnimation";
@@ -15,16 +14,8 @@ export const Welcome = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<LoginScreenNavigationProp>();
 
-  const triggerConfettiRef = useRef<(() => void) | null>(null);
-
   const handleNavigation = (route: "Signin" | "Signup") => {
     navigation.navigate(route);
-  };
-
-  const handleLogoPress = () => {
-    if (triggerConfettiRef.current) {
-      triggerConfettiRef.current();
-    }
   };
 
   const buttonsFooter = (
@@ -44,10 +35,6 @@ export const Welcome = () => {
   return (
     <Page
       disableScroll
-      onConfettiTrigger={(trigger) => {
-        triggerConfettiRef.current = trigger;
-      }}
-      confetti={true}
       className="gap-2 items-center flex-1"
       footer={buttonsFooter}
     >

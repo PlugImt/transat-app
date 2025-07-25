@@ -232,9 +232,8 @@
     "requestCodeCooldown": "Bitte warten Sie {{seconds}} Sekunden, bevor Sie einen neuen Code anfordern"
   },
   "welcome": {
-    "subtitle": "NEEDS TRANSLATION: By the Atlantes, for the Atlantes 🐙",
-    "login": "Anmelden",
-    "register": "Registrieren",
+    "subtitle": "Das wichtigste des Campus im selben Ort",
+    "signin": "Anmelden",
     "signup": "Registrieren"
   },
   "services": {

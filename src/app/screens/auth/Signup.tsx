@@ -8,7 +8,6 @@ import { z } from "zod";
 import { VerificationCodeModal } from "@/components/auth/VerificationCode";
 import { Button } from "@/components/common/Button";
 import Input from "@/components/common/Input";
-import { useToast } from "@/components/common/Toast";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";
@@ -16,10 +15,9 @@ import i18n from "@/i18n";
 
 export const Signup = () => {
   const navigation = useNavigation();
-  const { register, saveToken, isLoading } = useAuth();
+  const { register, isPending } = useAuth();
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const { toast } = useToast();
 
   const [signupError, setSignupError] = useState<string | null>(null);
   const [verificationModalVisible, setVerificationModalVisible] =
@@ -65,7 +63,7 @@ export const Signup = () => {
   const confirmPassword = watch("confirmPassword");
 
   const isButtonDisabled =
-    isLoading ||
+    isPending ||
     !email ||
     !password ||
     !confirmPassword ||
@@ -98,16 +96,6 @@ export const Signup = () => {
       } else {
         setSignupError(t("auth.errors.signupFailed"));
       }
-    }
-  };
-
-  const _handleVerificationSuccess = async (token: string) => {
-    try {
-      await saveToken(token);
-      setVerificationModalVisible(false);
-      toast(t("common.verificationSuccess"), "success");
-    } catch (_err) {
-      setSignupError(t("auth.errors.tokenSaveFailed"));
     }
   };
 
@@ -167,16 +155,16 @@ export const Signup = () => {
         />
         <View className="flex flex-col gap-2">
           <Button
-            label={isLoading ? t("auth.signingUp") : t("auth.signUp")}
+            label={isPending ? t("auth.signingUp") : t("auth.signUp")}
             onPress={handleSubmit(handleSignup)}
             disabled={isButtonDisabled}
             className={isButtonDisabled ? "opacity-50" : ""}
-            isUpdating={isLoading}
+            isUpdating={isPending}
           />
           <Button
             label={t("auth.gotAccount")}
             onPress={() => navigation.navigate("Auth", { screen: "Signin" })}
-            disabled={isLoading}
+            disabled={isPending}
             variant="link"
           />
         </View>

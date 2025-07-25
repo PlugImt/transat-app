@@ -1,8 +1,9 @@
 import { BadgeEuro, Beer, CircleX, Clock } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
-import { Image, View } from "react-native";
+import { View } from "react-native";
 import Badge from "@/components/common/Badge";
 import Card from "@/components/common/Card";
+import Image from "@/components/common/Image";
 import { Text } from "@/components/common/Text";
 import { AvatarSkeleton, TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -35,9 +36,10 @@ const TraqCard = ({
   return (
     <Card className="relative items-center">
       <Image
-        source={{ uri: image }}
+        source={image}
         resizeMode="contain"
-        className="w-4/5 h-[100px] rounded-lg"
+        className="w-4/5 rounded-lg"
+        size={100}
       />
 
       <View className="absolute top-8 right-8 items-end gap-2">

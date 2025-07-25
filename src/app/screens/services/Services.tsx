@@ -83,8 +83,8 @@ const ServicesLoading = () => {
 
   return (
     <Page title={t("services.title")}>
-      {Array.from({ length: 5 }).map((element) => (
-        <LinkCardLoading key={`service-loading-${element}`} />
+      {Array.from({ length: 5 }).map((_, index) => (
+        <LinkCardLoading key={`service-loading-${index.toString()}`} />
       ))}
     </Page>
   );

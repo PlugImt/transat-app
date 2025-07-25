@@ -53,6 +53,10 @@ export function Header({ headerShown, title, children }: HeaderProps) {
     };
   });
 
+  if (!title) {
+    return null;
+  }
+
   return (
     <Animated.View
       style={[headerAnimatedStyle, { backgroundColor: theme.overlay }]}

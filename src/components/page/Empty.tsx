@@ -17,7 +17,10 @@ export const Empty = ({ icon, title, description, children }: EmptyProps) => {
   const { t } = useTranslation();
 
   const Icon = isValidElement(icon) ? (
-    cloneElement(icon, { color: theme.text, size: 40 })
+    cloneElement(icon, {
+      color: theme.text,
+      ...(icon.props.size === undefined && { size: 40 }),
+    })
   ) : (
     <Sprout color={theme.text} size={40} />
   );

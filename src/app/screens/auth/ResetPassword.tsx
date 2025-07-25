@@ -19,7 +19,7 @@ type ResetPasswordRouteProp = RouteProp<AuthStackParamList, "ResetPassword">;
 export const ResetPassword = () => {
   const navigation = useNavigation();
   const route = useRoute<ResetPasswordRouteProp>();
-  const { resetPassword, changePassword, isLoading, isVerifying } = useAuth();
+  const { resetPassword, changePassword, isPending, isVerifying } = useAuth();
   const { t } = useTranslation();
   const { toast } = useToast();
 
@@ -72,7 +72,7 @@ export const ResetPassword = () => {
   const confirmPassword = watch("confirmPassword");
 
   const isButtonDisabled =
-    isLoading ||
+    isPending ||
     isVerifying ||
     !email ||
     !email.endsWith("@imt-atlantique.net") ||
@@ -249,7 +249,7 @@ export const ResetPassword = () => {
             {!verificationCodeSent ? (
               <Button
                 label={
-                  isLoading
+                  isPending
                     ? t("auth.resettingPassword")
                     : t("auth.requestVerificationCode")
                 }
@@ -258,19 +258,19 @@ export const ResetPassword = () => {
                 className={
                   isButtonDisabled || !canRequestCode ? "opacity-50" : ""
                 }
-                isUpdating={isLoading}
+                isUpdating={isPending}
               />
             ) : (
               <Button
                 label={
-                  isLoading
+                  isPending
                     ? t("auth.resettingPassword")
                     : t("auth.resetPassword")
                 }
                 onPress={handleSubmit(handleResetPassword)}
                 disabled={isButtonDisabled}
                 className={isButtonDisabled ? "opacity-50" : ""}
-                isUpdating={isLoading}
+                isUpdating={isPending}
               />
             )}
             {!canRequestCode && (

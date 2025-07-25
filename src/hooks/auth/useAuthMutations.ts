@@ -13,7 +13,7 @@ export const useAuthMutations = () => {
 
   const {
     data: user,
-    isLoading: isUserLoading,
+    isPending: isUserLoading,
     refetch: refetchUser,
   } = useQuery({
     queryKey: QUERY_KEYS.auth.user,

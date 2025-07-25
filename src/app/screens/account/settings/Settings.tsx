@@ -93,10 +93,10 @@ export const Settings = () => {
         />
       </SettingCategory>
 
-      <SettingCategory title={t("account.security")}>
+      <SettingCategory title={t("settings.security")}>
         <SettingsItem
           icon={<Shield color={theme.text} size={22} />}
-          title={t("account.changePassword")}
+          title={t("auth.resetPassword.changePassword")}
           onPress={() => navigation.navigate("ChangePassword")}
         />
       </SettingCategory>
@@ -105,7 +105,7 @@ export const Settings = () => {
         <SettingsItem
           icon={<HelpCircle color={theme.text} size={22} />}
           title={t("settings.help.title")}
-          subtitle={t("settings.contactSupport")}
+          subtitle={t("settings.help.subtitle")}
           onPress={() => navigation.navigate("Help")}
         />
         <SettingsItem

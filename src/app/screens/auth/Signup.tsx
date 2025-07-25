@@ -3,13 +3,14 @@ import { useNavigation } from "@react-navigation/native";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Text, type TextInput, View } from "react-native";
+import { type TextInput, View } from "react-native";
 import { z } from "zod";
 import { VerificationCodeModal } from "@/components/auth/VerificationCode";
 import { Button } from "@/components/common/Button";
 import Input from "@/components/common/Input";
+import { Text } from "@/components/common/Text";
+import { useToast } from "@/components/common/Toast";
 import { Page } from "@/components/page/Page";
-import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";
 import i18n from "@/i18n";
 
@@ -17,9 +18,8 @@ export const Signup = () => {
   const navigation = useNavigation();
   const { register, isPending } = useAuth();
   const { t } = useTranslation();
-  const { theme } = useTheme();
+  const { toast } = useToast();
 
-  const [signupError, setSignupError] = useState<string | null>(null);
   const [verificationModalVisible, setVerificationModalVisible] =
     useState(false);
   const [verificationEmail, setVerificationEmail] = useState<string>("");
@@ -76,7 +76,6 @@ export const Signup = () => {
     password: string;
     confirmPassword: string;
   }) => {
-    setSignupError(null);
     try {
       const language = i18n.language ?? "fr";
       const response = await register(data.email, data.password, language);
@@ -92,26 +91,16 @@ export const Signup = () => {
         err instanceof Error &&
         err.message === "You already have an account"
       ) {
-        setSignupError(t("auth.errors.accountExists"));
+        toast(t("auth.errors.accountExists"), "destructive");
       } else {
-        setSignupError(t("auth.errors.signupFailed"));
+        toast(t("auth.errors.signupFailed"), "destructive");
       }
     }
   };
 
   return (
-    <Page title={t("auth.signUp")} disableScroll className="gap-4">
-      {signupError ? (
-        <View className="bg-red-300 p-3 rounded-md my-4">
-          <Text className="text-red-900">{signupError}</Text>
-        </View>
-      ) : (
-        <View className="h-20">
-          <Text style={{ color: theme.muted }} className="mt-2">
-            {t("auth.signUpDescription")}
-          </Text>
-        </View>
-      )}
+    <Page title={t("auth.signUp.title")} disableScroll className="gap-4">
+      <Text color="muted">{t("auth.signUp.description")}</Text>
 
       <View className="flex flex-col gap-10">
         <Input
@@ -155,7 +144,9 @@ export const Signup = () => {
         />
         <View className="flex flex-col gap-2">
           <Button
-            label={isPending ? t("auth.signingUp") : t("auth.signUp")}
+            label={
+              isPending ? t("auth.signUp.pending") : t("auth.signUp.title")
+            }
             onPress={handleSubmit(handleSignup)}
             disabled={isButtonDisabled}
             className={isButtonDisabled ? "opacity-50" : ""}

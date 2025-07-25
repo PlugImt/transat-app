@@ -21,12 +21,12 @@ export const Welcome = () => {
   const buttonsFooter = (
     <View className="gap-2">
       <Button
-        label={t("welcome.signin")}
+        label={t("auth.signIn.title")}
         onPress={() => handleNavigation("Signin")}
       />
       <Button
         variant="secondary"
-        label={t("welcome.signup")}
+        label={t("auth.signUp.title")}
         onPress={() => handleNavigation("Signup")}
       />
     </View>

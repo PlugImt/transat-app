@@ -26,7 +26,7 @@ export const ChangePassword = () => {
       new_password_confirmation: z.string().min(6, t("auth.errors.password")),
     })
     .refine((data) => data.new_password === data.new_password_confirmation, {
-      message: t("account.passwordMismatch"),
+      message: t("auth.errors.confirmPassword"),
       path: ["new_password_confirmation"],
     });
 
@@ -58,7 +58,7 @@ export const ChangePassword = () => {
       {
         onSuccess: () => {
           resetPassword();
-          toast(t("account.passwordChanged"), "success");
+          toast(t("auth.resetPassword.passwordChanged"), "success");
           navigation.goBack();
         },
         onError: (error) => {
@@ -70,9 +70,13 @@ export const ChangePassword = () => {
   };
 
   return (
-    <Page className="gap-8" title={t("account.changePassword")} disableScroll>
+    <Page
+      className="gap-8"
+      title={t("auth.resetPassword.changePassword")}
+      disableScroll
+    >
       <Input
-        label={t("account.currentPassword")}
+        label={t("auth.resetPassword.currentPassword")}
         control={passwordControl}
         name="password"
         textContentType="password"
@@ -81,7 +85,7 @@ export const ChangePassword = () => {
       />
 
       <Input
-        label={t("account.newPassword")}
+        label={t("auth.resetPassword.newPassword")}
         control={passwordControl}
         name="new_password"
         textContentType="newPassword"
@@ -90,7 +94,7 @@ export const ChangePassword = () => {
       />
 
       <Input
-        label={t("account.confirmPassword")}
+        label={t("auth.resetPassword.confirmNewPassword")}
         control={passwordControl}
         name="new_password_confirmation"
         textContentType="newPassword"
@@ -98,7 +102,7 @@ export const ChangePassword = () => {
         secureTextEntry
       />
       <Button
-        label={t("account.changePassword")}
+        label={t("auth.resetPassword.changePassword")}
         onPress={handlePasswordSubmit(handleChangePassword)}
         disabled={isUpdatingPassword || !isPasswordValid}
         isUpdating={isUpdatingPassword}

@@ -128,7 +128,7 @@ export const ResetPassword = () => {
         data.confirmPassword,
       );
       if (response.success) {
-        toast(t("auth.resetPasswordSuccess"), "success");
+        toast(t("auth.resetPassword.resetPasswordSuccess"), "success");
         navigation.goBack();
       } else {
         setResetError(response.error || t("auth.errors.resetPasswordFailed"));
@@ -166,7 +166,7 @@ export const ResetPassword = () => {
   }, [fadeAnim, slideAnim]);
 
   return (
-    <Page title={t("auth.resetPassword")} className="gap-4">
+    <Page title={t("auth.resetPassword.title")} className="gap-4">
       <RNAnimated.View
         style={{
           opacity: fadeAnim,
@@ -181,7 +181,7 @@ export const ResetPassword = () => {
         ) : (
           <View className="h-20">
             <Text color="muted" className="mt-2">
-              {t("auth.resetPasswordDescription")}
+              {t("auth.resetPassword.description")}
             </Text>
           </View>
         )}
@@ -221,7 +221,7 @@ export const ResetPassword = () => {
                 control={control}
                 name="newPassword"
                 textContentType="newPassword"
-                label={t("auth.newPassword")}
+                label={t("auth.resetPassword.newPassword")}
                 labelClasses="h3"
                 secureTextEntry
                 ref={newPasswordRef}
@@ -250,8 +250,8 @@ export const ResetPassword = () => {
               <Button
                 label={
                   isPending
-                    ? t("auth.resettingPassword")
-                    : t("auth.requestVerificationCode")
+                    ? t("auth.resetPassword.resettingPassword")
+                    : t("auth.resetPassword.requestVerificationCode")
                 }
                 onPress={handleRequestCode}
                 disabled={isButtonDisabled || !canRequestCode}
@@ -264,8 +264,8 @@ export const ResetPassword = () => {
               <Button
                 label={
                   isPending
-                    ? t("auth.resettingPassword")
-                    : t("auth.resetPassword")
+                    ? t("auth.resetPassword.resettingPassword")
+                    : t("auth.resetPassword.resetPassword")
                 }
                 onPress={handleSubmit(handleResetPassword)}
                 disabled={isButtonDisabled}

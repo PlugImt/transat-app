@@ -24,15 +24,14 @@ export const Language = () => {
   const { currentLanguageOption, otherLanguages } = useLanguageOptions();
 
   const handleLanguageChange = async (languageCode: string) => {
-    try {
-      updateLanguage(languageCode, {
-        onSuccess: () => {
-          navigation.goBack();
-        },
-      });
-    } catch (_) {
-      toast(t("settings.language.selectLanguageError"), "destructive");
-    }
+    updateLanguage(languageCode, {
+      onSuccess: () => {
+        navigation.goBack();
+      },
+      onError: () => {
+        toast(t("settings.language.selectLanguageError"), "destructive");
+      },
+    });
   };
 
   return (

@@ -70,6 +70,7 @@ const DialogContent = ({
   const { theme } = useTheme();
   const [showTopIndicator, setShowTopIndicator] = useState(false);
   const [showBottomIndicator, setShowBottomIndicator] = useState(false);
+  const [scrollViewHeight, setScrollViewHeight] = useState(0);
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const { contentOffset, layoutMeasurement, contentSize } = event.nativeEvent;
@@ -77,17 +78,22 @@ const DialogContent = ({
     const scrollViewHeight = layoutMeasurement.height;
     const contentHeight = contentSize.height;
 
-    // Show top indicator if scrolled down
-    setShowTopIndicator(scrollY > 10);
+    // Show top indicator if scrolled down more than 5px
+    setShowTopIndicator(scrollY > 5);
 
-    // Show bottom indicator if there's more content below
-    setShowBottomIndicator(scrollY + scrollViewHeight < contentHeight - 10);
+    // Show bottom indicator if there's more content below (with 5px threshold)
+    setShowBottomIndicator(scrollY + scrollViewHeight < contentHeight - 5);
   };
 
   const handleContentSizeChange = (_contentWidth: number, contentHeight: number) => {
-    // Check if content overflows and show bottom indicator initially
-    const scrollViewHeight = 300; // Approximate max height for dialog content
-    setShowBottomIndicator(contentHeight > scrollViewHeight);
+    // Check if content overflows the scroll view
+    if (scrollViewHeight > 0) {
+      setShowBottomIndicator(contentHeight > scrollViewHeight);
+    }
+  };
+
+  const handleScrollViewLayout = (event: { nativeEvent: { layout: { height: number } } }) => {
+    setScrollViewHeight(event.nativeEvent.layout.height);
   };
 
   const handleCancel = () => {
@@ -144,6 +150,7 @@ const DialogContent = ({
                   keyboardShouldPersistTaps="handled"
                   onScroll={handleScroll}
                   onContentSizeChange={handleContentSizeChange}
+                  onLayout={handleScrollViewLayout}
                   scrollEventThrottle={16}
                   style={{ maxHeight: 400 }}
                 >

@@ -8,10 +8,10 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-import { Text } from "@/components/common/Text";
-import ScrollViewWithIndicators from '@/components/common/ScrollViewWithIndicators';
-import { Button } from '@/components/common/Button';
+import { Button } from "@/components/common/Button";
 import Card from "@/components/common/Card";
+import ScrollViewWithIndicators from "@/components/common/ScrollViewWithIndicators";
+import { Text } from "@/components/common/Text";
 
 interface DialogContextType {
   open: boolean;

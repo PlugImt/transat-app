@@ -30,7 +30,6 @@ export const useFloatAnimation = (
   }, [duration, progress]);
 
   const animatedStyle = useAnimatedStyle(() => {
-    // Mouvement circulaire relatif
     const angle = direction * progress.value + phase;
     return {
       transform: [

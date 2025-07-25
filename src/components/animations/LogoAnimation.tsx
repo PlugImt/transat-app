@@ -93,7 +93,7 @@ const LogoAnimation: React.FC<LogoAnimationProps> = ({
     <Pressable onPress={handlePress}>
       <Animated.View style={[styles.container, animatedStyle]}>
         <Animated.Image
-          source={require("@/assets/images/icon.png")}
+          source={require("@/assets/images/icon-bg.png")}
           style={[styles.icon]}
         />
       </Animated.View>

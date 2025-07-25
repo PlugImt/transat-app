@@ -73,6 +73,7 @@ const DialogContent = ({
 }: DialogContentProps) => {
   const { open, setOpen } = useDialog();
   const { theme } = useTheme();
+  const [showTopIndicator, setShowTopIndicator] = useState(false);
   const [showBottomIndicator, setShowBottomIndicator] = useState(false);
   const [scrollViewHeight, setScrollViewHeight] = useState(0);
   const [contentHeight, setContentHeight] = useState(0);
@@ -91,6 +92,7 @@ const DialogContent = ({
     } else {
       // Don't immediately reset - let the exit animation handle it
       setTimeout(() => {
+        setShowTopIndicator(false);
         setShowBottomIndicator(false);
         setScrollViewHeight(0);
         setContentHeight(0);
@@ -103,6 +105,9 @@ const DialogContent = ({
     const scrollY = contentOffset.y;
     const scrollViewHeight = layoutMeasurement.height;
     const contentHeight = contentSize.height;
+
+    // Show top indicator if scrolled down more than 5px
+    setShowTopIndicator(scrollY > 5);
 
     // Show bottom indicator if there's more content below (with 5px threshold)
     setShowBottomIndicator(scrollY + scrollViewHeight < contentHeight - 5);
@@ -192,6 +197,33 @@ const DialogContent = ({
                     <View className={className}>{children}</View>
                   </TouchableWithoutFeedback>
                 </ScrollView>
+
+                {showTopIndicator && (
+                  <MotiView
+                    from={{ opacity: 0 }}
+                    animate={{ opacity: open ? 1 : 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ 
+                      type: "timing", 
+                      duration: 300,
+                      delay: open ? 100 : 0 // Small delay on entrance for smoother appearance
+                    }}
+                  >
+                    <LinearGradient
+                      colors={[theme.card, `${theme.card}00`]}
+                      locations={[0, 1]}
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        height: 20,
+                        zIndex: 10,
+                        pointerEvents: "none",
+                      }}
+                    />
+                  </MotiView>
+                )}
 
                 {showBottomIndicator && (
                   <MotiView

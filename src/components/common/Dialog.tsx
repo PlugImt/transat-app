@@ -1,15 +1,20 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { MotiView } from "moti";
-import React, { cloneElement, createContext, useContext, useState } from "react";
+import React, {
+  cloneElement,
+  createContext,
+  useContext,
+  useState,
+} from "react";
 import {
   KeyboardAvoidingView,
   Modal,
+  type NativeScrollEvent,
+  type NativeSyntheticEvent,
   Platform,
   ScrollView,
   TouchableWithoutFeedback,
   View,
-  type NativeSyntheticEvent,
-  type NativeScrollEvent,
 } from "react-native";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -69,10 +74,9 @@ const DialogContent = ({
   const { open, setOpen } = useDialog();
   const { theme } = useTheme();
   const [showTopIndicator, setShowTopIndicator] = useState(false);
-  const [showBottomIndicator, setShowBottomIndicator] = useState(false);
+  const [showBottomIndicator, setShowBottomIndicator] = useState(true);
   const [scrollViewHeight, setScrollViewHeight] = useState(0);
 
-  // Reset indicators when dialog opens/closes
   React.useEffect(() => {
     if (!open) {
       setShowTopIndicator(false);
@@ -87,21 +91,23 @@ const DialogContent = ({
     const scrollViewHeight = layoutMeasurement.height;
     const contentHeight = contentSize.height;
 
-    // Show top indicator if scrolled down more than 5px
     setShowTopIndicator(scrollY > 5);
 
-    // Show bottom indicator if there's more content below (with 5px threshold)
     setShowBottomIndicator(scrollY + scrollViewHeight < contentHeight - 5);
   };
 
-  const handleContentSizeChange = (_contentWidth: number, contentHeight: number) => {
-    // Check if content overflows the scroll view
+  const handleContentSizeChange = (
+    _contentWidth: number,
+    contentHeight: number,
+  ) => {
     if (scrollViewHeight > 0) {
       setShowBottomIndicator(contentHeight > scrollViewHeight);
     }
   };
 
-  const handleScrollViewLayout = (event: { nativeEvent: { layout: { height: number } } }) => {
+  const handleScrollViewLayout = (event: {
+    nativeEvent: { layout: { height: number } };
+  }) => {
     setScrollViewHeight(event.nativeEvent.layout.height);
   };
 
@@ -155,7 +161,7 @@ const DialogContent = ({
             <Card className="w-full gap-6">
               <Text variant="h2">{title}</Text>
               <View className="relative">
-                <ScrollView 
+                <ScrollView
                   keyboardShouldPersistTaps="handled"
                   onScroll={handleScroll}
                   onContentSizeChange={handleContentSizeChange}
@@ -167,9 +173,26 @@ const DialogContent = ({
                     <View className={className}>{children}</View>
                   </TouchableWithoutFeedback>
                 </ScrollView>
-                
-                {/* Top scroll indicator */}
-                {showTopIndicator && (
+
+                <MotiView
+                  animate={{
+                    opacity: showTopIndicator ? 1 : 0,
+                  }}
+                  transition={{
+                    type: "spring",
+                    damping: 25,
+                    stiffness: 200,
+                  }}
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: 50,
+                    zIndex: 10,
+                    pointerEvents: "none",
+                  }}
+                >
                   <LinearGradient
                     colors={[theme.card, `${theme.card}00`]}
                     locations={[0, 1]}
@@ -178,15 +201,32 @@ const DialogContent = ({
                       top: 0,
                       left: 0,
                       right: 0,
-                      height: 20,
+                      height: 50,
                       zIndex: 10,
                       pointerEvents: "none",
                     }}
                   />
-                )}
-                
-                {/* Bottom scroll indicator */}
-                {showBottomIndicator && (
+                </MotiView>
+
+                <MotiView
+                  animate={{
+                    opacity: showBottomIndicator ? 1 : 0,
+                  }}
+                  transition={{
+                    type: "spring",
+                    damping: 25,
+                    stiffness: 200,
+                  }}
+                  style={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    height: 150,
+                    zIndex: 10,
+                    pointerEvents: "none",
+                  }}
+                >
                   <LinearGradient
                     colors={[`${theme.card}00`, theme.card]}
                     locations={[0, 1]}
@@ -195,12 +235,12 @@ const DialogContent = ({
                       bottom: 0,
                       left: 0,
                       right: 0,
-                      height: 20,
+                      height: 150,
                       zIndex: 10,
                       pointerEvents: "none",
                     }}
                   />
-                )}
+                </MotiView>
               </View>
               {(cancelLabel || confirmLabel) && (
                 <View className="flex-row items-center gap-2">

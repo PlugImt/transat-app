@@ -73,30 +73,16 @@ const DialogContent = ({
 }: DialogContentProps) => {
   const { open, setOpen } = useDialog();
   const { theme } = useTheme();
-  const [showBottomIndicator, setShowBottomIndicator] = useState(false);
+  const [showBottomIndicator, setShowBottomIndicator] = useState(true);
   const [scrollViewHeight, setScrollViewHeight] = useState(0);
-  const [contentHeight, setContentHeight] = useState(0);
 
-  // Check if content should show bottom indicator
-  const checkContentOverflow = React.useCallback(() => {
-    if (scrollViewHeight > 0 && contentHeight > 0) {
-      setShowBottomIndicator(contentHeight > scrollViewHeight + 5);
-    }
-  }, [scrollViewHeight, contentHeight]);
-
-  // Check overflow when dialog opens or dimensions change
+  // Reset indicators when dialog opens/closes
   React.useEffect(() => {
-    if (open) {
-      checkContentOverflow();
-    } else {
-      // Don't immediately reset - let the exit animation handle it
-      setTimeout(() => {
-        setShowBottomIndicator(false);
-        setScrollViewHeight(0);
-        setContentHeight(0);
-      }, 300); // Match the MotiView exit duration
+    if (!open) {
+      setShowBottomIndicator(false);
+      setScrollViewHeight(0);
     }
-  }, [open, checkContentOverflow]);
+  }, [open]);
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const { contentOffset, layoutMeasurement, contentSize } = event.nativeEvent;
@@ -110,24 +96,18 @@ const DialogContent = ({
 
   const handleContentSizeChange = (
     _contentWidth: number,
-    newContentHeight: number,
+    contentHeight: number,
   ) => {
-    setContentHeight(newContentHeight);
     // Check if content overflows the scroll view
     if (scrollViewHeight > 0) {
-      setShowBottomIndicator(newContentHeight > scrollViewHeight + 5);
+      setShowBottomIndicator(contentHeight > scrollViewHeight);
     }
   };
 
   const handleScrollViewLayout = (event: {
     nativeEvent: { layout: { height: number } };
   }) => {
-    const newScrollViewHeight = event.nativeEvent.layout.height;
-    setScrollViewHeight(newScrollViewHeight);
-    // Check overflow with new scroll view height
-    if (contentHeight > 0) {
-      setShowBottomIndicator(contentHeight > newScrollViewHeight + 5);
-    }
+    setScrollViewHeight(event.nativeEvent.layout.height);
   };
 
   const handleCancel = () => {
@@ -196,13 +176,8 @@ const DialogContent = ({
                 {showBottomIndicator && (
                   <MotiView
                     from={{ opacity: 0 }}
-                    animate={{ opacity: open ? 1 : 0 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ 
-                      type: "timing", 
-                      duration: 300,
-                      delay: open ? 100 : 0 // Small delay on entrance for smoother appearance
-                    }}
+                    animate={{ opacity: 1 }}
+                    transition={{ type: "timing", duration: 300 }}
                   >
                     <LinearGradient
                       colors={[`${theme.card}00`, theme.card]}

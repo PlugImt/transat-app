@@ -23,7 +23,6 @@ export const RootNavigator = () => {
     });
   }, []);
 
-  // Pendant qu'on vérifie si l'utilisateur est connecté et que l'i18n est prêt, on affiche un écran de chargement
   if (user === undefined || !isI18nReady) {
     return <SplashScreen />;
   }

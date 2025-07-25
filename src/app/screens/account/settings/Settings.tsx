@@ -7,10 +7,8 @@ import {
   HelpCircle,
   Info,
   Palette,
-  Server,
   Shield,
 } from "lucide-react-native";
-import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/common/Button";
 import {
@@ -18,7 +16,6 @@ import {
   DialogContent,
   DialogTrigger,
 } from "@/components/common/Dialog";
-import { Switch } from "@/components/common/Switch";
 import { Text } from "@/components/common/Text";
 import { useToast } from "@/components/common/Toast";
 import { AccountCard } from "@/components/custom/card/AccountCard";
@@ -28,8 +25,6 @@ import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";
 import { useLanguageOptions } from "@/hooks/account/useLanguageOptions";
 import { useUser } from "@/hooks/account/useUser";
-import { storage } from "@/services/storage/asyncStorage";
-import STORAGE_KEYS from "@/services/storage/constants";
 import type { SettingsNavigation } from "@/types";
 import SettingCategory from "./components/SettingCategory";
 import SettingsItem from "./components/SettingsItem";
@@ -42,21 +37,7 @@ export const Settings = () => {
   const queryClient = useQueryClient();
   const { data: user, isPending } = useUser();
   const navigation = useNavigation<SettingsNavigation>();
-  const [isDevServerSelected, setIsDevServerSelected] = React.useState(false);
   const { currentLanguageOption } = useLanguageOptions();
-
-  useEffect(() => {
-    const loadDevServerSetting = async () => {
-      const value = await storage.get(STORAGE_KEYS.IS_DEV_SERVER_SELECTED);
-      setIsDevServerSelected(value === "true");
-    };
-    loadDevServerSetting();
-  }, []);
-
-  const handleDevServerToggle = async (value: boolean) => {
-    setIsDevServerSelected(value);
-    await storage.set(STORAGE_KEYS.IS_DEV_SERVER_SELECTED, value.toString());
-  };
 
   const handleLogout = async () => {
     try {
@@ -139,21 +120,6 @@ export const Settings = () => {
           subtitle={t("settings.legal.subtitle")}
           onPress={() => navigation.navigate("Legal")}
         />
-
-        {process.env.NODE_ENV === "development" && (
-          <SettingsItem
-            icon={<Server color={theme.text} size={22} />}
-            title={t("settings.devServer")}
-            subtitle={t("settings.devServerDescription")}
-            onPress={() => {}}
-            rightElement={
-              <Switch
-                value={isDevServerSelected}
-                onValueChange={handleDevServerToggle}
-              />
-            }
-          />
-        )}
       </SettingCategory>
 
       <Dialog>
@@ -171,6 +137,7 @@ export const Settings = () => {
           cancelLabel={t("common.cancel")}
           confirmLabel={t("settings.logoutConfirm")}
           onConfirm={handleLogout}
+          disableScroll
         >
           <Text>{t("settings.logoutDesc")}</Text>
         </DialogContent>

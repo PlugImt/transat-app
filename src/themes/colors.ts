@@ -17,7 +17,7 @@ const colors = {
     card: "#FFFFFF",
     input: "#e3e3e3",
     border: "#E5E7EB",
-    backdrop: "#7075810D",
+    backdrop: "#70758166",
     overlay: "#f5f4f2E5",
   },
   dark: {
@@ -28,7 +28,7 @@ const colors = {
     card: "#1e1515",
     input: "#2D2222A3",
     border: "#403D3D",
-    backdrop: "#2C272666",
+    backdrop: "#000000CC",
     overlay: "#070402E5",
   },
   shared: {

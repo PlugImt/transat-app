@@ -1,25 +1,17 @@
-import { LinearGradient } from "expo-linear-gradient";
 import { MotiView } from "moti";
-import React, {
-  cloneElement,
-  createContext,
-  useContext,
-  useState,
-} from "react";
+import type React from "react";
+import { cloneElement, createContext, useContext, useState } from "react";
 import {
   KeyboardAvoidingView,
   Modal,
-  type NativeScrollEvent,
-  type NativeSyntheticEvent,
   Platform,
-  ScrollView,
   TouchableWithoutFeedback,
   View,
 } from "react-native";
 import { Text } from "@/components/common/Text";
-import { useTheme } from "@/contexts/ThemeContext";
 import { Button } from "./Button";
 import Card from "./Card";
+import ScrollViewWithIndicators from "./ScrollViewWithIndicators";
 
 interface DialogContextType {
   open: boolean;
@@ -72,44 +64,6 @@ const DialogContent = ({
   isPending,
 }: DialogContentProps) => {
   const { open, setOpen } = useDialog();
-  const { theme } = useTheme();
-  const [showTopIndicator, setShowTopIndicator] = useState(false);
-  const [showBottomIndicator, setShowBottomIndicator] = useState(true);
-  const [scrollViewHeight, setScrollViewHeight] = useState(0);
-
-  React.useEffect(() => {
-    if (!open) {
-      setShowTopIndicator(false);
-      setShowBottomIndicator(false);
-      setScrollViewHeight(0);
-    }
-  }, [open]);
-
-  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const { contentOffset, layoutMeasurement, contentSize } = event.nativeEvent;
-    const scrollY = contentOffset.y;
-    const scrollViewHeight = layoutMeasurement.height;
-    const contentHeight = contentSize.height;
-
-    setShowTopIndicator(scrollY > 5);
-
-    setShowBottomIndicator(scrollY + scrollViewHeight < contentHeight - 5);
-  };
-
-  const handleContentSizeChange = (
-    _contentWidth: number,
-    contentHeight: number,
-  ) => {
-    if (scrollViewHeight > 0) {
-      setShowBottomIndicator(contentHeight > scrollViewHeight);
-    }
-  };
-
-  const handleScrollViewLayout = (event: {
-    nativeEvent: { layout: { height: number } };
-  }) => {
-    setScrollViewHeight(event.nativeEvent.layout.height);
-  };
 
   const handleCancel = () => {
     onCancel?.();
@@ -160,88 +114,16 @@ const DialogContent = ({
           >
             <Card className="w-full gap-6">
               <Text variant="h2">{title}</Text>
-              <View className="relative">
-                <ScrollView
-                  keyboardShouldPersistTaps="handled"
-                  onScroll={handleScroll}
-                  onContentSizeChange={handleContentSizeChange}
-                  onLayout={handleScrollViewLayout}
-                  scrollEventThrottle={16}
-                  style={{ maxHeight: 400 }}
-                >
-                  <TouchableWithoutFeedback className="pr-6">
-                    <View className={className}>{children}</View>
-                  </TouchableWithoutFeedback>
-                </ScrollView>
 
-                <MotiView
-                  animate={{
-                    opacity: showTopIndicator ? 1 : 0,
-                  }}
-                  transition={{
-                    type: "spring",
-                    damping: 25,
-                    stiffness: 200,
-                  }}
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: 50,
-                    zIndex: 10,
-                    pointerEvents: "none",
-                  }}
-                >
-                  <LinearGradient
-                    colors={[theme.card, `${theme.card}00`]}
-                    locations={[0, 1]}
-                    style={{
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      height: 50,
-                      zIndex: 10,
-                      pointerEvents: "none",
-                    }}
-                  />
-                </MotiView>
+              <ScrollViewWithIndicators
+                keyboardShouldPersistTaps="handled"
+                maxHeight={400}
+              >
+                <TouchableWithoutFeedback className="pr-6">
+                  <View className={className}>{children}</View>
+                </TouchableWithoutFeedback>
+              </ScrollViewWithIndicators>
 
-                <MotiView
-                  animate={{
-                    opacity: showBottomIndicator ? 1 : 0,
-                  }}
-                  transition={{
-                    type: "spring",
-                    damping: 25,
-                    stiffness: 200,
-                  }}
-                  style={{
-                    position: "absolute",
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    height: 150,
-                    zIndex: 10,
-                    pointerEvents: "none",
-                  }}
-                >
-                  <LinearGradient
-                    colors={[`${theme.card}00`, theme.card]}
-                    locations={[0, 1]}
-                    style={{
-                      position: "absolute",
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      height: 150,
-                      zIndex: 10,
-                      pointerEvents: "none",
-                    }}
-                  />
-                </MotiView>
-              </View>
               {(cancelLabel || confirmLabel) && (
                 <View className="flex-row items-center gap-2">
                   {cancelLabel && (

@@ -77,8 +77,6 @@
   "settings": {
     "settings": "Definições",
     "logout": "Terminar sessão",
-    "devServer": "Servidor de desenvolvimento",
-    "devServerDescription": "Utilizar localhost",
     "logoutDesc": "Tem a certeza de que pretende terminar a sessão?",
     "logoutConfirm": "Terminar sessão",
     "notifications": {
@@ -135,14 +133,11 @@
       "title": "Aparência",
       "theme": "Tema",
       "system": "Sistema",
-      "systemDescription": "Seguir as configurações do sistema",
+      "systemDescription": "Seguir as configurações do seu dispositivo",
       "light": "Claro",
-      "lightDescription": "Tema claro",
+      "lightDescription": "Ideal para dias ensolarados",
       "dark": "Escuro",
-      "darkDescription": "Tema escuro",
-      "preview": "Pré-visualização",
-      "sampleCard": "Cartão de Exemplo",
-      "sampleText": "É assim que o texto aparecerá no tema selecionado."
+      "darkDescription": "Para uma utilização noturna"
     },
     "language": {
       "language": "Língua",

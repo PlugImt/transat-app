@@ -77,8 +77,6 @@
   "settings": {
     "settings": "设置",
     "logout": "注销",
-    "devServer": "开发服务器",
-    "devServerDescription": "使用本地主机",
     "logoutDesc": "您确定要注销吗？",
     "logoutConfirm": "注销",
     "notifications": {
@@ -135,14 +133,11 @@
       "title": "外观",
       "theme": "主题",
       "system": "系统",
-      "systemDescription": "跟随系统设置",
+      "systemDescription": "跟随您的设备设置",
       "light": "浅色",
-      "lightDescription": "浅色主题",
+      "lightDescription": "适合晴天使用",
       "dark": "深色",
-      "darkDescription": "深色主题",
-      "preview": "预览",
-      "sampleCard": "示例卡片",
-      "sampleText": "在选定的主题中，文本将如此显示。"
+      "darkDescription": "适合夜间使用"
     },
     "language": {
       "language": "语言",

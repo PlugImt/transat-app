@@ -77,8 +77,6 @@
   "settings": {
     "settings": "Einstellungen",
     "logout": "Abmelden",
-    "devServer": "Entwicklungsserver",
-    "devServerDescription": "Localhost verwenden",
     "logoutDesc": "Sind Sie sicher, dass Sie sich abmelden möchten?",
     "logoutConfirm": "Mich abmelden",
     "notifications": {
@@ -136,14 +134,11 @@
       "title": "Erscheinungsbild",
       "theme": "Thema",
       "system": "System",
-      "systemDescription": "Systemeinstellung folgen",
+      "systemDescription": "Systemeinstellungen folgen",
       "light": "Hell",
-      "lightDescription": "Helles Thema",
+      "lightDescription": "Ideal für sonnige Tage",
       "dark": "Dunkel",
-      "darkDescription": "Dunkles Thema",
-      "preview": "Vorschau",
-      "sampleCard": "Beispielkarte",
-      "sampleText": "So wird Text im ausgewählten Thema angezeigt."
+      "darkDescription": "Für Nachtnutzung"
     },
     "language": {
       "language": "Sprache",

@@ -77,8 +77,6 @@
   "settings": {
     "settings": "Paramètres",
     "logout": "Déconnexion",
-    "devServer": "Serveur de développement",
-    "devServerDescription": "Utiliser localhost",
     "logoutDesc": "Êtes-vous sûr(e) de vouloir vous déconnecter ?",
     "logoutConfirm": "Me déconnecter",
     "notifications": {
@@ -136,14 +134,11 @@
       "title": "Apparence",
       "theme": "Thème",
       "system": "Système",
-      "systemDescription": "Suivre les paramètres système",
+      "systemDescription": "En fonction du thème de votre téléphone",
       "light": "Clair",
-      "lightDescription": "Thème clair",
+      "lightDescription": "Idéal en plein soleil",
       "dark": "Sombre",
-      "darkDescription": "Thème sombre",
-      "preview": "Aperçu",
-      "sampleCard": "Carte d'exemple",
-      "sampleText": "Voici comment le texte apparaîtra dans le thème sélectionné."
+      "darkDescription": "Pour une utilisation nocturne"
     },
     "language": {
       "language": "Langue",

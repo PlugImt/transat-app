@@ -77,8 +77,6 @@
   "settings": {
     "settings": "Settings",
     "logout": "Logout",
-    "devServer": "Development Server",
-    "devServerDescription": "Use localhost",
     "logoutDesc": "Are you sure you want to log out?",
     "logoutConfirm": "Log me out",
     "notifications": {
@@ -136,14 +134,11 @@
       "title": "Appearance",
       "theme": "Theme",
       "system": "System",
-      "systemDescription": "Follow system setting",
+      "systemDescription": "Follow your device settings",
       "light": "Light",
-      "lightDescription": "Light theme",
+      "lightDescription": "Ideal for sunny days",
       "dark": "Dark",
-      "darkDescription": "Dark theme",
-      "preview": "Preview",
-      "sampleCard": "Sample Card",
-      "sampleText": "This is how text will appear in the selected theme."
+      "darkDescription": "For nighttime use"
     },
     "language": {
       "language": "Language",

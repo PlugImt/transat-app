@@ -42,7 +42,7 @@ export const uploadImage = async (): Promise<string> => {
 
     const apiUrl = await getAPIUrl();
 
-    const uploadResponse = await axios.post(`${apiUrl}/api/upload`, formData, {
+    const uploadResponse = await axios.post(`${apiUrl}upload`, formData, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",

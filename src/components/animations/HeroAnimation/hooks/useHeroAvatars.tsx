@@ -1,5 +1,9 @@
-import Dimitri from "@/assets/images/avatars/dimitri.jpeg";
-import Ninon from "@/assets/images/avatars/ninon.jpeg";
+import Abilan from "@/assets/images/avatars/abilan.jpg";
+import Dimitri from "@/assets/images/avatars/dimitri.jpg";
+import Jeanne from "@/assets/images/avatars/jeanne.jpg";
+import Maxime from "@/assets/images/avatars/maxime.jpg";
+import Nicolas from "@/assets/images/avatars/nicolas.jpg";
+import Ninon from "@/assets/images/avatars/ninon.jpg";
 
 type HeroAvatarType = {
   image: string;
@@ -27,7 +31,7 @@ const avatars: HeroAvatarType[] = [
     size: 40,
   },
   {
-    image: Dimitri,
+    image: Abilan,
     position: {
       top: 147,
       left: 60,
@@ -35,7 +39,7 @@ const avatars: HeroAvatarType[] = [
     size: 48,
   },
   {
-    image: Ninon,
+    image: Jeanne,
     position: {
       top: 69,
       left: 148,
@@ -43,7 +47,7 @@ const avatars: HeroAvatarType[] = [
     size: 26,
   },
   {
-    image: Dimitri,
+    image: Maxime,
     position: {
       top: -14,
       left: 243,
@@ -51,7 +55,7 @@ const avatars: HeroAvatarType[] = [
     size: 48,
   },
   {
-    image: Ninon,
+    image: Nicolas,
     position: {
       top: 90,
       left: 296,

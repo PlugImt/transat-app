@@ -4,6 +4,7 @@ export const menuItemSchema = z.object({
   name: z.string(),
   id: z.number(),
   average_rating: z.number().nullable(),
+  rated: z.boolean().optional(),
 });
 
 export const menuDataSchema = z.object({

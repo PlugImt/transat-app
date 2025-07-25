@@ -137,7 +137,6 @@ export const Settings = () => {
           cancelLabel={t("common.cancel")}
           confirmLabel={t("settings.logoutConfirm")}
           onConfirm={handleLogout}
-          disableScroll
         >
           <Text>{t("settings.logoutDesc")}</Text>
         </DialogContent>

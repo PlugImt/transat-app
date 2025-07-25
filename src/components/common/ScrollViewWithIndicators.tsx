@@ -16,7 +16,7 @@ interface ScrollViewWithIndicatorsProps extends ScrollViewProps {
   children: React.ReactNode;
   className?: string;
   maxHeight?: number;
-  disableScroll?: boolean;
+  scrollable?: boolean;
   indicatorHeight?: {
     top?: number;
     bottom?: number;
@@ -31,7 +31,7 @@ const ScrollViewWithIndicators = ({
   children,
   className,
   maxHeight = 400,
-  disableScroll = false,
+  scrollable,
   indicatorHeight = { top: 50, bottom: 150 },
   gradientHeight = { top: 50, bottom: 150 },
   ...scrollViewProps
@@ -71,7 +71,7 @@ const ScrollViewWithIndicators = ({
   };
 
   const getContent = () => {
-    if (disableScroll) {
+    if (!scrollable) {
       return (
         <View
           className={className}
@@ -100,7 +100,7 @@ const ScrollViewWithIndicators = ({
     <View className="relative">
       {getContent()}
 
-      {!disableScroll && (
+      {scrollable && (
         <>
           <MotiView
             animate={{

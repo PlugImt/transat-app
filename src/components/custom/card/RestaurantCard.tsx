@@ -57,7 +57,7 @@ const RestaurantCard = ({ title, meals, icon }: CardProps) => {
             <Text className="flex-1">{item.name}</Text>
             <View className="flex-row items-center gap-1">
               <Text color="primary">{item.average_rating}/5</Text>
-              <Stars max={1} value={1} />
+              <Stars max={1} value={Number(item.rated)} />
             </View>
           </TouchableOpacity>
         ))}

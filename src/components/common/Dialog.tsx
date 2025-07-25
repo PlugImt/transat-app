@@ -76,8 +76,6 @@ const DialogContent = ({
   const {
     showTopIndicator,
     showBottomIndicator,
-    topIndicatorOpacity,
-    bottomIndicatorOpacity,
     handleScroll,
     handleContentSizeChange,
     handleScrollViewLayout,
@@ -149,7 +147,7 @@ const DialogContent = ({
                 {showTopIndicator && (
                   <MotiView
                     from={{ opacity: 0 }}
-                    animate={{ opacity: (open ? 1 : 0) * topIndicatorOpacity }}
+                    animate={{ opacity: open ? 1 : 0 }}
                     exit={{ opacity: 0 }}
                     transition={{ 
                       type: "timing", 
@@ -165,7 +163,7 @@ const DialogContent = ({
                         top: 0,
                         left: 0,
                         right: 0,
-                        height: 40, // Increased height for better visibility
+                        height: 20,
                         zIndex: 10,
                         pointerEvents: "none",
                       }}
@@ -176,7 +174,7 @@ const DialogContent = ({
                 {showBottomIndicator && (
                   <MotiView
                     from={{ opacity: 0 }}
-                    animate={{ opacity: (open ? 1 : 0) * bottomIndicatorOpacity }}
+                    animate={{ opacity: open ? 1 : 0 }}
                     exit={{ opacity: 0 }}
                     transition={{ 
                       type: "timing", 
@@ -192,7 +190,7 @@ const DialogContent = ({
                         bottom: 0,
                         left: 0,
                         right: 0,
-                        height: 40, // Made consistent with top shadow
+                        height: 200,
                         zIndex: 10,
                         pointerEvents: "none",
                       }}

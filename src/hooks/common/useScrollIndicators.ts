@@ -8,19 +8,13 @@ interface UseScrollIndicatorsProps {
 export const useScrollIndicators = ({ isOpen }: UseScrollIndicatorsProps) => {
   const [showTopIndicator, setShowTopIndicator] = useState(false);
   const [showBottomIndicator, setShowBottomIndicator] = useState(false);
-  const [topIndicatorOpacity, setTopIndicatorOpacity] = useState(0);
-  const [bottomIndicatorOpacity, setBottomIndicatorOpacity] = useState(0);
   const [scrollViewHeight, setScrollViewHeight] = useState(0);
   const [contentHeight, setContentHeight] = useState(0);
 
   // Check if content should show bottom indicator
   const checkContentOverflow = useCallback(() => {
     if (scrollViewHeight > 0 && contentHeight > 0) {
-      const hasOverflow = contentHeight > scrollViewHeight + 5;
-      setShowBottomIndicator(hasOverflow);
-      if (hasOverflow) {
-        setBottomIndicatorOpacity(1); // Start with full opacity when content overflows
-      }
+      setShowBottomIndicator(contentHeight > scrollViewHeight + 5);
     }
   }, [scrollViewHeight, contentHeight]);
 
@@ -33,8 +27,6 @@ export const useScrollIndicators = ({ isOpen }: UseScrollIndicatorsProps) => {
       setTimeout(() => {
         setShowTopIndicator(false);
         setShowBottomIndicator(false);
-        setTopIndicatorOpacity(0);
-        setBottomIndicatorOpacity(0);
         setScrollViewHeight(0);
         setContentHeight(0);
       }, 300); // Match the MotiView exit duration
@@ -47,21 +39,11 @@ export const useScrollIndicators = ({ isOpen }: UseScrollIndicatorsProps) => {
     const scrollViewHeight = layoutMeasurement.height;
     const contentHeight = contentSize.height;
 
-    // Calculate progressive opacity for top indicator
-    const fadeDistance = 50; // Distance over which to fade the indicator
-    const topOpacity = Math.min(1, Math.max(0, scrollY / fadeDistance));
+    // Show top indicator if scrolled down more than 5px
     setShowTopIndicator(scrollY > 5);
-    setTopIndicatorOpacity(topOpacity);
 
-    // Calculate progressive opacity for bottom indicator  
-    const maxScroll = contentHeight - scrollViewHeight;
-    const remainingScroll = maxScroll - scrollY;
-    const bottomOpacity = Math.min(1, Math.max(0, remainingScroll / fadeDistance));
-    
     // Show bottom indicator if there's more content below (with 5px threshold)
-    const hasBottomContent = scrollY + scrollViewHeight < contentHeight - 5;
-    setShowBottomIndicator(hasBottomContent);
-    setBottomIndicatorOpacity(hasBottomContent ? bottomOpacity : 0);
+    setShowBottomIndicator(scrollY + scrollViewHeight < contentHeight - 5);
   };
 
   const handleContentSizeChange = (
@@ -71,11 +53,7 @@ export const useScrollIndicators = ({ isOpen }: UseScrollIndicatorsProps) => {
     setContentHeight(newContentHeight);
     // Check if content overflows the scroll view
     if (scrollViewHeight > 0) {
-      const hasOverflow = newContentHeight > scrollViewHeight + 5;
-      setShowBottomIndicator(hasOverflow);
-      if (hasOverflow) {
-        setBottomIndicatorOpacity(1); // Start with full opacity when content overflows
-      }
+      setShowBottomIndicator(newContentHeight > scrollViewHeight + 5);
     }
   };
 
@@ -86,19 +64,13 @@ export const useScrollIndicators = ({ isOpen }: UseScrollIndicatorsProps) => {
     setScrollViewHeight(newScrollViewHeight);
     // Check overflow with new scroll view height
     if (contentHeight > 0) {
-      const hasOverflow = contentHeight > newScrollViewHeight + 5;
-      setShowBottomIndicator(hasOverflow);
-      if (hasOverflow) {
-        setBottomIndicatorOpacity(1); // Start with full opacity when content overflows
-      }
+      setShowBottomIndicator(contentHeight > newScrollViewHeight + 5);
     }
   };
 
   return {
     showTopIndicator,
     showBottomIndicator,
-    topIndicatorOpacity,
-    bottomIndicatorOpacity,
     handleScroll,
     handleContentSizeChange,
     handleScrollViewLayout,

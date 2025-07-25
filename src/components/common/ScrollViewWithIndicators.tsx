@@ -16,6 +16,7 @@ interface ScrollViewWithIndicatorsProps extends ScrollViewProps {
   children: React.ReactNode;
   className?: string;
   maxHeight?: number;
+  disableScroll?: boolean;
   indicatorHeight?: {
     top?: number;
     bottom?: number;
@@ -30,6 +31,7 @@ const ScrollViewWithIndicators = ({
   children,
   className,
   maxHeight = 400,
+  disableScroll = false,
   indicatorHeight = { top: 50, bottom: 150 },
   gradientHeight = { top: 50, bottom: 150 },
   ...scrollViewProps
@@ -68,8 +70,19 @@ const ScrollViewWithIndicators = ({
     scrollViewProps.onLayout?.(event);
   };
 
-  return (
-    <View className="relative">
+  const getContent = () => {
+    if (disableScroll) {
+      return (
+        <View
+          className={className}
+          style={[{ maxHeight }, scrollViewProps.style]}
+        >
+          {children}
+        </View>
+      );
+    }
+
+    return (
       <ScrollView
         {...scrollViewProps}
         onScroll={handleScroll}
@@ -80,74 +93,85 @@ const ScrollViewWithIndicators = ({
       >
         <View className={className}>{children}</View>
       </ScrollView>
+    );
+  };
 
-      <MotiView
-        animate={{
-          opacity: showTopIndicator ? 1 : 0,
-        }}
-        transition={{
-          type: "spring",
-          damping: 25,
-          stiffness: 200,
-        }}
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: indicatorHeight.top,
-          zIndex: 10,
-          pointerEvents: "none",
-        }}
-      >
-        <LinearGradient
-          colors={[theme.card, `${theme.card}00`]}
-          locations={[0, 1]}
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            height: gradientHeight.top,
-            zIndex: 10,
-            pointerEvents: "none",
-          }}
-        />
-      </MotiView>
+  return (
+    <View className="relative">
+      {getContent()}
 
-      <MotiView
-        animate={{
-          opacity: showBottomIndicator ? 1 : 0,
-        }}
-        transition={{
-          type: "spring",
-          damping: 25,
-          stiffness: 200,
-        }}
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: indicatorHeight.bottom,
-          zIndex: 10,
-          pointerEvents: "none",
-        }}
-      >
-        <LinearGradient
-          colors={[`${theme.card}00`, theme.card]}
-          locations={[0, 1]}
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: gradientHeight.bottom,
-            zIndex: 10,
-            pointerEvents: "none",
-          }}
-        />
-      </MotiView>
+      {/* Only show indicators when scrolling is enabled */}
+      {!disableScroll && (
+        <>
+          <MotiView
+            animate={{
+              opacity: showTopIndicator ? 1 : 0,
+            }}
+            transition={{
+              type: "spring",
+              damping: 25,
+              stiffness: 200,
+            }}
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              height: indicatorHeight.top,
+              zIndex: 10,
+              pointerEvents: "none",
+            }}
+          >
+            <LinearGradient
+              colors={[theme.card, `${theme.card}00`]}
+              locations={[0, 1]}
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                height: gradientHeight.top,
+                zIndex: 10,
+                pointerEvents: "none",
+              }}
+            />
+          </MotiView>
+
+          <MotiView
+            animate={{
+              opacity: showBottomIndicator ? 1 : 0,
+            }}
+            transition={{
+              type: "spring",
+              damping: 25,
+              stiffness: 200,
+            }}
+            style={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: indicatorHeight.bottom,
+              zIndex: 10,
+              pointerEvents: "none",
+            }}
+          >
+            <LinearGradient
+              colors={[`${theme.card}00`, theme.card]}
+              locations={[0, 1]}
+              style={{
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                height: gradientHeight.bottom,
+                zIndex: 10,
+                pointerEvents: "none",
+              }}
+            />
+          </MotiView>
+        </>
+      )}
     </View>
   );
 };

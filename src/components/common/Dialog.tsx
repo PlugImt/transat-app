@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { MotiView } from "moti";
-import { cloneElement, createContext, useContext, useState } from "react";
+import React, { cloneElement, createContext, useContext, useState } from "react";
 import {
   KeyboardAvoidingView,
   Modal,
@@ -71,6 +71,15 @@ const DialogContent = ({
   const [showTopIndicator, setShowTopIndicator] = useState(false);
   const [showBottomIndicator, setShowBottomIndicator] = useState(false);
   const [scrollViewHeight, setScrollViewHeight] = useState(0);
+
+  // Reset indicators when dialog opens/closes
+  React.useEffect(() => {
+    if (!open) {
+      setShowTopIndicator(false);
+      setShowBottomIndicator(false);
+      setScrollViewHeight(0);
+    }
+  }, [open]);
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const { contentOffset, layoutMeasurement, contentSize } = event.nativeEvent;

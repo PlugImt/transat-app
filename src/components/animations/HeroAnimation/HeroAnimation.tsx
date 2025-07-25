@@ -56,11 +56,7 @@ export const HeroAnimation = ({ className }: HeroAnimationProps) => {
       <Image source={Logo} className="w-[135px] h-[135px] z-20" />
       {containerLayout &&
         avatars.map(({ image, size, position }, index) => {
-          const anim = getAnimationConfig(
-            containerLayout,
-            position,
-            images.length + index, // les avatars commencent après les cartes des clubs
-          );
+          const anim = getAnimationConfig(containerLayout, position, index);
           return (
             <MotiView
               key={`${position.top}-${position.left}`}

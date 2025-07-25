@@ -1,4 +1,3 @@
-import { Picker } from "@react-native-picker/picker";
 import { format } from "date-fns";
 import { enUS, fr } from "date-fns/locale";
 import { useMemo, useState } from "react";
@@ -115,7 +114,7 @@ export const Homework = () => {
               overflow: "hidden",
             }}
           >
-            <Picker
+            {/* <Picker
               selectedValue={selectedSubject}
               onValueChange={(itemValue) => setSelectedSubject(itemValue)}
               mode="dropdown"
@@ -136,7 +135,7 @@ export const Homework = () => {
                   value={subject}
                 />
               ))}
-            </Picker>
+            </Picker> */}
           </View>
           <View className="flex-row flex-wrap gap-2 mt-3">
             <Button

@@ -9,9 +9,9 @@ import {
   View,
 } from "react-native";
 import { Text } from "@/components/common/Text";
-import { Button } from "./Button";
-import Card from "./Card";
-import ScrollViewWithIndicators from "./ScrollViewWithIndicators";
+import ScrollViewWithIndicators from '@/components/common/ScrollViewWithIndicators';
+import { Button } from '@/components/common/Button';
+import Card from "@/components/common/Card";
 
 interface DialogContextType {
   open: boolean;

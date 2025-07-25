@@ -1,3 +1,4 @@
+import { LinearGradient } from "expo-linear-gradient";
 import { MotiView } from "moti";
 import { cloneElement, createContext, useContext, useState } from "react";
 import {
@@ -7,8 +8,11 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
   View,
+  type NativeSyntheticEvent,
+  type NativeScrollEvent,
 } from "react-native";
 import { Text } from "@/components/common/Text";
+import { useTheme } from "@/contexts/ThemeContext";
 import { Button } from "./Button";
 import Card from "./Card";
 
@@ -63,6 +67,28 @@ const DialogContent = ({
   isPending,
 }: DialogContentProps) => {
   const { open, setOpen } = useDialog();
+  const { theme } = useTheme();
+  const [showTopIndicator, setShowTopIndicator] = useState(false);
+  const [showBottomIndicator, setShowBottomIndicator] = useState(false);
+
+  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const { contentOffset, layoutMeasurement, contentSize } = event.nativeEvent;
+    const scrollY = contentOffset.y;
+    const scrollViewHeight = layoutMeasurement.height;
+    const contentHeight = contentSize.height;
+
+    // Show top indicator if scrolled down
+    setShowTopIndicator(scrollY > 10);
+
+    // Show bottom indicator if there's more content below
+    setShowBottomIndicator(scrollY + scrollViewHeight < contentHeight - 10);
+  };
+
+  const handleContentSizeChange = (_contentWidth: number, contentHeight: number) => {
+    // Check if content overflows and show bottom indicator initially
+    const scrollViewHeight = 300; // Approximate max height for dialog content
+    setShowBottomIndicator(contentHeight > scrollViewHeight);
+  };
 
   const handleCancel = () => {
     onCancel?.();
@@ -113,11 +139,53 @@ const DialogContent = ({
           >
             <Card className="w-full gap-6">
               <Text variant="h2">{title}</Text>
-              <ScrollView keyboardShouldPersistTaps="handled">
-                <TouchableWithoutFeedback className="pr-6">
-                  <View className={className}>{children}</View>
-                </TouchableWithoutFeedback>
-              </ScrollView>
+              <View className="relative">
+                <ScrollView 
+                  keyboardShouldPersistTaps="handled"
+                  onScroll={handleScroll}
+                  onContentSizeChange={handleContentSizeChange}
+                  scrollEventThrottle={16}
+                  style={{ maxHeight: 400 }}
+                >
+                  <TouchableWithoutFeedback className="pr-6">
+                    <View className={className}>{children}</View>
+                  </TouchableWithoutFeedback>
+                </ScrollView>
+                
+                {/* Top scroll indicator */}
+                {showTopIndicator && (
+                  <LinearGradient
+                    colors={[theme.card, `${theme.card}00`]}
+                    locations={[0, 1]}
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      height: 20,
+                      zIndex: 10,
+                      pointerEvents: "none",
+                    }}
+                  />
+                )}
+                
+                {/* Bottom scroll indicator */}
+                {showBottomIndicator && (
+                  <LinearGradient
+                    colors={[`${theme.card}00`, theme.card]}
+                    locations={[0, 1]}
+                    style={{
+                      position: "absolute",
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      height: 20,
+                      zIndex: 10,
+                      pointerEvents: "none",
+                    }}
+                  />
+                )}
+              </View>
               {(cancelLabel || confirmLabel) && (
                 <View className="flex-row items-center gap-2">
                   {cancelLabel && (

@@ -100,7 +100,6 @@ const ScrollViewWithIndicators = ({
     <View className="relative">
       {getContent()}
 
-      {/* Only show indicators when scrolling is enabled */}
       {!disableScroll && (
         <>
           <MotiView

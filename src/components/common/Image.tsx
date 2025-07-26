@@ -10,6 +10,7 @@ interface ImageProps
   loading?: boolean;
   size?: number;
   fallback?: React.ReactNode;
+  radius?: number | "round";
 }
 
 interface ImageFallbackProps {
@@ -53,7 +54,15 @@ const isValidSource = (src: ImageSourcePropType | undefined) => {
 
 const Image = forwardRef<React.ElementRef<typeof RNImage>, ImageProps>(
   (
-    { className, loading = false, source, size = 64, fallback, ...props },
+    {
+      className,
+      loading = false,
+      source,
+      size = 64,
+      fallback,
+      radius = 8,
+      ...props
+    },
     ref,
   ) => {
     const [hasError, setHasError] = useState(false);
@@ -80,6 +89,7 @@ const Image = forwardRef<React.ElementRef<typeof RNImage>, ImageProps>(
               "aspect-square h-full w-full",
               isLoading ? "opacity-0" : "opacity-100",
             )}
+            borderRadius={radius === "round" ? 9999 : radius}
             onLoadStart={() => setImageLoading(true)}
             onLoadEnd={() => setImageLoading(false)}
             {...props}
@@ -87,7 +97,7 @@ const Image = forwardRef<React.ElementRef<typeof RNImage>, ImageProps>(
         </View>
         {isLoading && (
           <View className="z-20 absolute inset-0 h-full w-full">
-            <ImageSkeleton size={size} />
+            <ImageSkeleton size={size} radius={radius} />
           </View>
         )}
       </View>

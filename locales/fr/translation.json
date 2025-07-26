@@ -8,6 +8,7 @@
     "confirm": "Confirmer",
     "send": "Envoyer",
     "cancel": "Annuler",
+    "search": "Rechercher",
     "close": "Fermer",
     "clearAll": "Effacer",
     "filter": "Filtrer",
@@ -384,6 +385,16 @@
       "price": "Lavage : 2€\nSéchage : 1€",
       "additionalInfo": "Payez par pièces, par carte ou avec le portefeuille Monix (recommandé pour les bonus et les remboursements)\n\nBesoin de plus de temps de séchage ? Payez plusieurs sessions avant de commencer",
       "location": "Sous la MDE, après les boîtes aux lettres"
+    },
+    "clubs": {
+      "title": "Clubs",
+      "description": "Découvre tous les clubs et associations de l’IMT",
+      "book": "Réserver",
+      "interested": "{{count}} personnes sont intéressées par ce club",
+      "errors": {
+        "empty": "Aucun club trouvé",
+        "emptyDescription": "Essayez avec un autre mot-clé"
+      }
     }
   },
   "games": {

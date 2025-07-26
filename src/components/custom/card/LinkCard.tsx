@@ -3,8 +3,8 @@ import { cloneElement, isValidElement } from "react";
 import { type ImageStyle, type StyleProp, View } from "react-native";
 import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
+import { AvatarSkeleton, TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
-import { AvatarSkeleton, TextSkeleton } from "../Skeleton";
 
 const ImageContainer = ({ children }: { children: React.ReactNode }) => {
   if (!isValidElement(children)) {

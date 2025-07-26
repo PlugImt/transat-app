@@ -23,6 +23,7 @@ import {
   Timetable,
   Traq,
 } from "@/app/screens/services";
+import ClubDetails from "@/app/screens/services/clubs/ClubDetails";
 import { HomeworkDetails } from "@/app/screens/services/homework/components/HomeworkDetails";
 import { RestaurantReviews } from "@/app/screens/services/restaurant/components/Reviews";
 import { Services } from "@/app/screens/services/Services";
@@ -61,6 +62,7 @@ const ServicesStackScreen = () => (
     <ServicesStack.Screen name="Homework" component={Homework} />
     <ServicesStack.Screen name="HomeworkDetails" component={HomeworkDetails} />
     <ServicesStack.Screen name="Clubs" component={Clubs} />
+    <ServicesStack.Screen name="ClubDetails" component={ClubDetails} />
     <ServicesStack.Screen name="Traq" component={Traq} />
     <ServicesStack.Screen name="Olimtpe" component={Olimtpe} />
   </ServicesStack.Navigator>

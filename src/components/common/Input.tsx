@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { cloneElement, forwardRef } from "react";
 import {
   type Control,
   Controller,
@@ -24,6 +24,7 @@ export interface InputWithControlProps<T extends FieldValues>
   error?: string;
   disabled?: boolean;
   loading?: boolean;
+  icon?: React.ReactElement<{ color?: string; size?: number }>;
 }
 
 // Interface pour l'utilisation standalone (sans react-hook-form)
@@ -40,6 +41,7 @@ export interface InputStandaloneProps
   error?: string;
   disabled?: boolean;
   loading?: boolean;
+  icon?: React.ReactElement<{ color?: string; size?: number }>;
 }
 
 // Union type pour supporter les deux cas d'usage
@@ -71,6 +73,7 @@ const Input = forwardRef(
       disabled,
       loading,
       error,
+      icon,
       ...props
     }: InputProps<T>,
     ref: React.Ref<TextInput>,
@@ -84,6 +87,7 @@ const Input = forwardRef(
           className={className}
           labelClasses={labelClasses}
           inputClasses={inputClasses}
+          icon={icon}
         />
       );
     }
@@ -92,14 +96,19 @@ const Input = forwardRef(
       ref,
       editable: !disabled,
       style: {
-        backgroundColor: theme.input,
+        backgroundColor: "transparent",
         color: theme.text,
-        borderColor: error ? theme.destructive : "transparent",
-        borderWidth: error ? 1 : 0,
+        flex: 1,
       },
-      className: cn(inputClasses, "py-2.5 px-4 rounded-lg h-12"),
+      className: "py-2.5",
       placeholderTextColor: theme.muted,
       ...props,
+    };
+
+    const inputContainerStyle = {
+      backgroundColor: theme.input,
+      borderColor: error ? theme.destructive : "transparent",
+      borderWidth: error ? 1 : 0,
     };
 
     return (
@@ -110,26 +119,43 @@ const Input = forwardRef(
           </Text>
         )}
 
-        {control && name ? (
-          <Controller
-            control={control}
-            name={name}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                {...commonTextInputProps}
-                onChangeText={onChange}
-                onBlur={onBlur}
-                value={value}
-              />
-            )}
-          />
-        ) : (
-          <TextInput
-            {...commonTextInputProps}
-            onChangeText={onChangeText}
-            value={value ?? ""}
-          />
-        )}
+        <View
+          className={cn(
+            "flex-row items-center rounded-lg h-12 px-4",
+            inputClasses,
+          )}
+          style={inputContainerStyle}
+        >
+          {icon && (
+            <View className="mr-3">
+              {cloneElement(icon, {
+                color: theme.muted,
+                ...(icon.props.size === undefined && { size: 20 }),
+              })}
+            </View>
+          )}
+
+          {control && name ? (
+            <Controller
+              control={control}
+              name={name}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                  {...commonTextInputProps}
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                />
+              )}
+            />
+          ) : (
+            <TextInput
+              {...commonTextInputProps}
+              onChangeText={onChangeText}
+              value={value ?? ""}
+            />
+          )}
+        </View>
 
         {error && (
           <Text color="destructive" variant="sm">
@@ -150,6 +176,7 @@ interface InputLoadingProps {
   className?: string;
   labelClasses?: string;
   inputClasses?: string;
+  icon?: React.ReactNode;
 }
 
 export const InputLoading = ({
@@ -157,6 +184,7 @@ export const InputLoading = ({
   className,
   labelClasses,
   inputClasses,
+  icon,
 }: InputLoadingProps) => {
   const { theme } = useTheme();
 
@@ -168,15 +196,28 @@ export const InputLoading = ({
         </Text>
       )}
 
-      <TextInput
-        editable={false}
+      <View
+        className={cn(
+          "flex-row items-center rounded-lg h-12 px-4",
+          inputClasses,
+        )}
         style={{
           backgroundColor: theme.input,
-          color: theme.text,
         }}
-        className={cn(inputClasses, "py-2.5 px-4 rounded-lg")}
-        placeholderTextColor={theme.muted}
-      />
+      >
+        {icon && <View className="mr-3">{icon}</View>}
+
+        <TextInput
+          editable={false}
+          style={{
+            backgroundColor: "transparent",
+            color: theme.text,
+            flex: 1,
+          }}
+          className="py-2.5"
+          placeholderTextColor={theme.muted}
+        />
+      </View>
     </View>
   );
 };

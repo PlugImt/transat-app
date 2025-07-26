@@ -384,6 +384,16 @@
       "price": "Lavagem: 2€\nSecagem: 1€",
       "additionalInfo": "Pague com moedas, cartão ou carteira Monix (recomendado para bônus e reembolsos)\n\nPrecisa de mais tempo de secagem? Pague por múltiplas sessões antes de começar",
       "location": "Abaixo da MDE, após as caixas de correio"
+    },
+    "clubs": {
+      "title": "Clubes",
+      "description": "Descubra todos os clubs e associações da IMT",
+      "book": "Reservar",
+      "interested": "{{count}} pessoas estão interessadas neste clube",
+      "errors": {
+        "empty": "Nenhum club encontrado",
+        "emptyDescription": "Tente com outra palavra-chave"
+      }
     }
   },
   "games": {

@@ -14,7 +14,8 @@ export type ServiceType =
   | "timetable"
   | "homework"
   | "traq"
-  | "olimtpe";
+  | "olimtpe"
+  | "clubs";
 
 export type PreferenceId = WidgetType | ServiceType;
 
@@ -80,6 +81,15 @@ const getDefaultServices = (
       image: require("@/assets/images/services/traq.png"),
       screen: "Traq",
       description: t("services.traq.description"),
+    },
+    {
+      id: "clubs",
+      name: t("services.clubs.title"),
+      enabled: true,
+      order: 5,
+      image: require("@/assets/images/services/club.png"),
+      screen: "Clubs",
+      description: t("services.clubs.description"),
     },
   ];
 };

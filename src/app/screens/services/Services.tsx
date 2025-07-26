@@ -4,12 +4,12 @@ import { useTranslation } from "react-i18next";
 import { Image } from "react-native";
 import Animated from "react-native-reanimated";
 import { Button } from "@/components/common/Button";
-import LinkCard, { LinkCardLoading } from "@/components/custom/LinkCard";
+import LinkCard, { LinkCardLoading } from "@/components/custom/card/LinkCard";
 import { PreferenceCustomizationButton } from "@/components/custom/PreferenceCustomizationModal";
 import { Empty } from "@/components/page/Empty";
 import { Page } from "@/components/page/Page";
 import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
-import { useServicePreferences } from "@/hooks/usePreferences";
+import { useServicePreferences } from "@/hooks/services/usePreferences";
 import type { Preference } from "@/services/storage/widgetPreferences";
 import type { AppStackParamList } from "@/types";
 
@@ -50,7 +50,7 @@ export const Services = () => {
         data={enabledServices}
         renderItem={({ item }) => renderServiceCard(item)}
         keyExtractor={(item) => item.id}
-        showsVerticalScrollIndicator={true}
+        showsVerticalScrollIndicator
         onScroll={scrollHandler}
         ListEmptyComponent={
           <Empty

@@ -3,7 +3,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 
 export interface ImageSkeletonProps {
   size?: number;
-  radius?: number | "round" | "square";
+  radius?: number | "round";
 }
 
 export const ImageSkeleton = ({ size = 100, radius }: ImageSkeletonProps) => {

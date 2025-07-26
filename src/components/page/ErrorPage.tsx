@@ -1,6 +1,8 @@
+import { CircleX } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { Button } from "@/components/common/Button";
+import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";
 import { Text } from "../common/Text";
 import { Page } from "./Page";
@@ -22,22 +24,27 @@ export const ErrorPage = ({
 }: ErrorPageProps) => {
   const { t } = useTranslation();
   const { logout } = useAuth();
+  const { theme } = useTheme();
 
   return (
     <Page
       title={title}
-      disableScroll
       className="flex-1 justify-center items-center"
+      onRefresh={refetch}
+      refreshing={isRefetching}
     >
-      <View className="justify-center items-center">
-        <Text variant="h3" className="text-center">
-          {t("common.errors.occurred")}
-        </Text>
-        {error && (
-          <Text color="muted" className="text-center">
-            {error?.message}
+      <View className="justify-center items-center gap-4">
+        <CircleX color={theme.text} size={40} />
+        <View className="items-center">
+          <Text variant="h3" className="text-center">
+            {t("common.errors.occurred")}
           </Text>
-        )}
+          {error && (
+            <Text color="muted" className="text-center">
+              {error?.message}
+            </Text>
+          )}
+        </View>
       </View>
       <View className="gap-2">
         <Button

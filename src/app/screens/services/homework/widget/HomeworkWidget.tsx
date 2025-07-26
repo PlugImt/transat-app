@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { TouchableOpacity, View } from "react-native";
 import { Text } from "@/components/common/Text";
 import type { Homework } from "@/dto";
-import { useHomework } from "@/hooks/useHomework";
+import { useHomework } from "@/hooks/services/homework/useHomework";
 import type { AppStackParamList } from "@/types";
 import { HomeworkWidgetItem } from "./HomeworkWidgetItem";
 import { HomeworkWidgetLoading } from "./HomeworkWidgetLoading";

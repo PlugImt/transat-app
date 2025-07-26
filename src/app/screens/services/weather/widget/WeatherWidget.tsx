@@ -20,7 +20,7 @@ import { Image, View } from "react-native";
 import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
 import { AvatarSkeleton, TextSkeleton } from "@/components/Skeleton";
-import { useWeather } from "@/hooks/useWeather";
+import { useWeather } from "@/hooks/services/weather/useWeather";
 import i18n from "@/i18n";
 
 export const WeatherWidget = () => {

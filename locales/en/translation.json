@@ -384,6 +384,16 @@
       "price": "Washing: €2\nDrying: €1",
       "additionalInfo": "Pay with coins, card, or Monix wallet (recommended for bonuses and refunds)\n\nNeed more drying time? Pay for multiple sessions before starting",
       "location": "Under the MDE, after the mailboxes"
+    },
+    "clubs": {
+      "title": "Clubs",
+      "description": "Discover all clubs and associations at IMT",
+      "book": "Book",
+      "interested": "{{count}} people are interested in this club",
+      "errors": {
+        "empty": "No club found",
+        "emptyDescription": "Try with another keyword"
+      }
     }
   },
   "games": {

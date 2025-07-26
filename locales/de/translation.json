@@ -384,6 +384,16 @@
       "price": "Waschen: 2€\nTrocknen: 1€",
       "additionalInfo": "Zahlen Sie mit Münzen, Karte oder Monix-Wallet (empfohlen für Boni und Rückerstattungen)\n\nBrauchen Sie mehr Trocknungszeit? Zahlen Sie für mehrere Sitzungen vor dem Start",
       "location": "Unter der MDE, nach den Briefkästen"
+    },
+    "clubs": {
+      "title": "Clubs",
+      "description": "Entdecken Sie alle Clubs und Vereine an der IMT",
+      "book": "Buchen",
+      "interested": "{{count}} Leute sind an diesem Club interessiert",
+      "errors": {
+        "empty": "Kein Club gefunden",
+        "emptyDescription": "Versuchen Sie es mit einem anderen Schlüsselwort"
+      }
     }
   },
   "games": {

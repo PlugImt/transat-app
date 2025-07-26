@@ -7,6 +7,8 @@ export const QUERY_KEYS = {
   weather: ["weather"],
   user: ["user"],
   traq: ["traq"],
+  clubs: ["clubs"],
+  clubDetails: ["clubDetails"],
   notification: ["notification"],
   auth: {
     user: ["auth", "user"],

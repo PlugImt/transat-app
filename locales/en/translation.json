@@ -100,6 +100,7 @@
     "signupSuccess": "Sign up successful",
     "signingUp": "Signing up...",
     "disconnected": "See you soon 👋",
+    "requestNewCode": "Request new code",
     "errors": {
       "email": "Invalid email address",
       "password": "Password must contain at least 6 characters",

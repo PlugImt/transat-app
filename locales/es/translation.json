@@ -100,6 +100,7 @@
     "signupSuccess": "Registro exitoso",
     "signingUp": "Registrándose...",
     "disconnected": "¡Hasta pronto 👋",
+    "requestNewCode": "Solicitar nuevo código",
     "errors": {
       "email": "Dirección de correo electrónico inválida",
       "password": "La contraseña debe contener al menos 6 caracteres",

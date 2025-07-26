@@ -100,6 +100,7 @@
     "signupSuccess": "Registrierung erfolgreich",
     "signingUp": "Registrierung läuft...",
     "disconnected": "Bis bald 👋",
+    "requestNewCode": "Einen neuen Code anfordern",
     "errors": {
       "email": "Ungültige E-Mail-Adresse",
       "password": "Das Passwort muss mindestens 6 Zeichen enthalten",

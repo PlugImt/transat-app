@@ -100,6 +100,7 @@
     "signupSuccess": "注册成功",
     "signingUp": "注册中...",
     "disconnected": "再见 👋",
+    "requestNewCode": "请求新验证码",
     "errors": {
       "email": "邮箱地址无效",
       "password": "密码必须至少包含6个字符",

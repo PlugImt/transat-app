@@ -4,7 +4,12 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Animated as RNAnimated, type TextInput, View } from "react-native";
+import {
+  Animated as RNAnimated,
+  type TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { z } from "zod";
 import { Button } from "@/components/common/Button";
 import Input from "@/components/common/Input";
@@ -273,7 +278,17 @@ export const ResetPassword = () => {
                 isUpdating={isPending}
               />
             )}
-            {!canRequestCode && (
+            {canRequestCode ? (
+              <TouchableOpacity
+                onPress={handleRequestCode}
+                disabled={isPending}
+                className="mt-2"
+              >
+                <Text color="muted" className="text-center">
+                  {t("auth.requestNewCode")}
+                </Text>
+              </TouchableOpacity>
+            ) : (
               <Text color="muted" className="text-center">
                 {t("auth.requestCodeCooldown", { seconds: countdown })}
               </Text>

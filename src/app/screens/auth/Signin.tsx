@@ -11,7 +11,6 @@ import Input from "@/components/common/Input";
 import { Text } from "@/components/common/Text";
 import { useToast } from "@/components/common/Toast";
 import { Page } from "@/components/page/Page";
-import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";
 
 export const Signin = () => {
@@ -19,7 +18,6 @@ export const Signin = () => {
   const { login, isPending } = useAuth();
   const { t } = useTranslation();
   const { toast } = useToast();
-  const { theme } = useTheme();
 
   const [verificationModalVisible, setVerificationModalVisible] =
     useState(false);

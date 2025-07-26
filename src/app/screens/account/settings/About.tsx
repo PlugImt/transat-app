@@ -20,12 +20,6 @@ export const About = () => {
     }
   };
 
-  const handleLogoPress = () => {
-    if (triggerConfettiRef.current) {
-      triggerConfettiRef.current();
-    }
-  };
-
   return (
     <Page
       title={t("settings.about.title")}

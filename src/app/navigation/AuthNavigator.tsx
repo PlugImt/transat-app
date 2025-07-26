@@ -1,4 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
+import Legal from "@/app/screens/account/settings/Legal";
 import { ResetPassword } from "@/app/screens/auth/ResetPassword";
 import { Signin } from "@/app/screens/auth/Signin";
 import { Signup } from "@/app/screens/auth/Signup";
@@ -15,6 +16,7 @@ export const AuthNavigator = () => {
       <Stack.Screen name="Signin" component={Signin} />
       <Stack.Screen name="Signup" component={Signup} />
       <Stack.Screen name="ResetPassword" component={ResetPassword} />
+      <Stack.Screen name="Legal" component={Legal} />
     </Stack.Navigator>
   );
 };

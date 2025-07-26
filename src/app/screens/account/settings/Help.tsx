@@ -106,9 +106,9 @@ const Help = () => {
             <View className="flex-row items-center gap-3">
               <SquareArrowOutUpRight size={22} color={theme.text} />
               <View className="ml-2.5 max-w-[80%]">
-                <Text>{t("settings.help.joinWhatsApp")}</Text>
+                <Text>{t("settings.help.whatsapp.title")}</Text>
                 <Text className="break-words" color="muted" variant="sm">
-                  {t("settings.help.joinCommunity")}
+                  {t("settings.help.whatsapp.description")}
                 </Text>
               </View>
             </View>

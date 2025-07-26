@@ -108,7 +108,7 @@ export const EditProfile = () => {
   };
 
   if (isPending) {
-    return <EditProfileLoading />;
+    return <EditAccountSkeleton />;
   }
 
   if ((isError && error) || !user) {
@@ -192,7 +192,7 @@ export const EditProfile = () => {
           render={({ field: { onChange, value } }) => (
             <Dropdown
               label={t("account.formationName")}
-              placeholder={t("account.selectBranch")}
+              placeholder={t("account.selectFormationName")}
               options={["FISE", "FIL", "FIT", "FIP"]}
               value={value}
               onValueChange={onChange}
@@ -237,7 +237,7 @@ export const EditProfile = () => {
 
 export default EditProfile;
 
-const EditProfileLoading = () => {
+const EditAccountSkeleton = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
   const navigation = useNavigation();

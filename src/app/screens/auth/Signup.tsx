@@ -1,25 +1,27 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
 import { useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Text, type TextInput, View } from "react-native";
+import { type TextInput, View } from "react-native";
 import { z } from "zod";
 import { VerificationCodeModal } from "@/components/auth/VerificationCode";
 import { Button } from "@/components/common/Button";
+import { Checkbox } from "@/components/common/Checkbox";
 import Input from "@/components/common/Input";
+import { Text } from "@/components/common/Text";
+import { useToast } from "@/components/common/Toast";
 import { Page } from "@/components/page/Page";
-import { useTheme } from "@/contexts/ThemeContext";
 import useAuth from "@/hooks/account/useAuth";
 import i18n from "@/i18n";
+import type { AuthNavigation } from "@/types";
 
 export const Signup = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<AuthNavigation>();
   const { register, isPending } = useAuth();
   const { t } = useTranslation();
-  const { theme } = useTheme();
+  const { toast } = useToast();
 
-  const [signupError, setSignupError] = useState<string | null>(null);
   const [verificationModalVisible, setVerificationModalVisible] =
     useState(false);
   const [verificationEmail, setVerificationEmail] = useState<string>("");
@@ -37,6 +39,7 @@ export const Signup = () => {
         }),
       password: z.string().min(6, t("auth.errors.password")),
       confirmPassword: z.string().min(6, t("auth.errors.password")),
+      terms: z.boolean(),
     })
     .refine((data) => data.password === data.confirmPassword, {
       message: t("auth.errors.confirmPassword"),
@@ -54,6 +57,7 @@ export const Signup = () => {
       email: "",
       password: "",
       confirmPassword: "",
+      terms: false,
     },
     mode: "onChange",
   });
@@ -61,6 +65,7 @@ export const Signup = () => {
   const email = watch("email");
   const password = watch("password");
   const confirmPassword = watch("confirmPassword");
+  const terms = watch("terms");
 
   const isButtonDisabled =
     isPending ||
@@ -69,14 +74,14 @@ export const Signup = () => {
     !confirmPassword ||
     password.length < 6 ||
     password !== confirmPassword ||
-    !email.endsWith("@imt-atlantique.net");
+    !email.endsWith("@imt-atlantique.net") ||
+    !terms;
 
   const handleSignup = async (data: {
     email: string;
     password: string;
     confirmPassword: string;
   }) => {
-    setSignupError(null);
     try {
       const language = i18n.language ?? "fr";
       const response = await register(data.email, data.password, language);
@@ -92,26 +97,16 @@ export const Signup = () => {
         err instanceof Error &&
         err.message === "You already have an account"
       ) {
-        setSignupError(t("auth.errors.accountExists"));
+        toast(t("auth.errors.accountExists"), "destructive");
       } else {
-        setSignupError(t("auth.errors.signupFailed"));
+        toast(t("auth.errors.signupFailed"), "destructive");
       }
     }
   };
 
   return (
-    <Page title={t("auth.signUp")} disableScroll className="gap-4">
-      {signupError ? (
-        <View className="bg-red-300 p-3 rounded-md my-4">
-          <Text className="text-red-900">{signupError}</Text>
-        </View>
-      ) : (
-        <View className="h-20">
-          <Text style={{ color: theme.muted }} className="mt-2">
-            {t("auth.signUpDescription")}
-          </Text>
-        </View>
-      )}
+    <Page title={t("auth.signUp.title")} disableScroll className="gap-4">
+      <Text color="muted">{t("auth.signUp.description")}</Text>
 
       <View className="flex flex-col gap-10">
         <Input
@@ -149,23 +144,42 @@ export const Signup = () => {
           labelClasses="h3"
           secureTextEntry
           ref={confirmPasswordRef}
-          returnKeyType="done"
+          returnKeyType="next"
           onSubmitEditing={handleSubmit(handleSignup)}
           error={errors.confirmPassword?.message}
         />
+        <Controller
+          control={control}
+          name="terms"
+          render={({ field }) => (
+            <Checkbox
+              label={
+                <View>
+                  <Text variant="sm">{t("auth.signUp.terms")}</Text>
+                  <Button
+                    variant="link"
+                    size="sm"
+                    labelClasses="text-sm"
+                    style={{ padding: 0 }}
+                    label={t("auth.signUp.termsLink")}
+                    onPress={() => navigation.navigate("Legal")}
+                  />
+                </View>
+              }
+              checked={field.value}
+              onPress={field.onChange}
+            />
+          )}
+        />
+
         <View className="flex flex-col gap-2">
           <Button
-            label={isPending ? t("auth.signingUp") : t("auth.signUp")}
+            label={
+              isPending ? t("auth.signUp.pending") : t("auth.signUp.title")
+            }
             onPress={handleSubmit(handleSignup)}
             disabled={isButtonDisabled}
-            className={isButtonDisabled ? "opacity-50" : ""}
             isUpdating={isPending}
-          />
-          <Button
-            label={t("auth.gotAccount")}
-            onPress={() => navigation.navigate("Auth", { screen: "Signin" })}
-            disabled={isPending}
-            variant="link"
           />
         </View>
       </View>

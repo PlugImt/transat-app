@@ -46,6 +46,7 @@ export const AboutModal: React.FC<AboutModalProps> = ({
         title={title}
         confirmLabel={t("common.close")}
         className="gap-8"
+        scrollable
       >
         <Text>{description}</Text>
 

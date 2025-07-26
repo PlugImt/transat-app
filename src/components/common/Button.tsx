@@ -25,7 +25,7 @@ const getButtonStyle = (variant: ButtonVariant, theme: ThemeType) => {
       backgroundColor: theme.destructive,
     },
     ghost: {
-      backgroundColor: theme.backdrop,
+      backgroundColor: theme.border,
     },
     link: {
       backgroundColor: "transparent",
@@ -40,7 +40,7 @@ const getTextColor = (variant: ButtonVariant, theme: ThemeType) => {
     default: theme.primaryText,
     secondary: theme.secondaryText,
     destructive: theme.destructiveText,
-    ghost: theme.muted,
+    ghost: theme.text,
     link: theme.primary,
   };
 

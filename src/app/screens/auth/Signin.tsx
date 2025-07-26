@@ -19,7 +19,6 @@ export const Signin = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
 
-  const [loginError, setLoginError] = useState<string | null>(null);
   const [verificationModalVisible, setVerificationModalVisible] =
     useState(false);
   const [verificationEmail, setVerificationEmail] = useState<string>("");
@@ -62,34 +61,21 @@ export const Signin = () => {
     !email.endsWith("@imt-atlantique.net");
 
   const handleLogin = async (data: { email: string; password: string }) => {
-    setLoginError(null);
     try {
       const result = await login(data.email, data.password);
 
       if (result?.needsVerification) {
         setVerificationEmail(data.email);
         setVerificationModalVisible(true);
-      } else if (result?.success) {
-        toast(t("auth.signInSuccess"), "success");
       }
     } catch {
-      setLoginError(t("auth.errors.invalidCredentials"));
+      toast(t("auth.errors.invalidCredentials"), "destructive");
     }
   };
 
   return (
-    <Page title={t("auth.signIn")} disableScroll className="gap-4">
-      {loginError ? (
-        <View className="bg-red-300 p-3 rounded-md my-4">
-          <Text className="text-red-900">{loginError}</Text>
-        </View>
-      ) : (
-        <View className="h-20">
-          <Text color="muted" className="mt-2">
-            {t("auth.signInDescription")}
-          </Text>
-        </View>
-      )}
+    <Page title={t("auth.signIn.title")} disableScroll className="gap-4">
+      <Text color="muted">{t("auth.signIn.description")}</Text>
 
       <View className="flex flex-col gap-10">
         <Input
@@ -105,47 +91,41 @@ export const Signin = () => {
           onSubmitEditing={() => passwordRef.current?.focus()}
           error={errors.email?.message}
         />
-        <Input
-          placeholder="••••••••••"
-          control={control}
-          name="password"
-          textContentType="password"
-          labelClasses="h3"
-          label={t("auth.password")}
-          secureTextEntry
-          ref={passwordRef}
-          returnKeyType="done"
-          onSubmitEditing={handleSubmit(handleLogin)}
-          error={errors.password?.message}
-        />
+        <View className="items-end">
+          <Input
+            className="w-full"
+            placeholder="••••••••••"
+            control={control}
+            name="password"
+            textContentType="password"
+            labelClasses="h3"
+            label={t("auth.password")}
+            secureTextEntry
+            ref={passwordRef}
+            returnKeyType="done"
+            onSubmitEditing={handleSubmit(handleLogin)}
+            error={errors.password?.message}
+          />
+          <Button
+            label={t("auth.resetPassword.forgotPassword")}
+            onPress={() =>
+              navigation.navigate("Auth", {
+                screen: "ResetPassword",
+                params: { email: watch("email") },
+              })
+            }
+            disabled={isPending}
+            variant="link"
+            size="sm"
+          />
+        </View>
 
         <View className="flex flex-col gap-2">
           <Button
-            label={isPending ? t("auth.signingIn") : t("common.signIn")}
+            label={isPending ? t("auth.signIn.pending") : t("common.signIn")}
             onPress={handleSubmit(handleLogin)}
             disabled={isButtonDisabled}
-            className={isButtonDisabled ? "opacity-50" : ""}
             isUpdating={isPending}
-          />
-
-          {loginError && (
-            <Button
-              label={t("auth.resetPassword")}
-              onPress={() =>
-                navigation.navigate("Auth", {
-                  screen: "ResetPassword",
-                  params: { email: watch("email") },
-                })
-              }
-              disabled={isPending}
-              variant="link"
-            />
-          )}
-          <Button
-            label={t("auth.noAccount")}
-            onPress={() => navigation.navigate("Auth", { screen: "Signup" })}
-            disabled={isPending}
-            variant="link"
           />
         </View>
       </View>

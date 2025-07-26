@@ -1,7 +1,7 @@
 import { MotiView } from "moti";
 import { useState } from "react";
 import { Image, View } from "react-native";
-import Logo from "@/assets/images/icon.png";
+import Logo from "@/assets/images/icon-bg.png";
 import { cn } from "@/utils";
 import { ClubCard } from "./components/ClubCard";
 import { HeroAvatar } from "./components/HeroAvatar";

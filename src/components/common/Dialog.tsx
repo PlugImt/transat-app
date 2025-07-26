@@ -50,6 +50,7 @@ type DialogContentProps = {
   title: string;
   isPending?: boolean;
   disableConfirm?: boolean;
+  scrollable?: boolean;
 };
 
 const DialogContent = ({
@@ -60,6 +61,7 @@ const DialogContent = ({
   onCancel,
   onConfirm,
   disableConfirm,
+  scrollable,
   title,
   isPending,
 }: DialogContentProps) => {
@@ -118,6 +120,7 @@ const DialogContent = ({
               <ScrollViewWithIndicators
                 keyboardShouldPersistTaps="handled"
                 maxHeight={400}
+                scrollable={scrollable}
               >
                 <TouchableWithoutFeedback className="pr-6">
                   <View className={className}>{children}</View>

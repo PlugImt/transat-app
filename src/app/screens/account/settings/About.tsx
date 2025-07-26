@@ -1,9 +1,9 @@
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Linking, View } from "react-native";
+import { HeroAnimation } from "@/components/animations/HeroAnimation";
 import { Button } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
-import { AnimatedLogo } from "@/components/custom/AnimatedLogo";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 
@@ -20,12 +20,6 @@ export const About = () => {
     }
   };
 
-  const handleLogoPress = () => {
-    if (triggerConfettiRef.current) {
-      triggerConfettiRef.current();
-    }
-  };
-
   return (
     <Page
       title={t("settings.about.title")}
@@ -39,9 +33,22 @@ export const About = () => {
         </Text>
       }
     >
-      <AnimatedLogo onLogoPress={handleLogoPress} showCampusApp={true} />
+      <HeroAnimation className="mt-6" />
 
-      <View className="gap-6 px-4 mt-4">
+      <View className="flex flex-col items-center">
+        <Text variant="h1" className="text-5xl" color="primary">
+          Transat
+        </Text>
+        <Text className="text-center" variant="h3" color="muted">
+          {t("welcome.subtitle")}
+        </Text>
+
+        <Text className="text-center mb-4" color="muted">
+          {t("common.campusApp")}
+        </Text>
+      </View>
+
+      <View className="gap-6 px-4">
         <View
           className=" rounded-lg px-6 py-6"
           style={{ backgroundColor: theme.card }}

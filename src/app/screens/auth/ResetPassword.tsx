@@ -4,12 +4,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import {
-  Animated as RNAnimated,
-  type TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { type TextInput, TouchableOpacity, View } from "react-native";
 import { z } from "zod";
 import { Button } from "@/components/common/Button";
 import Input from "@/components/common/Input";
@@ -28,7 +23,6 @@ export const ResetPassword = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
 
-  const [resetError, setResetError] = useState<string | null>(null);
   const [verificationCodeSent, setVerificationCodeSent] = useState(false);
   const [canRequestCode, setCanRequestCode] = useState(true);
   const [countdown, setCountdown] = useState(0);
@@ -97,7 +91,6 @@ export const ResetPassword = () => {
   }, [countdown]);
 
   const handleRequestCode = async () => {
-    setResetError(null);
     try {
       const response = await resetPassword(email);
       if (response.success) {
@@ -106,14 +99,17 @@ export const ResetPassword = () => {
         setCountdown(60); // 1 minute cooldown
         toast(t("auth.codeSent"), "success");
       } else {
-        setResetError(response.error || t("auth.errors.resetPasswordFailed"));
+        toast(
+          response.error || t("auth.errors.resetPasswordFailed"),
+          "destructive",
+        );
       }
       // biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
     } catch (error: any) {
       if (error.response?.status === 429) {
-        setResetError(t("auth.errors.tooManyRequests"));
+        toast(t("auth.errors.tooManyRequests"), "destructive");
       } else {
-        setResetError(t("auth.errors.resetPasswordFailed"));
+        toast(t("auth.errors.resetPasswordFailed"), "destructive");
       }
     }
   };
@@ -124,7 +120,6 @@ export const ResetPassword = () => {
     newPassword: string;
     confirmPassword: string;
   }) => {
-    setResetError(null);
     try {
       const response = await changePassword(
         data.email,
@@ -136,166 +131,127 @@ export const ResetPassword = () => {
         toast(t("auth.resetPassword.resetPasswordSuccess"), "success");
         navigation.goBack();
       } else {
-        setResetError(response.error || t("auth.errors.resetPasswordFailed"));
+        toast(
+          response.error || t("auth.errors.resetPasswordFailed"),
+          "destructive",
+        );
       }
       // biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
     } catch (error: any) {
       if (error.response?.status === 429) {
-        setResetError(t("auth.errors.tooManyRequests"));
+        toast(t("auth.errors.tooManyRequests"), "destructive");
       } else if (error.response?.status === 400) {
-        setResetError(t("auth.errors.invalidVerificationCode"));
+        toast(t("auth.errors.invalidVerificationCode"), "destructive");
       } else {
-        setResetError(t("auth.errors.resetPasswordFailed"));
+        toast(t("auth.errors.resetPasswordFailed"), "destructive");
       }
     }
   };
 
-  // Add animation values
-  const fadeAnim = useRef(new RNAnimated.Value(0)).current;
-  const slideAnim = useRef(new RNAnimated.Value(50)).current;
-
-  useEffect(() => {
-    // Start animations
-    RNAnimated.parallel([
-      RNAnimated.timing(fadeAnim, {
-        toValue: 1,
-        duration: 800,
-        useNativeDriver: true,
-      }),
-      RNAnimated.timing(slideAnim, {
-        toValue: 0,
-        duration: 800,
-        useNativeDriver: true,
-      }),
-    ]).start();
-  }, [fadeAnim, slideAnim]);
-
   return (
-    <Page title={t("auth.resetPassword.title")} className="gap-4">
-      <RNAnimated.View
-        style={{
-          opacity: fadeAnim,
-          transform: [{ translateY: slideAnim }],
-          flex: 1,
-        }}
-      >
-        {resetError ? (
-          <View className="bg-red-300 p-3 rounded-md my-4">
-            <Text className="text-red-900">{resetError}</Text>
-          </View>
-        ) : (
-          <View className="h-20">
-            <Text color="muted" className="mt-2">
-              {t("auth.resetPassword.description")}
-            </Text>
-          </View>
+    <Page title={t("auth.resetPassword.title")} className="gap-4" disableScroll>
+      <Text color="muted">{t("auth.resetPassword.description")}</Text>
+
+      <View className="flex flex-col gap-10">
+        <Input
+          placeholder="christophe.lerouge@imt-atlantique.net"
+          control={control}
+          name="email"
+          autoCapitalize="none"
+          textContentType="emailAddress"
+          label={t("auth.email")}
+          labelClasses="h3"
+          returnKeyType="next"
+          onSubmitEditing={() => verificationCodeRef.current?.focus()}
+          error={errors.email?.message}
+          editable={!verificationCodeSent}
+        />
+
+        {verificationCodeSent && (
+          <>
+            <Input
+              placeholder="123456"
+              control={control}
+              name="verificationCode"
+              keyboardType="numeric"
+              maxLength={6}
+              label={t("auth.verificationCode")}
+              labelClasses="h3"
+              returnKeyType="next"
+              ref={verificationCodeRef}
+              onSubmitEditing={() => newPasswordRef.current?.focus()}
+              error={errors.verificationCode?.message}
+            />
+            <Input
+              placeholder="••••••••••"
+              control={control}
+              name="newPassword"
+              textContentType="newPassword"
+              label={t("auth.resetPassword.newPassword")}
+              labelClasses="h3"
+              secureTextEntry
+              ref={newPasswordRef}
+              returnKeyType="next"
+              onSubmitEditing={() => confirmPasswordRef.current?.focus()}
+              error={errors.newPassword?.message}
+            />
+            <Input
+              placeholder="••••••••••"
+              control={control}
+              name="confirmPassword"
+              textContentType="password"
+              label={t("auth.confirmPassword")}
+              labelClasses="h3"
+              secureTextEntry
+              ref={confirmPasswordRef}
+              returnKeyType="done"
+              onSubmitEditing={handleSubmit(handleResetPassword)}
+              error={errors.confirmPassword?.message}
+            />
+          </>
         )}
 
-        <View className="flex flex-col gap-10">
-          <Input
-            placeholder="christophe.lerouge@imt-atlantique.net"
-            control={control}
-            name="email"
-            autoCapitalize="none"
-            textContentType="emailAddress"
-            label={t("auth.email")}
-            labelClasses="h3"
-            returnKeyType="next"
-            onSubmitEditing={() => verificationCodeRef.current?.focus()}
-            error={errors.email?.message}
-            editable={!verificationCodeSent}
-          />
-
-          {verificationCodeSent && (
-            <>
-              <Input
-                placeholder="123456"
-                control={control}
-                name="verificationCode"
-                keyboardType="numeric"
-                maxLength={6}
-                label={t("auth.verificationCode")}
-                labelClasses="h3"
-                returnKeyType="next"
-                ref={verificationCodeRef}
-                onSubmitEditing={() => newPasswordRef.current?.focus()}
-                error={errors.verificationCode?.message}
-              />
-              <Input
-                placeholder="••••••••••"
-                control={control}
-                name="newPassword"
-                textContentType="newPassword"
-                label={t("auth.resetPassword.newPassword")}
-                labelClasses="h3"
-                secureTextEntry
-                ref={newPasswordRef}
-                returnKeyType="next"
-                onSubmitEditing={() => confirmPasswordRef.current?.focus()}
-                error={errors.newPassword?.message}
-              />
-              <Input
-                placeholder="••••••••••"
-                control={control}
-                name="confirmPassword"
-                textContentType="password"
-                label={t("auth.confirmPassword")}
-                labelClasses="h3"
-                secureTextEntry
-                ref={confirmPasswordRef}
-                returnKeyType="done"
-                onSubmitEditing={handleSubmit(handleResetPassword)}
-                error={errors.confirmPassword?.message}
-              />
-            </>
+        <View className="flex flex-col gap-2">
+          {!verificationCodeSent ? (
+            <Button
+              label={
+                isPending
+                  ? t("auth.resetPassword.resettingPassword")
+                  : t("auth.resetPassword.requestVerificationCode")
+              }
+              onPress={handleRequestCode}
+              disabled={isButtonDisabled || !canRequestCode}
+              isUpdating={isPending}
+            />
+          ) : (
+            <Button
+              label={
+                isPending
+                  ? t("auth.resetPassword.resettingPassword")
+                  : t("auth.resetPassword.title")
+              }
+              onPress={handleSubmit(handleResetPassword)}
+              disabled={isButtonDisabled}
+              isUpdating={isPending}
+            />
           )}
-
-          <View className="flex flex-col gap-2">
-            {!verificationCodeSent ? (
-              <Button
-                label={
-                  isPending
-                    ? t("auth.resetPassword.resettingPassword")
-                    : t("auth.resetPassword.requestVerificationCode")
-                }
-                onPress={handleRequestCode}
-                disabled={isButtonDisabled || !canRequestCode}
-                className={
-                  isButtonDisabled || !canRequestCode ? "opacity-50" : ""
-                }
-                isUpdating={isPending}
-              />
-            ) : (
-              <Button
-                label={
-                  isPending
-                    ? t("auth.resetPassword.resettingPassword")
-                    : t("auth.resetPassword.resetPassword")
-                }
-                onPress={handleSubmit(handleResetPassword)}
-                disabled={isButtonDisabled}
-                className={isButtonDisabled ? "opacity-50" : ""}
-                isUpdating={isPending}
-              />
-            )}
-            {canRequestCode ? (
-              <TouchableOpacity
-                onPress={handleRequestCode}
-                disabled={isPending}
-                className="mt-2"
-              >
-                <Text color="muted" className="text-center">
-                  {t("auth.requestNewCode")}
-                </Text>
-              </TouchableOpacity>
-            ) : (
+          {canRequestCode ? (
+            <TouchableOpacity
+              onPress={handleRequestCode}
+              disabled={isPending}
+              className="mt-2"
+            >
               <Text color="muted" className="text-center">
-                {t("auth.requestCodeCooldown", { seconds: countdown })}
+                {t("auth.requestNewCode")}
               </Text>
-            )}
-          </View>
+            </TouchableOpacity>
+          ) : (
+            <Text color="muted" className="text-center">
+              {t("auth.requestCodeCooldown", { seconds: countdown })}
+            </Text>
+          )}
         </View>
-      </RNAnimated.View>
+      </View>
     </Page>
   );
 };

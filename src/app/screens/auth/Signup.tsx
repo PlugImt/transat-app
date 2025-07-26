@@ -149,14 +149,7 @@ export const Signup = () => {
             }
             onPress={handleSubmit(handleSignup)}
             disabled={isButtonDisabled}
-            className={isButtonDisabled ? "opacity-50" : ""}
             isUpdating={isPending}
-          />
-          <Button
-            label={t("auth.gotAccount")}
-            onPress={() => navigation.navigate("Auth", { screen: "Signin" })}
-            disabled={isPending}
-            variant="link"
           />
         </View>
       </View>

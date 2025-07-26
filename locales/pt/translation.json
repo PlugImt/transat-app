@@ -77,12 +77,12 @@
   "auth": {
     "signIn": {
       "title": "Entrar",
-      "description": "Sentimos sua falta!",
+      "description": "Bem-vindo de volta ao Transat 🥳",
       "pending": "Entrando..."
     },
     "signUp": {
       "title": "Cadastrar",
-      "description": "Junte-se à comunidade Transat! Preencha seus dados para criar uma conta e começar a aproveitar nossos serviços.",
+      "description": "Encontre todos os serviços que você precisa no campus a seu alcance 🌴",
       "pending": "Cadastrando..."
     },
     "email": "E-mail",

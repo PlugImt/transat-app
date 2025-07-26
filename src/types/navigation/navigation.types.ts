@@ -16,7 +16,10 @@ export type AuthStackParamList = {
   Signin: undefined;
   Signup: undefined;
   ResetPassword: { email: string };
+  Legal: undefined;
 };
+
+export type AuthNavigation = StackNavigationProp<AuthStackParamList>;
 
 export type AppStackParamList = {
   Home: undefined;

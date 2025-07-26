@@ -83,7 +83,9 @@
     "signUp": {
       "title": "Inscription",
       "description": "Retrouvez tous les services du campus dont vous avez besoin à portée de pouce 🌴",
-      "pending": "Inscription..."
+      "pending": "Inscription...",
+      "terms": "En m'inscrivant j'accepte les",
+      "termsLink": "conditions d'utilisation et la politique de confidentialité"
     },
     "email": "Email",
     "password": "Mot de passe",

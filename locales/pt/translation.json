@@ -83,7 +83,9 @@
     "signUp": {
       "title": "Cadastrar",
       "description": "Encontre todos os serviços que você precisa no campus a seu alcance 🌴",
-      "pending": "Cadastrando..."
+      "pending": "Cadastrando...",
+      "terms": "Ao me cadastrar, eu aceito os",
+      "termsLink": "termos de uso e política de privacidade"
     },
     "email": "E-mail",
     "password": "Senha",

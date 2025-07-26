@@ -83,7 +83,9 @@
     "signUp": {
       "title": "Sign up",
       "description": "Find all the services you need on campus at your fingertips 🌴",
-      "pending": "Signing up..."
+      "pending": "Signing up...",
+      "terms": "By signing up, I accept the",
+      "termsLink": "terms of use and privacy policy"
     },
     "email": "Email",
     "password": "Password",

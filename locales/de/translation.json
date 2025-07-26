@@ -83,7 +83,9 @@
     "signUp": {
       "title": "Registrieren",
       "description": "Finde alle Dienste, die du auf dem Campus benötigst, direkt in deinem Griff 🌴",
-      "pending": "Registrierung läuft..."
+      "pending": "Registrierung läuft...",
+      "terms": "Beim Registrieren akzeptiere ich die",
+      "termsLink": "Nutzungsbedingungen und Datenschutzrichtlinie"
     },
     "email": "E-Mail",
     "password": "Passwort",

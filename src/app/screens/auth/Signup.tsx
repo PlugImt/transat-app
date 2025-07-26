@@ -1,21 +1,23 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
 import { useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { type TextInput, View } from "react-native";
 import { z } from "zod";
 import { VerificationCodeModal } from "@/components/auth/VerificationCode";
 import { Button } from "@/components/common/Button";
+import { Checkbox } from "@/components/common/Checkbox";
 import Input from "@/components/common/Input";
 import { Text } from "@/components/common/Text";
 import { useToast } from "@/components/common/Toast";
 import { Page } from "@/components/page/Page";
 import useAuth from "@/hooks/account/useAuth";
 import i18n from "@/i18n";
+import type { AuthNavigation } from "@/types";
 
 export const Signup = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<AuthNavigation>();
   const { register, isPending } = useAuth();
   const { t } = useTranslation();
   const { toast } = useToast();
@@ -37,6 +39,10 @@ export const Signup = () => {
         }),
       password: z.string().min(6, t("auth.errors.password")),
       confirmPassword: z.string().min(6, t("auth.errors.password")),
+      terms: z.boolean().refine((terms) => terms, {
+        message: t("auth.errors.terms"),
+        path: ["terms"],
+      }),
     })
     .refine((data) => data.password === data.confirmPassword, {
       message: t("auth.errors.confirmPassword"),
@@ -54,6 +60,7 @@ export const Signup = () => {
       email: "",
       password: "",
       confirmPassword: "",
+      terms: false,
     },
     mode: "onChange",
   });
@@ -61,6 +68,7 @@ export const Signup = () => {
   const email = watch("email");
   const password = watch("password");
   const confirmPassword = watch("confirmPassword");
+  const terms = watch("terms");
 
   const isButtonDisabled =
     isPending ||
@@ -69,7 +77,8 @@ export const Signup = () => {
     !confirmPassword ||
     password.length < 6 ||
     password !== confirmPassword ||
-    !email.endsWith("@imt-atlantique.net");
+    !email.endsWith("@imt-atlantique.net") ||
+    !terms;
 
   const handleSignup = async (data: {
     email: string;
@@ -138,10 +147,34 @@ export const Signup = () => {
           labelClasses="h3"
           secureTextEntry
           ref={confirmPasswordRef}
-          returnKeyType="done"
+          returnKeyType="next"
           onSubmitEditing={handleSubmit(handleSignup)}
           error={errors.confirmPassword?.message}
         />
+        <Controller
+          control={control}
+          name="terms"
+          render={({ field }) => (
+            <Checkbox
+              label={
+                <View>
+                  <Text variant="sm">{t("auth.signUp.terms")}</Text>
+                  <Button
+                    variant="link"
+                    size="sm"
+                    labelClasses="text-sm"
+                    style={{ padding: 0 }}
+                    label={t("auth.signUp.termsLink")}
+                    onPress={() => navigation.navigate("Legal")}
+                  />
+                </View>
+              }
+              checked={field.value}
+              onPress={field.onChange}
+            />
+          )}
+        />
+
         <View className="flex flex-col gap-2">
           <Button
             label={

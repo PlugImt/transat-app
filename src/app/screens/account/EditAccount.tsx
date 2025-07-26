@@ -108,7 +108,7 @@ export const EditProfile = () => {
   };
 
   if (isPending) {
-    return <EditProfileLoading />;
+    return <EditAccountSkeleton />;
   }
 
   if ((isError && error) || !user) {
@@ -237,7 +237,7 @@ export const EditProfile = () => {
 
 export default EditProfile;
 
-const EditProfileLoading = () => {
+const EditAccountSkeleton = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
   const navigation = useNavigation();

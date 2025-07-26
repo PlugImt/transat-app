@@ -1,5 +1,5 @@
 import { Check } from "lucide-react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TouchableOpacity, View } from "react-native";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -13,7 +13,7 @@ interface CheckboxProps extends React.ComponentPropsWithoutRef<typeof View> {
   checkboxClasses?: string;
 }
 function Checkbox({
-  checked,
+  checked = false,
   onPress,
   label,
   labelClasses,
@@ -23,6 +23,10 @@ function Checkbox({
 }: CheckboxProps) {
   const [isChecked, setChecked] = useState(checked);
   const { theme } = useTheme();
+
+  useEffect(() => {
+    setChecked(checked);
+  }, [checked]);
 
   const toggleCheckbox = () => {
     const checked = !isChecked;

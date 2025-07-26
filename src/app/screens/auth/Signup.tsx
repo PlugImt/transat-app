@@ -39,10 +39,7 @@ export const Signup = () => {
         }),
       password: z.string().min(6, t("auth.errors.password")),
       confirmPassword: z.string().min(6, t("auth.errors.password")),
-      terms: z.boolean().refine((terms) => terms, {
-        message: t("auth.errors.terms"),
-        path: ["terms"],
-      }),
+      terms: z.boolean(),
     })
     .refine((data) => data.password === data.confirmPassword, {
       message: t("auth.errors.confirmPassword"),

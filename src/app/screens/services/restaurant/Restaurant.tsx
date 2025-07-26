@@ -24,8 +24,6 @@ export const Restaurant = () => {
     return <LoadingState />;
   }
 
-  console.log(menu);
-
   if (isError && error) {
     return (
       <ErrorPage

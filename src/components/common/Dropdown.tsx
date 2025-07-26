@@ -1,6 +1,7 @@
 import WheelPicker from "@quidone/react-native-wheel-picker";
 import { ChevronDown } from "lucide-react-native";
 import type React from "react";
+import { useTranslation } from "react-i18next";
 import { TouchableOpacity, View } from "react-native";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -57,6 +58,7 @@ const DropdownContent = ({
 }: DropdownProps) => {
   const { theme } = useTheme();
   const { handleBottomSheet } = useBottomSheet();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -87,7 +89,7 @@ const DropdownContent = ({
           enableScrollByTapOnItem={true}
         />
         <Button
-          label="Confirmer"
+          label={t("common.confirm")}
           variant="secondary"
           onPress={() => handleBottomSheet(false)}
         />
@@ -115,7 +117,10 @@ export const DropdownLoading = ({
       <Text color="muted" variant="sm">
         {label}
       </Text>
-      <View className="flex-row items-center justify-between bg-muted/70 rounded-lg px-3 h-12 gap-2">
+      <View
+        className="flex-row items-center justify-between rounded-lg px-3 h-12"
+        style={{ backgroundColor: theme.input }}
+      >
         <View className="flex-row items-center gap-2">
           {icon ? icon : null}
           <Text>{placeholder}</Text>

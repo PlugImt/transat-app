@@ -174,7 +174,7 @@
       "notifications": "Benachrichtigungen",
       "fetchError": "Benachrichtigungseinstellungen konnten nicht abgerufen werden",
       "updateError": "Benachrichtigungseinstellungen konnten nicht aktualisiert werden",
-      "setNotification": "Festlegen",
+      "setNotification": "Benachrichtigt werden",
       "toggleRestaurant": "Benachrichtigt werden, wenn das Tagesmenü veröffentlicht wird",
       "toggleTraq": "Benachrichtigt werden, wenn ein neuer Artikel beim Traq' angeboten wird"
     },
@@ -375,14 +375,15 @@
       "almostDone": "Maschine {{number}} fast fertig!",
       "almostDoneBody": "Ihr {{type}} wird in {{minutes}} Minuten fertig sein",
       "getNotification": "Benachrichtigung erhalten",
-      "getNotificationDesc": "Sie erhalten eine Benachrichtigung {{minutes}} Minuten bevor Ihr {{type}} fertig ist",
+      "getNotificationDesc": "Sie werden benachrichtigt {{minutes}} Minuten bevor Ihr {{type}} fertig ist",
+      "getNotificationError": "Fehler beim Einrichten der Benachrichtigung",
       "minutesBeforeEnd": "Minuten vor Ende",
       "machineAvailable": "Verfügbare Maschinen",
       "dryerAvailable": "Verfügbare Trockner",
       "noMachine": "Keine Maschine verfügbar",
       "about": "24/7 geöffnet, die Wäscherei ermöglicht es Ihnen, jederzeit zu waschen und zu trocknen zu einem sehr erschwinglichen Preis",
       "price": "Waschen: 2€\nTrocknen: 1€",
-      "additionalInfo": "Zahlen Sie mit Münzen, Karte oder Monix-Wallet (empfohlen für Boni und Rückerstattungen)\n\nBrauchen Sie mehr Trocknungszeit? Zahlen Sie für mehrere Sitzungen vor dem Start",
+      "additionalInfo": "Zahlen Sie mit Münzen, Karte oder Monix-Wallet (empfohlen für Boni und Cashback)\n\nBrauchen Sie mehr Trocknungszeit? Zahlen Sie für mehrere Sitzungen vor dem Start",
       "location": "Unter der MDE, nach den Briefkästen"
     }
   },

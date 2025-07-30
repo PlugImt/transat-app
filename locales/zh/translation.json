@@ -174,7 +174,7 @@
       "notifications": "通知",
       "fetchError": "无法获取通知设置",
       "updateError": "无法更新通知设置",
-      "setNotification": "设置",
+      "setNotification": "接收通知",
       "toggleRestaurant": "当日菜单发布时收到通知",
       "toggleTraq": "Traq'有新商品时收到通知"
     },
@@ -375,14 +375,15 @@
       "almostDone": "机器{{number}}即将完成！",
       "almostDoneBody": "您的{{type}}将在{{minutes}}分钟内完成",
       "getNotification": "接收通知",
-      "getNotificationDesc": "您的{{type}}完成前{{minutes}}分钟您将收到通知",
+      "getNotificationDesc": "您将在{{minutes}}分钟前收到通知",
+      "getNotificationError": "设置通知时发生错误",
       "minutesBeforeEnd": "结束前分钟数",
       "machineAvailable": "可用机器",
       "dryerAvailable": "可用烘干机",
       "noMachine": "没有可用机器",
       "about": "24/7开放，洗衣房让您随时以非常实惠的价格洗涤和烘干",
       "price": "洗涤：2€\n烘干：1€",
-      "additionalInfo": "用硬币、卡或Monix钱包支付（推荐用于奖金和退款）\n\n需要更多烘干时间？开始前支付多个会话",
+      "additionalInfo": "用硬币、卡或Monix钱包支付（推荐用于奖金和现金返还）\n\n需要更多烘干时间？开始前支付多个会话",
       "location": "MDE下方，邮箱后"
     }
   },

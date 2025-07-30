@@ -1,9 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
-import { Image } from "react-native";
 import Animated from "react-native-reanimated";
 import { Button } from "@/components/common/Button";
+import Image from "@/components/common/Image";
 import LinkCard, { LinkCardLoading } from "@/components/custom/card/LinkCard";
 import { PreferenceCustomizationButton } from "@/components/custom/PreferenceCustomizationModal";
 import { Empty } from "@/components/page/Empty";
@@ -45,7 +45,7 @@ export const Services = () => {
   }
 
   return (
-    <Page asChildren title={t("services.title")}>
+    <Page className="gap-2" title={t("services.title")} asChildren>
       <Animated.FlatList
         data={enabledServices}
         renderItem={({ item }) => renderServiceCard(item)}
@@ -68,6 +68,7 @@ export const Services = () => {
               label={t("common.customizeServices")}
               variant="ghost"
               size="sm"
+              className="mt-3"
             />
           </PreferenceCustomizationButton>
         }

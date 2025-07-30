@@ -7,7 +7,21 @@ export const getClubs = async () => {
 
 export const getClubDetails = async (id: number) => {
   return await apiRequest<ClubDetails>(
-    API_ROUTES.club.replace(":id", id.toString()),
+    API_ROUTES.clubDetails.replace(":id", id.toString()),
     Method.GET,
+  );
+};
+
+export const joinClub = async (id: number) => {
+  return await apiRequest<void>(
+    API_ROUTES.clubJoin.replace(":id", id.toString()),
+    Method.POST,
+  );
+};
+
+export const leaveClub = async (id: number) => {
+  return await apiRequest<void>(
+    API_ROUTES.clubLeave.replace(":id", id.toString()),
+    Method.POST,
   );
 };

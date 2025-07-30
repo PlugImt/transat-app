@@ -73,7 +73,7 @@ interface ButtonProps
   labelClasses?: string;
   variant?: ButtonVariant;
   size?: ButtonSize;
-  icon?: React.ReactNode;
+  icon?: React.ReactElement<{ color: string; size?: number }>;
   isUpdating?: boolean;
 }
 
@@ -105,7 +105,7 @@ const Button = ({
       ]}
       className={cn(
         className,
-        "rounded-lg gap-2 flex-row items-center justify-center",
+        "rounded-lg gap-1 flex-row items-center justify-center",
       )}
       {...props}
       disabled={isDisabled}
@@ -118,7 +118,11 @@ const Button = ({
       >
         {label}
       </Text>
-      {isUpdating ? <ActivityIndicator color={textColor} /> : icon}
+      {isUpdating ? (
+        <ActivityIndicator color={textColor} />
+      ) : (
+        icon && cloneElement(icon, { color: textColor, size: 16 })
+      )}
     </TouchableOpacity>
   );
 };

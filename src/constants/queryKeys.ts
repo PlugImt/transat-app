@@ -9,6 +9,8 @@ export const QUERY_KEYS = {
   traq: ["traq"],
   clubs: ["clubs"],
   clubDetails: ["clubDetails"],
+  clubJoin: ["clubJoin"],
+  clubLeave: ["clubLeave"],
   notification: ["notification"],
   auth: {
     user: ["auth", "user"],

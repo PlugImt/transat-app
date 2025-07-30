@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
-import { getClubDetails, getClubs } from "@/api";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getClubDetails, getClubs, joinClub, leaveClub } from "@/api";
 import { QUERY_KEYS } from "@/constants";
 
 export const useClubs = () => {
@@ -18,4 +18,32 @@ export const useClubDetails = (id: number) => {
   });
 
   return { data, isPending, refetch, isError, error };
+};
+
+export const useJoinClubMutation = (id: number) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: [...QUERY_KEYS.clubJoin, id],
+    mutationFn: () => joinClub(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [...QUERY_KEYS.clubDetails, id],
+      });
+    },
+  });
+};
+
+export const useLeaveClubMutation = (id: number) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: [...QUERY_KEYS.clubLeave, id],
+    mutationFn: () => leaveClub(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [...QUERY_KEYS.clubDetails, id],
+      });
+    },
+  });
 };

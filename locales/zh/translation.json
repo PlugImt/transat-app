@@ -12,6 +12,7 @@
     "clearAll": "清除全部",
     "filter": "筛选",
     "refresh": "刷新",
+    "link": "链接",
     "or": "或",
     "other": "其他",
     "free": "免费",
@@ -390,6 +391,7 @@
       "description": "发现IMT的所有俱乐部和协会",
       "book": "预订",
       "interested": "{{count}} 人对此俱乐部感兴趣",
+      "responsible": "负责人",
       "errors": {
         "empty": "未找到俱乐部",
         "emptyDescription": "尝试使用其他关键词"
@@ -398,5 +400,13 @@
   },
   "games": {
     "title": "游戏"
+  },
+  "user": {
+    "contact": "联系",
+    "interested": "感兴趣",
+    "notInterested": "不感兴趣",
+    "errors": {
+      "contact": "打开短信应用时出错"
+    }
   }
 }

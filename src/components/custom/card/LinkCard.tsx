@@ -33,19 +33,17 @@ interface LinkCardProps {
 const LinkCard = ({ onPress, image, title, description }: LinkCardProps) => {
   const { theme } = useTheme();
   return (
-    <Card onPress={onPress}>
-      <View className="flex-row items-center gap-4">
-        <ImageContainer>{image}</ImageContainer>
-        <View className="flex-1">
-          <Text variant="h3" numberOfLines={2}>
-            {title}
-          </Text>
-          <Text variant="sm" color="muted" numberOfLines={3}>
-            {description}
-          </Text>
-        </View>
-        {onPress && <ChevronRight color={theme.muted} />}
+    <Card onPress={onPress} className="h-[100px] flex-row items-center gap-4">
+      {image}
+      <View className="flex-1">
+        <Text variant="h3" numberOfLines={1}>
+          {title}
+        </Text>
+        <Text variant="sm" color="muted" numberOfLines={2}>
+          {description}
+        </Text>
       </View>
+      {onPress && <ChevronRight color={theme.muted} />}
     </Card>
   );
 };

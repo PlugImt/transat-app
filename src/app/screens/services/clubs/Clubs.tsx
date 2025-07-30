@@ -33,6 +33,7 @@ export const Clubs = () => {
       title={t("services.clubs.title")}
       onRefresh={refetch}
       refreshing={isPending}
+      className="gap-2"
       asChildren
     >
       <Animated.FlatList
@@ -42,7 +43,7 @@ export const Clubs = () => {
         onScroll={scrollHandler}
         showsVerticalScrollIndicator
         ListHeaderComponent={
-          <View className="flex-row items-center gap-2">
+          <View className="flex-row items-center gap-2 mb-3">
             <SearchClub />
             <Button label="Réserver" variant="secondary" onPress={() => {}} />
           </View>

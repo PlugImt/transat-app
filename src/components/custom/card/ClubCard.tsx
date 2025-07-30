@@ -19,7 +19,7 @@ const ClubCard = ({ club }: ClubCardProps) => {
     <LinkCard
       title={club.name}
       description={club.description}
-      image={<Image source={club.picture} />}
+      image={<Image source={club.picture} size={36} />}
       onPress={() => {
         navigation.navigate("ClubDetails", { id: club.id });
       }}

@@ -13,6 +13,7 @@
     "filter": "Filter",
     "refresh": "Refresh",
     "or": "Or",
+    "link": "Link",
     "other": "Other",
     "free": "Free",
     "freeToUse": "Free to use",
@@ -390,6 +391,7 @@
       "description": "Discover all clubs and associations at IMT",
       "book": "Book",
       "interested": "{{count}} people are interested in this club",
+      "responsible": "Responsible",
       "errors": {
         "empty": "No club found",
         "emptyDescription": "Try with another keyword"
@@ -398,5 +400,13 @@
   },
   "games": {
     "title": "Games"
+  },
+  "user": {
+    "contact": "Contact",
+    "interested": "Interested",
+    "notInterested": "Not interested",
+    "errors": {
+      "contact": "Error opening SMS app"
+    }
   }
 }

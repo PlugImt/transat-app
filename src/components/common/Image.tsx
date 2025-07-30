@@ -89,6 +89,7 @@ const Image = forwardRef<React.ElementRef<typeof RNImage>, ImageProps>(
               "aspect-square h-full w-full",
               isLoading ? "opacity-0" : "opacity-100",
             )}
+            resizeMode={props.resizeMode ?? "contain"}
             borderRadius={radius === "round" ? 9999 : radius}
             onLoadStart={() => setImageLoading(true)}
             onLoadEnd={() => setImageLoading(false)}
@@ -97,7 +98,7 @@ const Image = forwardRef<React.ElementRef<typeof RNImage>, ImageProps>(
         </View>
         {isLoading && (
           <View className="z-20 absolute inset-0 h-full w-full">
-            <ImageSkeleton size={size} radius={radius} />
+            <ImageSkeleton size={size} radius={radius} {...props} />
           </View>
         )}
       </View>

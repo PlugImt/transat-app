@@ -18,7 +18,7 @@ import {
 } from "@/components/common/Dialog";
 import { Text } from "@/components/common/Text";
 import { useToast } from "@/components/common/Toast";
-import { AccountCard } from "@/components/custom/card/AccountCard";
+import { UserCard } from "@/components/custom/card/UserCard";
 import { Page } from "@/components/page/Page";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -68,7 +68,7 @@ export const Settings = () => {
       onRefresh={refetch}
       title={t("settings.settings")}
     >
-      <AccountCard user={user} />
+      <UserCard user={user} />
 
       <SettingCategory title={t("common.appearance")}>
         <SettingsItem

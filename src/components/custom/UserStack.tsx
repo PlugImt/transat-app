@@ -6,8 +6,8 @@ import { type ThemeColorKeys, useTheme } from "@/contexts/ThemeContext";
 import Image from "../common/Image";
 
 interface UserStackProps {
-  pictures: string[];
-  count: number;
+  pictures?: string[];
+  count?: number;
   max?: number;
   size?: "default" | "sm";
   onPress?: () => void;
@@ -20,7 +20,7 @@ export const UserStack = ({
   size = "default",
   onPress,
   count,
-  borderColor = "destructive",
+  borderColor = "background",
 }: UserStackProps) => {
   const { theme } = useTheme();
   const { t } = useTranslation();
@@ -36,7 +36,9 @@ export const UserStack = ({
     },
   };
 
-  const countMax = count - max > 100 ? "99" : count - max;
+  if (!pictures || pictures.length === 0) {
+    return null;
+  }
 
   return (
     <View className="gap-2">
@@ -49,14 +51,14 @@ export const UserStack = ({
             {...imageProps}
           />
         ))}
-        {count > max && (
+        {count && count > max && (
           <View
             className="bg-black items-center justify-center rounded-full relative -ml-2"
             style={{ width: sizeProps, height: sizeProps }}
           >
             <Image source={pictures[max]} {...imageProps} />
             <View className="absolute inset-0 bg-black/50 rounded-full" />
-            <NativeText className="text-white text-sm font-medium absolute inset-x-0 text-center">{`+${countMax}`}</NativeText>
+            <NativeText className="text-white text-sm font-medium absolute inset-x-0 text-center">{`+${count - max > 100 ? "99" : count - max}`}</NativeText>
           </View>
         )}
       </View>

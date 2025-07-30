@@ -12,6 +12,7 @@
     "clearAll": "Limpiar todo",
     "filter": "Filtrar",
     "refresh": "Actualizar",
+    "link": "Enlace",
     "or": "O",
     "other": "Otro",
     "free": "Gratis",
@@ -388,6 +389,7 @@
       "description": "Descubre todos los clubs y asociaciones de la IMT",
       "book": "Reservar",
       "interested": "{{count}} personas están interesadas en este club",
+      "responsible": "Responsible",
       "errors": {
         "empty": "No se encontró ningún club",
         "emptyDescription": "Intenta con otra palabra clave"
@@ -396,5 +398,13 @@
   },
   "games": {
     "title": "Juegos"
+  },
+  "user": {
+    "contact": "Contactar",
+    "interested": "Interesado",
+    "notInterested": "No interesado",
+    "errors": {
+      "contact": "Error al abrir la aplicación de SMS"
+    }
   }
 }

@@ -5,10 +5,7 @@ import LaundryWidget from "@/app/screens/services/laundry/widget/LaundryWidget";
 import { RestaurantWidget } from "@/app/screens/services/restaurant/widget/RestaurantWidget";
 import TimetableWidget from "@/app/screens/services/schedule/widget/TimetableWidget";
 import { WeatherWidget } from "@/app/screens/services/weather/widget/WeatherWidget";
-import type {
-  PreferenceId,
-  WidgetType,
-} from "@/services/storage/widgetPreferences";
+import type { PreferenceId, WidgetType } from "@/services/storage/preferences";
 
 export function useWidgetComponents() {
   const widgetComponents = React.useMemo(

@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Linking, View } from "react-native";
 import { HeroAnimation } from "@/components/animations/HeroAnimation";
@@ -10,7 +9,6 @@ import { useTheme } from "@/contexts/ThemeContext";
 export const About = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
-  const triggerConfettiRef = useRef<(() => void) | null>(null);
 
   const handleOpenLink = async (url: string) => {
     try {
@@ -23,10 +21,6 @@ export const About = () => {
   return (
     <Page
       title={t("settings.about.title")}
-      onConfettiTrigger={(trigger) => {
-        triggerConfettiRef.current = trigger;
-      }}
-      confetti={true}
       footer={
         <Text className="text-center italic" color="muted">
           {t("common.plugImtNote")}

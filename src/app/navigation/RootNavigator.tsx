@@ -1,6 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native";
+import { SafeViewAndroid } from "@/app/_layout";
 import { AppNavigator } from "@/app/navigation/AppNavigator";
 import { AuthNavigator } from "@/app/navigation/AuthNavigator";
 import { SplashScreen } from "@/components/animations/SplashScreen";
@@ -10,7 +11,6 @@ import { usePushNotifications } from "@/hooks/home";
 import { i18nInitializedPromise } from "@/i18n";
 import { screenOptions } from "@/navigation/navigationConfig";
 import type { RootStackParamList } from "@/types";
-import { SafeViewAndroid } from "../_layout";
 
 const Stack = createStackNavigator<RootStackParamList>();
 

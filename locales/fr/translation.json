@@ -174,7 +174,7 @@
       "notifications": "Notifications",
       "fetchError": "Impossible de récupérer les paramètres de notification",
       "updateError": "Impossible de mettre à jour les paramètres de notification",
-      "setNotification": "Définir",
+      "setNotification": "Être notifié",
       "toggleRestaurant": "Être notifié lorsque le menu du jour est publié",
       "toggleTraq": "Être notifié lorsqu'un nouvel article est proposé au Traq'"
     },
@@ -375,14 +375,15 @@
       "almostDone": "Machine {{number}} presque terminée !",
       "almostDoneBody": "Votre {{type}} sera terminé dans {{minutes}} minutes",
       "getNotification": "Recevoir une notification",
-      "getNotificationDesc": "Vous recevrez une notification {{minutes}} minutes avant que votre {{type}} ne soit terminée",
+      "getNotificationDesc": "Vous serez notifié {{minutes}} minutes avant que votre {{type}} soit terminée",
+      "getNotificationError": "Erreur lors de la mise en place de la notification",
       "minutesBeforeEnd": "Minutes avant la fin",
       "machineAvailable": "Machines disponibles",
       "dryerAvailable": "Sèche-linges disponibles",
       "noMachine": "Aucune machine disponible",
       "about": "Ouverte 24h/24 et 7j/7, la laverie vous permet de laver et sécher à tout moment pour un prix très abordable",
       "price": "Lavage : 2€\nSéchage : 1€",
-      "additionalInfo": "Payez par pièces, par carte ou avec le portefeuille Monix (recommandé pour les bonus et les remboursements)\n\nBesoin de plus de temps de séchage ? Payez plusieurs sessions avant de commencer",
+      "additionalInfo": "Payez par pièces, par carte ou avec le portefeuille Monix (recommandé pour les bonus et le cashback)\n\nBesoin de plus de temps de séchage ? Payez plusieurs sessions avant de commencer",
       "location": "Sous la MDE, après les boîtes aux lettres"
     }
   },

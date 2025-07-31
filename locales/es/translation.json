@@ -172,7 +172,7 @@
       "notifications": "Notificaciones",
       "fetchError": "No se pudieron obtener la configuración de notificaciones",
       "updateError": "No se pudieron actualizar la configuración de notificaciones",
-      "setNotification": "Establecer",
+      "setNotification": "Recibir notificación",
       "toggleRestaurant": "Ser notificado cuando se publique el menú del día",
       "toggleTraq": "Ser notificado cuando se ofrezca un nuevo artículo en Traq'"
     },
@@ -374,13 +374,14 @@
       "almostDoneBody": "Tu {{type}} estará terminado en {{minutes}} minutos",
       "getNotification": "Recibir notificación",
       "getNotificationDesc": "Recibirás una notificación {{minutes}} minutos antes de que tu {{type}} esté terminado",
+      "getNotificationError": "Error al configurar la notificación",
       "minutesBeforeEnd": "Minutos antes del final",
       "machineAvailable": "Máquinas disponibles",
       "dryerAvailable": "Secadoras disponibles",
       "noMachine": "No hay máquina disponible",
       "about": "Abierta 24/7, la lavandería te permite lavar y secar en cualquier momento por un precio muy asequible",
       "price": "Lavado: 2€\nSecado: 1€",
-      "additionalInfo": "Paga con monedas, tarjeta o billetera Monix (recomendado para bonos y reembolsos)\n\n¿Necesitas más tiempo de secado? Paga por múltiples sesiones antes de comenzar",
+      "additionalInfo": "Paga con monedas, tarjeta o billetera Monix (recomendado para bonos y cashback)\n\n¿Necesitas más tiempo de secado? Paga por múltiples sesiones antes de comenzar",
       "location": "Debajo de la MDE, después de los buzones"
     }
   },

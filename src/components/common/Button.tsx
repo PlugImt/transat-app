@@ -9,7 +9,7 @@ import { type ThemeType, useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";
 
 type ButtonVariant = "default" | "secondary" | "destructive" | "ghost" | "link";
-type ButtonSize = "default" | "sm";
+type ButtonSize = "default" | "sm" | "lg";
 
 const getButtonStyle = (variant: ButtonVariant, theme: ThemeType) => {
   const buttonStyles: {
@@ -61,6 +61,10 @@ const getSizeStyles = (size: ButtonSize) => {
     sm: {
       height: 32,
       paddingHorizontal: 8,
+    },
+    lg: {
+      height: 48,
+      paddingHorizontal: 16,
     },
   };
 

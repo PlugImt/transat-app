@@ -26,7 +26,7 @@
     "knowMore": "Saber mais sobre Transat",
     "underConstruction": "Em construção 🏗️",
     "underConstructionDesc": "Novas funcionalidades em breve ;)",
-    "campusApp": "O aplicativo do campus para IMT Atlantique Nantes",
+    "campusApp": "Por os atlantes, para os atlantes 🐙",
     "plugImtNote": "NOTA: Plug'IMT é uma associação criada por estudantes do IMT mas não é afiliada à escola",
     "credits": "Créditos",
     "appearance": "Aparência",
@@ -196,7 +196,8 @@
       "selectLanguageError": "Ocorreu um erro ao alterar o idioma"
     },
     "about": {
-      "title": "Sobre"
+      "title": "Sobre",
+      "version": "Versão"
     },
     "help": {
       "title": "Ajuda",

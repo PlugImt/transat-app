@@ -11,7 +11,9 @@
     "test": "jest --watchAll",
     "check-types": "tsc -noEmit",
     "lint": "biome lint",
-    "format": "biome check --write"
+    "format": "biome check --write",
+    "build:android": "eas build --profile production --platform android --local",
+    "build:ios": "eas build --profile production --platform ios"
   },
   "jest": {
     "preset": "jest-expo"

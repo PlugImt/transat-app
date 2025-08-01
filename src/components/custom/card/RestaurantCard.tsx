@@ -1,7 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
 import { TouchableOpacity, View } from "react-native";
+import Badge from "@/components/common/Badge";
 import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
 import { Stars } from "@/components/custom/star/Stars";
@@ -22,6 +24,7 @@ interface CardProps {
 const RestaurantCard = ({ title, meals, icon }: CardProps) => {
   const { theme } = useTheme();
   const navigation = useNavigation<NavigationProp>();
+  const { t } = useTranslation();
 
   const getIcon = () => {
     const iconMap: { [key: string]: React.ReactElement } = {
@@ -48,7 +51,7 @@ const RestaurantCard = ({ title, meals, icon }: CardProps) => {
       <View className="flex-col gap-2">
         {meals.map((item) => (
           <TouchableOpacity
-            className="flex-row justify-between gap-4 items-start"
+            className="flex-row justify-between gap-4 items-center"
             key={item.id}
             onPress={() =>
               navigation.navigate("RestaurantReviews", { id: item.id })
@@ -56,7 +59,11 @@ const RestaurantCard = ({ title, meals, icon }: CardProps) => {
           >
             <Text className="flex-1">{item.name}</Text>
             <View className="flex-row items-center gap-1">
-              <Text color="primary">{item.average_rating}/5</Text>
+              {item.number_of_services > 1 ? (
+                <Text color="primary">{item.average_rating}/5</Text>
+              ) : (
+                <Badge label={t("common.new")} size="sm" variant="secondary" />
+              )}
               <Stars max={1} value={Number(item.rated)} />
             </View>
           </TouchableOpacity>

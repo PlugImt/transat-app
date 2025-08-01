@@ -114,7 +114,7 @@ export const Signin = () => {
                 params: { email: watch("email") },
               })
             }
-            disabled={isPending}
+            isUpdating={isPending}
             variant="link"
             size="sm"
           />

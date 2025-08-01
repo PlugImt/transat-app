@@ -112,28 +112,27 @@ export const RestaurantReviews = () => {
       </View>
 
       {/* Liste des avis */}
-      {hasReview ? (
-        <FlatList
-          data={reviewData.recent_reviews}
-          renderItem={({ item }) => <ReviewItem review={item} />}
-          scrollEnabled={false}
-          showsVerticalScrollIndicator={false}
-          contentContainerClassName="gap-2"
-        />
-      ) : (
-        <Empty
-          icon={<CookingPot size={50} color={theme.primary} />}
-          title={t("services.restaurant.reviews.noReviewsTitle")}
-          description={t("services.restaurant.reviews.noReviewsSubtitle")}
-        >
-          <ReviewDialog>
-            <Button
-              label={t("services.restaurant.reviews.rate")}
-              className="w-full"
-            />
-          </ReviewDialog>
-        </Empty>
-      )}
+      <FlatList
+        data={reviewData.recent_reviews}
+        renderItem={({ item }) => <ReviewItem review={item} />}
+        scrollEnabled={false}
+        showsVerticalScrollIndicator={false}
+        contentContainerClassName="gap-2"
+        ListEmptyComponent={
+          <Empty
+            icon={<CookingPot size={50} color={theme.primary} />}
+            title={t("services.restaurant.reviews.noReviewsTitle")}
+            description={t("services.restaurant.reviews.noReviewsSubtitle")}
+          >
+            <ReviewDialog>
+              <Button
+                label={t("services.restaurant.reviews.rate")}
+                className="w-full"
+              />
+            </ReviewDialog>
+          </Empty>
+        }
+      />
     </Page>
   );
 };

@@ -59,7 +59,7 @@ const RestaurantCard = ({ title, meals, icon }: CardProps) => {
           >
             <Text className="flex-1">{item.name}</Text>
             <View className="flex-row items-center gap-1">
-              {item.number_of_services && item.number_of_services > 1 ? (
+              {item.number_of_services > 1 ? (
                 <Text color="primary">{item.average_rating}/5</Text>
               ) : (
                 <Badge label={t("common.new")} size="sm" variant="secondary" />

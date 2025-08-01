@@ -2,14 +2,10 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { Text } from "@/components/common/Text";
+import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
 import { useLaundry } from "@/hooks/laundry/useLaundry";
-import {
-  AboutSection,
-  ErrorState,
-  LaundryList,
-  LaundryLoadingState,
-} from "./components";
+import { AboutSection, LaundryList, LaundryLoadingState } from "./components";
 
 export const Laundry = () => {
   const { t } = useTranslation();
@@ -30,10 +26,11 @@ export const Laundry = () => {
 
   if (isError)
     return (
-      <ErrorState
+      <ErrorPage
         error={error}
         title={t("services.laundry.title")}
-        onRefresh={refetch}
+        refetch={refetch}
+        isRefetching={isFetching}
       />
     );
 

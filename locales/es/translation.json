@@ -26,7 +26,7 @@
     "knowMore": "Saber más sobre Transat",
     "underConstruction": "En construcción 🏗️",
     "underConstructionDesc": "Nuevas funciones próximamente ;)",
-    "campusApp": "La aplicación del campus para IMT Atlantique Nantes",
+    "campusApp": "Por los atlantes, para los atlantes 🐙",
     "plugImtNote": "NOTA: Plug'IMT es una asociación creada por estudiantes de IMT pero no está afiliada a la escuela",
     "credits": "Créditos",
     "appearance": "Apariencia",
@@ -84,9 +84,12 @@
     "signUp": {
       "title": "Registrarse",
       "description": "Encuentra todos los servicios que necesitas en el campus a tu alcance 🌴",
-      "pending": "Registrándose..."
+      "pending": "Registrándose...",
+      "terms": "Al registrarme, acepto los",
+      "termsLink": "términos de uso y política de privacidad"
     },
     "email": "Correo electrónico",
+    "emailPlaceholder": "nombre.apellido@imt-atlantique.net",
     "password": "Contraseña",
     "confirmPassword": "Confirmar contraseña",
     "firstName": "Nombre",
@@ -194,7 +197,8 @@
       "selectLanguageError": "Ocurrió un error al cambiar el idioma"
     },
     "about": {
-      "title": "Acerca de"
+      "title": "Acerca de",
+      "version": "Versión"
     },
     "help": {
       "title": "Ayuda",

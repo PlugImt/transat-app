@@ -32,6 +32,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^2.30.0",
     "expo": "53.0.19",
+    "expo-application": "^6.1.5",
     "expo-av": "~15.1.4",
     "expo-blur": "~14.1.4",
     "expo-clipboard": "~7.1.4",

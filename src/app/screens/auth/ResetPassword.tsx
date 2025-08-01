@@ -154,7 +154,7 @@ export const ResetPassword = () => {
 
       <View className="flex flex-col gap-10">
         <Input
-          placeholder="christophe.lerouge@imt-atlantique.net"
+          placeholder="newf.nantes@imt-atlantique.net"
           control={control}
           name="email"
           autoCapitalize="none"

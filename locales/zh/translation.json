@@ -26,7 +26,7 @@
     "knowMore": "了解更多关于Transat",
     "underConstruction": "建设中 🏗️",
     "underConstructionDesc": "新功能即将推出 ;)",
-    "campusApp": "IMT Atlantique南特校区应用",
+    "campusApp": "由大西洋人，为大西洋人 🐙",
     "plugImtNote": "注意：Plug'IMT是由IMT学生创建的协会，但与学校无关",
     "credits": "致谢",
     "appearance": "外观",
@@ -89,6 +89,7 @@
       "termsLink": "使用条款和隐私政策"
     },
     "email": "邮箱",
+    "emailPlaceholder": "名.姓@imt-atlantique.net",
     "password": "密码",
     "confirmPassword": "确认密码",
     "firstName": "名字",
@@ -196,7 +197,8 @@
       "selectLanguageError": "更改语言时发生错误"
     },
     "about": {
-      "title": "关于"
+      "title": "关于",
+      "version": "版本"
     },
     "help": {
       "title": "帮助",

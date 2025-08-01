@@ -79,7 +79,7 @@ export const Signin = () => {
 
       <View className="flex flex-col gap-10">
         <Input
-          placeholder="newf.nantes@imt-atlantique.net"
+          placeholder={t("auth.emailPlaceholder")}
           control={control}
           name="email"
           autoCapitalize="none"

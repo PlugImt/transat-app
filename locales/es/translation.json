@@ -84,9 +84,12 @@
     "signUp": {
       "title": "Registrarse",
       "description": "Encuentra todos los servicios que necesitas en el campus a tu alcance 🌴",
-      "pending": "Registrándose..."
+      "pending": "Registrándose...",
+      "terms": "Al registrarme, acepto los",
+      "termsLink": "términos de uso y política de privacidad"
     },
     "email": "Correo electrónico",
+    "emailPlaceholder": "nombre.apellido@imt-atlantique.net",
     "password": "Contraseña",
     "confirmPassword": "Confirmar contraseña",
     "firstName": "Nombre",

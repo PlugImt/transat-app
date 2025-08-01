@@ -89,6 +89,7 @@
       "termsLink": "conditions d'utilisation et la politique de confidentialité"
     },
     "email": "Email",
+    "emailPlaceholder": "prenom.nom@imt-atlantique.net",
     "password": "Mot de passe",
     "confirmPassword": "Confirmer le mot de passe",
     "firstName": "Prénom",

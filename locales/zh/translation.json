@@ -89,6 +89,7 @@
       "termsLink": "使用条款和隐私政策"
     },
     "email": "邮箱",
+    "emailPlaceholder": "名.姓@imt-atlantique.net",
     "password": "密码",
     "confirmPassword": "确认密码",
     "firstName": "名字",

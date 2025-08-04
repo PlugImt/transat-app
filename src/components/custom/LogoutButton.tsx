@@ -25,11 +25,7 @@ export const LogoutButton = () => {
   return (
     <Dialog>
       <DialogTrigger>
-        <Button
-          label={t("settings.logout")}
-          onPress={handleLogout}
-          variant="destructive"
-        />
+        <Button label={t("settings.logout")} variant="destructive" />
       </DialogTrigger>
 
       <DialogContent

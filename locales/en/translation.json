@@ -394,7 +394,9 @@
       "responsible": "Responsible",
       "errors": {
         "empty": "No club found",
-        "emptyDescription": "Try with another keyword"
+        "emptyDescription": "Try with another keyword",
+        "notFound": "This club doesn't exist",
+        "notFoundDescription": "Refresh or change club"
       }
     }
   },

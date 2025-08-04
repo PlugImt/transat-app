@@ -395,7 +395,9 @@
       "responsible": "Respo",
       "errors": {
         "empty": "Aucun club trouvé",
-        "emptyDescription": "Essayez avec un autre mot-clé"
+        "emptyDescription": "Essayez avec un autre mot-clé",
+        "notFound": "Ce club n'existe pas",
+        "notFoundDescription": "Actualisez ou changez de club"
       }
     }
   },

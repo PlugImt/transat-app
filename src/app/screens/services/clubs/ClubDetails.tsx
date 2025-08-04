@@ -1,13 +1,16 @@
 import { type RouteProp, useRoute } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import CardGroup from "@/components/common/CardGroup";
-import { UserCard } from "@/components/custom";
+import { UserCard, UserCardSkeleton } from "@/components/custom";
 import { Empty } from "@/components/page/Empty";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
 import { useClubDetails } from "@/hooks/services/club/useClub";
 import type { AppStackParamList } from "@/types/navigation";
-import { ClubDetailsHeader } from "./components/ClubDetailsHeader";
+import {
+  ClubDetailsHeader,
+  ClubDetailsHeaderSkeleton,
+} from "./components/ClubDetailsHeader";
 
 export type ClubDetailsRouteProp = RouteProp<AppStackParamList, "ClubDetails">;
 
@@ -18,7 +21,7 @@ const ClubDetails = () => {
 
   const { data: club, isPending, isError, error, refetch } = useClubDetails(id);
 
-  if (isError || !club) {
+  if (isError) {
     return (
       <ErrorPage
         error={error}
@@ -29,8 +32,23 @@ const ClubDetails = () => {
     );
   }
 
+  if (isPending) {
+    return <ClubDetailsSkeleton />;
+  }
+
   if (!club) {
-    return <Empty title={t("services.clubs.errors.empty")} />;
+    return (
+      <Page
+        title={t("services.clubs.title")}
+        refreshing={isPending}
+        onRefresh={refetch}
+      >
+        <Empty
+          title={t("services.clubs.errors.notFound")}
+          description={t("services.clubs.errors.notFoundDescription")}
+        />
+      </Page>
+    );
   }
 
   return (
@@ -39,14 +57,7 @@ const ClubDetails = () => {
       refreshing={isPending}
       onRefresh={refetch}
     >
-      <ClubDetailsHeader
-        title={club.name}
-        description={club.description}
-        member_photos={club.member_photos}
-        member_count={club.member_count}
-        location={club.location}
-        link={club.link}
-      />
+      <ClubDetailsHeader club={club} />
       {club.responsible && (
         <CardGroup title={t("services.clubs.responsible")}>
           <UserCard user={club.responsible} />
@@ -57,3 +68,15 @@ const ClubDetails = () => {
 };
 
 export default ClubDetails;
+
+export const ClubDetailsSkeleton = () => {
+  const { t } = useTranslation();
+  return (
+    <Page title={t("services.clubs.title")}>
+      <ClubDetailsHeaderSkeleton />
+      <CardGroup title={t("services.clubs.responsible")}>
+        <UserCardSkeleton />
+      </CardGroup>
+    </Page>
+  );
+};

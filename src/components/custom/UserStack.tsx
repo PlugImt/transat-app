@@ -4,6 +4,20 @@ import { Text as NativeText, TouchableOpacity, View } from "react-native";
 import { Text } from "@/components/common/Text";
 import { type ThemeColorKeys, useTheme } from "@/contexts/ThemeContext";
 import Image from "../common/Image";
+import { TextSkeleton } from "../Skeleton";
+import ImageSkeleton from "../Skeleton/ImageSkeleton";
+
+const getImageProps = (size: "default" | "sm", borderColor: string) => {
+  const sizeProps = size === "default" ? 32 : 24;
+  return {
+    radius: "round" as const,
+    size: sizeProps,
+    style: {
+      borderWidth: 1,
+      borderColor,
+    },
+  };
+};
 
 interface UserStackProps {
   pictures?: string[];
@@ -27,14 +41,7 @@ export const UserStack = ({
 
   const sizeProps = size === "default" ? 32 : 24;
 
-  const imageProps = {
-    radius: "round" as const,
-    size: sizeProps,
-    style: {
-      borderWidth: 1,
-      borderColor: theme[borderColor],
-    },
-  };
+  const imageProps = getImageProps(size, theme[borderColor]);
 
   if (!pictures || pictures.length === 0) {
     return null;
@@ -73,6 +80,38 @@ export const UserStack = ({
           {onPress && <ChevronRight color={theme.text} size={16} />}
         </TouchableOpacity>
       )}
+    </View>
+  );
+};
+
+interface UserStackSkeletonProps {
+  size?: "default" | "sm";
+  max?: number;
+  borderColor?: ThemeColorKeys;
+}
+
+export const UserStackSkeleton = ({
+  size = "default",
+  max = 3,
+  borderColor = "background",
+}: UserStackSkeletonProps) => {
+  const { theme } = useTheme();
+
+  const imageProps = getImageProps(size, theme[borderColor]);
+
+  return (
+    <View className="gap-2">
+      <View className="flex-row ml-2">
+        {Array.from({ length: max }).map((_, index) => (
+          <View
+            key={`user-stack-skeleton-${index.toString()}`}
+            className="-ml-2"
+          >
+            <ImageSkeleton {...imageProps} />
+          </View>
+        ))}
+      </View>
+      <TextSkeleton variant="sm" />
     </View>
   );
 };

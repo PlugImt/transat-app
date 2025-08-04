@@ -4,14 +4,24 @@ import { useTranslation } from "react-i18next";
 import { Linking, View } from "react-native";
 import { Button } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
-import { UserStack } from "@/components/custom";
+import { UserStack, UserStackSkeleton } from "@/components/custom";
+import { TextSkeleton } from "@/components/Skeleton";
+import type { ClubDetails } from "@/dto/club";
 import {
   useJoinClubMutation,
   useLeaveClubMutation,
 } from "@/hooks/services/club/useClub";
 import type { ClubDetailsRouteProp } from "../ClubDetails";
 
-const NotificationButton = ({ isMember }: { isMember: boolean }) => {
+interface NotificationButtonProps {
+  isMember: boolean;
+  disabled?: boolean;
+}
+
+const NotificationButton = ({
+  isMember,
+  disabled,
+}: NotificationButtonProps) => {
   const { t } = useTranslation();
   const route = useRoute<ClubDetailsRouteProp>();
   const { id } = route.params;
@@ -26,6 +36,7 @@ const NotificationButton = ({ isMember }: { isMember: boolean }) => {
         onPress={() => leaveClub()}
         icon={<BellOff />}
         className="flex-1"
+        disabled={disabled}
       />
     );
   }
@@ -35,27 +46,24 @@ const NotificationButton = ({ isMember }: { isMember: boolean }) => {
       onPress={() => joinClub()}
       icon={<Bell />}
       className="flex-1"
+      disabled={disabled}
     />
   );
 };
 
 interface ClubDetailsHeaderProps {
-  title: string;
-  description: string;
-  member_photos: string[];
-  member_count: number;
-  location?: string;
-  link?: string;
+  club: ClubDetails;
 }
 
-export const ClubDetailsHeader = ({
-  title,
-  description,
-  member_photos,
-  member_count,
-  location,
-  link,
-}: ClubDetailsHeaderProps) => {
+export const ClubDetailsHeader = ({ club }: ClubDetailsHeaderProps) => {
+  const {
+    name: title,
+    description,
+    member_photos,
+    member_count,
+    location,
+    link,
+  } = club;
   const { t } = useTranslation();
 
   const label = link?.toLowerCase().includes("whatsapp")
@@ -87,3 +95,28 @@ export const ClubDetailsHeader = ({
 };
 
 export default ClubDetailsHeader;
+
+export const ClubDetailsHeaderSkeleton = () => {
+  const { t } = useTranslation();
+
+  return (
+    <View className="gap-4">
+      <View>
+        <TextSkeleton variant="sm" lastLineWidth={50} />
+        <TextSkeleton variant="h2" lastLineWidth={200} />
+        <TextSkeleton lines={2} />
+      </View>
+      <UserStackSkeleton />
+      <View className="flex-row items-center gap-2">
+        <Button
+          label={String(t("common.link"))}
+          icon={<ExternalLink />}
+          variant="secondary"
+          className="flex-1"
+          disabled
+        />
+        <NotificationButton isMember disabled />
+      </View>
+    </View>
+  );
+};

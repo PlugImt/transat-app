@@ -394,7 +394,9 @@
       "responsible": "Verantwortlich",
       "errors": {
         "empty": "Kein Club gefunden",
-        "emptyDescription": "Versuchen Sie es mit einem anderen Schlüsselwort"
+        "emptyDescription": "Versuchen Sie es mit einem anderen Schlüsselwort",
+        "notFound": "Dieser Club existiert nicht",
+        "notFoundDescription": "Aktualisieren Sie oder wechseln Sie den Club"
       }
     }
   },

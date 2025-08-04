@@ -392,7 +392,9 @@
       "responsible": "Responsible",
       "errors": {
         "empty": "No se encontró ningún club",
-        "emptyDescription": "Intenta con otra palabra clave"
+        "emptyDescription": "Intenta con otra palabra clave",
+        "notFound": "Este club no existe",
+        "notFoundDescription": "Actualiza o cambia de club"
       }
     }
   },

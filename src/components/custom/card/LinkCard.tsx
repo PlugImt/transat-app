@@ -1,27 +1,10 @@
 import { ChevronRight } from "lucide-react-native";
-import { cloneElement, isValidElement } from "react";
-import { type ImageStyle, type StyleProp, View } from "react-native";
+import { View } from "react-native";
 import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
-import { AvatarSkeleton, TextSkeleton } from "@/components/Skeleton";
+import { TextSkeleton } from "@/components/Skeleton";
+import ImageSkeleton from "@/components/Skeleton/ImageSkeleton";
 import { useTheme } from "@/contexts/ThemeContext";
-
-const ImageContainer = ({ children }: { children: React.ReactNode }) => {
-  if (!isValidElement(children)) {
-    return null;
-  }
-
-  return (
-    <View className="h-16 w-16">
-      {cloneElement(
-        children as React.ReactElement<{ style: StyleProp<ImageStyle> }>,
-        {
-          style: { width: "100%", height: "100%", resizeMode: "contain" },
-        },
-      )}
-    </View>
-  );
-};
 
 interface LinkCardProps {
   onPress?: () => void;
@@ -55,7 +38,7 @@ export const LinkCardLoading = () => {
   return (
     <Card>
       <View className="flex-row items-center gap-4">
-        <AvatarSkeleton size={64} />
+        <ImageSkeleton size={64} />
         <View className="flex-1">
           <TextSkeleton variant="h3" lastLineWidth={100} />
           <TextSkeleton variant="sm" width={175} lines={2} />

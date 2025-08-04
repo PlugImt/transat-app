@@ -394,7 +394,9 @@
       "responsible": "负责人",
       "errors": {
         "empty": "未找到俱乐部",
-        "emptyDescription": "尝试使用其他关键词"
+        "emptyDescription": "尝试使用其他关键词",
+        "notFound": "此俱乐部不存在",
+        "notFoundDescription": "刷新或更换俱乐部"
       }
     }
   },

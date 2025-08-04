@@ -4,6 +4,7 @@ import { TouchableOpacity, View } from "react-native";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";
+import { hapticFeedback } from "@/utils/haptics.utils";
 
 interface CheckboxProps extends React.ComponentPropsWithoutRef<typeof View> {
   checked?: boolean;
@@ -29,6 +30,7 @@ function Checkbox({
   }, [checked]);
 
   const toggleCheckbox = () => {
+    hapticFeedback.medium();
     const checked = !isChecked;
     setChecked(checked);
     onPress(checked);

@@ -10,19 +10,11 @@ import {
   Shield,
 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
-import { Button } from "@/components/common/Button";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "@/components/common/Dialog";
-import { Text } from "@/components/common/Text";
-import { useToast } from "@/components/common/Toast";
 import { AccountCard } from "@/components/custom/card/AccountCard";
+import { LogoutButton } from "@/components/custom/LogoutButton";
 import { Page } from "@/components/page/Page";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
-import useAuth from "@/hooks/account/useAuth";
 import { useLanguageOptions } from "@/hooks/account/useLanguageOptions";
 import { useUser } from "@/hooks/account/useUser";
 import type { SettingsNavigation } from "@/types";
@@ -32,21 +24,10 @@ import SettingsItem from "./components/SettingsItem";
 export const Settings = () => {
   const { theme, themeMode } = useTheme();
   const { t } = useTranslation();
-  const { logout } = useAuth();
-  const { toast } = useToast();
   const queryClient = useQueryClient();
   const { data: user, isPending } = useUser();
   const navigation = useNavigation<SettingsNavigation>();
   const { currentLanguageOption } = useLanguageOptions();
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-      toast(t("auth.disconnected"));
-    } catch (err) {
-      console.error("Error logging out:", err);
-    }
-  };
 
   const refetch = async () => {
     await queryClient.invalidateQueries({ queryKey: QUERY_KEYS.user });
@@ -122,25 +103,7 @@ export const Settings = () => {
         />
       </SettingCategory>
 
-      <Dialog>
-        <DialogTrigger>
-          <Button
-            label={t("settings.logout")}
-            onPress={handleLogout}
-            variant="destructive"
-          />
-        </DialogTrigger>
-
-        <DialogContent
-          title={t("settings.logout")}
-          className="gap-2"
-          cancelLabel={t("common.cancel")}
-          confirmLabel={t("settings.logoutConfirm")}
-          onConfirm={handleLogout}
-        >
-          <Text>{t("settings.logoutDesc")}</Text>
-        </DialogContent>
-      </Dialog>
+      <LogoutButton />
     </Page>
   );
 };

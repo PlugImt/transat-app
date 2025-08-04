@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { Button } from "@/components/common/Button";
+import { hapticFeedback } from "@/utils/haptics.utils";
 import { Text } from "../common/Text";
 import { Page } from "./Page";
 
@@ -20,6 +22,10 @@ export const ErrorPage = ({
   children,
 }: ErrorPageProps) => {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    hapticFeedback.error();
+  }, []);
 
   return (
     <Page

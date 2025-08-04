@@ -4,6 +4,7 @@ import { type ImageStyle, type StyleProp, View } from "react-native";
 import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
+import { hapticFeedback } from "@/utils/haptics.utils";
 import { AvatarSkeleton, TextSkeleton } from "../Skeleton";
 
 const ImageContainer = ({ children }: { children: React.ReactNode }) => {
@@ -32,8 +33,14 @@ interface LinkCardProps {
 
 const LinkCard = ({ onPress, image, title, description }: LinkCardProps) => {
   const { theme } = useTheme();
+
+  const handlePress = () => {
+    hapticFeedback.light();
+    onPress?.();
+  };
+
   return (
-    <Card onPress={onPress}>
+    <Card onPress={handlePress}>
       <View className="flex-row items-center gap-4">
         <ImageContainer>{image}</ImageContainer>
         <View className="flex-1">

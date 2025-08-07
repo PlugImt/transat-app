@@ -7,6 +7,8 @@ import Image from "../common/Image";
 import { TextSkeleton } from "../Skeleton";
 import ImageSkeleton from "../Skeleton/ImageSkeleton";
 
+const MAX_COUNT = 100;
+
 const getImageProps = (size: "default" | "sm", borderColor: string) => {
   const sizeProps = size === "default" ? 32 : 24;
   return {
@@ -65,7 +67,7 @@ export const UserStack = ({
           >
             <Image source={pictures[max]} {...imageProps} />
             <View className="absolute inset-0 bg-black/50 rounded-full" />
-            <NativeText className="text-white text-sm font-medium absolute inset-x-0 text-center">{`+${count - max > 100 ? "99" : count - max}`}</NativeText>
+            <NativeText className="text-white text-sm font-medium absolute inset-x-0 text-center">{`+${count - max > MAX_COUNT ? MAX_COUNT : count - max}`}</NativeText>
           </View>
         )}
       </View>

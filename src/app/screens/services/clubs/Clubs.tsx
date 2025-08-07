@@ -57,7 +57,11 @@ export const Clubs = () => {
         ListHeaderComponent={
           <View className="flex-row items-center gap-2 mb-3">
             <SearchClub value={searchValue} onChange={setSearchValue} />
-            <Button label="Réserver" variant="secondary" onPress={() => {}} />
+            <Button
+              label={t("services.clubs.book")}
+              variant="secondary"
+              onPress={() => {}}
+            />
           </View>
         }
         ListEmptyComponent={

@@ -8,6 +8,7 @@ import { Button, IconButton } from "@/components/common/Button";
 import Card from "@/components/common/Card";
 import InfoItem from "@/components/common/InfoItem";
 import { Text } from "@/components/common/Text";
+import { LogoutButton } from "@/components/custom/LogoutButton";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
 import { AvatarSkeleton, TextSkeleton } from "@/components/Skeleton";
@@ -51,7 +52,7 @@ export const Account = () => {
         refetch={refetch}
         isRefetching={isPending}
       >
-        <Button label="Déconnexion" variant="destructive" onPress={logout} />
+        <LogoutButton />
       </ErrorPage>
     );
   }

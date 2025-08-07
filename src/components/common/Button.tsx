@@ -1,12 +1,14 @@
 import { type ComponentPropsWithoutRef, cloneElement } from "react";
 import {
   ActivityIndicator,
+  type GestureResponderEvent,
   TouchableOpacity,
   type ViewStyle,
 } from "react-native";
 import { Text } from "@/components/common/Text";
 import { type ThemeType, useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";
+import { hapticFeedback } from "@/utils/haptics.utils";
 
 type ButtonVariant = "default" | "secondary" | "destructive" | "ghost" | "link";
 type ButtonSize = "default" | "sm" | "lg";
@@ -89,6 +91,7 @@ const Button = ({
   size = "default",
   icon,
   isUpdating,
+  onPress,
   ...props
 }: ButtonProps) => {
   const { theme } = useTheme();
@@ -97,6 +100,11 @@ const Button = ({
   const buttonStyle = getButtonStyle(variant, theme);
   const textColor = getTextColor(variant, theme);
   const sizeStyles = getSizeStyles(size);
+
+  const handlePress = (event: GestureResponderEvent) => {
+    hapticFeedback.light();
+    onPress?.(event);
+  };
 
   return (
     <TouchableOpacity
@@ -113,6 +121,7 @@ const Button = ({
       )}
       {...props}
       disabled={isDisabled}
+      onPress={handlePress}
     >
       <Text
         style={{
@@ -137,6 +146,7 @@ const IconButton = ({
   size = "default",
   isUpdating,
   className,
+  onPress,
   ...props
 }: IconButtonProps) => {
   const { theme } = useTheme();
@@ -145,6 +155,11 @@ const IconButton = ({
   const buttonStyle = variant === "default" && getButtonStyle(variant, theme);
   const sizeStyles = getSizeStyles(size);
   const iconColor = getTextColor(variant, theme);
+
+  const handlePress = (event: GestureResponderEvent) => {
+    hapticFeedback.light();
+    onPress?.(event);
+  };
 
   return (
     <TouchableOpacity
@@ -161,6 +176,7 @@ const IconButton = ({
       )}
       disabled={isDisabled}
       {...props}
+      onPress={handlePress}
     >
       {isUpdating ? (
         <ActivityIndicator color={iconColor} />

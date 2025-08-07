@@ -26,8 +26,8 @@ const NotificationButton = ({
   const route = useRoute<ClubDetailsRouteProp>();
   const { id } = route.params;
 
-  const { mutate: joinClub } = useJoinClubMutation(id);
-  const { mutate: leaveClub } = useLeaveClubMutation(id);
+  const { mutate: joinClub, isPending: isJoining } = useJoinClubMutation(id);
+  const { mutate: leaveClub, isPending: isLeaving } = useLeaveClubMutation(id);
 
   if (isMember) {
     return (
@@ -37,6 +37,7 @@ const NotificationButton = ({
         icon={<BellOff />}
         className="flex-1"
         disabled={disabled}
+        isUpdating={isJoining || isLeaving}
       />
     );
   }
@@ -47,6 +48,7 @@ const NotificationButton = ({
       icon={<Bell />}
       className="flex-1"
       disabled={disabled}
+      isUpdating={isJoining || isLeaving}
     />
   );
 };
@@ -88,7 +90,7 @@ export const ClubDetailsHeader = ({ club }: ClubDetailsHeaderProps) => {
             className="flex-1"
           />
         )}
-        <NotificationButton isMember={true} />
+        <NotificationButton isMember={club.has_joined} />
       </View>
     </View>
   );

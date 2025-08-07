@@ -27,22 +27,24 @@ const ActionButton = ({ user }: { user: User }) => {
     );
   }
 
-  const handleContact = async () => {
-    if (user?.phone_number) {
-      const phoneNumber = user.phone_number.replace(/\s/g, "");
-      const url = `sms:${phoneNumber}`;
+  if (!user?.phone_number) {
+    return null;
+  }
 
-      try {
-        const supported = await Linking.canOpenURL(url);
-        if (supported) {
-          await Linking.openURL(url);
-        } else {
-          const telUrl = `tel:${phoneNumber}`;
-          await Linking.openURL(telUrl);
-        }
-      } catch (_) {
-        toast(t("user.errors.contact"), "destructive");
+  const handleContact = async () => {
+    const phoneNumber = user.phone_number.replace(/\s/g, "");
+    const url = `sms:${phoneNumber}`;
+
+    try {
+      const supported = await Linking.canOpenURL(url);
+      if (supported) {
+        await Linking.openURL(url);
+      } else {
+        const telUrl = `tel:${phoneNumber}`;
+        await Linking.openURL(telUrl);
       }
+    } catch (_) {
+      toast(t("user.errors.contact"), "destructive");
     }
   };
 

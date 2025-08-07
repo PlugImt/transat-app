@@ -11,7 +11,7 @@ import { Button } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
-import type { Preference } from "@/services/storage/widgetPreferences";
+import type { Preference } from "@/services/storage/preferences";
 
 interface PreferenceCustomizationModalProps {
   visible: boolean;

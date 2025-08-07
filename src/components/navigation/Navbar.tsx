@@ -30,6 +30,7 @@ import { Services } from "@/app/screens/services/Services";
 import { useTheme } from "@/contexts/ThemeContext";
 import { screenOptions, tabBarOptions } from "@/navigation/navigationConfig";
 import type { BottomTabParamList } from "@/types";
+import { hapticFeedback } from "@/utils/haptics.utils";
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -96,11 +97,20 @@ export const BottomTabNavigator = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
 
+  const handleTabPress = () => {
+    return {
+      tabPress: () => {
+        hapticFeedback.light();
+      },
+    };
+  };
+
   return (
     <Tab.Navigator screenOptions={tabBarOptions(theme)}>
       <Tab.Screen
         name="HomeScreen"
         component={HomeStackScreen}
+        listeners={handleTabPress}
         options={{
           tabBarLabel: t("common.home"),
           tabBarIcon: ({ color, size }) => (
@@ -111,6 +121,7 @@ export const BottomTabNavigator = () => {
       <Tab.Screen
         name="ServicesScreen"
         component={ServicesStackScreen}
+        listeners={handleTabPress}
         options={{
           tabBarLabel: t("services.title"),
           tabBarIcon: ({ color, size }) => (
@@ -121,6 +132,7 @@ export const BottomTabNavigator = () => {
       <Tab.Screen
         name="GamesScreen"
         component={GamesStackScreen}
+        listeners={handleTabPress}
         options={{
           tabBarLabel: t("games.title"),
           tabBarIcon: ({ color, size }) => <Play size={size} color={color} />,
@@ -129,6 +141,7 @@ export const BottomTabNavigator = () => {
       <Tab.Screen
         name="AccountScreen"
         component={AccountStackScreen}
+        listeners={handleTabPress}
         options={{
           tabBarLabel: t("common.account"),
           tabBarIcon: ({ color, size }) => <User size={size} color={color} />,

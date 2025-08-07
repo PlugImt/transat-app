@@ -16,7 +16,8 @@
     "or": "Ou",
     "other": "Outro",
     "free": "Grátis",
-    "freeToUse": "Livre para usar",
+    "freeToUse": "Livre",
+    "new": "Novo",
     "empty": "Está bem vazio aqui",
     "closed": "Fechado",
     "success": "Sucesso",
@@ -27,7 +28,7 @@
     "knowMore": "Saber mais sobre Transat",
     "underConstruction": "Em construção 🏗️",
     "underConstructionDesc": "Novas funcionalidades em breve ;)",
-    "campusApp": "O aplicativo do campus para IMT Atlantique Nantes",
+    "campusApp": "Por os atlantes, para os atlantes 🐙",
     "plugImtNote": "NOTA: Plug'IMT é uma associação criada por estudantes do IMT mas não é afiliada à escola",
     "credits": "Créditos",
     "appearance": "Aparência",
@@ -90,6 +91,7 @@
       "termsLink": "termos de uso e política de privacidade"
     },
     "email": "E-mail",
+    "emailPlaceholder": "nome.sobrenome@imt-atlantique.net",
     "password": "Senha",
     "confirmPassword": "Confirmar senha",
     "firstName": "Nome",
@@ -175,7 +177,7 @@
       "notifications": "Notificações",
       "fetchError": "Não foi possível buscar as configurações de notificação",
       "updateError": "Não foi possível atualizar as configurações de notificação",
-      "setNotification": "Definir",
+      "setNotification": "Ser notificado",
       "toggleRestaurant": "Ser notificado quando o cardápio do dia for publicado",
       "toggleTraq": "Ser notificado quando um novo item for oferecido no Traq'"
     },
@@ -197,7 +199,8 @@
       "selectLanguageError": "Ocorreu um erro ao alterar o idioma"
     },
     "about": {
-      "title": "Sobre"
+      "title": "Sobre",
+      "version": "Versão"
     },
     "help": {
       "title": "Ajuda",
@@ -376,14 +379,15 @@
       "almostDone": "Máquina {{number}} quase pronta!",
       "almostDoneBody": "Seu {{type}} estará pronto em {{minutes}} minutos",
       "getNotification": "Receber notificação",
-      "getNotificationDesc": "Você receberá uma notificação {{minutes}} minutos antes de seu {{type}} estar pronto",
+      "getNotificationDesc": "Você será notificado {{minutes}} minutos antes de seu {{type}} estar pronto",
+      "getNotificationError": "Erro ao configurar a notificação",
       "minutesBeforeEnd": "Minutos antes do fim",
       "machineAvailable": "Máquinas disponíveis",
       "dryerAvailable": "Secadoras disponíveis",
       "noMachine": "Nenhuma máquina disponível",
       "about": "Aberta 24/7, a lavanderia permite que você lave e seque a qualquer momento por um preço muito acessível",
       "price": "Lavagem: 2€\nSecagem: 1€",
-      "additionalInfo": "Pague com moedas, cartão ou carteira Monix (recomendado para bônus e reembolsos)\n\nPrecisa de mais tempo de secagem? Pague por múltiplas sessões antes de começar",
+      "additionalInfo": "Pague com moedas, cartão ou carteira Monix (recomendado para bônus e cashback)\n\nPrecisa de mais tempo de secagem? Pague por múltiplas sessões antes de começar",
       "location": "Abaixo da MDE, após as caixas de correio"
     },
     "clubs": {
@@ -394,7 +398,9 @@
       "responsible": "Responsável",
       "errors": {
         "empty": "Nenhum club encontrado",
-        "emptyDescription": "Tente com outra palavra-chave"
+        "emptyDescription": "Tente com outra palavra-chave",
+        "notFound": "Este clube não existe",
+        "notFoundDescription": "Atualize ou mude de clube"
       }
     }
   },

@@ -1,7 +1,6 @@
 import axios from "axios";
 import * as ImagePicker from "expo-image-picker";
 import { t } from "i18next";
-import { getAPIUrl } from "@/api";
 import { storage } from "@/services/storage/asyncStorage";
 
 /**
@@ -15,7 +14,6 @@ export const uploadImage = async (): Promise<string> => {
   }
 
   const result = await ImagePicker.launchImageLibraryAsync({
-    mediaTypes: ImagePicker.MediaTypeOptions.Images,
     allowsEditing: true,
     aspect: [1, 1],
     quality: 0.8,
@@ -40,9 +38,9 @@ export const uploadImage = async (): Promise<string> => {
       type: `image/${image.uri.split(".").pop()}` || "image/jpeg",
     } as unknown as Blob);
 
-    const apiUrl = await getAPIUrl();
+    const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
-    const uploadResponse = await axios.post(`${apiUrl}upload`, formData, {
+    const uploadResponse = await axios.post(`${apiUrl}/upload`, formData, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",

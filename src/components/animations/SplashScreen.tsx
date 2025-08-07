@@ -1,10 +1,15 @@
 import { MotiView } from "moti";
 import { Image, View } from "react-native";
 import Logo from "@/assets/images/icon.png";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export const SplashScreen = () => {
+  const { theme } = useTheme();
   return (
-    <View className="flex-1 justify-center items-center">
+    <View
+      className="flex-1 justify-center items-center"
+      style={{ backgroundColor: theme.background }}
+    >
       <MotiView
         from={{ scale: 1 }}
         animate={{ scale: 1.25 }}

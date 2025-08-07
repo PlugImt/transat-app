@@ -6,6 +6,7 @@ import { Button } from "@/components/common/Button";
 import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
 import { useToast } from "@/components/common/Toast";
+import { AvatarSkeleton, TextSkeleton } from "@/components/Skeleton";
 import type { User } from "@/dto";
 import { useAuth } from "@/hooks/account";
 import type { AccountNavigation } from "@/types";
@@ -26,22 +27,24 @@ const ActionButton = ({ user }: { user: User }) => {
     );
   }
 
-  const handleContact = async () => {
-    if (user?.phone_number) {
-      const phoneNumber = user.phone_number.replace(/\s/g, "");
-      const url = `sms:${phoneNumber}`;
+  if (!user?.phone_number) {
+    return null;
+  }
 
-      try {
-        const supported = await Linking.canOpenURL(url);
-        if (supported) {
-          await Linking.openURL(url);
-        } else {
-          const telUrl = `tel:${phoneNumber}`;
-          await Linking.openURL(telUrl);
-        }
-      } catch (_) {
-        toast(t("user.errors.contact"), "destructive");
+  const handleContact = async () => {
+    const phoneNumber = user.phone_number.replace(/\s/g, "");
+    const url = `sms:${phoneNumber}`;
+
+    try {
+      const supported = await Linking.canOpenURL(url);
+      if (supported) {
+        await Linking.openURL(url);
+      } else {
+        const telUrl = `tel:${phoneNumber}`;
+        await Linking.openURL(telUrl);
       }
+    } catch (_) {
+      toast(t("user.errors.contact"), "destructive");
     }
   };
 
@@ -75,6 +78,20 @@ export const UserCard = ({ user }: UserCardProps) => {
           )}
         </View>
         <ActionButton user={user} />
+      </View>
+    </Card>
+  );
+};
+
+export const UserCardSkeleton = () => {
+  return (
+    <Card>
+      <View className="flex-row items-center gap-2">
+        <AvatarSkeleton size={48} />
+        <View className="flex-1">
+          <TextSkeleton variant="sm" lastLineWidth={200} />
+          <TextSkeleton variant="sm" lastLineWidth={125} />
+        </View>
       </View>
     </Card>
   );

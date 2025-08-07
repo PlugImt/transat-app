@@ -18,6 +18,7 @@ export const clubDetailsSchema = z.object({
   member_count: z.number(),
   member_photos: z.array(z.string()),
   responsible: userSchema.optional(),
+  has_joined: z.boolean(),
 });
 
 export type Club = z.infer<typeof clubSchema>;

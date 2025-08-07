@@ -110,7 +110,7 @@ export const Signup = () => {
 
       <View className="flex flex-col gap-10">
         <Input
-          placeholder="christophe.lerouge@imt-atlantique.net"
+          placeholder={t("auth.emailPlaceholder")}
           control={control}
           name="email"
           textContentType="emailAddress"

@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import Image from "@/components/common/Image";
 import type { Club } from "@/dto/club";
-import LinkCard from "./LinkCard";
+import LinkCard, { LinkCardLoading } from "./LinkCard";
 
 type NavigationProp = StackNavigationProp<{
   ClubDetails: { id: number };
@@ -28,3 +28,7 @@ const ClubCard = ({ club }: ClubCardProps) => {
 };
 
 export default ClubCard;
+
+export const ClubCardSkeleton = () => {
+  return <LinkCardLoading />;
+};

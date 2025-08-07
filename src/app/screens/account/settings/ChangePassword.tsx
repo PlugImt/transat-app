@@ -11,6 +11,7 @@ import { Page } from "@/components/page/Page";
 import type { PasswordChange } from "@/dto";
 import { useChangePassword } from "@/hooks/account/useChangePassword";
 import { useUser } from "@/hooks/account/useUser";
+import { hapticFeedback } from "@/utils/haptics.utils";
 
 export const ChangePassword = () => {
   const { t } = useTranslation();
@@ -60,10 +61,12 @@ export const ChangePassword = () => {
           resetPassword();
           toast(t("auth.resetPassword.passwordChanged"), "success");
           navigation.goBack();
+          hapticFeedback.success();
         },
         onError: (error) => {
           resetPassword();
           toast(error.message, "destructive");
+          hapticFeedback.error();
         },
       },
     );

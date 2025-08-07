@@ -100,7 +100,7 @@ const Input = forwardRef(
         color: theme.text,
         flex: 1,
       },
-      className: "py-2.5",
+      className: cn("py-2.5", disabled && "opacity-50"),
       placeholderTextColor: theme.muted,
       ...props,
     };

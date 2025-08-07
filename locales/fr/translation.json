@@ -18,6 +18,7 @@
     "other": "Autre",
     "free": "Gratuit",
     "freeToUse": "Libre",
+    "new": "Nouveauté",
     "empty": "C'est bien vide par ici",
     "closed": "Fermé",
     "success": "Succès",
@@ -28,7 +29,7 @@
     "knowMore": "En savoir plus sur Transat",
     "underConstruction": "En cours de développement 🏗️",
     "underConstructionDesc": "De nouvelles fonctionnalités arrivent bientôt ;)",
-    "campusApp": "L'application du campus pour l'IMT Atlantique de Nantes",
+    "campusApp": "Par les atlantes, pour les atlantes 🐙",
     "plugImtNote": "NOTE: Plug'IMT est une association créée par des étudiants de l'IMT mais n'est pas affilié à l'école",
     "credits": "Crédits",
     "appearance": "Apparence",
@@ -91,6 +92,7 @@
       "termsLink": "conditions d'utilisation et la politique de confidentialité"
     },
     "email": "Email",
+    "emailPlaceholder": "prenom.nom@imt-atlantique.net",
     "password": "Mot de passe",
     "confirmPassword": "Confirmer le mot de passe",
     "firstName": "Prénom",
@@ -176,7 +178,7 @@
       "notifications": "Notifications",
       "fetchError": "Impossible de récupérer les paramètres de notification",
       "updateError": "Impossible de mettre à jour les paramètres de notification",
-      "setNotification": "Définir",
+      "setNotification": "Être notifié",
       "toggleRestaurant": "Être notifié lorsque le menu du jour est publié",
       "toggleTraq": "Être notifié lorsqu'un nouvel article est proposé au Traq'"
     },
@@ -198,7 +200,8 @@
       "selectLanguageError": "Une erreur est survenue lors du changement de langue"
     },
     "about": {
-      "title": "À propos"
+      "title": "À propos",
+      "version": "Version"
     },
     "help": {
       "title": "Aide",
@@ -290,7 +293,7 @@
       },
       "location": "À côté du gymnase",
       "about": "API prépare des plats frais et faits maison quotidiennement — même la salade de fruits ! Le menu change tous les jours pour le déjeuner et le dîner ",
-      "price": "3,30€ (midi) et 4.60€ (soir) pour une entrée, un plat principal et un dessert.",
+      "price": "3,30€ (midi) et 4,60€ (soir) pour une entrée, un plat principal et un dessert.",
       "additionalInfo": "🍰 Il est possible de prendre 1 entrée et 1 dessert, ou 2 entrées ou 2 desserts\n\n💸 Vous pouvez prendre un side supplémentaire mais cela vous coûtera plus cher\n\n😋 Vous pouvez prendre du rab le soir à la fin de service",
       "closedUpdated": {
         "title": "Nous n'avons pas encore le menu",
@@ -377,14 +380,15 @@
       "almostDone": "Machine {{number}} presque terminée !",
       "almostDoneBody": "Votre {{type}} sera terminé dans {{minutes}} minutes",
       "getNotification": "Recevoir une notification",
-      "getNotificationDesc": "Vous recevrez une notification {{minutes}} minutes avant que votre {{type}} ne soit terminée",
+      "getNotificationDesc": "Vous serez notifié {{minutes}} minutes avant que votre {{type}} soit terminée",
+      "getNotificationError": "Erreur lors de la mise en place de la notification",
       "minutesBeforeEnd": "Minutes avant la fin",
       "machineAvailable": "Machines disponibles",
       "dryerAvailable": "Sèche-linges disponibles",
       "noMachine": "Aucune machine disponible",
       "about": "Ouverte 24h/24 et 7j/7, la laverie vous permet de laver et sécher à tout moment pour un prix très abordable",
       "price": "Lavage : 2€\nSéchage : 1€",
-      "additionalInfo": "Payez par pièces, par carte ou avec le portefeuille Monix (recommandé pour les bonus et les remboursements)\n\nBesoin de plus de temps de séchage ? Payez plusieurs sessions avant de commencer",
+      "additionalInfo": "Payez par pièces, par carte ou avec le portefeuille Monix (recommandé pour les bonus et le cashback)\n\nBesoin de plus de temps de séchage ? Payez plusieurs sessions avant de commencer",
       "location": "Sous la MDE, après les boîtes aux lettres"
     },
     "clubs": {
@@ -395,7 +399,9 @@
       "responsible": "Respo",
       "errors": {
         "empty": "Aucun club trouvé",
-        "emptyDescription": "Essayez avec un autre mot-clé"
+        "emptyDescription": "Essayez avec un autre mot-clé",
+        "notFound": "Ce club n'existe pas",
+        "notFoundDescription": "Actualisez ou changez de club"
       }
     }
   },

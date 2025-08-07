@@ -5,6 +5,7 @@ import { TouchableOpacity, View } from "react-native";
 import { Text } from "@/components/common/Text";
 import { Page } from "@/components/page/Page";
 import { type ThemeMode, useTheme } from "@/contexts/ThemeContext";
+import { hapticFeedback } from "@/utils/haptics.utils";
 import SettingCategory from "./components/SettingCategory";
 
 export const Appearance = () => {
@@ -38,6 +39,7 @@ export const Appearance = () => {
   ];
 
   const handleThemeChange = (mode: ThemeMode) => {
+    hapticFeedback.medium();
     setThemeMode(mode);
   };
 

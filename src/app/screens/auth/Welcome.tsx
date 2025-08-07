@@ -19,15 +19,19 @@ export const Welcome = () => {
   };
 
   const buttonsFooter = (
-    <View className="gap-2">
-      <Button
-        label={t("auth.signIn.title")}
-        onPress={() => handleNavigation("Signin")}
-      />
+    <View className="flex-row gap-2">
       <Button
         variant="secondary"
         label={t("auth.signUp.title")}
         onPress={() => handleNavigation("Signup")}
+        size="lg"
+        className="flex-1"
+      />
+      <Button
+        label={t("auth.signIn.title")}
+        onPress={() => handleNavigation("Signin")}
+        size="lg"
+        className="flex-1"
       />
     </View>
   );
@@ -39,7 +43,7 @@ export const Welcome = () => {
       footer={buttonsFooter}
     >
       <HeroAnimation />
-      <View className="items-center justify-center gap-2">
+      <View className="items-center justify-center max-w-sm">
         <Text variant="h1" className="text-center">
           Transat
         </Text>

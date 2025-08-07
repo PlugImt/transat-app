@@ -11,6 +11,7 @@ import { Textarea } from "@/components/common/Textarea";
 import { useToast } from "@/components/common/Toast";
 import { Stars } from "@/components/custom/star/Stars";
 import { usePostRestaurantReview } from "@/hooks/services/restaurant/useMenuRestaurant";
+import { hapticFeedback } from "@/utils/haptics.utils";
 
 interface ReviewDialogProps {
   children: React.ReactElement<{ onPress?: () => void }>;
@@ -45,12 +46,14 @@ export const ReviewDialog = ({ children }: ReviewDialogProps) => {
             "success",
           );
           handleClose();
+          hapticFeedback.success();
         },
         onError: () => {
           toast(
             t("services.restaurant.reviews.dialog.errorMessage"),
             "destructive",
           );
+          hapticFeedback.error();
         },
       },
     );

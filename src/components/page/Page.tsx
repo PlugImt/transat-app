@@ -1,6 +1,5 @@
-import React, { type ReactNode, useEffect, useRef, useState } from "react";
-import { Dimensions, RefreshControl, View } from "react-native";
-import ConfettiCannon from "react-native-confetti-cannon";
+import React, { type ReactNode } from "react";
+import { RefreshControl, View } from "react-native";
 import Animated from "react-native-reanimated";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
@@ -15,8 +14,6 @@ type PageProps = {
   title?: string | ReactNode;
   header?: ReactNode;
   footer?: ReactNode;
-  confetti?: boolean;
-  onConfettiTrigger?: (trigger: () => void) => void;
   disableScroll?: boolean;
   asChildren?: boolean;
 };
@@ -29,28 +26,11 @@ export const Page = ({
   title,
   header,
   footer,
-  confetti = false,
-  onConfettiTrigger,
   disableScroll = false,
   asChildren = false,
 }: PageProps) => {
   const { theme } = useTheme();
   const { scrollHandler, headerShown } = useAnimatedHeader();
-  const confettiRef = useRef<ConfettiCannon>(null);
-  const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
-  const [confettiTriggered, setConfettiTriggered] = useState(false);
-
-  // Expose the confetti trigger function to parent components
-  useEffect(() => {
-    if (onConfettiTrigger) {
-      onConfettiTrigger(() => {
-        if (confettiRef.current) {
-          setConfettiTriggered(true);
-          confettiRef.current.start();
-        }
-      });
-    }
-  }, [onConfettiTrigger]);
 
   const containerStyle = {
     paddingBottom: footer ? 0 : 40,
@@ -115,22 +95,6 @@ export const Page = ({
           }}
         >
           {footer}
-        </View>
-      )}
-
-      {confetti && (
-        <View style={{ zIndex: confettiTriggered ? 50 : -10 }}>
-          <ConfettiCannon
-            ref={confettiRef}
-            count={200}
-            origin={{ x: screenWidth / 2, y: screenHeight - 200 }}
-            autoStart={false}
-            fadeOut={false}
-            colors={[theme.primary, theme.secondary, theme.text]}
-            explosionSpeed={400}
-            fallSpeed={4000}
-            autoStartDelay={-1}
-          />
         </View>
       )}
     </View>

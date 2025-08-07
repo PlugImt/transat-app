@@ -18,6 +18,7 @@ export const SingleStar = ({
   disabled,
 }: SingleStarProps) => {
   const { theme } = useTheme();
+  const isDisabled = disabled || !onPress;
 
   const getStarColors = (isFilled: boolean) => {
     const colors = {
@@ -38,13 +39,13 @@ export const SingleStar = ({
   const { color, fillColor } = getStarColors(isFilled);
 
   const handlePress = () => {
-    if (onPress && !disabled) {
+    if (!isDisabled) {
       onPress(index);
     }
   };
 
   return (
-    <TouchableOpacity onPress={handlePress} disabled={disabled}>
+    <TouchableOpacity onPress={handlePress} disabled={isDisabled}>
       <LucidStar
         size={size}
         color={color}

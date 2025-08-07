@@ -16,7 +16,8 @@
     "link": "Link",
     "other": "Other",
     "free": "Free",
-    "freeToUse": "Free to use",
+    "freeToUse": "Free",
+    "new": "New",
     "empty": "It's quite empty here",
     "closed": "Closed",
     "success": "Success",
@@ -27,7 +28,7 @@
     "knowMore": "Learn more about Transat",
     "underConstruction": "Under construction 🏗️",
     "underConstructionDesc": "New features coming soon ;)",
-    "campusApp": "The campus app for IMT Atlantique Nantes",
+    "campusApp": "By the atlantes, for the atlantes 🐙",
     "plugImtNote": "NOTE: Plug'IMT is an association created by IMT students but is not affiliated with the school",
     "credits": "Credits",
     "appearance": "Appearance",
@@ -90,6 +91,7 @@
       "termsLink": "terms of use and privacy policy"
     },
     "email": "Email",
+    "emailPlaceholder": "firstname.lastname@imt-atlantique.net",
     "password": "Password",
     "confirmPassword": "Confirm password",
     "firstName": "First name",
@@ -175,7 +177,7 @@
       "notifications": "Notifications",
       "fetchError": "Unable to fetch notification settings",
       "updateError": "Unable to update notification settings",
-      "setNotification": "Set",
+      "setNotification": "Be notified",
       "toggleRestaurant": "Be notified when the daily menu is published",
       "toggleTraq": "Be notified when a new item is offered at Traq'"
     },
@@ -197,7 +199,8 @@
       "selectLanguageError": "An error occurred while changing language"
     },
     "about": {
-      "title": "About"
+      "title": "About",
+      "version": "Version"
     },
     "help": {
       "title": "Help",
@@ -376,14 +379,15 @@
       "almostDone": "Machine {{number}} almost done!",
       "almostDoneBody": "Your {{type}} will be finished in {{minutes}} minutes",
       "getNotification": "Get a notification",
-      "getNotificationDesc": "You will receive a notification {{minutes}} minutes before your {{type}} is finished",
+      "getNotificationDesc": "You will be notified {{minutes}} minutes before your {{type}} is finished",
+      "getNotificationError": "Error setting up notification",
       "minutesBeforeEnd": "Minutes before end",
       "machineAvailable": "Available machines",
       "dryerAvailable": "Available dryers",
       "noMachine": "No machine available",
       "about": "Open 24/7, the laundry allows you to wash and dry at any time for a very affordable price",
       "price": "Washing: €2\nDrying: €1",
-      "additionalInfo": "Pay with coins, card, or Monix wallet (recommended for bonuses and refunds)\n\nNeed more drying time? Pay for multiple sessions before starting",
+      "additionalInfo": "Pay with coins, card, or Monix wallet (recommended for bonuses and cashback)\n\nNeed more drying time? Pay for multiple sessions before starting",
       "location": "Under the MDE, after the mailboxes"
     },
     "clubs": {
@@ -402,13 +406,5 @@
   },
   "games": {
     "title": "Games"
-  },
-  "user": {
-    "contact": "Contact",
-    "interested": "Interested",
-    "notInterested": "Not interested",
-    "errors": {
-      "contact": "Error opening SMS app"
-    }
   }
 }

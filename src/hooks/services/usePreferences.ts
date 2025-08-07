@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
 import {
@@ -7,17 +8,28 @@ import {
   type Preference,
   saveHomeWidgetPreferences,
   saveServicePreferences,
-} from "@/services/storage/widgetPreferences";
+} from "@/services/storage/preferences";
 
 const usePreferences = (
-  queryKey: string[],
-  getFn: () => Promise<Preference[]>,
+  baseQueryKey: string[],
+  getFn: (
+    t: (key: string) => string,
+    theme?: "light" | "dark",
+  ) => Promise<Preference[]>,
   saveFn: (prefs: Preference[]) => Promise<void>,
 ) => {
   const queryClient = useQueryClient();
+  const { t, i18n } = useTranslation();
+  const { actualTheme } = useTheme();
+
+  // On inclut le theme pour que le hook se réexécute quand le thème change
+  const queryKey = [...baseQueryKey, i18n.language, actualTheme].filter(
+    Boolean,
+  );
+
   const { data: preferences = [], isPending } = useQuery({
     queryKey,
-    queryFn: getFn,
+    queryFn: () => getFn(t, actualTheme),
     select: (prefs) => prefs.sort((a, b) => a.order - b.order),
   });
 
@@ -68,11 +80,9 @@ export const useHomeWidgetPreferences = () =>
   );
 
 export const useServicePreferences = () => {
-  const { actualTheme } = useTheme();
-
   return usePreferences(
     QUERY_KEYS.servicePreferences,
-    () => getServicePreferences(actualTheme),
+    getServicePreferences,
     saveServicePreferences,
   );
 };

@@ -89,7 +89,7 @@ export const VerificationCodeModal: React.FC<VerificationCodeModalProps> = ({
           {error && (
             <View
               className="mb-4 w-full rounded-md p-2.5"
-              style={{ backgroundColor: theme.errorBackground }}
+              style={{ backgroundColor: theme.destructiveBackground }}
             >
               <Text className="text-center" color="destructive">
                 {error}

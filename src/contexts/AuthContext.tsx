@@ -59,6 +59,8 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     user: userQuery,
     refetchUser,
     isUserLoading,
+    isLoggingIn,
+    isRegistering,
     login: loginMutation,
     register: registerMutation,
     saveToken: saveTokenMutation,
@@ -217,7 +219,7 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
 
   const value = {
     user,
-    isPending: isUserLoading,
+    isPending: isUserLoading || isLoggingIn || isRegistering,
     login,
     logout,
     register,

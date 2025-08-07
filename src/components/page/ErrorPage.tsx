@@ -1,9 +1,10 @@
 import { CircleX } from "lucide-react-native";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { Button } from "@/components/common/Button";
 import { useTheme } from "@/contexts/ThemeContext";
-import useAuth from "@/hooks/account/useAuth";
+import { hapticFeedback } from "@/utils/haptics.utils";
 import { Text } from "../common/Text";
 import { Page } from "./Page";
 
@@ -12,7 +13,7 @@ type ErrorPageProps = {
   error: Error | null;
   refetch: () => void;
   isRefetching: boolean;
-  isAccountPage?: boolean;
+  children?: React.ReactNode;
 };
 
 export const ErrorPage = ({
@@ -20,18 +21,19 @@ export const ErrorPage = ({
   error,
   refetch,
   isRefetching,
-  isAccountPage = false,
+  children,
 }: ErrorPageProps) => {
   const { t } = useTranslation();
-  const { logout } = useAuth();
   const { theme } = useTheme();
+  useEffect(() => {
+    hapticFeedback.error();
+  }, []);
 
   return (
     <Page
       title={title}
       className="flex-1 justify-center items-center"
-      onRefresh={refetch}
-      refreshing={isRefetching}
+      footer={children}
     >
       <View className="justify-center items-center gap-4">
         <CircleX color={theme.text} size={40} />
@@ -53,13 +55,6 @@ export const ErrorPage = ({
           onPress={refetch}
           isUpdating={isRefetching}
         />
-        {isAccountPage && (
-          <Button
-            label="Déconnexion"
-            variant="destructive"
-            onPress={() => logout()}
-          />
-        )}
       </View>
     </Page>
   );

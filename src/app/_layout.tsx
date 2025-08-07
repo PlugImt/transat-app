@@ -1,7 +1,6 @@
 import * as Sentry from "@sentry/react-native";
 import { Slot } from "expo-router";
-import { StatusBar as ExpoStatusBar } from "expo-status-bar";
-import { Platform, SafeAreaView, StatusBar, StyleSheet } from "react-native";
+import { Platform, StatusBar, StyleSheet } from "react-native";
 
 Sentry.init({
   enabled: !__DEV__,
@@ -31,7 +30,7 @@ Sentry.init({
   environment: __DEV__ ? "development" : "production",
 });
 
-const SafeViewAndroid = StyleSheet.create({
+export const SafeViewAndroid = StyleSheet.create({
   AndroidSafeArea: {
     flex: 1,
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
@@ -41,10 +40,8 @@ const SafeViewAndroid = StyleSheet.create({
 export default function Layout() {
   return (
     <>
-      <ExpoStatusBar animated translucent />
-      <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
-        <Slot />
-      </SafeAreaView>
+      <StatusBar />
+      <Slot />
     </>
   );
 }

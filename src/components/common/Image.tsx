@@ -77,7 +77,7 @@ const Image = forwardRef<React.ElementRef<typeof RNImage>, ImageProps>(
 
     return (
       <View
-        style={{ width: size, height: size }}
+        style={[{ width: size, height: size }, props.style]}
         className={cn("relative flex shrink-0 overflow-hidden", className)}
       >
         <View className="absolute inset-0 h-full w-full z-10">

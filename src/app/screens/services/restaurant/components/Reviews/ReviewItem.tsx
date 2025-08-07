@@ -49,7 +49,7 @@ export const ReviewItem = ({ review }: ReviewItemProps) => {
         </View>
       </View>
 
-      <Text>{review.comment}</Text>
+      {Boolean(review.comment) && <Text>{review.comment}</Text>}
     </Card>
   );
 };

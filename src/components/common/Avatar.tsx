@@ -1,4 +1,4 @@
-import { forwardRef, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { Image, View } from "react-native";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -45,6 +45,14 @@ const AvatarImage = forwardRef<
         source.uri &&
         source.uri.trim() !== "")); // remote image
 
+  // Reset loading state when source changes
+  useEffect(() => {
+    if (hasValidSource) {
+      setImageLoading(true);
+      setHasError(false);
+    }
+  }, [hasValidSource]);
+
   if (!hasValidSource || hasError) {
     return null;
   }
@@ -55,7 +63,10 @@ const AvatarImage = forwardRef<
         <Image
           ref={ref}
           source={source}
-          onError={() => setHasError(true)}
+          onError={() => {
+            setHasError(true);
+            setImageLoading(false);
+          }}
           className={cn(
             "aspect-square h-full w-full",
             isLoading ? "opacity-0" : "opacity-100",

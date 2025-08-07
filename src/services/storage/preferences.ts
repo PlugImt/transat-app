@@ -1,5 +1,4 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { t } from "i18next";
 import type { ImageSourcePropType } from "react-native";
 
 export type WidgetType =
@@ -32,7 +31,7 @@ export interface Preference {
 const HOME_WIDGETS_KEY = "home_widgets_preferences";
 const SERVICES_KEY = "services_preferences";
 
-const getDefaultHomeWidgets = (): Preference[] => [
+const getDefaultHomeWidgets = (t: (key: string) => string): Preference[] => [
   { id: "weather", name: t("services.weather"), enabled: true, order: 0 },
   {
     id: "restaurant",
@@ -49,6 +48,7 @@ const getDefaultHomeWidgets = (): Preference[] => [
 ];
 
 const getDefaultServices = (
+  t: (key: string) => string,
   themeMode: "light" | "dark" = "light",
 ): Preference[] => {
   return [
@@ -102,10 +102,20 @@ const getPreferences = async (
     const stored = await AsyncStorage.getItem(key);
     const parsed: Preference[] = JSON.parse(stored || "[]");
     const defaultPrefs = getDefaultPrefs();
-    const newPrefs = defaultPrefs.filter(
-      (pref) => !parsed.some((p: Preference) => p.id === pref.id),
-    );
-    return [...parsed, ...newPrefs];
+
+    // On part des préférences par défaut et on applique les paramètres utilisateur
+    return defaultPrefs.map((defaultPref) => {
+      const existingPref = parsed.find((p) => p.id === defaultPref.id);
+      if (existingPref) {
+        // On garde les paramètres utilisateur (enabled, order) mais on utilise les nouvelles traductions/images
+        return {
+          ...defaultPref,
+          enabled: existingPref.enabled,
+          order: existingPref.order,
+        };
+      }
+      return defaultPref;
+    });
   } catch (error) {
     console.error(`Error getting preferences for ${key}:`, error);
     return getDefaultPrefs();
@@ -123,17 +133,20 @@ const savePreferences = async (
   }
 };
 
-export const getHomeWidgetPreferences = async (): Promise<Preference[]> =>
-  getPreferences(HOME_WIDGETS_KEY, getDefaultHomeWidgets);
+export const getHomeWidgetPreferences = async (
+  t: (key: string) => string,
+): Promise<Preference[]> =>
+  getPreferences(HOME_WIDGETS_KEY, () => getDefaultHomeWidgets(t));
 
 export const saveHomeWidgetPreferences = async (
   preferences: Preference[],
 ): Promise<void> => savePreferences(HOME_WIDGETS_KEY, preferences);
 
 export const getServicePreferences = async (
+  t: (key: string) => string,
   themeMode?: "light" | "dark",
 ): Promise<Preference[]> =>
-  getPreferences(SERVICES_KEY, () => getDefaultServices(themeMode));
+  getPreferences(SERVICES_KEY, () => getDefaultServices(t, themeMode));
 
 export const saveServicePreferences = async (
   preferences: Preference[],

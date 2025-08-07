@@ -8,11 +8,13 @@ import { Button, IconButton } from "@/components/common/Button";
 import Card from "@/components/common/Card";
 import InfoItem from "@/components/common/InfoItem";
 import { Text } from "@/components/common/Text";
+import { LogoutButton } from "@/components/custom/LogoutButton";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
 import { AvatarSkeleton, TextSkeleton } from "@/components/Skeleton";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useAuth } from "@/hooks/account";
 import { useUser } from "@/hooks/account/useUser";
 import type { AccountNavigation } from "@/types";
 import { getStudentYear } from "@/utils";
@@ -22,6 +24,7 @@ export const Account = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<AccountNavigation>();
   const queryClient = useQueryClient();
+  const { logout } = useAuth();
 
   const { data: user, isPending, isError, error } = useUser();
   const isUserFetching =
@@ -48,8 +51,9 @@ export const Account = () => {
         error={error}
         refetch={refetch}
         isRefetching={isPending}
-        isAccountPage={true}
-      />
+      >
+        <LogoutButton />
+      </ErrorPage>
     );
   }
 

@@ -12,7 +12,7 @@ const MAX_COUNT = 100;
 const getImageProps = (size: "default" | "sm", borderColor: string) => {
   const sizeProps = size === "default" ? 32 : 24;
   return {
-    radius: "round" as const,
+    radius: 9999,
     size: sizeProps,
     style: {
       borderWidth: 1,
@@ -66,7 +66,10 @@ export const UserStack = ({
             style={{ width: sizeProps, height: sizeProps }}
           >
             <Image source={pictures[max]} {...imageProps} />
-            <View className="absolute inset-0 bg-black/50 rounded-full" />
+            <View
+              className="absolute inset-0 bg-black/50 rounded-full"
+              style={{ ...imageProps.style }}
+            />
             <NativeText className="text-white text-sm font-medium absolute inset-x-0 text-center">{`+${count - max > MAX_COUNT ? MAX_COUNT : count - max}`}</NativeText>
           </View>
         )}

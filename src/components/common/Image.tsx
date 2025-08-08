@@ -23,14 +23,25 @@ interface ImageFallbackProps {
   size?: number;
   className?: string;
   style?: StyleProp<ViewStyle>;
+  radius?: number;
 }
 
-const ImageFallback = ({ size = 64, className, style }: ImageFallbackProps) => {
+const ImageFallback = ({
+  size = 64,
+  className,
+  style,
+  radius,
+}: ImageFallbackProps) => {
   const { theme } = useTheme();
   return (
     <View
       style={[
-        { backgroundColor: theme.border, width: size, height: size },
+        {
+          backgroundColor: theme.border,
+          width: size,
+          height: size,
+          borderRadius: radius,
+        },
         style,
       ]}
       className={cn(
@@ -85,7 +96,7 @@ const Image = forwardRef<React.ElementRef<typeof RNImage>, ImageProps>(
       return fallback !== undefined ? (
         fallback
       ) : (
-        <ImageFallback size={size} {...props} />
+        <ImageFallback size={size} radius={radius} {...props} />
       );
     }
 

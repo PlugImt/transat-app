@@ -9,8 +9,8 @@ import { Text } from "@/components/common/Text";
 import { TextSkeleton } from "@/components/Skeleton";
 import ImageSkeleton from "@/components/Skeleton/ImageSkeleton";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useAuth } from "@/hooks/account";
 import type { AppStackParamList } from "@/types";
-import { useAuth, useUser } from '@/hooks/account';
 
 interface ReservationCardProps {
   onPress?: () => void;
@@ -37,7 +37,7 @@ const ReservationCard = ({
   const { theme } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation<StackNavigationProp<AppStackParamList>>();
-const auth = useAuth();
+  const auth = useAuth();
   const handlePress = () => {
     if (type === "category") {
       if (onPress) onPress();
@@ -49,9 +49,8 @@ const auth = useAuth();
     }
   };
 
-  const disabled = !!user&& user.email != auth.user?.email;
-  const canBeFreed = !!user && user.email == auth.user?.email
-
+  const disabled = !!user && user.email !== auth.user?.email;
+  const canBeFreed = !!user && user.email === auth.user?.email;
 
   const handleReservePress = () => {
     if (slot) {
@@ -60,31 +59,35 @@ const auth = useAuth();
       console.log("dialog to be implemented");
     }
   };
+
   return (
     <Card
       onPress={type === "category" ? handlePress : undefined}
       className={`flex-row items-center gap-4 ${disabled ? "opacity-60" : ""}`}
     >
       <View className="flex-1">
-          <View className="flex-row items-center gap-2 mb-1">
-        <Text variant="h3" numberOfLines={1}>
-          {title}
-        </Text>
-      </View>
-      {user ? (
-        <View className="flex-row items-center gap-2">
-          <Text variant="sm" numberOfLines={1}>
-              {`${t("services.reservation.reservedBy")} ${user.first_name} ${user.last_name}`}
+        <View className="flex-row items-center gap-2 mb-1">
+          <Text variant="h3" numberOfLines={1}>
+            {title}
           </Text>
         </View>
-      ) : null}
+        {user ? (
+          <View className="flex-row items-center gap-2">
+            <Text variant="sm" numberOfLines={1}>
+              {`${t("services.reservation.reservedBy")} ${user.first_name} ${user.last_name}`}
+            </Text>
+          </View>
+        ) : null}
       </View>
       {type === "category" ? (
         <ChevronRight color={theme.muted} />
       ) : (
         <Button
-          label={canBeFreed ? t("services.reservation.returnItem")
-              : t("services.reservation.reserve")}
+          label={
+            canBeFreed
+              ? t("services.reservation.returnItem")
+              : t("services.reservation.reserve")
+          }
           variant="secondary"
           className="ml-auto"
           onPress={handleReservePress}

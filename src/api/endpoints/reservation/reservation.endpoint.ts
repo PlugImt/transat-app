@@ -28,3 +28,20 @@ export const getReservationItem = async (id: number) => {
     Method.GET,
   );
 };
+
+export const updateReservation = async (id: number, startTime: boolean) => {
+  if (startTime) {
+    return await apiRequest(
+      API_ROUTES.reservationItem.replace(":id", id.toString()),
+      Method.PATCH,
+      { start_date: startTime },
+    );
+  }
+
+  return await apiRequest(
+    API_ROUTES.reservationItem.replace(":id", id.toString()),
+    Method.PATCH,
+    { end_date: new Date().toISOString().slice(0, 19).replace("T", " ") },
+  );
+
+};

@@ -1,13 +1,13 @@
 import { useMemo } from "react";
+import type { User } from "@/dto";
 import type { GetReservation } from "@/dto/reservation";
-import { User } from '@/dto';
 
 type ReservationItem = {
   id: number;
   name: string;
   type: "category" | "item";
   slot?: boolean;
-  user?: User
+  user?: User;
 };
 
 export const useReservationData = (
@@ -23,12 +23,10 @@ export const useReservationData = (
         ...category,
         type: "category" as const,
       })) || []),
-      ...(dataObj.items?.map(
-        (item: any) => ({
-          ...item,
-          type: "item" as const,
-        }),
-      ) || []),
+      ...(dataObj.items?.map((item: any) => ({
+        ...item,
+        type: "item" as const,
+      })) || []),
     ];
 
     return combinedData;

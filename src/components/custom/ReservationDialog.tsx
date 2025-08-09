@@ -1,10 +1,14 @@
+import type { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/common/Dialog";
 import { Text } from "@/components/common/Text";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/common/Dialog";
 import { useToast } from "@/components/common/Toast";
 import { useReservationMutation } from "@/hooks/services/reservation/useReservationMutations";
 import { hapticFeedback } from "@/utils/haptics.utils";
-import type { ReactElement } from "react";
 
 interface ReservationDialogProps {
   children: ReactElement<{ onPress?: () => void }>;
@@ -16,7 +20,6 @@ interface ReservationDialogProps {
 export const ReservationDialog = ({
   children,
   itemId,
-  itemTitle,
   isReturning = false,
 }: ReservationDialogProps) => {
   const { t } = useTranslation();
@@ -25,28 +28,28 @@ export const ReservationDialog = ({
 
   const handleConfirm = async () => {
     try {
-      await reservationMutation.mutateAsync({ 
-        id: itemId, 
-        isReturning: isReturning
+      await reservationMutation.mutateAsync({
+        id: itemId,
+        isReturning: isReturning,
       });
-      
-      const successMessage = isReturning 
+
+      const successMessage = isReturning
         ? t("services.reservation.returnSuccess")
         : t("services.reservation.reserveSuccess");
-      
+
       toast(successMessage);
       await hapticFeedback.success();
-    } catch (error) {
+    } catch (_error) {
       const errorMessage = isReturning
         ? t("services.reservation.returnError")
         : t("services.reservation.reserveError");
-      
+
       toast(errorMessage, "destructive");
       await hapticFeedback.error();
     }
   };
 
-  const dialogTitle = isReturning 
+  const dialogTitle = isReturning
     ? t("services.reservation.returnItem")
     : t("services.reservation.reserve");
 
@@ -60,9 +63,7 @@ export const ReservationDialog = ({
 
   return (
     <Dialog>
-      <DialogTrigger>
-        {children}
-      </DialogTrigger>
+      <DialogTrigger>{children}</DialogTrigger>
 
       <DialogContent
         title={dialogTitle}

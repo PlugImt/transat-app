@@ -6,9 +6,9 @@ import { View } from "react-native";
 import { Button } from "@/components/common/Button";
 import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
+import { ReservationDialog } from "@/components/custom/ReservationDialog";
 import { TextSkeleton } from "@/components/Skeleton";
 import ImageSkeleton from "@/components/Skeleton/ImageSkeleton";
-import { ReservationDialog } from "@/components/custom/ReservationDialog";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/hooks/account";
 import type { AppStackParamList } from "@/types";
@@ -41,17 +41,17 @@ const ReservationCard = ({
   const navigation = useNavigation<StackNavigationProp<AppStackParamList>>();
   const auth = useAuth();
 
-    const handlePress = () => {
-        if (type !== "category") {
-            return;
-        }
-        onPress?.();
-        navigation.push("ReservationCategory", {
-            id,
-            type: "category",
-            title,
-        });
-    };
+  const handlePress = () => {
+    if (type !== "category") {
+      return;
+    }
+    onPress?.();
+    navigation.push("ReservationCategory", {
+      id,
+      type: "category",
+      title,
+    });
+  };
 
   const disabled = !!user && user.email !== auth.user?.email;
   const canBeFreed = !!user && user.email === auth.user?.email;
@@ -64,8 +64,8 @@ const ReservationCard = ({
 
   return (
     <Card
-        onPress={handlePress}
-        className={`flex-row items-center gap-4 ${disabled ? "opacity-60" : ""}`}
+      onPress={handlePress}
+      className={`flex-row items-center gap-4 ${disabled ? "opacity-60" : ""}`}
     >
       <View className="flex-1">
         <View className="flex-row items-center gap-2 mb-1">

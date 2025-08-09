@@ -391,6 +391,9 @@
     }
   },
   "games": {
-    "title": "Juegos"
+    "title": "Juegos",
+    "bassine": {
+      "title": "Cuenca"
+    }
   }
 }

@@ -391,6 +391,9 @@
     }
   },
   "games": {
-    "title": "游戏"
+    "title": "游戏",
+    "bassine": {
+      "title": "池塘"
+    }
   }
 }

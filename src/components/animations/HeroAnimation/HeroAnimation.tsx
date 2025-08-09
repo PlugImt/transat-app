@@ -5,7 +5,7 @@ import Logo from "@/assets/images/icon-bg.png";
 import { cn } from "@/utils";
 import { ClubCard } from "./components/ClubCard";
 import { HeroAvatar } from "./components/HeroAvatar";
-import { useClubImages } from "./hooks/useClubImages";
+import { useFeatureImages } from "./hooks/useClubImages";
 import { useHeroAvatars } from "./hooks/useHeroAvatars";
 
 interface HeroAnimationProps {
@@ -37,7 +37,7 @@ const getAnimationConfig = (
 });
 
 export const HeroAnimation = ({ className }: HeroAnimationProps) => {
-  const images = useClubImages();
+  const images = useFeatureImages();
   const avatars = useHeroAvatars();
 
   const [containerLayout, setContainerLayout] = useState<{

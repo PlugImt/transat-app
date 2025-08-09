@@ -152,7 +152,7 @@ const IconButton = ({
   const { theme } = useTheme();
   const isDisabled = props.disabled || isUpdating;
 
-  const buttonStyle = variant === "default" && getButtonStyle(variant, theme);
+  const buttonStyle = getButtonStyle(variant, theme);
   const sizeStyles = getSizeStyles(size);
   const iconColor = getTextColor(variant, theme);
 
@@ -180,10 +180,10 @@ const IconButton = ({
     >
       {isUpdating ? (
         <ActivityIndicator color={iconColor} />
+      ) : icon.props.color ? (
+        icon
       ) : (
-        cloneElement(icon, {
-          color: iconColor,
-        })
+        cloneElement(icon, { color: iconColor })
       )}
     </TouchableOpacity>
   );

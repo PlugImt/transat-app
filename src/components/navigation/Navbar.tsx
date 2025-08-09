@@ -23,6 +23,7 @@ import {
   Timetable,
   Traq,
 } from "@/app/screens/services";
+import Bassine from "@/app/screens/services/games/bassine/Bassine";
 import { HomeworkDetails } from "@/app/screens/services/homework/components/HomeworkDetails";
 import { RestaurantReviews } from "@/app/screens/services/restaurant/components/Reviews";
 import { Services } from "@/app/screens/services/Services";
@@ -71,6 +72,7 @@ const GamesStack = createStackNavigator();
 const GamesStackScreen = () => (
   <GamesStack.Navigator screenOptions={screenOptions}>
     <GamesStack.Screen name="Games" component={Games} />
+    <GamesStack.Screen name="Bassine" component={Bassine} />
   </GamesStack.Navigator>
 );
 

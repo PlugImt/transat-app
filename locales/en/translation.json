@@ -391,6 +391,9 @@
     }
   },
   "games": {
-    "title": "Games"
+    "title": "Games",
+    "bassine": {
+      "title": "Basin"
+    }
   }
 }

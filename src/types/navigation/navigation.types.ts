@@ -30,6 +30,7 @@ export type AppStackParamList = {
   Homework: undefined;
   HomeworkDetails: { homework: Homework };
   Games: undefined;
+  Bassine: undefined;
   Profile: {
     userId: string;
   };

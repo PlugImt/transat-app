@@ -2,7 +2,7 @@ import { MotiView } from "moti";
 import type { ImageSourcePropType } from "react-native";
 import Card from "@/components/common/Card";
 import Image from "@/components/common/Image";
-import { useClubImages, useFloatAnimation } from "../hooks";
+import { useFeatureImages, useFloatAnimation } from "../hooks";
 
 interface ClubCardProps {
   image: ImageSourcePropType;
@@ -10,7 +10,7 @@ interface ClubCardProps {
 }
 
 export const ClubCard = ({ image, index = 0 }: ClubCardProps) => {
-  const images = useClubImages();
+  const images = useFeatureImages();
 
   const amplitude = 2;
   const baseDuration = 6000;

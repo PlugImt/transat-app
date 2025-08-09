@@ -68,7 +68,7 @@
     "react-hook-form": "^7.54.2",
     "react-i18next": "^15.4.0",
     "react-native": "0.79.5",
-    "react-native-confetti-cannon": "^1.5.2",
+    "react-native-animated-rolling-numbers": "^2.0.0",
     "react-native-confirmation-code-field": "^7.4.0",
     "react-native-date-picker": "^5.0.13",
     "react-native-draggable-flatlist": "^4.0.3",
@@ -102,7 +102,6 @@
     "doctor": {
       "reactNativeDirectoryCheck": {
         "exclude": [
-          "react-native-confetti-cannon",
           "react-native-skeleton-placeholder"
         ],
         "listUnknownPackages": false

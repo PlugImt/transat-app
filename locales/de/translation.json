@@ -391,6 +391,9 @@
     }
   },
   "games": {
-    "title": "Spiele"
+    "title": "Spiele",
+    "bassine": {
+      "title": "Becken"
+    }
   }
 }

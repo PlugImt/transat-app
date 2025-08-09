@@ -391,6 +391,9 @@
     }
   },
   "games": {
-    "title": "Jogos"
+    "title": "Jogos",
+    "bassine": {
+      "title": "Baía"
+    }
   }
 }

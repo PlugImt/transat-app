@@ -59,7 +59,7 @@ const ClubDetails = () => {
       onRefresh={refetch}
     >
       <ClubDetailsHeader club={club} />
-      <ClubResponsible />
+      <ClubResponsible club={club} />
     </Page>
   );
 };

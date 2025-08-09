@@ -22,9 +22,9 @@ export const getReservationClub = async (id: number) => {
   );
 };
 
-export const getReservationItem = async (id: number) => {
+export const getReservationItem = async (id: number, date: string) => {
   return await apiRequest<GetReservation>(
-    API_ROUTES.reservationItem.replace(":id", id.toString()),
+    API_ROUTES.reservationItem.replace(":id", id.toString()) + `${date ? "date=" + date : ""}`,
     Method.GET,
   );
 };

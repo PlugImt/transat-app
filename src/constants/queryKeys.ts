@@ -25,4 +25,11 @@ export const QUERY_KEYS = {
   },
   homeWidgetPreferences: ["homeWidgetPreferences"],
   servicePreferences: ["servicePreferences"],
+  reservation: {
+    categories: ["reservation", "categories"],
+    createCategory: ["reservation", "createCategory"],
+    items: ["reservation", "items"],
+    createItem: ["reservation", "createItem"],
+    club: (id: number) => ["reservation", "club", id],
+  },
 };

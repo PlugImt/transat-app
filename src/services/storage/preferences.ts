@@ -14,7 +14,8 @@ export type ServiceType =
   | "homework"
   | "traq"
   | "olimtpe"
-  | "clubs";
+  | "clubs"
+  | "reservation";
 
 export type PreferenceId = WidgetType | ServiceType;
 
@@ -90,6 +91,15 @@ const getDefaultServices = (
       image: require("@/assets/images/services/club.png"),
       screen: "Clubs",
       description: t("services.clubs.description"),
+    },
+    {
+      id: "reservation",
+      name: t("services.reservation.title"),
+      enabled: true,
+      order: 6,
+      image: require("@/assets/images/services/edt.png"),
+      screen: "Reservation",
+      description: t("services.reservation.description"),
     },
   ];
 };

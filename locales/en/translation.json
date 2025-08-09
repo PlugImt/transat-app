@@ -403,6 +403,10 @@
         "notFound": "This club doesn't exist",
         "notFoundDescription": "Refresh or change club"
       }
+    },
+    "reservation": {
+      "title": "Reservation",
+      "description": "Reserve a room or equipment at IMT"
     }
   },
   "games": {

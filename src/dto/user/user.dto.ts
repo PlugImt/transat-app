@@ -14,7 +14,7 @@ export type Loading = z.infer<typeof loadingSchema>;
 export const userSchema = z.object({
   first_name: z.string(),
   last_name: z.string(),
-  phone_number: z.string(),
+  phone_number: z.string().optional(),
   email: z.string().email(),
   graduation_year: z.number().optional(),
   formation_name: z.nativeEnum(formationName).optional(),

@@ -19,6 +19,7 @@ import {
   Homework,
   Laundry,
   Olimtpe,
+  Reservation,
   Restaurant,
   Timetable,
   Traq,
@@ -66,6 +67,7 @@ const ServicesStackScreen = () => (
     <ServicesStack.Screen name="ClubDetails" component={ClubDetails} />
     <ServicesStack.Screen name="Traq" component={Traq} />
     <ServicesStack.Screen name="Olimtpe" component={Olimtpe} />
+    <ServicesStack.Screen name="Reservation" component={Reservation} />
   </ServicesStack.Navigator>
 );
 

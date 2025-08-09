@@ -10,7 +10,7 @@ import HomeworkCard from "@/components/custom/card/HomeworkCard";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Homework as HomeworkType } from "@/dto";
-import { useHomework } from "@/hooks/useHomework";
+import { useHomework } from "@/hooks/services/homework/useHomework";
 import { ErrorState, LoadingState } from "./components";
 
 export const Homework = () => {

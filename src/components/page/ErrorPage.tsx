@@ -1,7 +1,9 @@
+import { CircleX } from "lucide-react-native";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { Button } from "@/components/common/Button";
+import { useTheme } from "@/contexts/ThemeContext";
 import { hapticFeedback } from "@/utils/haptics.utils";
 import { Text } from "../common/Text";
 import { Page } from "./Page";
@@ -22,7 +24,7 @@ export const ErrorPage = ({
   children,
 }: ErrorPageProps) => {
   const { t } = useTranslation();
-
+  const { theme } = useTheme();
   useEffect(() => {
     hapticFeedback.error();
   }, []);
@@ -30,19 +32,21 @@ export const ErrorPage = ({
   return (
     <Page
       title={title}
-      disableScroll
       className="flex-1 justify-center items-center"
       footer={children}
     >
-      <View className="justify-center items-center">
-        <Text variant="h3" className="text-center">
-          {t("common.errors.occurred")}
-        </Text>
-        {error && (
-          <Text color="muted" className="text-center">
-            {error?.message}
+      <View className="justify-center items-center gap-4">
+        <CircleX color={theme.text} size={40} />
+        <View className="items-center">
+          <Text variant="h3" className="text-center">
+            {t("common.errors.occurred")}
           </Text>
-        )}
+          {error && (
+            <Text color="muted" className="text-center">
+              {error?.message}
+            </Text>
+          )}
+        </View>
       </View>
       <View className="gap-2">
         <Button

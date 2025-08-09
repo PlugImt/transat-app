@@ -12,7 +12,7 @@ import { Text } from "@/components/common/Text";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { MenuItem } from "@/dto";
-import { useMenuRestaurant } from "@/hooks/useMenuRestaurant";
+import { useMenuRestaurant } from "@/hooks/services/restaurant/useMenuRestaurant";
 import type { AppStackParamList } from "@/types";
 import { isDinner, isLunch, isWeekend, outOfService } from "@/utils";
 

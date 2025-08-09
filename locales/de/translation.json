@@ -7,11 +7,14 @@
     "save": "Speichern",
     "confirm": "Bestätigen",
     "send": "Senden",
+    "search": "Suchen",
     "cancel": "Abbrechen",
     "close": "Schließen",
     "clearAll": "Alles löschen",
     "filter": "Filter",
     "refresh": "Aktualisieren",
+    "link": "Link",
+    "reset": "Zurücksetzen",
     "or": "Oder",
     "other": "Andere",
     "free": "Kostenlos",
@@ -179,6 +182,10 @@
       "setNotification": "Benachrichtigt werden",
       "toggleRestaurant": "Benachrichtigt werden, wenn das Tagesmenü veröffentlicht wird",
       "toggleTraq": "Benachrichtigt werden, wenn ein neuer Artikel beim Traq' angeboten wird"
+    },
+    "hapticFeedback": {
+      "title": "Haptische Rückmeldung",
+      "description": "Vibriert bei Interaktionen"
     },
     "appearance": {
       "title": "Erscheinungsbild",
@@ -388,12 +395,36 @@
       "price": "Waschen: 2€\nTrocknen: 1€",
       "additionalInfo": "Zahlen Sie mit Münzen, Karte oder Monix-Wallet (empfohlen für Boni und Cashback)\n\nBrauchen Sie mehr Trocknungszeit? Zahlen Sie für mehrere Sitzungen vor dem Start",
       "location": "Unter der MDE, nach den Briefkästen"
+    },
+    "clubs": {
+      "title": "Clubs",
+      "description": "Entdecken Sie alle Clubs und Vereine an der IMT",
+      "book": "Buchen",
+      "interested": "{{count}} Leute sind an diesem Club interessiert",
+      "responsible": "Verantwortlich",
+      "errors": {
+        "empty": "Kein Club gefunden",
+        "emptyDescription": "Versuchen Sie es mit einem anderen Schlüsselwort",
+        "notFound": "Dieser Club existiert nicht",
+        "notFoundDescription": "Aktualisieren Sie oder wechseln Sie den Club"
+      }
     }
   },
   "games": {
     "title": "Spiele",
     "bassine": {
-      "title": "Becken"
+      "title": "Becken",
+      "description": "Wenn eine Bier serviert wird, füllt sich das Becken langsam, und wenn es voll ist, können Sie fragen, ob Sie Ihr Glas füllen können\n\nFür jedes gefüllte Glas aktualisieren Sie Ihren Zähler, um der König des Beckens zu werden 👑",
+      "location": "Bei der MDE während Partys",
+      "price": "Kostenlos"
+    }
+  },
+  "user": {
+    "contact": "Kontakt",
+    "interested": "Interessiert",
+    "notInterested": "Nicht interessiert",
+    "errors": {
+      "contact": "Fehler beim Öffnen der SMS-App"
     }
   }
 }

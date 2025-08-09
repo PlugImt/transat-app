@@ -13,7 +13,10 @@ import {
 import { Text } from "@/components/common/Text";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
-import { useLaundryNotifications, useLaundryTimer } from "@/hooks/laundry";
+import {
+  useLaundryNotifications,
+  useLaundryTimer,
+} from "@/hooks/services/laundry";
 
 interface LaundryProps {
   number: string;

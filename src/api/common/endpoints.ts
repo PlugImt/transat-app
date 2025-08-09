@@ -19,6 +19,11 @@ export const API_ROUTES: Record<Route, ApiRoute> = {
   resendCode: "/auth/resend-code",
   resetPassword: "/auth/reset-password",
   changePassword: "/auth/change-password",
+  club: "/club",
+  clubDetails: "/club/:id",
+  clubMembers: "/club/:id/members",
+  clubJoin: "/club/:id/join",
+  clubLeave: "/club/:id/leave",
 };
 
 type ApiRoute = `/${string}`;
@@ -42,4 +47,9 @@ type Route =
   | "verifyAccount"
   | "resendCode"
   | "resetPassword"
-  | "changePassword";
+  | "changePassword"
+  | "club"
+  | "clubDetails"
+  | "clubJoin"
+  | "clubLeave"
+  | "clubMembers";

@@ -8,10 +8,13 @@
     "confirm": "Confirmer",
     "send": "Envoyer",
     "cancel": "Annuler",
+    "search": "Rechercher",
     "close": "Fermer",
     "clearAll": "Effacer",
     "filter": "Filtrer",
     "refresh": "Actualiser",
+    "link": "Lien",
+    "reset": "Réinitialiser",
     "or": "Ou",
     "other": "Autre",
     "free": "Gratuit",
@@ -180,6 +183,10 @@
       "toggleRestaurant": "Être notifié lorsque le menu du jour est publié",
       "toggleTraq": "Être notifié lorsqu'un nouvel article est proposé au Traq'"
     },
+    "hapticFeedback": {
+      "title": "Retour haptique",
+      "description": "Vibre lors des interactions"
+    },
     "appearance": {
       "title": "Apparence",
       "theme": "Thème",
@@ -291,7 +298,7 @@
       },
       "location": "À côté du gymnase",
       "about": "API prépare des plats frais et faits maison quotidiennement — même la salade de fruits ! Le menu change tous les jours pour le déjeuner et le dîner ",
-      "price": "3,30€ (midi) et 4.60€ (soir) pour une entrée, un plat principal et un dessert.",
+      "price": "3,30€ (midi) et 4,60€ (soir) pour une entrée, un plat principal et un dessert.",
       "additionalInfo": "🍰 Il est possible de prendre 1 entrée et 1 dessert, ou 2 entrées ou 2 desserts\n\n💸 Vous pouvez prendre un side supplémentaire mais cela vous coûtera plus cher\n\n😋 Vous pouvez prendre du rab le soir à la fin de service",
       "closedUpdated": {
         "title": "Nous n'avons pas encore le menu",
@@ -388,6 +395,19 @@
       "price": "Lavage : 2€\nSéchage : 1€",
       "additionalInfo": "Payez par pièces, par carte ou avec le portefeuille Monix (recommandé pour les bonus et le cashback)\n\nBesoin de plus de temps de séchage ? Payez plusieurs sessions avant de commencer",
       "location": "Sous la MDE, après les boîtes aux lettres"
+    },
+    "clubs": {
+      "title": "Clubs",
+      "description": "Découvre tous les clubs et associations de l’IMT",
+      "book": "Réserver",
+      "interested": "{{count}} personnes sont intéressées par ce club",
+      "responsible": "Respo",
+      "errors": {
+        "empty": "Aucun club trouvé",
+        "emptyDescription": "Essayez avec un autre mot-clé",
+        "notFound": "Ce club n'existe pas",
+        "notFoundDescription": "Actualisez ou changez de club"
+      }
     }
   },
   "games": {
@@ -397,6 +417,14 @@
       "description": "Lorsqu'une bière est servie la bassine se remplie petit à petit, et lorsqu'elle est pleine vous pouvez demander de remplir votre verre avec\n\nÀ chaque verre rempli, mettez à jour votre compteur pour être le roi de la bassine 👑",
       "location": "À la MDE pendant les soirées",
       "price": "Gratuit"
+    }
+  },
+  "user": {
+    "contact": "Contacter",
+    "interested": "Intéressé",
+    "notInterested": "Plus intéressé",
+    "errors": {
+      "contact": "Erreur lors de l'ouverture de l'application SMS"
     }
   }
 }

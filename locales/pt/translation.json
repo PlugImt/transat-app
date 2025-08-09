@@ -7,11 +7,14 @@
     "save": "Salvar",
     "confirm": "Confirmar",
     "send": "Enviar",
+    "search": "Pesquisar",
     "cancel": "Cancelar",
     "close": "Fechar",
     "clearAll": "Limpar tudo",
     "filter": "Filtrar",
     "refresh": "Atualizar",
+    "link": "Link",
+    "reset": "Redefinir",
     "or": "Ou",
     "other": "Outro",
     "free": "Grátis",
@@ -179,6 +182,10 @@
       "setNotification": "Ser notificado",
       "toggleRestaurant": "Ser notificado quando o cardápio do dia for publicado",
       "toggleTraq": "Ser notificado quando um novo item for oferecido no Traq'"
+    },
+    "hapticFeedback": {
+      "title": "Retroalimentação tátil",
+      "description": "Vibra em interações"
     },
     "appearance": {
       "title": "Aparência",
@@ -388,12 +395,36 @@
       "price": "Lavagem: 2€\nSecagem: 1€",
       "additionalInfo": "Pague com moedas, cartão ou carteira Monix (recomendado para bônus e cashback)\n\nPrecisa de mais tempo de secagem? Pague por múltiplas sessões antes de começar",
       "location": "Abaixo da MDE, após as caixas de correio"
+    },
+    "clubs": {
+      "title": "Clubes",
+      "description": "Descubra todos os clubs e associações da IMT",
+      "book": "Reservar",
+      "interested": "{{count}} pessoas estão interessadas neste clube",
+      "responsible": "Responsável",
+      "errors": {
+        "empty": "Nenhum club encontrado",
+        "emptyDescription": "Tente com outra palavra-chave",
+        "notFound": "Este clube não existe",
+        "notFoundDescription": "Atualize ou mude de clube"
+      }
     }
   },
   "games": {
     "title": "Jogos",
     "bassine": {
-      "title": "Baía"
+      "title": "Baía",
+      "description": "Quando uma cerveja é servida, a baía enche pouco a pouco, e quando está cheia você pode pedir para encher seu copo com\n\nPara cada copo cheio, atualize seu contador para ser o rei da baía 👑",
+      "location": "Na MDE durante as festas",
+      "price": "Gratuito"
+    }
+  },
+  "user": {
+    "contact": "Contatar",
+    "interested": "Interessado",
+    "notInterested": "Não interessado",
+    "errors": {
+      "contact": "Erro ao abrir o aplicativo de SMS"
     }
   }
 }

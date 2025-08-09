@@ -83,7 +83,7 @@ export const Signup = () => {
     confirmPassword: string;
   }) => {
     try {
-      const language = i18n.language ?? "fr";
+      const language = i18n.language.toLowerCase() ?? "fr";
       const response = await register(data.email, data.password, language);
 
       if (!response.success) {

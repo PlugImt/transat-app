@@ -1,5 +1,11 @@
 import { forwardRef, useState } from "react";
-import { type ImageSourcePropType, Image as RNImage, View } from "react-native";
+import {
+  type ImageSourcePropType,
+  Image as RNImage,
+  type StyleProp,
+  View,
+  type ViewStyle,
+} from "react-native";
 import { useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";
 import { ImageSkeleton } from "../Skeleton/ImageSkeleton";
@@ -10,18 +16,34 @@ interface ImageProps
   loading?: boolean;
   size?: number;
   fallback?: React.ReactNode;
+  radius?: number;
 }
 
 interface ImageFallbackProps {
   size?: number;
   className?: string;
+  style?: StyleProp<ViewStyle>;
+  radius?: number;
 }
 
-const ImageFallback = ({ size = 64, className }: ImageFallbackProps) => {
+const ImageFallback = ({
+  size = 64,
+  className,
+  style,
+  radius,
+}: ImageFallbackProps) => {
   const { theme } = useTheme();
   return (
     <View
-      style={{ backgroundColor: theme.border, width: size, height: size }}
+      style={[
+        {
+          backgroundColor: theme.border,
+          width: size,
+          height: size,
+          borderRadius: radius,
+        },
+        style,
+      ]}
       className={cn(
         "absolute inset-0 h-full w-full items-center justify-center z-0",
         className,
@@ -53,7 +75,15 @@ const isValidSource = (src: ImageSourcePropType | undefined) => {
 
 const Image = forwardRef<React.ElementRef<typeof RNImage>, ImageProps>(
   (
-    { className, loading = false, source, size = 64, fallback, ...props },
+    {
+      className,
+      loading = false,
+      source,
+      size = 64,
+      fallback,
+      radius = 8,
+      ...props
+    },
     ref,
   ) => {
     const [hasError, setHasError] = useState(false);
@@ -63,12 +93,16 @@ const Image = forwardRef<React.ElementRef<typeof RNImage>, ImageProps>(
     const validSource = isValidSource(finalSource);
 
     if ((!validSource && hasError) || (!validSource && !isLoading)) {
-      return fallback !== undefined ? fallback : <ImageFallback size={size} />;
+      return fallback !== undefined ? (
+        fallback
+      ) : (
+        <ImageFallback size={size} radius={radius} {...props} />
+      );
     }
 
     return (
       <View
-        style={[{ width: size, height: size }, props.style]}
+        style={[{ width: size, height: size }]}
         className={cn("relative flex shrink-0 overflow-hidden", className)}
       >
         <View className="absolute inset-0 h-full w-full z-10">
@@ -80,6 +114,8 @@ const Image = forwardRef<React.ElementRef<typeof RNImage>, ImageProps>(
               "aspect-square h-full w-full",
               isLoading ? "opacity-0" : "opacity-100",
             )}
+            borderRadius={radius}
+            resizeMode={props.resizeMode ?? "contain"}
             onLoadStart={() => setImageLoading(true)}
             onLoadEnd={() => setImageLoading(false)}
             {...props}
@@ -87,7 +123,7 @@ const Image = forwardRef<React.ElementRef<typeof RNImage>, ImageProps>(
         </View>
         {isLoading && (
           <View className="z-20 absolute inset-0 h-full w-full">
-            <ImageSkeleton size={size} />
+            <ImageSkeleton size={size} radius={radius} {...props} />
           </View>
         )}
       </View>

@@ -7,11 +7,14 @@
     "save": "Guardar",
     "confirm": "Confirmar",
     "send": "Enviar",
+    "search": "Buscar",
     "cancel": "Cancelar",
     "close": "Cerrar",
     "clearAll": "Limpiar todo",
     "filter": "Filtrar",
     "refresh": "Actualizar",
+    "link": "Enlace",
+    "reset": "Restablecer",
     "or": "O",
     "other": "Otro",
     "free": "Gratis",
@@ -179,6 +182,10 @@
       "setNotification": "Recibir notificación",
       "toggleRestaurant": "Ser notificado cuando se publique el menú del día",
       "toggleTraq": "Ser notificado cuando se ofrezca un nuevo artículo en Traq'"
+    },
+    "hapticFeedback": {
+      "title": "Retroalimentación táctil",
+      "description": "Vibra en interacciones"
     },
     "appearance": {
       "title": "Apariencia",
@@ -388,12 +395,36 @@
       "price": "Lavado: 2€\nSecado: 1€",
       "additionalInfo": "Paga con monedas, tarjeta o billetera Monix (recomendado para bonos y cashback)\n\n¿Necesitas más tiempo de secado? Paga por múltiples sesiones antes de comenzar",
       "location": "Debajo de la MDE, después de los buzones"
+    },
+    "clubs": {
+      "title": "Clubs",
+      "description": "Descubre todos los clubs y asociaciones de la IMT",
+      "book": "Reservar",
+      "interested": "{{count}} personas están interesadas en este club",
+      "responsible": "Responsible",
+      "errors": {
+        "empty": "No se encontró ningún club",
+        "emptyDescription": "Intenta con otra palabra clave",
+        "notFound": "Este club no existe",
+        "notFoundDescription": "Actualiza o cambia de club"
+      }
     }
   },
   "games": {
     "title": "Juegos",
     "bassine": {
-      "title": "Cuenca"
+      "title": "Cuenca",
+      "description": "Cuando se sirve una cerveza, la cuenca se llena poco a poco, y cuando está llena puedes pedir que se llene tu vaso con\n\nPor cada vaso lleno, actualiza tu contador para ser el rey de la cuenca 👑",
+      "location": "En la MDE durante las fiestas",
+      "price": "Gratis"
+    }
+  },
+  "user": {
+    "contact": "Contactar",
+    "interested": "Interesado",
+    "notInterested": "No interesado",
+    "errors": {
+      "contact": "Error al abrir la aplicación de SMS"
     }
   }
 }

@@ -8,11 +8,14 @@
     "confirm": "Confirm",
     "send": "Send",
     "cancel": "Cancel",
+    "search": "Search",
     "close": "Close",
     "clearAll": "Clear all",
     "filter": "Filter",
     "refresh": "Refresh",
+    "reset": "Reset",
     "or": "Or",
+    "link": "Link",
     "other": "Other",
     "free": "Free",
     "freeToUse": "Free",
@@ -179,6 +182,10 @@
       "setNotification": "Be notified",
       "toggleRestaurant": "Be notified when the daily menu is published",
       "toggleTraq": "Be notified when a new item is offered at Traq'"
+    },
+    "hapticFeedback": {
+      "title": "Haptic Feedback",
+      "description": "Vibrate on interactions"
     },
     "appearance": {
       "title": "Appearance",
@@ -388,12 +395,36 @@
       "price": "Washing: €2\nDrying: €1",
       "additionalInfo": "Pay with coins, card, or Monix wallet (recommended for bonuses and cashback)\n\nNeed more drying time? Pay for multiple sessions before starting",
       "location": "Under the MDE, after the mailboxes"
+    },
+    "clubs": {
+      "title": "Clubs",
+      "description": "Discover all clubs and associations at IMT",
+      "book": "Book",
+      "interested": "{{count}} people are interested in this club",
+      "responsible": "Responsible",
+      "errors": {
+        "empty": "No club found",
+        "emptyDescription": "Try with another keyword",
+        "notFound": "This club doesn't exist",
+        "notFoundDescription": "Refresh or change club"
+      }
     }
   },
   "games": {
     "title": "Games",
     "bassine": {
-      "title": "Basin"
+      "title": "Basin",
+      "description": "When a beer is served, the basin fills little by little, and when it's full you can ask to fill your glass with\n\nFor each glass filled, update your counter to be the king of the basin 👑",
+      "location": "At the MDE during parties",
+      "price": "Free"
+    }
+  },
+  "user": {
+    "contact": "Contact",
+    "interested": "Interested",
+    "notInterested": "Not interested",
+    "errors": {
+      "contact": "Error opening SMS app"
     }
   }
 }

@@ -8,7 +8,7 @@ import {
   Info,
   Palette,
   Shield,
-  Smartphone,
+  Vibrate,
 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { Switch } from "@/components/common/Switch";
@@ -89,7 +89,7 @@ export const Settings = () => {
 
       <SettingCategory title={t("common.other")}>
         <SettingsItem
-          icon={<Smartphone color={theme.text} size={22} />}
+          icon={<Vibrate color={theme.text} size={22} />}
           title={t("settings.hapticFeedback.title")}
           subtitle={t("settings.hapticFeedback.description")}
           rightElement={

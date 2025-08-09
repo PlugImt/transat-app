@@ -408,6 +408,16 @@
       "title": "Reservas",
       "description": "Reservar equipamentos e atividades",
       "reserve": "Reservar",
+      "returnItem": "Devolver",
+      "reservedBy": "Reservado por",
+      "reserveConfirmDesc": "Ao reservar, você se compromete a devolver o equipamento no mesmo estado em que o encontrou",
+      "returnConfirmDesc": "Você confirma que quer devolver este equipamento?",
+      "confirmReserve": "Sim, eu me comprometo",
+      "confirmReturn": "Sim, eu devolvo",
+      "reserveSuccess": "Reserva confirmada!",
+      "returnSuccess": "Equipamento devolvido com sucesso!",
+      "reserveError": "Erro durante a reserva",
+      "returnError": "Erro durante a devolução",
       "errors": {
         "empty": "Nenhuma reserva disponível",
         "emptyDescription": "Nenhum equipamento ou atividade está disponível no momento"

@@ -10,7 +10,10 @@ type ReservationItem = {
     email: string;
     first_name: string;
     last_name: string;
-    profile_picture: string;
+    profile_picture?: string;
+    phone_number?: string;
+    graduation_year?: number;
+    [key: string]: any;
   };
 };
 
@@ -28,7 +31,7 @@ export const useReservationData = (
         type: "category" as const,
       })) || []),
       ...(dataObj.items?.map(
-        (item: { id: number; name: string; slot: boolean }) => ({
+        (item: any) => ({
           ...item,
           type: "item" as const,
         }),

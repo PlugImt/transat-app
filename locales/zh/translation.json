@@ -408,6 +408,16 @@
       "title": "预订",
       "description": "预订设备和活动",
       "reserve": "预订",
+      "returnItem": "归还",
+      "reservedBy": "预订者",
+      "reserveConfirmDesc": "通过预订，您承诺以发现时的相同状态归还设备",
+      "returnConfirmDesc": "您确认要归还此设备吗？",
+      "confirmReserve": "是的，我承诺",
+      "confirmReturn": "是的，我归还",
+      "reserveSuccess": "预订确认！",
+      "returnSuccess": "设备归还成功！",
+      "reserveError": "预订过程中出错",
+      "returnError": "归还过程中出错",
       "errors": {
         "empty": "没有可用的预订",
         "emptyDescription": "目前没有设备或活动可用"

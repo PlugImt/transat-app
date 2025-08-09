@@ -408,12 +408,20 @@
       "title": "Reservations",
       "description": "Reserve equipment and activities",
       "reserve": "Reserve",
+      "returnItem": "Return",
+      "reservedBy": "Reserved by",
+      "reserveConfirmDesc": "By reserving, you commit to return the equipment in the same condition as you found it",
+      "returnConfirmDesc": "Do you confirm you want to return this equipment?",
+      "confirmReserve": "Yes, I commit",
+      "confirmReturn": "Yes, I return",
+      "reserveSuccess": "Reservation confirmed!",
+      "returnSuccess": "Equipment returned successfully!",
+      "reserveError": "Error during reservation",
+      "returnError": "Error during return",
       "errors": {
         "empty": "No reservations available",
         "emptyDescription": "No equipment or activities are available at the moment"
-      },
-      "reservedBy": "Reserved by",
-      "returnItem": "Return"
+      }
     }
   },
   "games": {

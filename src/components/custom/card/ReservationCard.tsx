@@ -8,6 +8,7 @@ import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
 import { TextSkeleton } from "@/components/Skeleton";
 import ImageSkeleton from "@/components/Skeleton/ImageSkeleton";
+import { ReservationDialog } from "@/components/custom/ReservationDialog";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/hooks/account";
 import type { AppStackParamList } from "@/types";
@@ -22,7 +23,8 @@ interface ReservationCardProps {
     email: string;
     first_name: string;
     last_name: string;
-    profile_picture: string;
+    profile_picture?: string;
+    [key: string]: any;
   };
 }
 
@@ -38,6 +40,7 @@ const ReservationCard = ({
   const { t } = useTranslation();
   const navigation = useNavigation<StackNavigationProp<AppStackParamList>>();
   const auth = useAuth();
+
   const handlePress = () => {
     if (type === "category") {
       if (onPress) onPress();
@@ -55,8 +58,6 @@ const ReservationCard = ({
   const handleReservePress = () => {
     if (slot) {
       console.log("slot to be implemented");
-    } else {
-      console.log("dialog to be implemented");
     }
   };
 
@@ -81,7 +82,7 @@ const ReservationCard = ({
       </View>
       {type === "category" ? (
         <ChevronRight color={theme.muted} />
-      ) : (
+      ) : slot ? (
         <Button
           label={
             canBeFreed
@@ -93,6 +94,23 @@ const ReservationCard = ({
           onPress={handleReservePress}
           disabled={disabled}
         />
+      ) : (
+        <ReservationDialog
+          itemId={id}
+          itemTitle={title}
+          isReturning={canBeFreed}
+        >
+          <Button
+            label={
+              canBeFreed
+                ? t("services.reservation.returnItem")
+                : t("services.reservation.reserve")
+            }
+            variant="secondary"
+            className="ml-auto"
+            disabled={disabled}
+          />
+        </ReservationDialog>
       )}
     </Card>
   );

@@ -408,6 +408,16 @@
       "title": "Reservierungen",
       "description": "Ausrüstung und Aktivitäten reservieren",
       "reserve": "Reservieren",
+      "returnItem": "Zurückgeben",
+      "reservedBy": "Reserviert von",
+      "reserveConfirmDesc": "Mit der Reservierung verpflichten Sie sich, die Ausrüstung in demselben Zustand zurückzugeben, in dem Sie sie vorgefunden haben",
+      "returnConfirmDesc": "Bestätigen Sie, dass Sie diese Ausrüstung zurückgeben möchten?",
+      "confirmReserve": "Ja, ich verpflichte mich",
+      "confirmReturn": "Ja, ich gebe zurück",
+      "reserveSuccess": "Reservierung bestätigt!",
+      "returnSuccess": "Ausrüstung erfolgreich zurückgegeben!",
+      "reserveError": "Fehler bei der Reservierung",
+      "returnError": "Fehler bei der Rückgabe",
       "errors": {
         "empty": "Keine Reservierungen verfügbar",
         "emptyDescription": "Zur Zeit sind keine Ausrüstung oder Aktivitäten verfügbar"

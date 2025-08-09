@@ -411,7 +411,9 @@
       "errors": {
         "empty": "No reservations available",
         "emptyDescription": "No equipment or activities are available at the moment"
-      }
+      },
+      "reservedBy": "Reserved by",
+      "returnItem": "Return"
     }
   },
   "games": {

@@ -65,6 +65,7 @@ export const ReservationPageContainer = ({
             type={item.type}
             id={item.id}
             slot={item.type === "item" ? item.slot : undefined}
+            user={item.user}
           />
         )}
         keyExtractor={(item) => `${item.type}-${item.id}`}

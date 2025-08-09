@@ -16,6 +16,7 @@ export const getReservationSchema = z.object({
         id: z.number(),
         name: z.string(),
         slot: z.boolean(),
+        user: userSchema.optional(),
       }),
     )
     .optional(),

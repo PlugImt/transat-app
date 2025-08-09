@@ -10,6 +10,7 @@ import { TextSkeleton } from "@/components/Skeleton";
 import ImageSkeleton from "@/components/Skeleton/ImageSkeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { AppStackParamList } from "@/types";
+import { useAuth, useUser } from '@/hooks/account';
 
 interface ReservationCardProps {
   onPress?: () => void;
@@ -17,6 +18,12 @@ interface ReservationCardProps {
   slot?: boolean;
   type: "category" | "item";
   id: number;
+  user?: {
+    email: string;
+    first_name: string;
+    last_name: string;
+    profile_picture: string;
+  };
 }
 
 const ReservationCard = ({
@@ -25,11 +32,12 @@ const ReservationCard = ({
   slot,
   type,
   id,
+  user,
 }: ReservationCardProps) => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation<StackNavigationProp<AppStackParamList>>();
-
+const auth = useAuth();
   const handlePress = () => {
     if (type === "category") {
       if (onPress) onPress();
@@ -41,6 +49,10 @@ const ReservationCard = ({
     }
   };
 
+  const disabled = !!user&& user.email != auth.user?.email;
+  const canBeFreed = !!user && user.email == auth.user?.email
+
+
   const handleReservePress = () => {
     if (slot) {
       console.log("slot to be implemented");
@@ -51,21 +63,32 @@ const ReservationCard = ({
   return (
     <Card
       onPress={type === "category" ? handlePress : undefined}
-      className="flex-row items-center gap-4"
+      className={`flex-row items-center gap-4 ${disabled ? "opacity-60" : ""}`}
     >
       <View className="flex-1">
+          <View className="flex-row items-center gap-2 mb-1">
         <Text variant="h3" numberOfLines={1}>
           {title}
         </Text>
+      </View>
+      {user ? (
+        <View className="flex-row items-center gap-2">
+          <Text variant="sm" numberOfLines={1}>
+              {`${t("services.reservation.reservedBy")} ${user.first_name} ${user.last_name}`}
+          </Text>
+        </View>
+      ) : null}
       </View>
       {type === "category" ? (
         <ChevronRight color={theme.muted} />
       ) : (
         <Button
-          label={t("services.reservation.reserve")}
+          label={canBeFreed ? t("services.reservation.returnItem")
+              : t("services.reservation.reserve")}
           variant="secondary"
           className="ml-auto"
           onPress={handleReservePress}
+          disabled={disabled}
         />
       )}
     </Card>

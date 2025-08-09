@@ -6,6 +6,12 @@ type ReservationItem = {
   name: string;
   type: "category" | "item";
   slot?: boolean;
+  user?: {
+    email: string;
+    first_name: string;
+    last_name: string;
+    profile_picture: string;
+  };
 };
 
 export const useReservationData = (

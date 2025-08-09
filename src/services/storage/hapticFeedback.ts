@@ -27,7 +27,7 @@ export const toggleHapticFeedback = async (): Promise<boolean> => {
   try {
     const currentValue = await getHapticFeedbackEnabled();
     const newValue = !currentValue;
-    await setHapticFeedbackEnabled(!currentValue);
+    await setHapticFeedbackEnabled(newValue);
     return newValue;
   } catch (error) {
     console.error("Error toggling haptic feedback preference:", error);

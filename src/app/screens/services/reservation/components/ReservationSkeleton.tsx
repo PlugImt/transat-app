@@ -6,9 +6,9 @@ interface ReservationSkeletonProps {
   itemCount?: number;
 }
 
-export const ReservationSkeleton = ({ 
-  title, 
-  itemCount = 5 
+export const ReservationSkeleton = ({
+  title,
+  itemCount = 5,
 }: ReservationSkeletonProps) => {
   return (
     <Page title={title} className="gap-2">

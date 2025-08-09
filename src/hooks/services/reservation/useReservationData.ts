@@ -8,10 +8,12 @@ type ReservationItem = {
   slot?: boolean;
 };
 
-export const useReservationData = (data: GetReservation[] | GetReservation | undefined): ReservationItem[] => {
+export const useReservationData = (
+  data: GetReservation[] | GetReservation | undefined,
+): ReservationItem[] => {
   return useMemo(() => {
     const dataObj = Array.isArray(data) ? data[0] : data;
-    
+
     if (!dataObj) return [];
 
     const combinedData: ReservationItem[] = [
@@ -19,10 +21,12 @@ export const useReservationData = (data: GetReservation[] | GetReservation | und
         ...category,
         type: "category" as const,
       })) || []),
-      ...(dataObj.items?.map((item: { id: number; name: string; slot: boolean }) => ({
-        ...item,
-        type: "item" as const,
-      })) || []),
+      ...(dataObj.items?.map(
+        (item: { id: number; name: string; slot: boolean }) => ({
+          ...item,
+          type: "item" as const,
+        }),
+      ) || []),
     ];
 
     return combinedData;

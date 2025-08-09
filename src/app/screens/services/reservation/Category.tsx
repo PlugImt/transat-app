@@ -11,10 +11,5 @@ export const Category = () => {
   const { id, title } = route.params;
   const categoryQuery = useReservationCategories(id);
 
-  return (
-    <ReservationPageContainer
-      title={title}
-      {...categoryQuery}
-    />
-  );
+  return <ReservationPageContainer title={title} {...categoryQuery} />;
 };

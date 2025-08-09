@@ -36,7 +36,12 @@ export type AppStackParamList = {
   BottomTabNavigator: undefined;
   Clubs: undefined;
   Reservation: undefined;
-  ReservationCategory: { id: number; type: string; title: string; level?: number };
+  ReservationCategory: {
+    id: number;
+    type: string;
+    title: string;
+    level?: number;
+  };
   ClubDetails: { id: number };
   Traq: undefined;
   Olimtpe: undefined;

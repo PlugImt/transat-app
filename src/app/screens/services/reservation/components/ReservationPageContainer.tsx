@@ -1,13 +1,13 @@
-import { ReactNode } from "react";
 import { SearchX } from "lucide-react-native";
+import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import Animated from "react-native-reanimated";
 import ReservationCard from "@/components/custom/card/ReservationCard";
 import { Empty } from "@/components/page/Empty";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
-import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
 import type { GetReservation } from "@/dto/reservation";
+import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
 import { useReservationData } from "@/hooks/services/reservation/useReservationData";
 import { ReservationSkeleton } from "./ReservationSkeleton";
 

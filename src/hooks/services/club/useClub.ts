@@ -1,6 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useMemo } from "react";
-import { getClubDetails, getClubs, joinClub, leaveClub } from "@/api";
+import {
+  getClubDetails,
+  getClubMembers,
+  getClubs,
+  joinClub,
+  leaveClub,
+} from "@/api";
 import { QUERY_KEYS } from "@/constants";
 import type { Club, ClubDetails } from "@/dto/club";
 
@@ -97,4 +103,13 @@ export const useLeaveClubMutation = (id: number) => {
       });
     },
   });
+};
+
+export const useClubMembers = (id: number) => {
+  const { data, isPending, refetch, isError, error } = useQuery({
+    queryKey: [...QUERY_KEYS.club.clubMembers, id],
+    queryFn: () => getClubMembers(id),
+  });
+
+  return { data, isPending, refetch, isError, error };
 };

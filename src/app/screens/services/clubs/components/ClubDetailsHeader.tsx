@@ -1,4 +1,5 @@
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import type { StackNavigationProp } from "@react-navigation/stack";
 import { Bell, BellOff, ExternalLink, MapPin } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { Linking, View } from "react-native";
@@ -54,6 +55,10 @@ const NotificationButton = ({
   );
 };
 
+type NavigationProp = StackNavigationProp<{
+  ClubMemberList: { id: number };
+}>;
+
 interface ClubDetailsHeaderProps {
   club: ClubDetails;
 }
@@ -69,9 +74,15 @@ export const ClubDetailsHeader = ({ club }: ClubDetailsHeaderProps) => {
   } = club;
   const { t } = useTranslation();
   const { theme } = useTheme();
+  const navigation = useNavigation<NavigationProp>();
+
   const label = link?.toLowerCase().includes("whatsapp")
     ? "WhatsApp"
     : String(t("common.link"));
+
+  const handleMemberListPress = () => {
+    navigation.navigate("ClubMemberList", { id: club.id });
+  };
 
   return (
     <View className="gap-4">
@@ -83,7 +94,11 @@ export const ClubDetailsHeader = ({ club }: ClubDetailsHeaderProps) => {
         <Text variant="h2">{title}</Text>
         <Text color="muted">{description}</Text>
       </View>
-      <UserStack pictures={member_photos} count={member_count} />
+      <UserStack
+        pictures={member_photos}
+        count={member_count}
+        onPress={handleMemberListPress}
+      />
       <View className="flex-row items-center gap-2">
         {link && link.length > 0 && (
           <Button

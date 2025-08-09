@@ -1,20 +1,13 @@
 import { useMemo } from "react";
 import type { GetReservation } from "@/dto/reservation";
+import { User } from '@/dto';
 
 type ReservationItem = {
   id: number;
   name: string;
   type: "category" | "item";
   slot?: boolean;
-  user?: {
-    email: string;
-    first_name: string;
-    last_name: string;
-    profile_picture?: string;
-    phone_number?: string;
-    graduation_year?: number;
-    [key: string]: any;
-  };
+  user?: User
 };
 
 export const useReservationData = (

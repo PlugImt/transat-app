@@ -13,7 +13,7 @@ export const useReservationMutation = () => {
   return useMutation({
     mutationFn: ({ id, isReturning }: { id: number; isReturning: boolean }) => {
       const currentTime = formatDateForBackend(new Date());
-      return updateReservation(id, isReturning ? "" : currentTime);
+      return updateReservation(id, isReturning ? null : currentTime);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.reservation.categories });

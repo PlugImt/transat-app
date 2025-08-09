@@ -1,11 +1,12 @@
 import { useRoute } from "@react-navigation/native";
-import { Bell, BellOff, ExternalLink } from "lucide-react-native";
+import { Bell, BellOff, ExternalLink, MapPin } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { Linking, View } from "react-native";
 import { Button } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
 import { UserStack, UserStackSkeleton } from "@/components/custom";
 import { TextSkeleton } from "@/components/Skeleton";
+import { useTheme } from "@/contexts/ThemeContext";
 import type { ClubDetails } from "@/dto/club";
 import {
   useJoinClubMutation,
@@ -67,7 +68,7 @@ export const ClubDetailsHeader = ({ club }: ClubDetailsHeaderProps) => {
     link,
   } = club;
   const { t } = useTranslation();
-
+  const { theme } = useTheme();
   const label = link?.toLowerCase().includes("whatsapp")
     ? "WhatsApp"
     : String(t("common.link"));
@@ -75,7 +76,10 @@ export const ClubDetailsHeader = ({ club }: ClubDetailsHeaderProps) => {
   return (
     <View className="gap-4">
       <View>
-        <Text variant="sm">{location}</Text>
+        <View className="flex-row items-center gap-1">
+          <MapPin color={theme.text} size={12} />
+          <Text variant="sm">{location}</Text>
+        </View>
         <Text variant="h2">{title}</Text>
         <Text color="muted">{description}</Text>
       </View>

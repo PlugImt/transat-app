@@ -1,7 +1,7 @@
 import { type RouteProp, useRoute } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import CardGroup from "@/components/common/CardGroup";
-import { UserCard, UserCardSkeleton } from "@/components/custom";
+import { UserCardSkeleton } from "@/components/custom";
 import { Empty } from "@/components/page/Empty";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
@@ -11,6 +11,7 @@ import {
   ClubDetailsHeader,
   ClubDetailsHeaderSkeleton,
 } from "./components/ClubDetailsHeader";
+import { ClubResponsible } from "./components/ClubResponsible";
 
 export type ClubDetailsRouteProp = RouteProp<AppStackParamList, "ClubDetails">;
 
@@ -58,11 +59,7 @@ const ClubDetails = () => {
       onRefresh={refetch}
     >
       <ClubDetailsHeader club={club} />
-      {club.responsible && (
-        <CardGroup title={t("services.clubs.responsible")}>
-          <UserCard user={club.responsible} />
-        </CardGroup>
-      )}
+      <ClubResponsible club={club} />
     </Page>
   );
 };

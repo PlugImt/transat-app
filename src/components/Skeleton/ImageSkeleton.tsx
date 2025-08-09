@@ -8,12 +8,13 @@ export interface ImageSkeletonProps {
 
 export const ImageSkeleton = ({ size = 100, radius }: ImageSkeletonProps) => {
   const { actualTheme } = useTheme();
+  const borderRadius = radius === "round" ? 9999 : radius;
 
   return (
     <Skeleton
       width={size}
       height={size}
-      radius={radius}
+      radius={borderRadius}
       colorMode={actualTheme}
     />
   );

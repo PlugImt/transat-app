@@ -6,7 +6,7 @@ import type { Club, ClubDetails } from "@/dto/club";
 
 export const useClubs = () => {
   const { data, isPending, refetch, isError, error } = useQuery({
-    queryKey: QUERY_KEYS.clubs,
+    queryKey: QUERY_KEYS.club.clubs,
     queryFn: () => getClubs(),
   });
 
@@ -64,7 +64,7 @@ export const useFilteredClubs = (searchValue: string) => {
 
 export const useClubDetails = (id: number) => {
   const { data, isPending, refetch, isError, error } = useQuery({
-    queryKey: [...QUERY_KEYS.clubDetails, id],
+    queryKey: [...QUERY_KEYS.club.clubDetails, id],
     queryFn: () => getClubDetails(id),
   });
 
@@ -75,11 +75,11 @@ export const useJoinClubMutation = (id: number) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: [...QUERY_KEYS.clubJoin, id],
+    mutationKey: [...QUERY_KEYS.club.clubJoin, id],
     mutationFn: () => joinClub(id),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [...QUERY_KEYS.clubDetails, id],
+        queryKey: [...QUERY_KEYS.club.clubDetails, id],
       });
     },
   });
@@ -89,11 +89,11 @@ export const useLeaveClubMutation = (id: number) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: [...QUERY_KEYS.clubLeave, id],
+    mutationKey: [...QUERY_KEYS.club.clubLeave, id],
     mutationFn: () => leaveClub(id),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [...QUERY_KEYS.clubDetails, id],
+        queryKey: [...QUERY_KEYS.club.clubDetails, id],
       });
     },
   });

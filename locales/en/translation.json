@@ -8,6 +8,7 @@
     "confirm": "Confirm",
     "send": "Send",
     "cancel": "Cancel",
+    "search": "Search",
     "close": "Close",
     "clearAll": "Clear all",
     "filter": "Filter",
@@ -406,5 +407,13 @@
   },
   "games": {
     "title": "Games"
+  },
+  "user": {
+    "contact": "Contact",
+    "interested": "Interested",
+    "notInterested": "Not interested",
+    "errors": {
+      "contact": "Error opening SMS app"
+    }
   }
 }

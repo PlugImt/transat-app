@@ -1,5 +1,5 @@
-import { useNavigation } from "@react-navigation/native";
 import { t } from "i18next";
+import type { ReactNode } from "react";
 import { Linking, View } from "react-native";
 import Avatar from "@/components/common/Avatar";
 import { Button } from "@/components/common/Button";
@@ -9,25 +9,17 @@ import { useToast } from "@/components/common/Toast";
 import { AvatarSkeleton, TextSkeleton } from "@/components/Skeleton";
 import type { User } from "@/dto";
 import { useAuth } from "@/hooks/account";
-import type { AccountNavigation } from "@/types";
 import { getStudentYear } from "@/utils/student.utils";
 
-const ActionButton = ({ user }: { user: User }) => {
-  const navigation = useNavigation<AccountNavigation>();
+interface ActionButtonProps {
+  user: User;
+}
+
+const ActionButton = ({ user }: ActionButtonProps) => {
   const { user: currentUser } = useAuth();
   const { toast } = useToast();
 
-  if (user?.email === currentUser?.email) {
-    return (
-      <Button
-        label={t("common.edit")}
-        variant="ghost"
-        onPress={() => navigation.navigate("EditProfile")}
-      />
-    );
-  }
-
-  if (!user?.phone_number) {
+  if (user?.email === currentUser?.email || !user?.phone_number) {
     return null;
   }
 
@@ -55,9 +47,10 @@ const ActionButton = ({ user }: { user: User }) => {
 
 interface UserCardProps {
   user?: User;
+  action?: ReactNode;
 }
 
-export const UserCard = ({ user }: UserCardProps) => {
+export const UserCard = ({ user, action }: UserCardProps) => {
   if (!user) {
     return null;
   }
@@ -77,7 +70,7 @@ export const UserCard = ({ user }: UserCardProps) => {
             </Text>
           )}
         </View>
-        <ActionButton user={user} />
+        {action ? action : <ActionButton user={user} />}
       </View>
     </Card>
   );

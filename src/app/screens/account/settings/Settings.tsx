@@ -10,7 +10,8 @@ import {
   Shield,
 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
-import { AccountCard } from "@/components/custom/card/AccountCard";
+import { Button } from "@/components/common/Button";
+import { UserCard } from "@/components/custom/card/UserCard";
 import { LogoutButton } from "@/components/custom/LogoutButton";
 import { Page } from "@/components/page/Page";
 import { QUERY_KEYS } from "@/constants";
@@ -49,7 +50,16 @@ export const Settings = () => {
       onRefresh={refetch}
       title={t("settings.settings")}
     >
-      <AccountCard user={user} />
+      <UserCard
+        user={user}
+        action={
+          <Button
+            label={t("common.edit")}
+            variant="ghost"
+            onPress={() => navigation.navigate("EditProfile")}
+          />
+        }
+      />
 
       <SettingCategory title={t("common.appearance")}>
         <SettingsItem

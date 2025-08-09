@@ -10,7 +10,7 @@ import {
 import { Textarea } from "@/components/common/Textarea";
 import { useToast } from "@/components/common/Toast";
 import { Stars } from "@/components/custom/star/Stars";
-import { usePostRestaurantReview } from "@/hooks/useMenuRestaurant";
+import { usePostRestaurantReview } from "@/hooks/services/restaurant/useMenuRestaurant";
 import { hapticFeedback } from "@/utils/haptics.utils";
 
 interface ReviewDialogProps {

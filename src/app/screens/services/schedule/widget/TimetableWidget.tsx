@@ -5,7 +5,7 @@ import { TouchableOpacity, View } from "react-native";
 import { Text } from "@/components/common/Text";
 import type { Course } from "@/dto";
 import { useAuth } from "@/hooks/account/useAuth";
-import { useTimetable } from "@/hooks/useTimetable";
+import { useTimetable } from "@/hooks/services/timetable/useTimetable";
 import type { AppStackParamList } from "@/types";
 import { TimetableCourseWidget } from "./TimetableCourseWidget";
 import { TimetableLoadingWidget } from "./TimetableLoadingWidget";

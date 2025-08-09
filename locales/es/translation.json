@@ -7,11 +7,13 @@
     "save": "Guardar",
     "confirm": "Confirmar",
     "send": "Enviar",
+    "search": "Buscar",
     "cancel": "Cancelar",
     "close": "Cerrar",
     "clearAll": "Limpiar todo",
     "filter": "Filtrar",
     "refresh": "Actualizar",
+    "link": "Enlace",
     "or": "O",
     "other": "Otro",
     "free": "Gratis",
@@ -388,9 +390,30 @@
       "price": "Lavado: 2€\nSecado: 1€",
       "additionalInfo": "Paga con monedas, tarjeta o billetera Monix (recomendado para bonos y cashback)\n\n¿Necesitas más tiempo de secado? Paga por múltiples sesiones antes de comenzar",
       "location": "Debajo de la MDE, después de los buzones"
+    },
+    "clubs": {
+      "title": "Clubs",
+      "description": "Descubre todos los clubs y asociaciones de la IMT",
+      "book": "Reservar",
+      "interested": "{{count}} personas están interesadas en este club",
+      "responsible": "Responsible",
+      "errors": {
+        "empty": "No se encontró ningún club",
+        "emptyDescription": "Intenta con otra palabra clave",
+        "notFound": "Este club no existe",
+        "notFoundDescription": "Actualiza o cambia de club"
+      }
     }
   },
   "games": {
     "title": "Juegos"
+  },
+  "user": {
+    "contact": "Contactar",
+    "interested": "Interesado",
+    "notInterested": "No interesado",
+    "errors": {
+      "contact": "Error al abrir la aplicación de SMS"
+    }
   }
 }

@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import Image from "@/components/common/Image";
 import { Empty } from "@/components/page/Empty";
 import { useTheme } from "@/contexts/ThemeContext";
-import { useMenuRestaurant } from "@/hooks/useMenuRestaurant";
+import { useMenuRestaurant } from "@/hooks/services/restaurant/useMenuRestaurant";
 import { isWeekend, outOfService } from "@/utils";
 
 export const RestaurantClosed = () => {

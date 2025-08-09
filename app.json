@@ -13,8 +13,8 @@
     },
     "ios": {
       "icon": {
-        "dark": "./assets/images/ios-icon.png",
-        "light": "./assets/images/ios-icon.png",
+        "dark": "./assets/images/ios-icon-bg.png",
+        "light": "./assets/images/ios-icon-bg.png",
         "tinted": "./assets/images/ios-icon-tint.png"
       },
       "supportsTablet": true,

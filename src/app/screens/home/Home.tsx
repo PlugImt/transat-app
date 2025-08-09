@@ -13,7 +13,7 @@ import { useUser } from "@/hooks/account";
 import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
 import { useHomeWidgetsFetching } from "@/hooks/home/useHomeWidgetsFetching";
 import { useWidgetComponents } from "@/hooks/home/useWidgetComponents";
-import { useHomeWidgetPreferences } from "@/hooks/usePreferences";
+import { useHomeWidgetPreferences } from "@/hooks/services/usePreferences";
 import { isDinner, isLunch, isWeekend } from "@/utils";
 
 export const Home = () => {

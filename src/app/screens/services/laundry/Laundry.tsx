@@ -4,7 +4,7 @@ import { View } from "react-native";
 import { Text } from "@/components/common/Text";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
-import { useLaundry } from "@/hooks/laundry/useLaundry";
+import { useLaundry } from "@/hooks/services/laundry/useLaundry";
 import { AboutSection, LaundryList, LaundryLoadingState } from "./components";
 
 export const Laundry = () => {

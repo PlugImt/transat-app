@@ -1,3 +1,4 @@
+export * from "./club";
 export * from "./homework";
 export * from "./laundry";
 export * from "./notification";

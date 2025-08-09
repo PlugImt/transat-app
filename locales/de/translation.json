@@ -7,11 +7,13 @@
     "save": "Speichern",
     "confirm": "Bestätigen",
     "send": "Senden",
+    "search": "Suchen",
     "cancel": "Abbrechen",
     "close": "Schließen",
     "clearAll": "Alles löschen",
     "filter": "Filter",
     "refresh": "Aktualisieren",
+    "link": "Link",
     "or": "Oder",
     "other": "Andere",
     "free": "Kostenlos",
@@ -388,9 +390,30 @@
       "price": "Waschen: 2€\nTrocknen: 1€",
       "additionalInfo": "Zahlen Sie mit Münzen, Karte oder Monix-Wallet (empfohlen für Boni und Cashback)\n\nBrauchen Sie mehr Trocknungszeit? Zahlen Sie für mehrere Sitzungen vor dem Start",
       "location": "Unter der MDE, nach den Briefkästen"
+    },
+    "clubs": {
+      "title": "Clubs",
+      "description": "Entdecken Sie alle Clubs und Vereine an der IMT",
+      "book": "Buchen",
+      "interested": "{{count}} Leute sind an diesem Club interessiert",
+      "responsible": "Verantwortlich",
+      "errors": {
+        "empty": "Kein Club gefunden",
+        "emptyDescription": "Versuchen Sie es mit einem anderen Schlüsselwort",
+        "notFound": "Dieser Club existiert nicht",
+        "notFoundDescription": "Aktualisieren Sie oder wechseln Sie den Club"
+      }
     }
   },
   "games": {
     "title": "Spiele"
+  },
+  "user": {
+    "contact": "Kontakt",
+    "interested": "Interessiert",
+    "notInterested": "Nicht interessiert",
+    "errors": {
+      "contact": "Fehler beim Öffnen der SMS-App"
+    }
   }
 }

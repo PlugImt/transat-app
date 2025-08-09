@@ -393,7 +393,7 @@
     },
     "clubs": {
       "title": "Clubs",
-      "description": "Découvre tous les clubs et associations de l’IMT",
+      "description": "Découvre tous les clubs et associations de l'IMT",
       "book": "Réserver",
       "interested": "{{count}} personnes sont intéressées par ce club",
       "responsible": "Respo",
@@ -402,6 +402,15 @@
         "emptyDescription": "Essayez avec un autre mot-clé",
         "notFound": "Ce club n'existe pas",
         "notFoundDescription": "Actualisez ou changez de club"
+      }
+    },
+    "reservation": {
+      "title": "Réservations",
+      "description": "Réservez du matériel et des activités",
+      "reserve": "Réserver",
+      "errors": {
+        "empty": "Aucune réservation disponible",
+        "emptyDescription": "Aucun équipement ou activité n'est disponible pour le moment"
       }
     }
   },

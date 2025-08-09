@@ -403,6 +403,15 @@
         "notFound": "此俱乐部不存在",
         "notFoundDescription": "刷新或更换俱乐部"
       }
+    },
+    "reservation": {
+      "title": "预订",
+      "description": "预订设备和活动",
+      "reserve": "预订",
+      "errors": {
+        "empty": "没有可用的预订",
+        "emptyDescription": "目前没有设备或活动可用"
+      }
     }
   },
   "games": {

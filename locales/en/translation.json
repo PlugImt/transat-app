@@ -405,8 +405,13 @@
       }
     },
     "reservation": {
-      "title": "Reservation",
-      "description": "Reserve a room or equipment at IMT"
+      "title": "Reservations",
+      "description": "Reserve equipment and activities",
+      "reserve": "Reserve",
+      "errors": {
+        "empty": "No reservations available",
+        "emptyDescription": "No equipment or activities are available at the moment"
+      }
     }
   },
   "games": {

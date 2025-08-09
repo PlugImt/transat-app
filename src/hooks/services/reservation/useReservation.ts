@@ -9,7 +9,7 @@ import { QUERY_KEYS } from "@/constants";
 
 export const useReservations = () => {
   const { data, isPending, refetch, isError, error } = useQuery({
-    queryKey: QUERY_KEYS.reservation.items,
+    queryKey: ["reservation", "root"],
     queryFn: () => getReservationRoot(),
   });
 
@@ -18,7 +18,7 @@ export const useReservations = () => {
 
 export const useReservationCategories = (id: number) => {
   const { data, isPending, refetch, isError, error } = useQuery({
-    queryKey: QUERY_KEYS.reservation.categories,
+    queryKey: [...QUERY_KEYS.reservation.categories, id],
     queryFn: () => getReservationCategories(id),
   });
 

@@ -403,6 +403,15 @@
         "notFound": "Este club no existe",
         "notFoundDescription": "Actualiza o cambia de club"
       }
+    },
+    "reservation": {
+      "title": "Reservas",
+      "description": "Reservar equipos y actividades",
+      "reserve": "Reservar",
+      "errors": {
+        "empty": "No hay reservas disponibles",
+        "emptyDescription": "No hay equipos o actividades disponibles en este momento"
+      }
     }
   },
   "games": {

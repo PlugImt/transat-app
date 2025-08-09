@@ -26,6 +26,7 @@ import {
 } from "@/app/screens/services";
 import ClubDetails from "@/app/screens/services/clubs/ClubDetails";
 import { HomeworkDetails } from "@/app/screens/services/homework/components/HomeworkDetails";
+import { Category } from "@/app/screens/services/reservation";
 import { RestaurantReviews } from "@/app/screens/services/restaurant/components/Reviews";
 import { Services } from "@/app/screens/services/Services";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -68,6 +69,7 @@ const ServicesStackScreen = () => (
     <ServicesStack.Screen name="Traq" component={Traq} />
     <ServicesStack.Screen name="Olimtpe" component={Olimtpe} />
     <ServicesStack.Screen name="Reservation" component={Reservation} />
+    <ServicesStack.Screen name="ReservationCategory" component={Category} />
   </ServicesStack.Navigator>
 );
 

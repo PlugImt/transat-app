@@ -12,6 +12,7 @@
     "clearAll": "Alles löschen",
     "filter": "Filter",
     "refresh": "Aktualisieren",
+    "reset": "Zurücksetzen",
     "or": "Oder",
     "other": "Andere",
     "free": "Kostenlos",
@@ -179,6 +180,10 @@
       "setNotification": "Benachrichtigt werden",
       "toggleRestaurant": "Benachrichtigt werden, wenn das Tagesmenü veröffentlicht wird",
       "toggleTraq": "Benachrichtigt werden, wenn ein neuer Artikel beim Traq' angeboten wird"
+    },
+    "hapticFeedback": {
+      "title": "Haptische Rückmeldung",
+      "description": "Vibriert bei Interaktionen"
     },
     "appearance": {
       "title": "Erscheinungsbild",

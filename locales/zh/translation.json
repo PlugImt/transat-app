@@ -12,6 +12,7 @@
     "clearAll": "清除全部",
     "filter": "筛选",
     "refresh": "刷新",
+    "reset": "重置",
     "or": "或",
     "other": "其他",
     "free": "免费",
@@ -179,6 +180,10 @@
       "setNotification": "接收通知",
       "toggleRestaurant": "当日菜单发布时收到通知",
       "toggleTraq": "Traq'有新商品时收到通知"
+    },
+    "hapticFeedback": {
+      "title": "触觉反馈",
+      "description": "在交互时振动"
     },
     "appearance": {
       "title": "外观",

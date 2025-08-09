@@ -12,6 +12,7 @@
     "clearAll": "Effacer",
     "filter": "Filtrer",
     "refresh": "Actualiser",
+    "reset": "Réinitialiser",
     "or": "Ou",
     "other": "Autre",
     "free": "Gratuit",
@@ -179,6 +180,10 @@
       "setNotification": "Être notifié",
       "toggleRestaurant": "Être notifié lorsque le menu du jour est publié",
       "toggleTraq": "Être notifié lorsqu'un nouvel article est proposé au Traq'"
+    },
+    "hapticFeedback": {
+      "title": "Retour haptique",
+      "description": "Vibre lors des interactions"
     },
     "appearance": {
       "title": "Apparence",

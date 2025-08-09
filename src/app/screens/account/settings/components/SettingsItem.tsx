@@ -26,6 +26,7 @@ export const SettingsItem = ({
     <TouchableOpacity
       className="flex-row items-center justify-between py-4"
       onPress={handlePress}
+      disabled={!onPress}
     >
       <View className="flex-row items-center gap-3 flex-1">
         {icon}

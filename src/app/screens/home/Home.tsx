@@ -14,6 +14,7 @@ import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
 import { useHomeWidgetsFetching } from "@/hooks/home/useHomeWidgetsFetching";
 import { useWidgetComponents } from "@/hooks/home/useWidgetComponents";
 import { useHomeWidgetPreferences } from "@/hooks/usePreferences";
+import { resetHomeWidgetPreferences } from "@/services/storage/preferences";
 import { isDinner, isLunch, isWeekend } from "@/utils";
 
 export const Home = () => {
@@ -69,6 +70,7 @@ export const Home = () => {
             items={widgets}
             title={t("common.customizeWidgets")}
             onUpdate={updateOrder}
+            onReset={async () => resetHomeWidgetPreferences(t)}
           >
             <Button
               label={t("common.customizeWidgets")}

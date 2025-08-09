@@ -21,5 +21,11 @@ export const clubDetailsSchema = z.object({
   has_joined: z.boolean(),
 });
 
+export const clubMembersSchema = z.object({
+  members: z.array(userSchema),
+  count: z.number(),
+});
+
 export type Club = z.infer<typeof clubSchema>;
 export type ClubDetails = z.infer<typeof clubDetailsSchema>;
+export type ClubMembers = z.infer<typeof clubMembersSchema>;

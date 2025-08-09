@@ -9,18 +9,6 @@ import ImageSkeleton from "../Skeleton/ImageSkeleton";
 
 const MAX_COUNT = 100;
 
-const getImageProps = (size: "default" | "sm", borderColor: string) => {
-  const sizeProps = size === "default" ? 32 : 24;
-  return {
-    radius: 9999,
-    size: sizeProps,
-    style: {
-      borderWidth: 1,
-      borderColor,
-    },
-  };
-};
-
 interface UserStackProps {
   pictures?: string[];
   count?: number;
@@ -31,7 +19,7 @@ interface UserStackProps {
 }
 
 export const UserStack = ({
-  pictures,
+  pictures = [],
   max = 3,
   size = "default",
   onPress,
@@ -41,18 +29,28 @@ export const UserStack = ({
   const { theme } = useTheme();
   const { t } = useTranslation();
 
+  if (!pictures.length) return null;
+
   const sizeProps = size === "default" ? 32 : 24;
+  const imageProps = {
+    radius: 9999,
+    size: sizeProps,
+    style: {
+      borderWidth: 1,
+      borderColor: theme[borderColor],
+    },
+  };
 
-  const imageProps = getImageProps(size, theme[borderColor]);
-
-  if (!pictures || pictures.length === 0) {
-    return null;
-  }
+  const displayedPictures = pictures.slice(0, max);
+  const hasOverflow = count && count > pictures.length;
+  const overflowCount = hasOverflow
+    ? Math.min(count - pictures.length, MAX_COUNT)
+    : 0;
 
   return (
     <View className="gap-2">
       <View className="flex-row ml-2">
-        {pictures.slice(0, max).map((picture) => (
+        {displayedPictures.map((picture) => (
           <Image
             source={picture}
             key={picture}
@@ -60,17 +58,20 @@ export const UserStack = ({
             {...imageProps}
           />
         ))}
-        {count && count > max && (
+
+        {hasOverflow && (
           <View
             className="bg-black items-center justify-center rounded-full relative -ml-2"
             style={{ width: sizeProps, height: sizeProps }}
           >
-            <Image source={pictures[max]} {...imageProps} />
+            <Image source={pictures[pictures.length - 1]} {...imageProps} />
             <View
               className="absolute inset-0 bg-black/50 rounded-full"
               style={{ ...imageProps.style }}
             />
-            <NativeText className="text-white text-sm font-medium absolute inset-x-0 text-center">{`+${count - max > MAX_COUNT ? MAX_COUNT : count - max}`}</NativeText>
+            <NativeText className="text-white text-sm font-medium absolute inset-x-0 text-center">
+              +{overflowCount}
+            </NativeText>
           </View>
         )}
       </View>
@@ -101,15 +102,23 @@ export const UserStackSkeleton = ({
   borderColor = "background",
 }: UserStackSkeletonProps) => {
   const { theme } = useTheme();
+  const sizeProps = size === "default" ? 32 : 24;
 
-  const imageProps = getImageProps(size, theme[borderColor]);
+  const imageProps = {
+    radius: 9999,
+    size: sizeProps,
+    style: {
+      borderWidth: 1,
+      borderColor: theme[borderColor],
+    },
+  };
 
   return (
     <View className="gap-2">
       <View className="flex-row ml-2">
         {Array.from({ length: max }).map((_, index) => (
           <View
-            key={`user-stack-skeleton-${index.toString()}`}
+            key={`user-stack-skeleton-${index}-${size}-${max}`}
             className="-ml-2"
           >
             <ImageSkeleton {...imageProps} />

@@ -13,7 +13,7 @@ import { useServicePreferences } from "@/hooks/services/usePreferences";
 import type { Preference } from "@/services/storage/preferences";
 import type { AppStackParamList } from "@/types";
 
-type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
+export type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
 export const Services = () => {
   const { t } = useTranslation();

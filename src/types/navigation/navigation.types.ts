@@ -36,6 +36,7 @@ export type AppStackParamList = {
   BottomTabNavigator: undefined;
   Clubs: undefined;
   ClubDetails: { id: number };
+  ClubMemberList: { id: number };
   Traq: undefined;
   Olimtpe: undefined;
   Account: undefined;

@@ -6,7 +6,11 @@ const HAPTIC_FEEDBACK_KEY = STORAGE_KEYS.HAPTIC_FEEDBACK;
 export const getHapticFeedbackEnabled = async (): Promise<boolean> => {
   try {
     const value = await AsyncStorage.getItem(HAPTIC_FEEDBACK_KEY);
-    return value === null ? true : JSON.parse(value);
+    if (value === null) {
+      await AsyncStorage.setItem(HAPTIC_FEEDBACK_KEY, JSON.stringify(true));
+      return true;
+    }
+    return JSON.parse(value);
   } catch (error) {
     console.error("Error getting haptic feedback preference:", error);
     return true;

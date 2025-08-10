@@ -31,6 +31,7 @@ export type AppStackParamList = {
   HomeworkDetails: { homework: Homework };
   Games: undefined;
   Bassine: undefined;
+  BassineLeaderboard: undefined;
   Profile: {
     userId: string;
   };
@@ -42,6 +43,8 @@ export type AppStackParamList = {
   Olimtpe: undefined;
   Account: undefined;
 };
+
+export type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
 type AccountStackParamList = {
   Account: undefined;

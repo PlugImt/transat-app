@@ -26,6 +26,7 @@ import {
 import ClubDetails from "@/app/screens/services/clubs/ClubDetails";
 import { ClubMemberList } from "@/app/screens/services/clubs/components/ClubMemberList";
 import Bassine from "@/app/screens/services/games/bassine/Bassine";
+import { BassineLeaderboard } from "@/app/screens/services/games/bassine/BassineLeaderboard";
 import { HomeworkDetails } from "@/app/screens/services/homework/components/HomeworkDetails";
 import { RestaurantReviews } from "@/app/screens/services/restaurant/components/Reviews";
 import { Services } from "@/app/screens/services/Services";
@@ -77,6 +78,10 @@ const GamesStackScreen = () => (
   <GamesStack.Navigator screenOptions={screenOptions}>
     <GamesStack.Screen name="Games" component={Games} />
     <GamesStack.Screen name="Bassine" component={Bassine} />
+    <GamesStack.Screen
+      name="BassineLeaderboard"
+      component={BassineLeaderboard}
+    />
   </GamesStack.Navigator>
 );
 

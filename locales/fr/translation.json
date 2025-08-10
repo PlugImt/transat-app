@@ -416,7 +416,8 @@
       "title": "Bassine",
       "description": "Lorsqu'une bière est servie la bassine se remplie petit à petit, et lorsqu'elle est pleine vous pouvez demander de remplir votre verre avec\n\nÀ chaque verre rempli, mettez à jour votre compteur pour être le roi de la bassine 👑",
       "location": "À la MDE pendant les soirées",
-      "price": "Gratuit"
+      "price": "Gratuit",
+      "leaderboard": "Classement"
     }
   },
   "user": {

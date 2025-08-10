@@ -1,5 +1,4 @@
 import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
 import { LinearGradient } from "expo-linear-gradient";
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
 import { useMemo } from "react";
@@ -13,10 +12,8 @@ import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { MenuItem } from "@/dto";
 import { useMenuRestaurant } from "@/hooks/services/restaurant/useMenuRestaurant";
-import type { AppStackParamList } from "@/types";
+import type { AppScreenNavigationProp } from "@/types";
 import { isDinner, isLunch, isWeekend, outOfService } from "@/utils";
-
-type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
 const MenuItemCard = ({ item }: { item: MenuItem }) => {
   return (

@@ -1,5 +1,4 @@
 import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
 import { WashingMachineIcon, Wind } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
@@ -9,9 +8,7 @@ import { Text } from "@/components/common/Text";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useLaundryStats } from "@/hooks/services/laundry/useLaundry";
-import type { AppStackParamList } from "@/types";
-
-type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
+import type { AppScreenNavigationProp } from "@/types";
 
 export const LaundryWidget = () => {
   const { t } = useTranslation();

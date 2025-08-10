@@ -416,7 +416,8 @@
       "title": "Cuenca",
       "description": "Cuando se sirve una cerveza, la cuenca se llena poco a poco, y cuando está llena puedes pedir que se llene tu vaso con\n\nPor cada vaso lleno, actualiza tu contador para ser el rey de la cuenca 👑",
       "location": "En la MDE durante las fiestas",
-      "price": "Gratis"
+      "price": "Gratis",
+      "leaderboard": "Clasificación"
     }
   },
   "user": {

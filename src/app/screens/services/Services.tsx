@@ -1,5 +1,4 @@
 import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import Animated from "react-native-reanimated";
 import { Button } from "@/components/common/Button";
@@ -13,9 +12,7 @@ import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
 import { useServicePreferences } from "@/hooks/services/usePreferences";
 import type { Preference } from "@/services/storage/preferences";
 import { resetServicePreferences } from "@/services/storage/preferences";
-import type { AppStackParamList } from "@/types";
-
-export type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
+import type { AppScreenNavigationProp } from "@/types";
 
 export const Services = () => {
   const { t } = useTranslation();

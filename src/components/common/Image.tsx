@@ -1,3 +1,4 @@
+import type React from "react";
 import { forwardRef, useState } from "react";
 import {
   type ImageSourcePropType,
@@ -88,11 +89,13 @@ const Image = forwardRef<React.ElementRef<typeof RNImage>, ImageProps>(
   ) => {
     const [hasError, setHasError] = useState(false);
     const [imageLoading, setImageLoading] = useState(true);
+    const [hasLoaded, setHasLoaded] = useState(false);
+
     const isLoading = loading || imageLoading;
     const finalSource = normalizeSource(source);
     const validSource = isValidSource(finalSource);
 
-    if ((!validSource && hasError) || (!validSource && !isLoading)) {
+    if ((!validSource && !isLoading) || hasError) {
       return fallback !== undefined ? (
         fallback
       ) : (
@@ -109,19 +112,30 @@ const Image = forwardRef<React.ElementRef<typeof RNImage>, ImageProps>(
           <RNImage
             ref={ref}
             source={finalSource}
-            onError={() => setHasError(true)}
+            onError={() => {
+              setHasError(true);
+              setImageLoading(false);
+            }}
             className={cn(
               "aspect-square h-full w-full",
-              isLoading ? "opacity-0" : "opacity-100",
+              hasLoaded ? "opacity-100" : "opacity-0",
             )}
             borderRadius={radius}
             resizeMode={props.resizeMode ?? "contain"}
-            onLoadStart={() => setImageLoading(true)}
-            onLoadEnd={() => setImageLoading(false)}
+            onLoadStart={() => {
+              setImageLoading(true);
+              setHasError(false);
+            }}
+            onLoad={() => {
+              setHasLoaded(true);
+            }}
+            onLoadEnd={() => {
+              setImageLoading(false);
+            }}
             {...props}
           />
         </View>
-        {isLoading && (
+        {isLoading && !hasLoaded && (
           <View className="z-20 absolute inset-0 h-full w-full">
             <ImageSkeleton size={size} radius={radius} {...props} />
           </View>

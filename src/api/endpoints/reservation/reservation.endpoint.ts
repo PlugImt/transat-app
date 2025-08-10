@@ -1,5 +1,5 @@
 import { API_ROUTES, apiRequest, Method } from "@/api";
-import type { Club, GetReservation } from "@/dto";
+import type { Club, GetReservation, ReservationDetails } from "@/dto";
 
 export const getReservationRoot = async () => {
   return await apiRequest<GetReservation[]>(
@@ -23,9 +23,9 @@ export const getReservationClub = async (id: number) => {
 };
 
 export const getReservationItem = async (id: number, date: string) => {
-  return await apiRequest<GetReservation>(
+  return await apiRequest<ReservationDetails>(
     API_ROUTES.reservationItem.replace(":id", id.toString()) +
-      `${date ? `date=${date}` : ""}`,
+      `${date ? `?date=${date}` : ""}`,
     Method.GET,
   );
 };

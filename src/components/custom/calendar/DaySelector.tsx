@@ -2,15 +2,21 @@ import { useState } from "react";
 import { ScrollView, View } from "react-native";
 import { DayCard } from "@/components/custom/calendar/Day";
 
-export const DaySelector = () => {
+interface DaySelectorProps {
+  onDateSelect?: (date: Date) => void;
+}
+
+export const DaySelector = ({ onDateSelect }: DaySelectorProps) => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
   const [selectedDate, setSelectedDate] = useState(today);
 
   const handlePress = (date: Date) => {
-    console.log("Selected date:", date);
     setSelectedDate(date);
+    if (onDateSelect) {
+      onDateSelect(date);
+    }
   };
 
   const days = Array.from({ length: 33 }, (_, i) => {

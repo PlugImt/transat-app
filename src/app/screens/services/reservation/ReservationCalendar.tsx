@@ -1,5 +1,6 @@
 import type { RouteProp } from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import Animated from "react-native-reanimated";
 import { Text } from "@/components/common/Text";
@@ -16,8 +17,21 @@ export const ReservationCalendar = () => {
   const route = useRoute<ItemRouteProp>();
   const { id, title } = route.params;
   const { scrollHandler } = useAnimatedHeader();
+  const [selectedDate, setSelectedDate] = useState<string | undefined>(
+    undefined,
+  );
 
-  const { data, isPending, isError, error, refetch } = useReservationItem(id);
+  const { data, isPending, isError, error, refetch } = useReservationItem(
+    id,
+    selectedDate,
+  );
+
+  const handleDateSelect = (date: Date) => {
+    const formattedDate = date.toISOString().split("T")[0];
+    setSelectedDate(formattedDate);
+  };
+
+  console.log(data);
 
   return (
     <Page
@@ -28,14 +42,12 @@ export const ReservationCalendar = () => {
       asChildren
     >
       <Animated.FlatList
-        data={data}
+        data={data?.reservation}
         renderItem={({ item }) => <Text>TODO: display the slot list</Text>}
         keyExtractor={(item) => String(item.id)}
         onScroll={scrollHandler}
         showsVerticalScrollIndicator
-        ListHeaderComponent={
-          <DaySelector />
-        }
+        ListHeaderComponent={<DaySelector onDateSelect={handleDateSelect} />}
         ListFooterComponent={
           isPending ? <Text>{t("common.loading")}</Text> : null
         }

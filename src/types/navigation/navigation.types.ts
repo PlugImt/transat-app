@@ -40,7 +40,11 @@ export type AppStackParamList = {
   Traq: undefined;
   Olimtpe: undefined;
   Account: undefined;
+  Events: undefined;
+  EventDetails: { id: number };
 };
+
+export type AppNavigation = StackNavigationProp<AppStackParamList>;
 
 type AccountStackParamList = {
   Account: undefined;

@@ -25,6 +25,8 @@ import {
 } from "@/app/screens/services";
 import ClubDetails from "@/app/screens/services/clubs/ClubDetails";
 import { ClubMemberList } from "@/app/screens/services/clubs/components/ClubMemberList";
+import EventDetails from "@/app/screens/services/events/components/EventDetails";
+import Events from "@/app/screens/services/events/Events";
 import { HomeworkDetails } from "@/app/screens/services/homework/components/HomeworkDetails";
 import { RestaurantReviews } from "@/app/screens/services/restaurant/components/Reviews";
 import { Services } from "@/app/screens/services/Services";
@@ -66,6 +68,8 @@ const ServicesStackScreen = () => (
     <ServicesStack.Screen name="Clubs" component={Clubs} />
     <ServicesStack.Screen name="ClubDetails" component={ClubDetails} />
     <ServicesStack.Screen name="ClubMemberList" component={ClubMemberList} />
+    <ServicesStack.Screen name="Events" component={Events} />
+    <ServicesStack.Screen name="EventDetails" component={EventDetails} />
     <ServicesStack.Screen name="Traq" component={Traq} />
     <ServicesStack.Screen name="Olimtpe" component={Olimtpe} />
   </ServicesStack.Navigator>

@@ -77,6 +77,22 @@
       "months": "{{count}} months ago",
       "year": "{{count}} year ago",
       "years": "{{count}} years ago"
+    },
+    "dateFormats": {
+      "weekday": "{{date, weekday}}",
+      "time": "{{date, time}}",
+      "short": "{{date, short}}",
+      "long": "{{date, long}}",
+      "relative": "{{date, relative}}",
+      "ago": "{{date, ago}}",
+      "dateTime": "{{date, dateTime}}"
+    },
+    "homework": {
+      "deadline": "Deadline: {{date, dateTime}}",
+      "createdAt": "Created on {{date, short}}",
+      "updatedAt": "Updated on {{date, short}}",
+      "dueIn": "Due in {{date, ago}}",
+      "overdue": "Overdue by {{date, ago}}"
     }
   },
   "auth": {
@@ -407,6 +423,23 @@
         "emptyDescription": "Try with another keyword",
         "notFound": "This club doesn't exist",
         "notFoundDescription": "Refresh or change club"
+      }
+    },
+    "events": {
+      "title": "Events",
+      "description": "Don't miss any event at the MDE",
+      "upcoming": "Upcoming",
+      "past": "Past",
+      "organizer": "Organizer",
+      "createdBy": "Created by",
+      "peopleInterested": "People interested",
+      "errors": {
+        "emptyUpcoming": "No upcoming events",
+        "emptyUpcomingDescription": "Add an event to display it here",
+        "emptyPast": "No past events yet",
+        "emptyPastDescription": "Enjoy the upcoming events",
+        "notFound": "This event has been deleted",
+        "notFoundDescription": "Try with another"
       }
     }
   },

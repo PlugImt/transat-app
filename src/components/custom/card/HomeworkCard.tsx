@@ -1,7 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
-import { format } from "date-fns";
-import { enUS, fr } from "date-fns/locale";
 import { CheckCircle, Circle } from "lucide-react-native";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -9,6 +7,7 @@ import { TouchableOpacity, View } from "react-native";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Homework } from "@/dto";
+import { useHomeworkDate } from "@/hooks/services/homework";
 import type { AppStackParamList } from "@/types";
 
 interface Props {
@@ -17,8 +16,8 @@ interface Props {
 
 export default function HomeworkCard({ homework }: Props) {
   const { theme } = useTheme();
-  const { i18n } = useTranslation();
   const { t } = useTranslation();
+  const { formatDeadline, getDeadlineStatus } = useHomeworkDate();
   const navigation = useNavigation<StackNavigationProp<AppStackParamList>>();
   const [isDone, setIsDone] = useState(homework.done);
 
@@ -26,10 +25,8 @@ export default function HomeworkCard({ homework }: Props) {
     setIsDone(!isDone);
   };
 
-  const locale = i18n.language === "fr" ? fr : enUS;
-  const deadline = format(new Date(homework.deadline), "PPP '—' p", {
-    locale,
-  });
+  const deadline = formatDeadline(new Date(homework.deadline));
+  const deadlineStatus = getDeadlineStatus(new Date(homework.deadline));
 
   const now = new Date();
   const isLate = !homework.done && new Date(homework.deadline) < now;
@@ -75,11 +72,11 @@ export default function HomeworkCard({ homework }: Props) {
 
           <View className="flex flex-row justify-between items-center mt-2">
             <Text className="text-sm italic" style={{ color: theme.primary }}>
-              📅 Deadline : {deadline}
+              📅 {deadline}
             </Text>
-            {isLate && (
+            {deadlineStatus.isOverdue && (
               <Text className="text-sm font-bold text-red-500">
-                ⚠️ {t("services.homework.shortLate")}
+                ⚠️ {deadlineStatus.text}
               </Text>
             )}
           </View>

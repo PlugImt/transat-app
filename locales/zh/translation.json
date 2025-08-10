@@ -77,6 +77,15 @@
       "months": "{{count}}个月前",
       "year": "{{count}}年前",
       "years": "{{count}}年前"
+    },
+    "dateFormats": {
+      "weekday": "{{date, weekday}}",
+      "time": "{{date, time}}",
+      "short": "{{date, short}}",
+      "long": "{{date, long}}",
+      "relative": "{{date, relative}}",
+      "ago": "{{date, ago}}",
+      "dateTime": "{{date, dateTime}}"
     }
   },
   "auth": {
@@ -407,6 +416,23 @@
         "emptyDescription": "尝试使用其他关键词",
         "notFound": "此俱乐部不存在",
         "notFoundDescription": "刷新或更换俱乐部"
+      }
+    },
+    "events": {
+      "title": "活动",
+      "description": "不要错过任何活动",
+      "upcoming": "即将到来",
+      "past": "已过去",
+      "organizer": "组织者",
+      "createdBy": "创建者",
+      "peopleInterested": "感兴趣的人",
+      "errors": {
+        "emptyUpcoming": "没有即将到来的活动",
+        "emptyUpcomingDescription": "添加活动以在此显示",
+        "emptyPast": "没有已过去的活动",
+        "emptyPastDescription": "享受即将到来的活动",
+        "notFound": "此活动已被删除",
+        "notFoundDescription": "尝试使用其他"
       }
     }
   },

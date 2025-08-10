@@ -77,6 +77,15 @@
       "months": "hace {{count}} meses",
       "year": "hace {{count}} año",
       "years": "hace {{count}} años"
+    },
+    "dateFormats": {
+      "weekday": "{{date, weekday}}",
+      "time": "{{date, time}}",
+      "short": "{{date, short}}",
+      "long": "{{date, long}}",
+      "relative": "{{date, relative}}",
+      "ago": "{{date, ago}}",
+      "dateTime": "{{date, dateTime}}"
     }
   },
   "auth": {
@@ -407,6 +416,23 @@
         "emptyDescription": "Intenta con otra palabra clave",
         "notFound": "Este club no existe",
         "notFoundDescription": "Actualiza o cambia de club"
+      }
+    },
+    "events": {
+      "title": "Eventos",
+      "description": "No te pierdas ningún evento de la MDE",
+      "upcoming": "Próximos",
+      "past": "Pasados",
+      "organizer": "Organizador",
+      "createdBy": "Creado por",
+      "peopleInterested": "Personas interesadas",
+      "errors": {
+        "emptyUpcoming": "No hay eventos próximos",
+        "emptyUpcomingDescription": "Añade un evento para mostrarlo aquí",
+        "emptyPast": "No hay eventos pasados",
+        "emptyPastDescription": "Disfruta de los eventos próximos",
+        "notFound": "Este evento ha sido eliminado",
+        "notFoundDescription": "Intenta con otra"
       }
     }
   },

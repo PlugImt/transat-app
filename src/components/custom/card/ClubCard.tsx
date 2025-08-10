@@ -10,16 +10,18 @@ type NavigationProp = StackNavigationProp<{
 
 interface ClubCardProps {
   club: Club;
+  size?: "sm" | "default";
 }
 
-const ClubCard = ({ club }: ClubCardProps) => {
+const ClubCard = ({ club, size = "default" }: ClubCardProps) => {
   const navigation = useNavigation<NavigationProp>();
 
   return (
     <LinkCard
       title={club.name}
       description={club.description}
-      image={<Image source={club.picture} size={36} />}
+      size={size}
+      image={<Image source={club.picture} size={size === "sm" ? 24 : 36} />}
       onPress={() => {
         navigation.navigate("ClubDetails", { id: club.id });
       }}
@@ -29,6 +31,12 @@ const ClubCard = ({ club }: ClubCardProps) => {
 
 export default ClubCard;
 
-export const ClubCardSkeleton = () => {
-  return <LinkCardLoading />;
+interface ClubCardSkeletonProps {
+  size?: "sm" | "default";
+}
+
+export const ClubCardSkeleton = ({
+  size = "default",
+}: ClubCardSkeletonProps) => {
+  return <LinkCardLoading size={size} />;
 };

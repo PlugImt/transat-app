@@ -1,19 +1,24 @@
-import { useNavigation, useRoute } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
-import { Bell, BellOff, ExternalLink, MapPin } from "lucide-react-native";
+import { useRoute } from "@react-navigation/native";
+import {
+  Bell,
+  BellOff,
+  Clock,
+  ExternalLink,
+  MapPin,
+} from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { Linking, View } from "react-native";
 import { Button } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
-import { UserStack, UserStackSkeleton } from "@/components/custom";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
-import type { ClubDetails } from "@/dto/club";
+import type { EventDetails } from "@/dto/event";
+import { useDate } from "@/hooks/common";
 import {
   useJoinClubMutation,
   useLeaveClubMutation,
 } from "@/hooks/services/club/useClub";
-import type { ClubDetailsRouteProp } from "../ClubDetails";
+import type { EventDetailsRouteProp } from "./EventDetails";
 
 interface NotificationButtonProps {
   isMember: boolean;
@@ -25,7 +30,7 @@ const NotificationButton = ({
   disabled,
 }: NotificationButtonProps) => {
   const { t } = useTranslation();
-  const route = useRoute<ClubDetailsRouteProp>();
+  const route = useRoute<EventDetailsRouteProp>();
   const { id } = route.params;
 
   const { mutate: joinClub, isPending: isJoining } = useJoinClubMutation(id);
@@ -55,51 +60,44 @@ const NotificationButton = ({
   );
 };
 
-type NavigationProp = StackNavigationProp<{
-  ClubMemberList: { id: number };
-}>;
-
-interface ClubDetailsHeaderProps {
-  club: ClubDetails;
+interface EventDetailsHeaderProps {
+  event: EventDetails;
 }
 
-export const ClubDetailsHeader = ({ club }: ClubDetailsHeaderProps) => {
-  const {
-    name: title,
-    description,
-    member_photos,
-    member_count,
-    location,
-    link,
-  } = club;
+export const EventDetailsHeader = ({ event }: EventDetailsHeaderProps) => {
+  const { name: title, description, location, link } = event;
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const navigation = useNavigation<NavigationProp>();
+  const { formatWeekday, formatTime } = useDate();
 
   const label = link?.toLowerCase().includes("whatsapp")
     ? "WhatsApp"
     : String(t("common.link"));
 
-  const handleMemberListPress = () => {
-    navigation.navigate("ClubMemberList", { id: club.id });
-  };
+  const startDate = new Date(event.start_date);
+  const endDate = new Date(event.end_date);
 
   return (
     <View className="gap-4">
       <View>
-        <View className="flex-row items-center gap-1">
-          <MapPin color={theme.text} size={12} />
-          <Text variant="sm">{location}</Text>
-        </View>
         <Text variant="h2">{title}</Text>
+        <Text variant="lg" color="primary">
+          {formatWeekday(startDate).toLowerCase()}
+        </Text>
         <Text color="muted">{description}</Text>
       </View>
-      <UserStack
-        pictures={member_photos}
-        count={member_count}
-        onPress={handleMemberListPress}
-        moreText="services.clubs.interested"
-      />
+      <View className="flex-row items-center gap-2 justify-between flex-wrap">
+        <View className="flex-row items-center gap-1">
+          <MapPin color={theme.text} size={20} />
+          <Text>{location}</Text>
+        </View>
+        <View className="flex-row items-center gap-1">
+          <Clock color={theme.text} size={20} />
+          <Text>
+            {formatTime(startDate)} — {formatTime(endDate)}
+          </Text>
+        </View>
+      </View>
       <View className="flex-row items-center gap-2">
         {link && link.length > 0 && (
           <Button
@@ -110,33 +108,35 @@ export const ClubDetailsHeader = ({ club }: ClubDetailsHeaderProps) => {
             className="flex-1"
           />
         )}
-        <NotificationButton isMember={club.has_joined} />
+        <NotificationButton isMember={true} />
       </View>
     </View>
   );
 };
 
-export default ClubDetailsHeader;
+export default EventDetailsHeader;
 
-export const ClubDetailsHeaderSkeleton = () => {
-  const { t } = useTranslation();
+export const EventDetailsHeaderSkeleton = () => {
+  const { theme } = useTheme();
 
   return (
     <View className="gap-4">
       <View>
-        <TextSkeleton variant="sm" lastLineWidth={50} />
         <TextSkeleton variant="h2" lastLineWidth={200} />
+        <TextSkeleton variant="sm" lastLineWidth={80} />
         <TextSkeleton lines={2} />
       </View>
-      <UserStackSkeleton />
+      <View className="flex-row items-center gap-2 justify-between flex-wrap">
+        <View className="flex-row items-center gap-1">
+          <MapPin color={theme.text} size={20} />
+          <TextSkeleton lastLineWidth={100} />
+        </View>
+        <View className="flex-row items-center gap-1">
+          <Clock color={theme.text} size={20} />
+          <TextSkeleton lastLineWidth={100} />
+        </View>
+      </View>
       <View className="flex-row items-center gap-2">
-        <Button
-          label={String(t("common.link"))}
-          icon={<ExternalLink />}
-          variant="secondary"
-          className="flex-1"
-          disabled
-        />
         <NotificationButton isMember={false} disabled />
       </View>
     </View>

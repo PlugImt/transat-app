@@ -77,6 +77,22 @@
       "months": "il y a {{count}} mois",
       "year": "il y a {{count}} an",
       "years": "il y a {{count}} ans"
+    },
+    "dateFormats": {
+      "weekday": "{{date, weekday}}",
+      "time": "{{date, time}}",
+      "short": "{{date, short}}",
+      "long": "{{date, long}}",
+      "relative": "{{date, relative}}",
+      "ago": "{{date, ago}}",
+      "dateTime": "{{date, dateTime}}"
+    },
+    "homework": {
+      "deadline": "Échéance : {{date, dateTime}}",
+      "createdAt": "Créé le {{date, short}}",
+      "updatedAt": "Modifié le {{date, short}}",
+      "dueIn": "À rendre dans {{date, ago}}",
+      "overdue": "En retard depuis {{date, ago}}"
     }
   },
   "auth": {
@@ -407,6 +423,23 @@
         "emptyDescription": "Essayez avec un autre mot-clé",
         "notFound": "Ce club n'existe pas",
         "notFoundDescription": "Actualisez ou changez de club"
+      }
+    },
+    "events": {
+      "title": "Evénements",
+      "description": "Ne rate plus aucun événement de la MDE",
+      "upcoming": "Prochainement",
+      "past": "Passé",
+      "organizer": "Organisateur",
+      "createdBy": "Créé par",
+      "peopleInterested": "Personnes intéressées",
+      "errors": {
+        "emptyUpcoming": "Aucun événement à venir",
+        "emptyUpcomingDescription": "Ajoutez en un pour qu'il s'affiche ici",
+        "emptyPast": "Aucun événement n'est encore passé",
+        "emptyPastDescription": "Profitez des événements à venir",
+        "notFound": "Cet événement a été supprimé",
+        "notFoundDescription": "Essayez avec un autre"
       }
     }
   },

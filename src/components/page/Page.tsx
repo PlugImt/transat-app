@@ -1,5 +1,5 @@
 import React, { type ReactNode } from "react";
-import { RefreshControl, View } from "react-native";
+import { RefreshControl, View, type ViewStyle } from "react-native";
 import Animated from "react-native-reanimated";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
@@ -11,6 +11,7 @@ type PageProps = {
   refreshing?: boolean;
   onRefresh?: () => void;
   className?: string;
+  style?: ViewStyle;
   title?: string | ReactNode;
   header?: ReactNode;
   footer?: ReactNode;
@@ -23,6 +24,7 @@ export const Page = ({
   refreshing = false,
   onRefresh,
   className,
+  style,
   title,
   header,
   footer,
@@ -31,10 +33,10 @@ export const Page = ({
 }: PageProps) => {
   const { theme } = useTheme();
   const { scrollHandler, headerShown } = useAnimatedHeader();
-
   const containerStyle = {
     paddingBottom: footer ? 0 : 40,
     paddingTop: HEADER_HEIGHT,
+    ...style,
   };
 
   const containerClassName = cn("gap-6 px-5", className);

@@ -14,6 +14,13 @@ export const QUERY_KEYS = {
     clubLeave: ["clubLeave"],
     clubMembers: ["clubMembers"],
   },
+  event: {
+    events: ["events"],
+    eventDetails: ["eventDetails"],
+    eventJoin: ["eventJoin"],
+    eventLeave: ["eventLeave"],
+    eventMembers: ["eventMembers"],
+  },
   notification: ["notification"],
   auth: {
     user: ["auth", "user"],

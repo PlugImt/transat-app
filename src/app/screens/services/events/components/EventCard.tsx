@@ -22,7 +22,7 @@ type EventCardProps = {
 
 export const EventCard = ({ event }: EventCardProps) => {
   const { theme } = useTheme();
-  const { formatWeekday, formatTime } = useDate();
+  const { formatTime, formatAgo } = useDate();
   const navigation = useNavigation<NavigationProp>();
 
   const startDate = new Date(event.start_date);
@@ -41,7 +41,7 @@ export const EventCard = ({ event }: EventCardProps) => {
           <View>
             <Text variant="h3">{event.name}</Text>
             <Text variant="sm" color="primary">
-              {formatWeekday(startDate).toLowerCase()}
+              {formatAgo(startDate).toLowerCase()}
             </Text>
           </View>
           <View className="flex-row items-center gap-x-2 flex-wrap">

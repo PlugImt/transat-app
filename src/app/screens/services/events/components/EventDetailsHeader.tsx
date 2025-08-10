@@ -68,7 +68,7 @@ export const EventDetailsHeader = ({ event }: EventDetailsHeaderProps) => {
   const { name: title, description, location, link } = event;
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const { formatWeekday, formatTime } = useDate();
+  const { formatTime, formatAgo } = useDate();
 
   const label = link?.toLowerCase().includes("whatsapp")
     ? "WhatsApp"
@@ -82,7 +82,7 @@ export const EventDetailsHeader = ({ event }: EventDetailsHeaderProps) => {
       <View>
         <Text variant="h2">{title}</Text>
         <Text variant="lg" color="primary">
-          {formatWeekday(startDate).toLowerCase()}
+          {formatAgo(startDate).toLowerCase()}
         </Text>
         <Text color="muted">{description}</Text>
       </View>

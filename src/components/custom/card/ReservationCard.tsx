@@ -58,7 +58,7 @@ const ReservationCard = ({
 
   const handleReservePress = () => {
     if (slot) {
-      console.log("slot to be implemented");
+      navigation.push("ReservationItem", { id, title });
     }
   };
 

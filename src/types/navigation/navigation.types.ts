@@ -1,6 +1,7 @@
 import type { NavigatorScreenParams } from "@react-navigation/core";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import type { Homework } from "@/dto";
+import { ReservationCalendar } from '@/app/screens';
 
 export type BottomTabParamList = {
   AccountScreen: undefined;
@@ -42,6 +43,7 @@ export type AppStackParamList = {
     title: string;
     level?: number;
   };
+    ReservationCalendar: { id: number; title: string };
   ClubDetails: { id: number };
   Traq: undefined;
   Olimtpe: undefined;

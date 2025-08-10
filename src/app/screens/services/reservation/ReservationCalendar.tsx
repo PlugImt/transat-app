@@ -10,6 +10,7 @@ import { Page } from "@/components/page/Page";
 import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
 import { useReservationItem } from "@/hooks/services/reservation/useReservation";
 import type { AppStackParamList } from "@/types";
+import { generateCalendarSlots } from "@/utils/calendar.utils";
 
 type ItemRouteProp = RouteProp<AppStackParamList, "ReservationCalendar">;
 
@@ -32,6 +33,11 @@ export const ReservationCalendar = () => {
     setSelectedDate(formattedDate);
   };
 
+  const test = generateCalendarSlots(
+    data?.reservation || [],
+    new Date(selectedDate || new Date()),
+  );
+
   return (
     <Page
       title={title}
@@ -41,7 +47,7 @@ export const ReservationCalendar = () => {
       asChildren
     >
       <Animated.FlatList
-        data={data?.reservation}
+        data={test}
         renderItem={({ item }) => (
           <CalendarSlot reservationDetails={item} itemId={id} />
         )}

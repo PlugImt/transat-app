@@ -23,10 +23,10 @@ const CalendarSlot = ({ reservationDetails, itemId }: SlotProps) => {
   };
 
   const disabled =
-    !!reservationDetails &&
+    !!reservationDetails?.user &&
     reservationDetails?.user?.email !== auth.user?.email;
   const canBeFreed =
-    !!reservationDetails &&
+    !!reservationDetails?.user &&
     reservationDetails?.user?.email === auth.user?.email;
 
   return (
@@ -39,7 +39,7 @@ const CalendarSlot = ({ reservationDetails, itemId }: SlotProps) => {
             ? `${formatTimeFromDate(reservationDetails.start_date)} - ${formatTimeFromDate(reservationDetails.end_date)}`
             : null}
         </Text>
-        {reservationDetails ? (
+        {reservationDetails?.user ? (
           <Text className="text-sm text-gray-500">
             {`${t("services.reservation.reservedBy")} ${reservationDetails?.user?.first_name} ${reservationDetails?.user?.last_name}`}
           </Text>

@@ -26,7 +26,7 @@ export const reservationSchema = z.object({
   id: z.number(),
   start_date: z.string(),
   end_date: z.string(),
-  user: userSchema,
+  user: userSchema.optional(),
 });
 
 export const reservationDetailsSchema = z.object({

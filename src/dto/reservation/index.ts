@@ -66,3 +66,4 @@ export type CreateReservationCategory = z.infer<
 
 export type CreateReservationItem = z.infer<typeof createReservationItem>;
 export type ManageReservation = z.infer<typeof manageReservation>;
+export type ReservationScheme = z.infer<typeof reservationSchema>;

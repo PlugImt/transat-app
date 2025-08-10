@@ -8,7 +8,7 @@ interface DaySelectorProps {
 
 export const DaySelector = ({ onDateSelect }: DaySelectorProps) => {
   const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  today.setHours(8, 0, 0, 0);
 
   const [selectedDate, setSelectedDate] = useState(today);
 

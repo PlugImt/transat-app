@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import Animated from "react-native-reanimated";
 import { Text } from "@/components/common/Text";
+import CalendarSlot from "@/components/custom/calendar/CalendarSlot";
 import { DaySelector } from "@/components/custom/calendar/DaySelector";
 import { Page } from "@/components/page/Page";
 import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
@@ -31,8 +32,6 @@ export const ReservationCalendar = () => {
     setSelectedDate(formattedDate);
   };
 
-  console.log(data);
-
   return (
     <Page
       title={title}
@@ -43,8 +42,10 @@ export const ReservationCalendar = () => {
     >
       <Animated.FlatList
         data={data?.reservation}
-        renderItem={({ item }) => <Text>TODO: display the slot list</Text>}
-        keyExtractor={(item) => String(item.id)}
+        renderItem={({ item }) => (
+          <CalendarSlot reservationDetails={item} itemId={id} />
+        )}
+        keyExtractor={(item) => String(item?.id)}
         onScroll={scrollHandler}
         showsVerticalScrollIndicator
         ListHeaderComponent={<DaySelector onDateSelect={handleDateSelect} />}

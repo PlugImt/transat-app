@@ -51,7 +51,7 @@ export const ReservationCalendar = () => {
         renderItem={({ item }) => (
           <CalendarSlot reservationDetails={item} itemId={id} />
         )}
-        keyExtractor={(item) => String(item?.id)}
+        keyExtractor={(item, index) => `${String(item?.id)}-${index}`}
         onScroll={scrollHandler}
         showsVerticalScrollIndicator
         ListHeaderComponent={<DaySelector onDateSelect={handleDateSelect} />}

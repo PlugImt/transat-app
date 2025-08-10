@@ -47,10 +47,8 @@ const CalendarSlot = ({ reservationDetails, itemId }: SlotProps) => {
       </View>
 
       <Button
-        className="w-24"
         variant="secondary"
         disabled={disabled}
-        size="lg"
         onPress={() => {
           if (canBeFreed) {
             // Logic to free the slot

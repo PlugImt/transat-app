@@ -49,6 +49,8 @@ const HomeStackScreen = () => (
     <HomeStack.Screen name="Timetable" component={Timetable} />
     <HomeStack.Screen name="Homework" component={Homework} />
     <HomeStack.Screen name="HomeworkDetails" component={HomeworkDetails} />
+    <HomeStack.Screen name="Events" component={Events} />
+    <HomeStack.Screen name="EventDetails" component={EventDetails} />
   </HomeStack.Navigator>
 );
 

@@ -13,7 +13,7 @@
     "lint": "biome lint",
     "format": "biome check --write",
     "build:android": "eas build --profile production --platform android --local",
-    "build:ios": "eas build --profile production --platform ios"
+    "build:ios": "eas build --profile production --platform ios --local"
   },
   "jest": {
     "preset": "jest-expo"

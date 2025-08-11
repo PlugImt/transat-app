@@ -44,17 +44,18 @@ export const ReservationCalendar = () => {
     toast(error?.message || t("common.error"), "destructive");
   }
 
-  const itemData = (data as any)?.item as
-    | {
-        reservation?: any[];
-        reservation_before?: any[];
-        reservation_after?: any[];
-      }
-    | undefined;
+  const extractReservations = (raw: any) => {
+    const current = raw?.item?.reservation ?? raw?.reservation ?? [];
+    const before = raw?.item?.reservation_before ?? raw?.reservation_before ?? [];
+    const after = raw?.item?.reservation_after ?? raw?.reservation_after ?? [];
+    return { current, before, after };
+  };
+  const { current, before, after } = extractReservations(data);
 
   const handleDateSelect = (date: Date) => {
     const formattedDate = toYMD(date);
     setSelectedDate(formattedDate);
+    setSwiperKey(`swiper-${formattedDate}`);
   };
 
   const currentDateObj = selectedDate ? fromYMD(selectedDate) : new Date();
@@ -62,15 +63,15 @@ export const ReservationCalendar = () => {
   const nextDateObj = shiftDate(selectedDate, 1);
 
   const calendarDataDay = generateCalendarSlots(
-    itemData?.reservation || [],
+    current || [],
     currentDateObj,
   );
   const calendarDataDayBefore = generateCalendarSlots(
-    itemData?.reservation_before || [],
+    before || [],
     prevDateObj,
   );
   const calendarDataDayAfter = generateCalendarSlots(
-    itemData?.reservation_after || [],
+    after || [],
     nextDateObj,
   );
 
@@ -102,7 +103,7 @@ export const ReservationCalendar = () => {
       }, 50);
       return () => clearTimeout(id);
     }
-  }, []);
+  }, [selectedDate]);
 
   return (
     <Page
@@ -135,9 +136,7 @@ export const ReservationCalendar = () => {
           onScroll={scrollHandler}
           showsVerticalScrollIndicator
           ListFooterComponent={
-            isPending &&
-            (!itemData?.reservation_before ||
-              itemData.reservation_before.length === 0) ? (
+            isPending && (!before || before.length === 0) ? (
               <Text>{t("common.loading")}</Text>
             ) : null
           }
@@ -154,8 +153,7 @@ export const ReservationCalendar = () => {
           onScroll={scrollHandler}
           showsVerticalScrollIndicator
           ListFooterComponent={
-            isPending &&
-            (!itemData?.reservation || itemData.reservation.length === 0) ? (
+            isPending && (!current || current.length === 0) ? (
               <Text>{t("common.loading")}</Text>
             ) : null
           }
@@ -172,9 +170,7 @@ export const ReservationCalendar = () => {
           onScroll={scrollHandler}
           showsVerticalScrollIndicator
           ListFooterComponent={
-            isPending &&
-            (!itemData?.reservation_after ||
-              itemData.reservation_after.length === 0) ? (
+            isPending && (!after || after.length === 0) ? (
               <Text>{t("common.loading")}</Text>
             ) : null
           }

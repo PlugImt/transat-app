@@ -3,6 +3,7 @@ import { View } from "react-native";
 import { Button } from "@/components/common/Button";
 import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
+import { ReservationDialog } from "@/components/custom/ReservationDialog";
 import type { ReservationScheme } from "@/dto";
 import { useAuth } from "@/hooks/account";
 
@@ -25,9 +26,11 @@ const CalendarSlot = ({ reservationDetails, itemId }: SlotProps) => {
       reservationDetails?.user?.email !== auth.user?.email) ||
     // @ts-ignore
     reservationDetails?.end_date < new Date().toISOString();
-  const canBeFreed =
+  const _canBeFreed =
     !!reservationDetails?.user &&
     reservationDetails?.user?.email === auth.user?.email;
+
+  const startDateIso = reservationDetails?.start_date;
 
   return (
     <Card
@@ -47,20 +50,28 @@ const CalendarSlot = ({ reservationDetails, itemId }: SlotProps) => {
         ) : null}
       </View>
 
-      <Button
-        variant={canBeFreed ? "default" : "secondary"}
-        disabled={disabled}
-        onPress={() => {
-          if (canBeFreed) {
-            // Logic to free the slot
-          } else {
-            // Logic to reserve the slot
-          }
-        }}
-        label={
-          canBeFreed ? t("common.cancel") : t("services.reservation.reserve")
-        }
-      />
+      {reservationDetails?.id === -1 ? (
+        <ReservationDialog itemId={itemId as number} itemTitle={""}>
+          <Button
+            variant="secondary"
+            disabled={disabled || !itemId}
+            label={t("services.reservation.reserve")}
+          />
+        </ReservationDialog>
+      ) : (
+        <ReservationDialog
+          itemId={itemId as number}
+          itemTitle={""}
+          isCancel
+          startDate={startDateIso as string}
+        >
+          <Button
+            variant="default"
+            disabled={disabled || !itemId}
+            label={t("common.cancel")}
+          />
+        </ReservationDialog>
+      )}
     </Card>
   );
 };

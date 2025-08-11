@@ -45,3 +45,11 @@ export const updateReservation = async (id: number, startTime: string) => {
     { end_date: new Date().toISOString().slice(0, 19).replace("T", " ") },
   );
 };
+
+export const deleteReservation = async (id: number, startTime: string) => {
+  return await apiRequest(
+    API_ROUTES.reservationItem.replace(":id", id.toString()),
+    Method.DELETE,
+    { start_date: startTime },
+  );
+};

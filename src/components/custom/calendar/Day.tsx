@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@/components/common/Text";
 import CalendarCard from "@/components/custom/calendar/CalendarCard";
 import { useTheme } from "@/contexts/ThemeContext";
+import { hapticFeedback } from "@/utils/haptics.utils";
 
 interface DayCardProps {
   selected?: boolean;
@@ -18,6 +19,7 @@ export const DayCard = ({ date, selected = false, onPress }: DayCardProps) => {
   const isToday = date.getTime() === today;
 
   const handlePress = async () => {
+    await hapticFeedback.light();
     if (onPress) {
       onPress(date);
     }

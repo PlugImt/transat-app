@@ -1,12 +1,14 @@
-import { Link, MapPin } from "lucide-react-native";
+import { Link, MapPin, Users } from "lucide-react-native";
 import { Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
+import { SelectClubButton } from "@/app/screens/services/clubs/components";
 import { Button } from "@/components/common/Button";
 import Input from "@/components/common/Input";
 import { Text } from "@/components/common/Text";
 import { Textarea } from "@/components/common/Textarea";
 import { DateTimePicker } from "@/components/custom/date/DateTimePicker";
+import { InputButton } from "@/components/custom/InputButton";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAddEventForm } from "@/hooks/services/event";
@@ -26,6 +28,7 @@ export const AddEvent = () => {
     locationRef,
     linkRef,
     isAddingEvent,
+    id_club,
   } = useAddEventForm();
 
   return (
@@ -57,7 +60,8 @@ export const AddEvent = () => {
             name="description"
             render={({ field: { onChange, value } }) => (
               <Textarea
-                value={value}
+                ref={descriptionRef}
+                value={value || ""}
                 onChangeText={onChange}
                 placeholder={t("services.events.add.description.placeholder")}
                 disabled={false}
@@ -71,18 +75,32 @@ export const AddEvent = () => {
           )}
         </View>
 
-        {/* <Input
-          placeholder={t("services.events.add.organizer.placeholder")}
-          control={control}
-          name="organizer"
-          label={t("services.events.add.organizer.title")}
-          labelClasses="h3"
-          returnKeyType="next"
-          onSubmitEditing={() => locationRef.current?.focus()}
-          error={errors.organizer?.message}
-          autoCapitalize="words"
-          textContentType="none"
-        /> */}
+        <View className="gap-1.5">
+          <Controller
+            control={control}
+            name="id_club"
+            render={({ field: { onChange, value } }) => (
+              <SelectClubButton
+                onSelect={onChange}
+                title={t("services.events.add.organizer.title")}
+                selectedClubId={value}
+              >
+                <InputButton
+                  Icon={Users}
+                  label={t("services.events.add.organizer.title")}
+                  placeholder={t("services.events.add.organizer.placeholder")}
+                  error={errors.id_club?.message}
+                  onPress={() => {}}
+                />
+              </SelectClubButton>
+            )}
+          />
+          {errors.id_club && (
+            <Text color="destructive" variant="sm">
+              {errors.id_club.message}
+            </Text>
+          )}
+        </View>
 
         <Input
           icon={<MapPin size={16} color={theme.muted} />}
@@ -97,20 +115,6 @@ export const AddEvent = () => {
           autoCapitalize="sentences"
           textContentType="location"
         />
-
-        {/* <Input
-          placeholder={t("services.events.add.schedules.placeholder")}
-          control={control}
-          icon={<Calendar size={16} color={theme.muted} />}
-          name="schedules"
-          label={t("services.events.add.schedules.title")}
-          labelClasses="h3"
-          returnKeyType="next"
-          onSubmitEditing={() => linkRef.current?.focus()}
-          error={errors.schedules?.message}
-          autoCapitalize="sentences"
-          textContentType="none"
-        /> */}
 
         <DateTimePicker
           control={control}

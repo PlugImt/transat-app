@@ -6,7 +6,7 @@ import type React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { Controller, type UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { TouchableOpacity, View } from "react-native";
+import { View } from "react-native";
 import CalendarPicker, { type DateType } from "react-native-ui-datepicker";
 import {
   Dialog,
@@ -15,6 +15,7 @@ import {
 } from "@/components/common/Dialog";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
+import { InputButton } from "../InputButton";
 import { useDateTimePickerStyle } from "./DateTimePicker.style";
 
 interface DateTimePickerProps {
@@ -34,7 +35,7 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
   endDateField,
   label = "Date",
 }) => {
-  const { theme } = useTheme();
+  const { theme, actualTheme } = useTheme();
   const { t } = useTranslation();
   const calendarStyles = useDateTimePickerStyle();
 
@@ -61,7 +62,6 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
         dateObj = date as Date;
       }
 
-      // Combine date and time
       const combinedDate = new Date(dateObj);
       combinedDate.setHours(time.getHours());
       combinedDate.setMinutes(time.getMinutes());
@@ -74,7 +74,7 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
   );
 
   const formatDate = (date: DateType) => {
-    if (!date) return "Sélectionner une date";
+    if (!date) return t("services.events.add.date.placeholder");
 
     let dateObj: Date;
     if (typeof date === "string") {
@@ -109,6 +109,36 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
     createDateTimeISO,
   ]);
 
+  const onEndTimeChange = (
+    date: Date | undefined,
+    onChange: (...event: any[]) => void,
+  ) => {
+    if (!date) {
+      return;
+    }
+
+    setEndTime(date);
+    const isoString = createDateTimeISO(range.endDate, date);
+    onChange(endDateField, isoString);
+  };
+
+  const onStartTimeChange = (
+    date: Date | undefined,
+    onChange: (...event: any[]) => void,
+  ) => {
+    if (!date) {
+      return;
+    }
+
+    setStartTime(date);
+    const isoString = createDateTimeISO(range.startDate, date);
+    onChange(startDateField, isoString);
+  };
+
+  const rangeText = range.startDate
+    ? `${formatDate(range.startDate)} - ${formatDate(range.endDate)}`
+    : undefined;
+
   return (
     <View className="gap-2">
       <View className="flex-row items-center">
@@ -118,7 +148,7 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
           </Text>
           <Dialog>
             <DialogContent
-              title={t("services.events.add.schedules.title")}
+              title={t("services.events.add.date.title")}
               confirmLabel={t("common.confirm")}
             >
               <CalendarPicker
@@ -133,19 +163,13 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
               />
             </DialogContent>
             <DialogTrigger>
-              <TouchableOpacity
-                className="px-4 rounded-lg h-12 flex-row items-center gap-2"
-                style={{
-                  backgroundColor: theme.input,
-                }}
-              >
-                <Calendar size={16} color={theme.muted} />
-                <Text variant="sm" color="muted">
-                  {range.startDate
-                    ? `${formatDate(range.startDate)} - ${formatDate(range.endDate)}`
-                    : "Sélectionner une date"}
-                </Text>
-              </TouchableOpacity>
+              <InputButton
+                Icon={Calendar}
+                placeholder={t("services.events.add.date.placeholder")}
+                value={rangeText}
+                onPress={() => {}}
+                error={errors[startDateField]?.message}
+              />
             </DialogTrigger>
           </Dialog>
         </View>
@@ -161,16 +185,12 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
               <NativeDateTimePicker
                 value={startTime}
                 mode="time"
-                onChange={(_, selectedDate) => {
-                  if (selectedDate) {
-                    setStartTime(selectedDate);
-                    const isoString = createDateTimeISO(
-                      range.startDate,
-                      selectedDate,
-                    );
-                    onChange(isoString);
-                  }
-                }}
+                accentColor={theme.primary}
+                textColor={theme.text}
+                themeVariant={actualTheme}
+                onChange={(_, selectedDate) =>
+                  onStartTimeChange(selectedDate, onChange)
+                }
               />
             )}
           />
@@ -187,15 +207,11 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
               <NativeDateTimePicker
                 value={endTime}
                 mode="time"
+                textColor={theme.text}
+                accentColor={theme.primary}
+                themeVariant={actualTheme}
                 onChange={(_, selectedDate) => {
-                  if (selectedDate) {
-                    setEndTime(selectedDate);
-                    const isoString = createDateTimeISO(
-                      range.endDate,
-                      selectedDate,
-                    );
-                    onChange(isoString);
-                  }
+                  onEndTimeChange(selectedDate, onChange);
                 }}
               />
             )}

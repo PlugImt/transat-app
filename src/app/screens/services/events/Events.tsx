@@ -17,39 +17,79 @@ import { HEADER_HEIGHT } from "@/components/page/Header";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Event } from "@/dto/event";
-import { useEvents } from "@/hooks/services/event/useEvent";
+import { useEventsWithTabs } from "@/hooks/services/event/useEvent";
 import { EventCard, EventCardSkeleton } from "./components/EventCard";
 
 type NavigationProp = StackNavigationProp<{
   AddEvent: undefined;
 }>;
 
+const EventsTabContent = ({ tabValue }: { tabValue: "upcoming" | "past" }) => {
+  const { t } = useTranslation();
+  const { theme } = useTheme();
+  const { events, isPending, refetch, activeTab } = useEventsWithTabs();
+
+  const shouldLoadData = activeTab === tabValue;
+  const displayEvents = shouldLoadData ? events : [];
+
+  const flatListProps = {
+    renderItem: ({ item }: { item: Event }) => <EventCard event={item} />,
+    keyExtractor: (item: Event) => String(item.id),
+    contentContainerClassName: "gap-2",
+    showsVerticalScrollIndicator: false,
+    onRefresh: () => refetch(),
+    refreshing: isPending && shouldLoadData,
+    refreshControl: (
+      <RefreshControl
+        refreshing={isPending && shouldLoadData}
+        onRefresh={refetch}
+        tintColor={theme.text}
+        colors={[theme.primary]}
+        progressViewOffset={HEADER_HEIGHT}
+      />
+    ),
+    ListHeaderComponent: (
+      <TabsList>
+        <TabsTrigger value="upcoming" title={t("services.events.upcoming")} />
+        <TabsTrigger value="past" title={t("services.events.past")} />
+      </TabsList>
+    ),
+  };
+
+  const getEmptyComponent = () => {
+    if (tabValue === "upcoming") {
+      return (
+        <Empty
+          icon={<PartyPopper />}
+          title={t("services.events.errors.emptyUpcoming")}
+          description={t("services.events.errors.emptyUpcomingDescription")}
+        />
+      );
+    }
+    return (
+      <Empty
+        icon={<PartyPopper />}
+        title={t("services.events.errors.emptyPast")}
+        description={t("services.events.errors.emptyPastDescription")}
+      />
+    );
+  };
+
+  return (
+    <Animated.FlatList
+      {...flatListProps}
+      data={displayEvents}
+      ListEmptyComponent={getEmptyComponent()}
+    />
+  );
+};
+
 export const Events = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
   const navigation = useNavigation<NavigationProp>();
-  const {
-    data: upcomingEvents,
-    isPending: isUpcomingPending,
-    isError: isUpcomingError,
-    error: upcomingError,
-    refetch: refetchUpcoming,
-  } = useEvents("upcoming");
-  const {
-    data: pastEvents,
-    isPending: isPastPending,
-    isError: isPastError,
-    error: pastError,
-    refetch: refetchPast,
-  } = useEvents("past");
 
-  const isPending = isUpcomingPending || isPastPending;
-  const isError = isUpcomingError || isPastError;
-  const error = upcomingError || pastError;
-  const refetch = () => {
-    refetchUpcoming();
-    refetchPast();
-  };
+  const { isPending, isError, error, refetch } = useEventsWithTabs();
 
   if (isPending) {
     return <EventsSkeleton />;
@@ -65,30 +105,6 @@ export const Events = () => {
       />
     );
   }
-
-  const flatListProps = {
-    renderItem: ({ item }: { item: Event }) => <EventCard event={item} />,
-    keyExtractor: (item: Event) => String(item.id),
-    contentContainerClassName: "gap-2",
-    showsVerticalScrollIndicator: false,
-    onRefresh: () => refetch(),
-    refreshing: isPending,
-    refreshControl: (
-      <RefreshControl
-        refreshing={isPending}
-        onRefresh={refetch}
-        tintColor={theme.text}
-        colors={[theme.primary]}
-        progressViewOffset={HEADER_HEIGHT}
-      />
-    ),
-    ListHeaderComponent: (
-      <TabsList>
-        <TabsTrigger value="upcoming" title={t("services.events.upcoming")} />
-        <TabsTrigger value="past" title={t("services.events.past")} />
-      </TabsList>
-    ),
-  };
 
   return (
     <Page
@@ -106,33 +122,11 @@ export const Events = () => {
     >
       <Tabs defaultValue="upcoming">
         <TabsContent value="upcoming">
-          <Animated.FlatList
-            {...flatListProps}
-            data={upcomingEvents}
-            ListEmptyComponent={
-              <Empty
-                icon={<PartyPopper />}
-                title={t("services.events.errors.emptyUpcoming")}
-                description={t(
-                  "services.events.errors.emptyUpcomingDescription",
-                )}
-              />
-            }
-          />
+          <EventsTabContent tabValue="upcoming" />
         </TabsContent>
 
         <TabsContent value="past">
-          <Animated.FlatList
-            {...flatListProps}
-            data={pastEvents}
-            ListEmptyComponent={
-              <Empty
-                icon={<PartyPopper />}
-                title={t("services.events.errors.emptyPast")}
-                description={t("services.events.errors.emptyPastDescription")}
-              />
-            }
-          />
+          <EventsTabContent tabValue="past" />
         </TabsContent>
       </Tabs>
     </Page>

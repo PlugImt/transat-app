@@ -17,6 +17,7 @@ type PageProps = {
   footer?: ReactNode;
   disableScroll?: boolean;
   asChildren?: boolean;
+  onBack?: () => void;
 };
 
 export const Page = ({
@@ -30,6 +31,7 @@ export const Page = ({
   footer,
   disableScroll = false,
   asChildren = false,
+  onBack,
 }: PageProps) => {
   const { theme } = useTheme();
   const { scrollHandler, headerShown } = useAnimatedHeader();
@@ -84,7 +86,7 @@ export const Page = ({
 
   return (
     <View style={{ backgroundColor: theme.background }} className="flex-1">
-      <Header headerShown={headerShown} title={title}>
+      <Header headerShown={headerShown} title={title} onBack={onBack}>
         {header}
       </Header>
       {getContent()}

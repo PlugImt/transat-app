@@ -416,6 +416,7 @@
       "title": "Clubs",
       "description": "Discover all clubs and associations at IMT",
       "book": "Book",
+      "selectClub": "Select a club",
       "interested": "{{count}} people are interested in this club",
       "responsible": "Responsible",
       "errors": {
@@ -436,11 +437,41 @@
       "add": {
         "title": "New event",
         "picture": "Picture",
-        "name": "Name",
-        "description": "Description",
-        "schedules": "Schedules",
-        "location": "Location",
-        "link": "Link",
+        "name": {
+          "title": "Name",
+          "placeholder": "Tonus",
+          "required": "Name is required",
+          "min": "Name must be at least 3 characters",
+          "max": "Name must not exceed 100 characters"
+        },
+        "description": {
+          "title": "Description",
+          "placeholder": "Super Tonus at the MDE, come in numbers from 9pm"
+        },
+        "startTime": "Start time",
+        "endTime": "End time",
+        "date": {
+          "title": "Date",
+          "placeholder": "Select a date",
+          "required": "Start date is required"
+        },
+        "location": {
+          "title": "Location",
+          "placeholder": "MDE",
+          "required": "Location is required",
+          "min": "Location must be at least 3 characters",
+          "max": "Location must not exceed 100 characters"
+        },
+        "link": {
+          "title": "Link",
+          "placeholder": "https://www.vibly.fr",
+          "invalid": "The link is not valid"
+        },
+        "organizer": {
+          "title": "Organizer",
+          "placeholder": "Select a club",
+          "required": "Organizing club is required"
+        },
         "submit": "Add",
         "success": "Event added successfully",
         "error": "Error adding event"

@@ -416,6 +416,7 @@
       "title": "Clubs",
       "description": "Découvre tous les clubs et associations de l’IMT",
       "book": "Réserver",
+      "selectClub": "Sélectionner un club",
       "interested": "{{count}} personnes sont intéressées par ce club",
       "responsible": "Respo",
       "errors": {
@@ -439,40 +440,37 @@
         "name": {
           "title": "Nom",
           "placeholder": "Tonus",
-          "required": "Le nom est requis"
+          "required": "Le nom est requis",
+          "min": "Le nom doit contenir au moins 3 caractères",
+          "max": "Le nom ne doit pas dépasser 100 caractères"
         },
         "description": {
           "title": "Description",
-          "placeholder": "Super Tonus à la MDE venez nombreux dès 21h",
-          "required": "La description est requise"
+          "placeholder": "Super Tonus à la MDE venez nombreux dès 21h"
         },
-        "startTime": {
-          "title": "Heure de début",
-          "required": "L'heure de début est requise"
-        },
-        "endTime": {
-          "title": "Heure de fin",
-          "required": "L'heure de fin est requise"
-        },
-        "schedules": {
-          "title": "Date & horaires",
-          "placeholder": "Horaires de l'événement",
-          "required": "Les horaires sont requis"
+        "startTime": "Heure de début",
+        "endTime": "Heure de fin",
+        "date": {
+          "title": "Date",
+          "placeholder": "Sélectionner une date",
+          "required": "La date de début est obligatoire"
         },
         "location": {
           "title": "Lieu",
           "placeholder": "MDE",
-          "required": "Le lieu est requis"
+          "required": "Le lieu est requis",
+          "min": "Le lieu doit contenir au moins 3 caractères",
+          "max": "Le lieu ne doit pas dépasser 100 caractères"
         },
         "link": {
           "title": "Lien",
-          "placeholder": "https://www.google.com",
-          "required": "Le lien est requis"
+          "placeholder": "https://www.vibly.fr",
+          "invalid": "Le lien n'est pas valide"
         },
         "organizer": {
           "title": "Organisateur",
-          "placeholder": "Organisateur de l'événement",
-          "required": "Le nom de l'organisateur est requis"
+          "placeholder": "Sélectionner un club",
+          "required": "Le club organisateur est requis"
         },
         "submit": "Ajouter",
         "success": "Événement ajouté avec succès",

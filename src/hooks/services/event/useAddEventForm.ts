@@ -31,12 +31,12 @@ export const useAddEventForm = () => {
     resolver: zodResolver(addEventSchema),
     defaultValues: {
       name: "",
-      description: "",
+      description: undefined,
       location: "",
-      start_date: new Date().toISOString(),
-      end_date: new Date().toISOString(),
+      start_date: "",
+      end_date: undefined,
       id_club: undefined,
-      link: "",
+      link: undefined,
     },
     mode: "onChange",
   });
@@ -46,9 +46,8 @@ export const useAddEventForm = () => {
   const location = watch("location");
   const start_date = watch("start_date");
   const end_date = watch("end_date");
+  const id_club = watch("id_club");
   const link = watch("link");
-
-  console.log(start_date, end_date);
 
   const isButtonDisabled = !isValid || !isDirty;
 
@@ -84,6 +83,7 @@ export const useAddEventForm = () => {
     location,
     start_date,
     end_date,
+    id_club,
     link,
   };
 };

@@ -86,6 +86,13 @@
       "relative": "{{date, relative}}",
       "ago": "{{date, ago}}",
       "dateTime": "{{date, dateTime}}"
+    },
+    "homework": {
+      "deadline": "Fecha límite: {{date, dateTime}}",
+      "createdAt": "Creado el {{date, short}}",
+      "updatedAt": "Actualizado el {{date, short}}",
+      "dueIn": "Vence en {{date, ago}}",
+      "overdue": "Atrasado por {{date, ago}}"
     }
   },
   "auth": {
@@ -409,6 +416,7 @@
       "title": "Clubs",
       "description": "Descubre todos los clubs y asociaciones de la IMT",
       "book": "Reservar",
+      "selectClub": "Seleccionar club",
       "interested": "{{count}} personas están interesadas en este club",
       "responsible": "Responsible",
       "errors": {
@@ -429,11 +437,41 @@
       "add": {
         "title": "Nuevo evento",
         "picture": "Imagen",
-        "name": "Nombre",
-        "description": "Descripción",
-        "schedules": "Horarios",
-        "location": "Ubicación",
-        "link": "Enlace",
+        "name": {
+          "title": "Nombre",
+          "placeholder": "Tonus",
+          "required": "El nombre es obligatorio",
+          "min": "El nombre debe tener al menos 3 caracteres",
+          "max": "El nombre no debe exceder 100 caracteres"
+        },
+        "description": {
+          "title": "Descripción",
+          "placeholder": "Súper Tonus en la MDE, vengan numerosos desde las 21h"
+        },
+        "startTime": "Hora de inicio",
+        "endTime": "Hora de fin",
+        "date": {
+          "title": "Fecha",
+          "placeholder": "Seleccionar una fecha",
+          "required": "La fecha de inicio es obligatoria"
+        },
+        "location": {
+          "title": "Lugar",
+          "placeholder": "MDE",
+          "required": "El lugar es obligatorio",
+          "min": "El lugar debe tener al menos 3 caracteres",
+          "max": "El lugar no debe exceder 100 caracteres"
+        },
+        "link": {
+          "title": "Enlace",
+          "placeholder": "https://www.vibly.fr",
+          "invalid": "El enlace no es válido"
+        },
+        "organizer": {
+          "title": "Organizador",
+          "placeholder": "Seleccionar un club",
+          "required": "El club organizador es obligatorio"
+        },
         "submit": "Añadir",
         "success": "Evento añadido con éxito",
         "error": "Error al añadir el evento"

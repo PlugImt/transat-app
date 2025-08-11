@@ -86,6 +86,13 @@
       "relative": "{{date, relative}}",
       "ago": "{{date, ago}}",
       "dateTime": "{{date, dateTime}}"
+    },
+    "homework": {
+      "deadline": "Frist: {{date, dateTime}}",
+      "createdAt": "Erstellt am {{date, short}}",
+      "updatedAt": "Aktualisiert am {{date, short}}",
+      "dueIn": "Fällig in {{date, ago}}",
+      "overdue": "Überfällig seit {{date, ago}}"
     }
   },
   "auth": {
@@ -409,6 +416,8 @@
       "title": "Clubs",
       "description": "Entdecken Sie alle Clubs und Vereine an der IMT",
       "book": "Buchen",
+      "selectClub": "Club auswählen",
+      "interested": "{{count}} Personen sind an diesem Club interessiert",
       "responsible": "Verantwortlich",
       "errors": {
         "empty": "Kein Club gefunden",
@@ -428,11 +437,41 @@
       "add": {
         "title": "Neues Event",
         "picture": "Bild",
-        "name": "Name",
-        "description": "Beschreibung",
-        "schedules": "Zeiten",
-        "location": "Ort",
-        "link": "Link",
+        "name": {
+          "title": "Name",
+          "placeholder": "Tonus",
+          "required": "Name ist erforderlich",
+          "min": "Der Name muss mindestens 3 Zeichen enthalten",
+          "max": "Der Name darf 100 Zeichen nicht überschreiten"
+        },
+        "description": {
+          "title": "Beschreibung",
+          "placeholder": "Super Tonus in der MDE, kommt zahlreich ab 21 Uhr"
+        },
+        "startTime": "Startzeit",
+        "endTime": "Endzeit",
+        "date": {
+          "title": "Datum",
+          "placeholder": "Datum auswählen",
+          "required": "Startdatum ist erforderlich"
+        },
+        "location": {
+          "title": "Ort",
+          "placeholder": "MDE",
+          "required": "Ort ist erforderlich",
+          "min": "Der Ort muss mindestens 3 Zeichen enthalten",
+          "max": "Der Ort darf 100 Zeichen nicht überschreiten"
+        },
+        "link": {
+          "title": "Link",
+          "placeholder": "https://www.vibly.fr",
+          "invalid": "Der Link ist nicht gültig"
+        },
+        "organizer": {
+          "title": "Veranstalter",
+          "placeholder": "Club auswählen",
+          "required": "Veranstaltender Club ist erforderlich"
+        },
         "submit": "Hinzufügen",
         "success": "Event erfolgreich hinzugefügt",
         "error": "Fehler beim Hinzufügen des Events"

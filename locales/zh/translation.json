@@ -86,6 +86,13 @@
       "relative": "{{date, relative}}",
       "ago": "{{date, ago}}",
       "dateTime": "{{date, dateTime}}"
+    },
+    "homework": {
+      "deadline": "截止时间：{{date, dateTime}}",
+      "createdAt": "创建于 {{date, short}}",
+      "updatedAt": "更新于 {{date, short}}",
+      "dueIn": "将在 {{date, ago}} 后到期",
+      "overdue": "已逾期 {{date, ago}}"
     }
   },
   "auth": {
@@ -409,6 +416,7 @@
       "title": "俱乐部",
       "description": "发现IMT的所有俱乐部和协会",
       "book": "预订",
+      "selectClub": "选择俱乐部",
       "interested": "{{count}} 人对此俱乐部感兴趣",
       "responsible": "负责人",
       "errors": {
@@ -429,11 +437,41 @@
       "add": {
         "title": "新活动",
         "picture": "图片",
-        "name": "名称",
-        "description": "描述",
-        "schedules": "时间",
-        "location": "地点",
-        "link": "链接",
+        "name": {
+          "title": "名称",
+          "placeholder": "Tonus",
+          "required": "名称为必填项",
+          "min": "名称至少需包含3个字符",
+          "max": "名称不得超过100个字符"
+        },
+        "description": {
+          "title": "描述",
+          "placeholder": "MDE 超级 Tonus，晚上9点起欢迎大家前来"
+        },
+        "startTime": "开始时间",
+        "endTime": "结束时间",
+        "date": {
+          "title": "日期",
+          "placeholder": "选择日期",
+          "required": "开始日期为必填项"
+        },
+        "location": {
+          "title": "地点",
+          "placeholder": "MDE",
+          "required": "地点为必填项",
+          "min": "地点至少需包含3个字符",
+          "max": "地点不得超过100个字符"
+        },
+        "link": {
+          "title": "链接",
+          "placeholder": "https://www.vibly.fr",
+          "invalid": "链接无效"
+        },
+        "organizer": {
+          "title": "组织者",
+          "placeholder": "选择一个俱乐部",
+          "required": "组织俱乐部为必填项"
+        },
         "submit": "添加",
         "success": "活动添加成功",
         "error": "活动添加失败"

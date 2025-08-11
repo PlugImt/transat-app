@@ -7,20 +7,33 @@ export const useDateTimePickerStyle = () => {
 
   return {
     ...defaultStyles,
-    day: {
-      borderRadius: 10,
-    },
-    day_label: {
+    month_selector_label: {
       color: theme.text,
+      fontSize: 16,
+      fontWeight: "bold" as const,
     },
-    today: {
-      backgroundColor: theme.background,
-    },
-    today_label: {
+    year_selector_label: {
       color: theme.text,
+      fontSize: 16,
+      fontWeight: "bold" as const,
     },
+
+    button_prev_image: { tintColor: theme.text },
+    button_next_image: { tintColor: theme.text },
+
+    year: { backgroundColor: theme.background, borderRadius: 10 },
+    year_label: { color: theme.text },
+    month: { backgroundColor: theme.background, borderRadius: 10 },
+
+    day: { borderRadius: 10 },
+    day_label: { color: theme.text },
+
+    today: { backgroundColor: theme.background },
+    today_label: { color: theme.text },
+
     selected: { backgroundColor: theme.secondary },
     selected_label: { color: theme.secondaryText },
+
     range_start_label: { color: theme.secondaryText },
     range_end_label: { color: theme.secondaryText },
     range_fill: { backgroundColor: `${theme.secondary}40`, borderRadius: 10 },

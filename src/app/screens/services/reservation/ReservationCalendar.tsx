@@ -33,8 +33,16 @@ export const ReservationCalendar = () => {
     setSelectedDate(formattedDate);
   };
 
-  const test = generateCalendarSlots(
+  const calendarDataDay = generateCalendarSlots(
     data?.reservation || [],
+    new Date(selectedDate || new Date()),
+  );
+  const calendarDataDayBefore = generateCalendarSlots(
+    data?.reservation_before || [],
+    new Date(selectedDate || new Date()),
+  );
+  const calendarDataDayAfter = generateCalendarSlots(
+    data?.reservation_after || [],
     new Date(selectedDate || new Date()),
   );
 
@@ -47,7 +55,7 @@ export const ReservationCalendar = () => {
       asChildren
     >
       <Animated.FlatList
-        data={test}
+        data={calendarDataDay}
         renderItem={({ item }) => (
           <CalendarSlot reservationDetails={item} itemId={id} />
         )}

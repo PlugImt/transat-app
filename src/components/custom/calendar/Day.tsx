@@ -31,7 +31,7 @@ export const DayCard = ({ date, selected = false, onPress }: DayCardProps) => {
 
   return (
     <CalendarCard
-      className={"items-center justify-center"}
+      className={"items-center justify-center w-[75px] h-[80px] overflow-hidden"}
       backgroundColor={isToday ? `${theme.secondary}30` : theme.card}
       borderColor={selected ? theme.secondary : theme.border}
       onPress={handlePress}

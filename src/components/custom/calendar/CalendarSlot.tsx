@@ -32,7 +32,7 @@ const CalendarSlot = ({ reservationDetails, itemId }: SlotProps) => {
       className={`flex flex-row gap-2 justify-between items-center ${disabled ? "opacity-60" : null} mx-4 my-1`}
     >
       <View>
-        <Text variant="h2">
+        <Text variant="h3">
           {reservationDetails
             ? `${formatTimeFromDate(reservationDetails.start_date)} - ${formatTimeFromDate(reservationDetails.end_date)}`
             : null}

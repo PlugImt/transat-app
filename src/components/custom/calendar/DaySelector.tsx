@@ -1,14 +1,12 @@
-import { LinearGradient } from "expo-linear-gradient";
-import { ChevronLeft, ChevronRight } from "lucide-react-native";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   type NativeScrollEvent,
   type NativeSyntheticEvent,
   ScrollView,
-  TouchableOpacity,
   View,
 } from "react-native";
 import { DayCard } from "@/components/custom/calendar/Day";
+import { ScrollIndicator } from "@/components/custom/calendar/ScrollIndicator";
 import { useTheme } from "@/contexts/ThemeContext";
 
 interface DaySelectorProps {
@@ -175,87 +173,8 @@ export const DaySelector = ({
         </View>
       </ScrollView>
 
-      {/* Left gradient overlay */}
-      <LinearGradient
-        pointerEvents="none"
-        colors={[theme.card, `${theme.card}00`]}
-        locations={[0, 1]}
-        style={{
-          position: "absolute",
-          left: 0,
-          top: 0,
-          bottom: 0,
-          width: 80,
-          zIndex: 5,
-          transform: [{ rotate: "270deg" }],
-        }}
-      />
-
-      {/* Right gradient overlay */}
-      <LinearGradient
-        pointerEvents="none"
-        colors={[`${theme.card}00`, theme.card]}
-        locations={[0, 1]}
-        style={{
-          position: "absolute",
-          right: -10,
-          top: 0,
-          bottom: 0,
-          width: 80,
-          zIndex: 5,
-          transform: [{ rotate: "270deg" }],
-        }}
-      />
-
-      {/* Left control button with blur */}
-      <View
-        style={{
-          position: "absolute",
-          left: 8,
-          top: 0,
-          bottom: 0,
-          justifyContent: "center",
-          zIndex: 10,
-        }}
-        pointerEvents="box-none"
-      >
-        <TouchableOpacity
-          onPress={scrollLeft}
-          accessibilityRole="button"
-          activeOpacity={0.8}
-          style={{
-            borderRadius: 9999,
-            overflow: "hidden",
-          }}
-        >
-          <ChevronLeft size={25} color={theme.text} />
-        </TouchableOpacity>
-      </View>
-
-      {/* Right control button with blur */}
-      <View
-        style={{
-          position: "absolute",
-          right: 8,
-          top: 0,
-          bottom: 0,
-          justifyContent: "center",
-          zIndex: 10,
-        }}
-        pointerEvents="box-none"
-      >
-        <TouchableOpacity
-          onPress={scrollRight}
-          accessibilityRole="button"
-          activeOpacity={0.8}
-          style={{
-            borderRadius: 9999,
-            overflow: "hidden",
-          }}
-        >
-          <ChevronRight size={25} color={theme.text} />
-        </TouchableOpacity>
-      </View>
+      <ScrollIndicator side="left" onPress={scrollLeft} />
+      <ScrollIndicator side="right" onPress={scrollRight} />
     </View>
   );
 };

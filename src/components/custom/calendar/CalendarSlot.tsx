@@ -51,7 +51,11 @@ const CalendarSlot = ({ reservationDetails, itemId }: SlotProps) => {
       </View>
 
       {reservationDetails?.id === -1 ? (
-        <ReservationDialog itemId={itemId as number} itemTitle={""}>
+        <ReservationDialog
+          itemId={itemId as number}
+          itemTitle={""}
+          startDate={startDateIso as string}
+        >
           <Button
             variant="secondary"
             disabled={disabled || !itemId}

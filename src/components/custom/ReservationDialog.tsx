@@ -38,13 +38,6 @@ export const ReservationDialog = ({
 
   const handleConfirm = async () => {
     try {
-      console.log("[ReservationDialog] confirm", {
-        itemId,
-        isCancel,
-        isReturning,
-        startDate,
-      });
-
       if (isCancel) {
         await calendarMutation.mutateAsync({
           id: itemId,
@@ -146,7 +139,6 @@ const DialogOpenLogger = ({
 
   useEffect(() => {
     if (open) {
-      // eslint-disable-next-line no-console
       console.log("[ReservationDialog] open", {
         itemId,
         isCancel,

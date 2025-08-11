@@ -40,8 +40,8 @@ export const useCalendarReservationMutation = () => {
         if (!startDate) throw new Error("Missing startDate for cancellation");
         return deleteReservation(id, startDate);
       }
-      const currentTime = formatDateForBackend(new Date());
-      return updateReservation(id, currentTime);
+      const effectiveStart = startDate ?? formatDateForBackend(new Date());
+      return updateReservation(id, effectiveStart);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["reservationItem"] });

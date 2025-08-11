@@ -1,6 +1,6 @@
 import type { RouteProp } from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Animated from "react-native-reanimated";
 import Swiper from "react-native-swiper";
@@ -26,7 +26,6 @@ export const ReservationCalendar = () => {
   const route = useRoute<ItemRouteProp>();
   const { id, title } = route.params;
   const { scrollHandler } = useAnimatedHeader();
-  const swipeLockRef = useRef(false);
   const { toast } = useToast();
 
   const todayStr = useMemo(() => toYMD(new Date()), []);
@@ -35,7 +34,7 @@ export const ReservationCalendar = () => {
   );
   const [swiperKey, setSwiperKey] = useState<string>(`swiper-${todayStr}`);
 
-  const { data, isPending, isError, error, refetch } = useReservationItem(
+  const { data, isPending, isFetching, isError, error, refetch } = useReservationItem(
     id,
     selectedDate,
   );
@@ -70,35 +69,30 @@ export const ReservationCalendar = () => {
   );
   const calendarDataDayAfter = generateCalendarSlots(after || [], nextDateObj);
 
+  const placeholderDay = useMemo(
+    () => generateCalendarSlots([], currentDateObj),
+    [currentDateObj],
+  );
+  const placeholderDayBefore = useMemo(
+    () => generateCalendarSlots([], prevDateObj),
+    [prevDateObj],
+  );
+  const placeholderDayAfter = useMemo(
+    () => generateCalendarSlots([], nextDateObj),
+    [nextDateObj],
+  );
+
   const formatDate = (d: Date) => toYMD(d);
 
-  const handleSwipeEnd = (_: any, state: { index: number }) => {
-    if (swipeLockRef.current) return;
-    if (state.index === 0) {
-      swipeLockRef.current = true;
-      const nextDate = shiftDate(selectedDate, -1);
-      const nextDateStr = formatDate(nextDate);
-      setSelectedDate(nextDateStr);
-      setSwiperKey(`swiper-${nextDateStr}`);
-      return;
-    }
-    if (state.index === 2) {
-      swipeLockRef.current = true;
-      const nextDate = shiftDate(selectedDate, 1);
-      const nextDateStr = formatDate(nextDate);
-      setSelectedDate(nextDateStr);
-      setSwiperKey(`swiper-${nextDateStr}`);
-    }
+  const handleIndexChanged = (index: number) => {
+    if (index === 1) return;
+    const delta = index === 0 ? -1 : 1;
+    const nextDate = shiftDate(selectedDate, delta);
+    const nextDateStr = formatDate(nextDate);
+    setSelectedDate(nextDateStr);
+    setSwiperKey(`swiper-${nextDateStr}`);
   };
 
-  useEffect(() => {
-    if (swipeLockRef.current) {
-      const id = setTimeout(() => {
-        swipeLockRef.current = false;
-      }, 50);
-      return () => clearTimeout(id);
-    }
-  }, []);
 
   return (
     <Page
@@ -118,12 +112,12 @@ export const ReservationCalendar = () => {
         index={1}
         loop={false}
         showsPagination={false}
-        onMomentumScrollEnd={handleSwipeEnd}
+        onIndexChanged={handleIndexChanged}
       >
         {/* Previous day */}
         <Animated.FlatList
           style={{ flex: 1 }}
-          data={calendarDataDayBefore}
+          data={isFetching ? placeholderDayBefore : calendarDataDayBefore}
           renderItem={({ item }) => (
             <CalendarSlot reservationDetails={item} itemId={id} />
           )}
@@ -140,7 +134,7 @@ export const ReservationCalendar = () => {
         {/* Current day */}
         <Animated.FlatList
           style={{ flex: 1 }}
-          data={calendarDataDay}
+          data={isFetching ? placeholderDay : calendarDataDay}
           renderItem={({ item }) => (
             <CalendarSlot reservationDetails={item} itemId={id} />
           )}
@@ -157,7 +151,7 @@ export const ReservationCalendar = () => {
         {/* Next day */}
         <Animated.FlatList
           style={{ flex: 1 }}
-          data={calendarDataDayAfter}
+          data={isFetching ? placeholderDayAfter : calendarDataDayAfter}
           renderItem={({ item }) => (
             <CalendarSlot reservationDetails={item} itemId={id} />
           )}

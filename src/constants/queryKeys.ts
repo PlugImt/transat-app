@@ -30,6 +30,7 @@ export const QUERY_KEYS = {
     categories: ["reservation", "categories"],
     createCategory: ["reservation", "createCategory"],
     items: ["reservation", "items"],
+    item: (id: number, date?: string) => ["reservation", "items", id, date],
     createItem: ["reservation", "createItem"],
     club: (id: number) => ["reservation", "club", id],
   },

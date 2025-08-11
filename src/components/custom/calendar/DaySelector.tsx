@@ -75,13 +75,11 @@ export const DaySelector = ({
     setCurrentOffsetX(nextOffset);
   };
 
+  const step = ((todayLayout.width || 100) + 8) * 5; // 5 * a day card width
   const scrollLeft = () => {
-    const step = (todayLayout.width || 100) + 8; // approximate one-card step
     scrollBy(-step);
   };
-
   const scrollRight = () => {
-    const step = (todayLayout.width || 100) + 8;
     scrollBy(step);
   };
 

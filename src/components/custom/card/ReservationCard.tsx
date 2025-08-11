@@ -63,11 +63,9 @@ const ReservationCard = ({
       className={`flex-row items-center gap-4 ${disabled ? "opacity-60" : ""}`}
     >
       <View className="flex-1">
-        <View className="flex-row items-center gap-2 mb-1">
-          <Text variant="h3" numberOfLines={1}>
-            {title}
-          </Text>
-        </View>
+        <Text variant="h3" numberOfLines={1}>
+          {title}
+        </Text>
         {user ? (
           <View className="flex-row items-center gap-2">
             <Text variant="sm" numberOfLines={1}>

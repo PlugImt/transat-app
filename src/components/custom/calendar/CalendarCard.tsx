@@ -20,7 +20,7 @@ const CalendarCard = ({
   const { theme } = useTheme();
   return (
     <TouchableOpacity
-      className={cn("rounded-xl border-[1.5px] px-5 py-3 gap-4", className)}
+      className={cn("rounded-xl border-[1.5px] px-5 py-3 gap-2", className)}
       style={{
         backgroundColor: backgroundColor || theme.card,
         borderColor: borderColor || theme.border,

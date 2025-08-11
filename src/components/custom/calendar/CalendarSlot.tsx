@@ -26,17 +26,14 @@ const CalendarSlot = ({ reservationDetails, itemId }: SlotProps) => {
       reservationDetails?.user?.email !== auth.user?.email) ||
     (typeof reservationDetails?.end_date === "string" &&
       reservationDetails.end_date < new Date().toISOString());
-  const _canBeFreed =
-    !!reservationDetails?.user &&
-    reservationDetails?.user?.email === auth.user?.email;
 
-  const startDateIso = reservationDetails?.start_date;
+  const startDate = reservationDetails?.start_date;
 
   return (
     <Card
-      className={`flex flex-row gap-2 justify-between items-center ${disabled ? "opacity-60" : ""} mx-4 my-1`}
+      className={`flex-row gap-2 justify-between items-center ${disabled ? "opacity-60" : ""} mx-4 my-1`}
     >
-      <View style={{ flex: 1 }}>
+      <View>
         <Text variant="h3">
           {reservationDetails
             ? `${formatTimeFromDate(reservationDetails.start_date)} - ${formatTimeFromDate(reservationDetails.end_date)}`
@@ -44,7 +41,7 @@ const CalendarSlot = ({ reservationDetails, itemId }: SlotProps) => {
         </Text>
 
         {reservationDetails?.user ? (
-          <Text className="text-sm text-gray-500" numberOfLines={1}>
+          <Text variant="sm" numberOfLines={1}>
             {`${t("services.reservation.reservedBy")} ${reservationDetails.user.first_name} ${reservationDetails.user.last_name}`}
           </Text>
         ) : null}
@@ -53,8 +50,7 @@ const CalendarSlot = ({ reservationDetails, itemId }: SlotProps) => {
       {reservationDetails?.id === -1 ? (
         <ReservationDialog
           itemId={itemId as number}
-          itemTitle={""}
-          startDate={startDateIso as string}
+          startDate={startDate as string}
         >
           <Button
             variant="secondary"
@@ -65,9 +61,8 @@ const CalendarSlot = ({ reservationDetails, itemId }: SlotProps) => {
       ) : (
         <ReservationDialog
           itemId={itemId as number}
-          itemTitle={""}
-          isCancel
-          startDate={startDateIso as string}
+          isActionCancel
+          startDate={startDate as string}
         >
           <Button
             variant="default"

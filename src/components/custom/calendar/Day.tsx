@@ -19,10 +19,8 @@ export const DayCard = ({ date, selected = false, onPress }: DayCardProps) => {
   const isToday = date.getTime() === today;
 
   const handlePress = async () => {
-    await hapticFeedback.light();
-    if (onPress) {
-      onPress(date);
-    }
+    hapticFeedback.light();
+    onPress?.(date);
   };
 
   const dayName = new Intl.DateTimeFormat(i18n.language, { weekday: "long" })

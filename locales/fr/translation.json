@@ -427,7 +427,8 @@
         "empty": "Aucune réservation disponible",
         "emptyDescription": "Aucun équipement ou activité n'est disponible pour le moment",
         "reserveError": "Erreur lors de la réservation",
-        "returnError": "Erreur lors du retour"
+        "returnError": "Erreur lors du retour",
+        "startDateRequired": "La date de début est requise"
       }
     }
   },

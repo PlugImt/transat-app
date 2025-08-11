@@ -79,6 +79,6 @@ export const shiftDate = (base: string | undefined, deltaDays: number) => {
   return shifted;
 };
 
-export const formatDateForBackend = (date: Date): string => {
+export const formatDateSQL = (date: Date): string => {
   return date.toISOString().slice(0, 19).replace("T", " ");
 };

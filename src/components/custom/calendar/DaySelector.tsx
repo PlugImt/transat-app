@@ -5,6 +5,7 @@ import {
   ScrollView,
   View,
 } from "react-native";
+import CalendarHeader from "@/components/custom/calendar/CalendarHeader";
 import { DayCard } from "@/components/custom/calendar/Day";
 import { ScrollIndicator } from "@/components/custom/calendar/ScrollIndicator";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -112,6 +113,14 @@ export const DaySelector = ({
     clamp,
   ]);
 
+  const onTodayPress = () => {
+    const todayDate = new Date();
+    todayDate.setHours(8, 0, 0, 0);
+    setSelectedDate(todayDate);
+    setShouldCenter(true);
+    onDateSelect?.(todayDate);
+  };
+
   useEffect(() => {
     if (controlledSelectedDate) {
       setShouldCenter(true);
@@ -123,58 +132,61 @@ export const DaySelector = ({
       className="relative mt-16"
       onLayout={(e) => setContainerWidth(e.nativeEvent.layout.width)}
     >
-      <ScrollView
-        ref={scrollViewRef}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        onScroll={handleScroll}
-        scrollEventThrottle={16}
-        onContentSizeChange={(w) => setContentWidth(w)}
-      >
-        <View className="flex flex-row items-center gap-2 px-4 py-2">
-          {days.map((day, index) => {
-            const isSelected =
-              day.getDate() === selectedDate.getDate() &&
-              day.getMonth() === selectedDate.getMonth() &&
-              day.getFullYear() === selectedDate.getFullYear();
+      <CalendarHeader selectedDate={selectedDate} onToday={onTodayPress} />
+      <View>
+        <ScrollView
+          ref={scrollViewRef}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          onScroll={handleScroll}
+          scrollEventThrottle={16}
+          onContentSizeChange={(w) => setContentWidth(w)}
+        >
+          <View className="flex flex-row items-center gap-2 px-4 py-2">
+            {days.map((day, index) => {
+              const isSelected =
+                day.getDate() === selectedDate.getDate() &&
+                day.getMonth() === selectedDate.getMonth() &&
+                day.getFullYear() === selectedDate.getFullYear();
 
-            const isToday =
-              day.getDate() === today.getDate() &&
-              day.getMonth() === today.getMonth() &&
-              day.getFullYear() === today.getFullYear();
+              const isToday =
+                day.getDate() === today.getDate() &&
+                day.getMonth() === today.getMonth() &&
+                day.getFullYear() === today.getFullYear();
 
-            return (
-              <View
-                key={index.toString()}
-                onLayout={
-                  isSelected
-                    ? (e) =>
-                        setSelectedLayout({
-                          x: e.nativeEvent.layout.x,
-                          width: e.nativeEvent.layout.width,
-                        })
-                    : isToday
+              return (
+                <View
+                  key={index.toString()}
+                  onLayout={
+                    isSelected
                       ? (e) =>
-                          setTodayLayout({
+                          setSelectedLayout({
                             x: e.nativeEvent.layout.x,
                             width: e.nativeEvent.layout.width,
                           })
-                      : undefined
-                }
-              >
-                <DayCard
-                  date={day}
-                  selected={isSelected}
-                  onPress={() => handleDayPress(day)}
-                />
-              </View>
-            );
-          })}
-        </View>
-      </ScrollView>
+                      : isToday
+                        ? (e) =>
+                            setTodayLayout({
+                              x: e.nativeEvent.layout.x,
+                              width: e.nativeEvent.layout.width,
+                            })
+                        : undefined
+                  }
+                >
+                  <DayCard
+                    date={day}
+                    selected={isSelected}
+                    onPress={() => handleDayPress(day)}
+                  />
+                </View>
+              );
+            })}
+          </View>
+        </ScrollView>
 
-      <ScrollIndicator side="left" onPress={scrollLeft} />
-      <ScrollIndicator side="right" onPress={scrollRight} />
+        <ScrollIndicator side="left" onPress={scrollLeft} />
+        <ScrollIndicator side="right" onPress={scrollRight} />
+      </View>
     </View>
   );
 };

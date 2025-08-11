@@ -1,7 +1,10 @@
-import { PartyPopper } from "lucide-react-native";
+import { useNavigation } from "@react-navigation/native";
+import type { StackNavigationProp } from "@react-navigation/stack";
+import { PartyPopper, Plus } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { RefreshControl } from "react-native";
 import Animated from "react-native-reanimated";
+import { IconButton } from "@/components/common/Button";
 import {
   Tabs,
   TabsContent,
@@ -17,9 +20,14 @@ import type { Event } from "@/dto/event";
 import { useEvents } from "@/hooks/services/event/useEvent";
 import { EventCard, EventCardSkeleton } from "./components/EventCard";
 
+type NavigationProp = StackNavigationProp<{
+  AddEvent: undefined;
+}>;
+
 export const Events = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
+  const navigation = useNavigation<NavigationProp>();
   const {
     data: upcomingEvents,
     isPending: isUpcomingPending,
@@ -88,6 +96,13 @@ export const Events = () => {
       className="gap-4"
       style={{ paddingBottom: 0 }}
       disableScroll
+      header={
+        <IconButton
+          icon={<Plus color={theme.primary} />}
+          variant="link"
+          onPress={() => navigation.navigate("AddEvent")}
+        />
+      }
     >
       <Tabs defaultValue="upcoming">
         <TabsContent value="upcoming">
@@ -128,7 +143,8 @@ export default Events;
 
 const EventsSkeleton = () => {
   const { t } = useTranslation();
-
+  const { theme } = useTheme();
+  const navigation = useNavigation<NavigationProp>();
   return (
     <Tabs defaultValue="upcoming">
       <Page
@@ -136,6 +152,13 @@ const EventsSkeleton = () => {
         className="gap-4"
         style={{ paddingBottom: 0 }}
         disableScroll
+        header={
+          <IconButton
+            icon={<Plus color={theme.primary} />}
+            variant="link"
+            onPress={() => navigation.navigate("AddEvent")}
+          />
+        }
       >
         <TabsContent value="upcoming">
           <Animated.FlatList

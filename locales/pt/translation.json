@@ -426,6 +426,18 @@
       "organizer": "Organizador",
       "createdBy": "Criado por",
       "peopleInterested": "Pessoas interessadas",
+      "add": {
+        "title": "Novo evento",
+        "picture": "Imagem",
+        "name": "Nome",
+        "description": "Descrição",
+        "schedules": "Horários",
+        "location": "Local",
+        "link": "Link",
+        "submit": "Adicionar",
+        "success": "Evento adicionado com sucesso",
+        "error": "Erro ao adicionar evento"
+      },
       "errors": {
         "emptyUpcoming": "Nenhum evento próximo",
         "emptyUpcomingDescription": "Adicione um evento para mostrar aqui",

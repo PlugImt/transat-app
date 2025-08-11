@@ -426,6 +426,18 @@
       "organizer": "组织者",
       "createdBy": "创建者",
       "peopleInterested": "感兴趣的人",
+      "add": {
+        "title": "新活动",
+        "picture": "图片",
+        "name": "名称",
+        "description": "描述",
+        "schedules": "时间",
+        "location": "地点",
+        "link": "链接",
+        "submit": "添加",
+        "success": "活动添加成功",
+        "error": "活动添加失败"
+      },
       "errors": {
         "emptyUpcoming": "没有即将到来的活动",
         "emptyUpcomingDescription": "添加活动以在此显示",

@@ -22,7 +22,8 @@ export const Textarea = ({
       numberOfLines={4}
       textAlignVertical="top"
       disabled={disabled}
-      inputClasses="min-h-[100px] min-w-full"
+      inputClasses="min-h-[100px] min-w-full items-start pt-2"
+      className="h-[100px]"
     />
   );
 };

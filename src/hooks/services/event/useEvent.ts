@@ -1,5 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import {
+  addEvent,
   type EventTimeFilter,
   getEventDetails,
   getEventMembers,
@@ -7,7 +9,10 @@ import {
   joinEvent,
   leaveEvent,
 } from "@/api/endpoints/event/event.endpoint";
+import { useToast } from "@/components/common/Toast";
 import { QUERY_KEYS } from "@/constants";
+import { hapticFeedback } from "@/utils/haptics.utils";
+import type { AddEventFormData } from "./types";
 
 export const useEvents = (time: EventTimeFilter = "upcoming") => {
   const { data, isPending, refetch, isError, error } = useQuery({
@@ -62,4 +67,29 @@ export const useEventMembers = (id: number) => {
   });
 
   return { data, isPending, refetch, isError, error };
+};
+
+export const useAddEvent = () => {
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+  const { t } = useTranslation();
+
+  const { mutate, isPending } = useMutation({
+    mutationKey: [...QUERY_KEYS.event.events],
+    mutationFn: (data: AddEventFormData) => addEvent(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [...QUERY_KEYS.event.events],
+      });
+
+      toast(t("services.events.add.success"), "success");
+      hapticFeedback.success();
+    },
+    onError: () => {
+      hapticFeedback.error();
+      toast(t("services.events.add.error"), "destructive");
+    },
+  });
+
+  return { mutate, isPending };
 };

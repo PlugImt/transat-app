@@ -433,6 +433,51 @@
       "organizer": "Organisateur",
       "createdBy": "Créé par",
       "peopleInterested": "Personnes intéressées",
+      "add": {
+        "title": "Nouvel événement",
+        "picture": "Image",
+        "name": {
+          "title": "Nom",
+          "placeholder": "Tonus",
+          "required": "Le nom est requis"
+        },
+        "description": {
+          "title": "Description",
+          "placeholder": "Super Tonus à la MDE venez nombreux dès 21h",
+          "required": "La description est requise"
+        },
+        "startTime": {
+          "title": "Heure de début",
+          "required": "L'heure de début est requise"
+        },
+        "endTime": {
+          "title": "Heure de fin",
+          "required": "L'heure de fin est requise"
+        },
+        "schedules": {
+          "title": "Date & horaires",
+          "placeholder": "Horaires de l'événement",
+          "required": "Les horaires sont requis"
+        },
+        "location": {
+          "title": "Lieu",
+          "placeholder": "MDE",
+          "required": "Le lieu est requis"
+        },
+        "link": {
+          "title": "Lien",
+          "placeholder": "https://www.google.com",
+          "required": "Le lien est requis"
+        },
+        "organizer": {
+          "title": "Organisateur",
+          "placeholder": "Organisateur de l'événement",
+          "required": "Le nom de l'organisateur est requis"
+        },
+        "submit": "Ajouter",
+        "success": "Événement ajouté avec succès",
+        "error": "Erreur lors de l'ajout de l'événement"
+      },
       "errors": {
         "emptyUpcoming": "Aucun événement à venir",
         "emptyUpcomingDescription": "Ajoutez en un pour qu'il s'affiche ici",

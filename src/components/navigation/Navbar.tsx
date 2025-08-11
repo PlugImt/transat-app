@@ -25,6 +25,7 @@ import {
 } from "@/app/screens/services";
 import ClubDetails from "@/app/screens/services/clubs/ClubDetails";
 import { ClubMemberList } from "@/app/screens/services/clubs/components/ClubMemberList";
+import { AddEvent } from "@/app/screens/services/events/components/AddEvent";
 import EventDetails from "@/app/screens/services/events/components/EventDetails";
 import Events from "@/app/screens/services/events/Events";
 import { HomeworkDetails } from "@/app/screens/services/homework/components/HomeworkDetails";
@@ -49,8 +50,6 @@ const HomeStackScreen = () => (
     <HomeStack.Screen name="Timetable" component={Timetable} />
     <HomeStack.Screen name="Homework" component={Homework} />
     <HomeStack.Screen name="HomeworkDetails" component={HomeworkDetails} />
-    <HomeStack.Screen name="Events" component={Events} />
-    <HomeStack.Screen name="EventDetails" component={EventDetails} />
   </HomeStack.Navigator>
 );
 
@@ -72,6 +71,7 @@ const ServicesStackScreen = () => (
     <ServicesStack.Screen name="ClubMemberList" component={ClubMemberList} />
     <ServicesStack.Screen name="Events" component={Events} />
     <ServicesStack.Screen name="EventDetails" component={EventDetails} />
+    <ServicesStack.Screen name="AddEvent" component={AddEvent} />
     <ServicesStack.Screen name="Traq" component={Traq} />
     <ServicesStack.Screen name="Olimtpe" component={Olimtpe} />
   </ServicesStack.Navigator>

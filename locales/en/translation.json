@@ -433,6 +433,18 @@
       "organizer": "Organizer",
       "createdBy": "Created by",
       "peopleInterested": "People interested",
+      "add": {
+        "title": "New event",
+        "picture": "Picture",
+        "name": "Name",
+        "description": "Description",
+        "schedules": "Schedules",
+        "location": "Location",
+        "link": "Link",
+        "submit": "Add",
+        "success": "Event added successfully",
+        "error": "Error adding event"
+      },
       "errors": {
         "emptyUpcoming": "No upcoming events",
         "emptyUpcomingDescription": "Add an event to display it here",

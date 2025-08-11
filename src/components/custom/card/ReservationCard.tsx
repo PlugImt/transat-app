@@ -10,6 +10,7 @@ import { ReservationDialog } from "@/components/custom/ReservationDialog";
 import { TextSkeleton } from "@/components/Skeleton";
 import ImageSkeleton from "@/components/Skeleton/ImageSkeleton";
 import { useTheme } from "@/contexts/ThemeContext";
+import type { User } from "@/dto";
 import { useAuth } from "@/hooks/account";
 import type { AppStackParamList } from "@/types";
 
@@ -19,14 +20,7 @@ interface ReservationCardProps {
   slot?: boolean;
   type: "category" | "item";
   id: number;
-  user?: {
-    email: string;
-    first_name: string;
-    last_name: string;
-    profile_picture?: string;
-    // biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
-    [key: string]: any;
-  };
+  user?: User;
 }
 
 const ReservationCard = ({

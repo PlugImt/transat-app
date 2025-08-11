@@ -18,8 +18,7 @@ interface ReservationPageContainerProps {
   isError: boolean;
   error: Error | null;
   refetch: () => void;
-  // biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
-  headerComponent?: ReactElement | ComponentType<any> | null;
+  headerComponent?: ReactElement | ComponentType<object> | null;
 }
 
 export const ReservationPageContainer = ({

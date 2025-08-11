@@ -14,6 +14,7 @@
     "filter": "Filtrar",
     "refresh": "Actualizar",
     "link": "Enlace",
+    "reset": "Restablecer",
     "or": "O",
     "other": "Otro",
     "free": "Gratis",
@@ -183,6 +184,10 @@
       "setNotification": "Recibir notificación",
       "toggleRestaurant": "Ser notificado cuando se publique el menú del día",
       "toggleTraq": "Ser notificado cuando se ofrezca un nuevo artículo en Traq'"
+    },
+    "hapticFeedback": {
+      "title": "Retroalimentación táctil",
+      "description": "Vibra en interacciones"
     },
     "appearance": {
       "title": "Apariencia",

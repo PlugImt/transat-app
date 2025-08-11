@@ -8,17 +8,20 @@ import LinkCard, { LinkCardLoading } from "@/components/custom/card/LinkCard";
 import { PreferenceCustomizationButton } from "@/components/custom/PreferenceCustomizationModal";
 import { Empty } from "@/components/page/Empty";
 import { Page } from "@/components/page/Page";
+import { useTheme } from "@/contexts/ThemeContext";
 import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
 import { useServicePreferences } from "@/hooks/services/usePreferences";
 import type { Preference } from "@/services/storage/preferences";
+import { resetServicePreferences } from "@/services/storage/preferences";
 import type { AppStackParamList } from "@/types";
 
-type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
+export type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
 export const Services = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<AppScreenNavigationProp>();
   const { scrollHandler } = useAnimatedHeader();
+  const { actualTheme } = useTheme();
   const {
     enabledPreferences: enabledServices,
     preferences: services,
@@ -63,6 +66,7 @@ export const Services = () => {
             items={services}
             title={t("common.customizeServices")}
             onUpdate={updateOrder}
+            onReset={async () => resetServicePreferences(t, actualTheme)}
           >
             <Button
               label={t("common.customizeServices")}

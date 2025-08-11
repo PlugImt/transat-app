@@ -35,6 +35,8 @@ export type AppStackParamList = {
   };
   BottomTabNavigator: undefined;
   Clubs: undefined;
+  ClubDetails: { id: number };
+  ClubMemberList: { id: number };
   Reservation: undefined;
   ReservationCategory: {
     id: number;
@@ -43,7 +45,6 @@ export type AppStackParamList = {
     level?: number;
   };
   ReservationCalendar: { id: number; title: string };
-  ClubDetails: { id: number };
   Traq: undefined;
   Olimtpe: undefined;
   Account: undefined;

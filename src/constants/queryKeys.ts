@@ -12,6 +12,7 @@ export const QUERY_KEYS = {
     clubDetails: ["clubDetails"],
     clubJoin: ["clubJoin"],
     clubLeave: ["clubLeave"],
+    clubMembers: ["clubMembers"],
   },
   notification: ["notification"],
   auth: {

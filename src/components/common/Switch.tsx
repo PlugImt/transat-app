@@ -11,7 +11,7 @@ export const Switch = ({
 
   const trackColor = props.trackColor || {
     false: theme.muted,
-    true: theme.text,
+    true: theme.primary,
   };
   const thumbColor = props.thumbColor || theme.background;
   const ios_backgroundColor = props.ios_backgroundColor || theme.background;

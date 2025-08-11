@@ -25,6 +25,7 @@ import {
   Traq,
 } from "@/app/screens/services";
 import ClubDetails from "@/app/screens/services/clubs/ClubDetails";
+import { ClubMemberList } from "@/app/screens/services/clubs/components/ClubMemberList";
 import { HomeworkDetails } from "@/app/screens/services/homework/components/HomeworkDetails";
 import {
   Category,
@@ -69,6 +70,7 @@ const ServicesStackScreen = () => (
     <ServicesStack.Screen name="HomeworkDetails" component={HomeworkDetails} />
     <ServicesStack.Screen name="Clubs" component={Clubs} />
     <ServicesStack.Screen name="ClubDetails" component={ClubDetails} />
+    <ServicesStack.Screen name="ClubMemberList" component={ClubMemberList} />
     <ServicesStack.Screen name="Traq" component={Traq} />
     <ServicesStack.Screen name="Olimtpe" component={Olimtpe} />
     <ServicesStack.Screen name="Reservation" component={Reservation} />

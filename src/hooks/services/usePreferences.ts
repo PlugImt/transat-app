@@ -62,6 +62,22 @@ const usePreferences = (
 
   const enabledPreferences = preferences.filter((pref) => pref.enabled);
 
+  const resetPreferencesMutation = useMutation({
+    mutationFn: async () => {
+      const defaultPrefs = await getFn(t, actualTheme);
+      const resetPrefs = defaultPrefs.map((pref, index) => ({
+        ...pref,
+        enabled: true,
+        order: index,
+      }));
+      await saveFn(resetPrefs);
+      return resetPrefs;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey });
+    },
+  });
+
   return {
     preferences,
     enabledPreferences,
@@ -69,6 +85,7 @@ const usePreferences = (
     updateOrder: updateOrderMutation.mutateAsync,
     toggle: toggleMutation.mutateAsync,
     refreshPreferences: () => queryClient.invalidateQueries({ queryKey }),
+    resetPreferences: resetPreferencesMutation.mutateAsync,
   };
 };
 

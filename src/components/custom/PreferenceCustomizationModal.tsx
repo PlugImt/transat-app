@@ -1,8 +1,9 @@
 import { GripVertical } from "lucide-react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Modal, Switch, TouchableOpacity, View } from "react-native";
 import DraggableFlatList, {
+  type DragEndParams,
   type RenderItemParams,
   ScaleDecorator,
 } from "react-native-draggable-flatlist";
@@ -13,12 +14,15 @@ import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Preference } from "@/services/storage/preferences";
 
+import { hapticFeedback } from "@/utils/haptics.utils";
+
 interface PreferenceCustomizationModalProps {
   visible: boolean;
   onClose: () => void;
   items: Preference[];
   title: string;
   onUpdate: (items: Preference[]) => void;
+  onReset?: () => Promise<Preference[]>;
 }
 
 const PreferenceCustomizationModal = ({
@@ -27,10 +31,22 @@ const PreferenceCustomizationModal = ({
   onUpdate,
   items: initialItems = [],
   title,
+  onReset,
 }: PreferenceCustomizationModalProps) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
   const [localItems, setLocalItems] = useState<Preference[]>(initialItems);
+
+  useEffect(() => {
+    if (visible) {
+      setLocalItems(initialItems);
+    }
+  }, [visible, initialItems]);
+
+  const handleClose = () => {
+    setLocalItems(initialItems);
+    onClose();
+  };
 
   const handleSave = () => {
     const orderedItems: Preference[] = localItems
@@ -46,6 +62,32 @@ const PreferenceCustomizationModal = ({
         item.id === id ? { ...item, enabled: !item.enabled } : item,
       ),
     );
+  };
+
+  const handleDragMove = () => {
+    hapticFeedback.light();
+  };
+
+  const handleDragStart = () => {
+    hapticFeedback.medium();
+  };
+
+  const handleDragEnd = (data: DragEndParams<Preference>) => {
+    setLocalItems(data.data);
+    hapticFeedback.medium();
+  };
+
+  const handleReset = async () => {
+    try {
+      if (!onReset) return;
+      const defaultPreferences = await onReset();
+      onUpdate(defaultPreferences);
+      setLocalItems(defaultPreferences);
+
+      hapticFeedback.medium();
+    } catch (error) {
+      console.error("Error resetting preferences:", error);
+    }
   };
 
   const renderItem = ({
@@ -65,12 +107,13 @@ const PreferenceCustomizationModal = ({
         <View
           className="flex-row items-center justify-between p-4 rounded-lg mb-2"
           style={{
-            backgroundColor: item.enabled ? theme.card : theme.backdrop,
+            backgroundColor: theme.card,
+            opacity: item.enabled ? 1 : 0.5,
           }}
         >
           <View className="flex-row items-center gap-2">
             <GripVertical size={20} color={theme.muted} />
-            <Text color={item.enabled ? "text" : "muted"}>{item.name}</Text>
+            <Text color="text">{item.name}</Text>
           </View>
           <Switch
             value={item.enabled}
@@ -88,7 +131,7 @@ const PreferenceCustomizationModal = ({
       visible={visible}
       animationType="slide"
       presentationStyle="pageSheet"
-      onRequestClose={onClose}
+      onRequestClose={handleClose}
     >
       <GestureHandlerRootView>
         <Page disableScroll title={title} className="py-4 flex-1">
@@ -97,17 +140,35 @@ const PreferenceCustomizationModal = ({
           <View className="justify-between flex-1">
             <DraggableFlatList
               data={localItems}
-              onDragEnd={({ data }) => setLocalItems(data)}
+              onDragBegin={handleDragStart}
+              onDragEnd={handleDragEnd}
               keyExtractor={(item) => item.id}
               renderItem={renderItem}
               showsVerticalScrollIndicator={false}
+              onPlaceholderIndexChange={handleDragMove}
+              className="overflow-visible"
+              ListFooterComponent={() =>
+                onReset && (
+                  <Button
+                    label={t("common.reset")}
+                    onPress={handleReset}
+                    size="sm"
+                    variant="ghost"
+                  />
+                )
+              }
             />
-            <View className="gap-2">
-              <Button label={t("common.save")} onPress={handleSave} />
+            <View className="flex-row items-center gap-2">
               <Button
                 label={t("common.cancel")}
                 variant="secondary"
-                onPress={onClose}
+                onPress={handleClose}
+                className="flex-1"
+              />
+              <Button
+                label={t("common.save")}
+                onPress={handleSave}
+                className="flex-1"
               />
             </View>
           </View>
@@ -122,6 +183,7 @@ interface PreferenceCustomizationButtonProps {
   title: string;
   children: React.ReactElement<{ onPress?: () => void }>;
   onUpdate: (items: Preference[]) => void;
+  onReset?: () => Promise<Preference[]>;
 }
 
 export const PreferenceCustomizationButton = ({
@@ -129,6 +191,7 @@ export const PreferenceCustomizationButton = ({
   title,
   children,
   onUpdate,
+  onReset,
 }: PreferenceCustomizationButtonProps) => {
   const [visible, setVisible] = useState(false);
 
@@ -142,6 +205,7 @@ export const PreferenceCustomizationButton = ({
         items={items}
         title={title}
         onUpdate={onUpdate}
+        onReset={onReset}
       />
     </>
   );

@@ -8,14 +8,17 @@ import {
   Info,
   Palette,
   Shield,
+  Vibrate,
 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/common/Button";
+import { Switch } from "@/components/common/Switch";
 import { UserCard } from "@/components/custom/card/UserCard";
 import { LogoutButton } from "@/components/custom/LogoutButton";
 import { Page } from "@/components/page/Page";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useHapticFeedback } from "@/hooks/account/useHapticFeedback";
 import { useLanguageOptions } from "@/hooks/account/useLanguageOptions";
 import { useUser } from "@/hooks/account/useUser";
 import type { SettingsNavigation } from "@/types";
@@ -29,6 +32,8 @@ export const Settings = () => {
   const { data: user, isPending } = useUser();
   const navigation = useNavigation<SettingsNavigation>();
   const { currentLanguageOption } = useLanguageOptions();
+  const { isEnabled: isHapticEnabled, toggleHapticFeedback } =
+    useHapticFeedback();
 
   const refetch = async () => {
     await queryClient.invalidateQueries({ queryKey: QUERY_KEYS.user });
@@ -93,6 +98,17 @@ export const Settings = () => {
       </SettingCategory>
 
       <SettingCategory title={t("common.other")}>
+        <SettingsItem
+          icon={<Vibrate color={theme.text} size={22} />}
+          title={t("settings.hapticFeedback.title")}
+          subtitle={t("settings.hapticFeedback.description")}
+          rightElement={
+            <Switch
+              value={isHapticEnabled}
+              onValueChange={toggleHapticFeedback}
+            />
+          }
+        />
         <SettingsItem
           icon={<HelpCircle color={theme.text} size={22} />}
           title={t("settings.help.title")}

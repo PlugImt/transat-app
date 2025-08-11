@@ -169,3 +169,34 @@ export const resetToDefault = async (): Promise<void> => {
     console.error("Error resetting preferences:", error);
   }
 };
+
+export const resetHomeWidgetPreferences = async (
+  t: (key: string) => string,
+): Promise<Preference[]> => {
+  try {
+    await AsyncStorage.removeItem(HOME_WIDGETS_KEY);
+    const defaultHomeWidgets = getDefaultHomeWidgets(t);
+    await savePreferences(HOME_WIDGETS_KEY, defaultHomeWidgets);
+
+    return defaultHomeWidgets;
+  } catch (error) {
+    console.error("Error resetting home widget preferences:", error);
+    return getDefaultHomeWidgets(t);
+  }
+};
+
+export const resetServicePreferences = async (
+  t: (key: string) => string,
+  themeMode?: "light" | "dark",
+): Promise<Preference[]> => {
+  try {
+    await AsyncStorage.removeItem(SERVICES_KEY);
+    const defaultServices = getDefaultServices(t, themeMode);
+    await savePreferences(SERVICES_KEY, defaultServices);
+
+    return defaultServices;
+  } catch (error) {
+    console.error("Error resetting service preferences:", error);
+    return getDefaultServices(t, themeMode);
+  }
+};

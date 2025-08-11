@@ -64,11 +64,11 @@ export const UserCard = ({ user, action }: UserCardProps) => {
             className="font-bold"
             numberOfLines={1}
           >{`${user.first_name} ${user.last_name}`}</Text>
-          {user.graduation_year && (
+          {user.graduation_year ? (
             <Text color="muted" variant="sm" numberOfLines={1}>
               {getStudentYear(user.graduation_year)}
             </Text>
-          )}
+          ) : null}
         </View>
         {action ? action : <ActionButton user={user} />}
       </View>

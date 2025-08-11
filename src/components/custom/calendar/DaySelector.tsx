@@ -41,7 +41,12 @@ export const DaySelector = ({
   const [containerWidth, setContainerWidth] = useState(0);
   const [contentWidth, setContentWidth] = useState(0);
   const [currentOffsetX, setCurrentOffsetX] = useState(0);
+  const [shouldCenter, setShouldCenter] = useState(false);
   const [selectedLayout, setSelectedLayout] = useState<{
+    x: number;
+    width: number;
+  }>({ x: 0, width: 0 });
+  const [todayLayout, setTodayLayout] = useState<{
     x: number;
     width: number;
   }>({ x: 0, width: 0 });
@@ -58,6 +63,7 @@ export const DaySelector = ({
 
   const handleDayPress = (date: Date) => {
     setSelectedDate(date);
+    setShouldCenter(true);
     onDateSelect?.(date);
   };
 
@@ -89,20 +95,30 @@ export const DaySelector = ({
     if (!scrollViewRef.current) return;
     if (containerWidth === 0 || selectedLayout.width === 0) return;
 
-    const centerOffset = clamp(
-      selectedLayout.x - (containerWidth - selectedLayout.width) / 2,
-      0,
-      Math.max(0, contentWidth - containerWidth),
-    );
-    scrollViewRef.current.scrollTo({ x: centerOffset, animated: true });
-    setCurrentOffsetX(centerOffset);
+    if (shouldCenter) {
+      const centerOffset = clamp(
+        selectedLayout.x - (containerWidth - selectedLayout.width) / 2,
+        0,
+        Math.max(0, contentWidth - containerWidth),
+      );
+      scrollViewRef.current.scrollTo({ x: centerOffset, animated: true });
+      setCurrentOffsetX(centerOffset);
+      setShouldCenter(false);
+    }
   }, [
     containerWidth,
     contentWidth,
     selectedLayout.x,
     selectedLayout.width,
+    shouldCenter,
     clamp,
   ]);
+
+  useEffect(() => {
+    if (controlledSelectedDate) {
+      setShouldCenter(true);
+    }
+  }, [controlledSelectedDate]);
 
   return (
     <View
@@ -124,6 +140,11 @@ export const DaySelector = ({
               day.getMonth() === selectedDate.getMonth() &&
               day.getFullYear() === selectedDate.getFullYear();
 
+            const isToday =
+              day.getDate() === today.getDate() &&
+              day.getMonth() === today.getMonth() &&
+              day.getFullYear() === today.getFullYear();
+
             return (
               <View
                 key={index.toString()}
@@ -134,7 +155,13 @@ export const DaySelector = ({
                           x: e.nativeEvent.layout.x,
                           width: e.nativeEvent.layout.width,
                         })
-                    : undefined
+                    : isToday
+                      ? (e) =>
+                          setTodayLayout({
+                            x: e.nativeEvent.layout.x,
+                            width: e.nativeEvent.layout.width,
+                          })
+                      : undefined
                 }
               >
                 <DayCard

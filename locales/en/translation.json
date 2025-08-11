@@ -48,6 +48,8 @@
     "customizeServices": "Customize services",
     "customizeHint": "Enable/disable services or drag them to reorganize",
     "noWidgetsEnabled": "No widgets enabled",
+    "loading": "Loading",
+    "today": "Today",
     "noWidgetsEnabledDescription": "You can customize widgets by enabling or disabling them",
     "errors": {
       "occurred": "An error occurred",
@@ -416,11 +418,11 @@
       "confirmReturn": "Yes, I return",
       "reserveSuccess": "Reservation confirmed!",
       "returnSuccess": "Equipment returned successfully!",
-      "reserveError": "Error during reservation",
-      "returnError": "Error during return",
       "errors": {
         "empty": "No reservations available",
-        "emptyDescription": "No equipment or activities are available at the moment"
+        "emptyDescription": "No equipment or activities are available at the moment",
+        "reserveError": "Error during reservation",
+        "returnError": "Error during return"
       }
     }
   },

@@ -49,6 +49,8 @@
     "customizeHint": "Activa/desactiva servicios o arrástralos para reorganizarlos",
     "noWidgetsEnabled": "No hay widgets habilitados",
     "noWidgetsEnabledDescription": "Puedes personalizar widgets activándolos o desactivándolos",
+    "loading": "Cargando",
+    "today": "Hoy",
     "errors": {
       "occurred": "Ha ocurrido un error",
       "unableToFetch": "No se pudieron obtener los datos"
@@ -416,11 +418,11 @@
       "confirmReturn": "Sí, devuelvo",
       "reserveSuccess": "¡Reserva confirmada!",
       "returnSuccess": "¡Equipo devuelto con éxito!",
-      "reserveError": "Error durante la reserva",
-      "returnError": "Error durante la devolución",
       "errors": {
         "empty": "No hay reservas disponibles",
-        "emptyDescription": "No hay equipos o actividades disponibles en este momento"
+        "emptyDescription": "No hay equipos o actividades disponibles en este momento",
+        "reserveError": "Error durante la reserva",
+        "returnError": "Error durante la devolución"
       }
     }
   },

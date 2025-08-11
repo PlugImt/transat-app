@@ -35,8 +35,10 @@ export const ReservationCalendar = () => {
   );
   const [swiperKey, setSwiperKey] = useState<string>(`swiper-${todayStr}`);
 
-  const { data, isPending, isError, error, refetch } =
-    useReservationItem(id, selectedDate);
+  const { data, isPending, isError, error, refetch } = useReservationItem(
+    id,
+    selectedDate,
+  );
 
   if (isError) {
     toast(error?.message || t("common.error"), "destructive");
@@ -125,7 +127,7 @@ export const ReservationCalendar = () => {
     >
       <DaySelector
         onDateSelect={handleDateSelect}
-        selectedDate={new Date(selectedDate || new Date())}
+        selectedDate={currentDateObj}
       />
 
       <Swiper

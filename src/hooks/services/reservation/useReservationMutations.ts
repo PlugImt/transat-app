@@ -1,10 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateReservation } from "@/api/endpoints/reservation/reservation.endpoint";
 import { QUERY_KEYS } from "@/constants";
-
-const formatDateForBackend = (date: Date): string => {
-  return date.toISOString().slice(0, 19).replace("T", " ");
-};
+import { formatDateForBackend } from "@/utils/calendar.utils";
 
 export const useReservationMutation = () => {
   const queryClient = useQueryClient();

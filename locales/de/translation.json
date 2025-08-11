@@ -49,6 +49,8 @@
     "customizeHint": "Dienste aktivieren/deaktivieren oder ziehen Sie sie, um sie neu zu organisieren",
     "noWidgetsEnabled": "Keine Widgets aktiviert",
     "noWidgetsEnabledDescription": "Sie können Widgets anpassen, indem Sie sie aktivieren oder deaktivieren",
+    "loading": "Wird geladen",
+    "today": "Heute",
     "errors": {
       "occurred": "Ein Fehler ist aufgetreten",
       "unableToFetch": "Daten konnten nicht abgerufen werden"
@@ -416,11 +418,11 @@
       "confirmReturn": "Ja, ich gebe zurück",
       "reserveSuccess": "Reservierung bestätigt!",
       "returnSuccess": "Ausrüstung erfolgreich zurückgegeben!",
-      "reserveError": "Fehler bei der Reservierung",
-      "returnError": "Fehler bei der Rückgabe",
       "errors": {
         "empty": "Keine Reservierungen verfügbar",
-        "emptyDescription": "Zur Zeit sind keine Ausrüstung oder Aktivitäten verfügbar"
+        "emptyDescription": "Zur Zeit sind keine Ausrüstung oder Aktivitäten verfügbar",
+        "reserveError": "Fehler bei der Reservierung",
+        "returnError": "Fehler bei der Rückgabe"
       }
     }
   },

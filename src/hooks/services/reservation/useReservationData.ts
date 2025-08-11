@@ -14,21 +14,18 @@ export const useReservationData = (
   data: GetReservation[] | GetReservation | undefined,
 ): ReservationItem[] => {
   return useMemo(() => {
-    const dataObj = Array.isArray(data) ? data[0] : data;
+    const reservation = Array.isArray(data) ? data[0] : data;
+    if (!reservation) return [];
 
-    if (!dataObj) return [];
-
-    const combinedData: ReservationItem[] = [
-      ...(dataObj.categories?.map((category: { id: number; name: string }) => ({
-        ...category,
+    const mergedData: ReservationItem[] = [
+      ...(reservation.categories?.map((c) => ({
+        ...c,
         type: "category" as const,
       })) || []),
-      ...(dataObj.items?.map((item: any) => ({
-        ...item,
-        type: "item" as const,
-      })) || []),
+      ...(reservation.items?.map((i) => ({ ...i, type: "item" as const })) ||
+        []),
     ];
 
-    return combinedData;
+    return mergedData;
   }, [data]);
 };

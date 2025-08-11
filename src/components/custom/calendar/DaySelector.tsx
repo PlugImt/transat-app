@@ -8,7 +8,6 @@ import {
 import CalendarHeader from "@/components/custom/calendar/CalendarHeader";
 import { DayCard } from "@/components/custom/calendar/Day";
 import { ScrollIndicator } from "@/components/custom/calendar/ScrollIndicator";
-import { useTheme } from "@/contexts/ThemeContext";
 
 interface DaySelectorProps {
   onDateSelect?: (date: Date) => void;
@@ -19,7 +18,6 @@ export const DaySelector = ({
   onDateSelect,
   selectedDate: controlledSelectedDate,
 }: DaySelectorProps) => {
-  const { theme } = useTheme();
   const scrollViewRef = useRef<ScrollView>(null);
 
   const today = useMemo(() => {
@@ -35,6 +33,7 @@ export const DaySelector = ({
   useEffect(() => {
     if (controlledSelectedDate) {
       setSelectedDate(controlledSelectedDate);
+      setShouldCenter(true);
     }
   }, [controlledSelectedDate]);
   const [containerWidth, setContainerWidth] = useState(0);

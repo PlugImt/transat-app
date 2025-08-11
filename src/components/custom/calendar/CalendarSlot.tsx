@@ -23,6 +23,7 @@ const CalendarSlot = ({ reservationDetails, itemId }: SlotProps) => {
   const disabled =
     (!!reservationDetails?.user &&
       reservationDetails?.user?.email !== auth.user?.email) ||
+    // @ts-ignore
     reservationDetails?.end_date < new Date().toISOString();
   const canBeFreed =
     !!reservationDetails?.user &&

@@ -41,8 +41,8 @@ export const ReservationDialog = ({
       await hapticFeedback.success();
     } catch (_error) {
       const errorMessage = isReturning
-        ? t("services.reservation.returnError")
-        : t("services.reservation.reserveError");
+        ? t("services.reservation.errors.returnError")
+        : t("services.reservation.errors.reserveError");
 
       toast(errorMessage, "destructive");
       await hapticFeedback.error();

@@ -24,6 +24,7 @@ interface ReservationCardProps {
     first_name: string;
     last_name: string;
     profile_picture?: string;
+    // biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
     [key: string]: any;
   };
 }

@@ -50,7 +50,7 @@ export const CalendarHeader = ({
           <Button
             variant="link"
             size="sm"
-            label={t("common.today", { defaultValue: "Today" })}
+            label={t("common.today")}
             onPress={onToday}
             className="gap-0"
           />

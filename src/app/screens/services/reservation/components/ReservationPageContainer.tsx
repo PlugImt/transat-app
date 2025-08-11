@@ -18,6 +18,7 @@ interface ReservationPageContainerProps {
   isError: boolean;
   error: Error | null;
   refetch: () => void;
+  // biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
   headerComponent?: ReactElement | ComponentType<any> | null;
 }
 
@@ -71,6 +72,7 @@ export const ReservationPageContainer = ({
         keyExtractor={(item) => `${item.type}-${item.id}`}
         onScroll={scrollHandler}
         showsVerticalScrollIndicator
+        // biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
         ListHeaderComponent={headerComponent as any}
         ListEmptyComponent={
           <Empty

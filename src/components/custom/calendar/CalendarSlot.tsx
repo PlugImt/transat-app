@@ -21,31 +21,33 @@ const CalendarSlot = ({ reservationDetails, itemId }: SlotProps) => {
   };
 
   const disabled =
-    !!reservationDetails?.user &&
-    reservationDetails?.user?.email !== auth.user?.email;
+    (!!reservationDetails?.user &&
+      reservationDetails?.user?.email !== auth.user?.email) ||
+    reservationDetails?.end_date < new Date().toISOString();
   const canBeFreed =
     !!reservationDetails?.user &&
     reservationDetails?.user?.email === auth.user?.email;
 
   return (
     <Card
-      className={`flex flex-row gap-2 justify-between items-center ${disabled ? "opacity-60" : null} mx-4 my-1`}
+      className={`flex flex-row gap-2 justify-between items-center ${disabled ? "opacity-60" : ""} mx-4 my-1`}
     >
-      <View>
+      <View style={{ flex: 1 }}>
         <Text variant="h3">
           {reservationDetails
             ? `${formatTimeFromDate(reservationDetails.start_date)} - ${formatTimeFromDate(reservationDetails.end_date)}`
             : null}
         </Text>
+
         {reservationDetails?.user ? (
-          <Text className="text-sm text-gray-500">
-            {`${t("services.reservation.reservedBy")} ${reservationDetails?.user?.first_name} ${reservationDetails?.user?.last_name}`}
+          <Text className="text-sm text-gray-500" numberOfLines={1}>
+            {`${t("services.reservation.reservedBy")} ${reservationDetails.user.first_name} ${reservationDetails.user.last_name}`}
           </Text>
         ) : null}
       </View>
 
       <Button
-        variant="secondary"
+        variant={canBeFreed ? "default" : "secondary"}
         disabled={disabled}
         onPress={() => {
           if (canBeFreed) {
@@ -55,9 +57,7 @@ const CalendarSlot = ({ reservationDetails, itemId }: SlotProps) => {
           }
         }}
         label={
-          canBeFreed
-            ? t("services.reservation.returnItem")
-            : t("services.reservation.reserve")
+          canBeFreed ? t("common.cancel") : t("services.reservation.reserve")
         }
       />
     </Card>

@@ -107,7 +107,7 @@ const ReservationCard = ({
                 ? t("services.reservation.returnItem")
                 : t("services.reservation.reserve")
             }
-            variant="secondary"
+            variant={canBeFreed ? "default" : "secondary"}
             className="ml-auto"
             disabled={disabled}
           />

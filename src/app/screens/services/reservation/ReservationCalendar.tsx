@@ -46,7 +46,8 @@ export const ReservationCalendar = () => {
 
   const extractReservations = (raw: any) => {
     const current = raw?.item?.reservation ?? raw?.reservation ?? [];
-    const before = raw?.item?.reservation_before ?? raw?.reservation_before ?? [];
+    const before =
+      raw?.item?.reservation_before ?? raw?.reservation_before ?? [];
     const after = raw?.item?.reservation_after ?? raw?.reservation_after ?? [];
     return { current, before, after };
   };
@@ -62,18 +63,12 @@ export const ReservationCalendar = () => {
   const prevDateObj = shiftDate(selectedDate, -1);
   const nextDateObj = shiftDate(selectedDate, 1);
 
-  const calendarDataDay = generateCalendarSlots(
-    current || [],
-    currentDateObj,
-  );
+  const calendarDataDay = generateCalendarSlots(current || [], currentDateObj);
   const calendarDataDayBefore = generateCalendarSlots(
     before || [],
     prevDateObj,
   );
-  const calendarDataDayAfter = generateCalendarSlots(
-    after || [],
-    nextDateObj,
-  );
+  const calendarDataDayAfter = generateCalendarSlots(after || [], nextDateObj);
 
   const formatDate = (d: Date) => toYMD(d);
 
@@ -103,7 +98,7 @@ export const ReservationCalendar = () => {
       }, 50);
       return () => clearTimeout(id);
     }
-  }, [selectedDate]);
+  }, []);
 
   return (
     <Page

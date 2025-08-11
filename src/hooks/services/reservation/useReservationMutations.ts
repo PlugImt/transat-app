@@ -38,9 +38,11 @@ export const useCalendarReservationMutation = () => {
     }) => {
       if (isCancelling) {
         if (!startDate) throw new Error("Missing startDate for cancellation");
-        return deleteReservation(id, startDate);
+        return deleteReservation(id, formatDateForBackend(new Date(startDate)));
       }
-      const effectiveStart = startDate ?? formatDateForBackend(new Date());
+      const effectiveStart = startDate
+        ? formatDateForBackend(new Date(startDate))
+        : formatDateForBackend(new Date());
       return updateReservation(id, effectiveStart);
     },
     onSuccess: () => {

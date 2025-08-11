@@ -44,11 +44,16 @@ export const ReservationDialog = ({
           isCancelling: true,
           startDate,
         });
-      } else {
-        await reservationMutation.mutateAsync({
+      } else if (isReturning) {
+        await reservationMutation.mutateAsync({ id: itemId, isReturning });
+      } else if (startDate) {
+        await calendarMutation.mutateAsync({
           id: itemId,
-          isReturning: isReturning,
+          isCancelling: false,
+          startDate,
         });
+      } else {
+        await reservationMutation.mutateAsync({ id: itemId, isReturning });
       }
 
       const successMessage = isCancel
@@ -97,6 +102,9 @@ export const ReservationDialog = ({
       ? t("services.reservation.confirmReturn")
       : t("services.reservation.confirmReserve");
 
+  const isAnyPending =
+    calendarMutation.isPending || reservationMutation.isPending;
+
   return (
     <Dialog>
       <DialogTrigger>{children}</DialogTrigger>
@@ -107,9 +115,7 @@ export const ReservationDialog = ({
         cancelLabel={t("common.cancel")}
         confirmLabel={confirmLabel}
         onConfirm={handleConfirm}
-        isPending={
-          isCancel ? calendarMutation.isPending : reservationMutation.isPending
-        }
+        isPending={isAnyPending}
       >
         <Text>{dialogDescription}</Text>
       </DialogContent>

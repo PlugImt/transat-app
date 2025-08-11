@@ -109,6 +109,7 @@ export const DaySelector = ({
     selectedLayout.x,
     selectedLayout.width,
     shouldCenter,
+    // biome-ignore lint: reason
     clamp,
   ]);
 

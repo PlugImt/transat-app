@@ -1,5 +1,11 @@
 import type { ReservationScheme } from "@/dto";
 
+const parseDateSafe = (value: string): Date => {
+  if (!value) return new Date(Number.NaN);
+  const normalized = value.includes("T") ? value : value.replace(" ", "T");
+  return new Date(normalized);
+};
+
 export const SortReservationSchema = (reservationList: ReservationScheme[]) => {
   return reservationList.sort((a, b) => {
     const dateA = new Date(a.start_date);
@@ -9,10 +15,13 @@ export const SortReservationSchema = (reservationList: ReservationScheme[]) => {
 };
 
 export const generateCalendarSlots = (
-  reservationList: ReservationScheme[],
+  reservationList: (ReservationScheme | undefined)[],
   date: Date,
 ) => {
-  const sortedReservations = SortReservationSchema(reservationList);
+  const cleanedReservations: ReservationScheme[] = (
+    reservationList || []
+  ).filter(Boolean) as ReservationScheme[];
+  const sortedReservations = SortReservationSchema(cleanedReservations);
 
   const slots: ReservationScheme[] = [];
   const startHour = 8;
@@ -29,8 +38,8 @@ export const generateCalendarSlots = (
     slotEnd.setHours(slotEnd.getHours() + 1);
 
     const reservation = sortedReservations.find((res) => {
-      const resStart = new Date(res.start_date);
-      const resEnd = new Date(res.end_date);
+      const resStart = parseDateSafe(res.start_date);
+      const resEnd = parseDateSafe(res.end_date);
       return resStart < slotEnd && resEnd > slotStart;
     });
 
@@ -47,4 +56,25 @@ export const generateCalendarSlots = (
     currentDate.setHours(currentDate.getHours() + 1);
   }
   return slots;
+};
+
+export const toYMD = (date: Date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+export const fromYMD = (ymd: string) => {
+  const [y, m, d] = ymd.split("-").map((v) => Number(v));
+  const date = new Date(y, (m || 1) - 1, d || 1);
+  date.setHours(0, 0, 0, 0);
+  return date;
+};
+
+export const shiftDate = (base: string | undefined, deltaDays: number) => {
+  const d = base ? fromYMD(base) : new Date();
+  const shifted = new Date(d);
+  shifted.setDate(d.getDate() + deltaDays);
+  shifted.setHours(0, 0, 0, 0);
+  return shifted;
 };

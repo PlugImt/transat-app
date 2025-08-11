@@ -3,7 +3,6 @@ import { View } from "react-native";
 import { Button } from "@/components/common/Button";
 import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
-import { useTheme } from "@/contexts/ThemeContext";
 import type { ReservationScheme } from "@/dto";
 import { useAuth } from "@/hooks/account";
 
@@ -13,7 +12,6 @@ interface SlotProps {
 }
 
 const CalendarSlot = ({ reservationDetails, itemId }: SlotProps) => {
-  const { theme } = useTheme();
   const auth = useAuth();
   const { t } = useTranslation();
 
@@ -31,7 +29,7 @@ const CalendarSlot = ({ reservationDetails, itemId }: SlotProps) => {
 
   return (
     <Card
-      className={`flex flex-row gap-2 justify-between items-center ${disabled ? "opacity-60" : null}`}
+      className={`flex flex-row gap-2 justify-between items-center ${disabled ? "opacity-60" : null} mx-4 my-1`}
     >
       <View>
         <Text variant="h2">

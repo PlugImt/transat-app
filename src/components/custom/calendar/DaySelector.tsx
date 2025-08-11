@@ -1,3 +1,5 @@
+import { LinearGradient } from "expo-linear-gradient";
+import { ChevronLeft, ChevronRight } from "lucide-react-native";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   type NativeScrollEvent,
@@ -6,18 +8,19 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { BlurView } from "expo-blur";
-import { ChevronLeft, ChevronRight } from "lucide-react-native";
 import { DayCard } from "@/components/custom/calendar/Day";
 import { useTheme } from "@/contexts/ThemeContext";
 
 interface DaySelectorProps {
   onDateSelect?: (date: Date) => void;
+  selectedDate?: Date;
 }
 
-export const DaySelector = ({ onDateSelect }: DaySelectorProps) => {
-  const { theme, actualTheme } = useTheme();
+export const DaySelector = ({
+  onDateSelect,
+  selectedDate: controlledSelectedDate,
+}: DaySelectorProps) => {
+  const { theme } = useTheme();
   const scrollViewRef = useRef<ScrollView>(null);
 
   const today = useMemo(() => {
@@ -26,22 +29,32 @@ export const DaySelector = ({ onDateSelect }: DaySelectorProps) => {
     return d;
   }, []);
 
-  const [selectedDate, setSelectedDate] = useState(today);
+  const [selectedDate, setSelectedDate] = useState(
+    controlledSelectedDate ?? today,
+  );
+
+  useEffect(() => {
+    if (controlledSelectedDate) {
+      setSelectedDate(controlledSelectedDate);
+    }
+  }, [controlledSelectedDate]);
   const [containerWidth, setContainerWidth] = useState(0);
   const [contentWidth, setContentWidth] = useState(0);
   const [currentOffsetX, setCurrentOffsetX] = useState(0);
-  const [todayLayout, setTodayLayout] = useState<{ x: number; width: number }>(
-    { x: 0, width: 0 },
-  );
+  const [selectedLayout, setSelectedLayout] = useState<{
+    x: number;
+    width: number;
+  }>({ x: 0, width: 0 });
 
   const days = useMemo(() => {
+    const base = new Date(selectedDate);
     return Array.from({ length: 43 }, (_, i) => {
-      const date = new Date();
-      date.setDate(today.getDate() + i - 10);
+      const date = new Date(base);
+      date.setDate(base.getDate() + i - 10);
       date.setHours(8, 0, 0, 0);
       return date;
     });
-  }, [today]);
+  }, [selectedDate]);
 
   const handleDayPress = (date: Date) => {
     setSelectedDate(date);
@@ -74,25 +87,26 @@ export const DaySelector = ({ onDateSelect }: DaySelectorProps) => {
 
   useEffect(() => {
     if (!scrollViewRef.current) return;
-    if (containerWidth === 0 || todayLayout.width === 0) return;
+    if (containerWidth === 0 || selectedLayout.width === 0) return;
 
     const centerOffset = clamp(
-      todayLayout.x - (containerWidth - todayLayout.width) / 2,
+      selectedLayout.x - (containerWidth - selectedLayout.width) / 2,
       0,
       Math.max(0, contentWidth - containerWidth),
     );
-    scrollViewRef.current.scrollTo({ x: centerOffset, animated: false });
+    scrollViewRef.current.scrollTo({ x: centerOffset, animated: true });
     setCurrentOffsetX(centerOffset);
-  }, [containerWidth, todayLayout, contentWidth, clamp]);
-
-  const isToday = (d: Date) =>
-    d.getDate() === today.getDate() &&
-    d.getMonth() === today.getMonth() &&
-    d.getFullYear() === today.getFullYear();
+  }, [
+    containerWidth,
+    contentWidth,
+    selectedLayout.x,
+    selectedLayout.width,
+    clamp,
+  ]);
 
   return (
     <View
-      className="relative"
+      className="relative mt-16"
       onLayout={(e) => setContainerWidth(e.nativeEvent.layout.width)}
     >
       <ScrollView
@@ -110,15 +124,13 @@ export const DaySelector = ({ onDateSelect }: DaySelectorProps) => {
               day.getMonth() === selectedDate.getMonth() &&
               day.getFullYear() === selectedDate.getFullYear();
 
-            const trackLayout = isToday(day);
-
             return (
               <View
                 key={index.toString()}
                 onLayout={
-                  trackLayout
+                  isSelected
                     ? (e) =>
-                        setTodayLayout({
+                        setSelectedLayout({
                           x: e.nativeEvent.layout.x,
                           width: e.nativeEvent.layout.width,
                         })
@@ -148,8 +160,7 @@ export const DaySelector = ({ onDateSelect }: DaySelectorProps) => {
           bottom: 0,
           width: 80,
           zIndex: 5,
-            transform: [{ rotate: '270deg' }]
-
+          transform: [{ rotate: "270deg" }],
         }}
       />
 
@@ -165,7 +176,7 @@ export const DaySelector = ({ onDateSelect }: DaySelectorProps) => {
           bottom: 0,
           width: 80,
           zIndex: 5,
-            transform: [{ rotate: '270deg' }]
+          transform: [{ rotate: "270deg" }],
         }}
       />
 
@@ -190,7 +201,7 @@ export const DaySelector = ({ onDateSelect }: DaySelectorProps) => {
             overflow: "hidden",
           }}
         >
-            <ChevronLeft size={25} color={theme.text} />
+          <ChevronLeft size={25} color={theme.text} />
         </TouchableOpacity>
       </View>
 
@@ -215,7 +226,7 @@ export const DaySelector = ({ onDateSelect }: DaySelectorProps) => {
             overflow: "hidden",
           }}
         >
-            <ChevronRight size={25} color={theme.text} />
+          <ChevronRight size={25} color={theme.text} />
         </TouchableOpacity>
       </View>
     </View>

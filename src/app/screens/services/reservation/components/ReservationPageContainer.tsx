@@ -1,5 +1,5 @@
 import { SearchX } from "lucide-react-native";
-import type { ReactNode } from "react";
+import type { ComponentType, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import Animated from "react-native-reanimated";
 import ReservationCard from "@/components/custom/card/ReservationCard";
@@ -18,7 +18,7 @@ interface ReservationPageContainerProps {
   isError: boolean;
   error: Error | null;
   refetch: () => void;
-  headerComponent?: ReactNode;
+  headerComponent?: ReactElement | ComponentType<any> | null;
 }
 
 export const ReservationPageContainer = ({
@@ -71,7 +71,7 @@ export const ReservationPageContainer = ({
         keyExtractor={(item) => `${item.type}-${item.id}`}
         onScroll={scrollHandler}
         showsVerticalScrollIndicator
-        ListHeaderComponent={headerComponent}
+        ListHeaderComponent={headerComponent as any}
         ListEmptyComponent={
           <Empty
             icon={<SearchX />}

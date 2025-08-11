@@ -10,7 +10,7 @@ interface DayCardProps {
 }
 
 export const DayCard = ({ date, selected = false, onPress }: DayCardProps) => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const { theme } = useTheme();
   const today = new Date().setHours(8, 0, 0, 0);
   date.setHours(8, 0, 0, 0);

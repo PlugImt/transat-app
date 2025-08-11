@@ -35,10 +35,10 @@ export const useReservationClub = (id: number) => {
 };
 
 export const useReservationItem = (id: number, date = "") => {
-  const { data, isPending, isFetching, refetch, isError, error } = useQuery({
+  const { data, isPending, refetch, isError, error } = useQuery({
     queryKey: ["reservationItem", id, date],
     queryFn: () => getReservationItem(id, date),
   });
 
-  return { data, isPending, isFetching, refetch, isError, error };
+  return { data, isPending, refetch, isError, error };
 };

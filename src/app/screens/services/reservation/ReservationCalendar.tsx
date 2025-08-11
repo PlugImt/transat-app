@@ -9,6 +9,7 @@ import { useToast } from "@/components/common/Toast";
 import CalendarSlot from "@/components/custom/calendar/CalendarSlot";
 import { DaySelector } from "@/components/custom/calendar/DaySelector";
 import { Page } from "@/components/page/Page";
+import type { ReservationScheme } from "@/dto";
 import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
 import { useReservationItem } from "@/hooks/services/reservation/useReservation";
 import type { AppStackParamList } from "@/types";
@@ -34,23 +35,37 @@ export const ReservationCalendar = () => {
   );
   const [swiperKey, setSwiperKey] = useState<string>(`swiper-${todayStr}`);
 
-  const { data, isPending, isFetching, isError, error, refetch } = useReservationItem(
-    id,
-    selectedDate,
-  );
+  const { data, isPending, isError, error, refetch } =
+    useReservationItem(id, selectedDate);
 
   if (isError) {
     toast(error?.message || t("common.error"), "destructive");
   }
 
-  const extractReservations = (raw: any) => {
-    const current = raw?.item?.reservation ?? raw?.reservation ?? [];
+  const { current, before, after } = useMemo(() => {
+    const current = data?.item?.reservation ?? data?.reservation ?? [];
     const before =
-      raw?.item?.reservation_before ?? raw?.reservation_before ?? [];
-    const after = raw?.item?.reservation_after ?? raw?.reservation_after ?? [];
+      data?.item?.reservation_before ?? data?.reservation_before ?? [];
+    const after =
+      data?.item?.reservation_after ?? data?.reservation_after ?? [];
     return { current, before, after };
-  };
-  const { current, before, after } = extractReservations(data);
+  }, [data]);
+
+  const [display, setDisplay] = useState<{
+    current: (ReservationScheme | undefined)[];
+    before: (ReservationScheme | undefined)[];
+    after: (ReservationScheme | undefined)[];
+  }>({ current: [], before: [], after: [] });
+
+  useEffect(() => {
+    if (data) {
+      setDisplay({
+        current: current || [],
+        before: before || [],
+        after: after || [],
+      });
+    }
+  }, [data, current, before, after]);
 
   const handleDateSelect = (date: Date) => {
     const formattedDate = toYMD(date);
@@ -62,24 +77,17 @@ export const ReservationCalendar = () => {
   const prevDateObj = shiftDate(selectedDate, -1);
   const nextDateObj = shiftDate(selectedDate, 1);
 
-  const calendarDataDay = generateCalendarSlots(current || [], currentDateObj);
+  const calendarDataDay = generateCalendarSlots(
+    display.current || [],
+    currentDateObj,
+  );
   const calendarDataDayBefore = generateCalendarSlots(
-    before || [],
+    display.before || [],
     prevDateObj,
   );
-  const calendarDataDayAfter = generateCalendarSlots(after || [], nextDateObj);
-
-  const placeholderDay = useMemo(
-    () => generateCalendarSlots([], currentDateObj),
-    [currentDateObj],
-  );
-  const placeholderDayBefore = useMemo(
-    () => generateCalendarSlots([], prevDateObj),
-    [prevDateObj],
-  );
-  const placeholderDayAfter = useMemo(
-    () => generateCalendarSlots([], nextDateObj),
-    [nextDateObj],
+  const calendarDataDayAfter = generateCalendarSlots(
+    display.after || [],
+    nextDateObj,
   );
 
   const formatDate = (d: Date) => toYMD(d);
@@ -89,10 +97,23 @@ export const ReservationCalendar = () => {
     const delta = index === 0 ? -1 : 1;
     const nextDate = shiftDate(selectedDate, delta);
     const nextDateStr = formatDate(nextDate);
+    setDisplay((prev) => {
+      if (delta === 1) {
+        return {
+          current: prev.after || [],
+          before: prev.current || [],
+          after: [],
+        };
+      }
+      return {
+        current: prev.before || [],
+        after: prev.current || [],
+        before: [],
+      };
+    });
     setSelectedDate(nextDateStr);
     setSwiperKey(`swiper-${nextDateStr}`);
   };
-
 
   return (
     <Page
@@ -117,7 +138,7 @@ export const ReservationCalendar = () => {
         {/* Previous day */}
         <Animated.FlatList
           style={{ flex: 1 }}
-          data={isFetching ? placeholderDayBefore : calendarDataDayBefore}
+          data={calendarDataDayBefore}
           renderItem={({ item }) => (
             <CalendarSlot reservationDetails={item} itemId={id} />
           )}
@@ -134,7 +155,7 @@ export const ReservationCalendar = () => {
         {/* Current day */}
         <Animated.FlatList
           style={{ flex: 1 }}
-          data={isFetching ? placeholderDay : calendarDataDay}
+          data={calendarDataDay}
           renderItem={({ item }) => (
             <CalendarSlot reservationDetails={item} itemId={id} />
           )}
@@ -151,7 +172,7 @@ export const ReservationCalendar = () => {
         {/* Next day */}
         <Animated.FlatList
           style={{ flex: 1 }}
-          data={isFetching ? placeholderDayAfter : calendarDataDayAfter}
+          data={calendarDataDayAfter}
           renderItem={({ item }) => (
             <CalendarSlot reservationDetails={item} itemId={id} />
           )}

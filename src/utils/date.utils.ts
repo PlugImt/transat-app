@@ -15,9 +15,9 @@ export const isDinner = () => {
   const now = new Date();
   const hour = now.getHours();
   const minute = now.getMinutes();
-  const after1330 = hour > 13 || (hour === 13 && minute >= 30);
-  const before1945 = hour < 19 || (hour === 19 && minute < 45);
-  return after1330 && before1945;
+  const afterLunch = hour > 13 || (hour === 13 && minute >= 30);
+  const beforeEndDinner = hour < 19 || (hour === 19 && minute < 45);
+  return afterLunch && beforeEndDinner;
 };
 
 /**
@@ -30,17 +30,25 @@ export const isWeekend = () => {
   const day = now.getDay();
   if (day === 0 || day === 6) return true;
   if (day === 5) {
-    const hour = now.getHours();
-    const minute = now.getMinutes();
-    return hour > 13 || (hour === 13 && minute >= 30);
+    return isAfterLunch();
   }
   return false;
 };
 
 /**
+ * Checks if the current time is after 13:30 (lunch quoi)
+ */
+export const isAfterLunch = () => {
+  const now = new Date();
+  const hour = now.getHours();
+  const minute = now.getMinutes();
+  return hour > 13 || (hour === 13 && minute >= 30);
+};
+
+/**
  * Checks if the current time is after 19:45
  */
-export const isAfter1945 = () => {
+export const isNight = () => {
   const now = new Date();
   const hour = now.getHours();
   const minute = now.getMinutes();

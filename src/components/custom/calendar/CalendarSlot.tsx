@@ -24,7 +24,7 @@ const CalendarSlot = ({ reservationDetails, itemId }: SlotProps) => {
   const disabled =
     (!!reservationDetails?.user &&
       reservationDetails?.user?.email !== auth.user?.email) ||
-    (typeof reservationDetails?.end_date === "string" &&
+    (reservationDetails?.end_date &&
       reservationDetails.end_date < new Date().toISOString());
 
   const startDate = reservationDetails?.start_date;

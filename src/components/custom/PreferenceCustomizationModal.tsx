@@ -53,7 +53,7 @@ const PreferenceCustomizationModal = ({
       .map((item, index) => ({ ...item, order: index }))
       .sort((a, b) => a.order - b.order);
     onUpdate(orderedItems);
-    setLocalItems(orderedItems)
+    setLocalItems(orderedItems);
     onClose();
   };
 

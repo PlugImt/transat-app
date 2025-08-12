@@ -15,7 +15,7 @@ import type { MenuItem } from "@/dto";
 import { useMenuRestaurant } from "@/hooks/services/restaurant/useMenuRestaurant";
 import type { AppStackParamList } from "@/types";
 import {
-  isAfter1945,
+  isNight,
   isDinner,
   isLunch,
   isWeekend,
@@ -80,7 +80,7 @@ export const RestaurantWidget = () => {
   if (
     error ||
     weekend ||
-    isAfter1945() ||
+    isNight() ||
     outOfHours ||
     (!lunch && !dinner) ||
     !updatedToday
@@ -106,7 +106,7 @@ export const RestaurantWidget = () => {
                   {t("services.restaurant.closedWeekends.description")}
                 </Text>
               </>
-            ) : isAfter1945() ? (
+            ) : isNight() ? (
               <>
                 <Text variant="lg" numberOfLines={2}>
                   {t("services.restaurant.closedNight.title")}

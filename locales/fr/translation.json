@@ -291,12 +291,12 @@
       "sideDishes": "Accompagnements",
       "closed": "Fermé",
       "noLunch": {
-        "title": "Pas de menu ce midi",
-        "description": "Nous n'avons pas (encore) le menu du jour. Active les notifications pour être le premier à le découvrir."
+        "title": "Menu pas encore disponible",
+        "description": "Nous n'avons pas (encore) reçu le menu du jour.\nActive les notifications pour être le premier à le découvrir"
       },
       "noDinner": {
         "title": "Pas de repas ce soir",
-        "description": "Le self doit être fermé ce soir. Active les notifications pour être informé de sa réouverture."
+        "description": "Le self doit être fermé ce soir. Active les notifications pour être informé de sa réouverture"
       },
       "closedWeekends": {
         "title": "Le restaurant est fermé le week-end",
@@ -304,7 +304,7 @@
       },
       "closedNight": {
         "title": "Le restaurant est fermé",
-        "description": "Revenez demain pour voir le menu."
+        "description": "Revenez demain pour voir le menu"
       },
       "location": "À côté du gymnase",
       "about": "API prépare des plats frais et faits maison quotidiennement — même la salade de fruits ! Le menu change tous les jours pour le déjeuner et le dîner ",

@@ -6,10 +6,12 @@ import {
   DialogTrigger,
 } from "@/components/common/Dialog";
 import { Text } from "@/components/common/Text";
+import { useToast } from "@/components/common/Toast";
 import {
   useCalendarReservationMutation,
   useReservationMutation,
 } from "@/hooks/services/reservation/useReservationMutations";
+import { hapticFeedback } from "@/utils/haptics.utils";
 
 interface ReservationDialogProps {
   children: ReactElement<{ onPress?: () => void }>;
@@ -28,34 +30,52 @@ export const ReservationDialog = ({
   startDate,
 }: ReservationDialogProps) => {
   const { t } = useTranslation();
+  const { toast } = useToast();
   const reservationMutation = useReservationMutation();
   const calendarMutation = useCalendarReservationMutation();
 
   const handleConfirm = async () => {
-    if (isActionCancel) {
-      await calendarMutation.mutateAsync({
-        id: itemId,
-        isCancelling: true,
-        startDate,
-      });
-      return;
-    }
+    try {
+      if (isActionCancel) {
+        await calendarMutation.mutateAsync({
+          id: itemId,
+          isCancelling: true,
+          startDate,
+        });
+      } else if (isReturning) {
+        await reservationMutation.mutateAsync({ id: itemId, isReturning });
+      } else if (startDate) {
+        await calendarMutation.mutateAsync({
+          id: itemId,
+          isCancelling: false,
+          startDate,
+        });
+      } else {
+        await reservationMutation.mutateAsync({ id: itemId, isReturning });
+      }
 
-    if (isReturning) {
-      await reservationMutation.mutateAsync({ id: itemId, isReturning });
-      return;
-    }
+      const successMessage = isActionCancel
+        ? t("services.reservation.cancelSuccess", {
+            defaultValue: "Reservation canceled",
+          })
+        : isReturning
+          ? t("services.reservation.returnSuccess")
+          : t("services.reservation.reserveSuccess");
 
-    if (startDate) {
-      await calendarMutation.mutateAsync({
-        id: itemId,
-        isCancelling: false,
-        startDate,
-      });
-      return;
-    }
+      toast(successMessage);
+      await hapticFeedback.success();
+    } catch (_error) {
+      const errorMessage = isActionCancel
+        ? t("services.reservation.errors.cancelError", {
+            defaultValue: "Unable to cancel reservation",
+          })
+        : isReturning
+          ? t("services.reservation.errors.returnError")
+          : t("services.reservation.errors.reserveError");
 
-    await reservationMutation.mutateAsync({ id: itemId, isReturning });
+      toast(errorMessage, "destructive");
+      await hapticFeedback.error();
+    }
   };
 
   const dialogTitle = isActionCancel

@@ -1,11 +1,12 @@
-import { cloneElement, forwardRef } from "react";
+import { cloneElement, forwardRef, useState } from "react";
 import {
   type Control,
   Controller,
   type FieldValues,
   type Path,
 } from "react-hook-form";
-import { TextInput, View } from "react-native";
+import { TextInput, TouchableOpacity, View } from "react-native";
+import { Eye, EyeOff } from "lucide-react-native";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";
@@ -79,6 +80,7 @@ const Input = forwardRef(
     ref: React.Ref<TextInput>,
   ) => {
     const { theme } = useTheme();
+    const [showPassword, setShowPassword] = useState(false);
 
     if (loading) {
       return (
@@ -145,6 +147,7 @@ const Input = forwardRef(
                   onChangeText={onChange}
                   onBlur={onBlur}
                   value={value}
+                  secureTextEntry={props.secureTextEntry && !showPassword}
                 />
               )}
             />
@@ -153,7 +156,18 @@ const Input = forwardRef(
               {...commonTextInputProps}
               onChangeText={onChangeText}
               value={value ?? ""}
+              secureTextEntry={props.secureTextEntry && !showPassword}
             />
+          )}
+
+          {props.secureTextEntry && (
+            <TouchableOpacity onPress={() => setShowPassword((v) => !v)}>
+              {showPassword ? (
+                <Eye color={theme.muted} size={20} />
+              ) : (
+                <EyeOff color={theme.muted} size={20} />
+              )}
+            </TouchableOpacity>
           )}
         </View>
 

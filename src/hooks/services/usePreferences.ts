@@ -42,7 +42,25 @@ const usePreferences = (
       await saveFn(updated);
       return updated;
     },
-    onSuccess: () => {
+    onMutate: async (newOrder: Preference[]) => {
+      await queryClient.cancelQueries({ queryKey });
+      const previous = queryClient.getQueryData<Preference[]>(queryKey);
+      const optimistic = newOrder.map((pref, index) => ({
+        ...pref,
+        order: index,
+      }));
+      queryClient.setQueryData(queryKey, optimistic);
+      return { previous };
+    },
+    onError: (_err, _vars, context) => {
+      if (context?.previous) {
+        queryClient.setQueryData(queryKey, context.previous);
+      }
+    },
+    onSuccess: (data) => {
+      queryClient.setQueryData(queryKey, data);
+    },
+    onSettled: () => {
       queryClient.invalidateQueries({ queryKey });
     },
   });
@@ -55,7 +73,24 @@ const usePreferences = (
       await saveFn(updated);
       return updated;
     },
-    onSuccess: () => {
+    onMutate: async (prefId: string) => {
+      await queryClient.cancelQueries({ queryKey });
+      const previous = queryClient.getQueryData<Preference[]>(queryKey);
+      const updated = preferences.map((pref) =>
+        pref.id === prefId ? { ...pref, enabled: !pref.enabled } : pref,
+      );
+      queryClient.setQueryData(queryKey, updated);
+      return { previous };
+    },
+    onError: (_err, _vars, context) => {
+      if (context?.previous) {
+        queryClient.setQueryData(queryKey, context.previous);
+      }
+    },
+    onSuccess: (data) => {
+      queryClient.setQueryData(queryKey, data);
+    },
+    onSettled: () => {
       queryClient.invalidateQueries({ queryKey });
     },
   });
@@ -73,7 +108,8 @@ const usePreferences = (
       await saveFn(resetPrefs);
       return resetPrefs;
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
+      queryClient.setQueryData(queryKey, data);
       queryClient.invalidateQueries({ queryKey });
     },
   });

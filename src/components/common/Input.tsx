@@ -1,3 +1,4 @@
+import { Eye, EyeOff } from "lucide-react-native";
 import { cloneElement, forwardRef, useState } from "react";
 import {
   type Control,
@@ -6,7 +7,6 @@ import {
   type Path,
 } from "react-hook-form";
 import { TextInput, TouchableOpacity, View } from "react-native";
-import { Eye, EyeOff } from "lucide-react-native";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";

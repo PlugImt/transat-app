@@ -14,7 +14,13 @@ import { useTheme } from "@/contexts/ThemeContext";
 import type { MenuItem } from "@/dto";
 import { useMenuRestaurant } from "@/hooks/services/restaurant/useMenuRestaurant";
 import type { AppStackParamList } from "@/types";
-import { isAfter1945, isDinner, isLunch, isWeekend, outOfService } from "@/utils";
+import {
+  isAfter1945,
+  isDinner,
+  isLunch,
+  isWeekend,
+  outOfService,
+} from "@/utils";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -60,11 +66,12 @@ export const RestaurantWidget = () => {
     );
   }, [menu?.updatedDate]);
 
-  const title = !weekend && lunch
-    ? t("services.restaurant.widgetLunch")
-    : !weekend && dinner
-      ? t("services.restaurant.widgetDinner")
-      : t("services.restaurant.title");
+  const title =
+    !weekend && lunch
+      ? t("services.restaurant.widgetLunch")
+      : !weekend && dinner
+        ? t("services.restaurant.widgetDinner")
+        : t("services.restaurant.title");
 
   if (isPending) {
     return <RestaurantWidgetLoading />;
@@ -80,7 +87,9 @@ export const RestaurantWidget = () => {
   ) {
     return (
       <View className="flex flex-col gap-2">
-        <Text className="ml-4" variant="h3">{title}</Text>
+        <Text className="ml-4" variant="h3">
+          {title}
+        </Text>
         <Card className="flex flex-row gap-4 items-center">
           <Image
             source={require("@/assets/images/services/restaurant.png")}
@@ -116,27 +125,23 @@ export const RestaurantWidget = () => {
                   {t("services.restaurant.closedUpdated.description")}
                 </Text>
               </>
+            ) : lunch ? (
+              <>
+                <Text variant="lg" numberOfLines={2}>
+                  {t("services.restaurant.noLunch.title")}
+                </Text>
+                <Text numberOfLines={3}>
+                  {t("services.restaurant.noLunch.description")}
+                </Text>
+              </>
             ) : (
               <>
-                {lunch ? (
-                  <>
-                    <Text variant="lg" numberOfLines={2}>
-                      {t("services.restaurant.noLunch.title")}
-                    </Text>
-                    <Text numberOfLines={3}>
-                      {t("services.restaurant.noLunch.description")}
-                    </Text>
-                  </>
-                ) : (
-                  <>
-                    <Text variant="lg" numberOfLines={2}>
-                      {t("services.restaurant.noDinner.title")}
-                    </Text>
-                    <Text numberOfLines={3}>
-                      {t("services.restaurant.noDinner.description")}
-                    </Text>
-                  </>
-                )}
+                <Text variant="lg" numberOfLines={2}>
+                  {t("services.restaurant.noDinner.title")}
+                </Text>
+                <Text numberOfLines={3}>
+                  {t("services.restaurant.noDinner.description")}
+                </Text>
               </>
             )}
           </View>
@@ -158,7 +163,9 @@ export const RestaurantWidget = () => {
   if (!hasMenuItems) {
     return (
       <View className="flex flex-col gap-2">
-        <Text className="ml-4" variant="h3">{title}</Text>
+        <Text className="ml-4" variant="h3">
+          {title}
+        </Text>
         <Card className="flex flex-row gap-4 items-center">
           <Image
             source={require("@/assets/images/services/restaurant.png")}

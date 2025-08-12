@@ -290,13 +290,21 @@
       "vegetarian": "Vegetarian",
       "sideDishes": "Side dishes",
       "closed": "Closed",
+      "noLunch": {
+        "title": "No lunch today",
+        "description": "We don't have the menu (yet). Activate notifications to be informed when the menu is available"
+      },
+      "noDinner": {
+        "title": "No dinner tonight",
+        "description": "The restaurant must be closed. Activate notifications to be informed when it reopens"
+      },
       "closedWeekends": {
         "title": "The restaurant is closed on weekends",
         "description": "Come back Monday to discover the daily menu"
       },
       "closedNight": {
         "title": "The restaurant is closed",
-        "description": "Come back tomorrow to see the menu"
+        "description": "Come back tomorrow to see the menu. Enable notifications so you don't miss it."
       },
       "location": "Next to the gym",
       "about": "API prepares fresh, homemade dishes daily — even the fruit salad! The menu changes every day for lunch and dinner",

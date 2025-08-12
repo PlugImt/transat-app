@@ -63,7 +63,7 @@ export const ReservationDialog = ({
           : t("services.reservation.reserveSuccess");
 
       toast(successMessage);
-      await hapticFeedback.success();
+      hapticFeedback.success();
     } catch (_error) {
       const errorMessage = isActionCancel
         ? t("services.reservation.errors.cancelError", {
@@ -74,7 +74,7 @@ export const ReservationDialog = ({
           : t("services.reservation.errors.reserveError");
 
       toast(errorMessage, "destructive");
-      await hapticFeedback.error();
+      hapticFeedback.error();
     }
   };
 

@@ -1,26 +1,50 @@
 /**
- * Checks if the current time is before 2 PM
+ * Checks if the current time is before 13:30
  */
 export const isLunch = () => {
-  const hour = new Date().getHours();
-  return hour < 14;
+  const now = new Date();
+  const hour = now.getHours();
+  const minute = now.getMinutes();
+  return hour < 13 || (hour === 13 && minute < 30);
 };
 
 /**
- * Checks if the current time is between 2 PM and 8 PM
+ * Checks if the current time is between 13:30 and 19:45
  */
 export const isDinner = () => {
-  const hour = new Date().getHours();
-  return hour >= 14 && hour < 20;
+  const now = new Date();
+  const hour = now.getHours();
+  const minute = now.getMinutes();
+  const after1330 = hour > 13 || (hour === 13 && minute >= 30);
+  const before1945 = hour < 19 || (hour === 19 && minute < 45);
+  return after1330 && before1945;
 };
 
 /**
- * Checks if the current day is a weekend (Saturday or Sunday)
+ * Checks if we are in weekend service hours:
+ * - Saturday or Sunday at any time
+ * - Friday after 13:30
  */
 export const isWeekend = () => {
   const now = new Date();
   const day = now.getDay();
-  return day === 0 || day === 6 || (day === 5 && now.getHours() > 14);
+  if (day === 0 || day === 6) return true;
+  if (day === 5) {
+    const hour = now.getHours();
+    const minute = now.getMinutes();
+    return hour > 13 || (hour === 13 && minute >= 30);
+  }
+  return false;
+};
+
+/**
+ * Checks if the current time is after 19:45
+ */
+export const isAfter1945 = () => {
+  const now = new Date();
+  const hour = now.getHours();
+  const minute = now.getMinutes();
+  return hour > 19 || (hour === 19 && minute >= 45);
 };
 
 /**

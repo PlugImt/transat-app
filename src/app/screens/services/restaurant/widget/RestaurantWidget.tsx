@@ -14,13 +14,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import type { MenuItem } from "@/dto";
 import { useMenuRestaurant } from "@/hooks/services/restaurant/useMenuRestaurant";
 import type { AppStackParamList } from "@/types";
-import {
-  isNight,
-  isDinner,
-  isLunch,
-  isWeekend,
-  outOfService,
-} from "@/utils";
+import { isDinner, isLunch, isNight, isWeekend, outOfService } from "@/utils";
 
 type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 

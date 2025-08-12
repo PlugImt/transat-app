@@ -290,6 +290,14 @@
       "vegetarian": "Vegetariano",
       "sideDishes": "Acompanhamentos",
       "closed": "Fechado",
+      "noLunch": {
+        "title": "Sem almoço hoje",
+        "description": "Ainda não temos o cardápio. Ative as notificações para ser informado quando o cardápio estiver disponível"
+      },
+      "noDinner": {
+        "title": "Sem jantar hoje à noite",
+        "description": "O restaurante deve estar fechado. Ative as notificações para ser informado quando reabrir"
+      },
       "closedWeekends": {
         "title": "O restaurante está fechado nos fins de semana",
         "description": "Volte na segunda-feira para descobrir o cardápio do dia"

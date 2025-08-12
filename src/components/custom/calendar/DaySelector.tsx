@@ -107,7 +107,7 @@ export const DaySelector = ({
     selectedLayout.x,
     selectedLayout.width,
     shouldCenter,
-    // biome-ignore lint: reason
+    // biome-ignore lint: clamp is a stable utility function and does not change between renders; safe to omit from dependencies.
     clamp,
   ]);
 

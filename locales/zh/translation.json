@@ -290,6 +290,14 @@
       "vegetarian": "素食",
       "sideDishes": "配菜",
       "closed": "已关闭",
+      "noLunch": {
+        "title": "今天没有午餐",
+        "description": "我们暂时还没有菜单。开启通知以便菜单可用时第一时间收到提醒"
+      },
+      "noDinner": {
+        "title": "今晚没有晚餐",
+        "description": "餐厅可能已关闭。开启通知以便重新开放时收到提醒"
+      },
       "closedWeekends": {
         "title": "餐厅周末关闭",
         "description": "周一回来发现当日菜单"

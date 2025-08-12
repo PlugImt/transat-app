@@ -290,6 +290,14 @@
       "vegetarian": "Vegetarisch",
       "sideDishes": "Beilagen",
       "closed": "Geschlossen",
+      "noLunch": {
+        "title": "Heute kein Mittagessen",
+        "description": "Wir haben das Menü (noch) nicht. Aktiviere die Benachrichtigungen, um informiert zu werden, wenn das Menü verfügbar ist."
+      },
+      "noDinner": {
+        "title": "Heute kein Abendessen",
+        "description": "Das Restaurant ist vermutlich geschlossen. Aktiviere die Benachrichtigungen, um über die Wiedereröffnung informiert zu werden."
+      },
       "closedWeekends": {
         "title": "Das Restaurant ist am Wochenende geschlossen",
         "description": "Kommen Sie am Montag zurück, um das Tagesmenü zu entdecken"

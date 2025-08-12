@@ -5,6 +5,7 @@ interface TextareaProps {
   onChangeText: (text: string) => void;
   placeholder: string;
   disabled: boolean;
+  maxLength?: number;
 }
 
 export const Textarea = ({
@@ -12,6 +13,7 @@ export const Textarea = ({
   onChangeText,
   placeholder,
   disabled,
+  maxLength,
 }: TextareaProps) => {
   return (
     <Input
@@ -23,6 +25,7 @@ export const Textarea = ({
       textAlignVertical="top"
       disabled={disabled}
       inputClasses="min-h-[100px] min-w-full"
+      maxLength={maxLength}
     />
   );
 };

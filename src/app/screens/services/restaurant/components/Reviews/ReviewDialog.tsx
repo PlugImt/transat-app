@@ -91,6 +91,7 @@ export const ReviewDialog = ({ children }: ReviewDialogProps) => {
             "services.restaurant.reviews.dialog.commentPlaceholder",
           )}
           disabled={isPostingReview}
+          maxLength={500}
         />
       </DialogContent>
     </Dialog>

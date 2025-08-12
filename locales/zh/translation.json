@@ -431,11 +431,16 @@
       "confirmReturn": "是的，我归还",
       "reserveSuccess": "预订确认！",
       "returnSuccess": "设备归还成功！",
+      "cancelReservation": "取消预订",
+      "cancelConfirmDesc": "您确定要取消此预订吗？",
+      "confirmCancel": "是的，取消",
+      "cancelSuccess": "预订已取消！",
       "errors": {
         "empty": "没有可用的预订",
         "emptyDescription": "目前没有设备或活动可用",
         "reserveError": "预订过程中出错",
-        "returnError": "归还过程中出错"
+        "returnError": "归还过程中出错",
+        "cancelError": "无法取消预订"
       }
     }
   },

@@ -431,11 +431,16 @@
       "confirmReturn": "Sim, eu devolvo",
       "reserveSuccess": "Reserva confirmada!",
       "returnSuccess": "Equipamento devolvido com sucesso!",
+      "cancelReservation": "Cancelar reserva",
+      "cancelConfirmDesc": "Você confirma que quer cancelar esta reserva?",
+      "confirmCancel": "Sim, cancelar",
+      "cancelSuccess": "Reserva cancelada!",
       "errors": {
         "empty": "Nenhuma reserva disponível",
         "emptyDescription": "Nenhum equipamento ou atividade está disponível no momento",
         "reserveError": "Erro durante a reserva",
-        "returnError": "Erro durante a devolução"
+        "returnError": "Erro durante a devolução",
+        "cancelError": "Não foi possível cancelar a reserva"
       }
     }
   },

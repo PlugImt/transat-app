@@ -431,11 +431,16 @@
       "confirmReturn": "Yes, I return",
       "reserveSuccess": "Reservation confirmed!",
       "returnSuccess": "Equipment returned successfully!",
+      "cancelReservation": "Cancel reservation",
+      "cancelConfirmDesc": "Are you sure you want to cancel this reservation?",
+      "confirmCancel": "Yes, cancel",
+      "cancelSuccess": "Reservation canceled!",
       "errors": {
         "empty": "No reservations available",
         "emptyDescription": "No equipment or activities are available at the moment",
         "reserveError": "Error during reservation",
-        "returnError": "Error during return"
+        "returnError": "Error during return",
+        "cancelError": "Unable to cancel reservation"
       }
     }
   },

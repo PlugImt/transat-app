@@ -55,9 +55,7 @@ export const ReservationDialog = ({
       }
 
       const successMessage = isActionCancel
-        ? t("services.reservation.cancelSuccess", {
-            defaultValue: "Reservation canceled",
-          })
+        ? t("services.reservation.cancelSuccess")
         : isReturning
           ? t("services.reservation.returnSuccess")
           : t("services.reservation.reserveSuccess");
@@ -66,9 +64,7 @@ export const ReservationDialog = ({
       hapticFeedback.success();
     } catch (_error) {
       const errorMessage = isActionCancel
-        ? t("services.reservation.errors.cancelError", {
-            defaultValue: "Unable to cancel reservation",
-          })
+        ? t("services.reservation.errors.cancelError")
         : isReturning
           ? t("services.reservation.errors.returnError")
           : t("services.reservation.errors.reserveError");
@@ -79,23 +75,19 @@ export const ReservationDialog = ({
   };
 
   const dialogTitle = isActionCancel
-    ? t("services.reservation.cancelReservation", {
-        defaultValue: "Cancel reservation",
-      })
+    ? t("services.reservation.cancelReservation")
     : isReturning
       ? t("services.reservation.returnItem")
       : t("services.reservation.reserve");
 
   const dialogDescription = isActionCancel
-    ? t("services.reservation.cancelConfirmDesc", {
-        defaultValue: "Are you sure you want to cancel this reservation?",
-      })
+    ? t("services.reservation.cancelConfirmDesc")
     : isReturning
       ? t("services.reservation.returnConfirmDesc")
       : t("services.reservation.reserveConfirmDesc");
 
   const confirmLabel = isActionCancel
-    ? t("services.reservation.confirmCancel", { defaultValue: "Confirm" })
+    ? t("services.reservation.confirmCancel")
     : isReturning
       ? t("services.reservation.confirmReturn")
       : t("services.reservation.confirmReserve");

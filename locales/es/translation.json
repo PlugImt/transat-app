@@ -411,7 +411,7 @@
       "description": "Descubre todos los clubs y asociaciones de la IMT",
       "book": "Reservar",
       "interested": "{{count}} personas están interesadas en este club",
-      "responsible": "Responsible",
+      "responsible": "Responsable",
       "errors": {
         "empty": "No se encontró ningún club",
         "emptyDescription": "Intenta con otra palabra clave",
@@ -431,11 +431,16 @@
       "confirmReturn": "Sí, devuelvo",
       "reserveSuccess": "¡Reserva confirmada!",
       "returnSuccess": "¡Equipo devuelto con éxito!",
+      "cancelReservation": "Cancelar reserva",
+      "cancelConfirmDesc": "¿Confirmas que quieres cancelar esta reserva?",
+      "confirmCancel": "Sí, cancelar",
+      "cancelSuccess": "¡Reserva cancelada!",
       "errors": {
         "empty": "No hay reservas disponibles",
         "emptyDescription": "No hay equipos o actividades disponibles en este momento",
         "reserveError": "Error durante la reserva",
-        "returnError": "Error durante la devolución"
+        "returnError": "Error durante la devolución",
+        "cancelError": "No se pudo cancelar la reserva"
       }
     }
   },

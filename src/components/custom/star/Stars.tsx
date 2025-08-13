@@ -1,4 +1,4 @@
-import { PanResponder, type GestureResponderEvent, View } from "react-native";
+import { type GestureResponderEvent, PanResponder, View } from "react-native";
 import { SingleStar } from "@/components/custom/star/SingleStar";
 import { cn } from "@/utils";
 

@@ -33,11 +33,10 @@ export const MyReservations = () => {
     refetch: myPastRefetch,
   } = useMyReservations("past");
 
-  const list = (tab === "current" ? myCurrent?.current : myPast?.past) ?? [];
-  const slotItems = list.filter((i) => i.slot);
-  const nonSlotItems = list.filter((i) => !i.slot);
-
-  const grouped = slotItems.reduce<Record<string, typeof slotItems>>(
+  const currentList = myCurrent?.current ?? [];
+  const currentSlotItems = currentList.filter((i) => i.slot);
+  const currentNonSlotItems = currentList.filter((i) => !i.slot);
+  const groupedCurrent = currentSlotItems.reduce<Record<string, typeof currentSlotItems>>(
     (acc, item) => {
       const key = toYYYYMMDD(new Date(item.start_date));
       acc[key] = acc[key] ? [...acc[key], item] : [item];
@@ -45,8 +44,23 @@ export const MyReservations = () => {
     },
     {},
   );
-  const orderedDays = Object.keys(grouped).sort((a, b) =>
-    tab === "current" ? a.localeCompare(b) : b.localeCompare(a),
+  const orderedCurrentDays = Object.keys(groupedCurrent).sort((a, b) =>
+    a.localeCompare(b),
+  );
+
+  const pastList = myPast?.past ?? [];
+  const pastSlotItems = pastList.filter((i) => i.slot);
+  const pastNonSlotItems = pastList.filter((i) => !i.slot);
+  const groupedPast = pastSlotItems.reduce<Record<string, typeof pastSlotItems>>(
+    (acc, item) => {
+      const key = toYYYYMMDD(new Date(item.start_date));
+      acc[key] = acc[key] ? [...acc[key], item] : [item];
+      return acc;
+    },
+    {},
+  );
+  const orderedPastDays = Object.keys(groupedPast).sort((a, b) =>
+    b.localeCompare(a),
   );
   const isPending = tab === "current" ? myCurrentPending : myPastPending;
   const isError = tab === "current" ? myCurrentIsError : myPastIsError;
@@ -71,11 +85,7 @@ export const MyReservations = () => {
       asChildren
     >
       <View className="mt-24" />
-      <Tabs
-        defaultValue="current"
-        value={tab}
-        onValueChange={(v) => setTab(v as any)}
-      >
+      <Tabs defaultValue="current">
         <TabsList>
           <TabsTrigger
             title={t("services.reservation.current")}
@@ -87,40 +97,32 @@ export const MyReservations = () => {
         <TabsContent value="current">
           <Animated.FlatList
             ListHeaderComponent={
-              nonSlotItems.length > 0 ? (
+              currentNonSlotItems.length > 0 ? (
                 <View className="gap-2 mb-3">
                   <Text variant="h3" className="ml-4">
                     {t("services.reservation.current")}
                   </Text>
-                  {nonSlotItems.map((res) => (
-                    <MyReservationCard
-                      key={res.id}
-                      item={res}
-                      action="return"
-                    />
+                  {currentNonSlotItems.map((res) => (
+                    <MyReservationCard key={res.id} item={res} action="return" />
                   ))}
                 </View>
               ) : null
             }
-            data={orderedDays}
+            data={orderedCurrentDays}
             keyExtractor={(d) => d}
             renderItem={({ item: day }) => (
               <View className="gap-2 mb-3">
                 <Text variant="h3" className="ml-4">
                   {day}
                 </Text>
-                {grouped[day]
+                {groupedCurrent[day]
                   .sort(
                     (a, b) =>
                       new Date(a.start_date).getTime() -
                       new Date(b.start_date).getTime(),
                   )
                   .map((res) => (
-                    <MyReservationCard
-                      key={res.id}
-                      item={res}
-                      action="cancel"
-                    />
+                    <MyReservationCard key={res.id} item={res} action="cancel" />
                   ))}
               </View>
             )}
@@ -130,25 +132,25 @@ export const MyReservations = () => {
         <TabsContent value="past">
           <Animated.FlatList
             ListHeaderComponent={
-              nonSlotItems.length > 0 ? (
+              pastNonSlotItems.length > 0 ? (
                 <View className="gap-2 mb-3">
                   <Text variant="h3" className="ml-4">
                     {t("services.reservation.past")}
                   </Text>
-                  {nonSlotItems.map((res) => (
+                  {pastNonSlotItems.map((res) => (
                     <MyReservationCard key={res.id} item={res} />
                   ))}
                 </View>
               ) : null
             }
-            data={orderedDays}
+            data={orderedPastDays}
             keyExtractor={(d) => d}
             renderItem={({ item: day }) => (
               <View className="gap-2 mb-3">
                 <Text variant="h3" className="ml-4">
                   {day}
                 </Text>
-                {grouped[day]
+                {groupedPast[day]
                   .sort(
                     (a, b) =>
                       new Date(b.start_date).getTime() -

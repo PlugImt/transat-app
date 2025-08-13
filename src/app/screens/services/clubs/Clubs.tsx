@@ -1,3 +1,5 @@
+import { useNavigation } from "@react-navigation/native";
+import type { StackNavigationProp } from "@react-navigation/stack";
 import { SearchX } from "lucide-react-native";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -10,12 +12,14 @@ import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
 import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
 import { useFilteredClubs } from "@/hooks/services/club/useClub";
+import type { AppStackParamList } from "@/types/navigation";
 import { SearchClub } from "./components";
 
 export const Clubs = () => {
   const { t } = useTranslation();
   const { scrollHandler } = useAnimatedHeader();
   const [searchValue, setSearchValue] = useState("");
+  const navigation = useNavigation<StackNavigationProp<AppStackParamList>>();
 
   const {
     data: clubs,
@@ -58,9 +62,9 @@ export const Clubs = () => {
           <View className="flex-row items-center gap-2 mb-3">
             <SearchClub value={searchValue} onChange={setSearchValue} />
             <Button
-              label={t("services.clubs.book")}
+              label={t("services.reservation.title")}
               variant="secondary"
-              onPress={() => {}}
+              onPress={() => navigation.navigate("Reservation")}
             />
           </View>
         }

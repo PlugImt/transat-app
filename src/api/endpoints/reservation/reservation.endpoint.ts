@@ -53,3 +53,19 @@ export const deleteReservation = async (id: number, startTime: string) => {
     { start_date: startTime },
   );
 };
+
+export const getMyReservations = async (time?: "all" | "past" | "current") => {
+  const query = time ? `?time=${time}` : "";
+  return await apiRequest<{ current: any[]; past: any[] }>(
+    `${API_ROUTES.reservationMy}${query}`,
+    Method.GET,
+  );
+};
+
+export const searchReservations = async (q: string) => {
+  const query = q ? `?q=${encodeURIComponent(q)}` : "";
+  return await apiRequest<GetReservation>(
+    `${API_ROUTES.reservationSearch}${query}`,
+    Method.GET,
+  );
+};

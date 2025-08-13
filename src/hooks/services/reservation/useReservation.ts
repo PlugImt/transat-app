@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import {
+  getMyReservations,
   getReservationCategories,
   getReservationClub,
   getReservationItem,
   getReservationRoot,
+  searchReservations,
 } from "@/api";
 import { QUERY_KEYS } from "@/constants";
 
@@ -40,5 +42,22 @@ export const useReservationItem = (id: number, date = "") => {
     queryFn: () => getReservationItem(id, date),
   });
 
+  return { data, isPending, refetch, isError, error };
+};
+
+export const useMyReservations = (time?: "all" | "past" | "current") => {
+  const { data, isPending, refetch, isError, error } = useQuery({
+    queryKey: QUERY_KEYS.reservation.my(time),
+    queryFn: () => getMyReservations(time),
+  });
+  return { data, isPending, refetch, isError, error };
+};
+
+export const useSearchReservations = (q: string) => {
+  const { data, isPending, refetch, isError, error } = useQuery({
+    queryKey: QUERY_KEYS.reservation.search(q),
+    queryFn: () => searchReservations(q),
+    enabled: q.length > 0,
+  });
   return { data, isPending, refetch, isError, error };
 };

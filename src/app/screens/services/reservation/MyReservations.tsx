@@ -9,7 +9,10 @@ import {
 import { Page } from "@/components/page/Page";
 import { ReservationGroup } from "@/components/reservation";
 import { useMyReservations } from "@/hooks/services/reservation/useReservation";
-import { useMyReservationData } from "@/hooks/services/reservation/useReservationData";
+import {
+  useGroupedReservations,
+  useMyReservationData,
+} from "@/hooks/services/reservation/useReservationData";
 
 export const MyReservations = () => {
   const { t } = useTranslation();
@@ -31,6 +34,8 @@ export const MyReservations = () => {
     "current",
   );
   const pastReservations = useMyReservationData(pastData?.past ?? [], "past");
+  const { grouped: groupedPastAll, orderedDays: orderedPastAllDays } =
+    useGroupedReservations(pastData?.past ?? [], "desc");
 
   const isPending = currentPending || pastPending;
 
@@ -77,11 +82,11 @@ export const MyReservations = () => {
 
         <TabsContent value="past">
           <View className="gap-4 flex-1">
-            {pastReservations.orderedDays.map((day) => (
+            {orderedPastAllDays.map((day) => (
               <ReservationGroup
                 key={day}
                 title={day}
-                items={pastReservations.groupedSlotItems[day]}
+                items={groupedPastAll[day]}
                 showActions={false}
                 showFullDate
               />

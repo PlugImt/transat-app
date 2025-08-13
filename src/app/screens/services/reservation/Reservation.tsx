@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { Button } from "@/components/common/Button";
 import Search from "@/components/common/Search";
+import type { GetReservation } from "@/dto";
 import { useDebouncedValue } from "@/hooks/common/useDebouncedValue";
 import { useStaleData } from "@/hooks/common/useStaleData";
 import {
@@ -24,8 +25,8 @@ export const Reservation = () => {
 
   const rawData =
     debouncedQuery.length > 0
-      ? (searchQuery.data as any)
-      : (reservationQuery.data as any);
+      ? (searchQuery.data as GetReservation)
+      : (reservationQuery.data as GetReservation);
   const data = useStaleData(
     rawData,
     debouncedQuery.length > 0 && searchQuery.isPending,

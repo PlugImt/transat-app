@@ -1,3 +1,5 @@
+import i18n from "@/i18n";
+
 /**
  * Checks if the current time is before 13:30
  */
@@ -153,4 +155,19 @@ export const getTimeAgo = (
   const diffInYears = Math.floor(diffInMonths / 12);
   const key = diffInYears <= 1 ? "common.timeAgo.year" : "common.timeAgo.years";
   return t(key, { count: diffInYears });
+};
+
+/**
+ * Formats a Date object into a human-readable string
+ * in the format "DD MMM YYYY HHhMM".
+ * @param d - The Date object to format.
+ */
+export const formatDateTime = (d: Date) => {
+  const lang = (i18n.language || "en").toLowerCase();
+  const day = d.getDate().toString().padStart(2, "0");
+  const month = d.toLocaleString(lang, { month: "short" });
+  const year = d.getFullYear();
+  const hours = d.getHours().toString().padStart(2, "0");
+  const minutes = d.getMinutes().toString().padStart(2, "0");
+  return `${day} ${month} ${year} ${hours}h${minutes}`;
 };

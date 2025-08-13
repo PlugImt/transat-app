@@ -16,34 +16,33 @@ import { MyReservationCard } from "./components";
 
 export const MyReservations = () => {
   const { t } = useTranslation();
-  const [tab, setTab] = useState<"current" | "past">("current");
+  const [tab, _setTab] = useState<"current" | "past">("current");
 
   const {
     data: myCurrent,
     isPending: myCurrentPending,
-    isError: myCurrentIsError,
-    error: myCurrentError,
+    isError: _myCurrentIsError,
+    error: _myCurrentError,
     refetch: myCurrentRefetch,
   } = useMyReservations("current");
   const {
     data: myPast,
     isPending: myPastPending,
-    isError: myPastIsError,
-    error: myPastError,
+    isError: _myPastIsError,
+    error: _myPastError,
     refetch: myPastRefetch,
   } = useMyReservations("past");
 
   const currentList = myCurrent?.current ?? [];
   const currentSlotItems = currentList.filter((i) => i.slot);
   const currentNonSlotItems = currentList.filter((i) => !i.slot);
-  const groupedCurrent = currentSlotItems.reduce<Record<string, typeof currentSlotItems>>(
-    (acc, item) => {
-      const key = toYYYYMMDD(new Date(item.start_date));
-      acc[key] = acc[key] ? [...acc[key], item] : [item];
-      return acc;
-    },
-    {},
-  );
+  const groupedCurrent = currentSlotItems.reduce<
+    Record<string, typeof currentSlotItems>
+  >((acc, item) => {
+    const key = toYYYYMMDD(new Date(item.start_date));
+    acc[key] = acc[key] ? [...acc[key], item] : [item];
+    return acc;
+  }, {});
   const orderedCurrentDays = Object.keys(groupedCurrent).sort((a, b) =>
     a.localeCompare(b),
   );
@@ -61,12 +60,6 @@ export const MyReservations = () => {
     b.localeCompare(a),
   );
   const isPending = tab === "current" ? myCurrentPending : myPastPending;
-  const isError = tab === "current" ? myCurrentIsError : myPastIsError;
-  const error = tab === "current" ? myCurrentError : myPastError;
-  console.log("-----------CURRENT-----------");
-  console.log(myCurrent);
-  console.log("-----------PAST-----------");
-  console.log(myPast);
 
   return (
     <Page
@@ -101,7 +94,11 @@ export const MyReservations = () => {
                     {t("services.reservation.current")}
                   </Text>
                   {currentNonSlotItems.map((res) => (
-                    <MyReservationCard key={res.id} item={res} action="return" />
+                    <MyReservationCard
+                      key={res.id}
+                      item={res}
+                      action="return"
+                    />
                   ))}
                 </View>
               ) : null
@@ -120,7 +117,11 @@ export const MyReservations = () => {
                       new Date(b.start_date).getTime(),
                   )
                   .map((res) => (
-                    <MyReservationCard key={res.id} item={res} action="cancel" />
+                    <MyReservationCard
+                      key={`${res.id}-${res.start_date}`}
+                      item={res}
+                      action="cancel"
+                    />
                   ))}
               </View>
             )}
@@ -143,7 +144,11 @@ export const MyReservations = () => {
                       new Date(a.start_date).getTime(),
                   )
                   .map((res) => (
-                    <MyReservationCard key={res.id} item={res} />
+                    <MyReservationCard
+                      key={`${res.id}-${res.start_date}`}
+                      item={res}
+                      fullDateRange
+                    />
                   ))}
               </View>
             )}

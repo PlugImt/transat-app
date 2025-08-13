@@ -6,24 +6,21 @@ import ReservationCard from "@/components/custom/card/ReservationCard";
 import { Empty } from "@/components/page/Empty";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
-import type { GetReservation } from "@/dto/reservation";
 import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
-import { useReservationData } from "@/hooks/services/reservation/useReservationData";
+import { useReservationDisplayData } from "@/hooks/services/reservation/useReservationData";
+import type { ReservationListResponse } from "@/types/reservation.types";
 import { ReservationSkeleton } from "./ReservationSkeleton";
 
-interface ReservationCommonProps {
+interface ReservationListProps {
   title: string;
-  data: GetReservation[] | GetReservation | undefined;
+  data: ReservationListResponse | ReservationListResponse[] | undefined;
   isPending: boolean;
   isError: boolean;
   error: Error | null;
+  refetch?: () => void;
   headerComponent?: ReactElement | ComponentType<object> | null;
   variant?: "page" | "embed";
   showScrollIndicators?: boolean;
-}
-
-interface ReservationPageContainerProps extends ReservationCommonProps {
-  refetch?: () => void;
 }
 
 export const ReservationList = ({
@@ -36,9 +33,9 @@ export const ReservationList = ({
   headerComponent,
   variant = "page",
   showScrollIndicators = true,
-}: ReservationPageContainerProps) => {
+}: ReservationListProps) => {
   const { t } = useTranslation();
-  const combinedData = useReservationData(data);
+  const displayData = useReservationDisplayData(data);
   const { scrollHandler } = useAnimatedHeader();
 
   if (isPending) {
@@ -67,7 +64,7 @@ export const ReservationList = ({
 
   const content = (
     <Animated.FlatList
-      data={combinedData}
+      data={displayData}
       renderItem={({ item }) => (
         <ReservationCard
           title={item.name}
@@ -80,7 +77,7 @@ export const ReservationList = ({
       keyExtractor={(item) => `${item.type}-${item.id}`}
       onScroll={variant === "page" ? scrollHandler : undefined}
       showsVerticalScrollIndicator={showScrollIndicators}
-      // biome-ignore lint/suspicious/noExplicitAny: a être mieux handled
+      // biome-ignore lint/suspicious/noExplicitAny: HeaderComponent type is complex
       ListHeaderComponent={headerComponent as any}
       ListEmptyComponent={
         isPending ? null : (
@@ -111,10 +108,10 @@ export const ReservationList = ({
   return content;
 };
 
-export const ReservationPageContainer = (
-  props: ReservationPageContainerProps,
-) => <ReservationList {...props} variant="page" />;
+export const ReservationPageContainer = (props: ReservationListProps) => (
+  <ReservationList {...props} variant="page" />
+);
 
-export const ReservationListOnly = (props: ReservationCommonProps) => (
+export const ReservationListOnly = (props: ReservationListProps) => (
   <ReservationList {...props} variant="embed" />
 );

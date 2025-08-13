@@ -5,42 +5,59 @@ import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { Button } from "@/components/common/Button";
 import Search from "@/components/common/Search";
-import type { GetReservation } from "@/dto";
+import { ReservationList } from "@/components/reservation";
 import { useDebouncedValue } from "@/hooks/common/useDebouncedValue";
 import { useStaleData } from "@/hooks/common/useStaleData";
 import {
+  useReservationSearch,
   useReservations,
-  useSearchReservations,
 } from "@/hooks/services/reservation/useReservation";
 import type { AppStackParamList } from "@/types";
-import { ReservationList } from "./components";
+import type { ReservationListResponse } from "@/types/reservation.types";
 
 export const Reservation = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<StackNavigationProp<AppStackParamList>>();
   const [query, setQuery] = useState("");
+
   const reservationQuery = useReservations();
   const debouncedQuery = useDebouncedValue(query, 300);
-  const searchQuery = useSearchReservations(debouncedQuery);
+  const searchQuery = useReservationSearch(debouncedQuery);
 
-  const rawData =
-    debouncedQuery.length > 0
-      ? (searchQuery.data as GetReservation)
-      : (reservationQuery.data as GetReservation);
+  const isSearching = debouncedQuery.length > 0;
+  const rawData = isSearching ? searchQuery.data : reservationQuery.data;
   const data = useStaleData(
-    rawData,
-    debouncedQuery.length > 0 && searchQuery.isPending,
+    rawData as ReservationListResponse,
+    isSearching && searchQuery.isPending,
   );
+
   const isPending = reservationQuery.isPending;
-  const isError =
-    debouncedQuery.length > 0 ? searchQuery.isError : reservationQuery.isError;
+  const isError = isSearching ? searchQuery.isError : reservationQuery.isError;
   const error = (
-    debouncedQuery.length > 0 ? searchQuery.error : reservationQuery.error
+    isSearching ? searchQuery.error : reservationQuery.error
   ) as Error | null;
+
   const refetch = async () => {
     await reservationQuery.refetch();
     if (query.length > 0) await searchQuery.refetch();
   };
+
+  const headerComponent = (
+    <View className="gap-4 px-4 mb-4">
+      <Search
+        placeholder={t("services.reservation.searchPlaceholder")}
+        onChangeText={setQuery}
+        value={query}
+        onChange={setQuery}
+      />
+      <Button
+        label={t("services.reservation.myReservations")}
+        variant="secondary"
+        // @ts-ignore
+        onPress={() => navigation.navigate("MyReservations")}
+      />
+    </View>
+  );
 
   return (
     <ReservationList
@@ -50,16 +67,7 @@ export const Reservation = () => {
       isError={isError}
       error={error}
       refetch={refetch}
-      headerComponent={
-        <View className="flex-row items-center gap-2 mb-3">
-          <Search value={query} onChange={setQuery} />
-          <Button
-            label={t("services.reservation.myReservations")}
-            variant="secondary"
-            onPress={() => navigation.navigate("MyReservations")}
-          />
-        </View>
-      }
+      headerComponent={headerComponent}
       variant="page"
     />
   );

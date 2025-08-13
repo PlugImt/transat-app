@@ -8,56 +8,69 @@ import {
   searchReservations,
 } from "@/api";
 import { QUERY_KEYS } from "@/constants";
+import type {
+  MyReservationsResponse,
+  ReservationItemResponse,
+  ReservationListResponse,
+  ReservationTimeFilter,
+} from "@/types/reservation.types";
 
 export const useReservations = () => {
   const { data, isPending, refetch, isError, error } = useQuery({
-    queryKey: ["reservation", "root"],
-    queryFn: () => getReservationRoot(),
+    queryKey: QUERY_KEYS.reservation.categories,
+    queryFn: getReservationRoot,
   });
 
   return { data, isPending, refetch, isError, error };
 };
 
-export const useReservationCategories = (id: number) => {
+export const useReservationCategory = (categoryId: number) => {
   const { data, isPending, refetch, isError, error } = useQuery({
-    queryKey: [...QUERY_KEYS.reservation.categories, id],
-    queryFn: () => getReservationCategories(id),
+    queryKey: [...QUERY_KEYS.reservation.categories, categoryId],
+    queryFn: () => getReservationCategories(categoryId),
   });
 
   return { data, isPending, refetch, isError, error };
 };
 
-export const useReservationClub = (id: number) => {
+export const useClubReservations = (clubId: number) => {
   const { data, isPending, refetch, isError, error } = useQuery({
-    queryKey: QUERY_KEYS.reservation.club(id),
-    queryFn: () => getReservationClub(id),
+    queryKey: QUERY_KEYS.reservation.club(clubId),
+    queryFn: () => getReservationClub(clubId),
   });
 
   return { data, isPending, refetch, isError, error };
 };
 
-export const useReservationItem = (id: number, date = "") => {
+export const useReservationItem = (itemId: number, date?: string) => {
   const { data, isPending, refetch, isError, error } = useQuery({
-    queryKey: ["reservationItem", id, date],
-    queryFn: () => getReservationItem(id, date),
+    queryKey: QUERY_KEYS.reservation.item(itemId, date),
+    queryFn: () => getReservationItem(itemId, date || ""),
   });
 
   return { data, isPending, refetch, isError, error };
 };
 
-export const useMyReservations = (time?: "all" | "past" | "current") => {
-  const { data, isPending, refetch, isError, error } = useQuery({
-    queryKey: QUERY_KEYS.reservation.my(time),
-    queryFn: () => getMyReservations(time),
-  });
+export const useMyReservations = (
+  timeFilter: ReservationTimeFilter = "current",
+  options?: { enabled?: boolean },
+) => {
+  const { data, isPending, refetch, isError, error } =
+    useQuery<MyReservationsResponse>({
+      queryKey: QUERY_KEYS.reservation.my(timeFilter),
+      queryFn: () => getMyReservations(timeFilter),
+      enabled: options?.enabled ?? true,
+    });
+
   return { data, isPending, refetch, isError, error };
 };
 
-export const useSearchReservations = (q: string) => {
+export const useReservationSearch = (query: string) => {
   const { data, isPending, refetch, isError, error } = useQuery({
-    queryKey: QUERY_KEYS.reservation.search(q),
-    queryFn: () => searchReservations(q),
-    enabled: q.length > 0,
+    queryKey: QUERY_KEYS.reservation.search(query),
+    queryFn: () => searchReservations(query),
+    enabled: query.trim().length > 0,
   });
+
   return { data, isPending, refetch, isError, error };
 };

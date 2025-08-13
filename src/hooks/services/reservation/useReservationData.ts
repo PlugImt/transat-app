@@ -1,31 +1,81 @@
 import { useMemo } from "react";
-import type { User } from "@/dto";
-import type { GetReservation } from "@/dto/reservation";
+import type {
+  GroupedReservations,
+  MyReservationItem,
+  ReservationDisplayItem,
+  ReservationListResponse,
+} from "@/types/reservation.types";
+import {
+  groupReservationsByDate,
+  sortByStartDate,
+  splitReservationsBySlot,
+  transformToDisplayItems,
+} from "@/utils/reservation.utils";
 
-type ReservationItem = {
-  id: number;
-  name: string;
-  type: "category" | "item";
-  slot?: boolean;
-  user?: User;
+export const useReservationDisplayData = (
+  data: ReservationListResponse | ReservationListResponse[] | undefined,
+): ReservationDisplayItem[] => {
+  return useMemo(() => {
+    if (!data) return [];
+
+    if (Array.isArray(data)) {
+      const allCategories = data.flatMap((item) => item.categories || []);
+      const allItems = data.flatMap((item) => item.items || []);
+      return transformToDisplayItems({
+        categories: allCategories,
+        items: allItems,
+      });
+    }
+
+    return transformToDisplayItems(data);
+  }, [data]);
 };
 
-export const useReservationData = (
-  data: GetReservation[] | GetReservation | undefined,
-): ReservationItem[] => {
+export const useMyReservationData = (
+  items: MyReservationItem[],
+  type: "current" | "past",
+) => {
   return useMemo(() => {
-    const reservation = Array.isArray(data) ? data[0] : data;
-    if (!reservation) return [];
+    if (!items?.length) {
+      return {
+        slotItems: [],
+        nonSlotItems: [],
+        groupedSlotItems: {},
+        orderedDays: [],
+      };
+    }
 
-    const mergedData: ReservationItem[] = [
-      ...(reservation.categories?.map((c) => ({
-        ...c,
-        type: "category" as const,
-      })) || []),
-      ...(reservation.items?.map((i) => ({ ...i, type: "item" as const })) ||
-        []),
-    ];
+    const sortDirection = type === "current" ? "asc" : "desc";
+    const sortedItems = sortByStartDate(items, sortDirection);
+    const { slotItems, nonSlotItems } = splitReservationsBySlot(sortedItems);
 
-    return mergedData;
-  }, [data]);
+    const groupedSlotItems = groupReservationsByDate(slotItems);
+    const orderedDays = Object.keys(groupedSlotItems).sort((a, b) =>
+      type === "current" ? a.localeCompare(b) : b.localeCompare(a),
+    );
+
+    return {
+      slotItems,
+      nonSlotItems: sortByStartDate(nonSlotItems, sortDirection),
+      groupedSlotItems,
+      orderedDays,
+    };
+  }, [items, type]);
+};
+
+export const useGroupedReservations = <T extends MyReservationItem>(
+  items: T[],
+  sortDirection: "asc" | "desc" = "asc",
+): {
+  grouped: GroupedReservations<T>;
+  orderedDays: string[];
+} => {
+  return useMemo(() => {
+    const grouped = groupReservationsByDate(items);
+    const orderedDays = Object.keys(grouped).sort((a, b) =>
+      sortDirection === "asc" ? a.localeCompare(b) : b.localeCompare(a),
+    );
+
+    return { grouped, orderedDays };
+  }, [items, sortDirection]);
 };

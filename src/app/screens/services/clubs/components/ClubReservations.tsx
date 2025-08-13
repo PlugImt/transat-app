@@ -1,12 +1,12 @@
 import type { ComponentType, ReactElement } from "react";
-import { ReservationListOnly } from "@/app/screens/services/reservation/components/ReservationPageContainer";
 import CardGroup from "@/components/common/CardGroup";
-import type { GetReservation } from "@/dto/reservation";
-import { useReservationData } from "@/hooks/services/reservation/useReservationData";
+import { ReservationListOnly } from "@/components/reservation";
+import { useReservationDisplayData } from "@/hooks/services/reservation/useReservationData";
+import type { ReservationListResponse } from "@/types/reservation.types";
 
 interface ClubReservationsProps {
   title: string;
-  data: GetReservation[] | GetReservation | undefined;
+  data: ReservationListResponse | ReservationListResponse[] | undefined;
   isPending: boolean;
   isError: boolean;
   error: Error | null;
@@ -21,9 +21,9 @@ export const ClubReservations = ({
   error,
   headerComponent,
 }: ClubReservationsProps) => {
-  const combinedData = useReservationData(data);
+  const displayData = useReservationDisplayData(data);
 
-  if (!isPending && !isError && combinedData.length === 0) {
+  if (!isPending && !isError && displayData.length === 0) {
     return null;
   }
 

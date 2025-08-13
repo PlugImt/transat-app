@@ -83,11 +83,13 @@ export const ReservationList = ({
       // biome-ignore lint/suspicious/noExplicitAny: a être mieux handled
       ListHeaderComponent={headerComponent as any}
       ListEmptyComponent={
-        <Empty
-          icon={<SearchX />}
-          title={t("services.reservation.errors.empty")}
-          description={t("services.reservation.errors.emptyDescription")}
-        />
+        isPending ? null : (
+          <Empty
+            icon={<SearchX />}
+            title={t("services.reservation.errors.empty")}
+            description={t("services.reservation.errors.emptyDescription")}
+          />
+        )
       }
     />
   );

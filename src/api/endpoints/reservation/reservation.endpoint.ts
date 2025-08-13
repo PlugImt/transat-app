@@ -1,5 +1,10 @@
 import { API_ROUTES, apiRequest, Method } from "@/api";
-import type { Club, GetReservation, ReservationDetails } from "@/dto";
+import type {
+  Club,
+  GetReservation,
+  MyReservationsResponse,
+  ReservationDetails,
+} from "@/dto";
 
 export const getReservationRoot = async () => {
   return await apiRequest<GetReservation[]>(
@@ -54,9 +59,11 @@ export const deleteReservation = async (id: number, startTime: string) => {
   );
 };
 
-export const getMyReservations = async (time?: "all" | "past" | "current") => {
+export const getMyReservations = async (
+  time?: "all" | "past" | "current",
+): Promise<MyReservationsResponse> => {
   const query = time ? `?time=${time}` : "";
-  return await apiRequest<{ current: any[]; past: any[] }>(
+  return await apiRequest<MyReservationsResponse>(
     `${API_ROUTES.reservationMy}${query}`,
     Method.GET,
   );

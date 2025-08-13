@@ -29,6 +29,7 @@ import { ClubMemberList } from "@/app/screens/services/clubs/components/ClubMemb
 import { HomeworkDetails } from "@/app/screens/services/homework/components/HomeworkDetails";
 import {
   Category,
+  MyReservations,
   ReservationCalendar,
 } from "@/app/screens/services/reservation";
 import { RestaurantReviews } from "@/app/screens/services/restaurant/components/Reviews";
@@ -74,6 +75,7 @@ const ServicesStackScreen = () => (
     <ServicesStack.Screen name="Traq" component={Traq} />
     <ServicesStack.Screen name="Olimtpe" component={Olimtpe} />
     <ServicesStack.Screen name="Reservation" component={Reservation} />
+    <ServicesStack.Screen name="MyReservations" component={MyReservations} />
     <ServicesStack.Screen name="ReservationCategory" component={Category} />
     <ServicesStack.Screen
       name="ReservationItem"

@@ -52,7 +52,11 @@ export const Reservation = () => {
       headerComponent={
         <View className="flex-row items-center gap-2 mb-3">
           <Search value={query} onChange={setQuery} />
-          
+          <Button
+            label={t("services.reservation.myReservations")}
+            variant="secondary"
+            onPress={() => navigation.navigate("MyReservations")}
+          />
         </View>
       }
       variant="page"

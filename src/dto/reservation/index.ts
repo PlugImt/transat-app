@@ -67,3 +67,16 @@ export type CreateReservationCategory = z.infer<
 export type CreateReservationItem = z.infer<typeof createReservationItem>;
 export type ManageReservation = z.infer<typeof manageReservation>;
 export type ReservationScheme = z.infer<typeof reservationSchema>;
+
+export type MyReservationItem = {
+  id: number;
+  name: string;
+  slot: boolean;
+  start_date: string;
+  end_date: string | null;
+};
+
+export type MyReservationsResponse = {
+  current: MyReservationItem[];
+  past: MyReservationItem[];
+};

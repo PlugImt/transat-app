@@ -25,15 +25,14 @@ export const useUpdateReservation = () => {
       const currentTime = formatDateSQL(new Date());
       return updateReservation(id, isReturning ? null : currentTime);
     },
-    onSuccess: () => {
-      queryClient
-        .invalidateQueries({
-          queryKey: QUERY_KEYS.reservation.categories,
-        })
-        .then((r) => r);
-      queryClient
-        .invalidateQueries({ queryKey: QUERY_KEYS.reservation.my() })
-        .then((r) => r);
+    onSuccess: (_data, variables) => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.reservation.categories });
+      queryClient.invalidateQueries({ queryKey: ["reservation", "search"] });
+      queryClient.invalidateQueries({ queryKey: ["reservation", "items"] });
+      if (variables?.id) {
+        queryClient.invalidateQueries({ queryKey: ["reservation", "items", variables.id] });
+      }
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.reservation.my() });
     },
   });
 };
@@ -51,11 +50,13 @@ export const useCancelReservation = () => {
       }
       return deleteReservation(id, formatDateSQL(new Date(startDate)));
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: QUERY_KEYS.reservation.categories,
-      });
-      queryClient.invalidateQueries({ queryKey: ["reservation", "root"] });
+    onSuccess: (_data, variables) => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.reservation.categories });
+      queryClient.invalidateQueries({ queryKey: ["reservation", "search"] });
+      queryClient.invalidateQueries({ queryKey: ["reservation", "items"] });
+      if (variables?.id) {
+        queryClient.invalidateQueries({ queryKey: ["reservation", "items", variables.id] });
+      }
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.reservation.my() });
     },
   });
@@ -82,20 +83,14 @@ export const useCalendarReservationMutation = () => {
         : formatDateSQL(new Date());
       return updateReservation(id, effectiveStart);
     },
-    onSuccess: () => {
-      queryClient
-        .invalidateQueries({
-          queryKey: QUERY_KEYS.reservation.item(),
-        })
-        .then((r) => r);
-      queryClient
-        .invalidateQueries({
-          queryKey: QUERY_KEYS.reservation.categories,
-        })
-        .then((r) => r);
-      queryClient
-        .invalidateQueries({ queryKey: QUERY_KEYS.reservation.my() })
-        .then((r) => r);
+    onSuccess: (_data, variables) => {
+      if (variables?.id) {
+        queryClient.invalidateQueries({ queryKey: ["reservation", "items", variables.id] });
+      }
+      queryClient.invalidateQueries({ queryKey: ["reservation", "items"] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.reservation.categories });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.reservation.my() });
+      queryClient.invalidateQueries({ queryKey: ["reservation", "search"] });
     },
   });
 };

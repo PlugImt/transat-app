@@ -53,6 +53,7 @@ const ReservationCard = ({
 
   const handleReservePress = () => {
     if (slot) {
+      // @ts-ignore
       navigation.push("ReservationItem", { id, title });
     }
   };

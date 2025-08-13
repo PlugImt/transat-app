@@ -1,11 +1,14 @@
 import { type RouteProp, useRoute } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
+import { ClubReservations } from "@/app/screens/services/clubs/components/ClubReservations";
 import CardGroup from "@/components/common/CardGroup";
 import { UserCardSkeleton } from "@/components/custom";
 import { Empty } from "@/components/page/Empty";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
+import type { GetReservation } from "@/dto";
 import { useClubDetails } from "@/hooks/services/club/useClub";
+import { useReservationClub } from "@/hooks/services/reservation";
 import type { AppStackParamList } from "@/types/navigation";
 import {
   ClubDetailsHeader,
@@ -21,6 +24,13 @@ const ClubDetails = () => {
   const { id } = route.params;
 
   const { data: club, isPending, isError, error, refetch } = useClubDetails(id);
+  const {
+    data: clubReservations,
+    isPending: isClubReservationsPending,
+    isError: isClubReservationsError,
+    error: clubReservationsError,
+    refetch: refetchClubReservations,
+  } = useReservationClub(id);
 
   if (isError) {
     return (
@@ -55,11 +65,21 @@ const ClubDetails = () => {
   return (
     <Page
       title={t("services.clubs.title")}
-      refreshing={isPending}
-      onRefresh={refetch}
+      refreshing={isPending || isClubReservationsPending}
+      onRefresh={() => {
+        refetch().then((r) => r);
+        refetchClubReservations().then((r) => r);
+      }}
     >
       <ClubDetailsHeader club={club} />
       <ClubResponsible club={club} />
+      <ClubReservations
+        title={t("services.reservation.title")}
+        data={clubReservations as GetReservation[] | GetReservation | undefined}
+        isPending={isClubReservationsPending}
+        isError={isClubReservationsError}
+        error={clubReservationsError as Error | null}
+      />
     </Page>
   );
 };

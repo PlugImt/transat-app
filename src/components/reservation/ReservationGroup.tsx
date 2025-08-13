@@ -1,7 +1,6 @@
-import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { Text } from "@/components/common/Text";
-import type { MyReservationItem } from "@/types/reservation.types";
+import type { MyReservationItem } from "@/dto/reservation";
 import {
   generateReservationKey,
   getReservationAction,
@@ -25,8 +24,6 @@ export const ReservationGroup = ({
   variant = "default",
   emptyMessage,
 }: ReservationGroupProps) => {
-  const { t } = useTranslation();
-
   if (!items.length && !emptyMessage) {
     return null;
   }

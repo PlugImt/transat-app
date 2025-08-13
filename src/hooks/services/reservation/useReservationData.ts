@@ -1,19 +1,16 @@
 import { useMemo } from "react";
-import type {
-  GroupedReservations,
-  MyReservationItem,
-  ReservationDisplayItem,
-  ReservationListResponse,
-} from "@/types/reservation.types";
+import type { GetReservation, MyReservationItem } from "@/dto/reservation";
 import {
+  type GroupedReservations,
   groupReservationsByDate,
+  type ReservationDisplayItem,
   sortByStartDate,
   splitReservationsBySlot,
   transformToDisplayItems,
 } from "@/utils/reservation.utils";
 
 export const useReservationDisplayData = (
-  data: ReservationListResponse | ReservationListResponse[] | undefined,
+  data: GetReservation | GetReservation[] | undefined,
 ): ReservationDisplayItem[] => {
   return useMemo(() => {
     if (!data) return [];

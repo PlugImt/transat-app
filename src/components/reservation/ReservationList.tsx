@@ -6,14 +6,14 @@ import ReservationCard from "@/components/custom/card/ReservationCard";
 import { Empty } from "@/components/page/Empty";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
+import type { GetReservation } from "@/dto/reservation";
 import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
 import { useReservationDisplayData } from "@/hooks/services/reservation/useReservationData";
-import type { ReservationListResponse } from "@/types/reservation.types";
 import { ReservationSkeleton } from "./ReservationSkeleton";
 
 interface ReservationListProps {
   title: string;
-  data: ReservationListResponse | ReservationListResponse[] | undefined;
+  data: GetReservation | GetReservation[] | undefined;
   isPending: boolean;
   isError: boolean;
   error: Error | null;

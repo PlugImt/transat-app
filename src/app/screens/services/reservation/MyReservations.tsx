@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import {
@@ -11,7 +10,6 @@ import { Page } from "@/components/page/Page";
 import { ReservationGroup } from "@/components/reservation";
 import { useMyReservations } from "@/hooks/services/reservation/useReservation";
 import { useMyReservationData } from "@/hooks/services/reservation/useReservationData";
-import type { ReservationTimeFilter } from "@/types/reservation.types";
 
 export const MyReservations = () => {
   const { t } = useTranslation();
@@ -60,7 +58,7 @@ export const MyReservations = () => {
           <View className="gap-4 flex-1">
             {currentReservations.nonSlotItems.length > 0 && (
               <ReservationGroup
-                title={t("services.reservation.nonSlotItems")}
+                title={t("services.reservation.current")}
                 items={currentReservations.nonSlotItems}
                 showActions
               />

@@ -1,11 +1,18 @@
-import i18n from "@/i18n";
-import type {
-  GroupedReservations,
-  MyReservationItem,
-  ReservationDisplayItem,
-  ReservationListResponse,
-} from "@/types/reservation.types";
-import { formatDateTime } from '@/utils/date.utils';
+import type { User } from "@/dto";
+import type { GetReservation, MyReservationItem } from "@/dto/reservation";
+import { formatDateTime } from "@/utils/date.utils";
+
+export interface ReservationDisplayItem {
+  id: number;
+  name: string;
+  type: "category" | "item";
+  slot?: boolean;
+  user?: User;
+}
+
+export interface GroupedReservations<T = MyReservationItem> {
+  [date: string]: T[];
+}
 
 /**
  * Formats a Date object into YYYY-MM-DD format for grouping.
@@ -86,7 +93,7 @@ export const splitReservationsBySlot = <T extends MyReservationItem>(
  * Converts API response to display items for UI components.
  */
 export const transformToDisplayItems = (
-  data: ReservationListResponse | undefined,
+  data: GetReservation | undefined,
 ): ReservationDisplayItem[] => {
   const items: ReservationDisplayItem[] = [];
 

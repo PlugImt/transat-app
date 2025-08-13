@@ -6,6 +6,7 @@ import { View } from "react-native";
 import { Button } from "@/components/common/Button";
 import Search from "@/components/common/Search";
 import { ReservationList } from "@/components/reservation";
+import type { GetReservation } from "@/dto/reservation";
 import { useDebouncedValue } from "@/hooks/common/useDebouncedValue";
 import { useStaleData } from "@/hooks/common/useStaleData";
 import {
@@ -13,7 +14,6 @@ import {
   useReservations,
 } from "@/hooks/services/reservation/useReservation";
 import type { AppStackParamList } from "@/types";
-import type { ReservationListResponse } from "@/types/reservation.types";
 
 export const Reservation = () => {
   const { t } = useTranslation();
@@ -27,7 +27,7 @@ export const Reservation = () => {
   const isSearching = debouncedQuery.length > 0;
   const rawData = isSearching ? searchQuery.data : reservationQuery.data;
   const data = useStaleData(
-    rawData as ReservationListResponse,
+    rawData as GetReservation,
     isSearching && searchQuery.isPending,
   );
 
@@ -43,9 +43,9 @@ export const Reservation = () => {
   };
 
   const headerComponent = (
-    <View className="gap-4 px-4 mb-4">
+    <View className="flex-row items-center gap-2 mb-3">
       <Search
-        placeholder={t("services.reservation.searchPlaceholder")}
+        placeholder={String(t("common.search"))}
         onChangeText={setQuery}
         value={query}
         onChange={setQuery}

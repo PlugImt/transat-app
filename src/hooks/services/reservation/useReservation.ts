@@ -8,12 +8,9 @@ import {
   searchReservations,
 } from "@/api";
 import { QUERY_KEYS } from "@/constants";
-import type {
-  MyReservationsResponse,
-  ReservationItemResponse,
-  ReservationListResponse,
-  ReservationTimeFilter,
-} from "@/types/reservation.types";
+import type { MyReservationsResponse } from "@/dto/reservation";
+
+export type ReservationTimeFilter = "all" | "past" | "current";
 
 export const useReservations = () => {
   const { data, isPending, refetch, isError, error } = useQuery({

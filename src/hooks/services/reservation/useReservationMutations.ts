@@ -4,8 +4,15 @@ import {
   updateReservation,
 } from "@/api/endpoints/reservation/reservation.endpoint";
 import { QUERY_KEYS } from "@/constants";
-import type { ReservationMutationParams } from "@/types/reservation.types";
 import { formatDateSQL } from "@/utils/calendar.utils";
+
+// Mutation parameter types
+interface ReservationMutationParams {
+  id: number;
+  isReturning?: boolean;
+  isCancelling?: boolean;
+  startDate?: string;
+}
 
 export const useUpdateReservation = () => {
   const queryClient = useQueryClient();
@@ -19,10 +26,14 @@ export const useUpdateReservation = () => {
       return updateReservation(id, isReturning ? null : currentTime);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      queryClient
+        .invalidateQueries({
           queryKey: QUERY_KEYS.reservation.categories,
-      }).then(r  =>r);
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.reservation.my() }).then(r  =>r);
+        })
+        .then((r) => r);
+      queryClient
+        .invalidateQueries({ queryKey: QUERY_KEYS.reservation.my() })
+        .then((r) => r);
     },
   });
 };

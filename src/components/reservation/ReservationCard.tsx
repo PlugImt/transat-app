@@ -6,13 +6,26 @@ import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
 import { ReservationDialog } from "@/components/custom/ReservationDialog";
 import { useTheme } from "@/contexts/ThemeContext";
-import type { MyReservationCardProps } from "@/types/reservation.types";
+import type { MyReservationItem } from "@/dto/reservation";
 import {
   formatDateTimeRange,
   formatTimeRange,
   generateReservationKey,
-  hasEndDate,
 } from "@/utils/reservation.utils";
+
+// Component prop types
+interface ReservationCardBaseProps {
+  id: number;
+  name: string;
+  variant?: "default" | "compact";
+  showActions?: boolean;
+}
+
+export interface MyReservationCardProps extends ReservationCardBaseProps {
+  item: MyReservationItem;
+  action?: "cancel" | "return";
+  showFullDate?: boolean;
+}
 
 export const ReservationCard = ({
   item,

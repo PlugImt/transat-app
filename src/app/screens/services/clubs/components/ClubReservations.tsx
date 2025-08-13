@@ -1,12 +1,12 @@
 import type { ComponentType, ReactElement } from "react";
 import CardGroup from "@/components/common/CardGroup";
 import { ReservationListOnly } from "@/components/reservation";
+import type { GetReservation } from "@/dto/reservation";
 import { useReservationDisplayData } from "@/hooks/services/reservation/useReservationData";
-import type { ReservationListResponse } from "@/types/reservation.types";
 
 interface ClubReservationsProps {
   title: string;
-  data: ReservationListResponse | ReservationListResponse[] | undefined;
+  data: GetReservation | GetReservation[] | undefined;
   isPending: boolean;
   isError: boolean;
   error: Error | null;

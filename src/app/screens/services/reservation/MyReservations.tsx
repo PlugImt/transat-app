@@ -33,7 +33,6 @@ export const MyReservations = () => {
     currentData?.current ?? [],
     "current",
   );
-  const pastReservations = useMyReservationData(pastData?.past ?? [], "past");
   const { grouped: groupedPastAll, orderedDays: orderedPastAllDays } =
     useGroupedReservations(pastData?.past ?? [], "desc");
 

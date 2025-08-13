@@ -1,4 +1,5 @@
 import { CircleX } from "lucide-react-native";
+import type React from "react";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";

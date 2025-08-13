@@ -1,4 +1,5 @@
 import { useRoute } from "@react-navigation/native";
+import type React from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { RestaurantReviewsRouteProp } from "@/app/screens/services/restaurant/components/Reviews";

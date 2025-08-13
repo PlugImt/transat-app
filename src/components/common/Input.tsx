@@ -1,4 +1,5 @@
 import { Eye, EyeOff } from "lucide-react-native";
+import type React from "react";
 import { cloneElement, forwardRef, useState } from "react";
 import {
   type Control,

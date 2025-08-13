@@ -1,4 +1,4 @@
-import { type ComponentPropsWithoutRef, cloneElement } from "react";
+import React, { type ComponentPropsWithoutRef, cloneElement } from "react";
 import {
   ActivityIndicator,
   type GestureResponderEvent,

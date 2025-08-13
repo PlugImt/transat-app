@@ -26,11 +26,15 @@ export const useUpdateReservation = () => {
       return updateReservation(id, isReturning ? null : currentTime);
     },
     onSuccess: (_data, variables) => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.reservation.categories });
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.reservation.categories,
+      });
       queryClient.invalidateQueries({ queryKey: ["reservation", "search"] });
       queryClient.invalidateQueries({ queryKey: ["reservation", "items"] });
       if (variables?.id) {
-        queryClient.invalidateQueries({ queryKey: ["reservation", "items", variables.id] });
+        queryClient.invalidateQueries({
+          queryKey: ["reservation", "items", variables.id],
+        });
       }
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.reservation.my() });
     },
@@ -51,11 +55,15 @@ export const useCancelReservation = () => {
       return deleteReservation(id, formatDateSQL(new Date(startDate)));
     },
     onSuccess: (_data, variables) => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.reservation.categories });
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.reservation.categories,
+      });
       queryClient.invalidateQueries({ queryKey: ["reservation", "search"] });
       queryClient.invalidateQueries({ queryKey: ["reservation", "items"] });
       if (variables?.id) {
-        queryClient.invalidateQueries({ queryKey: ["reservation", "items", variables.id] });
+        queryClient.invalidateQueries({
+          queryKey: ["reservation", "items", variables.id],
+        });
       }
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.reservation.my() });
     },
@@ -85,10 +93,14 @@ export const useCalendarReservationMutation = () => {
     },
     onSuccess: (_data, variables) => {
       if (variables?.id) {
-        queryClient.invalidateQueries({ queryKey: ["reservation", "items", variables.id] });
+        queryClient.invalidateQueries({
+          queryKey: ["reservation", "items", variables.id],
+        });
       }
       queryClient.invalidateQueries({ queryKey: ["reservation", "items"] });
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.reservation.categories });
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.reservation.categories,
+      });
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.reservation.my() });
       queryClient.invalidateQueries({ queryKey: ["reservation", "search"] });
     },

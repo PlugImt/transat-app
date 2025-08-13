@@ -46,7 +46,7 @@ export const ReservationCard = ({
     }
 
     if (endDate) {
-      return formatTimeRange(item.start_date, item.end_date);
+      return formatTimeRange(item.start_date, String(item.end_date));
     }
 
     return formatTimeRange(item.start_date, item.start_date);

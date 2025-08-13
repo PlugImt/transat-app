@@ -19,6 +19,7 @@ export const useReservationMutation = () => {
         queryKey: QUERY_KEYS.reservation.categories,
       });
       queryClient.invalidateQueries({ queryKey: ["reservation", "root"] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.reservation.my() });
     },
   });
 };
@@ -51,6 +52,7 @@ export const useCalendarReservationMutation = () => {
         queryKey: QUERY_KEYS.reservation.categories,
       });
       queryClient.invalidateQueries({ queryKey: ["reservation", "root"] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.reservation.my() });
     },
   });
 };

@@ -49,9 +49,7 @@ export const MyReservations = () => {
   );
 
   const pastList = myPast?.past ?? [];
-  const pastSlotItems = pastList.filter((i) => i.slot);
-  const pastNonSlotItems = pastList.filter((i) => !i.slot);
-  const groupedPast = pastSlotItems.reduce<Record<string, typeof pastSlotItems>>(
+  const groupedPast = pastList.reduce<Record<string, typeof pastList>>(
     (acc, item) => {
       const key = toYYYYMMDD(new Date(item.start_date));
       acc[key] = acc[key] ? [...acc[key], item] : [item];
@@ -131,18 +129,6 @@ export const MyReservations = () => {
 
         <TabsContent value="past">
           <Animated.FlatList
-            ListHeaderComponent={
-              pastNonSlotItems.length > 0 ? (
-                <View className="gap-2 mb-3">
-                  <Text variant="h3" className="ml-4">
-                    {t("services.reservation.past")}
-                  </Text>
-                  {pastNonSlotItems.map((res) => (
-                    <MyReservationCard key={res.id} item={res} />
-                  ))}
-                </View>
-              ) : null
-            }
             data={orderedPastDays}
             keyExtractor={(d) => d}
             renderItem={({ item: day }) => (

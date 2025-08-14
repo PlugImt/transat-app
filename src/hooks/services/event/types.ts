@@ -20,6 +20,10 @@ export const createAddEventSchema = (t: (key: string) => string) =>
       .min(1, t("services.events.add.name.required"))
       .min(3, t("services.events.add.name.min"))
       .max(100, t("services.events.add.name.max")),
+    description: z
+      .string()
+      .max(200, t("services.events.add.description.max"))
+      .optional(),
     id_club: z.number({
       required_error: t("services.events.add.organizer.required"),
     }),
@@ -29,5 +33,9 @@ export const createAddEventSchema = (t: (key: string) => string) =>
       .min(3, t("services.events.add.location.min"))
       .max(100, t("services.events.add.location.max")),
     start_date: z.string().min(1, t("services.events.add.date.required")),
-    link: z.string().url(t("services.events.add.link.invalid")).optional(),
+    link: z
+      .string()
+      .url(t("services.events.add.link.invalid"))
+      .max(100, t("services.events.add.link.max"))
+      .optional(),
   });

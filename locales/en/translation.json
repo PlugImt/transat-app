@@ -93,6 +93,10 @@
       "updatedAt": "Updated on {{date, short}}",
       "dueIn": "Due in {{date, ago}}",
       "overdue": "Overdue by {{date, ago}}"
+    },
+    "imageSelector": {
+      "placeholder": "Tap to select an image",
+      "uploading": "Uploading..."
     }
   },
   "auth": {
@@ -436,7 +440,9 @@
       "peopleInterested": "People interested",
       "add": {
         "title": "New event",
-        "picture": "Picture",
+        "image": {
+          "title": "Image"
+        },
         "name": {
           "title": "Name",
           "placeholder": "Tonus",
@@ -446,7 +452,8 @@
         },
         "description": {
           "title": "Description",
-          "placeholder": "Super Tonus at the MDE, come in numbers from 9pm"
+          "placeholder": "Super Tonus at the MDE, come in numbers from 9pm",
+          "max": "Description must not exceed 200 characters"
         },
         "startTime": "Start time",
         "endTime": "End time",
@@ -465,7 +472,8 @@
         "link": {
           "title": "Link",
           "placeholder": "https://www.vibly.fr",
-          "invalid": "The link is not valid"
+          "invalid": "The link is not valid",
+          "max": "Link must not exceed 100 characters"
         },
         "organizer": {
           "title": "Organizer",

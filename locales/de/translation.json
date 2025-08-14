@@ -93,6 +93,10 @@
       "updatedAt": "Aktualisiert am {{date, short}}",
       "dueIn": "Fällig in {{date, ago}}",
       "overdue": "Überfällig seit {{date, ago}}"
+    },
+    "imageSelector": {
+      "placeholder": "Tippen Sie, um ein Bild auszuwählen",
+      "uploading": "Upload läuft..."
     }
   },
   "auth": {
@@ -446,7 +450,8 @@
         },
         "description": {
           "title": "Beschreibung",
-          "placeholder": "Super Tonus in der MDE, kommt zahlreich ab 21 Uhr"
+          "placeholder": "Super Tonus in der MDE, kommt zahlreich ab 21 Uhr",
+          "max": "Die Beschreibung darf 200 Zeichen nicht überschreiten"
         },
         "startTime": "Startzeit",
         "endTime": "Endzeit",
@@ -465,7 +470,8 @@
         "link": {
           "title": "Link",
           "placeholder": "https://www.vibly.fr",
-          "invalid": "Der Link ist nicht gültig"
+          "invalid": "Der Link ist nicht gültig",
+          "max": "Der Link darf 100 Zeichen nicht überschreiten"
         },
         "organizer": {
           "title": "Veranstalter",

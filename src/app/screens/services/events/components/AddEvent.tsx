@@ -8,6 +8,7 @@ import Input from "@/components/common/Input";
 import { Text } from "@/components/common/Text";
 import { Textarea } from "@/components/common/Textarea";
 import { DateTimePicker } from "@/components/custom/date/DateTimePicker";
+import { ImageSelector } from "@/components/custom/ImageSelector";
 import { InputButton } from "@/components/custom/InputButton";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -24,11 +25,11 @@ export const AddEvent = () => {
     handleSubmit,
     handleAddEvent,
     handleCancel,
+    handleSelectImage,
     descriptionRef,
-    locationRef,
-    linkRef,
     isAddingEvent,
-    id_club,
+    isUploadingImage,
+    picture,
   } = useAddEventForm();
 
   return (
@@ -38,6 +39,14 @@ export const AddEvent = () => {
       className="justify-between"
     >
       <View className="gap-6">
+        <ImageSelector
+          imageUrl={picture}
+          onImageSelect={handleSelectImage}
+          isUploading={isUploadingImage}
+          title={t("services.events.add.image.title")}
+          aspectRatio="square"
+        />
+
         <Input
           placeholder={t("services.events.add.name.placeholder")}
           control={control}
@@ -110,7 +119,6 @@ export const AddEvent = () => {
           label={t("services.events.add.location.title")}
           labelClasses="h3"
           returnKeyType="next"
-          //   onSubmitEditing={() => startDateRef.current?.focus()}
           error={errors.location?.message}
           autoCapitalize="sentences"
           textContentType="location"
@@ -125,7 +133,6 @@ export const AddEvent = () => {
           label="Date"
         />
 
-        {/* Lien (optionnel) */}
         <Input
           icon={<Link size={16} color={theme.muted} />}
           placeholder={t("services.events.add.link.placeholder")}
@@ -133,7 +140,7 @@ export const AddEvent = () => {
           name="link"
           label={t("services.events.add.link.title")}
           labelClasses="h3"
-          returnKeyType="done"
+          returnKeyType={isButtonDisabled ? "none" : "done"}
           onSubmitEditing={handleSubmit(handleAddEvent)}
           error={errors.link?.message}
           autoCapitalize="none"

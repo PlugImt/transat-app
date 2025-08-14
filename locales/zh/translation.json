@@ -93,6 +93,10 @@
       "updatedAt": "更新于 {{date, short}}",
       "dueIn": "将在 {{date, ago}} 后到期",
       "overdue": "已逾期 {{date, ago}}"
+    },
+    "imageSelector": {
+      "placeholder": "点击选择图片",
+      "uploading": "上传中..."
     }
   },
   "auth": {
@@ -446,7 +450,8 @@
         },
         "description": {
           "title": "描述",
-          "placeholder": "MDE 超级 Tonus，晚上9点起欢迎大家前来"
+          "placeholder": "MDE 超级 Tonus，晚上9点起欢迎大家前来",
+          "max": "描述不得超过200个字符"
         },
         "startTime": "开始时间",
         "endTime": "结束时间",
@@ -465,7 +470,8 @@
         "link": {
           "title": "链接",
           "placeholder": "https://www.vibly.fr",
-          "invalid": "链接无效"
+          "invalid": "链接无效",
+          "max": "链接不得超过100个字符"
         },
         "organizer": {
           "title": "组织者",

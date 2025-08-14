@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import type { TextInput } from "react-native";
+import { useImageUpload } from "@/hooks/common";
 import { hapticFeedback } from "@/utils/haptics.utils";
 import { type AddEventFormData, createAddEventSchema } from "./types";
 import { useAddEvent } from "./useEvent";
@@ -12,6 +13,7 @@ export const useAddEventForm = () => {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const { mutate: addEvent, isPending: isAddingEvent } = useAddEvent();
+  const { mutate: uploadImage, isPending: isUploadingImage } = useImageUpload();
 
   const addEventSchema = createAddEventSchema(t);
 
@@ -37,6 +39,7 @@ export const useAddEventForm = () => {
       end_date: undefined,
       id_club: undefined,
       link: undefined,
+      picture: undefined,
     },
     mode: "onChange",
   });
@@ -48,6 +51,7 @@ export const useAddEventForm = () => {
   const end_date = watch("end_date");
   const id_club = watch("id_club");
   const link = watch("link");
+  const picture = watch("picture");
 
   const isButtonDisabled = !isValid || !isDirty;
 
@@ -62,6 +66,14 @@ export const useAddEventForm = () => {
     navigation.goBack();
   };
 
+  const handleSelectImage = () => {
+    uploadImage(undefined, {
+      onSuccess: (imageUrl) => {
+        setValue("picture", imageUrl);
+      },
+    });
+  };
+
   return {
     control,
     errors,
@@ -69,9 +81,11 @@ export const useAddEventForm = () => {
     isDirty,
     isButtonDisabled,
     isAddingEvent,
+    isUploadingImage,
     handleSubmit,
     handleAddEvent,
     handleCancel,
+    handleSelectImage,
     reset,
     setValue,
     descriptionRef,
@@ -85,5 +99,6 @@ export const useAddEventForm = () => {
     end_date,
     id_club,
     link,
+    picture,
   };
 };

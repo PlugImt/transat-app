@@ -93,6 +93,10 @@
       "updatedAt": "Modifié le {{date, short}}",
       "dueIn": "À rendre dans {{date, ago}}",
       "overdue": "En retard depuis {{date, ago}}"
+    },
+    "imageSelector": {
+      "placeholder": "Appuyez pour sélectionner une image",
+      "uploading": "Upload en cours..."
     }
   },
   "auth": {
@@ -436,7 +440,9 @@
       "peopleInterested": "Personnes intéressées",
       "add": {
         "title": "Nouvel événement",
-        "picture": "Image",
+        "image": {
+          "title": "Image"
+        },
         "name": {
           "title": "Nom",
           "placeholder": "Tonus",
@@ -446,7 +452,8 @@
         },
         "description": {
           "title": "Description",
-          "placeholder": "Super Tonus à la MDE venez nombreux dès 21h"
+          "placeholder": "Super Tonus à la MDE venez nombreux dès 21h",
+          "max": "La description ne doit pas dépasser 200 caractères"
         },
         "startTime": "Heure de début",
         "endTime": "Heure de fin",
@@ -465,7 +472,8 @@
         "link": {
           "title": "Lien",
           "placeholder": "https://www.vibly.fr",
-          "invalid": "Le lien n'est pas valide"
+          "invalid": "Le lien n'est pas valide",
+          "max": "Le lien ne doit pas dépasser 100 caractères"
         },
         "organizer": {
           "title": "Organisateur",

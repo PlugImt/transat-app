@@ -45,7 +45,9 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
   }>({ startDate: undefined, endDate: undefined });
 
   const [startTime, setStartTime] = useState<Date>(new Date());
-  const [endTime, setEndTime] = useState<Date>(new Date());
+  const [endTime, setEndTime] = useState<Date>(
+    new Date(Date.now() + 60 * 60 * 1000),
+  ); // +1 heure
 
   const createDateTimeISO = useCallback(
     (date: DateType, time: Date): string => {
@@ -98,6 +100,8 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
     if (range.endDate) {
       const endISO = createDateTimeISO(range.endDate, endTime);
       onChange(endDateField, endISO);
+    } else {
+      onChange(endDateField, undefined);
     }
   }, [
     range,
@@ -118,8 +122,12 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
     }
 
     setEndTime(date);
-    const isoString = createDateTimeISO(range.endDate, date);
-    onChange(endDateField, isoString);
+    if (range.endDate) {
+      const isoString = createDateTimeISO(range.endDate, date);
+      onChange(endDateField, isoString);
+    } else {
+      onChange(endDateField, undefined);
+    }
   };
 
   const onStartTimeChange = (
@@ -131,13 +139,23 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
     }
 
     setStartTime(date);
-    const isoString = createDateTimeISO(range.startDate, date);
-    onChange(startDateField, isoString);
+    if (range.startDate) {
+      const isoString = createDateTimeISO(range.startDate, date);
+      onChange(startDateField, isoString);
+    } else {
+      onChange(startDateField, undefined);
+    }
   };
 
-  const rangeText = range.startDate
-    ? `${formatDate(range.startDate)} - ${formatDate(range.endDate)}`
-    : undefined;
+  const getRangeText = () => {
+    if (range.startDate && range.endDate) {
+      return `${formatDate(range.startDate)} - ${formatDate(range.endDate)}`;
+    }
+    if (range.startDate) {
+      return formatDate(range.startDate);
+    }
+    return undefined;
+  };
 
   return (
     <View className="gap-2">
@@ -166,7 +184,7 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
               <InputButton
                 Icon={Calendar}
                 placeholder={t("services.events.add.date.placeholder")}
-                value={rangeText}
+                value={getRangeText()}
                 onPress={() => {}}
                 error={errors[startDateField]?.message}
               />

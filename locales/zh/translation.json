@@ -4,6 +4,7 @@
     "home": "首页",
     "account": "账户",
     "edit": "编辑",
+    "delete": "删除",
     "save": "保存",
     "confirm": "确认",
     "send": "发送",
@@ -440,7 +441,9 @@
       "peopleInterested": "感兴趣的人",
       "add": {
         "title": "新活动",
-        "picture": "图片",
+        "image": {
+          "title": "图片"
+        },
         "name": {
           "title": "名称",
           "placeholder": "Tonus",

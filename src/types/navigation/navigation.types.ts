@@ -37,6 +37,7 @@ export type AppStackParamList = {
   Events: undefined;
   EventDetails: { id: number };
   AddEvent: undefined;
+  EditEvent: { id: number };
   Traq: undefined;
   Olimtpe: undefined;
   // Account screens

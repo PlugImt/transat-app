@@ -17,26 +17,32 @@ export const useDate = () => {
     return t("common.dateFormats." + format, { date });
   };
 
+  // Lundi
   const formatWeekday = (date: Date) => {
     return formatDate(date, "weekday");
   };
 
+  // 13:50
   const formatTime = (date: Date) => {
     return formatDate(date, "time");
   };
 
+  // 15/08/2025
   const formatShort = (date: Date) => {
     return formatDate(date, "short");
   };
 
+  // Lundi 15 août 2025
   const formatLong = (date: Date) => {
     return formatDate(date, "long");
   };
 
+  // Lundi prochain à 13:50
   const formatRelative = (date: Date) => {
     return formatDate(date, "relative");
   };
 
+  // Dans 6 heures
   const formatAgo = (date: Date) => {
     return formatDate(date, "ago");
   };

@@ -1,9 +1,7 @@
 import NativeDateTimePicker from "@react-native-community/datetimepicker";
-import { format, parseISO } from "date-fns";
-import { fr } from "date-fns/locale";
 import { Calendar } from "lucide-react-native";
 import type React from "react";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Controller, type UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
@@ -15,6 +13,12 @@ import {
 } from "@/components/common/Dialog";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useDate } from "@/hooks/common/useDate";
+import {
+  createDateTimeISO,
+  parseDate,
+  type DateType as UtilsDateType,
+} from "@/utils/date.utils";
 import { InputButton } from "../InputButton";
 import { useDateTimePickerStyle } from "./DateTimePicker.style";
 
@@ -25,6 +29,13 @@ interface DateTimePickerProps {
   startDateField: string;
   endDateField: string;
   label?: string;
+  initialStartDate?: string;
+  initialEndDate?: string;
+}
+
+interface DateTimeState {
+  date: DateType;
+  time: Date;
 }
 
 export const DateTimePicker: React.FC<DateTimePickerProps> = ({
@@ -34,125 +45,112 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
   startDateField,
   endDateField,
   label = "Date",
+  initialStartDate,
+  initialEndDate,
 }) => {
   const { theme, actualTheme } = useTheme();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const { formatDate } = useDate();
   const calendarStyles = useDateTimePickerStyle();
 
-  const [range, setRange] = useState<{
-    startDate: DateType;
-    endDate: DateType;
-  }>({ startDate: undefined, endDate: undefined });
+  const initialStartDateTime = useMemo(() => {
+    if (initialStartDate) {
+      const date = parseDate(initialStartDate);
+      return {
+        date: date,
+        time: date,
+      };
+    }
+    return {
+      date: new Date(),
+      time: new Date(),
+    };
+  }, [initialStartDate]);
 
-  const [startTime, setStartTime] = useState<Date>(new Date());
-  const [endTime, setEndTime] = useState<Date>(
-    new Date(Date.now() + 60 * 60 * 1000),
-  ); // +1 heure
+  const initialEndDateTime = useMemo(() => {
+    if (initialEndDate) {
+      const date = parseDate(initialEndDate);
+      return {
+        date: date,
+        time: date,
+      };
+    }
+    return {
+      date: new Date(Date.now() + 60 * 60 * 1000), // +1 heure
+      time: new Date(Date.now() + 60 * 60 * 1000),
+    };
+  }, [initialEndDate]);
 
-  const createDateTimeISO = useCallback(
-    (date: DateType, time: Date): string => {
-      if (!date) return new Date().toISOString();
+  const [startDateTime, setStartDateTime] =
+    useState<DateTimeState>(initialStartDateTime);
+  const [endDateTime, setEndDateTime] =
+    useState<DateTimeState>(initialEndDateTime);
 
-      let dateObj: Date;
-      if (typeof date === "string") {
-        dateObj = parseISO(date);
-      } else if (typeof date === "number") {
-        dateObj = new Date(date);
-      } else if (date && typeof date === "object" && "toDate" in date) {
-        dateObj = date.toDate();
-      } else {
-        dateObj = date as Date;
-      }
-
-      const combinedDate = new Date(dateObj);
-      combinedDate.setHours(time.getHours());
-      combinedDate.setMinutes(time.getMinutes());
-      combinedDate.setSeconds(0);
-      combinedDate.setMilliseconds(0);
-
-      return combinedDate.toISOString();
-    },
-    [],
-  );
-
-  const formatDate = (date: DateType) => {
+  const formatDateDisplay = (date: DateType) => {
     if (!date) return t("services.events.add.date.placeholder");
 
-    let dateObj: Date;
-    if (typeof date === "string") {
-      dateObj = parseISO(date);
-    } else if (typeof date === "number") {
-      dateObj = new Date(date);
-    } else if (date && typeof date === "object" && "toDate" in date) {
-      dateObj = date.toDate();
-    } else {
-      dateObj = date as Date;
-    }
-
-    return format(dateObj, "dd MMMM", { locale: fr });
+    const dateObj = parseDate(date as UtilsDateType);
+    return formatDate(dateObj, "short");
   };
 
+  // Mettre à jour les valeurs du formulaire quand les dates/heures changent
   useEffect(() => {
-    if (range.startDate) {
-      const startISO = createDateTimeISO(range.startDate, startTime);
+    if (startDateTime.date) {
+      const startISO = createDateTimeISO(
+        startDateTime.date,
+        startDateTime.time,
+      );
       onChange(startDateField, startISO);
     }
-    if (range.endDate) {
-      const endISO = createDateTimeISO(range.endDate, endTime);
+  }, [startDateTime, onChange, startDateField]);
+
+  useEffect(() => {
+    if (endDateTime.date) {
+      const endISO = createDateTimeISO(endDateTime.date, endDateTime.time);
       onChange(endDateField, endISO);
     } else {
       onChange(endDateField, undefined);
     }
-  }, [
-    range,
-    startTime,
-    endTime,
-    onChange,
-    startDateField,
-    endDateField,
-    createDateTimeISO,
-  ]);
+  }, [endDateTime, onChange, endDateField]);
 
-  const onEndTimeChange = (
-    date: Date | undefined,
-    onChange: (...event: any[]) => void,
-  ) => {
-    if (!date) {
-      return;
-    }
-
-    setEndTime(date);
-    if (range.endDate) {
-      const isoString = createDateTimeISO(range.endDate, date);
-      onChange(endDateField, isoString);
-    } else {
-      onChange(endDateField, undefined);
-    }
+  const handleStartDateChange = (newDate: DateType) => {
+    setStartDateTime((prev) => ({
+      ...prev,
+      date: newDate,
+    }));
   };
 
-  const onStartTimeChange = (
-    date: Date | undefined,
-    onChange: (...event: any[]) => void,
-  ) => {
-    if (!date) {
-      return;
-    }
+  const handleEndDateChange = (newDate: DateType) => {
+    setEndDateTime((prev) => ({
+      ...prev,
+      date: newDate,
+    }));
+  };
 
-    setStartTime(date);
-    if (range.startDate) {
-      const isoString = createDateTimeISO(range.startDate, date);
-      onChange(startDateField, isoString);
-    } else {
-      onChange(startDateField, undefined);
-    }
+  const handleStartTimeChange = (newTime: Date | undefined) => {
+    if (!newTime) return;
+
+    setStartDateTime((prev) => ({
+      ...prev,
+      time: newTime,
+    }));
+  };
+
+  const handleEndTimeChange = (newTime: Date | undefined) => {
+    if (!newTime) return;
+
+    setEndDateTime((prev) => ({
+      ...prev,
+      time: newTime,
+    }));
   };
 
   const getRangeText = () => {
-    if (range.startDate && range.endDate) {
-      return `${formatDate(range.startDate)} - ${formatDate(range.endDate)}`;
+    if (startDateTime.date && endDateTime.date) {
+      return `${formatDateDisplay(startDateTime.date)} - ${formatDateDisplay(endDateTime.date)}`;
     }
-    if (range.startDate) {
-      return formatDate(range.startDate);
+    if (startDateTime.date) {
+      return formatDateDisplay(startDateTime.date);
     }
     return undefined;
   };
@@ -170,12 +168,18 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
               confirmLabel={t("common.confirm")}
             >
               <CalendarPicker
+                locale={i18n.language}
                 mode="range"
-                startDate={range.startDate}
-                endDate={range.endDate}
+                startDate={startDateTime.date}
+                endDate={endDateTime.date}
                 minDate={new Date()}
                 onChange={(params) => {
-                  setRange(params);
+                  if (params.startDate !== undefined) {
+                    handleStartDateChange(params.startDate);
+                  }
+                  if (params.endDate !== undefined) {
+                    handleEndDateChange(params.endDate);
+                  }
                 }}
                 styles={calendarStyles}
               />
@@ -201,13 +205,13 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
             name={startDateField}
             render={({ field: { onChange } }) => (
               <NativeDateTimePicker
-                value={startTime}
+                value={startDateTime.time}
                 mode="time"
                 accentColor={theme.primary}
                 textColor={theme.text}
                 themeVariant={actualTheme}
                 onChange={(_, selectedDate) =>
-                  onStartTimeChange(selectedDate, onChange)
+                  handleStartTimeChange(selectedDate)
                 }
               />
             )}
@@ -223,13 +227,13 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
             name={endDateField}
             render={({ field: { onChange } }) => (
               <NativeDateTimePicker
-                value={endTime}
+                value={endDateTime.time}
                 mode="time"
                 textColor={theme.text}
                 accentColor={theme.primary}
                 themeVariant={actualTheme}
                 onChange={(_, selectedDate) => {
-                  onEndTimeChange(selectedDate, onChange);
+                  handleEndTimeChange(selectedDate);
                 }}
               />
             )}

@@ -23,6 +23,7 @@ import {
 import ClubDetails from "@/app/screens/services/clubs/ClubDetails";
 import { ClubMemberList } from "@/app/screens/services/clubs/components/ClubMemberList";
 import { AddEvent } from "@/app/screens/services/events/components/AddEvent";
+import { EditEvent } from "@/app/screens/services/events/components/EditEvent";
 import EventDetails from "@/app/screens/services/events/components/EventDetails";
 import Events from "@/app/screens/services/events/Events";
 import { HomeworkDetails } from "@/app/screens/services/homework/components/HomeworkDetails";
@@ -51,6 +52,7 @@ export const AppNavigator = () => {
       <Stack.Screen name="Events" component={Events} />
       <Stack.Screen name="EventDetails" component={EventDetails} />
       <Stack.Screen name="AddEvent" component={AddEvent} />
+      <Stack.Screen name="EditEvent" component={EditEvent} />
       <Stack.Screen name="Traq" component={Traq} />
       <Stack.Screen name="Olimtpe" component={Olimtpe} />
 

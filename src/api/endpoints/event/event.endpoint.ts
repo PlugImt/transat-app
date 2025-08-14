@@ -42,3 +42,18 @@ export const getEventMembers = async (id: number) => {
 export const addEvent = async (data: AddEventFormData) => {
   return await apiRequest<Event>(API_ROUTES.event, Method.POST, data);
 };
+
+export const deleteEvent = async (id: number) => {
+  return await apiRequest<void>(
+    API_ROUTES.eventDetails.replace(":id", id.toString()),
+    Method.DELETE,
+  );
+};
+
+export const updateEvent = async (id: number, data: AddEventFormData) => {
+  return await apiRequest<Event>(
+    API_ROUTES.eventDetails.replace(":id", id.toString()),
+    Method.PATCH,
+    data,
+  );
+};

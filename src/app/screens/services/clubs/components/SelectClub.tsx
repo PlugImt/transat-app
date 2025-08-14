@@ -1,7 +1,7 @@
 import { SearchX } from "lucide-react-native";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Modal } from "react-native";
+import { Modal, View } from "react-native";
 import Animated from "react-native-reanimated";
 import ClubCard, { ClubCardSkeleton } from "@/components/custom/card/ClubCard";
 import { Empty } from "@/components/page/Empty";
@@ -30,12 +30,16 @@ export const SelectClubButton = ({
   children,
 }: SelectClubButtonProps) => {
   const [visible, setVisible] = useState(false);
-  const { data: clubs } = useFilteredClubs("");
+  const { data: clubs, isPending } = useFilteredClubs("");
 
   const selectedClub =
     selectedClubId && clubs
       ? clubs.find((club) => club.id === selectedClubId)
       : null;
+
+  if (selectedClubId && isPending) {
+    return <View className="h-12 bg-muted rounded-lg animate-pulse" />;
+  }
 
   return (
     <>

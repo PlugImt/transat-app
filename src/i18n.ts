@@ -92,7 +92,8 @@ storage.get<string>(STORAGE_KEYS.LANGUAGE).then((language) => {
           if (isDate(value)) {
             const locale = locales[lng as keyof typeof locales];
 
-            if (format === "short") return formatDate(value, "P", { locale });
+            if (format === "short")
+              return formatDate(value, "dd MMMM", { locale });
             if (format === "long") return formatDate(value, "PPPP", { locale });
             if (format === "relative")
               return formatRelative(value, new Date(), { locale });

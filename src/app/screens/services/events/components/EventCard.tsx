@@ -26,7 +26,11 @@ export const EventCard = ({ event }: EventCardProps) => {
   const navigation = useNavigation<NavigationProp>();
 
   const startDate = new Date(event.start_date);
-  const endDate = new Date(event.end_date);
+  const endDate = event.end_date ? new Date(event.end_date) : undefined;
+
+  const rangeDate = endDate
+    ? `${formatTime(startDate)} — ${formatTime(endDate)}`
+    : formatTime(startDate);
 
   return (
     <Card
@@ -54,7 +58,7 @@ export const EventCard = ({ event }: EventCardProps) => {
             <View className="flex-row items-center gap-1">
               <Clock color={theme.muted} size={14} />
               <Text variant="sm" color="muted">
-                {formatTime(startDate)} — {formatTime(endDate)}
+                {rangeDate}
               </Text>
             </View>
           </View>

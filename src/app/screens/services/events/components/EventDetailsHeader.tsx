@@ -75,7 +75,10 @@ export const EventDetailsHeader = ({ event }: EventDetailsHeaderProps) => {
     : String(t("common.link"));
 
   const startDate = new Date(event.start_date);
-  const endDate = new Date(event.end_date);
+  const endDate = event.end_date ? new Date(event.end_date) : undefined;
+  const rangeDate = endDate
+    ? `${formatTime(startDate)} — ${formatTime(endDate)}`
+    : formatTime(startDate);
 
   return (
     <View className="gap-4">
@@ -93,9 +96,7 @@ export const EventDetailsHeader = ({ event }: EventDetailsHeaderProps) => {
         </View>
         <View className="flex-row items-center gap-1">
           <Clock color={theme.text} size={20} />
-          <Text>
-            {formatTime(startDate)} — {formatTime(endDate)}
-          </Text>
+          <Text>{rangeDate}</Text>
         </View>
       </View>
       <View className="flex-row items-center gap-2">
@@ -108,7 +109,7 @@ export const EventDetailsHeader = ({ event }: EventDetailsHeaderProps) => {
             className="flex-1"
           />
         )}
-        <NotificationButton isMember={true} />
+        <NotificationButton isMember={false} />
       </View>
     </View>
   );

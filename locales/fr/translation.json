@@ -4,6 +4,7 @@
     "home": "Accueil",
     "account": "Compte",
     "edit": "Modifier",
+    "delete": "Supprimer",
     "save": "Enregistrer",
     "confirm": "Confirmer",
     "send": "Envoyer",
@@ -483,6 +484,20 @@
         "submit": "Ajouter",
         "success": "Événement ajouté avec succès",
         "error": "Erreur lors de l'ajout de l'événement"
+      },
+      "edit": {
+        "title": "Modifier l'événement",
+        "submit": "Modifier",
+        "success": "Événement modifié avec succès",
+        "error": "Erreur lors de la modification de l'événement"
+      },
+      "delete": {
+        "title": "Supprimer l'événement",
+        "description": "Êtes-vous sûr de vouloir supprimer cet événement ? Cette action est irréversible",
+        "confirm": "Supprimer",
+        "cancel": "Annuler",
+        "success": "Événement supprimé avec succès",
+        "error": "Erreur lors de la suppression de l'événement"
       },
       "errors": {
         "emptyUpcoming": "Aucun événement à venir",

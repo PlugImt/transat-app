@@ -2,12 +2,14 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import {
   addEvent,
+  deleteEvent,
   type EventTimeFilter,
   getEventDetails,
   getEventMembers,
   getEvents,
   joinEvent,
   leaveEvent,
+  updateEvent,
 } from "@/api/endpoints/event/event.endpoint";
 import { useToast } from "@/components/common/Toast";
 import { QUERY_KEYS } from "@/constants";
@@ -107,6 +109,60 @@ export const useAddEvent = () => {
     onError: () => {
       hapticFeedback.error();
       toast(t("services.events.add.error"), "destructive");
+    },
+  });
+
+  return { mutate, isPending };
+};
+
+export const useDeleteEvent = () => {
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+  const { t } = useTranslation();
+
+  const { mutate, isPending } = useMutation({
+    mutationKey: [...QUERY_KEYS.event.events],
+    mutationFn: (id: number) => deleteEvent(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [...QUERY_KEYS.event.events],
+      });
+
+      toast(t("services.events.delete.success"), "success");
+      hapticFeedback.success();
+    },
+    onError: () => {
+      toast(t("services.events.delete.error"), "destructive");
+      hapticFeedback.error();
+    },
+  });
+
+  return { mutate, isPending };
+};
+
+export const useUpdateEvent = () => {
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+  const { t } = useTranslation();
+
+  const { mutate, isPending } = useMutation({
+    mutationKey: [...QUERY_KEYS.event.events],
+    mutationFn: ({ id, data }: { id: number; data: AddEventFormData }) =>
+      updateEvent(id, data),
+    onSuccess: (_, { id }) => {
+      queryClient.invalidateQueries({
+        queryKey: [...QUERY_KEYS.event.events],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [...QUERY_KEYS.event.eventDetails, id],
+      });
+
+      toast(t("services.events.edit.success"), "success");
+      hapticFeedback.success();
+    },
+    onError: () => {
+      toast(t("services.events.edit.error"), "destructive");
+      hapticFeedback.error();
     },
   });
 

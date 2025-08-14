@@ -4,6 +4,7 @@
     "home": "Startseite",
     "account": "Konto",
     "edit": "Bearbeiten",
+    "delete": "Löschen",
     "save": "Speichern",
     "confirm": "Bestätigen",
     "send": "Senden",
@@ -481,6 +482,20 @@
         "submit": "Hinzufügen",
         "success": "Event erfolgreich hinzugefügt",
         "error": "Fehler beim Hinzufügen des Events"
+      },
+      "edit": {
+        "title": "Event bearbeiten",
+        "submit": "Bearbeiten",
+        "success": "Event erfolgreich aktualisiert",
+        "error": "Fehler beim Aktualisieren des Events"
+      },
+      "delete": {
+        "title": "Event löschen",
+        "description": "Sind Sie sicher, dass Sie dieses Event löschen möchten? Diese Aktion ist nicht rückgängig zu machen.",
+        "confirm": "Löschen",
+        "cancel": "Abbrechen",
+        "success": "Event erfolgreich gelöscht",
+        "error": "Fehler beim Löschen des Events"
       },
       "errors": {
         "emptyUpcoming": "Keine bevorstehenden Events",

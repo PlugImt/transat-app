@@ -4,6 +4,7 @@
     "home": "Início",
     "account": "Conta",
     "edit": "Editar",
+    "delete": "Excluir",
     "save": "Salvar",
     "confirm": "Confirmar",
     "send": "Enviar",
@@ -440,7 +441,9 @@
       "peopleInterested": "Pessoas interessadas",
       "add": {
         "title": "Novo evento",
-        "picture": "Imagem",
+        "image": {
+          "title": "Imagem"
+        },
         "name": {
           "title": "Nome",
           "placeholder": "Tonus",

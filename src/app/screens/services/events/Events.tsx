@@ -17,7 +17,7 @@ import { HEADER_HEIGHT } from "@/components/page/Header";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Event } from "@/dto/event";
-import { useEventsWithTabs } from "@/hooks/services/event/useEvent";
+import { useEventsByTab } from "@/hooks/services/event/useEvent";
 import { EventCard, EventCardSkeleton } from "./components/EventCard";
 
 type NavigationProp = StackNavigationProp<{
@@ -27,10 +27,23 @@ type NavigationProp = StackNavigationProp<{
 const EventsTabContent = ({ tabValue }: { tabValue: "upcoming" | "past" }) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const { events, isPending, refetch, activeTab } = useEventsWithTabs();
+  const { events, isPending, isError, error, refetch } =
+    useEventsByTab(tabValue);
 
-  const shouldLoadData = activeTab === tabValue;
-  const displayEvents = shouldLoadData ? events : [];
+  if (isPending) {
+    return <EventsSkeleton />;
+  }
+
+  if (isError) {
+    return (
+      <ErrorPage
+        error={error}
+        title={t("services.events.title")}
+        refetch={refetch}
+        isRefetching={isPending}
+      />
+    );
+  }
 
   const flatListProps = {
     renderItem: ({ item }: { item: Event }) => <EventCard event={item} />,
@@ -38,10 +51,10 @@ const EventsTabContent = ({ tabValue }: { tabValue: "upcoming" | "past" }) => {
     contentContainerClassName: "gap-2",
     showsVerticalScrollIndicator: false,
     onRefresh: () => refetch(),
-    refreshing: isPending && shouldLoadData,
+    refreshing: isPending,
     refreshControl: (
       <RefreshControl
-        refreshing={isPending && shouldLoadData}
+        refreshing={isPending}
         onRefresh={refetch}
         tintColor={theme.text}
         colors={[theme.primary]}
@@ -49,7 +62,7 @@ const EventsTabContent = ({ tabValue }: { tabValue: "upcoming" | "past" }) => {
       />
     ),
     ListHeaderComponent: (
-      <TabsList>
+      <TabsList className="mb-4">
         <TabsTrigger value="upcoming" title={t("services.events.upcoming")} />
         <TabsTrigger value="past" title={t("services.events.past")} />
       </TabsList>
@@ -78,7 +91,7 @@ const EventsTabContent = ({ tabValue }: { tabValue: "upcoming" | "past" }) => {
   return (
     <Animated.FlatList
       {...flatListProps}
-      data={displayEvents}
+      data={events || []}
       ListEmptyComponent={getEmptyComponent()}
     />
   );
@@ -88,23 +101,6 @@ export const Events = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
   const navigation = useNavigation<NavigationProp>();
-
-  const { isPending, isError, error, refetch } = useEventsWithTabs();
-
-  if (isPending) {
-    return <EventsSkeleton />;
-  }
-
-  if (isError) {
-    return (
-      <ErrorPage
-        error={error}
-        title={t("services.events.title")}
-        refetch={refetch}
-        isRefetching={isPending}
-      />
-    );
-  }
 
   return (
     <Page
@@ -134,60 +130,19 @@ export const Events = () => {
 };
 
 export default Events;
-
 const EventsSkeleton = () => {
   const { t } = useTranslation();
-  const { theme } = useTheme();
-  const navigation = useNavigation<NavigationProp>();
   return (
-    <Tabs defaultValue="upcoming">
-      <Page
-        title={t("services.events.title")}
-        className="gap-4"
-        style={{ paddingBottom: 0 }}
-        disableScroll
-        header={
-          <IconButton
-            icon={<Plus color={theme.primary} />}
-            variant="link"
-            onPress={() => navigation.navigate("AddEvent")}
-          />
-        }
-      >
-        <TabsContent value="upcoming">
-          <Animated.FlatList
-            data={Array.from({ length: 10 })}
-            renderItem={() => <EventCardSkeleton />}
-            contentContainerStyle={{ gap: 8 }}
-            ListHeaderComponent={
-              <TabsList>
-                <TabsTrigger
-                  value="upcoming"
-                  title={t("services.events.upcoming")}
-                />
-                <TabsTrigger value="past" title={t("services.events.past")} />
-              </TabsList>
-            }
-          />
-        </TabsContent>
-
-        <TabsContent value="past">
-          <Animated.FlatList
-            data={Array.from({ length: 10 })}
-            renderItem={() => <EventCardSkeleton />}
-            contentContainerStyle={{ gap: 8 }}
-            ListHeaderComponent={
-              <TabsList>
-                <TabsTrigger
-                  value="upcoming"
-                  title={t("services.events.upcoming")}
-                />
-                <TabsTrigger value="past" title={t("services.events.past")} />
-              </TabsList>
-            }
-          />
-        </TabsContent>
-      </Page>
-    </Tabs>
+    <Animated.FlatList
+      data={Array.from({ length: 10 })}
+      renderItem={() => <EventCardSkeleton />}
+      contentContainerStyle={{ gap: 8 }}
+      ListHeaderComponent={
+        <TabsList>
+          <TabsTrigger value="upcoming" title={t("services.events.upcoming")} />
+          <TabsTrigger value="past" title={t("services.events.past")} />
+        </TabsList>
+      }
+    />
   );
 };

@@ -1,5 +1,4 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import {
   addEvent,
@@ -10,7 +9,6 @@ import {
   joinEvent,
   leaveEvent,
 } from "@/api/endpoints/event/event.endpoint";
-import { TabsContext } from "@/components/common/Tabs";
 import { useToast } from "@/components/common/Toast";
 import { QUERY_KEYS } from "@/constants";
 import { hapticFeedback } from "@/utils/haptics.utils";
@@ -20,25 +18,20 @@ export const useEvents = (time: EventTimeFilter = "upcoming") => {
   const { data, isPending, refetch, isError, error } = useQuery({
     queryKey: [...QUERY_KEYS.event.events, time],
     queryFn: () => getEvents(time),
+    staleTime: 1000 * 60 * 5,
   });
 
   return { data, isPending, refetch, isError, error };
 };
 
-export const useTabsContext = () => {
-  return useContext(TabsContext);
-};
-
-export const useEventsWithTabs = () => {
-  const { activeTab } = useTabsContext();
-
+export const useEventsByTab = (tabValue: "upcoming" | "past") => {
   const {
     data: events,
     isPending,
     isError,
     error,
     refetch,
-  } = useEvents(activeTab as "upcoming" | "past");
+  } = useEvents(tabValue);
 
   return {
     events,
@@ -46,7 +39,6 @@ export const useEventsWithTabs = () => {
     isError,
     error,
     refetch,
-    activeTab,
   };
 };
 

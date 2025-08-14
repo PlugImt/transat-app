@@ -27,6 +27,7 @@ import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { EventDetails as EventDetailsType } from "@/dto/event";
+import { useAuth } from "@/hooks/account";
 import {
   useDeleteEvent,
   useEventDetails,
@@ -103,7 +104,8 @@ const EventDetails = () => {
   const { theme } = useTheme();
   const route = useRoute<EventDetailsRouteProp>();
   const { id } = route.params;
-  const navigation = useNavigation<NavigationProp>();
+  const { user } = useAuth();
+
   const {
     data: event,
     isPending,
@@ -142,6 +144,8 @@ const EventDetails = () => {
     );
   }
 
+  const isOwner = event.creator.email === user?.email;
+
   const eventActions = (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -161,7 +165,7 @@ const EventDetails = () => {
       title={t("services.events.title")}
       refreshing={isPending}
       onRefresh={refetch}
-      header={eventActions}
+      header={isOwner && eventActions}
     >
       <EventDetailsHeader event={event} />
       <CardGroup title={t("services.events.organizer")}>
@@ -170,12 +174,7 @@ const EventDetails = () => {
       <CardGroup title={t("services.events.createdBy")}>
         <UserCard user={event.creator} />
       </CardGroup>
-      <CardGroup
-        title={t("services.events.peopleInterested")}
-        onPress={() => {
-          navigation.navigate("EventMemberList", { id: event.id });
-        }}
-      >
+      <CardGroup title={t("services.events.peopleInterested")}>
         <View className="gap-2">
           {event.attendees.slice(0, 3).map((attendee) => (
             <UserCard key={attendee.email} user={attendee} />

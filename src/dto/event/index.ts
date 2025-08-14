@@ -26,6 +26,7 @@ export const eventDetailsSchema = z.object({
   attendees: z.array(userSchema),
   creator: userSchema,
   club: clubSchema,
+  is_interested: z.boolean(),
 });
 
 export const eventMembersSchema = z.object({

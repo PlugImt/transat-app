@@ -87,7 +87,7 @@ export const EventDetailsHeader = ({ event }: EventDetailsHeaderProps) => {
         <Text variant="lg" color="primary">
           {formatAgo(startDate).toLowerCase()}
         </Text>
-        <Text color="muted">{description}</Text>
+        {description && <Text color="muted">{description}</Text>}
       </View>
       <View className="flex-row items-center gap-2 justify-between flex-wrap">
         <View className="flex-row items-center gap-1">
@@ -109,7 +109,7 @@ export const EventDetailsHeader = ({ event }: EventDetailsHeaderProps) => {
             className="flex-1"
           />
         )}
-        <NotificationButton isMember={false} />
+        <NotificationButton isMember={event.is_interested} />
       </View>
     </View>
   );

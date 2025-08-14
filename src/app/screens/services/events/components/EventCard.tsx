@@ -1,5 +1,5 @@
+import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
 import { ChevronRight, Clock, MapPin } from "lucide-react-native";
 import { View } from "react-native";
 import Card from "@/components/common/Card";
@@ -12,7 +12,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import type { Event } from "@/dto/event";
 import { useDate } from "@/hooks/common";
 
-type NavigationProp = StackNavigationProp<{
+type NavigationProp = BottomTabNavigationProp<{
   EventDetails: { id: number };
 }>;
 

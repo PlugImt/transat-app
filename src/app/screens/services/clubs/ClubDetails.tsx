@@ -6,14 +6,14 @@ import { Empty } from "@/components/page/Empty";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
 import { useClubDetails } from "@/hooks/services/club/useClub";
-import type { AppStackParamList } from "@/types/navigation";
+import type { BottomTabParamList } from "@/types/navigation";
 import {
   ClubDetailsHeader,
   ClubDetailsHeaderSkeleton,
 } from "./components/ClubDetailsHeader";
 import { ClubResponsible } from "./components/ClubResponsible";
 
-export type ClubDetailsRouteProp = RouteProp<AppStackParamList, "ClubDetails">;
+export type ClubDetailsRouteProp = RouteProp<BottomTabParamList, "ClubDetails">;
 
 const ClubDetails = () => {
   const { t } = useTranslation();

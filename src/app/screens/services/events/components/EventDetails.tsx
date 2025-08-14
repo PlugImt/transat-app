@@ -3,7 +3,6 @@ import {
   useNavigation,
   useRoute,
 } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
 import { Edit, MoreVertical, Trash2 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
@@ -32,19 +31,17 @@ import {
   useDeleteEvent,
   useEventDetails,
 } from "@/hooks/services/event/useEvent";
-import type { AppStackParamList } from "@/types/navigation";
+import type { AppNavigation } from "@/types";
+import type { BottomTabParamList } from "@/types/navigation";
 import {
   EventDetailsHeader,
   EventDetailsHeaderSkeleton,
 } from "./EventDetailsHeader";
 
-type NavigationProp = StackNavigationProp<{
-  EventMemberList: { id: number };
-  EditEvent: { id: number };
-}>;
+type NavigationProp = AppNavigation;
 
 export type EventDetailsRouteProp = RouteProp<
-  AppStackParamList,
+  BottomTabParamList,
   "EventDetails"
 >;
 

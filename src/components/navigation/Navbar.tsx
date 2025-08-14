@@ -45,10 +45,21 @@ const Stack = createStackNavigator<BottomTabParamList>();
 const HomeStack = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name="HomeScreen" component={Home} />
+    <Stack.Screen name="Laundry" component={Laundry} />
+    <Stack.Screen name="Restaurant" component={Restaurant} />
+    <Stack.Screen name="RestaurantReviews" component={RestaurantReviews} />
+    <Stack.Screen name="Timetable" component={Timetable} />
+    <Stack.Screen name="Homework" component={Homework} />
+    <Stack.Screen name="HomeworkDetails" component={HomeworkDetails} />
+    <Stack.Screen name="Clubs" component={Clubs} />
+    <Stack.Screen name="ClubDetails" component={ClubDetails} />
+    <Stack.Screen name="ClubMemberList" component={ClubMemberList} />
     <Stack.Screen name="Events" component={Events} />
     <Stack.Screen name="EventDetails" component={EventDetails} />
-    <Stack.Screen name="ClubDetails" component={ClubDetails} />
-    <Stack.Screen name="HomeworkDetails" component={HomeworkDetails} />
+    <Stack.Screen name="AddEvent" component={AddEvent} />
+    <Stack.Screen name="EditEvent" component={EditEvent} />
+    <Stack.Screen name="Traq" component={Traq} />
+    <Stack.Screen name="Olimtpe" component={Olimtpe} />
   </Stack.Navigator>
 );
 

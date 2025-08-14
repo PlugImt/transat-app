@@ -26,6 +26,7 @@ export const AddEvent = () => {
     handleAddEvent,
     handleCancel,
     handleSelectImage,
+    handleRemoveImage,
     descriptionRef,
     isAddingEvent,
     isUploadingImage,
@@ -42,9 +43,9 @@ export const AddEvent = () => {
         <ImageSelector
           imageUrl={picture}
           onImageSelect={handleSelectImage}
+          onImageRemove={handleRemoveImage}
           isUploading={isUploadingImage}
           title={t("services.events.add.image.title")}
-          aspectRatio="square"
         />
 
         <Input
@@ -56,7 +57,6 @@ export const AddEvent = () => {
           returnKeyType="next"
           onSubmitEditing={() => descriptionRef.current?.focus()}
           error={errors.name?.message}
-          autoCapitalize="words"
           textContentType="none"
         />
 
@@ -120,7 +120,6 @@ export const AddEvent = () => {
           labelClasses="h3"
           returnKeyType="next"
           error={errors.location?.message}
-          autoCapitalize="sentences"
           textContentType="location"
         />
 
@@ -140,7 +139,7 @@ export const AddEvent = () => {
           name="link"
           label={t("services.events.add.link.title")}
           labelClasses="h3"
-          returnKeyType={isButtonDisabled ? "none" : "done"}
+          returnKeyType={isButtonDisabled ? "default" : "done"}
           onSubmitEditing={handleSubmit(handleAddEvent)}
           error={errors.link?.message}
           autoCapitalize="none"

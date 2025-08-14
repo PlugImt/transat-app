@@ -1,5 +1,11 @@
 import React, { type ReactNode } from "react";
-import { RefreshControl, View, type ViewStyle } from "react-native";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  RefreshControl,
+  View,
+  type ViewStyle,
+} from "react-native";
 import Animated from "react-native-reanimated";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
@@ -89,7 +95,12 @@ export const Page = ({
       <Header headerShown={headerShown} title={title} onBack={onBack}>
         {header}
       </Header>
-      {getContent()}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1 }}
+      >
+        {getContent()}
+      </KeyboardAvoidingView>
       {footer && (
         <View
           style={{

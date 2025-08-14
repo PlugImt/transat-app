@@ -1,4 +1,4 @@
-import { CommonActions, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import CardGroup from "@/components/common/CardGroup";
@@ -23,14 +23,7 @@ export const EventWidget = () => {
     <CardGroup
       title={t("services.events.title")}
       onPress={() => {
-        navigation.dispatch(
-          CommonActions.navigate({
-            name: "ServicesScreen",
-            params: {
-              screen: "Events",
-            },
-          }),
-        );
+        navigation.navigate("Events");
       }}
     >
       <View className="gap-2">

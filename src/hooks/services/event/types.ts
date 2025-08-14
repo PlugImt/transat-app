@@ -7,7 +7,7 @@ export const addEventSchemaBase = z.object({
   location: z.string(),
   start_date: z.string().min(1),
   end_date: z.string().optional(),
-  link: z.string().url().optional(),
+  link: z.string().optional(),
   picture: z.string().optional(),
 });
 
@@ -37,5 +37,6 @@ export const createAddEventSchema = (t: (key: string) => string) =>
       .string()
       .url(t("services.events.add.link.invalid"))
       .max(100, t("services.events.add.link.max"))
-      .optional(),
+      .optional()
+      .or(z.literal("")),
   });

@@ -1,3 +1,4 @@
+import { CameraOff } from "lucide-react-native";
 import type React from "react";
 import { forwardRef, useState } from "react";
 import {
@@ -45,11 +46,10 @@ const ImageFallback = ({
         },
         style,
       ]}
-      className={cn(
-        "absolute inset-0 h-full w-full items-center justify-center z-0",
-        className,
-      )}
-    />
+      className={cn("h-full w-full items-center justify-center", className)}
+    >
+      <CameraOff size={size / 3} color={theme.muted} />
+    </View>
   );
 };
 
@@ -95,7 +95,7 @@ const Image = forwardRef<React.ElementRef<typeof RNImage>, ImageProps>(
     const finalSource = normalizeSource(source);
     const validSource = isValidSource(finalSource);
 
-    if ((!validSource && !isLoading) || hasError) {
+    if (!validSource || hasError) {
       return fallback !== undefined ? (
         fallback
       ) : (

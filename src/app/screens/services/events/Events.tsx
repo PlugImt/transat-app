@@ -105,7 +105,7 @@ export const Events = () => {
   return (
     <Page
       title={t("services.events.title")}
-      className="gap-4"
+      className="gap-4 flex-1"
       style={{ paddingBottom: 0 }}
       disableScroll
       header={

@@ -33,10 +33,10 @@ export const useAddEventForm = () => {
     resolver: zodResolver(addEventSchema),
     defaultValues: {
       name: "",
-      description: undefined,
+      description: "",
       location: "",
-      start_date: "",
-      end_date: undefined,
+      start_date: new Date().toISOString(),
+      end_date: "",
       id_club: undefined,
       link: undefined,
       picture: undefined,
@@ -74,6 +74,10 @@ export const useAddEventForm = () => {
     });
   };
 
+  const handleRemoveImage = () => {
+    setValue("picture", undefined);
+  };
+
   return {
     control,
     errors,
@@ -86,6 +90,7 @@ export const useAddEventForm = () => {
     handleAddEvent,
     handleCancel,
     handleSelectImage,
+    handleRemoveImage,
     reset,
     setValue,
     descriptionRef,

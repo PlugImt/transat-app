@@ -22,8 +22,8 @@ import {
 } from "@/components/common/DropdownMenu";
 import { Text } from "@/components/common/Text";
 import { UserCard, UserCardSkeleton } from "@/components/custom";
-import { UserStack, UserStackSkeleton } from "@/components/custom/UserStack";
 import ClubCard, { ClubCardSkeleton } from "@/components/custom/card/ClubCard";
+import { UserStack, UserStackSkeleton } from "@/components/custom/UserStack";
 import { Empty } from "@/components/page/Empty";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";

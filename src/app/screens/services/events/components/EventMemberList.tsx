@@ -9,7 +9,8 @@ import type { BottomTabParamList } from "@/types";
 
 export const EventMemberList = () => {
   const { t } = useTranslation();
-  const { params } = useRoute<RouteProp<BottomTabParamList, "EventMemberList">>();
+  const { params } =
+    useRoute<RouteProp<BottomTabParamList, "EventMemberList">>();
   const { id } = params;
 
   const { data, isPending, refetch, isError, error } = useEventMembers(id);
@@ -50,7 +51,10 @@ export const EventMemberListSkeleton = () => {
   const { t } = useTranslation();
   return (
     <Page title={t("services.events.title")} className="gap-2" asChildren>
-      <Animated.FlatList data={Array.from({ length: 10 })} renderItem={() => <UserCardSkeleton />} />
+      <Animated.FlatList
+        data={Array.from({ length: 10 })}
+        renderItem={() => <UserCardSkeleton />}
+      />
     </Page>
   );
 };

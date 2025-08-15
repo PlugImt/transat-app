@@ -23,9 +23,9 @@ export const BlurredBackground = ({ picture }: BlurredBackgroundProps) => {
         source={picture}
         fill
         resizeMode="cover"
-        blurRadius={20}
+        blurRadius={40}
         radius={0}
-        style={{ opacity: 0.4 }}
+        style={{ opacity: 0.3 }}
       />
       {BlurViewComp ? (
         <BlurViewComp
@@ -34,17 +34,6 @@ export const BlurredBackground = ({ picture }: BlurredBackgroundProps) => {
           style={StyleSheet.absoluteFillObject}
         />
       ) : null}
-      <View
-        style={[
-          StyleSheet.absoluteFillObject,
-          {
-            backgroundColor:
-              actualTheme === "light"
-                ? "rgba(0,0,0,0.001)"
-                : "rgba(255,255,255,0.001)",
-          },
-        ]}
-      />
     </View>
   );
 };

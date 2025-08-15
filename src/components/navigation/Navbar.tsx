@@ -27,9 +27,9 @@ import {
 import ClubDetails from "@/app/screens/services/clubs/ClubDetails";
 import { ClubMemberList } from "@/app/screens/services/clubs/components/ClubMemberList";
 import { AddEvent } from "@/app/screens/services/events/components/AddEvent";
-import { EventMemberList } from "@/app/screens/services/events/components/EventMemberList";
 import { EditEvent } from "@/app/screens/services/events/components/EditEvent";
 import EventDetails from "@/app/screens/services/events/components/EventDetails";
+import { EventMemberList } from "@/app/screens/services/events/components/EventMemberList";
 import Events from "@/app/screens/services/events/Events";
 import { HomeworkDetails } from "@/app/screens/services/homework/components/HomeworkDetails";
 import { RestaurantReviews } from "@/app/screens/services/restaurant/components/Reviews";

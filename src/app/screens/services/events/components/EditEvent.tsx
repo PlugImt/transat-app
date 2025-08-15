@@ -90,7 +90,7 @@ const EditEventForm = ({ event }: EditEventFormProps) => {
           onImageRemove={handleRemoveImage}
           isUploading={isUploadingImage}
           title={t("services.events.add.image.title")}
-          aspectRatio="banner"
+          aspectRatio="square"
         />
 
         <Input

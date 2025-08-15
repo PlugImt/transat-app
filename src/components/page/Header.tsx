@@ -20,9 +20,16 @@ type HeaderProps = {
   title?: string | ReactNode;
   children?: React.ReactNode;
   onBack?: () => void;
+  backgroundColor?: string;
 };
 
-export function Header({ headerShown, title, children, onBack }: HeaderProps) {
+export function Header({
+  headerShown,
+  title,
+  children,
+  onBack,
+  backgroundColor,
+}: HeaderProps) {
   const { theme } = useTheme();
   const navigation = useNavigation();
 
@@ -69,7 +76,10 @@ export function Header({ headerShown, title, children, onBack }: HeaderProps) {
 
   return (
     <Animated.View
-      style={[headerAnimatedStyle, { backgroundColor: theme.overlay }]}
+      style={[
+        headerAnimatedStyle,
+        { backgroundColor: backgroundColor || theme.overlay },
+      ]}
       className="absolute top-0 left-0 right-0 z-10"
     >
       <Animated.View

@@ -29,6 +29,7 @@ type PageProps = {
   asChildren?: boolean;
   onBack?: () => void;
   background?: ReactNode;
+  headerColor?: string;
 };
 
 export const Page = ({
@@ -44,6 +45,7 @@ export const Page = ({
   asChildren = false,
   onBack,
   background,
+  headerColor,
 }: PageProps) => {
   const { theme } = useTheme();
   const { scrollHandler, headerShown, scrollY } = useAnimatedHeader();
@@ -108,7 +110,12 @@ export const Page = ({
         </View>
       )}
       <AnimatedHeaderContext.Provider value={{ headerShown, scrollY }}>
-        <Header headerShown={headerShown} title={title} onBack={onBack}>
+        <Header
+          headerShown={headerShown}
+          title={title}
+          onBack={onBack}
+          backgroundColor={headerColor}
+        >
           {header}
         </Header>
         <KeyboardAvoidingView

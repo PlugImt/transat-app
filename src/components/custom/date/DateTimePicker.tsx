@@ -157,12 +157,33 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
   };
 
   const getRangeText = () => {
-    if (startDateTime.date && endDateTime.date) {
-      return `${formatDateDisplay(startDateTime.date)} - ${formatDateDisplay(endDateTime.date)}`;
+    const startDate = startDateTime.date
+      ? parseDate(startDateTime.date as UtilsDateType)
+      : undefined;
+    const endDate = endDateTime.date
+      ? parseDate(endDateTime.date as UtilsDateType)
+      : undefined;
+
+    const startTimeStr = formatTimeDisplay(startDateTime.time);
+    const endTimeStr = formatTimeDisplay(endDateTime.time);
+
+    if (startDate && endDate) {
+      const sameDay =
+        startDate.getFullYear() === endDate.getFullYear() &&
+        startDate.getMonth() === endDate.getMonth() &&
+        startDate.getDate() === endDate.getDate();
+
+      if (sameDay) {
+        return `${formatDateDisplay(startDateTime.date)} ${startTimeStr} - ${endTimeStr}`;
+      }
+
+      return `${formatDateDisplay(startDateTime.date)} ${startTimeStr} - ${formatDateDisplay(endDateTime.date)} ${endTimeStr}`;
     }
-    if (startDateTime.date) {
-      return formatDateDisplay(startDateTime.date);
+
+    if (startDate) {
+      return `${formatDateDisplay(startDateTime.date)} ${startTimeStr}`;
     }
+
     return undefined;
   };
 

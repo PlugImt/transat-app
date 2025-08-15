@@ -13,41 +13,41 @@ type DateFormat =
 export const useDate = () => {
   const { t } = useTranslation();
 
-  const formatDate = (date: Date, format: DateFormat = "short") => {
-    return t(`common.dateFormats.${format}`, { date });
+  const formatDate = (date: Date, format: DateFormat = "short"): string => {
+    return t(`common.dateFormats.${format}`, { date }) as string;
   };
 
   // Lundi
-  const formatWeekday = (date: Date) => {
+  const formatWeekday = (date: Date): string => {
     return formatDate(date, "weekday");
   };
 
   // 13:50
-  const formatTime = (date: Date) => {
+  const formatTime = (date: Date): string => {
     return formatDate(date, "time");
   };
 
   // 15/08/2025
-  const formatShort = (date: Date) => {
+  const formatShort = (date: Date): string => {
     return formatDate(date, "short");
   };
 
   // Lundi 15 août 2025
-  const formatLong = (date: Date) => {
+  const formatLong = (date: Date): string => {
     return formatDate(date, "long");
   };
 
   // Lundi prochain à 13:50
-  const formatRelative = (date: Date) => {
+  const formatRelative = (date: Date): string => {
     return formatDate(date, "relative");
   };
 
   // Dans 6 heures
-  const formatAgo = (date: Date) => {
+  const formatAgo = (date: Date): string => {
     return formatDate(date, "ago");
   };
 
-  const formatDateTime = (date: Date) => {
+  const formatDateTime = (date: Date): string => {
     return formatDate(date, "dateTime");
   };
 

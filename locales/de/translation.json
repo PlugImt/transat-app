@@ -439,6 +439,7 @@
       "organizer": "Verantwortlich",
       "createdBy": "Erstellt von",
       "peopleInterested": "Interessierte",
+      "interested": "{{count}} Personen sind an diesem Event interessiert",
       "add": {
         "title": "Neues Event",
         "picture": "Bild",

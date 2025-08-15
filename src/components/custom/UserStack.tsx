@@ -54,37 +54,75 @@ export const UserStack = ({
 
   return (
     <View>
-      <View className="flex-row ml-2">
-        {displayedPictures.map((picture) => (
-          <Image
-            source={picture}
-            key={picture}
-            className="-ml-2"
-            {...imageProps}
-          />
-        ))}
-
-        {hasOverflow && (
-          <View
-            className="bg-black items-center justify-center rounded-full relative -ml-2"
-            style={{ width: sizeProps, height: sizeProps }}
-          >
-            <Image source={pictures[pictures.length - 1]} {...imageProps} />
-            <View
-              className="absolute inset-0 bg-black/50 rounded-full"
-              style={{ ...imageProps.style }}
+      {onPress ? (
+        <TouchableOpacity
+          className="flex-row ml-2"
+          onPress={onPress}
+          disabled={!onPress}
+        >
+          {displayedPictures.map((picture) => (
+            <Image
+              source={picture}
+              key={picture}
+              className="-ml-2"
+              {...imageProps}
             />
-            <NativeText
-              className={cn(
-                "text-white font-medium absolute inset-x-0 text-center",
-                size === "sm" ? "text-xs" : "text-sm",
-              )}
+          ))}
+
+          {hasOverflow && (
+            <View
+              className="bg-black items-center justify-center rounded-full relative -ml-2"
+              style={{ width: sizeProps, height: sizeProps }}
             >
-              +{overflowCount}
-            </NativeText>
-          </View>
-        )}
-      </View>
+              <Image source={pictures[pictures.length - 1]} {...imageProps} />
+              <View
+                className="absolute inset-0 bg-black/50 rounded-full"
+                style={{ ...imageProps.style }}
+              />
+              <NativeText
+                className={cn(
+                  "text-white font-medium absolute inset-x-0 text-center",
+                  size === "sm" ? "text-xs" : "text-sm",
+                )}
+              >
+                +{overflowCount}
+              </NativeText>
+            </View>
+          )}
+        </TouchableOpacity>
+      ) : (
+        <View className="flex-row ml-2">
+          {displayedPictures.map((picture) => (
+            <Image
+              source={picture}
+              key={picture}
+              className="-ml-2"
+              {...imageProps}
+            />
+          ))}
+
+          {hasOverflow && (
+            <View
+              className="bg-black items-center justify-center rounded-full relative -ml-2"
+              style={{ width: sizeProps, height: sizeProps }}
+            >
+              <Image source={pictures[pictures.length - 1]} {...imageProps} />
+              <View
+                className="absolute inset-0 bg-black/50 rounded-full"
+                style={{ ...imageProps.style }}
+              />
+              <NativeText
+                className={cn(
+                  "text-white font-medium absolute inset-x-0 text-center",
+                  size === "sm" ? "text-xs" : "text-sm",
+                )}
+              >
+                +{overflowCount}
+              </NativeText>
+            </View>
+          )}
+        </View>
+      )}
 
       {moreText && count && (
         <TouchableOpacity

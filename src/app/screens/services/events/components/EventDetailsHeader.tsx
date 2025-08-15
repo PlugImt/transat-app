@@ -17,10 +17,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import type { EventDetails } from "@/dto/event";
 import { useDate } from "@/hooks/common";
 import { useAnimatedHeaderContext } from "@/hooks/common/useAnimatedHeader";
-import {
-  useJoinClubMutation,
-  useLeaveClubMutation,
-} from "@/hooks/services/club/useClub";
+import { useJoinEventMutation, useLeaveClubMutation } from "@/hooks/services/event/useEvent";
 import type { EventDetailsRouteProp } from "./EventDetails";
 
 interface NotificationButtonProps {
@@ -36,14 +33,14 @@ const NotificationButton = ({
   const route = useRoute<EventDetailsRouteProp>();
   const { id } = route.params;
 
-  const { mutate: joinClub, isPending: isJoining } = useJoinClubMutation(id);
-  const { mutate: leaveClub, isPending: isLeaving } = useLeaveClubMutation(id);
+  const { mutate: joinEvent, isPending: isJoining } = useJoinEventMutation(id);
+  const { mutate: leaveEvent, isPending: isLeaving } = useLeaveClubMutation(id);
 
   if (isMember) {
     return (
       <Button
         label={t("user.notInterested")}
-        onPress={() => leaveClub()}
+        onPress={() => leaveEvent()}
         icon={<BellOff />}
         className="flex-1"
         disabled={disabled}
@@ -54,7 +51,7 @@ const NotificationButton = ({
   return (
     <Button
       label={t("user.interested")}
-      onPress={() => joinClub()}
+      onPress={() => joinEvent()}
       icon={<Bell />}
       className="flex-1"
       disabled={disabled}

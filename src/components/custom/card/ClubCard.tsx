@@ -1,12 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
 import Image from "@/components/common/Image";
 import type { Club } from "@/dto/club";
+import type { AppNavigation } from "@/types";
 import LinkCard, { LinkCardLoading } from "./LinkCard";
-
-type NavigationProp = StackNavigationProp<{
-  ClubDetails: { id: number };
-}>;
 
 interface ClubCardProps {
   club: Club;
@@ -15,14 +11,14 @@ interface ClubCardProps {
 }
 
 const ClubCard = ({ club, size = "default", onPress }: ClubCardProps) => {
-  const navigation = useNavigation<NavigationProp>();
+  const navigation = useNavigation<AppNavigation>();
 
   const handlePress = () => {
     if (onPress) {
       onPress();
-    } else {
-      navigation.navigate("ClubDetails", { id: club.id });
+      return;
     }
+    navigation.navigate("ClubDetails", { id: club.id });
   };
 
   return (

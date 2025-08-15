@@ -20,9 +20,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/common/DropdownMenu";
-import Image from "@/components/common/Image";
 import { Text } from "@/components/common/Text";
 import { UserCard, UserCardSkeleton } from "@/components/custom";
+import { UserStack, UserStackSkeleton } from "@/components/custom/UserStack";
 import ClubCard, { ClubCardSkeleton } from "@/components/custom/card/ClubCard";
 import { Empty } from "@/components/page/Empty";
 import { ErrorPage } from "@/components/page/ErrorPage";
@@ -55,7 +55,7 @@ type EventActionsProps = {
 const EventActions = ({ event }: EventActionsProps) => {
   const { theme, actualTheme } = useTheme();
   const { t } = useTranslation();
-  const navigation = useNavigation<NavigationProp>();
+  const navigation = useNavigation<AppNavigation>();
 
   const { mutate: deleteEvent, isPending: isDeleting } = useDeleteEvent();
 
@@ -106,6 +106,7 @@ const EventDetails = () => {
   const { theme, actualTheme } = useTheme();
   const route = useRoute<EventDetailsRouteProp>();
   const { id } = route.params;
+  const navigation = useNavigation<NavigationProp>();
   const { user } = useAuth();
 
   const {
@@ -148,6 +149,14 @@ const EventDetails = () => {
 
   const isOwner = event.creator.email === user?.email;
 
+  const pictures = event.attendees
+    .map((u) => u.profile_picture)
+    .filter((p): p is string => Boolean(p));
+
+  const openEventMembers = () => {
+    navigation.navigate("EventMemberList", { id });
+  };
+
   const eventActions = (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -175,18 +184,19 @@ const EventDetails = () => {
       }
     >
       <EventDetailsHeader event={event} />
+      <CardGroup title={t("services.events.peopleInterested")}>
+        <UserStack
+          pictures={pictures}
+          count={event.attendee_count}
+          moreText="services.events.interested"
+          onPress={openEventMembers}
+        />
+      </CardGroup>
       <CardGroup title={t("services.events.organizer")}>
         <ClubCard club={event.club} size="sm" />
       </CardGroup>
       <CardGroup title={t("services.events.createdBy")}>
         <UserCard user={event.creator} />
-      </CardGroup>
-      <CardGroup title={t("services.events.peopleInterested")}>
-        <View className="gap-2">
-          {event.attendees.slice(0, 3).map((attendee) => (
-            <UserCard key={attendee.email} user={attendee} />
-          ))}
-        </View>
       </CardGroup>
     </Page>
   );
@@ -199,18 +209,14 @@ export const EventDetailsSkeleton = () => {
   return (
     <Page title={t("services.events.title")}>
       <EventDetailsHeaderSkeleton />
+      <CardGroup title={t("services.events.peopleInterested")}>
+        <UserStackSkeleton />
+      </CardGroup>
       <CardGroup title={t("services.events.organizer")}>
         <ClubCardSkeleton size="sm" />
       </CardGroup>
       <CardGroup title={t("services.events.createdBy")}>
         <UserCardSkeleton />
-      </CardGroup>
-      <CardGroup title={t("services.events.peopleInterested")}>
-        <View className="gap-2">
-          <UserCardSkeleton />
-          <UserCardSkeleton />
-          <UserCardSkeleton />
-        </View>
       </CardGroup>
     </Page>
   );

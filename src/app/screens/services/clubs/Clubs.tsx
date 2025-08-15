@@ -13,7 +13,7 @@ import { Page } from "@/components/page/Page";
 import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
 import { useFilteredClubs } from "@/hooks/services/club/useClub";
 import type { AppStackParamList } from "@/types/navigation";
-import { SearchClub } from "./components";
+import Search from '@/components/common/Search';
 
 export const Clubs = () => {
   const { t } = useTranslation();
@@ -60,7 +60,7 @@ export const Clubs = () => {
         showsVerticalScrollIndicator
         ListHeaderComponent={
           <View className="flex-row items-center gap-2 mb-3">
-            <SearchClub value={searchValue} onChange={setSearchValue} />
+            <Search value={searchValue} onChange={setSearchValue} />
             <Button
               label={t("services.reservation.title")}
               variant="secondary"
@@ -88,7 +88,7 @@ const ClubsSkeleton = () => {
   return (
     <Page title={t("services.clubs.title")} className="gap-2">
       <View className="flex-row items-center gap-2 mb-3">
-        <SearchClub value={""} onChange={() => {}} disabled />
+        <Search value={""} onChange={() => {}} disabled />
         <Button label="Réserver" variant="secondary" onPress={() => {}} />
       </View>
       {Array.from({ length: 5 }).map((_, index) => (

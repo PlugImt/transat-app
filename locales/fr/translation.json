@@ -435,9 +435,9 @@
       "current": "En cours",
       "past": "Passées",
       "cancelReservation": "Annuler la réservation",
-      "cancelConfirmDesc": "Confirmez-vous vouloir annuler cette réservation ?",
+      "cancelConfirmDesc": "Êtes-vous sûr de vouloir annuler cette réservation ?",
       "confirmCancel": "Oui, j'annule",
-      "cancelSuccess": "Réservation annulée !",
+      "cancelSuccess": "Réservation annulée",
       "errors": {
         "empty": "Aucune réservation disponible",
         "emptyDescription": "Aucun équipement ou activité n'est disponible pour le moment",

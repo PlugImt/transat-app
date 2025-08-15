@@ -30,7 +30,7 @@ export const API_ROUTES: Record<Route, ApiRoute> = {
   reservationItem: "/reservation/item/:id",
   reservationCreateItem: "/reservation/item",
   reservationClub: "/reservation/club/:id",
-  reservationMy: "/reservation/my",
+  reservationMy: "/reservation/me",
   reservationSearch: "/reservation/search",
 };
 

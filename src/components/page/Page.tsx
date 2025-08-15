@@ -8,7 +8,10 @@ import {
 } from "react-native";
 import Animated from "react-native-reanimated";
 import { useTheme } from "@/contexts/ThemeContext";
-import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
+import {
+  AnimatedHeaderContext,
+  useAnimatedHeader,
+} from "@/hooks/common/useAnimatedHeader";
 import { cn } from "@/utils";
 import { HEADER_HEIGHT, Header } from "./Header";
 
@@ -40,7 +43,7 @@ export const Page = ({
   onBack,
 }: PageProps) => {
   const { theme } = useTheme();
-  const { scrollHandler, headerShown } = useAnimatedHeader();
+  const { scrollHandler, headerShown, scrollY } = useAnimatedHeader();
   const containerStyle = {
     paddingBottom: footer ? 0 : 40,
     paddingTop: HEADER_HEIGHT,
@@ -92,26 +95,28 @@ export const Page = ({
 
   return (
     <View style={{ backgroundColor: theme.background }} className="flex-1">
-      <Header headerShown={headerShown} title={title} onBack={onBack}>
-        {header}
-      </Header>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={{ flex: 1 }}
-      >
-        {getContent()}
-      </KeyboardAvoidingView>
-      {footer && (
-        <View
-          style={{
-            backgroundColor: theme.background,
-            paddingHorizontal: 20,
-            paddingVertical: 16,
-          }}
+      <AnimatedHeaderContext.Provider value={{ headerShown, scrollY }}>
+        <Header headerShown={headerShown} title={title} onBack={onBack}>
+          {header}
+        </Header>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={{ flex: 1 }}
         >
-          {footer}
-        </View>
-      )}
+          {getContent()}
+        </KeyboardAvoidingView>
+        {footer && (
+          <View
+            style={{
+              backgroundColor: theme.background,
+              paddingHorizontal: 20,
+              paddingVertical: 16,
+            }}
+          >
+            {footer}
+          </View>
+        )}
+      </AnimatedHeaderContext.Provider>
     </View>
   );
 };

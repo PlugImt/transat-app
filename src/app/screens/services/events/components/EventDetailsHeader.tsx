@@ -8,12 +8,15 @@ import {
 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { Linking, View } from "react-native";
+import Animated, { useAnimatedStyle } from "react-native-reanimated";
 import { Button } from "@/components/common/Button";
+import Image from "@/components/common/Image";
 import { Text } from "@/components/common/Text";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { EventDetails } from "@/dto/event";
 import { useDate } from "@/hooks/common";
+import { useAnimatedHeaderContext } from "@/hooks/common/useAnimatedHeader";
 import {
   useJoinClubMutation,
   useLeaveClubMutation,
@@ -69,6 +72,20 @@ export const EventDetailsHeader = ({ event }: EventDetailsHeaderProps) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
   const { formatTime, formatAgo } = useDate();
+  const animatedHeaderCtx = useAnimatedHeaderContext();
+
+  const BANNER_MAX_HEIGHT = 200;
+  const BANNER_MIN_HEIGHT = 96;
+
+  const bannerStyle = useAnimatedStyle(() => {
+    const y = animatedHeaderCtx?.scrollY ? animatedHeaderCtx.scrollY.value : 0;
+    const raw = BANNER_MAX_HEIGHT - y * 0.6;
+    const height = Math.min(
+      BANNER_MAX_HEIGHT,
+      Math.max(BANNER_MIN_HEIGHT, raw),
+    );
+    return { height };
+  });
 
   const label = link?.toLowerCase().includes("whatsapp")
     ? "WhatsApp"
@@ -82,6 +99,14 @@ export const EventDetailsHeader = ({ event }: EventDetailsHeaderProps) => {
 
   return (
     <View className="gap-4">
+      {event.picture && (
+        <Animated.View
+          style={[bannerStyle]}
+          className="w-full overflow-hidden rounded-xl"
+        >
+          <Image source={event.picture} fill resizeMode="cover" />
+        </Animated.View>
+      )}
       <View>
         <Text variant="h2">{title}</Text>
         <Text variant="lg" color="primary">

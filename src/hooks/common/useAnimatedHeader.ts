@@ -1,4 +1,6 @@
+import React, { createContext, useContext } from "react";
 import {
+  type SharedValue,
   useAnimatedScrollHandler,
   useSharedValue,
   withSpring,
@@ -48,4 +50,15 @@ export const useAnimatedHeader = () => {
     scrollHandler,
     scrollY,
   };
+};
+
+type AnimatedHeaderCtx = {
+  headerShown: SharedValue<number>;
+  scrollY: SharedValue<number>;
+} | null;
+
+export const AnimatedHeaderContext = createContext<AnimatedHeaderCtx>(null);
+
+export const useAnimatedHeaderContext = () => {
+  return useContext(AnimatedHeaderContext);
 };

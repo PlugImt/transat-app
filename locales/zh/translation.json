@@ -439,6 +439,7 @@
       "organizer": "组织者",
       "createdBy": "创建者",
       "peopleInterested": "感兴趣的人",
+      "interested": "{{count}} 人对此活动感兴趣",
       "add": {
         "title": "新活动",
         "image": {

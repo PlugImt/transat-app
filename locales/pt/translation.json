@@ -439,6 +439,7 @@
       "organizer": "Organizador",
       "createdBy": "Criado por",
       "peopleInterested": "Pessoas interessadas",
+      "interested": "{{count}} pessoas estão interessadas neste evento",
       "add": {
         "title": "Novo evento",
         "image": {

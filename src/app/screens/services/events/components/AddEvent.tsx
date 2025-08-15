@@ -130,7 +130,7 @@ export const AddEvent = () => {
           onChange={setValue}
           startDateField="start_date"
           endDateField="end_date"
-          label="Date"
+          label={t("services.events.add.date.title")}
         />
 
         <Input

@@ -18,9 +18,9 @@ import { useTheme } from "@/contexts/ThemeContext";
 import type { EventDetails } from "@/dto/event";
 import { useEditEventForm } from "@/hooks/services/event/useEditEventForm";
 import { useEventDetails } from "@/hooks/services/event/useEvent";
-import type { AppStackParamList } from "@/types/navigation";
+import type { BottomTabParamList } from "@/types/navigation";
 
-type EditEventRouteProp = RouteProp<AppStackParamList, "EditEvent">;
+type EditEventRouteProp = RouteProp<BottomTabParamList, "EditEvent">;
 
 export const EditEvent = () => {
   const { theme } = useTheme();
@@ -174,7 +174,7 @@ const EditEventForm = ({ event }: EditEventFormProps) => {
           onChange={setValue}
           startDateField="start_date"
           endDateField="end_date"
-          label="Date"
+          label={t("services.events.add.date.title")}
           initialStartDate={event.start_date}
           initialEndDate={event.end_date}
         />

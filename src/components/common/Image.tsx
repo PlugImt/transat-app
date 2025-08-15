@@ -19,6 +19,7 @@ interface ImageProps
   size?: number;
   fallback?: React.ReactNode;
   radius?: number;
+  fill?: boolean;
 }
 
 interface ImageFallbackProps {
@@ -83,6 +84,7 @@ const Image = forwardRef<React.ElementRef<typeof RNImage>, ImageProps>(
       size = 64,
       fallback,
       radius = 8,
+      fill = false,
       ...props
     },
     ref,
@@ -103,10 +105,16 @@ const Image = forwardRef<React.ElementRef<typeof RNImage>, ImageProps>(
       );
     }
 
+    const containerStyle = !fill ? { width: size, height: size } : undefined;
+
     return (
       <View
-        style={[{ width: size, height: size }]}
-        className={cn("relative flex shrink-0 overflow-hidden", className)}
+        style={[containerStyle]}
+        className={cn(
+          "relative overflow-hidden",
+          fill ? "h-full w-full" : "flex shrink-0",
+          className,
+        )}
       >
         <View className="absolute inset-0 h-full w-full z-10">
           <RNImage
@@ -117,7 +125,7 @@ const Image = forwardRef<React.ElementRef<typeof RNImage>, ImageProps>(
               setImageLoading(false);
             }}
             className={cn(
-              "aspect-square h-full w-full",
+              "h-full w-full flex-shrink-0",
               hasLoaded ? "opacity-100" : "opacity-0",
             )}
             borderRadius={radius}

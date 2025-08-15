@@ -16,7 +16,7 @@ interface ImageSelectorProps {
   placeholder?: string;
   uploadingText?: string;
   size?: number;
-  aspectRatio?: "square" | "video" | "custom";
+  aspectRatio?: "square" | "video" | "banner" | "custom";
   className?: string;
   disabled?: boolean;
 }
@@ -42,12 +42,12 @@ export const ImageSelector = ({
     uploadingText || t("common.imageSelector.uploading");
 
   const aspectRatioClasses = {
-    square: "aspect-square",
-    video: "aspect-video",
-    custom: "",
+    square: 1,
+    video: 16 / 9,
+    banner: 3 / 1,
+    custom: undefined as number | undefined,
   };
-
-  const aspectRatioClass = aspectRatioClasses[aspectRatio];
+  const computedRatio = aspectRatioClasses[aspectRatio];
 
   return (
     <View className={cn("gap-1.5", className)}>
@@ -58,16 +58,17 @@ export const ImageSelector = ({
       )}
       <TouchableOpacity
         onPress={onImageSelect}
-        className={cn("relative", aspectRatioClass)}
-        style={{
-          width: size,
-          height: size,
-        }}
+        className={cn("relative overflow-hidden rounded-xl w-full")}
+        style={
+          aspectRatio === "square"
+            ? { width: size, height: size }
+            : { width: "100%", aspectRatio: computedRatio ?? 16 / 9 }
+        }
         disabled={disabled || isUploading}
       >
         {imageUrl ? (
           <>
-            <Image source={imageUrl} size={size} radius={12} />
+            <Image source={imageUrl} radius={12} fill resizeMode="cover" />
             {onImageRemove && (
               <IconButton
                 icon={<Trash />}

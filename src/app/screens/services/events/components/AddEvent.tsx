@@ -46,6 +46,7 @@ export const AddEvent = () => {
           onImageRemove={handleRemoveImage}
           isUploading={isUploadingImage}
           title={t("services.events.add.image.title")}
+          aspectRatio="banner"
         />
 
         <Input

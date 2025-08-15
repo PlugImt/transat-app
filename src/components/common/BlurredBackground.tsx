@@ -9,11 +9,11 @@ interface BlurredBackgroundProps {
 export const BlurredBackground = ({ picture }: BlurredBackgroundProps) => {
   const { actualTheme } = useTheme();
 
+  // biome-ignore lint/suspicious/noExplicitAny: to be replaced with proper type
   let BlurViewComp: any = null;
   try {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
     BlurViewComp = require("expo-blur").BlurView;
-  } catch (e) {
+  } catch (_e) {
     BlurViewComp = null;
   }
 

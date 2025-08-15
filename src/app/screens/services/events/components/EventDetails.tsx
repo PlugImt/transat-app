@@ -5,7 +5,6 @@ import {
 } from "@react-navigation/native";
 import { Edit, MoreVertical, Trash2 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
-import { StyleSheet, View } from "react-native";
 import { BlurredBackground } from "@/components/common/BlurredBackground";
 import { IconButton } from "@/components/common/Button";
 import CardGroup from "@/components/common/CardGroup";
@@ -53,7 +52,7 @@ type EventActionsProps = {
 };
 
 const EventActions = ({ event }: EventActionsProps) => {
-  const { theme, actualTheme } = useTheme();
+  const { theme } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation<AppNavigation>();
 
@@ -103,7 +102,7 @@ const EventActions = ({ event }: EventActionsProps) => {
 
 const EventDetails = () => {
   const { t } = useTranslation();
-  const { theme, actualTheme } = useTheme();
+  const { theme } = useTheme();
   const route = useRoute<EventDetailsRouteProp>();
   const { id } = route.params;
   const navigation = useNavigation<NavigationProp>();

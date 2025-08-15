@@ -20,11 +20,11 @@ export const Homework = () => {
 
   const { data, isPending, refetch, error, isError } = useHomework();
 
-  const [selectedSubject, setSelectedSubject] = useState<string>("");
+  const [selectedSubject, _setSelectedSubject] = useState<string>("");
   const [showDone, setShowDone] = useState<null | boolean>(null); // null = tous, true = faits, false = non faits
   const [sortBy, setSortBy] = useState<"deadline" | "subject">("deadline");
 
-  const uniqueSubjects = useMemo(() => {
+  const _uniqueSubjects = useMemo(() => {
     const allSubjects = (data || []).map((hw) => hw.course_name);
     return [...new Set(allSubjects)].sort();
   }, [data]);

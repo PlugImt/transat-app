@@ -23,7 +23,6 @@ import type { BottomTabParamList } from "@/types/navigation";
 type EditEventRouteProp = RouteProp<BottomTabParamList, "EditEvent">;
 
 export const EditEvent = () => {
-  const { theme } = useTheme();
   const { t } = useTranslation();
   const route = useRoute<EditEventRouteProp>();
   const { id } = route.params;
@@ -213,7 +212,6 @@ const EditEventForm = ({ event }: EditEventFormProps) => {
 };
 
 const EditEventLoading = () => {
-  const { theme } = useTheme();
   const { t } = useTranslation();
 
   return (

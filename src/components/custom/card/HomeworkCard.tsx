@@ -2,7 +2,6 @@ import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { CheckCircle, Circle } from "lucide-react-native";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 import { TouchableOpacity, View } from "react-native";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -16,7 +15,6 @@ interface Props {
 
 export default function HomeworkCard({ homework }: Props) {
   const { theme } = useTheme();
-  const { t } = useTranslation();
   const { formatDeadline, getDeadlineStatus } = useHomeworkDate();
   const navigation = useNavigation<StackNavigationProp<AppStackParamList>>();
   const [isDone, setIsDone] = useState(homework.done);
@@ -29,7 +27,7 @@ export default function HomeworkCard({ homework }: Props) {
   const deadlineStatus = getDeadlineStatus(new Date(homework.deadline));
 
   const now = new Date();
-  const isLate = !homework.done && new Date(homework.deadline) < now;
+  const _isLate = !homework.done && new Date(homework.deadline) < now;
 
   return (
     <TouchableOpacity

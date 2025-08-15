@@ -14,7 +14,7 @@ export const useDate = () => {
   const { t } = useTranslation();
 
   const formatDate = (date: Date, format: DateFormat = "short") => {
-    return t("common.dateFormats." + format, { date });
+    return t(`common.dateFormats.${format}`, { date });
   };
 
   // Lundi

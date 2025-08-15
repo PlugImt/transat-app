@@ -232,7 +232,9 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
                       <>
                         <InputButton
                           Icon={Clock}
-                          placeholder={t("services.events.add.startTime") as string}
+                          placeholder={
+                            t("services.events.add.startTime") as string
+                          }
                           value={formatTimeDisplay(startDateTime.time)}
                           onPress={() => setShowStartTimePicker(true)}
                         />
@@ -250,11 +252,13 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
                             <NativeDateTimePicker
                               value={startDateTime.time}
                               mode="time"
-                              display={Platform.OS === "ios" ? "spinner" : "default"}
+                              display={
+                                Platform.OS === "ios" ? "spinner" : "default"
+                              }
                               accentColor={theme.primary}
                               textColor={theme.text}
                               themeVariant={actualTheme}
-                              onChange={(event, selectedDate) => {
+                              onChange={(_event, selectedDate) => {
                                 if (!selectedDate) {
                                   setShowStartTimePicker(false);
                                   return;
@@ -281,7 +285,9 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
                       <>
                         <InputButton
                           Icon={Clock}
-                          placeholder={t("services.events.add.endTime") as string}
+                          placeholder={
+                            t("services.events.add.endTime") as string
+                          }
                           value={formatTimeDisplay(endDateTime.time)}
                           onPress={() => setShowEndTimePicker(true)}
                         />
@@ -299,11 +305,13 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
                             <NativeDateTimePicker
                               value={endDateTime.time}
                               mode="time"
-                              display={Platform.OS === "ios" ? "spinner" : "default"}
+                              display={
+                                Platform.OS === "ios" ? "spinner" : "default"
+                              }
                               textColor={theme.text}
                               accentColor={theme.primary}
                               themeVariant={actualTheme}
-                              onChange={(event, selectedDate) => {
+                              onChange={(_event, selectedDate) => {
                                 if (!selectedDate) {
                                   setShowEndTimePicker(false);
                                   return;
@@ -323,7 +331,9 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
             <DialogTrigger>
               <InputButton
                 Icon={Calendar}
-                placeholder={t("services.events.add.date.placeholder") as string}
+                placeholder={
+                  t("services.events.add.date.placeholder") as string
+                }
                 value={getRangeText()}
                 onPress={() => {}}
                 error={errors[startDateField]?.message as string | undefined}

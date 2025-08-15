@@ -4,9 +4,13 @@ import { useTheme } from "@/contexts/ThemeContext";
 
 interface BlurredBackgroundProps {
   picture: string;
+  blurIntensity?: number;
 }
 
-export const BlurredBackground = ({ picture }: BlurredBackgroundProps) => {
+export const BlurredBackground = ({
+  picture,
+  blurIntensity = 70,
+}: BlurredBackgroundProps) => {
   const { actualTheme } = useTheme();
 
   // biome-ignore lint/suspicious/noExplicitAny: to be replaced with proper type
@@ -29,7 +33,7 @@ export const BlurredBackground = ({ picture }: BlurredBackgroundProps) => {
       />
       {BlurViewComp ? (
         <BlurViewComp
-          intensity={70}
+          intensity={blurIntensity}
           tint={actualTheme}
           style={StyleSheet.absoluteFillObject}
         />

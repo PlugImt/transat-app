@@ -56,7 +56,7 @@ export const Home = () => {
             <TouchableOpacity
               onPress={() => tabNavigation?.navigate("AccountScreen")}
             >
-              <Text variant="h1" color="primary">
+              <Text variant="h1" color="primary" numberOfLines={1}>
                 {user.first_name}
               </Text>
             </TouchableOpacity>

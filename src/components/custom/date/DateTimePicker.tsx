@@ -4,7 +4,7 @@ import type React from "react";
 import { useEffect, useMemo, useState } from "react";
 import { Controller, type UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Platform, View } from "react-native";
+import { Dimensions, Platform, View } from "react-native";
 import CalendarPicker, { type DateType } from "react-native-ui-datepicker";
 import {
   Dialog,
@@ -180,6 +180,7 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
               confirmLabel={t("common.confirm")}
               cancelLabel={t("common.cancel")}
               scrollable
+              contentMaxHeight={Dimensions.get("window").height * 0.8}
             >
               <CalendarPicker
                 locale={i18n.language}

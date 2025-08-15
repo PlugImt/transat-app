@@ -26,6 +26,7 @@ import {
 } from "@/app/screens/services";
 import ClubDetails from "@/app/screens/services/clubs/ClubDetails";
 import { ClubMemberList } from "@/app/screens/services/clubs/components/ClubMemberList";
+import ClubEvents from "@/app/screens/services/events/ClubEvents";
 import { AddEvent } from "@/app/screens/services/events/components/AddEvent";
 import { EditEvent } from "@/app/screens/services/events/components/EditEvent";
 import EventDetails from "@/app/screens/services/events/components/EventDetails";
@@ -55,6 +56,7 @@ const HomeStack = () => (
     <Stack.Screen name="Clubs" component={Clubs} />
     <Stack.Screen name="ClubDetails" component={ClubDetails} />
     <Stack.Screen name="ClubMemberList" component={ClubMemberList} />
+    <Stack.Screen name="ClubEvents" component={ClubEvents} />
     <Stack.Screen name="Events" component={Events} />
     <Stack.Screen name="EventMemberList" component={EventMemberList} />
     <Stack.Screen name="EventDetails" component={EventDetails} />
@@ -77,6 +79,7 @@ const ServicesStack = () => (
     <Stack.Screen name="Clubs" component={Clubs} />
     <Stack.Screen name="ClubDetails" component={ClubDetails} />
     <Stack.Screen name="ClubMemberList" component={ClubMemberList} />
+    <Stack.Screen name="ClubEvents" component={ClubEvents} />
     <Stack.Screen name="Events" component={Events} />
     <Stack.Screen name="EventMemberList" component={EventMemberList} />
     <Stack.Screen name="EventDetails" component={EventDetails} />

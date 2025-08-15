@@ -3,6 +3,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   RefreshControl,
+  StyleSheet,
   View,
   type ViewStyle,
 } from "react-native";
@@ -27,6 +28,7 @@ type PageProps = {
   disableScroll?: boolean;
   asChildren?: boolean;
   onBack?: () => void;
+  background?: ReactNode;
 };
 
 export const Page = ({
@@ -41,6 +43,7 @@ export const Page = ({
   disableScroll = false,
   asChildren = false,
   onBack,
+  background,
 }: PageProps) => {
   const { theme } = useTheme();
   const { scrollHandler, headerShown, scrollY } = useAnimatedHeader();
@@ -95,6 +98,15 @@ export const Page = ({
 
   return (
     <View style={{ backgroundColor: theme.background }} className="flex-1">
+      {background && (
+        <View
+          pointerEvents="none"
+          style={StyleSheet.absoluteFillObject}
+          className="overflow-hidden"
+        >
+          {background}
+        </View>
+      )}
       <AnimatedHeaderContext.Provider value={{ headerShown, scrollY }}>
         <Header headerShown={headerShown} title={title} onBack={onBack}>
           {header}

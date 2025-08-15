@@ -106,8 +106,7 @@ export const parseDate = (date: DateType): Date => {
  * @param time - The time value
  * @returns ISO string representation of the combined date and time
  */
-// biome-ignore lint/suspicious/noExplicitAny: can't do better here
-export const createDateTimeISO = (date: any, time: Date): string => {
+export const createDateTimeISO = (date: DateType, time: Date): string => {
   if (!date) return new Date().toISOString();
 
   const dateObj = parseDate(date);

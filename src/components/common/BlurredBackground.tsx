@@ -1,3 +1,4 @@
+import type { BlurView } from "expo-blur";
 import { StyleSheet, View } from "react-native";
 import Image from "@/components/common/Image";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -13,8 +14,7 @@ export const BlurredBackground = ({
 }: BlurredBackgroundProps) => {
   const { actualTheme } = useTheme();
 
-  // biome-ignore lint/suspicious/noExplicitAny: to be replaced with proper type
-  let BlurViewComp: any = null;
+  let BlurViewComp: typeof BlurView | null = null;
   try {
     BlurViewComp = require("expo-blur").BlurView;
   } catch (_e) {

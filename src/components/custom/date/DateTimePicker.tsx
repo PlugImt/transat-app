@@ -56,6 +56,8 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
   const { formatDate } = useDate();
   const calendarStyles = useDateTimePickerStyle();
 
+  const HOUR_IN_MILLISECONDS = 60 * 60 * 1000; // 1 heure en millisecondes
+
   const initialStartDateTime = useMemo(() => {
     if (initialStartDate) {
       const date = parseDate(initialStartDate);
@@ -79,8 +81,8 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
       };
     }
     return {
-      date: new Date(Date.now() + 60 * 60 * 1000), // +1 heure
-      time: new Date(Date.now() + 60 * 60 * 1000),
+      date: new Date(Date.now() + HOUR_IN_MILLISECONDS),
+      time: new Date(Date.now() + HOUR_IN_MILLISECONDS),
     };
   }, [initialEndDate]);
 

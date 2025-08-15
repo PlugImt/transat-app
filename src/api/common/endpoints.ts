@@ -25,6 +25,7 @@ export const API_ROUTES: Record<Route, ApiRoute> = {
   clubJoin: "/club/:id/join",
   clubLeave: "/club/:id/leave",
   event: "/event",
+  eventClub: "/event/club/:idclub",
   eventDetails: "/event/:id",
   eventJoin: "/event/:id/join",
   eventLeave: "/event/:id/leave",
@@ -59,6 +60,7 @@ type Route =
   | "clubLeave"
   | "clubMembers"
   | "event"
+  | "eventClub"
   | "eventDetails"
   | "eventJoin"
   | "eventLeave"

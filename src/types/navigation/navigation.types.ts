@@ -20,6 +20,7 @@ export type BottomTabParamList = {
   Clubs: undefined;
   ClubDetails: { id: number };
   ClubMemberList: { id: number };
+  ClubEvents: { id: number };
   EventMemberList: { id: number };
   Events: undefined;
   EventDetails: { id: number };

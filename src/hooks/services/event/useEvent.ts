@@ -7,6 +7,7 @@ import {
   getEventDetails,
   getEventMembers,
   getEvents,
+  getClubEvents,
   joinEvent,
   leaveEvent,
   updateEvent,
@@ -34,6 +35,40 @@ export const useEventsByTab = (tabValue: "upcoming" | "past") => {
     error,
     refetch,
   } = useEvents(tabValue);
+
+  return {
+    events,
+    isPending,
+    isError,
+    error,
+    refetch,
+  };
+};
+
+export const useClubEvents = (
+  clubId: number,
+  time: EventTimeFilter = "upcoming",
+) => {
+  const { data, isPending, refetch, isError, error } = useQuery({
+    queryKey: [...QUERY_KEYS.event.clubEvents, clubId, time],
+    queryFn: () => getClubEvents(clubId, time),
+    staleTime: 1000 * 60 * 5,
+  });
+
+  return { data, isPending, refetch, isError, error };
+};
+
+export const useClubEventsByTab = (
+  clubId: number,
+  tabValue: "upcoming" | "past",
+) => {
+  const {
+    data: events,
+    isPending,
+    isError,
+    error,
+    refetch,
+  } = useClubEvents(clubId, tabValue);
 
   return {
     events,

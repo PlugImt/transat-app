@@ -11,6 +11,14 @@ export const getEvents = async (time: EventTimeFilter = "upcoming") => {
   );
 };
 
+export const getClubEvents = async (
+  clubId: number,
+  time: EventTimeFilter = "upcoming",
+) => {
+  const url = `${API_ROUTES.eventClub.replace(":idclub", clubId.toString())}?time=${time}`;
+  return await apiRequest<Event[]>(url, Method.GET);
+};
+
 export const getEventDetails = async (id: number) => {
   return await apiRequest<EventDetails>(
     API_ROUTES.eventDetails.replace(":id", id.toString()),

@@ -16,6 +16,7 @@ export const QUERY_KEYS = {
   },
   event: {
     events: ["events"],
+    clubEvents: ["clubEvents"],
     eventDetails: ["eventDetails"],
     eventJoin: ["eventJoin"],
     eventLeave: ["eventLeave"],

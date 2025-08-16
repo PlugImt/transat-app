@@ -20,14 +20,6 @@ export const useBassineOverview = () => {
     queryFn: () => getBassineOverview(),
   });
 
-  useEffect(() => {
-    if (__DEV__ && data) console.log("[Bassine] Overview fetched", data);
-  }, [data]);
-
-  useEffect(() => {
-    if (__DEV__ && isError) console.error("[Bassine] Overview error", error);
-  }, [isError, error]);
-
   return { data, isPending, refetch, error, isError };
 };
 
@@ -37,14 +29,6 @@ export const useBassineLeaderboard = () => {
     queryFn: () => getBassineLeaderboard(),
   });
 
-  useEffect(() => {
-    if (__DEV__ && data) console.log("[Bassine] Leaderboard fetched", data);
-  }, [data]);
-
-  useEffect(() => {
-    if (__DEV__ && isError) console.error("[Bassine] Leaderboard error", error);
-  }, [isError, error]);
-
   return { data, isPending, refetch, error, isError };
 };
 
@@ -53,14 +37,6 @@ export const useBassineHistory = () => {
     queryKey: QUERY_KEYS.bassine.history,
     queryFn: () => getBassineHistory(),
   });
-
-  useEffect(() => {
-    if (__DEV__ && data) console.log("[Bassine] History fetched", data);
-  }, [data]);
-
-  useEffect(() => {
-    if (__DEV__ && isError) console.error("[Bassine] History error", error);
-  }, [isError, error]);
 
   return { data, isPending, refetch, error, isError };
 };
@@ -72,16 +48,6 @@ export const useBassineUserHistory = (email?: string) => {
     enabled: !!email,
   });
 
-  useEffect(() => {
-    if (__DEV__ && data)
-      console.log("[Bassine] User history fetched", { email, data });
-  }, [email, data]);
-
-  useEffect(() => {
-    if (__DEV__ && isError)
-      console.error("[Bassine] User history error", { email, error });
-  }, [email, isError, error]);
-
   return { data, isPending, refetch, error, isError };
 };
 
@@ -91,7 +57,6 @@ export const useBassineIncrement = () => {
   return useMutation({
     mutationFn: () => patchBassine("up"),
     onSuccess: (res) => {
-      if (__DEV__) console.log("[Bassine] Increment success", res);
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bassine.overview });
       queryClient.invalidateQueries({
         queryKey: QUERY_KEYS.bassine.leaderboard,
@@ -113,7 +78,6 @@ export const useBassineDecrement = () => {
   return useMutation({
     mutationFn: () => patchBassine("down"),
     onSuccess: (res) => {
-      if (__DEV__) console.log("[Bassine] Decrement success", res);
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bassine.overview });
       queryClient.invalidateQueries({
         queryKey: QUERY_KEYS.bassine.leaderboard,

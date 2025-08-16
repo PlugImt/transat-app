@@ -149,9 +149,9 @@ const Input = forwardRef(
                     onChange(
                       allowAccents
                         ? text
-                        : text
+                        : (text
                             ?.normalize?.("NFD")
-                            .replace(/[\u0300-\u036f]/g, "") ?? text,
+                            .replace(/[\u0300-\u036f]/g, "") ?? text),
                     )
                   }
                   onBlur={onBlur}
@@ -166,9 +166,9 @@ const Input = forwardRef(
                 onChangeText?.(
                   allowAccents
                     ? text
-                    : text
+                    : (text
                         ?.normalize?.("NFD")
-                        .replace(/[\u0300-\u036f]/g, "") ?? text,
+                        .replace(/[\u0300-\u036f]/g, "") ?? text),
                 )
               }
               value={value ?? ""}

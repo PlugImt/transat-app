@@ -13,6 +13,7 @@ import {
   useJoinClubMutation,
   useLeaveClubMutation,
 } from "@/hooks/services/club/useClub";
+import { linkToDomain } from "@/utils/";
 import type { ClubDetailsRouteProp } from "../ClubDetails";
 
 interface NotificationButtonProps {
@@ -78,7 +79,9 @@ export const ClubDetailsHeader = ({ club }: ClubDetailsHeaderProps) => {
 
   const label = link?.toLowerCase().includes("whatsapp")
     ? "WhatsApp"
-    : String(t("common.link"));
+    : link
+      ? linkToDomain(link)
+      : String(t("common.link"));
 
   const handleMemberListPress = () => {
     navigation.navigate("ClubMemberList", { id: club.id });

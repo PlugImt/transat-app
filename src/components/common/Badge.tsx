@@ -32,7 +32,7 @@ const getBadgeStyle = (variant: BadgeVariant, theme: ThemeType) => {
 const getTextColor = (variant: BadgeVariant) => {
   const badgeTextStyles: { [key in BadgeVariant]: keyof ThemeType } = {
     default: "primaryText",
-    secondary: "secondaryText",
+    secondary: "primary",
     destructive: "destructiveText",
     ghost: "muted",
   };

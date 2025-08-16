@@ -38,7 +38,7 @@ const colors = {
     },
     secondary: {
       DEFAULT: sharedColors.secondary,
-      text: sharedColors.primary,
+      text: "#FFFFFF",
     },
     destructive: {
       DEFAULT: sharedColors.destructive,

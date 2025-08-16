@@ -4,6 +4,7 @@
     "home": "Accueil",
     "account": "Compte",
     "edit": "Modifier",
+    "delete": "Supprimer",
     "save": "Enregistrer",
     "confirm": "Confirmer",
     "send": "Envoyer",
@@ -77,6 +78,26 @@
       "months": "il y a {{count}} mois",
       "year": "il y a {{count}} an",
       "years": "il y a {{count}} ans"
+    },
+    "dateFormats": {
+      "weekday": "{{date, weekday}}",
+      "time": "{{date, time}}",
+      "short": "{{date, short}}",
+      "long": "{{date, long}}",
+      "relative": "{{date, relative}}",
+      "ago": "{{date, ago}}",
+      "dateTime": "{{date, dateTime}}"
+    },
+    "homework": {
+      "deadline": "Échéance : {{date, dateTime}}",
+      "createdAt": "Créé le {{date, short}}",
+      "updatedAt": "Modifié le {{date, short}}",
+      "dueIn": "À rendre dans {{date, ago}}",
+      "overdue": "En retard depuis {{date, ago}}"
+    },
+    "imageSelector": {
+      "placeholder": "Appuyez pour sélectionner une image",
+      "uploading": "Upload en cours..."
     }
   },
   "auth": {
@@ -400,6 +421,7 @@
       "title": "Clubs",
       "description": "Découvre tous les clubs et associations de l’IMT",
       "book": "Réserver",
+      "selectClub": "Sélectionner un club",
       "interested": "{{count}} personnes sont intéressées par ce club",
       "responsible": "Respo",
       "errors": {
@@ -407,6 +429,84 @@
         "emptyDescription": "Essayez avec un autre mot-clé",
         "notFound": "Ce club n'existe pas",
         "notFoundDescription": "Actualisez ou changez de club"
+      }
+    },
+    "events": {
+      "title": "Evénements",
+      "description": "Ne rate plus aucun événement de la MDE",
+      "upcoming": "Prochainement",
+      "past": "Passé",
+      "organizer": "Organisateur",
+      "createdBy": "Créé par",
+      "peopleInterested": "Personnes intéressées",
+      "interested": "{{count}} personnes sont intéressées par cet événement",
+      "add": {
+        "title": "Nouvel événement",
+        "image": {
+          "title": "Image"
+        },
+        "name": {
+          "title": "Nom",
+          "placeholder": "Tonus",
+          "required": "Le nom est requis",
+          "min": "Le nom doit contenir au moins 3 caractères",
+          "max": "Le nom ne doit pas dépasser 100 caractères"
+        },
+        "description": {
+          "title": "Description",
+          "placeholder": "Super Tonus à la MDE venez nombreux dès 21h",
+          "max": "La description ne doit pas dépasser 200 caractères"
+        },
+        "startTime": "Heure de début",
+        "endTime": "Heure de fin",
+        "date": {
+          "title": "Date",
+          "placeholder": "Sélectionner une date",
+          "required": "La date de début est obligatoire"
+        },
+        "location": {
+          "title": "Lieu",
+          "placeholder": "MDE",
+          "required": "Le lieu est requis",
+          "min": "Le lieu doit contenir au moins 3 caractères",
+          "max": "Le lieu ne doit pas dépasser 100 caractères"
+        },
+        "link": {
+          "title": "Lien",
+          "placeholder": "https://www.vibly.fr",
+          "invalid": "Le lien n'est pas valide",
+          "max": "Le lien ne doit pas dépasser 100 caractères"
+        },
+        "organizer": {
+          "title": "Organisateur",
+          "placeholder": "Sélectionner un club",
+          "required": "Le club organisateur est requis"
+        },
+        "submit": "Ajouter",
+        "success": "Événement ajouté avec succès",
+        "error": "Erreur lors de l'ajout de l'événement"
+      },
+      "edit": {
+        "title": "Modifier l'événement",
+        "submit": "Modifier",
+        "success": "Événement modifié avec succès",
+        "error": "Erreur lors de la modification de l'événement"
+      },
+      "delete": {
+        "title": "Supprimer l'événement",
+        "description": "Êtes-vous sûr de vouloir supprimer cet événement ? Cette action est irréversible",
+        "confirm": "Supprimer",
+        "cancel": "Annuler",
+        "success": "Événement supprimé avec succès",
+        "error": "Erreur lors de la suppression de l'événement"
+      },
+      "errors": {
+        "emptyUpcoming": "Aucun événement à venir",
+        "emptyUpcomingDescription": "Ajoutez en un pour qu'il s'affiche ici",
+        "emptyPast": "Aucun événement n'est encore passé",
+        "emptyPastDescription": "Profitez des événements à venir",
+        "notFound": "Cet événement a été supprimé",
+        "notFoundDescription": "Essayez avec un autre"
       }
     }
   },

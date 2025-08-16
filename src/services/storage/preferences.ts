@@ -6,7 +6,9 @@ export type WidgetType =
   | "restaurant"
   | "timetable"
   | "homework"
-  | "laundry";
+  | "laundry"
+  | "events";
+
 export type ServiceType =
   | "laundry"
   | "restaurant"
@@ -14,7 +16,8 @@ export type ServiceType =
   | "homework"
   | "traq"
   | "olimtpe"
-  | "clubs";
+  | "clubs"
+  | "events";
 
 export type PreferenceId = WidgetType | ServiceType;
 
@@ -38,6 +41,12 @@ const getDefaultHomeWidgets = (t: (key: string) => string): Preference[] => [
     name: t("services.restaurant.title"),
     enabled: true,
     order: 1,
+  },
+  {
+    id: "events",
+    name: t("services.events.title"),
+    enabled: true,
+    order: 6,
   },
   {
     id: "laundry",
@@ -90,6 +99,15 @@ const getDefaultServices = (
       image: require("@/assets/images/services/club.png"),
       screen: "Clubs",
       description: t("services.clubs.description"),
+    },
+    {
+      id: "events",
+      name: t("services.events.title"),
+      description: t("services.events.description"),
+      screen: "Events",
+      enabled: true,
+      order: 6,
+      image: require("@/assets/images/services/event.png"),
     },
   ];
 };

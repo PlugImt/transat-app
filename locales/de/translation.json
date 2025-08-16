@@ -4,6 +4,7 @@
     "home": "Startseite",
     "account": "Konto",
     "edit": "Bearbeiten",
+    "delete": "Löschen",
     "save": "Speichern",
     "confirm": "Bestätigen",
     "send": "Senden",
@@ -77,6 +78,26 @@
       "months": "vor {{count}} Monaten",
       "year": "vor {{count}} Jahr",
       "years": "vor {{count}} Jahren"
+    },
+    "dateFormats": {
+      "weekday": "{{date, weekday}}",
+      "time": "{{date, time}}",
+      "short": "{{date, short}}",
+      "long": "{{date, long}}",
+      "relative": "{{date, relative}}",
+      "ago": "{{date, ago}}",
+      "dateTime": "{{date, dateTime}}"
+    },
+    "homework": {
+      "deadline": "Frist: {{date, dateTime}}",
+      "createdAt": "Erstellt am {{date, short}}",
+      "updatedAt": "Aktualisiert am {{date, short}}",
+      "dueIn": "Fällig in {{date, ago}}",
+      "overdue": "Überfällig seit {{date, ago}}"
+    },
+    "imageSelector": {
+      "placeholder": "Tippen Sie, um ein Bild auszuwählen",
+      "uploading": "Upload läuft..."
     }
   },
   "auth": {
@@ -400,13 +421,90 @@
       "title": "Clubs",
       "description": "Entdecken Sie alle Clubs und Vereine an der IMT",
       "book": "Buchen",
-      "interested": "{{count}} Leute sind an diesem Club interessiert",
+      "selectClub": "Club auswählen",
+      "interested": "{{count}} Personen sind an diesem Club interessiert",
       "responsible": "Verantwortlich",
       "errors": {
         "empty": "Kein Club gefunden",
         "emptyDescription": "Versuchen Sie es mit einem anderen Schlüsselwort",
         "notFound": "Dieser Club existiert nicht",
         "notFoundDescription": "Aktualisieren Sie oder wechseln Sie den Club"
+      }
+    },
+    "events": {
+      "title": "Events",
+      "description": "Keine Events verpassen",
+      "upcoming": "Bevorstehend",
+      "past": "Vergangen",
+      "organizer": "Verantwortlich",
+      "createdBy": "Erstellt von",
+      "peopleInterested": "Interessierte",
+      "interested": "{{count}} Personen sind an diesem Event interessiert",
+      "add": {
+        "title": "Neues Event",
+        "picture": "Bild",
+        "name": {
+          "title": "Name",
+          "placeholder": "Tonus",
+          "required": "Name ist erforderlich",
+          "min": "Der Name muss mindestens 3 Zeichen enthalten",
+          "max": "Der Name darf 100 Zeichen nicht überschreiten"
+        },
+        "description": {
+          "title": "Beschreibung",
+          "placeholder": "Super Tonus in der MDE, kommt zahlreich ab 21 Uhr",
+          "max": "Die Beschreibung darf 200 Zeichen nicht überschreiten"
+        },
+        "startTime": "Startzeit",
+        "endTime": "Endzeit",
+        "date": {
+          "title": "Datum",
+          "placeholder": "Datum auswählen",
+          "required": "Startdatum ist erforderlich"
+        },
+        "location": {
+          "title": "Ort",
+          "placeholder": "MDE",
+          "required": "Ort ist erforderlich",
+          "min": "Der Ort muss mindestens 3 Zeichen enthalten",
+          "max": "Der Ort darf 100 Zeichen nicht überschreiten"
+        },
+        "link": {
+          "title": "Link",
+          "placeholder": "https://www.vibly.fr",
+          "invalid": "Der Link ist nicht gültig",
+          "max": "Der Link darf 100 Zeichen nicht überschreiten"
+        },
+        "organizer": {
+          "title": "Veranstalter",
+          "placeholder": "Club auswählen",
+          "required": "Veranstaltender Club ist erforderlich"
+        },
+        "submit": "Hinzufügen",
+        "success": "Event erfolgreich hinzugefügt",
+        "error": "Fehler beim Hinzufügen des Events"
+      },
+      "edit": {
+        "title": "Event bearbeiten",
+        "submit": "Bearbeiten",
+        "success": "Event erfolgreich aktualisiert",
+        "error": "Fehler beim Aktualisieren des Events"
+      },
+      "delete": {
+        "title": "Event löschen",
+        "description": "Sind Sie sicher, dass Sie dieses Event löschen möchten? Diese Aktion ist nicht rückgängig zu machen.",
+        "confirm": "Löschen",
+        "cancel": "Abbrechen",
+        "success": "Event erfolgreich gelöscht",
+        "error": "Fehler beim Löschen des Events"
+      },
+      "errors": {
+        "emptyUpcoming": "Keine bevorstehenden Events",
+        "emptyUpcomingDescription": "Fügen Sie ein Event hinzu, um es hier anzuzeigen",
+        "emptyPast": "Keine vergangenen Events",
+        "emptyPastDescription": "Genießen Sie die bevorstehenden Events",
+        "notFound": "Dieses Event wurde gelöscht",
+        "notFoundDescription": "Versuchen Sie es mit einem anderen"
       }
     }
   },

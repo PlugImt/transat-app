@@ -4,6 +4,7 @@
     "home": "Início",
     "account": "Conta",
     "edit": "Editar",
+    "delete": "Excluir",
     "save": "Salvar",
     "confirm": "Confirmar",
     "send": "Enviar",
@@ -77,6 +78,26 @@
       "months": "há {{count}} meses",
       "year": "há {{count}} ano",
       "years": "há {{count}} anos"
+    },
+    "dateFormats": {
+      "weekday": "{{date, weekday}}",
+      "time": "{{date, time}}",
+      "short": "{{date, short}}",
+      "long": "{{date, long}}",
+      "relative": "{{date, relative}}",
+      "ago": "{{date, ago}}",
+      "dateTime": "{{date, dateTime}}"
+    },
+    "homework": {
+      "deadline": "Prazo: {{date, dateTime}}",
+      "createdAt": "Criado em {{date, short}}",
+      "updatedAt": "Atualizado em {{date, short}}",
+      "dueIn": "Vence em {{date, ago}}",
+      "overdue": "Em atraso há {{date, ago}}"
+    },
+    "imageSelector": {
+      "placeholder": "Toque para selecionar uma imagem",
+      "uploading": "Enviando..."
     }
   },
   "auth": {
@@ -400,6 +421,7 @@
       "title": "Clubes",
       "description": "Descubra todos os clubs e associações da IMT",
       "book": "Reservar",
+      "selectClub": "Selecionar clube",
       "interested": "{{count}} pessoas estão interessadas neste clube",
       "responsible": "Responsável",
       "errors": {
@@ -407,6 +429,70 @@
         "emptyDescription": "Tente com outra palavra-chave",
         "notFound": "Este clube não existe",
         "notFoundDescription": "Atualize ou mude de clube"
+      }
+    },
+    "events": {
+      "title": "Eventos",
+      "description": "Não perca nenhum evento da MDE",
+      "upcoming": "Próximos",
+      "past": "Passados",
+      "organizer": "Organizador",
+      "createdBy": "Criado por",
+      "peopleInterested": "Pessoas interessadas",
+      "interested": "{{count}} pessoas estão interessadas neste evento",
+      "add": {
+        "title": "Novo evento",
+        "image": {
+          "title": "Imagem"
+        },
+        "name": {
+          "title": "Nome",
+          "placeholder": "Tonus",
+          "required": "O nome é obrigatório",
+          "min": "O nome deve ter pelo menos 3 caracteres",
+          "max": "O nome não deve exceder 100 caracteres"
+        },
+        "description": {
+          "title": "Descrição",
+          "placeholder": "Super Tonus na MDE, venham em peso a partir das 21h",
+          "max": "A descrição não deve exceder 200 caracteres"
+        },
+        "startTime": "Hora de início",
+        "endTime": "Hora de término",
+        "date": {
+          "title": "Data",
+          "placeholder": "Selecionar uma data",
+          "required": "A data de início é obrigatória"
+        },
+        "location": {
+          "title": "Local",
+          "placeholder": "MDE",
+          "required": "O local é obrigatório",
+          "min": "O local deve ter pelo menos 3 caracteres",
+          "max": "O local não deve exceder 100 caracteres"
+        },
+        "link": {
+          "title": "Link",
+          "placeholder": "https://www.vibly.fr",
+          "invalid": "O link não é válido",
+          "max": "O link não deve exceder 100 caracteres"
+        },
+        "organizer": {
+          "title": "Organizador",
+          "placeholder": "Selecionar um clube",
+          "required": "O clube organizador é obrigatório"
+        },
+        "submit": "Adicionar",
+        "success": "Evento adicionado com sucesso",
+        "error": "Erro ao adicionar evento"
+      },
+      "errors": {
+        "emptyUpcoming": "Nenhum evento próximo",
+        "emptyUpcomingDescription": "Adicione um evento para mostrar aqui",
+        "emptyPast": "Nenhum evento passado",
+        "emptyPastDescription": "Aproveite os eventos próximos",
+        "notFound": "Este evento foi excluído",
+        "notFoundDescription": "Tente com outro"
       }
     }
   },

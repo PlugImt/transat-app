@@ -1,19 +1,23 @@
 import { type RouteProp, useRoute } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
+import {
+  ClubEventWidget,
+  ClubEventWidgetSkeleton,
+} from "@/app/screens/services/events/widget/ClubEventWidget";
 import CardGroup from "@/components/common/CardGroup";
 import { UserCardSkeleton } from "@/components/custom";
 import { Empty } from "@/components/page/Empty";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
 import { useClubDetails } from "@/hooks/services/club/useClub";
-import type { AppStackParamList } from "@/types/navigation";
+import type { BottomTabParamList } from "@/types/navigation";
 import {
   ClubDetailsHeader,
   ClubDetailsHeaderSkeleton,
 } from "./components/ClubDetailsHeader";
 import { ClubResponsible } from "./components/ClubResponsible";
 
-export type ClubDetailsRouteProp = RouteProp<AppStackParamList, "ClubDetails">;
+export type ClubDetailsRouteProp = RouteProp<BottomTabParamList, "ClubDetails">;
 
 const ClubDetails = () => {
   const { t } = useTranslation();
@@ -60,6 +64,7 @@ const ClubDetails = () => {
     >
       <ClubDetailsHeader club={club} />
       <ClubResponsible club={club} />
+      <ClubEventWidget clubId={id} />
     </Page>
   );
 };
@@ -74,6 +79,7 @@ export const ClubDetailsSkeleton = () => {
       <CardGroup title={t("services.clubs.responsible")}>
         <UserCardSkeleton />
       </CardGroup>
+      <ClubEventWidgetSkeleton />
     </Page>
   );
 };

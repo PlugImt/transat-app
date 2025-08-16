@@ -40,7 +40,7 @@ const getButtonStyle = (variant: ButtonVariant, theme: ThemeType) => {
 const getTextColor = (variant: ButtonVariant, theme: ThemeType) => {
   const textColors: { [key: string]: string } = {
     default: theme.primaryText,
-    secondary: theme.secondaryText,
+    secondary: theme.primary,
     destructive: theme.destructiveText,
     ghost: theme.text,
     link: theme.primary,

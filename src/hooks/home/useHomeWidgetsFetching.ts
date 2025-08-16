@@ -12,12 +12,15 @@ export function useHomeWidgetsFetching() {
   const isLaundrysFetching =
     useIsFetching({ queryKey: QUERY_KEYS.laundry }) > 0;
   const isWeatherFetching = useIsFetching({ queryKey: QUERY_KEYS.weather }) > 0;
+  const isEventsFetching =
+    useIsFetching({ queryKey: QUERY_KEYS.event.events }) > 0;
   const isFetching =
     isMenuFetching ||
     isTimetableFetching ||
     isHomeworkFetching ||
     isLaundrysFetching ||
-    isWeatherFetching;
+    isWeatherFetching ||
+    isEventsFetching;
 
   const refetch = async () => {
     await Promise.all([
@@ -26,6 +29,7 @@ export function useHomeWidgetsFetching() {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.timetable }),
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.laundry }),
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.weather }),
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.event.events }),
     ]);
   };
 

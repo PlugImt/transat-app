@@ -11,20 +11,33 @@ interface LinkCardProps {
   image?: React.ReactNode;
   title: string;
   description: string;
+  size?: "sm" | "default";
 }
 
-const LinkCard = ({ onPress, image, title, description }: LinkCardProps) => {
+const LinkCard = ({
+  onPress,
+  image,
+  title,
+  description,
+  size = "default",
+}: LinkCardProps) => {
   const { theme } = useTheme();
   return (
-    <Card onPress={onPress} className="h-[100px] flex-row items-center gap-4">
+    <Card onPress={onPress} className="flex-row items-center gap-4">
       {image}
       <View className="flex-1">
-        <Text variant="h3" numberOfLines={1}>
+        <Text
+          variant={size === "sm" ? "default" : "h3"}
+          className="font-bold"
+          numberOfLines={1}
+        >
           {title}
         </Text>
-        <Text variant="sm" color="muted" numberOfLines={2}>
-          {description}
-        </Text>
+        {size === "default" && (
+          <Text variant="sm" color="muted" numberOfLines={2}>
+            {description}
+          </Text>
+        )}
       </View>
       {onPress && <ChevronRight color={theme.muted} />}
     </Card>
@@ -33,17 +46,24 @@ const LinkCard = ({ onPress, image, title, description }: LinkCardProps) => {
 
 export default LinkCard;
 
-export const LinkCardLoading = () => {
-  const { theme } = useTheme();
+interface LinkCardLoadingProps {
+  size?: "sm" | "default";
+}
+
+export const LinkCardLoading = ({ size = "default" }: LinkCardLoadingProps) => {
   return (
-    <Card>
+    <Card className="flex-row items-center gap-4">
       <View className="flex-row items-center gap-4">
-        <ImageSkeleton size={64} />
+        <ImageSkeleton size={size === "sm" ? 36 : 64} />
         <View className="flex-1">
-          <TextSkeleton variant="h3" lastLineWidth={100} />
-          <TextSkeleton variant="sm" width={175} lines={2} />
+          <TextSkeleton
+            variant={size === "sm" ? "default" : "h3"}
+            lastLineWidth={100}
+          />
+          {size === "default" && (
+            <TextSkeleton variant="sm" width={175} lines={2} />
+          )}
         </View>
-        <ChevronRight color={theme.muted} />
       </View>
     </Card>
   );

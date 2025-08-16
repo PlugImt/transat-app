@@ -8,7 +8,7 @@ const Stack = createStackNavigator<AppStackParamList>();
 export const AppNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptions}>
-      <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} />
+      <Stack.Screen name="Navbar" component={BottomTabNavigator} />
     </Stack.Navigator>
   );
 };

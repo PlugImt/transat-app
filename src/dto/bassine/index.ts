@@ -12,6 +12,7 @@ export type BassineLeaderboardEntry = BassineUserBasic & {
 };
 
 export type BassineOverview = {
+  leaderboard: any;
   user: BassineLeaderboardEntry;
   neighbors: BassineLeaderboardEntry[];
   bassine_count: number;

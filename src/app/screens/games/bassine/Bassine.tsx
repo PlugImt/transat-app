@@ -12,7 +12,9 @@ export const Bassine = () => {
   const { data, isPending, refetch, error, isError } = useBassineOverview();
 
   const leaderboardPhotos =
-    data?.leaderboard?.map((item) => item.profile_picture) || [];
+    data?.leaderboard?.map(
+      (item: { profile_picture: string }) => item.profile_picture,
+    ) || [];
 
   return (
     <Page

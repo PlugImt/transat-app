@@ -11,8 +11,17 @@ export type BassineLeaderboardEntry = BassineUserBasic & {
   bassine_count: number;
 };
 
+export type BassineLeaderboard = {
+  first_name: string;
+  last_name: string;
+  email: string;
+  profile_picture: string | null;
+  score: number;
+  rank: number;
+};
+
 export type BassineOverview = {
-  leaderboard: any;
+  leaderboard: BassineLeaderboard[];
   user: BassineLeaderboardEntry;
   neighbors: BassineLeaderboardEntry[];
   bassine_count: number;

@@ -1,8 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { ActivityIndicator, View } from "react-native";
 import BassineButtonIncrement from "@/app/screens/games/bassine/component/BassineButtonIncrement";
-import BassineButtonLeaderboard from "@/app/screens/games/bassine/component/BassineButtonLeaderboard";
-import EncouragementMessage from "@/app/screens/games/bassine/component/EncouragementMessage";
+import { BassineButtonLeaderboard } from "@/app/screens/games/bassine/component/BassineButtonLeaderboard";
 import { Text } from "@/components/common/Text";
 import { Page } from "@/components/page/Page";
 import { useBassineOverview } from "@/hooks/services/bassine/useBassine";

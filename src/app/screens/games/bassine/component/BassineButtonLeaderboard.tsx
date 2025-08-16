@@ -9,7 +9,7 @@ export interface BassineButtonLeaderboardProps {
   photos: string[];
 }
 
-const BassineButtonLeaderboard = ({
+export const BassineButtonLeaderboard = ({
   photos,
 }: BassineButtonLeaderboardProps) => {
   const member_photos = photos?.slice(0, 3);
@@ -29,5 +29,3 @@ const BassineButtonLeaderboard = ({
     </TouchableOpacity>
   );
 };
-
-export default BassineButtonLeaderboard;

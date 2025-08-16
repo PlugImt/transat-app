@@ -511,7 +511,18 @@
     }
   },
   "games": {
-    "title": "Jeux"
+    "title": "Jeux",
+    "bassine": {
+      "title": "Bassine",
+      "yourScore": "Votre score",
+      "rank": "Rang : #{{rank}}",
+      "increment": "+1",
+      "decrement": "-1",
+      "nearby": "Joueurs proches",
+      "leaderboard": "Classement",
+      "history": "Historique",
+      "description": "Appuyez pour ouvrir le jeu Bassine"
+    }
   },
   "user": {
     "contact": "Contacter",

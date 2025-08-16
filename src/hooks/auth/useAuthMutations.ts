@@ -77,7 +77,7 @@ export const useAuthMutations = () => {
       );
     },
     onError: (error) => {
-      console.log(error);
+      console.error(error);
     },
   });
 

@@ -45,6 +45,7 @@ export type BottomTabParamList = {
   Games: undefined;
   Caps: undefined;
   Bassine: undefined;
+  BassineLeaderboard: undefined;
 };
 
 export type BottomTabNavigation = BottomTabNavigationProp<BottomTabParamList>;

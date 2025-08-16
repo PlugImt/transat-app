@@ -1,11 +1,11 @@
 import type { ComponentType, ReactElement } from "react";
+import { useTranslation } from "react-i18next";
 import CardGroup from "@/components/common/CardGroup";
 import { ReservationListOnly } from "@/components/reservation";
 import type { GetReservation } from "@/dto/reservation";
 import { useReservationDisplayData } from "@/hooks/services/reservation/useReservationData";
 
 interface ClubReservationsProps {
-  title: string;
   data: GetReservation | GetReservation[] | undefined;
   isPending: boolean;
   isError: boolean;
@@ -14,7 +14,6 @@ interface ClubReservationsProps {
 }
 
 export const ClubReservations = ({
-  title,
   data,
   isPending,
   isError,
@@ -22,15 +21,16 @@ export const ClubReservations = ({
   headerComponent,
 }: ClubReservationsProps) => {
   const displayData = useReservationDisplayData(data);
+  const { t } = useTranslation();
 
   if (!isPending && !isError && displayData.length === 0) {
     return null;
   }
 
   return (
-    <CardGroup title={title}>
+    <CardGroup title={t("services.reservation.title")}>
       <ReservationListOnly
-        title={title}
+        title={t("services.reservation.title")}
         data={data}
         isPending={isPending}
         isError={isError}

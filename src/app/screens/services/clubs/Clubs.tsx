@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import Animated from "react-native-reanimated";
 import { Button } from "@/components/common/Button";
+import Search from "@/components/common/Search";
 import ClubCard, { ClubCardSkeleton } from "@/components/custom/card/ClubCard";
 import { Empty } from "@/components/page/Empty";
 import { ErrorPage } from "@/components/page/ErrorPage";
@@ -13,7 +14,6 @@ import { Page } from "@/components/page/Page";
 import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
 import { useFilteredClubs } from "@/hooks/services/club/useClub";
 import type { AppStackParamList } from "@/types/navigation";
-import Search from '@/components/common/Search';
 
 export const Clubs = () => {
   const { t } = useTranslation();

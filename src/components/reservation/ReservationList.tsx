@@ -1,6 +1,7 @@
 import { SearchX } from "lucide-react-native";
 import type { ComponentType, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
+import { View } from "react-native";
 import Animated from "react-native-reanimated";
 import ReservationCard from "@/components/custom/card/ReservationCard";
 import { Empty } from "@/components/page/Empty";
@@ -66,13 +67,15 @@ export const ReservationList = ({
     <Animated.FlatList
       data={displayData}
       renderItem={({ item }) => (
-        <ReservationCard
-          title={item.name}
-          type={item.type}
-          id={item.id}
-          slot={item.type === "item" ? item.slot : undefined}
-          user={item.user}
-        />
+        <View className="mb-2">
+          <ReservationCard
+            title={item.name}
+            type={item.type}
+            id={item.id}
+            slot={item.type === "item" ? item.slot : undefined}
+            user={item.user}
+          />
+        </View>
       )}
       keyExtractor={(item) => `${item.type}-${item.id}`}
       onScroll={variant === "page" ? scrollHandler : undefined}

@@ -73,7 +73,6 @@ const ClubDetails = () => {
       <ClubDetailsHeader club={club} />
       <ClubResponsible club={club} />
       <ClubReservations
-        title={t("services.reservation.title")}
         data={clubReservations}
         isPending={isClubReservationsPending}
         isError={isClubReservationsError}

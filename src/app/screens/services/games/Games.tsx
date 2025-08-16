@@ -1,10 +1,17 @@
+import { useNavigation } from "@react-navigation/native";
+import { Gamepad2 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
+import { View } from "react-native";
 import { BlurredBackground } from "@/components/common/BlurredBackground";
-import { Text } from "@/components/common/Text";
+import LinkCard from "@/components/custom/card/LinkCard";
 import { Page } from "@/components/page/Page";
+import { useTheme } from "@/contexts/ThemeContext";
+import type { AppNavigation } from "@/types";
 
 export const Games = () => {
   const { t } = useTranslation();
+  const navigation = useNavigation<AppNavigation>();
+  const { theme } = useTheme();
 
   return (
     <Page
@@ -21,12 +28,26 @@ export const Games = () => {
       }
       headerColor="transparent"
     >
-      <Text variant="h2" className="text-center">
-        {t("common.underConstruction")}
-      </Text>
-      <Text className="text-center" color="muted">
-        {t("common.underConstructionDesc")}
-      </Text>
+      <View className="w-full max-w-xl gap-2">
+        <LinkCard
+          title={t("games.bassine.title")}
+          description={t("games.bassine.description")}
+          onPress={() => navigation.navigate("Bassine")}
+          image={
+            <View
+              style={{
+                width: 64,
+                height: 64,
+                borderRadius: 8,
+                backgroundColor: theme.card,
+              }}
+              className="items-center justify-center"
+            >
+              <Gamepad2 size={28} color={theme.primary} />
+            </View>
+          }
+        />
+      </View>
     </Page>
   );
 };

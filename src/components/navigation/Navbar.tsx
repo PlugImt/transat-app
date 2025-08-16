@@ -13,7 +13,8 @@ import Language from "@/app/screens/account/settings/Language";
 import Legal from "@/app/screens/account/settings/Legal";
 import Notifications from "@/app/screens/account/settings/Notifications";
 import Settings from "@/app/screens/account/settings/Settings";
-import Caps from "@/app/screens/games/Caps";
+import Bassine from "@/app/screens/games/bassine/Bassine";
+import Caps from "@/app/screens/games/bassine/Caps";
 import {
   Clubs,
   Games,
@@ -94,6 +95,7 @@ const GamesStack = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name="GamesScreen" component={Games} />
     <Stack.Screen name="Caps" component={Caps} />
+    <Stack.Screen name="Bassine" component={Bassine} />
   </Stack.Navigator>
 );
 

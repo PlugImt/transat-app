@@ -30,6 +30,10 @@ export const API_ROUTES: Record<Route, ApiRoute> = {
   eventJoin: "/event/:id/join",
   eventLeave: "/event/:id/leave",
   eventMembers: "/event/:id/members",
+  bassine: "/bassine",
+  bassineLeaderboard: "/bassine/leaderboard",
+  bassineHistory: "/bassine/history",
+  bassineUserHistory: "/bassine/history/:email",
 };
 
 type ApiRoute = `/${string}`;
@@ -64,4 +68,8 @@ type Route =
   | "eventDetails"
   | "eventJoin"
   | "eventLeave"
-  | "eventMembers";
+  | "eventMembers"
+  | "bassine"
+  | "bassineLeaderboard"
+  | "bassineHistory"
+  | "bassineUserHistory";

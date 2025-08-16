@@ -506,19 +506,30 @@
         "emptyPast": "No past events yet",
         "emptyPastDescription": "Enjoy the upcoming events",
         "notFound": "This event has been deleted",
-        "notFoundDescription": "Try with another"
+        "notFoundDescription": "Try with another one"
       }
     }
   },
   "games": {
-    "title": "Games"
+    "title": "Games",
+    "bassine": {
+      "title": "Bassine",
+      "yourScore": "Your score",
+      "rank": "Rank: #{{rank}}",
+      "increment": "+1",
+      "decrement": "-1",
+      "nearby": "Nearby players",
+      "leaderboard": "Leaderboard",
+      "history": "History",
+      "description": "Tap to open the Bassine game"
+    }
   },
   "user": {
     "contact": "Contact",
     "interested": "Interested",
     "notInterested": "Not interested",
     "errors": {
-      "contact": "Error opening SMS app"
+      "contact": "Error opening the SMS app"
     }
   }
 }

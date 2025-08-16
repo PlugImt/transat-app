@@ -42,10 +42,8 @@ const BassineButtonIncrement = ({
       disabled={disabled}
       style={{
         backgroundColor: disabled
-          ? theme.input
-          : isPlus
-            ? theme.primary
-            : theme.secondary,
+          ? `${theme.muted}20`
+          : `${theme.muted}60`,
         width: 48,
         height: 48,
         borderRadius: 24,

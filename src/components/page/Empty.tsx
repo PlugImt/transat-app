@@ -1,4 +1,5 @@
 import { Sprout } from "lucide-react-native";
+import type React from "react";
 import { cloneElement, isValidElement } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";

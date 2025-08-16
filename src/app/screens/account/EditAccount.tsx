@@ -76,7 +76,7 @@ export const EditProfile = () => {
   const currentYear = new Date().getFullYear();
   // If we're past September, we're in the next academic year
   const startAcademicYear = currentMonth >= 8 ? currentYear : currentYear - 1;
-  const yearOptions = Array.from({ length: 4 }, (_, i) => {
+  const yearOptions = Array.from({ length: 5 }, (_, i) => {
     return (startAcademicYear + i).toString();
   });
 

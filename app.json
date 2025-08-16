@@ -2,7 +2,7 @@
   "expo": {
     "name": "Transat",
     "slug": "Transat",
-    "version": "2.2.0",
+    "version": "2.2.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon-bg.png",
     "scheme": "myapp",
@@ -25,7 +25,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/icon-bg.png",
+        "foregroundImage": "./assets/images/ios-icon.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.yohann69.transat2_0",

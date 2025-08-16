@@ -1,6 +1,6 @@
 import * as Sentry from "@sentry/react-native";
 import type { AxiosError } from "axios";
-import {
+import React, {
   createContext,
   type FC,
   useCallback,

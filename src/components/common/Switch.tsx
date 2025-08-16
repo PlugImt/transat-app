@@ -1,5 +1,5 @@
+import type React from "react";
 import { Switch as NativeSwitch } from "react-native";
-
 import { useTheme } from "@/contexts/ThemeContext";
 import { hapticFeedback } from "@/utils/haptics.utils";
 

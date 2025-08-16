@@ -16,7 +16,7 @@ export const useUpdateLanguage = () => {
       await updateLanguage(languageCode);
     },
     onSuccess: async () => {
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.user] });
+      await queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.user] });
     },
   });
 };

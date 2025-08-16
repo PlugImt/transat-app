@@ -1,4 +1,5 @@
 import * as Notifications from "expo-notifications";
+import i18n from "@/i18n";
 import { storage } from "@/services/storage/asyncStorage";
 
 export interface LaundryNotificationState {
@@ -74,10 +75,14 @@ class LaundryNotificationService {
         now + (timeRemaining - minutesBefore * 60) * 1000;
 
       // Schedule the local notification
+      const t = i18n.t.bind(i18n);
       const notificationId = await Notifications.scheduleNotificationAsync({
         content: {
-          title: `Machine ${machineNumber} Almost Done`,
-          body: `Your ${machineType.toLowerCase()} will be ready in ${minutesBefore} minutes`,
+          title: t("services.laundry.almostDone", { number: machineNumber }),
+          body: t("services.laundry.almostDoneBody", {
+            type: machineType.toLowerCase(),
+            minutes: minutesBefore,
+          }),
           sound: true,
         },
         trigger: {

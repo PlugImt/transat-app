@@ -3,6 +3,7 @@ export * from "./games";
 export * from "./homework";
 export * from "./laundry";
 export * from "./olimtpe";
+export * from "./reservation";
 export * from "./restaurant";
 export * from "./schedule";
 export * from "./traq";

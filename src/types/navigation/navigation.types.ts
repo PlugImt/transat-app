@@ -37,6 +37,14 @@ export type AppStackParamList = {
   Clubs: undefined;
   ClubDetails: { id: number };
   ClubMemberList: { id: number };
+  Reservation: undefined;
+  ReservationCategory: {
+    id: number;
+    type: string;
+    title: string;
+    level?: number;
+  };
+  ReservationCalendar: { id: number; title: string };
   Traq: undefined;
   Olimtpe: undefined;
   Account: undefined;

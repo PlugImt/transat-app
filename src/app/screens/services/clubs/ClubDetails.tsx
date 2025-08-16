@@ -6,11 +6,13 @@ import { Empty } from "@/components/page/Empty";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
 import { useClubDetails } from "@/hooks/services/club/useClub";
+import { useClubReservations } from "@/hooks/services/reservation/useReservation";
 import type { AppStackParamList } from "@/types/navigation";
 import {
   ClubDetailsHeader,
   ClubDetailsHeaderSkeleton,
 } from "./components/ClubDetailsHeader";
+import { ClubReservations } from "./components/ClubReservations";
 import { ClubResponsible } from "./components/ClubResponsible";
 
 export type ClubDetailsRouteProp = RouteProp<AppStackParamList, "ClubDetails">;
@@ -21,6 +23,13 @@ const ClubDetails = () => {
   const { id } = route.params;
 
   const { data: club, isPending, isError, error, refetch } = useClubDetails(id);
+  const {
+    data: clubReservations,
+    isPending: isClubReservationsPending,
+    isError: isClubReservationsError,
+    error: clubReservationsError,
+    refetch: refetchClubReservations,
+  } = useClubReservations(id);
 
   if (isError) {
     return (
@@ -55,11 +64,20 @@ const ClubDetails = () => {
   return (
     <Page
       title={t("services.clubs.title")}
-      refreshing={isPending}
-      onRefresh={refetch}
+      refreshing={isPending || isClubReservationsPending}
+      onRefresh={() => {
+        refetch().then((r) => r);
+        refetchClubReservations().then((r) => r);
+      }}
     >
       <ClubDetailsHeader club={club} />
       <ClubResponsible club={club} />
+      <ClubReservations
+        data={clubReservations}
+        isPending={isClubReservationsPending}
+        isError={isClubReservationsError}
+        error={clubReservationsError as Error | null}
+      />
     </Page>
   );
 };

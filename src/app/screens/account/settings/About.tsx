@@ -59,7 +59,7 @@ export const About = () => {
           />
           <Badge
             label="Zephyr"
-            onPress={() => handleOpenLink("https://github.com/zephyr-dassouli")}
+            onPress={() => handleOpenLink("https://github.com/zephyrdassouli")}
             variant="secondary"
           />
           <Badge

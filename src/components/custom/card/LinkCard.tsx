@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react-native";
+import type React from "react";
 import { View } from "react-native";
 import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";

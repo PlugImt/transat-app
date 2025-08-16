@@ -1,3 +1,4 @@
+import type React from "react";
 import { TouchableOpacity, View } from "react-native";
 import { Text } from "@/components/common/Text";
 import { hapticFeedback } from "@/utils/haptics.utils";

@@ -7,10 +7,11 @@ interface TextareaProps {
   onChangeText: (text: string) => void;
   placeholder: string;
   disabled: boolean;
+  allowAccents?: boolean;
 }
 
 export const Textarea = forwardRef<TextInput, TextareaProps>(
-  ({ value, onChangeText, placeholder, disabled }, ref) => {
+  ({ value, onChangeText, placeholder, disabled, allowAccents }, ref) => {
     return (
       <Input
         ref={ref}
@@ -23,6 +24,7 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
         disabled={disabled}
         inputClasses="min-h-[100px] min-w-full items-start pt-2"
         className="h-[100px]"
+        allowAccents={allowAccents}
       />
     );
   },

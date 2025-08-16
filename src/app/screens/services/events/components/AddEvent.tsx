@@ -59,6 +59,7 @@ export const AddEvent = () => {
           onSubmitEditing={() => descriptionRef.current?.focus()}
           error={errors.name?.message}
           textContentType="none"
+          allowAccents
         />
 
         <View className="gap-1.5">
@@ -75,6 +76,7 @@ export const AddEvent = () => {
                 onChangeText={onChange}
                 placeholder={t("services.events.add.description.placeholder")}
                 disabled={false}
+                allowAccents
               />
             )}
           />
@@ -122,6 +124,7 @@ export const AddEvent = () => {
           returnKeyType="next"
           error={errors.location?.message}
           textContentType="location"
+          allowAccents
         />
 
         <DateTimePicker
@@ -144,6 +147,7 @@ export const AddEvent = () => {
           onSubmitEditing={handleSubmit(handleAddEvent)}
           error={errors.link?.message}
           autoCapitalize="none"
+          allowAccents
         />
       </View>
 

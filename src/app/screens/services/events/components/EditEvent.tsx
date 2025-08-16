@@ -102,6 +102,7 @@ const EditEventForm = ({ event }: EditEventFormProps) => {
           onSubmitEditing={() => descriptionRef.current?.focus()}
           error={errors.name?.message}
           textContentType="none"
+          allowAccents
         />
 
         <View className="gap-1.5">
@@ -118,6 +119,7 @@ const EditEventForm = ({ event }: EditEventFormProps) => {
                 onChangeText={onChange}
                 placeholder={t("services.events.add.description.placeholder")}
                 disabled={false}
+                allowAccents
               />
             )}
           />
@@ -165,6 +167,7 @@ const EditEventForm = ({ event }: EditEventFormProps) => {
           returnKeyType="next"
           error={errors.location?.message}
           textContentType="location"
+          allowAccents
         />
 
         <DateTimePicker
@@ -189,6 +192,7 @@ const EditEventForm = ({ event }: EditEventFormProps) => {
           onSubmitEditing={handleSubmit(handleUpdateEvent)}
           error={errors.link?.message}
           autoCapitalize="none"
+          allowAccents
         />
       </View>
 

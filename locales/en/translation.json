@@ -417,7 +417,13 @@
       "description": "When a beer is served, the basin fills little by little, and when it's full you can ask to fill your glass with\n\nFor each glass filled, update your counter to be the king of the basin 👑",
       "location": "At the MDE during parties",
       "price": "Free",
-      "leaderboard": "Leaderboard"
+      "leaderboard": {
+        "title": "Leaderboard",
+        "score": "Score",
+        "history": "History",
+        "first_place_lead": "is only {{count}} basin behind you",
+        "following_place": "is {{count}} basin ahead of you"
+      }
     }
   },
   "user": {

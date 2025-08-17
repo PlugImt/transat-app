@@ -12,15 +12,27 @@ import { Text } from "@/components/common/Text";
 import { UserStack } from "@/components/custom";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
-import { useAuth } from "@/hooks/account";
+import type { BassineLeaderboardEntry } from "@/dto";
+import { useBassineOverview } from "@/hooks/services/games/bassine/useBassine";
 import type { AppScreenNavigationProp } from "@/types";
 import { AboutBassine } from "./AboutBassine";
+import { useNeighbors } from "./hooks/useNeighbors";
 
 export const Bassine = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const [count, setCount] = useState(0);
-  const { user } = useAuth();
+  const { data: overview } = useBassineOverview();
+  const neighbors = useNeighbors({
+    user: {
+      email: overview?.email,
+      rank: overview?.rank,
+      bassine_count: overview?.bassine_count,
+    } as BassineLeaderboardEntry,
+    userAbove: overview?.user_above,
+    userBelow: overview?.user_below,
+  });
+  const [count, setCount] = useState(overview?.bassine_count ?? 0);
+
   const navigation = useNavigation<AppScreenNavigationProp>();
   const increment = () => setCount((prev) => prev + 1);
   const decrement = () => setCount((prev) => prev - 1);
@@ -42,11 +54,9 @@ export const Bassine = () => {
         >
           <View className="flex-row items-center gap-2">
             <UserStack
-              pictures={[
-                user?.profile_picture,
-                user?.profile_picture,
-                user?.profile_picture,
-              ]}
+              pictures={overview?.leaderboard.map(
+                (user) => user.profile_picture ?? "",
+              )}
             />
             <Text>Voir le classement</Text>
           </View>
@@ -78,16 +88,25 @@ export const Bassine = () => {
           onPress={increment}
         />
       </View>
-      <View className="flex-row items-center gap-2 max-w-48">
-        <Avatar user={user} size={24} />
-        <Text variant="sm">
-          <Text className="font-bold" variant="sm">
-            {user?.first_name}
-          </Text>{" "}
-          est seulement 3 bassines devant toi
-        </Text>
-        {/* <ChevronRight size={16} color={theme.muted} /> */}
-      </View>
+      {neighbors && (
+        <View className="flex-row items-center gap-2 max-w-48">
+          <Avatar
+            user={{
+              first_name: neighbors.followingUser?.first_name,
+              last_name: neighbors.followingUser?.last_name,
+              profile_picture:
+                neighbors.followingUser?.profile_picture || undefined,
+            }}
+            size={24}
+          />
+          <Text variant="sm">
+            <Text className="font-bold" variant="sm">
+              {neighbors.followingUser?.first_name}
+            </Text>{" "}
+            {neighbors.followingText}
+          </Text>
+        </View>
+      )}
     </Page>
   );
 };

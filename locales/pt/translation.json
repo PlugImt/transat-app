@@ -417,7 +417,13 @@
       "description": "Quando uma cerveja é servida, a baía enche pouco a pouco, e quando está cheia você pode pedir para encher seu copo com\n\nPara cada copo cheio, atualize seu contador para ser o rei da baía 👑",
       "location": "Na MDE durante as festas",
       "price": "Gratuito",
-      "leaderboard": "Classificação"
+      "leaderboard": {
+        "title": "Classificação",
+        "score": "Pontuação",
+        "history": "Histórico",
+        "first_place_lead": "está apenas {{count}} baía atrás de você",
+        "following_place": "está {{count}} baía à sua frente"
+      }
     }
   },
   "user": {

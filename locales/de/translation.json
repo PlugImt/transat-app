@@ -417,7 +417,13 @@
       "description": "Wenn eine Bier serviert wird, füllt sich das Becken langsam, und wenn es voll ist, können Sie fragen, ob Sie Ihr Glas füllen können\n\nFür jedes gefüllte Glas aktualisieren Sie Ihren Zähler, um der König des Beckens zu werden 👑",
       "location": "Bei der MDE während Partys",
       "price": "Kostenlos",
-      "leaderboard": "Rangliste"
+      "leaderboard": {
+        "title": "Rangliste",
+        "score": "Punktzahl",
+        "history": "Verlauf",
+        "first_place_lead": "ist nur {{count}} Becken hinter Ihnen",
+        "following_place": "ist {{count}} Becken vor Ihnen"
+      }
     }
   },
   "user": {

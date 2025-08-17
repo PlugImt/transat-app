@@ -417,7 +417,13 @@
       "description": "当啤酒被服务时，池塘会慢慢填满，当它满时，你可以要求填满你的杯子\n\n每填满一个杯子，更新你的计数器，成为池塘之王 👑",
       "location": "在MDE的派对期间",
       "price": "免费",
-      "leaderboard": "排行榜"
+      "leaderboard": {
+        "title": "排行榜",
+        "score": "分数",
+        "history": "历史",
+        "first_place_lead": "只落后您{{count}}个池塘",
+        "following_place": "领先您{{count}}个池塘"
+      }
     }
   },
   "user": {

@@ -25,7 +25,6 @@ export interface InputWithControlProps<T extends FieldValues>
   disabled?: boolean;
   loading?: boolean;
   icon?: React.ReactElement<{ color?: string; size?: number }>;
-  allowAccents?: boolean;
 }
 
 // Interface pour l'utilisation standalone (sans react-hook-form)
@@ -43,7 +42,6 @@ export interface InputStandaloneProps
   disabled?: boolean;
   loading?: boolean;
   icon?: React.ReactElement<{ color?: string; size?: number }>;
-  allowAccents?: boolean;
 }
 
 // Union type pour supporter les deux cas d'usage
@@ -76,7 +74,6 @@ const Input = forwardRef(
       loading,
       error,
       icon,
-      allowAccents = false, // TODO: mettre à vrai mais il faut identifier les endroits ou c'est actuellement faux
       ...props
     }: InputProps<T>,
     ref: React.Ref<TextInput>,
@@ -145,15 +142,7 @@ const Input = forwardRef(
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   {...commonTextInputProps}
-                  onChangeText={(text) =>
-                    onChange(
-                      allowAccents
-                        ? text
-                        : (text
-                            ?.normalize?.("NFD")
-                            .replace(/[\u0300-\u036f]/g, "") ?? text),
-                    )
-                  }
+                  onChangeText={(text) => onChange(text)}
                   onBlur={onBlur}
                   value={value}
                 />
@@ -162,15 +151,7 @@ const Input = forwardRef(
           ) : (
             <TextInput
               {...commonTextInputProps}
-              onChangeText={(text) =>
-                onChangeText?.(
-                  allowAccents
-                    ? text
-                    : (text
-                        ?.normalize?.("NFD")
-                        .replace(/[\u0300-\u036f]/g, "") ?? text),
-                )
-              }
+              onChangeText={(text) => onChangeText?.(text)}
               value={value ?? ""}
             />
           )}

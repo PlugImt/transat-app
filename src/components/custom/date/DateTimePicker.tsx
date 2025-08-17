@@ -22,6 +22,7 @@ import {
 import { InputButton } from "../InputButton";
 import { useDateTimePickerStyle } from "./DateTimePicker.style";
 
+const HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
 interface DateTimePickerProps {
   control: any;
   errors: any;
@@ -76,8 +77,8 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
       };
     }
     return {
-      date: new Date(Date.now() + 60 * 60 * 1000), // +1 heure
-      time: new Date(Date.now() + 60 * 60 * 1000),
+      date: new Date(Date.now() + HOUR_IN_MILLISECONDS),
+      time: new Date(Date.now() + HOUR_IN_MILLISECONDS),
     };
   }, [initialEndDate]);
 
@@ -203,7 +204,7 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
           <Controller
             control={control}
             name={startDateField}
-            render={({ field: { onChange } }) => (
+            render={() => (
               <NativeDateTimePicker
                 value={startDateTime.time}
                 mode="time"
@@ -226,7 +227,7 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
           <Controller
             control={control}
             name={endDateField}
-            render={({ field: { onChange } }) => (
+            render={() => (
               <NativeDateTimePicker
                 value={endDateTime.time}
                 mode="time"

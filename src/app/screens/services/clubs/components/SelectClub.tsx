@@ -154,11 +154,9 @@ const SelectClubModal = ({
           showsVerticalScrollIndicator={false}
           onScroll={scrollHandler}
           ListHeaderComponent={
-            <SearchClub
-              value={searchValue}
-              onChange={setSearchValue}
-              className="mb-4"
-            />
+            <View className="flex-row items-center gap-2 mb-4">
+              <SearchClub value={searchValue} onChange={setSearchValue} />
+            </View>
           }
           ListEmptyComponent={
             <Empty

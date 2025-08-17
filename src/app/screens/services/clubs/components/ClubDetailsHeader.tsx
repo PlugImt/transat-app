@@ -80,7 +80,7 @@ export const ClubDetailsHeader = ({ club }: ClubDetailsHeaderProps) => {
   const label = link?.toLowerCase().includes("whatsapp")
     ? "WhatsApp"
     : link
-      ? linkToDomain(link)
+      ? linkToDomain(link, t)
       : String(t("common.link"));
 
   const handleMemberListPress = () => {

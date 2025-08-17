@@ -2,7 +2,6 @@ import { useRoute } from "@react-navigation/native";
 import {
   Bell,
   BellOff,
-  Calendar,
   Clock,
   ExternalLink,
   MapPin,
@@ -70,7 +69,7 @@ export const EventDetailsHeader = ({ event }: EventDetailsHeaderProps) => {
   const { name: title, description, location, link } = event;
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const { formatTime, formatAgo, formatShort } = useDate();
+  const { formatTime, formatShort } = useDate();
 
   const label = link?.toLowerCase().includes("whatsapp")
     ? "WhatsApp"
@@ -92,40 +91,37 @@ export const EventDetailsHeader = ({ event }: EventDetailsHeaderProps) => {
 
   return (
     <View className="gap-4 mt-3">
-      <View className="flex-row items-start gap-4">
+      <View className="flex-row gap-4">
         {event.picture && (
           <View
             className="overflow-hidden rounded-xl"
-            style={{ width: 170, height: 170 }}
+            style={{ width: 145, height: 145 }}
           >
             <Image source={event.picture} fill resizeMode="cover" />
           </View>
         )}
-        <View
-          className="flex-1 justify-between py-1"
-          style={{ minHeight: 170 }}
-        >
-          <Text variant="h2">{title}</Text>
-          <Text variant="lg" color="primary">
-            {formatAgo(startDate).toLowerCase()}
-          </Text>
-          <View className="flex-row items-center gap-2 flex-wrap">
-            <MapPin color={theme.text} size={20} />
-            <Text>{location}</Text>
-          </View>
-          <View className="flex-row items-center gap-2 flex-wrap">
-            <Clock color={theme.text} size={20} />
-            <Text>{rangeDate}</Text>
-          </View>
-          <View className="flex-row items-center gap-2 flex-wrap">
-            <Calendar color={theme.text} size={20} />
-            <Text lineBreakMode="middle" numberOfLines={2}>
+        <View className="flex-1 gap-4">
+          <View>
+            <Text variant="h2">{title}</Text>
+            <Text variant="lg" color="primary">
               {dateLine}
             </Text>
           </View>
+          <View className="gap-2">
+            <View className="flex-row items-center gap-1 flex-wrap">
+              <MapPin color={theme.text} size={20} />
+              <Text>{location}</Text>
+            </View>
+            <View className="flex-row items-center gap-1 flex-wrap">
+              <Clock color={theme.text} size={20} />
+              <Text>{rangeDate}</Text>
+            </View>
+          </View>
         </View>
       </View>
-      {description?.length > 1 && <Text color="muted">{description}</Text>}
+      {description && description?.length > 1 && (
+        <Text color="muted">{description}</Text>
+      )}
       <View className="flex-row items-center gap-2">
         {link && link.length > 0 && (
           <Button

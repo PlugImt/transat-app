@@ -1,8 +1,6 @@
-import { useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
 
-const { t } = useTranslation();
-
-export const linkToDomain = (link: string): string => {
+export const linkToDomain = (link: string, t: TFunction) => {
   return (
     link
       .replace(/^(?:https?:\/\/)?(?:www\.)?/, "")

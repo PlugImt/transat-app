@@ -5,7 +5,7 @@ import {
 } from "@react-navigation/native";
 import { Edit, MoreVertical, Trash2 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
-import { BlurredBackground } from "@/components/common/BlurredBackground";
+import { View } from "react-native";
 import { IconButton } from "@/components/common/Button";
 import CardGroup from "@/components/common/CardGroup";
 import {
@@ -176,21 +176,18 @@ const EventDetails = () => {
       refreshing={isPending}
       onRefresh={refetch}
       header={isOwner && eventActions}
-      background={
-        event.picture ? (
-          <BlurredBackground picture={event.picture} />
-        ) : undefined
-      }
     >
       <EventDetailsHeader event={event} />
-      <CardGroup title={t("services.events.peopleInterested")}>
+      <View className="gap-2 ml-2">
+        <Text variant="h3">{t("services.events.peopleInterested")}</Text>
         <UserStack
           pictures={pictures}
           count={event.attendee_count}
           moreText="services.events.interested"
           onPress={openEventMembers}
         />
-      </CardGroup>
+      </View>
+
       <CardGroup title={t("services.events.organizer")}>
         <ClubCard club={event.club} size="sm" />
       </CardGroup>

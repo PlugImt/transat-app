@@ -37,9 +37,6 @@ const ReservationCard = ({
   const auth = useAuth();
 
   const handlePress = () => {
-    if (type !== "category") {
-      return;
-    }
     onPress?.();
     navigation.push("ReservationCategory", {
       id,
@@ -60,7 +57,7 @@ const ReservationCard = ({
 
   return (
     <Card
-      onPress={handlePress}
+      onPress={type === "category" ? handlePress : undefined}
       className={`flex-row items-center gap-4 ${disabled ? "opacity-60" : ""}`}
     >
       <View className="flex-1">

@@ -1,7 +1,6 @@
 import { SearchX } from "lucide-react-native";
 import type { ComponentType, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import { View } from "react-native";
 import Animated from "react-native-reanimated";
 import ReservationCard from "@/components/custom/card/ReservationCard";
 import { Empty } from "@/components/page/Empty";
@@ -66,22 +65,20 @@ export const ReservationList = ({
   const content = (
     <Animated.FlatList
       data={displayData}
+      contentContainerClassName="gap-2"
       renderItem={({ item }) => (
-        <View className="mb-2">
-          <ReservationCard
-            title={item.name}
-            type={item.type}
-            id={item.id}
-            slot={item.type === "item" ? item.slot : undefined}
-            user={item.user}
-          />
-        </View>
+        <ReservationCard
+          title={item.name}
+          type={item.type}
+          id={item.id}
+          slot={item.type === "item" ? item.slot : undefined}
+          user={item.user}
+        />
       )}
       keyExtractor={(item) => `${item.type}-${item.id}`}
       onScroll={variant === "page" ? scrollHandler : undefined}
       showsVerticalScrollIndicator={showScrollIndicators}
-      // biome-ignore lint/suspicious/noExplicitAny: HeaderComponent type is complex
-      ListHeaderComponent={headerComponent as any}
+      ListHeaderComponent={headerComponent as ReactElement}
       ListEmptyComponent={
         isPending ? null : (
           <Empty

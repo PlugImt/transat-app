@@ -55,10 +55,10 @@ export const UserStack = ({
   return (
     <TouchableOpacity onPress={onPress} disabled={!onPress}>
       <View className="flex-row ml-2">
-        {displayedPictures.map((user) => (
+        {displayedPictures.map((user, index) => (
           <Avatar
             user={user}
-            key={String(user.profile_picture)}
+            key={`${user.profile_picture}-${index}`}
             className="-ml-2"
             {...imageProps}
           />

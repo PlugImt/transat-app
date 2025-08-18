@@ -24,6 +24,14 @@ export const API_ROUTES: Record<Route, ApiRoute> = {
   clubMembers: "/club/:id/members",
   clubJoin: "/club/:id/join",
   clubLeave: "/club/:id/leave",
+  reservation: "/reservation",
+  reservationCategory: "/reservation/category/:id",
+  reservationCreateCategory: "/reservation/category",
+  reservationItem: "/reservation/item/:id",
+  reservationCreateItem: "/reservation/item",
+  reservationClub: "/reservation/club/:id",
+  reservationMy: "/reservation/me",
+  reservationSearch: "/reservation/search",
   event: "/event",
   eventClub: "/event/club/:idclub",
   eventDetails: "/event/:id",
@@ -59,6 +67,14 @@ type Route =
   | "clubJoin"
   | "clubLeave"
   | "clubMembers"
+  | "reservation"
+  | "reservationCategory"
+  | "reservationCreateCategory"
+  | "reservationItem"
+  | "reservationCreateItem"
+  | "reservationClub"
+  | "reservationMy"
+  | "reservationSearch"
   | "event"
   | "eventClub"
   | "eventDetails"

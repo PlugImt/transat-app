@@ -34,4 +34,18 @@ export const QUERY_KEYS = {
   },
   homeWidgetPreferences: ["homeWidgetPreferences"],
   servicePreferences: ["servicePreferences"],
+  reservation: {
+    categories: ["reservation", "categories"],
+    createCategory: ["reservation", "createCategory"],
+    items: ["reservation", "items"],
+    item: (id: number, date?: string) => ["reservation", "items", id, date],
+    createItem: ["reservation", "createItem"],
+    club: (id: number) => ["reservation", "club", id],
+    my: (time?: "all" | "past" | "current") => [
+      "reservation",
+      "my",
+      time || "current",
+    ],
+    search: (q: string) => ["reservation", "search", q],
+  },
 };

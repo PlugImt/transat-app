@@ -1,5 +1,8 @@
+import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
+import { useNavigation } from "@react-navigation/native";
+import type { StackNavigationProp } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
-import { View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import Animated from "react-native-reanimated";
 import { LaundryWidgetLoading } from "@/app/screens/services/laundry/widget/LaundryWidget";
 import { RestaurantWidgetLoading } from "@/app/screens/services/restaurant/widget/RestaurantWidget";
@@ -15,6 +18,7 @@ import { useHomeWidgetsFetching } from "@/hooks/home/useHomeWidgetsFetching";
 import { useWidgetComponents } from "@/hooks/home/useWidgetComponents";
 import { useHomeWidgetPreferences } from "@/hooks/services/usePreferences";
 import { resetHomeWidgetPreferences } from "@/services/storage/preferences";
+import type { AppStackParamList, BottomTabParamList } from "@/types";
 import { isDinner, isLunch, isWeekend } from "@/utils";
 import { EventWidgetSkeleton } from "../services/events/widget/EventWidget";
 
@@ -22,6 +26,9 @@ export const Home = () => {
   const { data: user } = useUser();
   const { t } = useTranslation();
   const { scrollHandler } = useAnimatedHeader();
+  const navigation = useNavigation<StackNavigationProp<AppStackParamList>>();
+  const tabNavigation =
+    navigation.getParent<BottomTabNavigationProp<BottomTabParamList>>();
   const {
     preferences: widgets,
     enabledPreferences: enabledWidgets,
@@ -47,9 +54,13 @@ export const Home = () => {
             {t("common.welcome")}
           </Text>
           {user?.first_name && (
-            <Text variant="h1" color="primary">
-              {user.first_name}
-            </Text>
+            <TouchableOpacity
+              onPress={() => tabNavigation?.navigate("AccountScreen")}
+            >
+              <Text variant="h1" color="primary" numberOfLines={1}>
+                {user.first_name}
+              </Text>
+            </TouchableOpacity>
           )}
         </View>
       }

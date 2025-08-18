@@ -20,6 +20,7 @@ import {
   Homework,
   Laundry,
   Olimtpe,
+  Reservation,
   Restaurant,
   Timetable,
   Traq,
@@ -33,6 +34,7 @@ import EventDetails from "@/app/screens/services/events/components/EventDetails"
 import { EventMemberList } from "@/app/screens/services/events/components/EventMemberList";
 import Events from "@/app/screens/services/events/Events";
 import { HomeworkDetails } from "@/app/screens/services/homework/components/HomeworkDetails";
+import { Category, MyReservations } from "@/app/screens/services/reservation";
 import { RestaurantReviews } from "@/app/screens/services/restaurant/components/Reviews";
 import { Services } from "@/app/screens/services/Services";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -87,6 +89,9 @@ const ServicesStack = () => (
     <Stack.Screen name="EditEvent" component={EditEvent} />
     <Stack.Screen name="Traq" component={Traq} />
     <Stack.Screen name="Olimtpe" component={Olimtpe} />
+    <Stack.Screen name="Reservation" component={Reservation} />
+    <Stack.Screen name="MyReservations" component={MyReservations} />
+    <Stack.Screen name="ReservationCategory" component={Category} />
   </Stack.Navigator>
 );
 

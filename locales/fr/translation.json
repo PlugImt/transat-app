@@ -50,6 +50,8 @@
     "customizeServices": "Personnaliser les services",
     "customizeHint": "Activez/désactivez les services ou faites-les glisser pour les réorganiser",
     "noWidgetsEnabled": "Aucun widget activé",
+    "loading": "Chargement",
+    "today": "Aujourd'hui",
     "noWidgetsEnabledDescription": "Vous pouvez personnaliser les widgets en les activant ou les désactivant",
     "errors": {
       "occurred": "Une erreur est survenue",
@@ -309,6 +311,14 @@
       "vegetarian": "Végétarien",
       "sideDishes": "Accompagnements",
       "closed": "Fermé",
+      "noLunch": {
+        "title": "Menu pas encore disponible",
+        "description": "Nous n'avons pas (encore) reçu le menu du jour.\nActive les notifications pour être le premier à le découvrir"
+      },
+      "noDinner": {
+        "title": "Pas de repas ce soir",
+        "description": "Le self doit être fermé ce soir. Active les notifications pour être informé de sa réouverture"
+      },
       "closedWeekends": {
         "title": "Le restaurant est fermé le week-end",
         "description": "Revenez lundi pour découvrir le menu du jour"
@@ -419,7 +429,7 @@
     },
     "clubs": {
       "title": "Clubs",
-      "description": "Découvre tous les clubs et associations de l’IMT",
+      "description": "Découvre tous les clubs et associations de l'IMT",
       "book": "Réserver",
       "selectClub": "Sélectionner un club",
       "interested": "{{count}} personnes sont intéressées par ce club",
@@ -429,6 +439,40 @@
         "emptyDescription": "Essayez avec un autre mot-clé",
         "notFound": "Ce club n'existe pas",
         "notFoundDescription": "Actualisez ou changez de club"
+      }
+    },
+    "reservation": {
+      "title": "Réservations",
+      "description": "Réservez du matériel et des salles",
+      "reserve": "Réserver",
+      "returnItem": "Rendre",
+      "reservedBy": "Réservé par",
+      "reserveConfirmDesc": "En réservant, vous vous engagez à rendre le matériel dans le même état que vous l'avez trouvé",
+      "returnConfirmDesc": "Confirmez-vous vouloir rendre cet équipement ?",
+      "confirmReserve": "Oui, je m'engage",
+      "confirmReturn": "Oui, je rends",
+      "reserveSuccess": "Réservation confirmée",
+      "returnSuccess": "Équipement rendu avec succès",
+      "current": "En cours",
+      "past": "Passées",
+      "cancelReservation": "Annuler la réservation",
+      "cancelConfirmDesc": "Êtes-vous sûr de vouloir annuler cette réservation ?",
+      "confirmCancel": "Oui, j'annule",
+      "cancelSuccess": "Réservation annulée",
+      "personal": {
+        "title": "Mes réservations",
+        "emptyUpcoming": "Aucune réservation à venir",
+        "emptyUpcomingDescription": "Réservez une salle ou du matériel pour voir vos réservations à venir",
+        "emptyPast": "Aucune réservation passée",
+        "emptyPastDescription": "Vous n'avez pas de réservation passée"
+      },
+      "errors": {
+        "empty": "Aucune réservation disponible",
+        "emptyDescription": "Aucun équipement ou activité n'est disponible pour le moment",
+        "reserveError": "Erreur lors de la réservation",
+        "returnError": "Erreur lors du retour",
+        "cancelError": "Impossible d'annuler la réservation",
+        "startDateRequired": "La date de début est requise"
       }
     },
     "events": {

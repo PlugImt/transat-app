@@ -1,3 +1,4 @@
+import type React from "react";
 import { Text as RText, type StyleProp, type TextStyle } from "react-native";
 import { type ThemeColorKeys, useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";

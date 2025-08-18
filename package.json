@@ -13,7 +13,7 @@
     "lint": "biome lint",
     "format": "biome check --write",
     "build:android": "eas build --profile production --platform android --local",
-    "build:ios": "eas build --profile production --platform ios"
+    "build:ios": "eas build --profile production --platform ios --local"
   },
   "jest": {
     "preset": "jest-expo"
@@ -30,7 +30,7 @@
     "@react-navigation/stack": "^7.1.1",
     "@sentry/react-native": "~6.14.0",
     "@tanstack/react-query": "^5.66.0",
-    "axios": "^1.7.9",
+    "axios": "1.11.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^2.30.0",
@@ -81,6 +81,7 @@
     "react-native-screens": "~4.11.1",
     "react-native-skeleton-placeholder": "^5.2.4",
     "react-native-svg": "15.12.0",
+    "react-native-swiper": "^1.6.0",
     "react-native-ui-datepicker": "^3.1.2",
     "react-native-web": "^0.20.0",
     "react-native-webview": "13.13.5",

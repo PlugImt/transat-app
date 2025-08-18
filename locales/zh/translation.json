@@ -51,6 +51,8 @@
     "customizeHint": "启用/禁用服务或拖拽重新排序",
     "noWidgetsEnabled": "未启用任何小部件",
     "noWidgetsEnabledDescription": "您可以通过启用或禁用来自定义小部件",
+    "loading": "加载中",
+    "today": "今天",
     "errors": {
       "occurred": "发生错误",
       "unableToFetch": "无法获取数据"
@@ -309,6 +311,14 @@
       "vegetarian": "素食",
       "sideDishes": "配菜",
       "closed": "已关闭",
+      "noLunch": {
+        "title": "今天没有午餐",
+        "description": "我们暂时还没有菜单。开启通知以便菜单可用时第一时间收到提醒"
+      },
+      "noDinner": {
+        "title": "今晚没有晚餐",
+        "description": "餐厅可能已关闭。开启通知以便重新开放时收到提醒"
+      },
       "closedWeekends": {
         "title": "餐厅周末关闭",
         "description": "周一回来发现当日菜单"
@@ -429,6 +439,41 @@
         "emptyDescription": "尝试使用其他关键词",
         "notFound": "此俱乐部不存在",
         "notFoundDescription": "刷新或更换俱乐部"
+      }
+    },
+    "reservation": {
+      "title": "预订",
+      "description": "预订设备和活动",
+      "reserve": "预订",
+      "returnItem": "归还",
+      "reservedBy": "预订者",
+      "reserveConfirmDesc": "通过预订，您承诺以发现时的相同状态归还设备",
+      "returnConfirmDesc": "您确认要归还此设备吗？",
+      "confirmReserve": "是的，我承诺",
+      "confirmReturn": "是的，我归还",
+      "reserveSuccess": "预订确认",
+      "returnSuccess": "设备归还成功",
+      "myReservations": "我的预订",
+      "current": "当前",
+      "past": "已结束",
+      "cancelReservation": "取消预订",
+      "cancelConfirmDesc": "您确定要取消此预订吗？",
+      "confirmCancel": "是的，取消",
+      "cancelSuccess": "预订已取消！",
+      "personal": {
+        "title": "我的预订",
+        "emptyUpcoming": "没有即将到来的预订",
+        "emptyUpcomingDescription": "预订房间或设备以查看您即将到来的预订",
+        "emptyPast": "没有过去的预订",
+        "emptyPastDescription": "您没有过去的预订"
+      },
+      "errors": {
+        "empty": "没有可用的预订",
+        "emptyDescription": "目前没有设备或活动可用",
+        "reserveError": "预订过程中出错",
+        "returnError": "归还过程中出错",
+        "cancelError": "无法取消预订",
+        "startDateRequired": "开始日期为必填项"
       }
     },
     "events": {

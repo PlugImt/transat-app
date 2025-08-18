@@ -199,8 +199,14 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
           </Dialog>
         </View>
 
-        <View className={`gap-1.5 ${Platform.OS === 'android' ? 'mx-2' : null}`}>
-          <Text variant="sm" color="muted" className={`${Platform.OS === 'ios' ? 'ml-4' : null}`}>
+        <View
+          className={`gap-1.5 ${Platform.OS === "android" ? "mx-2" : null}`}
+        >
+          <Text
+            variant="sm"
+            color="muted"
+            className={`${Platform.OS === "ios" ? "ml-4" : null}`}
+          >
             Début
           </Text>
           <Controller
@@ -253,7 +259,11 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
         </View>
 
         <View className="gap-1.5">
-          <Text variant="sm" color="muted" className={`${Platform.OS === 'ios' ? 'ml-4' : null}`}>
+          <Text
+            variant="sm"
+            color="muted"
+            className={`${Platform.OS === "ios" ? "ml-4" : null}`}
+          >
             Fin
           </Text>
           <Controller

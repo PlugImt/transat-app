@@ -1,3 +1,4 @@
+import type React from "react";
 import { forwardRef, useEffect, useState } from "react";
 import { Image, View } from "react-native";
 import { Text } from "@/components/common/Text";

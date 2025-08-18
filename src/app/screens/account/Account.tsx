@@ -15,13 +15,13 @@ import { AvatarSkeleton, TextSkeleton } from "@/components/Skeleton";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useUser } from "@/hooks/account/useUser";
-import type { AccountNavigation } from "@/types";
+import type { AppNavigation } from "@/types";
 import { getStudentYear } from "@/utils";
 
 export const Account = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
-  const navigation = useNavigation<AccountNavigation>();
+  const navigation = useNavigation<AppNavigation>();
   const queryClient = useQueryClient();
 
   const { data: user, isPending, isError, error } = useUser();
@@ -109,7 +109,7 @@ export default Account;
 const AccountLoading = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
-  const navigation = useNavigation<AccountNavigation>();
+  const navigation = useNavigation<AppNavigation>();
 
   return (
     <Page

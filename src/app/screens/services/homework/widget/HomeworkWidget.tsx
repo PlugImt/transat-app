@@ -4,13 +4,13 @@ import { TouchableOpacity, View } from "react-native";
 import { Text } from "@/components/common/Text";
 import type { Homework } from "@/dto";
 import { useHomework } from "@/hooks/services/homework/useHomework";
-import type { AppScreenNavigationProp } from "@/types";
+import type { AppNavigation } from "@/types";
 import { HomeworkWidgetItem } from "./HomeworkWidgetItem";
 import { HomeworkWidgetLoading } from "./HomeworkWidgetLoading";
 
 export const HomeworkWidget = () => {
   const { t } = useTranslation();
-  const navigation = useNavigation<AppScreenNavigationProp>();
+  const navigation = useNavigation<AppNavigation>();
   const { upcomingHomeworks, isPending, error } = useHomework();
 
   if (isPending) return <HomeworkWidgetLoading />;

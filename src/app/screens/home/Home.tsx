@@ -1,6 +1,5 @@
 import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { TouchableOpacity, View } from "react-native";
 import Animated from "react-native-reanimated";
@@ -18,7 +17,7 @@ import { useHomeWidgetsFetching } from "@/hooks/home/useHomeWidgetsFetching";
 import { useWidgetComponents } from "@/hooks/home/useWidgetComponents";
 import { useHomeWidgetPreferences } from "@/hooks/services/usePreferences";
 import { resetHomeWidgetPreferences } from "@/services/storage/preferences";
-import type { AppStackParamList, BottomTabParamList } from "@/types";
+import type { AppNavigation, BottomTabParamList } from "@/types";
 import { isDinner, isLunch, isWeekend } from "@/utils";
 import { EventWidgetSkeleton } from "../services/events/widget/EventWidget";
 
@@ -26,7 +25,7 @@ export const Home = () => {
   const { data: user } = useUser();
   const { t } = useTranslation();
   const { scrollHandler } = useAnimatedHeader();
-  const navigation = useNavigation<StackNavigationProp<AppStackParamList>>();
+  const navigation = useNavigation<AppNavigation>();
   const tabNavigation =
     navigation.getParent<BottomTabNavigationProp<BottomTabParamList>>();
   const {

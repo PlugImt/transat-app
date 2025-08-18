@@ -8,11 +8,11 @@ import { Text } from "@/components/common/Text";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useLaundryStats } from "@/hooks/services/laundry/useLaundry";
-import type { AppScreenNavigationProp } from "@/types";
+import type { AppNavigation } from "@/types";
 
 export const LaundryWidget = () => {
   const { t } = useTranslation();
-  const navigation = useNavigation<AppScreenNavigationProp>();
+  const navigation = useNavigation<AppNavigation>();
   const { theme } = useTheme();
 
   const {
@@ -85,7 +85,7 @@ export default LaundryWidget;
 
 export const LaundryWidgetLoading = () => {
   const { t } = useTranslation();
-  const navigation = useNavigation<AppScreenNavigationProp>();
+  const navigation = useNavigation<AppNavigation>();
   const { theme } = useTheme();
 
   return (

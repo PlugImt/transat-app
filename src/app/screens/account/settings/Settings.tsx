@@ -21,7 +21,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { useHapticFeedback } from "@/hooks/account/useHapticFeedback";
 import { useLanguageOptions } from "@/hooks/account/useLanguageOptions";
 import { useUser } from "@/hooks/account/useUser";
-import type { SettingsNavigation } from "@/types";
+import type { AppNavigation } from "@/types";
 import SettingCategory from "./components/SettingCategory";
 import SettingsItem from "./components/SettingsItem";
 
@@ -30,7 +30,7 @@ export const Settings = () => {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
   const { data: user, isPending } = useUser();
-  const navigation = useNavigation<SettingsNavigation>();
+  const navigation = useNavigation<AppNavigation>();
   const { currentLanguageOption } = useLanguageOptions();
   const { isEnabled: isHapticEnabled, toggleHapticFeedback } =
     useHapticFeedback();

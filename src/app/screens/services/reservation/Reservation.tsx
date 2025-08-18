@@ -1,5 +1,4 @@
 import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
@@ -13,11 +12,11 @@ import {
   useReservationSearch,
   useReservations,
 } from "@/hooks/services/reservation/useReservation";
-import type { AppStackParamList } from "@/types";
+import type { AppNavigation } from "@/types";
 
 export const Reservation = () => {
   const { t } = useTranslation();
-  const navigation = useNavigation<StackNavigationProp<AppStackParamList>>();
+  const navigation = useNavigation<AppNavigation>();
   const [query, setQuery] = useState("");
 
   const reservationQuery = useReservations();

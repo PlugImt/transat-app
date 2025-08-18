@@ -1,5 +1,4 @@
 import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
 import { ChevronRight } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
@@ -12,7 +11,7 @@ import ImageSkeleton from "@/components/Skeleton/ImageSkeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { User } from "@/dto";
 import { useAuth } from "@/hooks/account";
-import type { AppStackParamList } from "@/types";
+import type { AppNavigation } from "@/types";
 
 interface ReservationCardProps {
   onPress?: () => void;
@@ -33,7 +32,7 @@ const ReservationCard = ({
 }: ReservationCardProps) => {
   const { theme } = useTheme();
   const { t } = useTranslation();
-  const navigation = useNavigation<StackNavigationProp<AppStackParamList>>();
+  const navigation = useNavigation<AppNavigation>();
   const auth = useAuth();
 
   const handlePress = () => {

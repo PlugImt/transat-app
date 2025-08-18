@@ -1,12 +1,11 @@
 import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
 import Constants from "expo-constants";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import { useEffect, useState } from "react";
 import { Platform } from "react-native";
 import { laundryNotificationService } from "@/services/notifications/laundryNotifications";
-import type { AppStackParamList } from "@/types";
+import type { AppNavigation } from "@/types";
 import useAuth from "../account/useAuth";
 
 interface NotificationContent {
@@ -76,7 +75,7 @@ export function usePushNotifications() {
   const [notificationOpened, setNotificationOpened] = useState(false);
   const [notificationData, setNotificationData] =
     useState<NotificationContent | null>(null);
-  const navigation = useNavigation<StackNavigationProp<AppStackParamList>>();
+  const navigation = useNavigation<AppNavigation>();
 
   useEffect(() => {
     laundryNotificationService.initialize();

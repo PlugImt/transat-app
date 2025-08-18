@@ -1,5 +1,4 @@
 import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
 import { SearchX } from "lucide-react-native";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -13,13 +12,13 @@ import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
 import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
 import { useFilteredClubs } from "@/hooks/services/club/useClub";
-import type { AppStackParamList } from "@/types/navigation";
+import type { AppNavigation } from "@/types";
 
 export const Clubs = () => {
   const { t } = useTranslation();
   const { scrollHandler } = useAnimatedHeader();
   const [searchValue, setSearchValue] = useState("");
-  const navigation = useNavigation<StackNavigationProp<AppStackParamList>>();
+  const navigation = useNavigation<AppNavigation>();
 
   const {
     data: clubs,

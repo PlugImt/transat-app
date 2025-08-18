@@ -12,11 +12,11 @@ import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
 import { useServicePreferences } from "@/hooks/services/usePreferences";
 import type { Preference } from "@/services/storage/preferences";
 import { resetServicePreferences } from "@/services/storage/preferences";
-import type { AppScreenNavigationProp } from "@/types";
+import type { AppNavigation } from "@/types";
 
 export const Services = () => {
   const { t } = useTranslation();
-  const navigation = useNavigation<AppScreenNavigationProp>();
+  const navigation = useNavigation<AppNavigation>();
   const { scrollHandler } = useAnimatedHeader();
   const { actualTheme } = useTheme();
   const {

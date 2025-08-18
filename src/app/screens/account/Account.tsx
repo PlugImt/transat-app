@@ -14,7 +14,6 @@ import { Page } from "@/components/page/Page";
 import { AvatarSkeleton, TextSkeleton } from "@/components/Skeleton";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
-import { useAuth } from "@/hooks/account";
 import { useUser } from "@/hooks/account/useUser";
 import type { AccountNavigation } from "@/types";
 import { getStudentYear } from "@/utils";
@@ -24,7 +23,6 @@ export const Account = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<AccountNavigation>();
   const queryClient = useQueryClient();
-  const { logout } = useAuth();
 
   const { data: user, isPending, isError, error } = useUser();
   const isUserFetching =

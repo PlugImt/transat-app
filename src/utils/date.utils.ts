@@ -76,6 +76,50 @@ export const getWeekId = (d: Date): string => {
 };
 
 /**
+ * Type for date values that can be converted to Date objects
+ */
+export type DateType = string | number | Date | { toDate(): Date };
+
+/**
+ * Converts various date types to a Date object
+ * @param date - The date value (can be string, number, Date, or object with toDate method)
+ * @returns Date object
+ */
+export const parseDate = (date: DateType): Date => {
+  if (!date) return new Date();
+
+  if (typeof date === "string") {
+    return new Date(date);
+  }
+  if (typeof date === "number") {
+    return new Date(date);
+  }
+  if (date && typeof date === "object" && "toDate" in date) {
+    return date.toDate();
+  }
+  return date as Date;
+};
+
+/**
+ * Creates an ISO string by combining a date and time
+ * @param date - The date value (can be string, number, Date, or object with toDate method)
+ * @param time - The time value
+ * @returns ISO string representation of the combined date and time
+ */
+export const createDateTimeISO = (date: DateType, time: Date): string => {
+  if (!date) return new Date().toISOString();
+
+  const dateObj = parseDate(date);
+  const combinedDate = new Date(dateObj);
+  combinedDate.setHours(time.getHours());
+  combinedDate.setMinutes(time.getMinutes());
+  combinedDate.setSeconds(0);
+  combinedDate.setMilliseconds(0);
+
+  return combinedDate.toISOString();
+};
+
+/**
  * Returns a human-readable "time ago" string for a given date
  */
 export const getTimeAgo = (

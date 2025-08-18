@@ -1,15 +1,53 @@
+import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import type { NavigatorScreenParams } from "@react-navigation/core";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import type { Homework } from "@/dto";
 
 export type BottomTabParamList = {
-  AccountScreen: undefined;
+  // Main tabs
   HomeScreen: undefined;
   ServicesScreen: undefined;
   GamesScreen: undefined;
+  AccountScreen: undefined;
+
+  // Services screens
+  Laundry: undefined;
+  Restaurant: undefined;
+  RestaurantReviews: { id: number };
+  Timetable: undefined;
+  Homework: undefined;
+  HomeworkDetails: { homework: Homework };
+  Clubs: undefined;
+  ClubDetails: { id: number };
+  ClubMemberList: { id: number };
+  ClubEvents: { id: number };
+  EventMemberList: { id: number };
+  Events: undefined;
+  EventDetails: { id: number };
+  AddEvent: undefined;
+  EditEvent: { id: number };
+  Traq: undefined;
+  Olimtpe: undefined;
+
+  // Account screens
+  Account: undefined;
+  EditProfile: undefined;
+  Settings: undefined;
+  ChangePassword: undefined;
+  Notifications: undefined;
+  Language: undefined;
+  Appearance: undefined;
+  About: undefined;
+  Help: undefined;
+  Legal: undefined;
+
+  // Games screens
+  Games: undefined;
+  Bassine: undefined;
+  BassineLeaderboard: undefined;
 };
 
-export default BottomTabParamList;
+export type BottomTabNavigation = BottomTabNavigationProp<BottomTabParamList>;
 
 export type AuthStackParamList = {
   Welcome: undefined;
@@ -22,59 +60,17 @@ export type AuthStackParamList = {
 export type AuthNavigation = StackNavigationProp<AuthStackParamList>;
 
 export type AppStackParamList = {
-  Home: undefined;
-  Laundry: undefined;
-  Restaurant: undefined;
-  RestaurantReviews: { id: number };
-  Timetable: undefined;
-  Homework: undefined;
-  HomeworkDetails: { homework: Homework };
-  Games: undefined;
-  Bassine: undefined;
-  BassineLeaderboard: undefined;
-  Profile: {
-    userId: string;
-  };
-  BottomTabNavigator: undefined;
-  Clubs: undefined;
-  ClubDetails: { id: number };
-  ClubMemberList: { id: number };
-  Traq: undefined;
-  Olimtpe: undefined;
-  Account: undefined;
+  Navbar: NavigatorScreenParams<BottomTabParamList>;
 };
 
-export type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
-
-type AccountStackParamList = {
-  Account: undefined;
-  EditProfile: undefined;
-  Settings: undefined;
-  ChangePassword: undefined;
-  Feedback: undefined;
-};
-export type AccountNavigation = StackNavigationProp<AccountStackParamList>;
-
-type SettingsStackParamList = {
-  Account: undefined;
-  EditProfile: undefined;
-  ChangePassword: undefined;
-  Notifications: undefined;
-  Language: undefined;
-  Appearance: undefined;
-  About: undefined;
-  Help: undefined;
-  Statistics: undefined;
-  Legal: undefined;
-};
-export type SettingsNavigation = StackNavigationProp<SettingsStackParamList>;
+export type AppNavigation = BottomTabNavigationProp<BottomTabParamList> &
+  StackNavigationProp<BottomTabParamList>;
 
 export type RootStackParamList = {
   Auth: NavigatorScreenParams<AuthStackParamList>;
   App: NavigatorScreenParams<AppStackParamList>;
 };
 
-// Navigation Types for useNavigation hook
 declare global {
   namespace ReactNavigation {
     interface RootParamList extends RootStackParamList {}
@@ -82,9 +78,8 @@ declare global {
 }
 
 export enum TabRoute {
-  Home = "Home",
-  Services = "Services",
-  Games = "Games",
-  Account = "Account",
-  Welcome = "Welcome",
+  Home = "HomeScreen",
+  Services = "ServicesScreen",
+  Games = "GamesScreen",
+  Account = "AccountScreen",
 }

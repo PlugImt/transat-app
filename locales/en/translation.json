@@ -317,7 +317,7 @@
       },
       "noDinner": {
         "title": "No dinner tonight",
-        "description": "The restaurant must be closed. Activate notifications to be informed when it reopens"
+        "description": "The RU must be closed tonight"
       },
       "closedWeekends": {
         "title": "The restaurant is closed on weekends",

@@ -317,7 +317,7 @@
       },
       "noDinner": {
         "title": "No hay cena esta noche",
-        "description": "El restaurante debe estar cerrado. Activa las notificaciones para ser informado cuando reabra"
+        "description": "El RU debe estar cerrado esta noche"
       },
       "closedWeekends": {
         "title": "El restaurante está cerrado los fines de semana",

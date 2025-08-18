@@ -317,7 +317,7 @@
       },
       "noDinner": {
         "title": "今晚没有晚餐",
-        "description": "餐厅可能已关闭。开启通知以便重新开放时收到提醒"
+        "description": "餐厅可能已关闭"
       },
       "closedWeekends": {
         "title": "餐厅周末关闭",

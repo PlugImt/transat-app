@@ -317,7 +317,7 @@
       },
       "noDinner": {
         "title": "Pas de repas ce soir",
-        "description": "Le self doit être fermé ce soir. Active les notifications pour être informé de sa réouverture"
+        "description": "Le RU doit être fermé ce soir"
       },
       "closedWeekends": {
         "title": "Le restaurant est fermé le week-end",

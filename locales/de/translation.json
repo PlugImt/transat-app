@@ -317,7 +317,7 @@
       },
       "noDinner": {
         "title": "Heute kein Abendessen",
-        "description": "Das Restaurant ist vermutlich geschlossen. Aktiviere die Benachrichtigungen, um über die Wiedereröffnung informiert zu werden."
+        "description": "Das RU muss heute geschlossen sein"
       },
       "closedWeekends": {
         "title": "Das Restaurant ist am Wochenende geschlossen",

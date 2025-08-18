@@ -4,14 +4,17 @@
     "home": "Startseite",
     "account": "Konto",
     "edit": "Bearbeiten",
+    "delete": "Löschen",
     "save": "Speichern",
     "confirm": "Bestätigen",
     "send": "Senden",
+    "search": "Suchen",
     "cancel": "Abbrechen",
     "close": "Schließen",
     "clearAll": "Alles löschen",
     "filter": "Filter",
     "refresh": "Aktualisieren",
+    "link": "Link",
     "reset": "Zurücksetzen",
     "or": "Oder",
     "other": "Andere",
@@ -48,6 +51,8 @@
     "customizeHint": "Dienste aktivieren/deaktivieren oder ziehen Sie sie, um sie neu zu organisieren",
     "noWidgetsEnabled": "Keine Widgets aktiviert",
     "noWidgetsEnabledDescription": "Sie können Widgets anpassen, indem Sie sie aktivieren oder deaktivieren",
+    "loading": "Wird geladen",
+    "today": "Heute",
     "errors": {
       "occurred": "Ein Fehler ist aufgetreten",
       "unableToFetch": "Daten konnten nicht abgerufen werden"
@@ -75,6 +80,26 @@
       "months": "vor {{count}} Monaten",
       "year": "vor {{count}} Jahr",
       "years": "vor {{count}} Jahren"
+    },
+    "dateFormats": {
+      "weekday": "{{date, weekday}}",
+      "time": "{{date, time}}",
+      "short": "{{date, short}}",
+      "long": "{{date, long}}",
+      "relative": "{{date, relative}}",
+      "ago": "{{date, ago}}",
+      "dateTime": "{{date, dateTime}}"
+    },
+    "homework": {
+      "deadline": "Frist: {{date, dateTime}}",
+      "createdAt": "Erstellt am {{date, short}}",
+      "updatedAt": "Aktualisiert am {{date, short}}",
+      "dueIn": "Fällig in {{date, ago}}",
+      "overdue": "Überfällig seit {{date, ago}}"
+    },
+    "imageSelector": {
+      "placeholder": "Tippen Sie, um ein Bild auszuwählen",
+      "uploading": "Upload läuft..."
     }
   },
   "auth": {
@@ -263,7 +288,7 @@
     "weather": "Wetter",
     "traq": {
       "title": "Traq",
-      "description": "Alle im Bar angebotenen Getränke",
+      "description": "Alle an der Bar angebotenen Getränke",
       "about": "Der Traquenard (oder Traq' für Insider) ist die vom BDE verwaltete Bar",
       "location": "Im Inneren der MDE",
       "openingHours": "Geöffnet während aller Partys und organisierten Veranstaltungen 🥳 \n\nWenn Sie durstig sind und Traq' geschlossen ist, können Sie ein BDE-Mitglied bitten, über WhatsApp zu Ihnen zu kommen 😋",
@@ -286,6 +311,14 @@
       "vegetarian": "Vegetarisch",
       "sideDishes": "Beilagen",
       "closed": "Geschlossen",
+      "noLunch": {
+        "title": "Heute kein Mittagessen",
+        "description": "Wir haben das Menü (noch) nicht. Aktiviere die Benachrichtigungen, um informiert zu werden, wenn das Menü verfügbar ist."
+      },
+      "noDinner": {
+        "title": "Heute kein Abendessen",
+        "description": "Das RU muss heute geschlossen sein"
+      },
       "closedWeekends": {
         "title": "Das Restaurant ist am Wochenende geschlossen",
         "description": "Kommen Sie am Montag zurück, um das Tagesmenü zu entdecken"
@@ -393,9 +426,170 @@
       "price": "Waschen: 2€\nTrocknen: 1€",
       "additionalInfo": "Zahlen Sie mit Münzen, Karte oder Monix-Wallet (empfohlen für Boni und Cashback)\n\nBrauchen Sie mehr Trocknungszeit? Zahlen Sie für mehrere Sitzungen vor dem Start",
       "location": "Unter der MDE, nach den Briefkästen"
+    },
+    "clubs": {
+      "title": "Clubs",
+      "description": "Entdecken Sie alle Clubs und Vereine an der IMT",
+      "book": "Buchen",
+      "selectClub": "Club auswählen",
+      "interested": "{{count}} Personen sind an diesem Club interessiert",
+      "responsible": "Verantwortlich",
+      "errors": {
+        "empty": "Kein Club gefunden",
+        "emptyDescription": "Versuchen Sie es mit einem anderen Schlüsselwort",
+        "notFound": "Dieser Club existiert nicht",
+        "notFoundDescription": "Aktualisieren Sie oder wechseln Sie den Club"
+      }
+    },
+    "reservation": {
+      "title": "Reservierungen",
+      "description": "Ausrüstung und Aktivitäten reservieren",
+      "reserve": "Reservieren",
+      "returnItem": "Zurückgeben",
+      "reservedBy": "Reserviert von",
+      "reserveConfirmDesc": "Mit der Reservierung verpflichten Sie sich, die Ausrüstung in demselben Zustand zurückzugeben, in dem Sie sie vorgefunden haben",
+      "returnConfirmDesc": "Bestätigen Sie, dass Sie diese Ausrüstung zurückgeben möchten?",
+      "confirmReserve": "Ja, ich verpflichte mich",
+      "confirmReturn": "Ja, ich gebe zurück",
+      "reserveSuccess": "Reservierung bestätigt",
+      "returnSuccess": "Ausrüstung erfolgreich zurückgegeben",
+      "myReservations": "Meine Reservierungen",
+      "current": "Aktuell",
+      "past": "Vergangen",
+      "cancelReservation": "Reservierung stornieren",
+      "cancelConfirmDesc": "Sind Sie sicher, dass Sie diese Reservierung stornieren möchten?",
+      "confirmCancel": "Ja, stornieren",
+      "cancelSuccess": "Reservierung storniert",
+      "personal": {
+        "title": "Meine Reservierungen",
+        "emptyUpcoming": "Keine bevorstehenden Reservierungen",
+        "emptyUpcomingDescription": "Reservieren Sie einen Raum oder Ausrüstung, um Ihre bevorstehenden Reservierungen zu sehen",
+        "emptyPast": "Keine vergangenen Reservierungen",
+        "emptyPastDescription": "Sie haben keine vergangenen Reservierungen"
+      },
+      "errors": {
+        "empty": "Keine Reservierungen verfügbar",
+        "emptyDescription": "Zur Zeit sind keine Ausrüstung oder Aktivitäten verfügbar",
+        "reserveError": "Fehler bei der Reservierung",
+        "returnError": "Fehler bei der Rückgabe",
+        "cancelError": "Reservierung kann nicht storniert werden",
+        "startDateRequired": "Startdatum ist erforderlich"
+      }
+    },
+    "events": {
+      "title": "Events",
+      "description": "Keine Events verpassen",
+      "upcoming": "Bevorstehend",
+      "past": "Vergangen",
+      "organizer": "Veranstalter",
+      "createdBy": "Erstellt von",
+      "peopleInterested": "Interessierte",
+      "interested_one": "Eine Person ist an diesem Event interessiert",
+      "interested_other": "{{count}} Personen sind an diesem Event interessiert",
+      "interested": "{{count}} Personen sind an diesem Event interessiert",
+      "add": {
+        "title": "Neues Event",
+        "image": {
+          "title": "Bild"
+        },
+        "name": {
+          "title": "Name",
+          "placeholder": "Tonus",
+          "required": "Name ist erforderlich",
+          "min": "Der Name muss mindestens 3 Zeichen enthalten",
+          "max": "Der Name darf 100 Zeichen nicht überschreiten"
+        },
+        "description": {
+          "title": "Beschreibung",
+          "placeholder": "Super Tonus in der MDE, kommt zahlreich ab 21 Uhr",
+          "max": "Die Beschreibung darf 200 Zeichen nicht überschreiten"
+        },
+        "startTime": "Startzeit",
+        "endTime": "Endzeit",
+        "date": {
+          "title": "Datum",
+          "placeholder": "Datum auswählen",
+          "required": "Startdatum ist erforderlich"
+        },
+        "location": {
+          "title": "Ort",
+          "placeholder": "MDE",
+          "required": "Ort ist erforderlich",
+          "min": "Der Ort muss mindestens 3 Zeichen enthalten",
+          "max": "Der Ort darf 100 Zeichen nicht überschreiten"
+        },
+        "link": {
+          "title": "Link",
+          "placeholder": "https://www.vibly.fr",
+          "invalid": "Der Link ist nicht gültig",
+          "max": "Der Link darf 100 Zeichen nicht überschreiten"
+        },
+        "organizer": {
+          "title": "Veranstalter",
+          "placeholder": "Club auswählen",
+          "required": "Veranstaltender Club ist erforderlich"
+        },
+        "submit": "Hinzufügen",
+        "success": "Event erfolgreich hinzugefügt",
+        "error": "Fehler beim Hinzufügen des Events"
+      },
+      "edit": {
+        "title": "Event bearbeiten",
+        "submit": "Bearbeiten",
+        "success": "Event erfolgreich aktualisiert",
+        "error": "Fehler beim Aktualisieren des Events"
+      },
+      "delete": {
+        "title": "Event löschen",
+        "description": "Sind Sie sicher, dass Sie dieses Event löschen möchten? Diese Aktion ist nicht rückgängig zu machen.",
+        "confirm": "Löschen",
+        "cancel": "Abbrechen",
+        "success": "Event erfolgreich gelöscht",
+        "error": "Fehler beim Löschen des Events"
+      },
+      "errors": {
+        "emptyUpcoming": "Keine bevorstehenden Events",
+        "emptyUpcomingDescription": "Fügen Sie ein Event hinzu, um es hier anzuzeigen",
+        "emptyPast": "Keine vergangenen Events",
+        "emptyPastDescription": "Genießen Sie die bevorstehenden Events",
+        "notFound": "Dieses Event wurde gelöscht",
+        "notFoundDescription": "Versuchen Sie es mit einem anderen"
+      }
     }
   },
   "games": {
-    "title": "Spiele"
+    "title": "Spiele",
+    "bassine": {
+      "title": "Becken",
+      "description": "Wenn eine Bier serviert wird, füllt sich das Becken langsam, und wenn es voll ist, können Sie fragen, ob Sie Ihr Glas füllen können\n\nFür jedes gefüllte Glas aktualisieren Sie Ihren Zähler, um der König des Beckens zu werden 👑",
+      "location": "Bei der MDE während Partys",
+      "price": "Kostenlos",
+      "seeLeaderboard": "Rangliste ansehen",
+      "leaderboard": {
+        "title": "Rangliste",
+        "score": "Punktzahl",
+        "history": "Verlauf",
+        "firstPlaceLead_zero": "liegt gleichauf",
+        "firstPlaceLead_one": "liegt knapp hinter Ihnen",
+        "firstPlaceLeader_few": "liegt nur {{count}} Becken hinter Ihnen",
+        "firstPlaceLead_other": "liegt {{count}} Becken hinter Ihnen",
+        "followingPlace_zero": "liegt gleichauf",
+        "followingPlace_one": "liegt knapp vor Ihnen",
+        "followingPlace_few": "liegt nur {{count}} Becken vor Ihnen",
+        "followingPlace_other": "liegt {{count}} Becken vor Ihnen",
+        "firstPlaceLead": "ist nur {{count}} Becken hinter Ihnen",
+        "followingPlace": "ist {{count}} Becken vor Ihnen",
+        "tookBassine_one": "hat {{count}} Becken genommen",
+        "tookBassine_other": "hat {{count}} Becken genommen"
+      }
+    }
+  },
+  "user": {
+    "contact": "Kontakt",
+    "interested": "Interessiert",
+    "notInterested": "Nicht interessiert",
+    "errors": {
+      "contact": "Fehler beim Öffnen der SMS-App"
+    }
   }
 }

@@ -1,5 +1,4 @@
 import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
 import { LinearGradient } from "expo-linear-gradient";
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
 import { useMemo } from "react";
@@ -12,11 +11,9 @@ import { Text } from "@/components/common/Text";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { MenuItem } from "@/dto";
-import { useMenuRestaurant } from "@/hooks/useMenuRestaurant";
-import type { AppStackParamList } from "@/types";
-import { isDinner, isLunch, isWeekend, outOfService } from "@/utils";
-
-type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
+import { useMenuRestaurant } from "@/hooks/services/restaurant/useMenuRestaurant";
+import type { AppNavigation } from "@/types";
+import { isDinner, isLunch, isNight, isWeekend, outOfService } from "@/utils";
 
 const MenuItemCard = ({ item }: { item: MenuItem }) => {
   return (
@@ -30,7 +27,7 @@ export const RestaurantWidget = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
 
-  const navigation = useNavigation<AppScreenNavigationProp>();
+  const navigation = useNavigation<AppNavigation>();
 
   const { menu, error, isPending } = useMenuRestaurant();
 
@@ -65,17 +62,24 @@ export const RestaurantWidget = () => {
       ? t("services.restaurant.widgetLunch")
       : !weekend && dinner
         ? t("services.restaurant.widgetDinner")
-        : "";
+        : t("services.restaurant.title");
 
   if (isPending) {
     return <RestaurantWidgetLoading />;
   }
 
-  if (error || weekend || outOfHours || (!lunch && !dinner) || !updatedToday) {
+  if (
+    error ||
+    weekend ||
+    isNight() ||
+    outOfHours ||
+    (!lunch && !dinner) ||
+    !updatedToday
+  ) {
     return (
       <View className="flex flex-col gap-2">
         <Text className="ml-4" variant="h3">
-          {t("services.restaurant.title")}
+          {title}
         </Text>
         <Card className="flex flex-row gap-4 items-center">
           <Image
@@ -87,9 +91,17 @@ export const RestaurantWidget = () => {
             {weekend ? (
               <>
                 <Text variant="lg" numberOfLines={2}>
+                  {t("services.restaurant.closedWeekends.title")}
+                </Text>
+                <Text numberOfLines={3}>
+                  {t("services.restaurant.closedWeekends.description")}
+                </Text>
+              </>
+            ) : isNight() ? (
+              <>
+                <Text variant="lg" numberOfLines={2}>
                   {t("services.restaurant.closedNight.title")}
                 </Text>
-
                 <Text numberOfLines={3}>
                   {t("services.restaurant.closedNight.description")}
                 </Text>
@@ -104,14 +116,22 @@ export const RestaurantWidget = () => {
                   {t("services.restaurant.closedUpdated.description")}
                 </Text>
               </>
+            ) : lunch ? (
+              <>
+                <Text variant="lg" numberOfLines={2}>
+                  {t("services.restaurant.noLunch.title")}
+                </Text>
+                <Text numberOfLines={3}>
+                  {t("services.restaurant.noLunch.description")}
+                </Text>
+              </>
             ) : (
               <>
                 <Text variant="lg" numberOfLines={2}>
-                  {t("services.restaurant.closedWeekends.title")}
+                  {t("services.restaurant.noDinner.title")}
                 </Text>
-
                 <Text numberOfLines={3}>
-                  {t("services.restaurant.closedNight.description")}
+                  {t("services.restaurant.noDinner.description")}
                 </Text>
               </>
             )}
@@ -132,7 +152,41 @@ export const RestaurantWidget = () => {
       (menu.accompSoir.length > 0 || menu.grilladesSoir.length > 0));
 
   if (!hasMenuItems) {
-    return null;
+    return (
+      <View className="flex flex-col gap-2">
+        <Text className="ml-4" variant="h3">
+          {title}
+        </Text>
+        <Card className="flex flex-row gap-4 items-center">
+          <Image
+            source={require("@/assets/images/services/restaurant.png")}
+            size={80}
+            style={{ tintColor: theme.muted }}
+          />
+          <View style={{ maxWidth: Dimensions.get("window").width - 200 }}>
+            {lunch ? (
+              <>
+                <Text variant="lg" numberOfLines={2}>
+                  {t("services.restaurant.noLunch.title")}
+                </Text>
+                <Text numberOfLines={3}>
+                  {t("services.restaurant.noLunch.description")}
+                </Text>
+              </>
+            ) : (
+              <>
+                <Text variant="lg" numberOfLines={2}>
+                  {t("services.restaurant.noDinner.title")}
+                </Text>
+                <Text numberOfLines={3}>
+                  {t("services.restaurant.noDinner.description")}
+                </Text>
+              </>
+            )}
+          </View>
+        </Card>
+      </View>
+    );
   }
 
   return (
@@ -267,7 +321,7 @@ export default RestaurantWidget;
 export const RestaurantWidgetLoading = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
-  const navigation = useNavigation<AppScreenNavigationProp>();
+  const navigation = useNavigation<AppNavigation>();
 
   const skeletonCount = () => Math.floor(Math.random() * 3) + 1;
 

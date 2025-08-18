@@ -1,3 +1,4 @@
+import type React from "react";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { Animated, View } from "react-native";
 import { Text } from "@/components/common/Text";

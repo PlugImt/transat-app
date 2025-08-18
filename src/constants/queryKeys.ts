@@ -7,6 +7,27 @@ export const QUERY_KEYS = {
   weather: ["weather"],
   user: ["user"],
   traq: ["traq"],
+  bassine: {
+    overview: ["bassine", "overview"],
+    leaderboard: ["bassine", "leaderboard"],
+    history: ["bassine", "history"],
+    userHistory: ["bassine", "history", "user"],
+  },
+  club: {
+    clubs: ["clubs"],
+    clubDetails: ["clubDetails"],
+    clubJoin: ["clubJoin"],
+    clubLeave: ["clubLeave"],
+    clubMembers: ["clubMembers"],
+  },
+  event: {
+    events: ["events"],
+    clubEvents: ["clubEvents"],
+    eventDetails: ["eventDetails"],
+    eventJoin: ["eventJoin"],
+    eventLeave: ["eventLeave"],
+    eventMembers: ["eventMembers"],
+  },
   notification: ["notification"],
   auth: {
     user: ["auth", "user"],
@@ -19,4 +40,18 @@ export const QUERY_KEYS = {
   },
   homeWidgetPreferences: ["homeWidgetPreferences"],
   servicePreferences: ["servicePreferences"],
+  reservation: {
+    categories: ["reservation", "categories"],
+    createCategory: ["reservation", "createCategory"],
+    items: ["reservation", "items"],
+    item: (id: number, date?: string) => ["reservation", "items", id, date],
+    createItem: ["reservation", "createItem"],
+    club: (id: number) => ["reservation", "club", id],
+    my: (time?: "all" | "past" | "current") => [
+      "reservation",
+      "my",
+      time || "current",
+    ],
+    search: (q: string) => ["reservation", "search", q],
+  },
 };

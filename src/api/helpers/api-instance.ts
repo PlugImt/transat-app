@@ -17,10 +17,13 @@ const createApiInstance = async (): Promise<AxiosInstance> => {
     }
 
     if (__DEV__) {
-      console.log(`[API] ${config.method?.toUpperCase()} ${config.url}`, {
-        baseURL,
-        hasToken: Boolean(token),
-      });
+      console.log(
+        `[API] ${config.method?.toUpperCase()} ${config.url} BODY: ${JSON.stringify(config.data) || "No Body"}`,
+        {
+          baseURL,
+          hasToken: Boolean(token),
+        },
+      );
     }
 
     return config;

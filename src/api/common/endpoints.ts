@@ -19,6 +19,29 @@ export const API_ROUTES: Record<Route, ApiRoute> = {
   resendCode: "/auth/resend-code",
   resetPassword: "/auth/reset-password",
   changePassword: "/auth/change-password",
+  club: "/club",
+  clubDetails: "/club/:id",
+  clubMembers: "/club/:id/members",
+  clubJoin: "/club/:id/join",
+  clubLeave: "/club/:id/leave",
+  bassine: "/bassine",
+  bassineLeaderboard: "/bassine/leaderboard",
+  bassineHistory: "/bassine/history",
+  bassineUserHistory: "/bassine/history/:email",
+  reservation: "/reservation",
+  reservationCategory: "/reservation/category/:id",
+  reservationCreateCategory: "/reservation/category",
+  reservationItem: "/reservation/item/:id",
+  reservationCreateItem: "/reservation/item",
+  reservationClub: "/reservation/club/:id",
+  reservationMy: "/reservation/me",
+  reservationSearch: "/reservation/search",
+  event: "/event",
+  eventClub: "/event/club/:idclub",
+  eventDetails: "/event/:id",
+  eventJoin: "/event/:id/join",
+  eventLeave: "/event/:id/leave",
+  eventMembers: "/event/:id/members",
 };
 
 type ApiRoute = `/${string}`;
@@ -42,4 +65,27 @@ type Route =
   | "verifyAccount"
   | "resendCode"
   | "resetPassword"
-  | "changePassword";
+  | "changePassword"
+  | "club"
+  | "clubDetails"
+  | "clubJoin"
+  | "clubLeave"
+  | "clubMembers"
+  | "bassine"
+  | "bassineLeaderboard"
+  | "bassineHistory"
+  | "bassineUserHistory"
+  | "reservation"
+  | "reservationCategory"
+  | "reservationCreateCategory"
+  | "reservationItem"
+  | "reservationCreateItem"
+  | "reservationClub"
+  | "reservationMy"
+  | "reservationSearch"
+  | "event"
+  | "eventClub"
+  | "eventDetails"
+  | "eventJoin"
+  | "eventLeave"
+  | "eventMembers";

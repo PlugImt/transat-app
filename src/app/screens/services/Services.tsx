@@ -1,25 +1,22 @@
 import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
-import { Image } from "react-native";
 import Animated from "react-native-reanimated";
 import { Button } from "@/components/common/Button";
-import LinkCard, { LinkCardLoading } from "@/components/custom/LinkCard";
+import Image from "@/components/common/Image";
+import LinkCard, { LinkCardLoading } from "@/components/custom/card/LinkCard";
 import { PreferenceCustomizationButton } from "@/components/custom/PreferenceCustomizationModal";
 import { Empty } from "@/components/page/Empty";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
-import { useServicePreferences } from "@/hooks/usePreferences";
+import { useServicePreferences } from "@/hooks/services/usePreferences";
 import type { Preference } from "@/services/storage/preferences";
 import { resetServicePreferences } from "@/services/storage/preferences";
-import type { AppStackParamList } from "@/types";
-
-type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
+import type { AppNavigation } from "@/types";
 
 export const Services = () => {
   const { t } = useTranslation();
-  const navigation = useNavigation<AppScreenNavigationProp>();
+  const navigation = useNavigation<AppNavigation>();
   const { scrollHandler } = useAnimatedHeader();
   const { actualTheme } = useTheme();
   const {
@@ -48,12 +45,12 @@ export const Services = () => {
   }
 
   return (
-    <Page asChildren title={t("services.title")}>
+    <Page className="gap-2" title={t("services.title")} asChildren>
       <Animated.FlatList
         data={enabledServices}
         renderItem={({ item }) => renderServiceCard(item)}
         keyExtractor={(item) => item.id}
-        showsVerticalScrollIndicator={true}
+        showsVerticalScrollIndicator
         onScroll={scrollHandler}
         ListEmptyComponent={
           <Empty
@@ -72,6 +69,7 @@ export const Services = () => {
               label={t("common.customizeServices")}
               variant="ghost"
               size="sm"
+              className="mt-3"
             />
           </PreferenceCustomizationButton>
         }

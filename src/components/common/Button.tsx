@@ -1,4 +1,4 @@
-import { type ComponentPropsWithoutRef, cloneElement } from "react";
+import React, { type ComponentPropsWithoutRef, cloneElement } from "react";
 import {
   ActivityIndicator,
   type GestureResponderEvent,
@@ -40,7 +40,7 @@ const getButtonStyle = (variant: ButtonVariant, theme: ThemeType) => {
 const getTextColor = (variant: ButtonVariant, theme: ThemeType) => {
   const textColors: { [key: string]: string } = {
     default: theme.primaryText,
-    secondary: theme.secondaryText,
+    secondary: theme.primary,
     destructive: theme.destructiveText,
     ghost: theme.text,
     link: theme.primary,
@@ -79,7 +79,7 @@ interface ButtonProps
   labelClasses?: string;
   variant?: ButtonVariant;
   size?: ButtonSize;
-  icon?: React.ReactNode;
+  icon?: React.ReactElement<{ color: string; size?: number }>;
   isUpdating?: boolean;
 }
 
@@ -117,7 +117,7 @@ const Button = ({
       ]}
       className={cn(
         className,
-        "rounded-lg gap-2 flex-row items-center justify-center",
+        "rounded-lg gap-1 flex-row items-center justify-center",
       )}
       {...props}
       disabled={isDisabled}
@@ -131,7 +131,11 @@ const Button = ({
       >
         {label}
       </Text>
-      {isUpdating ? <ActivityIndicator color={textColor} /> : icon}
+      {isUpdating ? (
+        <ActivityIndicator color={textColor} />
+      ) : (
+        icon && cloneElement(icon, { color: textColor, size: 16 })
+      )}
     </TouchableOpacity>
   );
 };
@@ -152,7 +156,7 @@ const IconButton = ({
   const { theme } = useTheme();
   const isDisabled = props.disabled || isUpdating;
 
-  const buttonStyle = variant === "default" && getButtonStyle(variant, theme);
+  const buttonStyle = getButtonStyle(variant, theme);
   const sizeStyles = getSizeStyles(size);
   const iconColor = getTextColor(variant, theme);
 
@@ -180,10 +184,10 @@ const IconButton = ({
     >
       {isUpdating ? (
         <ActivityIndicator color={iconColor} />
+      ) : icon.props.color ? (
+        icon
       ) : (
-        cloneElement(icon, {
-          color: iconColor,
-        })
+        cloneElement(icon, { color: iconColor })
       )}
     </TouchableOpacity>
   );

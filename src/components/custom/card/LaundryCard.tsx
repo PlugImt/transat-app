@@ -1,4 +1,5 @@
 import { Bell, BellRing, WashingMachineIcon, Wind } from "lucide-react-native";
+import type React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { TouchableOpacity, View } from "react-native";
@@ -13,7 +14,10 @@ import {
 import { Text } from "@/components/common/Text";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
-import { useLaundryNotifications, useLaundryTimer } from "@/hooks/laundry";
+import {
+  useLaundryNotifications,
+  useLaundryTimer,
+} from "@/hooks/services/laundry";
 
 interface LaundryProps {
   number: string;

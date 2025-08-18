@@ -3,17 +3,21 @@ import { useTheme } from "@/contexts/ThemeContext";
 
 export interface ImageSkeletonProps {
   size?: number;
-  radius?: number | "round" | "square";
+  radius?: number | "round";
 }
 
-export const ImageSkeleton = ({ size = 100, radius }: ImageSkeletonProps) => {
+export const ImageSkeleton = ({
+  size = 100,
+  radius = 8,
+}: ImageSkeletonProps) => {
   const { actualTheme } = useTheme();
+  const borderRadius = radius === "round" ? 9999 : radius;
 
   return (
     <Skeleton
       width={size}
       height={size}
-      radius={radius}
+      radius={borderRadius}
       colorMode={actualTheme}
     />
   );

@@ -1,3 +1,4 @@
+import type React from "react";
 import { ScrollView } from "react-native";
 import Badge from "@/components/common/Badge";
 

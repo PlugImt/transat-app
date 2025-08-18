@@ -11,8 +11,9 @@ import {
   Vibrate,
 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
+import { Button } from "@/components/common/Button";
 import { Switch } from "@/components/common/Switch";
-import { AccountCard } from "@/components/custom/card/AccountCard";
+import { UserCard } from "@/components/custom/card/UserCard";
 import { LogoutButton } from "@/components/custom/LogoutButton";
 import { Page } from "@/components/page/Page";
 import { QUERY_KEYS } from "@/constants";
@@ -20,7 +21,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { useHapticFeedback } from "@/hooks/account/useHapticFeedback";
 import { useLanguageOptions } from "@/hooks/account/useLanguageOptions";
 import { useUser } from "@/hooks/account/useUser";
-import type { SettingsNavigation } from "@/types";
+import type { AppNavigation } from "@/types";
 import SettingCategory from "./components/SettingCategory";
 import SettingsItem from "./components/SettingsItem";
 
@@ -29,7 +30,7 @@ export const Settings = () => {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
   const { data: user, isPending } = useUser();
-  const navigation = useNavigation<SettingsNavigation>();
+  const navigation = useNavigation<AppNavigation>();
   const { currentLanguageOption } = useLanguageOptions();
   const { isEnabled: isHapticEnabled, toggleHapticFeedback } =
     useHapticFeedback();
@@ -54,7 +55,16 @@ export const Settings = () => {
       onRefresh={refetch}
       title={t("settings.settings")}
     >
-      <AccountCard user={user} />
+      <UserCard
+        user={user}
+        action={
+          <Button
+            label={t("common.edit")}
+            variant="ghost"
+            onPress={() => navigation.navigate("EditProfile")}
+          />
+        }
+      />
 
       <SettingCategory title={t("common.appearance")}>
         <SettingsItem

@@ -1,4 +1,5 @@
 import { Check } from "lucide-react-native";
+import type React from "react";
 import { useEffect, useState } from "react";
 import { TouchableOpacity, View } from "react-native";
 import { Text } from "@/components/common/Text";

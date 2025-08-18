@@ -4,14 +4,17 @@
     "home": "首页",
     "account": "账户",
     "edit": "编辑",
+    "delete": "删除",
     "save": "保存",
     "confirm": "确认",
     "send": "发送",
+    "search": "搜索",
     "cancel": "取消",
     "close": "关闭",
     "clearAll": "清除全部",
     "filter": "筛选",
     "refresh": "刷新",
+    "link": "链接",
     "reset": "重置",
     "or": "或",
     "other": "其他",
@@ -48,6 +51,8 @@
     "customizeHint": "启用/禁用服务或拖拽重新排序",
     "noWidgetsEnabled": "未启用任何小部件",
     "noWidgetsEnabledDescription": "您可以通过启用或禁用来自定义小部件",
+    "loading": "加载中",
+    "today": "今天",
     "errors": {
       "occurred": "发生错误",
       "unableToFetch": "无法获取数据"
@@ -75,6 +80,26 @@
       "months": "{{count}}个月前",
       "year": "{{count}}年前",
       "years": "{{count}}年前"
+    },
+    "dateFormats": {
+      "weekday": "{{date, weekday}}",
+      "time": "{{date, time}}",
+      "short": "{{date, short}}",
+      "long": "{{date, long}}",
+      "relative": "{{date, relative}}",
+      "ago": "{{date, ago}}",
+      "dateTime": "{{date, dateTime}}"
+    },
+    "homework": {
+      "deadline": "截止时间：{{date, dateTime}}",
+      "createdAt": "创建于 {{date, short}}",
+      "updatedAt": "更新于 {{date, short}}",
+      "dueIn": "将在 {{date, ago}} 后到期",
+      "overdue": "已逾期 {{date, ago}}"
+    },
+    "imageSelector": {
+      "placeholder": "点击选择图片",
+      "uploading": "上传中..."
     }
   },
   "auth": {
@@ -286,6 +311,14 @@
       "vegetarian": "素食",
       "sideDishes": "配菜",
       "closed": "已关闭",
+      "noLunch": {
+        "title": "今天没有午餐",
+        "description": "我们暂时还没有菜单。开启通知以便菜单可用时第一时间收到提醒"
+      },
+      "noDinner": {
+        "title": "今晚没有晚餐",
+        "description": "餐厅可能已关闭"
+      },
       "closedWeekends": {
         "title": "餐厅周末关闭",
         "description": "周一回来发现当日菜单"
@@ -393,9 +426,170 @@
       "price": "洗涤：2€\n烘干：1€",
       "additionalInfo": "用硬币、卡或Monix钱包支付（推荐用于奖金和现金返还）\n\n需要更多烘干时间？开始前支付多个会话",
       "location": "MDE下方，邮箱后"
+    },
+    "clubs": {
+      "title": "俱乐部",
+      "description": "发现IMT的所有俱乐部和协会",
+      "book": "预订",
+      "selectClub": "选择俱乐部",
+      "interested": "{{count}} 人对此俱乐部感兴趣",
+      "responsible": "负责人",
+      "errors": {
+        "empty": "未找到俱乐部",
+        "emptyDescription": "尝试使用其他关键词",
+        "notFound": "此俱乐部不存在",
+        "notFoundDescription": "刷新或更换俱乐部"
+      }
+    },
+    "reservation": {
+      "title": "预订",
+      "description": "预订设备和活动",
+      "reserve": "预订",
+      "returnItem": "归还",
+      "reservedBy": "预订者",
+      "reserveConfirmDesc": "通过预订，您承诺以发现时的相同状态归还设备",
+      "returnConfirmDesc": "您确认要归还此设备吗？",
+      "confirmReserve": "是的，我承诺",
+      "confirmReturn": "是的，我归还",
+      "reserveSuccess": "预订确认",
+      "returnSuccess": "设备归还成功",
+      "myReservations": "我的预订",
+      "current": "当前",
+      "past": "已结束",
+      "cancelReservation": "取消预订",
+      "cancelConfirmDesc": "您确定要取消此预订吗？",
+      "confirmCancel": "是的，取消",
+      "cancelSuccess": "预订已取消！",
+      "personal": {
+        "title": "我的预订",
+        "emptyUpcoming": "没有即将到来的预订",
+        "emptyUpcomingDescription": "预订房间或设备以查看您即将到来的预订",
+        "emptyPast": "没有过去的预订",
+        "emptyPastDescription": "您没有过去的预订"
+      },
+      "errors": {
+        "empty": "没有可用的预订",
+        "emptyDescription": "目前没有设备或活动可用",
+        "reserveError": "预订过程中出错",
+        "returnError": "归还过程中出错",
+        "cancelError": "无法取消预订",
+        "startDateRequired": "开始日期为必填项"
+      }
+    },
+    "events": {
+      "title": "活动",
+      "description": "不要错过任何活动",
+      "upcoming": "即将到来",
+      "past": "已过去",
+      "organizer": "组织者",
+      "createdBy": "创建者",
+      "peopleInterested": "感兴趣的人",
+      "interested_one": "只有一人对此活动感兴趣",
+      "interested_other": "{{count}} 人对此活动感兴趣",
+      "interested": "{{count}} 人对此活动感兴趣",
+      "add": {
+        "title": "新活动",
+        "image": {
+          "title": "图片"
+        },
+        "name": {
+          "title": "名称",
+          "placeholder": "Tonus",
+          "required": "名称为必填项",
+          "min": "名称至少需包含3个字符",
+          "max": "名称不得超过100个字符"
+        },
+        "description": {
+          "title": "描述",
+          "placeholder": "MDE 超级 Tonus，晚上9点起欢迎大家前来",
+          "max": "描述不得超过200个字符"
+        },
+        "startTime": "开始时间",
+        "endTime": "结束时间",
+        "date": {
+          "title": "日期",
+          "placeholder": "选择日期",
+          "required": "开始日期为必填项"
+        },
+        "location": {
+          "title": "地点",
+          "placeholder": "MDE",
+          "required": "地点为必填项",
+          "min": "地点至少需包含3个字符",
+          "max": "地点不得超过100个字符"
+        },
+        "link": {
+          "title": "链接",
+          "placeholder": "https://www.vibly.fr",
+          "invalid": "链接无效",
+          "max": "链接不得超过100个字符"
+        },
+        "organizer": {
+          "title": "组织者",
+          "placeholder": "选择一个俱乐部",
+          "required": "组织俱乐部为必填项"
+        },
+        "submit": "添加",
+        "success": "活动添加成功",
+        "error": "活动添加失败"
+      },
+      "edit": {
+        "title": "编辑活动",
+        "submit": "编辑",
+        "success": "活动更新成功",
+        "error": "更新活动时出错"
+      },
+      "delete": {
+        "title": "删除活动",
+        "description": "您确定要删除此活动吗？此操作不可逆。",
+        "confirm": "删除",
+        "cancel": "取消",
+        "success": "活动删除成功",
+        "error": "删除活动时出错"
+      },
+      "errors": {
+        "emptyUpcoming": "没有即将到来的活动",
+        "emptyUpcomingDescription": "添加活动以在此显示",
+        "emptyPast": "没有已过去的活动",
+        "emptyPastDescription": "享受即将到来的活动",
+        "notFound": "此活动已被删除",
+        "notFoundDescription": "尝试使用其他"
+      }
     }
   },
   "games": {
-    "title": "游戏"
+    "title": "游戏",
+    "bassine": {
+      "title": "池塘",
+      "description": "当啤酒被服务时，池塘会慢慢填满，当它满时，你可以要求填满你的杯子\n\n每填满一个杯子，更新你的计数器，成为池塘之王 👑",
+      "location": "在MDE的派对期间",
+      "price": "免费",
+      "seeLeaderboard": "查看排行榜",
+      "leaderboard": {
+        "title": "排行榜",
+        "score": "分数",
+        "history": "历史",
+        "firstPlaceLead_zero": "打成平手",
+        "firstPlaceLead_one": "就在你后面",
+        "firstPlaceLeader_few": "仅落后你{{count}}个池塘",
+        "firstPlaceLead_other": "落后你{{count}}个池塘",
+        "followingPlace_zero": "打成平手",
+        "followingPlace_one": "就在你前面",
+        "followingPlace_few": "仅领先你{{count}}个池塘",
+        "followingPlace_other": "领先你{{count}}个池塘",
+        "firstPlaceLead": "只落后您{{count}}个池塘",
+        "followingPlace": "领先您{{count}}个池塘",
+        "tookBassine_one": "取了{{count}}次池塘",
+        "tookBassine_other": "取了{{count}}次池塘"
+      }
+    }
+  },
+  "user": {
+    "contact": "联系",
+    "interested": "感兴趣",
+    "notInterested": "不感兴趣",
+    "errors": {
+      "contact": "打开短信应用时出错"
+    }
   }
 }

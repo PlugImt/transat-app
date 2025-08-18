@@ -6,7 +6,7 @@ import {
 import { AboutModal } from "@/components/custom/AboutModal";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
-import { useMenuRestaurant } from "@/hooks/useMenuRestaurant";
+import { useMenuRestaurant } from "@/hooks/services/restaurant/useMenuRestaurant";
 import { getOpeningHoursData, isWeekend, outOfService } from "@/utils";
 import { RestaurantClosed } from "./components/RestaurantMenu/RestaurantClosed";
 

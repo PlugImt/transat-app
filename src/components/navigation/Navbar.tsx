@@ -19,11 +19,23 @@ import {
   Homework,
   Laundry,
   Olimtpe,
+  Reservation,
   Restaurant,
   Timetable,
   Traq,
 } from "@/app/screens/services";
+import ClubDetails from "@/app/screens/services/clubs/ClubDetails";
+import { ClubMemberList } from "@/app/screens/services/clubs/components/ClubMemberList";
+import ClubEvents from "@/app/screens/services/events/ClubEvents";
+import { AddEvent } from "@/app/screens/services/events/components/AddEvent";
+import { EditEvent } from "@/app/screens/services/events/components/EditEvent";
+import EventDetails from "@/app/screens/services/events/components/EventDetails";
+import { EventMemberList } from "@/app/screens/services/events/components/EventMemberList";
+import Events from "@/app/screens/services/events/Events";
+import Bassine from "@/app/screens/services/games/bassine/Bassine";
+import { BassineLeaderboard } from "@/app/screens/services/games/bassine/leaderboard/BassineLeaderboard";
 import { HomeworkDetails } from "@/app/screens/services/homework/components/HomeworkDetails";
+import { Category, MyReservations } from "@/app/screens/services/reservation";
 import { RestaurantReviews } from "@/app/screens/services/restaurant/components/Reviews";
 import { Services } from "@/app/screens/services/Services";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -32,63 +44,79 @@ import type { BottomTabParamList } from "@/types";
 import { hapticFeedback } from "@/utils/haptics.utils";
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
+const Stack = createStackNavigator<BottomTabParamList>();
 
-// Create stack navigators for each tab
-const HomeStack = createStackNavigator();
-const HomeStackScreen = () => (
-  <HomeStack.Navigator screenOptions={screenOptions}>
-    <HomeStack.Screen name="Home" component={Home} />
-    <HomeStack.Screen name="Laundry" component={Laundry} />
-    <HomeStack.Screen name="Restaurant" component={Restaurant} />
-    <HomeStack.Screen name="RestaurantReviews" component={RestaurantReviews} />
-    <HomeStack.Screen name="Olimtpe" component={Olimtpe} />
-    <HomeStack.Screen name="Timetable" component={Timetable} />
-    <HomeStack.Screen name="Homework" component={Homework} />
-    <HomeStack.Screen name="HomeworkDetails" component={HomeworkDetails} />
-  </HomeStack.Navigator>
+// Stack navigators for each main tab
+const HomeStack = () => (
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="HomeScreen" component={Home} />
+    <Stack.Screen name="Laundry" component={Laundry} />
+    <Stack.Screen name="Restaurant" component={Restaurant} />
+    <Stack.Screen name="RestaurantReviews" component={RestaurantReviews} />
+    <Stack.Screen name="Timetable" component={Timetable} />
+    <Stack.Screen name="Homework" component={Homework} />
+    <Stack.Screen name="HomeworkDetails" component={HomeworkDetails} />
+    <Stack.Screen name="Clubs" component={Clubs} />
+    <Stack.Screen name="ClubDetails" component={ClubDetails} />
+    <Stack.Screen name="ClubMemberList" component={ClubMemberList} />
+    <Stack.Screen name="ClubEvents" component={ClubEvents} />
+    <Stack.Screen name="Events" component={Events} />
+    <Stack.Screen name="EventMemberList" component={EventMemberList} />
+    <Stack.Screen name="EventDetails" component={EventDetails} />
+    <Stack.Screen name="AddEvent" component={AddEvent} />
+    <Stack.Screen name="EditEvent" component={EditEvent} />
+    <Stack.Screen name="Traq" component={Traq} />
+    <Stack.Screen name="Olimtpe" component={Olimtpe} />
+  </Stack.Navigator>
 );
 
-const ServicesStack = createStackNavigator();
-const ServicesStackScreen = () => (
-  <ServicesStack.Navigator screenOptions={screenOptions}>
-    <ServicesStack.Screen name="Services" component={Services} />
-    <ServicesStack.Screen name="Laundry" component={Laundry} />
-    <ServicesStack.Screen name="Restaurant" component={Restaurant} />
-    <ServicesStack.Screen
-      name="RestaurantReviews"
-      component={RestaurantReviews}
-    />
-    <ServicesStack.Screen name="Timetable" component={Timetable} />
-    <ServicesStack.Screen name="Homework" component={Homework} />
-    <ServicesStack.Screen name="HomeworkDetails" component={HomeworkDetails} />
-    <ServicesStack.Screen name="Clubs" component={Clubs} />
-    <ServicesStack.Screen name="Traq" component={Traq} />
-    <ServicesStack.Screen name="Olimtpe" component={Olimtpe} />
-  </ServicesStack.Navigator>
+const ServicesStack = () => (
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="ServicesScreen" component={Services} />
+    <Stack.Screen name="Laundry" component={Laundry} />
+    <Stack.Screen name="Restaurant" component={Restaurant} />
+    <Stack.Screen name="RestaurantReviews" component={RestaurantReviews} />
+    <Stack.Screen name="Timetable" component={Timetable} />
+    <Stack.Screen name="Homework" component={Homework} />
+    <Stack.Screen name="HomeworkDetails" component={HomeworkDetails} />
+    <Stack.Screen name="Clubs" component={Clubs} />
+    <Stack.Screen name="ClubDetails" component={ClubDetails} />
+    <Stack.Screen name="ClubMemberList" component={ClubMemberList} />
+    <Stack.Screen name="ClubEvents" component={ClubEvents} />
+    <Stack.Screen name="Events" component={Events} />
+    <Stack.Screen name="EventMemberList" component={EventMemberList} />
+    <Stack.Screen name="EventDetails" component={EventDetails} />
+    <Stack.Screen name="AddEvent" component={AddEvent} />
+    <Stack.Screen name="EditEvent" component={EditEvent} />
+    <Stack.Screen name="Traq" component={Traq} />
+    <Stack.Screen name="Olimtpe" component={Olimtpe} />
+    <Stack.Screen name="Reservation" component={Reservation} />
+    <Stack.Screen name="MyReservations" component={MyReservations} />
+    <Stack.Screen name="ReservationCategory" component={Category} />
+  </Stack.Navigator>
 );
 
-const GamesStack = createStackNavigator();
-const GamesStackScreen = () => (
-  <GamesStack.Navigator screenOptions={screenOptions}>
-    <GamesStack.Screen name="Games" component={Games} />
-  </GamesStack.Navigator>
+const GamesStack = () => (
+  <Stack.Navigator screenOptions={screenOptions}>
+    <Stack.Screen name="Games" component={Games} />
+    <Stack.Screen name="Bassine" component={Bassine} />
+    <Stack.Screen name="BassineLeaderboard" component={BassineLeaderboard} />
+  </Stack.Navigator>
 );
 
-const AccountStack = createStackNavigator();
-
-const AccountStackScreen = () => (
-  <AccountStack.Navigator screenOptions={screenOptions}>
-    <AccountStack.Screen name="Account" component={Account} />
-    <AccountStack.Screen name="EditProfile" component={EditProfile} />
-    <AccountStack.Screen name="Settings" component={Settings} />
-    <AccountStack.Screen name="ChangePassword" component={ChangePassword} />
-    <AccountStack.Screen name="Notifications" component={Notifications} />
-    <AccountStack.Screen name="Language" component={Language} />
-    <AccountStack.Screen name="Appearance" component={Appearance} />
-    <AccountStack.Screen name="About" component={About} />
-    <AccountStack.Screen name="Help" component={Help} />
-    <AccountStack.Screen name="Legal" component={Legal} />
-  </AccountStack.Navigator>
+const AccountStack = () => (
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="AccountScreen" component={Account} />
+    <Stack.Screen name="EditProfile" component={EditProfile} />
+    <Stack.Screen name="Settings" component={Settings} />
+    <Stack.Screen name="ChangePassword" component={ChangePassword} />
+    <Stack.Screen name="Notifications" component={Notifications} />
+    <Stack.Screen name="Language" component={Language} />
+    <Stack.Screen name="Appearance" component={Appearance} />
+    <Stack.Screen name="About" component={About} />
+    <Stack.Screen name="Help" component={Help} />
+    <Stack.Screen name="Legal" component={Legal} />
+  </Stack.Navigator>
 );
 
 export const BottomTabNavigator = () => {
@@ -107,7 +135,7 @@ export const BottomTabNavigator = () => {
     <Tab.Navigator screenOptions={tabBarOptions(theme)}>
       <Tab.Screen
         name="HomeScreen"
-        component={HomeStackScreen}
+        component={HomeStack}
         listeners={handleTabPress}
         options={{
           tabBarLabel: t("common.home"),
@@ -118,7 +146,7 @@ export const BottomTabNavigator = () => {
       />
       <Tab.Screen
         name="ServicesScreen"
-        component={ServicesStackScreen}
+        component={ServicesStack}
         listeners={handleTabPress}
         options={{
           tabBarLabel: t("services.title"),
@@ -129,7 +157,7 @@ export const BottomTabNavigator = () => {
       />
       <Tab.Screen
         name="GamesScreen"
-        component={GamesStackScreen}
+        component={GamesStack}
         listeners={handleTabPress}
         options={{
           tabBarLabel: t("games.title"),
@@ -138,7 +166,7 @@ export const BottomTabNavigator = () => {
       />
       <Tab.Screen
         name="AccountScreen"
-        component={AccountStackScreen}
+        component={AccountStack}
         listeners={handleTabPress}
         options={{
           tabBarLabel: t("common.account"),

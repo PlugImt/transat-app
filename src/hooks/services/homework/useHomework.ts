@@ -2,7 +2,7 @@ import { skipToken, useQuery } from "@tanstack/react-query";
 import { getHomeworks } from "@/api";
 import { QUERY_KEYS } from "@/constants";
 import type { Homework } from "@/dto";
-import useAuth from "./account/useAuth";
+import useAuth from "../../account/useAuth";
 
 export const useHomework = () => {
   const { user } = useAuth();

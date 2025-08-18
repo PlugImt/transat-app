@@ -14,17 +14,15 @@ import { Page } from "@/components/page/Page";
 import { AvatarSkeleton, TextSkeleton } from "@/components/Skeleton";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
-import { useAuth } from "@/hooks/account";
 import { useUser } from "@/hooks/account/useUser";
-import type { AccountNavigation } from "@/types";
+import type { AppNavigation } from "@/types";
 import { getStudentYear } from "@/utils";
 
 export const Account = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
-  const navigation = useNavigation<AccountNavigation>();
+  const navigation = useNavigation<AppNavigation>();
   const queryClient = useQueryClient();
-  const { logout } = useAuth();
 
   const { data: user, isPending, isError, error } = useUser();
   const isUserFetching =
@@ -64,8 +62,8 @@ export const Account = () => {
       title={t("common.account")}
       header={
         <IconButton
-          icon={<Settings />}
-          variant="ghost"
+          icon={<Settings color={theme.text} />}
+          variant="link"
           onPress={() => navigation.navigate("Settings")}
         />
       }
@@ -111,15 +109,15 @@ export default Account;
 const AccountLoading = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
-  const navigation = useNavigation<AccountNavigation>();
+  const navigation = useNavigation<AppNavigation>();
 
   return (
     <Page
       title={t("common.account")}
       header={
         <IconButton
-          icon={<Settings />}
-          variant="ghost"
+          icon={<Settings color={theme.text} />}
+          variant="link"
           onPress={() => navigation.navigate("Settings")}
         />
       }

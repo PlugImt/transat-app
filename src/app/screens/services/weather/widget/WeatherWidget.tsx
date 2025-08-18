@@ -1,54 +1,15 @@
-import { format } from "date-fns";
-import {
-  ar,
-  de,
-  es,
-  fr,
-  hi,
-  it,
-  ja,
-  ko,
-  nl,
-  pl,
-  pt,
-  ru,
-  sv,
-  tr,
-  zhCN,
-} from "date-fns/locale";
 import { Image, View } from "react-native";
 import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
 import { AvatarSkeleton, TextSkeleton } from "@/components/Skeleton";
-import { useWeather } from "@/hooks/useWeather";
-import i18n from "@/i18n";
+import { useDate } from "@/hooks/common";
+import { useWeather } from "@/hooks/services/weather/useWeather";
 
 export const WeatherWidget = () => {
   const { data: weather, isPending, isError } = useWeather();
+  const { formatLong } = useDate();
 
   const date = new Date();
-
-  const localeMap: { [key: string]: Locale } = {
-    fr,
-    de,
-    es,
-    zh: zhCN,
-    ru,
-    it,
-    ja,
-    ko,
-    pt,
-    nl,
-    ar,
-    hi,
-    sv,
-    tr,
-    pl,
-  };
-
-  const getLocale = () => {
-    return localeMap[i18n.language] || undefined;
-  };
 
   if (isPending) {
     return <WeatherSkeleton />;
@@ -61,7 +22,7 @@ export const WeatherWidget = () => {
   return (
     <Card className="flex-row justify-between items-center">
       <View>
-        <Text>{format(date, "PPP", { locale: getLocale() })}</Text>
+        <Text>{formatLong(date)}</Text>
         <Text variant="h1">{Math.round(weather?.temperature ?? 0)}°C</Text>
         <Text variant="lg" color="muted">
           {weather?.condition ?? ""}

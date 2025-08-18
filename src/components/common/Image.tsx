@@ -1,5 +1,13 @@
+import { CameraOff } from "lucide-react-native";
+import type React from "react";
 import { forwardRef, useState } from "react";
-import { type ImageSourcePropType, Image as RNImage, View } from "react-native";
+import {
+  type ImageSourcePropType,
+  Image as RNImage,
+  type StyleProp,
+  View,
+  type ViewStyle,
+} from "react-native";
 import { useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";
 import { ImageSkeleton } from "../Skeleton/ImageSkeleton";
@@ -10,23 +18,39 @@ interface ImageProps
   loading?: boolean;
   size?: number;
   fallback?: React.ReactNode;
+  radius?: number;
+  fill?: boolean;
 }
 
 interface ImageFallbackProps {
   size?: number;
   className?: string;
+  style?: StyleProp<ViewStyle>;
+  radius?: number;
 }
 
-const ImageFallback = ({ size = 64, className }: ImageFallbackProps) => {
+const ImageFallback = ({
+  size = 64,
+  className,
+  style,
+  radius,
+}: ImageFallbackProps) => {
   const { theme } = useTheme();
   return (
     <View
-      style={{ backgroundColor: theme.border, width: size, height: size }}
-      className={cn(
-        "absolute inset-0 h-full w-full items-center justify-center z-0",
-        className,
-      )}
-    />
+      style={[
+        {
+          backgroundColor: theme.border,
+          width: size,
+          height: size,
+          borderRadius: radius,
+        },
+        style,
+      ]}
+      className={cn("h-full w-full items-center justify-center", className)}
+    >
+      <CameraOff size={size / 3} color={theme.muted} />
+    </View>
   );
 };
 
@@ -53,41 +77,75 @@ const isValidSource = (src: ImageSourcePropType | undefined) => {
 
 const Image = forwardRef<React.ElementRef<typeof RNImage>, ImageProps>(
   (
-    { className, loading = false, source, size = 64, fallback, ...props },
+    {
+      className,
+      loading = false,
+      source,
+      size = 64,
+      fallback,
+      radius = 8,
+      fill = false,
+      ...props
+    },
     ref,
   ) => {
     const [hasError, setHasError] = useState(false);
     const [imageLoading, setImageLoading] = useState(true);
+    const [hasLoaded, setHasLoaded] = useState(false);
+
     const isLoading = loading || imageLoading;
     const finalSource = normalizeSource(source);
     const validSource = isValidSource(finalSource);
 
-    if ((!validSource && hasError) || (!validSource && !isLoading)) {
-      return fallback !== undefined ? fallback : <ImageFallback size={size} />;
+    if (!validSource || hasError) {
+      return fallback !== undefined ? (
+        fallback
+      ) : (
+        <ImageFallback size={size} radius={radius} {...props} />
+      );
     }
+
+    const containerStyle = !fill ? { width: size, height: size } : undefined;
 
     return (
       <View
-        style={[{ width: size, height: size }, props.style]}
-        className={cn("relative flex shrink-0 overflow-hidden", className)}
+        style={[containerStyle]}
+        className={cn(
+          "relative overflow-hidden",
+          fill ? "h-full w-full" : "flex shrink-0",
+          className,
+        )}
       >
         <View className="absolute inset-0 h-full w-full z-10">
           <RNImage
             ref={ref}
             source={finalSource}
-            onError={() => setHasError(true)}
+            onError={() => {
+              setHasError(true);
+              setImageLoading(false);
+            }}
             className={cn(
-              "aspect-square h-full w-full",
-              isLoading ? "opacity-0" : "opacity-100",
+              "h-full w-full flex-shrink-0",
+              hasLoaded ? "opacity-100" : "opacity-0",
             )}
-            onLoadStart={() => setImageLoading(true)}
-            onLoadEnd={() => setImageLoading(false)}
+            borderRadius={radius}
+            resizeMode={props.resizeMode ?? "contain"}
+            onLoadStart={() => {
+              setImageLoading(true);
+              setHasError(false);
+            }}
+            onLoad={() => {
+              setHasLoaded(true);
+            }}
+            onLoadEnd={() => {
+              setImageLoading(false);
+            }}
             {...props}
           />
         </View>
-        {isLoading && (
+        {isLoading && !hasLoaded && (
           <View className="z-20 absolute inset-0 h-full w-full">
-            <ImageSkeleton size={size} />
+            <ImageSkeleton size={size} radius={radius} {...props} />
           </View>
         )}
       </View>

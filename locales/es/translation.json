@@ -4,14 +4,17 @@
     "home": "Inicio",
     "account": "Cuenta",
     "edit": "Editar",
+    "delete": "Eliminar",
     "save": "Guardar",
     "confirm": "Confirmar",
     "send": "Enviar",
+    "search": "Buscar",
     "cancel": "Cancelar",
     "close": "Cerrar",
     "clearAll": "Limpiar todo",
     "filter": "Filtrar",
     "refresh": "Actualizar",
+    "link": "Enlace",
     "reset": "Restablecer",
     "or": "O",
     "other": "Otro",
@@ -48,6 +51,8 @@
     "customizeHint": "Activa/desactiva servicios o arrástralos para reorganizarlos",
     "noWidgetsEnabled": "No hay widgets habilitados",
     "noWidgetsEnabledDescription": "Puedes personalizar widgets activándolos o desactivándolos",
+    "loading": "Cargando",
+    "today": "Hoy",
     "errors": {
       "occurred": "Ha ocurrido un error",
       "unableToFetch": "No se pudieron obtener los datos"
@@ -75,12 +80,32 @@
       "months": "hace {{count}} meses",
       "year": "hace {{count}} año",
       "years": "hace {{count}} años"
+    },
+    "dateFormats": {
+      "weekday": "{{date, weekday}}",
+      "time": "{{date, time}}",
+      "short": "{{date, short}}",
+      "long": "{{date, long}}",
+      "relative": "{{date, relative}}",
+      "ago": "{{date, ago}}",
+      "dateTime": "{{date, dateTime}}"
+    },
+    "homework": {
+      "deadline": "Fecha límite: {{date, dateTime}}",
+      "createdAt": "Creado el {{date, short}}",
+      "updatedAt": "Actualizado el {{date, short}}",
+      "dueIn": "Vence en {{date, ago}}",
+      "overdue": "Atrasado por {{date, ago}}"
+    },
+    "imageSelector": {
+      "placeholder": "Toca para seleccionar una imagen",
+      "uploading": "Subiendo..."
     }
   },
   "auth": {
     "signIn": {
       "title": "Iniciar sesión",
-      "description": "¡Bienvenido de nuevo a Transat 🥳",
+      "description": "¡Bienvenido de nuevo a Transat! 🥳",
       "pending": "Iniciando sesión..."
     },
     "signUp": {
@@ -105,7 +130,7 @@
     "resendCode": "Reenviar código",
     "signupSuccess": "Registro exitoso",
     "signingUp": "Registrándose...",
-    "disconnected": "¡Hasta pronto 👋",
+    "disconnected": "¡Hasta pronto! 👋",
     "requestNewCode": "Solicitar nuevo código",
     "errors": {
       "email": "Dirección de correo electrónico inválida",
@@ -141,7 +166,7 @@
     }
   },
   "welcome": {
-    "subtitle": "Lo esencial del campus todo en un lugar"
+    "subtitle": "Lo esencial del campus, todo en un solo lugar"
   },
   "account": {
     "graduationYear": "Año de graduación",
@@ -286,6 +311,14 @@
       "vegetarian": "Vegetariano",
       "sideDishes": "Guarniciones",
       "closed": "Cerrado",
+      "noLunch": {
+        "title": "No hay almuerzo hoy",
+        "description": "Aún no tenemos el menú. Activa las notificaciones para ser informado cuando el menú esté disponible"
+      },
+      "noDinner": {
+        "title": "No hay cena esta noche",
+        "description": "El RU debe estar cerrado esta noche"
+      },
       "closedWeekends": {
         "title": "El restaurante está cerrado los fines de semana",
         "description": "Vuelve el lunes para descubrir el menú del día"
@@ -393,9 +426,170 @@
       "price": "Lavado: 2€\nSecado: 1€",
       "additionalInfo": "Paga con monedas, tarjeta o billetera Monix (recomendado para bonos y cashback)\n\n¿Necesitas más tiempo de secado? Paga por múltiples sesiones antes de comenzar",
       "location": "Debajo de la MDE, después de los buzones"
+    },
+    "clubs": {
+      "title": "Clubs",
+      "description": "Descubre todos los clubs y asociaciones de la IMT",
+      "book": "Reservar",
+      "selectClub": "Seleccionar club",
+      "interested": "{{count}} personas están interesadas en este club",
+      "responsible": "Responsable",
+      "errors": {
+        "empty": "No se encontró ningún club",
+        "emptyDescription": "Intenta con otra palabra clave",
+        "notFound": "Este club no existe",
+        "notFoundDescription": "Actualiza o cambia de club"
+      }
+    },
+    "reservation": {
+      "title": "Reservas",
+      "description": "Reservar equipos y actividades",
+      "reserve": "Reservar",
+      "returnItem": "Devolver",
+      "reservedBy": "Reservado por",
+      "reserveConfirmDesc": "Al reservar, te comprometes a devolver el equipo en el mismo estado en que lo encontraste",
+      "returnConfirmDesc": "¿Confirmas que quieres devolver este equipo?",
+      "confirmReserve": "Sí, me comprometo",
+      "confirmReturn": "Sí, devuelvo",
+      "reserveSuccess": "Reserva confirmada",
+      "returnSuccess": "Equipo devuelto con éxito",
+      "myReservations": "Mis reservas",
+      "current": "Actuales",
+      "past": "Pasadas",
+      "cancelReservation": "Cancelar reserva",
+      "cancelConfirmDesc": "¿Confirmas que quieres cancelar esta reserva?",
+      "confirmCancel": "Sí, cancelar",
+      "cancelSuccess": "Reserva cancelada",
+      "personal": {
+        "title": "Mis reservas",
+        "emptyUpcoming": "No hay reservas próximas",
+        "emptyUpcomingDescription": "Reserva una sala o equipo para ver tus próximas reservas",
+        "emptyPast": "No hay reservas pasadas",
+        "emptyPastDescription": "No tienes reservas pasadas"
+      },
+      "errors": {
+        "empty": "No hay reservas disponibles",
+        "emptyDescription": "No hay equipos o actividades disponibles en este momento",
+        "reserveError": "Error durante la reserva",
+        "returnError": "Error durante la devolución",
+        "cancelError": "No se pudo cancelar la reserva",
+        "startDateRequired": "La fecha de inicio es obligatoria"
+      }
+    },
+    "events": {
+      "title": "Eventos",
+      "description": "No te pierdas ningún evento de la MDE",
+      "upcoming": "Próximos",
+      "past": "Pasados",
+      "organizer": "Organizador",
+      "createdBy": "Creado por",
+      "peopleInterested": "Personas interesadas",
+      "interested_one": "Una sola persona está interesada en este evento",
+      "interested_other": "{{count}} personas están interesadas en este evento",
+      "interested": "{{count}} personas están interesadas en este evento",
+      "add": {
+        "title": "Nuevo evento",
+        "image": {
+          "title": "Imagen"
+        },
+        "name": {
+          "title": "Nombre",
+          "placeholder": "Tonus",
+          "required": "El nombre es obligatorio",
+          "min": "El nombre debe tener al menos 3 caracteres",
+          "max": "El nombre no debe exceder 100 caracteres"
+        },
+        "description": {
+          "title": "Descripción",
+          "placeholder": "Súper Tonus en la MDE, vengan numerosos desde las 21h",
+          "max": "La descripción no debe exceder 200 caracteres"
+        },
+        "startTime": "Hora de inicio",
+        "endTime": "Hora de fin",
+        "date": {
+          "title": "Fecha",
+          "placeholder": "Seleccionar una fecha",
+          "required": "La fecha de inicio es obligatoria"
+        },
+        "location": {
+          "title": "Lugar",
+          "placeholder": "MDE",
+          "required": "El lugar es obligatorio",
+          "min": "El lugar debe tener al menos 3 caracteres",
+          "max": "El lugar no debe exceder 100 caracteres"
+        },
+        "link": {
+          "title": "Enlace",
+          "placeholder": "https://www.vibly.fr",
+          "invalid": "El enlace no es válido",
+          "max": "El enlace no debe exceder 100 caracteres"
+        },
+        "organizer": {
+          "title": "Organizador",
+          "placeholder": "Seleccionar un club",
+          "required": "El club organizador es obligatorio"
+        },
+        "submit": "Añadir",
+        "success": "Evento añadido con éxito",
+        "error": "Error al añadir el evento"
+      },
+      "edit": {
+        "title": "Editar evento",
+        "submit": "Editar",
+        "success": "Evento actualizado con éxito",
+        "error": "Error al actualizar el evento"
+      },
+      "delete": {
+        "title": "Eliminar evento",
+        "description": "¿Estás seguro de que deseas eliminar este evento? Esta acción es irreversible.",
+        "confirm": "Eliminar",
+        "cancel": "Cancelar",
+        "success": "Evento eliminado con éxito",
+        "error": "Error al eliminar el evento"
+      },
+      "errors": {
+        "emptyUpcoming": "No hay eventos próximos",
+        "emptyUpcomingDescription": "Añade un evento para mostrarlo aquí",
+        "emptyPast": "No hay eventos pasados",
+        "emptyPastDescription": "Disfruta de los eventos próximos",
+        "notFound": "Este evento ha sido eliminado",
+        "notFoundDescription": "Intenta con otra"
+      }
     }
   },
   "games": {
-    "title": "Juegos"
+    "title": "Juegos",
+    "bassine": {
+      "title": "Cuenca",
+      "description": "Cuando se sirve una cerveza, la cuenca se llena poco a poco, y cuando está llena puedes pedir que se llene tu vaso con\n\nPor cada vaso lleno, actualiza tu contador para ser el rey de la cuenca 👑",
+      "location": "En la MDE durante las fiestas",
+      "price": "Gratis",
+      "seeLeaderboard": "Ver la clasificación",
+      "leaderboard": {
+        "title": "Clasificación",
+        "score": "Puntuación",
+        "history": "Historial",
+        "firstPlaceLead_zero": "está empatado",
+        "firstPlaceLead_one": "está justo detrás de ti",
+        "firstPlaceLeader_few": "está a solo {{count}} cuencas detrás de ti",
+        "firstPlaceLead_other": "está {{count}} cuencas detrás de ti",
+        "followingPlace_zero": "está empatado",
+        "followingPlace_one": "está justo delante de ti",
+        "followingPlace_few": "está a solo {{count}} cuencas delante de ti",
+        "followingPlace_other": "está {{count}} cuencas delante de ti",
+        "firstPlaceLead": "está solo {{count}} cuenca detrás de ti",
+        "followingPlace": "está {{count}} cuenca delante de ti",
+        "tookBassine_one": "tomó {{count}} cuenca",
+        "tookBassine_other": "tomó {{count}} cuencas"
+      }
+    }
+  },
+  "user": {
+    "contact": "Contactar",
+    "interested": "Interesado",
+    "notInterested": "No interesado",
+    "errors": {
+      "contact": "Error al abrir la aplicación de SMS"
+    }
   }
 }

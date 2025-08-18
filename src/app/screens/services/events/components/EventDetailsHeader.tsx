@@ -92,14 +92,7 @@ export const EventDetailsHeader = ({ event }: EventDetailsHeaderProps) => {
   return (
     <View className="gap-4 mt-3">
       <View className="flex-row gap-4">
-        {event.picture && (
-          <View
-            className="overflow-hidden rounded-xl"
-            style={{ width: 145, height: 145 }}
-          >
-            <Image source={event.picture} fill resizeMode="cover" />
-          </View>
-        )}
+        {event.picture && <Image source={event.picture} size={145} />}
         <View className="flex-1 gap-4">
           <View>
             <Text variant="h2">{title}</Text>

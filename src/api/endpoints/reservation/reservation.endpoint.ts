@@ -34,7 +34,10 @@ export const getReservationItem = async (id: number, date: string) => {
   );
 };
 
-export const updateReservation = async (id: number, startTime: string) => {
+export const updateReservation = async (
+  id: number,
+  startTime: string | null,
+) => {
   if (startTime) {
     return await apiRequest(
       API_ROUTES.reservationItem.replace(":id", id.toString()),

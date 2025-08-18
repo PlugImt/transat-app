@@ -66,7 +66,6 @@ export const Stars = ({
     return (
       <View
         className={cn("flex-row items-center gap-1", className)}
-        // @ts-expect-error PanHandlers type mismatch is acceptable for RN
         {...(panResponder ? panResponder.panHandlers : {})}
       >
         {Array.from({ length: max }).map((_, index) => {

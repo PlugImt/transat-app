@@ -19,12 +19,12 @@ const ActionButton = ({ user }: ActionButtonProps) => {
   const { user: currentUser } = useAuth();
   const { toast } = useToast();
 
-  if (user?.email === currentUser?.email || !user?.phone_number) {
+  if (user.email === currentUser?.email || !user.phone_number) {
     return null;
   }
 
   const handleContact = async () => {
-    const phoneNumber = user.phone_number.replace(/\s/g, "");
+    const phoneNumber = user.phone_number?.replace(/\s/g, "");
     const url = `sms:${phoneNumber}`;
 
     try {

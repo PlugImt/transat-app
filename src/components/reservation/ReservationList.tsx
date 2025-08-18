@@ -17,7 +17,7 @@ interface ReservationListProps {
   isPending: boolean;
   isError: boolean;
   error: Error | null;
-  refetch?: () => void;
+  refetch: () => void;
   headerComponent?: ReactElement | ComponentType<object> | null;
   variant?: "page" | "embed";
   showScrollIndicators?: boolean;

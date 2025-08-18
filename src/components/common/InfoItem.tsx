@@ -1,3 +1,4 @@
+import type React from "react";
 import { View } from "react-native";
 import { Text } from "@/components/common/Text";
 import { TextSkeleton } from "@/components/Skeleton";

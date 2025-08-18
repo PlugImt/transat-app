@@ -50,6 +50,8 @@
     "customizeServices": "Customize services",
     "customizeHint": "Enable/disable services or drag them to reorganize",
     "noWidgetsEnabled": "No widgets enabled",
+    "loading": "Loading",
+    "today": "Today",
     "noWidgetsEnabledDescription": "You can customize widgets by enabling or disabling them",
     "errors": {
       "occurred": "An error occurred",
@@ -309,13 +311,21 @@
       "vegetarian": "Vegetarian",
       "sideDishes": "Side dishes",
       "closed": "Closed",
+      "noLunch": {
+        "title": "No lunch today",
+        "description": "We don't have the menu (yet). Activate notifications to be informed when the menu is available"
+      },
+      "noDinner": {
+        "title": "No dinner tonight",
+        "description": "The restaurant must be closed. Activate notifications to be informed when it reopens"
+      },
       "closedWeekends": {
         "title": "The restaurant is closed on weekends",
         "description": "Come back Monday to discover the daily menu"
       },
       "closedNight": {
         "title": "The restaurant is closed",
-        "description": "Come back tomorrow to see the menu"
+        "description": "Come back tomorrow to see the menu. Enable notifications so you don't miss it"
       },
       "location": "Next to the gym",
       "about": "API prepares fresh, homemade dishes daily — even the fruit salad! The menu changes every day for lunch and dinner",
@@ -429,6 +439,41 @@
         "emptyDescription": "Try with another keyword",
         "notFound": "This club doesn't exist",
         "notFoundDescription": "Refresh or change club"
+      }
+    },
+    "reservation": {
+      "title": "Reservations",
+      "description": "Reserve equipment and activities",
+      "reserve": "Reserve",
+      "returnItem": "Return",
+      "reservedBy": "Reserved by",
+      "reserveConfirmDesc": "By reserving, you commit to return the equipment in the same condition as you found it",
+      "returnConfirmDesc": "Do you confirm you want to return this equipment?",
+      "confirmReserve": "Yes, I commit",
+      "confirmReturn": "Yes, I return",
+      "reserveSuccess": "Reservation confirmed!",
+      "returnSuccess": "Equipment returned successfully!",
+      "myReservations": "My reservations",
+      "current": "Current",
+      "past": "Past",
+      "cancelReservation": "Cancel reservation",
+      "cancelConfirmDesc": "Are you sure you want to cancel this reservation?",
+      "confirmCancel": "Yes, cancel",
+      "cancelSuccess": "Reservation canceled!",
+      "personal": {
+        "title": "My reservations",
+        "emptyUpcoming": "No upcoming reservations",
+        "emptyUpcomingDescription": "Reserve a room or equipment to see your upcoming reservations",
+        "emptyPast": "No past reservations",
+        "emptyPastDescription": "You have no past reservations"
+      },
+      "errors": {
+        "empty": "No reservations available",
+        "emptyDescription": "No equipment or activities are available at the moment",
+        "reserveError": "Error during reservation",
+        "returnError": "Error during return",
+        "cancelError": "Unable to cancel reservation",
+        "startDateRequired": "Start date is required"
       }
     },
     "events": {

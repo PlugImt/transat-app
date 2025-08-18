@@ -4,8 +4,8 @@ import { formationName } from "@/enums";
 import { passwordChangeSchema } from ".";
 
 export const updateUserPayloadSchema = z.object({
-  first_name: z.string().nonempty(t("auth.errors.firstName")),
-  last_name: z.string().nonempty(t("auth.errors.lastName")),
+  first_name: z.string().nonempty(t("auth.errors.firstName")).max(50),
+  last_name: z.string().nonempty(t("auth.errors.lastName")).max(50),
   phone_number: z
     .string()
     .refine((val) => !val || /^\+?\d{8,15}$/.test(val), {

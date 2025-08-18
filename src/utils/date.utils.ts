@@ -1,26 +1,60 @@
+import i18n from "@/i18n";
+
 /**
- * Checks if the current time is before 2 PM
+ * Checks if the current time is before 13:30
  */
 export const isLunch = () => {
-  const hour = new Date().getHours();
-  return hour < 14;
+  const now = new Date();
+  const hour = now.getHours();
+  const minute = now.getMinutes();
+  return hour < 13 || (hour === 13 && minute < 30);
 };
 
 /**
- * Checks if the current time is between 2 PM and 8 PM
+ * Checks if the current time is between 13:30 and 19:45
  */
 export const isDinner = () => {
-  const hour = new Date().getHours();
-  return hour >= 14 && hour < 20;
+  const now = new Date();
+  const hour = now.getHours();
+  const minute = now.getMinutes();
+  const afterLunch = hour > 13 || (hour === 13 && minute >= 30);
+  const beforeEndDinner = hour < 19 || (hour === 19 && minute < 45);
+  return afterLunch && beforeEndDinner;
 };
 
 /**
- * Checks if the current day is a weekend (Saturday or Sunday)
+ * Checks if we are in weekend service hours:
+ * - Saturday or Sunday at any time
+ * - Friday after 13:30
  */
 export const isWeekend = () => {
   const now = new Date();
   const day = now.getDay();
-  return day === 0 || day === 6 || (day === 5 && now.getHours() > 14);
+  if (day === 0 || day === 6) return true;
+  if (day === 5) {
+    return isAfterLunch();
+  }
+  return false;
+};
+
+/**
+ * Checks if the current time is after 13:30 (lunch quoi)
+ */
+export const isAfterLunch = () => {
+  const now = new Date();
+  const hour = now.getHours();
+  const minute = now.getMinutes();
+  return hour > 13 || (hour === 13 && minute >= 30);
+};
+
+/**
+ * Checks if the current time is after 19:45
+ */
+export const isNight = () => {
+  const now = new Date();
+  const hour = now.getHours();
+  const minute = now.getMinutes();
+  return hour > 19 || (hour === 19 && minute >= 45);
 };
 
 /**
@@ -165,4 +199,19 @@ export const getTimeAgo = (
   const diffInYears = Math.floor(diffInMonths / 12);
   const key = diffInYears <= 1 ? "common.timeAgo.year" : "common.timeAgo.years";
   return t(key, { count: diffInYears });
+};
+
+/**
+ * Formats a Date object into a human-readable string
+ * in the format "DD MMM YYYY HHhMM".
+ * @param d - The Date object to format.
+ */
+export const formatDateTime = (d: Date) => {
+  const lang = (i18n.language || "en").toLowerCase();
+  const day = d.getDate().toString().padStart(2, "0");
+  const month = d.toLocaleString(lang, { month: "short" });
+  const year = d.getFullYear();
+  const hours = d.getHours().toString().padStart(2, "0");
+  const minutes = d.getMinutes().toString().padStart(2, "0");
+  return `${day} ${month} ${year} ${hours}h${minutes}`;
 };

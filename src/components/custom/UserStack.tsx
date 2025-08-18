@@ -52,6 +52,35 @@ export const UserStack = ({
     ? Math.min(count - pictures.length, MAX_COUNT)
     : 0;
 
+  const ImagesRow = (
+    <>
+      {displayedPictures.map((picture) => (
+        <Image
+          source={picture}
+          key={picture}
+          className="-ml-2"
+          {...imageProps}
+        />
+      ))}
+
+      {hasOverflow && (
+        <View
+          className="bg-black items-center justify-center rounded-full relative -ml-2"
+          style={{ width: sizeProps, height: sizeProps }}
+        >
+          <Image source={pictures[pictures.length - 1]} {...imageProps} />
+          <View
+            className="absolute inset-0 bg-black/50 rounded-full"
+            style={{ ...imageProps.style }}
+          />
+          <NativeText className="text-white text-sm font-medium absolute inset-x-0 text-center">
+            +{overflowCount}
+          </NativeText>
+        </View>
+      )}
+    </>
+  );
+
   return (
     <View>
       {onPress ? (
@@ -168,7 +197,7 @@ export const UserStackSkeleton = ({
       <View className="flex-row ml-2">
         {Array.from({ length: max }).map((_, index) => (
           <View
-            key={`user-stack-skeleton-${index}-${size}-${max}`}
+            key={`user-stack-skeleton-${index.toString()}-${size}-${max}`}
             className="-ml-2"
           >
             <ImageSkeleton {...imageProps} />

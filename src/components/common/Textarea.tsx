@@ -7,6 +7,7 @@ interface TextareaProps {
   onChangeText: (text: string) => void;
   placeholder: string;
   disabled: boolean;
+  maxLength?: number;
 }
 
 export const Textarea = forwardRef<TextInput, TextareaProps>(

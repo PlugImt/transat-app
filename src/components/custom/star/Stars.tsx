@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { type GestureResponderEvent, PanResponder, View } from "react-native";
 import { SingleStar } from "@/components/custom/star/SingleStar";
 import { cn } from "@/utils";
 
@@ -37,9 +37,38 @@ export const Stars = ({
     }
   };
 
+  const panResponder =
+    onRatingChange && !disabled
+      ? PanResponder.create({
+          onStartShouldSetPanResponder: () => true,
+          onMoveShouldSetPanResponder: () => true,
+          onPanResponderGrant: (evt: GestureResponderEvent) => {
+            const rating = computeRatingFromTouch(evt.nativeEvent.locationX);
+            onRatingChange?.(rating);
+          },
+          onPanResponderMove: (evt: GestureResponderEvent) => {
+            const rating = computeRatingFromTouch(evt.nativeEvent.locationX);
+            onRatingChange?.(rating);
+          },
+        })
+      : undefined;
+
+  const computeRatingFromTouch = (x: number) => {
+    const starTotalWidth = starSize + 4; // size + approximate gap
+    const rating = Math.min(
+      max,
+      Math.max(1, Math.floor(x / starTotalWidth) + 1),
+    );
+    return rating;
+  };
+
   if (onRatingChange) {
     return (
-      <View className={cn("flex-row items-center gap-1", className)}>
+      <View
+        className={cn("flex-row items-center gap-1", className)}
+        // @ts-expect-error PanHandlers type mismatch is acceptable for RN
+        {...(panResponder ? panResponder.panHandlers : {})}
+      >
         {Array.from({ length: max }).map((_, index) => {
           return (
             <SingleStar

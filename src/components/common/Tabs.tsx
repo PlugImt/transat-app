@@ -1,3 +1,4 @@
+import type React from "react";
 import { createContext, useContext, useState } from "react";
 import { TouchableOpacity, View } from "react-native";
 import { Text } from "@/components/common/Text";

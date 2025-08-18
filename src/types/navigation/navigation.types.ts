@@ -28,6 +28,15 @@ export type BottomTabParamList = {
   EditEvent: { id: number };
   Traq: undefined;
   Olimtpe: undefined;
+  Reservation: undefined;
+  MyReservations: undefined;
+  ReservationCategory: {
+    id: number;
+    type: string;
+    title: string;
+    level?: number;
+  };
+  ReservationCalendar: { id: number; title: string };
 
   // Account screens
   Account: undefined;

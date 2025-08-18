@@ -51,6 +51,8 @@
     "customizeHint": "Ative/desative serviços ou arraste-os para reorganizar",
     "noWidgetsEnabled": "Nenhum widget habilitado",
     "noWidgetsEnabledDescription": "Você pode personalizar widgets ativando-os ou desativando-os",
+    "loading": "Carregando",
+    "today": "Hoje",
     "errors": {
       "occurred": "Ocorreu um erro",
       "unableToFetch": "Não foi possível buscar os dados"
@@ -309,6 +311,14 @@
       "vegetarian": "Vegetariano",
       "sideDishes": "Acompanhamentos",
       "closed": "Fechado",
+      "noLunch": {
+        "title": "Sem almoço hoje",
+        "description": "Ainda não temos o cardápio. Ative as notificações para ser informado quando o cardápio estiver disponível"
+      },
+      "noDinner": {
+        "title": "Sem jantar hoje à noite",
+        "description": "O restaurante deve estar fechado. Ative as notificações para ser informado quando reabrir"
+      },
       "closedWeekends": {
         "title": "O restaurante está fechado nos fins de semana",
         "description": "Volte na segunda-feira para descobrir o cardápio do dia"
@@ -429,6 +439,41 @@
         "emptyDescription": "Tente com outra palavra-chave",
         "notFound": "Este clube não existe",
         "notFoundDescription": "Atualize ou mude de clube"
+      }
+    },
+    "reservation": {
+      "title": "Reservas",
+      "description": "Reservar equipamentos e atividades",
+      "reserve": "Reservar",
+      "returnItem": "Devolver",
+      "reservedBy": "Reservado por",
+      "reserveConfirmDesc": "Ao reservar, você se compromete a devolver o equipamento no mesmo estado em que o encontrou",
+      "returnConfirmDesc": "Você confirma que quer devolver este equipamento?",
+      "confirmReserve": "Sim, eu me comprometo",
+      "confirmReturn": "Sim, eu devolvo",
+      "reserveSuccess": "Reserva confirmada",
+      "returnSuccess": "Equipamento devolvido com sucesso",
+      "myReservations": "Minhas reservas",
+      "current": "Atuais",
+      "past": "Passadas",
+      "cancelReservation": "Cancelar reserva",
+      "cancelConfirmDesc": "Você confirma que quer cancelar esta reserva?",
+      "confirmCancel": "Sim, cancelar",
+      "cancelSuccess": "Reserva cancelada",
+      "personal": {
+        "title": "Minhas reservas",
+        "emptyUpcoming": "Nenhuma reserva futura",
+        "emptyUpcomingDescription": "Reserve uma sala ou equipamento para ver suas reservas futuras",
+        "emptyPast": "Nenhuma reserva passada",
+        "emptyPastDescription": "Você não tem reservas passadas"
+      },
+      "errors": {
+        "empty": "Nenhuma reserva disponível",
+        "emptyDescription": "Nenhum equipamento ou atividade está disponível no momento",
+        "reserveError": "Erro durante a reserva",
+        "returnError": "Erro durante a devolução",
+        "cancelError": "Não foi possível cancelar a reserva",
+        "startDateRequired": "A data de início é obrigatória"
       }
     },
     "events": {

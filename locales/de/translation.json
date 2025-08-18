@@ -51,6 +51,8 @@
     "customizeHint": "Dienste aktivieren/deaktivieren oder ziehen Sie sie, um sie neu zu organisieren",
     "noWidgetsEnabled": "Keine Widgets aktiviert",
     "noWidgetsEnabledDescription": "Sie können Widgets anpassen, indem Sie sie aktivieren oder deaktivieren",
+    "loading": "Wird geladen",
+    "today": "Heute",
     "errors": {
       "occurred": "Ein Fehler ist aufgetreten",
       "unableToFetch": "Daten konnten nicht abgerufen werden"
@@ -309,6 +311,14 @@
       "vegetarian": "Vegetarisch",
       "sideDishes": "Beilagen",
       "closed": "Geschlossen",
+      "noLunch": {
+        "title": "Heute kein Mittagessen",
+        "description": "Wir haben das Menü (noch) nicht. Aktiviere die Benachrichtigungen, um informiert zu werden, wenn das Menü verfügbar ist."
+      },
+      "noDinner": {
+        "title": "Heute kein Abendessen",
+        "description": "Das Restaurant ist vermutlich geschlossen. Aktiviere die Benachrichtigungen, um über die Wiedereröffnung informiert zu werden."
+      },
       "closedWeekends": {
         "title": "Das Restaurant ist am Wochenende geschlossen",
         "description": "Kommen Sie am Montag zurück, um das Tagesmenü zu entdecken"
@@ -429,6 +439,41 @@
         "emptyDescription": "Versuchen Sie es mit einem anderen Schlüsselwort",
         "notFound": "Dieser Club existiert nicht",
         "notFoundDescription": "Aktualisieren Sie oder wechseln Sie den Club"
+      }
+    },
+    "reservation": {
+      "title": "Reservierungen",
+      "description": "Ausrüstung und Aktivitäten reservieren",
+      "reserve": "Reservieren",
+      "returnItem": "Zurückgeben",
+      "reservedBy": "Reserviert von",
+      "reserveConfirmDesc": "Mit der Reservierung verpflichten Sie sich, die Ausrüstung in demselben Zustand zurückzugeben, in dem Sie sie vorgefunden haben",
+      "returnConfirmDesc": "Bestätigen Sie, dass Sie diese Ausrüstung zurückgeben möchten?",
+      "confirmReserve": "Ja, ich verpflichte mich",
+      "confirmReturn": "Ja, ich gebe zurück",
+      "reserveSuccess": "Reservierung bestätigt",
+      "returnSuccess": "Ausrüstung erfolgreich zurückgegeben",
+      "myReservations": "Meine Reservierungen",
+      "current": "Aktuell",
+      "past": "Vergangen",
+      "cancelReservation": "Reservierung stornieren",
+      "cancelConfirmDesc": "Sind Sie sicher, dass Sie diese Reservierung stornieren möchten?",
+      "confirmCancel": "Ja, stornieren",
+      "cancelSuccess": "Reservierung storniert",
+      "personal": {
+        "title": "Meine Reservierungen",
+        "emptyUpcoming": "Keine bevorstehenden Reservierungen",
+        "emptyUpcomingDescription": "Reservieren Sie einen Raum oder Ausrüstung, um Ihre bevorstehenden Reservierungen zu sehen",
+        "emptyPast": "Keine vergangenen Reservierungen",
+        "emptyPastDescription": "Sie haben keine vergangenen Reservierungen"
+      },
+      "errors": {
+        "empty": "Keine Reservierungen verfügbar",
+        "emptyDescription": "Zur Zeit sind keine Ausrüstung oder Aktivitäten verfügbar",
+        "reserveError": "Fehler bei der Reservierung",
+        "returnError": "Fehler bei der Rückgabe",
+        "cancelError": "Reservierung kann nicht storniert werden",
+        "startDateRequired": "Startdatum ist erforderlich"
       }
     },
     "events": {

@@ -1,3 +1,4 @@
+import type React from "react";
 import { TouchableOpacity } from "react-native";
 import { useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";

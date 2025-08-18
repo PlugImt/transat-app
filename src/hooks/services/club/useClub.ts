@@ -41,7 +41,6 @@ export const useFilteredClubs = (searchValue: string) => {
       if (
         "location" in club &&
         club.location &&
-        typeof club.location === "string" &&
         club.location.toLowerCase().includes(searchLower)
       ) {
         return true;

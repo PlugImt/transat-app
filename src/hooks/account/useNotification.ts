@@ -35,10 +35,7 @@ const useNotification = () => {
           };
 
           for (const notif of enabledNotifications) {
-            if (
-              typeof notif === "string" &&
-              NotificationTypeValues.includes(notif as NotificationType)
-            ) {
+            if (NotificationTypeValues.includes(notif as NotificationType)) {
               updatedNotifications[notif as NotificationType] = true;
             }
           }

@@ -286,7 +286,7 @@
     "weather": "Wetter",
     "traq": {
       "title": "Traq",
-      "description": "Alle im Bar angebotenen Getränke",
+      "description": "Alle an der Bar angebotenen Getränke",
       "about": "Der Traquenard (oder Traq' für Insider) ist die vom BDE verwaltete Bar",
       "location": "Im Inneren der MDE",
       "openingHours": "Geöffnet während aller Partys und organisierten Veranstaltungen 🥳 \n\nWenn Sie durstig sind und Traq' geschlossen ist, können Sie ein BDE-Mitglied bitten, über WhatsApp zu Ihnen zu kommen 😋",
@@ -436,13 +436,17 @@
       "description": "Keine Events verpassen",
       "upcoming": "Bevorstehend",
       "past": "Vergangen",
-      "organizer": "Verantwortlich",
+      "organizer": "Veranstalter",
       "createdBy": "Erstellt von",
       "peopleInterested": "Interessierte",
+      "interested_one": "Eine Person ist an diesem Event interessiert",
+      "interested_other": "{{count}} Personen sind an diesem Event interessiert",
       "interested": "{{count}} Personen sind an diesem Event interessiert",
       "add": {
         "title": "Neues Event",
-        "picture": "Bild",
+        "image": {
+          "title": "Bild"
+        },
         "name": {
           "title": "Name",
           "placeholder": "Tonus",

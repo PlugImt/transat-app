@@ -439,6 +439,8 @@
       "organizer": "Organizer",
       "createdBy": "Created by",
       "peopleInterested": "People interested",
+      "interested_one": "One person is interested in this event",
+      "interested_other": "{{count}} people are interested in this event",
       "interested": "{{count}} people are interested in this event",
       "add": {
         "title": "New event",

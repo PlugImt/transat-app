@@ -320,7 +320,7 @@
       "location": "À côté du gymnase",
       "about": "API prépare des plats frais et faits maison quotidiennement — même la salade de fruits ! Le menu change tous les jours pour le déjeuner et le dîner ",
       "price": "3,30€ (midi) et 4,60€ (soir) pour une entrée, un plat principal et un dessert.",
-      "additionalInfo": "🍰 Il est possible de prendre 1 entrée et 1 dessert, ou 2 entrées ou 2 desserts\n\n💸 Vous pouvez prendre un side supplémentaire mais cela vous coûtera plus cher\n\n😋 Vous pouvez prendre du rab le soir à la fin de service",
+      "additionalInfo": "🍰 Il est possible de prendre 1 entrée et 1 dessert, ou 2 entrées ou 2 desserts\n\n💸 Vous pouvez prendre un accompagnement supplémentaire mais cela vous coûtera plus cher\n\n😋 Vous pouvez prendre du rab le soir à la fin de service",
       "closedUpdated": {
         "title": "Nous n'avons pas encore le menu",
         "description": "Revenez plus tard pour découvrir le menu du jour"
@@ -423,7 +423,7 @@
       "book": "Réserver",
       "selectClub": "Sélectionner un club",
       "interested": "{{count}} personnes sont intéressées par ce club",
-      "responsible": "Respo",
+      "responsible": "Responsable",
       "errors": {
         "empty": "Aucun club trouvé",
         "emptyDescription": "Essayez avec un autre mot-clé",
@@ -432,14 +432,15 @@
       }
     },
     "events": {
-      "title": "Evénements",
+      "title": "Événements",
       "description": "Ne rate plus aucun événement de la MDE",
       "upcoming": "Prochainement",
       "past": "Passé",
       "organizer": "Organisateur",
       "createdBy": "Créé par",
       "peopleInterested": "Personnes intéressées",
-      "interested": "{{count}} personnes sont intéressées par cet événement",
+      "interested_one": "Une seule personne est intéressée par cet événement",
+      "interested_other": "{{count}} personnes sont intéressées par cet événement",
       "add": {
         "title": "Nouvel événement",
         "image": {
@@ -515,8 +516,8 @@
   },
   "user": {
     "contact": "Contacter",
-    "interested": "Intéressé",
-    "notInterested": "Plus intéressé",
+    "interested": "Intéressé.e",
+    "notInterested": "Plus intéressé.e",
     "errors": {
       "contact": "Erreur lors de l'ouverture de l'application SMS"
     }

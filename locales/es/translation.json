@@ -103,7 +103,7 @@
   "auth": {
     "signIn": {
       "title": "Iniciar sesión",
-      "description": "¡Bienvenido de nuevo a Transat 🥳",
+      "description": "¡Bienvenido de nuevo a Transat! 🥳",
       "pending": "Iniciando sesión..."
     },
     "signUp": {
@@ -128,7 +128,7 @@
     "resendCode": "Reenviar código",
     "signupSuccess": "Registro exitoso",
     "signingUp": "Registrándose...",
-    "disconnected": "¡Hasta pronto 👋",
+    "disconnected": "¡Hasta pronto! 👋",
     "requestNewCode": "Solicitar nuevo código",
     "errors": {
       "email": "Dirección de correo electrónico inválida",
@@ -164,7 +164,7 @@
     }
   },
   "welcome": {
-    "subtitle": "Lo esencial del campus todo en un lugar"
+    "subtitle": "Lo esencial del campus, todo en un solo lugar"
   },
   "account": {
     "graduationYear": "Año de graduación",
@@ -423,7 +423,7 @@
       "book": "Reservar",
       "selectClub": "Seleccionar club",
       "interested": "{{count}} personas están interesadas en este club",
-      "responsible": "Responsible",
+      "responsible": "Responsable",
       "errors": {
         "empty": "No se encontró ningún club",
         "emptyDescription": "Intenta con otra palabra clave",
@@ -439,6 +439,8 @@
       "organizer": "Organizador",
       "createdBy": "Creado por",
       "peopleInterested": "Personas interesadas",
+      "interested_one": "Una sola persona está interesada en este evento",
+      "interested_other": "{{count}} personas están interesadas en este evento",
       "interested": "{{count}} personas están interesadas en este evento",
       "add": {
         "title": "Nuevo evento",
@@ -485,6 +487,20 @@
         "submit": "Añadir",
         "success": "Evento añadido con éxito",
         "error": "Error al añadir el evento"
+      },
+      "edit": {
+        "title": "Editar evento",
+        "submit": "Editar",
+        "success": "Evento actualizado con éxito",
+        "error": "Error al actualizar el evento"
+      },
+      "delete": {
+        "title": "Eliminar evento",
+        "description": "¿Estás seguro de que deseas eliminar este evento? Esta acción es irreversible.",
+        "confirm": "Eliminar",
+        "cancel": "Cancelar",
+        "success": "Evento eliminado con éxito",
+        "error": "Error al eliminar el evento"
       },
       "errors": {
         "emptyUpcoming": "No hay eventos próximos",

@@ -31,7 +31,7 @@
     "knowMore": "Saber mais sobre Transat",
     "underConstruction": "Em construção 🏗️",
     "underConstructionDesc": "Novas funcionalidades em breve ;)",
-    "campusApp": "Por os atlantes, para os atlantes 🐙",
+    "campusApp": "Pelos atlantes, para os atlantes 🐙",
     "plugImtNote": "NOTA: Plug'IMT é uma associação criada por estudantes do IMT mas não é afiliada à escola",
     "credits": "Créditos",
     "appearance": "Aparência",
@@ -320,7 +320,7 @@
       "location": "Ao lado do ginásio",
       "about": "API prepara pratos frescos e caseiros diariamente — até mesmo a salada de frutas! O cardápio muda todos os dias para o almoço e jantar",
       "price": "3,30€ (almoço) e 4,60€ (jantar) para entrada, prato principal e sobremesa.",
-      "additionalInfo": "🍰 Você pode pegar 1 entrada e 1 sobremesa, ou 2 entradas ou 2 sobremesas\n\n💸 Você pode pegar um acompanhamento extra mas isso custará mais\n\n😋 Você pode pegar repetição à noite no final do serviço",
+      "additionalInfo": "🍰 Você pode pegar 1 entrada e 1 sobremesa, ou 2 entradas ou 2 sobremesas\n\n💸 Você pode pegar um acompanhamento extra, mas isso custará mais\n\n😋 Você pode repetir à noite ao final do serviço",
       "closedUpdated": {
         "title": "Ainda não temos o cardápio",
         "description": "Volte mais tarde para descobrir o cardápio do dia"
@@ -419,13 +419,13 @@
     },
     "clubs": {
       "title": "Clubes",
-      "description": "Descubra todos os clubs e associações da IMT",
+      "description": "Descubra todos os clubes e associações da IMT",
       "book": "Reservar",
       "selectClub": "Selecionar clube",
       "interested": "{{count}} pessoas estão interessadas neste clube",
       "responsible": "Responsável",
       "errors": {
-        "empty": "Nenhum club encontrado",
+        "empty": "Nenhum clube encontrado",
         "emptyDescription": "Tente com outra palavra-chave",
         "notFound": "Este clube não existe",
         "notFoundDescription": "Atualize ou mude de clube"
@@ -439,6 +439,8 @@
       "organizer": "Organizador",
       "createdBy": "Criado por",
       "peopleInterested": "Pessoas interessadas",
+      "interested_one": "Apenas uma pessoa está interessada neste evento",
+      "interested_other": "{{count}} pessoas estão interessadas neste evento",
       "interested": "{{count}} pessoas estão interessadas neste evento",
       "add": {
         "title": "Novo evento",
@@ -485,6 +487,20 @@
         "submit": "Adicionar",
         "success": "Evento adicionado com sucesso",
         "error": "Erro ao adicionar evento"
+      },
+      "edit": {
+        "title": "Editar evento",
+        "submit": "Editar",
+        "success": "Evento atualizado com sucesso",
+        "error": "Erro ao atualizar o evento"
+      },
+      "delete": {
+        "title": "Excluir evento",
+        "description": "Tem certeza de que deseja excluir este evento? Esta ação é irreversível.",
+        "confirm": "Excluir",
+        "cancel": "Cancelar",
+        "success": "Evento excluído com sucesso",
+        "error": "Erro ao excluir o evento"
       },
       "errors": {
         "emptyUpcoming": "Nenhum evento próximo",

@@ -439,6 +439,8 @@
       "organizer": "组织者",
       "createdBy": "创建者",
       "peopleInterested": "感兴趣的人",
+      "interested_one": "只有一人对此活动感兴趣",
+      "interested_other": "{{count}} 人对此活动感兴趣",
       "interested": "{{count}} 人对此活动感兴趣",
       "add": {
         "title": "新活动",
@@ -485,6 +487,20 @@
         "submit": "添加",
         "success": "活动添加成功",
         "error": "活动添加失败"
+      },
+      "edit": {
+        "title": "编辑活动",
+        "submit": "编辑",
+        "success": "活动更新成功",
+        "error": "更新活动时出错"
+      },
+      "delete": {
+        "title": "删除活动",
+        "description": "您确定要删除此活动吗？此操作不可逆。",
+        "confirm": "删除",
+        "cancel": "取消",
+        "success": "活动删除成功",
+        "error": "删除活动时出错"
       },
       "errors": {
         "emptyUpcoming": "没有即将到来的活动",

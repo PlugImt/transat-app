@@ -40,12 +40,7 @@ export const EventCard = ({ event }: EventCardProps) => {
       }}
     >
       <View className="flex-1 flex-row items-center gap-4">
-        <View
-          className="overflow-hidden rounded-md"
-          style={{ width: 100, height: 100 }}
-        >
-          <Image source={event.picture} fill resizeMode="cover" />
-        </View>
+        <Image source={event.picture} size={100} />
         <View className="gap-2 flex-1">
           <View>
             <Text variant="h3">{event.name}</Text>

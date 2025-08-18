@@ -429,21 +429,29 @@
       "returnConfirmDesc": "Bestätigen Sie, dass Sie diese Ausrüstung zurückgeben möchten?",
       "confirmReserve": "Ja, ich verpflichte mich",
       "confirmReturn": "Ja, ich gebe zurück",
-      "reserveSuccess": "Reservierung bestätigt!",
-      "returnSuccess": "Ausrüstung erfolgreich zurückgegeben!",
+      "reserveSuccess": "Reservierung bestätigt",
+      "returnSuccess": "Ausrüstung erfolgreich zurückgegeben",
       "myReservations": "Meine Reservierungen",
       "current": "Aktuell",
       "past": "Vergangen",
       "cancelReservation": "Reservierung stornieren",
       "cancelConfirmDesc": "Sind Sie sicher, dass Sie diese Reservierung stornieren möchten?",
       "confirmCancel": "Ja, stornieren",
-      "cancelSuccess": "Reservierung storniert!",
+      "cancelSuccess": "Reservierung storniert",
+      "personal": {
+        "title": "Meine Reservierungen",
+        "emptyUpcoming": "Keine bevorstehenden Reservierungen",
+        "emptyUpcomingDescription": "Reservieren Sie einen Raum oder Ausrüstung, um Ihre bevorstehenden Reservierungen zu sehen",
+        "emptyPast": "Keine vergangenen Reservierungen",
+        "emptyPastDescription": "Sie haben keine vergangenen Reservierungen"
+      },
       "errors": {
         "empty": "Keine Reservierungen verfügbar",
         "emptyDescription": "Zur Zeit sind keine Ausrüstung oder Aktivitäten verfügbar",
         "reserveError": "Fehler bei der Reservierung",
         "returnError": "Fehler bei der Rückgabe",
-        "cancelError": "Reservierung kann nicht storniert werden"
+        "cancelError": "Reservierung kann nicht storniert werden",
+        "startDateRequired": "Startdatum ist erforderlich"
       }
     }
   },

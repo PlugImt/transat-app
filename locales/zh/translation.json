@@ -429,8 +429,8 @@
       "returnConfirmDesc": "您确认要归还此设备吗？",
       "confirmReserve": "是的，我承诺",
       "confirmReturn": "是的，我归还",
-      "reserveSuccess": "预订确认！",
-      "returnSuccess": "设备归还成功！",
+      "reserveSuccess": "预订确认",
+      "returnSuccess": "设备归还成功",
       "myReservations": "我的预订",
       "current": "当前",
       "past": "已结束",
@@ -438,12 +438,20 @@
       "cancelConfirmDesc": "您确定要取消此预订吗？",
       "confirmCancel": "是的，取消",
       "cancelSuccess": "预订已取消！",
+      "personal": {
+        "title": "我的预订",
+        "emptyUpcoming": "没有即将到来的预订",
+        "emptyUpcomingDescription": "预订房间或设备以查看您即将到来的预订",
+        "emptyPast": "没有过去的预订",
+        "emptyPastDescription": "您没有过去的预订"
+      },
       "errors": {
         "empty": "没有可用的预订",
         "emptyDescription": "目前没有设备或活动可用",
         "reserveError": "预订过程中出错",
         "returnError": "归还过程中出错",
-        "cancelError": "无法取消预订"
+        "cancelError": "无法取消预订",
+        "startDateRequired": "开始日期为必填项"
       }
     }
   },

@@ -1,5 +1,5 @@
-export { ReservationCard } from "./ReservationCard";
-export { ReservationGroup } from "./ReservationGroup";
+export { PersonalReservationCard } from "./PersonalReservationCard";
+export { PersonalReservationGroup } from "./PersonalReservationGroup";
 export {
   ReservationList,
   ReservationListOnly,

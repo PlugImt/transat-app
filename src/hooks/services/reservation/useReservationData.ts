@@ -1,5 +1,8 @@
 import { useMemo } from "react";
-import type { GetReservation, MyReservationItem } from "@/dto/reservation";
+import type {
+  GetReservation,
+  PersonalReservationItem,
+} from "@/dto/reservation";
 import {
   type GroupedReservations,
   groupReservationsByDate,
@@ -29,7 +32,7 @@ export const useReservationDisplayData = (
 };
 
 export const useMyReservationData = (
-  items: MyReservationItem[],
+  items: PersonalReservationItem[],
   type: "current" | "past",
 ) => {
   return useMemo(() => {
@@ -60,7 +63,7 @@ export const useMyReservationData = (
   }, [items, type]);
 };
 
-export const useGroupedReservations = <T extends MyReservationItem>(
+export const useGroupedReservations = <T extends PersonalReservationItem>(
   items: T[],
   sortDirection: "asc" | "desc" = "asc",
 ): {

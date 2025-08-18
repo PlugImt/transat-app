@@ -1,37 +1,31 @@
 import { View } from "react-native";
 import { Text } from "@/components/common/Text";
-import type { MyReservationItem } from "@/dto/reservation";
+import type { PersonalReservationItem } from "@/dto/reservation";
 import {
   generateReservationKey,
   getReservationAction,
 } from "@/utils/reservation.utils";
-import { ReservationCard } from "./ReservationCard";
+import { PersonalReservationCard } from "./PersonalReservationCard";
 
-interface ReservationGroupProps {
+interface PersonalReservationGroupProps {
   title?: string;
-  items: MyReservationItem[];
-  showActions?: boolean;
-  showFullDate?: boolean;
-  variant?: "default" | "compact";
+  items: PersonalReservationItem[];
   emptyMessage?: string;
 }
 
-export const ReservationGroup = ({
+export const PersonalReservationGroup = ({
   title,
   items,
-  showActions = true,
-  showFullDate = false,
-  variant = "default",
   emptyMessage,
-}: ReservationGroupProps) => {
+}: PersonalReservationGroupProps) => {
   if (!items.length && !emptyMessage) {
     return null;
   }
 
   return (
-    <View className="gap-3">
+    <View className="gap-2">
       {title && (
-        <Text variant="h3" className="text-lg font-semibold">
+        <Text variant="lg" className="font-semibold">
           {title}
         </Text>
       )}
@@ -39,13 +33,10 @@ export const ReservationGroup = ({
       {items.length > 0 ? (
         <View className="gap-2">
           {items.map((item) => (
-            <ReservationCard
+            <PersonalReservationCard
               key={generateReservationKey(item)}
+              action={getReservationAction(item)}
               item={item}
-              action={showActions ? getReservationAction(item) : undefined}
-              showFullDate={showFullDate}
-              showActions={showActions}
-              variant={variant}
             />
           ))}
         </View>

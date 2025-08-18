@@ -429,21 +429,29 @@
       "returnConfirmDesc": "¿Confirmas que quieres devolver este equipo?",
       "confirmReserve": "Sí, me comprometo",
       "confirmReturn": "Sí, devuelvo",
-      "reserveSuccess": "¡Reserva confirmada!",
-      "returnSuccess": "¡Equipo devuelto con éxito!",
+      "reserveSuccess": "Reserva confirmada",
+      "returnSuccess": "Equipo devuelto con éxito",
       "myReservations": "Mis reservas",
       "current": "Actuales",
       "past": "Pasadas",
       "cancelReservation": "Cancelar reserva",
       "cancelConfirmDesc": "¿Confirmas que quieres cancelar esta reserva?",
       "confirmCancel": "Sí, cancelar",
-      "cancelSuccess": "¡Reserva cancelada!",
+      "cancelSuccess": "Reserva cancelada",
+      "personal": {
+        "title": "Mis reservas",
+        "emptyUpcoming": "No hay reservas próximas",
+        "emptyUpcomingDescription": "Reserva una sala o equipo para ver tus próximas reservas",
+        "emptyPast": "No hay reservas pasadas",
+        "emptyPastDescription": "No tienes reservas pasadas"
+      },
       "errors": {
         "empty": "No hay reservas disponibles",
         "emptyDescription": "No hay equipos o actividades disponibles en este momento",
         "reserveError": "Error durante la reserva",
         "returnError": "Error durante la devolución",
-        "cancelError": "No se pudo cancelar la reserva"
+        "cancelError": "No se pudo cancelar la reserva",
+        "startDateRequired": "La fecha de inicio es obligatoria"
       }
     }
   },

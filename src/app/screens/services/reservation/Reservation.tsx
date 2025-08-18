@@ -51,7 +51,7 @@ export const Reservation = () => {
         onChange={setQuery}
       />
       <Button
-        label={t("services.reservation.myReservations")}
+        label={t("services.reservation.personal.title")}
         variant="secondary"
         // @ts-ignore
         onPress={() => navigation.navigate("MyReservations")}

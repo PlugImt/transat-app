@@ -1,5 +1,5 @@
+import { useIsFetching, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
-import { View } from "react-native";
 import {
   Tabs,
   TabsContent,
@@ -7,45 +7,37 @@ import {
   TabsTrigger,
 } from "@/components/common/Tabs";
 import { Page } from "@/components/page/Page";
-import { ReservationGroup } from "@/components/reservation";
-import { useMyReservations } from "@/hooks/services/reservation/useReservation";
-import {
-  useGroupedReservations,
-  useMyReservationData,
-} from "@/hooks/services/reservation/useReservationData";
+import { QUERY_KEYS } from "@/constants";
+import { PastPersonalReservations } from "./components/PastPersonalReservations";
+import { UpcomingPersonalReservations } from "./components/UpcomingPersonalReservations";
 
 export const MyReservations = () => {
   const { t } = useTranslation();
+  const queryClient = useQueryClient();
 
-  const {
-    data: currentData,
-    isPending: currentPending,
-    refetch: currentRefetch,
-  } = useMyReservations("current");
+  const currentFetching = useIsFetching({
+    queryKey: QUERY_KEYS.reservation.my("current"),
+  });
+  const pastFetching = useIsFetching({
+    queryKey: QUERY_KEYS.reservation.my("past"),
+  });
 
-  const {
-    data: pastData,
-    isPending: pastPending,
-    refetch: pastRefetch,
-  } = useMyReservations("past");
+  const isPending = currentFetching + pastFetching > 0;
 
-  const currentReservations = useMyReservationData(
-    currentData?.current ?? [],
-    "current",
-  );
-  const { grouped: groupedPastAll, orderedDays: orderedPastAllDays } =
-    useGroupedReservations(pastData?.past ?? [], "desc");
-
-  const isPending = currentPending || pastPending;
-
-  const refetch = () => {
-    currentRefetch();
-    pastRefetch();
+  const refetch = async () => {
+    await Promise.all([
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.reservation.my("current"),
+      }),
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.reservation.my("past"),
+      }),
+    ]);
   };
 
   return (
     <Page
-      title={t("services.reservation.myReservations")}
+      title={t("services.reservation.personal.title")}
       onRefresh={refetch}
       refreshing={isPending}
     >
@@ -59,38 +51,11 @@ export const MyReservations = () => {
         </TabsList>
 
         <TabsContent value="current">
-          <View className="gap-4 flex-1">
-            {currentReservations.nonSlotItems.length > 0 && (
-              <ReservationGroup
-                title={t("services.reservation.current")}
-                items={currentReservations.nonSlotItems}
-                showActions
-              />
-            )}
-
-            {currentReservations.orderedDays.map((day) => (
-              <ReservationGroup
-                key={day}
-                title={day}
-                items={currentReservations.groupedSlotItems[day]}
-                showActions
-              />
-            ))}
-          </View>
+          <UpcomingPersonalReservations />
         </TabsContent>
 
         <TabsContent value="past">
-          <View className="gap-4 flex-1">
-            {orderedPastAllDays.map((day) => (
-              <ReservationGroup
-                key={day}
-                title={day}
-                items={groupedPastAll[day]}
-                showActions={false}
-                showFullDate
-              />
-            ))}
-          </View>
+          <PastPersonalReservations />
         </TabsContent>
       </Tabs>
     </Page>

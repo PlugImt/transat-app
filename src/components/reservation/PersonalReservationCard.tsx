@@ -6,45 +6,27 @@ import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
 import { ReservationDialog } from "@/components/custom/ReservationDialog";
 import { useTheme } from "@/contexts/ThemeContext";
-import type { MyReservationItem } from "@/dto/reservation";
+import type { PersonalReservationItem } from "@/dto/reservation";
 import {
-  formatDateTimeRange,
   formatTimeRange,
   generateReservationKey,
 } from "@/utils/reservation.utils";
 
-// Component prop types
-interface ReservationCardBaseProps {
-  id: number;
-  name: string;
-  variant?: "default" | "compact";
-  showActions?: boolean;
-}
-
-export interface MyReservationCardProps extends ReservationCardBaseProps {
-  item: MyReservationItem;
+export interface PersonalReservationCardProps {
+  item: PersonalReservationItem;
   action?: "cancel" | "return";
-  showFullDate?: boolean;
 }
 
-export const ReservationCard = ({
+export const PersonalReservationCard = ({
   item,
   action,
-  showFullDate = false,
-  variant = "default",
-  showActions = true,
-}: MyReservationCardProps) => {
+}: PersonalReservationCardProps) => {
   const { theme } = useTheme();
   const { t } = useTranslation();
 
-  const startDate = new Date(item.start_date);
   const endDate = item.end_date ? new Date(item.end_date) : null;
 
   const getTimeDisplay = () => {
-    if (showFullDate && endDate) {
-      return formatDateTimeRange(startDate, endDate);
-    }
-
     if (endDate) {
       return formatTimeRange(item.start_date, String(item.end_date));
     }
@@ -52,51 +34,42 @@ export const ReservationCard = ({
     return formatTimeRange(item.start_date, item.start_date);
   };
 
-  const isCompact = variant === "compact";
+  const isUpcoming = new Date(item.start_date) > new Date();
 
   return (
     <Card
-      className={`flex-row items-center gap-4 ${isCompact ? "py-3" : ""}`}
+      className="flex-row items-center gap-4"
       key={generateReservationKey(item)}
     >
-      <View className="flex-1">
-        <Text
-          variant={isCompact ? "default" : "h3"}
-          numberOfLines={1}
-          className={isCompact ? "font-semibold" : ""}
-        >
+      <View className="flex-1 gap-1">
+        <Text variant="h3" numberOfLines={1} className="font-semibold">
           {item.name}
         </Text>
 
-        <View className="flex-row items-center gap-2 mt-1">
-          <CalendarClock size={isCompact ? 14 : 16} color={theme.muted} />
+        <View className="flex-row items-center gap-1">
+          <CalendarClock size={14} color={theme.muted} />
           <Text variant="sm" color="muted" numberOfLines={1}>
             {getTimeDisplay()}
           </Text>
         </View>
       </View>
 
-      {showActions && action === "cancel" && (
+      {isUpcoming && action === "cancel" && (
         <ReservationDialog
           itemId={item.id}
           itemTitle={item.name}
           isActionCancel
           startDate={item.start_date}
         >
-          <Button
-            label={t("common.cancel")}
-            variant="secondary"
-            size={isCompact ? "sm" : "default"}
-          />
+          <Button label={t("common.cancel")} variant="secondary" />
         </ReservationDialog>
       )}
 
-      {showActions && action === "return" && (
+      {isUpcoming && action === "return" && (
         <ReservationDialog itemId={item.id} itemTitle={item.name} isReturning>
           <Button
             label={t("services.reservation.returnItem")}
             variant="secondary"
-            size={isCompact ? "sm" : "default"}
           />
         </ReservationDialog>
       )}

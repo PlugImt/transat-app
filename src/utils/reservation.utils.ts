@@ -1,5 +1,8 @@
 import type { User } from "@/dto";
-import type { GetReservation, MyReservationItem } from "@/dto/reservation";
+import type {
+  GetReservation,
+  PersonalReservationItem,
+} from "@/dto/reservation";
 import { formatDateTime } from "@/utils/date.utils";
 
 export interface ReservationDisplayItem {
@@ -10,7 +13,7 @@ export interface ReservationDisplayItem {
   user?: User;
 }
 
-export interface GroupedReservations<T = MyReservationItem> {
+export interface GroupedReservations<T = PersonalReservationItem> {
   [date: string]: T[];
 }
 
@@ -53,7 +56,7 @@ export const formatTimeRange = (startDate: string, endDate: string): string => {
 /**
  * Groups reservations by date.
  */
-export const groupReservationsByDate = <T extends MyReservationItem>(
+export const groupReservationsByDate = <T extends PersonalReservationItem>(
   items: T[],
 ): GroupedReservations<T> => {
   return items.reduce<GroupedReservations<T>>((acc, item) => {
@@ -66,7 +69,7 @@ export const groupReservationsByDate = <T extends MyReservationItem>(
 /**
  * Sorts items by start date.
  */
-export const sortByStartDate = <T extends MyReservationItem>(
+export const sortByStartDate = <T extends PersonalReservationItem>(
   items: T[],
   direction: "asc" | "desc" = "asc",
 ): T[] => {
@@ -80,7 +83,7 @@ export const sortByStartDate = <T extends MyReservationItem>(
 /**
  * Splits reservations into slot and non-slot items.
  */
-export const splitReservationsBySlot = <T extends MyReservationItem>(
+export const splitReservationsBySlot = <T extends PersonalReservationItem>(
   items: T[],
 ): { slotItems: T[]; nonSlotItems: T[] } => {
   return {
@@ -124,7 +127,7 @@ export const transformToDisplayItems = (
  * Generates a unique key for reservation items to avoid React key conflicts.
  */
 export const generateReservationKey = (
-  item: MyReservationItem,
+  item: PersonalReservationItem,
   prefix?: string,
 ): string => {
   const base = `${item.id}-${item.start_date}`;
@@ -134,7 +137,7 @@ export const generateReservationKey = (
 /**
  * Checks if a reservation item has an end date.
  */
-export const hasEndDate = (item: MyReservationItem): boolean => {
+export const hasEndDate = (item: PersonalReservationItem): boolean => {
   return item.end_date !== null && item.end_date !== undefined;
 };
 
@@ -142,7 +145,7 @@ export const hasEndDate = (item: MyReservationItem): boolean => {
  * Gets the appropriate action button type for a reservation.
  */
 export const getReservationAction = (
-  item: MyReservationItem,
+  item: PersonalReservationItem,
 ): "cancel" | "return" => {
   return item.slot ? "cancel" : "return";
 };

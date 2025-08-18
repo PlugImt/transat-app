@@ -1,22 +1,22 @@
 import { useTranslation } from "react-i18next";
 import CardGroup from "@/components/common/CardGroup";
 import { UserCard } from "@/components/custom/card/UserCard";
-import type { ClubDetails } from "@/dto/club";
+import type { User } from "@/dto";
 
 interface ClubResponsibleProps {
-  club: ClubDetails;
+  responsible?: User;
 }
 
-export const ClubResponsible = ({ club }: ClubResponsibleProps) => {
+export const ClubResponsible = ({ responsible }: ClubResponsibleProps) => {
   const { t } = useTranslation();
 
-  if (!club?.responsible) {
+  if (!responsible) {
     return null;
   }
 
   return (
     <CardGroup title={t("services.clubs.responsible")}>
-      <UserCard user={club.responsible} />
+      <UserCard user={responsible} />
     </CardGroup>
   );
 };

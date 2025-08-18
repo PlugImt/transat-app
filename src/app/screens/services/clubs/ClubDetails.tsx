@@ -80,7 +80,7 @@ const ClubDetails = () => {
       onRefresh={refetch}
     >
       <ClubDetailsHeader club={club} />
-      <ClubResponsible club={club} />
+      <ClubResponsible responsible={club.responsible} />
       <ClubReservationWidget clubId={club.id} />
       <ClubEventWidget clubId={club.id} />
     </Page>

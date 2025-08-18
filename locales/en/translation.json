@@ -4,6 +4,7 @@
     "home": "Home",
     "account": "Account",
     "edit": "Edit",
+    "delete": "Delete",
     "save": "Save",
     "confirm": "Confirm",
     "send": "Send",
@@ -77,6 +78,26 @@
       "months": "{{count}} months ago",
       "year": "{{count}} year ago",
       "years": "{{count}} years ago"
+    },
+    "dateFormats": {
+      "weekday": "{{date, weekday}}",
+      "time": "{{date, time}}",
+      "short": "{{date, short}}",
+      "long": "{{date, long}}",
+      "relative": "{{date, relative}}",
+      "ago": "{{date, ago}}",
+      "dateTime": "{{date, dateTime}}"
+    },
+    "homework": {
+      "deadline": "Deadline: {{date, dateTime}}",
+      "createdAt": "Created on {{date, short}}",
+      "updatedAt": "Updated on {{date, short}}",
+      "dueIn": "Due in {{date, ago}}",
+      "overdue": "Overdue by {{date, ago}}"
+    },
+    "imageSelector": {
+      "placeholder": "Tap to select an image",
+      "uploading": "Uploading..."
     }
   },
   "auth": {
@@ -400,6 +421,7 @@
       "title": "Clubs",
       "description": "Discover all clubs and associations at IMT",
       "book": "Book",
+      "selectClub": "Select a club",
       "interested": "{{count}} people are interested in this club",
       "responsible": "Responsible",
       "errors": {
@@ -407,6 +429,86 @@
         "emptyDescription": "Try with another keyword",
         "notFound": "This club doesn't exist",
         "notFoundDescription": "Refresh or change club"
+      }
+    },
+    "events": {
+      "title": "Events",
+      "description": "Don't miss any event at the MDE",
+      "upcoming": "Upcoming",
+      "past": "Past",
+      "organizer": "Organizer",
+      "createdBy": "Created by",
+      "peopleInterested": "People interested",
+      "interested_one": "One person is interested in this event",
+      "interested_other": "{{count}} people are interested in this event",
+      "interested": "{{count}} people are interested in this event",
+      "add": {
+        "title": "New event",
+        "image": {
+          "title": "Image"
+        },
+        "name": {
+          "title": "Name",
+          "placeholder": "Tonus",
+          "required": "Name is required",
+          "min": "Name must be at least 3 characters",
+          "max": "Name must not exceed 100 characters"
+        },
+        "description": {
+          "title": "Description",
+          "placeholder": "Super Tonus at the MDE, come in numbers from 9pm",
+          "max": "Description must not exceed 200 characters"
+        },
+        "startTime": "Start time",
+        "endTime": "End time",
+        "date": {
+          "title": "Date",
+          "placeholder": "Select a date",
+          "required": "Start date is required"
+        },
+        "location": {
+          "title": "Location",
+          "placeholder": "MDE",
+          "required": "Location is required",
+          "min": "Location must be at least 3 characters",
+          "max": "Location must not exceed 100 characters"
+        },
+        "link": {
+          "title": "Link",
+          "placeholder": "https://www.vibly.fr",
+          "invalid": "The link is not valid",
+          "max": "Link must not exceed 100 characters"
+        },
+        "organizer": {
+          "title": "Organizer",
+          "placeholder": "Select a club",
+          "required": "Organizing club is required"
+        },
+        "submit": "Add",
+        "success": "Event added successfully",
+        "error": "Error adding event"
+      },
+      "edit": {
+        "title": "Edit event",
+        "submit": "Edit",
+        "success": "Event updated successfully",
+        "error": "Error updating event"
+      },
+      "delete": {
+        "title": "Delete event",
+        "description": "Are you sure you want to delete this event? This action is irreversible.",
+        "confirm": "Delete",
+        "cancel": "Cancel",
+        "success": "Event deleted successfully",
+        "error": "Error deleting event"
+      },
+      "errors": {
+        "emptyUpcoming": "No upcoming events",
+        "emptyUpcomingDescription": "Add an event to display it here",
+        "emptyPast": "No past events yet",
+        "emptyPastDescription": "Enjoy the upcoming events",
+        "notFound": "This event has been deleted",
+        "notFoundDescription": "Try with another"
       }
     }
   },

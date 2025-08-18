@@ -142,7 +142,7 @@ const Input = forwardRef(
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   {...commonTextInputProps}
-                  onChangeText={onChange}
+                  onChangeText={(text) => onChange(text)}
                   onBlur={onBlur}
                   value={value}
                 />
@@ -151,7 +151,7 @@ const Input = forwardRef(
           ) : (
             <TextInput
               {...commonTextInputProps}
-              onChangeText={onChangeText}
+              onChangeText={(text) => onChangeText?.(text)}
               value={value ?? ""}
             />
           )}

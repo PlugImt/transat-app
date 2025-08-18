@@ -51,6 +51,7 @@ type DialogContentProps = {
   isPending?: boolean;
   disableConfirm?: boolean;
   scrollable?: boolean;
+  contentMaxHeight?: number;
 };
 
 const DialogContent = ({
@@ -64,6 +65,7 @@ const DialogContent = ({
   scrollable,
   title,
   isPending,
+  contentMaxHeight,
 }: DialogContentProps) => {
   const { open, setOpen } = useDialog();
 
@@ -119,7 +121,7 @@ const DialogContent = ({
 
               <ScrollViewWithIndicators
                 keyboardShouldPersistTaps="handled"
-                maxHeight={400}
+                maxHeight={contentMaxHeight ?? 400}
                 scrollable={scrollable}
               >
                 <TouchableWithoutFeedback className="pr-6">

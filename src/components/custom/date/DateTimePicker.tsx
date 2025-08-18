@@ -1,10 +1,10 @@
 import NativeDateTimePicker from "@react-native-community/datetimepicker";
-import { Calendar } from "lucide-react-native";
+import { Calendar, Clock } from "lucide-react-native";
 import type React from "react";
 import { useEffect, useMemo, useState } from "react";
 import { Controller, type UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { View } from "react-native";
+import { Platform, View } from "react-native";
 import CalendarPicker, { type DateType } from "react-native-ui-datepicker";
 import {
   Dialog,
@@ -51,7 +51,7 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
 }) => {
   const { theme, actualTheme } = useTheme();
   const { t, i18n } = useTranslation();
-  const { formatDate } = useDate();
+  const { formatDate, formatTime } = useDate();
   const calendarStyles = useDateTimePickerStyle();
 
   const initialStartDateTime = useMemo(() => {
@@ -86,6 +86,8 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
     useState<DateTimeState>(initialStartDateTime);
   const [endDateTime, setEndDateTime] =
     useState<DateTimeState>(initialEndDateTime);
+  const [showStartTimePicker, setShowStartTimePicker] = useState(false);
+  const [showEndTimePicker, setShowEndTimePicker] = useState(false);
 
   const formatDateDisplay = (date: DateType) => {
     if (!date) return t("services.events.add.date.placeholder");
@@ -197,48 +199,107 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
           </Dialog>
         </View>
 
-        <View className="gap-1.5">
-          <Text variant="sm" color="muted" className="ml-4">
+        <View className={`gap-1.5 ${Platform.OS === 'android' ? 'mx-2' : null}`}>
+          <Text variant="sm" color="muted" className={`${Platform.OS === 'ios' ? 'ml-4' : null}`}>
             Début
           </Text>
           <Controller
             control={control}
             name={startDateField}
             render={() => (
-              <NativeDateTimePicker
-                value={startDateTime.time}
-                mode="time"
-                display="default"
-                accentColor={theme.primary}
-                textColor={theme.text}
-                themeVariant={actualTheme}
-                onChange={(_, selectedDate) =>
-                  handleStartTimeChange(selectedDate)
-                }
-              />
+              <>
+                {Platform.OS === "ios" ? (
+                  <NativeDateTimePicker
+                    value={startDateTime.time}
+                    mode="time"
+                    display="default"
+                    accentColor={theme.primary}
+                    textColor={theme.text}
+                    themeVariant={actualTheme}
+                    onChange={(_, selectedDate) =>
+                      handleStartTimeChange(selectedDate)
+                    }
+                  />
+                ) : (
+                  <>
+                    <InputButton
+                      Icon={Clock}
+                      placeholder={t("services.events.add.startTime")}
+                      value={formatTime(startDateTime.time)}
+                      onPress={() => setShowStartTimePicker(true)}
+                    />
+                    {showStartTimePicker && (
+                      <NativeDateTimePicker
+                        value={startDateTime.time}
+                        mode="time"
+                        display="default"
+                        accentColor={theme.primary}
+                        textColor={theme.text}
+                        themeVariant={actualTheme}
+                        onChange={(event, selectedDate) => {
+                          // On Android, close the picker whether set or dismissed
+                          if (event?.type === "set" && selectedDate) {
+                            handleStartTimeChange(selectedDate);
+                          }
+                          setShowStartTimePicker(false);
+                        }}
+                      />
+                    )}
+                  </>
+                )}
+              </>
             )}
           />
         </View>
 
         <View className="gap-1.5">
-          <Text variant="sm" color="muted" className="ml-4">
+          <Text variant="sm" color="muted" className={`${Platform.OS === 'ios' ? 'ml-4' : null}`}>
             Fin
           </Text>
           <Controller
             control={control}
             name={endDateField}
             render={() => (
-              <NativeDateTimePicker
-                value={endDateTime.time}
-                mode="time"
-                display="default"
-                textColor={theme.text}
-                accentColor={theme.primary}
-                themeVariant={actualTheme}
-                onChange={(_, selectedDate) => {
-                  handleEndTimeChange(selectedDate);
-                }}
-              />
+              <>
+                {Platform.OS === "ios" ? (
+                  <NativeDateTimePicker
+                    value={endDateTime.time}
+                    mode="time"
+                    display="default"
+                    textColor={theme.text}
+                    accentColor={theme.primary}
+                    themeVariant={actualTheme}
+                    onChange={(_, selectedDate) => {
+                      handleEndTimeChange(selectedDate);
+                    }}
+                  />
+                ) : (
+                  <>
+                    <InputButton
+                      Icon={Clock}
+                      placeholder={t("services.events.add.endTime")}
+                      value={formatTime(endDateTime.time)}
+                      onPress={() => setShowEndTimePicker(true)}
+                    />
+                    {showEndTimePicker && (
+                      <NativeDateTimePicker
+                        value={endDateTime.time}
+                        mode="time"
+                        display="default"
+                        textColor={theme.text}
+                        accentColor={theme.primary}
+                        themeVariant={actualTheme}
+                        onChange={(event, selectedDate) => {
+                          if (event?.type === "set" && selectedDate) {
+                            handleEndTimeChange(selectedDate);
+                          }
+                          setShowEndTimePicker(false);
+                        }}
+                      />
+                    )}
+                  </>
+                )}
+              </>
             )}
           />
         </View>

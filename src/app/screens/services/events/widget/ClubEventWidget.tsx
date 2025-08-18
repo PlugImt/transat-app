@@ -22,7 +22,11 @@ export const ClubEventWidget = ({ clubId }: { clubId: number }) => {
   return (
     <CardGroup
       title={t("services.events.title")}
-      onPress={() => navigation.navigate("ClubEvents", { id: clubId })}
+      onPress={
+        data.length > 3
+          ? () => navigation.navigate("ClubEvents", { id: clubId })
+          : undefined
+      }
     >
       <View className="gap-2">
         {data?.slice(0, 3).map((event) => (

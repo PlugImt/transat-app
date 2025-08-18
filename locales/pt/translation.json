@@ -1,6 +1,7 @@
 {
   "common": {
-    "welcome": "Bem-vindo",
+    "hello": "Olá",
+    "goodEvening": "Boa noite",
     "home": "Início",
     "account": "Conta",
     "edit": "Editar",
@@ -312,7 +313,7 @@
       "sideDishes": "Acompanhamentos",
       "closed": "Fechado",
       "noLunch": {
-        "title": "Sem almoço hoje",
+        "title": "Cardápio ainda não disponível",
         "description": "Ainda não temos o cardápio. Ative as notificações para ser informado quando o cardápio estiver disponível"
       },
       "noDinner": {
@@ -453,7 +454,7 @@
       "confirmReturn": "Sim, eu devolvo",
       "reserveSuccess": "Reserva confirmada",
       "returnSuccess": "Equipamento devolvido com sucesso",
-      "myReservations": "Minhas reservas",
+
       "current": "Atuais",
       "past": "Passadas",
       "cancelReservation": "Cancelar reserva",
@@ -486,7 +487,6 @@
       "peopleInterested": "Pessoas interessadas",
       "interested_one": "Apenas uma pessoa está interessada neste evento",
       "interested_other": "{{count}} pessoas estão interessadas neste evento",
-      "interested": "{{count}} pessoas estão interessadas neste evento",
       "add": {
         "title": "Novo evento",
         "image": {
@@ -568,7 +568,11 @@
       "leaderboard": {
         "title": "Classificação",
         "score": "Pontuação",
-        "history": "Histórico",
+        "history": {
+          "title": "Histórico",
+          "emptyHistory": "Ninguém pegou uma baía ainda",
+          "emptyHistoryDescription": "Adicione suas baías ao contador para vê-las aparecer aqui"
+        },
         "firstPlaceLead_zero": "está empatado",
         "firstPlaceLead_one": "está logo atrás de você",
         "firstPlaceLeader_few": "está a apenas {{count}} baías atrás de você",
@@ -577,8 +581,6 @@
         "followingPlace_one": "está logo à frente de você",
         "followingPlace_few": "está a apenas {{count}} baías à sua frente",
         "followingPlace_other": "está {{count}} baías à sua frente",
-        "firstPlaceLead": "está apenas {{count}} baía atrás de você",
-        "followingPlace": "está {{count}} baía à sua frente",
         "tookBassine_one": "tomou {{count}} baía",
         "tookBassine_other": "tomou {{count}} baías"
       }

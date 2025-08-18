@@ -1,11 +1,9 @@
 import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
-import { TouchableOpacity, View } from "react-native";
+import { View } from "react-native";
 import Animated from "react-native-reanimated";
-import { LaundryWidgetLoading } from "@/app/screens/services/laundry/widget/LaundryWidget";
-import { RestaurantWidgetLoading } from "@/app/screens/services/restaurant/widget/RestaurantWidget";
-import { WeatherSkeleton } from "@/app/screens/services/weather/widget/WeatherWidget";
+import { SplashScreen } from "@/components/animations/SplashScreen";
 import { Button } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
 import { PreferenceCustomizationButton } from "@/components/custom/PreferenceCustomizationModal";
@@ -18,8 +16,7 @@ import { useWidgetComponents } from "@/hooks/home/useWidgetComponents";
 import { useHomeWidgetPreferences } from "@/hooks/services/usePreferences";
 import { resetHomeWidgetPreferences } from "@/services/storage/preferences";
 import type { AppNavigation, BottomTabParamList } from "@/types";
-import { isDinner, isLunch, isWeekend } from "@/utils";
-import { EventWidgetSkeleton } from "../services/events/widget/EventWidget";
+import { isNight } from "@/utils";
 
 export const Home = () => {
   const { data: user } = useUser();
@@ -38,7 +35,7 @@ export const Home = () => {
   const { getWidgetComponent } = useWidgetComponents();
 
   if (isPending) {
-    return <HomeLoading />;
+    return <SplashScreen />;
   }
 
   return (
@@ -50,16 +47,17 @@ export const Home = () => {
       title={
         <View className="flex-row gap-2 items-center">
           <Text variant="h1" color="text">
-            {t("common.welcome")}
+            {isNight() ? t("common.goodEvening") : t("common.hello")}
           </Text>
           {user?.first_name && (
-            <TouchableOpacity
+            <Text
+              variant="h1"
+              color="primary"
+              numberOfLines={1}
               onPress={() => tabNavigation?.navigate("AccountScreen")}
             >
-              <Text variant="h1" color="primary" numberOfLines={1}>
-                {user.first_name}
-              </Text>
-            </TouchableOpacity>
+              {user.first_name}
+            </Text>
           )}
         </View>
       }
@@ -96,17 +94,3 @@ export const Home = () => {
 };
 
 export default Home;
-
-export const HomeLoading = () => {
-  const { t } = useTranslation();
-  return (
-    <Page className="gap-8" title={t("common.welcome")}>
-      <WeatherSkeleton />
-      {!isWeekend() && !isLunch() && !isDinner() ? (
-        <RestaurantWidgetLoading />
-      ) : null}
-      <EventWidgetSkeleton />
-      <LaundryWidgetLoading />
-    </Page>
-  );
-};

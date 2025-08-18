@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import Animated from "react-native-reanimated";
 import { Button } from "@/components/common/Button";
-import Search from "@/components/common/Search";
+import Search from "@/components/common/SearchInput";
 import ClubCard, { ClubCardSkeleton } from "@/components/custom/card/ClubCard";
 import { Empty } from "@/components/page/Empty";
 import { ErrorPage } from "@/components/page/ErrorPage";
@@ -58,13 +58,8 @@ export const Clubs = () => {
         onScroll={scrollHandler}
         showsVerticalScrollIndicator
         ListHeaderComponent={
-          <View className="flex-row items-center gap-2 mb-3">
+          <View className="flex-row mb-4">
             <Search value={searchValue} onChange={setSearchValue} />
-            <Button
-              label={t("services.reservation.title")}
-              variant="secondary"
-              onPress={() => navigation.navigate("Reservation")}
-            />
           </View>
         }
         ListEmptyComponent={

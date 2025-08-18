@@ -1,6 +1,7 @@
 {
   "common": {
-    "welcome": "Bienvenido",
+    "hello": "Hola",
+    "goodEvening": "Buenas noches",
     "home": "Inicio",
     "account": "Cuenta",
     "edit": "Editar",
@@ -312,7 +313,7 @@
       "sideDishes": "Guarniciones",
       "closed": "Cerrado",
       "noLunch": {
-        "title": "No hay almuerzo hoy",
+        "title": "Menú aún no disponible",
         "description": "Aún no tenemos el menú. Activa las notificaciones para ser informado cuando el menú esté disponible"
       },
       "noDinner": {
@@ -453,7 +454,7 @@
       "confirmReturn": "Sí, devuelvo",
       "reserveSuccess": "Reserva confirmada",
       "returnSuccess": "Equipo devuelto con éxito",
-      "myReservations": "Mis reservas",
+
       "current": "Actuales",
       "past": "Pasadas",
       "cancelReservation": "Cancelar reserva",
@@ -486,7 +487,6 @@
       "peopleInterested": "Personas interesadas",
       "interested_one": "Una sola persona está interesada en este evento",
       "interested_other": "{{count}} personas están interesadas en este evento",
-      "interested": "{{count}} personas están interesadas en este evento",
       "add": {
         "title": "Nuevo evento",
         "image": {
@@ -568,7 +568,11 @@
       "leaderboard": {
         "title": "Clasificación",
         "score": "Puntuación",
-        "history": "Historial",
+        "history": {
+          "title": "Historial",
+          "emptyHistory": "Nadie ha tomado una cuenca aún",
+          "emptyHistoryDescription": "Añade tus cuencas al contador para que aparezcan aquí"
+        },
         "firstPlaceLead_zero": "está empatado",
         "firstPlaceLead_one": "está justo detrás de ti",
         "firstPlaceLeader_few": "está a solo {{count}} cuencas detrás de ti",
@@ -577,8 +581,6 @@
         "followingPlace_one": "está justo delante de ti",
         "followingPlace_few": "está a solo {{count}} cuencas delante de ti",
         "followingPlace_other": "está {{count}} cuencas delante de ti",
-        "firstPlaceLead": "está solo {{count}} cuenca detrás de ti",
-        "followingPlace": "está {{count}} cuenca delante de ti",
         "tookBassine_one": "tomó {{count}} cuenca",
         "tookBassine_other": "tomó {{count}} cuencas"
       }

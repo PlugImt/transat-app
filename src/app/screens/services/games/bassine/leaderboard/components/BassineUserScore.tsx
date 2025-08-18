@@ -2,6 +2,8 @@ import { View } from "react-native";
 import Avatar from "@/components/common/Avatar";
 import Image from "@/components/common/Image";
 import { Text } from "@/components/common/Text";
+import { AvatarSkeleton, TextSkeleton } from "@/components/Skeleton";
+import ImageSkeleton from "@/components/Skeleton/ImageSkeleton";
 import type { BassineLeaderboardEntry, User } from "@/dto";
 
 const top = [
@@ -40,3 +42,16 @@ export const BassineUserScore = ({ userScore }: BassineUserScoreProps) => {
 };
 
 export default BassineUserScore;
+
+export const BassineUserScoreSkeleton = () => {
+  return (
+    <View className="flex-row items-center gap-6">
+      <ImageSkeleton size={24} />
+      <View className="flex-row items-center gap-2 flex-1">
+        <AvatarSkeleton size={24} />
+        <TextSkeleton lastLineWidth={150} />
+      </View>
+      <TextSkeleton lastLineWidth={30} />
+    </View>
+  );
+};

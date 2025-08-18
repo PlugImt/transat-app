@@ -6,6 +6,7 @@ import { Text } from "@/components/common/Text";
 import { TextSkeleton } from "@/components/Skeleton";
 import ImageSkeleton from "@/components/Skeleton/ImageSkeleton";
 import { useTheme } from "@/contexts/ThemeContext";
+import { cn } from "@/utils";
 
 interface LinkCardProps {
   onPress?: () => void;
@@ -13,6 +14,7 @@ interface LinkCardProps {
   title: string;
   description: string;
   size?: "sm" | "default";
+  className?: string;
 }
 
 const LinkCard = ({
@@ -21,10 +23,14 @@ const LinkCard = ({
   title,
   description,
   size = "default",
+  className,
 }: LinkCardProps) => {
   const { theme } = useTheme();
   return (
-    <Card onPress={onPress} className="flex-row items-center gap-4">
+    <Card
+      onPress={onPress}
+      className={cn("flex-row items-center gap-4", className)}
+    >
       {image}
       <View className="flex-1">
         <Text
@@ -34,7 +40,7 @@ const LinkCard = ({
         >
           {title}
         </Text>
-        {size === "default" && (
+        {size === "default" && description && (
           <Text variant="sm" color="muted" numberOfLines={2}>
             {description}
           </Text>

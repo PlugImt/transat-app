@@ -11,7 +11,7 @@ import { QUERY_KEYS } from "@/constants";
 import { PastPersonalReservations } from "./components/PastPersonalReservations";
 import { UpcomingPersonalReservations } from "./components/UpcomingPersonalReservations";
 
-export const MyReservations = () => {
+export const PersonalReservations = () => {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
 
@@ -62,4 +62,4 @@ export const MyReservations = () => {
   );
 };
 
-export default MyReservations;
+export default PersonalReservations;

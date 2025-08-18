@@ -1,4 +1,4 @@
 export * from "./Category";
-export * from "./MyReservations";
+export * from "./PersonalReservations";
 export * from "./Reservation";
 export * from "./ReservationCalendar";

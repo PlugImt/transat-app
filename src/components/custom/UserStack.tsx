@@ -52,120 +52,49 @@ export const UserStack = ({
     ? Math.min(count - pictures.length, MAX_COUNT)
     : 0;
 
-  const ImagesRow = (
-    <>
-      {displayedPictures.map((picture) => (
-        <Image
-          source={picture}
-          key={picture}
-          className="-ml-2"
-          {...imageProps}
-        />
-      ))}
-
-      {hasOverflow && (
-        <View
-          className="bg-black items-center justify-center rounded-full relative -ml-2"
-          style={{ width: sizeProps, height: sizeProps }}
-        >
-          <Image source={pictures[pictures.length - 1]} {...imageProps} />
-          <View
-            className="absolute inset-0 bg-black/50 rounded-full"
-            style={{ ...imageProps.style }}
-          />
-          <NativeText className="text-white text-sm font-medium absolute inset-x-0 text-center">
-            +{overflowCount}
-          </NativeText>
-        </View>
-      )}
-    </>
-  );
-
   return (
-    <View>
-      {onPress ? (
-        <TouchableOpacity
-          className="flex-row ml-2"
-          onPress={onPress}
-          disabled={!onPress}
-        >
-          {displayedPictures.map((picture) => (
-            <Image
-              source={picture}
-              key={picture}
-              className="-ml-2"
-              {...imageProps}
-            />
-          ))}
+    <TouchableOpacity onPress={onPress} disabled={!onPress}>
+      <View className="flex-row ml-2">
+        {displayedPictures.map((picture) => (
+          <Image
+            source={picture}
+            key={picture}
+            className="-ml-2"
+            {...imageProps}
+          />
+        ))}
 
-          {hasOverflow && (
+        {hasOverflow && (
+          <View
+            className="bg-black items-center justify-center rounded-full relative -ml-2"
+            style={{ width: sizeProps, height: sizeProps }}
+          >
+            <Image source={pictures[pictures.length - 1]} {...imageProps} />
             <View
-              className="bg-black items-center justify-center rounded-full relative -ml-2"
-              style={{ width: sizeProps, height: sizeProps }}
-            >
-              <Image source={pictures[pictures.length - 1]} {...imageProps} />
-              <View
-                className="absolute inset-0 bg-black/50 rounded-full"
-                style={{ ...imageProps.style }}
-              />
-              <NativeText
-                className={cn(
-                  "text-white font-medium absolute inset-x-0 text-center",
-                  size === "sm" ? "text-xs" : "text-sm",
-                )}
-              >
-                +{overflowCount}
-              </NativeText>
-            </View>
-          )}
-        </TouchableOpacity>
-      ) : (
-        <View className="flex-row ml-2">
-          {displayedPictures.map((picture) => (
-            <Image
-              source={picture}
-              key={picture}
-              className="-ml-2"
-              {...imageProps}
+              className="absolute inset-0 bg-black/50 rounded-full"
+              style={{ ...imageProps.style }}
             />
-          ))}
-
-          {hasOverflow && (
-            <View
-              className="bg-black items-center justify-center rounded-full relative -ml-2"
-              style={{ width: sizeProps, height: sizeProps }}
+            <NativeText
+              className={cn(
+                "text-white font-medium absolute inset-x-0 text-center",
+                size === "sm" ? "text-xs" : "text-sm",
+              )}
             >
-              <Image source={pictures[pictures.length - 1]} {...imageProps} />
-              <View
-                className="absolute inset-0 bg-black/50 rounded-full"
-                style={{ ...imageProps.style }}
-              />
-              <NativeText
-                className={cn(
-                  "text-white font-medium absolute inset-x-0 text-center",
-                  size === "sm" ? "text-xs" : "text-sm",
-                )}
-              >
-                +{overflowCount}
-              </NativeText>
-            </View>
-          )}
-        </View>
-      )}
+              +{overflowCount}
+            </NativeText>
+          </View>
+        )}
+      </View>
 
       {moreText && count && (
-        <TouchableOpacity
-          className="flex-row items-center"
-          onPress={onPress}
-          disabled={!onPress}
-        >
+        <View className="flex-row items-center">
           <Text variant="sm" color={moreTextColor}>
             {t(moreText, { count })}
           </Text>
           {onPress && <ChevronRight color={theme.text} size={16} />}
-        </TouchableOpacity>
+        </View>
       )}
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -173,12 +102,14 @@ interface UserStackSkeletonProps {
   size?: "default" | "sm";
   max?: number;
   borderColor?: ThemeColorKeys;
+  moreText?: boolean;
 }
 
 export const UserStackSkeleton = ({
   size = "default",
   max = 3,
   borderColor = "background",
+  moreText = false,
 }: UserStackSkeletonProps) => {
   const { theme } = useTheme();
   const sizeProps = size === "default" ? 32 : 24;
@@ -204,7 +135,7 @@ export const UserStackSkeleton = ({
           </View>
         ))}
       </View>
-      <TextSkeleton variant="sm" />
+      {moreText && <TextSkeleton variant="sm" />}
     </View>
   );
 };

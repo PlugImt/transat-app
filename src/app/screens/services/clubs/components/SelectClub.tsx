@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Modal, View } from "react-native";
 import Animated from "react-native-reanimated";
+import SearchInput from "@/components/common/SearchInput";
 import ClubCard, { ClubCardSkeleton } from "@/components/custom/card/ClubCard";
 import { Empty } from "@/components/page/Empty";
 import { ErrorPage } from "@/components/page/ErrorPage";
@@ -10,7 +11,6 @@ import { Page } from "@/components/page/Page";
 import type { Club } from "@/dto/club";
 import { useAnimatedHeader } from "@/hooks/common";
 import { useFilteredClubs } from "@/hooks/services/club/useClub";
-import { SearchClub } from "./";
 
 interface SelectClubButtonProps {
   onSelect: (clubId: number) => void;
@@ -155,7 +155,7 @@ const SelectClubModal = ({
           onScroll={scrollHandler}
           ListHeaderComponent={
             <View className="flex-row items-center gap-2 mb-4">
-              <SearchClub value={searchValue} onChange={setSearchValue} />
+              <SearchInput value={searchValue} onChange={setSearchValue} />
             </View>
           }
           ListEmptyComponent={
@@ -206,7 +206,7 @@ export const SelectClubSkeleton = ({
           showsVerticalScrollIndicator={false}
           onScroll={scrollHandler}
           ListHeaderComponent={
-            <SearchClub
+            <SearchInput
               value={""}
               onChange={() => {}}
               disabled

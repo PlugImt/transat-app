@@ -1,6 +1,7 @@
 {
   "common": {
-    "welcome": "Welcome",
+    "hello": "Hello",
+    "goodEvening": "Good evening",
     "home": "Home",
     "account": "Account",
     "edit": "Edit",
@@ -312,8 +313,8 @@
       "sideDishes": "Side dishes",
       "closed": "Closed",
       "noLunch": {
-        "title": "No lunch today",
-        "description": "We don't have the menu (yet). Activate notifications to be informed when the menu is available"
+        "title": "Menu not available yet",
+        "description": "We haven't (yet) received the daily menu.\nEnable notifications to be the first to discover it"
       },
       "noDinner": {
         "title": "No dinner tonight",
@@ -325,7 +326,7 @@
       },
       "closedNight": {
         "title": "The restaurant is closed",
-        "description": "Come back tomorrow to see the menu. Enable notifications so you don't miss it"
+        "description": "Come back tomorrow to see the menu"
       },
       "location": "Next to the gym",
       "about": "API prepares fresh, homemade dishes daily — even the fruit salad! The menu changes every day for lunch and dinner",
@@ -453,7 +454,7 @@
       "confirmReturn": "Yes, I return",
       "reserveSuccess": "Reservation confirmed!",
       "returnSuccess": "Equipment returned successfully!",
-      "myReservations": "My reservations",
+
       "current": "Current",
       "past": "Past",
       "cancelReservation": "Cancel reservation",
@@ -486,7 +487,6 @@
       "peopleInterested": "People interested",
       "interested_one": "One person is interested in this event",
       "interested_other": "{{count}} people are interested in this event",
-      "interested": "{{count}} people are interested in this event",
       "add": {
         "title": "New event",
         "image": {
@@ -568,7 +568,11 @@
       "leaderboard": {
         "title": "Leaderboard",
         "score": "Score",
-        "history": "History",
+        "history": {
+          "title": "History",
+          "emptyHistory": "Nobody has taken a basin yet",
+          "emptyHistoryDescription": "Add your basins to the counter to see them appear here"
+        },
         "firstPlaceLead_zero": "is tied",
         "firstPlaceLead_one": "is just behind you",
         "firstPlaceLeader_few": "is only {{count}} basins behind you",
@@ -577,8 +581,6 @@
         "followingPlace_one": "is just ahead",
         "followingPlace_few": "is only {{count}} basins ahead of you",
         "followingPlace_other": "is {{count}} basins ahead of you",
-        "firstPlaceLead": "is only {{count}} basin behind you",
-        "followingPlace": "is {{count}} basin ahead of you",
         "tookBassine_one": "took {{count}} basin",
         "tookBassine_other": "took {{count}} basins"
       }

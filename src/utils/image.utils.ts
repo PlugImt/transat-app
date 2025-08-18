@@ -1,6 +1,7 @@
 import axios from "axios";
 import * as ImagePicker from "expo-image-picker";
 import { t } from "i18next";
+import type { ImageSourcePropType } from "react-native";
 import { storage } from "@/services/storage/asyncStorage";
 
 /**
@@ -56,4 +57,25 @@ export const uploadImage = async (): Promise<string> => {
     console.error("Image upload failed:", error);
     throw new Error(t("account.profilePictureUpdateFailed"));
   }
+};
+
+export const isValidSource = (src: ImageSourcePropType | undefined) => {
+  if (!src) return false;
+  if (typeof src === "number") return true;
+  if (
+    typeof src === "object" &&
+    "uri" in src &&
+    src.uri &&
+    src.uri.trim() !== ""
+  )
+    return true;
+  return false;
+};
+
+export const normalizeSource = (
+  source?: ImageSourcePropType | string,
+): ImageSourcePropType | undefined => {
+  if (!source) return undefined;
+  if (typeof source === "string") return { uri: source };
+  return source;
 };

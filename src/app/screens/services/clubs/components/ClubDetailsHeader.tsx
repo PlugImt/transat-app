@@ -8,6 +8,7 @@ import { Text } from "@/components/common/Text";
 import { UserStack, UserStackSkeleton } from "@/components/custom";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
+import type { User } from "@/dto";
 import type { ClubDetails } from "@/dto/club";
 import {
   useJoinClubMutation,
@@ -73,6 +74,7 @@ export const ClubDetailsHeader = ({ club }: ClubDetailsHeaderProps) => {
     location,
     link,
   } = club;
+
   const { t } = useTranslation();
   const { theme } = useTheme();
   const navigation = useNavigation<NavigationProp>();
@@ -98,7 +100,13 @@ export const ClubDetailsHeader = ({ club }: ClubDetailsHeaderProps) => {
         <Text color="muted">{description}</Text>
       </View>
       <UserStack
-        pictures={member_photos}
+        users={
+          member_photos?.map((photo) => ({
+            profile_picture: photo,
+            first_name: "",
+            last_name: "",
+          })) as User[]
+        }
         count={member_count}
         onPress={handleMemberListPress}
         moreText="services.clubs.interested"

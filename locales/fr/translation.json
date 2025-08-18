@@ -575,13 +575,13 @@
 
         "firstPlaceLead_zero": "est à égalité",
         "firstPlaceLead_one": "est juste derrière vous",
-        "firstPlaceLeader_few": "n'est qu'à {{count}} bassine derrière vous",
+        "firstPlaceLeader_few": "n'est qu'à {{count}} bassines derrière vous",
         "firstPlaceLead_other": "est {{count}} bassines derrière vous",
 
         "followingPlace_zero": "est à égalité",
         "followingPlace_one": "est juste devant",
         "followingPlace_few": "n'est qu'à {{count}} bassines devant vous",
-        "followingPlace_other": "est à {{count}} bassines devant vous",
+        "followingPlace_other": "est {{count}} bassines devant vous",
 
         "tookBassine_one": "a pris {{count}} bassine",
         "tookBassine_other": "a pris {{count}} bassines"

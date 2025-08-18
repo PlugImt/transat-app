@@ -28,7 +28,7 @@ export const BassineUserScore = ({ userScore }: BassineUserScoreProps) => {
       {userScore.rank <= 3 ? (
         <Image source={{ uri: top[userScore.rank - 1] }} size={24} />
       ) : (
-        <Text>{userScore.rank}</Text>
+        <Text className="w-[24px] text-center">{userScore.rank}</Text>
       )}
       <View className="flex-row items-center gap-2 flex-1">
         <Avatar user={user as User} size={24} />

@@ -14,7 +14,7 @@ import { Page } from "@/components/page/Page";
 import { AvatarSkeleton, TextSkeleton } from "@/components/Skeleton";
 import ImageSkeleton from "@/components/Skeleton/ImageSkeleton";
 import { useTheme } from "@/contexts/ThemeContext";
-import type { BassineLeaderboardEntry } from "@/dto";
+import type { BassineLeaderboardEntry, User } from "@/dto";
 import {
   useBassineDecrement,
   useBassineIncrement,
@@ -80,64 +80,59 @@ export const Bassine = () => {
           }}
         >
           <View className="flex-row items-center gap-2">
-            <UserStack
-              size="sm"
-              pictures={data?.leaderboard.map(
-                (user) => user.profile_picture ?? "",
-              )}
-            />
+            <UserStack size="sm" users={data?.leaderboard as User[]} />
             <Text>{t("games.bassine.seeLeaderboard")}</Text>
           </View>
           <ChevronRight size={16} color={theme.text} />
         </Card>
       }
     >
-      <View className="gap-4">
-        <View className="flex-row items-center gap-6">
-          <IconButton
-            icon={<Minus size={24} strokeWidth={3} />}
-            variant="ghost"
-            size="lg"
-            onPress={decrement}
-            disabled={decrementDisabled}
-          />
-          <AnimatedRollingNumber
-            value={count}
-            compactToFixed={2}
-            textStyle={{ fontSize: 60, fontWeight: "900", color: theme.text }}
-            spinningAnimationConfig={{
-              duration: 500,
-              easing: Easing.elastic(1.5),
-            }}
-          />
-          <IconButton
-            icon={<Plus size={24} strokeWidth={3} />}
-            variant="ghost"
-            size="lg"
-            onPress={increment}
-            disabled={isIncPending}
-          />
-        </View>
-        {neighbors && (
-          <View className="flex-row items-center gap-2 max-w-64">
-            <Avatar
-              user={{
-                first_name: neighbors.followingUser?.first_name,
-                last_name: neighbors.followingUser?.last_name,
-                profile_picture:
-                  neighbors.followingUser?.profile_picture || undefined,
-              }}
-              size={24}
-            />
-            <Text variant="sm" className="flex-1">
-              <Text className="font-bold flex-1" variant="sm">
-                {neighbors.followingUser?.first_name}
-              </Text>{" "}
-              {neighbors.followingText}
-            </Text>
-          </View>
-        )}
+      {/* <View className="gap-4"> */}
+      <View className="flex-row items-center gap-6 ">
+        <IconButton
+          icon={<Minus size={24} strokeWidth={3} />}
+          variant="ghost"
+          size="lg"
+          onPress={decrement}
+          disabled={decrementDisabled}
+        />
+        <AnimatedRollingNumber
+          value={count}
+          compactToFixed={2}
+          textStyle={{ fontSize: 60, fontWeight: "900", color: theme.text }}
+          spinningAnimationConfig={{
+            duration: 500,
+            easing: Easing.elastic(1.5),
+          }}
+        />
+        <IconButton
+          icon={<Plus size={24} strokeWidth={3} />}
+          variant="ghost"
+          size="lg"
+          onPress={increment}
+          disabled={isIncPending}
+        />
       </View>
+      {neighbors && (
+        <View className="flex-row items-center gap-2 max-w-48">
+          <Avatar
+            user={{
+              first_name: neighbors.followingUser?.first_name,
+              last_name: neighbors.followingUser?.last_name,
+              profile_picture:
+                neighbors.followingUser?.profile_picture || undefined,
+            }}
+            size={24}
+          />
+          <Text variant="sm" className="flex-1">
+            <Text className="font-bold flex-1" variant="sm">
+              {neighbors.followingUser?.first_name}
+            </Text>{" "}
+            {neighbors.followingText}
+          </Text>
+        </View>
+      )}
+      {/* </View> */}
     </Page>
   );
 };

@@ -1,10 +1,11 @@
+import { UserRound } from "lucide-react-native";
 import type React from "react";
-import { forwardRef, useEffect, useState } from "react";
+import { forwardRef, useState } from "react";
 import { Image, View } from "react-native";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { User } from "@/dto";
-import { cn } from "@/utils";
+import { cn, isValidSource, normalizeSource } from "@/utils";
 import { AvatarSkeleton } from "../Skeleton";
 
 const AvatarContainer = forwardRef<
@@ -37,26 +38,10 @@ const AvatarImage = forwardRef<
   const [hasLoaded, setHasLoaded] = useState(false);
 
   const isLoading = loading || imageLoading;
+  const finalSource = normalizeSource(source);
+  const validSource = isValidSource(finalSource);
 
-  // Check if source is valid - handle both URI objects and local images
-  const hasValidSource =
-    source &&
-    (typeof source === "number" || // local image
-      (typeof source === "object" &&
-        "uri" in source &&
-        source.uri &&
-        source.uri.trim() !== "")); // remote image
-
-  // Reset loading state when source changes
-  useEffect(() => {
-    if (hasValidSource) {
-      setImageLoading(true);
-      setHasError(false);
-      setHasLoaded(false);
-    }
-  }, [hasValidSource]);
-
-  if ((!hasValidSource && !isLoading) || hasError) {
+  if (!validSource || hasError) {
     return null;
   }
 
@@ -135,12 +120,21 @@ AvatarFallback.displayName = "AvatarFallback";
 interface AvatarProps extends React.ComponentPropsWithoutRef<typeof View> {
   user: Pick<User, "profile_picture" | "first_name" | "last_name">;
   size?: number;
+  style?: React.ComponentPropsWithoutRef<typeof View>["style"];
 }
 
-const Avatar = ({ user, className, size = 64, ...props }: AvatarProps) => {
+const Avatar = ({
+  user,
+  className,
+  size = 64,
+  style,
+  ...props
+}: AvatarProps) => {
+  const { theme } = useTheme();
+
   return (
     <AvatarContainer
-      style={{ width: size, height: size }}
+      style={[{ width: size, height: size }, style]}
       className={className}
       {...props}
     >
@@ -151,8 +145,14 @@ const Avatar = ({ user, className, size = 64, ...props }: AvatarProps) => {
         size={size}
       />
       <AvatarFallback size={size}>
-        {user.first_name?.charAt(0)}
-        {user.last_name?.charAt(0)}
+        {user.first_name && user.last_name ? (
+          <>
+            {user.first_name?.charAt(0)}
+            {user.last_name?.charAt(0)}
+          </>
+        ) : (
+          <UserRound size={size} color={theme.muted} />
+        )}
       </AvatarFallback>
     </AvatarContainer>
   );

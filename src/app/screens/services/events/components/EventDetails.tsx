@@ -157,7 +157,7 @@ const EventDetails = () => {
       <DropdownMenuTrigger>
         <IconButton
           icon={<MoreVertical size={20} color={theme.text} />}
-          variant="ghost"
+          variant="link"
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent>

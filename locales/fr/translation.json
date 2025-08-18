@@ -1,6 +1,7 @@
 {
   "common": {
-    "welcome": "Bienvenue",
+    "hello": "Bonjour",
+    "goodEvening": "Bonsoir",
     "home": "Accueil",
     "account": "Compte",
     "edit": "Modifier",
@@ -566,7 +567,11 @@
       "leaderboard": {
         "title": "Classement",
         "score": "Score",
-        "history": "Historique",
+        "history": {
+          "title": "Historique",
+          "emptyHistory": "Personne n'a encore pris de bassine",
+          "emptyHistoryDescription": "Ajoute tes bassines au compteur pour les voir apparaître ici"
+        },
 
         "firstPlaceLead_zero": "est à égalité",
         "firstPlaceLead_one": "est juste derrière vous",

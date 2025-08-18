@@ -1,4 +1,4 @@
-import { ReservationCardLoading } from "@/components/custom/card/ReservationCard";
+import { ReservationCardSkeleton } from "@/components/custom/card/ReservationCard";
 import { Page } from "@/components/page/Page";
 
 interface ReservationSkeletonProps {
@@ -13,7 +13,7 @@ export const ReservationSkeleton = ({
   return (
     <Page title={title} className="gap-2">
       {Array.from({ length: itemCount }).map((_, index) => (
-        <ReservationCardLoading
+        <ReservationCardSkeleton
           key={`reservation-loading-${index.toString()}`}
         />
       ))}

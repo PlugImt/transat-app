@@ -5,11 +5,12 @@ import { UserCard, UserCardSkeleton } from "@/components/custom";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
 import { useClubMembers } from "@/hooks/services/club/useClub";
-import type { AppStackParamList } from "@/types";
+import type { BottomTabParamList } from "@/types";
 
 export const ClubMemberList = () => {
   const { t } = useTranslation();
-  const { params } = useRoute<RouteProp<AppStackParamList, "ClubMemberList">>();
+  const { params } =
+    useRoute<RouteProp<BottomTabParamList, "ClubMemberList">>();
   const { id } = params;
 
   const { data, isPending, refetch, isError, error } = useClubMembers(id);

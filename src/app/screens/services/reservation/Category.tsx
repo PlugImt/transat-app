@@ -2,9 +2,9 @@ import type { RouteProp } from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
 import { ReservationPageContainer } from "@/components/reservation";
 import { useReservationCategory } from "@/hooks/services/reservation";
-import type { AppStackParamList } from "@/types";
+import type { BottomTabParamList } from "@/types";
 
-type CategoryRouteProp = RouteProp<AppStackParamList, "ReservationCategory">;
+type CategoryRouteProp = RouteProp<BottomTabParamList, "ReservationCategory">;
 
 export const Category = () => {
   const route = useRoute<CategoryRouteProp>();

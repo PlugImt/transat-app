@@ -12,7 +12,7 @@ import { Page } from "@/components/page/Page";
 import type { ReservationScheme } from "@/dto";
 import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
 import { useReservationItem } from "@/hooks/services/reservation/useReservation";
-import type { AppStackParamList } from "@/types";
+import type { BottomTabParamList } from "@/types";
 import {
   fromYMD,
   generateCalendarSlots,
@@ -20,7 +20,7 @@ import {
   toYMD,
 } from "@/utils/calendar.utils";
 
-type ItemRouteProp = RouteProp<AppStackParamList, "ReservationCalendar">;
+type ItemRouteProp = RouteProp<BottomTabParamList, "ReservationCalendar">;
 
 export const ReservationCalendar = () => {
   const { t } = useTranslation();

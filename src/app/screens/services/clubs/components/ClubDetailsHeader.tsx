@@ -131,7 +131,7 @@ export const ClubDetailsHeaderSkeleton = () => {
         <TextSkeleton variant="h2" lastLineWidth={200} />
         <TextSkeleton lines={2} />
       </View>
-      <UserStackSkeleton />
+      <UserStackSkeleton moreText />
       <View className="flex-row items-center gap-2">
         <Button
           label={String(t("common.link"))}

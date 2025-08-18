@@ -1,6 +1,5 @@
 import { API_ROUTES, apiRequest, Method } from "@/api";
 import type {
-  Club,
   GetReservation,
   MyReservationsResponse,
   ReservationDetails,
@@ -21,7 +20,7 @@ export const getReservationCategories = async (id: number) => {
 };
 
 export const getReservationClub = async (id: number) => {
-  return await apiRequest<Club>(
+  return await apiRequest<GetReservation>(
     API_ROUTES.reservationClub.replace(":id", id.toString()),
     Method.GET,
   );

@@ -9,8 +9,10 @@ import Avatar from "@/components/common/Avatar";
 import { IconButton } from "@/components/common/Button";
 import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
-import { UserStack } from "@/components/custom";
+import { UserStack, UserStackSkeleton } from "@/components/custom";
 import { Page } from "@/components/page/Page";
+import { AvatarSkeleton, TextSkeleton } from "@/components/Skeleton";
+import ImageSkeleton from "@/components/Skeleton/ImageSkeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { BassineLeaderboardEntry } from "@/dto";
 import {
@@ -18,34 +20,36 @@ import {
   useBassineIncrement,
   useBassineOverview,
 } from "@/hooks/services/games/bassine/useBassine";
-import type { AppScreenNavigationProp } from "@/types";
+import type { AppNavigation } from "@/types";
 import { AboutBassine } from "./AboutBassine";
 import { useNeighbors } from "./hooks/useNeighbors";
 
 export const Bassine = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const { data: overview } = useBassineOverview();
+  const { data, isPending } = useBassineOverview();
+
   const neighbors = useNeighbors({
     user: {
-      email: overview?.email,
-      rank: overview?.rank,
-      bassine_count: overview?.bassine_count,
+      email: data?.email,
+      rank: data?.rank,
+      bassine_count: data?.bassine_count,
     } as BassineLeaderboardEntry,
-    userAbove: overview?.user_above,
-    userBelow: overview?.user_below,
+    userAbove: data?.user_above,
+    userBelow: data?.user_below,
   });
-  const [count, setCount] = useState(overview?.bassine_count ?? 0);
 
-  const navigation = useNavigation<AppScreenNavigationProp>();
+  const [count, setCount] = useState(data?.bassine_count ?? 0);
+
+  const navigation = useNavigation<AppNavigation>();
   const { mutate: inc, isPending: isIncPending } = useBassineIncrement();
   const { mutate: dec, isPending: isDecPending } = useBassineDecrement();
 
   useEffect(() => {
-    if (typeof overview?.bassine_count === "number") {
-      setCount(overview.bassine_count);
+    if (typeof data?.bassine_count === "number") {
+      setCount(data.bassine_count);
     }
-  }, [overview?.bassine_count]);
+  }, [data?.bassine_count]);
 
   const increment = () => {
     setCount((prev) => prev + 1);
@@ -55,6 +59,10 @@ export const Bassine = () => {
     setCount((prev) => Math.max(0, prev - 1));
     dec();
   };
+
+  if (isPending) {
+    return <BassineSkeleton />;
+  }
 
   const decrementDisabled = count <= 0 || isDecPending;
 
@@ -73,7 +81,8 @@ export const Bassine = () => {
         >
           <View className="flex-row items-center gap-2">
             <UserStack
-              pictures={overview?.leaderboard.map(
+              size="sm"
+              pictures={data?.leaderboard.map(
                 (user) => user.profile_picture ?? "",
               )}
             />
@@ -134,3 +143,53 @@ export const Bassine = () => {
 };
 
 export default Bassine;
+
+const BassineSkeleton = () => {
+  const { t } = useTranslation();
+  const { theme } = useTheme();
+  const navigation = useNavigation<AppNavigation>();
+  return (
+    <Page
+      title={t("games.bassine.title")}
+      className="flex-1 justify-center items-center"
+      header={<AboutBassine />}
+      disableScroll
+      footer={
+        <Card
+          className="rounded-full flex-row items-center gap-4 px-4 py-2 self-center"
+          onPress={() => {
+            navigation.navigate("BassineLeaderboard");
+          }}
+        >
+          <View className="flex-row items-center gap-2">
+            <UserStackSkeleton size="sm" />
+            <Text>{t("games.bassine.seeLeaderboard")}</Text>
+          </View>
+          <ChevronRight size={16} color={theme.text} />
+        </Card>
+      }
+    >
+      <View className="gap-4">
+        <View className="flex-row items-center gap-6">
+          <IconButton
+            icon={<Minus size={24} strokeWidth={3} />}
+            variant="ghost"
+            size="lg"
+            disabled
+          />
+          <ImageSkeleton size={60} />
+          <IconButton
+            icon={<Plus size={24} strokeWidth={3} />}
+            variant="ghost"
+            size="lg"
+            disabled
+          />
+        </View>
+        <View className="flex-row items-center gap-2 max-w-64">
+          <AvatarSkeleton size={24} />
+          <TextSkeleton variant="sm" lines={2} className="flex-1" />
+        </View>
+      </View>
+    </Page>
+  );
+};

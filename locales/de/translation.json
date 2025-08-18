@@ -1,6 +1,7 @@
 {
   "common": {
-    "welcome": "Willkommen",
+    "hello": "Hallo",
+    "goodEvening": "Guten Abend",
     "home": "Startseite",
     "account": "Konto",
     "edit": "Bearbeiten",
@@ -312,7 +313,7 @@
       "sideDishes": "Beilagen",
       "closed": "Geschlossen",
       "noLunch": {
-        "title": "Heute kein Mittagessen",
+        "title": "Menü noch nicht verfügbar",
         "description": "Wir haben das Menü (noch) nicht. Aktiviere die Benachrichtigungen, um informiert zu werden, wenn das Menü verfügbar ist."
       },
       "noDinner": {
@@ -453,7 +454,7 @@
       "confirmReturn": "Ja, ich gebe zurück",
       "reserveSuccess": "Reservierung bestätigt",
       "returnSuccess": "Ausrüstung erfolgreich zurückgegeben",
-      "myReservations": "Meine Reservierungen",
+
       "current": "Aktuell",
       "past": "Vergangen",
       "cancelReservation": "Reservierung stornieren",
@@ -486,7 +487,6 @@
       "peopleInterested": "Interessierte",
       "interested_one": "Eine Person ist an diesem Event interessiert",
       "interested_other": "{{count}} Personen sind an diesem Event interessiert",
-      "interested": "{{count}} Personen sind an diesem Event interessiert",
       "add": {
         "title": "Neues Event",
         "image": {
@@ -568,7 +568,11 @@
       "leaderboard": {
         "title": "Rangliste",
         "score": "Punktzahl",
-        "history": "Verlauf",
+        "history": {
+          "title": "Verlauf",
+          "emptyHistory": "Noch niemand hat eine Bassine genommen",
+          "emptyHistoryDescription": "Füge deine Bassinen dem Zähler hinzu, damit sie hier erscheinen"
+        },
         "firstPlaceLead_zero": "liegt gleichauf",
         "firstPlaceLead_one": "liegt knapp hinter Ihnen",
         "firstPlaceLeader_few": "liegt nur {{count}} Becken hinter Ihnen",
@@ -577,8 +581,6 @@
         "followingPlace_one": "liegt knapp vor Ihnen",
         "followingPlace_few": "liegt nur {{count}} Becken vor Ihnen",
         "followingPlace_other": "liegt {{count}} Becken vor Ihnen",
-        "firstPlaceLead": "ist nur {{count}} Becken hinter Ihnen",
-        "followingPlace": "ist {{count}} Becken vor Ihnen",
         "tookBassine_one": "hat {{count}} Becken genommen",
         "tookBassine_other": "hat {{count}} Becken genommen"
       }

@@ -50,7 +50,7 @@ const ReservationCard = ({
   const handleReservePress = () => {
     if (slot) {
       // @ts-ignore
-      navigation.push("ReservationItem", { id, title });
+      navigation.push("ReservationCalendar", { id, title });
     }
   };
 
@@ -109,7 +109,7 @@ const ReservationCard = ({
 
 export default ReservationCard;
 
-export const ReservationCardLoading = () => {
+export const ReservationCardSkeleton = () => {
   const { theme } = useTheme();
   return (
     <Card>

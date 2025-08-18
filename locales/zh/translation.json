@@ -1,6 +1,7 @@
 {
   "common": {
-    "welcome": "欢迎",
+    "hello": "你好",
+    "goodEvening": "晚上好",
     "home": "首页",
     "account": "账户",
     "edit": "编辑",
@@ -312,7 +313,7 @@
       "sideDishes": "配菜",
       "closed": "已关闭",
       "noLunch": {
-        "title": "今天没有午餐",
+        "title": "菜单尚未提供",
         "description": "我们暂时还没有菜单。开启通知以便菜单可用时第一时间收到提醒"
       },
       "noDinner": {
@@ -453,7 +454,7 @@
       "confirmReturn": "是的，我归还",
       "reserveSuccess": "预订确认",
       "returnSuccess": "设备归还成功",
-      "myReservations": "我的预订",
+
       "current": "当前",
       "past": "已结束",
       "cancelReservation": "取消预订",
@@ -486,7 +487,6 @@
       "peopleInterested": "感兴趣的人",
       "interested_one": "只有一人对此活动感兴趣",
       "interested_other": "{{count}} 人对此活动感兴趣",
-      "interested": "{{count}} 人对此活动感兴趣",
       "add": {
         "title": "新活动",
         "image": {
@@ -568,7 +568,11 @@
       "leaderboard": {
         "title": "排行榜",
         "score": "分数",
-        "history": "历史",
+        "history": {
+          "title": "历史",
+          "emptyHistory": "还没有人记录过池塘",
+          "emptyHistoryDescription": "将你的池塘添加到计数器以在此显示"
+        },
         "firstPlaceLead_zero": "打成平手",
         "firstPlaceLead_one": "就在你后面",
         "firstPlaceLeader_few": "仅落后你{{count}}个池塘",
@@ -577,8 +581,6 @@
         "followingPlace_one": "就在你前面",
         "followingPlace_few": "仅领先你{{count}}个池塘",
         "followingPlace_other": "领先你{{count}}个池塘",
-        "firstPlaceLead": "只落后您{{count}}个池塘",
-        "followingPlace": "领先您{{count}}个池塘",
         "tookBassine_one": "取了{{count}}次池塘",
         "tookBassine_other": "取了{{count}}次池塘"
       }

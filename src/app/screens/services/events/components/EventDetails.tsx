@@ -206,7 +206,7 @@ export const EventDetailsSkeleton = () => {
     <Page title={t("services.events.title")}>
       <EventDetailsHeaderSkeleton />
       <CardGroup title={t("services.events.peopleInterested")}>
-        <UserStackSkeleton />
+        <UserStackSkeleton moreText />
       </CardGroup>
       <CardGroup title={t("services.events.organizer")}>
         <ClubCardSkeleton size="sm" />

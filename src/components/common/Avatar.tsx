@@ -133,7 +133,7 @@ const AvatarFallback = forwardRef<
 AvatarFallback.displayName = "AvatarFallback";
 
 interface AvatarProps extends React.ComponentPropsWithoutRef<typeof View> {
-  user: User;
+  user: Pick<User, "profile_picture" | "first_name" | "last_name">;
   size?: number;
 }
 

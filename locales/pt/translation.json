@@ -558,7 +558,31 @@
     }
   },
   "games": {
-    "title": "Jogos"
+    "title": "Jogos",
+    "bassine": {
+      "title": "Baía",
+      "description": "Quando uma cerveja é servida, a baía enche pouco a pouco, e quando está cheia você pode pedir para encher seu copo com\n\nPara cada copo cheio, atualize seu contador para ser o rei da baía 👑",
+      "location": "Na MDE durante as festas",
+      "price": "Gratuito",
+      "seeLeaderboard": "Ver classificação",
+      "leaderboard": {
+        "title": "Classificação",
+        "score": "Pontuação",
+        "history": "Histórico",
+        "firstPlaceLead_zero": "está empatado",
+        "firstPlaceLead_one": "está logo atrás de você",
+        "firstPlaceLeader_few": "está a apenas {{count}} baías atrás de você",
+        "firstPlaceLead_other": "está {{count}} baías atrás de você",
+        "followingPlace_zero": "está empatado",
+        "followingPlace_one": "está logo à frente de você",
+        "followingPlace_few": "está a apenas {{count}} baías à sua frente",
+        "followingPlace_other": "está {{count}} baías à sua frente",
+        "firstPlaceLead": "está apenas {{count}} baía atrás de você",
+        "followingPlace": "está {{count}} baía à sua frente",
+        "tookBassine_one": "tomou {{count}} baía",
+        "tookBassine_other": "tomou {{count}} baías"
+      }
+    }
   },
   "user": {
     "contact": "Contatar",

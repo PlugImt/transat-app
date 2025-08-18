@@ -1,5 +1,4 @@
 import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
 import { LinearGradient } from "expo-linear-gradient";
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
 import { useMemo } from "react";
@@ -13,10 +12,8 @@ import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { MenuItem } from "@/dto";
 import { useMenuRestaurant } from "@/hooks/services/restaurant/useMenuRestaurant";
-import type { AppStackParamList } from "@/types";
+import type { AppNavigation } from "@/types";
 import { isDinner, isLunch, isNight, isWeekend, outOfService } from "@/utils";
-
-type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
 const MenuItemCard = ({ item }: { item: MenuItem }) => {
   return (
@@ -30,7 +27,7 @@ export const RestaurantWidget = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
 
-  const navigation = useNavigation<AppScreenNavigationProp>();
+  const navigation = useNavigation<AppNavigation>();
 
   const { menu, error, isPending } = useMenuRestaurant();
 
@@ -324,7 +321,7 @@ export default RestaurantWidget;
 export const RestaurantWidgetLoading = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
-  const navigation = useNavigation<AppScreenNavigationProp>();
+  const navigation = useNavigation<AppNavigation>();
 
   const skeletonCount = () => Math.floor(Math.random() * 3) + 1;
 

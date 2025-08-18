@@ -13,7 +13,6 @@ import Language from "@/app/screens/account/settings/Language";
 import Legal from "@/app/screens/account/settings/Legal";
 import Notifications from "@/app/screens/account/settings/Notifications";
 import Settings from "@/app/screens/account/settings/Settings";
-import Caps from "@/app/screens/games/Caps";
 import {
   Clubs,
   Games,
@@ -33,12 +32,14 @@ import { EditEvent } from "@/app/screens/services/events/components/EditEvent";
 import EventDetails from "@/app/screens/services/events/components/EventDetails";
 import { EventMemberList } from "@/app/screens/services/events/components/EventMemberList";
 import Events from "@/app/screens/services/events/Events";
+import Bassine from "@/app/screens/services/games/bassine/Bassine";
+import { BassineLeaderboard } from "@/app/screens/services/games/bassine/leaderboard/BassineLeaderboard";
 import { HomeworkDetails } from "@/app/screens/services/homework/components/HomeworkDetails";
 import { Category, MyReservations } from "@/app/screens/services/reservation";
 import { RestaurantReviews } from "@/app/screens/services/restaurant/components/Reviews";
 import { Services } from "@/app/screens/services/Services";
 import { useTheme } from "@/contexts/ThemeContext";
-import { tabBarOptions } from "@/navigation/navigationConfig";
+import { screenOptions, tabBarOptions } from "@/navigation/navigationConfig";
 import type { BottomTabParamList } from "@/types";
 import { hapticFeedback } from "@/utils/haptics.utils";
 
@@ -96,9 +97,10 @@ const ServicesStack = () => (
 );
 
 const GamesStack = () => (
-  <Stack.Navigator screenOptions={{ headerShown: false }}>
-    <Stack.Screen name="GamesScreen" component={Games} />
-    <Stack.Screen name="Caps" component={Caps} />
+  <Stack.Navigator screenOptions={screenOptions}>
+    <Stack.Screen name="Games" component={Games} />
+    <Stack.Screen name="Bassine" component={Bassine} />
+    <Stack.Screen name="BassineLeaderboard" component={BassineLeaderboard} />
   </Stack.Navigator>
 );
 

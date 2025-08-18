@@ -6,7 +6,7 @@ import LaundryDarkImg from "@/assets/images/services/washing_machine_dark.png";
 import LaundryLightImg from "@/assets/images/services/washing_machine_light.png";
 import { useTheme } from "@/contexts/ThemeContext";
 
-export const useClubImages = () => {
+export const useFeatureImages = () => {
   const { actualTheme } = useTheme();
   const images = [
     {

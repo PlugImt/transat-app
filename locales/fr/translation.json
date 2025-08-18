@@ -556,7 +556,32 @@
     }
   },
   "games": {
-    "title": "Jeux"
+    "title": "Jeux",
+    "bassine": {
+      "title": "Bassine",
+      "description": "Lorsqu'une bière est servie la bassine se remplie petit à petit, et lorsqu'elle est pleine vous pouvez demander de remplir votre verre avec\n\nÀ chaque verre rempli, mettez à jour votre compteur pour être le roi de la bassine 👑",
+      "location": "À la MDE pendant les soirées",
+      "price": "Gratuit",
+      "seeLeaderboard": "Voir le classement",
+      "leaderboard": {
+        "title": "Classement",
+        "score": "Score",
+        "history": "Historique",
+
+        "firstPlaceLead_zero": "est à égalité",
+        "firstPlaceLead_one": "est juste derrière vous",
+        "firstPlaceLeader_few": "n'est qu'à {{count}} bassine derrière vous",
+        "firstPlaceLead_other": "est {{count}} bassines derrière vous",
+
+        "followingPlace_zero": "est à égalité",
+        "followingPlace_one": "est juste devant",
+        "followingPlace_few": "n'est qu'à {{count}} bassines devant vous",
+        "followingPlace_other": "est à {{count}} bassines devant vous",
+
+        "tookBassine_one": "a pris {{count}} bassine",
+        "tookBassine_other": "a pris {{count}} bassines"
+      }
+    }
   },
   "user": {
     "contact": "Contacter",

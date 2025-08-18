@@ -7,6 +7,12 @@ export const QUERY_KEYS = {
   weather: ["weather"],
   user: ["user"],
   traq: ["traq"],
+  bassine: {
+    overview: ["bassine", "overview"],
+    leaderboard: ["bassine", "leaderboard"],
+    history: ["bassine", "history"],
+    userHistory: ["bassine", "history", "user"],
+  },
   club: {
     clubs: ["clubs"],
     clubDetails: ["clubDetails"],

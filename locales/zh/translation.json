@@ -558,7 +558,31 @@
     }
   },
   "games": {
-    "title": "游戏"
+    "title": "游戏",
+    "bassine": {
+      "title": "池塘",
+      "description": "当啤酒被服务时，池塘会慢慢填满，当它满时，你可以要求填满你的杯子\n\n每填满一个杯子，更新你的计数器，成为池塘之王 👑",
+      "location": "在MDE的派对期间",
+      "price": "免费",
+      "seeLeaderboard": "查看排行榜",
+      "leaderboard": {
+        "title": "排行榜",
+        "score": "分数",
+        "history": "历史",
+        "firstPlaceLead_zero": "打成平手",
+        "firstPlaceLead_one": "就在你后面",
+        "firstPlaceLeader_few": "仅落后你{{count}}个池塘",
+        "firstPlaceLead_other": "落后你{{count}}个池塘",
+        "followingPlace_zero": "打成平手",
+        "followingPlace_one": "就在你前面",
+        "followingPlace_few": "仅领先你{{count}}个池塘",
+        "followingPlace_other": "领先你{{count}}个池塘",
+        "firstPlaceLead": "只落后您{{count}}个池塘",
+        "followingPlace": "领先您{{count}}个池塘",
+        "tookBassine_one": "取了{{count}}次池塘",
+        "tookBassine_other": "取了{{count}}次池塘"
+      }
+    }
   },
   "user": {
     "contact": "联系",

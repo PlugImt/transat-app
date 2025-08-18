@@ -1,15 +1,12 @@
 import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { TouchableOpacity, View } from "react-native";
 import { Text } from "@/components/common/Text";
 import type { Homework } from "@/dto";
 import { useHomework } from "@/hooks/services/homework/useHomework";
-import type { AppStackParamList } from "@/types";
+import type { AppScreenNavigationProp } from "@/types";
 import { HomeworkWidgetItem } from "./HomeworkWidgetItem";
 import { HomeworkWidgetLoading } from "./HomeworkWidgetLoading";
-
-type AppScreenNavigationProp = StackNavigationProp<AppStackParamList>;
 
 export const HomeworkWidget = () => {
   const { t } = useTranslation();

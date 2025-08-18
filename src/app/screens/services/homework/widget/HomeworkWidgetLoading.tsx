@@ -1,8 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity, View } from "react-native";
-import type { AppScreenNavigationProp } from "@/app/screens/services/schedule/widget/TimetableWidget";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
+import type { AppScreenNavigationProp } from "@/types";
 
 export const HomeworkWidgetLoading = () => {
   const { theme } = useTheme();

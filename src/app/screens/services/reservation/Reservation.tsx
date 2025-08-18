@@ -52,7 +52,6 @@ export const Reservation = () => {
       <Button
         label={t("services.reservation.personal.title")}
         variant="secondary"
-        // @ts-ignore
         onPress={() => navigation.navigate("MyReservations")}
       />
     </View>

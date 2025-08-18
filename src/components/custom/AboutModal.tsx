@@ -40,7 +40,7 @@ export const AboutModal: React.FC<AboutModalProps> = ({
   return (
     <Dialog>
       <DialogTrigger>
-        <IconButton icon={<Info color={theme.text} />} variant="link" />
+        <IconButton icon={<Info color={theme.muted} />} variant="link" />
       </DialogTrigger>
       <DialogContent
         title={title}

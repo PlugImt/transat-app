@@ -6,6 +6,7 @@ import {
   TabsTrigger,
 } from "@/components/common/Tabs";
 import { Page } from "@/components/page/Page";
+import BassineHistory from "./BassineHistory";
 import BassineScores from "./BassineScores";
 
 export const BassineLeaderboard = () => {
@@ -26,6 +27,9 @@ export const BassineLeaderboard = () => {
         </TabsList>
         <TabsContent value="scores">
           <BassineScores />
+        </TabsContent>
+        <TabsContent value="history">
+          <BassineHistory />
         </TabsContent>
       </Tabs>
     </Page>

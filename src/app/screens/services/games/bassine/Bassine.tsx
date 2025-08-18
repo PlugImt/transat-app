@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { ChevronRight, Minus, Plus } from "lucide-react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { AnimatedRollingNumber } from "react-native-animated-rolling-numbers";
@@ -13,7 +13,11 @@ import { UserStack } from "@/components/custom";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { BassineLeaderboardEntry } from "@/dto";
-import { useBassineOverview } from "@/hooks/services/games/bassine/useBassine";
+import {
+  useBassineDecrement,
+  useBassineIncrement,
+  useBassineOverview,
+} from "@/hooks/services/games/bassine/useBassine";
 import type { AppScreenNavigationProp } from "@/types";
 import { AboutBassine } from "./AboutBassine";
 import { useNeighbors } from "./hooks/useNeighbors";
@@ -34,10 +38,25 @@ export const Bassine = () => {
   const [count, setCount] = useState(overview?.bassine_count ?? 0);
 
   const navigation = useNavigation<AppScreenNavigationProp>();
-  const increment = () => setCount((prev) => prev + 1);
-  const decrement = () => setCount((prev) => prev - 1);
+  const { mutate: inc, isPending: isIncPending } = useBassineIncrement();
+  const { mutate: dec, isPending: isDecPending } = useBassineDecrement();
 
-  const decrementDisabled = count <= 0;
+  useEffect(() => {
+    if (typeof overview?.bassine_count === "number") {
+      setCount(overview.bassine_count);
+    }
+  }, [overview?.bassine_count]);
+
+  const increment = () => {
+    setCount((prev) => prev + 1);
+    inc();
+  };
+  const decrement = () => {
+    setCount((prev) => Math.max(0, prev - 1));
+    dec();
+  };
+
+  const decrementDisabled = count <= 0 || isDecPending;
 
   return (
     <Page
@@ -86,6 +105,7 @@ export const Bassine = () => {
           variant="ghost"
           size="lg"
           onPress={increment}
+          disabled={isIncPending}
         />
       </View>
       {neighbors && (

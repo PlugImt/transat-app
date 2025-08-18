@@ -55,7 +55,7 @@ export const useBassineIncrement = () => {
 
   return useMutation({
     mutationFn: () => patchBassine("up"),
-    onSuccess: (res) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bassine.overview });
       queryClient.invalidateQueries({
         queryKey: QUERY_KEYS.bassine.leaderboard,
@@ -76,7 +76,7 @@ export const useBassineDecrement = () => {
 
   return useMutation({
     mutationFn: () => patchBassine("down"),
-    onSuccess: (res) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bassine.overview });
       queryClient.invalidateQueries({
         queryKey: QUERY_KEYS.bassine.leaderboard,

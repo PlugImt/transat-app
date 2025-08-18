@@ -1,10 +1,8 @@
-import { useNavigation } from "@react-navigation/native";
 import { SearchX } from "lucide-react-native";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import Animated from "react-native-reanimated";
-import { Button } from "@/components/common/Button";
 import Search from "@/components/common/SearchInput";
 import ClubCard, { ClubCardSkeleton } from "@/components/custom/card/ClubCard";
 import { Empty } from "@/components/page/Empty";
@@ -12,13 +10,11 @@ import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
 import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
 import { useFilteredClubs } from "@/hooks/services/club/useClub";
-import type { AppNavigation } from "@/types";
 
 export const Clubs = () => {
   const { t } = useTranslation();
   const { scrollHandler } = useAnimatedHeader();
   const [searchValue, setSearchValue] = useState("");
-  const navigation = useNavigation<AppNavigation>();
 
   const {
     data: clubs,
@@ -81,9 +77,8 @@ const ClubsSkeleton = () => {
 
   return (
     <Page title={t("services.clubs.title")} className="gap-2">
-      <View className="flex-row items-center gap-2 mb-3">
+      <View className="mb-4">
         <Search value={""} onChange={() => {}} disabled />
-        <Button label="Réserver" variant="secondary" onPress={() => {}} />
       </View>
       {Array.from({ length: 5 }).map((_, index) => (
         <ClubCardSkeleton key={`club-loading-${index.toString()}`} />

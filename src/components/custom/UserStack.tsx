@@ -1,13 +1,13 @@
 import { ChevronRight } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { Text as NativeText, TouchableOpacity, View } from "react-native";
+import { Avatar } from "@/components/common";
 import { Text } from "@/components/common/Text";
+import { TextSkeleton } from "@/components/Skeleton";
+import ImageSkeleton from "@/components/Skeleton/ImageSkeleton";
 import { type ThemeColorKeys, useTheme } from "@/contexts/ThemeContext";
 import type { User } from "@/dto";
 import { cn } from "@/utils/class.utils";
-import { Avatar } from "../common";
-import { TextSkeleton } from "../Skeleton";
-import ImageSkeleton from "../Skeleton/ImageSkeleton";
 
 const MAX_COUNT = 100;
 

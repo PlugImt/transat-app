@@ -5,14 +5,14 @@ import { Text } from "@/components/common/Text";
 import type { Course } from "@/dto";
 import { useAuth } from "@/hooks/account/useAuth";
 import { useTimetable } from "@/hooks/services/timetable/useTimetable";
-import type { AppScreenNavigationProp } from "@/types";
+import type { BottomTabNavigation } from "@/types/navigation";
 import { TimetableCourseWidget } from "./TimetableCourseWidget";
 import { TimetableLoadingWidget } from "./TimetableLoadingWidget";
 
 export const TimetableWidget = () => {
   const { t } = useTranslation();
 
-  const navigation = useNavigation<AppScreenNavigationProp>();
+  const navigation = useNavigation<BottomTabNavigation>();
 
   const { user } = useAuth();
 

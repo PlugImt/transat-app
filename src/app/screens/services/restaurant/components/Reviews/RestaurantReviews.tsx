@@ -18,11 +18,11 @@ import { Page } from "@/components/page/Page";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import { userMenuRating } from "@/hooks/services/restaurant/useMenuRestaurant";
-import type { AppStackParamList } from "@/types";
+import type { BottomTabParamList } from "@/types";
 import { getOpeningHoursData } from "@/utils";
 
 export type RestaurantReviewsRouteProp = RouteProp<
-  AppStackParamList,
+  BottomTabParamList,
   "RestaurantReviews"
 >;
 

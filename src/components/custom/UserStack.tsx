@@ -1,17 +1,18 @@
 import { ChevronRight } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { Text as NativeText, TouchableOpacity, View } from "react-native";
+import { Avatar } from "@/components/common";
 import { Text } from "@/components/common/Text";
+import { TextSkeleton } from "@/components/Skeleton";
+import ImageSkeleton from "@/components/Skeleton/ImageSkeleton";
 import { type ThemeColorKeys, useTheme } from "@/contexts/ThemeContext";
+import type { User } from "@/dto";
 import { cn } from "@/utils/class.utils";
-import Image from "../common/Image";
-import { TextSkeleton } from "../Skeleton";
-import ImageSkeleton from "../Skeleton/ImageSkeleton";
 
 const MAX_COUNT = 100;
 
 interface UserStackProps {
-  pictures?: string[];
+  users?: User[];
   count?: number;
   max?: number;
   size?: "default" | "sm";
@@ -22,7 +23,7 @@ interface UserStackProps {
 }
 
 export const UserStack = ({
-  pictures = [],
+  users = [],
   max = 3,
   size = "default",
   onPress,
@@ -34,11 +35,10 @@ export const UserStack = ({
   const { theme } = useTheme();
   const { t } = useTranslation();
 
-  if (!pictures?.length) return null;
+  if (!users?.length) return null;
 
   const sizeProps = size === "default" ? 32 : 24;
   const imageProps = {
-    radius: 9999,
     size: sizeProps,
     style: {
       borderWidth: 1,
@@ -46,19 +46,19 @@ export const UserStack = ({
     },
   };
 
-  const displayedPictures = pictures.slice(0, max);
-  const hasOverflow = count && count > pictures.length;
+  const displayedPictures = users.slice(0, max);
+  const hasOverflow = count && count > users.length;
   const overflowCount = hasOverflow
-    ? Math.min(count - pictures.length, MAX_COUNT)
+    ? Math.min(count - users.length, MAX_COUNT)
     : 0;
 
   return (
     <TouchableOpacity onPress={onPress} disabled={!onPress}>
       <View className="flex-row ml-2">
-        {displayedPictures.map((picture) => (
-          <Image
-            source={picture}
-            key={picture}
+        {displayedPictures.map((user, index) => (
+          <Avatar
+            user={user}
+            key={`${user.profile_picture}-${index}`}
             className="-ml-2"
             {...imageProps}
           />
@@ -69,7 +69,14 @@ export const UserStack = ({
             className="bg-black items-center justify-center rounded-full relative -ml-2"
             style={{ width: sizeProps, height: sizeProps }}
           >
-            <Image source={pictures[pictures.length - 1]} {...imageProps} />
+            <Avatar
+              user={{
+                first_name: "",
+                last_name: "",
+                profile_picture: users[users.length - 1].profile_picture,
+              }}
+              {...imageProps}
+            />
             <View
               className="absolute inset-0 bg-black/50 rounded-full"
               style={{ ...imageProps.style }}

@@ -103,7 +103,7 @@ const ServicesStack = () => (
 
 const GamesStack = () => (
   <Stack.Navigator screenOptions={screenOptions}>
-    <Stack.Screen name="Games" component={Games} />
+    <Stack.Screen name="GamesScreen" component={Games} />
     <Stack.Screen name="Bassine" component={Bassine} />
     <Stack.Screen name="BassineLeaderboard" component={BassineLeaderboard} />
   </Stack.Navigator>

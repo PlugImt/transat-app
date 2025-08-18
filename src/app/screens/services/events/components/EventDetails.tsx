@@ -148,10 +148,6 @@ const EventDetails = () => {
 
   const isOwner = event.creator.email === user?.email;
 
-  const pictures = event.attendees
-    .map((u) => u.profile_picture)
-    .filter((p): p is string => Boolean(p));
-
   const openEventMembers = () => {
     navigation.navigate("EventMemberList", { id });
   };
@@ -161,7 +157,7 @@ const EventDetails = () => {
       <DropdownMenuTrigger>
         <IconButton
           icon={<MoreVertical size={20} color={theme.text} />}
-          variant="ghost"
+          variant="link"
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
@@ -181,7 +177,7 @@ const EventDetails = () => {
       <View className="gap-2 ml-2">
         <Text variant="h3">{t("services.events.peopleInterested")}</Text>
         <UserStack
-          pictures={pictures}
+          users={event.attendees}
           count={event.attendee_count}
           moreText="services.events.interested"
           onPress={openEventMembers}

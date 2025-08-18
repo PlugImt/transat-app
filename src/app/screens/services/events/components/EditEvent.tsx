@@ -4,7 +4,7 @@ import { Link, MapPin, Users } from "lucide-react-native";
 import { Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
-import { SelectClubButton } from "@/app/screens/services/clubs/components";
+import { SelectClubButton } from "@/app/screens/services/clubs/components/SelectClub";
 import { Button } from "@/components/common/Button";
 import Input from "@/components/common/Input";
 import { Text } from "@/components/common/Text";

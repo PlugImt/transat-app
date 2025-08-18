@@ -9,9 +9,12 @@ import { ScrollView, TouchableOpacity, View } from "react-native";
 import { Text } from "@/components/common/Text";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
-import type { AppStackParamList } from "@/types";
+import type { BottomTabParamList } from "@/types/navigation";
 
-type HomeworkDetailsRouteProp = RouteProp<AppStackParamList, "HomeworkDetails">;
+export type HomeworkDetailsRouteProp = RouteProp<
+  BottomTabParamList,
+  "HomeworkDetails"
+>;
 
 export const HomeworkDetails = () => {
   const route = useRoute<HomeworkDetailsRouteProp>();

@@ -9,7 +9,7 @@ import {
   type ViewStyle,
 } from "react-native";
 import { useTheme } from "@/contexts/ThemeContext";
-import { cn } from "@/utils";
+import { cn, isValidSource, normalizeSource } from "@/utils";
 import { ImageSkeleton } from "../Skeleton/ImageSkeleton";
 
 interface ImageProps
@@ -52,27 +52,6 @@ const ImageFallback = ({
       <CameraOff size={size / 3} color={theme.muted} />
     </View>
   );
-};
-
-const normalizeSource = (
-  source?: ImageSourcePropType | string,
-): ImageSourcePropType | undefined => {
-  if (!source) return undefined;
-  if (typeof source === "string") return { uri: source };
-  return source;
-};
-
-const isValidSource = (src: ImageSourcePropType | undefined) => {
-  if (!src) return false;
-  if (typeof src === "number") return true;
-  if (
-    typeof src === "object" &&
-    "uri" in src &&
-    src.uri &&
-    src.uri.trim() !== ""
-  )
-    return true;
-  return false;
 };
 
 const Image = forwardRef<React.ElementRef<typeof RNImage>, ImageProps>(

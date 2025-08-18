@@ -9,6 +9,7 @@ import { UserStack, UserStackSkeleton } from "@/components/custom";
 import { TextSkeleton } from "@/components/Skeleton";
 import ImageSkeleton from "@/components/Skeleton/ImageSkeleton";
 import { useTheme } from "@/contexts/ThemeContext";
+import type { User } from "@/dto";
 import type { Event } from "@/dto/event";
 import { useDate } from "@/hooks/common";
 
@@ -63,7 +64,13 @@ export const EventCard = ({ event }: EventCardProps) => {
             </View>
           </View>
           <UserStack
-            pictures={event.member_photos}
+            users={
+              event.member_photos.map((photo) => ({
+                profile_picture: photo,
+                first_name: "",
+                last_name: "",
+              })) as User[]
+            }
             borderColor="card"
             count={event.attendee_count}
             size="sm"

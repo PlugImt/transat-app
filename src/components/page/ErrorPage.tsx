@@ -26,6 +26,7 @@ export const ErrorPage = ({
 }: ErrorPageProps) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
+
   useEffect(() => {
     hapticFeedback.error();
   }, []);
@@ -35,6 +36,7 @@ export const ErrorPage = ({
       title={title}
       className="flex-1 justify-center items-center"
       footer={children}
+      onRefresh={refetch}
     >
       <View className="justify-center items-center gap-4">
         <CircleX color={theme.destructive} size={40} />

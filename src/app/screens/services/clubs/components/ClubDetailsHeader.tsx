@@ -13,6 +13,7 @@ import {
   useJoinClubMutation,
   useLeaveClubMutation,
 } from "@/hooks/services/club/useClub";
+import { linkToDomain } from "@/utils/";
 import type { ClubDetailsRouteProp } from "../ClubDetails";
 
 interface NotificationButtonProps {
@@ -78,7 +79,9 @@ export const ClubDetailsHeader = ({ club }: ClubDetailsHeaderProps) => {
 
   const label = link?.toLowerCase().includes("whatsapp")
     ? "WhatsApp"
-    : String(t("common.link"));
+    : link
+      ? linkToDomain(link, t)
+      : String(t("common.link"));
 
   const handleMemberListPress = () => {
     navigation.navigate("ClubMemberList", { id: club.id });
@@ -98,6 +101,7 @@ export const ClubDetailsHeader = ({ club }: ClubDetailsHeaderProps) => {
         pictures={member_photos}
         count={member_count}
         onPress={handleMemberListPress}
+        moreText="services.clubs.interested"
       />
       <View className="flex-row items-center gap-2">
         {link && link.length > 0 && (
@@ -136,7 +140,7 @@ export const ClubDetailsHeaderSkeleton = () => {
           className="flex-1"
           disabled
         />
-        <NotificationButton isMember disabled />
+        <NotificationButton isMember={false} disabled />
       </View>
     </View>
   );

@@ -34,6 +34,7 @@ const AvatarImage = forwardRef<
 >(({ className, loading = false, source, size, ...props }, ref) => {
   const [hasError, setHasError] = useState(false);
   const [imageLoading, setImageLoading] = useState(true);
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   const isLoading = loading || imageLoading;
 
@@ -51,10 +52,11 @@ const AvatarImage = forwardRef<
     if (hasValidSource) {
       setImageLoading(true);
       setHasError(false);
+      setHasLoaded(false);
     }
   }, [hasValidSource]);
 
-  if (!hasValidSource || hasError) {
+  if ((!hasValidSource && !isLoading) || hasError) {
     return null;
   }
 
@@ -70,14 +72,22 @@ const AvatarImage = forwardRef<
           }}
           className={cn(
             "aspect-square h-full w-full",
-            isLoading ? "opacity-0" : "opacity-100",
+            hasLoaded ? "opacity-100" : "opacity-0",
           )}
-          onLoadStart={() => setImageLoading(true)}
-          onLoadEnd={() => setImageLoading(false)}
+          onLoadStart={() => {
+            setImageLoading(true);
+            setHasError(false);
+          }}
+          onLoad={() => {
+            setHasLoaded(true);
+          }}
+          onLoadEnd={() => {
+            setImageLoading(false);
+          }}
           {...props}
         />
       </View>
-      {isLoading && (
+      {isLoading && !hasLoaded && (
         <View className="z-10">
           <AvatarSkeleton size={size} />
         </View>

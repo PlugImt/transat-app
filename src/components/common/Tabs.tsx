@@ -9,7 +9,7 @@ interface TabsContextProps {
   activeTab: string;
   setActiveTab: (id: string) => void;
 }
-const TabsContext = createContext<TabsContextProps>({
+export const TabsContext = createContext<TabsContextProps>({
   activeTab: "",
   setActiveTab: () => {},
 });

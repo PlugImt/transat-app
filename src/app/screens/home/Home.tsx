@@ -20,6 +20,7 @@ import { useHomeWidgetPreferences } from "@/hooks/services/usePreferences";
 import { resetHomeWidgetPreferences } from "@/services/storage/preferences";
 import type { AppStackParamList, BottomTabParamList } from "@/types";
 import { isDinner, isLunch, isWeekend } from "@/utils";
+import { EventWidgetSkeleton } from "../services/events/widget/EventWidget";
 
 export const Home = () => {
   const { data: user } = useUser();
@@ -105,6 +106,7 @@ export const HomeLoading = () => {
       {!isWeekend() && !isLunch() && !isDinner() ? (
         <RestaurantWidgetLoading />
       ) : null}
+      <EventWidgetSkeleton />
       <LaundryWidgetLoading />
     </Page>
   );

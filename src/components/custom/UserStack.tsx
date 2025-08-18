@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Text as NativeText, TouchableOpacity, View } from "react-native";
 import { Text } from "@/components/common/Text";
 import { type ThemeColorKeys, useTheme } from "@/contexts/ThemeContext";
+import { cn } from "@/utils/class.utils";
 import Image from "../common/Image";
 import { TextSkeleton } from "../Skeleton";
 import ImageSkeleton from "../Skeleton/ImageSkeleton";
@@ -16,6 +17,8 @@ interface UserStackProps {
   size?: "default" | "sm";
   onPress?: () => void;
   borderColor?: ThemeColorKeys;
+  moreText?: string;
+  moreTextColor?: ThemeColorKeys;
 }
 
 export const UserStack = ({
@@ -25,11 +28,13 @@ export const UserStack = ({
   onPress,
   count,
   borderColor = "background",
+  moreText,
+  moreTextColor = "text",
 }: UserStackProps) => {
   const { theme } = useTheme();
   const { t } = useTranslation();
 
-  if (!pictures.length) return null;
+  if (!pictures?.length) return null;
 
   const sizeProps = size === "default" ? 32 : 24;
   const imageProps = {
@@ -77,22 +82,86 @@ export const UserStack = ({
   );
 
   return (
-    <View className="gap-2">
+    <View>
       {onPress ? (
-        <TouchableOpacity className="flex-row ml-2" onPress={onPress}>
-          {ImagesRow}
+        <TouchableOpacity
+          className="flex-row ml-2"
+          onPress={onPress}
+          disabled={!onPress}
+        >
+          {displayedPictures.map((picture) => (
+            <Image
+              source={picture}
+              key={picture}
+              className="-ml-2"
+              {...imageProps}
+            />
+          ))}
+
+          {hasOverflow && (
+            <View
+              className="bg-black items-center justify-center rounded-full relative -ml-2"
+              style={{ width: sizeProps, height: sizeProps }}
+            >
+              <Image source={pictures[pictures.length - 1]} {...imageProps} />
+              <View
+                className="absolute inset-0 bg-black/50 rounded-full"
+                style={{ ...imageProps.style }}
+              />
+              <NativeText
+                className={cn(
+                  "text-white font-medium absolute inset-x-0 text-center",
+                  size === "sm" ? "text-xs" : "text-sm",
+                )}
+              >
+                +{overflowCount}
+              </NativeText>
+            </View>
+          )}
         </TouchableOpacity>
       ) : (
-        <View className="flex-row ml-2">{ImagesRow}</View>
+        <View className="flex-row ml-2">
+          {displayedPictures.map((picture) => (
+            <Image
+              source={picture}
+              key={picture}
+              className="-ml-2"
+              {...imageProps}
+            />
+          ))}
+
+          {hasOverflow && (
+            <View
+              className="bg-black items-center justify-center rounded-full relative -ml-2"
+              style={{ width: sizeProps, height: sizeProps }}
+            >
+              <Image source={pictures[pictures.length - 1]} {...imageProps} />
+              <View
+                className="absolute inset-0 bg-black/50 rounded-full"
+                style={{ ...imageProps.style }}
+              />
+              <NativeText
+                className={cn(
+                  "text-white font-medium absolute inset-x-0 text-center",
+                  size === "sm" ? "text-xs" : "text-sm",
+                )}
+              >
+                +{overflowCount}
+              </NativeText>
+            </View>
+          )}
+        </View>
       )}
 
-      {count && (
+      {moreText && count && (
         <TouchableOpacity
           className="flex-row items-center"
           onPress={onPress}
           disabled={!onPress}
         >
-          <Text variant="sm">{t("services.clubs.interested", { count })}</Text>
+          <Text variant="sm" color={moreTextColor}>
+            {t(moreText, { count })}
+          </Text>
           {onPress && <ChevronRight color={theme.text} size={16} />}
         </TouchableOpacity>
       )}
@@ -124,7 +193,7 @@ export const UserStackSkeleton = ({
   };
 
   return (
-    <View className="gap-2">
+    <View>
       <View className="flex-row ml-2">
         {Array.from({ length: max }).map((_, index) => (
           <View

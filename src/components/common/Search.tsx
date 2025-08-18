@@ -6,6 +6,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 interface SearchProps extends Omit<InputStandaloneProps, "onChange"> {
   value: string;
   onChange: (value: string) => void;
+  className?: string;
 }
 
 const SearchInput = ({

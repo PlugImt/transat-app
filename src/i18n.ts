@@ -1,3 +1,10 @@
+import {
+  format as formatDate,
+  formatDistance,
+  formatRelative,
+  isDate,
+} from "date-fns";
+import { de, enUS, es, fr, pt, zhCN } from "date-fns/locale";
 import * as Localization from "expo-localization";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
@@ -37,6 +44,15 @@ const importAllTranslations = () => {
 
 const { resources } = importAllTranslations();
 
+const locales = {
+  fr,
+  en: enUS,
+  es,
+  de,
+  pt,
+  zh: zhCN,
+};
+
 // type TranslationResource = { [key: string]: any };
 // or more specifically allowing strings or nested objects
 type TranslationResource = { [key: string]: string };
@@ -72,6 +88,31 @@ storage.get<string>(STORAGE_KEYS.LANGUAGE).then((language) => {
       fallbackLng: "en",
       interpolation: {
         escapeValue: false,
+        format: (value, format, lng) => {
+          if (isDate(value)) {
+            const locale = locales[lng as keyof typeof locales];
+
+            if (format === "short")
+              return formatDate(value, "dd MMMM", { locale });
+            if (format === "long") return formatDate(value, "PPPP", { locale });
+            if (format === "relative")
+              return formatRelative(value, new Date(), { locale });
+            if (format === "ago")
+              return formatDistance(value, new Date(), {
+                locale,
+                addSuffix: true,
+              });
+            if (format === "weekday")
+              return formatDate(value, "EEEE", { locale });
+            if (format === "time")
+              return formatDate(value, "HH:mm", { locale });
+            if (format === "dateTime")
+              return formatDate(value, "Pp", { locale });
+
+            return formatDate(value, format || "P", { locale });
+          }
+          return value;
+        },
       },
     },
     (err, _t) => {

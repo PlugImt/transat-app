@@ -4,6 +4,7 @@
     "home": "Startseite",
     "account": "Konto",
     "edit": "Bearbeiten",
+    "delete": "Löschen",
     "save": "Speichern",
     "confirm": "Bestätigen",
     "send": "Senden",
@@ -79,6 +80,26 @@
       "months": "vor {{count}} Monaten",
       "year": "vor {{count}} Jahr",
       "years": "vor {{count}} Jahren"
+    },
+    "dateFormats": {
+      "weekday": "{{date, weekday}}",
+      "time": "{{date, time}}",
+      "short": "{{date, short}}",
+      "long": "{{date, long}}",
+      "relative": "{{date, relative}}",
+      "ago": "{{date, ago}}",
+      "dateTime": "{{date, dateTime}}"
+    },
+    "homework": {
+      "deadline": "Frist: {{date, dateTime}}",
+      "createdAt": "Erstellt am {{date, short}}",
+      "updatedAt": "Aktualisiert am {{date, short}}",
+      "dueIn": "Fällig in {{date, ago}}",
+      "overdue": "Überfällig seit {{date, ago}}"
+    },
+    "imageSelector": {
+      "placeholder": "Tippen Sie, um ein Bild auszuwählen",
+      "uploading": "Upload läuft..."
     }
   },
   "auth": {
@@ -267,7 +288,7 @@
     "weather": "Wetter",
     "traq": {
       "title": "Traq",
-      "description": "Alle im Bar angebotenen Getränke",
+      "description": "Alle an der Bar angebotenen Getränke",
       "about": "Der Traquenard (oder Traq' für Insider) ist die vom BDE verwaltete Bar",
       "location": "Im Inneren der MDE",
       "openingHours": "Geöffnet während aller Partys und organisierten Veranstaltungen 🥳 \n\nWenn Sie durstig sind und Traq' geschlossen ist, können Sie ein BDE-Mitglied bitten, über WhatsApp zu Ihnen zu kommen 😋",
@@ -410,7 +431,8 @@
       "title": "Clubs",
       "description": "Entdecken Sie alle Clubs und Vereine an der IMT",
       "book": "Buchen",
-      "interested": "{{count}} Leute sind an diesem Club interessiert",
+      "selectClub": "Club auswählen",
+      "interested": "{{count}} Personen sind an diesem Club interessiert",
       "responsible": "Verantwortlich",
       "errors": {
         "empty": "Kein Club gefunden",
@@ -452,6 +474,86 @@
         "returnError": "Fehler bei der Rückgabe",
         "cancelError": "Reservierung kann nicht storniert werden",
         "startDateRequired": "Startdatum ist erforderlich"
+      }
+    },
+    "events": {
+      "title": "Events",
+      "description": "Keine Events verpassen",
+      "upcoming": "Bevorstehend",
+      "past": "Vergangen",
+      "organizer": "Veranstalter",
+      "createdBy": "Erstellt von",
+      "peopleInterested": "Interessierte",
+      "interested_one": "Eine Person ist an diesem Event interessiert",
+      "interested_other": "{{count}} Personen sind an diesem Event interessiert",
+      "interested": "{{count}} Personen sind an diesem Event interessiert",
+      "add": {
+        "title": "Neues Event",
+        "image": {
+          "title": "Bild"
+        },
+        "name": {
+          "title": "Name",
+          "placeholder": "Tonus",
+          "required": "Name ist erforderlich",
+          "min": "Der Name muss mindestens 3 Zeichen enthalten",
+          "max": "Der Name darf 100 Zeichen nicht überschreiten"
+        },
+        "description": {
+          "title": "Beschreibung",
+          "placeholder": "Super Tonus in der MDE, kommt zahlreich ab 21 Uhr",
+          "max": "Die Beschreibung darf 200 Zeichen nicht überschreiten"
+        },
+        "startTime": "Startzeit",
+        "endTime": "Endzeit",
+        "date": {
+          "title": "Datum",
+          "placeholder": "Datum auswählen",
+          "required": "Startdatum ist erforderlich"
+        },
+        "location": {
+          "title": "Ort",
+          "placeholder": "MDE",
+          "required": "Ort ist erforderlich",
+          "min": "Der Ort muss mindestens 3 Zeichen enthalten",
+          "max": "Der Ort darf 100 Zeichen nicht überschreiten"
+        },
+        "link": {
+          "title": "Link",
+          "placeholder": "https://www.vibly.fr",
+          "invalid": "Der Link ist nicht gültig",
+          "max": "Der Link darf 100 Zeichen nicht überschreiten"
+        },
+        "organizer": {
+          "title": "Veranstalter",
+          "placeholder": "Club auswählen",
+          "required": "Veranstaltender Club ist erforderlich"
+        },
+        "submit": "Hinzufügen",
+        "success": "Event erfolgreich hinzugefügt",
+        "error": "Fehler beim Hinzufügen des Events"
+      },
+      "edit": {
+        "title": "Event bearbeiten",
+        "submit": "Bearbeiten",
+        "success": "Event erfolgreich aktualisiert",
+        "error": "Fehler beim Aktualisieren des Events"
+      },
+      "delete": {
+        "title": "Event löschen",
+        "description": "Sind Sie sicher, dass Sie dieses Event löschen möchten? Diese Aktion ist nicht rückgängig zu machen.",
+        "confirm": "Löschen",
+        "cancel": "Abbrechen",
+        "success": "Event erfolgreich gelöscht",
+        "error": "Fehler beim Löschen des Events"
+      },
+      "errors": {
+        "emptyUpcoming": "Keine bevorstehenden Events",
+        "emptyUpcomingDescription": "Fügen Sie ein Event hinzu, um es hier anzuzeigen",
+        "emptyPast": "Keine vergangenen Events",
+        "emptyPastDescription": "Genießen Sie die bevorstehenden Events",
+        "notFound": "Dieses Event wurde gelöscht",
+        "notFoundDescription": "Versuchen Sie es mit einem anderen"
       }
     }
   },

@@ -37,7 +37,7 @@ export const ErrorPage = ({
       footer={children}
     >
       <View className="justify-center items-center gap-4">
-        <CircleX color={theme.text} size={40} />
+        <CircleX color={theme.destructive} size={40} />
         <View className="items-center">
           <Text variant="h3" className="text-center">
             {t("common.errors.occurred")}

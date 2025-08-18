@@ -57,7 +57,7 @@ const TabsTrigger = ({
 
   return (
     <TouchableOpacity
-      className={cn("px-8 py-3 rounded-md flex-1", className)}
+      className={cn("px-8 py-3 rounded-md flex-1 relative", className)}
       style={{
         backgroundColor: activeTab === value ? theme.card : "transparent",
       }}
@@ -65,6 +65,7 @@ const TabsTrigger = ({
       {...props}
     >
       <Text className={cn("text-center", textClasses)}>{title}</Text>
+      {props.children}
     </TouchableOpacity>
   );
 };

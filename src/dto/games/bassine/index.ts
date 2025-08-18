@@ -29,10 +29,9 @@ export type BassineOverview = {
 };
 
 export type BassineHistoryItem = {
-  id?: number | string;
-  date: string;
-  type: "up" | "down";
-  user: BassineUserBasic;
-  score?: number;
-  delta?: number;
+  dates: string[];
+  email: string;
+  first_name: string;
+  last_name: string;
+  profile_picture: string | null;
 };

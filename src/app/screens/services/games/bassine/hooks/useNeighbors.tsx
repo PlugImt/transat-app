@@ -18,7 +18,7 @@ export const useNeighbors = ({
     const bassineDifference = user.bassine_count - userBelow.bassine_count;
     return {
       followingUser: userBelow,
-      followingText: t("games.bassine.leaderboard.first_place_lead", {
+      followingText: t("games.bassine.leaderboard.firstPlaceLead", {
         count: bassineDifference,
       }),
     };
@@ -28,7 +28,7 @@ export const useNeighbors = ({
     const bassineDifference = userAbove.bassine_count - user.bassine_count;
     return {
       followingUser: userAbove,
-      followingText: t("games.bassine.leaderboard.following_place", {
+      followingText: t("games.bassine.leaderboard.followingPlace", {
         count: bassineDifference,
       }),
     };

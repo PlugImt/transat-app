@@ -59,15 +59,12 @@ export const BassineHistory = () => {
 export default BassineHistory;
 
 const BassineHistorySkeleton = () => {
-  const nbGroups = Math.floor(Math.random() * 3) + 1; // entre 1 et 3
-  const nbUsers = Math.floor(Math.random() * 5) + 1; // entre 1 et 5
-
   return (
     <View className="gap-4">
-      {Array.from({ length: nbGroups }).map((_, index) => (
+      {Array.from({ length: 3 }).map((_, index) => (
         <View key={String(index)} className="gap-2">
           <TextSkeleton className="ml-4" lastLineWidth={200} />
-          {Array.from({ length: nbUsers }).map((_, index) => (
+          {Array.from({ length: 5 }).map((_, index) => (
             <Card key={String(index)} className="flex-row gap-2 items-center">
               <AvatarSkeleton size={32} />
               <TextSkeleton lines={2} className="flex-1" />

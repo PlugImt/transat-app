@@ -1,6 +1,8 @@
 import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { useNavigation } from "@react-navigation/native";
 import { ChevronRight, Clock, MapPin } from "lucide-react-native";
+import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import Card from "@/components/common/Card";
 import Image from "@/components/common/Image";
@@ -24,14 +26,20 @@ type EventCardProps = {
 export const EventCard = ({ event }: EventCardProps) => {
   const { theme } = useTheme();
   const { formatTime, formatAgo } = useDate();
+  const { t } = useTranslation();
   const navigation = useNavigation<NavigationProp>();
 
   const startDate = new Date(event.start_date);
-  const endDate = event.end_date ? new Date(event.end_date) : undefined;
+  const endDate = new Date(event.end_date);
 
   const rangeDate = endDate
     ? `${formatTime(startDate)} — ${formatTime(endDate)}`
     : formatTime(startDate);
+
+  const isLive = useMemo(() => {
+    const now = new Date();
+    return startDate <= now && endDate && endDate >= now;
+  }, [startDate, endDate]);
 
   return (
     <Card
@@ -45,9 +53,18 @@ export const EventCard = ({ event }: EventCardProps) => {
         <View className="gap-2 flex-1">
           <View>
             <Text variant="h3">{event.name}</Text>
-            <Text variant="sm" color="primary">
-              {formatAgo(startDate).toLowerCase()}
-            </Text>
+            {isLive ? (
+              <View className="flex-row items-center gap-2 mt-1">
+                <View className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+                <Text variant="sm" color="primary" className="font-bold">
+                  {t("services.events.live")}
+                </Text>
+              </View>
+            ) : (
+              <Text variant="sm" color="primary">
+                {formatAgo(startDate).toLowerCase()}
+              </Text>
+            )}
           </View>
           <View className="flex-row items-center gap-x-2 flex-wrap">
             <View className="flex-row items-center gap-1">

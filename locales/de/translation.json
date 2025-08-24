@@ -482,6 +482,7 @@
       "description": "Keine Events verpassen",
       "upcoming": "Bevorstehend",
       "past": "Vergangen",
+      "live": "Jetzt",
       "organizer": "Veranstalter",
       "createdBy": "Erstellt von",
       "peopleInterested": "Interessierte",

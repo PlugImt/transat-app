@@ -482,6 +482,7 @@
       "description": "Don't miss any event at the MDE",
       "upcoming": "Upcoming",
       "past": "Past",
+      "live": "Live",
       "organizer": "Organizer",
       "createdBy": "Created by",
       "peopleInterested": "People interested",

@@ -481,6 +481,7 @@
       "description": "Ne rate plus aucun événement de la MDE",
       "upcoming": "Prochainement",
       "past": "Passé",
+      "live": "En ce moment",
       "organizer": "Organisateur",
       "createdBy": "Créé par",
       "peopleInterested": "Personnes intéressées",

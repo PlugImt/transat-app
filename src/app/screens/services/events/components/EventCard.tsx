@@ -32,13 +32,11 @@ export const EventCard = ({ event }: EventCardProps) => {
   const startDate = new Date(event.start_date);
   const endDate = new Date(event.end_date);
 
-  const rangeDate = endDate
-    ? `${formatTime(startDate)} — ${formatTime(endDate)}`
-    : formatTime(startDate);
+  const rangeDate = `${formatTime(startDate)} — ${formatTime(endDate)}`;
 
   const isLive = useMemo(() => {
     const now = new Date();
-    return startDate <= now && endDate && endDate >= now;
+    return startDate <= now && endDate >= now;
   }, [startDate, endDate]);
 
   return (

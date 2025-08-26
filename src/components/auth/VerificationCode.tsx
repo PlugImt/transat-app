@@ -1,5 +1,5 @@
 import type React from "react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ActivityIndicator, Modal, TouchableOpacity, View } from "react-native";
 import {
@@ -37,6 +37,9 @@ export const VerificationCodeModal: React.FC<VerificationCodeModalProps> = ({
     setValue,
   });
 
+  // pour limiter les appels parallèles
+  const verifyingRef = useRef(false);
+
   useEffect(() => {
     if (isVisible) {
       setValue("");
@@ -46,17 +49,23 @@ export const VerificationCodeModal: React.FC<VerificationCodeModalProps> = ({
 
   const handleVerify = useCallback(async () => {
     if (value.length !== CELL_COUNT) return;
+    if (verifyingRef.current) return;
+    verifyingRef.current = true;
 
     setError(null);
-    const { success } = await verifyCode(email, value);
-    if (!success) {
-      setError(t("common.verificationFailed"));
+    try {
+      const { success } = await verifyCode(email, value);
+      if (!success) {
+        setError(t("common.verificationFailed"));
+      }
+    } finally {
+      verifyingRef.current = false;
     }
   }, [value, verifyCode, email, t]);
 
   // Auto-submit when code is complete
   useEffect(() => {
-    if (value.length === CELL_COUNT) {
+    if (value.length === CELL_COUNT && !verifyingRef.current) {
       handleVerify();
     }
   }, [value, handleVerify]);

@@ -8,8 +8,9 @@ import { Text } from "@/components/common/Text";
 import { TextSkeleton, ImgSkeleton } from "@/components/Skeleton";
 import { Button } from "@/components/common/Button";
 import type { Event } from "@/dto";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Counter } from "@/app/screens/services/fourchettas/components/Counter";
+import { useDeleteOrder } from "@/hooks/useFourchettas";
 interface CardProps {
   event: Event;
   onPress?: () => void;
@@ -34,14 +35,17 @@ export const FourchettasEventCard = ({ event, onPress }: CardProps) => {
     ).getTime() - Date.now(),
   );
 
-  const [number, setNumber] = useState(99);
+  const orderId = event.orderuser?.id;
+  const deleteOrderMut = useDeleteOrder(
+    orderId || 0,
+    event.orderuser?.phone || "",
+  );
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setNumber((prev) => (prev <= 0 ? 99 : prev - 1));
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
+  function onPressDelete() {
+    if (orderId) {
+      deleteOrderMut.mutate();
+    }
+  }
 
   return (
     <View
@@ -74,7 +78,7 @@ export const FourchettasEventCard = ({ event, onPress }: CardProps) => {
           event.form_closing_time,
         )}
       />
-      <View className="relative flex">
+      <View className="relative flex flex-row items-center justify-center w-full gap-2">
         <Button
           label={
             event.orderuser === null
@@ -104,6 +108,11 @@ export const FourchettasEventCard = ({ event, onPress }: CardProps) => {
             {t("services.fourchettas.hurryUp")}
           </Text>
         )}
+        <Button
+          label={"delete"}
+          onPress={onPressDelete}
+          disabled={timediff <= 0}
+        />
       </View>
     </View>
   );

@@ -17,14 +17,10 @@ function Steps({ steps, currentStep }: StepsProps) {
   return (
     <View
       className="shrink-0 flex-row items-start justify-between"
-      style={{ width: `${2.5 * (steps.length * 2 - 1)}rem` }}
+      style={{ width: 2.5 * (steps.length * 2 - 1) * 16 }}
     >
       {steps.map((step, index) => (
-        <View
-          key={step.title}
-          style={{ width: `${5}rem` }}
-          className="flex flex-col items-center"
-        >
+        <View key={step.title} className="flex flex-col items-center w-20">
           <View
             style={
               index + 1 <= currentStep ? {} : { backgroundColor: theme.card }

@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-
 import { View } from "react-native";
 
 import { useUser } from "@/hooks/account/useUser";
@@ -7,6 +6,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 
 import { Text } from "@/components/common/Text";
 import type { Item } from "@/dto";
+import Card from "@/components/common/Card";
 interface RecipeProps {
   dish: Item | null;
   side: Item;
@@ -37,10 +37,7 @@ const RecipeOrder = ({ dish, side, drink }: RecipeProps) => {
         </Text>
       </Text>
 
-      <View
-        style={{ backgroundColor: theme.card }}
-        className=" border-border rounded-lg p-4 w-full max-w-sm"
-      >
+      <Card className="p-4 w-full max-w-sm">
         <Text variant="h2" className="text-xl text-center mb-4">
           {t("services.fourchettas.orderOf")}{" "}
           <Text variant="h2" color={"primary"}>
@@ -118,7 +115,7 @@ const RecipeOrder = ({ dish, side, drink }: RecipeProps) => {
             </Text>
           </View>
         </View>
-      </View>
+      </Card>
     </View>
   );
 };

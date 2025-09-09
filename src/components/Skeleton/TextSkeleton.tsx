@@ -1,6 +1,7 @@
 import { Skeleton } from "moti/skeleton";
 import { View } from "react-native";
 import { useTheme } from "@/contexts/ThemeContext";
+import { cn } from "@/utils/class.utils";
 
 export interface TextSkeletonProps {
   lines?: number;
@@ -33,7 +34,7 @@ export const TextSkeleton = ({
 
   return (
     <View
-      className={`${className || ''}${textCenter ? ' flex items-center' : ''}`}
+      className={cn(className, textCenter && " items-center")}
       style={{ gap, marginVertical: gap }}
     >
       {Array.from({ length: lines }, (_, index) => {

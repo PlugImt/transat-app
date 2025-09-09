@@ -94,7 +94,7 @@ export const FourchettasOrder = () => {
       {
         event_id: id,
         name: user?.last_name || "",
-        firstName: user?.first_name || "",
+        firstname: user?.first_name || "",
         phone,
         dish_id: dishId,
         side_id: sideId || 0,

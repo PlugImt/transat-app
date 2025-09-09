@@ -45,7 +45,7 @@ export const Fourchettas = () => {
             {t("services.fourchettas.noPhoneNumber")}
           </Text>
           <Button
-            className="bg-primary text-white px-4 py-2 rounded"
+            variant="default"
             onPress={() => {
               // Je n'ai pas réussi à trouver comment faire pour que le type soit reconnu
               // Mais ça marche :)

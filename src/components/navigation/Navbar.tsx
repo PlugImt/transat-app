@@ -100,6 +100,11 @@ const ServicesStack = () => (
     <Stack.Screen name="MyReservations" component={PersonalReservations} />
     <Stack.Screen name="ReservationCategory" component={Category} />
     <Stack.Screen name="ReservationCalendar" component={ReservationCalendar} />
+    <Stack.Screen name="Fourchettas" component={Fourchettas} />
+    <Stack.Screen
+      name="FourchettasOrder"
+      component={FourchettasOrder}
+    />
   </Stack.Navigator>
 );
 
@@ -111,53 +116,6 @@ const GamesStack = () => (
   </Stack.Navigator>
 );
 
-// Create stack navigators for each tab
-const HomeStack = createStackNavigator();
-const HomeStackScreen = () => (
-  <HomeStack.Navigator screenOptions={{ headerShown: false }}>
-    <HomeStack.Screen name="Home" component={Home} />
-    <HomeStack.Screen name="Laundry" component={Laundry} />
-    <HomeStack.Screen name="Restaurant" component={Restaurant} />
-    <HomeStack.Screen name="RestaurantReviews" component={RestaurantReviews} />
-    <HomeStack.Screen name="Olimtpe" component={Olimtpe} />
-    <HomeStack.Screen name="Timetable" component={Timetable} />
-    <HomeStack.Screen name="Homework" component={Homework} />
-    <HomeStack.Screen name="HomeworkDetails" component={HomeworkDetails} />
-  </HomeStack.Navigator>
-);
-
-const ServicesStack = createStackNavigator();
-const ServicesStackScreen = () => (
-  <ServicesStack.Navigator screenOptions={{ headerShown: false }}>
-    <ServicesStack.Screen name="Services" component={Services} />
-    <ServicesStack.Screen name="Laundry" component={Laundry} />
-    <ServicesStack.Screen name="Restaurant" component={Restaurant} />
-    <ServicesStack.Screen
-      name="RestaurantReviews"
-      component={RestaurantReviews}
-    />
-    <ServicesStack.Screen name="Timetable" component={Timetable} />
-    <ServicesStack.Screen name="Homework" component={Homework} />
-    <ServicesStack.Screen name="HomeworkDetails" component={HomeworkDetails} />
-    <ServicesStack.Screen name="Clubs" component={Clubs} />
-    <ServicesStack.Screen name="Traq" component={Traq} />
-    <ServicesStack.Screen name="Olimtpe" component={Olimtpe} />
-    <ServicesStack.Screen name="Fourchettas" component={Fourchettas} />
-    <ServicesStack.Screen
-      name="FourchettasOrder"
-      component={FourchettasOrder}
-    />
-  </ServicesStack.Navigator>
-);
-
-const GamesStack = createStackNavigator();
-const GamesStackScreen = () => (
-  <GamesStack.Navigator screenOptions={{ headerShown: false }}>
-    <GamesStack.Screen name="Games" component={Games} />
-  </GamesStack.Navigator>
-);
-
-const AccountStack = createStackNavigator();
 
 const AccountStack = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>

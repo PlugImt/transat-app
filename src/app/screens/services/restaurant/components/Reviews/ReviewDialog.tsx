@@ -1,4 +1,5 @@
 import { useRoute } from "@react-navigation/native";
+import type React from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { RestaurantReviewsRouteProp } from "@/app/screens/services/restaurant/components/Reviews";
@@ -10,7 +11,8 @@ import {
 import { Textarea } from "@/components/common/Textarea";
 import { useToast } from "@/components/common/Toast";
 import { Stars } from "@/components/custom/star/Stars";
-import { usePostRestaurantReview } from "@/hooks/useMenuRestaurant";
+import { usePostRestaurantReview } from "@/hooks/services/restaurant/useMenuRestaurant";
+import { hapticFeedback } from "@/utils/haptics.utils";
 
 interface ReviewDialogProps {
   children: React.ReactElement<{ onPress?: () => void }>;
@@ -45,12 +47,14 @@ export const ReviewDialog = ({ children }: ReviewDialogProps) => {
             "success",
           );
           handleClose();
+          hapticFeedback.success();
         },
         onError: () => {
           toast(
             t("services.restaurant.reviews.dialog.errorMessage"),
             "destructive",
           );
+          hapticFeedback.error();
         },
       },
     );
@@ -88,6 +92,7 @@ export const ReviewDialog = ({ children }: ReviewDialogProps) => {
             "services.restaurant.reviews.dialog.commentPlaceholder",
           )}
           disabled={isPostingReview}
+          maxLength={500}
         />
       </DialogContent>
     </Dialog>

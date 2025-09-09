@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { Image, View } from "react-native";
+import { View } from "react-native";
+import Image from "@/components/common/Image";
 import { Text } from "@/components/common/Text";
 import { AboutModal } from "@/components/custom/AboutModal";
 import { Page } from "@/components/page/Page";
@@ -21,7 +22,7 @@ export const Olimtpe = () => {
       <View className="min-h-full flex justify-center items-center gap-8 p-4">
         <Image
           source={require("@/assets/images/services/olimtpe.png")}
-          className="w-40 h-40"
+          size={100}
           resizeMode="contain"
         />
 

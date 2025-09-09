@@ -1,4 +1,5 @@
 import { Sprout } from "lucide-react-native";
+import type React from "react";
 import { cloneElement, isValidElement } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
@@ -17,7 +18,10 @@ export const Empty = ({ icon, title, description, children }: EmptyProps) => {
   const { t } = useTranslation();
 
   const Icon = isValidElement(icon) ? (
-    cloneElement(icon, { color: theme.text, size: 40 })
+    cloneElement(icon, {
+      color: theme.text,
+      ...(icon.props.size === undefined && { size: 40 }),
+    })
   ) : (
     <Sprout color={theme.text} size={40} />
   );

@@ -1,10 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
-import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
+import { HeroAnimation } from "@/components/animations/HeroAnimation/HeroAnimation";
 import { Button } from "@/components/common/Button";
-import { AnimatedLogo } from "@/components/custom/AnimatedLogo";
+import { Text } from "@/components/common/Text";
 import { Page } from "@/components/page/Page";
 import type { AuthStackParamList } from "@/types";
 
@@ -14,42 +14,42 @@ export const Welcome = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<LoginScreenNavigationProp>();
 
-  const triggerConfettiRef = useRef<(() => void) | null>(null);
-
   const handleNavigation = (route: "Signin" | "Signup") => {
     navigation.navigate(route);
   };
 
-  const handleLogoPress = () => {
-    if (triggerConfettiRef.current) {
-      triggerConfettiRef.current();
-    }
-  };
-
   const buttonsFooter = (
-    <View className="gap-2">
-      <Button
-        label={t("welcome.login")}
-        onPress={() => handleNavigation("Signin")}
-      />
+    <View className="flex-row gap-2">
       <Button
         variant="secondary"
-        label={t("welcome.register")}
+        label={t("auth.signUp.title")}
         onPress={() => handleNavigation("Signup")}
+        size="lg"
+        className="flex-1"
+      />
+      <Button
+        label={t("auth.signIn.title")}
+        onPress={() => handleNavigation("Signin")}
+        size="lg"
+        className="flex-1"
       />
     </View>
   );
 
   return (
     <Page
+      disableScroll
+      className="gap-2 items-center flex-1"
       footer={buttonsFooter}
-      onConfettiTrigger={(trigger) => {
-        triggerConfettiRef.current = trigger;
-      }}
-      confetti={true}
     >
-      <View className="flex flex-col items-center justify-center h-full">
-        <AnimatedLogo onLogoPress={handleLogoPress} />
+      <HeroAnimation />
+      <View className="items-center justify-center max-w-sm">
+        <Text variant="h1" className="text-center">
+          Transat
+        </Text>
+        <Text variant="lg" className="text-center">
+          {t("welcome.subtitle")}
+        </Text>
       </View>
     </Page>
   );

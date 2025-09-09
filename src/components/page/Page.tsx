@@ -1,9 +1,18 @@
-import React, { type ReactNode, useEffect, useRef, useState } from "react";
-import { Dimensions, RefreshControl, View } from "react-native";
-import ConfettiCannon from "react-native-confetti-cannon";
+import React, { type ReactNode } from "react";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  RefreshControl,
+  StyleSheet,
+  View,
+  type ViewStyle,
+} from "react-native";
 import Animated from "react-native-reanimated";
 import { useTheme } from "@/contexts/ThemeContext";
-import { useAnimatedHeader } from "@/hooks/useAnimatedHeader";
+import {
+  AnimatedHeaderContext,
+  useAnimatedHeader,
+} from "@/hooks/common/useAnimatedHeader";
 import { cn } from "@/utils";
 import { HEADER_HEIGHT, Header } from "./Header";
 
@@ -12,13 +21,14 @@ type PageProps = {
   refreshing?: boolean;
   onRefresh?: () => void;
   className?: string;
+  style?: ViewStyle;
   title?: string | ReactNode;
   header?: ReactNode;
   footer?: ReactNode;
-  confetti?: boolean;
-  onConfettiTrigger?: (trigger: () => void) => void;
   disableScroll?: boolean;
   asChildren?: boolean;
+  onBack?: () => void;
+  background?: ReactNode;
 };
 
 export const Page = ({
@@ -26,38 +36,24 @@ export const Page = ({
   refreshing = false,
   onRefresh,
   className,
+  style,
   title,
   header,
   footer,
-  confetti = false,
-  onConfettiTrigger,
   disableScroll = false,
   asChildren = false,
+  onBack,
+  background,
 }: PageProps) => {
   const { theme } = useTheme();
-  const { scrollHandler, headerShown } = useAnimatedHeader();
-  const confettiRef = useRef<ConfettiCannon>(null);
-  const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
-  const [confettiTriggered, setConfettiTriggered] = useState(false);
-
-  // Expose the confetti trigger function to parent components
-  useEffect(() => {
-    if (onConfettiTrigger) {
-      onConfettiTrigger(() => {
-        if (confettiRef.current) {
-          setConfettiTriggered(true);
-          confettiRef.current.start();
-        }
-      });
-    }
-  }, [onConfettiTrigger]);
-
+  const { scrollHandler, headerShown, scrollY } = useAnimatedHeader();
   const containerStyle = {
     paddingBottom: footer ? 0 : 40,
     paddingTop: HEADER_HEIGHT,
+    ...style,
   };
 
-  const containerClassName = cn("gap-4 px-5", className);
+  const containerClassName = cn("gap-6 px-5", className);
 
   const contentWrapperProps = {
     onScroll: scrollHandler,
@@ -102,37 +98,37 @@ export const Page = ({
 
   return (
     <View style={{ backgroundColor: theme.background }} className="flex-1">
-      <Header headerShown={headerShown} title={title}>
-        {header}
-      </Header>
-      {getContent()}
-      {footer && (
+      {background && (
         <View
-          style={{
-            backgroundColor: theme.background,
-            paddingHorizontal: 20,
-            paddingVertical: 16,
-          }}
+          pointerEvents="none"
+          style={StyleSheet.absoluteFillObject}
+          className="overflow-hidden"
         >
-          {footer}
+          {background}
         </View>
       )}
-
-      {confetti && (
-        <View style={{ zIndex: confettiTriggered ? 50 : -10 }}>
-          <ConfettiCannon
-            ref={confettiRef}
-            count={200}
-            origin={{ x: screenWidth / 2, y: screenHeight - 200 }}
-            autoStart={false}
-            fadeOut={false}
-            colors={[theme.primary, theme.secondary, theme.text]}
-            explosionSpeed={400}
-            fallSpeed={4000}
-            autoStartDelay={-1}
-          />
-        </View>
-      )}
+      <AnimatedHeaderContext.Provider value={{ headerShown, scrollY }}>
+        <Header headerShown={headerShown} title={title} onBack={onBack}>
+          {header}
+        </Header>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={{ flex: 1 }}
+        >
+          {getContent()}
+        </KeyboardAvoidingView>
+        {footer && (
+          <View
+            style={{
+              backgroundColor: theme.background,
+              paddingHorizontal: 20,
+              paddingVertical: 16,
+            }}
+          >
+            {footer}
+          </View>
+        )}
+      </AnimatedHeaderContext.Provider>
     </View>
   );
 };

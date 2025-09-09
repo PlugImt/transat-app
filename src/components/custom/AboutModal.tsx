@@ -40,12 +40,13 @@ export const AboutModal: React.FC<AboutModalProps> = ({
   return (
     <Dialog>
       <DialogTrigger>
-        <IconButton icon={<Info />} variant="ghost" />
+        <IconButton icon={<Info color={theme.muted} />} variant="link" />
       </DialogTrigger>
       <DialogContent
         title={title}
         confirmLabel={t("common.close")}
         className="gap-8"
+        scrollable
       >
         <Text>{description}</Text>
 

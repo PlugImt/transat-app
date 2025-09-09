@@ -1,15 +1,17 @@
-import { type ComponentPropsWithoutRef, cloneElement } from "react";
+import React, { type ComponentPropsWithoutRef, cloneElement } from "react";
 import {
   ActivityIndicator,
+  type GestureResponderEvent,
   TouchableOpacity,
   type ViewStyle,
 } from "react-native";
 import { Text } from "@/components/common/Text";
 import { type ThemeType, useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";
+import { hapticFeedback } from "@/utils/haptics.utils";
 
 type ButtonVariant = "default" | "secondary" | "destructive" | "ghost" | "link";
-type ButtonSize = "default" | "sm";
+type ButtonSize = "default" | "sm" | "lg";
 
 const getButtonStyle = (variant: ButtonVariant, theme: ThemeType) => {
   const buttonStyles: {
@@ -25,7 +27,7 @@ const getButtonStyle = (variant: ButtonVariant, theme: ThemeType) => {
       backgroundColor: theme.destructive,
     },
     ghost: {
-      backgroundColor: theme.backdrop,
+      backgroundColor: theme.border,
     },
     link: {
       backgroundColor: "transparent",
@@ -38,9 +40,9 @@ const getButtonStyle = (variant: ButtonVariant, theme: ThemeType) => {
 const getTextColor = (variant: ButtonVariant, theme: ThemeType) => {
   const textColors: { [key: string]: string } = {
     default: theme.primaryText,
-    secondary: theme.secondaryText,
+    secondary: theme.primary,
     destructive: theme.destructiveText,
-    ghost: theme.muted,
+    ghost: theme.text,
     link: theme.primary,
   };
 
@@ -62,6 +64,10 @@ const getSizeStyles = (size: ButtonSize) => {
       height: 32,
       paddingHorizontal: 8,
     },
+    lg: {
+      height: 48,
+      paddingHorizontal: 16,
+    },
   };
 
   return sizeStyles[size] || sizeStyles.default;
@@ -73,7 +79,7 @@ interface ButtonProps
   labelClasses?: string;
   variant?: ButtonVariant;
   size?: ButtonSize;
-  icon?: React.ReactNode;
+  icon?: React.ReactElement<{ color: string; size?: number }>;
   isUpdating?: boolean;
 }
 
@@ -85,6 +91,7 @@ const Button = ({
   size = "default",
   icon,
   isUpdating,
+  onPress,
   ...props
 }: ButtonProps) => {
   const { theme } = useTheme();
@@ -93,6 +100,11 @@ const Button = ({
   const buttonStyle = getButtonStyle(variant, theme);
   const textColor = getTextColor(variant, theme);
   const sizeStyles = getSizeStyles(size);
+
+  const handlePress = (event: GestureResponderEvent) => {
+    hapticFeedback.light();
+    onPress?.(event);
+  };
 
   return (
     <TouchableOpacity
@@ -105,10 +117,11 @@ const Button = ({
       ]}
       className={cn(
         className,
-        "rounded-lg gap-2 flex-row items-center justify-center",
+        "rounded-lg gap-1 flex-row items-center justify-center",
       )}
       {...props}
       disabled={isDisabled}
+      onPress={handlePress}
     >
       <Text
         style={{
@@ -118,7 +131,11 @@ const Button = ({
       >
         {label}
       </Text>
-      {isUpdating ? <ActivityIndicator color={textColor} /> : icon}
+      {isUpdating ? (
+        <ActivityIndicator color={textColor} />
+      ) : (
+        icon && cloneElement(icon, { color: textColor, size: 16 })
+      )}
     </TouchableOpacity>
   );
 };
@@ -133,14 +150,20 @@ const IconButton = ({
   size = "default",
   isUpdating,
   className,
+  onPress,
   ...props
 }: IconButtonProps) => {
   const { theme } = useTheme();
   const isDisabled = props.disabled || isUpdating;
 
-  const buttonStyle = variant === "default" && getButtonStyle(variant, theme);
+  const buttonStyle = getButtonStyle(variant, theme);
   const sizeStyles = getSizeStyles(size);
   const iconColor = getTextColor(variant, theme);
+
+  const handlePress = (event: GestureResponderEvent) => {
+    hapticFeedback.light();
+    onPress?.(event);
+  };
 
   return (
     <TouchableOpacity
@@ -157,13 +180,14 @@ const IconButton = ({
       )}
       disabled={isDisabled}
       {...props}
+      onPress={handlePress}
     >
       {isUpdating ? (
         <ActivityIndicator color={iconColor} />
+      ) : icon.props.color ? (
+        icon
       ) : (
-        cloneElement(icon, {
-          color: iconColor,
-        })
+        cloneElement(icon, { color: iconColor })
       )}
     </TouchableOpacity>
   );

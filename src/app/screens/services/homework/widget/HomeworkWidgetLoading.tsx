@@ -1,12 +1,12 @@
 import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity, View } from "react-native";
-import type { AppScreenNavigationProp } from "@/app/screens/services/schedule/widget/TimetableWidget";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
+import type { AppNavigation } from "@/types";
 
 export const HomeworkWidgetLoading = () => {
   const { theme } = useTheme();
-  const navigation = useNavigation<AppScreenNavigationProp>();
+  const navigation = useNavigation<AppNavigation>();
 
   const skeletonCount = () => Math.floor(Math.random() * 3) + 1;
 

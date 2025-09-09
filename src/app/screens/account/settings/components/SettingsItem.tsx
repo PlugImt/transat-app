@@ -1,5 +1,7 @@
+import type React from "react";
 import { TouchableOpacity, View } from "react-native";
 import { Text } from "@/components/common/Text";
+import { hapticFeedback } from "@/utils/haptics.utils";
 
 interface Props {
   icon?: React.ReactNode;
@@ -16,10 +18,16 @@ export const SettingsItem = ({
   onPress,
   rightElement,
 }: Props) => {
+  const handlePress = () => {
+    hapticFeedback.light();
+    onPress?.();
+  };
+
   return (
     <TouchableOpacity
       className="flex-row items-center justify-between py-4"
-      onPress={() => onPress?.()}
+      onPress={handlePress}
+      disabled={!onPress}
     >
       <View className="flex-row items-center gap-3 flex-1">
         {icon}

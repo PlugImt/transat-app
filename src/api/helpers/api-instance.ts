@@ -1,19 +1,10 @@
 import axios, { type AxiosInstance } from "axios";
-import { apiEnv } from "@/config";
 import { storage } from "@/services/storage/asyncStorage";
-import STORAGE_KEYS from "@/services/storage/constants";
-
-const { API_URL_DEV, API_URL_PROD } = apiEnv;
 
 let apiInstance: AxiosInstance | null = null;
 
-export const getAPIUrl = async (): Promise<string> => {
-  const isDevSelected = await storage.get(STORAGE_KEYS.IS_DEV_SERVER_SELECTED);
-  return isDevSelected === "true" && API_URL_DEV ? API_URL_DEV : API_URL_PROD;
-};
-
 const createApiInstance = async (): Promise<AxiosInstance> => {
-  const baseURL = await getAPIUrl();
+  const baseURL = process.env.EXPO_PUBLIC_API_URL;
 
   const instance = axios.create({ baseURL });
 
@@ -26,10 +17,13 @@ const createApiInstance = async (): Promise<AxiosInstance> => {
     }
 
     if (__DEV__) {
-      console.log(`[API] ${config.method?.toUpperCase()} ${config.url}`, {
-        baseURL,
-        hasToken: Boolean(token),
-      });
+      console.log(
+        `[API] ${config.method?.toUpperCase()} ${config.url} BODY: ${JSON.stringify(config.data) || "No Body"}`,
+        {
+          baseURL,
+          hasToken: Boolean(token),
+        },
+      );
     }
 
     return config;

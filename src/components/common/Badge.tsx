@@ -1,7 +1,7 @@
 import type { LucideIcon } from "lucide-react-native";
 import type React from "react";
 import { TouchableOpacity, type ViewStyle } from "react-native";
-import { Text } from "@/components/common/Text";
+import { Text, type TextVariant } from "@/components/common/Text";
 import { type ThemeType, useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";
 
@@ -32,7 +32,7 @@ const getBadgeStyle = (variant: BadgeVariant, theme: ThemeType) => {
 const getTextColor = (variant: BadgeVariant) => {
   const badgeTextStyles: { [key in BadgeVariant]: keyof ThemeType } = {
     default: "primaryText",
-    secondary: "secondaryText",
+    secondary: "primary",
     destructive: "destructiveText",
     ghost: "muted",
   };
@@ -41,15 +41,33 @@ const getTextColor = (variant: BadgeVariant) => {
 
 const getSize = (size: BadgeSize) => {
   const badgeSize: {
-    [key: string]: ViewStyle;
+    [key: string]: {
+      container: ViewStyle;
+      text: {
+        size: number;
+        variant: TextVariant;
+      };
+    };
   } = {
     default: {
-      paddingHorizontal: 16,
-      paddingVertical: 4,
+      container: {
+        paddingHorizontal: 16,
+        paddingVertical: 4,
+      },
+      text: {
+        size: 14,
+        variant: "default",
+      },
     },
     sm: {
-      paddingHorizontal: 10,
-      paddingVertical: 6,
+      container: {
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+      },
+      text: {
+        size: 12,
+        variant: "sm",
+      },
     },
   };
   return badgeSize[size] || badgeSize.default;
@@ -94,14 +112,18 @@ const Badge = ({
       style={[
         {
           ...badgeStyle,
-          ...sizeStyles,
+          ...sizeStyles.container,
           opacity: isDisabled ? 0.5 : 1,
         },
       ]}
       {...props}
     >
-      {Icon && <Icon size={14} color={theme[textColor]} />}
-      <Text className={labelClasses} color={textColor}>
+      {Icon && <Icon size={sizeStyles.text.size} color={theme[textColor]} />}
+      <Text
+        className={labelClasses}
+        color={textColor}
+        variant={sizeStyles.text.variant}
+      >
         {label}
       </Text>
     </TouchableOpacity>

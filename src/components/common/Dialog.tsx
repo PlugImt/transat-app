@@ -1,16 +1,17 @@
 import { MotiView } from "moti";
+import type React from "react";
 import { cloneElement, createContext, useContext, useState } from "react";
 import {
   KeyboardAvoidingView,
   Modal,
   Platform,
-  ScrollView,
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import { Button } from "@/components/common/Button";
+import Card from "@/components/common/Card";
+import ScrollViewWithIndicators from "@/components/common/ScrollViewWithIndicators";
 import { Text } from "@/components/common/Text";
-import { Button } from "./Button";
-import Card from "./Card";
 
 interface DialogContextType {
   open: boolean;
@@ -49,6 +50,8 @@ type DialogContentProps = {
   title: string;
   isPending?: boolean;
   disableConfirm?: boolean;
+  scrollable?: boolean;
+  contentMaxHeight?: number;
 };
 
 const DialogContent = ({
@@ -59,8 +62,10 @@ const DialogContent = ({
   onCancel,
   onConfirm,
   disableConfirm,
+  scrollable,
   title,
   isPending,
+  contentMaxHeight,
 }: DialogContentProps) => {
   const { open, setOpen } = useDialog();
 
@@ -113,11 +118,17 @@ const DialogContent = ({
           >
             <Card className="w-full gap-6">
               <Text variant="h2">{title}</Text>
-              <ScrollView keyboardShouldPersistTaps="handled">
+
+              <ScrollViewWithIndicators
+                keyboardShouldPersistTaps="handled"
+                maxHeight={contentMaxHeight ?? 400}
+                scrollable={scrollable}
+              >
                 <TouchableWithoutFeedback className="pr-6">
                   <View className={className}>{children}</View>
                 </TouchableWithoutFeedback>
-              </ScrollView>
+              </ScrollViewWithIndicators>
+
               {(cancelLabel || confirmLabel) && (
                 <View className="flex-row items-center gap-2">
                   {cancelLabel && (

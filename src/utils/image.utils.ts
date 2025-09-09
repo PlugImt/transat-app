@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as ImagePicker from "expo-image-picker";
 import { t } from "i18next";
-import { getAPIUrl } from "@/api";
+import type { ImageSourcePropType } from "react-native";
 import { storage } from "@/services/storage/asyncStorage";
 
 /**
@@ -15,7 +15,6 @@ export const uploadImage = async (): Promise<string> => {
   }
 
   const result = await ImagePicker.launchImageLibraryAsync({
-    mediaTypes: ImagePicker.MediaTypeOptions.Images,
     allowsEditing: true,
     aspect: [1, 1],
     quality: 0.8,
@@ -40,9 +39,9 @@ export const uploadImage = async (): Promise<string> => {
       type: `image/${image.uri.split(".").pop()}` || "image/jpeg",
     } as unknown as Blob);
 
-    const apiUrl = await getAPIUrl();
+    const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
-    const uploadResponse = await axios.post(`${apiUrl}/api/upload`, formData, {
+    const uploadResponse = await axios.post(`${apiUrl}/upload`, formData, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",
@@ -58,4 +57,25 @@ export const uploadImage = async (): Promise<string> => {
     console.error("Image upload failed:", error);
     throw new Error(t("account.profilePictureUpdateFailed"));
   }
+};
+
+export const isValidSource = (src: ImageSourcePropType | undefined) => {
+  if (!src) return false;
+  if (typeof src === "number") return true;
+  if (
+    typeof src === "object" &&
+    "uri" in src &&
+    src.uri &&
+    src.uri.trim() !== ""
+  )
+    return true;
+  return false;
+};
+
+export const normalizeSource = (
+  source?: ImageSourcePropType | string,
+): ImageSourcePropType | undefined => {
+  if (!source) return undefined;
+  if (typeof source === "string") return { uri: source };
+  return source;
 };

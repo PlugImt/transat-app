@@ -2,11 +2,11 @@ import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity, View } from "react-native";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
-import type { AppScreenNavigationProp } from "./TimetableWidget";
+import type { AppNavigation } from "@/types";
 
 export const TimetableLoadingWidget = () => {
   const { theme } = useTheme();
-  const navigation = useNavigation<AppScreenNavigationProp>();
+  const navigation = useNavigation<AppNavigation>();
 
   const skeletonCount = () => Math.floor(Math.random() * 3) + 1;
 

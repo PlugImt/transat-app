@@ -3,28 +3,25 @@ import { useIsFetching, useQueryClient } from "@tanstack/react-query";
 import { Mail, Phone, Settings } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/common/Avatar";
+import Avatar from "@/components/common/Avatar";
 import { Button, IconButton } from "@/components/common/Button";
 import Card from "@/components/common/Card";
 import InfoItem from "@/components/common/InfoItem";
 import { Text } from "@/components/common/Text";
+import { LogoutButton } from "@/components/custom/LogoutButton";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
 import { AvatarSkeleton, TextSkeleton } from "@/components/Skeleton";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useUser } from "@/hooks/account/useUser";
-import type { AccountNavigation } from "@/types";
+import type { AppNavigation } from "@/types";
 import { getStudentYear } from "@/utils";
 
 export const Account = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
-  const navigation = useNavigation<AccountNavigation>();
+  const navigation = useNavigation<AppNavigation>();
   const queryClient = useQueryClient();
 
   const { data: user, isPending, isError, error } = useUser();
@@ -45,15 +42,16 @@ export const Account = () => {
     return <AccountLoading />;
   }
 
-  if (isError && error) {
+  if ((isError && error) || !user) {
     return (
       <ErrorPage
         title={t("common.account")}
         error={error}
         refetch={refetch}
         isRefetching={isPending}
-        isAccountPage={true}
-      />
+      >
+        <LogoutButton />
+      </ErrorPage>
     );
   }
 
@@ -61,28 +59,17 @@ export const Account = () => {
     <Page
       refreshing={isUserFetching}
       onRefresh={refetch}
-      className="gap-6"
       title={t("common.account")}
       header={
         <IconButton
-          icon={<Settings />}
-          variant="ghost"
+          icon={<Settings color={theme.text} />}
+          variant="link"
           onPress={() => navigation.navigate("Settings")}
         />
       }
     >
       <View className="items-center gap-2">
-        <Avatar className="w-32 h-32">
-          <AvatarImage
-            source={{
-              uri: user?.profile_picture,
-            }}
-          />
-          <AvatarFallback>
-            {user?.first_name?.charAt(0)}
-            {user?.last_name?.charAt(0)}
-          </AvatarFallback>
-        </Avatar>
+        <Avatar user={user} size={128} />
 
         <View className="gap-1 justify-center items-center">
           <Text variant="h2">
@@ -122,15 +109,15 @@ export default Account;
 const AccountLoading = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
-  const navigation = useNavigation<AccountNavigation>();
+  const navigation = useNavigation<AppNavigation>();
 
   return (
     <Page
       title={t("common.account")}
       header={
         <IconButton
-          icon={<Settings />}
-          variant="ghost"
+          icon={<Settings color={theme.text} />}
+          variant="link"
           onPress={() => navigation.navigate("Settings")}
         />
       }

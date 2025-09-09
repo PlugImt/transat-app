@@ -15,7 +15,7 @@ import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Course } from "@/dto";
 import useAuth from "@/hooks/account/useAuth";
-import { useTimetableForWeek } from "@/hooks/useTimetable";
+import { useTimetableForWeek } from "@/hooks/services/timetable/useTimetable";
 import { isoToHourString } from "@/utils";
 import { Cours, LoadingState } from "./components";
 

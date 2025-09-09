@@ -1,6 +1,13 @@
 import { BottomSheetModal, BottomSheetView } from "@gorhom/bottom-sheet";
 import type React from "react";
-import { cloneElement, createContext, useContext, useRef } from "react";
+import {
+  cloneElement,
+  createContext,
+  type ReactElement,
+  type ReactNode,
+  useContext,
+  useRef,
+} from "react";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
   runOnJS,
@@ -10,49 +17,28 @@ import Animated, {
 } from "react-native-reanimated";
 import { useTheme } from "@/contexts/ThemeContext";
 
-// Context pour gérer l'état du bottom sheet
 interface BottomSheetContextType {
   bottomSheetRef: React.RefObject<BottomSheetModal | null>;
   handleBottomSheet: (open: boolean) => void;
 }
+
 const BottomSheetContext = createContext<BottomSheetContextType | undefined>(
   undefined,
 );
 
-export const useBottomSheet = () => {
+const useBottomSheet = () => {
   const context = useContext(BottomSheetContext);
-  if (!context) {
+  if (!context)
     throw new Error("useBottomSheet must be used within a BottomSheetProvider");
-  }
   return context;
 };
 
-// Composant qui déclenche l'ouverture du bottom sheet
-export const BottomSheetTrigger = ({
-  children,
-}: {
-  children: React.ReactElement<{ onPress?: () => void }>;
-}) => {
-  const { handleBottomSheet } = useBottomSheet();
-  return cloneElement(children, { onPress: () => handleBottomSheet(true) });
-};
-
-// Provider qui gère l'état global du bottom sheet
-export const BottomSheetProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const bottomSheetRef = useRef<BottomSheetModal>(null);
-
+const BottomSheetProvider = ({ children }: { children: ReactNode }) => {
+  const bottomSheetRef = useRef<BottomSheetModal | null>(null);
   const handleBottomSheet = (open: boolean) => {
-    if (open) {
-      bottomSheetRef.current?.present();
-    } else {
-      bottomSheetRef.current?.dismiss();
-    }
+    if (open) bottomSheetRef.current?.present();
+    else bottomSheetRef.current?.dismiss();
   };
-
   return (
     <BottomSheetContext.Provider value={{ bottomSheetRef, handleBottomSheet }}>
       {children}
@@ -60,20 +46,24 @@ export const BottomSheetProvider = ({
   );
 };
 
-// Composant principal du bottom sheet
-export const BottomSheet = ({ children }: { children: React.ReactNode }) => {
+const BottomSheetTrigger = ({
+  children,
+}: {
+  children: ReactElement<{ onPress?: () => void }>;
+}) => {
+  const { handleBottomSheet } = useBottomSheet();
+  return cloneElement(children, { onPress: () => handleBottomSheet(true) });
+};
+
+const BottomSheet = ({ children }: { children: ReactNode }) => {
   const { bottomSheetRef, handleBottomSheet } = useBottomSheet();
   const { theme } = useTheme();
   const opacity = useSharedValue(0);
 
-  // Configuration du geste de fermeture
   const gesture = Gesture.Pan().onFinalize((e) => {
-    if (e.velocityY > 500) {
-      runOnJS(handleBottomSheet)(false);
-    }
+    if (e.velocityY > 500) runOnJS(handleBottomSheet)(false);
   });
 
-  // Style animé pour le backdrop
   const animatedBackdropStyle = useAnimatedStyle(() => ({
     opacity: opacity.value,
   }));
@@ -86,11 +76,9 @@ export const BottomSheet = ({ children }: { children: React.ReactNode }) => {
       enableDismissOnClose
       enablePanDownToClose
       index={0}
-      // Animation du backdrop
-      onAnimate={(_fromIndex, toIndex) => {
-        opacity.value = withTiming(toIndex === 0 ? 0.5 : 0, { duration: 300 });
+      onAnimate={(_from, to) => {
+        opacity.value = withTiming(to === 0 ? 0.5 : 0, { duration: 300 });
       }}
-      // Backdrop avec animation
       backdropComponent={({ style }) => (
         <Animated.View
           style={[
@@ -105,12 +93,8 @@ export const BottomSheet = ({ children }: { children: React.ReactNode }) => {
       <GestureDetector gesture={gesture}>
         <Animated.View>
           <BottomSheetView
-            style={{
-              backgroundColor: theme.card,
-              paddingHorizontal: 20,
-              paddingTop: 32,
-              gap: 8,
-            }}
+            style={{ backgroundColor: theme.card }}
+            className="gap-1 py-6 px-5"
           >
             {children}
           </BottomSheetView>
@@ -119,3 +103,6 @@ export const BottomSheet = ({ children }: { children: React.ReactNode }) => {
     </BottomSheetModal>
   );
 };
+
+// Exports regroupés
+export { BottomSheetProvider, BottomSheetTrigger, BottomSheet, useBottomSheet };

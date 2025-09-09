@@ -1,6 +1,6 @@
 import * as Sentry from "@sentry/react-native";
 import type { AxiosError } from "axios";
-import {
+import React, {
   createContext,
   type FC,
   useCallback,
@@ -13,7 +13,7 @@ import { useVerificationCode } from "@/hooks/auth/useVerificationCode";
 
 interface AuthContextType {
   user: User | null | undefined;
-  isLoading: boolean;
+  isPending: boolean;
   login: (
     email: string,
     password: string,
@@ -59,6 +59,8 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     user: userQuery,
     refetchUser,
     isUserLoading,
+    isLoggingIn,
+    isRegistering,
     login: loginMutation,
     register: registerMutation,
     saveToken: saveTokenMutation,
@@ -76,6 +78,7 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
   } = useVerificationCode();
 
   const [user, setUser] = useState<User | NotLoggedIn | Loading>(undefined);
+
   useEffect(() => {
     if (typeof userQuery !== "undefined") {
       setUser(userQuery);
@@ -216,7 +219,7 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
 
   const value = {
     user,
-    isLoading: isUserLoading,
+    isPending: isUserLoading || isLoggingIn || isRegistering,
     login,
     logout,
     register,

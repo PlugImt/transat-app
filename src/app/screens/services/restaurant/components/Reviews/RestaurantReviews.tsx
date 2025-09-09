@@ -17,12 +17,12 @@ import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
-import { userMenuRating } from "@/hooks/useMenuRestaurant";
-import type { AppStackParamList } from "@/types";
+import { userMenuRating } from "@/hooks/services/restaurant/useMenuRestaurant";
+import type { BottomTabParamList } from "@/types";
 import { getOpeningHoursData } from "@/utils";
 
 export type RestaurantReviewsRouteProp = RouteProp<
-  AppStackParamList,
+  BottomTabParamList,
   "RestaurantReviews"
 >;
 
@@ -112,28 +112,27 @@ export const RestaurantReviews = () => {
       </View>
 
       {/* Liste des avis */}
-      {hasReview ? (
-        <FlatList
-          data={reviewData.recent_reviews}
-          renderItem={({ item }) => <ReviewItem review={item} />}
-          scrollEnabled={false}
-          showsVerticalScrollIndicator={false}
-          contentContainerClassName="gap-2"
-        />
-      ) : (
-        <Empty
-          icon={<CookingPot size={50} color={theme.primary} />}
-          title={t("services.restaurant.reviews.noReviewsTitle")}
-          description={t("services.restaurant.reviews.noReviewsSubtitle")}
-        >
-          <ReviewDialog>
-            <Button
-              label={t("services.restaurant.reviews.rate")}
-              className="w-full"
-            />
-          </ReviewDialog>
-        </Empty>
-      )}
+      <FlatList
+        data={reviewData.recent_reviews}
+        renderItem={({ item }) => <ReviewItem review={item} />}
+        scrollEnabled={false}
+        showsVerticalScrollIndicator={false}
+        contentContainerClassName="gap-2"
+        ListEmptyComponent={
+          <Empty
+            icon={<CookingPot size={50} color={theme.primary} />}
+            title={t("services.restaurant.reviews.noReviewsTitle")}
+            description={t("services.restaurant.reviews.noReviewsSubtitle")}
+          >
+            <ReviewDialog>
+              <Button
+                label={t("services.restaurant.reviews.rate")}
+                className="w-full"
+              />
+            </ReviewDialog>
+          </Empty>
+        }
+      />
     </Page>
   );
 };

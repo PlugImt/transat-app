@@ -53,7 +53,7 @@ const Help = () => {
   ];
 
   return (
-    <Page className="gap-6" title={t("settings.help.title")}>
+    <Page title={t("settings.help.title")}>
       <Text className="mx-4 mb-2" color="muted">
         {t("settings.help.description")}
       </Text>
@@ -106,9 +106,9 @@ const Help = () => {
             <View className="flex-row items-center gap-3">
               <SquareArrowOutUpRight size={22} color={theme.text} />
               <View className="ml-2.5 max-w-[80%]">
-                <Text>{t("settings.help.joinWhatsApp")}</Text>
+                <Text>{t("settings.help.whatsapp.title")}</Text>
                 <Text className="break-words" color="muted" variant="sm">
-                  {t("settings.help.joinCommunity")}
+                  {t("settings.help.whatsapp.description")}
                 </Text>
               </View>
             </View>

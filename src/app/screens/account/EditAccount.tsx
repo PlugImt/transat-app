@@ -6,11 +6,7 @@ import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Keyboard, TouchableOpacity, View } from "react-native";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/common/Avatar";
+import Avatar from "@/components/common/Avatar";
 import { Button, IconButton } from "@/components/common/Button";
 import Dropdown, { DropdownLoading } from "@/components/common/Dropdown";
 import Input, { InputLoading } from "@/components/common/Input";
@@ -26,6 +22,7 @@ import type { formationName } from "@/enums";
 import { useUpdateAccount } from "@/hooks/account/useUpdateAccount";
 import { useUpdateProfilePicture } from "@/hooks/account/useUpdateProfilePicture";
 import { useUser } from "@/hooks/account/useUser";
+import { hapticFeedback } from "@/utils/haptics.utils";
 
 export const EditProfile = () => {
   const { theme } = useTheme();
@@ -79,7 +76,7 @@ export const EditProfile = () => {
   const currentYear = new Date().getFullYear();
   // If we're past September, we're in the next academic year
   const startAcademicYear = currentMonth >= 8 ? currentYear : currentYear - 1;
-  const yearOptions = Array.from({ length: 4 }, (_, i) => {
+  const yearOptions = Array.from({ length: 5 }, (_, i) => {
     return (startAcademicYear + i).toString();
   });
 
@@ -87,12 +84,14 @@ export const EditProfile = () => {
     Keyboard.dismiss();
     updateAccount(data, {
       onSuccess: async () => {
+        hapticFeedback.success();
         await refetch();
         toast(t("account.profileUpdated"), "success");
         navigation.goBack();
       },
       onError: (error) => {
         toast(error.message, "destructive");
+        hapticFeedback.error();
       },
     });
   };
@@ -100,19 +99,21 @@ export const EditProfile = () => {
   const handleUpdateProfilePicture = () => {
     updateProfilePicture(undefined, {
       onSuccess: async () => {
+        hapticFeedback.success();
         await refetch();
         toast(t("account.profilePictureUpdated"), "success");
       },
       onError: (error) => {
         if (error.message) {
           toast(error.message, "destructive");
+          hapticFeedback.error();
         }
       },
     });
   };
 
   if (isPending) {
-    return <EditProfileLoading />;
+    return <EditAccountSkeleton />;
   }
 
   if ((isError && error) || !user) {
@@ -130,7 +131,6 @@ export const EditProfile = () => {
 
   return (
     <Page
-      className="gap-6"
       refreshing={isPending}
       onRefresh={refetch}
       title={t("account.editProfile")}
@@ -140,22 +140,12 @@ export const EditProfile = () => {
           className="relative"
           onPress={handleUpdateProfilePicture}
         >
-          <Avatar className="w-32 h-32">
-            <AvatarImage
-              source={{
-                uri: user.profile_picture,
-              }}
-              loading={isUpdatingProfilePicture}
-            />
-            <AvatarFallback>
-              {user.first_name.charAt(0)}
-              {user.last_name.charAt(0)}
-            </AvatarFallback>
-          </Avatar>
+          <Avatar user={user} size={128} />
           <IconButton
             className="absolute bottom-0 right-0"
             icon={<Edit size={16} />}
             onPress={handleUpdateProfilePicture}
+            isUpdating={isUpdatingProfilePicture}
           />
         </TouchableOpacity>
       </View>
@@ -207,7 +197,7 @@ export const EditProfile = () => {
           render={({ field: { onChange, value } }) => (
             <Dropdown
               label={t("account.formationName")}
-              placeholder={t("account.selectBranch")}
+              placeholder={t("account.selectFormationName")}
               options={["FISE", "FIL", "FIT", "FIP"]}
               value={value}
               onValueChange={onChange}
@@ -252,13 +242,13 @@ export const EditProfile = () => {
 
 export default EditProfile;
 
-const EditProfileLoading = () => {
+const EditAccountSkeleton = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
   const navigation = useNavigation();
 
   return (
-    <Page title={t("account.editProfile")} className="gap-8">
+    <Page title={t("account.editProfile")}>
       <View className="flex-row items-center justify-between m-4">
         <Text variant="h1">{t("account.editProfile")}</Text>
         <Button

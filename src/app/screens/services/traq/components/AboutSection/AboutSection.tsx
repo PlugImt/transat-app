@@ -9,7 +9,6 @@ export const AboutSection = () => {
       description={t("services.traq.about")}
       openingHours={t("services.traq.openingHours")}
       location={t("services.traq.location")}
-      additionalInfo={t("services.traq.additionalInfo")}
     />
   );
 };

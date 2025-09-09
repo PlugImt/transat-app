@@ -11,7 +11,7 @@ import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useLanguageOptions } from "@/hooks/account/useLanguageOptions";
 import { useUpdateLanguage } from "@/hooks/account/useUpdateLanguage";
-import type { SettingsNavigation } from "@/types";
+import type { AppNavigation } from "@/types";
 import SettingCategory from "./components/SettingCategory";
 import { SettingsItem } from "./components/SettingsItem";
 
@@ -19,24 +19,23 @@ export const Language = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   const { toast } = useToast();
-  const navigation = useNavigation<SettingsNavigation>();
+  const navigation = useNavigation<AppNavigation>();
   const { mutate: updateLanguage, isPending } = useUpdateLanguage();
   const { currentLanguageOption, otherLanguages } = useLanguageOptions();
 
   const handleLanguageChange = async (languageCode: string) => {
-    try {
-      updateLanguage(languageCode, {
-        onSuccess: () => {
-          navigation.goBack();
-        },
-      });
-    } catch (_) {
-      toast(t("settings.language.selectLanguageError"), "destructive");
-    }
+    updateLanguage(languageCode, {
+      onSuccess: () => {
+        navigation.goBack();
+      },
+      onError: () => {
+        toast(t("settings.language.selectLanguageError"), "destructive");
+      },
+    });
   };
 
   return (
-    <Page title={t("settings.language.language")}>
+    <Page title={t("settings.language.language")} className="gap-4">
       {currentLanguageOption && (
         <MotiView
           animate={{

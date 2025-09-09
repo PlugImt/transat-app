@@ -1,8 +1,9 @@
+import type React from "react";
 import { Text as RText, type StyleProp, type TextStyle } from "react-native";
 import { type ThemeColorKeys, useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";
 
-type TextVariant = "h1" | "h2" | "h3" | "lg" | "default" | "sm";
+export type TextVariant = "h1" | "h2" | "h3" | "lg" | "default" | "sm";
 
 interface TextProps extends React.ComponentProps<typeof RText> {
   style?: StyleProp<TextStyle>;

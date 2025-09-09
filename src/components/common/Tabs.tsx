@@ -1,3 +1,4 @@
+import type React from "react";
 import { createContext, useContext, useState } from "react";
 import { TouchableOpacity, View } from "react-native";
 import { Text } from "@/components/common/Text";
@@ -8,7 +9,7 @@ interface TabsContextProps {
   activeTab: string;
   setActiveTab: (id: string) => void;
 }
-const TabsContext = createContext<TabsContextProps>({
+export const TabsContext = createContext<TabsContextProps>({
   activeTab: "",
   setActiveTab: () => {},
 });
@@ -57,7 +58,7 @@ const TabsTrigger = ({
 
   return (
     <TouchableOpacity
-      className={cn("px-8 py-3 rounded-md flex-1", className)}
+      className={cn("px-8 py-3 rounded-md flex-1 relative", className)}
       style={{
         backgroundColor: activeTab === value ? theme.card : "transparent",
       }}
@@ -65,6 +66,7 @@ const TabsTrigger = ({
       {...props}
     >
       <Text className={cn("text-center", textClasses)}>{title}</Text>
+      {props.children}
     </TouchableOpacity>
   );
 };

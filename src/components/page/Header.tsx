@@ -19,14 +19,16 @@ type HeaderProps = {
   headerShown: SharedValue<number>;
   title?: string | ReactNode;
   children?: React.ReactNode;
+  onBack?: () => void;
 };
 
-export function Header({ headerShown, title, children }: HeaderProps) {
+export function Header({ headerShown, title, children, onBack }: HeaderProps) {
   const { theme } = useTheme();
   const navigation = useNavigation();
 
   const route = useRoute();
-  const canGoBack = !Object.values(TabRoute).includes(route.name as TabRoute);
+  const canGoBack =
+    onBack || !Object.values(TabRoute).includes(route.name as TabRoute);
 
   const headerAnimatedStyle = useAnimatedStyle(() => {
     // If canGoBack is true, the header is not shown (here to compute the value every time)
@@ -53,6 +55,18 @@ export function Header({ headerShown, title, children }: HeaderProps) {
     };
   });
 
+  if (!title) {
+    return null;
+  }
+
+  const handleBack = () => {
+    if (onBack) {
+      onBack();
+    } else {
+      navigation.goBack();
+    }
+  };
+
   return (
     <Animated.View
       style={[headerAnimatedStyle, { backgroundColor: theme.overlay }]}
@@ -66,10 +80,7 @@ export function Header({ headerShown, title, children }: HeaderProps) {
           {(canGoBack || title) && (
             <View className="flex flex-row items-center flex-1">
               {canGoBack && (
-                <ArrowLeft
-                  color={theme.text}
-                  onPress={() => navigation.goBack()}
-                />
+                <ArrowLeft color={theme.text} onPress={handleBack} />
               )}
               {title && (
                 <Text variant="h1" className="ml-4 flex-1" numberOfLines={1}>

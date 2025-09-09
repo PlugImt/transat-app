@@ -7,65 +7,33 @@ import {
   HelpCircle,
   Info,
   Palette,
-  Server,
   Shield,
+  Vibrate,
 } from "lucide-react-native";
-import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/common/Button";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "@/components/common/Dialog";
 import { Switch } from "@/components/common/Switch";
-import { Text } from "@/components/common/Text";
-import { useToast } from "@/components/common/Toast";
-import { AccountCard } from "@/components/custom/card/AccountCard";
+import { UserCard } from "@/components/custom/card/UserCard";
+import { LogoutButton } from "@/components/custom/LogoutButton";
 import { Page } from "@/components/page/Page";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
-import useAuth from "@/hooks/account/useAuth";
+import { useHapticFeedback } from "@/hooks/account/useHapticFeedback";
 import { useLanguageOptions } from "@/hooks/account/useLanguageOptions";
 import { useUser } from "@/hooks/account/useUser";
-import { storage } from "@/services/storage/asyncStorage";
-import STORAGE_KEYS from "@/services/storage/constants";
-import type { SettingsNavigation } from "@/types";
+import type { AppNavigation } from "@/types";
 import SettingCategory from "./components/SettingCategory";
 import SettingsItem from "./components/SettingsItem";
 
 export const Settings = () => {
   const { theme, themeMode } = useTheme();
   const { t } = useTranslation();
-  const { logout } = useAuth();
-  const { toast } = useToast();
   const queryClient = useQueryClient();
   const { data: user, isPending } = useUser();
-  const navigation = useNavigation<SettingsNavigation>();
-  const [isDevServerSelected, setIsDevServerSelected] = React.useState(false);
+  const navigation = useNavigation<AppNavigation>();
   const { currentLanguageOption } = useLanguageOptions();
-
-  useEffect(() => {
-    const loadDevServerSetting = async () => {
-      const value = await storage.get(STORAGE_KEYS.IS_DEV_SERVER_SELECTED);
-      setIsDevServerSelected(value === "true");
-    };
-    loadDevServerSetting();
-  }, []);
-
-  const handleDevServerToggle = async (value: boolean) => {
-    setIsDevServerSelected(value);
-    await storage.set(STORAGE_KEYS.IS_DEV_SERVER_SELECTED, value.toString());
-  };
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-      toast(t("auth.disconnected"));
-    } catch (err) {
-      console.error("Error logging out:", err);
-    }
-  };
+  const { isEnabled: isHapticEnabled, toggleHapticFeedback } =
+    useHapticFeedback();
 
   const refetch = async () => {
     await queryClient.invalidateQueries({ queryKey: QUERY_KEYS.user });
@@ -83,12 +51,20 @@ export const Settings = () => {
 
   return (
     <Page
-      className="gap-6"
       refreshing={isPending}
       onRefresh={refetch}
       title={t("settings.settings")}
     >
-      <AccountCard user={user} />
+      <UserCard
+        user={user}
+        action={
+          <Button
+            label={t("common.edit")}
+            variant="ghost"
+            onPress={() => navigation.navigate("EditProfile")}
+          />
+        }
+      />
 
       <SettingCategory title={t("common.appearance")}>
         <SettingsItem
@@ -113,19 +89,30 @@ export const Settings = () => {
         />
       </SettingCategory>
 
-      <SettingCategory title={t("account.security")}>
+      <SettingCategory title={t("settings.security")}>
         <SettingsItem
           icon={<Shield color={theme.text} size={22} />}
-          title={t("account.changePassword")}
+          title={t("auth.resetPassword.changePassword")}
           onPress={() => navigation.navigate("ChangePassword")}
         />
       </SettingCategory>
 
       <SettingCategory title={t("common.other")}>
         <SettingsItem
+          icon={<Vibrate color={theme.text} size={22} />}
+          title={t("settings.hapticFeedback.title")}
+          subtitle={t("settings.hapticFeedback.description")}
+          rightElement={
+            <Switch
+              value={isHapticEnabled}
+              onValueChange={toggleHapticFeedback}
+            />
+          }
+        />
+        <SettingsItem
           icon={<HelpCircle color={theme.text} size={22} />}
           title={t("settings.help.title")}
-          subtitle={t("settings.contactSupport")}
+          subtitle={t("settings.help.subtitle")}
           onPress={() => navigation.navigate("Help")}
         />
         <SettingsItem
@@ -140,42 +127,9 @@ export const Settings = () => {
           subtitle={t("settings.legal.subtitle")}
           onPress={() => navigation.navigate("Legal")}
         />
-
-        {process.env.NODE_ENV === "development" && (
-          <SettingsItem
-            icon={<Server color={theme.text} size={22} />}
-            title={t("settings.devServer")}
-            subtitle={t("settings.devServerDescription")}
-            onPress={() => {}}
-            rightElement={
-              <Switch
-                value={isDevServerSelected}
-                onValueChange={handleDevServerToggle}
-              />
-            }
-          />
-        )}
       </SettingCategory>
 
-      <Dialog>
-        <DialogTrigger>
-          <Button
-            label={t("settings.logout")}
-            onPress={handleLogout}
-            variant="destructive"
-          />
-        </DialogTrigger>
-
-        <DialogContent
-          title={t("settings.logout")}
-          className="gap-2"
-          cancelLabel={t("common.cancel")}
-          confirmLabel={t("settings.logoutConfirm")}
-          onConfirm={handleLogout}
-        >
-          <Text>{t("settings.logoutDesc")}</Text>
-        </DialogContent>
-      </Dialog>
+      <LogoutButton />
     </Page>
   );
 };

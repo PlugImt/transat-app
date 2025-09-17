@@ -6,7 +6,7 @@ import { useRef, useEffect, useState } from "react";
 import Animated from "react-native-reanimated";
 
 import { Page } from "@/components/page/Page";
-import type { AppStackParamList } from "@/types";
+import type { BottomTabParamList } from "@/types";
 import { useUser } from "@/hooks/account/useUser";
 import {
   FourchettasItemCard,
@@ -22,7 +22,7 @@ import { phoneWithoutSpaces } from "../../utils/common";
 import { useItemsFromEventId } from "@/hooks/useFourchettas";
 
 export type FourchettasOrderRouteProp = RouteProp<
-  AppStackParamList,
+  BottomTabParamList,
   "FourchettasOrder"
 >;
 
@@ -89,7 +89,6 @@ export const FourchettasOrder = () => {
 
   function order() {
     if (!dishId) return;
-
     postOrderMut.mutate(
       {
         event_id: id,

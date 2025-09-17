@@ -443,6 +443,9 @@
       "orderThanks": "Merci pour votre commande 😊",
       "orderSent": "Nous avons bien reçu votre commande",
       "orderModified": "Votre commande a été modifiée avec succès",
+      "orderDeleteTitle" :" Supprimer la commande",
+      "orderDeleteDesc": "Êtes-vous sûr de vouloir supprimer votre commande ?",
+      
       "chooseYourDish": "Choisissez votre plat",
       "chooseYourSide": "Choisissez votre accompagnement",
       "chooseYourDrink": "Choisissez votre boisson",

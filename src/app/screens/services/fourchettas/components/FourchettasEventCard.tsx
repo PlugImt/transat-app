@@ -71,36 +71,38 @@ export const FourchettasEventCard = ({ event, onPress }: CardProps) => {
             <Counter
                 date={DateFromTimestampAndTime(event.form_closing_date, event.form_closing_time)}
             />
-            <View className="relative flex flex-row items-center justify-center w-full gap-2">
-                <Button
-                    label={
-                        event.orderuser === null
-                            ? t('services.fourchettas.orderButton')
-                            : t('services.fourchettas.modifyOrderButton')
-                    }
-                    onPress={onPress}
-                    disabled={timediff <= 0}
-                />
-                {timediff <= 0 && (
-                    <Text
-                        variant="sm"
-                        className="absolute -right-8 -top-2 p-1 font-bold rounded-lg text-center"
-                        style={{ backgroundColor: theme.warning }}
-                        color="warningText"
-                    >
-                        {t('services.fourchettas.tooLate')}
-                    </Text>
-                )}
-                {timediff <= 1000 * 60 * 60 * 5 && timediff > 0 && (
-                    <Text
-                        variant="sm"
-                        className="absolute -right-4 -top-2 p-1 font-bold rounded-lg text-center"
-                        style={{ backgroundColor: theme.warning }}
-                        color="warningText"
-                    >
-                        {t('services.fourchettas.hurryUp')}
-                    </Text>
-                )}
+            <View className="relative flex flex-row items-center justify-center w-full gap-6">
+                <View className="relative flex flex-row">
+                    <Button
+                        label={
+                            event.orderuser === null
+                                ? t('services.fourchettas.orderButton')
+                                : t('services.fourchettas.modifyOrderButton')
+                        }
+                        onPress={onPress}
+                        disabled={timediff <= 0}
+                    />
+                    {timediff <= 0 && (
+                        <Text
+                            variant="sm"
+                            className="absolute -right-8 -top-2 p-1 font-bold rounded-lg text-center"
+                            style={{ backgroundColor: theme.warning }}
+                            color="warningText"
+                        >
+                            {t('services.fourchettas.tooLate')}
+                        </Text>
+                    )}
+                    {timediff <= 1000 * 60 * 60 * 5 && timediff > 0 && (
+                        <Text
+                            variant="sm"
+                            className="absolute -right-4 -top-2 p-1 font-bold rounded-lg text-center"
+                            style={{ backgroundColor: theme.warning }}
+                            color="warningText"
+                        >
+                            {t('services.fourchettas.hurryUp')}
+                        </Text>
+                    )}
+                </View>
                 {event.orderuser !== null && (
                     <FourchettasDeleteModal onConfirm={onPressDelete}>
                         <IconButton

@@ -1,6 +1,7 @@
 import { Skeleton } from "moti/skeleton";
 import { View } from "react-native";
 import { useTheme } from "@/contexts/ThemeContext";
+import { cn } from "@/utils/class.utils";
 
 export interface TextSkeletonProps {
   lines?: number;
@@ -8,6 +9,7 @@ export interface TextSkeletonProps {
   lastLineWidth?: number | "auto" | `${number}%`;
   className?: string;
   variant?: "h1" | "h2" | "h3" | "lg" | "sm" | "default";
+  textCenter?: boolean;
 }
 
 const VARIANT_SIZES = {
@@ -25,14 +27,18 @@ export const TextSkeleton = ({
   lastLineWidth = "70%",
   variant = "default",
   className,
+  textCenter = false,
 }: TextSkeletonProps) => {
   const { actualTheme } = useTheme();
   const { height, gap } = VARIANT_SIZES[variant];
 
   return (
-    <View className={className} style={{ gap, marginVertical: gap }}>
+    <View
+      className={cn(className, textCenter && " items-center")}
+      style={{ gap, marginVertical: gap }}
+    >
       {Array.from({ length: lines }, (_, index) => {
-        const isLastLine = index === lines - 1;
+        const isLastLine = index === lines - 1 && index > 0;
         return (
           <Skeleton
             key={`skeleton-line-${isLastLine ? "last" : index}`}

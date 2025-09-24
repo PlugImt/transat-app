@@ -2,6 +2,7 @@ import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import type { NavigatorScreenParams } from "@react-navigation/core";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import type { Homework } from "@/dto";
+import type { Order } from "@/dto";
 
 export type BottomTabParamList = {
   // Main tabs
@@ -37,6 +38,8 @@ export type BottomTabParamList = {
     level?: number;
   };
   ReservationCalendar: { id: number; title: string };
+  Fourchettas: undefined;
+  FourchettasOrder: { id: number; orderUser?: Order };
 
   // Account screens
   Account: undefined;

@@ -49,7 +49,7 @@ const ReservationCard = ({
 
   const handleReservePress = () => {
     if (slot) {
-      // @ts-ignore
+      // @ts-expect-error
       navigation.push("ReservationCalendar", { id, title });
     }
   };

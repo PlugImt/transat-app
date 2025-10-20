@@ -86,7 +86,7 @@ export const EventDetailsHeader = ({ event }: EventDetailsHeaderProps) => {
     const endBefore5 = endDate.getHours() < 5;
     if (sameDay) return `${formatShort(endDate)}`;
     if (!sameDay && endBefore5) return `${formatShort(startDate)}`;
-    return `${formatShort(endDate)} — ${formatShort(startDate)}`;
+    return `${formatShort(startDate)} — ${formatShort(endDate)}`;
   })();
 
   return (

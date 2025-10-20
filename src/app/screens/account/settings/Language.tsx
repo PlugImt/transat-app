@@ -44,8 +44,6 @@ export const Language = () => {
           }}
           transition={{
             type: "spring",
-            damping: 15,
-            stiffness: 150,
           }}
         >
           <CardGroup title={t("settings.language.currentLanguage")}>

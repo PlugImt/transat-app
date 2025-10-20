@@ -108,8 +108,6 @@ const DialogContent = ({
             }}
             transition={{
               type: "spring",
-              damping: 20,
-              stiffness: 300,
             }}
             className="w-[90%] max-h-[80%]"
             onStartShouldSetResponder={() => true}

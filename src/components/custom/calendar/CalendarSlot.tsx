@@ -6,6 +6,7 @@ import { Text } from "@/components/common/Text";
 import { ReservationDialog } from "@/components/custom/ReservationDialog";
 import type { ReservationScheme } from "@/dto";
 import { useAuth } from "@/hooks/account";
+import { cn } from "@/utils";
 
 interface SlotProps {
   reservationDetails?: ReservationScheme;
@@ -31,18 +32,24 @@ const CalendarSlot = ({ reservationDetails, itemId }: SlotProps) => {
 
   return (
     <Card
-      className={`flex-row gap-2 justify-between items-center ${disabled ? "opacity-60" : ""} mx-4 my-1`}
+      className={cn("flex-row gap-2 justify-between items-center", {
+        "opacity-60": disabled,
+      })}
     >
-      <View>
+      <View className="flex-1">
         <Text variant="h3">
           {reservationDetails
-            ? `${formatTimeFromDate(reservationDetails.start_date)} - ${formatTimeFromDate(reservationDetails.end_date)}`
+            ? `${formatTimeFromDate(
+                reservationDetails.start_date,
+              )} - ${formatTimeFromDate(reservationDetails.end_date)}`
             : null}
         </Text>
 
         {reservationDetails?.user ? (
           <Text variant="sm" numberOfLines={1}>
-            {`${t("services.reservation.reservedBy")} ${reservationDetails.user.first_name} ${reservationDetails.user.last_name}`}
+            {`${t("services.reservation.reservedBy")} ${
+              reservationDetails.user.first_name
+            } ${reservationDetails.user.last_name}`}
           </Text>
         ) : null}
       </View>

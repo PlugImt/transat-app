@@ -108,8 +108,6 @@ const ScrollViewWithIndicators = ({
             }}
             transition={{
               type: "spring",
-              damping: 25,
-              stiffness: 200,
             }}
             style={{
               position: "absolute",
@@ -142,8 +140,6 @@ const ScrollViewWithIndicators = ({
             }}
             transition={{
               type: "spring",
-              damping: 25,
-              stiffness: 200,
             }}
             style={{
               position: "absolute",

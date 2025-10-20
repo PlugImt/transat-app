@@ -197,7 +197,7 @@ export const RestaurantWidget = () => {
         </Text>
 
         <TouchableOpacity onPress={() => navigation.navigate("Restaurant")}>
-          <Text variant="sm" color="primary" className="px-4">
+          <Text color="primary" className="px-4">
             {t("common.seeMore")}
           </Text>
         </TouchableOpacity>

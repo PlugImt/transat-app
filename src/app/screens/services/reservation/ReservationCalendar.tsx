@@ -122,7 +122,7 @@ export const ReservationCalendar = () => {
       title={title}
       onRefresh={refetch}
       refreshing={isPending}
-      className="gap-2"
+      className="gap-4"
       asChildren
     >
       <DaySelector
@@ -139,7 +139,8 @@ export const ReservationCalendar = () => {
       >
         {/* Previous day */}
         <Animated.FlatList
-          style={{ flex: 1 }}
+          contentContainerClassName="gap-2"
+          className="px-4"
           data={calendarDataDayBefore}
           renderItem={({ item }) => (
             <CalendarSlot reservationDetails={item} itemId={id} />
@@ -156,7 +157,8 @@ export const ReservationCalendar = () => {
 
         {/* Current day */}
         <Animated.FlatList
-          style={{ flex: 1 }}
+          contentContainerClassName="gap-2"
+          className="px-4"
           data={calendarDataDay}
           renderItem={({ item }) => (
             <CalendarSlot reservationDetails={item} itemId={id} />
@@ -173,7 +175,8 @@ export const ReservationCalendar = () => {
 
         {/* Next day */}
         <Animated.FlatList
-          style={{ flex: 1 }}
+          contentContainerClassName="gap-2"
+          className="px-4"
           data={calendarDataDayAfter}
           renderItem={({ item }) => (
             <CalendarSlot reservationDetails={item} itemId={id} />

@@ -103,16 +103,16 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
         startDateTime.date,
         startDateTime.time,
       );
-      onChange(startDateField, startISO);
+      onChange(startDateField, startISO, { shouldDirty: true });
     }
   }, [startDateTime, onChange, startDateField]);
 
   useEffect(() => {
     if (endDateTime.date) {
       const endISO = createDateTimeISO(endDateTime.date, endDateTime.time);
-      onChange(endDateField, endISO);
+      onChange(endDateField, endISO, { shouldDirty: true });
     } else {
-      onChange(endDateField, undefined);
+      onChange(endDateField, undefined, { shouldDirty: true });
     }
   }, [endDateTime, onChange, endDateField]);
 

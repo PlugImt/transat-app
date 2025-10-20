@@ -69,13 +69,13 @@ export const useEditEventForm = (event: EventDetails) => {
   const handleSelectImage = () => {
     uploadImage(undefined, {
       onSuccess: (imageUrl) => {
-        setValue("picture", imageUrl);
+        setValue("picture", imageUrl, { shouldDirty: true });
       },
     });
   };
 
   const handleRemoveImage = () => {
-    setValue("picture", undefined);
+    setValue("picture", undefined, { shouldDirty: true });
   };
 
   return {

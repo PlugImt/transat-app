@@ -6,7 +6,6 @@ import * as Sentry from "@sentry/react-native";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import * as Notifications from "expo-notifications";
 import { Provider } from "jotai";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { ToastProvider } from "@/components/common/Toast";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
@@ -26,17 +25,15 @@ const App = () => {
   return (
     <Provider>
       <ThemeProvider>
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <QueryClientProvider client={queryClient}>
-            <BottomSheetModalProvider>
-              <AuthProvider>
-                <ToastProvider position="top">
-                  <RootNavigator />
-                </ToastProvider>
-              </AuthProvider>
-            </BottomSheetModalProvider>
-          </QueryClientProvider>
-        </GestureHandlerRootView>
+        <QueryClientProvider client={queryClient}>
+          <BottomSheetModalProvider>
+            <AuthProvider>
+              <ToastProvider position="top">
+                <RootNavigator />
+              </ToastProvider>
+            </AuthProvider>
+          </BottomSheetModalProvider>
+        </QueryClientProvider>
       </ThemeProvider>
     </Provider>
   );

@@ -1,12 +1,8 @@
 import type { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs";
-import type { StackNavigationOptions } from "@react-navigation/stack";
+import type { NativeStackNavigationOptions } from "@react-navigation/native-stack";
 import type { ThemeType } from "@/contexts/ThemeContext";
 
-export const screenOptions: StackNavigationOptions = {
-  headerShown: false,
-  cardStyle: { backgroundColor: "transparent" },
-  detachPreviousScreen: false,
-};
+export const screenOptions: NativeStackNavigationOptions = { headerShown: false };
 
 export const tabBarOptions = (
   theme: ThemeType,

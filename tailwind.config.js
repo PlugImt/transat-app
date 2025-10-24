@@ -1,9 +1,15 @@
+import heroUINativePlugin from "heroui-native/tailwind-plugin";
+
 const colors = require("./src/themes/colors").default;
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./node_modules/heroui-native/lib/**/*.{js,ts,jsx,tsx}",
+  ],
+  plugins: [heroUINativePlugin],
   presets: [require("nativewind/preset")],
   theme: {
     fontFamily: {

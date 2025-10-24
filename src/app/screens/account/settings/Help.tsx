@@ -1,14 +1,8 @@
-import {
-  ChevronDown,
-  ChevronUp,
-  HelpCircle,
-  SquareArrowOutUpRight,
-} from "lucide-react-native";
-import { useState } from "react";
+import { Accordion } from "heroui-native";
+import { SquareArrowOutUpRight } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
-import { Linking, TouchableOpacity, View } from "react-native";
+import { Linking, View } from "react-native";
 import Card from "@/components/common/Card";
-import { Divider } from "@/components/common/Divider";
 import {
   Tabs,
   TabsContent,
@@ -22,12 +16,6 @@ import { useTheme } from "@/contexts/ThemeContext";
 const Help = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
-
-  const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
-
-  const toggleFaq = (index: number) => {
-    setExpandedFaq(expandedFaq === index ? null : index);
-  };
 
   const openWhatsApp = () => {
     Linking.openURL("https://chat.whatsapp.com/EJ2tv8M59kC4Dkgs3AvQBu");
@@ -65,40 +53,29 @@ const Help = () => {
         </TabsList>
 
         <TabsContent value="faq">
-          <View
-            className="rounded-lg p-2"
-            style={{ backgroundColor: theme.card }}
-          >
-            {faqs.map((faq, index) => (
-              <View key={faq.question} className="px-4 py-2">
-                <TouchableOpacity
-                  onPress={() => toggleFaq(index)}
-                  className="flex-row justify-between items-center py-3"
+          <Card className="px-3 py-2">
+            <Accordion
+              selectionMode="single"
+              isDividerVisible={false}
+              className=""
+            >
+              {faqs.map((item) => (
+                <Accordion.Item
+                  key={item.question}
+                  value={item.question}
+                  className="rounded-lg bg-card"
                 >
-                  <View className="flex-row items-center gap-2 flex-1 max-w-[80%]">
-                    <HelpCircle size={20} color={theme.text} />
-                    <Text>{faq.question}</Text>
-                  </View>
-                  {expandedFaq === index ? (
-                    <ChevronUp size={18} color={theme.muted} />
-                  ) : (
-                    <ChevronDown size={18} color={theme.muted} />
-                  )}
-                </TouchableOpacity>
-
-                {expandedFaq === index && (
-                  <View className="pl-8 pr-4 pb-2">
-                    <Text color="muted">{faq.answer}</Text>
-                  </View>
-                )}
-                {index < faqs.length - 1 && expandedFaq !== index && (
-                  <View className="ml-8 mr-4">
-                    <Divider />
-                  </View>
-                )}
-              </View>
-            ))}
-          </View>
+                  <Accordion.Trigger className="bg-card">
+                    <Text className="flex-1">{item.question}</Text>
+                    <Accordion.Indicator />
+                  </Accordion.Trigger>
+                  <Accordion.Content className="bg-card">
+                    <Text color="muted">{item.answer}</Text>
+                  </Accordion.Content>
+                </Accordion.Item>
+              ))}
+            </Accordion>
+          </Card>
         </TabsContent>
 
         <TabsContent value="contact" className="gap-4">

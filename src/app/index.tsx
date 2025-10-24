@@ -5,6 +5,7 @@ import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import * as Sentry from "@sentry/react-native";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import * as Notifications from "expo-notifications";
+import { HeroUINativeProvider } from "heroui-native";
 import { Provider } from "jotai";
 import { ToastProvider } from "@/components/common/Toast";
 import { AuthProvider } from "@/contexts/AuthContext";
@@ -26,13 +27,15 @@ const App = () => {
     <Provider>
       <ThemeProvider>
         <QueryClientProvider client={queryClient}>
-          <BottomSheetModalProvider>
-            <AuthProvider>
-              <ToastProvider position="top">
-                <RootNavigator />
-              </ToastProvider>
-            </AuthProvider>
-          </BottomSheetModalProvider>
+          <ToastProvider position="top">
+            <HeroUINativeProvider>
+              <BottomSheetModalProvider>
+                <AuthProvider>
+                  <RootNavigator />
+                </AuthProvider>
+              </BottomSheetModalProvider>
+            </HeroUINativeProvider>
+          </ToastProvider>
         </QueryClientProvider>
       </ThemeProvider>
     </Provider>

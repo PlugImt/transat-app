@@ -3,7 +3,7 @@ import { Button } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
 import { useAuth } from "@/hooks/account/useAuth";
 import { hapticFeedback } from "@/utils/haptics.utils";
-import { Dialog, DialogContent, DialogTrigger } from "../common/Dialog";
+import { Dialog } from "../common/Dialog";
 import { useToast } from "../common/Toast";
 
 export const LogoutButton = () => {
@@ -23,20 +23,15 @@ export const LogoutButton = () => {
   };
 
   return (
-    <Dialog>
-      <DialogTrigger>
-        <Button label={t("settings.logout")} variant="destructive" />
-      </DialogTrigger>
-
-      <DialogContent
-        title={t("settings.logout")}
-        className="gap-2"
-        cancelLabel={t("common.cancel")}
-        confirmLabel={t("settings.logoutConfirm")}
-        onConfirm={handleLogout}
-      >
-        <Text>{t("settings.logoutDesc")}</Text>
-      </DialogContent>
+    <Dialog
+      title={t("settings.logout")}
+      className="gap-2"
+      cancelLabel={t("common.cancel")}
+      confirmLabel={t("settings.logoutConfirm")}
+      onConfirm={handleLogout}
+      trigger={<Button label={t("settings.logout")} variant="destructive" />}
+    >
+      <Text>{t("settings.logoutDesc")}</Text>
     </Dialog>
   );
 };

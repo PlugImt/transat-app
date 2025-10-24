@@ -8,11 +8,7 @@ import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { IconButton } from "@/components/common/Button";
 import CardGroup from "@/components/common/CardGroup";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "@/components/common/Dialog";
+import { Dialog } from "@/components/common/Dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -74,8 +70,15 @@ const EventActions = ({ event }: EventActionsProps) => {
         onPress={handleEditEvent}
         icon={<Edit size={16} color={theme.text} />}
       />
-      <Dialog>
-        <DialogTrigger>
+      <Dialog
+        title={t("services.events.delete.title")}
+        cancelLabel={t("services.events.delete.cancel")}
+        confirmLabel={t("services.events.delete.confirm")}
+        onCancel={() => {}}
+        onConfirm={handleDeleteEvent}
+        isPending={isDeleting}
+        disableConfirm={isDeleting}
+        trigger={
           <DropdownMenuItem
             label={t("common.delete")}
             onPress={() => {}}
@@ -83,18 +86,9 @@ const EventActions = ({ event }: EventActionsProps) => {
             icon={<Trash2 size={16} color={theme.destructive} />}
             preventClose
           />
-        </DialogTrigger>
-        <DialogContent
-          title={t("services.events.delete.title")}
-          cancelLabel={t("services.events.delete.cancel")}
-          confirmLabel={t("services.events.delete.confirm")}
-          onCancel={() => {}}
-          onConfirm={handleDeleteEvent}
-          isPending={isDeleting}
-          disableConfirm={isDeleting}
-        >
-          <Text>{t("services.events.delete.description")}</Text>
-        </DialogContent>
+        }
+      >
+        <Text>{t("services.events.delete.description")}</Text>
       </Dialog>
     </>
   );

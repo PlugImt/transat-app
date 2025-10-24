@@ -54,22 +54,22 @@ const Help = () => {
 
         <TabsContent value="faq">
           <Card className="px-3 py-2">
-            <Accordion
-              selectionMode="single"
-              isDividerVisible={false}
-              className=""
-            >
+            <Accordion selectionMode="single" isDividerVisible={false}>
               {faqs.map((item) => (
                 <Accordion.Item
                   key={item.question}
                   value={item.question}
                   className="rounded-lg bg-card"
+                  style={{ backgroundColor: theme.card }}
                 >
-                  <Accordion.Trigger className="bg-card">
+                  <Accordion.Trigger
+                    className="gap-2"
+                    style={{ backgroundColor: theme.card }}
+                  >
                     <Text className="flex-1">{item.question}</Text>
-                    <Accordion.Indicator />
+                    <Accordion.Indicator iconProps={{ color: theme.text }} />
                   </Accordion.Trigger>
-                  <Accordion.Content className="bg-card">
+                  <Accordion.Content style={{ backgroundColor: theme.card }}>
                     <Text color="muted">{item.answer}</Text>
                   </Accordion.Content>
                 </Accordion.Item>

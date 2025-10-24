@@ -6,11 +6,7 @@ import { Controller, type UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Platform, View } from "react-native";
 import CalendarPicker, { type DateType } from "react-native-ui-datepicker";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "@/components/common/Dialog";
+import { Dialog } from "@/components/common/Dialog";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useDate } from "@/hooks/common/useDate";
@@ -150,7 +146,9 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
 
   const getRangeText = () => {
     if (startDateTime.date && endDateTime.date) {
-      return `${formatDateDisplay(startDateTime.date)} - ${formatDateDisplay(endDateTime.date)}`;
+      return `${formatDateDisplay(startDateTime.date)} - ${formatDateDisplay(
+        endDateTime.date,
+      )}`;
     }
     if (startDateTime.date) {
       return formatDateDisplay(startDateTime.date);
@@ -165,29 +163,10 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
           <Text variant="sm" color="muted">
             {label}
           </Text>
-          <Dialog>
-            <DialogContent
-              title={t("services.events.add.date.title")}
-              confirmLabel={t("common.confirm")}
-            >
-              <CalendarPicker
-                locale={i18n.language}
-                mode="range"
-                startDate={startDateTime.date}
-                endDate={endDateTime.date}
-                minDate={new Date()}
-                onChange={(params) => {
-                  if (params.startDate !== undefined) {
-                    handleStartDateChange(params.startDate);
-                  }
-                  if (params.endDate !== undefined) {
-                    handleEndDateChange(params.endDate);
-                  }
-                }}
-                styles={calendarStyles}
-              />
-            </DialogContent>
-            <DialogTrigger>
+          <Dialog
+            title={t("services.events.add.date.title")}
+            confirmLabel={t("common.confirm")}
+            trigger={
               <InputButton
                 Icon={Calendar}
                 placeholder={t("services.events.add.date.placeholder")}
@@ -195,7 +174,24 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
                 onPress={() => {}}
                 error={errors[startDateField]?.message}
               />
-            </DialogTrigger>
+            }
+          >
+            <CalendarPicker
+              locale={i18n.language}
+              mode="range"
+              startDate={startDateTime.date}
+              endDate={endDateTime.date}
+              minDate={new Date()}
+              onChange={(params) => {
+                if (params.startDate !== undefined) {
+                  handleStartDateChange(params.startDate);
+                }
+                if (params.endDate !== undefined) {
+                  handleEndDateChange(params.endDate);
+                }
+              }}
+              styles={calendarStyles}
+            />
           </Dialog>
         </View>
 

@@ -4,7 +4,7 @@ export { Button } from "./Button";
 export { default as Card } from "./Card";
 export { default as CardGroup } from "./CardGroup";
 export { Checkbox } from "./Checkbox";
-export { Dialog, DialogContent, DialogTrigger, useDialog } from "./Dialog";
+export { Dialog } from "./Dialog";
 export { Divider } from "./Divider";
 export {
   DropdownMenu,

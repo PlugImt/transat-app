@@ -6,11 +6,7 @@ import { TouchableOpacity, View } from "react-native";
 import { BubbleAnimation, WindAnimation } from "@/components/animations";
 import Badge, { BadgeSkeleton } from "@/components/common/Badge";
 import Card from "@/components/common/Card";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "@/components/common/Dialog";
+import { Dialog } from "@/components/common/Dialog";
 import { Text } from "@/components/common/Text";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -111,8 +107,13 @@ const LaundryCard = ({ number, type, initialTimeLeft, icon }: LaundryProps) => {
         />
 
         {!shouldDisableButton && (
-          <Dialog>
-            <DialogTrigger>
+          <Dialog
+            title={t("services.laundry.getNotification")}
+            className="gap-2"
+            cancelLabel={t("common.cancel")}
+            confirmLabel={t("settings.notifications.setNotification")}
+            onConfirm={handleSetNotification}
+            trigger={
               <TouchableOpacity onPress={handleBellPress}>
                 {isNotificationSet ? (
                   <BellRing color={theme.primary} />
@@ -120,22 +121,14 @@ const LaundryCard = ({ number, type, initialTimeLeft, icon }: LaundryProps) => {
                   <Bell color={theme.primary} />
                 )}
               </TouchableOpacity>
-            </DialogTrigger>
-
-            <DialogContent
-              title={t("services.laundry.getNotification")}
-              className="gap-2"
-              cancelLabel={t("common.cancel")}
-              confirmLabel={t("settings.notifications.setNotification")}
-              onConfirm={handleSetNotification}
-            >
-              <Text>
-                {t("services.laundry.getNotificationDesc", {
-                  type: type.toLowerCase(),
-                  minutes: MINUTES_BEFORE_NOTIFICATION,
-                })}
-              </Text>
-            </DialogContent>
+            }
+          >
+            <Text>
+              {t("services.laundry.getNotificationDesc", {
+                type: type.toLowerCase(),
+                minutes: MINUTES_BEFORE_NOTIFICATION,
+              })}
+            </Text>
           </Dialog>
         )}
       </View>

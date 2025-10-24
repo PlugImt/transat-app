@@ -87,7 +87,6 @@ export const Bassine = () => {
         </Card>
       }
     >
-      {/* <View className="gap-4"> */}
       <View className="flex-row items-center gap-6 ">
         <IconButton
           icon={<Minus size={24} strokeWidth={3} />}
@@ -132,7 +131,6 @@ export const Bassine = () => {
           </Text>
         </View>
       )}
-      {/* </View> */}
     </Page>
   );
 };

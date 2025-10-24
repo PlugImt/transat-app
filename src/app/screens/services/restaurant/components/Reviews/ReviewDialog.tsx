@@ -3,11 +3,7 @@ import type React from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { RestaurantReviewsRouteProp } from "@/app/screens/services/restaurant/components/Reviews";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "@/components/common/Dialog";
+import { Dialog } from "@/components/common/Dialog";
 import { Textarea } from "@/components/common/Textarea";
 import { useToast } from "@/components/common/Toast";
 import { Stars } from "@/components/custom/star/Stars";
@@ -67,34 +63,30 @@ export const ReviewDialog = ({ children }: ReviewDialogProps) => {
   };
 
   return (
-    <Dialog>
-      <DialogTrigger>{children}</DialogTrigger>
-      <DialogContent
-        title={t("services.restaurant.reviews.dialog.title")}
-        className="gap-4 items-center"
-        cancelLabel={t("common.cancel")}
-        confirmLabel={t("services.restaurant.reviews.dialog.submit")}
-        isPending={isPostingReview}
-        disableConfirm={!isValid}
-        onConfirm={handleSubmit}
-        onCancel={handleClose}
-      >
-        <Stars
-          value={rating}
-          onRatingChange={setRating}
-          disabled={isPostingReview}
-          size="lg"
-        />
-        <Textarea
-          value={comment}
-          onChangeText={setComment}
-          placeholder={t(
-            "services.restaurant.reviews.dialog.commentPlaceholder",
-          )}
-          disabled={isPostingReview}
-          maxLength={500}
-        />
-      </DialogContent>
+    <Dialog
+      title={t("services.restaurant.reviews.dialog.title")}
+      className="gap-4 items-center"
+      cancelLabel={t("common.cancel")}
+      confirmLabel={t("services.restaurant.reviews.dialog.submit")}
+      isPending={isPostingReview}
+      disableConfirm={!isValid}
+      onConfirm={handleSubmit}
+      onCancel={handleClose}
+      trigger={children}
+    >
+      <Stars
+        value={rating}
+        onRatingChange={setRating}
+        disabled={isPostingReview}
+        size="lg"
+      />
+      <Textarea
+        value={comment}
+        onChangeText={setComment}
+        placeholder={t("services.restaurant.reviews.dialog.commentPlaceholder")}
+        disabled={isPostingReview}
+        maxLength={500}
+      />
     </Dialog>
   );
 };

@@ -1,10 +1,6 @@
 import type { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "@/components/common/Dialog";
+import { Dialog } from "@/components/common/Dialog";
 import { Text } from "@/components/common/Text";
 import { useToast } from "@/components/common/Toast";
 import {
@@ -96,19 +92,16 @@ export const ReservationDialog = ({
     calendarMutation.isPending || reservationMutation.isPending;
 
   return (
-    <Dialog>
-      <DialogTrigger>{children}</DialogTrigger>
-
-      <DialogContent
-        title={dialogTitle}
-        className="gap-2"
-        cancelLabel={t("common.cancel")}
-        confirmLabel={confirmLabel}
-        onConfirm={handleConfirm}
-        isPending={isAnyPending}
-      >
-        <Text>{dialogDescription}</Text>
-      </DialogContent>
+    <Dialog
+      title={dialogTitle}
+      className="gap-2"
+      cancelLabel={t("common.cancel")}
+      confirmLabel={confirmLabel}
+      onConfirm={handleConfirm}
+      isPending={isAnyPending}
+      trigger={children}
+    >
+      <Text>{dialogDescription}</Text>
     </Dialog>
   );
 };

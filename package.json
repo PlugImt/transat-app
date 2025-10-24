@@ -14,7 +14,7 @@
     "lint": "biome lint",
     "format": "biome check --write",
     "build:android": "eas build --profile production --platform android --local",
-    "build:ios": "eas build --profile production --platform ios --local"
+    "build:ios": "EAS_SKIP_AUTO_FINGERPRINT=1 eas build --profile production --platform ios --local"
   },
   "jest": {
     "preset": "jest-expo"
@@ -63,7 +63,8 @@
     "expo-web-browser": "~15.0.8",
     "i18next": "^24.2.2",
     "jotai": "^2.12.3",
-    "lottie-react-native": "~7.3.1",
+    "lottie-ios": "^4.5.0",
+    "lottie-react-native": "^7.3.4",
     "lucide-react-native": "^0.511.0",
     "moti": "^0.30.0",
     "nativecn-ui": "^0.0.8",

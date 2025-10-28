@@ -20,7 +20,7 @@ function Steps({ steps, currentStep }: StepsProps) {
       style={{ width: 2.5 * (steps.length * 2 - 1) * 16 }}
     >
       {steps.map((step, index) => (
-        <View key={step.title} className="flex flex-col items-center w-20">
+        <View key={step.title} className="items-center w-20">
           <View
             style={
               index + 1 <= currentStep ? {} : { backgroundColor: theme.card }

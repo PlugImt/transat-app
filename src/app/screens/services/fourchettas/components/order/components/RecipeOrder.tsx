@@ -4,7 +4,6 @@ import { View } from "react-native";
 import Card from "@/components/common/Card";
 
 import { Text } from "@/components/common/Text";
-import { useTheme } from "@/contexts/ThemeContext";
 import type { Item, Type } from "@/dto";
 import { useUser } from "@/hooks/account/useUser";
 
@@ -17,7 +16,6 @@ interface RecipeProps {
 const RecipeOrder = ({ orderedItems, itemsMap, types }: RecipeProps) => {
   const { data: user } = useUser();
   const { t } = useTranslation();
-  const { theme } = useTheme();
 
   const totalPrice = orderedItems.reduce((total, item) => {
     const itemData = itemsMap.get(item.id);
@@ -41,7 +39,7 @@ const RecipeOrder = ({ orderedItems, itemsMap, types }: RecipeProps) => {
   }, [orderedItems, itemsMap, typesMap]);
 
   return (
-    <View className="w-full flex flex-col items-center gap-4">
+    <View className="w-full items-center gap-4">
       <Text variant="h2" className="text-center text-primary mb-3">
         {t("services.fourchettas.receiptTitle")}{" "}
         <Text variant="h2" color={"primary"}>

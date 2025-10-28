@@ -35,7 +35,7 @@ export const Fourchettas = () => {
   if (!user?.phone_number || user?.phone_number === "") {
     return (
       <Page title={t("services.fourchettas.title")} className="h-full">
-        <View className="flex flex-col items-center gap-4 h-full justify-center">
+        <View className="items-center gap-4 h-full justify-center">
           <Image
             source={require("@/assets/images/services/fourchettas_dead.png")}
             style={{ width: 200, height: 200 }}
@@ -61,6 +61,36 @@ export const Fourchettas = () => {
     );
   }
 
+
+
+  
+  if (isLoading) {
+    return (
+      <Page title={t("services.fourchettas.title")} className="h-full">
+        <View className="w-full items-center gap-4">
+          <FourchettasEventCardLoading />
+          <FourchettasEventCardLoading />
+        </View>
+      </Page>
+    );
+  }
+  
+  if(isError) {
+    return (
+      <Page title={t("services.fourchettas.title")} className="h-full">
+        <View className="items-center gap-4 h-full justify-center">
+          <Image
+            source={require("@/assets/images/services/fourchettas_dead.png")}
+            className="w-32 h-32"
+          />
+          <Text className="text-center w-3/4" color="warning">
+            {t("services.fourchettas.apiError")}
+          </Text>
+        </View>
+      </Page>
+    );
+  }
+
   return (
     <Page
       title={t("services.fourchettas.title")}
@@ -71,7 +101,7 @@ export const Fourchettas = () => {
           additionalInfo={t("services.fourchettas.additionalInfo")}
         />
       }
-      className="flex min-w-full flex-col justify-center items-center gap-8 p-4"
+      className=" min-w-full justify-center items-center gap-8 "
     >
       <View className=" flex flex-row justify-start items-center p-2">
         <View className="gap-4 max-w-md">
@@ -85,23 +115,8 @@ export const Fourchettas = () => {
         </View>
       </View>
       <View className="min-w-full w-full flex items-center gap-4">
-        {isError ? (
-          <View className="flex flex-col items-center gap-4">
-            <Image
-              source={require("@/assets/images/services/fourchettas_dead.png")}
-              style={{ width: 200, height: 200 }}
-            />
-            <Text className="text-center w-3/4" color="primary">
-              {t("services.fourchettas.apiError")}
-            </Text>
-          </View>
-        ) : isLoading ? (
-          <>
-            <FourchettasEventCardLoading />
-            <FourchettasEventCardLoading />
-          </>
-        ) : events.length === 0 ? (
-          <View className="flex flex-col items-center gap-4">
+        {events.length === 0 ? (
+          <View className="items-center gap-4">
             <Image
               source={require("@/assets/images/services/fourchettas.png")}
               style={{ width: 200, height: 200 }}

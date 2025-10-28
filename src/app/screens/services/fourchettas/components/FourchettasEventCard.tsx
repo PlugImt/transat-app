@@ -7,12 +7,13 @@ import { Counter } from "@/app/screens/services/fourchettas/components/Counter";
 import { Button, IconButton } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
 import { ImgSkeleton, TextSkeleton } from "@/components/Skeleton";
-import { useTheme } from "@/contexts/ThemeContext";
 import type { Event } from "@/dto";
 import { useUser } from "@/hooks/account/useUser";
 import { useDeleteOrder } from "@/hooks/services/fourchettas/useFourchettas";
 import { phoneWithoutSpaces } from "../utils/common";
 import FourchettasDeleteModal from "./order/FourchettasDeleteModal";
+import { Badge, Card } from "@/components/common";
+import { format, parseISO ,set} from "date-fns";
 
 interface CardProps {
   event: Event;
@@ -20,20 +21,20 @@ interface CardProps {
 }
 
 function DateFromTimestampAndTime(timestamp: string, time: string): Date {
-  return new Date(`${timestamp.split("T")[0]}T${time}.000Z`);
+  const [hours, minutes, seconds] = time.split(":").map(Number);
+  return set(parseISO(timestamp), { hours, minutes, seconds });
 }
 
 function correctDate(date: string): string {
-  const split = date.split("T")[0].split("-");
-  return `${split[2]}/${split[1]}/${split[0]}`;
+  return format(parseISO(date), "dd/MM/yyyy");
 }
 
 export const FourchettasEventCard = ({ event, onPress }: CardProps) => {
+  const { t } = useTranslation();
   const { data: user } = useUser();
   const phone = phoneWithoutSpaces(user?.phone_number);
 
-  const { t } = useTranslation();
-  const { theme } = useTheme();
+
   const [timediff] = useState(
     DateFromTimestampAndTime(
       event.form_closing_date,
@@ -49,10 +50,13 @@ export const FourchettasEventCard = ({ event, onPress }: CardProps) => {
     );
   }
 
+  const isOrderClosed = timediff <= 0;
+  // Warn the user if the order is closing in less than 12 hours
+  const isOrderNearlyClosed = timediff <= 1000 * 60 * 60 * 12 && timediff > 0;
+  const hasOrdered = event.orderuser !== null;
   return (
-    <View
-      style={{ backgroundColor: theme.card }}
-      className="px-6 py-8 rounded-lg gap-3 relative items-center w-10/12"
+    <Card
+      className=" relative items-center w-10/12"
     >
       <Image
         source={{ uri: event.img_url }}
@@ -84,56 +88,48 @@ export const FourchettasEventCard = ({ event, onPress }: CardProps) => {
         <View className="relative flex flex-row">
           <Button
             label={
-              event.orderuser === null
+              hasOrdered
                 ? t("services.fourchettas.orderButton")
                 : t("services.fourchettas.modifyOrderButton")
             }
             onPress={onPress}
-            disabled={timediff <= 0}
+            disabled={isOrderClosed}
           />
-          {timediff <= 0 && (
-            <Text
-              variant="sm"
-              className="absolute -right-8 -top-2 p-1 font-bold rounded-lg text-center"
-              style={{ backgroundColor: theme.warning }}
-              color="warningText"
-            >
-              {t("services.fourchettas.tooLate")}
-            </Text>
+          {isOrderClosed && (
+            <Badge
+              label={t("services.fourchettas.tooLate")}
+              className="absolute -right-8 -top-2 p-1 z-10"
+              variant="warning"
+            />
           )}
-          {timediff <= 1000 * 60 * 60 * 5 && timediff > 0 && (
-            <Text
-              variant="sm"
-              className="absolute -right-4 -top-2 p-1 font-bold rounded-lg text-center"
-              style={{ backgroundColor: theme.warning }}
-              color="warningText"
-            >
-              {t("services.fourchettas.hurryUp")}
-            </Text>
+          {isOrderNearlyClosed && (
+            <Badge
+              label={t("services.fourchettas.hurryUp")}
+              className="absolute -right-6 -top-4 p-1 z-10"
+              variant="warning"
+            />
           )}
         </View>
-        {event.orderuser !== null && (
+        {hasOrdered && (
           <FourchettasDeleteModal onConfirm={onPressDelete}>
             <IconButton
               variant="destructive"
               icon={<Trash />}
-              disabled={timediff <= 0}
+              disabled={isOrderClosed}
             />
           </FourchettasDeleteModal>
         )}
       </View>
-    </View>
+    </Card>
   );
 };
 
 export const FourchettasEventCardLoading = () => {
   const { t } = useTranslation();
-  const { theme } = useTheme();
 
   return (
-    <View
-      style={{ backgroundColor: theme.card }}
-      className="px-6 py-8 rounded-lg gap-6 justify-center items-center w-4/5"
+    <Card
+      className=" relative items-center w-10/12"
     >
       <ImgSkeleton width={80} height={80} />
       <TextSkeleton lastLineWidth={100} variant="h1" />
@@ -147,6 +143,6 @@ export const FourchettasEventCardLoading = () => {
       </View>
 
       <Button label={t("services.fourchettas.orderButton")} disabled={true} />
-    </View>
+    </Card>
   );
 };

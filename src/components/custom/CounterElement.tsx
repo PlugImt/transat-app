@@ -1,7 +1,6 @@
 import { MotiView } from "moti";
 import { View } from "react-native";
 import { Text } from "@/components/common/Text";
-import { useTheme } from "@/contexts/ThemeContext";
 import { useState, useEffect } from "react";
 
 interface CounterProps {
@@ -24,7 +23,6 @@ function CounterElement({
   label = "sec",
   labelVariant = "h2",
 }: CounterProps) {
-  const { theme } = useTheme();
 
   if (displayed_number < 0 || displayed_number > 99) displayed_number = 0;
 
@@ -42,7 +40,7 @@ function CounterElement({
   }, [displayed_number, lastNumber]);
 
   return (
-    <View className="flex-col items-center justify-center">
+    <View className="items-center justify-center">
       <View
         className="relative rounded-md border-2 border-gray-500 "
         style={{

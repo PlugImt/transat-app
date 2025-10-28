@@ -1,10 +1,9 @@
-import { Minus, Plus, X } from "lucide-react-native";
+import { Minus, Plus} from "lucide-react-native";
 import { MotiView } from "moti";
 import { Image, TouchableOpacity, View } from "react-native";
-import { Button } from "@/components/common";
+import { Button, Card } from "@/components/common";
 import { Text } from "@/components/common/Text";
 import { ImgSkeleton, TextSkeleton } from "@/components/Skeleton";
-import { useTheme } from "@/contexts/ThemeContext";
 import type { Item } from "@/dto";
 
 interface FourchettasItemCardProps {
@@ -23,15 +22,11 @@ function FourchettasItemCard({
   orderedQuantity,
   onChangeOrderedQuantity,
 }: FourchettasItemCardProps) {
-  const { theme } = useTheme();
   return (
-    <TouchableOpacity
-      style={{ backgroundColor: theme.card }}
-      className={`flex-col w-4/5 border-primary ${
-        selected ? "border-2" : ""
-      } justify-between items-center p-4 gap-4 rounded-lg shadow`}
+    <Card
+      className={"w-4/5 items-center"}
       onPress={onPress}
-      activeOpacity={0.8}
+      active={selected}
     >
       <MotiView
         className="relative"
@@ -44,9 +39,6 @@ function FourchettasItemCard({
           repeatReverse: true,
         }}
       >
-        {item.id === 0 ? (
-          <X size={160} color={theme.text} />
-        ) : (
           <Image
             source={{
               uri: item.img_url,
@@ -54,7 +46,7 @@ function FourchettasItemCard({
             resizeMode="contain"
             className="w-40 h-40 rounded-lg"
           />
-        )}
+        
         {item.quantity > 0 && (
           <View className="absolute bottom-0 right-0 bg-primary rounded-md px-3 py-1">
             <Text variant="h3" color="primaryText">x{item.quantity}</Text>
@@ -73,6 +65,7 @@ function FourchettasItemCard({
 
       {orderedQuantity > 0 && (
         <TouchableOpacity
+          //this container prevent the user from accidentally unselecting the item when trying to press the buttons
           onPress={() => {}}
           className="p-1 flex flex-row items-center justify-center gap-4"
         >
@@ -89,23 +82,21 @@ function FourchettasItemCard({
           />
         </TouchableOpacity>
       )}
-    </TouchableOpacity>
+    </Card>
   );
 }
 
 function FourchettasItemCardLoading() {
-  const { theme } = useTheme();
 
   return (
-    <View
-      className="flex-col w-4/5 justify-between items-center p-4 gap-4 rounded-lg shadow"
-      style={{ backgroundColor: theme.card }}
+    <Card 
+      className={"w-4/5 items-center"}
     >
       <ImgSkeleton width={160} height={160} />
       <TextSkeleton width={"50%"} textCenter />
       <TextSkeleton width={"40%"} textCenter />
       <TextSkeleton width={"100%"} textCenter />
-    </View>
+    </Card>
   );
 }
 

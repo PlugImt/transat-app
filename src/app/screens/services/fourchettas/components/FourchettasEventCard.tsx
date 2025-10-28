@@ -116,7 +116,7 @@ export const FourchettasEventCard = ({ event, onPress }: CardProps) => {
           <FourchettasDeleteModal onConfirm={onPressDelete}>
             <IconButton
               variant="destructive"
-              icon={<Trash className="absolute -left-20" />}
+              icon={<Trash />}
               disabled={timediff <= 0}
             />
           </FourchettasDeleteModal>

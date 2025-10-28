@@ -27,7 +27,7 @@ function Steps({ steps, currentStep }: StepsProps) {
             }
             className={`rounded-full flex items-center justify-center relative ${index + 1 <= currentStep ? "bg-primary" : ""} h-10 w-10`}
           >
-            <Text className="text-center text-white">{index + 1}</Text>
+            <Text className="text-center text-primary-text">{index + 1}</Text>
             {index < steps.length - 1 && (
               <View
                 style={
@@ -37,7 +37,7 @@ function Steps({ steps, currentStep }: StepsProps) {
               />
             )}
           </View>
-          <Text className="text-center text-white">{step.title}</Text>
+          <Text className="text-center text-primary-text">{step.title}</Text>
         </View>
       ))}
     </View>

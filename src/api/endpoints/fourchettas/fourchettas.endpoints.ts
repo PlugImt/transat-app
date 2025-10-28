@@ -56,7 +56,7 @@ export async function postOrderMutation(orderData: orderData) {
 }
 
 export async function updateOrderMutation(orderData: updateOrderData) {
-    const { phone, event_id, items } = orderData;
+    const { event_id } = orderData;
     console.log(`[FOURCHETTAS API] PUT /orders/update/${event_id}`);
     const validatedData = updateOrderSchema.safeParse(orderData);
     if (!validatedData.success) {

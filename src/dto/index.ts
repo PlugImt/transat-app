@@ -9,3 +9,4 @@ export * from "./reservation";
 export * from "./timetable";
 export * from "./user";
 export * from "./weather";
+export * from "./fourchettas";

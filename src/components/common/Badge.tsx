@@ -5,7 +5,7 @@ import { Text, type TextVariant } from "@/components/common/Text";
 import { type ThemeType, useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";
 
-type BadgeVariant = "default" | "secondary" | "destructive" | "ghost";
+type BadgeVariant = "default" | "secondary" | "destructive" | "ghost" | "warning";
 type BadgeSize = "default" | "sm";
 
 const getBadgeStyle = (variant: BadgeVariant, theme: ThemeType) => {
@@ -24,6 +24,9 @@ const getBadgeStyle = (variant: BadgeVariant, theme: ThemeType) => {
     ghost: {
       backgroundColor: theme.backdrop,
     },
+    warning: {
+      backgroundColor: theme.warning,
+    },
   };
 
   return badgeStyles[variant] || badgeStyles.default;
@@ -35,6 +38,7 @@ const getTextColor = (variant: BadgeVariant) => {
     secondary: "primary",
     destructive: "destructiveText",
     ghost: "muted",
+    warning: "warningText",
   };
   return badgeTextStyles[variant] || "primaryText";
 };

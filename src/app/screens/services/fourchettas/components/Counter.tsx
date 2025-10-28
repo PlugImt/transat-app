@@ -1,6 +1,5 @@
-import { View } from "react-native";
-import { useTheme } from "@/contexts/ThemeContext";
 import { useEffect, useState } from "react";
+import { View } from "react-native";
 import { CounterElement } from "@/components/custom/CounterElement";
 
 interface CounterProps {
@@ -8,8 +7,6 @@ interface CounterProps {
 }
 
 function Counter({ date }: CounterProps) {
-  const { theme } = useTheme();
-
   const currentDate = new Date();
   const [timediff, setTimediff] = useState(
     date.getTime() - currentDate.getTime(),
@@ -37,7 +34,9 @@ function Counter({ date }: CounterProps) {
 
   return (
     <View
-      className={`flex-row-reverse items-center justify-between w-full ${timediff <= 0 ? "opacity-40" : ""}`}
+      className={`flex-row-reverse items-center justify-between w-full ${
+        timediff <= 0 ? "opacity-40" : ""
+      }`}
     >
       <CounterElement
         key={"sec"}

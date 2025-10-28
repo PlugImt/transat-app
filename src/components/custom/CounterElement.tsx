@@ -20,7 +20,7 @@ function CounterElement({
   direction = "up",
   height = 50,
   width = 50,
-  variant = "h1",
+  variant = "h2",
   label = "sec",
   labelVariant = "h2",
 }: CounterProps) {
@@ -44,9 +44,8 @@ function CounterElement({
   return (
     <View className="flex-col items-center justify-center">
       <View
-        className="relative rounded-md"
+        className="relative rounded-md border-2 border-gray-500 "
         style={{
-          backgroundColor: theme.backdrop,
           overflow: "hidden",
           height,
           width,
@@ -88,12 +87,12 @@ function CounterElement({
         >
           <View className="flex-row items-center">
             <Text variant={variant} color="primary">
-              {lastNumber.toString().padStart(2, "0")}
+              {displayed_number.toString().padStart(2, "0")}
             </Text>
           </View>
         </MotiView>
       </View>
-      <Text variant={labelVariant} color="primary" className="mb-2">
+      <Text variant={labelVariant}  className="mb-2 opacity-70">
         {label}
       </Text>
     </View>

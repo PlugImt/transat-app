@@ -469,7 +469,11 @@
       "previous": "Précédent",
       "back": "Retour",
       "noPhoneNumber": "Il faut avoir rentré son numéro de télephone dans Transat pour pouvoir commander chez Fourchettas ",
-      "addPhoneNumberButton": "Ajouter un numéro"
+      "addPhoneNumberButton": "Ajouter un numéro",
+      "days": "jours",
+      "hours": "heures",
+      "minutes": "min",
+      "seconds": "sec"
     },
     "clubs": {
       "title": "Clubs",

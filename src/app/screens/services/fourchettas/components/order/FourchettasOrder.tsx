@@ -102,7 +102,7 @@ export const FourchettasOrder = () => {
     }
   }
 
-  const nbPages = types.length + 1;
+  const nbPages = isLoading ? 4 : types.length + 1;
 
   const phone = phoneWithoutSpaces(user?.phone_number);
   const postOrderMut = usePostOrder(phone);
@@ -202,7 +202,7 @@ export const FourchettasOrder = () => {
             resizeMode="contain"
           />
           <Text variant="h2">{t("services.fourchettas.orderThanks")}</Text>
-          <Text variant="h3">
+          <Text variant="sm">
             {orderUser
               ? t("services.fourchettas.orderModified")
               : t("services.fourchettas.orderSent")}
@@ -256,7 +256,7 @@ export const FourchettasOrder = () => {
                   ))}
                 {noDishSelected && (
                   <Text variant="sm" color="warning">
-                    {t("services.noItemSelected") + types[currentPage - 1].name}
+                    {t("services.fourchettas.noItemSelected") + types[currentPage - 1].name}
                   </Text>
                 )}
               </View>

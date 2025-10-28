@@ -61,13 +61,13 @@ export const FourchettasEventCard = ({ event, onPress }: CardProps) => {
     >
       <Image
         source={{ uri: event.img_url }}
-        resizeMode="contain"
-        className="w-28 h-28 rounded-lg"
+        resizeMode="cover"
+        className="w-48 h-52 rounded-sm"
       />
-      <Text variant="h1" className="text-center" color="primary">
+      <Text variant="h2"  className="text-center" >
         {event.title}
       </Text>
-      <Text variant="lg" className="text-center font-semibold">
+      <Text variant="lg" className="text-center font-semibold opacity-70">
         {event.description}
       </Text>
       <Text variant="lg" className="text-center">
@@ -76,7 +76,7 @@ export const FourchettasEventCard = ({ event, onPress }: CardProps) => {
           time: event.time,
         })}
       </Text>
-      <Text variant="lg" className="text-center -mb-2" color="primary">
+      <Text variant="lg" className="text-center -mb-2 opacity-70" >
         {t("services.fourchettas.orderClosingIn")}
       </Text>
       <Counter

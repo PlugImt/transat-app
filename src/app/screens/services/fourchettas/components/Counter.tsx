@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { CounterElement } from "@/components/custom/CounterElement";
+import { useTranslation } from "react-i18next";
 
 interface CounterProps {
   date: Date;
 }
 
 function Counter({ date }: CounterProps) {
+  const { t } = useTranslation();
   const currentDate = new Date();
   const [timediff, setTimediff] = useState(
     date.getTime() - currentDate.getTime(),
@@ -42,25 +44,25 @@ function Counter({ date }: CounterProps) {
         key={"sec"}
         displayed_number={seconds}
         direction="down"
-        label="sec"
+        label={t("services.fourchettas.seconds")}
       />
       <CounterElement
         key={"min"}
         displayed_number={minutes}
         direction="down"
-        label="min"
+        label={t("services.fourchettas.minutes")}
       />
       <CounterElement
         key={"hr"}
         displayed_number={hours}
         direction="down"
-        label="heures"
+        label={t("services.fourchettas.hours")}
       />
       <CounterElement
         key={"day"}
         displayed_number={days}
         direction="down"
-        label="jours"
+        label={t("services.fourchettas.days")}
       />
     </View>
   );

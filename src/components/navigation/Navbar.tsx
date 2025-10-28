@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { GridIcon, LucideHome, Play, User } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { Home } from '@/app/screens';
@@ -51,7 +51,7 @@ import type { BottomTabParamList } from '@/types';
 import { hapticFeedback } from '@/utils/haptics.utils';
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
-const Stack = createStackNavigator<BottomTabParamList>();
+const Stack = createNativeStackNavigator<BottomTabParamList>();
 
 // Stack navigators for each main tab
 const HomeStack = () => (

@@ -1,4 +1,4 @@
-import { createStackNavigator } from "@react-navigation/stack";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native";
 import { SafeViewAndroid } from "@/app/_layout";
@@ -12,7 +12,7 @@ import { i18nInitializedPromise } from "@/i18n";
 import { screenOptions } from "@/navigation/navigationConfig";
 import type { RootStackParamList } from "@/types";
 
-const Stack = createStackNavigator<RootStackParamList>();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const RootNavigator = () => {
   const { user } = useAuth();

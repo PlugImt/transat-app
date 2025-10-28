@@ -89,8 +89,8 @@ export const FourchettasEventCard = ({ event, onPress }: CardProps) => {
           <Button
             label={
               hasOrdered
-                ? t("services.fourchettas.orderButton")
-                : t("services.fourchettas.modifyOrderButton")
+                ? t("services.fourchettas.modifyOrderButton")
+                : t("services.fourchettas.orderButton")
             }
             onPress={onPress}
             disabled={isOrderClosed}

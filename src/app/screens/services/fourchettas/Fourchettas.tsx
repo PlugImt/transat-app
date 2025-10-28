@@ -1,22 +1,23 @@
-import { Text } from '@/components/common/Text';
-import { Page } from '@/components/page/Page';
+import { Image, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { CompositeNavigationProp } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
-import { View, Image } from 'react-native';
+
 import { AboutModal } from '@/components/custom/AboutModal';
+import { Button } from '@/components/common/Button';
+import { Page } from '@/components/page/Page';
+import { Text } from '@/components/common/Text';
 import {
     FourchettasEventCard,
     FourchettasEventCardLoading,
 } from './components/FourchettasEventCard';
 import { useEventsUpcomingPhone } from '@/hooks/services/fourchettas/useFourchettas';
 import { useUser } from '@/hooks/account/useUser';
-import { useNavigation } from '@react-navigation/native';
-import { CompositeNavigationProp } from '@react-navigation/native';
 
 import { phoneWithoutSpaces } from './utils/common';
-import { Button } from '@/components/common/Button';
 import type { AppStackParamList, BottomTabParamList } from '@/types';
-import type { StackNavigationProp } from '@react-navigation/stack';
 import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import type { StackNavigationProp } from '@react-navigation/stack';
 
 type NavigationProp = CompositeNavigationProp<
     StackNavigationProp<AppStackParamList>,

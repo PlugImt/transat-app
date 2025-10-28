@@ -1,112 +1,91 @@
-import type { Event } from "@/dto";
-import { z } from "zod";
+import type { Event } from '@/dto';
+import type { updateOrderData, orderData } from '@/dto/fourchettas';
+import { orderSchema, updateOrderSchema } from '@/dto/fourchettas';
+const api_url = 'https://fourchettas.vercel.app';
 
-const api_url = "https://fourchettas.vercel.app";
-
-export async function getUpcomingEventsWithPhoneOrder(
-  phone: string,
-): Promise<Event[]> {
-  console.log(`[FOURCHETTAS API] GET /events/upcoming/phone/${phone}`);
-  const response = await fetch(`${api_url}/api/events/upcoming/phone/${phone}`);
-  if (!response.ok) {
-    throw new Error("Network response was not ok");
-  }
-  const data = await response.json();
-  return data;
+export async function getUpcomingEventsWithPhoneOrder(phone: string): Promise<Event[]> {
+    console.log(`[FOURCHETTAS API] GET /events/upcoming/phone/${phone}`);
+    const response = await fetch(`${api_url}/api/events/upcoming/phone/${phone}`);
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    return data;
 }
 
 export async function getItemsFromEventId(id: number) {
-  console.log(`[FOURCHETTAS API] GET /events/${id.toString()}/items`);
-  const response = await fetch(`${api_url}/api/events/${id.toString()}/items`);
-  if (!response.ok) {
-    throw new Error("Network response was not ok");
-  }
-  const data = await response.json();
-  return data;
+    console.log(`[FOURCHETTAS API] GET /events/${id.toString()}/items`);
+    const response = await fetch(`${api_url}/api/events/${id.toString()}/items`);
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    return data;
 }
 
-const orderSchema = z.object({
-  event_id: z.number().int().positive(),
-  name: z.string().min(1),
-  firstname: z.string().min(1),
-  phone: z.string().min(10),
-  dish_id: z.number().int().nonnegative(),
-  side_id: z.number().int().nonnegative(),
-  drink_id: z.number().int().nonnegative(),
-});
-
-export type orderData = z.infer<typeof orderSchema>;
+export async function getTypesFromEventId(id: number) {
+    console.log(`[FOURCHETTAS API] GET /events/${id.toString()}/types`);
+    const response = await fetch(`${api_url}/api/events/${id.toString()}/types`);
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    return data;
+}
 
 export async function postOrderMutation(orderData: orderData) {
-  console.log("[FOURCHETTAS API] POST /orders");
-  const validatedData = orderSchema.safeParse(orderData);
-  console.log(orderData);
-  console.log(validatedData);
-  if (!validatedData.success) {
-    throw new Error("Invalid order data format");
-  }
+    console.log('[FOURCHETTAS API] POST /orders');
+    const validatedData = orderSchema.safeParse(orderData);
+    if (!validatedData.success) {
+        throw new Error('Invalid order data format');
+    }
 
-  const response = await fetch(`${api_url}/api/orders`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(validatedData.data),
-  });
+    const response = await fetch(`${api_url}/api/orders`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(validatedData.data),
+    });
 
-  if (!response.ok) {
-    throw new Error("Network response was not ok");
-  }
-  const responseData = await response.json();
-  console.log(responseData);
-  return responseData;
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    const responseData = await response.json();
+    return responseData;
 }
 
-const updateOrderSchema = z.object({
-  phone: z.string().min(10),
-  event_id: z.number().int().positive(),
-  dish_id: z.number().int().nonnegative(),
-  side_id: z.number().int().nonnegative(),
-  drink_id: z.number().int().nonnegative(),
-});
+export async function updateOrderMutation(orderData: updateOrderData) {
+    const { phone, event_id, items } = orderData;
+    console.log(`[FOURCHETTAS API] PUT /orders/update/${event_id}`);
+    const validatedData = updateOrderSchema.safeParse(orderData);
+    if (!validatedData.success) {
+        throw new Error('Invalid order data format for update');
+    }
 
-export async function updateOrderMutation(orderData: {
-  phone: string;
-  event_id: number;
-  dish_id: number;
-  side_id: number;
-  drink_id: number;
-}) {
-  const { phone, event_id, ...payload } = orderData;
-  console.log(`[FOURCHETTAS API] PUT /orders/update/${event_id}`);
-  const validatedData = updateOrderSchema.safeParse(orderData);
-  if (!validatedData.success) {
-    throw new Error("Invalid order data format for update");
-  }
+    const response = await fetch(`${api_url}/api/orders/update/${event_id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(validatedData.data),
+    });
 
-  const response = await fetch(`${api_url}/api/orders/update/${event_id}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(validatedData.data),
-  });
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
 
-  if (!response.ok) {
-    throw new Error("Network response was not ok");
-  }
-
-  return response.json();
+    return response.json();
 }
 
-export async function deleteOrderMutation(orderId: number) {
-  console.log(`[FOURCHETTAS API] DELETE /orders/${orderId}`);
-  const response = await fetch(`${api_url}/api/orders/${orderId}`, {
-    method: "DELETE",
-  });
-  if (!response.ok) {
-    throw new Error("Network response was not ok");
-  }
+export async function deleteOrderMutation(event_id: number, phone: string) {
+    console.log(`[FOURCHETTAS API] DELETE api/orders/phone/${phone}/event/${event_id}`);
+    const response = await fetch(`${api_url}/api/orders/phone/${phone}/event/${event_id}`, {
+        method: 'DELETE',
+    });
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
 
-  return response.json();
+    return response.json();
 }

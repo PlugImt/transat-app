@@ -1,17 +1,21 @@
-import { useTranslation } from 'react-i18next';
-import { Trash } from 'lucide-react-native';
+import { useState } from 'react';
 import { Image, View } from 'react-native';
+import { Trash } from 'lucide-react-native';
+import { useTranslation } from 'react-i18next';
+
+import { Counter } from '@/app/screens/services/fourchettas/components/Counter';
+import { Text } from '@/components/common/Text';
+import { IconButton, Button } from '@/components/common/Button';
+import { ImgSkeleton, TextSkeleton } from '@/components/Skeleton';
+import FourchettasDeleteModal from './order/FourchettasDeleteModal';
 
 import { useTheme } from '@/contexts/ThemeContext';
-
-import { Text } from '@/components/common/Text';
-import { TextSkeleton, ImgSkeleton } from '@/components/Skeleton';
-import { IconButton, Button } from '@/components/common/Button';
-import type { Event } from '@/dto';
-import { useState } from 'react';
-import { Counter } from '@/app/screens/services/fourchettas/components/Counter';
+import { useUser } from '@/hooks/account/useUser';
 import { useDeleteOrder } from '@/hooks/services/fourchettas/useFourchettas';
-import FourchettasDeleteModal from './order/FourchettasDeleteModal';
+
+import type { Event } from '@/dto';
+import { phoneWithoutSpaces } from '../utils/common';
+
 interface CardProps {
     event: Event;
     onPress?: () => void;
@@ -27,6 +31,9 @@ function correctDate(date: string): string {
 }
 
 export const FourchettasEventCard = ({ event, onPress }: CardProps) => {
+    const { data: user } = useUser();
+    const phone = phoneWithoutSpaces(user?.phone_number);
+
     const { t } = useTranslation();
     const { theme } = useTheme();
     const [timediff, setTimediff] = useState(
@@ -34,13 +41,17 @@ export const FourchettasEventCard = ({ event, onPress }: CardProps) => {
             Date.now()
     );
 
-    const orderId = event.orderuser?.id;
-    const deleteOrderMut = useDeleteOrder(orderId || 0, event.orderuser?.phone || '');
+    const deleteOrderMut = useDeleteOrder(phone || '');
 
     function onPressDelete() {
-        if (orderId) {
-            deleteOrderMut.mutate();
-        }
+        deleteOrderMut.mutate(
+            { event_id: event.id || 0 },
+            {
+                onSuccess: () => {
+                    console.log('Order deleted successfully');
+                },
+            }
+        );
     }
 
     return (

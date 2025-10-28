@@ -66,11 +66,9 @@ export const FourchettasOrder = () => {
   useEffect(() => {
     if (orderUser) {
       setOrderedItems(orderUser);
-      console.log("Pre-filling order with existing order data:", orderUser);
     }
   }, [orderUser]);
 
-  console.log("Ordered Items:", orderedItems);
 
   function scrollToTop() {
     setTimeout(() => {
@@ -286,8 +284,8 @@ export const FourchettasOrder = () => {
               <Button
                 label={
                   orderUser
-                    ? `${t("services.fourchettas.modifyOrderButton")}!!`
-                    : `${t("services.fourchettas.orderButton")}!!`
+                    ? `${t("services.fourchettas.modifyOrderButton")}`
+                    : `${t("services.fourchettas.orderButton")}`
                 }
                 onPress={orderUser ? modifyOrder : order}
                 className="w-2/3"
@@ -315,7 +313,7 @@ export const FourchettasOrder = () => {
           <Steps
             steps={types
               .map((type) => ({ title: type.name }))
-              .concat({ title: t("services.fourchettas.StepShortReciept") })}
+              .concat({ title: t("services.fourchettas.StepShortReceipt") })}
             currentStep={currentPage}
           />
         </View>

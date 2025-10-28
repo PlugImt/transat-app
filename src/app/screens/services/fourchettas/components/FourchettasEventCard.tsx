@@ -45,12 +45,7 @@ export const FourchettasEventCard = ({ event, onPress }: CardProps) => {
 
   function onPressDelete() {
     deleteOrderMut.mutate(
-      { event_id: event.id || 0 },
-      {
-        onSuccess: () => {
-          console.log("Order deleted successfully");
-        },
-      },
+      { event_id: event.id || 0 }
     );
   }
 

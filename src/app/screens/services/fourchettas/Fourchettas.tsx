@@ -7,7 +7,7 @@ import {
     FourchettasEventCard,
     FourchettasEventCardLoading,
 } from './components/FourchettasEventCard';
-import { useEventsUpcomingPhone } from '@/hooks/useFourchettas';
+import { useEventsUpcomingPhone } from '@/hooks/services/fourchettas/useFourchettas';
 import { useUser } from '@/hooks/account/useUser';
 import { useNavigation } from '@react-navigation/native';
 import { CompositeNavigationProp } from '@react-navigation/native';

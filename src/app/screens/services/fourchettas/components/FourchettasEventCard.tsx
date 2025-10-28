@@ -10,7 +10,7 @@ import { IconButton, Button } from '@/components/common/Button';
 import type { Event } from '@/dto';
 import { useState } from 'react';
 import { Counter } from '@/app/screens/services/fourchettas/components/Counter';
-import { useDeleteOrder } from '@/hooks/useFourchettas';
+import { useDeleteOrder } from '@/hooks/services/fourchettas/useFourchettas';
 import FourchettasDeleteModal from './order/FourchettasDeleteModal';
 interface CardProps {
     event: Event;

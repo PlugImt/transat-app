@@ -74,7 +74,7 @@ const getSizeStyles = (size: ButtonSize) => {
 };
 
 interface ButtonProps extends ComponentPropsWithoutRef<typeof TouchableOpacity> {
-    label: string;
+    label?: string;
     labelClasses?: string;
     variant?: ButtonVariant;
     size?: ButtonSize;

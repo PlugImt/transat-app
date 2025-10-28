@@ -1,5 +1,5 @@
 import type { RouteProp } from "@react-navigation/native";
-import { useRoute } from "@react-navigation/native";
+import {  useRoute, useNavigation } from "@react-navigation/native";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Image, View } from "react-native";
@@ -16,7 +16,7 @@ import {
   useTypesFromEventId,
   useUpdateOrder,
 } from "@/hooks/services/fourchettas/useFourchettas";
-import type { BottomTabParamList } from "@/types";
+import type {  BottomTabParamList } from "@/types";
 import { phoneWithoutSpaces } from "../../utils/common";
 import {
   FourchettasItemCard,
@@ -29,16 +29,24 @@ export type FourchettasOrderRouteProp = RouteProp<
   "FourchettasOrder"
 >;
 
+
+
+
+
 export const FourchettasOrder = () => {
   const { data: user } = useUser();
   const { t } = useTranslation();
   const route = useRoute<FourchettasOrderRouteProp>();
+  const navigation = useNavigation();
   const { id, orderUser } = route.params;
 
   const scrollViewRef = useRef<Animated.ScrollView>(null);
 
-  const { data: items = [], isLoading, isError } = useItemsFromEventId(id);
-  const { data: types = [] } = useTypesFromEventId(id);
+  const { data: items = [], isLoading: isItemsLoading, isError: isItemsError } = useItemsFromEventId(id);
+  const { data: types = [], isLoading: isTypesLoading, isError: isTypesError } = useTypesFromEventId(id);
+
+  const isLoading = isItemsLoading || isTypesLoading;
+  const isError = isItemsError || isTypesError;
 
   const itemsMap = useMemo(() => {
     const map = new Map<number, Item>();
@@ -186,19 +194,27 @@ export const FourchettasOrder = () => {
 
   if (success) {
     return (
-      <Page title={t("services.fourchettas.orderTitle")}>
+      <Page title={t("services.fourchettas.orderTitle")} className="h-full">
         <View className="flex-col justify-center items-center h-full gap-8 w-full">
           <Image
             source={require("@/assets/images/services/fourchettas.png")}
             style={{ width: 120, height: 120 }}
             resizeMode="contain"
           />
-          <Text variant="h1">{t("services.fourchettas.orderThanks")}</Text>
+          <Text variant="h2">{t("services.fourchettas.orderThanks")}</Text>
           <Text variant="h3">
             {orderUser
               ? t("services.fourchettas.orderModified")
               : t("services.fourchettas.orderSent")}
           </Text>
+          <Button
+            label={t("services.fourchettas.back")}
+            onPress={() => {
+                navigation.goBack();
+            }
+            }
+            variant="secondary"
+          />
         </View>
       </Page>
     );
@@ -216,7 +232,7 @@ export const FourchettasOrder = () => {
               </>
             ) : (
               <View className="w-full flex flex-col items-center gap-4">
-                <Text variant="h1" className="text-center text-primary">
+                <Text variant="h2" className="text-center text-primary">
                   {t("services.fourchettas.chooseYourItem") +
                     types[currentPage - 1].name}{" "}
                   :

@@ -73,9 +73,9 @@ export const Fourchettas = () => {
       }
       className="flex min-w-full flex-col justify-center items-center gap-8 p-4"
     >
-      <View className=" flex flex-row justify-start items-center gap-8 p-8">
+      <View className=" flex flex-row justify-start items-center p-2">
         <View className="gap-4 max-w-md">
-          <Text variant="h1" className="text-center">
+          <Text variant="h2" className="text-center">
             {t("services.fourchettas.welcome")}
           </Text>
 

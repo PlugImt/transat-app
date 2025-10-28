@@ -42,9 +42,9 @@ const RecipeOrder = ({ orderedItems, itemsMap, types }: RecipeProps) => {
 
   return (
     <View className="w-full flex flex-col items-center gap-4">
-      <Text variant="h1" className="text-center text-primary mb-3">
+      <Text variant="h2" className="text-center text-primary mb-3">
         {t("services.fourchettas.recieptTitle")}{" "}
-        <Text variant="h1" color={"primary"}>
+        <Text variant="h2" color={"primary"}>
           Fourchettas
         </Text>
       </Text>

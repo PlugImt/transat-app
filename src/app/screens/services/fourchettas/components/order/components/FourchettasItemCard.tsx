@@ -57,12 +57,12 @@ function FourchettasItemCard({
         )}
         {item.quantity > 0 && (
           <View className="absolute bottom-0 right-0 bg-primary rounded-md px-3 py-1">
-            <Text variant="h3">x{item.quantity}</Text>
+            <Text variant="h3" color="primaryText">x{item.quantity}</Text>
           </View>
         )}
       </MotiView>
 
-      <Text variant="h1" className="text-center" color="primary">
+      <Text variant="h1" className="text-center" >
         {item.name}
       </Text>
       <Text variant="h3" className="text-center">

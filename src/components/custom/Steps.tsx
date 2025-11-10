@@ -14,30 +14,38 @@ interface StepsProps {
 function Steps({ steps, currentStep }: StepsProps) {
   const { theme } = useTheme();
 
+  const isPreviousStep = (index: number) => index + 1 <= currentStep;
+
   return (
-    <View
-      className="shrink-0 flex-row items-start justify-between"
-      style={{ width: 2.5 * (steps.length * 2 - 1) * 16 }}
-    >
+    <View className="flex-row items-start justify-between">
       {steps.map((step, index) => (
         <View key={step.title} className="items-center w-20">
           <View
             style={
-              index + 1 <= currentStep ? {} : { backgroundColor: theme.card }
+              isPreviousStep(index)
+                ? { backgroundColor: theme.primary }
+                : { backgroundColor: theme.card }
             }
-            className={`rounded-full flex items-center justify-center relative ${index + 1 <= currentStep ? "bg-primary" : ""} h-10 w-10`}
+            className="rounded-full flex items-center justify-center relative h-10 w-10"
           >
-            <Text className="text-center text-primary-text">{index + 1}</Text>
+            <Text
+              className="text-center"
+              color={isPreviousStep(index) ? "background" : "text"}
+            >
+              {index + 1}
+            </Text>
             {index < steps.length - 1 && (
               <View
                 style={
-                  index + 1 < currentStep ? {} : { backgroundColor: theme.card }
+                  isPreviousStep(index + 1)
+                    ? { backgroundColor: theme.primary }
+                    : { backgroundColor: theme.card }
                 }
-                className={`absolute -z-10 left-[1.25rem] top-[0.625rem] w-[5rem] h-5 ${index + 1 < currentStep ? "bg-primary" : ""}`}
+                className="absolute -z-10 left-[1.25rem] top-[0.625rem] w-[5rem] h-5"
               />
             )}
           </View>
-          <Text className="text-center text-primary-text">{step.title}</Text>
+          <Text className="text-center">{step.title}</Text>
         </View>
       ))}
     </View>

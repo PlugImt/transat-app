@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useEffect, useState } from "react";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { SafeViewAndroid } from "@/app/_layout";
 import { AppNavigator } from "@/app/navigation/AppNavigator";
 import { AuthNavigator } from "@/app/navigation/AuthNavigator";

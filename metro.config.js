@@ -1,6 +1,9 @@
-const { withNativeWind } = require("nativewind/metro");
+const { withUniwindConfig } = require("uniwind/metro");
 const { getSentryExpoConfig } = require("@sentry/react-native/metro");
 
 const config = getSentryExpoConfig(__dirname);
 
-module.exports = withNativeWind(config, { input: "./src/app/global.css" });
+module.exports = withUniwindConfig(config, {
+  cssEntryFile: "./src/global.css",
+  dtsFile: "./src/uniwind-types.d.ts",
+});

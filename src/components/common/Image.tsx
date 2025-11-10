@@ -104,7 +104,7 @@ const Image = forwardRef<React.ElementRef<typeof RNImage>, ImageProps>(
               setImageLoading(false);
             }}
             className={cn(
-              "h-full w-full flex-shrink-0",
+              "h-full w-full shrink-0",
               hasLoaded ? "opacity-100" : "opacity-0",
             )}
             borderRadius={radius}

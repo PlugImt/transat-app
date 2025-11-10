@@ -1,6 +1,6 @@
 import { RootNavigator } from "@/app/navigation/RootNavigator";
 import "@/i18n";
-import "./global.css";
+import "../global.css";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import * as Sentry from "@sentry/react-native";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";

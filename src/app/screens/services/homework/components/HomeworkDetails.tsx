@@ -80,7 +80,7 @@ export const HomeworkDetails = () => {
                 : t("services.homework.markDone")}
             </Text>
           </TouchableOpacity>
-          <View className="h-[1px] bg-gray-400 my-3" />
+          <View className="h-px bg-gray-400 my-3" />
 
           <Text variant="sm">
             🧑‍🏫 {t("services.homework.author")} : {homework.author}

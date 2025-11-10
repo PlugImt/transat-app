@@ -84,7 +84,7 @@ const Help = () => {
               <SquareArrowOutUpRight size={22} color={theme.text} />
               <View className="ml-2.5 max-w-[80%]">
                 <Text>{t("settings.help.whatsapp.title")}</Text>
-                <Text className="break-words" color="muted" variant="sm">
+                <Text className="wrap-break-word" color="muted" variant="sm">
                   {t("settings.help.whatsapp.description")}
                 </Text>
               </View>

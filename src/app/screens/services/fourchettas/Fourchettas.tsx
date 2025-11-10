@@ -61,21 +61,17 @@ export const Fourchettas = () => {
     );
   }
 
-
-
-  
   if (isLoading) {
     return (
       <Page title={t("services.fourchettas.title")} className="h-full">
         <View className="w-full items-center gap-4">
           <FourchettasEventCardLoading />
-          <FourchettasEventCardLoading />
         </View>
       </Page>
     );
   }
-  
-  if(isError) {
+
+  if (isError) {
     return (
       <Page title={t("services.fourchettas.title")} className="h-full">
         <View className="items-center gap-4 h-full justify-center">
@@ -101,19 +97,9 @@ export const Fourchettas = () => {
           additionalInfo={t("services.fourchettas.additionalInfo")}
         />
       }
-      className=" min-w-full justify-center items-center gap-8 "
+      className="gap-6"
     >
-      <View className=" flex flex-row justify-start items-center p-2">
-        <View className="gap-4 max-w-md">
-          <Text variant="h2" className="text-center">
-            {t("services.fourchettas.welcome")}
-          </Text>
-
-          <Text className="text-center" color="muted">
-            {t("services.fourchettas.description")}
-          </Text>
-        </View>
-      </View>
+      <Text variant="h2">{t("services.fourchettas.nextEvent")}</Text>
       <View className="min-w-full w-full flex items-center gap-4">
         {events.length === 0 ? (
           <View className="items-center gap-4">

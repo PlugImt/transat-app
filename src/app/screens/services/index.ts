@@ -1,4 +1,5 @@
 export * from "./clubs";
+export * from "./fourchettas";
 export * from "./games";
 export * from "./homework";
 export * from "./laundry";
@@ -7,4 +8,3 @@ export * from "./reservation";
 export * from "./restaurant";
 export * from "./schedule";
 export * from "./traq";
-export * from "./fourchettas";

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { CounterElement } from "@/components/custom/CounterElement";
-import { useTranslation } from "react-i18next";
 
 interface CounterProps {
   date: Date;
@@ -29,9 +29,7 @@ function Counter({ date }: CounterProps) {
 
   const seconds = Math.floor((timediff / 1000) % 60);
   const minutes = Math.floor((timediff / (1000 * 60)) % 60);
-  const hours =
-    Math.floor((timediff / (1000 * 60 * 60)) % 24) +
-    currentDate.getTimezoneOffset() / 60;
+  const hours = Math.floor((timediff / (1000 * 60 * 60)) % 24);
   const days = Math.floor(timediff / (1000 * 60 * 60 * 24));
 
   return (

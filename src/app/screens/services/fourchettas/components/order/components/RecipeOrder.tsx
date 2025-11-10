@@ -4,13 +4,13 @@ import { View } from "react-native";
 import Card from "@/components/common/Card";
 
 import { Text } from "@/components/common/Text";
-import type { Item, Type } from "@/dto";
+import type { FourchettasItem, FourchettasType } from "@/dto";
 import { useUser } from "@/hooks/account/useUser";
 
 interface RecipeProps {
   orderedItems: { id: number; ordered_quantity: number }[];
-  itemsMap: Map<number, Item>;
-  types: Type[];
+  itemsMap: Map<number, FourchettasItem>;
+  types: FourchettasType[];
 }
 
 const RecipeOrder = ({ orderedItems, itemsMap, types }: RecipeProps) => {
@@ -23,7 +23,7 @@ const RecipeOrder = ({ orderedItems, itemsMap, types }: RecipeProps) => {
   }, 0);
 
   const typesMap = useMemo(() => {
-    const map = new Map<string, Type>();
+    const map = new Map<string, FourchettasType>();
     types.forEach((type) => {
       map.set(type.name, type);
     });
@@ -48,11 +48,10 @@ const RecipeOrder = ({ orderedItems, itemsMap, types }: RecipeProps) => {
       </Text>
 
       <Card className="p-4 w-full max-w-sm">
-        <Text variant="h2" className="text-xl text-center mb-4">
+        <Text variant="h2" className="text-center mb-4">
           {t("services.fourchettas.orderOf")}{" "}
           <Text variant="h2" color={"primary"}>
-            {user?.first_name}
-            {user?.last_name}
+            {user?.first_name} {user?.last_name}
           </Text>
         </Text>
 

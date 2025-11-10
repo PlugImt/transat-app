@@ -7,24 +7,24 @@ import {
   postOrderMutation,
   updateOrderMutation,
 } from "@/api/endpoints/fourchettas";
-import type { Event, Item, Type } from "@/dto";
+import type { FourchettasEvent, FourchettasItem, FourchettasType } from "@/dto";
 
 export const useEventsUpcomingPhone = (phone: string) => {
-  return useQuery<Event[], Error>({
+  return useQuery<FourchettasEvent[], Error>({
     queryKey: ["events", "upcoming", phone],
     queryFn: () => getUpcomingEventsWithPhoneOrder(phone),
   });
 };
 
 export const useItemsFromEventId = (event_id: number) => {
-  return useQuery<Item[], Error>({
+  return useQuery<FourchettasItem[], Error>({
     queryKey: ["events", event_id, "items"],
     queryFn: () => getItemsFromEventId(event_id),
   });
 };
 
 export const useTypesFromEventId = (event_id: number) => {
-  return useQuery<Type[], Error>({
+  return useQuery<FourchettasType[], Error>({
     queryKey: ["events", event_id, "types"],
     queryFn: () => getTypesFromEventId(event_id),
   });

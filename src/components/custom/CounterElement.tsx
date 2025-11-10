@@ -1,7 +1,7 @@
 import { MotiView } from "moti";
+import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { Text } from "@/components/common/Text";
-import { useState, useEffect } from "react";
 
 interface CounterProps {
   displayed_number: number;
@@ -23,7 +23,6 @@ function CounterElement({
   label = "sec",
   labelVariant = "h2",
 }: CounterProps) {
-
   if (displayed_number < 0 || displayed_number > 99) displayed_number = 0;
 
   const [lastNumber, setLastNumber] = useState(displayed_number);
@@ -90,7 +89,7 @@ function CounterElement({
           </View>
         </MotiView>
       </View>
-      <Text variant={labelVariant}  className="mb-2 opacity-70">
+      <Text variant={labelVariant} className="mb-2 opacity-70">
         {label}
       </Text>
     </View>

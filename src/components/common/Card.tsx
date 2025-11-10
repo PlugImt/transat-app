@@ -15,7 +15,10 @@ const Card = ({ children, className, onPress, active = false }: CardProps) => {
   return (
     <TouchableOpacity
       className={cn("rounded-xl border-[1.5px] px-6 py-4 gap-4", className)}
-      style={{ backgroundColor: theme.card, borderColor: active ? theme.primary : theme.border }}
+      style={{
+        backgroundColor: theme.card,
+        borderColor: active ? theme.primary : theme.border,
+      }}
       onPress={onPress}
       disabled={!onPress}
     >

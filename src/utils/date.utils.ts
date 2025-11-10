@@ -59,8 +59,10 @@ export const isNight = () => {
 
 /**
  * Checks if the last update date is before today
+ * @param lastUpdate - The last update date string in ISO format
+ * @returns True if the last update date is before today, false otherwise
  */
-export const outOfService = (lastUpdate: string) => {
+export const beforeToday = (lastUpdate: string) => {
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   const updateDate = new Date(lastUpdate);
@@ -77,18 +79,6 @@ export const toYYYYMMDD = (date: Date): string => {
   const month = (date.getMonth() + 1).toString().padStart(2, "0");
   const day = date.getDate().toString().padStart(2, "0");
   return `${year}-${month}-${day}`;
-};
-
-export const formatDate = (dateString: string) => {
-  const options: Intl.DateTimeFormatOptions = {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  };
-  return new Date(dateString).toLocaleDateString(undefined, options);
 };
 
 export const isoToHourString = (isoString: string): string => {
@@ -214,4 +204,39 @@ export const formatDateTime = (d: Date) => {
   const hours = d.getHours().toString().padStart(2, "0");
   const minutes = d.getMinutes().toString().padStart(2, "0");
   return `${day} ${month} ${year} ${hours}h${minutes}`;
+};
+
+/**
+ * Combines a date string (ISO format) and a time string (HH:MM:SS or HH:MM) into a Date object
+ * @param dateString - The date string in ISO format (e.g., "2024-01-15")
+ * @param timeString - The time string in format "HH:MM:SS" or "HH:MM" (e.g., "14:30:00" or "14:30")
+ * @returns Date object with the combined date and time
+ */
+export const combineDateAndTimeString = (
+  dateString: string,
+  timeString: string,
+): Date => {
+  const dateObj = parseDate(dateString);
+  const [hours, minutes, seconds = 0] = timeString.split(":").map(Number);
+  const combinedDate = new Date(dateObj);
+  combinedDate.setHours(hours);
+  combinedDate.setMinutes(minutes);
+  combinedDate.setSeconds(seconds);
+  combinedDate.setMilliseconds(0);
+  return combinedDate;
+};
+
+/**
+ * Formats a date string (ISO format) to a human-readable format
+ * like "Monday 13 November" (day name, day number, month name)
+ * @param dateString - The date string in ISO format
+ * @returns Formatted date string in the format "Monday 13 November"
+ */
+export const formatDateToDayMonth = (dateString: string): string => {
+  const date = parseDate(dateString);
+  const lang = (i18n.language || "en").toLowerCase();
+  const dayName = date.toLocaleString(lang, { weekday: "long" });
+  const day = date.getDate();
+  const monthName = date.toLocaleString(lang, { month: "long" });
+  return `${dayName} ${day} ${monthName}`;
 };

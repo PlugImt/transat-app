@@ -7,6 +7,7 @@ export type WidgetType =
   | "timetable"
   | "homework"
   | "laundry"
+  | "fourchettas"
   | "events";
 
 export type ServiceType =
@@ -16,6 +17,7 @@ export type ServiceType =
   | "homework"
   | "traq"
   | "olimtpe"
+  | "fourchettas"
   | "clubs"
   | "reservation"
   | "events";
@@ -87,16 +89,25 @@ const getDefaultServices = (
       id: "traq",
       name: t("services.traq.title"),
       enabled: true,
-      order: 4,
+      order: 5,
       image: require("@/assets/images/services/traq.png"),
       screen: "Traq",
       description: t("services.traq.description"),
     },
     {
+      id: "fourchettas",
+      name: t("services.fourchettas.title"),
+      enabled: true,
+      order: 4,
+      image: require("@/assets/images/services/fourchettas.png"),
+      screen: "Fourchettas",
+      description: t("services.fourchettas.description"),
+    },
+    {
       id: "clubs",
       name: t("services.clubs.title"),
       enabled: true,
-      order: 5,
+      order: 2,
       image: require("@/assets/images/services/club.png"),
       screen: "Clubs",
       description: t("services.clubs.description"),
@@ -105,7 +116,7 @@ const getDefaultServices = (
       id: "reservation",
       name: t("services.reservation.title"),
       enabled: true,
-      order: 6,
+      order: 3,
       image: require("@/assets/images/services/edt.png"),
       screen: "Reservation",
       description: t("services.reservation.description"),

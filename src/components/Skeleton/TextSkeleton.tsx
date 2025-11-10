@@ -1,6 +1,7 @@
 import { Skeleton } from "moti/skeleton";
 import { View } from "react-native";
 import { useTheme } from "@/contexts/ThemeContext";
+import { cn } from "@/utils/class.utils";
 
 export interface TextSkeletonProps {
   lines?: number;
@@ -30,7 +31,7 @@ export const TextSkeleton = ({
   const { height, gap } = VARIANT_SIZES[variant];
 
   return (
-    <View className={className} style={{ gap, marginVertical: gap }}>
+    <View className={cn(className)} style={{ gap, marginVertical: gap }}>
       {Array.from({ length: lines }, (_, index) => {
         const isLastLine = index === lines - 1;
         return (

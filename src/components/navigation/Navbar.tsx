@@ -15,6 +15,7 @@ import Notifications from "@/app/screens/account/settings/Notifications";
 import Settings from "@/app/screens/account/settings/Settings";
 import {
   Clubs,
+  Fourchettas,
   Games,
   Homework,
   Laundry,
@@ -32,6 +33,7 @@ import { EditEvent } from "@/app/screens/services/events/components/EditEvent";
 import EventDetails from "@/app/screens/services/events/components/EventDetails";
 import { EventMemberList } from "@/app/screens/services/events/components/EventMemberList";
 import Events from "@/app/screens/services/events/Events";
+import { FourchettasOrder } from "@/app/screens/services/fourchettas/components/order/FourchettasOrder";
 import Bassine from "@/app/screens/services/games/bassine/Bassine";
 import { BassineLeaderboard } from "@/app/screens/services/games/bassine/leaderboard/BassineLeaderboard";
 import { HomeworkDetails } from "@/app/screens/services/homework/components/HomeworkDetails";
@@ -41,6 +43,7 @@ import {
   ReservationCalendar,
 } from "@/app/screens/services/reservation";
 import { RestaurantReviews } from "@/app/screens/services/restaurant/components/Reviews";
+
 import { Services } from "@/app/screens/services/Services";
 import { useTheme } from "@/contexts/ThemeContext";
 import { screenOptions, tabBarOptions } from "@/navigation/navigationConfig";
@@ -98,6 +101,8 @@ const ServicesStack = () => (
     <Stack.Screen name="MyReservations" component={PersonalReservations} />
     <Stack.Screen name="ReservationCategory" component={Category} />
     <Stack.Screen name="ReservationCalendar" component={ReservationCalendar} />
+    <Stack.Screen name="Fourchettas" component={Fourchettas} />
+    <Stack.Screen name="FourchettasOrder" component={FourchettasOrder} />
   </Stack.Navigator>
 );
 

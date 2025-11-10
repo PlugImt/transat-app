@@ -75,7 +75,7 @@ const getSizeStyles = (size: ButtonSize) => {
 
 interface ButtonProps
   extends ComponentPropsWithoutRef<typeof TouchableOpacity> {
-  label: string;
+  label?: string;
   labelClasses?: string;
   variant?: ButtonVariant;
   size?: ButtonSize;
@@ -119,29 +119,32 @@ const Button = ({
         className,
         "rounded-lg gap-1 flex-row items-center justify-center",
       )}
+      activeOpacity={1}
       {...props}
       disabled={isDisabled}
       onPress={handlePress}
     >
-      <Text
-        style={{
-          color: textColor,
-        }}
-        className={cn(labelClasses, "text-center")}
-      >
-        {label}
-      </Text>
+      {label && (
+        <Text
+          style={{
+            color: textColor,
+          }}
+          className={cn(labelClasses, "text-center")}
+        >
+          {label}
+        </Text>
+      )}
       {isUpdating ? (
         <ActivityIndicator color={textColor} />
       ) : (
-        icon && cloneElement(icon, { color: textColor, size: 16 })
+        icon && cloneElement(icon, { color: textColor })
       )}
     </TouchableOpacity>
   );
 };
 
 interface IconButtonProps extends Omit<ButtonProps, "label" | "labelClasses"> {
-  icon: React.ReactElement<{ color: string }>;
+  icon: React.ReactElement<{ color: string; size?: number }>;
 }
 
 const IconButton = ({
@@ -178,6 +181,7 @@ const IconButton = ({
         className,
         "rounded-full aspect-square items-center justify-center",
       )}
+      activeOpacity={1}
       disabled={isDisabled}
       {...props}
       onPress={handlePress}
@@ -187,7 +191,7 @@ const IconButton = ({
       ) : icon.props.color ? (
         icon
       ) : (
-        cloneElement(icon, { color: iconColor })
+        cloneElement(icon, { color: iconColor, size: sizeStyles.height / 2 })
       )}
     </TouchableOpacity>
   );

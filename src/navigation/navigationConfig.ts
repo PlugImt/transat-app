@@ -2,7 +2,9 @@ import type { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs";
 import type { NativeStackNavigationOptions } from "@react-navigation/native-stack";
 import type { ThemeType } from "@/contexts/ThemeContext";
 
-export const screenOptions: NativeStackNavigationOptions = { headerShown: false };
+export const screenOptions: NativeStackNavigationOptions = {
+  headerShown: false,
+};
 
 export const tabBarOptions = (
   theme: ThemeType,

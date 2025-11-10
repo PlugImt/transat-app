@@ -13,7 +13,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import type { MenuItem } from "@/dto";
 import { useMenuRestaurant } from "@/hooks/services/restaurant/useMenuRestaurant";
 import type { AppNavigation } from "@/types";
-import { isDinner, isLunch, isNight, isWeekend, outOfService } from "@/utils";
+import { beforeToday, isDinner, isLunch, isNight, isWeekend } from "@/utils";
 
 const MenuItemCard = ({ item }: { item: MenuItem }) => {
   return (
@@ -35,7 +35,7 @@ export const RestaurantWidget = () => {
   const lunch: boolean = useMemo(() => isLunch(), []);
   const dinner: boolean = useMemo(() => isDinner(), []);
   const outOfHours: boolean = useMemo(
-    () => (menu?.updatedDate ? outOfService(String(menu.updatedDate)) : false),
+    () => (menu?.updatedDate ? beforeToday(String(menu.updatedDate)) : false),
     [menu?.updatedDate],
   );
   const updatedToday: boolean = useMemo(() => {

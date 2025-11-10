@@ -3,7 +3,7 @@ import Image from "@/components/common/Image";
 import { Empty } from "@/components/page/Empty";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useMenuRestaurant } from "@/hooks/services/restaurant/useMenuRestaurant";
-import { isWeekend, outOfService } from "@/utils";
+import { beforeToday, isWeekend } from "@/utils";
 
 export const RestaurantClosed = () => {
   const { t } = useTranslation();
@@ -11,7 +11,7 @@ export const RestaurantClosed = () => {
   const { menu } = useMenuRestaurant();
   const weekend: boolean = isWeekend();
   const outOfHours: boolean = menu?.updatedDate
-    ? outOfService(menu.updatedDate.toString())
+    ? beforeToday(menu.updatedDate.toString())
     : false;
 
   const getTitle = () => {

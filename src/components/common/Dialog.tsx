@@ -1,5 +1,9 @@
 import { LinearGradient } from "expo-linear-gradient";
-import { Dialog as NativeDialog, ScrollShadow } from "heroui-native";
+import {
+  Dialog as NativeDialog,
+  ScrollShadow,
+  useThemeColor,
+} from "heroui-native";
 import type React from "react";
 import { useState } from "react";
 import { useWindowDimensions, View } from "react-native";
@@ -39,6 +43,7 @@ export const Dialog = ({
   const [isOpen, setIsOpen] = useState(false);
   const { height } = useWindowDimensions();
   const { theme } = useTheme();
+  const themeColorOverlay = useThemeColor("overlay");
 
   return (
     <NativeDialog isOpen={isOpen} onOpenChange={setIsOpen}>
@@ -56,7 +61,7 @@ export const Dialog = ({
             <ScrollShadow
               LinearGradientComponent={LinearGradient}
               className="max-h-[60vh]"
-              color={theme.card}
+              color={themeColorOverlay}
             >
               <ScrollView
                 contentContainerClassName={cn("pr-6", className)}

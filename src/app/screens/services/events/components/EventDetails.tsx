@@ -3,18 +3,14 @@ import {
   useNavigation,
   useRoute,
 } from "@react-navigation/native";
+import { Popover, type PopoverTriggerRef } from "heroui-native";
 import { Edit, MoreVertical, Trash2 } from "lucide-react-native";
+import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { IconButton } from "@/components/common/Button";
 import CardGroup from "@/components/common/CardGroup";
 import { Dialog } from "@/components/common/Dialog";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/common/DropdownMenu";
 import { Text } from "@/components/common/Text";
 import { UserCard, UserCardSkeleton } from "@/components/custom";
 import ClubCard, { ClubCardSkeleton } from "@/components/custom/card/ClubCard";
@@ -45,9 +41,10 @@ export type EventDetailsRouteProp = RouteProp<
 
 type EventActionsProps = {
   event: EventDetailsType;
+  onClose: () => void;
 };
 
-const EventActions = ({ event }: EventActionsProps) => {
+const EventActions = ({ event, onClose }: EventActionsProps) => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation<AppNavigation>();
@@ -55,6 +52,7 @@ const EventActions = ({ event }: EventActionsProps) => {
   const { mutate: deleteEvent, isPending: isDeleting } = useDeleteEvent();
 
   const handleEditEvent = () => {
+    onClose();
     navigation.navigate("EditEvent", { id: event.id });
   };
 
@@ -65,11 +63,20 @@ const EventActions = ({ event }: EventActionsProps) => {
 
   return (
     <>
-      <DropdownMenuItem
-        label={t("common.edit")}
-        onPress={handleEditEvent}
-        icon={<Edit size={16} color={theme.text} />}
-      />
+      <TouchableOpacity onPress={handleEditEvent}>
+        <View className="flex-row items-center gap-3 px-4 py-3">
+          <View className="w-5">
+            <Edit size={16} color={theme.text} />
+          </View>
+          <Text
+            variant="default"
+            className="flex-1"
+            style={{ color: theme.text }}
+          >
+            {t("common.edit")}
+          </Text>
+        </View>
+      </TouchableOpacity>
       <Dialog
         title={t("services.events.delete.title")}
         cancelLabel={t("services.events.delete.cancel")}
@@ -79,13 +86,20 @@ const EventActions = ({ event }: EventActionsProps) => {
         isPending={isDeleting}
         disableConfirm={isDeleting}
         trigger={
-          <DropdownMenuItem
-            label={t("common.delete")}
-            onPress={() => {}}
-            variant="destructive"
-            icon={<Trash2 size={16} color={theme.destructive} />}
-            preventClose
-          />
+          <TouchableOpacity onPress={() => {}}>
+            <View className="flex-row items-center gap-3 px-4 py-3">
+              <View className="w-5">
+                <Trash2 size={16} color={theme.destructive} />
+              </View>
+              <Text
+                variant="default"
+                className="flex-1"
+                style={{ color: theme.destructive }}
+              >
+                {t("common.delete")}
+              </Text>
+            </View>
+          </TouchableOpacity>
         }
       >
         <Text>{t("services.events.delete.description")}</Text>
@@ -101,6 +115,9 @@ const EventDetails = () => {
   const { id } = route.params;
   const navigation = useNavigation<NavigationProp>();
   const { user } = useAuth();
+
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const popoverRef = useRef<PopoverTriggerRef>(null);
 
   const {
     data: event,
@@ -147,17 +164,25 @@ const EventDetails = () => {
   };
 
   const eventActions = (
-    <DropdownMenu>
-      <DropdownMenuTrigger>
+    <Popover isOpen={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
+      <Popover.Trigger ref={popoverRef} asChild>
         <IconButton
           icon={<MoreVertical size={20} color={theme.text} />}
           variant="link"
         />
-      </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        <EventActions event={event} />
-      </DropdownMenuContent>
-    </DropdownMenu>
+      </Popover.Trigger>
+      <Popover.Portal>
+        <Popover.Overlay />
+        <Popover.Content presentation="bottom-sheet">
+          <View>
+            <EventActions
+              event={event}
+              onClose={() => setIsPopoverOpen(false)}
+            />
+          </View>
+        </Popover.Content>
+      </Popover.Portal>
+    </Popover>
   );
 
   return (

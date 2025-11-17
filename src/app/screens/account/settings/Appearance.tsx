@@ -2,6 +2,7 @@ import { Check, Moon, Smartphone, Sun } from "lucide-react-native";
 import type React from "react";
 import { useTranslation } from "react-i18next";
 import { TouchableOpacity, View } from "react-native";
+import { Uniwind } from "uniwind";
 import { Text } from "@/components/common/Text";
 import { Page } from "@/components/page/Page";
 import { type ThemeMode, useTheme } from "@/contexts/ThemeContext";
@@ -40,6 +41,7 @@ export const Appearance = () => {
 
   const handleThemeChange = (mode: ThemeMode) => {
     hapticFeedback.medium();
+    Uniwind.setTheme(mode);
     setThemeMode(mode);
   };
 

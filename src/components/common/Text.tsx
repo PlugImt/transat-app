@@ -31,7 +31,7 @@ export const Text = ({
   };
 
   function getVariantClasses(variant: string): string {
-    return variantClasses[variant] || "text-base font-medium";
+    return variantClasses[variant] || "text-base font-medium font-sans";
   }
 
   return (

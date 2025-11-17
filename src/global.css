@@ -1,6 +1,121 @@
+/** biome-ignore-all lint/suspicious/noDuplicateCustomProperties: Tailwind and uniwind use the same custom properties */
 @import "tailwindcss";
+@import "./theme.css";
 @import "uniwind";
 
 @import "heroui-native/styles";
 
 @source './node_modules/heroui-native/lib';
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  /* Primitive Colors (Do not change between light and dark) */
+  --white: oklch(100% 0 0);
+  --black: oklch(0% 0 0);
+  --snow: oklch(0.9911 0 0);
+  --eclipse: oklch(0.2103 0.0059 285.89);
+
+  /* Base radius */
+  --radius: 16px;
+
+  /* Opacity */
+  --opacity-disabled: 0.5;
+}
+
+@layer theme {
+  :root {
+    @variant light {
+      /* Base Colors */
+      --background: #f5f4f2;
+      --foreground: #1a1a1a;
+
+      /* Surface: Used for non-overlay components (cards, accordions, disclosure groups) */
+      --surface: #ffffff;
+      --surface-foreground: var(--foreground);
+
+      /* Overlay: Used for floating/overlay components (dialogs, popovers, modals, menus) */
+      --overlay: #ffffff;
+      --overlay-foreground: var(--foreground);
+
+      --muted: #6b7280;
+
+      --default: oklch(94% 0.001 286.375);
+      --default-foreground: var(--foreground);
+
+      --accent: #ec7f32;
+      --accent-foreground: #ffffff;
+
+      /* Form Field Defaults - Colors */
+      --field-background: #e3e3e3;
+      --field-foreground: #1a1a1a;
+      --field-placeholder: var(--muted);
+      --field-border: transparent; /* no border by default on form fields */
+
+      /* Status Colors */
+      --success: #4caf50;
+      --success-foreground: #ffffff;
+
+      --warning: #ffc107;
+      --warning-foreground: #000000;
+
+      --danger: #f44336;
+      --danger-foreground: #ffffff;
+
+      /* Component Colors */
+      --segment: #ffffff;
+      --segment-foreground: var(--foreground);
+
+      /* Misc Colors */
+      --border: #e5e7eb;
+      --divider: oklch(72% 0.004 286.32);
+      --link: var(--foreground);
+    }
+
+    @variant dark {
+      /* Base Colors */
+      --background: #070402;
+      --foreground: #ffe6cc;
+
+      /* Surface: Used for non-overlay components (cards, accordions, disclosure groups) */
+      --surface: #1e1515;
+      --surface-foreground: var(--foreground);
+
+      /* Overlay: Used for floating/overlay components (dialogs, popovers, modals, menus) - lighter for contrast */
+      --overlay: #1e1515;
+      --overlay-foreground: var(--foreground);
+
+      --muted: #a1a1aa;
+
+      --default: oklch(27.4% 0.006 286.033);
+      --default-foreground: var(--foreground);
+
+      --accent: #ec7f32;
+      --accent-foreground: #ffffff;
+
+      /* Form Field Defaults - Colors (only the ones that are different from light theme) */
+      --field-background: #2d2222;
+      --field-foreground: var(--foreground);
+      --field-placeholder: var(--muted);
+      --field-border: transparent; /* no border by default on form fields */
+
+      /* Status Colors */
+      --success: #4caf50;
+      --success-foreground: #ffffff;
+
+      --warning: #ffc107;
+      --warning-foreground: #000000;
+
+      --danger: #f44336;
+      --danger-foreground: #ffffff;
+
+      /* Component Colors */
+      --segment: oklch(0.3964 0.01 285.93);
+      --segment-foreground: var(--foreground);
+
+      /* Misc Colors */
+      --border: #403d3d;
+      --divider: oklch(47% 0.006 286.033);
+      --link: var(--foreground);
+    }
+  }
+}

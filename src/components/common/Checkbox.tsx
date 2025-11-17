@@ -7,7 +7,11 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";
 import { hapticFeedback } from "@/utils/haptics.utils";
 
-interface CheckboxProps extends React.ComponentPropsWithoutRef<typeof View> {
+interface CheckboxProps
+  extends Omit<
+    React.ComponentPropsWithoutRef<typeof TouchableOpacity>,
+    "onPress"
+  > {
   checked?: boolean;
   onPress: (checked: boolean) => void;
   label?: string | React.ReactNode;

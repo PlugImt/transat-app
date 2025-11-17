@@ -114,11 +114,6 @@ const DropdownMenuContent = ({
               scale: open ? 1 : 0.95,
               translateY: open ? 0 : -10,
             }}
-            transition={{
-              type: "spring",
-              damping: 20,
-              stiffness: 300,
-            }}
             className="absolute top-20 right-4"
             onStartShouldSetResponder={() => true}
             onResponderGrant={() => {}}

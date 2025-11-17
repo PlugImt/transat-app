@@ -29,12 +29,13 @@ export const HeroAvatar = ({
     direction,
   );
   return (
-    <MotiView style={animatedStyle}>
+    <MotiView style={[animatedStyle, { width: size, height: size }]}>
       <Image
         source={image}
-        size={size}
-        className="rounded-full border"
-        style={{ borderColor: theme.border }}
+        fill
+        resizeMode="cover"
+        radius={9999}
+        style={{ borderColor: theme.border, borderWidth: 1 }}
       />
     </MotiView>
   );

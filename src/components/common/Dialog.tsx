@@ -106,11 +106,6 @@ const DialogContent = ({
               scale: open ? 1 : 0.8,
               translateY: open ? 0 : 20,
             }}
-            transition={{
-              type: "spring",
-              damping: 20,
-              stiffness: 300,
-            }}
             className="w-[90%] max-h-[80%]"
             onStartShouldSetResponder={() => true}
             onResponderGrant={() => {}}

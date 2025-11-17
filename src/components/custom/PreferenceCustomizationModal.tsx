@@ -7,7 +7,6 @@ import DraggableFlatList, {
   type RenderItemParams,
   ScaleDecorator,
 } from "react-native-draggable-flatlist";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Button } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
 import { Page } from "@/components/page/Page";
@@ -134,47 +133,45 @@ const PreferenceCustomizationModal = ({
       presentationStyle="pageSheet"
       onRequestClose={handleClose}
     >
-      <GestureHandlerRootView>
-        <Page disableScroll title={title} className="py-4 flex-1">
-          <Text className="px-2">{t("common.customizeHint")}</Text>
+      <Page disableScroll title={title} className="py-4 flex-1">
+        <Text className="px-2">{t("common.customizeHint")}</Text>
 
-          <View className="justify-between flex-1">
-            <DraggableFlatList
-              data={localItems}
-              onDragBegin={handleDragStart}
-              onDragEnd={handleDragEnd}
-              keyExtractor={(item) => item.id}
-              renderItem={renderItem}
-              showsVerticalScrollIndicator={false}
-              onPlaceholderIndexChange={handleDragMove}
-              className="overflow-visible"
-              ListFooterComponent={() =>
-                onReset && (
-                  <Button
-                    label={t("common.reset")}
-                    onPress={handleReset}
-                    size="sm"
-                    variant="ghost"
-                  />
-                )
-              }
+        <View className="justify-between flex-1">
+          <DraggableFlatList
+            data={localItems}
+            onDragBegin={handleDragStart}
+            onDragEnd={handleDragEnd}
+            keyExtractor={(item) => item.id}
+            renderItem={renderItem}
+            showsVerticalScrollIndicator={false}
+            onPlaceholderIndexChange={handleDragMove}
+            className="overflow-visible"
+            ListFooterComponent={() =>
+              onReset && (
+                <Button
+                  label={t("common.reset")}
+                  onPress={handleReset}
+                  size="sm"
+                  variant="ghost"
+                />
+              )
+            }
+          />
+          <View className="flex-row items-center gap-2">
+            <Button
+              label={t("common.cancel")}
+              variant="secondary"
+              onPress={handleClose}
+              className="flex-1"
             />
-            <View className="flex-row items-center gap-2">
-              <Button
-                label={t("common.cancel")}
-                variant="secondary"
-                onPress={handleClose}
-                className="flex-1"
-              />
-              <Button
-                label={t("common.save")}
-                onPress={handleSave}
-                className="flex-1"
-              />
-            </View>
+            <Button
+              label={t("common.save")}
+              onPress={handleSave}
+              className="flex-1"
+            />
           </View>
-        </Page>
-      </GestureHandlerRootView>
+        </View>
+      </Page>
     </Modal>
   );
 };

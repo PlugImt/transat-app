@@ -42,11 +42,6 @@ export const Language = () => {
             opacity: isPending ? 0.5 : 1,
             scale: isPending ? 0.95 : 1,
           }}
-          transition={{
-            type: "spring",
-            damping: 15,
-            stiffness: 150,
-          }}
         >
           <CardGroup title={t("settings.language.currentLanguage")}>
             <Card>

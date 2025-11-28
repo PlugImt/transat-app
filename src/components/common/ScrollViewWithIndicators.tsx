@@ -106,11 +106,6 @@ const ScrollViewWithIndicators = ({
             animate={{
               opacity: showTopIndicator ? 1 : 0,
             }}
-            transition={{
-              type: "spring",
-              damping: 25,
-              stiffness: 200,
-            }}
             style={{
               position: "absolute",
               top: 0,
@@ -139,11 +134,6 @@ const ScrollViewWithIndicators = ({
           <MotiView
             animate={{
               opacity: showBottomIndicator ? 1 : 0,
-            }}
-            transition={{
-              type: "spring",
-              damping: 25,
-              stiffness: 200,
             }}
             style={{
               position: "absolute",

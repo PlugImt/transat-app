@@ -7,7 +7,7 @@ import { AboutModal } from "@/components/custom/AboutModal";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
 import { useMenuRestaurant } from "@/hooks/services/restaurant/useMenuRestaurant";
-import { getOpeningHoursData, isWeekend, outOfService } from "@/utils";
+import { beforeToday, getOpeningHoursData, isWeekend } from "@/utils";
 import { RestaurantClosed } from "./components/RestaurantMenu/RestaurantClosed";
 
 export const Restaurant = () => {
@@ -17,7 +17,7 @@ export const Restaurant = () => {
   const openingHoursData = getOpeningHoursData(t);
   const weekend: boolean = isWeekend();
   const outOfHours: boolean = menu?.updatedDate
-    ? outOfService(menu.updatedDate.toString())
+    ? beforeToday(menu.updatedDate.toString())
     : false;
 
   if (isPending || !menu) {

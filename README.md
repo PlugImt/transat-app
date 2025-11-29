@@ -119,6 +119,13 @@ Merci à Sentry pour leur offre gratuite !
                     <sub><b>Marina</b></sub>
                 </a>
             </td>
+            <td align="center">
+                <a href="https://github.com/AurelienPautet">
+                    <img src="https://avatars.githubusercontent.com/u/47290623?v=4" width="100;" alt="AurelienPautet"/>
+                    <br />
+                    <sub><b>Aurelien </b></sub>
+                </a>
+            </td>
 		</tr>
 	<tbody>
 </table>

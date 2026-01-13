@@ -175,6 +175,7 @@
     "promotion": "年级",
     "phone": "电话",
     "email": "邮箱",
+    "profilePicture": "个人资料照片",
     "contactInfo": "个人信息",
     "notProvided": "未提供",
     "editProfile": "编辑资料",
@@ -668,10 +669,8 @@
       "yourInfo": "您的信息",
       "hasProfilePicture": "已添加照片",
       "publicVisibility": "公开可见性",
-      "publicVisibilityDescription": "此信息将对所有用户可见",
-      "privacyNotice": "您的所有个人信息可能会被Transat应用程序的其他用户看到。",
-      "validate": "验证我的个人资料",
-      "skip": "跳过"
+      "publicVisibilityDescription": "您的所有信息（电话号码除外）将对Transat应用程序的所有用户可见。",
+      "validate": "验证我的个人资料"
     },
     "success": {
       "title": "欢迎使用Transat！",

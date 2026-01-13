@@ -175,6 +175,7 @@
     "promotion": "Promoção",
     "phone": "Telefone",
     "email": "E-mail",
+    "profilePicture": "Foto de perfil",
     "contactInfo": "Informações pessoais",
     "notProvided": "Não fornecido",
     "editProfile": "Editar perfil",
@@ -668,10 +669,8 @@
       "yourInfo": "Suas informações",
       "hasProfilePicture": "Foto adicionada",
       "publicVisibility": "Visibilidade pública",
-      "publicVisibilityDescription": "Esta informação será visível para todos os usuários",
-      "privacyNotice": "Todas as suas informações pessoais serão potencialmente visíveis para outros usuários do aplicativo Transat.",
-      "validate": "Validar meu perfil",
-      "skip": "Pular"
+      "publicVisibilityDescription": "Todas as suas informações, exceto seu número de telefone, serão visíveis para todos os usuários do aplicativo Transat.",
+      "validate": "Validar meu perfil"
     },
     "success": {
       "title": "Bem-vindo ao Transat!",

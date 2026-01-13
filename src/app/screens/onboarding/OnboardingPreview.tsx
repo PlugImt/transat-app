@@ -124,28 +124,6 @@ export const OnboardingPreview = ({
               </View>
             </LinearGradient>
 
-            {/* Public visibility notice */}
-            <View
-              className="rounded-2xl p-5 gap-3"
-              style={{ backgroundColor: theme.card }}
-            >
-              <View className="flex-row items-center gap-3">
-                <View
-                  className="rounded-full p-2"
-                  style={{ backgroundColor: `${theme.primary}20` }}
-                >
-                  <Eye size={22} color={theme.primary} />
-                </View>
-                <View className="flex-1">
-                  <Text variant="sm" className="font-semibold">
-                    {t("onboarding.preview.publicVisibility")}
-                  </Text>
-                  <Text variant="sm" color="muted">
-                    {t("onboarding.preview.publicVisibilityDescription")}
-                  </Text>
-                </View>
-              </View>
-            </View>
 
             {/* Info cards grid */}
             {infoItems.length > 0 && (
@@ -169,7 +147,7 @@ export const OnboardingPreview = ({
                           colors={[`${item.color}20`, `${item.color}10`]}
                           start={{ x: 0, y: 0 }}
                           end={{ x: 1, y: 1 }}
-                          className="rounded-2xl p-4 flex-row items-center gap-4"
+                          className="rounded-3xl p-4 flex-row items-center gap-4"
                         >
                           <View
                             className="rounded-xl p-3"
@@ -194,9 +172,9 @@ export const OnboardingPreview = ({
               </View>
             )}
 
-            {/* Privacy notice */}
+            {/* Privacy notice - Combined with visibility info */}
             <View
-              className="rounded-2xl p-4 flex-row items-start gap-3"
+              className="rounded-3xl p-5 flex-row items-start gap-3"
               style={{ backgroundColor: `${theme.primary}15` }}
             >
               <View
@@ -205,20 +183,24 @@ export const OnboardingPreview = ({
               >
                 <Shield size={20} color={theme.primary} />
               </View>
-              <Text variant="sm" style={{ color: theme.primary }} className="flex-1">
-                {t("onboarding.preview.privacyNotice")}
-              </Text>
+              <View className="flex-1 gap-1">
+                <Text variant="sm" className="font-semibold" style={{ color: theme.primary }}>
+                  {t("onboarding.preview.publicVisibility")}
+                </Text>
+                <Text variant="sm" style={{ color: theme.primary }}>
+                  {t("onboarding.preview.publicVisibilityDescription")}
+                </Text>
+              </View>
             </View>
           </View>
         </MotiView>
       </ScrollView>
 
-      <View className="px-6 pb-8 gap-3">
+      <View className="px-6 pb-8">
         <Button
           label={t("onboarding.preview.validate")}
           onPress={handleComplete}
         />
-        <Button label={t("onboarding.preview.skip")} variant="ghost" onPress={handleSkip} />
       </View>
     </View>
   );

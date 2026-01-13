@@ -175,6 +175,7 @@
     "promotion": "Promotion",
     "phone": "Phone",
     "email": "Email",
+    "profilePicture": "Profile picture",
     "contactInfo": "Personal information",
     "notProvided": "Not provided",
     "editProfile": "Edit profile",
@@ -638,6 +639,47 @@
     "notInterested": "Not interested",
     "errors": {
       "contact": "Error opening SMS app"
+    }
+  },
+  "onboarding": {
+    "profilePicture": {
+      "title": "Add your profile picture",
+      "description": "Your profile picture will be visible to all users of the Transat application.",
+      "canChangeLater": "You can change your profile picture anytime in Account > Edit profile.",
+      "encouragement": "💡 A friendly face helps others recognize you!",
+      "continue": "Continue",
+      "skip": "Skip this step"
+    },
+    "basicInfo": {
+      "title": "Your basic information",
+      "description": "Fill in your personal information so other users can identify you.",
+      "encouragement": "✨ Complete your profile for a better experience on Transat!",
+      "phoneInfo": "This number will be used to contact you for reservations, orders, or if we need to reach you. Phone number is strongly advised.",
+      "firstNamePlaceholder": "Your first name",
+      "lastNamePlaceholder": "Your last name",
+      "phonePlaceholder": "Your phone number",
+      "continue": "Continue",
+      "skip": "Skip this step"
+    },
+    "academicInfo": {
+      "title": "Your academic information",
+      "description": "Share your formation and graduation year to connect with your classmates.",
+      "encouragement": "🎓 Join your community and discover events from your formation!",
+      "continue": "Continue",
+      "skip": "Skip this step"
+    },
+    "preview": {
+      "title": "Profile preview",
+      "yourInfo": "Your information",
+      "hasProfilePicture": "Photo added",
+      "publicVisibility": "Public visibility",
+      "publicVisibilityDescription": "All your information, except your phone number, will be visible to all users of the Transat application.",
+      "validate": "Validate my profile"
+    },
+    "success": {
+      "title": "Welcome to Transat!",
+      "description": "Your profile is now set up. You can start exploring all the features of the application!",
+      "start": "Get started"
     }
   }
 }

@@ -79,6 +79,7 @@ export type AppNavigation = BottomTabNavigationProp<BottomTabParamList> &
 
 export type RootStackParamList = {
   Auth: NavigatorScreenParams<AuthStackParamList>;
+  Onboarding: undefined;
   App: NavigatorScreenParams<AppStackParamList>;
 };
 

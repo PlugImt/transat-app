@@ -153,6 +153,7 @@ export const OnboardingBasicInfo = ({
               name="first_name"
               textContentType="name"
               error={errors.first_name?.message}
+              placeholder={t("onboarding.basicInfo.firstNamePlaceholder")}
             />
 
             <Input
@@ -161,6 +162,7 @@ export const OnboardingBasicInfo = ({
               name="last_name"
               textContentType="familyName"
               error={errors.last_name?.message}
+              placeholder={t("onboarding.basicInfo.lastNamePlaceholder")}
             />
 
             <Input
@@ -170,6 +172,7 @@ export const OnboardingBasicInfo = ({
               textContentType="telephoneNumber"
               error={errors.phone_number?.message}
               keyboardType="phone-pad"
+              placeholder={t("onboarding.basicInfo.phonePlaceholder")}
             />
             <Text variant="sm" color="muted" className="px-1 -mt-2">
               {t("onboarding.basicInfo.phoneInfo")}
@@ -180,15 +183,15 @@ export const OnboardingBasicInfo = ({
 
       <View className="gap-3">
         <Button
+          label={t("onboarding.basicInfo.skip")}
+          variant="ghost"
+          onPress={handleSkip}
+        />
+        <Button
           label={t("onboarding.basicInfo.continue")}
           onPress={handleSubmit(handleUpdateAccount)}
           isUpdating={isUpdating}
           disabled={!isDirty || !isValid}
-        />
-        <Button
-          label={t("onboarding.basicInfo.skip")}
-          variant="ghost"
-          onPress={handleSkip}
         />
       </View>
     </View>

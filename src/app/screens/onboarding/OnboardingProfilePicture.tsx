@@ -175,13 +175,13 @@ export const OnboardingProfilePicture = ({
 
       <View className="gap-3">
         <Button
-          label={t("onboarding.profilePicture.continue")}
-          onPress={handleNext}
-        />
-        <Button
           label={t("onboarding.profilePicture.skip")}
           variant="ghost"
           onPress={handleSkip}
+        />
+        <Button
+          label={t("onboarding.profilePicture.continue")}
+          onPress={handleNext}
         />
       </View>
     </View>

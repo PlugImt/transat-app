@@ -656,7 +656,10 @@
       "title": "Vos informations de base",
       "description": "Remplissez vos informations personnelles pour que les autres utilisateurs puissent vous identifier.",
       "encouragement": "✨ Complétez votre profil pour une meilleure expérience sur Transat !",
-      "phoneInfo": "Ce numéro sera utilisé pour vous contacter lors de réservations, commandes ou si nous devons vous joindre.",
+      "phoneInfo": "Ce numéro sera utilisé pour vous contacter lors de réservations, commandes ou si nous devons vous joindre. Le numéro de téléphone est fortement conseillé.",
+      "firstNamePlaceholder": "Votre prénom",
+      "lastNamePlaceholder": "Votre nom",
+      "phonePlaceholder": "Votre numéro de téléphone",
       "continue": "Continuer",
       "skip": "Passer cette étape"
     },

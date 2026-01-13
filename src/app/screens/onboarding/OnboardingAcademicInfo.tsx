@@ -44,6 +44,7 @@ export const OnboardingAcademicInfo = ({
     handleSubmit,
     formState: { errors, isValid, isDirty },
     reset,
+    watch,
   } = useForm({
     resolver: zodResolver(updateUserPayloadSchema),
     defaultValues: {
@@ -51,11 +52,15 @@ export const OnboardingAcademicInfo = ({
       last_name: displayUser.last_name || "",
       phone_number: displayUser.phone_number || "",
       email: displayUser.email || "",
-      graduation_year: undefined as number | undefined,
-      formation_name: undefined as formationName | undefined,
+      graduation_year: displayUser?.graduation_year || undefined,
+      formation_name: displayUser?.formation_name || undefined,
     },
     mode: "onChange",
   });
+
+  // Watch form values to ensure isDirty updates correctly
+  const formationName = watch("formation_name");
+  const graduationYear = watch("graduation_year");
 
   useEffect(() => {
     if (displayUser) {
@@ -125,7 +130,7 @@ export const OnboardingAcademicInfo = ({
                   label={t("account.formationName")}
                   placeholder={t("account.selectFormationName")}
                   options={["FISE", "FIL", "FIT", "FIP", "FID"]}
-                  value={value}
+                  value={value || undefined}
                   onValueChange={onChange}
                 />
               )}
@@ -141,8 +146,8 @@ export const OnboardingAcademicInfo = ({
                   icon={<GraduationCap color={theme.text} size={20} />}
                   options={yearOptions}
                   value={value ? value.toString() : undefined}
-                  onValueChange={(value) =>
-                    onChange(value ? Number(value) : undefined)
+                  onValueChange={(newValue) =>
+                    onChange(newValue ? Number(newValue) : undefined)
                   }
                 />
               )}
@@ -153,15 +158,15 @@ export const OnboardingAcademicInfo = ({
 
       <View className="gap-3">
         <Button
-          label={t("onboarding.academicInfo.continue")}
-          onPress={handleSubmit(handleUpdateAccount)}
-          isUpdating={isUpdating}
-          disabled={!isDirty || !isValid}
-        />
-        <Button
           label={t("onboarding.academicInfo.skip")}
           variant="ghost"
           onPress={handleSkip}
+        />
+        <Button
+          label={t("onboarding.academicInfo.continue")}
+          onPress={handleSubmit(handleUpdateAccount)}
+          isUpdating={isUpdating}
+          disabled={!formationName && !graduationYear && !isDirty}
         />
       </View>
     </View>

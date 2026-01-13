@@ -653,7 +653,10 @@
       "title": "Ihre grundlegenden Informationen",
       "description": "Füllen Sie Ihre persönlichen Informationen aus, damit andere Benutzer Sie identifizieren können.",
       "encouragement": "✨ Vervollständigen Sie Ihr Profil für ein besseres Erlebnis auf Transat!",
-      "phoneInfo": "Diese Nummer wird verwendet, um Sie für Reservierungen, Bestellungen oder wenn wir Sie erreichen müssen, zu kontaktieren.",
+      "phoneInfo": "Diese Nummer wird verwendet, um Sie für Reservierungen, Bestellungen oder wenn wir Sie erreichen müssen, zu kontaktieren. Die Telefonnummer wird dringend empfohlen.",
+      "firstNamePlaceholder": "Ihr Vorname",
+      "lastNamePlaceholder": "Ihr Nachname",
+      "phonePlaceholder": "Ihre Telefonnummer",
       "continue": "Weiter",
       "skip": "Diesen Schritt überspringen"
     },

@@ -50,31 +50,31 @@ export const OnboardingPreview = ({
   };
 
   const infoItems: InfoItem[] = [
-    displayUser.phone_number && {
+    {
       icon: Phone,
       label: t("account.phone"),
-      value: displayUser.phone_number,
-      color: theme.info || "#2196F3",
+      value: displayUser.phone_number || t("account.notProvided"),
+      color: displayUser.phone_number ? (theme.info || "#2196F3") : theme.muted,
     },
-    displayUser.formation_name && {
+    {
       icon: GraduationCap,
       label: t("account.formationName"),
-      value: displayUser.formation_name,
-      color: theme.secondary || "#0049a8",
+      value: displayUser.formation_name || t("account.notProvided"),
+      color: displayUser.formation_name ? (theme.secondary || "#0049a8") : theme.muted,
     },
-    displayUser.graduation_year && {
+    {
       icon: GraduationCap,
       label: t("account.graduationYear"),
-      value: displayUser.graduation_year.toString(),
-      color: theme.primary,
+      value: displayUser.graduation_year ? displayUser.graduation_year.toString() : t("account.notProvided"),
+      color: displayUser.graduation_year ? theme.primary : theme.muted,
     },
-    displayUser.profile_picture && {
+    {
       icon: UserIcon,
       label: t("account.profilePicture"),
-      value: t("onboarding.preview.hasProfilePicture"),
-      color: theme.success || "#4CAF50",
+      value: displayUser.profile_picture ? t("onboarding.preview.hasProfilePicture") : t("account.notProvided"),
+      color: displayUser.profile_picture ? (theme.success || "#4CAF50") : theme.muted,
     },
-  ].filter((item): item is InfoItem => Boolean(item));
+  ];
 
   return (
     <View className="flex-1" style={{ backgroundColor: theme.background }}>
@@ -126,51 +126,50 @@ export const OnboardingPreview = ({
 
 
             {/* Info cards grid */}
-            {infoItems.length > 0 && (
-              <View className="gap-4">
-                <Text variant="h2">{t("onboarding.preview.yourInfo")}</Text>
-                <View className="gap-3">
-                  {infoItems.map((item, index) => {
-                    const Icon = item.icon;
-                    return (
-                      <MotiView
-                        key={index}
-                        from={{ opacity: 0, translateX: -20 }}
-                        animate={{ opacity: 1, translateX: 0 }}
-                        transition={{
-                          type: "timing",
-                          duration: 400,
-                          delay: index * 100,
-                        }}
+            <View className="gap-4">
+              <Text variant="h2">{t("onboarding.preview.yourInfo")}</Text>
+              <View className="gap-3">
+                {infoItems.map((item, index) => {
+                  const Icon = item.icon;
+                  const hasValue = item.value !== t("account.notProvided");
+                  return (
+                    <MotiView
+                      key={index}
+                      from={{ opacity: 0, translateX: -20 }}
+                      animate={{ opacity: 1, translateX: 0 }}
+                      transition={{
+                        type: "timing",
+                        duration: 400,
+                        delay: index * 100,
+                      }}
+                    >
+                      <LinearGradient
+                        colors={[`${item.color}20`, `${item.color}10`]}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 1, y: 1 }}
+                        className="rounded-3xl p-4 flex-row items-center gap-4"
                       >
-                        <LinearGradient
-                          colors={[`${item.color}20`, `${item.color}10`]}
-                          start={{ x: 0, y: 0 }}
-                          end={{ x: 1, y: 1 }}
-                          className="rounded-3xl p-4 flex-row items-center gap-4"
+                        <View
+                          className="rounded-xl p-3"
+                          style={{ backgroundColor: `${item.color}30` }}
                         >
-                          <View
-                            className="rounded-xl p-3"
-                            style={{ backgroundColor: `${item.color}30` }}
-                          >
-                            <Icon size={24} color={item.color} />
-                          </View>
-                          <View className="flex-1">
-                            <Text variant="sm" color="muted" className="mb-1">
-                              {item.label}
-                            </Text>
-                            <Text variant="body" className="font-semibold">
-                              {item.value}
-                            </Text>
-                          </View>
-                          <CheckCircle2 size={20} color={item.color} />
-                        </LinearGradient>
-                      </MotiView>
-                    );
-                  })}
-                </View>
+                          <Icon size={24} color={item.color} />
+                        </View>
+                        <View className="flex-1">
+                          <Text variant="sm" color="muted" className="mb-1">
+                            {item.label}
+                          </Text>
+                          <Text variant="body" className="font-semibold" style={{ color: hasValue ? undefined : theme.muted }}>
+                            {item.value}
+                          </Text>
+                        </View>
+                        {hasValue && <CheckCircle2 size={20} color={item.color} />}
+                      </LinearGradient>
+                    </MotiView>
+                  );
+                })}
               </View>
-            )}
+            </View>
 
             {/* Privacy notice - Combined with visibility info */}
             <View

@@ -58,7 +58,12 @@ export const RootNavigator = () => {
       }
     };
 
-    checkOnboarding();
+    // Add a small delay to ensure storage is updated after verifyCode
+    const timeoutId = setTimeout(() => {
+      checkOnboarding();
+    }, 100);
+
+    return () => clearTimeout(timeoutId);
   }, [user, isI18nReady]);
 
   // Show splash screen while:

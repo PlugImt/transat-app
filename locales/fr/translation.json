@@ -648,6 +648,7 @@
     "profilePicture": {
       "title": "Ajoutez votre photo de profil",
       "description": "Votre photo de profil sera visible par tous les utilisateurs de l'application Transat.",
+      "canChangeLater": "Vous pourrez modifier votre photo de profil à tout moment dans Compte > Modifier le profil.",
       "encouragement": "💡 Un visage amical aide les autres à vous reconnaître !",
       "continue": "Continuer",
       "skip": "Passer cette étape"

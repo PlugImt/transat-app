@@ -34,22 +34,12 @@ export const OnboardingProfilePicture = ({
   const { mutate: updateProfilePicture, isPending: isUpdating } =
     useUpdateProfilePicture();
   const { data: user, refetch } = useUser();
-  const [hasProfilePicture, setHasProfilePicture] = useState(
-    !!user?.profile_picture,
-  );
-
-  useEffect(() => {
-    if (user?.profile_picture) {
-      setHasProfilePicture(true);
-    }
-  }, [user?.profile_picture]);
 
   const handleUpdateProfilePicture = () => {
     updateProfilePicture(undefined, {
       onSuccess: async () => {
         hapticFeedback.success();
         await refetch();
-        setHasProfilePicture(true);
       },
       onError: () => {
         hapticFeedback.error();
@@ -101,6 +91,7 @@ export const OnboardingProfilePicture = ({
   };
 
   const displayUser = user || route.params.user;
+  const hasProfilePicture = !!displayUser?.profile_picture;
 
   const handleSkip = () => {
     const currentUser = user || route.params.user;
@@ -170,6 +161,9 @@ export const OnboardingProfilePicture = ({
           <Text variant="body" color="muted" className="text-center px-4">
             {t("onboarding.profilePicture.description")}
           </Text>
+          <Text variant="sm" color="muted" className="text-center px-4">
+            {t("onboarding.profilePicture.canChangeLater")}
+          </Text>
         </MotiView>
       </View>
 
@@ -182,6 +176,7 @@ export const OnboardingProfilePicture = ({
         <Button
           label={t("onboarding.profilePicture.continue")}
           onPress={handleNext}
+          disabled={!hasProfilePicture}
         />
       </View>
     </View>

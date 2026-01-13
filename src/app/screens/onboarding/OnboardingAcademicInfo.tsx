@@ -82,17 +82,28 @@ export const OnboardingAcademicInfo = ({
     return (startAcademicYear + i).toString();
   });
 
-  const handleUpdateAccount = (data: User) => {
+  const handleUpdateAccount = (data: any) => {
     Keyboard.dismiss();
-    updateAccount(data, {
+    // Ensure we have all required fields from the current user
+    const payload = {
+      first_name: data.first_name || displayUser.first_name || "",
+      last_name: data.last_name || displayUser.last_name || "",
+      email: data.email || displayUser.email || "",
+      phone_number: data.phone_number || displayUser.phone_number || "",
+      graduation_year: data.graduation_year || displayUser.graduation_year || undefined,
+      formation_name: data.formation_name || displayUser.formation_name || undefined,
+    };
+    
+    updateAccount(payload as User, {
       onSuccess: async () => {
         hapticFeedback.success();
         const updatedUser = await refetch();
         const currentUser = updatedUser.data || displayUser;
         navigation.navigate("Preview", { user: currentUser });
       },
-      onError: () => {
+      onError: (error) => {
         hapticFeedback.error();
+        console.error("[OnboardingAcademicInfo] Error updating account:", error);
       },
     });
   };

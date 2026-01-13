@@ -645,6 +645,7 @@
     "profilePicture": {
       "title": "添加您的个人资料照片",
       "description": "您的个人资料照片将对Transat应用程序的所有用户可见。",
+      "canChangeLater": "您可以随时在账户 > 编辑资料中更改您的个人资料照片。",
       "encouragement": "💡 友好的面孔有助于他人认出您！",
       "continue": "继续",
       "skip": "跳过此步骤"

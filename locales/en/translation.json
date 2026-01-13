@@ -645,6 +645,7 @@
     "profilePicture": {
       "title": "Add your profile picture",
       "description": "Your profile picture will be visible to all users of the Transat application.",
+      "canChangeLater": "You can change your profile picture anytime in Account > Edit profile.",
       "encouragement": "💡 A friendly face helps others recognize you!",
       "continue": "Continue",
       "skip": "Skip this step"

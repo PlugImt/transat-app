@@ -645,6 +645,7 @@
     "profilePicture": {
       "title": "Adicione sua foto de perfil",
       "description": "Sua foto de perfil será visível para todos os usuários do aplicativo Transat.",
+      "canChangeLater": "Você pode alterar sua foto de perfil a qualquer momento em Conta > Editar perfil.",
       "encouragement": "💡 Um rosto amigável ajuda os outros a reconhecê-lo!",
       "continue": "Continuar",
       "skip": "Pular esta etapa"

@@ -645,6 +645,7 @@
     "profilePicture": {
       "title": "Fügen Sie Ihr Profilbild hinzu",
       "description": "Ihr Profilbild wird für alle Benutzer der Transat-Anwendung sichtbar sein.",
+      "canChangeLater": "Sie können Ihr Profilbild jederzeit unter Konto > Profil bearbeiten ändern.",
       "encouragement": "💡 Ein freundliches Gesicht hilft anderen, Sie zu erkennen!",
       "continue": "Weiter",
       "skip": "Diesen Schritt überspringen"

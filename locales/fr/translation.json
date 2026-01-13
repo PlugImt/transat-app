@@ -647,12 +647,22 @@
     "profilePicture": {
       "title": "Ajoutez votre photo de profil",
       "description": "Votre photo de profil sera visible par tous les utilisateurs de l'application Transat.",
+      "encouragement": "💡 Un visage amical aide les autres à vous reconnaître !",
       "continue": "Continuer",
       "skip": "Passer cette étape"
     },
-    "personalInfo": {
-      "title": "Complétez votre profil",
-      "description": "Ces informations seront visibles par tous les utilisateurs de l'application Transat.",
+    "basicInfo": {
+      "title": "Vos informations de base",
+      "description": "Remplissez vos informations personnelles pour que les autres utilisateurs puissent vous identifier.",
+      "encouragement": "✨ Complétez votre profil pour une meilleure expérience sur Transat !",
+      "phoneInfo": "Ce numéro sera utilisé pour vous contacter lors de réservations, commandes ou si nous devons vous joindre.",
+      "continue": "Continuer",
+      "skip": "Passer cette étape"
+    },
+    "academicInfo": {
+      "title": "Vos informations académiques",
+      "description": "Partagez votre formation et votre année de diplôme pour connecter avec vos camarades.",
+      "encouragement": "🎓 Rejoignez votre communauté et découvrez les événements de votre formation !",
       "continue": "Continuer",
       "skip": "Passer cette étape"
     },

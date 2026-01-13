@@ -644,12 +644,22 @@
     "profilePicture": {
       "title": "Añade tu foto de perfil",
       "description": "Tu foto de perfil será visible para todos los usuarios de la aplicación Transat.",
+      "encouragement": "💡 ¡Una cara amigable ayuda a otros a reconocerte!",
       "continue": "Continuar",
       "skip": "Saltar este paso"
     },
-    "personalInfo": {
-      "title": "Completa tu perfil",
-      "description": "Esta información será visible para todos los usuarios de la aplicación Transat.",
+    "basicInfo": {
+      "title": "Tu información básica",
+      "description": "Completa tu información personal para que otros usuarios puedan identificarte.",
+      "encouragement": "✨ ¡Completa tu perfil para una mejor experiencia en Transat!",
+      "phoneInfo": "Este número se utilizará para contactarte para reservas, pedidos o si necesitamos comunicarnos contigo.",
+      "continue": "Continuar",
+      "skip": "Saltar este paso"
+    },
+    "academicInfo": {
+      "title": "Tu información académica",
+      "description": "Comparte tu formación y año de graduación para conectar con tus compañeros.",
+      "encouragement": "🎓 ¡Únete a tu comunidad y descubre eventos de tu formación!",
       "continue": "Continuar",
       "skip": "Saltar este paso"
     },

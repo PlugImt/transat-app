@@ -3,11 +3,12 @@ import { useMemo } from "react";
 import type { User } from "@/dto";
 import { storage } from "@/services/storage/asyncStorage";
 
-export type OnboardingStep = "profilePicture" | "personalInfo" | "preview";
+export type OnboardingStep = "profilePicture" | "basicInfo" | "academicInfo" | "preview";
 
 export interface OnboardingSteps {
   needsProfilePicture: boolean;
-  needsPersonalInfo: boolean;
+  needsBasicInfo: boolean;
+  needsAcademicInfo: boolean;
   needsPreview: boolean;
   steps: OnboardingStep[];
   hasCompletedAll: boolean;
@@ -23,21 +24,25 @@ export const useOnboardingSteps = (user: User | null | undefined) => {
     if (!user) {
       return {
         needsProfilePicture: false,
-        needsPersonalInfo: false,
+        needsBasicInfo: false,
+        needsAcademicInfo: false,
         needsPreview: false,
         steps: [],
         hasCompletedAll: true,
       };
     }
 
-    // Check if onboarding was skipped or completed
-    // We'll check this in the component using async storage
-
+    // Step 1: Profile Picture
     const needsProfilePicture = !user.profile_picture;
-    const needsPersonalInfo =
+    
+    // Step 2: Basic Info (First Name, Last Name, Phone Number)
+    const needsBasicInfo =
       !user.first_name ||
       !user.last_name ||
-      !user.phone_number ||
+      !user.phone_number;
+    
+    // Step 3: Academic Info (Formation, Graduation Year)
+    const needsAcademicInfo =
       !user.formation_name ||
       !user.graduation_year;
 
@@ -45,8 +50,11 @@ export const useOnboardingSteps = (user: User | null | undefined) => {
     if (needsProfilePicture) {
       steps.push("profilePicture");
     }
-    if (needsPersonalInfo) {
-      steps.push("personalInfo");
+    if (needsBasicInfo) {
+      steps.push("basicInfo");
+    }
+    if (needsAcademicInfo) {
+      steps.push("academicInfo");
     }
     // Always show preview if there are any steps
     if (steps.length > 0) {
@@ -55,7 +63,8 @@ export const useOnboardingSteps = (user: User | null | undefined) => {
 
     return {
       needsProfilePicture,
-      needsPersonalInfo,
+      needsBasicInfo,
+      needsAcademicInfo,
       needsPreview: steps.length > 0,
       steps,
       hasCompletedAll: steps.length === 0,

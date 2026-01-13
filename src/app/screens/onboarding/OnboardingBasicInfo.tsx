@@ -1,19 +1,16 @@
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { GraduationCap } from "lucide-react-native";
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Keyboard, View } from "react-native";
 import { MotiView } from "moti";
 import { Button } from "@/components/common/Button";
-import Dropdown from "@/components/common/Dropdown";
 import Input from "@/components/common/Input";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 import { updateUserPayloadSchema } from "@/dto";
-import type { formationName } from "@/enums";
 import { useUpdateAccount } from "@/hooks/account/useUpdateAccount";
 import { useUser } from "@/hooks/account/useUser";
 import { hapticFeedback } from "@/utils/haptics.utils";
@@ -22,17 +19,17 @@ import type { User } from "@/dto";
 
 type NavigationProp = NativeStackNavigationProp<OnboardingStackParamList>;
 
-interface OnboardingPersonalInfoProps {
+interface OnboardingBasicInfoProps {
   route: {
     params: { user: User };
   };
-  onSkip: () => void;
+  onSkipStep: () => void;
 }
 
-export const OnboardingPersonalInfo = ({
+export const OnboardingBasicInfo = ({
   route,
-  onSkip,
-}: OnboardingPersonalInfoProps) => {
+  onSkipStep,
+}: OnboardingBasicInfoProps) => {
   const navigation = useNavigation<NavigationProp>();
   const { theme } = useTheme();
   const { t } = useTranslation();
@@ -52,8 +49,8 @@ export const OnboardingPersonalInfo = ({
       last_name: "",
       phone_number: "",
       email: displayUser.email || "",
-      graduation_year: undefined as number | undefined,
-      formation_name: undefined as formationName | undefined,
+      graduation_year: displayUser?.graduation_year || undefined,
+      formation_name: displayUser?.formation_name || undefined,
     },
     mode: "onChange",
   });
@@ -71,40 +68,67 @@ export const OnboardingPersonalInfo = ({
     }
   }, [displayUser, reset]);
 
-  const currentMonth = new Date().getMonth();
-  const currentYear = new Date().getFullYear();
-  const startAcademicYear = currentMonth >= 8 ? currentYear : currentYear - 1;
-  const yearOptions = Array.from({ length: 5 }, (_, i) => {
-    return (startAcademicYear + i).toString();
-  });
-
-  const handleUpdateAccount = (data: User) => {
+  const handleUpdateAccount = (formData: User) => {
     Keyboard.dismiss();
-    updateAccount(data, {
-      onSuccess: async () => {
+    updateAccount(formData, {
+      onSuccess: async (updatedUser) => {
         hapticFeedback.success();
-        const updatedUser = await refetch();
-        const currentUser = updatedUser.data || displayUser;
-        navigation.navigate("Preview", { user: currentUser });
+        // The mutation already fetches fresh user data, but let's refetch to be sure
+        if (refetch) {
+          try {
+            const freshUser = await refetch();
+            // Use fresh data or fallback to updated user from mutation or merged form data
+            const currentUser = freshUser.data || updatedUser || {
+              ...displayUser,
+              ...formData,
+            };
+            
+            navigateToNextStep(currentUser);
+          } catch (error) {
+            console.error("[Onboarding] Error refetching user:", error);
+            // Fallback: use updated user from mutation or merged form data
+            const currentUser = updatedUser || {
+              ...displayUser,
+              ...formData,
+            };
+            navigateToNextStep(currentUser);
+          }
+        } else {
+          // If refetch is not available, use updated user from mutation or merged form data
+          const currentUser = updatedUser || {
+            ...displayUser,
+            ...formData,
+          };
+          navigateToNextStep(currentUser);
+        }
       },
-      onError: () => {
+      onError: (error) => {
         hapticFeedback.error();
+        console.error("[Onboarding] Error updating account:", error);
       },
     });
   };
 
+  const navigateToNextStep = (userData: User) => {
+    // Check what's the next step
+    const needsAcademicInfo =
+      !userData.formation_name ||
+      !userData.graduation_year;
+
+    if (needsAcademicInfo) {
+      navigation.navigate("AcademicInfo", { user: userData });
+    } else {
+      navigation.navigate("Preview", { user: userData });
+    }
+  };
+
+  const handleSkip = () => {
+    const currentUser = user || route.params.user;
+    navigateToNextStep(currentUser);
+  };
+
   return (
     <View className="flex-1 px-6 py-8" style={{ backgroundColor: theme.background }}>
-      {/* Skip all button in top right */}
-      <View className="absolute top-8 right-6 z-10">
-        <Button
-          label={t("onboarding.skipAll")}
-          variant="ghost"
-          onPress={onSkip}
-          className="px-4 py-2"
-        />
-      </View>
-
       <MotiView
         from={{ opacity: 0, translateY: 20 }}
         animate={{ opacity: 1, translateY: 0 }}
@@ -116,9 +140,12 @@ export const OnboardingPersonalInfo = ({
       >
         <View className="gap-6 mb-8">
           <View className="gap-2">
-            <Text variant="h1">{t("onboarding.personalInfo.title")}</Text>
+            <Text variant="h1">{t("onboarding.basicInfo.title")}</Text>
             <Text variant="body" color="muted">
-              {t("onboarding.personalInfo.description")}
+              {t("onboarding.basicInfo.description")}
+            </Text>
+            <Text variant="sm" color="muted" className="mt-2 italic">
+              {t("onboarding.basicInfo.encouragement")}
             </Text>
           </View>
 
@@ -147,52 +174,24 @@ export const OnboardingPersonalInfo = ({
               error={errors.phone_number?.message}
               keyboardType="phone-pad"
             />
-
-            <Controller
-              control={control}
-              name="formation_name"
-              render={({ field: { onChange, value } }) => (
-                <Dropdown
-                  label={t("account.formationName")}
-                  placeholder={t("account.selectFormationName")}
-                  options={["FISE", "FIL", "FIT", "FIP", "FID"]}
-                  value={value}
-                  onValueChange={onChange}
-                />
-              )}
-            />
-
-            <Controller
-              control={control}
-              name="graduation_year"
-              render={({ field: { onChange, value } }) => (
-                <Dropdown
-                  label={t("account.graduationYear")}
-                  placeholder={t("account.selectGraduationYear")}
-                  icon={<GraduationCap color={theme.text} size={20} />}
-                  options={yearOptions}
-                  value={value ? value.toString() : undefined}
-                  onValueChange={(value) =>
-                    onChange(value ? Number(value) : undefined)
-                  }
-                />
-              )}
-            />
+            <Text variant="sm" color="muted" className="px-1 -mt-2">
+              {t("onboarding.basicInfo.phoneInfo")}
+            </Text>
           </View>
         </View>
       </MotiView>
 
       <View className="gap-3">
         <Button
-          label={t("onboarding.personalInfo.continue")}
+          label={t("onboarding.basicInfo.continue")}
           onPress={handleSubmit(handleUpdateAccount)}
           isUpdating={isUpdating}
           disabled={!isDirty || !isValid}
         />
         <Button
-          label={t("onboarding.personalInfo.skip")}
+          label={t("onboarding.basicInfo.skip")}
           variant="ghost"
-          onPress={onSkip}
+          onPress={handleSkip}
         />
       </View>
     </View>

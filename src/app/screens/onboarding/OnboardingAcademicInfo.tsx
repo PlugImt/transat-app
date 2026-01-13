@@ -8,8 +8,7 @@ import { useTranslation } from "react-i18next";
 import { Keyboard, View } from "react-native";
 import { MotiView } from "moti";
 import { Button } from "@/components/common/Button";
-import Dropdown from "@/components/common/Dropdown";
-import Input from "@/components/common/Input";
+import SimpleDropdown from "@/components/common/SimpleDropdown";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 import { updateUserPayloadSchema } from "@/dto";
@@ -22,17 +21,17 @@ import type { User } from "@/dto";
 
 type NavigationProp = NativeStackNavigationProp<OnboardingStackParamList>;
 
-interface OnboardingPersonalInfoProps {
+interface OnboardingAcademicInfoProps {
   route: {
     params: { user: User };
   };
-  onSkip: () => void;
+  onSkipStep: () => void;
 }
 
-export const OnboardingPersonalInfo = ({
+export const OnboardingAcademicInfo = ({
   route,
-  onSkip,
-}: OnboardingPersonalInfoProps) => {
+  onSkipStep,
+}: OnboardingAcademicInfoProps) => {
   const navigation = useNavigation<NavigationProp>();
   const { theme } = useTheme();
   const { t } = useTranslation();
@@ -48,9 +47,9 @@ export const OnboardingPersonalInfo = ({
   } = useForm({
     resolver: zodResolver(updateUserPayloadSchema),
     defaultValues: {
-      first_name: "",
-      last_name: "",
-      phone_number: "",
+      first_name: displayUser.first_name || "",
+      last_name: displayUser.last_name || "",
+      phone_number: displayUser.phone_number || "",
       email: displayUser.email || "",
       graduation_year: undefined as number | undefined,
       formation_name: undefined as formationName | undefined,
@@ -93,18 +92,13 @@ export const OnboardingPersonalInfo = ({
     });
   };
 
+  const handleSkip = () => {
+    const currentUser = user || route.params.user;
+    navigation.navigate("Preview", { user: currentUser });
+  };
+
   return (
     <View className="flex-1 px-6 py-8" style={{ backgroundColor: theme.background }}>
-      {/* Skip all button in top right */}
-      <View className="absolute top-8 right-6 z-10">
-        <Button
-          label={t("onboarding.skipAll")}
-          variant="ghost"
-          onPress={onSkip}
-          className="px-4 py-2"
-        />
-      </View>
-
       <MotiView
         from={{ opacity: 0, translateY: 20 }}
         animate={{ opacity: 1, translateY: 0 }}
@@ -116,43 +110,21 @@ export const OnboardingPersonalInfo = ({
       >
         <View className="gap-6 mb-8">
           <View className="gap-2">
-            <Text variant="h1">{t("onboarding.personalInfo.title")}</Text>
+            <Text variant="h1">{t("onboarding.academicInfo.title")}</Text>
             <Text variant="body" color="muted">
-              {t("onboarding.personalInfo.description")}
+              {t("onboarding.academicInfo.description")}
+            </Text>
+            <Text variant="sm" color="muted" className="mt-2 italic">
+              {t("onboarding.academicInfo.encouragement")}
             </Text>
           </View>
 
           <View className="gap-4">
-            <Input
-              control={control}
-              label={t("account.firstName")}
-              name="first_name"
-              textContentType="name"
-              error={errors.first_name?.message}
-            />
-
-            <Input
-              control={control}
-              label={t("account.lastName")}
-              name="last_name"
-              textContentType="familyName"
-              error={errors.last_name?.message}
-            />
-
-            <Input
-              control={control}
-              label={t("account.phone")}
-              name="phone_number"
-              textContentType="telephoneNumber"
-              error={errors.phone_number?.message}
-              keyboardType="phone-pad"
-            />
-
             <Controller
               control={control}
               name="formation_name"
               render={({ field: { onChange, value } }) => (
-                <Dropdown
+                <SimpleDropdown
                   label={t("account.formationName")}
                   placeholder={t("account.selectFormationName")}
                   options={["FISE", "FIL", "FIT", "FIP", "FID"]}
@@ -166,7 +138,7 @@ export const OnboardingPersonalInfo = ({
               control={control}
               name="graduation_year"
               render={({ field: { onChange, value } }) => (
-                <Dropdown
+                <SimpleDropdown
                   label={t("account.graduationYear")}
                   placeholder={t("account.selectGraduationYear")}
                   icon={<GraduationCap color={theme.text} size={20} />}
@@ -184,15 +156,15 @@ export const OnboardingPersonalInfo = ({
 
       <View className="gap-3">
         <Button
-          label={t("onboarding.personalInfo.continue")}
+          label={t("onboarding.academicInfo.continue")}
           onPress={handleSubmit(handleUpdateAccount)}
           isUpdating={isUpdating}
           disabled={!isDirty || !isValid}
         />
         <Button
-          label={t("onboarding.personalInfo.skip")}
+          label={t("onboarding.academicInfo.skip")}
           variant="ghost"
-          onPress={onSkip}
+          onPress={handleSkip}
         />
       </View>
     </View>

@@ -21,12 +21,12 @@ interface OnboardingProfilePictureProps {
   route: {
     params: { user: User };
   };
-  onSkip: () => void;
+  onSkipStep: () => void;
 }
 
 export const OnboardingProfilePicture = ({
   route,
-  onSkip,
+  onSkipStep,
 }: OnboardingProfilePictureProps) => {
   const { theme } = useTheme();
   const { t } = useTranslation();
@@ -59,22 +59,73 @@ export const OnboardingProfilePicture = ({
 
   const handleNext = () => {
     const currentUser = user || route.params.user;
-    // Check what's the next step
-    const needsPersonalInfo =
-      !currentUser.first_name ||
-      !currentUser.last_name ||
-      !currentUser.phone_number ||
-      !currentUser.formation_name ||
-      !currentUser.graduation_year;
+    if (!currentUser) {
+      return;
+    }
 
-    if (needsPersonalInfo) {
-      navigation.navigate("PersonalInfo", { user: currentUser });
+    // Try to refetch to get latest user data, but don't block navigation if it fails
+    if (refetch) {
+      refetch()
+        .then((result) => {
+          const latestUser = result.data || currentUser;
+          navigateToNextStep(latestUser);
+        })
+        .catch(() => {
+          // If refetch fails, use current user data
+          navigateToNextStep(currentUser);
+        });
     } else {
-      navigation.navigate("Preview", { user: currentUser });
+      // If refetch is not available, use current user data
+      navigateToNextStep(currentUser);
+    }
+  };
+
+  const navigateToNextStep = (userData: User) => {
+    // Check what's the next step based on user data
+    const needsBasicInfo =
+      !userData.first_name ||
+      !userData.last_name ||
+      !userData.phone_number;
+
+    const needsAcademicInfo =
+      !userData.formation_name ||
+      !userData.graduation_year;
+
+    if (needsBasicInfo) {
+      navigation.navigate("BasicInfo", { user: userData });
+    } else if (needsAcademicInfo) {
+      navigation.navigate("AcademicInfo", { user: userData });
+    } else {
+      navigation.navigate("Preview", { user: userData });
     }
   };
 
   const displayUser = user || route.params.user;
+
+  const handleSkip = () => {
+    const currentUser = user || route.params.user;
+    if (!currentUser) {
+      return;
+    }
+
+    // Check what's the next step
+    const needsBasicInfo =
+      !currentUser.first_name ||
+      !currentUser.last_name ||
+      !currentUser.phone_number;
+
+    const needsAcademicInfo =
+      !currentUser.formation_name ||
+      !currentUser.graduation_year;
+
+    if (needsBasicInfo) {
+      navigation.navigate("BasicInfo", { user: currentUser });
+    } else if (needsAcademicInfo) {
+      navigation.navigate("AcademicInfo", { user: currentUser });
+    } else {
+      navigation.navigate("Preview", { user: currentUser });
+    }
+  };
 
   return (
     <View className="flex-1 px-6 py-8" style={{ backgroundColor: theme.background }}>
@@ -119,6 +170,9 @@ export const OnboardingProfilePicture = ({
           <Text variant="body" color="muted" className="text-center px-4">
             {t("onboarding.profilePicture.description")}
           </Text>
+          <Text variant="sm" color="muted" className="text-center px-4 mt-2 italic">
+            {t("onboarding.profilePicture.encouragement")}
+          </Text>
         </MotiView>
       </View>
 
@@ -126,12 +180,11 @@ export const OnboardingProfilePicture = ({
         <Button
           label={t("onboarding.profilePicture.continue")}
           onPress={handleNext}
-          disabled={!hasProfilePicture}
         />
         <Button
           label={t("onboarding.profilePicture.skip")}
           variant="ghost"
-          onPress={onSkip}
+          onPress={handleSkip}
         />
       </View>
     </View>

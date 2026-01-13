@@ -19,13 +19,13 @@ interface OnboardingPreviewProps {
     params: { user: User };
   };
   onComplete: () => void;
-  onSkip: () => void;
+  onSkipStep: () => void;
 }
 
 export const OnboardingPreview = ({
   route,
   onComplete,
-  onSkip,
+  onSkipStep,
 }: OnboardingPreviewProps) => {
   const { theme } = useTheme();
   const { t } = useTranslation();
@@ -34,6 +34,10 @@ export const OnboardingPreview = ({
   const displayUser = currentUser || route.params.user;
 
   const handleComplete = () => {
+    navigation.navigate("Success");
+  };
+
+  const handleSkip = () => {
     navigation.navigate("Success");
   };
 
@@ -139,7 +143,7 @@ export const OnboardingPreview = ({
           label={t("onboarding.preview.validate")}
           onPress={handleComplete}
         />
-        <Button label={t("onboarding.preview.skip")} variant="ghost" onPress={onSkip} />
+        <Button label={t("onboarding.preview.skip")} variant="ghost" onPress={handleSkip} />
       </View>
     </View>
   );

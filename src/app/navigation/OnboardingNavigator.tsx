@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { useQueryClient } from "@tanstack/react-query";
 import { OnboardingProfilePicture } from "@/app/screens/onboarding/OnboardingProfilePicture";
-import { OnboardingPersonalInfo } from "@/app/screens/onboarding/OnboardingPersonalInfo";
+import { OnboardingBasicInfo } from "@/app/screens/onboarding/OnboardingBasicInfo";
+import { OnboardingAcademicInfo } from "@/app/screens/onboarding/OnboardingAcademicInfo";
 import { OnboardingPreview } from "@/app/screens/onboarding/OnboardingPreview";
 import { OnboardingSuccess } from "@/app/screens/onboarding/OnboardingSuccess";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -19,7 +20,8 @@ import type { User } from "@/dto";
 
 export type OnboardingStackParamList = {
   ProfilePicture: { user: User };
-  PersonalInfo: { user: User };
+  BasicInfo: { user: User };
+  AcademicInfo: { user: User };
   Preview: { user: User };
   Success: undefined;
 };
@@ -38,11 +40,10 @@ export const OnboardingNavigator = ({
   const queryClient = useQueryClient();
   const onboardingSteps = useOnboardingSteps(user || null);
 
-  const handleSkip = async () => {
-    await setOnboardingSkipped(true);
-    // Clear force show flag
-    await setForceShowOnboarding(false);
-    onComplete();
+  // Handle skipping a single step (not the entire onboarding)
+  const handleSkipStep = () => {
+    // This will be handled by each screen individually
+    // They will navigate to the next step or preview
   };
 
   const handleComplete = async () => {
@@ -65,11 +66,15 @@ export const OnboardingNavigator = ({
     const firstStep = steps[0];
     return firstStep === "profilePicture"
       ? "ProfilePicture"
-      : firstStep === "personalInfo"
-        ? "PersonalInfo"
-        : "Preview";
+      : firstStep === "basicInfo"
+        ? "BasicInfo"
+        : firstStep === "academicInfo"
+          ? "AcademicInfo"
+          : "Preview";
   };
 
+  // All screens must be declared for React Navigation to work properly
+  // We control which one is shown via initialRouteName and navigation logic
   return (
     <View style={{ flex: 1, backgroundColor: theme.background }}>
       <Stack.Navigator
@@ -81,48 +86,52 @@ export const OnboardingNavigator = ({
           contentStyle: { backgroundColor: theme.background },
         }}
       >
-        {onboardingSteps.needsProfilePicture && (
-          <Stack.Screen
-            name="ProfilePicture"
-            initialParams={{ user }}
-            options={{ headerShown: false }}
-          >
-            {(props) => (
-              <OnboardingProfilePicture
-                route={props.route}
-                onSkip={handleSkip}
-              />
-            )}
-          </Stack.Screen>
-        )}
+        <Stack.Screen
+          name="ProfilePicture"
+          initialParams={{ user }}
+          options={{ headerShown: false }}
+        >
+          {(props) => (
+            <OnboardingProfilePicture
+              route={props.route}
+              onSkipStep={handleSkipStep}
+            />
+          )}
+        </Stack.Screen>
 
-        {onboardingSteps.needsPersonalInfo && (
-          <Stack.Screen
-            name="PersonalInfo"
-            initialParams={{ user }}
-            options={{ headerShown: false }}
-          >
-            {(props) => (
-              <OnboardingPersonalInfo route={props.route} onSkip={handleSkip} />
-            )}
-          </Stack.Screen>
-        )}
+        <Stack.Screen
+          name="BasicInfo"
+          initialParams={{ user }}
+          options={{ headerShown: false }}
+        >
+          {(props) => (
+            <OnboardingBasicInfo route={props.route} onSkipStep={handleSkipStep} />
+          )}
+        </Stack.Screen>
 
-        {onboardingSteps.needsPreview && (
-          <Stack.Screen
-            name="Preview"
-            initialParams={{ user }}
-            options={{ headerShown: false }}
-          >
-            {(props) => (
-              <OnboardingPreview
-                route={props.route}
-                onComplete={handleComplete}
-                onSkip={handleSkip}
-              />
-            )}
-          </Stack.Screen>
-        )}
+        <Stack.Screen
+          name="AcademicInfo"
+          initialParams={{ user }}
+          options={{ headerShown: false }}
+        >
+          {(props) => (
+            <OnboardingAcademicInfo route={props.route} onSkipStep={handleSkipStep} />
+          )}
+        </Stack.Screen>
+
+        <Stack.Screen
+          name="Preview"
+          initialParams={{ user }}
+          options={{ headerShown: false }}
+        >
+          {(props) => (
+            <OnboardingPreview
+              route={props.route}
+              onComplete={handleComplete}
+              onSkipStep={handleSkipStep}
+            />
+          )}
+        </Stack.Screen>
 
         <Stack.Screen name="Success">
           {() => <OnboardingSuccess onFinish={handleComplete} />}

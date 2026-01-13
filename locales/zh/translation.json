@@ -644,12 +644,22 @@
     "profilePicture": {
       "title": "添加您的个人资料照片",
       "description": "您的个人资料照片将对Transat应用程序的所有用户可见。",
+      "encouragement": "💡 友好的面孔有助于他人认出您！",
       "continue": "继续",
       "skip": "跳过此步骤"
     },
-    "personalInfo": {
-      "title": "完善您的个人资料",
-      "description": "此信息将对Transat应用程序的所有用户可见。",
+    "basicInfo": {
+      "title": "您的基本信息",
+      "description": "填写您的个人信息，以便其他用户可以识别您。",
+      "encouragement": "✨ 完善您的个人资料，在Transat上获得更好的体验！",
+      "phoneInfo": "此号码将用于在预订、订单或需要联系您时与您联系。",
+      "continue": "继续",
+      "skip": "跳过此步骤"
+    },
+    "academicInfo": {
+      "title": "您的学术信息",
+      "description": "分享您的专业和毕业年份，与同学建立联系。",
+      "encouragement": "🎓 加入您的社区，发现您专业的活动！",
       "continue": "继续",
       "skip": "跳过此步骤"
     },

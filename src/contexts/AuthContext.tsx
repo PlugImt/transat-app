@@ -10,6 +10,7 @@ import React, {
 import type { Loading, NotLoggedIn, User } from "@/dto";
 import { useAuthMutations } from "@/hooks/auth/useAuthMutations";
 import { useVerificationCode } from "@/hooks/auth/useVerificationCode";
+import { setForceShowOnboarding } from "@/hooks/onboarding/useOnboardingSteps";
 
 interface AuthContextType {
   user: User | null | undefined;
@@ -91,6 +92,8 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
       await saveTokenMutation(response.token);
       const user = await refetchUser();
       setUser(user.data);
+      // Force show onboarding after login
+      await setForceShowOnboarding(true);
       Sentry.setUser({
         email: user.data?.email,
         id: user.data?.id_newf,
@@ -180,6 +183,8 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
       await saveTokenMutation(token);
       const user = await refetchUser();
       setUser(user.data);
+      // Force show onboarding after registration (verification)
+      await setForceShowOnboarding(true);
       return { success: true };
     } catch (error) {
       console.error("Error verifying code:", error);

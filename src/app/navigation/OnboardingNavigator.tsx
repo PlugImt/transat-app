@@ -8,10 +8,9 @@ import { OnboardingPreview } from "@/app/screens/onboarding/OnboardingPreview";
 import { OnboardingSuccess } from "@/app/screens/onboarding/OnboardingSuccess";
 import { useTheme } from "@/contexts/ThemeContext";
 import {
-  getOnboardingCompleted,
-  getOnboardingSkipped,
   setOnboardingCompleted,
   setOnboardingSkipped,
+  setForceShowOnboarding,
   useOnboardingSteps,
 } from "@/hooks/onboarding/useOnboardingSteps";
 import { useUser } from "@/hooks/account/useUser";
@@ -35,46 +34,27 @@ export const OnboardingNavigator = ({
   onComplete,
 }: OnboardingNavigatorProps) => {
   const { theme } = useTheme();
-  const { data: user } = useUser();
+  const { data: user, isPending } = useUser();
   const queryClient = useQueryClient();
-  const [shouldShowOnboarding, setShouldShowOnboarding] = useState<
-    boolean | null
-  >(null);
   const onboardingSteps = useOnboardingSteps(user || null);
-
-  useEffect(() => {
-    const checkOnboardingStatus = async () => {
-      if (!user) {
-        setShouldShowOnboarding(false);
-        return;
-      }
-
-      const isSkipped = await getOnboardingSkipped();
-      const isCompleted = await getOnboardingCompleted();
-
-      if (isSkipped || isCompleted || onboardingSteps.hasCompletedAll) {
-        setShouldShowOnboarding(false);
-        onComplete();
-      } else {
-        setShouldShowOnboarding(true);
-      }
-    };
-
-    checkOnboardingStatus();
-  }, [user, onboardingSteps.hasCompletedAll, onComplete]);
 
   const handleSkip = async () => {
     await setOnboardingSkipped(true);
+    // Clear force show flag
+    await setForceShowOnboarding(false);
     onComplete();
   };
 
   const handleComplete = async () => {
     await setOnboardingCompleted(true);
     await queryClient.invalidateQueries({ queryKey: QUERY_KEYS.user });
+    // Clear force show flag
+    await setForceShowOnboarding(false);
     onComplete();
   };
 
-  if (shouldShowOnboarding === null || !user || !shouldShowOnboarding) {
+  // Wait for user to load
+  if (isPending || !user) {
     return null;
   }
 

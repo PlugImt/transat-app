@@ -10,8 +10,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/hooks/account/useAuth";
 import { usePushNotifications } from "@/hooks/home";
 import {
-  getOnboardingCompleted,
-  getOnboardingSkipped,
+  shouldShowOnboarding,
   useOnboardingSteps,
 } from "@/hooks/onboarding/useOnboardingSteps";
 import { i18nInitializedPromise } from "@/i18n";
@@ -35,34 +34,56 @@ export const RootNavigator = () => {
   }, []);
 
   useEffect(() => {
+    // If user is not logged in, we don't need to check onboarding
+    if (user === null) {
+      setShowOnboarding(false);
+      return;
+    }
+
+    // If user is still loading or i18n is not ready, wait
+    if (user === undefined || !isI18nReady) {
+      return;
+    }
+
+    // Check if we should show onboarding
     const checkOnboarding = async () => {
-      // If user is not logged in, we don't need to check onboarding
-      if (!user) {
-        setShowOnboarding(false);
-        return;
-      }
-
-      // Only check onboarding if user is logged in and i18n is ready
-      if (!isI18nReady) {
-        return;
-      }
-
-      const isSkipped = await getOnboardingSkipped();
-      const isCompleted = await getOnboardingCompleted();
-
-      if (isSkipped || isCompleted || onboardingSteps.hasCompletedAll) {
-        setShowOnboarding(false);
-      } else {
+      try {
+        const shouldShow = await shouldShowOnboarding();
+        console.log("[RootNavigator] shouldShowOnboarding:", shouldShow, "user:", !!user);
+        setShowOnboarding(shouldShow);
+      } catch (error) {
+        console.error("[Onboarding] Error in checkOnboarding:", error);
+        // On error, show onboarding by default
         setShowOnboarding(true);
       }
     };
 
     checkOnboarding();
-  }, [user, isI18nReady, onboardingSteps.hasCompletedAll]);
+  }, [user, isI18nReady]);
 
-  // Show splash screen while loading or while checking onboarding status
-  if (user === undefined || !isI18nReady || (user && showOnboarding === null)) {
+  // Show splash screen while:
+  // - User is still loading (undefined)
+  // - i18n is not ready
+  // - User is logged in but we're still checking onboarding status
+  if (
+    user === undefined ||
+    !isI18nReady ||
+    (user !== null && user !== undefined && showOnboarding === null)
+  ) {
     return <SplashScreen />;
+  }
+
+  // If showing onboarding, render it full screen without SafeAreaView
+  if (user && showOnboarding === true) {
+    console.log("[RootNavigator] Rendering OnboardingNavigator");
+    return (
+      <OnboardingNavigator
+        onComplete={() => {
+          console.log("[RootNavigator] Onboarding completed");
+          setShowOnboarding(false);
+        }}
+      />
+    );
   }
 
   return (
@@ -74,17 +95,7 @@ export const RootNavigator = () => {
     >
       <Stack.Navigator screenOptions={screenOptions}>
         {user ? (
-          showOnboarding ? (
-            <Stack.Screen name="Onboarding" options={{ headerShown: false }}>
-              {() => (
-                <OnboardingNavigator
-                  onComplete={() => setShowOnboarding(false)}
-                />
-              )}
-            </Stack.Screen>
-          ) : (
-            <Stack.Screen name="App" component={AppNavigator} />
-          )
+          <Stack.Screen name="App" component={AppNavigator} />
         ) : (
           <Stack.Screen name="Auth" component={AuthNavigator} />
         )}

@@ -4,19 +4,21 @@ import { UserCard } from "@/components/custom/card/UserCard";
 import type { User } from "@/dto";
 
 interface ClubResponsibleProps {
-  responsible?: User;
+  responsibles?: User[];
 }
 
-export const ClubResponsible = ({ responsible }: ClubResponsibleProps) => {
+export const ClubResponsible = ({ responsibles }: ClubResponsibleProps) => {
   const { t } = useTranslation();
 
-  if (!responsible) {
+  if (!responsibles || responsibles.length === 0) {
     return null;
   }
 
   return (
     <CardGroup title={t("services.clubs.responsible")}>
-      <UserCard user={responsible} />
+      {responsibles.map((user) => (
+        <UserCard key={user.email} user={user} />
+      ))}
     </CardGroup>
   );
 };

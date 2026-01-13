@@ -642,5 +642,32 @@
     "errors": {
       "contact": "Erreur lors de l'ouverture de l'application SMS"
     }
+  },
+  "onboarding": {
+    "profilePicture": {
+      "title": "Ajoutez votre photo de profil",
+      "description": "Votre photo de profil sera visible par tous les utilisateurs de l'application Transat.",
+      "continue": "Continuer",
+      "skip": "Passer cette étape"
+    },
+    "personalInfo": {
+      "title": "Complétez votre profil",
+      "description": "Ces informations seront visibles par tous les utilisateurs de l'application Transat.",
+      "continue": "Continuer",
+      "skip": "Passer cette étape"
+    },
+    "preview": {
+      "title": "Aperçu de votre profil",
+      "publicVisibility": "Visibilité publique",
+      "publicVisibilityDescription": "Ces informations seront visibles par tous les utilisateurs",
+      "privacyNotice": "Toutes vos informations personnelles seront potentiellement visibles par les autres utilisateurs de l'application Transat.",
+      "validate": "Valider mon profil",
+      "skip": "Passer"
+    },
+    "success": {
+      "title": "Bienvenue sur Transat !",
+      "description": "Votre profil est maintenant configuré. Vous pouvez commencer à explorer toutes les fonctionnalités de l'application !",
+      "start": "Commencer"
+    }
   }
 }

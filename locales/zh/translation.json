@@ -639,5 +639,32 @@
     "errors": {
       "contact": "打开短信应用时出错"
     }
+  },
+  "onboarding": {
+    "profilePicture": {
+      "title": "添加您的个人资料照片",
+      "description": "您的个人资料照片将对Transat应用程序的所有用户可见。",
+      "continue": "继续",
+      "skip": "跳过此步骤"
+    },
+    "personalInfo": {
+      "title": "完善您的个人资料",
+      "description": "此信息将对Transat应用程序的所有用户可见。",
+      "continue": "继续",
+      "skip": "跳过此步骤"
+    },
+    "preview": {
+      "title": "个人资料预览",
+      "publicVisibility": "公开可见性",
+      "publicVisibilityDescription": "此信息将对所有用户可见",
+      "privacyNotice": "您的所有个人信息可能会被Transat应用程序的其他用户看到。",
+      "validate": "验证我的个人资料",
+      "skip": "跳过"
+    },
+    "success": {
+      "title": "欢迎使用Transat！",
+      "description": "您的个人资料现已设置完成。您可以开始探索应用程序的所有功能！",
+      "start": "开始"
+    }
   }
 }

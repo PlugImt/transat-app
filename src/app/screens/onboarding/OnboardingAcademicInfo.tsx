@@ -114,9 +114,6 @@ export const OnboardingAcademicInfo = ({
             <Text variant="body" color="muted">
               {t("onboarding.academicInfo.description")}
             </Text>
-            <Text variant="sm" color="muted" className="mt-2 italic">
-              {t("onboarding.academicInfo.encouragement")}
-            </Text>
           </View>
 
           <View className="gap-4">

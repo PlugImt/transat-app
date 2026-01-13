@@ -170,9 +170,6 @@ export const OnboardingProfilePicture = ({
           <Text variant="body" color="muted" className="text-center px-4">
             {t("onboarding.profilePicture.description")}
           </Text>
-          <Text variant="sm" color="muted" className="text-center px-4 mt-2 italic">
-            {t("onboarding.profilePicture.encouragement")}
-          </Text>
         </MotiView>
       </View>
 

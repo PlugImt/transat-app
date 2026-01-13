@@ -665,6 +665,8 @@
     },
     "preview": {
       "title": "Vista previa del perfil",
+      "yourInfo": "Tu información",
+      "hasProfilePicture": "Foto añadida",
       "publicVisibility": "Visibilidad pública",
       "publicVisibilityDescription": "Esta información será visible para todos los usuarios",
       "privacyNotice": "Toda tu información personal será potencialmente visible para otros usuarios de la aplicación Transat.",

@@ -1,8 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { CheckCircle2, Eye, Shield } from "lucide-react-native";
+import { CheckCircle2, Eye, Shield, Phone, GraduationCap, User as UserIcon } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { View, ScrollView } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import { MotiView } from "moti";
 import Avatar from "@/components/common/Avatar";
 import { Button } from "@/components/common/Button";
@@ -41,11 +42,45 @@ export const OnboardingPreview = ({
     navigation.navigate("Success");
   };
 
+  type InfoItem = {
+    icon: typeof Phone;
+    label: string;
+    value: string;
+    color: string;
+  };
+
+  const infoItems: InfoItem[] = [
+    displayUser.phone_number && {
+      icon: Phone,
+      label: t("account.phone"),
+      value: displayUser.phone_number,
+      color: theme.info || "#2196F3",
+    },
+    displayUser.formation_name && {
+      icon: GraduationCap,
+      label: t("account.formationName"),
+      value: displayUser.formation_name,
+      color: theme.secondary || "#0049a8",
+    },
+    displayUser.graduation_year && {
+      icon: GraduationCap,
+      label: t("account.graduationYear"),
+      value: displayUser.graduation_year.toString(),
+      color: theme.primary,
+    },
+    displayUser.profile_picture && {
+      icon: UserIcon,
+      label: t("account.profilePicture"),
+      value: t("onboarding.preview.hasProfilePicture"),
+      color: theme.success || "#4CAF50",
+    },
+  ].filter((item): item is InfoItem => Boolean(item));
+
   return (
     <View className="flex-1" style={{ backgroundColor: theme.background }}>
       <ScrollView
-        className="flex-1 px-6 py-8"
-        contentContainerStyle={{ flexGrow: 1 }}
+        className="flex-1"
+        contentContainerStyle={{ flexGrow: 1, padding: 24 }}
       >
         <MotiView
           from={{ opacity: 0, translateY: 20 }}
@@ -56,35 +91,51 @@ export const OnboardingPreview = ({
           }}
           className="flex-1"
         >
-          <View className="gap-6 mb-8">
-            <View className="items-center gap-4">
+          <View className="gap-8 mb-8">
+            {/* Header with gradient background */}
+            <LinearGradient
+              colors={[`${theme.primary}15`, `${theme.primary}05`, "transparent"]}
+              locations={[0, 0.5, 1]}
+              className="rounded-3xl p-8 items-center gap-6 -mx-4"
+            >
               <MotiView
-                from={{ scale: 0.9 }}
-                animate={{ scale: 1 }}
+                from={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
                 transition={{
                   type: "spring",
                   damping: 15,
                   stiffness: 150,
                 }}
               >
-                <Avatar user={displayUser} size={120} />
+                <View
+                  className="rounded-full p-2"
+                  style={{ backgroundColor: `${theme.primary}20` }}
+                >
+                  <Avatar user={displayUser} size={140} />
+                </View>
               </MotiView>
               <View className="items-center gap-2">
-                <Text variant="h1">
+                <Text variant="h1" className="text-center">
                   {displayUser.first_name} {displayUser.last_name}
                 </Text>
-                <Text variant="body" color="muted">
+                <Text variant="body" color="muted" className="text-center">
                   {displayUser.email}
                 </Text>
               </View>
-            </View>
+            </LinearGradient>
 
+            {/* Public visibility notice */}
             <View
-              className="rounded-lg p-4 gap-4"
+              className="rounded-2xl p-5 gap-3"
               style={{ backgroundColor: theme.card }}
             >
               <View className="flex-row items-center gap-3">
-                <Eye size={20} color={theme.text} />
+                <View
+                  className="rounded-full p-2"
+                  style={{ backgroundColor: `${theme.primary}20` }}
+                >
+                  <Eye size={22} color={theme.primary} />
+                </View>
                 <View className="flex-1">
                   <Text variant="sm" className="font-semibold">
                     {t("onboarding.preview.publicVisibility")}
@@ -94,45 +145,69 @@ export const OnboardingPreview = ({
                   </Text>
                 </View>
               </View>
+            </View>
 
-              <View className="gap-3 pt-2 border-t" style={{ borderColor: theme.border }}>
-                {displayUser.phone_number && (
-                  <View className="flex-row items-center gap-2">
-                    <CheckCircle2 size={16} color={theme.primary} />
-                    <Text variant="sm">Téléphone : {displayUser.phone_number}</Text>
-                  </View>
-                )}
-                {displayUser.formation_name && (
-                  <View className="flex-row items-center gap-2">
-                    <CheckCircle2 size={16} color={theme.primary} />
-                    <Text variant="sm">Formation : {displayUser.formation_name}</Text>
-                  </View>
-                )}
-                {displayUser.graduation_year && (
-                  <View className="flex-row items-center gap-2">
-                    <CheckCircle2 size={16} color={theme.primary} />
-                    <Text variant="sm">
-                      Année de diplôme : {displayUser.graduation_year}
-                    </Text>
-                  </View>
-                )}
-                {displayUser.profile_picture && (
-                  <View className="flex-row items-center gap-2">
-                    <CheckCircle2 size={16} color={theme.primary} />
-                    <Text variant="sm">Photo de profil</Text>
-                  </View>
-                )}
+            {/* Info cards grid */}
+            {infoItems.length > 0 && (
+              <View className="gap-4">
+                <Text variant="h2">{t("onboarding.preview.yourInfo")}</Text>
+                <View className="gap-3">
+                  {infoItems.map((item, index) => {
+                    const Icon = item.icon;
+                    return (
+                      <MotiView
+                        key={index}
+                        from={{ opacity: 0, translateX: -20 }}
+                        animate={{ opacity: 1, translateX: 0 }}
+                        transition={{
+                          type: "timing",
+                          duration: 400,
+                          delay: index * 100,
+                        }}
+                      >
+                        <LinearGradient
+                          colors={[`${item.color}20`, `${item.color}10`]}
+                          start={{ x: 0, y: 0 }}
+                          end={{ x: 1, y: 1 }}
+                          className="rounded-2xl p-4 flex-row items-center gap-4"
+                        >
+                          <View
+                            className="rounded-xl p-3"
+                            style={{ backgroundColor: `${item.color}30` }}
+                          >
+                            <Icon size={24} color={item.color} />
+                          </View>
+                          <View className="flex-1">
+                            <Text variant="sm" color="muted" className="mb-1">
+                              {item.label}
+                            </Text>
+                            <Text variant="body" className="font-semibold">
+                              {item.value}
+                            </Text>
+                          </View>
+                          <CheckCircle2 size={20} color={item.color} />
+                        </LinearGradient>
+                      </MotiView>
+                    );
+                  })}
+                </View>
               </View>
+            )}
 
+            {/* Privacy notice */}
+            <View
+              className="rounded-2xl p-4 flex-row items-start gap-3"
+              style={{ backgroundColor: `${theme.primary}15` }}
+            >
               <View
-                className="flex-row items-start gap-3 p-3 rounded-lg"
-                style={{ backgroundColor: `${theme.primary}20` }}
+                className="rounded-full p-2"
+                style={{ backgroundColor: `${theme.primary}30` }}
               >
-                <Shield size={18} color={theme.primary} />
-                <Text variant="sm" style={{ color: theme.primary }}>
-                  {t("onboarding.preview.privacyNotice")}
-                </Text>
+                <Shield size={20} color={theme.primary} />
               </View>
+              <Text variant="sm" style={{ color: theme.primary }} className="flex-1">
+                {t("onboarding.preview.privacyNotice")}
+              </Text>
             </View>
           </View>
         </MotiView>

@@ -20,6 +20,8 @@ interface ReservationCardProps {
   type: "category" | "item";
   id: number;
   user?: User;
+  warningMessage?: string;
+  confirmationMessage?: string;
 }
 
 const ReservationCard = ({
@@ -29,6 +31,8 @@ const ReservationCard = ({
   type,
   id,
   user,
+  warningMessage,
+  confirmationMessage,
 }: ReservationCardProps) => {
   const { theme } = useTheme();
   const { t } = useTranslation();
@@ -90,6 +94,8 @@ const ReservationCard = ({
           itemId={id}
           itemTitle={title}
           isReturning={canBeFreed}
+          warningMessage={warningMessage}
+          confirmationMessage={confirmationMessage}
         >
           <Button
             label={

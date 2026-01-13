@@ -73,6 +73,8 @@ export const ReservationList = ({
           id={item.id}
           slot={item.type === "item" ? item.slot : undefined}
           user={item.user}
+          warningMessage={item.warningMessage}
+          confirmationMessage={item.confirmationMessage}
         />
       )}
       keyExtractor={(item) => `${item.type}-${item.id}`}

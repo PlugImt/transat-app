@@ -177,7 +177,7 @@ export const OnboardingAcademicInfo = ({
           label={t("onboarding.academicInfo.continue")}
           onPress={handleSubmit(handleUpdateAccount)}
           isUpdating={isUpdating}
-          disabled={!formationName && !graduationYear && !isDirty}
+          disabled={!isDirty || (!formationName && !graduationYear)}
         />
       </View>
     </View>

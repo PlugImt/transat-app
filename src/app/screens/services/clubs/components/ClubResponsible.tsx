@@ -16,8 +16,8 @@ export const ClubResponsible = ({ responsibles }: ClubResponsibleProps) => {
 
   return (
     <CardGroup title={t("services.clubs.responsible")}>
-      {responsibles.map((user) => (
-        <UserCard key={user.email} user={user} />
+      {responsibles.map((user, index) => (
+        <UserCard key={index} user={user} />
       ))}
     </CardGroup>
   );

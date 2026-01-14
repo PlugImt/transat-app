@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { CheckCircle2, Eye, Shield, Phone, GraduationCap, User as UserIcon } from "lucide-react-native";
+import { CheckCircle2, Shield, Phone, GraduationCap, User as UserIcon } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { View, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";

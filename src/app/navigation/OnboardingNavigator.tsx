@@ -10,7 +10,6 @@ import { OnboardingSuccess } from "@/app/screens/onboarding/OnboardingSuccess";
 import { useTheme } from "@/contexts/ThemeContext";
 import {
   setOnboardingCompleted,
-  setOnboardingSkipped,
   setForceShowOnboarding,
   useOnboardingSteps,
 } from "@/hooks/onboarding/useOnboardingSteps";

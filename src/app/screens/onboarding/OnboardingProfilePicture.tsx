@@ -54,20 +54,15 @@ export const OnboardingProfilePicture = ({
     }
 
     // Try to refetch to get latest user data, but don't block navigation if it fails
-    if (refetch) {
-      refetch()
-        .then((result) => {
-          const latestUser = result.data || currentUser;
-          navigateToNextStep(latestUser);
-        })
-        .catch(() => {
-          // If refetch fails, use current user data
-          navigateToNextStep(currentUser);
-        });
-    } else {
-      // If refetch is not available, use current user data
-      navigateToNextStep(currentUser);
-    }
+    refetch()
+      .then((result) => {
+        const latestUser = result.data || currentUser;
+        navigateToNextStep(latestUser);
+      })
+      .catch(() => {
+        // If refetch fails, use current user data
+        navigateToNextStep(currentUser);
+      });
   };
 
   const navigateToNextStep = (userData: User) => {

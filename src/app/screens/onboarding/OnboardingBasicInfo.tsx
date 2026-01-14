@@ -74,27 +74,18 @@ export const OnboardingBasicInfo = ({
       onSuccess: async (updatedUser) => {
         hapticFeedback.success();
         // The mutation already fetches fresh user data, but let's refetch to be sure
-        if (refetch) {
-          try {
-            const freshUser = await refetch();
-            // Use fresh data or fallback to updated user from mutation or merged form data
-            const currentUser = freshUser.data || updatedUser || {
-              ...displayUser,
-              ...formData,
-            };
-            
-            navigateToNextStep(currentUser);
-          } catch (error) {
-            console.error("[Onboarding] Error refetching user:", error);
-            // Fallback: use updated user from mutation or merged form data
-            const currentUser = updatedUser || {
-              ...displayUser,
-              ...formData,
-            };
-            navigateToNextStep(currentUser);
-          }
-        } else {
-          // If refetch is not available, use updated user from mutation or merged form data
+        try {
+          const freshUser = await refetch();
+          // Use fresh data or fallback to updated user from mutation or merged form data
+          const currentUser = freshUser.data || updatedUser || {
+            ...displayUser,
+            ...formData,
+          };
+
+          navigateToNextStep(currentUser);
+        } catch (error) {
+          console.error("[Onboarding] Error refetching user:", error);
+          // Fallback: use updated user from mutation or merged form data
           const currentUser = updatedUser || {
             ...displayUser,
             ...formData,

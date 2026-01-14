@@ -45,30 +45,39 @@ export const OnboardingPreview = ({
     color: string;
   };
 
+  // Helper function to ensure color is always a valid string
+  const getColorWithOpacity = (color: string, opacity: string): string => {
+    if (!color) return theme.muted;
+    return `${color}${opacity}`;
+  };
+
   const infoItems: InfoItem[] = [
     {
       icon: Phone,
       label: t("account.phone"),
       value: displayUser.phone_number || t("account.notProvided"),
-      color: displayUser.phone_number ? (theme.info || "#2196F3") : theme.muted,
+      color: displayUser.phone_number ? theme.primary : theme.muted,
     },
     {
       icon: GraduationCap,
       label: t("account.formationName"),
       value: displayUser.formation_name || t("account.notProvided"),
-      color: displayUser.formation_name ? (theme.secondary || "#0049a8") : theme.muted,
+      // Keep secondary for formation / program
+      color: displayUser.formation_name ? theme.secondary : theme.muted,
     },
     {
       icon: GraduationCap,
       label: t("account.graduationYear"),
       value: displayUser.graduation_year ? displayUser.graduation_year.toString() : t("account.notProvided"),
-      color: displayUser.graduation_year ? theme.primary : theme.muted,
+      // Use success for graduation year to differentiate visually
+      color: displayUser.graduation_year ? theme.success : theme.muted,
     },
     {
       icon: UserIcon,
       label: t("account.profilePicture"),
       value: displayUser.profile_picture ? t("onboarding.preview.hasProfilePicture") : t("account.notProvided"),
-      color: displayUser.profile_picture ? (theme.success || "#4CAF50") : theme.muted,
+      // Use primary as well for profile picture so only formation stays blue
+      color: displayUser.profile_picture ? theme.primary : theme.muted,
     },
   ];
 
@@ -76,7 +85,8 @@ export const OnboardingPreview = ({
     <View className="flex-1" style={{ backgroundColor: theme.background }}>
       <ScrollView
         className="flex-1"
-        contentContainerStyle={{ flexGrow: 1, padding: 24 }}
+        contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 24, paddingTop: 24, paddingBottom: 32 }}
+        contentInsetAdjustmentBehavior="always"
       >
         <MotiView
           from={{ opacity: 0, translateY: 20 }}
@@ -90,7 +100,11 @@ export const OnboardingPreview = ({
           <View className="gap-8 mb-8">
             {/* Header with gradient background */}
             <LinearGradient
-              colors={[`${theme.primary}15`, `${theme.primary}05`, "transparent"]}
+              colors={[
+                getColorWithOpacity(theme.primary, "15"),
+                getColorWithOpacity(theme.primary, "05"),
+                "transparent",
+              ]}
               locations={[0, 0.5, 1]}
               className="rounded-3xl p-8 items-center gap-6 -mx-4"
             >
@@ -105,7 +119,7 @@ export const OnboardingPreview = ({
               >
                 <View
                   className="rounded-full p-2"
-                  style={{ backgroundColor: `${theme.primary}20` }}
+                  style={{ backgroundColor: getColorWithOpacity(theme.primary, "20") }}
                 >
                   <Avatar user={displayUser} size={140} />
                 </View>
@@ -140,14 +154,17 @@ export const OnboardingPreview = ({
                       }}
                     >
                       <LinearGradient
-                        colors={[`${item.color}20`, `${item.color}10`]}
+                        colors={[
+                          getColorWithOpacity(item.color, "20"),
+                          getColorWithOpacity(item.color, "10"),
+                        ]}
                         start={{ x: 0, y: 0 }}
                         end={{ x: 1, y: 1 }}
                         className="rounded-3xl p-4 flex-row items-center gap-4"
                       >
                         <View
-                          className="rounded-xl p-3"
-                          style={{ backgroundColor: `${item.color}30` }}
+                          className="rounded-2xl p-3"
+                          style={{ backgroundColor: getColorWithOpacity(item.color, "30") }}
                         >
                           <Icon size={24} color={item.color} />
                         </View>
@@ -170,11 +187,11 @@ export const OnboardingPreview = ({
             {/* Privacy notice - Combined with visibility info */}
             <View
               className="rounded-3xl p-5 flex-row items-start gap-3"
-              style={{ backgroundColor: `${theme.primary}15` }}
+              style={{ backgroundColor: getColorWithOpacity(theme.primary, "15") }}
             >
               <View
                 className="rounded-full p-2"
-                style={{ backgroundColor: `${theme.primary}30` }}
+                style={{ backgroundColor: getColorWithOpacity(theme.primary, "30") }}
               >
                 <Shield size={20} color={theme.primary} />
               </View>

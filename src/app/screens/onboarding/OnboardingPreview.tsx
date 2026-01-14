@@ -38,10 +38,6 @@ export const OnboardingPreview = ({
     navigation.navigate("Success");
   };
 
-  const handleSkip = () => {
-    navigation.navigate("Success");
-  };
-
   type InfoItem = {
     icon: typeof Phone;
     label: string;

@@ -76,8 +76,8 @@ export const OnboardingPreview = ({
       icon: UserIcon,
       label: t("account.profilePicture"),
       value: displayUser.profile_picture ? t("onboarding.preview.hasProfilePicture") : t("account.notProvided"),
-      // Use primary as well for profile picture so only formation stays blue
-      color: displayUser.profile_picture ? theme.primary : theme.muted,
+      // Use warning for profile picture to have a distinct color
+      color: displayUser.profile_picture ? theme.warning : theme.muted,
     },
   ];
 

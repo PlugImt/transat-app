@@ -8,7 +8,10 @@ import {
   ReviewItem,
   ReviewItemSkeleton,
 } from "@/app/screens/services/restaurant/components";
+import { AllergenDialog } from "@/app/screens/services/restaurant/components/Reviews/AllergenDialog";
 import { ReviewDialog } from "@/app/screens/services/restaurant/components/Reviews/ReviewDialog";
+import Image from "@/components/common/Image";
+import { getAllergenImage } from "@/utils/allergenImages";
 import { Button } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
 import { AboutModal } from "@/components/custom/AboutModal";
@@ -61,6 +64,13 @@ export const RestaurantReviews = () => {
   const hasReview =
     reviewData.recent_reviews && reviewData.recent_reviews.length > 0;
 
+  const allAllergens = reviewData.allergens ?? [];
+  const allergens = allAllergens.filter((a) => !a.is_marker);
+  const markers = allAllergens.filter((a) => a.is_marker);
+
+  const hasAllergens = allergens.length > 0;
+  const hasMarkers = markers.length > 0;
+
   return (
     <Page
       refreshing={isPending}
@@ -97,6 +107,82 @@ export const RestaurantReviews = () => {
               variant="secondary"
             />
           </ReviewDialog>
+        )}
+      </View>
+
+      {/* Allergens */}
+      <View className="mt-4 gap-2">
+        <Text variant="h3">{t("services.restaurant.allergens.title")}</Text>
+        {!hasAllergens ? (
+          <Text color="muted">
+            {t("services.restaurant.allergens.none")}
+          </Text>
+        ) : (
+          <View className="flex-row flex-wrap gap-3">
+            {allergens.map((allergen) => {
+              const imageSource = getAllergenImage(
+                allergen.picture_url || allergen.name,
+              );
+              return (
+                <AllergenDialog key={allergen.id_allergen} allergen={allergen}>
+                  <View className="items-center justify-center">
+                    {imageSource ? (
+                      <Image
+                        source={imageSource}
+                        size={48}
+                        radius={8}
+                        resizeMode="contain"
+                      />
+                    ) : (
+                      <View className="w-12 h-12 items-center justify-center bg-muted rounded-lg">
+                        <Text className="text-xs text-center" numberOfLines={2}>
+                          {allergen.name}
+                        </Text>
+                      </View>
+                    )}
+                  </View>
+                </AllergenDialog>
+              );
+            })}
+          </View>
+        )}
+      </View>
+
+      {/* Markers */}
+      <View className="mt-4 gap-2">
+        <Text variant="h3">{t("services.restaurant.markers.title")}</Text>
+        {!hasMarkers ? (
+          <Text color="muted">
+            {t("services.restaurant.markers.none")}
+          </Text>
+        ) : (
+          <View className="flex-row flex-wrap gap-3">
+            {markers.map((marker) => {
+              const imageSource = getAllergenImage(
+                marker.picture_url || marker.name,
+              );
+              return (
+                <AllergenDialog key={marker.id_allergen} allergen={marker}>
+                  <View className="items-center justify-center">
+                    {imageSource ? (
+                      <Image
+                        source={imageSource}
+                        size={48}
+                        radius={8}
+                        resizeMode="contain"
+                      />
+                    ) : (
+                      <View className="w-12 h-12 items-center justify-center bg-muted rounded-lg">
+                        <Text className="text-xs text-center" numberOfLines={2}>
+                          {marker.name}
+                        </Text>
+                      </View>
+                    )}
+                  </View>
+                </AllergenDialog>
+              );
+            })}
+          </View>
         )}
       </View>
 

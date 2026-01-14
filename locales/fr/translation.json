@@ -351,6 +351,14 @@
           "successMessage": "Votre avis a été publié",
           "errorMessage": "Impossible de publier votre avis"
         }
+      },
+      "allergens": {
+        "title": "Allergènes",
+        "none": "Aucun allergène déclaré pour ce plat."
+      },
+      "markers": {
+        "title": "Marqueurs",
+        "none": "Aucun marqueur pour ce plat."
       }
     },
     "timetable": {

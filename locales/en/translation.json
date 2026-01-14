@@ -351,6 +351,14 @@
           "successMessage": "Your review has been published",
           "errorMessage": "Unable to publish your review"
         }
+      },
+      "allergens": {
+        "title": "Allergens",
+        "none": "No declared allergens for this dish."
+      },
+      "markers": {
+        "title": "Markers",
+        "none": "No markers for this dish."
       }
     },
     "timetable": {

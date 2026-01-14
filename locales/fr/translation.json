@@ -620,17 +620,14 @@
           "emptyHistory": "Personne n'a encore pris de bassine",
           "emptyHistoryDescription": "Ajoute tes bassines au compteur pour les voir apparaître ici"
         },
-
         "firstPlaceLead_zero": "est à égalité",
         "firstPlaceLead_one": "est juste derrière vous",
         "firstPlaceLeader_few": "n'est qu'à {{count}} bassines derrière vous",
         "firstPlaceLead_other": "est {{count}} bassines derrière vous",
-
         "followingPlace_zero": "est à égalité",
         "followingPlace_one": "est juste devant",
         "followingPlace_few": "n'est qu'à {{count}} bassines devant vous",
         "followingPlace_other": "est {{count}} bassines devant vous",
-
         "tookBassine_one": "a pris {{count}} bassine",
         "tookBassine_other": "a pris {{count}} bassines"
       }
@@ -649,14 +646,12 @@
       "title": "Ajoutez votre photo de profil",
       "description": "Votre photo de profil sera visible par tous les utilisateurs de l'application Transat.",
       "canChangeLater": "Vous pourrez modifier votre photo de profil à tout moment dans Compte > Modifier le profil.",
-      "encouragement": "💡 Un visage amical aide les autres à vous reconnaître !",
       "continue": "Continuer",
       "skip": "Passer cette étape"
     },
     "basicInfo": {
       "title": "Vos informations de base",
       "description": "Remplissez vos informations personnelles pour que les autres utilisateurs puissent vous identifier.",
-      "encouragement": "✨ Complétez votre profil pour une meilleure expérience sur Transat !",
       "phoneInfo": "Ce numéro sera utilisé pour vous contacter lors de réservations, commandes ou si nous devons vous joindre. Le numéro de téléphone est fortement conseillé.",
       "firstNamePlaceholder": "Votre prénom",
       "lastNamePlaceholder": "Votre nom",
@@ -667,12 +662,10 @@
     "academicInfo": {
       "title": "Vos informations académiques",
       "description": "Partagez votre formation et votre année de diplôme pour connecter avec vos camarades.",
-      "encouragement": "🎓 Rejoignez votre communauté et découvrez les événements de votre formation !",
       "continue": "Continuer",
       "skip": "Passer cette étape"
     },
     "preview": {
-      "title": "Aperçu de votre profil",
       "yourInfo": "Vos informations",
       "hasProfilePicture": "Photo ajoutée",
       "publicVisibility": "Visibilité publique",

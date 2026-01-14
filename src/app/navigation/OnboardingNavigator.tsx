@@ -9,6 +9,7 @@ import { OnboardingPreview } from "@/app/screens/onboarding/OnboardingPreview";
 import { OnboardingSuccess } from "@/app/screens/onboarding/OnboardingSuccess";
 import { useTheme } from "@/contexts/ThemeContext";
 import {
+  setOnboardingSkipped,
   setOnboardingCompleted,
   setForceShowOnboarding,
   useOnboardingSteps,
@@ -40,9 +41,10 @@ export const OnboardingNavigator = ({
   const onboardingSteps = useOnboardingSteps(user || null);
 
   // Handle skipping a single step (not the entire onboarding)
-  const handleSkipStep = () => {
+  const handleSkipStep = async () => {
     // This will be handled by each screen individually
     // They will navigate to the next step or preview
+    await setOnboardingSkipped(true);
   };
 
   const handleComplete = async () => {
@@ -63,13 +65,16 @@ export const OnboardingNavigator = ({
   const getInitialRouteName = (): keyof OnboardingStackParamList => {
     if (steps.length === 0) return "Success";
     const firstStep = steps[0];
-    return firstStep === "profilePicture"
-      ? "ProfilePicture"
-      : firstStep === "basicInfo"
-        ? "BasicInfo"
-        : firstStep === "academicInfo"
-          ? "AcademicInfo"
-          : "Preview";
+    if (firstStep === "profilePicture") {
+      return "ProfilePicture";
+    }
+    if (firstStep === "basicInfo") {
+      return "BasicInfo";
+    }
+    if (firstStep === "academicInfo") {
+      return "AcademicInfo";
+    }
+    return "Preview";
   };
 
   // All screens must be declared for React Navigation to work properly

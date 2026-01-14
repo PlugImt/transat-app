@@ -44,6 +44,7 @@ export const OnboardingAcademicInfo = ({
     handleSubmit,
     reset,
     watch,
+    formState: { isDirty },
   } = useForm({
     resolver: zodResolver(updateUserPayloadSchema),
     defaultValues: {

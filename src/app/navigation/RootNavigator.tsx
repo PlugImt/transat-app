@@ -49,7 +49,6 @@ export const RootNavigator = () => {
     const checkOnboarding = async () => {
       try {
         const shouldShow = await shouldShowOnboarding();
-        console.log("[RootNavigator] shouldShowOnboarding:", shouldShow, "user:", !!user);
         setShowOnboarding(shouldShow);
       } catch (error) {
         console.error("[Onboarding] Error in checkOnboarding:", error);
@@ -84,7 +83,6 @@ export const RootNavigator = () => {
     return (
       <OnboardingNavigator
         onComplete={() => {
-          console.log("[RootNavigator] Onboarding completed");
           setShowOnboarding(false);
         }}
       />

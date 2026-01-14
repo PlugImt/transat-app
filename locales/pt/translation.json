@@ -646,14 +646,12 @@
       "title": "Adicione sua foto de perfil",
       "description": "Sua foto de perfil será visível para todos os usuários do aplicativo Transat.",
       "canChangeLater": "Você pode alterar sua foto de perfil a qualquer momento em Conta > Editar perfil.",
-      "encouragement": "💡 Um rosto amigável ajuda os outros a reconhecê-lo!",
       "continue": "Continuar",
       "skip": "Pular esta etapa"
     },
     "basicInfo": {
       "title": "Suas informações básicas",
       "description": "Preencha suas informações pessoais para que outros usuários possam identificá-lo.",
-      "encouragement": "✨ Complete seu perfil para uma melhor experiência no Transat!",
       "phoneInfo": "Este número será usado para entrar em contato com você para reservas, pedidos ou se precisarmos falar com você. O número de telefone é altamente recomendado.",
       "firstNamePlaceholder": "Seu nome",
       "lastNamePlaceholder": "Seu sobrenome",
@@ -664,12 +662,10 @@
     "academicInfo": {
       "title": "Suas informações acadêmicas",
       "description": "Compartilhe sua formação e ano de graduação para conectar com seus colegas.",
-      "encouragement": "🎓 Junte-se à sua comunidade e descubra eventos da sua formação!",
       "continue": "Continuar",
       "skip": "Pular esta etapa"
     },
     "preview": {
-      "title": "Visualização do perfil",
       "yourInfo": "Suas informações",
       "hasProfilePicture": "Foto adicionada",
       "publicVisibility": "Visibilidade pública",

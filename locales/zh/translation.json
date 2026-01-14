@@ -646,14 +646,12 @@
       "title": "添加您的个人资料照片",
       "description": "您的个人资料照片将对Transat应用程序的所有用户可见。",
       "canChangeLater": "您可以随时在账户 > 编辑资料中更改您的个人资料照片。",
-      "encouragement": "💡 友好的面孔有助于他人认出您！",
       "continue": "继续",
       "skip": "跳过此步骤"
     },
     "basicInfo": {
       "title": "您的基本信息",
       "description": "填写您的个人信息，以便其他用户可以识别您。",
-      "encouragement": "✨ 完善您的个人资料，在Transat上获得更好的体验！",
       "phoneInfo": "此号码将用于在预订、订单或需要联系您时与您联系。强烈建议提供电话号码。",
       "firstNamePlaceholder": "您的名字",
       "lastNamePlaceholder": "您的姓氏",
@@ -664,12 +662,10 @@
     "academicInfo": {
       "title": "您的学术信息",
       "description": "分享您的专业和毕业年份，与同学建立联系。",
-      "encouragement": "🎓 加入您的社区，发现您专业的活动！",
       "continue": "继续",
       "skip": "跳过此步骤"
     },
     "preview": {
-      "title": "个人资料预览",
       "yourInfo": "您的信息",
       "hasProfilePicture": "已添加照片",
       "publicVisibility": "公开可见性",

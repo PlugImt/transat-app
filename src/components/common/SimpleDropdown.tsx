@@ -40,7 +40,7 @@ export const SimpleDropdown = ({
         onPress={() => setIsOpen(true)}
       >
         <View className="flex-row items-center gap-2">
-          {icon ? icon : null}
+          {icon}
           <Text>{value ? value : placeholder}</Text>
         </View>
         <ChevronDown color={theme.text} size={20} />

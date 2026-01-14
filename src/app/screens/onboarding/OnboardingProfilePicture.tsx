@@ -99,23 +99,7 @@ export const OnboardingProfilePicture = ({
       return;
     }
 
-    // Check what's the next step
-    const needsBasicInfo =
-      !currentUser.first_name ||
-      !currentUser.last_name ||
-      !currentUser.phone_number;
-
-    const needsAcademicInfo =
-      !currentUser.formation_name ||
-      !currentUser.graduation_year;
-
-    if (needsBasicInfo) {
-      navigation.navigate("BasicInfo", { user: currentUser });
-    } else if (needsAcademicInfo) {
-      navigation.navigate("AcademicInfo", { user: currentUser });
-    } else {
-      navigation.navigate("Preview", { user: currentUser });
-    }
+    navigateToNextStep(currentUser);
   };
 
   return (

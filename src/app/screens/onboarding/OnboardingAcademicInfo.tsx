@@ -42,7 +42,6 @@ export const OnboardingAcademicInfo = ({
   const {
     control,
     handleSubmit,
-    formState: { errors, isValid, isDirty },
     reset,
     watch,
   } = useForm({

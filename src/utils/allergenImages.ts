@@ -20,7 +20,7 @@ const allergenImages: Record<string, any> = {
   Sulfites: require("@/assets/icons/allergens/Sulfites.png"),
   vide: require("@/assets/icons/allergens/vide.svg"), // Fallback to SVG if PNG not available
   undefined: require("@/assets/icons/allergens/undefined.svg"), // Fallback to SVG if PNG not available
-  
+
   // Markers (lowercase)
   ardoise: require("@/assets/icons/allergens/ardoise.png"),
   formule: require("@/assets/icons/allergens/formule.png"),

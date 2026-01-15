@@ -1,24 +1,24 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { GraduationCap } from "lucide-react-native";
+import { MotiView } from "moti";
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Keyboard, View } from "react-native";
-import { MotiView } from "moti";
+import type { OnboardingStackParamList } from "@/app/navigation/OnboardingNavigator";
 import { Button } from "@/components/common/Button";
 import Dropdown from "@/components/common/Dropdown";
 import Input from "@/components/common/Input";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
+import type { User } from "@/dto";
 import { updateUserPayloadSchema } from "@/dto";
 import type { formationName } from "@/enums";
 import { useUpdateAccount } from "@/hooks/account/useUpdateAccount";
 import { useUser } from "@/hooks/account/useUser";
 import { hapticFeedback } from "@/utils/haptics.utils";
-import type { OnboardingStackParamList } from "@/app/navigation/OnboardingNavigator";
-import type { User } from "@/dto";
 
 type NavigationProp = NativeStackNavigationProp<OnboardingStackParamList>;
 
@@ -94,7 +94,10 @@ export const OnboardingPersonalInfo = ({
   };
 
   return (
-    <View className="flex-1 px-6 py-8" style={{ backgroundColor: theme.background }}>
+    <View
+      className="flex-1 px-6 py-8"
+      style={{ backgroundColor: theme.background }}
+    >
       {/* Skip all button in top right */}
       <View className="absolute top-8 right-6 z-10">
         <Button

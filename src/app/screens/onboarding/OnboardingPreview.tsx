@@ -1,17 +1,23 @@
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { CheckCircle2, Shield, Phone, GraduationCap, User as UserIcon } from "lucide-react-native";
-import { useTranslation } from "react-i18next";
-import { View, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import {
+  CheckCircle2,
+  GraduationCap,
+  Phone,
+  Shield,
+  User as UserIcon,
+} from "lucide-react-native";
 import { MotiView } from "moti";
+import { useTranslation } from "react-i18next";
+import { ScrollView, View } from "react-native";
+import type { OnboardingStackParamList } from "@/app/navigation/OnboardingNavigator";
 import Avatar from "@/components/common/Avatar";
 import { Button } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
-import { useUser } from "@/hooks/account/useUser";
-import type { OnboardingStackParamList } from "@/app/navigation/OnboardingNavigator";
 import type { User } from "@/dto";
+import { useUser } from "@/hooks/account/useUser";
 
 type NavigationProp = NativeStackNavigationProp<OnboardingStackParamList>;
 
@@ -68,14 +74,18 @@ export const OnboardingPreview = ({
     {
       icon: GraduationCap,
       label: t("account.graduationYear"),
-      value: displayUser.graduation_year ? displayUser.graduation_year.toString() : t("account.notProvided"),
+      value: displayUser.graduation_year
+        ? displayUser.graduation_year.toString()
+        : t("account.notProvided"),
       // Use success for graduation year to differentiate visually
       color: displayUser.graduation_year ? theme.success : theme.muted,
     },
     {
       icon: UserIcon,
       label: t("account.profilePicture"),
-      value: displayUser.profile_picture ? t("onboarding.preview.hasProfilePicture") : t("account.notProvided"),
+      value: displayUser.profile_picture
+        ? t("onboarding.preview.hasProfilePicture")
+        : t("account.notProvided"),
       // Use warning for profile picture to have a distinct color
       color: displayUser.profile_picture ? theme.warning : theme.muted,
     },
@@ -85,7 +95,12 @@ export const OnboardingPreview = ({
     <View className="flex-1" style={{ backgroundColor: theme.background }}>
       <ScrollView
         className="flex-1"
-        contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 24, paddingTop: 24, paddingBottom: 32 }}
+        contentContainerStyle={{
+          flexGrow: 1,
+          paddingHorizontal: 24,
+          paddingTop: 24,
+          paddingBottom: 32,
+        }}
         contentInsetAdjustmentBehavior="always"
       >
         <MotiView
@@ -119,7 +134,9 @@ export const OnboardingPreview = ({
               >
                 <View
                   className="rounded-full p-2"
-                  style={{ backgroundColor: getColorWithOpacity(theme.primary, "20") }}
+                  style={{
+                    backgroundColor: getColorWithOpacity(theme.primary, "20"),
+                  }}
                 >
                   <Avatar user={displayUser} size={140} />
                 </View>
@@ -133,7 +150,6 @@ export const OnboardingPreview = ({
                 </Text>
               </View>
             </LinearGradient>
-
 
             {/* Info cards grid */}
             <View className="gap-4">
@@ -164,7 +180,12 @@ export const OnboardingPreview = ({
                       >
                         <View
                           className="rounded-2xl p-3"
-                          style={{ backgroundColor: getColorWithOpacity(item.color, "30") }}
+                          style={{
+                            backgroundColor: getColorWithOpacity(
+                              item.color,
+                              "30",
+                            ),
+                          }}
                         >
                           <Icon size={24} color={item.color} />
                         </View>
@@ -172,11 +193,19 @@ export const OnboardingPreview = ({
                           <Text variant="sm" color="muted" className="mb-1">
                             {item.label}
                           </Text>
-                          <Text variant="body" className="font-semibold" style={{ color: hasValue ? undefined : theme.muted }}>
+                          <Text
+                            variant="body"
+                            className="font-semibold"
+                            style={{
+                              color: hasValue ? undefined : theme.muted,
+                            }}
+                          >
                             {item.value}
                           </Text>
                         </View>
-                        {hasValue && <CheckCircle2 size={20} color={item.color} />}
+                        {hasValue && (
+                          <CheckCircle2 size={20} color={item.color} />
+                        )}
                       </LinearGradient>
                     </MotiView>
                   );
@@ -187,16 +216,24 @@ export const OnboardingPreview = ({
             {/* Privacy notice - Combined with visibility info */}
             <View
               className="rounded-3xl p-5 flex-row items-start gap-3"
-              style={{ backgroundColor: getColorWithOpacity(theme.primary, "15") }}
+              style={{
+                backgroundColor: getColorWithOpacity(theme.primary, "15"),
+              }}
             >
               <View
                 className="rounded-full p-2"
-                style={{ backgroundColor: getColorWithOpacity(theme.primary, "30") }}
+                style={{
+                  backgroundColor: getColorWithOpacity(theme.primary, "30"),
+                }}
               >
                 <Shield size={20} color={theme.primary} />
               </View>
               <View className="flex-1 gap-1">
-                <Text variant="sm" className="font-semibold" style={{ color: theme.primary }}>
+                <Text
+                  variant="sm"
+                  className="font-semibold"
+                  style={{ color: theme.primary }}
+                >
                   {t("onboarding.preview.publicVisibility")}
                 </Text>
                 <Text variant="sm" style={{ color: theme.primary }}>

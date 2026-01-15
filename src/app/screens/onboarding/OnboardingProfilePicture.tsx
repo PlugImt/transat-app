@@ -1,19 +1,19 @@
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Edit } from "lucide-react-native";
-import { useState, useEffect } from "react";
+import { MotiView } from "moti";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { TouchableOpacity, View } from "react-native";
-import { MotiView } from "moti";
+import type { OnboardingStackParamList } from "@/app/navigation/OnboardingNavigator";
 import Avatar from "@/components/common/Avatar";
 import { Button, IconButton } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
+import type { User } from "@/dto";
 import { useUpdateProfilePicture } from "@/hooks/account/useUpdateProfilePicture";
 import { useUser } from "@/hooks/account/useUser";
 import { hapticFeedback } from "@/utils/haptics.utils";
-import type { OnboardingStackParamList } from "@/app/navigation/OnboardingNavigator";
-import type { User } from "@/dto";
 
 type NavigationProp = NativeStackNavigationProp<OnboardingStackParamList>;
 
@@ -68,13 +68,10 @@ export const OnboardingProfilePicture = ({
   const navigateToNextStep = (userData: User) => {
     // Check what's the next step based on user data
     const needsBasicInfo =
-      !userData.first_name ||
-      !userData.last_name ||
-      !userData.phone_number;
+      !userData.first_name || !userData.last_name || !userData.phone_number;
 
     const needsAcademicInfo =
-      !userData.formation_name ||
-      !userData.graduation_year;
+      !userData.formation_name || !userData.graduation_year;
 
     if (needsBasicInfo) {
       navigation.navigate("BasicInfo", { user: userData });
@@ -98,7 +95,10 @@ export const OnboardingProfilePicture = ({
   };
 
   return (
-    <View className="flex-1 px-6 py-8" style={{ backgroundColor: theme.background }}>
+    <View
+      className="flex-1 px-6 py-8"
+      style={{ backgroundColor: theme.background }}
+    >
       <View className="flex-1 justify-center items-center gap-8">
         <MotiView
           from={{ scale: 0.8, opacity: 0 }}

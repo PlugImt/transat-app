@@ -1,22 +1,22 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
-import { useQueryClient } from "@tanstack/react-query";
-import { OnboardingProfilePicture } from "@/app/screens/onboarding/OnboardingProfilePicture";
-import { OnboardingBasicInfo } from "@/app/screens/onboarding/OnboardingBasicInfo";
 import { OnboardingAcademicInfo } from "@/app/screens/onboarding/OnboardingAcademicInfo";
+import { OnboardingBasicInfo } from "@/app/screens/onboarding/OnboardingBasicInfo";
 import { OnboardingPreview } from "@/app/screens/onboarding/OnboardingPreview";
+import { OnboardingProfilePicture } from "@/app/screens/onboarding/OnboardingProfilePicture";
 import { OnboardingSuccess } from "@/app/screens/onboarding/OnboardingSuccess";
+import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
+import type { User } from "@/dto";
+import { useUser } from "@/hooks/account/useUser";
 import {
-  setOnboardingSkipped,
-  setOnboardingCompleted,
   setForceShowOnboarding,
+  setOnboardingCompleted,
+  setOnboardingSkipped,
   useOnboardingSteps,
 } from "@/hooks/onboarding/useOnboardingSteps";
-import { useUser } from "@/hooks/account/useUser";
-import { QUERY_KEYS } from "@/constants";
-import type { User } from "@/dto";
 
 export type OnboardingStackParamList = {
   ProfilePicture: { user: User };
@@ -109,7 +109,10 @@ export const OnboardingNavigator = ({
           options={{ headerShown: false }}
         >
           {(props) => (
-            <OnboardingBasicInfo route={props.route} onSkipStep={handleSkipStep} />
+            <OnboardingBasicInfo
+              route={props.route}
+              onSkipStep={handleSkipStep}
+            />
           )}
         </Stack.Screen>
 
@@ -119,7 +122,10 @@ export const OnboardingNavigator = ({
           options={{ headerShown: false }}
         >
           {(props) => (
-            <OnboardingAcademicInfo route={props.route} onSkipStep={handleSkipStep} />
+            <OnboardingAcademicInfo
+              route={props.route}
+              onSkipStep={handleSkipStep}
+            />
           )}
         </Stack.Screen>
 

@@ -23,10 +23,7 @@ interface AllergenDialogProps {
   children: React.ReactElement;
 }
 
-export const AllergenDialog = ({
-  allergen,
-  children,
-}: AllergenDialogProps) => {
+export const AllergenDialog = ({ allergen, children }: AllergenDialogProps) => {
   const { t, i18n } = useTranslation();
   const isFrench = i18n.language === "fr";
 

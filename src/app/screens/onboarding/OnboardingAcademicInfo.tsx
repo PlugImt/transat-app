@@ -1,23 +1,23 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { GraduationCap } from "lucide-react-native";
+import { MotiView } from "moti";
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Keyboard, View } from "react-native";
-import { MotiView } from "moti";
+import type { OnboardingStackParamList } from "@/app/navigation/OnboardingNavigator";
 import { Button } from "@/components/common/Button";
 import SimpleDropdown from "@/components/common/SimpleDropdown";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
+import type { User } from "@/dto";
 import { updateUserPayloadSchema } from "@/dto";
 import type { formationName } from "@/enums";
 import { useUpdateAccount } from "@/hooks/account/useUpdateAccount";
 import { useUser } from "@/hooks/account/useUser";
 import { hapticFeedback } from "@/utils/haptics.utils";
-import type { OnboardingStackParamList } from "@/app/navigation/OnboardingNavigator";
-import type { User } from "@/dto";
 
 type NavigationProp = NativeStackNavigationProp<OnboardingStackParamList>;
 
@@ -90,10 +90,12 @@ export const OnboardingAcademicInfo = ({
       last_name: data.last_name || displayUser.last_name || "",
       email: data.email || displayUser.email || "",
       phone_number: data.phone_number || displayUser.phone_number || "",
-      graduation_year: data.graduation_year || displayUser.graduation_year || undefined,
-      formation_name: data.formation_name || displayUser.formation_name || undefined,
+      graduation_year:
+        data.graduation_year || displayUser.graduation_year || undefined,
+      formation_name:
+        data.formation_name || displayUser.formation_name || undefined,
     };
-    
+
     updateAccount(payload as User, {
       onSuccess: async () => {
         hapticFeedback.success();
@@ -103,7 +105,10 @@ export const OnboardingAcademicInfo = ({
       },
       onError: (error) => {
         hapticFeedback.error();
-        console.error("[OnboardingAcademicInfo] Error updating account:", error);
+        console.error(
+          "[OnboardingAcademicInfo] Error updating account:",
+          error,
+        );
       },
     });
   };
@@ -114,7 +119,10 @@ export const OnboardingAcademicInfo = ({
   };
 
   return (
-    <View className="flex-1 px-6 py-8" style={{ backgroundColor: theme.background }}>
+    <View
+      className="flex-1 px-6 py-8"
+      style={{ backgroundColor: theme.background }}
+    >
       <MotiView
         from={{ opacity: 0, translateY: 20 }}
         animate={{ opacity: 1, translateY: 0 }}

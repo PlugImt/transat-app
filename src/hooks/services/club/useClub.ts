@@ -48,16 +48,16 @@ export const useFilteredClubs = (searchValue: string) => {
 
       if ("responsibles" in club && club.responsibles?.length) {
         const names = club.responsibles
-          .map(
-            (user) =>
-              `${user.first_name ?? ""} ${user.last_name ?? ""}`.toLowerCase(),
+          .map((user) =>
+            `${user.first_name ?? ""} ${user.last_name ?? ""}`.toLowerCase(),
           )
           .join(" ");
         if (names.includes(searchLower)) {
           return true;
         }
       } else if ("responsible" in club && club.responsible) {
-        const fullName = `${club.responsible.first_name} ${club.responsible.last_name}`.toLowerCase();
+        const fullName =
+          `${club.responsible.first_name} ${club.responsible.last_name}`.toLowerCase();
         if (fullName.includes(searchLower)) {
           return true;
         }

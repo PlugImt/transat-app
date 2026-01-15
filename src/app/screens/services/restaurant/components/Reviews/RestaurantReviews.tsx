@@ -10,9 +10,8 @@ import {
 } from "@/app/screens/services/restaurant/components";
 import { AllergenDialog } from "@/app/screens/services/restaurant/components/Reviews/AllergenDialog";
 import { ReviewDialog } from "@/app/screens/services/restaurant/components/Reviews/ReviewDialog";
-import Image from "@/components/common/Image";
-import { getAllergenImage } from "@/utils/allergenImages";
 import { Button } from "@/components/common/Button";
+import Image from "@/components/common/Image";
 import { Text } from "@/components/common/Text";
 import { AboutModal } from "@/components/custom/AboutModal";
 import { Empty } from "@/components/page/Empty";
@@ -23,6 +22,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { userMenuRating } from "@/hooks/services/restaurant/useMenuRestaurant";
 import type { BottomTabParamList } from "@/types";
 import { getOpeningHoursData } from "@/utils";
+import { getAllergenImage } from "@/utils/allergenImages";
 
 export type RestaurantReviewsRouteProp = RouteProp<
   BottomTabParamList,
@@ -114,9 +114,7 @@ export const RestaurantReviews = () => {
       <View className="mt-4 gap-2">
         <Text variant="h3">{t("services.restaurant.allergens.title")}</Text>
         {!hasAllergens ? (
-          <Text color="muted">
-            {t("services.restaurant.allergens.none")}
-          </Text>
+          <Text color="muted">{t("services.restaurant.allergens.none")}</Text>
         ) : (
           <View className="flex-row flex-wrap gap-3">
             {allergens.map((allergen) => {
@@ -152,9 +150,7 @@ export const RestaurantReviews = () => {
       <View className="mt-4 gap-2">
         <Text variant="h3">{t("services.restaurant.markers.title")}</Text>
         {!hasMarkers ? (
-          <Text color="muted">
-            {t("services.restaurant.markers.none")}
-          </Text>
+          <Text color="muted">{t("services.restaurant.markers.none")}</Text>
         ) : (
           <View className="flex-row flex-wrap gap-3">
             {markers.map((marker) => {

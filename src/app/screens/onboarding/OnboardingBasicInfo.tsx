@@ -1,21 +1,21 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { MotiView } from "moti";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Keyboard, View } from "react-native";
-import { MotiView } from "moti";
+import type { OnboardingStackParamList } from "@/app/navigation/OnboardingNavigator";
 import { Button } from "@/components/common/Button";
 import Input from "@/components/common/Input";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
+import type { User } from "@/dto";
 import { updateUserPayloadSchema } from "@/dto";
 import { useUpdateAccount } from "@/hooks/account/useUpdateAccount";
 import { useUser } from "@/hooks/account/useUser";
 import { hapticFeedback } from "@/utils/haptics.utils";
-import type { OnboardingStackParamList } from "@/app/navigation/OnboardingNavigator";
-import type { User } from "@/dto";
 
 type NavigationProp = NativeStackNavigationProp<OnboardingStackParamList>;
 
@@ -77,10 +77,11 @@ export const OnboardingBasicInfo = ({
         try {
           const freshUser = await refetch();
           // Use fresh data or fallback to updated user from mutation or merged form data
-          const currentUser = freshUser.data || updatedUser || {
-            ...displayUser,
-            ...formData,
-          };
+          const currentUser = freshUser.data ||
+            updatedUser || {
+              ...displayUser,
+              ...formData,
+            };
 
           navigateToNextStep(currentUser);
         } catch (error) {
@@ -103,8 +104,7 @@ export const OnboardingBasicInfo = ({
   const navigateToNextStep = (userData: User) => {
     // Check what's the next step
     const needsAcademicInfo =
-      !userData.formation_name ||
-      !userData.graduation_year;
+      !userData.formation_name || !userData.graduation_year;
 
     if (needsAcademicInfo) {
       navigation.navigate("AcademicInfo", { user: userData });
@@ -119,7 +119,10 @@ export const OnboardingBasicInfo = ({
   };
 
   return (
-    <View className="flex-1 px-6 py-8" style={{ backgroundColor: theme.background }}>
+    <View
+      className="flex-1 px-6 py-8"
+      style={{ backgroundColor: theme.background }}
+    >
       <MotiView
         from={{ opacity: 0, translateY: 20 }}
         animate={{ opacity: 1, translateY: 0 }}

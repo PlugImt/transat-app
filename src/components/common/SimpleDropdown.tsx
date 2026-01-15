@@ -3,7 +3,12 @@ import { ChevronDown } from "lucide-react-native";
 import type React from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Modal, TouchableOpacity, View, TouchableWithoutFeedback } from "react-native";
+import {
+  Modal,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 import { Button } from "./Button";

@@ -1,7 +1,7 @@
 import { CheckCircle2, Sparkles } from "lucide-react-native";
+import { MotiView } from "moti";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
-import { MotiView } from "moti";
 import { Button } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -15,7 +15,10 @@ export const OnboardingSuccess = ({ onFinish }: OnboardingSuccessProps) => {
   const { t } = useTranslation();
 
   return (
-    <View className="flex-1 px-6 py-8" style={{ backgroundColor: theme.background }}>
+    <View
+      className="flex-1 px-6 py-8"
+      style={{ backgroundColor: theme.background }}
+    >
       <View className="flex-1 justify-center items-center gap-8">
         <MotiView
           from={{ scale: 0, opacity: 0 }}

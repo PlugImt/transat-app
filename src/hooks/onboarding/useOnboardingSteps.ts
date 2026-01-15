@@ -4,7 +4,11 @@ import type { User } from "@/dto";
 import { storage } from "@/services/storage/asyncStorage";
 import type { StorageItemValue } from "@/services/storage/types";
 
-export type OnboardingStep = "profilePicture" | "basicInfo" | "academicInfo" | "preview";
+export type OnboardingStep =
+  | "profilePicture"
+  | "basicInfo"
+  | "academicInfo"
+  | "preview";
 
 export interface OnboardingSteps {
   needsProfilePicture: boolean;
@@ -38,14 +42,10 @@ export const useOnboardingSteps = (user: User | null | undefined) => {
 
     // Step 2: Basic Info (First Name, Last Name, Phone Number)
     const needsBasicInfo =
-      !user.first_name ||
-      !user.last_name ||
-      !user.phone_number;
+      !user.first_name || !user.last_name || !user.phone_number;
 
     // Step 3: Academic Info (Formation, Graduation Year)
-    const needsAcademicInfo =
-      !user.formation_name ||
-      !user.graduation_year;
+    const needsAcademicInfo = !user.formation_name || !user.graduation_year;
 
     const steps: OnboardingStep[] = [];
     if (needsProfilePicture) {
@@ -79,13 +79,19 @@ export const getOnboardingSkipped = async (): Promise<boolean> => {
 };
 
 export const setOnboardingSkipped = async (skipped: boolean): Promise<void> => {
-  await storage.set(ONBOARDING_SKIPPED_KEY, skipped as unknown as StorageItemValue);
+  await storage.set(
+    ONBOARDING_SKIPPED_KEY,
+    skipped as unknown as StorageItemValue,
+  );
   if (skipped) {
     // Save the current app version when onboarding is skipped
     const currentVersion = Application.nativeApplicationVersion || "1.0.0";
     await storage.set(ONBOARDING_VERSION_KEY, currentVersion);
     // Clear force show flag
-    await storage.set(ONBOARDING_FORCE_SHOW_KEY, false as unknown as StorageItemValue);
+    await storage.set(
+      ONBOARDING_FORCE_SHOW_KEY,
+      false as unknown as StorageItemValue,
+    );
   }
 };
 
@@ -97,14 +103,19 @@ export const getOnboardingCompleted = async (): Promise<boolean> => {
 export const setOnboardingCompleted = async (
   completed: boolean,
 ): Promise<void> => {
-  await storage.set(ONBOARDING_COMPLETED_KEY, completed as unknown as StorageItemValue);
+  await storage.set(
+    ONBOARDING_COMPLETED_KEY,
+    completed as unknown as StorageItemValue,
+  );
   if (completed) {
     // Save the current app version when onboarding is completed
-    const currentVersion =
-      Application.nativeApplicationVersion || "1.0.0";
+    const currentVersion = Application.nativeApplicationVersion || "1.0.0";
     await storage.set(ONBOARDING_VERSION_KEY, currentVersion);
     // Clear force show flag
-    await storage.set(ONBOARDING_FORCE_SHOW_KEY, false as unknown as StorageItemValue);
+    await storage.set(
+      ONBOARDING_FORCE_SHOW_KEY,
+      false as unknown as StorageItemValue,
+    );
   }
 };
 
@@ -161,5 +172,8 @@ export const shouldShowOnboarding = async (): Promise<boolean> => {
 };
 
 export const setForceShowOnboarding = async (force: boolean): Promise<void> => {
-  await storage.set(ONBOARDING_FORCE_SHOW_KEY, force as unknown as StorageItemValue);
+  await storage.set(
+    ONBOARDING_FORCE_SHOW_KEY,
+    force as unknown as StorageItemValue,
+  );
 };

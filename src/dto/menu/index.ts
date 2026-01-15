@@ -35,6 +35,18 @@ export const restaurantReviewSchema = z.object({
   average_rating: z.number().nullable(),
   total_ratings: z.number(),
   times_served: z.number(),
+  allergens: z
+    .array(
+      z.object({
+        id_allergen: z.number(),
+        name: z.string(),
+        description: z.string().nullable().optional(),
+        description_en: z.string().nullable().optional(),
+        picture_url: z.string().nullable().optional(),
+        is_marker: z.boolean().optional(),
+      }),
+    )
+    .optional(),
   recent_reviews: z.array(reviewSchema).optional(),
 });
 

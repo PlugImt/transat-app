@@ -1,4 +1,4 @@
-export type StorageItemValue = string | object | null;
+export type StorageItemValue = string | boolean | object | null;
 
 export interface StorageItem {
   value: StorageItemValue;

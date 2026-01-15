@@ -132,7 +132,7 @@ export const OnboardingBasicInfo = ({
         <View className="gap-6 mb-8">
           <View className="gap-2">
             <Text variant="h1">{t("onboarding.basicInfo.title")}</Text>
-            <Text variant="body" color="muted">
+            <Text variant="default" color="muted">
               {t("onboarding.basicInfo.description")}
             </Text>
           </View>

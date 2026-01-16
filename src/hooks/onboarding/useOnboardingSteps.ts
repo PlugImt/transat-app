@@ -38,11 +38,22 @@ export const useOnboardingSteps = (user: User | null | undefined) => {
     }
 
     // Step 1: Profile Picture
-    const needsProfilePicture = !user.profile_picture;
+    // Treat empty strings as missing
+    const needsProfilePicture =
+      !user.profile_picture ||
+      (typeof user.profile_picture === "string" &&
+        user.profile_picture.trim() === "");
 
     // Step 2: Basic Info (First Name, Last Name, Phone Number)
+    // Treat empty strings as missing
     const needsBasicInfo =
-      !user.first_name || !user.last_name || !user.phone_number;
+      !user.first_name ||
+      (typeof user.first_name === "string" && user.first_name.trim() === "") ||
+      !user.last_name ||
+      (typeof user.last_name === "string" && user.last_name.trim() === "") ||
+      !user.phone_number ||
+      (typeof user.phone_number === "string" &&
+        user.phone_number.trim() === "");
 
     // Step 3: Academic Info (Formation, Graduation Year)
     const needsAcademicInfo = !user.formation_name || !user.graduation_year;
@@ -169,6 +180,11 @@ export const shouldShowOnboarding = async (): Promise<boolean> => {
     // On error, show onboarding by default to be safe
     return true;
   }
+};
+
+export const getForceShowOnboarding = async (): Promise<boolean> => {
+  const forceShow = await storage.get(ONBOARDING_FORCE_SHOW_KEY);
+  return forceShow === true;
 };
 
 export const setForceShowOnboarding = async (force: boolean): Promise<void> => {

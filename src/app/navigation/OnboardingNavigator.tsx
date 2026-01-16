@@ -1,5 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useQueryClient } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { OnboardingAcademicInfo } from "@/app/screens/onboarding/OnboardingAcademicInfo";
 import { OnboardingBasicInfo } from "@/app/screens/onboarding/OnboardingBasicInfo";
@@ -11,6 +12,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import type { User } from "@/dto";
 import { useUser } from "@/hooks/account/useUser";
 import {
+  getForceShowOnboarding,
   setForceShowOnboarding,
   setOnboardingCompleted,
   setOnboardingSkipped,
@@ -38,6 +40,16 @@ export const OnboardingNavigator = ({
   const { data: user, isPending } = useUser();
   const queryClient = useQueryClient();
   const onboardingSteps = useOnboardingSteps(user || null);
+  const [isForceShow, setIsForceShow] = useState<boolean | null>(null);
+
+  // Check if onboarding is being forced (e.g., after registration)
+  useEffect(() => {
+    const checkForceShow = async () => {
+      const forceShow = await getForceShowOnboarding();
+      setIsForceShow(forceShow);
+    };
+    checkForceShow();
+  }, []);
 
   // Handle skipping a single step (not the entire onboarding)
   const handleSkipStep = async () => {
@@ -54,14 +66,21 @@ export const OnboardingNavigator = ({
     onComplete();
   };
 
-  // Wait for user to load
-  if (isPending || !user) {
+  // Wait for user to load and force show status
+  if (isPending || !user || isForceShow === null) {
     return null;
   }
 
   const { steps } = onboardingSteps;
 
   const getInitialRouteName = (): keyof OnboardingStackParamList => {
+    // If onboarding is forced (e.g., after registration), always start from ProfilePicture
+    // This ensures new users go through the full onboarding flow
+    if (isForceShow) {
+      return "ProfilePicture";
+    }
+
+    // Otherwise, use the steps logic
     if (steps.length === 0) return "Success";
     const firstStep = steps[0];
     if (firstStep === "profilePicture") {
@@ -137,7 +156,6 @@ export const OnboardingNavigator = ({
             <OnboardingPreview
               route={props.route}
               onComplete={handleComplete}
-              onSkipStep={handleSkipStep}
             />
           )}
         </Stack.Screen>

@@ -1,6 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { OnboardingAcademicInfo } from "@/app/screens/onboarding/OnboardingAcademicInfo";
 import { OnboardingBasicInfo } from "@/app/screens/onboarding/OnboardingBasicInfo";

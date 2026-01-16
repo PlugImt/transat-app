@@ -26,13 +26,11 @@ interface OnboardingPreviewProps {
     params: { user: User };
   };
   onComplete: () => void;
-  onSkipStep: () => void;
 }
 
 export const OnboardingPreview = ({
   route,
   onComplete,
-  onSkipStep,
 }: OnboardingPreviewProps) => {
   const { theme } = useTheme();
   const { t } = useTranslation();
@@ -41,6 +39,9 @@ export const OnboardingPreview = ({
   const displayUser = currentUser || route.params.user;
 
   const handleComplete = () => {
+    // Mark onboarding as complete at navigator level
+    onComplete();
+    // Navigate to success screen within the stack
     navigation.navigate("Success");
   };
 
@@ -145,7 +146,7 @@ export const OnboardingPreview = ({
                 <Text variant="h1" className="text-center">
                   {displayUser.first_name} {displayUser.last_name}
                 </Text>
-                <Text variant="body" color="muted" className="text-center">
+                <Text variant="default" color="muted" className="text-center">
                   {displayUser.email}
                 </Text>
               </View>
@@ -160,7 +161,7 @@ export const OnboardingPreview = ({
                   const hasValue = item.value !== t("account.notProvided");
                   return (
                     <MotiView
-                      key={index}
+                      key={item.label}
                       from={{ opacity: 0, translateX: -20 }}
                       animate={{ opacity: 1, translateX: 0 }}
                       transition={{
@@ -194,7 +195,7 @@ export const OnboardingPreview = ({
                             {item.label}
                           </Text>
                           <Text
-                            variant="body"
+                            variant="default"
                             className="font-semibold"
                             style={{
                               color: hasValue ? undefined : theme.muted,

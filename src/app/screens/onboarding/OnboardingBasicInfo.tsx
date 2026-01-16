@@ -114,6 +114,7 @@ export const OnboardingBasicInfo = ({
   };
 
   const handleSkip = () => {
+    onSkipStep();
     const currentUser = user || route.params.user;
     navigateToNextStep(currentUser);
   };

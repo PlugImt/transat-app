@@ -14,7 +14,6 @@ import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { User } from "@/dto";
 import { updateUserPayloadSchema } from "@/dto";
-import type { formationName } from "@/enums";
 import { useUpdateAccount } from "@/hooks/account/useUpdateAccount";
 import { useUser } from "@/hooks/account/useUser";
 import { hapticFeedback } from "@/utils/haptics.utils";
@@ -82,7 +81,7 @@ export const OnboardingAcademicInfo = ({
     return (startAcademicYear + i).toString();
   });
 
-  const handleUpdateAccount = (data: any) => {
+  const handleUpdateAccount = (data: Partial<User>) => {
     Keyboard.dismiss();
     // Ensure we have all required fields from the current user
     const payload = {
@@ -114,6 +113,7 @@ export const OnboardingAcademicInfo = ({
   };
 
   const handleSkip = () => {
+    onSkipStep();
     const currentUser = user || route.params.user;
     navigation.navigate("Preview", { user: currentUser });
   };
@@ -135,7 +135,7 @@ export const OnboardingAcademicInfo = ({
         <View className="gap-6 mb-8">
           <View className="gap-2">
             <Text variant="h1">{t("onboarding.academicInfo.title")}</Text>
-            <Text variant="body" color="muted">
+            <Text variant="default" color="muted">
               {t("onboarding.academicInfo.description")}
             </Text>
           </View>

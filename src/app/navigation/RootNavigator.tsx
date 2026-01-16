@@ -25,7 +25,7 @@ export const RootNavigator = () => {
   usePushNotifications();
   const [isI18nReady, setIsI18nReady] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState<boolean | null>(null);
-  const onboardingSteps = useOnboardingSteps(user || null);
+  const _onboardingSteps = useOnboardingSteps(user || null);
 
   useEffect(() => {
     i18nInitializedPromise.then(() => {

@@ -1,8 +1,13 @@
 import NativeDateTimePicker from "@react-native-community/datetimepicker";
 import { Calendar, Clock } from "lucide-react-native";
-import type React from "react";
 import { useEffect, useMemo, useState } from "react";
-import { Controller, type UseFormSetValue } from "react-hook-form";
+import {
+  type Control,
+  Controller,
+  type FieldErrors,
+  type FieldValues,
+  type UseFormSetValue,
+} from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Platform, View } from "react-native";
 import CalendarPicker, { type DateType } from "react-native-ui-datepicker";
@@ -23,10 +28,10 @@ import { InputButton } from "../InputButton";
 import { useDateTimePickerStyle } from "./DateTimePicker.style";
 
 const HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
-interface DateTimePickerProps {
-  control: any;
-  errors: any;
-  onChange: UseFormSetValue<any>;
+interface DateTimePickerProps<TFieldValues extends FieldValues = FieldValues> {
+  control: Control<TFieldValues>;
+  errors: FieldErrors<TFieldValues>;
+  onChange: UseFormSetValue<TFieldValues>;
   startDateField: string;
   endDateField: string;
   label?: string;
@@ -39,7 +44,7 @@ interface DateTimeState {
   time: Date;
 }
 
-export const DateTimePicker: React.FC<DateTimePickerProps> = ({
+export const DateTimePicker = <TFieldValues extends FieldValues = FieldValues>({
   control,
   errors,
   onChange,
@@ -48,7 +53,7 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
   label = "Date",
   initialStartDate,
   initialEndDate,
-}) => {
+}: DateTimePickerProps<TFieldValues>) => {
   const { theme, actualTheme } = useTheme();
   const { t, i18n } = useTranslation();
   const { formatDate, formatTime } = useDate();

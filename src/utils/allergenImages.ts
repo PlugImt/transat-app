@@ -1,8 +1,10 @@
+import type { ImageSourcePropType } from "react-native";
+
 // Mapping of allergen/marker names to their local asset paths
 // This maps the name stored in the database to the actual file in assets/icons/allergens/
 
 // Import all allergen PNG files
-const allergenImages: Record<string, any> = {
+const allergenImages: Record<string, ImageSourcePropType> = {
   // Allergens (capitalized)
   Arachide: require("@/assets/icons/allergens/Arachide.png"),
   FruitaCoque: require("@/assets/icons/allergens/FruitaCoque.png"),
@@ -42,7 +44,7 @@ const allergenImages: Record<string, any> = {
  */
 export const getAllergenImage = (
   nameOrFilename: string | null | undefined,
-): any => {
+): ImageSourcePropType | null => {
   if (!nameOrFilename) return null;
 
   // Remove .svg or .png extension if present

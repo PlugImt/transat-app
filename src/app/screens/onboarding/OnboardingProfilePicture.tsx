@@ -2,7 +2,6 @@ import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Edit } from "lucide-react-native";
 import { MotiView } from "moti";
-import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { TouchableOpacity, View } from "react-native";
 import type { OnboardingStackParamList } from "@/app/navigation/OnboardingNavigator";
@@ -86,6 +85,7 @@ export const OnboardingProfilePicture = ({
   const hasProfilePicture = !!displayUser?.profile_picture;
 
   const handleSkip = () => {
+    onSkipStep();
     const currentUser = user || route.params.user;
     if (!currentUser) {
       return;
@@ -137,7 +137,7 @@ export const OnboardingProfilePicture = ({
           <Text variant="h1" className="text-center">
             {t("onboarding.profilePicture.title")}
           </Text>
-          <Text variant="body" color="muted" className="text-center px-4">
+          <Text variant="default" color="muted" className="text-center px-4">
             {t("onboarding.profilePicture.description")}
           </Text>
           <Text variant="sm" color="muted" className="text-center px-4">

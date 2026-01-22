@@ -64,7 +64,9 @@ export const apiRequest = async <T>(
           err = new Error(
             axiosError.response?.data
               ? String(axiosError.response.data)
-              : axiosError.message || t("common.errors.occurred") || "An unexpected error occurred.",
+              : axiosError.message ||
+                  t("common.errors.occurred") ||
+                  "An unexpected error occurred.",
           ) as Error & { status?: number; isNetworkError?: boolean };
 
           // Attach status code for proper error handling upstream
@@ -72,9 +74,9 @@ export const apiRequest = async <T>(
           // Network errors don't have a response (timeout, no connection, etc.)
           err.isNetworkError = !axiosError.response && !!axiosError.code;
         } else {
-          err = (error instanceof Error
-            ? error
-            : new Error(String(error))) as Error & {
+          err = (
+            error instanceof Error ? error : new Error(String(error))
+          ) as Error & {
             status?: number;
             isNetworkError?: boolean;
           };

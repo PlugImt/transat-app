@@ -46,7 +46,9 @@ export const useAuthMutations = () => {
         // This allows the app to work offline and retry when connection is restored
         console.warn(
           "[Auth] Failed to fetch user, but keeping session:",
-          errorWithStatus.isNetworkError ? "Network error" : `Status ${errorWithStatus.status}`,
+          errorWithStatus.isNetworkError
+            ? "Network error"
+            : `Status ${errorWithStatus.status}`,
         );
         return null as NotLoggedIn;
       }

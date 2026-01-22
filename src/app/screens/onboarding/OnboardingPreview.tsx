@@ -69,7 +69,6 @@ export const OnboardingPreview = ({
       icon: GraduationCap,
       label: t("account.formationName"),
       value: displayUser.formation_name || t("account.notProvided"),
-      // Keep secondary for formation / program
       color: displayUser.formation_name ? theme.secondary : theme.muted,
     },
     {
@@ -78,7 +77,6 @@ export const OnboardingPreview = ({
       value: displayUser.graduation_year
         ? displayUser.graduation_year.toString()
         : t("account.notProvided"),
-      // Use success for graduation year to differentiate visually
       color: displayUser.graduation_year ? theme.success : theme.muted,
     },
     {
@@ -87,7 +85,6 @@ export const OnboardingPreview = ({
       value: displayUser.profile_picture
         ? t("onboarding.preview.hasProfilePicture")
         : t("account.notProvided"),
-      // Use warning for profile picture to have a distinct color
       color: displayUser.profile_picture ? theme.warning : theme.muted,
     },
   ];

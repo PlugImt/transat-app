@@ -183,8 +183,7 @@ export const shouldShowOnboarding = async (): Promise<boolean> => {
 };
 
 export const getForceShowOnboarding = async (): Promise<boolean> => {
-  const forceShow = await storage.get(ONBOARDING_FORCE_SHOW_KEY);
-  return forceShow === true;
+  return Boolean(await storage.get(ONBOARDING_FORCE_SHOW_KEY));
 };
 
 export const setForceShowOnboarding = async (force: boolean): Promise<void> => {

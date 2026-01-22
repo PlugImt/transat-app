@@ -9,10 +9,7 @@ import { SplashScreen } from "@/components/animations/SplashScreen";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/hooks/account/useAuth";
 import { usePushNotifications } from "@/hooks/home";
-import {
-  shouldShowOnboarding,
-  useOnboardingSteps,
-} from "@/hooks/onboarding/useOnboardingSteps";
+import { shouldShowOnboarding } from "@/hooks/onboarding/useOnboardingSteps";
 import { i18nInitializedPromise } from "@/i18n";
 import { screenOptions } from "@/navigation/navigationConfig";
 import type { RootStackParamList } from "@/types";
@@ -25,7 +22,6 @@ export const RootNavigator = () => {
   usePushNotifications();
   const [isI18nReady, setIsI18nReady] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState<boolean | null>(null);
-  const _onboardingSteps = useOnboardingSteps(user || null);
 
   useEffect(() => {
     i18nInitializedPromise.then(() => {

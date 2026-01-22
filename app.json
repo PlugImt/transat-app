@@ -2,7 +2,7 @@
   "expo": {
     "name": "Transat",
     "slug": "Transat",
-    "version": "2.2.3",
+    "version": "2.2.5",
     "orientation": "portrait",
     "icon": "./assets/images/icon-bg.png",
     "scheme": "myapp",

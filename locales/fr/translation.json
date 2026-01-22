@@ -175,6 +175,7 @@
     "promotion": "Promotion",
     "phone": "Téléphone",
     "email": "Email",
+    "profilePicture": "Photo de profil",
     "contactInfo": "Informations personnelles",
     "notProvided": "Non fourni",
     "editProfile": "Modifier le profil",
@@ -350,6 +351,14 @@
           "successMessage": "Votre avis a été publié",
           "errorMessage": "Impossible de publier votre avis"
         }
+      },
+      "allergens": {
+        "title": "Allergènes",
+        "none": "Aucun allergène déclaré pour ce plat."
+      },
+      "markers": {
+        "title": "Marqueurs",
+        "none": "Aucun marqueur pour ce plat."
       }
     },
     "timetable": {
@@ -619,17 +628,14 @@
           "emptyHistory": "Personne n'a encore pris de bassine",
           "emptyHistoryDescription": "Ajoute tes bassines au compteur pour les voir apparaître ici"
         },
-
         "firstPlaceLead_zero": "est à égalité",
         "firstPlaceLead_one": "est juste derrière vous",
         "firstPlaceLeader_few": "n'est qu'à {{count}} bassines derrière vous",
         "firstPlaceLead_other": "est {{count}} bassines derrière vous",
-
         "followingPlace_zero": "est à égalité",
         "followingPlace_one": "est juste devant",
         "followingPlace_few": "n'est qu'à {{count}} bassines devant vous",
         "followingPlace_other": "est {{count}} bassines devant vous",
-
         "tookBassine_one": "a pris {{count}} bassine",
         "tookBassine_other": "a pris {{count}} bassines"
       }
@@ -641,6 +647,43 @@
     "notInterested": "Plus intéressé.e",
     "errors": {
       "contact": "Erreur lors de l'ouverture de l'application SMS"
+    }
+  },
+  "onboarding": {
+    "profilePicture": {
+      "title": "Ajoutez votre photo de profil",
+      "description": "Votre photo de profil sera visible par tous les utilisateurs de l'application Transat.",
+      "canChangeLater": "Vous pourrez modifier votre photo de profil à tout moment dans Compte > Modifier le profil.",
+      "continue": "Continuer",
+      "skip": "Passer cette étape"
+    },
+    "basicInfo": {
+      "title": "Vos informations de base",
+      "description": "Remplissez vos informations personnelles pour que les autres utilisateurs puissent vous identifier.",
+      "phoneInfo": "Ce numéro sera utilisé pour vous contacter lors de réservations, commandes ou si nous devons vous joindre. Le numéro de téléphone est fortement conseillé.",
+      "firstNamePlaceholder": "Votre prénom",
+      "lastNamePlaceholder": "Votre nom",
+      "phonePlaceholder": "Votre numéro de téléphone",
+      "continue": "Continuer",
+      "skip": "Passer cette étape"
+    },
+    "academicInfo": {
+      "title": "Vos informations académiques",
+      "description": "Partagez votre formation et votre année de diplôme pour connecter avec vos camarades.",
+      "continue": "Continuer",
+      "skip": "Passer cette étape"
+    },
+    "preview": {
+      "yourInfo": "Vos informations",
+      "hasProfilePicture": "Photo ajoutée",
+      "publicVisibility": "Visibilité publique",
+      "publicVisibilityDescription": "Toutes vos informations, sauf votre numéro de téléphone, seront visibles par tous les utilisateurs de l'application Transat.",
+      "validate": "Valider mon profil"
+    },
+    "success": {
+      "title": "Bienvenue sur Transat !",
+      "description": "Votre profil est maintenant configuré. Vous pouvez commencer à explorer toutes les fonctionnalités de l'application !",
+      "start": "Commencer"
     }
   }
 }

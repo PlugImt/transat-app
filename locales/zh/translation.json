@@ -175,6 +175,7 @@
     "promotion": "年级",
     "phone": "电话",
     "email": "邮箱",
+    "profilePicture": "个人资料照片",
     "contactInfo": "个人信息",
     "notProvided": "未提供",
     "editProfile": "编辑资料",
@@ -638,6 +639,43 @@
     "notInterested": "不感兴趣",
     "errors": {
       "contact": "打开短信应用时出错"
+    }
+  },
+  "onboarding": {
+    "profilePicture": {
+      "title": "添加您的个人资料照片",
+      "description": "您的个人资料照片将对Transat应用程序的所有用户可见。",
+      "canChangeLater": "您可以随时在账户 > 编辑资料中更改您的个人资料照片。",
+      "continue": "继续",
+      "skip": "跳过此步骤"
+    },
+    "basicInfo": {
+      "title": "您的基本信息",
+      "description": "填写您的个人信息，以便其他用户可以识别您。",
+      "phoneInfo": "此号码将用于在预订、订单或需要联系您时与您联系。强烈建议提供电话号码。",
+      "firstNamePlaceholder": "您的名字",
+      "lastNamePlaceholder": "您的姓氏",
+      "phonePlaceholder": "您的电话号码",
+      "continue": "继续",
+      "skip": "跳过此步骤"
+    },
+    "academicInfo": {
+      "title": "您的学术信息",
+      "description": "分享您的专业和毕业年份，与同学建立联系。",
+      "continue": "继续",
+      "skip": "跳过此步骤"
+    },
+    "preview": {
+      "yourInfo": "您的信息",
+      "hasProfilePicture": "已添加照片",
+      "publicVisibility": "公开可见性",
+      "publicVisibilityDescription": "您的所有信息（电话号码除外）将对Transat应用程序的所有用户可见。",
+      "validate": "验证我的个人资料"
+    },
+    "success": {
+      "title": "欢迎使用Transat！",
+      "description": "您的个人资料现已设置完成。您可以开始探索应用程序的所有功能！",
+      "start": "开始"
     }
   }
 }

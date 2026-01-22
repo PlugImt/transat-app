@@ -17,6 +17,8 @@ export const getReservationSchema = z.object({
         name: z.string(),
         slot: z.boolean(),
         user: userSchema.optional(),
+        warning_message: z.string().optional(),
+        confirmation_message: z.string().optional(),
       }),
     )
     .optional(),
@@ -37,6 +39,8 @@ export const reservationDetailsSchema = z.object({
     reservation: z.array(reservationSchema.optional()),
     reservation_before: z.array(reservationSchema.optional()),
     reservation_after: z.array(reservationSchema.optional()),
+    warning_message: z.string().optional(),
+    confirmation_message: z.string().optional(),
   }),
 });
 

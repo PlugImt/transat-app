@@ -175,6 +175,7 @@
     "promotion": "Promoción",
     "phone": "Teléfono",
     "email": "Correo electrónico",
+    "profilePicture": "Foto de perfil",
     "contactInfo": "Información personal",
     "notProvided": "No proporcionado",
     "editProfile": "Editar perfil",
@@ -638,6 +639,43 @@
     "notInterested": "No interesado",
     "errors": {
       "contact": "Error al abrir la aplicación de SMS"
+    }
+  },
+  "onboarding": {
+    "profilePicture": {
+      "title": "Añade tu foto de perfil",
+      "description": "Tu foto de perfil será visible para todos los usuarios de la aplicación Transat.",
+      "canChangeLater": "Puedes cambiar tu foto de perfil en cualquier momento en Cuenta > Editar perfil.",
+      "continue": "Continuar",
+      "skip": "Saltar este paso"
+    },
+    "basicInfo": {
+      "title": "Tu información básica",
+      "description": "Completa tu información personal para que otros usuarios puedan identificarte.",
+      "phoneInfo": "Este número se utilizará para contactarte para reservas, pedidos o si necesitamos comunicarnos contigo. Se recomienda encarecidamente el número de teléfono.",
+      "firstNamePlaceholder": "Tu nombre",
+      "lastNamePlaceholder": "Tu apellido",
+      "phonePlaceholder": "Tu número de teléfono",
+      "continue": "Continuar",
+      "skip": "Saltar este paso"
+    },
+    "academicInfo": {
+      "title": "Tu información académica",
+      "description": "Comparte tu formación y año de graduación para conectar con tus compañeros.",
+      "continue": "Continuar",
+      "skip": "Saltar este paso"
+    },
+    "preview": {
+      "yourInfo": "Tu información",
+      "hasProfilePicture": "Foto añadida",
+      "publicVisibility": "Visibilidad pública",
+      "publicVisibilityDescription": "Toda tu información, excepto tu número de teléfono, será visible para todos los usuarios de la aplicación Transat.",
+      "validate": "Validar mi perfil"
+    },
+    "success": {
+      "title": "¡Bienvenido a Transat!",
+      "description": "Tu perfil ya está configurado. ¡Puedes empezar a explorar todas las funciones de la aplicación!",
+      "start": "Comenzar"
     }
   }
 }

@@ -175,6 +175,7 @@
     "promotion": "Promotion",
     "phone": "Telefon",
     "email": "E-Mail",
+    "profilePicture": "Profilbild",
     "contactInfo": "Persönliche Informationen",
     "notProvided": "Nicht angegeben",
     "editProfile": "Profil bearbeiten",
@@ -638,6 +639,43 @@
     "notInterested": "Nicht interessiert",
     "errors": {
       "contact": "Fehler beim Öffnen der SMS-App"
+    }
+  },
+  "onboarding": {
+    "profilePicture": {
+      "title": "Fügen Sie Ihr Profilbild hinzu",
+      "description": "Ihr Profilbild wird für alle Benutzer der Transat-Anwendung sichtbar sein.",
+      "canChangeLater": "Sie können Ihr Profilbild jederzeit unter Konto > Profil bearbeiten ändern.",
+      "continue": "Weiter",
+      "skip": "Diesen Schritt überspringen"
+    },
+    "basicInfo": {
+      "title": "Ihre grundlegenden Informationen",
+      "description": "Füllen Sie Ihre persönlichen Informationen aus, damit andere Benutzer Sie identifizieren können.",
+      "phoneInfo": "Diese Nummer wird verwendet, um Sie für Reservierungen, Bestellungen oder wenn wir Sie erreichen müssen, zu kontaktieren. Die Telefonnummer wird dringend empfohlen.",
+      "firstNamePlaceholder": "Ihr Vorname",
+      "lastNamePlaceholder": "Ihr Nachname",
+      "phonePlaceholder": "Ihre Telefonnummer",
+      "continue": "Weiter",
+      "skip": "Diesen Schritt überspringen"
+    },
+    "academicInfo": {
+      "title": "Ihre akademischen Informationen",
+      "description": "Teilen Sie Ihre Ausbildung und Ihr Abschlussjahr, um sich mit Ihren Klassenkameraden zu verbinden.",
+      "continue": "Weiter",
+      "skip": "Diesen Schritt überspringen"
+    },
+    "preview": {
+      "yourInfo": "Ihre Informationen",
+      "hasProfilePicture": "Foto hinzugefügt",
+      "publicVisibility": "Öffentliche Sichtbarkeit",
+      "publicVisibilityDescription": "Alle Ihre Informationen, außer Ihrer Telefonnummer, werden für alle Benutzer der Transat-Anwendung sichtbar sein.",
+      "validate": "Mein Profil validieren"
+    },
+    "success": {
+      "title": "Willkommen bei Transat!",
+      "description": "Ihr Profil ist jetzt eingerichtet. Sie können beginnen, alle Funktionen der Anwendung zu erkunden!",
+      "start": "Loslegen"
     }
   }
 }

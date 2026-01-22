@@ -63,7 +63,7 @@ export const OnboardingPreview = ({
       icon: Phone,
       label: t("account.phone"),
       value: displayUser.phone_number || t("account.notProvided"),
-      color: displayUser.phone_number ? theme.primary : theme.muted,
+      color: displayUser.phone_number ? theme.secondary : theme.muted,
     },
     {
       icon: GraduationCap,
@@ -77,7 +77,7 @@ export const OnboardingPreview = ({
       value: displayUser.graduation_year
         ? displayUser.graduation_year.toString()
         : t("account.notProvided"),
-      color: displayUser.graduation_year ? theme.success : theme.muted,
+      color: displayUser.graduation_year ? theme.secondary : theme.muted,
     },
     {
       icon: UserIcon,
@@ -85,7 +85,7 @@ export const OnboardingPreview = ({
       value: displayUser.profile_picture
         ? t("onboarding.preview.hasProfilePicture")
         : t("account.notProvided"),
-      color: displayUser.profile_picture ? theme.warning : theme.muted,
+      color: displayUser.profile_picture ? theme.secondary : theme.muted,
     },
   ];
 

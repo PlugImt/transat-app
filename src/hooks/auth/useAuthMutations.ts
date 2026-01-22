@@ -25,12 +25,42 @@ export const useAuthMutations = () => {
         const userData = await apiRequest<User>(API_ROUTES.user);
         await storage.set("newf", userData);
         return userData;
-      } catch (_error) {
-        await storage.remove("token");
+      } catch (error) {
+        // Only remove token and log out if it's a 401 Unauthorized error
+        // Network errors (slow/no internet) should not log the user out
+        const errorWithStatus = error as Error & {
+          status?: number;
+          isNetworkError?: boolean;
+        };
+
+        if (errorWithStatus.status === 401) {
+          // Token is invalid or expired - log out
+          await storage.remove("token");
+          await storage.remove("newf");
+          queryClient.setQueryData(QUERY_KEYS.auth.user, null);
+          return null as NotLoggedIn;
+        }
+
+        // For network errors or other errors, keep the user logged in
+        // Return null but don't remove the token
+        // This allows the app to work offline and retry when connection is restored
+        console.warn(
+          "[Auth] Failed to fetch user, but keeping session:",
+          errorWithStatus.isNetworkError ? "Network error" : `Status ${errorWithStatus.status}`,
+        );
         return null as NotLoggedIn;
       }
     },
     staleTime: 1000 * 60 * 5, // 5 minutes
+    retry: (failureCount, error) => {
+      // Don't retry on 401 (unauthorized) - token is invalid
+      const errorWithStatus = error as Error & { status?: number };
+      if (errorWithStatus.status === 401) {
+        return false;
+      }
+      // Retry network errors up to 3 times
+      return failureCount < 3;
+    },
   });
 
   const loginMutation = useMutation<

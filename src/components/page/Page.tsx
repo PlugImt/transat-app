@@ -4,6 +4,7 @@ import {
   Platform,
   RefreshControl,
   StyleSheet,
+  Text,
   View,
   type ViewStyle,
 } from "react-native";
@@ -55,6 +56,17 @@ export const Page = ({
 
   const containerClassName = cn("gap-6 px-5", className);
 
+  const normalizeChildren = (node: ReactNode): ReactNode =>
+    React.Children.map(node, (child) =>
+      typeof child === "string" || typeof child === "number" ? (
+        <Text>{child}</Text>
+      ) : (
+        child
+      )
+    );
+
+  const normalizedChildren = normalizeChildren(children);
+
   const contentWrapperProps = {
     onScroll: scrollHandler,
     refreshControl: onRefresh ? (
@@ -76,7 +88,7 @@ export const Page = ({
         ? React.cloneElement(children, {
             ...contentWrapperProps,
           })
-        : children;
+        : normalizedChildren;
     }
     if (disableScroll) {
       return (
@@ -85,13 +97,13 @@ export const Page = ({
           style={containerStyle}
           {...contentWrapperProps}
         >
-          {children}
+          {normalizedChildren}
         </View>
       );
     }
     return (
       <Animated.ScrollView {...contentWrapperProps}>
-        {children}
+        {normalizedChildren}
       </Animated.ScrollView>
     );
   };

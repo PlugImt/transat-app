@@ -28,8 +28,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.yohann69.transat2_0",
-      "googleServicesFile": "./google-services.json",
-      "permissions": ["android.permission.RECORD_AUDIO"]
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "bundler": "metro",

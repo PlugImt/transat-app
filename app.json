@@ -7,7 +7,6 @@
     "icon": "./assets/images/icon-bg.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
     "splash": {
       "backgroundColor": "#0D0505"
     },
@@ -71,7 +70,11 @@
           "project": "transat-app",
           "organization": "plugimt"
         }
-      ]
+      ],
+      "@react-native-community/datetimepicker",
+      "@sentry/react-native",
+      "expo-font",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true

@@ -1,7 +1,7 @@
 import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import type { NavigatorScreenParams } from "@react-navigation/core";
-import type { StackNavigationProp } from "@react-navigation/stack";
 import type { Homework, OrderedItem } from "@/dto";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export type BottomTabParamList = {
   // Main tabs
@@ -68,14 +68,14 @@ export type AuthStackParamList = {
   Legal: undefined;
 };
 
-export type AuthNavigation = StackNavigationProp<AuthStackParamList>;
+export type AuthNavigation = NativeStackNavigationProp<AuthStackParamList>;
 
 export type AppStackParamList = {
   Navbar: NavigatorScreenParams<BottomTabParamList>;
 };
 
 export type AppNavigation = BottomTabNavigationProp<BottomTabParamList> &
-  StackNavigationProp<BottomTabParamList>;
+  NativeStackNavigationProp<BottomTabParamList>;
 
 export type RootStackParamList = {
   Auth: NavigatorScreenParams<AuthStackParamList>;

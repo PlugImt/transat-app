@@ -1,7 +1,6 @@
 import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import type { CompositeNavigationProp } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { Image, View } from "react-native";
 import { Button } from "@/components/common/Button";
@@ -16,6 +15,7 @@ import {
   FourchettasEventCardLoading,
 } from "./components/FourchettasEventCard";
 import { phoneWithoutSpaces } from "./utils/common";
+import type { StackNavigationProp } from "@react-navigation/stack";
 
 type NavigationProp = CompositeNavigationProp<
   StackNavigationProp<AppStackParamList>,

@@ -120,6 +120,13 @@ Merci à Sentry pour leur offre gratuite !
                 </a>
             </td>
             <td align="center">
+                <a href="https://github.com/akinimaginable">
+                    <img src="https://avatars.githubusercontent.com/u/38192770?v=4" width="100;" alt="akinimaginable"/>
+                    <br />
+                    <sub><b>Akinimaginable</b></sub>
+                </a>
+            </td>
+            <td align="center">
                 <a href="https://github.com/AurelienPautet">
                     <img src="https://avatars.githubusercontent.com/u/47290623?v=4" width="100;" alt="AurelienPautet"/>
                     <br />

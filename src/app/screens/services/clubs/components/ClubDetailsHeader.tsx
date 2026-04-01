@@ -1,4 +1,5 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Bell, BellOff, ExternalLink, MapPin } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { Linking, View } from "react-native";
@@ -15,7 +16,6 @@ import {
 } from "@/hooks/services/club/useClub";
 import { linkToDomain } from "@/utils/";
 import type { ClubDetailsRouteProp } from "../ClubDetails";
-import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 interface NotificationButtonProps {
   isMember: boolean;

@@ -42,9 +42,7 @@
         {
           "icon": "./assets/images/icon-bg.png",
           "color": "#ffffff",
-          "sounds": [
-            "./assets/sounds/notification_sound.wav"
-          ]
+          "sounds": ["./assets/sounds/notification_sound.wav"]
         }
       ],
       [

@@ -1,4 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { HeroAnimation } from "@/components/animations/HeroAnimation/HeroAnimation";
@@ -6,7 +7,6 @@ import { Button } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
 import { Page } from "@/components/page/Page";
 import type { AuthStackParamList } from "@/types";
-import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type LoginScreenNavigationProp = NativeStackNavigationProp<AuthStackParamList>;
 

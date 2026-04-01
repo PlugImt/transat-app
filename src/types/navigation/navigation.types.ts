@@ -1,7 +1,7 @@
 import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import type { NavigatorScreenParams } from "@react-navigation/core";
-import type { Homework, OrderedItem } from "@/dto";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { Homework, OrderedItem } from "@/dto";
 
 export type BottomTabParamList = {
   // Main tabs

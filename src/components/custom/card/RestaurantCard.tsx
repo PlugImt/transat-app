@@ -1,4 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
 import type React from "react";
 import { useTranslation } from "react-i18next";
@@ -10,7 +11,6 @@ import { Stars } from "@/components/custom/star/Stars";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { MenuItem } from "@/dto";
-import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type NavigationProp = NativeStackNavigationProp<{
   RestaurantReviews: { id: number };

@@ -62,7 +62,7 @@ export const Page = ({
         <Text>{child}</Text>
       ) : (
         child
-      )
+      ),
     );
 
   const normalizedChildren = normalizeChildren(children);

@@ -82,4 +82,4 @@ function TabsContent({ value, className, ...props }: TabsContentProps) {
   return null;
 }
 
-export { Tabs, TabsList, TabsTrigger, TabsContent };
+export { Tabs, TabsContent, TabsList, TabsTrigger };

@@ -105,4 +105,4 @@ const BottomSheet = ({ children }: { children: ReactNode }) => {
 };
 
 // Exports regroupés
-export { BottomSheetProvider, BottomSheetTrigger, BottomSheet, useBottomSheet };
+export { BottomSheet, BottomSheetProvider, BottomSheetTrigger, useBottomSheet };

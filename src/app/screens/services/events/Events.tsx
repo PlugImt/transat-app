@@ -1,5 +1,4 @@
 import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
 import { PartyPopper, Plus } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { RefreshControl } from "react-native";
@@ -19,6 +18,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import type { Event } from "@/dto/event";
 import { useEventsByTab } from "@/hooks/services/event/useEvent";
 import { EventCard, EventCardSkeleton } from "./components/EventCard";
+import type { StackNavigationProp } from "@react-navigation/stack";
 
 type NavigationProp = StackNavigationProp<{
   AddEvent: undefined;

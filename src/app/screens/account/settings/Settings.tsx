@@ -14,6 +14,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/common/Button";
 import { Switch } from "@/components/common/Switch";
 import { UserCard } from "@/components/custom/card/UserCard";
+import { DeleteAccountButton } from "@/components/custom/DeleteAccountButton";
 import { LogoutButton } from "@/components/custom/LogoutButton";
 import { Page } from "@/components/page/Page";
 import { QUERY_KEYS } from "@/constants";
@@ -130,6 +131,7 @@ export const Settings = () => {
       </SettingCategory>
 
       <LogoutButton />
+      <DeleteAccountButton />
     </Page>
   );
 };

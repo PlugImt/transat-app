@@ -198,6 +198,12 @@
     "logout": "Déconnexion",
     "logoutDesc": "Êtes-vous sûr(e) de vouloir vous déconnecter ?",
     "logoutConfirm": "Me déconnecter",
+    "deleteAccount": {
+      "title": "Supprimer mon compte",
+      "desc": "Êtes-vous sûr(e) de vouloir supprimer votre compte ? Cette action est irréversible et supprimera toutes vos données.",
+      "confirm": "Supprimer",
+      "error": "Impossible de supprimer le compte"
+    },
     "security": "Sécurité",
     "notifications": {
       "notifications": "Notifications",

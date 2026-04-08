@@ -198,6 +198,12 @@
     "logout": "Abmelden",
     "logoutDesc": "Sind Sie sicher, dass Sie sich abmelden möchten?",
     "logoutConfirm": "Mich abmelden",
+    "deleteAccount": {
+      "title": "Mein Konto löschen",
+      "desc": "Sind Sie sicher, dass Sie Ihr Konto löschen möchten? Diese Aktion ist unwiderruflich und löscht alle Ihre Daten.",
+      "confirm": "Löschen",
+      "error": "Konto konnte nicht gelöscht werden"
+    },
     "security": "Sicherheit",
     "notifications": {
       "notifications": "Benachrichtigungen",

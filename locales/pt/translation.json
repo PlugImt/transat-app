@@ -198,6 +198,12 @@
     "logout": "Sair",
     "logoutDesc": "Tem certeza de que deseja sair?",
     "logoutConfirm": "Sair da minha conta",
+    "deleteAccount": {
+      "title": "Excluir minha conta",
+      "desc": "Tem certeza de que deseja excluir sua conta? Esta ação é irreversível e excluirá todos os seus dados.",
+      "confirm": "Excluir",
+      "error": "Não foi possível excluir a conta"
+    },
     "security": "Segurança",
     "notifications": {
       "notifications": "Notificações",

@@ -198,6 +198,12 @@
     "logout": "Cerrar sesión",
     "logoutDesc": "¿Estás seguro de que quieres cerrar sesión?",
     "logoutConfirm": "Cerrar mi sesión",
+    "deleteAccount": {
+      "title": "Eliminar mi cuenta",
+      "desc": "¿Estás seguro de que quieres eliminar tu cuenta? Esta acción es irreversible y eliminará todos tus datos.",
+      "confirm": "Eliminar",
+      "error": "No se pudo eliminar la cuenta"
+    },
     "security": "Seguridad",
     "notifications": {
       "notifications": "Notificaciones",

@@ -198,6 +198,12 @@
     "logout": "Logout",
     "logoutDesc": "Are you sure you want to logout?",
     "logoutConfirm": "Log me out",
+    "deleteAccount": {
+      "title": "Delete my account",
+      "desc": "Are you sure you want to delete your account? This action is irreversible and will delete all your data.",
+      "confirm": "Delete",
+      "error": "Unable to delete account"
+    },
     "security": "Security",
     "notifications": {
       "notifications": "Notifications",

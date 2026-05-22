@@ -1,5 +1,5 @@
-import { type RouteProp, useRoute } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
+import { type RouteProp, useRoute } from "expo-router/react-navigation";
 import { useTranslation } from "react-i18next";
 import { ClubEventWidget } from "@/app/screens/services/events/widget/ClubEventWidget";
 import CardGroup from "@/components/common/CardGroup";

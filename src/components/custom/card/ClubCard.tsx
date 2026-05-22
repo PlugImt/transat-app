@@ -1,4 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "expo-router/react-navigation";
 import Image from "@/components/common/Image";
 import type { Club } from "@/dto/club";
 import type { AppNavigation } from "@/types";

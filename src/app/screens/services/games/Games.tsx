@@ -1,5 +1,5 @@
-import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "expo-router/react-navigation";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { Page } from "@/components/page/Page";

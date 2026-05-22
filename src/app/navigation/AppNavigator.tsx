@@ -1,4 +1,4 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createNativeStackNavigator } from "expo-router/build/react-navigation/native-stack";
 import { BottomTabNavigator } from "@/components/navigation/Navbar";
 import { screenOptions } from "@/navigation/navigationConfig";
 import type { AppStackParamList } from "@/types";

@@ -8,9 +8,6 @@
     "icon": "./assets/images/icon-bg.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
-    "splash": {
-      "backgroundColor": "#0D0505"
-    },
     "ios": {
       "icon": {
         "dark": "./assets/images/ios-icon.png",

@@ -1,5 +1,5 @@
-import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
-import { useNavigation } from "@react-navigation/native";
+import type { BottomTabNavigationProp } from "expo-router/js-tabs";
+import { useNavigation } from "expo-router/react-navigation";
 import { ChevronRight, Clock, MapPin } from "lucide-react-native";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";

@@ -2,17 +2,17 @@ import { createBottomTabNavigator } from "expo-router/build/react-navigation/bot
 import { createNativeStackNavigator } from "expo-router/build/react-navigation/native-stack";
 import { GridIcon, LucideHome, Play, User } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
-import { Home } from "@/app/screens";
-import Account from "@/app/screens/account/Account";
-import EditProfile from "@/app/screens/account/EditAccount";
-import About from "@/app/screens/account/settings/About";
-import { Appearance } from "@/app/screens/account/settings/Appearance";
-import ChangePassword from "@/app/screens/account/settings/ChangePassword";
-import Help from "@/app/screens/account/settings/Help";
-import Language from "@/app/screens/account/settings/Language";
-import Legal from "@/app/screens/account/settings/Legal";
-import Notifications from "@/app/screens/account/settings/Notifications";
-import Settings from "@/app/screens/account/settings/Settings";
+import { Home } from "@/screens";
+import Account from "@/screens/account/Account";
+import EditProfile from "@/screens/account/EditAccount";
+import About from "@/screens/account/settings/About";
+import { Appearance } from "@/screens/account/settings/Appearance";
+import ChangePassword from "@/screens/account/settings/ChangePassword";
+import Help from "@/screens/account/settings/Help";
+import Language from "@/screens/account/settings/Language";
+import Legal from "@/screens/account/settings/Legal";
+import Notifications from "@/screens/account/settings/Notifications";
+import Settings from "@/screens/account/settings/Settings";
 import {
   Clubs,
   Fourchettas,
@@ -24,27 +24,27 @@ import {
   Restaurant,
   Timetable,
   Traq,
-} from "@/app/screens/services";
-import ClubDetails from "@/app/screens/services/clubs/ClubDetails";
-import { ClubMemberList } from "@/app/screens/services/clubs/components/ClubMemberList";
-import ClubEvents from "@/app/screens/services/events/ClubEvents";
-import { AddEvent } from "@/app/screens/services/events/components/AddEvent";
-import { EditEvent } from "@/app/screens/services/events/components/EditEvent";
-import EventDetails from "@/app/screens/services/events/components/EventDetails";
-import { EventMemberList } from "@/app/screens/services/events/components/EventMemberList";
-import Events from "@/app/screens/services/events/Events";
-import { FourchettasOrder } from "@/app/screens/services/fourchettas/components/order/FourchettasOrder";
-import Bassine from "@/app/screens/services/games/bassine/Bassine";
-import { BassineLeaderboard } from "@/app/screens/services/games/bassine/leaderboard/BassineLeaderboard";
-import { HomeworkDetails } from "@/app/screens/services/homework/components/HomeworkDetails";
+} from "@/screens/services";
+import ClubDetails from "@/screens/services/clubs/ClubDetails";
+import { ClubMemberList } from "@/screens/services/clubs/components/ClubMemberList";
+import ClubEvents from "@/screens/services/events/ClubEvents";
+import { AddEvent } from "@/screens/services/events/components/AddEvent";
+import { EditEvent } from "@/screens/services/events/components/EditEvent";
+import EventDetails from "@/screens/services/events/components/EventDetails";
+import { EventMemberList } from "@/screens/services/events/components/EventMemberList";
+import Events from "@/screens/services/events/Events";
+import { FourchettasOrder } from "@/screens/services/fourchettas/components/order/FourchettasOrder";
+import Bassine from "@/screens/services/games/bassine/Bassine";
+import { BassineLeaderboard } from "@/screens/services/games/bassine/leaderboard/BassineLeaderboard";
+import { HomeworkDetails } from "@/screens/services/homework/components/HomeworkDetails";
 import {
   Category,
   PersonalReservations,
   ReservationCalendar,
-} from "@/app/screens/services/reservation";
-import { RestaurantReviews } from "@/app/screens/services/restaurant/components/Reviews";
+} from "@/screens/services/reservation";
+import { RestaurantReviews } from "@/screens/services/restaurant/components/Reviews";
 
-import { Services } from "@/app/screens/services/Services";
+import { Services } from "@/screens/services/Services";
 import { useTheme } from "@/contexts/ThemeContext";
 import { screenOptions, tabBarOptions } from "@/navigation/navigationConfig";
 import type { BottomTabParamList } from "@/types";

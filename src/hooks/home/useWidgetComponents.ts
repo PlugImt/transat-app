@@ -1,11 +1,11 @@
 import type { ReactElement } from "react";
 import React, { useCallback } from "react";
-import { EventWidget } from "@/app/screens/services/events/widget/EventWidget";
-import { HomeworkWidget } from "@/app/screens/services/homework/widget/HomeworkWidget";
-import LaundryWidget from "@/app/screens/services/laundry/widget/LaundryWidget";
-import { RestaurantWidget } from "@/app/screens/services/restaurant/widget/RestaurantWidget";
-import TimetableWidget from "@/app/screens/services/schedule/widget/TimetableWidget";
-import { WeatherWidget } from "@/app/screens/services/weather/widget/WeatherWidget";
+import { EventWidget } from "@/screens/services/events/widget/EventWidget";
+import { HomeworkWidget } from "@/screens/services/homework/widget/HomeworkWidget";
+import LaundryWidget from "@/screens/services/laundry/widget/LaundryWidget";
+import { RestaurantWidget } from "@/screens/services/restaurant/widget/RestaurantWidget";
+import TimetableWidget from "@/screens/services/schedule/widget/TimetableWidget";
+import { WeatherWidget } from "@/screens/services/weather/widget/WeatherWidget";
 import type { PreferenceId, WidgetType } from "@/services/storage/preferences";
 
 export function useWidgetComponents() {

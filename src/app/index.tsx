@@ -1,4 +1,4 @@
-import { RootNavigator } from "@/app/navigation/RootNavigator";
+import { RootNavigator } from "@/navigation/RootNavigator";
 import "@/i18n";
 import "./global.css";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";

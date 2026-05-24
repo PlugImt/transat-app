@@ -1,11 +1,16 @@
 import {
   createContext,
   type ReactNode,
+  default as React,
   useContext,
   useEffect,
   useState,
 } from "react";
-import { type ColorSchemeName, useColorScheme } from "react-native";
+import {
+  Appearance as NativeAppearance,
+  type ColorSchemeName,
+  useColorScheme,
+} from "react-native";
 import { storage } from "@/services/storage/asyncStorage";
 import STORAGE_KEYS from "@/services/storage/constants";
 import colors from "@/themes/colors";
@@ -51,13 +56,12 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const systemColorScheme = useColorScheme();
   const [themeMode, setThemeModeState] = useState<ThemeMode>("system");
 
-  // Determine the actual theme based on mode and system preference
   const getActualTheme = (
     mode: ThemeMode,
     systemScheme: ColorSchemeName,
   ): "light" | "dark" => {
     if (mode === "system") {
-      return systemScheme === "light" ? "light" : "dark";
+      return systemScheme === "dark" ? "dark" : "light";
     }
     return mode as "light" | "dark";
   };
@@ -98,7 +102,12 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     loadThemePreference().then((r) => r);
   }, []);
 
-  // Save theme preference to storage
+  useEffect(() => {
+    NativeAppearance.setColorScheme(
+      themeMode === "system" ? "unspecified" : themeMode,
+    );
+  }, [themeMode]);
+
   const setThemeMode = async (mode: ThemeMode) => {
     try {
       setThemeModeState(mode);

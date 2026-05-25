@@ -1,5 +1,7 @@
 import { t } from "i18next";
-import { API_ROUTES, apiRequest, Method } from "@/api";
+import { API_ROUTES } from "@/api/common";
+import { Method } from "@/api/enums";
+import { apiRequest } from "@/api/helpers";
 import type {
   LaundryApiResponseSchema,
   LaundryData,

@@ -3,8 +3,6 @@ import { Calendar, Clock, Trash } from "lucide-react-native";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
-
-import { Counter } from "@/screens/services/fourchettas/components/Counter";
 import { Badge, Card } from "@/components/common";
 import { Button, IconButton } from "@/components/common/Button";
 import Image from "@/components/common/Image";
@@ -15,6 +13,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import type { FourchettasEvent } from "@/dto";
 import { useUser } from "@/hooks/account/useUser";
 import { useDeleteOrder } from "@/hooks/services/fourchettas/useFourchettas";
+import { Counter } from "@/screens/services/fourchettas/components/Counter";
 import {
   combineDateAndTimeString,
   formatDateToDayMonth,

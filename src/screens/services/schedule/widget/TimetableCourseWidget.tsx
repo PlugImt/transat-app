@@ -1,8 +1,8 @@
 import { View } from "react-native";
-import { TagCourseRoom } from "@/screens/services/schedule/components/TagCourseRoom";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Course } from "@/dto";
+import { TagCourseRoom } from "@/screens/services/schedule/components/TagCourseRoom";
 
 export const TimetableCourseWidget = ({ course }: { course: Course }) => {
   const { theme } = useTheme();

@@ -1,12 +1,12 @@
 import { useTranslation } from "react-i18next";
-import {
-  LoadingState,
-  RestaurantMenu,
-} from "@/screens/services/restaurant/components";
 import { AboutModal } from "@/components/custom/AboutModal";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
 import { useMenuRestaurant } from "@/hooks/services/restaurant/useMenuRestaurant";
+import {
+  LoadingState,
+  RestaurantMenu,
+} from "@/screens/services/restaurant/components";
 import { beforeToday, getOpeningHoursData, isWeekend } from "@/utils";
 import { RestaurantClosed } from "./components/RestaurantMenu/RestaurantClosed";
 

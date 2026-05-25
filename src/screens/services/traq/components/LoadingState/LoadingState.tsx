@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { ScrollView, View } from "react-native";
-import { AboutSection } from "@/screens/services/traq/components/AboutSection";
 import { BadgeSkeleton } from "@/components/common/Badge";
 import { TraqCardLoading } from "@/components/custom/card/TraqCard";
 import { Page } from "@/components/page/Page";
+import { AboutSection } from "@/screens/services/traq/components/AboutSection";
 
 export const LoadingState = () => {
   const { t } = useTranslation();

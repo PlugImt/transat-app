@@ -2,6 +2,8 @@ import { createBottomTabNavigator } from "expo-router/build/react-navigation/bot
 import { createNativeStackNavigator } from "expo-router/build/react-navigation/native-stack";
 import { GridIcon, LucideHome, Play, User } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@/contexts/ThemeContext";
+import { screenOptions, tabBarOptions } from "@/navigation/navigationConfig";
 import { Home } from "@/screens";
 import Account from "@/screens/account/Account";
 import EditProfile from "@/screens/account/EditAccount";
@@ -43,10 +45,7 @@ import {
   ReservationCalendar,
 } from "@/screens/services/reservation";
 import { RestaurantReviews } from "@/screens/services/restaurant/components/Reviews";
-
 import { Services } from "@/screens/services/Services";
-import { useTheme } from "@/contexts/ThemeContext";
-import { screenOptions, tabBarOptions } from "@/navigation/navigationConfig";
 import type { BottomTabParamList } from "@/types";
 import { hapticFeedback } from "@/utils/haptics.utils";
 

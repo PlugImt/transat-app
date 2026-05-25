@@ -1,16 +1,16 @@
 import { createNativeStackNavigator } from "expo-router/build/react-navigation/native-stack";
 import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native";
-import { AppNavigator } from "@/navigation/AppNavigator";
-import { AuthNavigator } from "@/navigation/AuthNavigator";
+import { SafeViewAndroid } from "@/app/_layout";
 import { SplashScreen } from "@/components/animations/SplashScreen";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/hooks/account/useAuth";
 import { usePushNotifications } from "@/hooks/home";
 import { i18nInitializedPromise } from "@/i18n";
+import { AppNavigator } from "@/navigation/AppNavigator";
+import { AuthNavigator } from "@/navigation/AuthNavigator";
 import { screenOptions } from "@/navigation/navigationConfig";
 import type { RootStackParamList } from "@/types";
-import { SafeViewAndroid } from "@/app/_layout";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

@@ -1,14 +1,14 @@
 import {
   createContext,
-  type ReactNode,
   default as React,
+  type ReactNode,
   useContext,
   useEffect,
   useState,
 } from "react";
 import {
-  Appearance as NativeAppearance,
   type ColorSchemeName,
+  Appearance as NativeAppearance,
   useColorScheme,
 } from "react-native";
 import { storage } from "@/services/storage/asyncStorage";

@@ -1,3 +1,9 @@
+import {
+  format as formatDateFns,
+  formatDistance,
+  isDate,
+} from "date-fns";
+import { de, enUS, es, fr, pt, zhCN } from "date-fns/locale";
 import { useTranslation } from "react-i18next";
 
 type DateFormat =
@@ -7,14 +13,39 @@ type DateFormat =
   | "long"
   | "relative"
   | "ago"
-  | "dateTime"
-  | string;
+  | "dateTime";
 
 export const useDate = () => {
-  const { t } = useTranslation();
+  const { i18n } = useTranslation();
+
+  const locales = {
+    fr,
+    en: enUS,
+    es,
+    de,
+    pt,
+    zh: zhCN,
+  };
+
+  const resolveLocale = (language: string | undefined) => {
+    const key = (language || "en").split("-")[0];
+    return locales[key as keyof typeof locales] ?? enUS;
+  };
 
   const formatDate = (date: Date, format: DateFormat = "short"): string => {
-    return t(`common.dateFormats.${format}`, { date }) as string;
+    if (!isDate(date)) return String(date);
+
+    const locale = resolveLocale(i18n.language);
+
+    if (format === "short") return formatDateFns(date, "dd MMMM", { locale });
+    if (format === "long") return formatDateFns(date, "PPPP", { locale });
+    if (format === "relative") return formatRelative(date);
+    if (format === "ago") return formatDistance(date, new Date(), { locale, addSuffix: true });
+    if (format === "weekday") return formatDateFns(date, "EEEE", { locale });
+    if (format === "time") return formatDateFns(date, "HH:mm", { locale });
+    if (format === "dateTime") return formatDateFns(date, "Pp", { locale });
+
+    return formatDateFns(date, format || "P", { locale });
   };
 
   // Lundi

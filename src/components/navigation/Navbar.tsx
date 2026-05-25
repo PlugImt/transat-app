@@ -1,5 +1,5 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "expo-router/build/react-navigation/bottom-tabs";
+import { createNativeStackNavigator } from "expo-router/build/react-navigation/native-stack";
 import { GridIcon, LucideHome, Play, User } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { Home } from "@/app/screens";

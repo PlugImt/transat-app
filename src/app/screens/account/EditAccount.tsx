@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
+import { useNavigation } from "expo-router/react-navigation";
 import { Edit, GraduationCap } from "lucide-react-native";
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";

@@ -1,6 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { RouteProp } from "@react-navigation/native";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import {
+  type RouteProp,
+  useNavigation,
+  useRoute,
+} from "expo-router/react-navigation";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";

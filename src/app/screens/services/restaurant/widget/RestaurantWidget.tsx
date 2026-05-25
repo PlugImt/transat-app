@@ -1,5 +1,5 @@
-import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "expo-router/react-navigation";
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";

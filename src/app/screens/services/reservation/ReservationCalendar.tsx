@@ -1,5 +1,4 @@
-import type { RouteProp } from "@react-navigation/native";
-import { useRoute } from "@react-navigation/native";
+import { type RouteProp, useRoute } from "expo-router/react-navigation";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Animated from "react-native-reanimated";

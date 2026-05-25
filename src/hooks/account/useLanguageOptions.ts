@@ -41,7 +41,8 @@ export const useLanguageOptions = () => {
 
     setCurrentLanguageOption(currentLang || null);
     setOtherLanguages(otherLangs);
-  }, [currentLanguage]);
+  }, [currentLanguage]
+);
 
   return {
     currentLanguageOption,

@@ -1,4 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "expo-router/react-navigation";
 import { ChevronRight, Minus, Plus } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";

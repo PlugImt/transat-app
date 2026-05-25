@@ -1,4 +1,4 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createNativeStackNavigator } from "expo-router/build/react-navigation/native-stack";
 import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native";
 import { SafeViewAndroid } from "@/app/_layout";

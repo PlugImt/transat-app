@@ -1,6 +1,6 @@
-import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
-import type { NavigatorScreenParams } from "@react-navigation/core";
-import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { BottomTabNavigationProp } from "expo-router/build/react-navigation/bottom-tabs";
+import type { NativeStackNavigationProp } from "expo-router/build/react-navigation/native-stack";
+import type { NavigatorScreenParams } from "expo-router/react-navigation";
 import type { Homework, OrderedItem } from "@/dto";
 
 export type BottomTabParamList = {
@@ -81,12 +81,6 @@ export type RootStackParamList = {
   Auth: NavigatorScreenParams<AuthStackParamList>;
   App: NavigatorScreenParams<AppStackParamList>;
 };
-
-declare global {
-  namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
-  }
-}
 
 export enum TabRoute {
   Home = "HomeScreen",

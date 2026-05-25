@@ -1,7 +1,9 @@
-import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
-import type { CompositeNavigationProp } from "@react-navigation/native";
-import { useNavigation } from "@react-navigation/native";
-import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { BottomTabNavigationProp } from "expo-router/build/react-navigation/bottom-tabs";
+import type { NativeStackNavigationProp } from "expo-router/build/react-navigation/native-stack";
+import {
+  type CompositeNavigationProp,
+  useNavigation,
+} from "expo-router/react-navigation";
 import { useTranslation } from "react-i18next";
 import { Image, View } from "react-native";
 import { Button } from "@/components/common/Button";

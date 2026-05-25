@@ -1,4 +1,4 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createNativeStackNavigator } from "expo-router/build/react-navigation/native-stack";
 import Legal from "@/app/screens/account/settings/Legal";
 import { ResetPassword } from "@/app/screens/auth/ResetPassword";
 import { Signin } from "@/app/screens/auth/Signin";

@@ -1,5 +1,5 @@
-import type { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs";
-import type { NativeStackNavigationOptions } from "@react-navigation/native-stack";
+import type { BottomTabNavigationOptions } from "expo-router/build/react-navigation/bottom-tabs";
+import type { NativeStackNavigationOptions } from "expo-router/build/react-navigation/native-stack";
 import type { ThemeType } from "@/contexts/ThemeContext";
 
 export const screenOptions: NativeStackNavigationOptions = {

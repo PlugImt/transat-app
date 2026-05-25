@@ -1,7 +1,6 @@
-import type { RouteProp } from "@react-navigation/native";
-import { useRoute } from "@react-navigation/native";
 import { format } from "date-fns";
 import { enUS, fr } from "date-fns/locale";
+import { type RouteProp, useRoute } from "expo-router/react-navigation";
 import { CheckCircle, Circle } from "lucide-react-native";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";

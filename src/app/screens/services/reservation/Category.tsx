@@ -1,5 +1,4 @@
-import type { RouteProp } from "@react-navigation/native";
-import { useRoute } from "@react-navigation/native";
+import { type RouteProp, useRoute } from "expo-router/react-navigation";
 import { ReservationPageContainer } from "@/components/reservation";
 import { useReservationCategory } from "@/hooks/services/reservation";
 import type { BottomTabParamList } from "@/types";

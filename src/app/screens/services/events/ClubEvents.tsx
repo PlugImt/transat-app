@@ -1,4 +1,4 @@
-import { type RouteProp, useRoute } from "@react-navigation/native";
+import { type RouteProp, useRoute } from "expo-router/react-navigation";
 import { PartyPopper } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { RefreshControl } from "react-native";

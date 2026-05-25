@@ -1,4 +1,4 @@
-import { useRoute } from "@react-navigation/native";
+import { useRoute } from "expo-router/react-navigation";
 import type React from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";

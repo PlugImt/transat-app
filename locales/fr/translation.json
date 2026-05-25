@@ -572,7 +572,7 @@
         },
         "link": {
           "title": "Lien",
-          "placeholder": "https://www.vibly.fr",
+          "placeholder": "https://www.instagram.com/bde_imtatlantique_nantes",
           "invalid": "Le lien n'est pas valide",
           "max": "Le lien ne doit pas dépasser 100 caractères"
         },

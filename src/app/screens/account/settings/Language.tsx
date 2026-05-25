@@ -1,4 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "expo-router/react-navigation";
 import { Check } from "lucide-react-native";
 import { MotiView } from "moti";
 import { useTranslation } from "react-i18next";

@@ -2,7 +2,7 @@ import {
   type RouteProp,
   useNavigation,
   useRoute,
-} from "@react-navigation/native";
+} from "expo-router/react-navigation";
 import { Edit, MoreVertical, Trash2 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";

@@ -1,7 +1,7 @@
-import { useNavigation } from "@react-navigation/native";
 import Constants from "expo-constants";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
+import { useNavigation } from "expo-router/react-navigation";
 import { useEffect, useState } from "react";
 import { Platform } from "react-native";
 import { laundryNotificationService } from "@/services/notifications/laundryNotifications";

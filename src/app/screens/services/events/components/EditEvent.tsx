@@ -1,5 +1,4 @@
-import type { RouteProp } from "@react-navigation/native";
-import { useRoute } from "@react-navigation/native";
+import { type RouteProp, useRoute } from "expo-router/react-navigation";
 import { Link, MapPin, Users } from "lucide-react-native";
 import { Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";

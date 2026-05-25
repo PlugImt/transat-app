@@ -1,5 +1,5 @@
-import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
+import type { StackNavigationProp } from "expo-router/js-stack";
+import { useNavigation } from "expo-router/react-navigation";
 import { PartyPopper, Plus } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { RefreshControl } from "react-native";

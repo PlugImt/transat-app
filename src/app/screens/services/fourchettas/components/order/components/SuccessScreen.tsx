@@ -1,4 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "expo-router/react-navigation";
 import { useTranslation } from "react-i18next";
 import { Image, View } from "react-native";
 import { Button } from "@/components/common/Button";

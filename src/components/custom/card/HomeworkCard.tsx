@@ -1,4 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "expo-router/react-navigation";
 import { CheckCircle, Circle } from "lucide-react-native";
 import { useState } from "react";
 import { TouchableOpacity, View } from "react-native";

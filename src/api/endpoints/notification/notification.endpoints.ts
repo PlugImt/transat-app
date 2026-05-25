@@ -1,4 +1,6 @@
-import { API_ROUTES, apiRequest, Method } from "@/api";
+import { API_ROUTES } from "@/api/common";
+import { Method } from "@/api/enums";
+import { apiRequest } from "@/api/helpers";
 import type { NotificationType } from "@/dto";
 
 export const addNotification = async (

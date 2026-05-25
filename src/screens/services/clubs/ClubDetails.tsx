@@ -1,7 +1,6 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { type RouteProp, useRoute } from "expo-router/react-navigation";
 import { useTranslation } from "react-i18next";
-import { ClubEventWidget } from "@/screens/services/events/widget/ClubEventWidget";
 import CardGroup from "@/components/common/CardGroup";
 import { UserCardSkeleton } from "@/components/custom";
 import { Empty } from "@/components/page/Empty";
@@ -9,6 +8,7 @@ import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
 import { QUERY_KEYS } from "@/constants";
 import { useClubDetails } from "@/hooks/services/club/useClub";
+import { ClubEventWidget } from "@/screens/services/events/widget/ClubEventWidget";
 import type { BottomTabParamList } from "@/types/navigation";
 import { ClubReservationWidget } from "../reservation/widget/ClubReservationWidget";
 import {

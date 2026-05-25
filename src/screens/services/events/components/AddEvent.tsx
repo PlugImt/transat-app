@@ -2,7 +2,6 @@ import { Link, MapPin, Users } from "lucide-react-native";
 import { Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
-import { SelectClubButton } from "@/screens/services/clubs/components/SelectClub";
 import { Button } from "@/components/common/Button";
 import Input from "@/components/common/Input";
 import { Text } from "@/components/common/Text";
@@ -13,6 +12,7 @@ import { InputButton } from "@/components/custom/InputButton";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAddEventForm } from "@/hooks/services/event";
+import { SelectClubButton } from "@/screens/services/clubs/components/SelectClub";
 
 export const AddEvent = () => {
   const { theme } = useTheme();

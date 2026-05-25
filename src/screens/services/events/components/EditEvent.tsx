@@ -3,7 +3,6 @@ import { Link, MapPin, Users } from "lucide-react-native";
 import { Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
-import { SelectClubButton } from "@/screens/services/clubs/components/SelectClub";
 import { Button } from "@/components/common/Button";
 import Input from "@/components/common/Input";
 import { Text } from "@/components/common/Text";
@@ -17,6 +16,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import type { EventDetails } from "@/dto/event";
 import { useEditEventForm } from "@/hooks/services/event/useEditEventForm";
 import { useEventDetails } from "@/hooks/services/event/useEvent";
+import { SelectClubButton } from "@/screens/services/clubs/components/SelectClub";
 import type { BottomTabParamList } from "@/types/navigation";
 
 type EditEventRouteProp = RouteProp<BottomTabParamList, "EditEvent">;

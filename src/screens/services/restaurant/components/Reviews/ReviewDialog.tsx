@@ -2,7 +2,6 @@ import { useRoute } from "expo-router/react-navigation";
 import type React from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import type { RestaurantReviewsRouteProp } from "@/screens/services/restaurant/components/Reviews";
 import {
   Dialog,
   DialogContent,
@@ -12,6 +11,7 @@ import { Textarea } from "@/components/common/Textarea";
 import { useToast } from "@/components/common/Toast";
 import { Stars } from "@/components/custom/star/Stars";
 import { usePostRestaurantReview } from "@/hooks/services/restaurant/useMenuRestaurant";
+import type { RestaurantReviewsRouteProp } from "@/screens/services/restaurant/components/Reviews";
 import { hapticFeedback } from "@/utils/haptics.utils";
 
 interface ReviewDialogProps {

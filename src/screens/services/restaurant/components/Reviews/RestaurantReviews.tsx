@@ -3,11 +3,6 @@ import { CookingPot, Star, Utensils } from "lucide-react-native";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { FlatList, View } from "react-native";
-import {
-  ReviewItem,
-  ReviewItemSkeleton,
-} from "@/screens/services/restaurant/components";
-import { ReviewDialog } from "@/screens/services/restaurant/components/Reviews/ReviewDialog";
 import { Button } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
 import { AboutModal } from "@/components/custom/AboutModal";
@@ -17,6 +12,11 @@ import { Page } from "@/components/page/Page";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import { userMenuRating } from "@/hooks/services/restaurant/useMenuRestaurant";
+import { ReviewDialog } from "@/screens/services/restaurant/components/Reviews/ReviewDialog";
+import {
+  ReviewItem,
+  ReviewItemSkeleton,
+} from "@/screens/services/restaurant/components/Reviews/ReviewItem";
 import type { BottomTabParamList } from "@/types";
 import { getOpeningHoursData } from "@/utils";
 

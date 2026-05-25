@@ -1,8 +1,4 @@
-import {
-  format as formatDateFns,
-  formatDistance,
-  isDate,
-} from "date-fns";
+import { format as formatDateFns, formatDistance, isDate } from "date-fns";
 import { de, enUS, es, fr, pt, zhCN } from "date-fns/locale";
 import { useTranslation } from "react-i18next";
 
@@ -40,7 +36,8 @@ export const useDate = () => {
     if (format === "short") return formatDateFns(date, "dd MMMM", { locale });
     if (format === "long") return formatDateFns(date, "PPPP", { locale });
     if (format === "relative") return formatRelative(date);
-    if (format === "ago") return formatDistance(date, new Date(), { locale, addSuffix: true });
+    if (format === "ago")
+      return formatDistance(date, new Date(), { locale, addSuffix: true });
     if (format === "weekday") return formatDateFns(date, "EEEE", { locale });
     if (format === "time") return formatDateFns(date, "HH:mm", { locale });
     if (format === "dateTime") return formatDateFns(date, "Pp", { locale });

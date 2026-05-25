@@ -1,10 +1,10 @@
 import { createNativeStackNavigator } from "expo-router/build/react-navigation/native-stack";
+import { screenOptions } from "@/navigation/navigationConfig";
 import Legal from "@/screens/account/settings/Legal";
 import { ResetPassword } from "@/screens/auth/ResetPassword";
 import { Signin } from "@/screens/auth/Signin";
 import { Signup } from "@/screens/auth/Signup";
 import Welcome from "@/screens/auth/Welcome";
-import { screenOptions } from "@/navigation/navigationConfig";
 import type { AuthStackParamList } from "@/types";
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();

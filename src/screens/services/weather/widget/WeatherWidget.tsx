@@ -1,4 +1,3 @@
-import React from "react";
 import { Image, View } from "react-native";
 import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";

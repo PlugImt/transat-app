@@ -41,7 +41,6 @@ export type BottomTabParamList = {
   FourchettasOrder: { id: number; orderUser?: OrderedItem[] };
 
   // Account screens
-  Account: undefined;
   EditProfile: undefined;
   Settings: undefined;
   ChangePassword: undefined;
@@ -53,7 +52,6 @@ export type BottomTabParamList = {
   Legal: undefined;
 
   // Games screens
-  Games: undefined;
   Bassine: undefined;
   BassineLeaderboard: undefined;
 };
@@ -83,8 +81,8 @@ export type RootStackParamList = {
 };
 
 export enum TabRoute {
-  Home = "HomeScreen",
-  Services = "ServicesScreen",
-  Games = "GamesScreen",
-  Account = "AccountScreen",
+  Home = "Home",
+  Services = "Services",
+  Games = "Games",
+  Account = "Account",
 }

@@ -55,7 +55,7 @@ const Stack = createNativeStackNavigator<BottomTabParamList>();
 // Stack navigators for each main tab
 const HomeStack = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
-    <Stack.Screen name="HomeScreen" component={Home} />
+    <Stack.Screen name="Home" component={Home} />
     <Stack.Screen name="Laundry" component={Laundry} />
     <Stack.Screen name="Restaurant" component={Restaurant} />
     <Stack.Screen name="RestaurantReviews" component={RestaurantReviews} />
@@ -78,7 +78,7 @@ const HomeStack = () => (
 
 const ServicesStack = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
-    <Stack.Screen name="ServicesScreen" component={Services} />
+    <Stack.Screen name="Services" component={Services} />
     <Stack.Screen name="Laundry" component={Laundry} />
     <Stack.Screen name="Restaurant" component={Restaurant} />
     <Stack.Screen name="RestaurantReviews" component={RestaurantReviews} />
@@ -107,7 +107,7 @@ const ServicesStack = () => (
 
 const GamesStack = () => (
   <Stack.Navigator screenOptions={screenOptions}>
-    <Stack.Screen name="GamesScreen" component={Games} />
+    <Stack.Screen name="Games" component={Games} />
     <Stack.Screen name="Bassine" component={Bassine} />
     <Stack.Screen name="BassineLeaderboard" component={BassineLeaderboard} />
   </Stack.Navigator>
@@ -115,7 +115,7 @@ const GamesStack = () => (
 
 const AccountStack = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
-    <Stack.Screen name="AccountScreen" component={Account} />
+    <Stack.Screen name="Account" component={Account} />
     <Stack.Screen name="EditProfile" component={EditProfile} />
     <Stack.Screen name="Settings" component={Settings} />
     <Stack.Screen name="ChangePassword" component={ChangePassword} />

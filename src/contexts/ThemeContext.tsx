@@ -102,12 +102,6 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     loadThemePreference().then((r) => r);
   }, []);
 
-  useEffect(() => {
-    NativeAppearance.setColorScheme(
-      themeMode === "system" ? "unspecified" : themeMode,
-    );
-  }, [themeMode]);
-
   const setThemeMode = async (mode: ThemeMode) => {
     try {
       setThemeModeState(mode);

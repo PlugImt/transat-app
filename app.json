@@ -17,8 +17,9 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/ios-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/images/adaptive-foreground.png",
+        "backgroundImage": "./assets/images/adaptive-background.png",
+        "backgroundColor": "#EC7F32"
       },
       "package": "com.yohann69.transat2_0",
       "googleServicesFile": "./google-services.json",

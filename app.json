@@ -9,13 +9,8 @@
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": {
-        "dark": "./assets/images/ios-icon.png",
-        "light": "./assets/images/ios-icon.png",
-        "tinted": "./assets/images/ios-icon-tint.png"
-      },
-      "supportsTablet": true,
-      "bundleIdentifier": "fr.resel.transat",
+      "icon": "./assets/images/transat.icon",
+      "bundleIdentifier": "com.yohann69.transat2-0",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
@@ -26,7 +21,10 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.yohann69.transat2_0",
-      "googleServicesFile": "./google-services.json"
+      "googleServicesFile": "./google-services.json",
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -39,7 +37,9 @@
         {
           "icon": "./assets/images/icon-bg.png",
           "color": "#ffffff",
-          "sounds": ["./assets/sounds/notification_sound.wav"]
+          "sounds": [
+            "./assets/sounds/notification_sound.wav"
+          ]
         }
       ],
       [

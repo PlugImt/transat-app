@@ -378,6 +378,10 @@
         "description": "请在PASS上查看。"
       }
     },
+    "plannings": {
+      "title": "日程安排",
+      "description": "查看IMT各协会、俱乐部及体育项目的活动安排"
+    },
     "homework": {
       "title": "作业",
       "description": "找到所有要做的作业",

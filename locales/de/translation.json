@@ -378,6 +378,10 @@
         "description": "Bitte überprüfen Sie auf PASS."
       }
     },
+    "plannings": {
+      "title": "Zeitpläne",
+      "description": "Sieh dir die Termine der Vereine, Clubs und Sportgruppen des IMT an"
+    },
     "homework": {
       "title": "Hausaufgaben",
       "description": "Finden Sie alle zu erledigenden Hausaufgaben",

@@ -378,6 +378,10 @@
         "description": "Por favor verifica en PASS."
       }
     },
+    "plannings": {
+      "title": "Planificaciónes",
+      "description": "Consulta los horarios de las asociaciones, los clubes y las actividades deportivas"
+    },
     "homework": {
       "title": "Tareas",
       "description": "Encuentra todas las tareas por hacer",

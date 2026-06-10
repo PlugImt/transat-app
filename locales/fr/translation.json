@@ -378,6 +378,10 @@
         "description": "Veuillez vérifier sur PASS."
       }
     },
+    "plannings": {
+      "title": "Plannings",
+      "description": "Consulte les plannings des assos, clubs et sports de l'IMT"
+    },
     "homework": {
       "title": "Devoirs",
       "description": "Retrouve tous les devoirs à faire",

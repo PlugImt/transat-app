@@ -20,7 +20,8 @@ export type ServiceType =
   | "fourchettas"
   | "clubs"
   | "reservation"
-  | "events";
+  | "events"
+  | "plannings";
 
 export type PreferenceId = WidgetType | ServiceType;
 
@@ -95,11 +96,20 @@ const getDefaultServices = (
       image: require("@/assets/images/services/event.png"),
     },
     {
-      id: "reservation",
-      name: t("services.reservation.title"),
+      id: "plannings",
+      name: t("services.plannings.title"),
       enabled: true,
       order: 3,
       image: require("@/assets/images/services/edt.png"),
+      screen: "Plannings",
+      description: t("services.plannings.description"),
+    },
+    {
+      id: "reservation",
+      name: t("services.reservation.title"),
+      enabled: true,
+      order: 4,
+      image: require("@/assets/images/services/resa.png"),
       screen: "Reservation",
       description: t("services.reservation.description"),
     },
@@ -107,7 +117,7 @@ const getDefaultServices = (
       id: "clubs",
       name: t("services.clubs.title"),
       enabled: true,
-      order: 4,
+      order: 5,
       image: require("@/assets/images/services/club.png"),
       screen: "Clubs",
       description: t("services.clubs.description"),
@@ -116,7 +126,7 @@ const getDefaultServices = (
       id: "traq",
       name: t("services.traq.title"),
       enabled: true,
-      order: 5,
+      order: 6,
       image: require("@/assets/images/services/traq.png"),
       screen: "Traq",
       description: t("services.traq.description"),
@@ -125,7 +135,7 @@ const getDefaultServices = (
       id: "fourchettas",
       name: t("services.fourchettas.title"),
       enabled: true,
-      order: 6,
+      order: 7,
       image: require("@/assets/images/services/fourchettas.png"),
       screen: "Fourchettas",
       description: t("services.fourchettas.description"),

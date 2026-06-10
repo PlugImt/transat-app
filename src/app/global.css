@@ -1,6 +1,64 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "uniwind";
+
+@source "..";
+
+@theme {
+  --font-sans: "Poppins";
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  --color-primary: #ec7f32;
+  --color-primary-text: #ffffff;
+  --color-secondary: #0049a8;
+  --color-secondary-text: #ffffff;
+  --color-destructive: #f44336;
+  --color-destructive-text: #ffffff;
+  --color-destructive-background: #f4433620;
+  --color-success: #4caf50;
+  --color-success-text: #ffffff;
+  --color-warning: #ffc107;
+  --color-warning-text: #000000;
+  --color-info: #2196f3;
+  --color-info-text: #ffffff;
+}
+
+@layer theme {
+  :root {
+    @variant light {
+      --color-background: #f5f4f2;
+      --color-foreground: #1a1a1a;
+      --color-muted: #6b7280;
+      --color-text-tertiary: #9ca3af;
+      --color-textTertiary: #9ca3af;
+      --color-card: #ffffff;
+      --color-light-card: #ffffff;
+      --color-lightCard: #ffffff;
+      --color-input: #e3e3e3;
+      --color-border: #6b7280;
+      --color-backdrop: #70758166;
+      --color-overlay: #f5f4f2e5;
+    }
+
+    @variant dark {
+      --color-background: #070402;
+      --color-foreground: #ffe6cc;
+      --color-muted: #a1a1aa;
+      --color-text-tertiary: #71717a;
+      --color-textTertiary: #71717a;
+      --color-card: #1e1515;
+      --color-light-card: #1e1515;
+      --color-lightCard: #1e1515;
+      --color-input: #2d2222a3;
+      --color-border: #a1a1aa;
+      --color-backdrop: #000000cc;
+      --color-overlay: #070402e5;
+    }
+  }
+}
 
 @layer base {
   .h1 {

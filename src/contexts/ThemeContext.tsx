@@ -11,6 +11,7 @@ import {
   Appearance as NativeAppearance,
   useColorScheme,
 } from "react-native";
+import { Uniwind } from "uniwind";
 import { storage } from "@/services/storage/asyncStorage";
 import STORAGE_KEYS from "@/services/storage/constants";
 import colors from "@/themes/colors";
@@ -101,6 +102,10 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
 
     loadThemePreference().then((r) => r);
   }, []);
+
+  useEffect(() => {
+    Uniwind.setTheme(themeMode);
+  }, [themeMode]);
 
   const setThemeMode = async (mode: ThemeMode) => {
     try {

@@ -19,6 +19,7 @@ export type ServiceType =
   | "olimtpe"
   | "fourchettas"
   | "clubs"
+  | "associations"
   | "reservation"
   | "events"
   | "plannings"
@@ -132,6 +133,15 @@ const getDefaultServices = (
       image: require("@/assets/images/services/club.png"),
       screen: "Clubs",
       description: t("services.clubs.description"),
+    },
+    {
+      id: "associations",
+      name: t("services.associations.title"),
+      enabled: true,
+      order: 5,
+      image: require("@/assets/images/services/association.png"),
+      screen: "Associations",
+      description: t("services.associations.description"),
     },
     {
       id: "traq",

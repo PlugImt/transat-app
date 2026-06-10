@@ -1,4 +1,5 @@
 export * from "./ClubCard";
+export * from "./AssociationCard";
 export * from "./HomeworkCard";
 export * from "./LaundryCard";
 export * from "./LinkCard";

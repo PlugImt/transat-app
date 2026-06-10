@@ -1,4 +1,5 @@
 export * from "./club";
+export * from "./association";
 export * from "./course";
 export * from "./fourchettas";
 export * from "./games";

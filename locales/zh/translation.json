@@ -439,17 +439,31 @@
       "location": "MDE下方，邮箱后"
     },
     "clubs": {
-      "title": "俱乐部",
-      "description": "发现IMT的所有俱乐部和协会",
+      "title": "社团",
+      "description": "探索所有IMTA社团",
       "book": "预订",
-      "selectClub": "选择俱乐部",
-      "interested": "{{count}} 人对此俱乐部感兴趣",
+      "selectClub": "选择一个社团",
+      "interested": "{{count}} 人对这个社团感兴趣",
       "responsible": "负责人",
       "errors": {
-        "empty": "未找到俱乐部",
-        "emptyDescription": "尝试使用其他关键词",
-        "notFound": "此俱乐部不存在",
-        "notFoundDescription": "刷新或更换俱乐部"
+        "empty": "未找到社团",
+        "emptyDescription": "请尝试其他关键词",
+        "notFound": "该社团不存在",
+        "notFoundDescription": "请刷新页面或选择其他社团"
+      }
+    },
+    "associations": {
+      "title": "协会",
+      "description": "探索所有 IMTA 协会",
+      "book": "预订",
+      "selectClub": "选择一个协会",
+      "interested": "{{count}} 人对该协会感兴趣",
+      "responsible": "管理员",
+      "errors": {
+        "empty": "未找到任何协会",
+        "emptyDescription": "请尝试其他关键词",
+        "notFound": "该协会不存在",
+        "notFoundDescription": "请刷新或选择另一个协会"
       }
     },
     "reservation": {

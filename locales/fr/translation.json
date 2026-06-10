@@ -486,7 +486,7 @@
     },
     "clubs": {
       "title": "Clubs",
-      "description": "Découvre tous les clubs et associations de l'IMT",
+      "description": "Découvre tous les clubs de l'IMTA",
       "book": "Réserver",
       "selectClub": "Sélectionner un club",
       "interested": "{{count}} personnes sont intéressées par ce club",
@@ -496,6 +496,20 @@
         "emptyDescription": "Essayez avec un autre mot-clé",
         "notFound": "Ce club n'existe pas",
         "notFoundDescription": "Actualisez ou changez de club"
+      }
+    },
+    "associations": {
+      "title": "Associations",
+      "description": "Découvre tous les associations de l'IMT",
+      "book": "Réserver",
+      "selectClub": "Sélectionner une association",
+      "interested": "{{count}} personnes sont intéressées par cette association",
+      "responsible": "Responsable",
+      "errors": {
+        "empty": "Aucune association trouvée",
+        "emptyDescription": "Essayez avec un autre mot-clé",
+        "notFound": "Cette association n'existe pas",
+        "notFoundDescription": "Actualisez ou changez d'association"
       }
     },
     "reservation": {

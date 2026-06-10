@@ -440,16 +440,30 @@
     },
     "clubs": {
       "title": "Clubs",
-      "description": "Discover all clubs and associations at IMT",
+      "description": "Discover all the IMTA clubs",
       "book": "Book",
       "selectClub": "Select a club",
       "interested": "{{count}} people are interested in this club",
-      "responsible": "Responsible",
+      "responsible": "Manager",
       "errors": {
-        "empty": "No club found",
+        "empty": "No clubs found",
         "emptyDescription": "Try with another keyword",
-        "notFound": "This club doesn't exist",
-        "notFoundDescription": "Refresh or change club"
+        "notFound": "This club does not exist",
+        "notFoundDescription": "Refresh or choose another club"
+      }
+    },
+    "associations": {
+      "title": "Associations",
+      "description": "Discover all the IMT associations",
+      "book": "Book",
+      "selectClub": "Select an association",
+      "interested": "{{count}} people are interested in this association",
+      "responsible": "Manager",
+      "errors": {
+        "empty": "No associations found",
+        "emptyDescription": "Try with another keyword",
+        "notFound": "This association does not exist",
+        "notFoundDescription": "Refresh or choose another association"
       }
     },
     "reservation": {

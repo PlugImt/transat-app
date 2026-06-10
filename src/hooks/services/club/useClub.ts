@@ -1,11 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useMemo } from "react";
 import {
-  getClubDetails,
-  getClubMembers,
-  getClubs,
-  joinClub,
-  leaveClub,
+  getAssociationDetails,
+  getAssociationMembers,
+  getAssociations,
+  joinAssociation,
+  leaveAssociation,
 } from "@/api";
 import { QUERY_KEYS } from "@/constants";
 import type { Club, ClubDetails } from "@/dto/club";

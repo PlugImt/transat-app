@@ -439,17 +439,31 @@
       "location": "Debajo de la MDE, después de los buzones"
     },
     "clubs": {
-      "title": "Clubs",
-      "description": "Descubre todos los clubs y asociaciones de la IMT",
+      "title": "Clubes",
+      "description": "Descubre todos los clubes de la IMTA",
       "book": "Reservar",
-      "selectClub": "Seleccionar club",
+      "selectClub": "Seleccionar un club",
       "interested": "{{count}} personas están interesadas en este club",
       "responsible": "Responsable",
       "errors": {
-        "empty": "No se encontró ningún club",
-        "emptyDescription": "Intenta con otra palabra clave",
+        "empty": "No se han encontrado clubes",
+        "emptyDescription": "Prueba con otra palabra clave",
         "notFound": "Este club no existe",
-        "notFoundDescription": "Actualiza o cambia de club"
+        "notFoundDescription": "Actualiza la página o elige otro club"
+      }
+    },
+    "associations": {
+      "title": "Asociaciones",
+      "description": "Descubre todas las asociaciones del IMT",
+      "book": "Reservar",
+      "selectClub": "Selecciona una asociación",
+      "interested": "{{count}} personas están interesadas en esta asociación",
+      "responsible": "Responsable",
+      "errors": {
+        "empty": "No se han encontrado asociaciones",
+        "emptyDescription": "Prueba con otra palabra clave",
+        "notFound": "Esta asociación no existe",
+        "notFoundDescription": "Actualiza la página o elige otra asociación"
       }
     },
     "reservation": {

@@ -378,6 +378,10 @@
         "description": "Please check on PASS."
       }
     },
+    "plannings": {
+      "title": "Plannings",
+      "description": "Check out the timetables for IMT’s societies, clubs and sports"
+    },
     "homework": {
       "title": "Homework",
       "description": "Find all homework to do",

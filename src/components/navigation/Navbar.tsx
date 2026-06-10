@@ -22,10 +22,11 @@ import {
   Homework,
   Laundry,
   Olimtpe,
+  Plannings,
   Reservation,
   Restaurant,
   Timetable,
-  Traq,
+  Traq
 } from "@/screens/services";
 import ClubDetails from "@/screens/services/clubs/ClubDetails";
 import { ClubMemberList } from "@/screens/services/clubs/components/ClubMemberList";
@@ -73,6 +74,7 @@ const HomeStack = () => (
     <Stack.Screen name="EditEvent" component={EditEvent} />
     <Stack.Screen name="Traq" component={Traq} />
     <Stack.Screen name="Olimtpe" component={Olimtpe} />
+    <Stack.Screen name="Plannings" component={Plannings} />
   </Stack.Navigator>
 );
 
@@ -96,6 +98,7 @@ const ServicesStack = () => (
     <Stack.Screen name="EditEvent" component={EditEvent} />
     <Stack.Screen name="Traq" component={Traq} />
     <Stack.Screen name="Olimtpe" component={Olimtpe} />
+    <Stack.Screen name="Plannings" component={Plannings} />
     <Stack.Screen name="Reservation" component={Reservation} />
     <Stack.Screen name="MyReservations" component={PersonalReservations} />
     <Stack.Screen name="ReservationCategory" component={Category} />

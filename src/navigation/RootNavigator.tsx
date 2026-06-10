@@ -1,7 +1,5 @@
 import { createNativeStackNavigator } from "expo-router/build/react-navigation/native-stack";
 import { useEffect, useState } from "react";
-import { SafeAreaView } from "react-native";
-import { SafeViewAndroid } from "@/app/_layout";
 import { SplashScreen } from "@/components/animations/SplashScreen";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/hooks/account/useAuth";
@@ -11,12 +9,14 @@ import { AppNavigator } from "@/navigation/AppNavigator";
 import { AuthNavigator } from "@/navigation/AuthNavigator";
 import { screenOptions } from "@/navigation/navigationConfig";
 import type { RootStackParamList } from "@/types";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const RootNavigator = () => {
   const { user } = useAuth();
   const { theme } = useTheme();
+  const insets = useSafeAreaInsets();
   usePushNotifications();
   const [isI18nReady, setIsI18nReady] = useState(false);
 
@@ -32,10 +32,8 @@ export const RootNavigator = () => {
 
   return (
     <SafeAreaView
-      style={[
-        SafeViewAndroid.AndroidSafeArea,
-        { backgroundColor: theme.background },
-      ]}
+      edges={["top"]}
+      style={[{ flex: 1, paddingBottom: insets.bottom, backgroundColor: "#ff0000" }]}
     >
       <Stack.Navigator screenOptions={screenOptions}>
         {user ? (

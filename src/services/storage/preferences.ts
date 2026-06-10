@@ -68,7 +68,7 @@ const getDefaultServices = (
       id: "laundry",
       name: t("services.laundry.title"),
       enabled: true,
-      order: 0,
+      order: 1,
       image:
         themeMode === "dark"
           ? require("@/assets/images/services/washing_machine_light.png")
@@ -80,7 +80,7 @@ const getDefaultServices = (
       id: "restaurant",
       name: t("services.restaurant.title"),
       enabled: true,
-      order: 1,
+      order: 0,
       image: require("@/assets/images/services/restaurant.png"),
       screen: "Restaurant",
       description: t("services.restaurant.description"),
@@ -98,7 +98,7 @@ const getDefaultServices = (
       id: "fourchettas",
       name: t("services.fourchettas.title"),
       enabled: true,
-      order: 4,
+      order: 6,
       image: require("@/assets/images/services/fourchettas.png"),
       screen: "Fourchettas",
       description: t("services.fourchettas.description"),
@@ -107,7 +107,7 @@ const getDefaultServices = (
       id: "clubs",
       name: t("services.clubs.title"),
       enabled: true,
-      order: 2,
+      order: 4,
       image: require("@/assets/images/services/club.png"),
       screen: "Clubs",
       description: t("services.clubs.description"),
@@ -127,7 +127,7 @@ const getDefaultServices = (
       description: t("services.events.description"),
       screen: "Events",
       enabled: true,
-      order: 6,
+      order: 2,
       image: require("@/assets/images/services/event.png"),
     },
   ];

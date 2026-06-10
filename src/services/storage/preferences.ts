@@ -65,10 +65,19 @@ const getDefaultServices = (
 ): Preference[] => {
   return [
     {
+      id: "restaurant",
+      name: t("services.restaurant.title"),
+      enabled: true,
+      order: 0,
+      image: require("@/assets/images/services/restaurant.png"),
+      screen: "Restaurant",
+      description: t("services.restaurant.description"),
+    },
+    {
       id: "laundry",
       name: t("services.laundry.title"),
       enabled: true,
-      order: 0,
+      order: 1,
       image:
         themeMode === "dark"
           ? require("@/assets/images/services/washing_machine_light.png")
@@ -77,13 +86,31 @@ const getDefaultServices = (
       description: t("services.laundry.description"),
     },
     {
-      id: "restaurant",
-      name: t("services.restaurant.title"),
+      id: "events",
+      name: t("services.events.title"),
+      description: t("services.events.description"),
+      screen: "Events",
       enabled: true,
-      order: 1,
-      image: require("@/assets/images/services/restaurant.png"),
-      screen: "Restaurant",
-      description: t("services.restaurant.description"),
+      order: 2,
+      image: require("@/assets/images/services/event.png"),
+    },
+    {
+      id: "reservation",
+      name: t("services.reservation.title"),
+      enabled: true,
+      order: 3,
+      image: require("@/assets/images/services/edt.png"),
+      screen: "Reservation",
+      description: t("services.reservation.description"),
+    },
+    {
+      id: "clubs",
+      name: t("services.clubs.title"),
+      enabled: true,
+      order: 4,
+      image: require("@/assets/images/services/club.png"),
+      screen: "Clubs",
+      description: t("services.clubs.description"),
     },
     {
       id: "traq",
@@ -98,37 +125,10 @@ const getDefaultServices = (
       id: "fourchettas",
       name: t("services.fourchettas.title"),
       enabled: true,
-      order: 4,
+      order: 6,
       image: require("@/assets/images/services/fourchettas.png"),
       screen: "Fourchettas",
       description: t("services.fourchettas.description"),
-    },
-    {
-      id: "clubs",
-      name: t("services.clubs.title"),
-      enabled: true,
-      order: 2,
-      image: require("@/assets/images/services/club.png"),
-      screen: "Clubs",
-      description: t("services.clubs.description"),
-    },
-    {
-      id: "reservation",
-      name: t("services.reservation.title"),
-      enabled: true,
-      order: 3,
-      image: require("@/assets/images/services/edt.png"),
-      screen: "Reservation",
-      description: t("services.reservation.description"),
-    },
-    {
-      id: "events",
-      name: t("services.events.title"),
-      description: t("services.events.description"),
-      screen: "Events",
-      enabled: true,
-      order: 6,
-      image: require("@/assets/images/services/event.png"),
     },
   ];
 };

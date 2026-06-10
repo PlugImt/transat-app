@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from "expo-router/build/react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "expo-router/build/react-navigation/native-stack";
-import { LucideHome, Play, User,Wrench } from "lucide-react-native";
+import { LucideHome, Play, User, Wrench } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@/contexts/ThemeContext";
 import { screenOptions, tabBarOptions } from "@/navigation/navigationConfig";

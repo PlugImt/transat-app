@@ -13,7 +13,7 @@ export const Games = () => {
 
   return (
     <Page
-      title={t("games.title")}
+      title={t("services.games.title")}
       className="flex-1 justify-center items-center"
       disableScroll
     >

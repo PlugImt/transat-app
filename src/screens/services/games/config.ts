@@ -11,7 +11,7 @@ export type Game = {
 export const gamesConfig: Game[] = [
   {
     key: "bassine",
-    titleKey: "games.bassine.title",
+    titleKey: "services.games.bassine.title",
     Icon: Soup,
     route: "Bassine",
   },

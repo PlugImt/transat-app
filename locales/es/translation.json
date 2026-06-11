@@ -615,36 +615,39 @@
     "covoit": {
       "title": "Compartir coche",
       "description": "Encuentra u ofrece un viaje compartido para tus desplazamientos desde o hacia el campus"
-    }
-  },
-  "games": {
-    "title": "Juegos",
-    "bassine": {
-      "title": "Cuenca",
-      "description": "Cuando se sirve una cerveza, la cuenca se llena poco a poco, y cuando está llena puedes pedir que se llene tu vaso con\n\nPor cada vaso lleno, actualiza tu contador para ser el rey de la cuenca 👑",
-      "location": "En la MDE durante las fiestas",
-      "price": "Gratis",
-      "seeLeaderboard": "Ver la clasificación",
-      "leaderboard": {
-        "title": "Clasificación",
-        "score": "Puntuación",
-        "history": {
-          "title": "Historial",
-          "emptyHistory": "Nadie ha tomado una cuenca aún",
-          "emptyHistoryDescription": "Añade tus cuencas al contador para que aparezcan aquí"
-        },
-        "firstPlaceLead_zero": "está empatado",
-        "firstPlaceLead_one": "está justo detrás de ti",
-        "firstPlaceLeader_few": "está a solo {{count}} cuencas detrás de ti",
-        "firstPlaceLead_other": "está {{count}} cuencas detrás de ti",
-        "followingPlace_zero": "está empatado",
-        "followingPlace_one": "está justo delante de ti",
-        "followingPlace_few": "está a solo {{count}} cuencas delante de ti",
-        "followingPlace_other": "está {{count}} cuencas delante de ti",
-        "tookBassine_one": "tomó {{count}} cuenca",
-        "tookBassine_other": "tomó {{count}} cuencas"
+    },
+    "games": {
+      "title": "Juegos",
+      "bassine": {
+        "title": "Cuenca",
+        "description": "Cuando se sirve una cerveza, la cuenca se llena poco a poco, y cuando está llena puedes pedir que se llene tu vaso con\n\nPor cada vaso lleno, actualiza tu contador para ser el rey de la cuenca 👑",
+        "location": "En la MDE durante las fiestas",
+        "price": "Gratis",
+        "seeLeaderboard": "Ver la clasificación",
+        "leaderboard": {
+          "title": "Clasificación",
+          "score": "Puntuación",
+          "history": {
+            "title": "Historial",
+            "emptyHistory": "Nadie ha tomado una cuenca aún",
+            "emptyHistoryDescription": "Añade tus cuencas al contador para que aparezcan aquí"
+          },
+          "firstPlaceLead_zero": "está empatado",
+          "firstPlaceLead_one": "está justo detrás de ti",
+          "firstPlaceLeader_few": "está a solo {{count}} cuencas detrás de ti",
+          "firstPlaceLead_other": "está {{count}} cuencas detrás de ti",
+          "followingPlace_zero": "está empatado",
+          "followingPlace_one": "está justo delante de ti",
+          "followingPlace_few": "está a solo {{count}} cuencas delante de ti",
+          "followingPlace_other": "está {{count}} cuencas delante de ti",
+          "tookBassine_one": "tomó {{count}} cuenca",
+          "tookBassine_other": "tomó {{count}} cuencas"
+        }
       }
     }
+  },
+  "schedule":{
+    "title":"Horario personal"
   },
   "user": {
     "contact": "Contactar",

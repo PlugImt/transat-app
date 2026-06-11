@@ -611,6 +611,10 @@
       "hours": "horas",
       "minutes": "min",
       "seconds": "seg"
+    },
+    "covoit": {
+      "title": "Compartir coche",
+      "description": "Encuentra u ofrece un viaje compartido para tus desplazamientos desde o hacia el campus"
     }
   },
   "games": {

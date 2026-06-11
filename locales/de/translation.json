@@ -611,6 +611,10 @@
       "hours": "Stunden",
       "minutes": "Min",
       "seconds": "Sek"
+    },
+    "covoit": {
+      "title": "Mitfahrgelegenheiten",
+      "description": "Finde oder biete eine Mitfahrgelegenheit für deine Fahrten vom oder zum Campus an"
     }
   },
   "games": {

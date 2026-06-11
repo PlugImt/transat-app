@@ -611,6 +611,10 @@
         "notFound": "Cet événement a été supprimé",
         "notFoundDescription": "Essayez avec un autre"
       }
+    },
+    "covoit": {
+      "title": "Covoiturage",
+      "description": "Trouve ou propose un covoiturage pour tes déplacements depuis ou vers le campus"
     }
   },
   "games": {

@@ -611,6 +611,10 @@
       "hours": "hours",
       "minutes": "min",
       "seconds": "sec"
+    },
+    "covoit": {
+      "title": "Carpooling",
+      "description": "Find or offer a carpool for your trips to or from campus"
     }
   },
   "games": {

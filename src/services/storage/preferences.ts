@@ -21,7 +21,8 @@ export type ServiceType =
   | "clubs"
   | "reservation"
   | "events"
-  | "plannings";
+  | "plannings"
+  | "covoiturage";
 
 export type PreferenceId = WidgetType | ServiceType;
 
@@ -112,6 +113,15 @@ const getDefaultServices = (
       image: require("@/assets/images/services/resa.png"),
       screen: "Reservation",
       description: t("services.reservation.description"),
+    },
+    {
+      id: "covoiturage",
+      name: t("services.covoit.title"),
+      enabled: true,
+      order: 4,
+      image: require("@/assets/images/services/covoit.png"),
+      screen: "Covoiturage",
+      description: t("services.covoit.description"),
     },
     {
       id: "clubs",

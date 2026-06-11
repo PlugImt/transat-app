@@ -611,6 +611,10 @@
       "hours": "小时",
       "minutes": "分钟",
       "seconds": "秒"
+    },
+    "covoit": {
+      "title": "拼车",
+      "description": "寻找或发布拼车信息，方便你往返校园"
     }
   },
   "games": {

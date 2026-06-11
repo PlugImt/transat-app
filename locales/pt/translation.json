@@ -611,6 +611,10 @@
       "hours": "horas",
       "minutes": "min",
       "seconds": "seg"
+    },
+    "covoit": {
+      "title": "Caroço",
+      "description": "Encontra ou oferece uma boleia para as tuas deslocações de ou para o campus"
     }
   },
   "games": {

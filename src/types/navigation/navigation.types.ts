@@ -84,6 +84,6 @@ export type RootStackParamList = {
 export enum TabRoute {
   Home = "Home",
   Services = "Services",
-  Games = "Games",
+  Schedule = "Schedule",
   Account = "Account",
 }

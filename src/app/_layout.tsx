@@ -1,8 +1,9 @@
 import "react-native-gesture-handler";
 import * as Sentry from "@sentry/react-native";
 import { Slot } from "expo-router";
-import { Platform, StatusBar, StyleSheet } from "react-native";
+import { StatusBar } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 Sentry.init({
   enabled: !__DEV__,
@@ -32,18 +33,13 @@ Sentry.init({
   environment: __DEV__ ? "development" : "production",
 });
 
-export const SafeViewAndroid = StyleSheet.create({
-  AndroidSafeArea: {
-    flex: 1,
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-  },
-});
-
 export default function Layout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <StatusBar />
-      <Slot />
+      <SafeAreaProvider>
+        <StatusBar />
+        <Slot />
+      </SafeAreaProvider>
     </GestureHandlerRootView>
   );
 }

@@ -1,7 +1,6 @@
 import "react-native-gesture-handler";
 import * as Sentry from "@sentry/react-native";
 import { Slot } from "expo-router";
-import { StatusBar } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
@@ -37,7 +36,6 @@ export default function Layout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
-        <StatusBar />
         <Slot />
       </SafeAreaProvider>
     </GestureHandlerRootView>

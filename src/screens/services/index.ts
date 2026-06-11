@@ -9,3 +9,4 @@ export * from "./restaurant";
 export * from "./schedule";
 export * from "./traq";
 export * from "./plannings";
+export * from "./covoiturage";

@@ -1,4 +1,4 @@
-import { useRoute } from "expo-router/react-navigation";
+import { useLocalSearchParams } from "expo-router";
 import type React from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -11,8 +11,8 @@ import { Textarea } from "@/components/common/Textarea";
 import { useToast } from "@/components/common/Toast";
 import { Stars } from "@/components/custom/star/Stars";
 import { usePostRestaurantReview } from "@/hooks/services/restaurant/useMenuRestaurant";
-import type { RestaurantReviewsRouteProp } from "@/screens/services/restaurant/components/Reviews";
 import { hapticFeedback } from "@/utils/haptics.utils";
+import { parseNumberParam } from "@/utils/search-params.utils";
 
 interface ReviewDialogProps {
   children: React.ReactElement<{ onPress?: () => void }>;
@@ -24,8 +24,8 @@ export const ReviewDialog = ({ children }: ReviewDialogProps) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
 
-  const route = useRoute<RestaurantReviewsRouteProp>();
-  const { id } = route.params;
+  const { id: idParam } = useLocalSearchParams<{ id: string }>();
+  const id = parseNumberParam(idParam) ?? 0;
 
   const { mutate: postReview, isPending: isPostingReview } =
     usePostRestaurantReview(id);

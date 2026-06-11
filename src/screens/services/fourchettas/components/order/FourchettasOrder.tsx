@@ -1,4 +1,4 @@
-import { type RouteProp, useRoute } from "expo-router/react-navigation";
+import { useLocalSearchParams } from "expo-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
@@ -15,8 +15,8 @@ import {
   useTypesFromEventId,
   useUpdateOrder,
 } from "@/hooks/services/fourchettas/useFourchettas";
-import type { BottomTabParamList } from "@/types";
 import { phoneWithoutSpaces } from "../../utils/common";
+import { parseJsonParam, parseNumberParam } from "@/utils/search-params.utils";
 import { FourchettasItemCardLoading } from "./components/FourchettasItemCard";
 import { ItemsSelectionView } from "./components/ItemsSelectionView";
 import { OrderSummaryView } from "./components/OrderSummaryView";
@@ -27,16 +27,15 @@ import {
   updateOrderedQuantity as updateOrderedQuantityUtil,
 } from "./utils/orderUtils";
 
-export type FourchettasOrderRouteProp = RouteProp<
-  BottomTabParamList,
-  "FourchettasOrder"
->;
-
 export const FourchettasOrder = () => {
   const { data: user } = useUser();
   const { t } = useTranslation();
-  const route = useRoute<FourchettasOrderRouteProp>();
-  const { id, orderUser } = route.params;
+  const { id: idParam, orderUser: orderUserParam } = useLocalSearchParams<{
+    id: string;
+    orderUser?: string;
+  }>();
+  const id = parseNumberParam(idParam) ?? 0;
+  const orderUser = parseJsonParam<OrderedItem[]>(orderUserParam);
 
   const scrollViewRef = useRef<Animated.ScrollView>(null);
 

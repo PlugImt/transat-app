@@ -1,4 +1,4 @@
-import { type RouteProp, useRoute } from "expo-router/react-navigation";
+import { useLocalSearchParams } from "expo-router";
 import { CookingPot, Star, Utensils } from "lucide-react-native";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -17,19 +17,14 @@ import {
   ReviewItem,
   ReviewItemSkeleton,
 } from "@/screens/services/restaurant/components/Reviews/ReviewItem";
-import type { BottomTabParamList } from "@/types";
 import { getOpeningHoursData } from "@/utils";
-
-export type RestaurantReviewsRouteProp = RouteProp<
-  BottomTabParamList,
-  "RestaurantReviews"
->;
+import { parseNumberParam } from "@/utils/search-params.utils";
 
 export const RestaurantReviews = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const route = useRoute<RestaurantReviewsRouteProp>();
-  const { id } = route.params;
+  const { id: idParam } = useLocalSearchParams<{ id: string }>();
+  const id = parseNumberParam(idParam) ?? 0;
   const openingHoursData = useMemo(() => getOpeningHoursData(t), [t]);
 
   const {

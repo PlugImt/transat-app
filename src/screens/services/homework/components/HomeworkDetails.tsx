@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import { enUS, fr } from "date-fns/locale";
-import { type RouteProp, useRoute } from "expo-router/react-navigation";
+import { useLocalSearchParams } from "expo-router";
 import { CheckCircle, Circle } from "lucide-react-native";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -8,18 +8,18 @@ import { ScrollView, TouchableOpacity, View } from "react-native";
 import { Text } from "@/components/common/Text";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
-import type { BottomTabParamList } from "@/types/navigation";
-
-export type HomeworkDetailsRouteProp = RouteProp<
-  BottomTabParamList,
-  "HomeworkDetails"
->;
+import type { Homework } from "@/dto";
+import { parseJsonParam } from "@/utils/search-params.utils";
 
 export const HomeworkDetails = () => {
-  const route = useRoute<HomeworkDetailsRouteProp>();
-  const { homework } = route.params;
+  const { homework: homeworkParam } = useLocalSearchParams<{ homework?: string }>();
+  const homework = parseJsonParam<Homework>(homeworkParam);
   const { i18n, t } = useTranslation();
   const { theme } = useTheme();
+
+  if (!homework) {
+    return null;
+  }
 
   const locale = i18n.language === "fr" ? fr : enUS;
 

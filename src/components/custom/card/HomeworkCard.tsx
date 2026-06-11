@@ -30,7 +30,12 @@ export default function HomeworkCard({ homework }: Props) {
 
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate("HomeworkDetails", { homework })}
+      onPress={() =>
+        navigation.navigate(
+          "HomeworkDetails",
+          { homework: JSON.stringify(homework) } as never,
+        )
+      }
       activeOpacity={0.8}
     >
       <View

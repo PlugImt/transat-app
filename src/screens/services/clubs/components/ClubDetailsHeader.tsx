@@ -1,4 +1,5 @@
-import { useNavigation, useRoute } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
+import { useNavigation } from "expo-router";
 import type { NativeStackNavigationProp } from "expo-router/build/react-navigation/native-stack";
 import { Bell, BellOff, ExternalLink, MapPin } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
@@ -15,7 +16,7 @@ import {
   useLeaveClubMutation,
 } from "@/hooks/services/club/useClub";
 import { linkToDomain } from "@/utils/";
-import type { ClubDetailsRouteProp } from "../ClubDetails";
+import { parseNumberParam } from "@/utils/search-params.utils";
 
 interface NotificationButtonProps {
   isMember: boolean;
@@ -27,8 +28,8 @@ const NotificationButton = ({
   disabled,
 }: NotificationButtonProps) => {
   const { t } = useTranslation();
-  const route = useRoute<ClubDetailsRouteProp>();
-  const { id } = route.params;
+  const { id: idParam } = useLocalSearchParams<{ id: string }>();
+  const id = parseNumberParam(idParam) ?? 0;
 
   const { mutate: joinClub, isPending: isJoining } = useJoinClubMutation(id);
   const { mutate: leaveClub, isPending: isLeaving } = useLeaveClubMutation(id);

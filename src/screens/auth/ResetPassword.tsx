@@ -1,9 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  type RouteProp,
-  useNavigation,
-  useRoute,
-} from "expo-router/react-navigation";
+import { useLocalSearchParams } from "expo-router";
+import { useNavigation } from "expo-router/react-navigation";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -15,13 +12,9 @@ import { Text } from "@/components/common/Text";
 import { useToast } from "@/components/common/Toast";
 import { Page } from "@/components/page/Page";
 import useAuth from "@/hooks/account/useAuth";
-import type { AuthStackParamList } from "@/types";
-
-type ResetPasswordRouteProp = RouteProp<AuthStackParamList, "ResetPassword">;
-
 export const ResetPassword = () => {
   const navigation = useNavigation();
-  const route = useRoute<ResetPasswordRouteProp>();
+  const { email: emailParam } = useLocalSearchParams<{ email?: string }>();
   const { resetPassword, changePassword, isPending, isVerifying } = useAuth();
   const { t } = useTranslation();
   const { toast } = useToast();
@@ -60,7 +53,7 @@ export const ResetPassword = () => {
   } = useForm({
     resolver: zodResolver(resetSchema),
     defaultValues: {
-      email: route.params?.email || "",
+      email: emailParam || "",
       verificationCode: "",
       newPassword: "",
       confirmPassword: "",

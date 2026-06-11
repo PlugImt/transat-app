@@ -1,4 +1,4 @@
-import { type RouteProp, useRoute } from "expo-router/react-navigation";
+import { useLocalSearchParams } from "expo-router";
 import { Link, MapPin, Users } from "lucide-react-native";
 import { Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -17,14 +17,12 @@ import type { EventDetails } from "@/dto/event";
 import { useEditEventForm } from "@/hooks/services/event/useEditEventForm";
 import { useEventDetails } from "@/hooks/services/event/useEvent";
 import { SelectClubButton } from "@/screens/services/clubs/components/SelectClub";
-import type { BottomTabParamList } from "@/types/navigation";
-
-type EditEventRouteProp = RouteProp<BottomTabParamList, "EditEvent">;
+import { parseNumberParam } from "@/utils/search-params.utils";
 
 export const EditEvent = () => {
   const { t } = useTranslation();
-  const route = useRoute<EditEventRouteProp>();
-  const { id } = route.params;
+  const { id: idParam } = useLocalSearchParams<{ id: string }>();
+  const id = parseNumberParam(idParam) ?? 0;
 
   const {
     data: event,

@@ -1,4 +1,4 @@
-import { type RouteProp, useRoute } from "expo-router/react-navigation";
+import { useLocalSearchParams } from "expo-router";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Animated from "react-native-reanimated";
@@ -11,20 +11,22 @@ import { Page } from "@/components/page/Page";
 import type { ReservationScheme } from "@/dto";
 import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
 import { useReservationItem } from "@/hooks/services/reservation/useReservation";
-import type { BottomTabParamList } from "@/types";
 import {
   fromYMD,
   generateCalendarSlots,
   shiftDate,
   toYMD,
 } from "@/utils/calendar.utils";
-
-type ItemRouteProp = RouteProp<BottomTabParamList, "ReservationCalendar">;
+import { parseNumberParam, parseStringParam } from "@/utils/search-params.utils";
 
 export const ReservationCalendar = () => {
   const { t } = useTranslation();
-  const route = useRoute<ItemRouteProp>();
-  const { id, title } = route.params;
+  const { id: idParam, title: titleParam } = useLocalSearchParams<{
+    id: string;
+    title: string;
+  }>();
+  const id = parseNumberParam(idParam) ?? 0;
+  const title = parseStringParam(titleParam) ?? "";
   const { scrollHandler } = useAnimatedHeader();
   const { toast } = useToast();
 

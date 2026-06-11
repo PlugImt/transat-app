@@ -20,7 +20,4 @@ export const tabBarOptions = (
     height: 60,
     paddingBottom: 0,
   },
-  headerTitleStyle: {
-    backgroundColor: theme.background,
-  },
 });

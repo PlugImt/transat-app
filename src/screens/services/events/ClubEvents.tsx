@@ -1,4 +1,4 @@
-import { type RouteProp, useRoute } from "expo-router/react-navigation";
+import { useLocalSearchParams } from "expo-router";
 import { PartyPopper } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { RefreshControl } from "react-native";
@@ -16,10 +16,8 @@ import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Event } from "@/dto/event";
 import { useClubEventsByTab } from "@/hooks/services/event/useEvent";
-import type { BottomTabParamList } from "@/types/navigation";
+import { parseNumberParam } from "@/utils/search-params.utils";
 import { EventCard, EventCardSkeleton } from "./components/EventCard";
-
-export type ClubEventsRouteProp = RouteProp<BottomTabParamList, "ClubEvents">;
 
 const ClubEventsTabContent = ({
   tabValue,
@@ -104,8 +102,8 @@ const ClubEventsTabContent = ({
 
 export const ClubEvents = () => {
   const { t } = useTranslation();
-  const route = useRoute<ClubEventsRouteProp>();
-  const { id } = route.params;
+  const { id: idParam } = useLocalSearchParams<{ id: string }>();
+  const id = parseNumberParam(idParam) ?? 0;
 
   return (
     <Page

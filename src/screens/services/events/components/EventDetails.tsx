@@ -1,8 +1,5 @@
-import {
-  type RouteProp,
-  useNavigation,
-  useRoute,
-} from "expo-router/react-navigation";
+import { useLocalSearchParams } from "expo-router";
+import { useNavigation } from "expo-router/react-navigation";
 import { Edit, MoreVertical, Trash2 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
@@ -34,18 +31,13 @@ import {
   useEventDetails,
 } from "@/hooks/services/event/useEvent";
 import type { AppNavigation } from "@/types";
-import type { BottomTabParamList } from "@/types/navigation";
+import { parseNumberParam } from "@/utils/search-params.utils";
 import {
   EventDetailsHeader,
   EventDetailsHeaderSkeleton,
 } from "./EventDetailsHeader";
 
 type NavigationProp = AppNavigation;
-
-export type EventDetailsRouteProp = RouteProp<
-  BottomTabParamList,
-  "EventDetails"
->;
 
 type EventActionsProps = {
   event: EventDetailsType;
@@ -103,8 +95,8 @@ const EventActions = ({ event }: EventActionsProps) => {
 const EventDetails = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const route = useRoute<EventDetailsRouteProp>();
-  const { id } = route.params;
+  const { id: idParam } = useLocalSearchParams<{ id: string }>();
+  const id = parseNumberParam(idParam) ?? 0;
   const navigation = useNavigation<NavigationProp>();
   const { user } = useAuth();
 

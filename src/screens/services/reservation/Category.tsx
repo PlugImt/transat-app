@@ -1,13 +1,15 @@
-import { type RouteProp, useRoute } from "expo-router/react-navigation";
+import { useLocalSearchParams } from "expo-router";
 import { ReservationPageContainer } from "@/components/reservation";
 import { useReservationCategory } from "@/hooks/services/reservation";
-import type { BottomTabParamList } from "@/types";
-
-type CategoryRouteProp = RouteProp<BottomTabParamList, "ReservationCategory">;
+import { parseNumberParam, parseStringParam } from "@/utils/search-params.utils";
 
 export const Category = () => {
-  const route = useRoute<CategoryRouteProp>();
-  const { id, title } = route.params;
+  const { id: idParam, title: titleParam } = useLocalSearchParams<{
+    id: string;
+    title: string;
+  }>();
+  const id = parseNumberParam(idParam) ?? 0;
+  const title = parseStringParam(titleParam) ?? "";
   const categoryQuery = useReservationCategory(id);
 
   return <ReservationPageContainer title={title} {...categoryQuery} />;

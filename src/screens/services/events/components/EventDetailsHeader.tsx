@@ -1,4 +1,4 @@
-import { useRoute } from "expo-router/react-navigation";
+import { useLocalSearchParams } from "expo-router";
 import {
   Bell,
   BellOff,
@@ -19,7 +19,7 @@ import {
   useJoinEventMutation,
   useLeaveClubMutation,
 } from "@/hooks/services/event/useEvent";
-import type { EventDetailsRouteProp } from "./EventDetails";
+import { parseNumberParam } from "@/utils/search-params.utils";
 
 interface NotificationButtonProps {
   isMember: boolean;
@@ -31,8 +31,8 @@ const NotificationButton = ({
   disabled,
 }: NotificationButtonProps) => {
   const { t } = useTranslation();
-  const route = useRoute<EventDetailsRouteProp>();
-  const { id } = route.params;
+  const { id: idParam } = useLocalSearchParams<{ id: string }>();
+  const id = parseNumberParam(idParam) ?? 0;
 
   const { mutate: joinEvent, isPending: isJoining } = useJoinEventMutation(id);
   const { mutate: leaveEvent, isPending: isLeaving } = useLeaveClubMutation(id);

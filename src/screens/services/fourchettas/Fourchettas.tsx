@@ -1,5 +1,6 @@
 import type { BottomTabNavigationProp } from "expo-router/build/react-navigation/bottom-tabs";
 import type { NativeStackNavigationProp } from "expo-router/build/react-navigation/native-stack";
+import { router } from "expo-router";
 import {
   type CompositeNavigationProp,
   useNavigation,
@@ -48,13 +49,7 @@ export const Fourchettas = () => {
           <Button
             variant="default"
             onPress={() => {
-              // Je n'ai pas réussi à trouver comment faire pour que le type soit reconnu
-              // Mais ça marche :)
-              // A l'aide !
-              // @ts-expect-error
-              navigation.navigate("AccountScreen", {
-                screen: "EditProfile",
-              });
+              router.push("/(app)/(tabs)/(account)/EditProfile");
             }}
             label={t("services.fourchettas.addPhoneNumberButton")}
           />
@@ -119,10 +114,13 @@ export const Fourchettas = () => {
               key={evt.id}
               event={evt}
               onPress={() =>
-                navigation.navigate("FourchettasOrder", {
-                  id: evt.id,
-                  orderUser: evt.orderuser,
-                })
+                navigation.navigate(
+                  "FourchettasOrder",
+                  {
+                    id: evt.id,
+                    orderUser: JSON.stringify(evt.orderuser),
+                  } as never,
+                )
               }
             />
           ))

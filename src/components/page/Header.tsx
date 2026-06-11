@@ -27,7 +27,10 @@ export function Header({ headerShown, title, children, onBack }: Readonly<Header
   const navigation = useNavigation();
 
   const route = useRoute();
-    const canGoBack = Boolean(onBack) || !Object.values(TabRoute).includes(route.name as TabRoute);
+  const isTabRoot =
+    route.name === "index" ||
+    Object.values(TabRoute).includes(route.name as TabRoute);
+  const canGoBack = Boolean(onBack) || !isTabRoot;
 
   const headerAnimatedStyle = useAnimatedStyle(() => {
     // If canGoBack is true, the header is not shown (here to compute the value every time)

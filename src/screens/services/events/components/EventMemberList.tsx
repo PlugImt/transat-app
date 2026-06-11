@@ -1,17 +1,16 @@
-import { type RouteProp, useRoute } from "expo-router/react-navigation";
+import { useLocalSearchParams } from "expo-router";
 import { useTranslation } from "react-i18next";
 import Animated from "react-native-reanimated";
 import { UserCard, UserCardSkeleton } from "@/components/custom";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
 import { useEventMembers } from "@/hooks/services/event/useEvent";
-import type { BottomTabParamList } from "@/types";
+import { parseNumberParam } from "@/utils/search-params.utils";
 
 export const EventMemberList = () => {
   const { t } = useTranslation();
-  const { params } =
-    useRoute<RouteProp<BottomTabParamList, "EventMemberList">>();
-  const { id } = params;
+  const { id: idParam } = useLocalSearchParams<{ id: string }>();
+  const id = parseNumberParam(idParam) ?? 0;
 
   const { data, isPending, refetch, isError, error } = useEventMembers(id);
 

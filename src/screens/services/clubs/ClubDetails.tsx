@@ -1,5 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query";
-import { type RouteProp, useRoute } from "expo-router/react-navigation";
+import { useLocalSearchParams } from "expo-router";
 import { useTranslation } from "react-i18next";
 import CardGroup from "@/components/common/CardGroup";
 import { UserCardSkeleton } from "@/components/custom";
@@ -9,7 +9,7 @@ import { Page } from "@/components/page/Page";
 import { QUERY_KEYS } from "@/constants";
 import { useClubDetails } from "@/hooks/services/club/useClub";
 import { ClubEventWidget } from "@/screens/services/events/widget/ClubEventWidget";
-import type { BottomTabParamList } from "@/types/navigation";
+import { parseNumberParam } from "@/utils/search-params.utils";
 import { ClubReservationWidget } from "../reservation/widget/ClubReservationWidget";
 import {
   ClubDetailsHeader,
@@ -17,12 +17,10 @@ import {
 } from "./components/ClubDetailsHeader";
 import { ClubResponsible } from "./components/ClubResponsible";
 
-export type ClubDetailsRouteProp = RouteProp<BottomTabParamList, "ClubDetails">;
-
 const ClubDetails = () => {
   const { t } = useTranslation();
-  const route = useRoute<ClubDetailsRouteProp>();
-  const { id } = route.params;
+  const { id: idParam } = useLocalSearchParams<{ id: string }>();
+  const id = parseNumberParam(idParam) ?? 0;
 
   const {
     data: club,
@@ -91,8 +89,8 @@ export default ClubDetails;
 
 export const ClubDetailsSkeleton = () => {
   const { t } = useTranslation();
-  const route = useRoute<ClubDetailsRouteProp>();
-  const { id } = route.params;
+  const { id: idParam } = useLocalSearchParams<{ id: string }>();
+  const id = parseNumberParam(idParam) ?? 0;
 
   return (
     <Page title={t("services.clubs.title")}>

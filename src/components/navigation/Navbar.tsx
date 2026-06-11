@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from "expo-router/build/react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "expo-router/build/react-navigation/native-stack";
-import { GridIcon, LucideHome, Play, User } from "lucide-react-native";
+import { CalendarDays, GridIcon, LucideHome, User } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@/contexts/ThemeContext";
 import { screenOptions, tabBarOptions } from "@/navigation/navigationConfig";
@@ -48,6 +48,7 @@ import { RestaurantReviews } from "@/screens/services/restaurant/components/Revi
 import { Services } from "@/screens/services/Services";
 import type { BottomTabParamList } from "@/types";
 import { hapticFeedback } from "@/utils/haptics.utils";
+import Schedule from "@/screens/Schedule/Schedule";
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 const Stack = createNativeStackNavigator<BottomTabParamList>();
@@ -102,14 +103,15 @@ const ServicesStack = () => (
     <Stack.Screen name="ReservationCalendar" component={ReservationCalendar} />
     <Stack.Screen name="Fourchettas" component={Fourchettas} />
     <Stack.Screen name="FourchettasOrder" component={FourchettasOrder} />
-  </Stack.Navigator>
-);
-
-const GamesStack = () => (
-  <Stack.Navigator screenOptions={screenOptions}>
     <Stack.Screen name="Games" component={Games} />
     <Stack.Screen name="Bassine" component={Bassine} />
     <Stack.Screen name="BassineLeaderboard" component={BassineLeaderboard} />
+  </Stack.Navigator>
+);
+
+const ScheduleStack = () => (
+  <Stack.Navigator screenOptions={screenOptions}>
+    <Stack.Screen name="Schedule" component={Schedule} />
   </Stack.Navigator>
 );
 
@@ -165,12 +167,12 @@ export const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="GamesScreen"
-        component={GamesStack}
+        name="ScheduleScreen"
+        component={ScheduleStack}
         listeners={handleTabPress}
         options={{
-          tabBarLabel: t("games.title"),
-          tabBarIcon: ({ color, size }) => <Play size={size} color={color} />,
+          tabBarLabel: t("schedule.title"),
+          tabBarIcon: ({ color, size }) => <CalendarDays size={size} color={color} />,
         }}
       />
       <Tab.Screen

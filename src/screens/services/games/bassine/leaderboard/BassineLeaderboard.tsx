@@ -33,7 +33,7 @@ export const BassineLeaderboard = () => {
 
   return (
     <Page
-      title={t("games.bassine.leaderboard.title")}
+      title={t("services.games.bassine.leaderboard.title")}
       onRefresh={refetch}
       refreshing={isRefetching}
     >
@@ -41,11 +41,11 @@ export const BassineLeaderboard = () => {
         <TabsList className="mt-4">
           <TabsTrigger
             value="scores"
-            title={t("games.bassine.leaderboard.score")}
+            title={t("services.games.bassine.leaderboard.score")}
           />
           <TabsTrigger
             value="history"
-            title={t("games.bassine.leaderboard.history.title")}
+            title={t("services.games.bassine.leaderboard.history.title")}
           />
         </TabsList>
         <TabsContent value="scores">

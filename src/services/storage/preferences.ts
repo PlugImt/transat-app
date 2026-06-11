@@ -20,7 +20,8 @@ export type ServiceType =
   | "fourchettas"
   | "clubs"
   | "reservation"
-  | "events";
+  | "events"
+  | "games";
 
 export type PreferenceId = WidgetType | ServiceType;
 
@@ -130,6 +131,14 @@ const getDefaultServices = (
       order: 6,
       image: require("@/assets/images/services/event.png"),
     },
+    {
+      id: "games",
+      name: t("services.games.title"),
+      screen: "Games",
+      enabled: true,
+      order: 10,
+      image: require("@/assets/images/services/games.png"),
+    }
   ];
 };
 

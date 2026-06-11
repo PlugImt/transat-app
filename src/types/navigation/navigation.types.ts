@@ -7,7 +7,7 @@ export type BottomTabParamList = {
   // Main tabs
   HomeScreen: undefined;
   ServicesScreen: undefined;
-  GamesScreen: undefined;
+  ScheduleScreen: undefined;
   AccountScreen: undefined;
 
   // Services screens
@@ -52,6 +52,7 @@ export type BottomTabParamList = {
   Legal: undefined;
 
   // Games screens
+  Games:undefined;
   Bassine: undefined;
   BassineLeaderboard: undefined;
 };

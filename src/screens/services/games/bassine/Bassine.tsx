@@ -68,7 +68,7 @@ export const Bassine = () => {
 
   return (
     <Page
-      title={t("games.bassine.title")}
+      title={t("services.games.bassine.title")}
       className="flex-1 justify-center items-center"
       header={<AboutBassine />}
       disableScroll
@@ -81,7 +81,7 @@ export const Bassine = () => {
         >
           <View className="flex-row items-center gap-2">
             <UserStack size="sm" users={data?.leaderboard as User[]} />
-            <Text>{t("games.bassine.seeLeaderboard")}</Text>
+            <Text>{t("services.games.bassine.seeLeaderboard")}</Text>
           </View>
           <ChevronRight size={16} color={theme.text} />
         </Card>
@@ -145,7 +145,7 @@ const BassineSkeleton = () => {
   const navigation = useNavigation<AppNavigation>();
   return (
     <Page
-      title={t("games.bassine.title")}
+      title={t("services.games.bassine.title")}
       className="flex-1 justify-center items-center"
       header={<AboutBassine />}
       disableScroll
@@ -158,7 +158,7 @@ const BassineSkeleton = () => {
         >
           <View className="flex-row items-center gap-2">
             <UserStackSkeleton size="sm" />
-            <Text>{t("games.bassine.seeLeaderboard")}</Text>
+            <Text>{t("services.games.bassine.seeLeaderboard")}</Text>
           </View>
           <ChevronRight size={16} color={theme.text} />
         </Card>

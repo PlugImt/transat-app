@@ -618,6 +618,7 @@
     },
     "games": {
       "title": "Jeux",
+      "description":"Retrouve les jeux de l'IMT, plein d'autres à venir...",
       "bassine": {
         "title": "Bassine",
         "description": "Lorsqu'une bière est servie la bassine se remplie petit à petit, et lorsqu'elle est pleine vous pouvez demander de remplir votre verre avec\n\nÀ chaque verre rempli, mettez à jour votre compteur pour être le roi de la bassine 👑",

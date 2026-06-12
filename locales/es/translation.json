@@ -618,6 +618,7 @@
     },
     "games": {
       "title": "Juegos",
+      "description":"Descubre los juegos del IMT; pronto habrá muchos más...",
       "bassine": {
         "title": "Cuenca",
         "description": "Cuando se sirve una cerveza, la cuenca se llena poco a poco, y cuando está llena puedes pedir que se llene tu vaso con\n\nPor cada vaso lleno, actualiza tu contador para ser el rey de la cuenca 👑",

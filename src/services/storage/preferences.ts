@@ -154,6 +154,7 @@ const getDefaultServices = (
     {
       id: "games",
       name: t("services.games.title"),
+      description: t("services.games.description"),
       screen: "Games",
       enabled: true,
       order: 10,

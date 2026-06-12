@@ -22,7 +22,8 @@ export type ServiceType =
   | "reservation"
   | "events"
   | "plannings"
-  | "covoiturage";
+  | "covoiturage"
+  | "games";
 
 export type PreferenceId = WidgetType | ServiceType;
 
@@ -150,6 +151,15 @@ const getDefaultServices = (
       screen: "Fourchettas",
       description: t("services.fourchettas.description"),
     },
+    {
+      id: "games",
+      name: t("services.games.title"),
+      description: t("services.games.description"),
+      screen: "Games",
+      enabled: true,
+      order: 10,
+      image: require("@/assets/images/services/games.png"),
+    }
   ];
 };
 

@@ -615,36 +615,40 @@
     "covoit": {
       "title": "Mitfahrgelegenheiten",
       "description": "Finde oder biete eine Mitfahrgelegenheit für deine Fahrten vom oder zum Campus an"
-    }
-  },
-  "games": {
-    "title": "Spiele",
-    "bassine": {
-      "title": "Becken",
-      "description": "Wenn eine Bier serviert wird, füllt sich das Becken langsam, und wenn es voll ist, können Sie fragen, ob Sie Ihr Glas füllen können\n\nFür jedes gefüllte Glas aktualisieren Sie Ihren Zähler, um der König des Beckens zu werden 👑",
-      "location": "Bei der MDE während Partys",
-      "price": "Kostenlos",
-      "seeLeaderboard": "Rangliste ansehen",
-      "leaderboard": {
-        "title": "Rangliste",
-        "score": "Punktzahl",
-        "history": {
-          "title": "Verlauf",
-          "emptyHistory": "Noch niemand hat eine Bassine genommen",
-          "emptyHistoryDescription": "Füge deine Bassinen dem Zähler hinzu, damit sie hier erscheinen"
-        },
-        "firstPlaceLead_zero": "liegt gleichauf",
-        "firstPlaceLead_one": "liegt knapp hinter Ihnen",
-        "firstPlaceLeader_few": "liegt nur {{count}} Becken hinter Ihnen",
-        "firstPlaceLead_other": "liegt {{count}} Becken hinter Ihnen",
-        "followingPlace_zero": "liegt gleichauf",
-        "followingPlace_one": "liegt knapp vor Ihnen",
-        "followingPlace_few": "liegt nur {{count}} Becken vor Ihnen",
-        "followingPlace_other": "liegt {{count}} Becken vor Ihnen",
-        "tookBassine_one": "hat {{count}} Becken genommen",
-        "tookBassine_other": "hat {{count}} Becken genommen"
+    },
+    "games": {
+      "title": "Spiele",
+      "description":"Entdecke die Spiele des IMT – viele weitere folgen in Kürze...",
+      "bassine": {
+        "title": "Becken",
+        "description": "Wenn eine Bier serviert wird, füllt sich das Becken langsam, und wenn es voll ist, können Sie fragen, ob Sie Ihr Glas füllen können\n\nFür jedes gefüllte Glas aktualisieren Sie Ihren Zähler, um der König des Beckens zu werden 👑",
+        "location": "Bei der MDE während Partys",
+        "price": "Kostenlos",
+        "seeLeaderboard": "Rangliste ansehen",
+        "leaderboard": {
+          "title": "Rangliste",
+          "score": "Punktzahl",
+          "history": {
+            "title": "Verlauf",
+            "emptyHistory": "Noch niemand hat eine Bassine genommen",
+            "emptyHistoryDescription": "Füge deine Bassinen dem Zähler hinzu, damit sie hier erscheinen"
+          },
+          "firstPlaceLead_zero": "liegt gleichauf",
+          "firstPlaceLead_one": "liegt knapp hinter Ihnen",
+          "firstPlaceLeader_few": "liegt nur {{count}} Becken hinter Ihnen",
+          "firstPlaceLead_other": "liegt {{count}} Becken hinter Ihnen",
+          "followingPlace_zero": "liegt gleichauf",
+          "followingPlace_one": "liegt knapp vor Ihnen",
+          "followingPlace_few": "liegt nur {{count}} Becken vor Ihnen",
+          "followingPlace_other": "liegt {{count}} Becken vor Ihnen",
+          "tookBassine_one": "hat {{count}} Becken genommen",
+          "tookBassine_other": "hat {{count}} Becken genommen"
+        }
       }
     }
+  },
+  "schedule": {
+    "title":"Persönlicher Stundenplan"
   },
   "user": {
     "contact": "Kontakt",

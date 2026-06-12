@@ -24,9 +24,9 @@ export const BassineHistory = () => {
     return (
       <Empty
         icon={<Soup />}
-        title={t("games.bassine.leaderboard.history.emptyHistory")}
+        title={t("services.games.bassine.leaderboard.history.emptyHistory")}
         description={t(
-          "games.bassine.leaderboard.history.emptyHistoryDescription",
+          "services.games.bassine.leaderboard.history.emptyHistoryDescription",
         )}
       />
     );
@@ -46,7 +46,7 @@ export const BassineHistory = () => {
                 <Text className="font-bold">
                   {user.first_name} {user.last_name}
                 </Text>{" "}
-                {t("games.bassine.leaderboard.tookBassine", { count })}
+                {t("services.games.bassine.leaderboard.tookBassine", { count })}
               </Text>
             </Card>
           ))}

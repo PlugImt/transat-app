@@ -615,39 +615,43 @@
     "covoit": {
       "title": "Covoiturage",
       "description": "Trouve ou propose un covoiturage pour tes déplacements depuis ou vers le campus"
-    }
-  },
-  "games": {
-    "title": "Jeux",
-    "bassine": {
-      "title": "Bassine",
-      "description": "Lorsqu'une bière est servie la bassine se remplie petit à petit, et lorsqu'elle est pleine vous pouvez demander de remplir votre verre avec\n\nÀ chaque verre rempli, mettez à jour votre compteur pour être le roi de la bassine 👑",
-      "location": "À la MDE pendant les soirées",
-      "price": "Gratuit",
-      "seeLeaderboard": "Voir le classement",
-      "leaderboard": {
-        "title": "Classement",
-        "score": "Score",
-        "history": {
-          "title": "Historique",
-          "emptyHistory": "Personne n'a encore pris de bassine",
-          "emptyHistoryDescription": "Ajoute tes bassines au compteur pour les voir apparaître ici"
-        },
+    },
+    "games": {
+      "title": "Jeux",
+      "description":"Retrouve les jeux de l'IMT, plein d'autres à venir...",
+      "bassine": {
+        "title": "Bassine",
+        "description": "Lorsqu'une bière est servie la bassine se remplie petit à petit, et lorsqu'elle est pleine vous pouvez demander de remplir votre verre avec\n\nÀ chaque verre rempli, mettez à jour votre compteur pour être le roi de la bassine 👑",
+        "location": "À la MDE pendant les soirées",
+        "price": "Gratuit",
+        "seeLeaderboard": "Voir le classement",
+        "leaderboard": {
+          "title": "Classement",
+          "score": "Score",
+          "history": {
+            "title": "Historique",
+            "emptyHistory": "Personne n'a encore pris de bassine",
+            "emptyHistoryDescription": "Ajoute tes bassines au compteur pour les voir apparaître ici"
+          },
 
-        "firstPlaceLead_zero": "est à égalité",
-        "firstPlaceLead_one": "est juste derrière vous",
-        "firstPlaceLeader_few": "n'est qu'à {{count}} bassines derrière vous",
-        "firstPlaceLead_other": "est {{count}} bassines derrière vous",
+          "firstPlaceLead_zero": "est à égalité",
+          "firstPlaceLead_one": "est juste derrière vous",
+          "firstPlaceLeader_few": "n'est qu'à {{count}} bassines derrière vous",
+          "firstPlaceLead_other": "est {{count}} bassines derrière vous",
 
-        "followingPlace_zero": "est à égalité",
-        "followingPlace_one": "est juste devant",
-        "followingPlace_few": "n'est qu'à {{count}} bassines devant vous",
-        "followingPlace_other": "est {{count}} bassines devant vous",
+          "followingPlace_zero": "est à égalité",
+          "followingPlace_one": "est juste devant",
+          "followingPlace_few": "n'est qu'à {{count}} bassines devant vous",
+          "followingPlace_other": "est {{count}} bassines devant vous",
 
-        "tookBassine_one": "a pris {{count}} bassine",
-        "tookBassine_other": "a pris {{count}} bassines"
+          "tookBassine_one": "a pris {{count}} bassine",
+          "tookBassine_other": "a pris {{count}} bassines"
+        }
       }
     }
+  },
+  "schedule": {
+    "title":"Emploi du temps personel"
   },
   "user": {
     "contact": "Contacter",

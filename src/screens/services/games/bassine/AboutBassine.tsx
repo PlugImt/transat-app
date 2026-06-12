@@ -6,10 +6,10 @@ export const AboutBassine = () => {
 
   return (
     <AboutModal
-      title={t("games.bassine.title")}
-      description={t("games.bassine.description")}
-      location={t("games.bassine.location")}
-      price={t("games.bassine.price")}
+      title={t("services.games.bassine.title")}
+      description={t("services.games.bassine.description")}
+      location={t("services.games.bassine.location")}
+      price={t("services.games.bassine.price")}
     />
   );
 };

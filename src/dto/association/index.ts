@@ -1,5 +1,13 @@
 import { z } from "zod";
-import { userSchema } from "@/dto/user";
+
+export const associationUserSchema = z.object({
+  email: z.string().email(),
+  first_name: z.string(),
+  last_name: z.string(),
+  profile_picture: z.string().catch(""),
+  graduation_year: z.number().nullable().optional(),
+  is_respo: z.boolean().optional(),
+});
 
 export const associationSchema = z.object({
   id: z.number(),
@@ -13,16 +21,16 @@ export const associationDetailsSchema = z.object({
   name: z.string(),
   description: z.string(),
   picture: z.string(),
-  location: z.string().optional(),
-  link: z.string().optional(),
+  location: z.string().catch(""),
+  link: z.string().catch(""),
   member_count: z.number(),
   member_photos: z.array(z.string()),
-  responsible: userSchema.optional(),
+  responsibles: z.array(associationUserSchema).catch([]),
   has_joined: z.boolean(),
 });
 
 export const associationMembersSchema = z.object({
-  members: z.array(userSchema),
+  members: z.array(associationUserSchema),
   count: z.number(),
 });
 

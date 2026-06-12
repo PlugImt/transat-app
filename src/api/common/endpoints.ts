@@ -40,6 +40,7 @@ export const API_ROUTES: Record<Route, ApiRoute> = {
   reservationItem: "/reservation/item/:id",
   reservationCreateItem: "/reservation/item",
   reservationClub: "/reservation/club/:id",
+  reservationAssociation: "/reservation/association/:id",
   reservationMy: "/reservation/me",
   reservationSearch: "/reservation/search",
   event: "/event",
@@ -88,6 +89,7 @@ type Route =
   | "reservationItem"
   | "reservationCreateItem"
   | "reservationClub"
+  | "reservationAssociation"
   | "reservationMy"
   | "reservationSearch"
   | "event"

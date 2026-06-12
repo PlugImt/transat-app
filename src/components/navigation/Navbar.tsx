@@ -17,6 +17,7 @@ import Notifications from "@/screens/account/settings/Notifications";
 import Settings from "@/screens/account/settings/Settings";
 import {
   Clubs,
+  Associations,
   Covoiturage,
   Fourchettas,
   Games,
@@ -51,6 +52,9 @@ import { Services } from "@/screens/services/Services";
 import type { BottomTabParamList } from "@/types";
 import { hapticFeedback } from "@/utils/haptics.utils";
 import Schedule from "@/screens/Schedule/Schedule";
+import AssociationDetails from "@/screens/services/associations/AssociationDetails";
+import {AssociationMemberList} from "@/screens/services/associations/components/AssociationMemberList";
+import AssociationEvents from "@/screens/services/events/AssociationEvents";
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 const Stack = createNativeStackNavigator<BottomTabParamList>();
@@ -69,6 +73,10 @@ const HomeStack = () => (
     <Stack.Screen name="ClubDetails" component={ClubDetails} />
     <Stack.Screen name="ClubMemberList" component={ClubMemberList} />
     <Stack.Screen name="ClubEvents" component={ClubEvents} />
+    <Stack.Screen name="Associations" component={Associations} />
+    <Stack.Screen name="AssociationDetails" component={AssociationDetails} />
+    <Stack.Screen name="AssociationMemberList" component={AssociationMemberList} />
+    <Stack.Screen name="AssociationEvents" component={AssociationEvents} />
     <Stack.Screen name="Events" component={Events} />
     <Stack.Screen name="EventMemberList" component={EventMemberList} />
     <Stack.Screen name="EventDetails" component={EventDetails} />
@@ -94,6 +102,10 @@ const ServicesStack = () => (
     <Stack.Screen name="ClubDetails" component={ClubDetails} />
     <Stack.Screen name="ClubMemberList" component={ClubMemberList} />
     <Stack.Screen name="ClubEvents" component={ClubEvents} />
+    <Stack.Screen name="Associations" component={Associations} />
+    <Stack.Screen name="AssociationDetails" component={AssociationDetails} />
+    <Stack.Screen name="AssociationMemberList" component={AssociationMemberList} />
+    <Stack.Screen name="AssociationEvents" component={AssociationEvents} />
     <Stack.Screen name="Events" component={Events} />
     <Stack.Screen name="EventMemberList" component={EventMemberList} />
     <Stack.Screen name="EventDetails" component={EventDetails} />

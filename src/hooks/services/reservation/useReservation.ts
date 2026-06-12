@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import {
   getMyReservations,
+  getReservationAssociation,
   getReservationCategories,
   getReservationClub,
   getReservationItem,
@@ -34,6 +35,15 @@ export const useClubReservations = (clubId: number) => {
   const { data, isPending, refetch, isError, error } = useQuery({
     queryKey: QUERY_KEYS.reservation.club(clubId),
     queryFn: () => getReservationClub(clubId),
+  });
+
+  return { data, isPending, refetch, isError, error };
+};
+
+export const useAssociationReservations = (associationId: number) => {
+  const { data, isPending, refetch, isError, error } = useQuery({
+    queryKey: QUERY_KEYS.reservation.association(associationId),
+    queryFn: () => getReservationAssociation(associationId),
   });
 
   return { data, isPending, refetch, isError, error };

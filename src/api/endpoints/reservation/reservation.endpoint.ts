@@ -28,6 +28,13 @@ export const getReservationClub = async (id: number) => {
   );
 };
 
+export const getReservationAssociation = async (id: number) => {
+  return await apiRequest<GetReservation>(
+      API_ROUTES.reservationAssociation.replace(":id", id.toString()),
+      Method.GET,
+  );
+};
+
 export const getReservationItem = async (id: number, date: string) => {
   return await apiRequest<ReservationDetails>(
     API_ROUTES.reservationItem.replace(":id", id.toString()) +

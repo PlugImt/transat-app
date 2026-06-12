@@ -40,7 +40,17 @@ export const AssociationMemberList = () => {
     >
       <Animated.FlatList
         data={data?.members}
-        renderItem={({ item }) => <UserCard user={item} />}
+        renderItem={({ item }) => (
+            <UserCard
+                user={{
+                  email: item.email,
+                  firstName: item.first_name,
+                  lastName: item.last_name,
+                  profilePicture: item.profile_picture,
+                  ...item
+                }}
+            />
+        )}
         keyExtractor={(item) => item.email}
       />
     </Page>

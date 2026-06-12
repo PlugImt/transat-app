@@ -10,7 +10,7 @@ import { QUERY_KEYS } from "@/constants";
 import { useAssociationDetails } from "@/hooks/services/association/useAssociation";
 import { AssociationEventWidget } from "@/screens/services/events/widget/AssociationEventWidget";
 import type { BottomTabParamList } from "@/types/navigation";
-import { AssociationReservationWidget } from "../reservation/widget/AssociationReservationWidget";
+import { AssociationReservationWidget } from "@/screens/services/reservation/widget/AssociationReservationWidget";
 import {
   AssociationDetailsHeader,
   AssociationDetailsHeaderSkeleton,

@@ -20,6 +20,13 @@ export const QUERY_KEYS = {
     clubLeave: ["clubLeave"],
     clubMembers: ["clubMembers"],
   },
+  association: {
+    associations: ["associations"],
+    associationDetails: ["associationDetails"],
+    associationJoin: ["associationJoin"],
+    associationLeave: ["associationLeave"],
+    associationMembers: ["associationMembers"],
+  },
   event: {
     events: ["events"],
     clubEvents: ["clubEvents"],
@@ -47,6 +54,7 @@ export const QUERY_KEYS = {
     item: (id: number, date?: string) => ["reservation", "items", id, date],
     createItem: ["reservation", "createItem"],
     club: (id: number) => ["reservation", "club", id],
+    association: (id: number) => ["reservation", "association", id],
     my: (time?: "all" | "past" | "current") => [
       "reservation",
       "my",

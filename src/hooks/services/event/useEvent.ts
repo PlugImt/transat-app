@@ -79,6 +79,39 @@ export const useClubEventsByTab = (
   };
 };
 
+export const useAssociationEvents = (
+    associationId: number,
+    time: EventTimeFilter = "upcoming",
+) => {
+  const { data, isPending, refetch, isError, error } = useQuery({
+    queryKey: [...QUERY_KEYS.event.events, "association", associationId, time],
+    queryFn: () => getEvents(time),
+    staleTime: 1000 * 60 * 5,
+  });
+  return { data, isPending, refetch, isError, error };
+};
+
+export const useAssociationEventsByTab = (
+    associationId: number,
+    tabValue: "upcoming" | "past",
+) => {
+  const {
+    data: events,
+    isPending,
+    isError,
+    error,
+    refetch,
+  } = useAssociationEvents(associationId, tabValue);
+
+  return {
+    events,
+    isPending,
+    isError,
+    error,
+    refetch,
+  };
+};
+
 export const useEventDetails = (id: number) => {
   const { data, isPending, refetch, isError, error } = useQuery({
     queryKey: [...QUERY_KEYS.event.eventDetails, id],

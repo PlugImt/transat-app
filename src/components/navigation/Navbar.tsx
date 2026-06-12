@@ -108,6 +108,7 @@ const ServicesStack = () => (
     <Stack.Screen name="ReservationCalendar" component={ReservationCalendar} />
     <Stack.Screen name="Fourchettas" component={Fourchettas} />
     <Stack.Screen name="FourchettasOrder" component={FourchettasOrder} />
+    <Stack.Screen name="Covoiturage" component={Covoiturage} />
     <Stack.Screen name="Games" component={Games} />
     <Stack.Screen name="Bassine" component={Bassine} />
     <Stack.Screen name="BassineLeaderboard" component={BassineLeaderboard} />

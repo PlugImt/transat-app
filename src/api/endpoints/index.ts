@@ -10,3 +10,4 @@ export * from "./timetable";
 export * from "./traq";
 export * from "./user";
 export * from "./weather";
+export * from "./covoiturage";

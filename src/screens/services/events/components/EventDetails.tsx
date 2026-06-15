@@ -55,7 +55,6 @@ const EventActions = ({ event }: EventActionsProps) => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation<AppNavigation>();
-
   const { mutate: deleteEvent, isPending: isDeleting } = useDeleteEvent();
 
   const handleEditEvent = () => {
@@ -201,9 +200,11 @@ export const EventDetailsSkeleton = () => {
   return (
     <Page title={t("services.events.title")}>
       <EventDetailsHeaderSkeleton />
-      <CardGroup title={t("services.events.peopleInterested")}>
+      <View className="gap-2 ml-2">
+        <Text variant="h3">{t("services.events.peopleInterested")}</Text>
         <UserStackSkeleton moreText />
-      </CardGroup>
+        <Text className="mt-2 w-48" />
+      </View>
       <CardGroup title={t("services.events.organizer")}>
         <ClubCardSkeleton size="sm" />
       </CardGroup>

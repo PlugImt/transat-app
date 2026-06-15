@@ -62,4 +62,7 @@ export const QUERY_KEYS = {
     ],
     search: (q: string) => ["reservation", "search", q],
   },
+  covoiturage: {
+    covoiturages: ["covoiturage"],
+  }
 };

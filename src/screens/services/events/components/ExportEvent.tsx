@@ -20,15 +20,22 @@ const exportToCalendar = async () => {
   setIsExporting(true);
 
   try {
-    const { status } = await Calendar.requestCalendarPermissions(); 
-    if (status !== "granted") {
-      Alert.alert(
-        t("services.events.export.permission.title"),
-        t("services.events.export.permission.description")
-      );
+    const currentPermission =
+      await Calendar.getCalendarPermissions();
+
+    if (currentPermission.status !== "granted") {
+      const permissionResult =
+        await Calendar.requestCalendarPermissions();
+
+      if (permissionResult.status !== "granted") {
+        Alert.alert(
+          t("services.events.export.permission.title"),
+          t("services.events.export.permission.description")
+        );
+      }
+
       return;
     }
-     
     let choosedCalendar;
     if(Platform.OS === 'ios') {
       choosedCalendar = await Calendar.presentPicker();
@@ -42,7 +49,7 @@ const exportToCalendar = async () => {
       return;
     }
     
-    const id = await choosedCalendar.createEvent( {
+    await choosedCalendar.createEvent( {
       title: event.name,
       startDate: new Date(event.start_date),
       endDate: event.end_date ? new Date(event.end_date) : undefined,
@@ -52,13 +59,16 @@ const exportToCalendar = async () => {
     });
     Alert.alert(t("common.success"), t("services.events.export.success"));
     if(Platform.OS === 'android') {
-      await Linking.openURL(`content://com.android.calendar/time/${new Date(event.start_date).getTime()}`);
+      const url = `content://com.android.calendar/time/${new Date(event.start_date).getTime()}`;
+      if (await Linking.canOpenURL(url)) {
+        await Linking.openURL(url);
+      }
     }
     if(Platform.OS === 'ios') {
-      await Linking.openURL(`calshow:${new Date(event.start_date).getTime()}/${id}`);
+      const appleDate =
+      Math.floor(new Date(event.start_date).getTime() / 1000) - 978307200;
+      await Linking.openURL(`calshow:${appleDate}`);
     }
-
-    
 
   } catch (error) {
     console.error("Export error:", error);

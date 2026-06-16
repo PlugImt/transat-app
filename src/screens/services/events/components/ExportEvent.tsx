@@ -20,22 +20,15 @@ const exportToCalendar = async () => {
   setIsExporting(true);
 
   try {
-    const currentPermission =
-      await Calendar.getCalendarPermissions();
-
-    if (currentPermission.status !== "granted") {
-      const permissionResult =
-        await Calendar.requestCalendarPermissions();
-
-      if (permissionResult.status !== "granted") {
-        Alert.alert(
-          t("services.events.export.permission.title"),
-          t("services.events.export.permission.description")
-        );
-      }
-
+    const { status } = await Calendar.requestCalendarPermissions(); 
+    if (status !== "granted") {
+      Alert.alert(
+        t("services.events.export.permission.title"),
+        t("services.events.export.permission.description")
+      );
       return;
     }
+     
     let choosedCalendar;
     if(Platform.OS === 'ios') {
       choosedCalendar = await Calendar.presentPicker();
@@ -56,6 +49,7 @@ const exportToCalendar = async () => {
       location: event.location,
       notes: event.description,
       url: event.link,
+      alarms: [],
     });
     Alert.alert(t("common.success"), t("services.events.export.success"));
     if(Platform.OS === 'android') {
@@ -65,8 +59,7 @@ const exportToCalendar = async () => {
       }
     }
     if(Platform.OS === 'ios') {
-      const appleDate =
-      Math.floor(new Date(event.start_date).getTime() / 1000) - 978307200;
+      const appleDate = Math.floor(new Date(event.start_date).getTime() / 1000) - 978307200;
       await Linking.openURL(`calshow:${appleDate}`);
     }
 

@@ -628,7 +628,23 @@
     },
     "covoit": {
       "title": "Compartir coche",
-      "description": "Encuentra u ofrece un viaje compartido para tus desplazamientos desde o hacia el campus"
+      "description": "Encuentra u ofrece un viaje compartido para tus desplazamientos desde o hacia el campus",
+      "tags": 
+        {
+          "shopping": "Compras",
+          "weekend": "Fin de semana",
+          "other": "Otro"
+        },
+      "errors": {
+        "empty": "No se han encontrado viajes compartidos"
+      },
+      "filters": {
+        "title": "Filtros",
+        "tripType": "Tipo de viaje",
+        "departureDate": "Fecha de salida",
+        "allDates": "Todas las fechas",
+        "chooseDate": "Selecciona una fecha..."
+      }
     },
     "games": {
       "title": "Juegos",
@@ -657,7 +673,7 @@
           "followingPlace_other": "está {{count}} cuencas delante de ti",
           "tookBassine_one": "tomó {{count}} cuenca",
           "tookBassine_other": "tomó {{count}} cuencas"
-        }
+        }     
       }
     }
   },

@@ -18,7 +18,7 @@ import Settings from "@/screens/account/settings/Settings";
 import {
   Clubs,
   Associations,
-  Covoiturage,
+  Covoiturages,
   Fourchettas,
   Games,
   Homework,
@@ -85,7 +85,7 @@ const HomeStack = () => (
     <Stack.Screen name="Traq" component={Traq} />
     <Stack.Screen name="Olimtpe" component={Olimtpe} />
     <Stack.Screen name="Plannings" component={Plannings} />
-    <Stack.Screen name="Covoiturage" component={Covoiturage} />
+    <Stack.Screen name="Covoiturage" component={Covoiturages} />
   </Stack.Navigator>
 );
 
@@ -120,7 +120,7 @@ const ServicesStack = () => (
     <Stack.Screen name="ReservationCalendar" component={ReservationCalendar} />
     <Stack.Screen name="Fourchettas" component={Fourchettas} />
     <Stack.Screen name="FourchettasOrder" component={FourchettasOrder} />
-    <Stack.Screen name="Covoiturage" component={Covoiturage} />
+    <Stack.Screen name="Covoiturage" component={Covoiturages} />
     <Stack.Screen name="Games" component={Games} />
     <Stack.Screen name="Bassine" component={Bassine} />
     <Stack.Screen name="BassineLeaderboard" component={BassineLeaderboard} />

@@ -628,7 +628,23 @@
     },
     "covoit": {
       "title": "Covoiturage",
-      "description": "Trouve ou propose un covoiturage pour tes déplacements depuis ou vers le campus"
+      "description": "Trouve ou propose un covoiturage pour tes déplacements depuis ou vers le campus",
+      "tags": 
+        {
+          "shopping": "Courses",
+          "weekend": "Week-end",
+          "other": "Autre"
+        },
+      "errors": {
+        "empty": "Aucun covoiturage trouvé"
+      },
+      "filters": {
+        "title": "Filtres",
+        "tripType": "Type de trajet",
+        "departureDate": "Date du départ",
+        "allDates": "Toutes les dates",
+        "chooseDate": "Choisir une date..."
+      }
     },
     "games": {
       "title": "Jeux",

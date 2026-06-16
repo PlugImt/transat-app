@@ -628,7 +628,23 @@
     },
     "covoit": {
       "title": "拼车",
-      "description": "寻找或发布拼车信息，方便你往返校园"
+       "description": "寻找或发布拼车信息，方便你往返校园",
+      "tags": 
+        {
+          "shopping": "购物",
+          "weekend": "周末",
+          "other": "其他"
+        },
+      "errors": {
+        "empty": "未找到拼车信息"
+      },
+      "filters": {
+        "title": "筛选器",
+        "tripType": "旅行类型",
+        "departureDate": "出发日期",
+        "allDates": "所有日期",
+        "chooseDate": "请选择日期..."
+      }
     },
     "games": {
       "title": "游戏",

@@ -41,7 +41,11 @@ const exportToCalendar = async () => {
       Alert.alert(t("common.error"), t("services.events.export.error.noCalendar"));
       return;
     }
-    
+    console.log("calendar", choosedCalendar);
+    console.log(
+      "allowsModifications",
+      choosedCalendar.allowsModifications
+    );
     await choosedCalendar.createEvent( {
       title: event.name,
       startDate: new Date(event.start_date),

@@ -628,7 +628,23 @@
     },
     "covoit": {
       "title": "Mitfahrgelegenheiten",
-      "description": "Finde oder biete eine Mitfahrgelegenheit für deine Fahrten vom oder zum Campus an"
+        "description": "Finde oder biete eine Mitfahrgelegenheit für deine Fahrten vom oder zum Campus an",
+      "tags": 
+        {
+          "shopping": "Einkaufen",
+          "weekend": "Wochenende",
+          "other": "Andere"
+        },
+      "errors": {
+        "empty": "Es wurde keine Mitfahrgelegenheit gefunden"
+      },
+      "filters": {
+        "title": "Filter",
+        "tripType": "Art der Fahrt",
+        "departureDate": "Abreisedatum",
+        "allDates": "Alle Termine",
+        "chooseDate": "Wähle ein Datum aus..."
+      }
     },
     "games": {
       "title": "Spiele",
@@ -658,6 +674,7 @@
           "tookBassine_one": "hat {{count}} Becken genommen",
           "tookBassine_other": "hat {{count}} Becken genommen"
         }
+
       }
     }
   },

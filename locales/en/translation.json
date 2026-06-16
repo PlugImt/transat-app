@@ -628,7 +628,23 @@
     },
     "covoit": {
       "title": "Carpooling",
-      "description": "Find or offer a carpool for your trips to or from campus"
+        "description": "Find or offer a carpool for your trips to or from campus",
+      "tags": 
+        {
+          "shopping": "Shopping",
+          "weekend": "Weekend",
+          "other": "Other"
+        },
+      "errors": {
+        "empty": "No carpools found"
+      },
+      "filters": {
+        "title": "Filters",
+        "tripType": "Type of trip",
+        "departureDate": "Departure date",
+        "allDates": "All dates",
+        "chooseDate": "Select a date..."
+      }
     },
     "games": {
       "title": "Games",

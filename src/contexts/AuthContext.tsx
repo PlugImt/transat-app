@@ -1,5 +1,4 @@
 import * as Sentry from "@sentry/react-native";
-import type { AxiosError } from "axios";
 import React, {
   createContext,
   type FC,
@@ -7,6 +6,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import { ApiError } from "@/api/errors";
 import type { Loading, NotLoggedIn, User } from "@/dto";
 import { useAuthMutations } from "@/hooks/auth/useAuthMutations";
 import { useVerificationCode } from "@/hooks/auth/useVerificationCode";
@@ -39,13 +39,13 @@ interface AuthContextType {
   isResending: boolean;
   resetPassword: (
     email: string,
-  ) => Promise<{ success: boolean; error?: string }>;
+  ) => Promise<{ success: boolean; error?: string; status?: number }>;
   changePassword: (
     email: string,
     verification_code: string,
     new_password: string,
     new_password_confirmation: string,
-  ) => Promise<{ success: boolean; error?: string }>;
+  ) => Promise<{ success: boolean; error?: string; status?: number }>;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(
@@ -105,12 +105,12 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
       });
       return { success: true };
     } catch (error) {
-      const axiosError = error as AxiosError<{ error: string }>;
-      const errorMessage = axiosError.response?.data?.error || "Login failed";
+      const apiError = ApiError.isApiError(error) ? error : null;
+      const errorMessage = apiError?.serverMessage ?? apiError?.message ?? "Login failed";
       console.error("Login failed:", error, errorMessage);
 
       if (
-        axiosError.response?.status === 401 &&
+        apiError?.status === 401 &&
         errorMessage === "Validate your account first"
       ) {
         return { needsVerification: true, email };
@@ -129,13 +129,14 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
       await registerMutation({ email, password, language });
       return { success: true };
     } catch (error) {
-      const axiosError = error as AxiosError;
-      if (axiosError.response?.status === 409) {
-        throw new Error("You already have an account");
-      }
+      if (ApiError.isApiError(error)) {
+        if (error.status === 409) {
+          throw new Error("You already have an account");
+        }
 
-      if (axiosError.response?.status === 400) {
-        throw new Error("Only IMT emails are allowed");
+        if (error.status === 400) {
+          throw new Error("Only IMT emails are allowed");
+        }
       }
 
       throw new Error("Registration failed");
@@ -193,6 +194,13 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
       return { success: true };
     } catch (error) {
       console.error("Error resetting password:", error);
+      if (ApiError.isApiError(error)) {
+        return {
+          success: false,
+          error: error.serverMessage ?? error.message,
+          status: error.status,
+        };
+      }
       return { success: false };
     }
   };
@@ -213,6 +221,13 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
       return { success: true };
     } catch (error) {
       console.error("Error changing password:", error);
+      if (ApiError.isApiError(error)) {
+        return {
+          success: false,
+          error: error.serverMessage ?? error.message,
+          status: error.status,
+        };
+      }
       return { success: false };
     }
   };

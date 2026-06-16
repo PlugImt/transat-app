@@ -1,8 +1,9 @@
 import type { SpanStatus } from "@sentry/core";
 import { spanToTraceHeader } from "@sentry/core";
 import * as Sentry from "@sentry/react-native";
-import type { AxiosRequestConfig } from "axios";
+import axios, { type AxiosRequestConfig } from "axios";
 import { t } from "i18next";
+import { ApiError } from "@/api/errors";
 import { Method } from "@/api/enums";
 import { getApiInstance } from "@/api/helpers/api-instance";
 import type { ApiMethod } from "@/api/types";
@@ -56,13 +57,23 @@ export const apiRequest = async <T>(
         span?.setStatus({ code: 1 } satisfies SpanStatus);
         return response.data;
       } catch (error) {
+        const fallbackMessage =
+          t("common.errors.occurred") || "An unexpected error occurred.";
+
+        if (axios.isAxiosError(error)) {
+          const apiError = ApiError.fromAxiosError(error, fallbackMessage);
+          span?.setStatus({
+            code: 2,
+            message: apiError.message,
+          } satisfies SpanStatus);
+          Sentry.captureException(apiError);
+          throw apiError;
+        }
+
         const err = error instanceof Error ? error : new Error(String(error));
         span?.setStatus({ code: 2, message: err.message } satisfies SpanStatus);
         Sentry.captureException(err);
-
-        throw new Error(
-          t("common.errors.occurred") || "An unexpected error occurred.",
-        );
+        throw err;
       }
     },
   );

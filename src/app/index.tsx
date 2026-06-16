@@ -1,9 +1,11 @@
+import React from "react";
 import { RootNavigator } from "@/navigation/RootNavigator";
 import "@/i18n";
 import "./global.css";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import * as Sentry from "@sentry/react-native";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "@/api/query-client";
 import * as Notifications from "expo-notifications";
 import { Provider } from "jotai";
 import { ToastProvider } from "@/components/common/Toast";
@@ -20,8 +22,6 @@ Notifications.setNotificationHandler({
   }),
 });
 const App = () => {
-  const queryClient = new QueryClient();
-
   return (
     <Provider>
       <ThemeProvider>

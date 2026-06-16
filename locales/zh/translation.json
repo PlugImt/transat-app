@@ -586,6 +586,18 @@
         "success": "活动更新成功",
         "error": "更新活动时出错"
       },
+      "export":{
+        "title":"导出到我的个人日历",
+        "error":{
+          "title": "导出活动时发生错误",
+          "noCalendar":"没有可用日程"
+        },
+        "permission":{
+          "title": "日历权限被拒绝",
+          "description": "请授权访问日历，以便导出此活动"
+        },
+        "success":"事件已成功导出"
+      },
       "delete": {
         "title": "删除活动",
         "description": "您确定要删除此活动吗？此操作不可逆。",

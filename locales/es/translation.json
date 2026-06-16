@@ -586,6 +586,18 @@
         "success": "Evento actualizado con éxito",
         "error": "Error al actualizar el evento"
       },
+      "export":{        
+        "title":"Exportar a mi calendario personal",
+        "error":{
+          "title": "Se ha producido un error al exportar el evento",
+          "noCalendar":"No hay ningún calendario disponible"
+        },
+        "permission":{
+          "title": "Permissão de calendário recusada",
+          "description": "Por favor, autorize o acesso ao calendário para poder exportar este evento"
+        },
+        "success":"Evento exportado correctamente"
+      },
       "delete": {
         "title": "Eliminar evento",
         "description": "¿Estás seguro de que deseas eliminar este evento? Esta acción es irreversible.",

@@ -23,12 +23,8 @@ const exportToCalendar = async () => {
     const { status } = await Calendar.requestCalendarPermissions(); 
     if (status !== "granted") {
       Alert.alert(
-        t("permissionsRequired"),
-        t("enableInSettings"),
-        [
-          { text: t("cancel"), style: "cancel" },
-          { text: t("openSettings"), onPress: () => Linking.openSettings() },
-        ]
+        t("services.events.export.permission.title"),
+        t("services.events.export.permission.description")
       );
       return;
     }
@@ -42,25 +38,11 @@ const exportToCalendar = async () => {
 
     }
     if(!choosedCalendar) {
-      Alert.alert(t("error"), t("noCalendar"));
+      Alert.alert(t("common.error"), t("services.events.export.error.noCalendar"));
       return;
     }
     
-    const existingEvents = await choosedCalendar.listEvents(
-      new Date(event.start_date),
-      event.end_date ? new Date(event.end_date) : new Date(event.start_date)
-    );
-
-    const duplicateEvent = existingEvents.find(
-      (e) => e.title === event.name && e.startDate.toLocaleString() === new Date(event.start_date).toLocaleString()
-    );
-
-    if (duplicateEvent) {
-      Alert.alert(t("error"), t("Duplicate"));
-      return;
-    }
-  
-    await choosedCalendar.createEvent( {
+    const id = await choosedCalendar.createEvent( {
       title: event.name,
       startDate: new Date(event.start_date),
       endDate: event.end_date ? new Date(event.end_date) : undefined,
@@ -68,18 +50,19 @@ const exportToCalendar = async () => {
       notes: event.description,
       url: event.link,
     });
+    Alert.alert(t("common.success"), t("services.events.export.success"));
     if(Platform.OS === 'android') {
       await Linking.openURL(`content://com.android.calendar/time/${new Date(event.start_date).getTime()}`);
     }
     if(Platform.OS === 'ios') {
-      await Linking.openURL(`calshow:${new Date(event.start_date).getTime() / 1000}`);
+      await Linking.openURL(`calshow:${new Date(event.start_date).getTime()}/${id}`);
     }
 
-    Alert.alert(t("success"), t("success"));
+    
 
   } catch (error) {
     console.error("Export error:", error);
-    Alert.alert(t("error"), t("failed"));
+    Alert.alert(t("common.error"), t("services.events.export.error.noCalendar"));
   } finally {
     setIsExporting(false);
   }
@@ -87,7 +70,7 @@ const exportToCalendar = async () => {
 
   return (
     <Button
-      label={t("export")}
+      label={t("services.events.export.title")}
       onPress={exportToCalendar}
       icon={<CalendarIcon size={16} />}
       disabled={disabled}

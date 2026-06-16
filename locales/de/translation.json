@@ -586,6 +586,18 @@
         "success": "Event erfolgreich aktualisiert",
         "error": "Fehler beim Aktualisieren des Events"
       },
+      "export":{
+        "title":"In meinen persönlichen Kalender exportieren",
+        "error":{
+          "title":"Beim Exportieren des Ereignisses ist ein Fehler aufgetreten",
+          "noCalendar":"Es ist kein Zeitplan verfügbar"
+        },
+        "permission":{
+          "title": "Kalenderberechtigung verweigert",
+          "description": "Bitte gewähren Sie Zugriff auf den Kalender, damit Sie diesen Termin exportieren können"
+        },
+        "success":"Ereignis erfolgreich exportiert"
+      },
       "delete": {
         "title": "Event löschen",
         "description": "Sind Sie sicher, dass Sie dieses Event löschen möchten? Diese Aktion ist nicht rückgängig zu machen.",

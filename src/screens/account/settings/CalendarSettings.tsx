@@ -1,3 +1,4 @@
+import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "expo-router/react-navigation";
 import { useEffect } from "react";
@@ -58,7 +59,9 @@ export const CalendarSettings = () => {
         onSuccess: () => {
           toast(t("settings.calendar.saveSuccess"), "success");
           hapticFeedback.success();
-          navigation.goBack();
+          navigation.navigate("ScheduleScreen", {
+            screen: "Schedule",
+          });
         },
         onError: (error) => {
           toast(error.message || t("settings.calendar.saveError"), "destructive");
@@ -74,7 +77,9 @@ export const CalendarSettings = () => {
       reset({ ics_url: "" });
       toast(t("settings.calendar.deleteSuccess"), "success");
       hapticFeedback.success();
-      navigation.goBack();
+      navigation.navigate("ScheduleScreen", {
+        screen: "Schedule",
+      });
     } catch {
       toast(t("settings.calendar.deleteError"), "destructive");
       hapticFeedback.error();

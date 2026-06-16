@@ -6,6 +6,9 @@ const sharedColors = {
 
   primary: "#ec7f32",
   secondary: "#0049a8",
+
+  blueFigmaDark: "#0049A8",
+  greenFigma: "#4CAF50",
 };
 
 const colors = {
@@ -56,6 +59,20 @@ const colors = {
     info: {
       DEFAULT: sharedColors.info,
       text: "#FFFFFF",
+    },
+    covoitTags: {
+      shopping: {
+        color: sharedColors.blueFigmaDark,
+        background: `${sharedColors.blueFigmaDark}1A`,
+      },
+      weekend: {
+        color: sharedColors.primary,
+        background: `${sharedColors.primary}1A`,
+      },
+      other: {
+        color: sharedColors.greenFigma,
+        background: `${sharedColors.greenFigma}1A`,
+      },
     },
   },
 };

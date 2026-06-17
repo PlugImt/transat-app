@@ -24,10 +24,7 @@ export const DepartureWidget = () => {
         <CardGroup title={t("services.departure.title")}>
             <Card className="flex-row justify-between bg-green-500 items-start">
                 {departure.map((item, index) => {
-                    const alignmentClass =
-                        index === 0 ? "items-start" :
-                            index === 1 ? "items-center" :
-                                "items-end";
+                    const alignmentClass = "items-center"
 
                     const isLast = index === 2;
 

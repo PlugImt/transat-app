@@ -8,6 +8,7 @@ export const QUERY_KEYS = {
   homework: ["homework"],
   laundry: ["laundry"],
   weather: ["weather"],
+  departure: ["departure"],
   user: ["user"],
   traq: ["traq"],
   bassine: {

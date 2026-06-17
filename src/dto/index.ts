@@ -12,4 +12,5 @@ export * from "./schedule";
 export * from "./timetable";
 export * from "./user";
 export * from "./weather";
+export * from "./departure";
 export * from "./covoiturage";

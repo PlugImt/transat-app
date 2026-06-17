@@ -75,6 +75,11 @@ const colors = {
       },
     },
   },
+  departure: {
+    C6: "#a877b2",
+    E5: "#e30613",
+    75: "#e8b975",
+  },
 };
 
 export default colors;

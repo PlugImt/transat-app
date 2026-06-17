@@ -308,6 +308,13 @@
     "price": "Preis",
     "additionalInfo": "Zusätzliche Informationen",
     "weather": "Wetter",
+    "departure": {
+      "title": "Um in die Innenstadt zu fahren...",
+      "approaching": "Der Bus kommt",
+      "alreadyGone": "Ist schon abgefahren",
+      "minutes": "Min",
+      "scheduledFor": "Um"
+    },
     "traq": {
       "title": "Traq",
       "description": "Alle an der Bar angebotenen Getränke",

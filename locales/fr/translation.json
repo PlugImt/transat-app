@@ -308,6 +308,13 @@
     "price": "Prix",
     "additionalInfo": "Informations complémentaires",
     "weather": "Météo",
+    "departure": {
+      "title": "Pour aller dans le centre ville...",
+      "approaching": "En approche",
+      "alreadyGone": "Déjà parti",
+      "minutes": "min",
+      "scheduledFor": "Prévu à"
+    },
     "traq": {
       "title": "Traq",
       "description": "Toutes les boissons proposées au bar",

@@ -24,12 +24,11 @@ export const DepartureWidget = () => {
         <CardGroup title={t("services.departure.title")}>
             <Card className="flex-row justify-between bg-green-500 items-start">
                 {departure.map((item, index) => {
-                    const alignmentClass = "items-center"
 
                     const isLast = index === 2;
 
                     return (
-                        <View key={index} className={`flex-1 ${alignmentClass}`}>
+                        <View key={index} className={`flex-1 items-center`}>
                             <Text
                                 variant="h1"
                                 className="rounded-lg px-3 py-1 text-white font-bold"
@@ -38,11 +37,11 @@ export const DepartureWidget = () => {
                                 {item.name}
                             </Text>
 
-                            <View className={`h-10 justify-end ${alignmentClass}`}>
+                            <View className={`h-10 justify-end items-center`}>
                                 {renderDepartureTime(item.nextDeparture, t, alignmentClass, isLast ? "font-semibold" : "")}
                             </View>
 
-                            <View className={`h-10 justify-end ${alignmentClass}`}>
+                            <View className={`h-10 justify-end items-center`}>
                                 {renderDepartureTime(item.nextDeparture2, t, alignmentClass, isLast ? "text-muted" : "")}
                             </View> 
                         </View>
@@ -106,7 +105,7 @@ const renderDepartureTime = (departureDate: Date | string | number, t: any, alig
     if (differenceInMinutes >= 60) {
         const hour = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
         return (
-            <View className={`flex-row items-baseline ${alignmentClass}`}>
+            <View className={`flex-row items-baseline items-center`}>
 
                 <Text className={`${extraStyles}`}>{t("services.departure.scheduledFor")} </Text>
                 <Text className="text-2xl font-bold leading-none">{hour}</Text>
@@ -123,7 +122,7 @@ const renderDepartureTime = (departureDate: Date | string | number, t: any, alig
     else if (differenceInMinutes >= 1) {
         const minutesLeft = Math.floor(differenceInMinutes);
         return (
-            <View className={`flex-row items-baseline ${alignmentClass}`}>
+            <View className={`flex-row items-baseline items-center`}>
                 <Text className="text-2xl font-bold leading-none">{minutesLeft}</Text>
                 <Text className={`${extraStyles}`}>{t("services.departure.minutes")}</Text>
             </View>

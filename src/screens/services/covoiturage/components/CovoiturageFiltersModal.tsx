@@ -77,7 +77,7 @@ export const CovoiturageFiltersModal = ({
             <View className="flex-row gap-3 flex-wrap">
               {[
                 { id: "SHOPPING", label: t("services.covoit.tags.shopping"), icon: <ShoppingCart size={15} /> },
-                { id: "WEEKEND", label: t("services.covoit.tags.weekend"), icon: <Sun size={15} /> },
+                { id: "LONG_TRIP", label: t("services.covoit.tags.long_trip"), icon: <Sun size={15} /> },
                 { id: "OTHER", label: t("services.covoit.tags.other"), icon: <Car size={15} /> }
               ].map((cat) => {
                 const isSelected = selectedCategories.includes(cat.id); // Vérification dans le tableau

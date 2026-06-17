@@ -101,7 +101,8 @@
     "imageSelector": {
       "placeholder": "Toque para selecionar uma imagem",
       "uploading": "Enviando..."
-    }
+    },
+    "whatsApp": "WhatsApp"
   },
   "auth": {
     "signIn": {
@@ -632,11 +633,14 @@
       "tags": 
         {
           "shopping": "Compras",
-          "weekend": "Fim de semana",
+          "long_trip": "Longa viagem",
           "other": "Outro"
         },
       "errors": {
-        "empty": "Não foram encontradas viagens partilhadas"
+        "empty": "Não foram encontradas viagens partilhadas",
+        "NotFound": "Não foi encontrada nenhuma viagem partilhada",
+        "notFoundDescription": "Esta viagem já não existe",
+        "whatsappError": "Não foi possível abrir o WhatsApp"  
       },
       "filters": {
         "title": "Filtros",
@@ -644,6 +648,24 @@
         "departureDate": "Data de partida",
         "allDates": "Todas as datas",
         "chooseDate": "Selecione uma data..."
+      },
+      "driver": "Condutor",
+      "route": "Percurso",
+      "actions": {
+        "setFull": "Marcar como lotado",
+        "setAvailable": "Disponibilizar novamente",
+        "archive": "Arquivar viagem"
+      },
+      "archive": {
+        "title": "Arquivar carona",
+        "description": "Tem certeza de que deseja arquivar esta carona? Ela não estará mais visível para os outros usuários. Esta ação é irreversível.",
+        "cancel": "Cancelar",
+        "confirm": "Arquivar"
+      },
+      "status": {
+        "available": "Disponível",
+        "full": "Lotado",
+        "archived": "Arquivado"
       }
     },
     "games": {

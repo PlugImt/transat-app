@@ -31,13 +31,13 @@ const getBadgeConfig = (tripType: string, t: (key: string) => string) => {
         icon: <ShoppingCart color={tagsColors.shopping.color} size={BADGE_ICON_SIZE} />,
         label: t("services.covoit.tags.shopping")
       };
-    case "WEEKEND":
-    case "WEEK-END":
+    case "LONG_TRIP":
+    case "LONG_TRIP":
       return {
-        color: tagsColors.weekend.color,
-        bgColor: tagsColors.weekend.background,
-        icon: <Sun color={tagsColors.weekend.color} size={BADGE_ICON_SIZE} />,
-        label: t("services.covoit.tags.weekend")
+        color: tagsColors.long_trip.color,
+        bgColor: tagsColors.long_trip.background,
+        icon: <Sun color={tagsColors.long_trip.color} size={BADGE_ICON_SIZE} />,
+        label: t("services.covoit.tags.long_trip")
       };
     case "OTHER":
       return {

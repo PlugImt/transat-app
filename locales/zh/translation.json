@@ -101,7 +101,8 @@
     "imageSelector": {
       "placeholder": "点击选择图片",
       "uploading": "上传中..."
-    }
+    },
+    "whatsApp": "WhatsApp"
   },
   "auth": {
     "signIn": {
@@ -632,11 +633,14 @@
       "tags": 
         {
           "shopping": "购物",
-          "weekend": "周末",
+          "long_trip": "长途旅行",
           "other": "其他"
         },
       "errors": {
-        "empty": "未找到拼车信息"
+        "empty": "未找到拼车信息",
+        "notFound": "找不到拼车信息",
+        "notFoundDescription": "该行程已不存在",
+        "whatsappError": "无法打开 WhatsApp"
       },
       "filters": {
         "title": "筛选器",
@@ -644,6 +648,24 @@
         "departureDate": "出发日期",
         "allDates": "所有日期",
         "chooseDate": "请选择日期..."
+      },
+      "driver": "驾驶员",
+      "route": "路线",
+      "actions": {
+        "setFull": "设为已满",
+        "setAvailable": "重新设为可选",
+        "archive": "归档行程"
+      },
+      "archive": {
+        "title": "归档拼车行程",
+        "description": "您确定要归档此行程吗？归档后其他用户将无法看到该行程。此操作无法撤销。",
+        "cancel": "取消",
+        "confirm": "归档"
+      },
+      "status": {
+        "available": "可选",
+        "full": "已满",
+        "archived": "已归档"
       }
     },
     "games": {

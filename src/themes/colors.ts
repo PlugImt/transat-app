@@ -65,7 +65,7 @@ const colors = {
         color: sharedColors.blueFigmaDark,
         background: `${sharedColors.blueFigmaDark}1A`,
       },
-      weekend: {
+      long_trip: {
         color: sharedColors.primary,
         background: `${sharedColors.primary}1A`,
       },

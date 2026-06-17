@@ -217,6 +217,21 @@
       "title": "Retroalimentación táctil",
       "description": "Vibra en interacciones"
     },
+    "calendar": {
+      "title": "Horario personal",
+      "subtitle": "Sincronizar tu calendario PASS",
+      "description": "Pega la URL ICS de tu calendario PASS para sincronizar eventos en Transat.",
+      "icsUrlLabel": "URL del calendario PASS",
+      "icsUrlPlaceholder": "https://inpass.imt-atlantique.fr/passcal/getics?...",
+      "saveSuccess": "URL guardada. Sincronización en curso...",
+      "saveError": "No se pudo guardar la URL del calendario",
+      "deleteSuccess": "Calendario eliminado",
+      "deleteError": "No se pudo eliminar el calendario",
+      "deleteTitle": "Eliminar calendario",
+      "deleteDescription": "Tus eventos sincronizados se eliminarán de Transat.",
+      "invalidUrl": "Introduce una URL válida",
+      "configureButton": "Configurar calendario"
+    },
     "appearance": {
       "title": "Apariencia",
       "theme": "Tema",
@@ -629,12 +644,11 @@
     "covoit": {
       "title": "Compartir coche",
       "description": "Encuentra u ofrece un viaje compartido para tus desplazamientos desde o hacia el campus",
-      "tags": 
-        {
-          "shopping": "Compras",
-          "weekend": "Fin de semana",
-          "other": "Otro"
-        },
+      "tags": {
+        "shopping": "Compras",
+        "weekend": "Fin de semana",
+        "other": "Otro"
+      },
       "errors": {
         "empty": "No se han encontrado viajes compartidos"
       },
@@ -648,7 +662,7 @@
     },
     "games": {
       "title": "Juegos",
-      "description":"Descubre los juegos del IMT; pronto habrá muchos más...",
+      "description": "Descubre los juegos del IMT; pronto habrá muchos más...",
       "bassine": {
         "title": "Cuenca",
         "description": "Cuando se sirve una cerveza, la cuenca se llena poco a poco, y cuando está llena puedes pedir que se llene tu vaso con\n\nPor cada vaso lleno, actualiza tu contador para ser el rey de la cuenca 👑",
@@ -673,12 +687,19 @@
           "followingPlace_other": "está {{count}} cuencas delante de ti",
           "tookBassine_one": "tomó {{count}} cuenca",
           "tookBassine_other": "tomó {{count}} cuencas"
-        }     
+        }
       }
     }
   },
   "schedule": {
-    "title":"Horario personal"
+    "title": "Horario personal",
+    "today": "Hoy",
+    "loading": "Cargando horario...",
+    "noEvents": "No hay eventos para este día",
+    "noEventsDescription": "Consulta PASS para las últimas actualizaciones.",
+    "notConfigured": "No hay calendario configurado",
+    "notConfiguredDescription": "Añade la URL de tu calendario PASS en ajustes para sincronizar tu horario personal.",
+    "lastSync": "Última sincronización {{time}}"
   },
   "user": {
     "contact": "Contactar",

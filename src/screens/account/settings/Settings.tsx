@@ -2,6 +2,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useNavigation } from "expo-router/react-navigation";
 import {
   Bell,
+  CalendarDays,
   FileText,
   Globe,
   HelpCircle,
@@ -95,6 +96,15 @@ export const Settings = () => {
           icon={<Shield color={theme.text} size={22} />}
           title={t("auth.resetPassword.changePassword")}
           onPress={() => navigation.navigate("ChangePassword")}
+        />
+      </SettingCategory>
+
+      <SettingCategory title={t("schedule.title")}>
+        <SettingsItem
+          icon={<CalendarDays color={theme.text} size={22} />}
+          title={t("settings.calendar.title")}
+          subtitle={t("settings.calendar.subtitle")}
+          onPress={() => navigation.navigate("CalendarSettings")}
         />
       </SettingCategory>
 

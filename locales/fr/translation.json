@@ -217,6 +217,21 @@
       "title": "Retour haptique",
       "description": "Vibre lors des interactions"
     },
+    "calendar": {
+      "title": "Emploi du temps personnel",
+      "subtitle": "Synchroniser votre calendrier PASS",
+      "description": "Collez l'URL ICS de votre calendrier PASS pour synchroniser vos événements dans Transat.",
+      "icsUrlLabel": "URL du calendrier PASS",
+      "icsUrlPlaceholder": "https://inpass.imt-atlantique.fr/passcal/getics?...",
+      "saveSuccess": "URL enregistrée. Synchronisation en cours...",
+      "saveError": "Impossible d'enregistrer l'URL du calendrier",
+      "deleteSuccess": "Calendrier supprimé",
+      "deleteError": "Impossible de supprimer le calendrier",
+      "deleteTitle": "Supprimer le calendrier",
+      "deleteDescription": "Vos événements synchronisés seront supprimés de Transat.",
+      "invalidUrl": "Veuillez saisir une URL valide",
+      "configureButton": "Configurer le calendrier"
+    },
     "appearance": {
       "title": "Apparence",
       "theme": "Thème",
@@ -629,12 +644,11 @@
     "covoit": {
       "title": "Covoiturage",
       "description": "Trouve ou propose un covoiturage pour tes déplacements depuis ou vers le campus",
-      "tags": 
-        {
-          "shopping": "Courses",
-          "weekend": "Week-end",
-          "other": "Autre"
-        },
+      "tags": {
+        "shopping": "Courses",
+        "weekend": "Week-end",
+        "other": "Autre"
+      },
       "errors": {
         "empty": "Aucun covoiturage trouvé"
       },
@@ -648,7 +662,7 @@
     },
     "games": {
       "title": "Jeux",
-      "description":"Retrouve les jeux de l'IMT, plein d'autres à venir...",
+      "description": "Retrouve les jeux de l'IMT, plein d'autres à venir...",
       "bassine": {
         "title": "Bassine",
         "description": "Lorsqu'une bière est servie la bassine se remplie petit à petit, et lorsqu'elle est pleine vous pouvez demander de remplir votre verre avec\n\nÀ chaque verre rempli, mettez à jour votre compteur pour être le roi de la bassine 👑",
@@ -663,17 +677,14 @@
             "emptyHistory": "Personne n'a encore pris de bassine",
             "emptyHistoryDescription": "Ajoute tes bassines au compteur pour les voir apparaître ici"
           },
-
           "firstPlaceLead_zero": "est à égalité",
           "firstPlaceLead_one": "est juste derrière vous",
           "firstPlaceLeader_few": "n'est qu'à {{count}} bassines derrière vous",
           "firstPlaceLead_other": "est {{count}} bassines derrière vous",
-
           "followingPlace_zero": "est à égalité",
           "followingPlace_one": "est juste devant",
           "followingPlace_few": "n'est qu'à {{count}} bassines devant vous",
           "followingPlace_other": "est {{count}} bassines devant vous",
-
           "tookBassine_one": "a pris {{count}} bassine",
           "tookBassine_other": "a pris {{count}} bassines"
         }
@@ -681,7 +692,14 @@
     }
   },
   "schedule": {
-    "title":"Emploi du temps personel"
+    "title": "Emploi du temps personel",
+    "today": "Aujourd'hui",
+    "loading": "Chargement de l'emploi du temps...",
+    "noEvents": "Aucun événement pour ce jour",
+    "noEventsDescription": "Vérifiez sur PASS pour les dernières mises à jour.",
+    "notConfigured": "Aucun calendrier configuré",
+    "notConfiguredDescription": "Ajoutez l'URL de votre calendrier PASS dans les paramètres pour synchroniser votre emploi du temps.",
+    "lastSync": "Dernière synchro {{time}}"
   },
   "user": {
     "contact": "Contacter",

@@ -10,6 +10,7 @@ import EditProfile from "@/screens/account/EditAccount";
 import About from "@/screens/account/settings/About";
 import { Appearance } from "@/screens/account/settings/Appearance";
 import ChangePassword from "@/screens/account/settings/ChangePassword";
+import CalendarSettings from "@/screens/account/settings/CalendarSettings";
 import Help from "@/screens/account/settings/Help";
 import Language from "@/screens/account/settings/Language";
 import Legal from "@/screens/account/settings/Legal";
@@ -139,6 +140,7 @@ const AccountStack = () => (
     <Stack.Screen name="EditProfile" component={EditProfile} />
     <Stack.Screen name="Settings" component={Settings} />
     <Stack.Screen name="ChangePassword" component={ChangePassword} />
+    <Stack.Screen name="CalendarSettings" component={CalendarSettings} />
     <Stack.Screen name="Notifications" component={Notifications} />
     <Stack.Screen name="Language" component={Language} />
     <Stack.Screen name="Appearance" component={Appearance} />

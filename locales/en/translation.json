@@ -217,6 +217,21 @@
       "title": "Haptic Feedback",
       "description": "Vibrate on interactions"
     },
+    "calendar": {
+      "title": "Personal schedule",
+      "subtitle": "Sync your PASS calendar",
+      "description": "Paste the ICS URL from your PASS calendar to sync events in Transat.",
+      "icsUrlLabel": "PASS calendar URL",
+      "icsUrlPlaceholder": "https://inpass.imt-atlantique.fr/passcal/getics?...",
+      "saveSuccess": "Calendar URL saved. Sync in progress...",
+      "saveError": "Unable to save calendar URL",
+      "deleteSuccess": "Calendar removed",
+      "deleteError": "Unable to remove calendar",
+      "deleteTitle": "Remove calendar",
+      "deleteDescription": "Your synced events will be removed from Transat.",
+      "invalidUrl": "Please enter a valid URL",
+      "configureButton": "Configure calendar"
+    },
     "appearance": {
       "title": "Appearance",
       "theme": "Theme",
@@ -628,13 +643,12 @@
     },
     "covoit": {
       "title": "Carpooling",
-        "description": "Find or offer a carpool for your trips to or from campus",
-      "tags": 
-        {
-          "shopping": "Shopping",
-          "weekend": "Weekend",
-          "other": "Other"
-        },
+      "description": "Find or offer a carpool for your trips to or from campus",
+      "tags": {
+        "shopping": "Shopping",
+        "weekend": "Weekend",
+        "other": "Other"
+      },
       "errors": {
         "empty": "No carpools found"
       },
@@ -648,7 +662,7 @@
     },
     "games": {
       "title": "Games",
-      "description":"Check out the IMT games – with plenty more to come...",
+      "description": "Check out the IMT games – with plenty more to come...",
       "bassine": {
         "title": "Basin",
         "description": "When a beer is served, the basin fills little by little, and when it's full you can ask to fill your glass with\n\nFor each glass filled, update your counter to be the king of the basin 👑",
@@ -678,7 +692,13 @@
     }
   },
   "schedule": {
-    "title":"Personal schedule"
+    "title": "Schedule",
+    "loading": "Loading schedule...",
+    "noEvents": "No events for this day",
+    "noEventsDescription": "Check PASS for the latest updates.",
+    "notConfigured": "No calendar configured",
+    "notConfiguredDescription": "Add your PASS calendar URL in settings to sync your personal schedule.",
+    "lastSync": "Last synced {{time}}"
   },
   "user": {
     "contact": "Contact",

@@ -217,6 +217,21 @@
       "title": "Retroalimentação tátil",
       "description": "Vibra em interações"
     },
+    "calendar": {
+      "title": "Horário pessoal",
+      "subtitle": "Sincronizar o calendário PASS",
+      "description": "Cole a URL ICS do seu calendário PASS para sincronizar eventos no Transat.",
+      "icsUrlLabel": "URL do calendário PASS",
+      "icsUrlPlaceholder": "https://inpass.imt-atlantique.fr/passcal/getics?...",
+      "saveSuccess": "URL salva. Sincronização em andamento...",
+      "saveError": "Não foi possível salvar a URL do calendário",
+      "deleteSuccess": "Calendário removido",
+      "deleteError": "Não foi possível remover o calendário",
+      "deleteTitle": "Remover calendário",
+      "deleteDescription": "Seus eventos sincronizados serão removidos do Transat.",
+      "invalidUrl": "Insira uma URL válida",
+      "configureButton": "Configurar calendário"
+    },
     "appearance": {
       "title": "Aparência",
       "theme": "Tema",
@@ -629,12 +644,11 @@
     "covoit": {
       "title": "Caroço",
       "description": "Encontra ou oferece uma boleia para as tuas deslocações de ou para o campus",
-      "tags": 
-        {
-          "shopping": "Compras",
-          "weekend": "Fim de semana",
-          "other": "Outro"
-        },
+      "tags": {
+        "shopping": "Compras",
+        "weekend": "Fim de semana",
+        "other": "Outro"
+      },
       "errors": {
         "empty": "Não foram encontradas viagens partilhadas"
       },
@@ -648,7 +662,7 @@
     },
     "games": {
       "title": "Jogos",
-      "description":"Zobacz gry IMT – wkrótce pojawi się ich jeszcze więcej...",
+      "description": "Zobacz gry IMT – wkrótce pojawi się ich jeszcze więcej...",
       "bassine": {
         "title": "Baía",
         "description": "Quando uma cerveja é servida, a baía enche pouco a pouco, e quando está cheia você pode pedir para encher seu copo com\n\nPara cada copo cheio, atualize seu contador para ser o rei da baía 👑",
@@ -678,7 +692,14 @@
     }
   },
   "schedule": {
-    "title":"Horário pessoal"
+    "title": "Horário pessoal",
+    "today": "Hoje",
+    "loading": "Carregando horário...",
+    "noEvents": "Nenhum evento para este dia",
+    "noEventsDescription": "Verifique no PASS as últimas atualizações.",
+    "notConfigured": "Nenhum calendário configurado",
+    "notConfiguredDescription": "Adicione a URL do seu calendário PASS nas configurações para sincronizar seu horário pessoal.",
+    "lastSync": "Última sincronização {{time}}"
   },
   "user": {
     "contact": "Contatar",

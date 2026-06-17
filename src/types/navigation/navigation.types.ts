@@ -44,6 +44,7 @@ export type BottomTabParamList = {
   EditProfile: undefined;
   Settings: undefined;
   ChangePassword: undefined;
+  CalendarSettings: undefined;
   Notifications: undefined;
   Language: undefined;
   Appearance: undefined;

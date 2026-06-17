@@ -217,6 +217,21 @@
       "title": "触觉反馈",
       "description": "在交互时振动"
     },
+    "calendar": {
+      "title": "个人日程",
+      "subtitle": "同步 PASS 日历",
+      "description": "粘贴 PASS 日历的 ICS URL，以在 Transat 中同步活动。",
+      "icsUrlLabel": "PASS 日历 URL",
+      "icsUrlPlaceholder": "https://inpass.imt-atlantique.fr/passcal/getics?...",
+      "saveSuccess": "日历 URL 已保存，正在同步...",
+      "saveError": "无法保存日历 URL",
+      "deleteSuccess": "日历已移除",
+      "deleteError": "无法移除日历",
+      "deleteTitle": "移除日历",
+      "deleteDescription": "已同步的活动将从 Transat 中删除。",
+      "invalidUrl": "请输入有效的 URL",
+      "configureButton": "配置日历"
+    },
     "appearance": {
       "title": "外观",
       "theme": "主题",
@@ -628,13 +643,12 @@
     },
     "covoit": {
       "title": "拼车",
-       "description": "寻找或发布拼车信息，方便你往返校园",
-      "tags": 
-        {
-          "shopping": "购物",
-          "weekend": "周末",
-          "other": "其他"
-        },
+      "description": "寻找或发布拼车信息，方便你往返校园",
+      "tags": {
+        "shopping": "购物",
+        "weekend": "周末",
+        "other": "其他"
+      },
       "errors": {
         "empty": "未找到拼车信息"
       },
@@ -648,7 +662,7 @@
     },
     "games": {
       "title": "游戏",
-      "description":"快来体验IMT的游戏吧，更多精彩内容即将上线……",
+      "description": "快来体验IMT的游戏吧，更多精彩内容即将上线……",
       "bassine": {
         "title": "池塘",
         "description": "当啤酒被服务时，池塘会慢慢填满，当它满时，你可以要求填满你的杯子\n\n每填满一个杯子，更新你的计数器，成为池塘之王 👑",
@@ -678,7 +692,14 @@
     }
   },
   "schedule": {
-    "title":"个人日程表"
+    "title": "个人日程表",
+    "today": "今天",
+    "loading": "正在加载日程...",
+    "noEvents": "当天没有活动",
+    "noEventsDescription": "请在 PASS 上查看最新更新。",
+    "notConfigured": "未配置日历",
+    "notConfiguredDescription": "在设置中添加 PASS 日历 URL 以同步个人日程。",
+    "lastSync": "上次同步 {{time}}"
   },
   "user": {
     "contact": "联系",

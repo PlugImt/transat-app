@@ -101,7 +101,8 @@
     "imageSelector": {
       "placeholder": "Appuyez pour sélectionner une image",
       "uploading": "Upload en cours..."
-    }
+    },
+    "whatsApp": "WhatsApp"
   },
   "auth": {
     "signIn": {
@@ -653,11 +654,14 @@
       "description": "Trouve ou propose un covoiturage pour tes déplacements depuis ou vers le campus",
       "tags": {
         "shopping": "Courses",
-        "weekend": "Week-end",
+        "long_trip": "Long trajet",
         "other": "Autre"
       },
       "errors": {
-        "empty": "Aucun covoiturage trouvé"
+        "empty": "Aucun covoiturage trouvé",
+        "notFound": "Covoiturage introuvable",
+        "notFoundDescription": "Ce trajet n'existe plus",
+        "whatsappError": "Impossible d'ouvrir WhatsApp"
       },
       "filters": {
         "title": "Filtres",
@@ -665,6 +669,24 @@
         "departureDate": "Date du départ",
         "allDates": "Toutes les dates",
         "chooseDate": "Choisir une date..."
+      },
+      "driver": "Conducteur",
+      "route": "Trajet",
+      "actions": {
+        "setFull": "Marquer comme Complet",
+        "setAvailable": "Remettre disponible",
+        "archive": "Archiver le trajet"
+      },
+      "archive": {
+        "title": "Archiver le covoiturage",
+        "description": "Êtes-vous sûr de vouloir archiver ce trajet ? Il ne sera plus visible par les autres utilisateurs. Cette action est irréversible.",
+        "cancel": "Annuler",
+        "confirm": "Archiver"
+      },
+      "status": {
+        "available": "Disponible",
+        "full": "Complet",
+        "archived": "Archivé"
       }
     },
     "games": {

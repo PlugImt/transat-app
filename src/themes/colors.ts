@@ -7,7 +7,8 @@ const sharedColors = {
   primary: "#ec7f32",
   secondary: "#0049a8",
 
-  blueFigmaDark: "#0049A8",
+  blueFigmaLight: "#0049A8", 
+  blueFigmaDark: "#4D94FF",
   greenFigma: "#4CAF50",
 };
 
@@ -22,6 +23,10 @@ const colors = {
     border: "#E5E7EB",
     backdrop: "#70758166",
     overlay: "#f5f4f2E5",
+    covoitShopping: {
+      color: sharedColors.blueFigmaLight,
+      background: `${sharedColors.blueFigmaLight}1A`,
+    }
   },
   dark: {
     background: "#070402",
@@ -33,6 +38,10 @@ const colors = {
     border: "#403D3D",
     backdrop: "#000000CC",
     overlay: "#070402E5",
+    covoitShopping: {
+      color: sharedColors.blueFigmaDark,
+      background: `${sharedColors.blueFigmaDark}26`,
+    }
   },
   shared: {
     primary: {
@@ -65,7 +74,7 @@ const colors = {
         color: sharedColors.blueFigmaDark,
         background: `${sharedColors.blueFigmaDark}1A`,
       },
-      weekend: {
+      long_trip: {
         color: sharedColors.primary,
         background: `${sharedColors.primary}1A`,
       },

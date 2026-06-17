@@ -101,7 +101,8 @@
     "imageSelector": {
       "placeholder": "Tap to select an image",
       "uploading": "Uploading..."
-    }
+    },
+    "whatsApp": "WhatsApp"
   },
   "auth": {
     "signIn": {
@@ -653,11 +654,14 @@
       "description": "Find or offer a carpool for your trips to or from campus",
       "tags": {
         "shopping": "Shopping",
-        "weekend": "Weekend",
+        "long_trip": "Long trip",
         "other": "Other"
       },
       "errors": {
-        "empty": "No carpools found"
+        "empty": "No carpools found",
+        "notFound": "Carpool not found",
+        "notFoundDescription": "This carpool no longer exists",
+        "whatsappError": "Could not open WhatsApp"
       },
       "filters": {
         "title": "Filters",
@@ -665,6 +669,24 @@
         "departureDate": "Departure date",
         "allDates": "All dates",
         "chooseDate": "Select a date..."
+      },
+      "driver": "Driver",
+      "route": "Route",
+      "actions": {
+        "setFull": "Mark as Full",
+        "setAvailable": "Make Available Again",
+        "archive": "Archive ride"
+      },
+      "archive": {
+        "title": "Archive carpool",
+        "description": "Are you sure you want to archive this ride? It will no longer be visible to other users. This action cannot be undone.",
+        "cancel": "Cancel",
+        "confirm": "Archive"
+      },
+      "status": {
+        "available": "Available",
+        "full": "Full",
+        "archived": "Archived"
       }
     },
     "games": {

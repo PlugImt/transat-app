@@ -9,3 +9,18 @@ export const getCovoiturages = async () => {
     Method.GET,
   );
 };
+
+export const getCovoiturageDetails = async (id: number) => {
+  return await apiRequest<Covoiturage>(
+    `${API_ROUTES.covoiturage}/${id}`,
+    Method.GET,
+  );
+};
+
+export const updateCovoiturage = async (id: number, data: { status: "OPEN" | "FULL" | "ARCHIVED" }) => {
+  return await apiRequest<Covoiturage>(
+    `${API_ROUTES.covoiturage}/${id}/status`,
+    Method.PATCH, 
+    data,
+  );
+};

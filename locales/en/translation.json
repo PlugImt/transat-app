@@ -293,6 +293,13 @@
     "price": "Price",
     "additionalInfo": "Additional information",
     "weather": "Weather",
+    "departure": {
+      "title": "To get to downtown...",
+      "approaching": "On its way",
+      "alreadyGone": "Already left",
+      "minutes": "min",
+      "scheduledFor": "At"
+    },
     "traq": {
       "title": "Traq",
       "description": "All drinks offered at the bar",

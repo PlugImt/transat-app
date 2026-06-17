@@ -293,6 +293,13 @@
     "price": "Precio",
     "additionalInfo": "Información adicional",
     "weather": "Clima",
+    "departure": {
+      "title": "Para llegar al centro...",
+      "approaching": "Está llegando",
+      "alreadyGone": "Ya se ha ido",
+      "minutes": "min",
+      "scheduledFor": "A las"
+    },
     "traq": {
       "title": "Traq",
       "description": "Todas las bebidas ofrecidas en el bar",

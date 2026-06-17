@@ -293,6 +293,13 @@
     "price": "价格",
     "additionalInfo": "附加信息",
     "weather": "天气",
+    "departure": {
+      "title": "前往市中心...",
+      "approaching": "即将到达",
+      "alreadyGone": "已经开走了",
+      "minutes": "分钟",
+      "scheduledFor": "分"
+    },
     "traq": {
       "title": "Traq",
       "description": "酒吧提供的所有饮品",

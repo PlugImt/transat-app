@@ -6,12 +6,14 @@ import LaundryWidget from "@/screens/services/laundry/widget/LaundryWidget";
 import { RestaurantWidget } from "@/screens/services/restaurant/widget/RestaurantWidget";
 import TimetableWidget from "@/screens/services/schedule/widget/TimetableWidget";
 import { WeatherWidget } from "@/screens/services/weather/widget/WeatherWidget";
+import { DepartureWidget } from "@/screens/services/departure/widget/DepartureWidget";
 import type { PreferenceId, WidgetType } from "@/services/storage/preferences";
 
 export function useWidgetComponents() {
   const widgetComponents = React.useMemo(
     () => ({
       weather: () => React.createElement(WeatherWidget),
+      departure: () => React.createElement(DepartureWidget),
       restaurant: () => React.createElement(RestaurantWidget),
       timetable: () => React.createElement(TimetableWidget),
       homework: () => React.createElement(HomeworkWidget),

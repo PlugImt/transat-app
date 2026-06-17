@@ -3,6 +3,7 @@ import type { ImageSourcePropType } from "react-native";
 
 export type WidgetType =
   | "weather"
+  | "departure"
   | "restaurant"
   | "timetable"
   | "homework"
@@ -43,6 +44,7 @@ const SERVICES_KEY = "services_preferences";
 
 const getDefaultHomeWidgets = (t: (key: string) => string): Preference[] => [
   { id: "weather", name: t("services.weather"), enabled: true, order: 0 },
+  { id: "departure", name: t("services.departure"), enabled: true, order: 0 },
   {
     id: "restaurant",
     name: t("services.restaurant.title"),

@@ -1,9 +1,10 @@
+import React from "react";
 import { View } from "react-native";
 import Card from "@/components/common/Card";
 import { Text } from "@/components/common/Text";
 import { AvatarSkeleton, TextSkeleton } from "@/components/Skeleton";
 import { useDeparture } from "@/hooks/services/departure/useDeparture";
-import {CardGroup} from "@/components/common";
+import { CardGroup } from "@/components/common";
 import colors from "@/themes/colors";
 import { useTranslation } from "react-i18next";
 
@@ -21,7 +22,7 @@ export const DepartureWidget = () => {
 
     return (
         <CardGroup title={t("services.departure.title")}>
-            <Card className="flex-row justify-between items-start">
+            <Card className="flex-row justify-between bg-green-500 items-start">
                 {departure.map((item, index) => {
                     const alignmentClass =
                         index === 0 ? "items-start" :
@@ -34,7 +35,7 @@ export const DepartureWidget = () => {
                         <View key={index} className={`flex-1 ${alignmentClass}`}>
                             <Text
                                 variant="h1"
-                                className="rounded-xl px-3 py-1 text-white font-bold"
+                                className="rounded-lg px-3 py-1 text-white font-bold"
                                 style={{ backgroundColor: colors.departure[item.name as keyof typeof colors.departure] || '#000' }}
                             >
                                 {item.name}
@@ -46,7 +47,7 @@ export const DepartureWidget = () => {
 
                             <View className={`h-10 justify-end ${alignmentClass}`}>
                                 {renderDepartureTime(item.nextDeparture2, t, alignmentClass, isLast ? "text-muted" : "")}
-                            </View>
+                            </View> 
                         </View>
                     );
                 })}
@@ -95,22 +96,23 @@ export const DepartureError = () => {
     );
 };
 
-const renderDepartureTime = (departureDate: any, t: any, alignmentClass: string, extraStyles: string): React.ReactNode => {
-    if (!(departureDate instanceof Date) || isNaN(departureDate.getTime())) {
+const renderDepartureTime = (departureDate: Date | string | number, t: any, alignmentClass: string, extraStyles: string): React.ReactNode => {
+    const date = new Date(departureDate);
+    if (isNaN(date.getTime())) {
         return "";
     }
 
     const now = new Date();
-    const differenceInMs = departureDate.getTime() - now.getTime();
+    const differenceInMs = date.getTime() - now.getTime();
     const differenceInMinutes = differenceInMs / (1000 * 60);
 
     if (differenceInMinutes >= 60) {
-        const hour = departureDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+        const hour = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
         return (
             <View className={`flex-row items-baseline ${alignmentClass}`}>
 
                 <Text className={`${extraStyles}`}>{t("services.departure.scheduledFor")} </Text>
-                <Text className="text-3xl font-bold leading-none">{hour}</Text>
+                <Text className="text-2xl font-bold leading-none">{hour}</Text>
             </View>
         );
     }
@@ -125,7 +127,7 @@ const renderDepartureTime = (departureDate: any, t: any, alignmentClass: string,
         const minutesLeft = Math.floor(differenceInMinutes);
         return (
             <View className={`flex-row items-baseline ${alignmentClass}`}>
-                <Text className="text-3xl font-bold leading-none">{minutesLeft}</Text>
+                <Text className="text-2xl font-bold leading-none">{minutesLeft}</Text>
                 <Text className={`${extraStyles}`}>{t("services.departure.minutes")}</Text>
             </View>
         );

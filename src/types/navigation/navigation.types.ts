@@ -21,6 +21,7 @@ export type BottomTabParamList = {
   ClubDetails: { id: number };
   ClubMemberList: { id: number };
   ClubEvents: { id: number };
+  CovoiturageDetails: { id: number };
   EventMemberList: { id: number };
   Events: undefined;
   EventDetails: { id: number };

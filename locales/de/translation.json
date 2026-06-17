@@ -101,7 +101,8 @@
     "imageSelector": {
       "placeholder": "Tippen Sie, um ein Bild auszuwählen",
       "uploading": "Upload läuft..."
-    }
+    },
+    "whatsApp": "WhatsApp"
   },
   "auth": {
     "signIn": {
@@ -646,11 +647,14 @@
       "description": "Finde oder biete eine Mitfahrgelegenheit für deine Fahrten vom oder zum Campus an",
       "tags": {
         "shopping": "Einkaufen",
-        "weekend": "Wochenende",
+        "long_trip": "Lange Fahrt",
         "other": "Andere"
       },
       "errors": {
-        "empty": "Es wurde keine Mitfahrgelegenheit gefunden"
+        "empty": "Es wurde keine Mitfahrgelegenheit gefunden",
+        "notFound": "Keine Mitfahrgelegenheit gefunden",
+        "notFoundDescription": "Diese Fahrt existiert nicht mehr",
+        "whatsappError": "WhatsApp konnte nicht geöffnet werden"
       },
       "filters": {
         "title": "Filter",
@@ -658,6 +662,24 @@
         "departureDate": "Abreisedatum",
         "allDates": "Alle Termine",
         "chooseDate": "Wähle ein Datum aus..."
+      },
+      "driver": "Fahrer",
+      "route": "Anfahrt",
+      "actions": {
+        "setFull": "Als ausgebucht markieren",
+        "setAvailable": "Wieder verfügbar machen",
+        "archive": "Fahrt archivieren"
+      },
+      "archive": {
+        "title": "Fahrt archivieren",
+        "description": "Sind Sie sicher, dass Sie diese Fahrt archivieren möchten? Sie wird für andere Nutzer nicht mehr sichtbar sein. Diese Aktion kann nicht rückgängig gemacht werden.",
+        "cancel": "Abbrechen",
+        "confirm": "Archivieren"
+      },
+      "status": {
+        "available": "Verfügbar",
+        "full": "Ausgebucht",
+        "archived": "Archiviert"
       }
     },
     "games": {

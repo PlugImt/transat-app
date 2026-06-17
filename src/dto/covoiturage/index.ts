@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const covoiturageSchema = z.object({
   id: z.number(),
-  name: z.string(),
+  description: z.string(),
   departure_time: z.string(),
   departure_place: z.string(),
   destination: z.string(),
@@ -12,7 +12,9 @@ export const covoiturageSchema = z.object({
     last_name: z.string(),
     profile_picture: z.string().nullable().optional(),
   }),
-  trip_type: z.enum(["SHOPPING", "WEEKEND","OTHER"]),
+  trip_type: z.enum(["SHOPPING", "LONG_TRIP","OTHER"]),
+  status: z.enum(["OPEN", "FULL", "ARCHIVED"]),
+  contact_details: z.string(),
 });
 
 export type Covoiturage = z.infer<typeof covoiturageSchema>;

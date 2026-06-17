@@ -36,6 +36,8 @@ export const Covoiturages = () => {
   const isFilteringActive = selectedCategories.length > 0 || dateFilter !== null;
 
   const filteredCovoiturages = (covoiturages || []).filter((covoit) => {
+    if (covoit.status !== "OPEN") return false;
+
     const searchLower = searchValue.toLowerCase().trim();
     if (searchLower) {
       const departure = covoit.departure_place?.toLowerCase() || "";
@@ -44,15 +46,15 @@ export const Covoiturages = () => {
       if (!departure.includes(searchLower) && !destination.includes(searchLower) && !driver.includes(searchLower)) return false;
     }
 
-  if (selectedCategories.length > 0) {
-    const type = covoit.trip_type;
+    if (selectedCategories.length > 0) {
+      const type = covoit.trip_type;
 
-    const matchShopping = selectedCategories.includes("SHOPPING") && type === "SHOPPING";
-    const matchOther = selectedCategories.includes("OTHER") && type === "OTHER";
-    const matchWeekend = selectedCategories.includes("WEEKEND") && type === "WEEKEND";
+      const matchShopping = selectedCategories.includes("SHOPPING") && type === "SHOPPING";
+      const matchOther = selectedCategories.includes("OTHER") && type === "OTHER";
+      const matchLongTrip = selectedCategories.includes("LONG_TRIP") && type === "LONG_TRIP";
 
-    if (!matchShopping && !matchOther && !matchWeekend) return false;
-  }
+      if (!matchShopping && !matchOther && !matchLongTrip) return false;
+    }
 
     if (dateFilter instanceof Date) {
       if (new Date(covoit.departure_time).toDateString() !== dateFilter.toDateString()) return false;

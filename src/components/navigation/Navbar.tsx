@@ -37,6 +37,7 @@ import ClubEvents from "@/screens/services/events/ClubEvents";
 import { AddEvent } from "@/screens/services/events/components/AddEvent";
 import { EditEvent } from "@/screens/services/events/components/EditEvent";
 import EventDetails from "@/screens/services/events/components/EventDetails";
+import CovoiturageDetails from "@/screens/services/covoiturage/components/CovoiturageDetails";
 import { EventMemberList } from "@/screens/services/events/components/EventMemberList";
 import Events from "@/screens/services/events/Events";
 import { FourchettasOrder } from "@/screens/services/fourchettas/components/order/FourchettasOrder";
@@ -87,6 +88,7 @@ const HomeStack = () => (
     <Stack.Screen name="Olimtpe" component={Olimtpe} />
     <Stack.Screen name="Plannings" component={Plannings} />
     <Stack.Screen name="Covoiturage" component={Covoiturages} />
+    <Stack.Screen name="CovoiturageDetails" component={CovoiturageDetails} />
   </Stack.Navigator>
 );
 
@@ -103,6 +105,7 @@ const ServicesStack = () => (
     <Stack.Screen name="ClubDetails" component={ClubDetails} />
     <Stack.Screen name="ClubMemberList" component={ClubMemberList} />
     <Stack.Screen name="ClubEvents" component={ClubEvents} />
+    <Stack.Screen name="CovoiturageDetails" component={CovoiturageDetails} />
     <Stack.Screen name="Associations" component={Associations} />
     <Stack.Screen name="AssociationDetails" component={AssociationDetails} />
     <Stack.Screen name="AssociationMemberList" component={AssociationMemberList} />

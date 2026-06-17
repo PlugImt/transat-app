@@ -19,31 +19,31 @@ type CovoiturageCardProps = {
   covoiturage: Covoiturage;
 };
 
-const getBadgeConfig = (tripType: string, t: (key: string) => string) => {
-  const tagsColors = colors.shared.covoitTags;
+const getBadgeConfig = (tripType: string, isDark: boolean, t: (key: string) => string) => {
+  const sharedTags = colors.shared.covoitTags;
   const BADGE_ICON_SIZE = 12;
 
   switch (tripType) {
     case "SHOPPING":
+      const shoppingColors = isDark ? colors.dark.covoitShopping : colors.light.covoitShopping;
       return {
-        color: tagsColors.shopping.color,
-        bgColor: tagsColors.shopping.background, 
-        icon: <ShoppingCart color={tagsColors.shopping.color} size={BADGE_ICON_SIZE} />,
+        color: shoppingColors.color,
+        bgColor: shoppingColors.background, 
+        icon: <ShoppingCart color={shoppingColors.color} size={BADGE_ICON_SIZE} />,
         label: t("services.covoit.tags.shopping")
       };
-    case "WEEKEND":
-    case "WEEK-END":
+    case "LONG_TRIP":
       return {
-        color: tagsColors.weekend.color,
-        bgColor: tagsColors.weekend.background,
-        icon: <Sun color={tagsColors.weekend.color} size={BADGE_ICON_SIZE} />,
-        label: t("services.covoit.tags.weekend")
+        color: sharedTags.long_trip.color,
+        bgColor: sharedTags.long_trip.background,
+        icon: <Sun color={sharedTags.long_trip.color} size={BADGE_ICON_SIZE} />,
+        label: t("services.covoit.tags.long_trip")
       };
     case "OTHER":
       return {
-        color: tagsColors.other.color,
-        bgColor: tagsColors.other.background, 
-        icon: <Car color={tagsColors.other.color} size={BADGE_ICON_SIZE} />, 
+        color: sharedTags.other.color,
+        bgColor: sharedTags.other.background, 
+        icon: <Car color={sharedTags.other.color} size={BADGE_ICON_SIZE} />, 
         label: t("services.covoit.tags.other")
       };
     default:
@@ -55,6 +55,8 @@ export const CovoiturageCard = ({ covoiturage }: CovoiturageCardProps) => {
   const { theme } = useTheme();
   const navigation = useNavigation<NavigationProp>();
   const { t, i18n } = useTranslation();
+
+  const isDark = theme.background === colors.dark.background;
 
   const departureTime = new Date(covoiturage.departure_time);
   
@@ -69,7 +71,7 @@ export const CovoiturageCard = ({ covoiturage }: CovoiturageCardProps) => {
   const separator = i18n.language?.startsWith("fr") ? "h" : ":";
   const formattedTime = `${hours}${separator}${minutes}`;
 
-  const badge = getBadgeConfig(covoiturage.trip_type, t);
+  const badge = getBadgeConfig(covoiturage.trip_type, isDark, t);
   const driverName = `${covoiturage.creator.first_name} ${covoiturage.creator.last_name?.charAt(0)}.`;
 
   return (

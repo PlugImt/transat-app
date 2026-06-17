@@ -101,7 +101,8 @@
     "imageSelector": {
       "placeholder": "Toca para seleccionar una imagen",
       "uploading": "Subiendo..."
-    }
+    },
+    "whatsApp": "WhatsApp"
   },
   "auth": {
     "signIn": {
@@ -646,11 +647,14 @@
       "description": "Encuentra u ofrece un viaje compartido para tus desplazamientos desde o hacia el campus",
       "tags": {
         "shopping": "Compras",
-        "weekend": "Fin de semana",
+        "long_trip": "Viaje largo",
         "other": "Otro"
       },
       "errors": {
-        "empty": "No se han encontrado viajes compartidos"
+        "empty": "No se han encontrado viajes compartidos",
+        "notFound": "No se ha encontrado ningún viaje compartido",
+        "notFoundDescription": "Este trayecto ya no existe",
+        "whatsappError": "No se pudo abrir WhatsApp"
       },
       "filters": {
         "title": "Filtros",
@@ -658,6 +662,24 @@
         "departureDate": "Fecha de salida",
         "allDates": "Todas las fechas",
         "chooseDate": "Selecciona una fecha..."
+      },
+      "driver": "Conductor",
+      "route": "Recorrido",
+      "actions": {
+        "setFull": "Marcar como lleno",
+        "setAvailable": "Volver a poner disponible",
+        "archive": "Archivar viaje"
+      },
+      "archive": {
+        "title": "Archivar viaje",
+        "description": "¿Está seguro de que desea archivar este viaje? Ya no será visible para los demás usuarios. Esta acción es irreversible.",
+        "cancel": "Cancelar",
+        "confirm": "Archivar"
+      },
+      "status": {
+        "available": "Disponible",
+        "full": "Lleno",
+        "archived": "Archivado"
       }
     },
     "games": {

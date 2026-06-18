@@ -28,7 +28,7 @@ interface DateTimePickerProps {
   errors: any;
   onChange: UseFormSetValue<any>;
   startDateField: string;
-  endDateField: string;
+  endDateField?: string;
   label?: string;
   initialStartDate?: string;
   initialEndDate?: string;
@@ -53,6 +53,8 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
   const { t, i18n } = useTranslation();
   const { formatDate, formatTime } = useDate();
   const calendarStyles = useDateTimePickerStyle();
+
+  const isRangeMode = !!endDateField;
 
   const initialStartDateTime = useMemo(() => {
     if (initialStartDate) {
@@ -96,7 +98,6 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
     return formatDate(dateObj, "short");
   };
 
-  // Mettre à jour les valeurs du formulaire quand les dates/heures changent
   useEffect(() => {
     if (startDateTime.date) {
       const startISO = createDateTimeISO(
@@ -108,13 +109,15 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
   }, [startDateTime, onChange, startDateField]);
 
   useEffect(() => {
+    if (!isRangeMode || !endDateField) return;
+
     if (endDateTime.date) {
       const endISO = createDateTimeISO(endDateTime.date, endDateTime.time);
       onChange(endDateField, endISO);
     } else {
       onChange(endDateField, undefined);
     }
-  }, [endDateTime, onChange, endDateField]);
+  }, [endDateTime, onChange, endDateField, isRangeMode]);
 
   const handleStartDateChange = (newDate: DateType) => {
     setStartDateTime((prev) => ({
@@ -149,7 +152,7 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
   };
 
   const getRangeText = () => {
-    if (startDateTime.date && endDateTime.date) {
+    if (isRangeMode && startDateTime.date && endDateTime.date) {
       return `${formatDateDisplay(startDateTime.date)} - ${formatDateDisplay(endDateTime.date)}`;
     }
     if (startDateTime.date) {
@@ -172,16 +175,21 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
             >
               <CalendarPicker
                 locale={i18n.language}
-                mode="range"
-                startDate={startDateTime.date}
-                endDate={endDateTime.date}
+                mode={isRangeMode ? "range" : "single"}
+                date={!isRangeMode ? startDateTime.date : undefined}
+                startDate={isRangeMode ? startDateTime.date : undefined}
+                endDate={isRangeMode ? endDateTime.date : undefined}
                 minDate={new Date()}
                 onChange={(params) => {
-                  if (params.startDate !== undefined) {
-                    handleStartDateChange(params.startDate);
-                  }
-                  if (params.endDate !== undefined) {
-                    handleEndDateChange(params.endDate);
+                  if (!isRangeMode && params.date !== undefined) {
+                    handleStartDateChange(params.date);
+                  } else {
+                    if (params.startDate !== undefined) {
+                      handleStartDateChange(params.startDate);
+                    }
+                    if (params.endDate !== undefined) {
+                      handleEndDateChange(params.endDate);
+                    }
                   }
                 }}
                 styles={calendarStyles}
@@ -207,7 +215,7 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
             color="muted"
             className={`${Platform.OS === "ios" ? "ml-4" : null}`}
           >
-            Début
+            {isRangeMode ? "Début" : t("common.hour")}
           </Text>
           <Controller
             control={control}
@@ -243,7 +251,6 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
                         textColor={theme.text}
                         themeVariant={actualTheme}
                         onChange={(event, selectedDate) => {
-                          // On Android, close the picker whether set or dismissed
                           if (event?.type === "set" && selectedDate) {
                             handleStartTimeChange(selectedDate);
                           }
@@ -258,61 +265,63 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
           />
         </View>
 
-        <View className="gap-1.5">
-          <Text
-            variant="sm"
-            color="muted"
-            className={`${Platform.OS === "ios" ? "ml-4" : null}`}
-          >
-            Fin
-          </Text>
-          <Controller
-            control={control}
-            name={endDateField}
-            render={() => (
-              <>
-                {Platform.OS === "ios" ? (
-                  <NativeDateTimePicker
-                    value={endDateTime.time}
-                    mode="time"
-                    display="default"
-                    textColor={theme.text}
-                    accentColor={theme.primary}
-                    themeVariant={actualTheme}
-                    onChange={(_, selectedDate) => {
-                      handleEndTimeChange(selectedDate);
-                    }}
-                  />
-                ) : (
-                  <>
-                    <InputButton
-                      Icon={Clock}
-                      placeholder={t("services.events.add.endTime")}
-                      value={formatTime(endDateTime.time)}
-                      onPress={() => setShowEndTimePicker(true)}
+        {isRangeMode && endDateField && (
+          <View className="gap-1.5">
+            <Text
+              variant="sm"
+              color="muted"
+              className={`${Platform.OS === "ios" ? "ml-4" : null}`}
+            >
+              Fin
+            </Text>
+            <Controller
+              control={control}
+              name={endDateField}
+              render={() => (
+                <>
+                  {Platform.OS === "ios" ? (
+                    <NativeDateTimePicker
+                      value={endDateTime.time}
+                      mode="time"
+                      display="default"
+                      textColor={theme.text}
+                      accentColor={theme.primary}
+                      themeVariant={actualTheme}
+                      onChange={(_, selectedDate) => {
+                        handleEndTimeChange(selectedDate);
+                      }}
                     />
-                    {showEndTimePicker && (
-                      <NativeDateTimePicker
-                        value={endDateTime.time}
-                        mode="time"
-                        display="default"
-                        textColor={theme.text}
-                        accentColor={theme.primary}
-                        themeVariant={actualTheme}
-                        onChange={(event, selectedDate) => {
-                          if (event?.type === "set" && selectedDate) {
-                            handleEndTimeChange(selectedDate);
-                          }
-                          setShowEndTimePicker(false);
-                        }}
+                  ) : (
+                    <>
+                      <InputButton
+                        Icon={Clock}
+                        placeholder={t("services.events.add.endTime")}
+                        value={formatTime(endDateTime.time)}
+                        onPress={() => setShowEndTimePicker(true)}
                       />
-                    )}
-                  </>
-                )}
-              </>
-            )}
-          />
-        </View>
+                      {showEndTimePicker && (
+                        <NativeDateTimePicker
+                          value={endDateTime.time}
+                          mode="time"
+                          display="default"
+                          textColor={theme.text}
+                          accentColor={theme.primary}
+                          themeVariant={actualTheme}
+                          onChange={(event, selectedDate) => {
+                            if (event?.type === "set" && selectedDate) {
+                              handleEndTimeChange(selectedDate);
+                            }
+                            setShowEndTimePicker(false);
+                          }}
+                        />
+                      )}
+                    </>
+                  )}
+                </>
+              )}
+            />
+          </View>
+        )}
       </View>
 
       {errors[startDateField] && (
@@ -320,7 +329,7 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
           {errors[startDateField].message}
         </Text>
       )}
-      {errors[endDateField] && (
+      {isRangeMode && endDateField && errors[endDateField] && (
         <Text color="destructive" variant="sm">
           {errors[endDateField].message}
         </Text>

@@ -2,9 +2,11 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   getCovoiturages,
   getCovoiturageDetails,
-  updateCovoiturage
+  updateCovoiturage,
+  createCovoiturage,
 } from "@/api";
 import { QUERY_KEYS } from "@/constants";
+import { Covoiturage } from "@/dto";
 
 export const useCovoiturage = () => {
   const { data, isPending, refetch, isError, error } = useQuery({
@@ -31,6 +33,23 @@ export const useUpdateCovoiturage = () => {
   const { mutate, mutateAsync, isPending, isError, error } = useMutation({
     mutationFn: ({ id, status }: { id: number; status: "OPEN" | "FULL" | "ARCHIVED" }) =>
       updateCovoiturage(id, { status }),
+    
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.covoiturage.covoiturages,
+      });
+    },
+  });
+
+  return { mutate, mutateAsync, isPending, isError, error };
+};
+
+export const useAddCovoiturage = () => {
+  const queryClient = useQueryClient();
+
+  const { mutate, mutateAsync, isPending, isError, error } = useMutation({
+    mutationFn: (newCovoit: Omit<Covoiturage, "id" | "creator" | "status">) =>
+      createCovoiturage(newCovoit),
     
     onSuccess: () => {
       queryClient.invalidateQueries({

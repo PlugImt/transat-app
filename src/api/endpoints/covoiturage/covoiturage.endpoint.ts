@@ -24,3 +24,11 @@ export const updateCovoiturage = async (id: number, data: { status: "OPEN" | "FU
     data,
   );
 };
+
+export const createCovoiturage = async (data: Omit<Covoiturage, "id" | "creator" | "status">) => {
+  return await apiRequest<Covoiturage>(
+    `${API_ROUTES.covoiturage}`,
+    Method.POST,
+    data,
+  );
+};

@@ -69,7 +69,7 @@ export const Covoiturages = () => {
       className="gap-4 flex-1"
       style={{ paddingBottom: 0 }}
       disableScroll
-      header={<IconButton icon={<Plus color={theme.primary} />} variant="link" onPress={() => navigation.navigate("AddEvent")} />}
+      header={<IconButton icon={<Plus color={theme.primary} />} variant="link" onPress={() => navigation.navigate("AddCovoiturage")} />}
     >
       <Animated.FlatList
         data={filteredCovoiturages}

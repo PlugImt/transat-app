@@ -38,11 +38,11 @@ export const DepartureWidget = () => {
                             </Text>
 
                             <View className={`h-10 justify-end items-center`}>
-                                {renderDepartureTime(item.nextDeparture, t, alignmentClass, isLast ? "font-semibold" : "")}
+                                {renderDepartureTime(item.nextDeparture, t, "items-center", isLast ? "font-semibold" : "")}
                             </View>
 
                             <View className={`h-10 justify-end items-center`}>
-                                {renderDepartureTime(item.nextDeparture2, t, alignmentClass, isLast ? "text-muted" : "")}
+                                {renderDepartureTime(item.nextDeparture2, t, "items-center", isLast ? "text-muted" : "")}
                             </View> 
                         </View>
                     );

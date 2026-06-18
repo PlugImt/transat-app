@@ -13,6 +13,7 @@ export function useHomeWidgetsFetching() {
     useIsFetching({ queryKey: QUERY_KEYS.laundry }) > 0;
   const isWeatherFetching = useIsFetching({ queryKey: QUERY_KEYS.weather }) > 0;
   const isDepartureFetching = useIsFetching({ queryKey: QUERY_KEYS.departure }) > 0;
+  const isScheduleFetching = useIsFetching({ queryKey: QUERY_KEYS.schedule }) > 0;
   const isEventsFetching =
     useIsFetching({ queryKey: QUERY_KEYS.event.events }) > 0;
   const isFetching =
@@ -32,6 +33,7 @@ export function useHomeWidgetsFetching() {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.laundry }),
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.weather }),
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.departure }),
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.schedule }),
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.event.events }),
     ]);
   };

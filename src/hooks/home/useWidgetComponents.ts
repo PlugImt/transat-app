@@ -7,6 +7,7 @@ import { RestaurantWidget } from "@/screens/services/restaurant/widget/Restauran
 import TimetableWidget from "@/screens/services/schedule/widget/TimetableWidget";
 import { WeatherWidget } from "@/screens/services/weather/widget/WeatherWidget";
 import { DepartureWidget } from "@/screens/services/departure/widget/DepartureWidget";
+import { ScheduleWidget} from "@/screens/Schedule/widget/ScheduleWidget";
 import type { PreferenceId, WidgetType } from "@/services/storage/preferences";
 
 export function useWidgetComponents() {
@@ -15,6 +16,7 @@ export function useWidgetComponents() {
       weather: () => React.createElement(WeatherWidget),
       departure: () => React.createElement(DepartureWidget),
       restaurant: () => React.createElement(RestaurantWidget),
+      schedule: () => React.createElement(ScheduleWidget),
       timetable: () => React.createElement(TimetableWidget),
       homework: () => React.createElement(HomeworkWidget),
       events: () => React.createElement(EventWidget),

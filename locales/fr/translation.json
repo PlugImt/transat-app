@@ -728,7 +728,9 @@
     "noEventsDescription": "Vérifiez sur PASS pour les dernières mises à jour.",
     "notConfigured": "Aucun calendrier configuré",
     "notConfiguredDescription": "Ajoutez l'URL de votre calendrier PASS dans les paramètres pour synchroniser votre emploi du temps.",
-    "lastSync": "Dernière synchro {{time}}"
+    "lastSync": "Dernière synchro {{time}}",
+    "titleWidget": "Mes prochains cours",
+    "noUpcomingEvents": "Aucun cours à venir"
   },
   "user": {
     "contact": "Contacter",

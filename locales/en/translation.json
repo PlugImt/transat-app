@@ -727,7 +727,9 @@
     "noEventsDescription": "Check PASS for the latest updates.",
     "notConfigured": "No calendar configured",
     "notConfiguredDescription": "Add your PASS calendar URL in settings to sync your personal schedule.",
-    "lastSync": "Last synced {{time}}"
+    "lastSync": "Last synced {{time}}",
+    "titleWidget": "My Upcoming Classes",
+    "noUpcomingEvents": "No upcoming classes"
   },
   "user": {
     "contact": "Contact",

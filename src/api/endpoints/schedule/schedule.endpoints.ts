@@ -4,7 +4,7 @@ import { API_ROUTES } from "@/api/common";
 import { Method } from "@/api/enums";
 import { apiRequest } from "@/api/helpers";
 import { getApiInstance } from "@/api/helpers/api-instance";
-import type {UpdateUserSchedule, UserSchedule} from "@/dto";
+import type { UpdateUserSchedule, UserSchedule } from "@/dto";
 
 export const getMySchedule = async (): Promise<UserSchedule | null> => {
   const api = await getApiInstance();

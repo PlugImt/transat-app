@@ -8,8 +8,8 @@ import { useSchedule } from "@/hooks/services/schedule/useSchedule";
 import { ScheduleEvent } from "@/screens/Schedule/components/ScheduleEvent";
 import { useTranslation } from "react-i18next";
 import { getNextTwoEvents } from "@/screens/Schedule/schedule.utils";
-import {useNavigation} from "expo-router";
-import {AppNavigation} from "@/types";
+import { useNavigation } from "expo-router";
+import { AppNavigation } from "@/types";
 
 export const ScheduleWidget = () => {
     const { t } = useTranslation();

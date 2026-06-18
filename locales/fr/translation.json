@@ -102,7 +102,8 @@
       "placeholder": "Appuyez pour sélectionner une image",
       "uploading": "Upload en cours..."
     },
-    "whatsApp": "WhatsApp"
+    "whatsApp": "WhatsApp",
+    "hour": "Heure"
   },
   "auth": {
     "signIn": {
@@ -687,6 +688,43 @@
         "available": "Disponible",
         "full": "Complet",
         "archived": "Archivé"
+      },
+      "add": {
+        "title": "Nouveau Covoit",
+        "departure": {
+          "title": "Départ",
+          "placeholder": "Lieu de départ",
+          "required": "Le lieu de départ est obligatoire",
+          "min": "Le départ doit contenir au moins 3 caractères",
+          "max": "Le départ ne peut pas dépasser 100 caractères"
+        },
+        "destination": {
+          "title": "Arrivée",
+          "placeholder": "Lieu d'arrivée",
+          "required": "Le lieu d'arrivée est obligatoire",
+          "min": "L'arrivée doit contenir au moins 3 caractères",
+          "max": "L'arrivée ne peut pas dépasser 100 caractères"
+        },
+        "date": {
+          "title": "Date & Heure",
+          "required": "La date et l'heure sont obligatoires"
+        },
+        "contact": {
+          "title": "Contact (Téléphone)",
+          "required": "Le numéro de téléphone est obligatoire",
+          "invalid_phone": "Le numéro doit être au format international (ex: +33612345678)"
+        },
+        "type": {
+          "title": "Type de trajet",
+          "required": "Veuillez sélectionner un type de trajet"
+        },
+        "description": {
+          "title": "Description",
+          "placeholder": "Détails du voyage...",
+          "required": "La description est obligatoire",
+          "max": "La description ne peut pas dépasser 500 caractères"
+        },
+        "submit": "Ajouter"
       }
     },
     "games": {

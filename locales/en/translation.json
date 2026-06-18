@@ -102,7 +102,8 @@
       "placeholder": "Tap to select an image",
       "uploading": "Uploading..."
     },
-    "whatsApp": "WhatsApp"
+    "whatsApp": "WhatsApp",
+    "hour": "Hour"
   },
   "auth": {
     "signIn": {
@@ -687,6 +688,43 @@
         "available": "Available",
         "full": "Full",
         "archived": "Archived"
+      },
+      "add": {
+        "title": "New Carpool",
+        "departure": {
+          "title": "Departure",
+          "placeholder": "Departure location",
+          "required": "Departure location is required",
+          "min": "Departure must be at least 3 characters",
+          "max": "Departure cannot exceed 100 characters"
+        },
+        "destination": {
+          "title": "Arrival",
+          "placeholder": "Destination location",
+          "required": "Destination location is required",
+          "min": "Destination must be at least 3 characters",
+          "max": "Destination cannot exceed 100 characters"
+        },
+        "date": {
+          "title": "Date & Time",
+          "required": "Date and time are required"
+        },
+        "contact": {
+          "title": "Contact (Phone)",
+          "required": "Phone number is required",
+          "invalid_phone": "Number must be in international format (e.g., +44712345678)"
+        },
+        "type": {
+          "title": "Trip Type",
+          "required": "Please select a trip type"
+        },
+        "description": {
+          "title": "Description",
+          "placeholder": "Trip details...",
+          "required": "Description is required",
+          "max": "Description cannot exceed 500 characters"
+        },
+        "submit": "Add"
       }
     },
     "games": {

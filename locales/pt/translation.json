@@ -102,7 +102,8 @@
       "placeholder": "Toque para selecionar uma imagem",
       "uploading": "Enviando..."
     },
-    "whatsApp": "WhatsApp"
+    "whatsApp": "WhatsApp",
+    "hour": "Hora"
   },
   "auth": {
     "signIn": {
@@ -687,6 +688,43 @@
         "available": "Disponível",
         "full": "Lotado",
         "archived": "Arquivado"
+      },
+      "add": {
+        "title": "Nova Carona",
+        "departure": {
+          "title": "Partida",
+          "placeholder": "Local de partida",
+          "required": "O local de partida é obrigatório",
+          "min": "O local de partida deve ter pelo menos 3 caracteres",
+          "max": "O local de partida não pode exceder 100 caracteres"
+        },
+        "destination": {
+          "title": "Chegada",
+          "placeholder": "Local de chegada",
+          "required": "O local de chegada é obrigatório",
+          "min": "O local de chegada deve ter pelo menos 3 caracteres",
+          "max": "O local de chegada não pode exceder 100 caracteres"
+        },
+        "date": {
+          "title": "Data e Hora",
+          "required": "A data e a hora são obrigatórias"
+        },
+        "contact": {
+          "title": "Contato (Telefone)",
+          "required": "O número de telefone é obrigatório",
+          "invalid_phone": "O número deve estar no formato internacional (ex: +5511912345678)"
+        },
+        "type": {
+          "title": "Tipo de viagem",
+          "required": "Por favor, selecione um tipo de viagem"
+        },
+        "description": {
+          "title": "Descrição",
+          "placeholder": "Detalhes da viagem...",
+          "required": "A descrição é obrigatória",
+          "max": "A descrição não pode exceder 500 caracteres"
+        },
+        "submit": "Adicionar"
       }
     },
     "games": {

@@ -102,7 +102,8 @@
       "placeholder": "点击选择图片",
       "uploading": "上传中..."
     },
-    "whatsApp": "WhatsApp"
+    "whatsApp": "WhatsApp",
+    "hour": "时间"
   },
   "auth": {
     "signIn": {
@@ -687,6 +688,43 @@
         "available": "可选",
         "full": "已满",
         "archived": "已归档"
+      },
+      "add": {
+        "title": "新建拼车",
+        "departure": {
+          "title": "出发地",
+          "placeholder": "出发地点",
+          "required": "出发地点为必填项",
+          "min": "出发地点至少需要3个字符",
+          "max": "出发地点不能超过100个字符"
+        },
+        "destination": {
+          "title": "目的地",
+          "placeholder": "到达地点",
+          "required": "到达地点为必填项",
+          "min": "到达地点至少需要3个字符",
+          "max": "到达地点不能超过100个字符"
+        },
+        "date": {
+          "title": "日期和时间",
+          "required": "日期和时间为必填项"
+        },
+        "contact": {
+          "title": "联系方式 (电话)",
+          "required": "电话号码为必填项",
+          "invalid_phone": "电话号码格式不正确，须为国际格式（例如：+8613812345678）"
+        },
+        "type": {
+          "title": "行程类型",
+          "required": "请选择行程类型"
+        },
+        "description": {
+          "title": "行程描述",
+          "placeholder": "行程详情...",
+          "required": "行程描述为必填项",
+          "max": "行程描述不能超过500个字符"
+        },
+        "submit": "添加"
       }
     },
     "games": {

@@ -102,7 +102,8 @@
       "placeholder": "Tippen Sie, um ein Bild auszuwählen",
       "uploading": "Upload läuft..."
     },
-    "whatsApp": "WhatsApp"
+    "whatsApp": "WhatsApp",
+    "hour": "Uhrzeit"
   },
   "auth": {
     "signIn": {
@@ -687,6 +688,43 @@
         "available": "Verfügbar",
         "full": "Ausgebucht",
         "archived": "Archiviert"
+      },
+      "add": {
+        "title": "Neue Fahrgemeinschaft",
+        "departure": {
+          "title": "Abfahrt",
+          "placeholder": "Abfahrtsort",
+          "required": "Der Abfahrtsort ist ein Pflichtfeld",
+          "min": "Der Abfahrtsort muss mindestens 3 Zeichen lang sein",
+          "max": "Der Abfahrtsort darf maximal 100 Zeichen lang sein"
+        },
+        "destination": {
+          "title": "Ankunft",
+          "placeholder": "Ankunftsort",
+          "required": "Der Ankunftsort ist ein Pflichtfeld",
+          "min": "Der Ankunftsort muss mindestens 3 Zeichen lang sein",
+          "max": "Der Ankunftsort darf maximal 100 Zeichen lang sein"
+        },
+        "date": {
+          "title": "Datum & Uhrzeit",
+          "required": "Datum und Uhrzeit sind Pflichtfelder"
+        },
+        "contact": {
+          "title": "Kontakt (Telefon)",
+          "required": "Die Telefonnummer ist ein Pflichtfeld",
+          "invalid_phone": "Die Nummer muss im internationalen Format sein (z. B. +491701234567)"
+        },
+        "type": {
+          "title": "Fahrttyp",
+          "required": "Bitte wählen Sie einen Fahrttyp aus"
+        },
+        "description": {
+          "title": "Beschreibung",
+          "placeholder": "Details zur Fahrt...",
+          "required": "Die Beschreibung ist ein Pflichtfeld",
+          "max": "Die Beschreibung darf maximal 500 Zeichen lang sein"
+        },
+        "submit": "Hinzufügen"
       }
     },
     "games": {

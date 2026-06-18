@@ -102,7 +102,8 @@
       "placeholder": "Toca para seleccionar una imagen",
       "uploading": "Subiendo..."
     },
-    "whatsApp": "WhatsApp"
+    "whatsApp": "WhatsApp",
+    "hour": "Hora"
   },
   "auth": {
     "signIn": {
@@ -687,6 +688,43 @@
         "available": "Disponible",
         "full": "Lleno",
         "archived": "Archivado"
+      },
+      "add": {
+        "title": "Nuevo Viaje",
+        "departure": {
+          "title": "Salida",
+          "placeholder": "Lugar de salida",
+          "required": "El lugar de salida es obligatorio",
+          "min": "El lugar de salida debe tener al menos 3 caracteres",
+          "max": "El lugar de salida no puede superar los 100 caracteres"
+        },
+        "destination": {
+          "title": "Llegada",
+          "placeholder": "Lugar de llegada",
+          "required": "El lugar de llegada es obligatorio",
+          "min": "El lugar de llegada debe tener al menos 3 caracteres",
+          "max": "El lugar de llegada no puede superar los 100 caracteres"
+        },
+        "date": {
+          "title": "Fecha y Hora",
+          "required": "La fecha y hora son obligatorias"
+        },
+        "contact": {
+          "title": "Contacto (Teléfono)",
+          "required": "El número de teléfono es obligatorio",
+          "invalid_phone": "El número debe estar en formato internacional (ej: +34612345678)"
+        },
+        "type": {
+          "title": "Tipo de viaje",
+          "required": "Por favor, seleccione un tipo de viaje"
+        },
+        "description": {
+          "title": "Descripción",
+          "placeholder": "Detalles del viaje...",
+          "required": "La descripción es obligatoria",
+          "max": "La descripción no puede superar los 500 caracteres"
+        },
+        "submit": "Añadir"
       }
     },
     "games": {

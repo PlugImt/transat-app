@@ -38,6 +38,7 @@ import { AddEvent } from "@/screens/services/events/components/AddEvent";
 import { EditEvent } from "@/screens/services/events/components/EditEvent";
 import EventDetails from "@/screens/services/events/components/EventDetails";
 import CovoiturageDetails from "@/screens/services/covoiturage/components/CovoiturageDetails";
+import AddCovoiturage from "@/screens/services/covoiturage/components/AddCovoiturage";
 import { EventMemberList } from "@/screens/services/events/components/EventMemberList";
 import Events from "@/screens/services/events/Events";
 import { FourchettasOrder } from "@/screens/services/fourchettas/components/order/FourchettasOrder";
@@ -89,6 +90,7 @@ const HomeStack = () => (
     <Stack.Screen name="Plannings" component={Plannings} />
     <Stack.Screen name="Covoiturage" component={Covoiturages} />
     <Stack.Screen name="CovoiturageDetails" component={CovoiturageDetails} />
+    <Stack.Screen name="AddCovoiturage" component={AddCovoiturage} />
   </Stack.Navigator>
 );
 
@@ -128,6 +130,7 @@ const ServicesStack = () => (
     <Stack.Screen name="Games" component={Games} />
     <Stack.Screen name="Bassine" component={Bassine} />
     <Stack.Screen name="BassineLeaderboard" component={BassineLeaderboard} />
+    <Stack.Screen name="AddCovoiturage" component={AddCovoiturage} />
   </Stack.Navigator>
 );
 

@@ -12,7 +12,8 @@
       "icon": "./assets/images/transat.icon",
       "bundleIdentifier": "com.yohann69.transat2-0",
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSCalendarsUsageDescription": "Allow you to add an event to your personal calendar."
       }
     },
     "android": {
@@ -24,7 +25,9 @@
       "package": "com.yohann69.transat2_0",
       "googleServicesFile": "./google-services.json",
       "permissions": [
-        "android.permission.RECORD_AUDIO"
+        "RECORD_AUDIO",
+        "READ_CALENDAR",
+        "WRITE_CALENDAR"
       ]
     },
     "web": {
@@ -49,6 +52,7 @@
           "photosPermission": "Allow access to your photos to update your profile picture."
         }
       ],
+      "expo-calendar",
       "expo-router",
       [
         "expo-splash-screen",

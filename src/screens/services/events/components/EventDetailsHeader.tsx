@@ -20,6 +20,9 @@ import {
   useLeaveClubMutation,
 } from "@/hooks/services/event/useEvent";
 import type { EventDetailsRouteProp } from "./EventDetails";
+import React from "react";
+import { ExportButton } from "./ExportEvent";
+
 
 interface NotificationButtonProps {
   isMember: boolean;
@@ -115,17 +118,20 @@ export const EventDetailsHeader = ({ event }: EventDetailsHeaderProps) => {
       {description && description?.length > 1 && (
         <Text color="muted">{description}</Text>
       )}
-      <View className="flex-row items-center gap-2">
-        {link && link.length > 0 && (
-          <Button
-            label={label}
-            icon={<ExternalLink />}
-            variant="secondary"
-            onPress={() => Linking.openURL(link)}
-            className="flex-1"
-          />
-        )}
-        <NotificationButton isMember={event.is_interested} />
+      <View className="gap-2">
+        <View className="flex-row items-center gap-2">
+          {link && link.length > 0 && (
+            <Button
+              label={label}
+              icon={<ExternalLink />}
+              variant="secondary"
+              onPress={() => Linking.openURL(link)}
+              className="flex-1"
+            />
+          )}
+          <NotificationButton isMember={event.is_interested} />
+        </View>
+        <ExportButton event={event} />
       </View>
     </View>
   );
@@ -157,8 +163,16 @@ export const EventDetailsHeaderSkeleton = () => {
         </View>
       </View>
       <TextSkeleton lines={2} />
-      <View className="flex-row items-center gap-2">
-        <NotificationButton isMember={false} disabled />
+      <View className="gap-2">
+        <View className="flex-row items-center gap-2">
+          <Button className="flex-1" disabled>
+            <TextSkeleton lastLineWidth={80} />
+          </Button>
+          <NotificationButton isMember={false} disabled />
+        </View>
+        <Button className="w-full" disabled>
+          <TextSkeleton lastLineWidth={120} />
+        </Button>
       </View>
     </View>
   );

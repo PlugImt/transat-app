@@ -633,6 +633,18 @@
         "success": "Événement modifié avec succès",
         "error": "Erreur lors de la modification de l'événement"
       },
+      "export":{
+        "title":"Exporter vers mon calendrier personnel",
+        "error":{
+          "title": "Une erreur est survenue lors de l'exportation de l'événement",
+          "noCalendar":"Aucun calendrier n'est disponible"
+        },
+        "permission":{
+          "title": "Permission de calendrier refusée",
+          "description": "Veuillez autoriser l'accès au calendrier pour pouvoir exporter cet événement"
+        },
+        "success":"Événement exporté avec succès"
+      },
       "delete": {
         "title": "Supprimer l'événement",
         "description": "Êtes-vous sûr de vouloir supprimer cet événement ? Cette action est irréversible",

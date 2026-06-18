@@ -17,37 +17,33 @@ export const DepartureWidget = () => {
     }
 
     if (isError) {
-        return <DepartureError />;
+        return null;
     }
 
     return (
         <CardGroup title={t("services.departure.title")}>
             <Card className="flex-row justify-between bg-green-500 items-start">
                 {departure.map((item, index) => {
-                    const alignmentClass =
-                        index === 0 ? "items-start" :
-                            index === 1 ? "items-center" :
-                                "items-end";
 
                     const isLast = index === 2;
 
                     return (
-                        <View key={index} className={`flex-1 ${alignmentClass}`}>
+                        <View key={index} className={`flex-1 items-center gap-1`}>
                             <Text
-                                variant="h1"
-                                className="rounded-lg px-3 py-1 text-white font-bold"
+                                variant="h3"
+                                className="rounded-lg px-5 py-0.5 text-white font-bold"
                                 style={{ backgroundColor: colors.departure[item.name as keyof typeof colors.departure] || '#000' }}
                             >
                                 {item.name}
                             </Text>
 
-                            <View className={`h-10 justify-end ${alignmentClass}`}>
-                                {renderDepartureTime(item.nextDeparture, t, alignmentClass, isLast ? "font-semibold" : "")}
+                            <View className={`items-center gap-1`}>
+                                {renderDepartureTime(item.nextDeparture, t, isLast ? "font-semibold" : "")}
                             </View>
 
-                            <View className={`h-10 justify-end ${alignmentClass}`}>
-                                {renderDepartureTime(item.nextDeparture2, t, alignmentClass, isLast ? "text-muted" : "")}
-                            </View> 
+                            <View className={`items-center`}>
+                                {renderDepartureTime(item.nextDeparture2, t, isLast ? "text-muted" : "")}
+                            </View>
                         </View>
                     );
                 })}
@@ -57,26 +53,24 @@ export const DepartureWidget = () => {
 };
 export default DepartureWidget;
 
-export const DepartureSkeleton = () => {
+export const DepartureSkeleton = (t: any) => {
     return (
-        <CardGroup
-            title={"Pour aller dans le centre ville..."}
-        >
+        <CardGroup>
             <Card className="flex flex-row justify-between items-center ">
-                <View className="flex-1 items-start">
-                    <TextSkeleton variant="h1" className="w-32" />
+                <View className="flex-1 items-center">
+                    <TextSkeleton variant="h2" className="w-32" />
                     <TextSkeleton variant="h3" className="w-32" />
                     <TextSkeleton variant="h3" className="w-32" />
                 </View>
 
                 <View className="flex-1 items-center">
-                    <TextSkeleton variant="h1" className="w-32" />
+                    <TextSkeleton variant="h2" className="w-32" />
                     <TextSkeleton variant="h3" className="w-32" />
                     <TextSkeleton variant="h3" className="w-32" />
                 </View>
 
-                <View className="flex-1 items-end">
-                    <TextSkeleton variant="h1" className="w-32" />
+                <View className="flex-1 items-center">
+                    <TextSkeleton variant="h2" className="w-32" />
                     <TextSkeleton variant="h3" className="w-32" />
                     <TextSkeleton variant="h3" className="w-32" />
                 </View>
@@ -85,18 +79,7 @@ export const DepartureSkeleton = () => {
     );
 };
 
-export const DepartureError = () => {
-    return (
-        <Card className="flex-row justify-between items-center gap-0">
-            <View>
-                <Text>Error</Text>
-            </View>
-            <AvatarSkeleton size={64} />
-        </Card>
-    );
-};
-
-const renderDepartureTime = (departureDate: Date | string | number, t: any, alignmentClass: string, extraStyles: string): React.ReactNode => {
+const renderDepartureTime = (departureDate: Date | string | number, t: any, extraStyles: string): React.ReactNode => {
     const date = new Date(departureDate);
     if (isNaN(date.getTime())) {
         return "";
@@ -109,10 +92,10 @@ const renderDepartureTime = (departureDate: Date | string | number, t: any, alig
     if (differenceInMinutes >= 60) {
         const hour = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
         return (
-            <View className={`flex-row items-baseline ${alignmentClass}`}>
+            <View className={`flex-row items-baseline items-center`}>
 
                 <Text className={`${extraStyles}`}>{t("services.departure.scheduledFor")} </Text>
-                <Text className="text-2xl font-bold leading-none">{hour}</Text>
+                <Text className="text-xl font-bold leading-none">{hour}</Text>
             </View>
         );
     }
@@ -126,8 +109,8 @@ const renderDepartureTime = (departureDate: Date | string | number, t: any, alig
     else if (differenceInMinutes >= 1) {
         const minutesLeft = Math.floor(differenceInMinutes);
         return (
-            <View className={`flex-row items-baseline ${alignmentClass}`}>
-                <Text className="text-2xl font-bold leading-none">{minutesLeft}</Text>
+            <View className={`flex-row items-baseline items-center`}>
+                <Text className="text-xl font-bold leading-none">{minutesLeft}</Text>
                 <Text className={`${extraStyles}`}>{t("services.departure.minutes")}</Text>
             </View>
         );

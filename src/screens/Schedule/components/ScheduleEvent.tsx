@@ -20,7 +20,7 @@ export const ScheduleEvent = ({ event, isOver }: ScheduleEventProps) => {
     <View
       style={{ backgroundColor: theme.card, borderColor: theme.text }}
       className={`
-        flex-col justify-center rounded-br-xl rounded-tr-2xl p-2 border-l-2 h-full gap-1
+        flex-col justify-center rounded-br-xl rounded-tr-2xl p-2 border-l-2 py-3 gap-1
         ${isOver ? "opacity-60" : ""}
       `}
     >

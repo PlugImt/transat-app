@@ -5,6 +5,7 @@ export type WidgetType =
   | "weather"
   | "departure"
   | "restaurant"
+  | "schedule"
   | "timetable"
   | "homework"
   | "laundry"
@@ -43,25 +44,41 @@ const HOME_WIDGETS_KEY = "home_widgets_preferences";
 const SERVICES_KEY = "services_preferences";
 
 const getDefaultHomeWidgets = (t: (key: string) => string): Preference[] => [
-  { id: "weather", name: t("services.weather"), enabled: true, order: 0 },
-  { id: "departure", name: t("services.departure"), enabled: true, order: 0 },
+  {
+    id: "weather",
+    name: t("services.weather"),
+    enabled: true,
+    order: 0
+  },
+  {
+    id: "departure",
+    name: t("services.departure"),
+    enabled: true,
+    order: 1
+  },
   {
     id: "restaurant",
     name: t("services.restaurant.title"),
     enabled: true,
-    order: 1,
+    order: 2,
+  },
+  {
+    id: "schedule",
+    name: t("services.schedule.title"),
+    enabled: true,
+    order: 3,
   },
   {
     id: "events",
     name: t("services.events.title"),
     enabled: true,
-    order: 6,
+    order: 8,
   },
   {
     id: "laundry",
     name: t("services.laundry.title"),
     enabled: true,
-    order: 3,
+    order: 5,
   },
 ];
 

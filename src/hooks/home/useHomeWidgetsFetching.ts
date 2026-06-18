@@ -32,6 +32,7 @@ export function useHomeWidgetsFetching() {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.laundry }),
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.weather }),
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.departure }),
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.schedule }),
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.event.events }),
     ]);
   };

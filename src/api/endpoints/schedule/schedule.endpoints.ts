@@ -47,3 +47,8 @@ export const deleteMySchedule = async (): Promise<void> => {
     throw new Error(t("common.errors.occurred"));
   }
 };
+
+export const fetchSchedule = async (): Promise<UpdateUserSchedule> => {
+  const data = await apiRequest<UpdateUserSchedule>(API_ROUTES.schedule_me, Method.GET);
+  return data;
+};

@@ -778,7 +778,9 @@
     "noEventsDescription": "请在 PASS 上查看最新更新。",
     "notConfigured": "未配置日历",
     "notConfiguredDescription": "在设置中添加 PASS 日历 URL 以同步个人日程。",
-    "lastSync": "上次同步 {{time}}"
+    "lastSync": "上次同步 {{time}}",
+    "titleWidget": "我接下来的课程",
+    "noUpcomingEvents": "暂无即将举行的课程"
   },
   "user": {
     "contact": "联系",

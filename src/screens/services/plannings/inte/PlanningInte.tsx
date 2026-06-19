@@ -142,29 +142,7 @@ export function PlanningInte() {
             )}
           </View>
         )}
-        <View className="flex-row items-center gap-2 justify-end">
-          <View>
-            <Text className="text-right" variant="h2">
-              {weekday}
-            </Text>
-            <Text className="text-right">
-              {month} {year}
-            </Text>
-          </View>
-          <Pressable onPress={() => setSelectedDate(new Date())}>
-            {({ pressed }) => (
-              <View
-                className={`rounded-xl items-center justify-center ${pressed ? "opacity-60" : ""}`}
-                style={{ backgroundColor: theme.secondary }}
-              >
-                <Text className="p-3 text-white" variant="h3">
-                  {dayNumber}
-                </Text>
-              </View>
-            )}
-          </Pressable>
-        </View>
-        <View className="flex-row justify-between items-center">
+        <View className="flex-row justify-between items-center w-full px-2">
           <Button
             onPress={() => changeDay("prev")}
             label="<"
@@ -175,6 +153,22 @@ export function PlanningInte() {
               borderRadius: 12,
             }}
           />
+
+          <Pressable
+            onPress={() => setSelectedDate(new Date())}
+            className="items-center gap-1"
+          >
+            <Text variant="h3" className="lowercase text-gray-700">
+              {weekday}
+            </Text>
+            <Text className="font-bold" variant="h2" style={{ color: theme.text }}>
+              {dayNumber}
+            </Text>
+            <Text className="text-sm color-muted">
+              {month} {year}
+            </Text>
+          </Pressable>
+
           <Button
             onPress={() => changeDay("next")}
             label=">"

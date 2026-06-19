@@ -220,7 +220,7 @@
       "description": "Vibre lors des interactions"
     },
     "calendar": {
-      "title": "Emploi du temps personnel",
+      "title": "Emploi du temps",
       "subtitle": "Synchroniser votre calendrier PASS",
       "description": "Collez l'URL ICS de votre calendrier PASS pour synchroniser vos événements dans Transat.",
       "icsUrlLabel": "URL du calendrier PASS",

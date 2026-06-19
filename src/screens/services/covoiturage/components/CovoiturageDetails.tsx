@@ -5,8 +5,8 @@ import {
   useRoute,
 } from "expo-router/react-navigation";
 import { useTranslation } from "react-i18next";
-import { View, Linking, Pressable, Alert } from "react-native";
-import { MessageSquare, User, MoreVertical, CheckCircle, Trash2 } from "lucide-react-native"; 
+import { View, Alert } from "react-native";
+import { Phone, User, MoreVertical, CheckCircle, Trash2 } from "lucide-react-native"; 
 import { IconButton } from "@/components/common/Button";
 import {
   Dialog,
@@ -153,31 +153,6 @@ const CovoiturageDetails = () => {
   const isOwner = covoiturage.creator.email === user?.email;
   const isFull = covoiturage.status === "FULL";
 
-  const handleContactWhatsApp = async () => {
-    if (!covoiturage.contact_details) return;
-
-    let formattedNumber = covoiturage.contact_details.replace(/[^\d+]/g, "");
-
-    if (!formattedNumber.startsWith("+")) {
-      formattedNumber = `+${formattedNumber}`;
-    }
-    
-    const whatsappUrl = `whatsapp://send?phone=${formattedNumber}`;
-    const cleanNumberForWeb = formattedNumber.replace("+", "");
-    const webWhatsappUrl = `https://wa.me/${cleanNumberForWeb}`;
-
-    try {
-      const supported = await Linking.canOpenURL(whatsappUrl);
-      if (supported) {
-        await Linking.openURL(whatsappUrl);
-      } else {
-        await Linking.openURL(webWhatsappUrl);
-      }
-    } catch (err) {
-      Alert.alert(t("common.error"), t("services.covoit.errors.whatsappError"));
-    }
-  };
-
   const covoitActions = (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -223,19 +198,18 @@ const CovoiturageDetails = () => {
             </View>
 
             {covoiturage.contact_details && (!isFull || isOwner) && (
-              <Pressable 
-                onPress={handleContactWhatsApp}
-                className="flex-row items-center gap-2 px-4 py-2 rounded-full active:opacity-60 border"
+              <View 
+                className="flex-row items-center gap-2 px-4 py-2 rounded-full border"
                 style={{ 
                   borderColor: theme.primary + '25', 
                   backgroundColor: theme.primary + '08' 
                 }}
               >
-                <MessageSquare size={14} color={theme.primary} />
+                <Phone size={14} color={theme.primary} />
                 <Text className="font-bold text-[12px] tracking-wide" style={{ color: theme.primary }}>
-                  {t("common.whatsApp")}
+                  {covoiturage.contact_details}
                 </Text>
-              </Pressable>
+              </View>
             )}
           </View>
 

@@ -782,6 +782,7 @@
   },
   "schedule": {
     "title": "Schedule",
+    "title.short": "Schedule",
     "loading": "Loading schedule...",
     "noEvents": "No events for this day",
     "noEventsDescription": "Check PASS for the latest updates.",

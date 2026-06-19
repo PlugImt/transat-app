@@ -201,7 +201,7 @@ export const BottomTabNavigator = () => {
         component={ScheduleStack}
         listeners={handleTabPress}
         options={{
-          tabBarLabel: t("schedule.title"),
+          tabBarLabel: t("schedule.title.short"),
           tabBarIcon: ({ color, size }) => <CalendarDays size={size} color={color} />,
         }}
       />

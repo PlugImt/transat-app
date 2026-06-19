@@ -781,7 +781,8 @@
     }
   },
   "schedule": {
-    "title": "Horário pessoal",
+    "title": "Horário",
+    "title.short": "Horário",
     "today": "Hoje",
     "loading": "Carregando horário...",
     "noEvents": "Nenhum evento para este dia",

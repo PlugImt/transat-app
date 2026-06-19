@@ -782,6 +782,7 @@
   },
   "schedule": {
     "title": "个人日程表",
+    "title.short": "日程表",
     "today": "今天",
     "loading": "正在加载日程...",
     "noEvents": "当天没有活动",

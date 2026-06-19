@@ -781,7 +781,8 @@
     }
   },
   "schedule": {
-    "title": "Persönlicher Stundenplan",
+    "title": "Stundenplan",
+    "title.short": "Stundenplan",
     "today": "Heute",
     "loading": "Stundenplan wird geladen...",
     "noEvents": "Keine Termine an diesem Tag",

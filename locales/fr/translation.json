@@ -409,6 +409,11 @@
       "sport":{
         "title": "Planning sport",
         "description": "Retrouve les plannings sportifs de l'IMT"
+      },
+      "integration": {
+        "title": "Planning intégration",
+        "description": "Retrouve le planning d'intégration",
+        "noPlanning": "Aucune activité d'intégration trouvée"
       }
     },
     "homework": {

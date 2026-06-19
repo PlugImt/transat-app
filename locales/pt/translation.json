@@ -409,6 +409,11 @@
       "sport":{
         "title": "Calendário desportivo",
         "description": "Consulta os horários das atividades desportivas do IMT"
+      },
+      "integration": {
+        "title": "Planeamento de integração",
+        "description": "Encontra o planeamento de integração",
+        "noPlanning": "Nenhuma atividade de integração encontrada"
       }
     },
     "homework": {

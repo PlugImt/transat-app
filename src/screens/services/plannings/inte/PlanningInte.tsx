@@ -15,6 +15,7 @@ import type { CalendarEvent } from "@/dto";
 import { usePlanningInte } from "@/hooks/services/plannings/usePlanningInte";
 import { getEventsForDate } from "@/screens/Schedule/components/DayCalendar";
 import { ScheduleEvent } from "@/screens/Schedule/components/ScheduleEvent";
+import { t } from "i18next";
 
 const HOUR_HEIGHT = 60;
 const START_HOUR = 8;
@@ -126,14 +127,14 @@ export function PlanningInte() {
     <Page
       refreshing={isPending}
       onRefresh={refetch}
-      title="Planning inté"
+      title={t("services.plannings.integration.title")}
       className="flex-col gap-8 p-5"
     >
       <View className="gap-2">
         {(calendarData === null || isError) && (
           <View>
             <Text color="muted" className="italic">
-              Aucun planning inté disponible pour le moment.
+              {t("services.plannings.integration.noPlanning")}
             </Text>
             {error && (
               <Text color="destructive" className="italic">

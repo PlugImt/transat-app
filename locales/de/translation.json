@@ -409,6 +409,11 @@
       "sport":{
         "title": "Sportplan",
         "description": "Hier findest du die Sportpläne des IMT"
+      },
+      "integration": {
+        "title": "Einarbeitungsplan",
+        "description": "Hier findest du den Einarbeitungsplan",
+        "noPlanning": "Keine Einarbeitungsaktivitäten gefunden"
       }
     },
     "homework": {

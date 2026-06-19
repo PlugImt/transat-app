@@ -86,7 +86,7 @@ export function PlanningSport() {
     <Page
       refreshing={isPending}
       onRefresh={refetch}
-      title="Planning sport"
+      title="services.plannings.sport.title"
       className="flex-col gap-8 p-5"
     >
       <View className="gap-2">

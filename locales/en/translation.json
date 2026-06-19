@@ -408,6 +408,11 @@
       "sport":{
         "title": "Sports Planning",
         "description": "Check out the IMT sports plannings"
+      },
+      "integration": {
+        "title": "Onboarding schedule",
+        "description": "Find the onboarding schedule",
+        "noPlanning": "No onboarding activities found"
       }
     },
     "homework": {

@@ -409,6 +409,11 @@
       "sport":{
         "title": "体育活动安排",
         "description": "查看IMT的体育活动安排"
+      },
+      "integration": {
+        "title": "入职培训日程表",
+        "description": "查找入职培训日程表",
+        "noPlanning": "未找到入职培训活动"
       }
     },
     "homework": {

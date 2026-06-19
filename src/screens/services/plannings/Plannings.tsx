@@ -18,8 +18,8 @@ export const Plannings = () => {
           onPress={() => { navigation.navigate("PlanningSport") }}
         />
         <LinkCard
-          title="inté"
-          description="inté"
+          title={t("services.plannings.integration.title")}
+          description={t("services.plannings.integration.description")}
           size={"default"}
           onPress={() => { navigation.navigate("PlanningInte") }}
         />

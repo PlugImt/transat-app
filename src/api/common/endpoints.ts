@@ -52,6 +52,7 @@ export const API_ROUTES: Record<Route, ApiRoute> = {
   eventLeave: "/event/:id/leave",
   eventMembers: "/event/:id/members",
   schedule_me: "/schedule/me",
+  schedule_inte: "/schedule/inte",
   covoiturage: "/carpool",
 };
 
@@ -105,4 +106,5 @@ type Route =
   | "eventLeave"
   | "eventMembers"
   | "schedule_me"
+  | "schedule_inte"
   | "covoiturage";

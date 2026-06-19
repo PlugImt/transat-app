@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Pressable, View } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
@@ -10,36 +9,40 @@ import Animated, {
 } from "react-native-reanimated";
 import { Button } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
-import { AboutModal } from "@/components/custom/AboutModal";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
-import type { Course } from "@/dto";
-import useAuth from "@/hooks/account/useAuth";
-import { useTimetableForWeek } from "@/hooks/services/timetable/useTimetable";
-import { isoToHourString } from "@/utils";
-import { Cours, LoadingState } from "./components";
+import type { CalendarEvent } from "@/dto";
+import { usePlanningInte } from "@/hooks/services/plannings/usePlanningInte";
+import { getEventsForDate } from "@/screens/Schedule/components/DayCalendar";
+import { ScheduleEvent } from "@/screens/Schedule/components/ScheduleEvent";
 
-/* Gérer la date pour la ligne rouge = heure actuelle */
-const HOUR_HEIGHT = 60; // 60 pixels = 1 heure
+const HOUR_HEIGHT = 60;
 const START_HOUR = 8;
 const END_HOUR = 18;
 const TOTAL_HOURS = END_HOUR - START_HOUR;
 
-export const Timetable = () => {
-  const { t } = useTranslation();
+const toMinutes = (time: string) => {
+  const [hours, minutes] = time.split(":").map(Number);
+  return hours * 60 + minutes;
+};
+
+export function PlanningInte() {
   const { theme } = useTheme();
-  const { user } = useAuth();
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const {
-    data: edt,
+    data: calendarData,
     refetch,
-    isPending: isPendingEdt,
+    isPending,
     isError,
     error,
-  } = useTimetableForWeek(user?.email || "", selectedDate);
+  } = usePlanningInte();
 
-  /* <SWIPE> */
+  const filteredEvents = useMemo(
+    () => getEventsForDate(calendarData ?? undefined, selectedDate),
+    [calendarData, selectedDate],
+  );
+
   const translateX = useSharedValue(0);
 
   const changeDay = (direction: "next" | "prev") => {
@@ -64,15 +67,13 @@ export const Timetable = () => {
       } else if (e.translationX > SWIPE_THRESHOLD) {
         runOnJS(changeDay)("prev");
       }
-      translateX.value = withTiming(0); // Reset position
+      translateX.value = withTiming(0);
     });
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: translateX.value }],
   }));
-  /* </SWIPE> */
 
-  /* <Cours et date> */
   const locale = "fr-FR";
   const weekday = new Intl.DateTimeFormat(locale, { weekday: "long" }).format(
     selectedDate,
@@ -82,39 +83,15 @@ export const Timetable = () => {
   );
   const year = selectedDate.getFullYear();
   const dayNumber = selectedDate.getDate();
-
-  // This logic processes the data for the entire week
-  const parsedEdt = edt?.map((course) => ({
-    ...course,
-    date: new Date(course.date),
-    start_time: isoToHourString(course.start_time),
-    end_time: isoToHourString(course.end_time),
-  }));
-
-  // This crucial filter selects courses for the currently displayed 'selectedDate' from the weekly data
-  const filteredCourses = parsedEdt?.filter(
-    (course) =>
-      new Date(course.date).toDateString() === selectedDate.toDateString(),
-  );
-
   const isToday = selectedDate.toDateString() === new Date().toDateString();
 
-  const toMinutes = (heure: string) => {
-    const [h, m] = heure.split(/[h:]/).map(Number);
-    return h * 60 + m;
-  };
-
-  const isCourseOver = (heureFin: string) => {
+  const isEventOver = (endTime: string) => {
     const now = new Date();
-    // Use toDateString for robust comparison across year/month/day
     if (now.toDateString() === selectedDate.toDateString()) {
-      const currentHour = now.getHours();
-      const currentMinutes = now.getMinutes();
-      const [h, m] = heureFin.split(/[h:]/).map(Number);
-      if (currentHour > h) return true;
-      return currentHour === h && currentMinutes > m;
+      const currentMinutes = now.getHours() * 60 + now.getMinutes();
+      return currentMinutes > toMinutes(endTime);
     }
-    return now > selectedDate; // Mark courses on past days as over
+    return now > selectedDate;
   };
 
   const getNowTimeForLine = useCallback(() => {
@@ -134,34 +111,29 @@ export const Timetable = () => {
 
     return () => clearInterval(interval);
   }, [getNowTimeForLine]);
-  /* </Cours et date> */
 
-  // Show loading state only on initial fetch for a week, not on background refetches
-  if (isPendingEdt && !edt) {
-    return <LoadingState />;
+  if (isPending && calendarData === undefined) {
+    return (
+      <Page title="Planning inté">
+        <Text className="text-center" color="muted">
+          Chargement...
+        </Text>
+      </Page>
+    );
   }
 
   return (
     <Page
-      refreshing={isPendingEdt}
+      refreshing={isPending}
       onRefresh={refetch}
-      title={t("services.timetable.title")}
-      header={
-        <AboutModal
-          title={t("services.timetable.title")}
-          description={t("services.timetable.about")}
-          additionalInfo={t("services.timetable.additionalInfo")}
-        />
-      }
+      title="Planning inté"
       className="flex-col gap-8 p-5"
     >
-      {/*{header : jour}*/}
       <View className="gap-2">
-        {(edt === null || isError) && (
+        {(calendarData === null || isError) && (
           <View>
             <Text color="muted" className="italic">
-              {t("services.timetable.noEdt.title")}
-              {t("services.timetable.noEdt.description")}
+              Aucun planning inté disponible pour le moment.
             </Text>
             {error && (
               <Text color="destructive" className="italic">
@@ -192,7 +164,6 @@ export const Timetable = () => {
             )}
           </Pressable>
         </View>
-        {/*{jour navi}*/}
         <View className="flex-row justify-between items-center">
           <Button
             onPress={() => changeDay("prev")}
@@ -217,11 +188,9 @@ export const Timetable = () => {
         </View>
       </View>
 
-      {/*{content edt}*/}
       <View className="h-full">
         <GestureDetector gesture={panGesture}>
           <Animated.View className="flex-row h-full" style={animatedStyle}>
-            {/* PARTIE horaire */}
             <View>
               {Array.from({ length: TOTAL_HOURS }).map((_, index) => {
                 const hour = START_HOUR + index;
@@ -243,7 +212,6 @@ export const Timetable = () => {
               })}
             </View>
 
-            {/* PARTIE cours */}
             <View className="flex-1 relative pt-4">
               {isToday && (
                 <>
@@ -274,22 +242,22 @@ export const Timetable = () => {
                   />
                 );
               })}
-              {filteredCourses?.map((cours: Course) => {
-                const startInMin = toMinutes(cours.start_time);
-                const endInMin = toMinutes(cours.end_time);
+              {filteredEvents.map((event: CalendarEvent) => {
+                const startInMin = toMinutes(event.startTime);
+                const endInMin = toMinutes(event.endTime);
                 const baseInMin = START_HOUR * 60 - 14;
                 const top = ((startInMin - baseInMin) / 60) * HOUR_HEIGHT;
                 const height = ((endInMin - startInMin) / 60) * HOUR_HEIGHT;
 
                 return (
                   <View
-                    key={cours.id}
-                    style={{ top, height }}
+                    key={event.id}
+                    style={{ top, height: Math.max(height, 28) }}
                     className="absolute left-0 right-0 px-2"
                   >
-                    <Cours
-                      course={cours}
-                      isOver={isCourseOver(cours.end_time)}
+                    <ScheduleEvent
+                      event={event}
+                      isOver={isEventOver(event.endTime)}
                     />
                   </View>
                 );
@@ -300,4 +268,4 @@ export const Timetable = () => {
       </View>
     </Page>
   );
-};
+}

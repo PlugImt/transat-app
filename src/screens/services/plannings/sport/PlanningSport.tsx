@@ -89,35 +89,9 @@ export function PlanningSport() {
       title="Planning sport"
       className="flex-col gap-8 p-5"
     >
-      {/* ── Header : même structure que Timetable ── */}
       <View className="gap-2">
-        <View className="flex-row items-center gap-2 justify-center">
-          <View>
-            <Text className="text-right" variant="h2">
-              {weekday}
-            </Text>
-            <Text className="text-right">
-              {month} {year}
-            </Text>
-          </View>
-
-          {/* Bouton jour numéroté – tap = retour à aujourd'hui */}
-          <Pressable onPress={goToToday}>
-            {({ pressed }) => (
-              <View
-                className={`rounded-xl items-center justify-center ${pressed ? 'opacity-60' : ''}`}
-                style={{ backgroundColor: isToday ? theme.primary : theme.secondary }}
-              >
-                <Text className="p-3 text-white" variant="h3">
-                  {dayNumber}
-                </Text>
-              </View>
-            )}
-          </Pressable>
-        </View>
-
-        {/* Flèches de navigation */}
-        <View className="flex-row justify-between items-center">
+        <View className="flex-row justify-between items-center w-full px-2">
+          
           <Button
             onPress={goToPrevDay}
             label="<"
@@ -128,6 +102,21 @@ export function PlanningSport() {
               borderRadius: 12,
             }}
           />
+
+          <Pressable onPress={goToToday} className="items-center gap-1">
+            <Text variant="h3" className="lowercase text-gray-700">
+              {weekday}
+            </Text>
+            
+            <Text className="font-bold" variant="h2" style={{ color: theme.text }}>
+              {dayNumber}
+            </Text>
+            
+            <Text className="text-sm color-muted">
+              {month} {year}
+            </Text>
+          </Pressable>
+
           <Button
             onPress={goToNextDay}
             label=">"
@@ -138,6 +127,7 @@ export function PlanningSport() {
               borderRadius: 12,
             }}
           />
+          
         </View>
       </View>
 

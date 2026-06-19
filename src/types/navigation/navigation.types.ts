@@ -42,6 +42,7 @@ export type BottomTabParamList = {
   FourchettasOrder: { id: number; orderUser?: OrderedItem[] };
   Plannings: undefined;
   PlanningSport : undefined;
+  PlanningInte : undefined;
 
   // Account screens
   EditProfile: undefined;

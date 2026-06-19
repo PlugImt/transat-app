@@ -1,3 +1,4 @@
+import React from "react";
 import { createBottomTabNavigator } from "expo-router/build/react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "expo-router/build/react-navigation/native-stack";
 import { CalendarDays, Wrench, LucideHome, User } from "lucide-react-native";
@@ -59,6 +60,7 @@ import AssociationDetails from "@/screens/services/associations/AssociationDetai
 import {AssociationMemberList} from "@/screens/services/associations/components/AssociationMemberList";
 import AssociationEvents from "@/screens/services/events/AssociationEvents";
 import { PlanningSport } from "@/screens/services/plannings/sport/PlanningSport";
+import { PlanningInte } from "@/screens/services/plannings/inte/PlanningInte";
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 const Stack = createNativeStackNavigator<BottomTabParamList>();
@@ -132,6 +134,7 @@ const ServicesStack = () => (
     <Stack.Screen name="Bassine" component={Bassine} />
     <Stack.Screen name="BassineLeaderboard" component={BassineLeaderboard} />
     <Stack.Screen name="AddCovoiturage" component={AddCovoiturage} />
+    <Stack.Screen name="PlanningInte" component={PlanningInte} />
   </Stack.Navigator>
 );
 

@@ -311,6 +311,7 @@
     "additionalInfo": "Zusätzliche Informationen",
     "weather": "Wetter",
     "departure": {
+      "name": "Bus",
       "title": "Um in die Innenstadt zu fahren...",
       "approaching": "Der Bus kommt",
       "alreadyGone": "Ist schon abgefahren",

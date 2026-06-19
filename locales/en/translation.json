@@ -708,6 +708,7 @@
       "add": {
         "title": "New Carpool",
         "departure": {
+          "name": "Bus",
           "title": "Departure",
           "placeholder": "Departure location",
           "required": "Departure location is required",

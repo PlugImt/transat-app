@@ -9,7 +9,7 @@ export const Plannings = () => {
   const navigation = useNavigation<AppNavigation>();
 
   return (
-    <Page>
+    <Page title={t('services.plannings.title')}>
       <>
         <LinkCard
           title={t('services.plannings.sport.title')}

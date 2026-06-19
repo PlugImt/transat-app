@@ -71,5 +71,6 @@ export const QUERY_KEYS = {
   },
   plannings:{
     planningSport: ["planning_sport"],
+    planningInte: ["planning_inte"],
   }
 };

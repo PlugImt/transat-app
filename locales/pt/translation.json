@@ -311,6 +311,7 @@
     "additionalInfo": "Informações adicionais",
     "weather": "Clima",
     "departure": {
+      "name": "Autocarro",
       "title": "Para ir ao centro da cidade...",
       "approaching": "Está a chegar",
       "alreadyGone": "Já partiu",

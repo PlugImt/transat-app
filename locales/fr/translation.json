@@ -311,11 +311,12 @@
     "additionalInfo": "Informations complémentaires",
     "weather": "Météo",
     "departure": {
+      "name": "Bus",
       "title": "Pour aller dans le centre ville...",
       "approaching": "En approche",
       "alreadyGone": "Déjà parti",
       "minutes": "min",
-      "scheduledFor": "Prévu à"
+      "scheduledFor": "À"
     },
     "traq": {
       "title": "Traq",
@@ -771,7 +772,7 @@
     }
   },
   "schedule": {
-    "title": "Emploi du temps personel",
+    "title": "Emploi du temps personnel",
     "today": "Aujourd'hui",
     "loading": "Chargement de l'emploi du temps...",
     "noEvents": "Aucun événement pour ce jour",

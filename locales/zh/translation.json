@@ -311,6 +311,7 @@
     "additionalInfo": "附加信息",
     "weather": "天气",
     "departure": {
+      "name": "公交车",
       "title": "前往市中心...",
       "approaching": "即将到达",
       "alreadyGone": "已经开走了",

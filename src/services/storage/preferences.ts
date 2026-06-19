@@ -52,7 +52,7 @@ const getDefaultHomeWidgets = (t: (key: string) => string): Preference[] => [
   },
   {
     id: "departure",
-    name: t("services.departure"),
+    name: t("services.departure.name"),
     enabled: true,
     order: 1
   },
@@ -64,7 +64,7 @@ const getDefaultHomeWidgets = (t: (key: string) => string): Preference[] => [
   },
   {
     id: "schedule",
-    name: t("services.schedule.title"),
+    name: t("schedule.title"),
     enabled: true,
     order: 3,
   },

@@ -40,6 +40,8 @@ export type BottomTabParamList = {
   ReservationCalendar: { id: number; title: string };
   Fourchettas: undefined;
   FourchettasOrder: { id: number; orderUser?: OrderedItem[] };
+  Plannings: undefined;
+  PlanningSport : undefined;
 
   // Account screens
   EditProfile: undefined;

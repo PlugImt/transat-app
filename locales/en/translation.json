@@ -404,7 +404,11 @@
     },
     "plannings": {
       "title": "Plannings",
-      "description": "Check out the timetables for IMT’s societies, clubs and sports"
+      "description": "Check out the timetables for IMT’s societies, clubs and sports",
+      "sport":{
+        "title": "Sports Planning",
+        "description": "Check out the IMT sports plannings"
+      }
     },
     "homework": {
       "title": "Homework",

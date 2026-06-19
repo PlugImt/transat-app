@@ -404,7 +404,11 @@
     },
     "plannings": {
       "title": "Zeitpläne",
-      "description": "Sieh dir die Termine der Vereine, Clubs und Sportgruppen des IMT an"
+      "description": "Sieh dir die Termine der Vereine, Clubs und Sportgruppen des IMT an",
+      "sport":{
+        "title": "Sportplan",
+        "description": "Hier findest du die Sportpläne des IMT"
+      }
     },
     "homework": {
       "title": "Hausaufgaben",

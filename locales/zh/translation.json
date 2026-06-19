@@ -404,7 +404,11 @@
     },
     "plannings": {
       "title": "日程安排",
-      "description": "查看IMT各协会、俱乐部及体育项目的活动安排"
+      "description": "查看IMT各协会、俱乐部及体育项目的活动安排",
+      "sport":{
+        "title": "体育活动安排",
+        "description": "查看IMT的体育活动安排"
+      }
     },
     "homework": {
       "title": "作业",

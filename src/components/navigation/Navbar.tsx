@@ -58,6 +58,7 @@ import Schedule from "@/screens/Schedule/Schedule";
 import AssociationDetails from "@/screens/services/associations/AssociationDetails";
 import {AssociationMemberList} from "@/screens/services/associations/components/AssociationMemberList";
 import AssociationEvents from "@/screens/services/events/AssociationEvents";
+import { PlanningSport } from "@/screens/services/plannings/sport/PlanningSport";
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 const Stack = createNativeStackNavigator<BottomTabParamList>();
@@ -87,7 +88,6 @@ const HomeStack = () => (
     <Stack.Screen name="EditEvent" component={EditEvent} />
     <Stack.Screen name="Traq" component={Traq} />
     <Stack.Screen name="Olimtpe" component={Olimtpe} />
-    <Stack.Screen name="Plannings" component={Plannings} />
     <Stack.Screen name="Covoiturage" component={Covoiturages} />
     <Stack.Screen name="CovoiturageDetails" component={CovoiturageDetails} />
     <Stack.Screen name="AddCovoiturage" component={AddCovoiturage} />
@@ -120,6 +120,7 @@ const ServicesStack = () => (
     <Stack.Screen name="Traq" component={Traq} />
     <Stack.Screen name="Olimtpe" component={Olimtpe} />
     <Stack.Screen name="Plannings" component={Plannings} />
+    <Stack.Screen name="PlanningSport" component={PlanningSport}/>
     <Stack.Screen name="Reservation" component={Reservation} />
     <Stack.Screen name="MyReservations" component={PersonalReservations} />
     <Stack.Screen name="ReservationCategory" component={Category} />

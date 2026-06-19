@@ -404,7 +404,11 @@
     },
     "plannings": {
       "title": "Planificaciónes",
-      "description": "Consulta los horarios de las asociaciones, los clubes y las actividades deportivas"
+      "description": "Consulta los horarios de las asociaciones, los clubes y las actividades deportivas",
+      "sport":{
+        "title": "Calendario deportivo",
+        "description": "Consulta los horarios deportivos del IMT"
+      }
     },
     "homework": {
       "title": "Tareas",

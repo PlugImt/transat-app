@@ -404,7 +404,11 @@
     },
     "plannings": {
       "title": "Calendários",
-      "description": "Consulta os horários das associações, clubes e atividades desportivas"
+      "description": "Consulta os horários das associações, clubes e atividades desportivas",
+      "sport":{
+        "title": "Calendário desportivo",
+        "description": "Consulta os horários das atividades desportivas do IMT"
+      }
     },
     "homework": {
       "title": "Tarefas",

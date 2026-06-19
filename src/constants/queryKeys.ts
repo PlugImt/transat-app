@@ -68,5 +68,8 @@ export const QUERY_KEYS = {
   },
   covoiturage: {
     covoiturages: ["covoiturage"],
+  },
+  plannings:{
+    planningSport: ["planning_sport"],
   }
 };

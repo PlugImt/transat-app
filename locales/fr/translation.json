@@ -404,7 +404,11 @@
     },
     "plannings": {
       "title": "Plannings",
-      "description": "Consulte les plannings des assos, clubs et sports de l'IMT"
+      "description": "Consulte les plannings des assos, clubs et sports de l'IMT",
+      "sport":{
+        "title": "Planning sport",
+        "description": "Retrouve les plannings sportifs de l'IMT"
+      }
     },
     "homework": {
       "title": "Devoirs",

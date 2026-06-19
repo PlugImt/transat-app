@@ -5,6 +5,7 @@ export const API_ROUTES: Record<Route, ApiRoute> = {
   departure: "/departures",
   planning_today: "/planning/users/:email/courses/today",
   planning_week: "/planning/users/:email/courses",
+  planning_sport: "/planning-sport",
   restaurant: "/restaurant",
   restaurantRating: "/restaurant/:id",
   traq: "/traq/",
@@ -62,6 +63,7 @@ type Route =
   | "departure"
   | "planning_today"
   | "planning_week"
+  | "planning_sport"
   | "restaurant"
   | "restaurantRating"
   | "traq"

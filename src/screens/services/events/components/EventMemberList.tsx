@@ -4,6 +4,7 @@ import Animated from "react-native-reanimated";
 import { UserCard, UserCardSkeleton } from "@/components/custom";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
+import { getIsRefetching } from "@/components/query";
 import { useEventMembers } from "@/hooks/services/event/useEvent";
 import type { BottomTabParamList } from "@/types";
 
@@ -13,7 +14,8 @@ export const EventMemberList = () => {
     useRoute<RouteProp<BottomTabParamList, "EventMemberList">>();
   const { id } = params;
 
-  const { data, isPending, refetch, isError, error } = useEventMembers(id);
+  const { data, isPending, isFetching, refetch, isError, error } =
+    useEventMembers(id);
 
   if (isPending) {
     return <EventMemberListSkeleton />;
@@ -25,7 +27,8 @@ export const EventMemberList = () => {
         error={error}
         title={t("services.events.title")}
         refetch={refetch}
-        isRefetching={isPending}
+        isRefetching={getIsRefetching(isFetching, isPending)}
+        refreshing={isFetching}
       />
     );
   }
@@ -34,7 +37,7 @@ export const EventMemberList = () => {
     <Page
       title={t("services.events.title")}
       onRefresh={refetch}
-      refreshing={isPending}
+      refreshing={isFetching}
       className="gap-2"
       asChildren
     >

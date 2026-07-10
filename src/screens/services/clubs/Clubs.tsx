@@ -8,6 +8,7 @@ import ClubCard, { ClubCardSkeleton } from "@/components/custom/card/ClubCard";
 import { Empty } from "@/components/page/Empty";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
+import { getIsRefetching } from "@/components/query";
 import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
 import { useFilteredClubs } from "@/hooks/services/club/useClub";
 
@@ -19,6 +20,7 @@ export const Clubs = () => {
   const {
     data: clubs,
     isPending,
+    isFetching,
     refetch,
     isError,
     error,
@@ -34,7 +36,8 @@ export const Clubs = () => {
         error={error}
         title={t("services.clubs.title")}
         refetch={refetch}
-        isRefetching={isPending}
+        isRefetching={getIsRefetching(isFetching, isPending)}
+        refreshing={isFetching}
       />
     );
   }
@@ -43,7 +46,7 @@ export const Clubs = () => {
     <Page
       title={t("services.clubs.title")}
       onRefresh={refetch}
-      refreshing={isPending}
+      refreshing={isFetching}
       className="gap-2"
       asChildren
     >

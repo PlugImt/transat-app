@@ -9,6 +9,7 @@ import { AboutModal } from "@/components/custom/AboutModal";
 import { Empty } from "@/components/page/Empty";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
+import { getIsRefetching } from "@/components/query";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import { userMenuRating } from "@/hooks/services/restaurant/useMenuRestaurant";
@@ -35,6 +36,7 @@ export const RestaurantReviews = () => {
   const {
     rating: reviewData,
     isPending,
+    isFetching,
     refetch,
     isError,
     error,
@@ -50,7 +52,8 @@ export const RestaurantReviews = () => {
         title={t("services.restaurant.title")}
         error={error}
         refetch={refetch}
-        isRefetching={isPending}
+        isRefetching={getIsRefetching(isFetching, isPending)}
+        refreshing={isFetching}
       />
     );
   }
@@ -62,7 +65,7 @@ export const RestaurantReviews = () => {
 
   return (
     <Page
-      refreshing={isPending}
+      refreshing={isFetching}
       onRefresh={refetch}
       title={t("services.restaurant.title")}
       header={

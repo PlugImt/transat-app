@@ -13,6 +13,7 @@ import { Empty } from "@/components/page/Empty";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { HEADER_HEIGHT } from "@/components/page/Header";
 import { Page } from "@/components/page/Page";
+import { getIsRefetching } from "@/components/query";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Event } from "@/dto/event";
 import { useClubEventsByTab } from "@/hooks/services/event/useEvent";
@@ -30,7 +31,7 @@ const ClubEventsTabContent = ({
 }) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const { events, isPending, isError, error, refetch } = useClubEventsByTab(
+  const { events, isPending, isFetching, isError, error, refetch } = useClubEventsByTab(
     clubId,
     tabValue,
   );
@@ -45,7 +46,8 @@ const ClubEventsTabContent = ({
         error={error}
         title={t("services.events.title")}
         refetch={refetch}
-        isRefetching={isPending}
+        isRefetching={getIsRefetching(isFetching, isPending)}
+        refreshing={isFetching}
       />
     );
   }
@@ -56,10 +58,10 @@ const ClubEventsTabContent = ({
     contentContainerClassName: "gap-2",
     showsVerticalScrollIndicator: false,
     onRefresh: () => refetch(),
-    refreshing: isPending,
+    refreshing: isFetching,
     refreshControl: (
       <RefreshControl
-        refreshing={isPending}
+        refreshing={isFetching}
         onRefresh={refetch}
         tintColor={theme.text}
         colors={[theme.primary]}

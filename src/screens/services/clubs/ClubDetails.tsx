@@ -6,6 +6,7 @@ import { UserCardSkeleton } from "@/components/custom";
 import { Empty } from "@/components/page/Empty";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
+import { getIsRefetching } from "@/components/query";
 import { QUERY_KEYS } from "@/constants";
 import { useClubDetails } from "@/hooks/services/club/useClub";
 import { ClubEventWidget } from "@/screens/services/events/widget/ClubEventWidget";
@@ -27,6 +28,7 @@ const ClubDetails = () => {
   const {
     data: club,
     isPending,
+    isFetching,
     isError,
     error,
     refetch: refetchClub,
@@ -49,7 +51,8 @@ const ClubDetails = () => {
         error={error}
         title={t("services.clubs.title")}
         refetch={refetch}
-        isRefetching={isPending}
+        isRefetching={getIsRefetching(isFetching, isPending)}
+        refreshing={isFetching}
       />
     );
   }
@@ -62,7 +65,7 @@ const ClubDetails = () => {
     return (
       <Page
         title={t("services.clubs.title")}
-        refreshing={isPending}
+        refreshing={isFetching}
         onRefresh={refetch}
       >
         <Empty

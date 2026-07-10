@@ -8,6 +8,7 @@ import Card from "@/components/common/Card";
 import CardGroup from "@/components/common/CardGroup";
 import Image from "@/components/common/Image";
 import { Text } from "@/components/common/Text";
+import { getIsRefetching, WidgetErrorCard } from "@/components/query";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { MenuItem } from "@/dto";
@@ -29,7 +30,8 @@ export const RestaurantWidget = () => {
 
   const navigation = useNavigation<AppNavigation>();
 
-  const { menu, error, isPending } = useMenuRestaurant();
+  const { menu, isPending, isFetching, isError, error, refetch } =
+    useMenuRestaurant();
 
   const weekend: boolean = useMemo(() => isWeekend(), []);
   const lunch: boolean = useMemo(() => isLunch(), []);
@@ -68,8 +70,18 @@ export const RestaurantWidget = () => {
     return <RestaurantWidgetLoading />;
   }
 
+  if (isError) {
+    return (
+      <WidgetErrorCard
+        title={title}
+        error={error}
+        onRetry={refetch}
+        isRetrying={getIsRefetching(isFetching, isPending)}
+      />
+    );
+  }
+
   if (
-    error ||
     weekend ||
     isNight() ||
     outOfHours ||

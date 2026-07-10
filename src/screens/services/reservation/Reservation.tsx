@@ -31,6 +31,9 @@ export const Reservation = () => {
   );
 
   const isPending = reservationQuery.isPending;
+  const isFetching =
+    reservationQuery.isFetching ||
+    (isSearching ? searchQuery.isFetching : false);
   const isError = isSearching ? searchQuery.isError : reservationQuery.isError;
   const error = (
     isSearching ? searchQuery.error : reservationQuery.error
@@ -62,6 +65,7 @@ export const Reservation = () => {
       title={t("services.reservation.title")}
       data={data}
       isPending={isPending}
+      isFetching={isFetching}
       isError={isError}
       error={error}
       refetch={refetch}

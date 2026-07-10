@@ -5,6 +5,7 @@ import { View } from "react-native";
 import Card from "@/components/common/Card";
 import CardGroup from "@/components/common/CardGroup";
 import { Text } from "@/components/common/Text";
+import { WidgetBoundary } from "@/components/query";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useLaundryStats } from "@/hooks/services/laundry/useLaundry";
@@ -21,63 +22,69 @@ export const LaundryWidget = () => {
     availableDryers,
     totalDryers,
     isPending,
+    isFetching,
     isError,
     error,
+    refetch,
   } = useLaundryStats();
 
-  if (isPending) {
-    return <LaundryWidgetLoading />;
-  }
-
-  if (isError || error) {
-    return null;
-  }
-
   return (
-    <CardGroup
+    <WidgetBoundary
       title={t("services.laundry.title")}
-      onPress={() => navigation.navigate("Laundry")}
+      query={{
+        isPending,
+        isFetching,
+        isError,
+        error,
+        refetch,
+      }}
+      loading={<LaundryWidgetLoading />}
     >
-      <Card
+      <CardGroup
+        title={t("services.laundry.title")}
         onPress={() => navigation.navigate("Laundry")}
-        className="flex-row justify-between gap-6"
       >
-        <View className="items-center">
-          <WashingMachineIcon
-            size={32}
-            color={availableWashers === 0 ? theme.muted : theme.primary}
-          />
-          <Text variant="lg">
-            {availableWashers}/{totalWashers}
-          </Text>
-          <Text
-            className="flex-1 text-center"
-            numberOfLines={1}
-            variant="sm"
-            color="muted"
-          >
-            {t("services.laundry.machineAvailable")}
-          </Text>
-        </View>
-        <View className="items-center">
-          <Wind
-            size={32}
-            color={availableDryers === 0 ? theme.muted : theme.primary}
-          />
-          <Text variant="lg">
-            {availableDryers}/{totalDryers}
-          </Text>
-          <Text
-            className="flex-1 text-center"
-            numberOfLines={1}
-            variant="sm"
-            color="muted"
-          >
-            {t("services.laundry.dryerAvailable")}
-          </Text>
-        </View>
-      </Card>
-    </CardGroup>
+        <Card
+          onPress={() => navigation.navigate("Laundry")}
+          className="flex-row justify-between gap-6"
+        >
+          <View className="items-center">
+            <WashingMachineIcon
+              size={32}
+              color={availableWashers === 0 ? theme.muted : theme.primary}
+            />
+            <Text variant="lg">
+              {availableWashers}/{totalWashers}
+            </Text>
+            <Text
+              className="flex-1 text-center"
+              numberOfLines={1}
+              variant="sm"
+              color="muted"
+            >
+              {t("services.laundry.machineAvailable")}
+            </Text>
+          </View>
+          <View className="items-center">
+            <Wind
+              size={32}
+              color={availableDryers === 0 ? theme.muted : theme.primary}
+            />
+            <Text variant="lg">
+              {availableDryers}/{totalDryers}
+            </Text>
+            <Text
+              className="flex-1 text-center"
+              numberOfLines={1}
+              variant="sm"
+              color="muted"
+            >
+              {t("services.laundry.dryerAvailable")}
+            </Text>
+          </View>
+        </Card>
+      </CardGroup>
+    </WidgetBoundary>
   );
 };
 

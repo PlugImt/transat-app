@@ -12,6 +12,7 @@ import { ImageSelector } from "@/components/custom/ImageSelector";
 import { InputButton } from "@/components/custom/InputButton";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
+import { getIsRefetching } from "@/components/query";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { EventDetails } from "@/dto/event";
 import { useEditEventForm } from "@/hooks/services/event/useEditEventForm";
@@ -29,6 +30,7 @@ export const EditEvent = () => {
   const {
     data: event,
     isPending,
+    isFetching,
     isError,
     error,
     refetch,
@@ -44,7 +46,8 @@ export const EditEvent = () => {
         title={t("services.events.edit.title")}
         error={error}
         refetch={refetch}
-        isRefetching={isPending}
+        isRefetching={getIsRefetching(isFetching, isPending)}
+        refreshing={isFetching}
       />
     );
   }

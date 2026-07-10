@@ -1,5 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { API_ROUTES, apiRequest, Method } from "@/api";
+import { queryClient as globalQueryClient } from "@/api/query-client";
+import { performSessionTeardown } from "@/api/session";
 import { QUERY_KEYS } from "@/constants";
 import type { NotLoggedIn, User } from "@/dto";
 import { storage } from "@/services/storage/asyncStorage";
@@ -26,7 +28,7 @@ export const useAuthMutations = () => {
         await storage.set("newf", userData);
         return userData;
       } catch (_error) {
-        await storage.remove("token");
+        await performSessionTeardown(globalQueryClient);
         return null as NotLoggedIn;
       }
     },
@@ -75,9 +77,6 @@ export const useAuthMutations = () => {
         {},
         true,
       );
-    },
-    onError: (error) => {
-      console.log(error);
     },
   });
 
@@ -137,10 +136,7 @@ export const useAuthMutations = () => {
   });
 
   const logout = async () => {
-    await storage.remove("token");
-    await storage.remove("newf");
-
-    queryClient.setQueryData(QUERY_KEYS.auth.user, null);
+    await performSessionTeardown(queryClient);
   };
 
   return {

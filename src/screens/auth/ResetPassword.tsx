@@ -101,19 +101,16 @@ export const ResetPassword = () => {
         setCanRequestCode(false);
         setCountdown(60); // 1 minute cooldown
         toast(t("auth.codeSent"), "success");
+      } else if (response.status === 429) {
+        toast(t("auth.errors.tooManyRequests"), "destructive");
       } else {
         toast(
           response.error || t("auth.errors.resetPasswordFailed"),
           "destructive",
         );
       }
-      // biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
-    } catch (error: any) {
-      if (error.response?.status === 429) {
-        toast(t("auth.errors.tooManyRequests"), "destructive");
-      } else {
-        toast(t("auth.errors.resetPasswordFailed"), "destructive");
-      }
+    } catch {
+      toast(t("auth.errors.resetPasswordFailed"), "destructive");
     }
   };
 
@@ -133,21 +130,18 @@ export const ResetPassword = () => {
       if (response.success) {
         toast(t("auth.resetPassword.resetPasswordSuccess"), "success");
         navigation.goBack();
+      } else if (response.status === 429) {
+        toast(t("auth.errors.tooManyRequests"), "destructive");
+      } else if (response.status === 400) {
+        toast(t("auth.errors.invalidVerificationCode"), "destructive");
       } else {
         toast(
           response.error || t("auth.errors.resetPasswordFailed"),
           "destructive",
         );
       }
-      // biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
-    } catch (error: any) {
-      if (error.response?.status === 429) {
-        toast(t("auth.errors.tooManyRequests"), "destructive");
-      } else if (error.response?.status === 400) {
-        toast(t("auth.errors.invalidVerificationCode"), "destructive");
-      } else {
-        toast(t("auth.errors.resetPasswordFailed"), "destructive");
-      }
+    } catch {
+      toast(t("auth.errors.resetPasswordFailed"), "destructive");
     }
   };
 

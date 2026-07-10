@@ -3,11 +3,10 @@ import React, {
   createContext,
   type FC,
   useCallback,
-  useEffect,
-  useState,
 } from "react";
 import { ApiError } from "@/api/errors";
-import type { Loading, NotLoggedIn, User } from "@/dto";
+import type { User } from "@/dto";
+import { useUser } from "@/hooks/account/useUser";
 import { useAuthMutations } from "@/hooks/auth/useAuthMutations";
 import { useVerificationCode } from "@/hooks/auth/useVerificationCode";
 
@@ -56,9 +55,12 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const {
-    user: userQuery,
-    refetchUser,
-    isUserLoading,
+    data: userData,
+    isPending: isUserLoading,
+    refetch: refetchUser,
+  } = useUser();
+
+  const {
     isLoggingIn,
     isRegistering,
     login: loginMutation,
@@ -77,30 +79,23 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     isResending,
   } = useVerificationCode();
 
-  const [user, setUser] = useState<User | NotLoggedIn | Loading>(undefined);
-
-  useEffect(() => {
-    if (typeof userQuery !== "undefined") {
-      setUser(userQuery);
-    }
-  }, [userQuery]);
+  const user = isUserLoading ? undefined : userData;
 
   const login = async (email: string, password: string) => {
     try {
       const response = await loginMutation({ email, password });
       await saveTokenMutation(response.token);
-      const user = await refetchUser();
-      setUser(user.data);
+      const { data: user } = await refetchUser();
       Sentry.setUser({
-        email: user.data?.email,
-        id: user.data?.id_newf,
-        username: `${user.data?.first_name} ${user.data?.last_name}`,
+        email: user?.email,
+        id: user?.id_newf,
+        username: `${user?.first_name} ${user?.last_name}`,
       });
       Sentry.addBreadcrumb({
         message: "User logged in",
         level: "info",
         data: {
-          email: user.data?.email,
+          email: user?.email,
         },
       });
       return { success: true };
@@ -172,7 +167,6 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
   const logout = async () => {
     try {
       await logoutMutation();
-      setUser(null);
     } catch (error) {
       console.error("Error logging out:", error);
     }
@@ -182,8 +176,7 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     try {
       const { token } = await verifyCodeMutation({ email, verification_code });
       await saveTokenMutation(token);
-      const user = await refetchUser();
-      setUser(user.data);
+      await refetchUser();
       return { success: true };
     } catch (error) {
       console.error("Error verifying code:", error);

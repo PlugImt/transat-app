@@ -33,13 +33,6 @@ Sentry.init({
   environment: __DEV__ ? "development" : "production",
 });
 
-export const SafeViewAndroid = StyleSheet.create({
-  AndroidSafeArea: {
-    flex: 1,
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-  },
-});
-
 export default function Layout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>

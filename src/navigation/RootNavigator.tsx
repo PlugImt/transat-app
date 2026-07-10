@@ -1,7 +1,6 @@
 import { createNativeStackNavigator } from "expo-router/build/react-navigation/native-stack";
 import { useEffect, useState } from "react";
-import { SafeAreaView } from "react-native";
-import { SafeViewAndroid } from "@/app/_layout";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { SplashScreen } from "@/components/animations/SplashScreen";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/hooks/account/useAuth";
@@ -32,10 +31,7 @@ export const RootNavigator = () => {
 
   return (
     <SafeAreaView
-      style={[
-        SafeViewAndroid.AndroidSafeArea,
-        { backgroundColor: theme.background },
-      ]}
+      style={{ flex: 1, backgroundColor: theme.background }}
     >
       <Stack.Navigator screenOptions={screenOptions}>
         {user ? (

@@ -9,6 +9,7 @@ import {
 import {
   type ColorSchemeName,
   Appearance as NativeAppearance,
+  StatusBar,
   useColorScheme,
 } from "react-native";
 import { storage } from "@/services/storage/asyncStorage";
@@ -120,6 +121,10 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <ThemeContext.Provider value={contextValue}>
+      <StatusBar
+        barStyle={actualTheme === "dark" ? "light-content" : "dark-content"}
+        backgroundColor={theme.background}
+      />
       {children}
     </ThemeContext.Provider>
   );

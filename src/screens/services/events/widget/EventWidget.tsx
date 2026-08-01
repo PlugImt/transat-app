@@ -15,7 +15,7 @@ export const EventWidget = () => {
     return <EventWidgetSkeleton />;
   }
 
-  if (isError) {
+  if (isError || !data || data.length === 0) {
     return null;
   }
 

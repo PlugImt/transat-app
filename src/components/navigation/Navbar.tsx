@@ -2,6 +2,7 @@ import { createBottomTabNavigator } from "expo-router/build/react-navigation/bot
 import { createNativeStackNavigator } from "expo-router/build/react-navigation/native-stack";
 import { GridIcon, LucideHome, Play, User } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@/contexts/ThemeContext";
 import { screenOptions, tabBarOptions } from "@/navigation/navigationConfig";
 import { Home } from "@/screens";
@@ -131,6 +132,7 @@ const AccountStack = () => (
 export const BottomTabNavigator = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
+  const insets = useSafeAreaInsets();
 
   const handleTabPress = () => {
     return {
@@ -141,7 +143,7 @@ export const BottomTabNavigator = () => {
   };
 
   return (
-    <Tab.Navigator screenOptions={tabBarOptions(theme)}>
+    <Tab.Navigator screenOptions={tabBarOptions(theme, insets.bottom)}>
       <Tab.Screen
         name="HomeScreen"
         component={HomeStack}

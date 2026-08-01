@@ -8,6 +8,7 @@ export const screenOptions: NativeStackNavigationOptions = {
 
 export const tabBarOptions = (
   theme: ThemeType,
+  bottomInset = 0,
 ): BottomTabNavigationOptions => ({
   headerShown: false,
   tabBarActiveTintColor: theme.primary,
@@ -17,8 +18,8 @@ export const tabBarOptions = (
     backgroundColor: theme.background,
     borderTopColor: theme.border,
     paddingTop: 8,
-    height: 60,
-    paddingBottom: 0,
+    height: 60 + bottomInset,
+    paddingBottom: bottomInset,
   },
   headerTitleStyle: {
     backgroundColor: theme.background,

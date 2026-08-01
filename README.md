@@ -113,17 +113,17 @@ Merci à Sentry pour leur offre gratuite !
                 </a>
             </td>
             <td align="center">
-                <a href="https://github.com/Enockii">
-                    <img src="https://avatars.githubusercontent.com/u/98472937?v=4" width="100;" alt="Enockii"/>
-                    <br />
-                    <sub><b>Marina</b></sub>
-                </a>
-            </td>
-            <td align="center">
                 <a href="https://github.com/akinimaginable">
                     <img src="https://avatars.githubusercontent.com/u/38192770?v=4" width="100;" alt="akinimaginable"/>
                     <br />
                     <sub><b>Akinimaginable</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/Enockii">
+                    <img src="https://avatars.githubusercontent.com/u/98472937?v=4" width="100;" alt="Enockii"/>
+                    <br />
+                    <sub><b>Marina</b></sub>
                 </a>
             </td>
             <td align="center">

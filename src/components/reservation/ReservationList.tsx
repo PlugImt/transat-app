@@ -6,6 +6,10 @@ import ReservationCard from "@/components/custom/card/ReservationCard";
 import { Empty } from "@/components/page/Empty";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
+import {
+  getIsRefetching,
+  WidgetErrorCard,
+} from "@/components/query";
 import type { GetReservation } from "@/dto/reservation";
 import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
 import { useReservationDisplayData } from "@/hooks/services/reservation/useReservationData";
@@ -15,6 +19,7 @@ interface ReservationListProps {
   title: string;
   data: GetReservation | GetReservation[] | undefined;
   isPending: boolean;
+  isFetching?: boolean;
   isError: boolean;
   error: Error | null;
   refetch: () => void;
@@ -27,6 +32,7 @@ export const ReservationList = ({
   title,
   data,
   isPending,
+  isFetching = false,
   isError,
   error,
   refetch,
@@ -37,6 +43,7 @@ export const ReservationList = ({
   const { t } = useTranslation();
   const displayData = useReservationDisplayData(data);
   const { scrollHandler } = useAnimatedHeader();
+  const isRefetching = getIsRefetching(isFetching, isPending);
 
   if (isPending) {
     return variant === "page" ? <ReservationSkeleton title={title} /> : null;
@@ -49,15 +56,17 @@ export const ReservationList = ({
           error={error}
           title={title}
           refetch={refetch}
-          isRefetching={isPending}
+          isRefetching={isRefetching}
+          refreshing={isFetching}
         />
       );
     }
     return (
-      <Empty
-        icon={<SearchX />}
+      <WidgetErrorCard
         title={title}
-        description={error?.message || t("common.errors.unableToFetch")}
+        error={error}
+        onRetry={refetch}
+        isRetrying={isRefetching}
       />
     );
   }
@@ -80,13 +89,11 @@ export const ReservationList = ({
       showsVerticalScrollIndicator={showScrollIndicators}
       ListHeaderComponent={headerComponent as ReactElement}
       ListEmptyComponent={
-        isPending ? null : (
-          <Empty
-            icon={<SearchX />}
-            title={t("services.reservation.errors.empty")}
-            description={t("services.reservation.errors.emptyDescription")}
-          />
-        )
+        <Empty
+          icon={<SearchX />}
+          title={t("services.reservation.errors.empty")}
+          description={t("services.reservation.errors.emptyDescription")}
+        />
       }
     />
   );
@@ -96,7 +103,7 @@ export const ReservationList = ({
       <Page
         title={title}
         onRefresh={refetch}
-        refreshing={isPending}
+        refreshing={isFetching}
         className="gap-2"
         asChildren
       >

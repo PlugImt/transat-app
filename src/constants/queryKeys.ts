@@ -30,7 +30,6 @@ export const QUERY_KEYS = {
   },
   notification: ["notification"],
   auth: {
-    user: ["auth", "user"],
     login: ["auth", "login"],
     register: ["auth", "register"],
     saveToken: ["auth", "saveToken"],

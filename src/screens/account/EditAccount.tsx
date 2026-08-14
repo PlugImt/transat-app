@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useQueryClient } from "@tanstack/react-query";
+import { useIsFetching, useQueryClient } from "@tanstack/react-query";
 import { useNavigation } from "expo-router/react-navigation";
 import { Edit, GraduationCap } from "lucide-react-native";
 import { useEffect } from "react";
@@ -14,6 +14,7 @@ import { Text } from "@/components/common/Text";
 import { useToast } from "@/components/common/Toast";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
+import { getIsRefetching } from "@/components/query";
 import { AvatarSkeleton } from "@/components/Skeleton";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -31,6 +32,10 @@ export const EditProfile = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const { data: user, isPending, isError, error } = useUser();
+  const isUserFetching =
+    useIsFetching({
+      queryKey: QUERY_KEYS.user,
+    }) > 0;
   const { mutate: updateAccount, isPending: isUpdatingAccount } =
     useUpdateAccount();
   const { mutate: updateProfilePicture, isPending: isUpdatingProfilePicture } =
@@ -124,14 +129,15 @@ export const EditProfile = () => {
           error || ({ message: t("common.errors.unableToFetch") } as Error)
         }
         refetch={refetch}
-        isRefetching={isPending}
+        isRefetching={getIsRefetching(isUserFetching, isPending)}
+        refreshing={isUserFetching}
       />
     );
   }
 
   return (
     <Page
-      refreshing={isPending}
+      refreshing={isUserFetching}
       onRefresh={refetch}
       title={t("account.editProfile")}
     >

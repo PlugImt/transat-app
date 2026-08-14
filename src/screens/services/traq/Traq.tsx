@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ErrorPage } from "@/components/page/ErrorPage";
-import { Page } from "@/components/page/Page";
+import { ServicePageShell } from "@/components/query";
 import { useTraq } from "@/hooks/services/traq/useTraq";
 import {
   AboutSection,
@@ -14,7 +13,7 @@ import {
 export const Traq = () => {
   const { t } = useTranslation();
 
-  const { traq, refetch, isPending, isError, error } = useTraq();
+  const { traq, refetch, isPending, isFetching, isError, error } = useTraq();
 
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
@@ -41,30 +40,12 @@ export const Traq = () => {
     );
   }, [traq, selectedTags]);
 
-  if (isPending) {
-    return <LoadingState />;
-  }
-
-  if (isError && error) {
-    return (
-      <ErrorPage
-        title={t("services.traq.title")}
-        error={
-          error || ({ message: t("common.errors.unableToFetch") } as Error)
-        }
-        refetch={refetch}
-        isRefetching={isPending}
-      />
-    );
-  }
-
   return (
-    <Page
-      refreshing={isPending}
-      onRefresh={refetch}
-      className="gap-4"
+    <ServicePageShell
       title={t("services.traq.title")}
-      header={<AboutSection />}
+      query={{ isPending, isError, isFetching, error, refetch }}
+      loading={<LoadingState />}
+      pageProps={{ className: "gap-4", header: <AboutSection /> }}
     >
       <TraqFilter
         tags={tags}
@@ -76,7 +57,7 @@ export const Traq = () => {
       ) : (
         <TraqList items={filteredArticles} />
       )}
-    </Page>
+    </ServicePageShell>
   );
 };
 

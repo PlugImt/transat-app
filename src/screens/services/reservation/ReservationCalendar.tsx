@@ -4,10 +4,11 @@ import { useTranslation } from "react-i18next";
 import Animated from "react-native-reanimated";
 import Swiper from "react-native-swiper";
 import { Text } from "@/components/common/Text";
-import { useToast } from "@/components/common/Toast";
 import CalendarSlot from "@/components/custom/calendar/CalendarSlot";
 import { DaySelector } from "@/components/custom/calendar/DaySelector";
+import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
+import { getIsRefetching } from "@/components/query";
 import type { ReservationScheme } from "@/dto";
 import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
 import { useReservationItem } from "@/hooks/services/reservation/useReservation";
@@ -26,7 +27,6 @@ export const ReservationCalendar = () => {
   const route = useRoute<ItemRouteProp>();
   const { id, title } = route.params;
   const { scrollHandler } = useAnimatedHeader();
-  const { toast } = useToast();
 
   const todayStr = useMemo(() => toYMD(new Date()), []);
   const [selectedDate, setSelectedDate] = useState<string | undefined>(
@@ -34,14 +34,10 @@ export const ReservationCalendar = () => {
   );
   const [swiperKey, setSwiperKey] = useState<string>(`swiper-${todayStr}`);
 
-  const { data, isPending, isError, error, refetch } = useReservationItem(
-    id,
-    selectedDate,
-  );
+  const { data, isPending, isFetching, isError, error, refetch } =
+    useReservationItem(id, selectedDate);
 
-  if (isError) {
-    toast(error?.message || t("common.error"), "destructive");
-  }
+  const isRefetching = getIsRefetching(isFetching, isPending);
 
   const { current, before, after } = useMemo(() => {
     const current = data?.item?.reservation ?? data?.reservation ?? [];
@@ -116,11 +112,23 @@ export const ReservationCalendar = () => {
     setSwiperKey(`swiper-${nextDateStr}`);
   };
 
+  if (isError) {
+    return (
+      <ErrorPage
+        title={title}
+        error={error}
+        refetch={refetch}
+        isRefetching={isRefetching}
+        refreshing={isFetching}
+      />
+    );
+  }
+
   return (
     <Page
       title={title}
       onRefresh={refetch}
-      refreshing={isPending}
+      refreshing={isFetching}
       className="gap-2"
       asChildren
     >

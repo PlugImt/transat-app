@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { AboutModal } from "@/components/custom/AboutModal";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
+import { getIsRefetching } from "@/components/query";
 import { useMenuRestaurant } from "@/hooks/services/restaurant/useMenuRestaurant";
 import {
   LoadingState,
@@ -13,7 +14,7 @@ import { RestaurantClosed } from "./components/RestaurantMenu/RestaurantClosed";
 export const Restaurant = () => {
   const { t } = useTranslation();
 
-  const { menu, isPending, refetch, isError, error } = useMenuRestaurant();
+  const { menu, isPending, isFetching, refetch, isError, error } = useMenuRestaurant();
   const openingHoursData = getOpeningHoursData(t);
   const weekend: boolean = isWeekend();
   const outOfHours: boolean = menu?.updatedDate
@@ -30,7 +31,8 @@ export const Restaurant = () => {
         title={t("services.restaurant.title")}
         error={error}
         refetch={refetch}
-        isRefetching={isPending}
+        isRefetching={getIsRefetching(isFetching, isPending)}
+        refreshing={isFetching}
       />
     );
   }
@@ -45,7 +47,7 @@ export const Restaurant = () => {
 
   return (
     <Page
-      refreshing={isPending}
+      refreshing={isFetching}
       onRefresh={refetch}
       title={t("services.restaurant.title")}
       header={

@@ -8,6 +8,7 @@ import ClubCard, { ClubCardSkeleton } from "@/components/custom/card/ClubCard";
 import { Empty } from "@/components/page/Empty";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
+import { getIsRefetching } from "@/components/query";
 import type { Club } from "@/dto/club";
 import { useAnimatedHeader } from "@/hooks/common";
 import { useFilteredClubs } from "@/hooks/services/club/useClub";
@@ -77,6 +78,7 @@ const SelectClubModal = ({
   const {
     data: clubs,
     isPending,
+    isFetching,
     refetch,
     isError,
     error,
@@ -120,7 +122,8 @@ const SelectClubModal = ({
           error={error}
           title={title || t("services.clubs.selectClub")}
           refetch={refetch}
-          isRefetching={isPending}
+          isRefetching={getIsRefetching(isFetching, isPending)}
+          refreshing={isFetching}
         />
       </Modal>
     );
@@ -136,7 +139,7 @@ const SelectClubModal = ({
       <Page
         title={title || t("services.clubs.selectClub")}
         onRefresh={refetch}
-        refreshing={isPending}
+        refreshing={isFetching}
         onBack={handleClose}
         className="gap-2"
         asChildren

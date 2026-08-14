@@ -1,9 +1,8 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { API_ROUTES, apiRequest, Method } from "@/api";
-import { queryClient as globalQueryClient } from "@/api/query-client";
 import { performSessionTeardown } from "@/api/session";
 import { QUERY_KEYS } from "@/constants";
-import type { NotLoggedIn, User } from "@/dto";
+import type { User } from "@/dto";
 import { storage } from "@/services/storage/asyncStorage";
 
 interface LoginResponse {
@@ -12,29 +11,6 @@ interface LoginResponse {
 
 export const useAuthMutations = () => {
   const queryClient = useQueryClient();
-
-  const {
-    data: user,
-    isPending: isUserLoading,
-    refetch: refetchUser,
-  } = useQuery({
-    queryKey: QUERY_KEYS.auth.user,
-    queryFn: async () => {
-      const token = await storage.get("token");
-      if (!token) return null as NotLoggedIn;
-
-      try {
-        const userData = await apiRequest<User>(API_ROUTES.user);
-        await storage.set("newf", userData);
-        return userData;
-      } catch (_error) {
-        await performSessionTeardown(globalQueryClient);
-        return null as NotLoggedIn;
-      }
-    },
-    staleTime: 1000 * 60 * 5, // 5 minutes
-  });
-
   const loginMutation = useMutation<
     LoginResponse,
     Error,
@@ -88,6 +64,9 @@ export const useAuthMutations = () => {
       await storage.set("newf", userData);
       return userData;
     },
+    onSuccess: (userData) => {
+      queryClient.setQueryData(QUERY_KEYS.user, userData);
+    },
   });
 
   const saveExpoPushTokenMutation = useMutation({
@@ -140,9 +119,6 @@ export const useAuthMutations = () => {
   };
 
   return {
-    user,
-    refetchUser,
-    isUserLoading,
     login: loginMutation.mutateAsync,
     register: registerMutation.mutateAsync,
     saveToken: saveTokenMutation.mutateAsync,

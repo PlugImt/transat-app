@@ -4,6 +4,7 @@ import Animated from "react-native-reanimated";
 import { UserCard, UserCardSkeleton } from "@/components/custom";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
+import { getIsRefetching } from "@/components/query";
 import { useClubMembers } from "@/hooks/services/club/useClub";
 import type { BottomTabParamList } from "@/types";
 
@@ -13,7 +14,8 @@ export const ClubMemberList = () => {
     useRoute<RouteProp<BottomTabParamList, "ClubMemberList">>();
   const { id } = params;
 
-  const { data, isPending, refetch, isError, error } = useClubMembers(id);
+  const { data, isPending, isFetching, refetch, isError, error } =
+    useClubMembers(id);
 
   if (isPending) {
     return <ClubMemberListSkeleton />;
@@ -25,7 +27,8 @@ export const ClubMemberList = () => {
         error={error}
         title={t("services.clubs.title")}
         refetch={refetch}
-        isRefetching={isPending}
+        isRefetching={getIsRefetching(isFetching, isPending)}
+        refreshing={isFetching}
       />
     );
   }
@@ -34,7 +37,7 @@ export const ClubMemberList = () => {
     <Page
       title={t("services.clubs.title")}
       onRefresh={refetch}
-      refreshing={isPending}
+      refreshing={isFetching}
       className="gap-2"
       asChildren
     >

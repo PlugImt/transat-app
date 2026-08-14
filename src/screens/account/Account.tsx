@@ -11,6 +11,7 @@ import { Text } from "@/components/common/Text";
 import { LogoutButton } from "@/components/custom/LogoutButton";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
+import { getIsRefetching } from "@/components/query";
 import { AvatarSkeleton, TextSkeleton } from "@/components/Skeleton";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -48,7 +49,8 @@ export const Account = () => {
         title={t("common.account")}
         error={error}
         refetch={refetch}
-        isRefetching={isPending}
+        isRefetching={getIsRefetching(isUserFetching, isPending)}
+        refreshing={isUserFetching}
       >
         <LogoutButton />
       </ErrorPage>

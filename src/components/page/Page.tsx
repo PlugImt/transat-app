@@ -17,7 +17,7 @@ import {
 import { cn } from "@/utils";
 import { HEADER_HEIGHT, Header } from "./Header";
 
-type PageProps = {
+export type PageProps = {
   children: ReactNode;
   refreshing?: boolean;
   onRefresh?: () => void;

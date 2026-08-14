@@ -2,6 +2,7 @@ import { useNavigation } from "expo-router/react-navigation";
 import { useTranslation } from "react-i18next";
 import { TouchableOpacity, View } from "react-native";
 import { Text } from "@/components/common/Text";
+import { WidgetBoundary } from "@/components/query";
 import type { Course } from "@/dto";
 import { useAuth } from "@/hooks/account/useAuth";
 import { useTimetable } from "@/hooks/services/timetable/useTimetable";
@@ -19,7 +20,10 @@ export const TimetableWidget = () => {
   const {
     data: edt,
     isPending: isPendingEdt,
+    isFetching,
+    isError,
     error,
+    refetch,
   } = useTimetable(user?.email || "");
 
   const CUT_OFF_HOUR = 12;
@@ -74,84 +78,83 @@ export const TimetableWidget = () => {
   const noCoursesAfternoon = afternoonCourses?.length === 0;
   const noCoursesToday = !morningCourses?.length && !afternoonCourses?.length;
 
-  if (isPendingEdt) {
-    return <TimetableLoadingWidget />;
-  }
-
-  if (
-    error ||
+  const showEmptyState =
     noCoursesToday ||
     (isMorningNow && noCoursesMorning) ||
-    (!isMorningNow && noCoursesAfternoon)
-  ) {
-    return (
-      <View className="flex flex-col gap-2 mr-2">
-        <Text className="ml-4" variant="h3">
-          {t("services.timetable.title")}
-        </Text>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Timetable")}
-          className="rounded-lg flex flex-col gap-3"
-        >
-          <View className="flex flex-col">
-            {error ? (
-              <>
-                <Text className="ml-4">
-                  {t("services.timetable.noEdt.title")}
-                </Text>
-                <Text className="ml-4 font-bold" color="primary">
-                  {t("services.timetable.noEdt.description")}
-                </Text>
-              </>
-            ) : noCoursesToday ? (
-              <>
-                <Text className="ml-4">
-                  {t("services.timetable.noCourses.dayTitle")}
-                </Text>
-                <Text className="ml-4 italic" variant="sm">
-                  {t("services.timetable.noCourses.description")}
-                </Text>
-              </>
-            ) : isMorningNow && noCoursesMorning ? (
-              <>
-                <Text className="ml-4">
-                  {t("services.timetable.noCourses.morningTitle")}
-                </Text>
-                <Text className="ml-4 italic" variant="sm">
-                  {t("services.timetable.noCourses.description")}
-                </Text>
-              </>
-            ) : (
-              <>
-                <Text className="ml-4">
-                  {t("services.timetable.noCourses.afternoonTitle")}
-                </Text>
-                <Text className="ml-4 italic" variant="sm">
-                  {t("services.timetable.noCourses.description")}
-                </Text>
-              </>
-            )}
-          </View>
-        </TouchableOpacity>
-      </View>
-    );
-  }
+    (!isMorningNow && noCoursesAfternoon);
 
-  return (
-    <View className="flex flex-col gap-2">
+  const emptyContent = (
+    <View className="flex flex-col gap-2 mr-2">
       <Text className="ml-4" variant="h3">
         {t("services.timetable.title")}
       </Text>
-
       <TouchableOpacity
         onPress={() => navigation.navigate("Timetable")}
         className="rounded-lg flex flex-col gap-3"
       >
-        {filteredCourses?.map((course: Course) => (
-          <TimetableCourseWidget key={course.id} course={course} />
-        ))}
+        <View className="flex flex-col">
+          {noCoursesToday ? (
+            <>
+              <Text className="ml-4">
+                {t("services.timetable.noCourses.dayTitle")}
+              </Text>
+              <Text className="ml-4 italic" variant="sm">
+                {t("services.timetable.noCourses.description")}
+              </Text>
+            </>
+          ) : isMorningNow && noCoursesMorning ? (
+            <>
+              <Text className="ml-4">
+                {t("services.timetable.noCourses.morningTitle")}
+              </Text>
+              <Text className="ml-4 italic" variant="sm">
+                {t("services.timetable.noCourses.description")}
+              </Text>
+            </>
+          ) : (
+            <>
+              <Text className="ml-4">
+                {t("services.timetable.noCourses.afternoonTitle")}
+              </Text>
+              <Text className="ml-4 italic" variant="sm">
+                {t("services.timetable.noCourses.description")}
+              </Text>
+            </>
+          )}
+        </View>
       </TouchableOpacity>
     </View>
+  );
+
+  return (
+    <WidgetBoundary
+      title={t("services.timetable.title")}
+      query={{
+        isPending: isPendingEdt,
+        isFetching,
+        isError,
+        error,
+        refetch,
+      }}
+      loading={<TimetableLoadingWidget />}
+      isEmpty={showEmptyState}
+      empty={emptyContent}
+    >
+      <View className="flex flex-col gap-2">
+        <Text className="ml-4" variant="h3">
+          {t("services.timetable.title")}
+        </Text>
+
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Timetable")}
+          className="rounded-lg flex flex-col gap-3"
+        >
+          {filteredCourses?.map((course: Course) => (
+            <TimetableCourseWidget key={course.id} course={course} />
+          ))}
+        </TouchableOpacity>
+      </View>
+    </WidgetBoundary>
   );
 };
 

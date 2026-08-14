@@ -26,6 +26,7 @@ import { UserStack, UserStackSkeleton } from "@/components/custom/UserStack";
 import { Empty } from "@/components/page/Empty";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
+import { getIsRefetching } from "@/components/query";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { EventDetails as EventDetailsType } from "@/dto/event";
 import { useAuth } from "@/hooks/account";
@@ -111,6 +112,7 @@ const EventDetails = () => {
   const {
     data: event,
     isPending,
+    isFetching,
     isError,
     error,
     refetch,
@@ -122,7 +124,8 @@ const EventDetails = () => {
         error={error}
         title={t("services.events.title")}
         refetch={refetch}
-        isRefetching={isPending}
+        isRefetching={getIsRefetching(isFetching, isPending)}
+        refreshing={isFetching}
       />
     );
   }
@@ -135,7 +138,7 @@ const EventDetails = () => {
     return (
       <Page
         title={t("services.events.title")}
-        refreshing={isPending}
+        refreshing={isFetching}
         onRefresh={refetch}
       >
         <Empty
@@ -169,7 +172,7 @@ const EventDetails = () => {
   return (
     <Page
       title={t("services.events.title")}
-      refreshing={isPending}
+      refreshing={isFetching}
       onRefresh={refetch}
       header={isOwner && eventActions}
     >

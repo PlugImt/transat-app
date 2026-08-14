@@ -5,6 +5,7 @@ import CardGroup from "@/components/common/CardGroup";
 import ReservationCard, {
   ReservationCardSkeleton,
 } from "@/components/custom/card/ReservationCard";
+import { WidgetBoundary } from "@/components/query";
 import {
   useClubReservations,
   useReservationDisplayData,
@@ -14,39 +15,45 @@ import type { AppNavigation } from "@/types";
 export const ClubReservationWidget = ({ clubId }: { clubId: number }) => {
   const { t } = useTranslation();
   const navigation = useNavigation<AppNavigation>();
-  const { data, isPending, isError } = useClubReservations(clubId);
+  const { data, isPending, isFetching, isError, error, refetch } =
+    useClubReservations(clubId);
   const displayData = useReservationDisplayData(data);
 
-  if (isPending) {
-    return <ClubReservationWidgetSkeleton />;
-  }
-
-  if (isError || !displayData || displayData.length === 0) {
-    return null;
-  }
-
   return (
-    <CardGroup
+    <WidgetBoundary
       title={t("services.reservation.title")}
-      onPress={
-        displayData.length > 3
-          ? () => navigation.navigate("Reservation")
-          : undefined
-      }
+      query={{
+        isPending,
+        isFetching,
+        isError,
+        error,
+        refetch,
+      }}
+      loading={<ClubReservationWidgetSkeleton />}
+      isEmpty={!displayData?.length}
     >
-      <View className="gap-2">
-        {displayData?.slice(0, 3).map((reservation) => (
-          <ReservationCard
-            key={reservation.id}
-            title={reservation.name}
-            type={reservation.type}
-            id={reservation.id}
-            slot={reservation.slot}
-            user={reservation.user}
-          />
-        ))}
-      </View>
-    </CardGroup>
+      <CardGroup
+        title={t("services.reservation.title")}
+        onPress={
+          displayData && displayData.length > 3
+            ? () => navigation.navigate("Reservation")
+            : undefined
+        }
+      >
+        <View className="gap-2">
+          {displayData?.slice(0, 3).map((reservation) => (
+            <ReservationCard
+              key={reservation.id}
+              title={reservation.name}
+              type={reservation.type}
+              id={reservation.id}
+              slot={reservation.slot}
+              user={reservation.user}
+            />
+          ))}
+        </View>
+      </CardGroup>
+    </WidgetBoundary>
   );
 };
 

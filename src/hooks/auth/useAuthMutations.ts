@@ -11,7 +11,6 @@ interface LoginResponse {
 
 export const useAuthMutations = () => {
   const queryClient = useQueryClient();
-
   const loginMutation = useMutation<
     LoginResponse,
     Error,

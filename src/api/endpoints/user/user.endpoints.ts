@@ -34,8 +34,8 @@ export const updateProfilePicture = async (imageUrl: string) => {
   return response.profile_picture;
 };
 
-export const updatePassword = async (_: UpdatePasswordPayload) => {
-  return await apiRequest(API_ROUTES.changePassword, Method.PATCH);
+export const updatePassword = async (data: UpdatePasswordPayload) => {
+  return await apiRequest(API_ROUTES.changePassword, Method.PATCH, data);
 };
 
 export const deleteAccount = async () => {

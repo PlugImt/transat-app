@@ -99,6 +99,13 @@ Merci à Sentry pour leur offre gratuite !
 		</tr>
 		<tr>
             <td align="center">
+                <a href="https://github.com/akinimaginable">
+                    <img src="https://avatars.githubusercontent.com/u/38192770?v=4" width="100;" alt="akinimaginable"/>
+                    <br />
+                    <sub><b>Akinimaginable</b></sub>
+                </a>
+            </td>
+            <td align="center">
                 <a href="https://github.com/PacomeCailleteau">
                     <img src="https://avatars.githubusercontent.com/u/129100875?v=4" width="100;" alt="PacomeCailleteau"/>
                     <br />
@@ -110,13 +117,6 @@ Merci à Sentry pour leur offre gratuite !
                     <img src="https://avatars.githubusercontent.com/u/95444282?v=4" width="100;" alt="anthony-eluecque"/>
                     <br />
                     <sub><b>Antho</b></sub>
-                </a>
-            </td>
-            <td align="center">
-                <a href="https://github.com/akinimaginable">
-                    <img src="https://avatars.githubusercontent.com/u/38192770?v=4" width="100;" alt="akinimaginable"/>
-                    <br />
-                    <sub><b>Akinimaginable</b></sub>
                 </a>
             </td>
             <td align="center">

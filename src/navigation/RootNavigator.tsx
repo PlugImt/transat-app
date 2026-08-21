@@ -32,6 +32,7 @@ export const RootNavigator = () => {
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: theme.background }}
+      edges={user ? ["top", "left", "right"] : ["top", "bottom", "left", "right"]}
     >
       <Stack.Navigator screenOptions={screenOptions}>
         {user ? (

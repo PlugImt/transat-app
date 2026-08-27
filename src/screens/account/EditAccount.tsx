@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
 import { useNavigation } from "expo-router/react-navigation";
 import { Edit, GraduationCap } from "lucide-react-native";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Keyboard, TouchableOpacity, View } from "react-native";
@@ -81,9 +81,18 @@ export const EditProfile = () => {
   const currentYear = new Date().getFullYear();
   // If we're past September, we're in the next academic year
   const startAcademicYear = currentMonth >= 8 ? currentYear : currentYear - 1;
-  const yearOptions = Array.from({ length: 5 }, (_, i) => {
-    return (startAcademicYear + i).toString();
-  });
+  const yearOptions = useMemo(() => {
+    const years = new Set(
+      Array.from({ length: 5 }, (_, i) => startAcademicYear + i),
+    );
+    // keep the stored value selectable even if it falls outside the default window
+    if (user?.graduation_year) {
+      years.add(user.graduation_year);
+    }
+    return Array.from(years)
+      .sort((a, b) => a - b)
+      .map((year) => year.toString());
+  }, [startAcademicYear, user?.graduation_year]);
 
   const handleUpdateAccount = (data: User) => {
     Keyboard.dismiss();

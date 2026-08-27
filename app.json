@@ -3,14 +3,15 @@
     "name": "Transat",
     "slug": "Transat",
     "owner": "plugimt",
-    "version": "2.2.3",
+    "version": "2.2.7",
     "orientation": "portrait",
     "icon": "./assets/images/icon-bg.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/images/transat.icon",
-      "bundleIdentifier": "com.yohann69.transat2-0",
+      "bundleIdentifier": "fr.resel.transat",
+      "supportsTablet": true,
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }

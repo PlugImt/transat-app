@@ -20,6 +20,7 @@ import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
 import { type User, updateUserPayloadSchema } from "@/dto";
 import type { formationName } from "@/enums";
+import { useIsStaff } from "@/hooks/account";
 import { useUpdateAccount } from "@/hooks/account/useUpdateAccount";
 import { useUpdateProfilePicture } from "@/hooks/account/useUpdateProfilePicture";
 import { useUser } from "@/hooks/account/useUser";
@@ -32,6 +33,7 @@ export const EditProfile = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const { data: user, isPending, isError, error } = useUser();
+  const isStaff = useIsStaff();
   const isUserFetching =
     useIsFetching({
       queryKey: QUERY_KEYS.user,
@@ -206,36 +208,40 @@ export const EditProfile = () => {
           keyboardType="phone-pad"
         />
 
-        <Controller
-          control={userControl}
-          name="formation_name"
-          render={({ field: { onChange, value } }) => (
-            <Dropdown
-              label={t("account.formationName")}
-              placeholder={t("account.selectFormationName")}
-              options={["FISE", "FIL", "FIT", "FIP"]}
-              value={value}
-              onValueChange={onChange}
+        {!isStaff && (
+          <>
+            <Controller
+              control={userControl}
+              name="formation_name"
+              render={({ field: { onChange, value } }) => (
+                <Dropdown
+                  label={t("account.formationName")}
+                  placeholder={t("account.selectFormationName")}
+                  options={["FISE", "FIL", "FIT", "FIP", "FID"]}
+                  value={value}
+                  onValueChange={onChange}
+                />
+              )}
             />
-          )}
-        />
 
-        <Controller
-          control={userControl}
-          name="graduation_year"
-          render={({ field: { onChange, value } }) => (
-            <Dropdown
-              label={t("account.graduationYear")}
-              placeholder={t("account.selectGraduationYear")}
-              icon={<GraduationCap color={theme.text} size={20} />}
-              options={yearOptions}
-              value={value ? value.toString() : undefined}
-              onValueChange={(value) =>
-                onChange(value ? Number(value) : undefined)
-              }
+            <Controller
+              control={userControl}
+              name="graduation_year"
+              render={({ field: { onChange, value } }) => (
+                <Dropdown
+                  label={t("account.graduationYear")}
+                  placeholder={t("account.selectGraduationYear")}
+                  icon={<GraduationCap color={theme.text} size={20} />}
+                  options={yearOptions}
+                  value={value ? value.toString() : undefined}
+                  onValueChange={(value) =>
+                    onChange(value ? Number(value) : undefined)
+                  }
+                />
+              )}
             />
-          )}
-        />
+          </>
+        )}
       </View>
       <View className="gap-2">
         <Button

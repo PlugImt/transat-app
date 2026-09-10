@@ -1,6 +1,7 @@
 export { useAuth } from "./useAuth";
 export { useChangePassword } from "./useChangePassword";
 export { useHapticFeedback } from "./useHapticFeedback";
+export { useIsStaff } from "./useIsStaff";
 export { useLanguageOptions } from "./useLanguageOptions";
 export { default as useNotification } from "./useNotification";
 export { useUpdateAccount } from "./useUpdateAccount";

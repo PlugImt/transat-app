@@ -34,6 +34,33 @@ export interface Preference {
   description?: string;
 }
 
+const STAFF_RESTRICTED_PREFERENCE_IDS = new Set<PreferenceId>([
+  "events",
+  "timetable",
+  "homework",
+  "fourchettas",
+  "clubs",
+  "reservation",
+  "traq",
+  "olimtpe",
+]);
+
+export const isStaffRestrictedPreference = (preference: Preference): boolean =>
+  STAFF_RESTRICTED_PREFERENCE_IDS.has(preference.id);
+
+export const filterStaffPreferences = (
+  preferences: Preference[],
+): Preference[] =>
+  preferences.filter((item) => !isStaffRestrictedPreference(item));
+
+export const mergeStaffPreferences = (
+  visiblePreferences: Preference[],
+  allPreferences: Preference[],
+): Preference[] => [
+  ...filterStaffPreferences(visiblePreferences),
+  ...allPreferences.filter(isStaffRestrictedPreference),
+];
+
 const HOME_WIDGETS_KEY = "home_widgets_preferences";
 const SERVICES_KEY = "services_preferences";
 

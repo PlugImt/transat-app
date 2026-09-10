@@ -57,7 +57,9 @@
     "noWidgetsEnabledDescription": "Vous pouvez personnaliser les widgets en les activant ou les désactivant",
     "errors": {
       "occurred": "Une erreur est survenue",
-      "unableToFetch": "Impossible de récupérer les données"
+      "unableToFetch": "Impossible de récupérer les données",
+      "studentOnlyTitle": "Accès restreint",
+      "studentOnly": "Cette fonctionnalité est réservée aux étudiants"
     },
     "days": {
       "monday": "Lundi",
@@ -118,7 +120,7 @@
       "termsLink": "conditions d'utilisation et la politique de confidentialité"
     },
     "email": "Email",
-    "emailPlaceholder": "prenom.nom@imt-atlantique.net",
+    "emailPlaceholder": "prenom.nom@imt-atlantique.net / .fr",
     "password": "Mot de passe",
     "confirmPassword": "Confirmer le mot de passe",
     "firstName": "Prénom",

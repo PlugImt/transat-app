@@ -12,6 +12,7 @@ import { Text } from "@/components/common/Text";
 import { useToast } from "@/components/common/Toast";
 import { Page } from "@/components/page/Page";
 import useAuth from "@/hooks/account/useAuth";
+import { isImtEmail } from "@/utils";
 
 export const Signin = () => {
   const navigation = useNavigation();
@@ -29,8 +30,9 @@ export const Signin = () => {
     email: z
       .string()
       .trim()
+      .toLowerCase()
       .email(t("auth.errors.email"))
-      .refine((email) => email.endsWith("@imt-atlantique.net"), {
+      .refine(isImtEmail, {
         message: t("auth.errors.imtOnly"),
       }),
     password: z.string().min(6, t("auth.errors.password")),
@@ -58,7 +60,7 @@ export const Signin = () => {
     !email ||
     !password ||
     password.length < 6 ||
-    !email.endsWith("@imt-atlantique.net");
+    !isImtEmail(email);
 
   const handleLogin = async (data: { email: string; password: string }) => {
     try {

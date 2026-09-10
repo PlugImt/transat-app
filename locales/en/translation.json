@@ -57,7 +57,9 @@
     "noWidgetsEnabledDescription": "You can customize widgets by enabling or disabling them",
     "errors": {
       "occurred": "An error occurred",
-      "unableToFetch": "Unable to fetch data"
+      "unableToFetch": "Unable to fetch data",
+      "studentOnlyTitle": "Restricted access",
+      "studentOnly": "This feature is only available to students"
     },
     "days": {
       "monday": "Monday",
@@ -118,7 +120,7 @@
       "termsLink": "terms of use and privacy policy"
     },
     "email": "Email",
-    "emailPlaceholder": "firstname.lastname@imt-atlantique.net",
+    "emailPlaceholder": "firstname.lastname@imt-atlantique.net / .fr",
     "password": "Password",
     "confirmPassword": "Confirm password",
     "firstName": "First name",

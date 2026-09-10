@@ -16,6 +16,7 @@ import { useToast } from "@/components/common/Toast";
 import { Page } from "@/components/page/Page";
 import useAuth from "@/hooks/account/useAuth";
 import type { AuthStackParamList } from "@/types";
+import { isImtEmail, normalizeEmail } from "@/utils";
 
 type ResetPasswordRouteProp = RouteProp<AuthStackParamList, "ResetPassword">;
 
@@ -39,8 +40,9 @@ export const ResetPassword = () => {
       email: z
         .string()
         .trim()
+        .toLowerCase()
         .email(t("auth.errors.email"))
-        .refine((email) => email.endsWith("@imt-atlantique.net"), {
+        .refine(isImtEmail, {
           message: t("auth.errors.imtOnly"),
         }),
       verificationCode: z.string().length(6, t("auth.errors.verificationCode")),
@@ -77,7 +79,7 @@ export const ResetPassword = () => {
     isPending ||
     isVerifying ||
     !email ||
-    !email.endsWith("@imt-atlantique.net") ||
+    !isImtEmail(email) ||
     (verificationCodeSent &&
       (!verificationCode || !newPassword || !confirmPassword));
 
@@ -95,7 +97,7 @@ export const ResetPassword = () => {
 
   const handleRequestCode = async () => {
     try {
-      const response = await resetPassword(email);
+      const response = await resetPassword(normalizeEmail(email));
       if (response.success) {
         setVerificationCodeSent(true);
         setCanRequestCode(false);

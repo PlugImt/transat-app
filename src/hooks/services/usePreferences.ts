@@ -2,9 +2,12 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useIsStaff } from "@/hooks/account";
 import {
+  filterStaffPreferences,
   getHomeWidgetPreferences,
   getServicePreferences,
+  mergeStaffPreferences,
   type Preference,
   saveHomeWidgetPreferences,
   saveServicePreferences,
@@ -90,16 +93,42 @@ const usePreferences = (
 };
 
 export const useHomeWidgetPreferences = () =>
-  usePreferences(
+  useRoleAwarePreferences(
     QUERY_KEYS.homeWidgetPreferences,
     getHomeWidgetPreferences,
     saveHomeWidgetPreferences,
   );
 
 export const useServicePreferences = () => {
-  return usePreferences(
+  return useRoleAwarePreferences(
     QUERY_KEYS.servicePreferences,
     getServicePreferences,
     saveServicePreferences,
   );
+};
+
+const useRoleAwarePreferences = (
+  baseQueryKey: string[],
+  getFn: (
+    t: (key: string) => string,
+    theme?: "light" | "dark",
+  ) => Promise<Preference[]>,
+  saveFn: (prefs: Preference[]) => Promise<void>,
+) => {
+  const isStaff = useIsStaff();
+  const result = usePreferences(baseQueryKey, getFn, saveFn);
+
+  if (!isStaff) return result;
+
+  return {
+    ...result,
+    preferences: filterStaffPreferences(result.preferences),
+    enabledPreferences: filterStaffPreferences(result.enabledPreferences),
+    updateOrder: (visiblePreferences: Preference[]) =>
+      result.updateOrder(
+        mergeStaffPreferences(visiblePreferences, result.preferences),
+      ),
+    resetPreferences: async () =>
+      filterStaffPreferences(await result.resetPreferences()),
+  };
 };

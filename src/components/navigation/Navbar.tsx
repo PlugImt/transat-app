@@ -4,6 +4,7 @@ import { GridIcon, LucideHome, Play, User } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useIsStaff } from "@/hooks/account";
 import { screenOptions, tabBarOptions } from "@/navigation/navigationConfig";
 import { Home } from "@/screens";
 import Account from "@/screens/account/Account";
@@ -132,6 +133,7 @@ const AccountStack = () => (
 export const BottomTabNavigator = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
+  const isStaff = useIsStaff();
   const insets = useSafeAreaInsets();
 
   const handleTabPress = () => {
@@ -166,15 +168,17 @@ export const BottomTabNavigator = () => {
           ),
         }}
       />
-      <Tab.Screen
-        name="GamesScreen"
-        component={GamesStack}
-        listeners={handleTabPress}
-        options={{
-          tabBarLabel: t("games.title"),
-          tabBarIcon: ({ color, size }) => <Play size={size} color={color} />,
-        }}
-      />
+      {!isStaff && (
+        <Tab.Screen
+          name="GamesScreen"
+          component={GamesStack}
+          listeners={handleTabPress}
+          options={{
+            tabBarLabel: t("games.title"),
+            tabBarIcon: ({ color, size }) => <Play size={size} color={color} />,
+          }}
+        />
+      )}
       <Tab.Screen
         name="AccountScreen"
         component={AccountStack}

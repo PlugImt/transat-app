@@ -1,6 +1,7 @@
 import { t } from "i18next";
 import { z } from "zod";
 import { formationName } from "@/enums";
+import { isImtEmail } from "@/utils/auth.utils";
 import { passwordChangeSchema } from "./user.dto";
 
 export const updateUserPayloadSchema = z.object({
@@ -12,18 +13,19 @@ export const updateUserPayloadSchema = z.object({
       message: t("auth.errors.phone"),
     })
     .optional(),
-  email: z.string().refine(
-    (val) => {
-      if (!val) return true;
-      return (
-        z.string().email().safeParse(val).success &&
-        val.endsWith("@imt-atlantique.net")
-      );
-    },
-    {
-      message: t("auth.errors.email"),
-    },
-  ),
+  email: z
+    .string()
+    .trim()
+    .toLowerCase()
+    .refine(
+      (val) => {
+        if (!val) return true;
+        return z.string().email().safeParse(val).success && isImtEmail(val);
+      },
+      {
+        message: t("auth.errors.email"),
+      },
+    ),
   graduation_year: z.number().optional(),
   formation_name: z.nativeEnum(formationName).optional(),
 });

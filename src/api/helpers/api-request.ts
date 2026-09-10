@@ -3,8 +3,8 @@ import { spanToTraceHeader } from "@sentry/core";
 import * as Sentry from "@sentry/react-native";
 import axios, { type AxiosRequestConfig } from "axios";
 import { t } from "i18next";
-import { ApiError } from "@/api/errors";
 import { Method } from "@/api/enums";
+import { ApiError, isStudentOnlyForbiddenError } from "@/api/errors";
 import { getApiInstance } from "@/api/helpers/api-instance";
 import type { ApiMethod } from "@/api/types";
 import { storage } from "@/services/storage/asyncStorage";
@@ -62,12 +62,21 @@ export const apiRequest = async <T>(
 
         if (axios.isAxiosError(error)) {
           const apiError = ApiError.fromAxiosError(error, fallbackMessage);
+          const displayedError = isStudentOnlyForbiddenError(apiError)
+            ? new ApiError(t("common.errors.studentOnly"), {
+                status: apiError.status,
+                code: apiError.code,
+                serverMessage: apiError.serverMessage,
+                data: apiError.data,
+                cause: apiError,
+              })
+            : apiError;
           span?.setStatus({
             code: 2,
-            message: apiError.message,
+            message: displayedError.message,
           } satisfies SpanStatus);
-          Sentry.captureException(apiError);
-          throw apiError;
+          Sentry.captureException(displayedError);
+          throw displayedError;
         }
 
         const err = error instanceof Error ? error : new Error(String(error));

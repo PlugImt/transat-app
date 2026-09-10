@@ -57,7 +57,9 @@
     "today": "今天",
     "errors": {
       "occurred": "发生错误",
-      "unableToFetch": "无法获取数据"
+      "unableToFetch": "无法获取数据",
+      "studentOnlyTitle": "访问受限",
+      "studentOnly": "此功能仅对学生开放"
     },
     "days": {
       "monday": "星期一",
@@ -118,7 +120,7 @@
       "termsLink": "使用条款和隐私政策"
     },
     "email": "邮箱",
-    "emailPlaceholder": "名.姓@imt-atlantique.net",
+    "emailPlaceholder": "名.姓@imt-atlantique.net / .fr",
     "password": "密码",
     "confirmPassword": "确认密码",
     "firstName": "名字",

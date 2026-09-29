@@ -1,5 +1,5 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useQueryClient } from "@tanstack/react-query";
+import { createNativeStackNavigator } from "expo-router/build/react-navigation/native-stack";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { QUERY_KEYS } from "@/constants";

@@ -1,10 +1,9 @@
 import { CheckCircle2, Sparkles } from "lucide-react-native";
-import { MotiView } from "moti";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { Button } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
+import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 
 interface OnboardingSuccessProps {
@@ -16,51 +15,29 @@ export const OnboardingSuccess = ({ onFinish }: OnboardingSuccessProps) => {
   const { t } = useTranslation();
 
   return (
-    <SafeAreaView
-      className="flex-1 px-6 py-8"
-      style={{ backgroundColor: theme.background }}
-    >
-      <View className="flex-1 justify-center items-center gap-8">
-        <MotiView
-          from={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{
-            type: "spring",
-            damping: 12,
-            stiffness: 100,
-          }}
-        >
-          <View
-            className="w-32 h-32 rounded-full items-center justify-center"
-            style={{ backgroundColor: `${theme.primary}20` }}
-          >
-            <CheckCircle2 size={64} color={theme.primary} />
-          </View>
-        </MotiView>
-
-        <MotiView
-          from={{ opacity: 0, translateY: 20 }}
-          animate={{ opacity: 1, translateY: 0 }}
-          transition={{
-            type: "timing",
-            duration: 600,
-            delay: 300,
-          }}
-          className="items-center gap-4"
-        >
-          <View className="flex-row items-center gap-2">
-            <Text variant="h1">{t("onboarding.success.title")}</Text>
-            <Sparkles size={24} color={theme.primary} />
-          </View>
-          <Text variant="default" color="muted" className="text-center px-4">
-            {t("onboarding.success.description")}
-          </Text>
-        </MotiView>
-      </View>
-
-      <View className="pb-8">
+    <Page
+      disableScroll
+      className="flex-1 items-center justify-center gap-8"
+      footer={
         <Button label={t("onboarding.success.start")} onPress={onFinish} />
+      }
+    >
+      <View
+        className="w-32 h-32 rounded-full items-center justify-center"
+        style={{ backgroundColor: `${theme.primary}20` }}
+      >
+        <CheckCircle2 size={64} color={theme.primary} />
       </View>
-    </SafeAreaView>
+
+      <View className="items-center gap-4">
+        <View className="flex-row items-center gap-2">
+          <Text variant="h1">{t("onboarding.success.title")}</Text>
+          <Sparkles size={24} color={theme.primary} />
+        </View>
+        <Text color="muted" className="text-center px-4">
+          {t("onboarding.success.description")}
+        </Text>
+      </View>
+    </Page>
   );
 };

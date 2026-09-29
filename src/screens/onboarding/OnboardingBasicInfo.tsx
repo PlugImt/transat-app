@@ -1,16 +1,14 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { NativeStackNavigationProp } from "expo-router/build/react-navigation/native-stack";
 import { useNavigation } from "expo-router/react-navigation";
-import { MotiView } from "moti";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Keyboard, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { Button } from "@/components/common/Button";
 import Input from "@/components/common/Input";
 import { Text } from "@/components/common/Text";
-import { useTheme } from "@/contexts/ThemeContext";
+import { Page } from "@/components/page/Page";
 import type { User } from "@/dto";
 import { updateUserPayloadSchema } from "@/dto";
 import { useUpdateAccount } from "@/hooks/account/useUpdateAccount";
@@ -32,7 +30,6 @@ export const OnboardingBasicInfo = ({
   onSkipStep,
 }: OnboardingBasicInfoProps) => {
   const navigation = useNavigation<NavigationProp>();
-  const { theme } = useTheme();
   const { t } = useTranslation();
   const { mutate: updateAccount, isPending: isUpdating } = useUpdateAccount();
   const { data: user, refetch } = useUser();
@@ -69,6 +66,18 @@ export const OnboardingBasicInfo = ({
     }
   }, [displayUser, reset]);
 
+  const navigateToNextStep = (userData: User) => {
+    // Check what's the next step
+    const needsAcademicInfo =
+      !userData.formation_name || !userData.graduation_year;
+
+    if (needsAcademicInfo) {
+      navigation.navigate("AcademicInfo", { user: userData });
+    } else {
+      navigation.navigate("Preview", { user: userData });
+    }
+  };
+
   const handleUpdateAccount = (formData: User) => {
     Keyboard.dismiss();
     updateAccount(formData, {
@@ -102,94 +111,64 @@ export const OnboardingBasicInfo = ({
     });
   };
 
-  const navigateToNextStep = (userData: User) => {
-    // Check what's the next step
-    const needsAcademicInfo =
-      !userData.formation_name || !userData.graduation_year;
-
-    if (needsAcademicInfo) {
-      navigation.navigate("AcademicInfo", { user: userData });
-    } else {
-      navigation.navigate("Preview", { user: userData });
-    }
-  };
-
   const handleSkip = () => {
     onSkipStep();
-    const currentUser = user || route.params.user;
-    navigateToNextStep(currentUser);
+    navigateToNextStep(user || route.params.user);
   };
 
   return (
-    <SafeAreaView
-      className="flex-1 px-6 py-8"
-      style={{ backgroundColor: theme.background }}
-    >
-      <MotiView
-        from={{ opacity: 0, translateY: 20 }}
-        animate={{ opacity: 1, translateY: 0 }}
-        transition={{
-          type: "timing",
-          duration: 600,
-        }}
-        className="flex-1"
-      >
-        <View className="gap-6 mb-8">
-          <View className="gap-2">
-            <Text variant="h1">{t("onboarding.basicInfo.title")}</Text>
-            <Text variant="default" color="muted">
-              {t("onboarding.basicInfo.description")}
-            </Text>
-          </View>
-
-          <View className="gap-4">
-            <Input
-              control={control}
-              label={t("account.firstName")}
-              name="first_name"
-              textContentType="name"
-              error={errors.first_name?.message}
-              placeholder={t("onboarding.basicInfo.firstNamePlaceholder")}
-            />
-
-            <Input
-              control={control}
-              label={t("account.lastName")}
-              name="last_name"
-              textContentType="familyName"
-              error={errors.last_name?.message}
-              placeholder={t("onboarding.basicInfo.lastNamePlaceholder")}
-            />
-
-            <Input
-              control={control}
-              label={t("account.phone")}
-              name="phone_number"
-              textContentType="telephoneNumber"
-              error={errors.phone_number?.message}
-              keyboardType="phone-pad"
-              placeholder={t("onboarding.basicInfo.phonePlaceholder")}
-            />
-            <Text variant="sm" color="muted" className="px-1 -mt-2">
-              {t("onboarding.basicInfo.phoneInfo")}
-            </Text>
-          </View>
+    <Page
+      title={t("onboarding.basicInfo.title")}
+      footer={
+        <View className="gap-3">
+          <Button
+            label={t("onboarding.basicInfo.skip")}
+            variant="ghost"
+            onPress={handleSkip}
+          />
+          <Button
+            label={t("onboarding.basicInfo.continue")}
+            onPress={handleSubmit(handleUpdateAccount)}
+            isUpdating={isUpdating}
+            disabled={!isDirty || !isValid}
+          />
         </View>
-      </MotiView>
+      }
+    >
+      <Text color="muted">{t("onboarding.basicInfo.description")}</Text>
 
-      <View className="gap-3">
-        <Button
-          label={t("onboarding.basicInfo.skip")}
-          variant="ghost"
-          onPress={handleSkip}
+      <View className="gap-4">
+        <Input
+          control={control}
+          label={t("account.firstName")}
+          name="first_name"
+          textContentType="name"
+          error={errors.first_name?.message}
+          placeholder={t("onboarding.basicInfo.firstNamePlaceholder")}
         />
-        <Button
-          label={t("onboarding.basicInfo.continue")}
-          onPress={handleSubmit(handleUpdateAccount)}
-          isUpdating={isUpdating}
-          disabled={!isDirty || !isValid}
+
+        <Input
+          control={control}
+          label={t("account.lastName")}
+          name="last_name"
+          textContentType="familyName"
+          error={errors.last_name?.message}
+          placeholder={t("onboarding.basicInfo.lastNamePlaceholder")}
         />
+
+        <Input
+          control={control}
+          label={t("account.phone")}
+          name="phone_number"
+          textContentType="telephoneNumber"
+          error={errors.phone_number?.message}
+          keyboardType="phone-pad"
+          placeholder={t("onboarding.basicInfo.phonePlaceholder")}
+        />
+        <Text variant="sm" color="muted" className="px-1 -mt-2">
+          {t("onboarding.basicInfo.phoneInfo")}
+        </Text>
       </View>
-    </SafeAreaView>
+    </Page>
   );
 };

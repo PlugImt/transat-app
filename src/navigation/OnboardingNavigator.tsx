@@ -1,7 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { createNativeStackNavigator } from "expo-router/build/react-navigation/native-stack";
 import { useEffect, useState } from "react";
-import { View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { User } from "@/dto";
@@ -98,7 +98,10 @@ export const OnboardingNavigator = ({
   // All screens must be declared for React Navigation to work properly
   // We control which one is shown via initialRouteName and navigation logic
   return (
-    <View style={{ flex: 1, backgroundColor: theme.background }}>
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: theme.background }}
+      edges={["top", "bottom", "left", "right"]}
+    >
       <Stack.Navigator
         initialRouteName={getInitialRouteName()}
         screenOptions={{
@@ -164,6 +167,6 @@ export const OnboardingNavigator = ({
           {() => <OnboardingSuccess onFinish={handleComplete} />}
         </Stack.Screen>
       </Stack.Navigator>
-    </View>
+    </SafeAreaView>
   );
 };

@@ -2,15 +2,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import type { NativeStackNavigationProp } from "expo-router/build/react-navigation/native-stack";
 import { useNavigation } from "expo-router/react-navigation";
 import { GraduationCap } from "lucide-react-native";
-import { MotiView } from "moti";
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Keyboard, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { Button } from "@/components/common/Button";
-import SimpleDropdown from "@/components/common/SimpleDropdown";
+import Dropdown from "@/components/common/Dropdown";
 import { Text } from "@/components/common/Text";
+import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { User } from "@/dto";
 import { updateUserPayloadSchema } from "@/dto";
@@ -120,75 +119,58 @@ export const OnboardingAcademicInfo = ({
   };
 
   return (
-    <SafeAreaView
-      className="flex-1 px-6 py-8"
-      style={{ backgroundColor: theme.background }}
-    >
-      <MotiView
-        from={{ opacity: 0, translateY: 20 }}
-        animate={{ opacity: 1, translateY: 0 }}
-        transition={{
-          type: "timing",
-          duration: 600,
-        }}
-        className="flex-1"
-      >
-        <View className="gap-6 mb-8">
-          <View className="gap-2">
-            <Text variant="h1">{t("onboarding.academicInfo.title")}</Text>
-            <Text variant="default" color="muted">
-              {t("onboarding.academicInfo.description")}
-            </Text>
-          </View>
-
-          <View className="gap-4">
-            <Controller
-              control={control}
-              name="formation_name"
-              render={({ field: { onChange, value } }) => (
-                <SimpleDropdown
-                  label={t("account.formationName")}
-                  placeholder={t("account.selectFormationName")}
-                  options={["FISE", "FIL", "FIT", "FIP", "FID"]}
-                  value={value || undefined}
-                  onValueChange={onChange}
-                />
-              )}
-            />
-
-            <Controller
-              control={control}
-              name="graduation_year"
-              render={({ field: { onChange, value } }) => (
-                <SimpleDropdown
-                  label={t("account.graduationYear")}
-                  placeholder={t("account.selectGraduationYear")}
-                  icon={<GraduationCap color={theme.text} size={20} />}
-                  options={yearOptions}
-                  value={value ? value.toString() : undefined}
-                  onValueChange={(newValue) =>
-                    onChange(newValue ? Number(newValue) : undefined)
-                  }
-                />
-              )}
-            />
-          </View>
+    <Page
+      title={t("onboarding.academicInfo.title")}
+      footer={
+        <View className="gap-3">
+          <Button
+            label={t("onboarding.academicInfo.skip")}
+            variant="ghost"
+            onPress={handleSkip}
+          />
+          <Button
+            label={t("onboarding.academicInfo.continue")}
+            onPress={handleSubmit(handleUpdateAccount)}
+            isUpdating={isUpdating}
+            disabled={!isDirty || (!formationName && !graduationYear)}
+          />
         </View>
-      </MotiView>
+      }
+    >
+      <Text color="muted">{t("onboarding.academicInfo.description")}</Text>
 
-      <View className="gap-3">
-        <Button
-          label={t("onboarding.academicInfo.skip")}
-          variant="ghost"
-          onPress={handleSkip}
+      <View className="gap-4">
+        <Controller
+          control={control}
+          name="formation_name"
+          render={({ field: { onChange, value } }) => (
+            <Dropdown
+              label={t("account.formationName")}
+              placeholder={t("account.selectFormationName")}
+              options={["FISE", "FIL", "FIT", "FIP", "FID"]}
+              value={value || undefined}
+              onValueChange={onChange}
+            />
+          )}
         />
-        <Button
-          label={t("onboarding.academicInfo.continue")}
-          onPress={handleSubmit(handleUpdateAccount)}
-          isUpdating={isUpdating}
-          disabled={!isDirty || (!formationName && !graduationYear)}
+
+        <Controller
+          control={control}
+          name="graduation_year"
+          render={({ field: { onChange, value } }) => (
+            <Dropdown
+              label={t("account.graduationYear")}
+              placeholder={t("account.selectGraduationYear")}
+              icon={<GraduationCap color={theme.text} size={20} />}
+              options={yearOptions}
+              value={value ? value.toString() : undefined}
+              onValueChange={(newValue) =>
+                onChange(newValue ? Number(newValue) : undefined)
+              }
+            />
+          )}
         />
       </View>
-    </SafeAreaView>
+    </Page>
   );
 };

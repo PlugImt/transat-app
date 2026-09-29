@@ -20,7 +20,7 @@ import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
 import { type User, updateUserPayloadSchema } from "@/dto";
 import type { formationName } from "@/enums";
-import { useIsStaff } from "@/hooks/account";
+import { useIsAcademics } from "@/hooks/account";
 import { useUpdateAccount } from "@/hooks/account/useUpdateAccount";
 import { useUpdateProfilePicture } from "@/hooks/account/useUpdateProfilePicture";
 import { useUser } from "@/hooks/account/useUser";
@@ -33,7 +33,7 @@ export const EditProfile = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const { data: user, isPending, isError, error } = useUser();
-  const isStaff = useIsStaff();
+  const isAcademics = useIsAcademics();
   const isUserFetching =
     useIsFetching({
       queryKey: QUERY_KEYS.user,
@@ -208,7 +208,7 @@ export const EditProfile = () => {
           keyboardType="phone-pad"
         />
 
-        {!isStaff && (
+        {!isAcademics && (
           <>
             <Controller
               control={userControl}

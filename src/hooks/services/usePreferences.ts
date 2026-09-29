@@ -2,12 +2,12 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
-import { useIsStaff } from "@/hooks/account";
+import { useIsAcademics } from "@/hooks/account";
 import {
-  filterStaffPreferences,
+  filterAcademicsPreferences,
   getHomeWidgetPreferences,
   getServicePreferences,
-  mergeStaffPreferences,
+  mergeAcademicsPreferences,
   type Preference,
   saveHomeWidgetPreferences,
   saveServicePreferences,
@@ -115,20 +115,20 @@ const useRoleAwarePreferences = (
   ) => Promise<Preference[]>,
   saveFn: (prefs: Preference[]) => Promise<void>,
 ) => {
-  const isStaff = useIsStaff();
+  const isAcademics = useIsAcademics();
   const result = usePreferences(baseQueryKey, getFn, saveFn);
 
-  if (!isStaff) return result;
+  if (!isAcademics) return result;
 
   return {
     ...result,
-    preferences: filterStaffPreferences(result.preferences),
-    enabledPreferences: filterStaffPreferences(result.enabledPreferences),
+    preferences: filterAcademicsPreferences(result.preferences),
+    enabledPreferences: filterAcademicsPreferences(result.enabledPreferences),
     updateOrder: (visiblePreferences: Preference[]) =>
       result.updateOrder(
-        mergeStaffPreferences(visiblePreferences, result.preferences),
+        mergeAcademicsPreferences(visiblePreferences, result.preferences),
       ),
     resetPreferences: async () =>
-      filterStaffPreferences(await result.resetPreferences()),
+      filterAcademicsPreferences(await result.resetPreferences()),
   };
 };

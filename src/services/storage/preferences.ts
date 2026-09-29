@@ -34,7 +34,7 @@ export interface Preference {
   description?: string;
 }
 
-const STAFF_RESTRICTED_PREFERENCE_IDS = new Set<PreferenceId>([
+const ACADEMICS_RESTRICTED_PREFERENCE_IDS = new Set<PreferenceId>([
   "events",
   "timetable",
   "homework",
@@ -45,20 +45,21 @@ const STAFF_RESTRICTED_PREFERENCE_IDS = new Set<PreferenceId>([
   "olimtpe",
 ]);
 
-export const isStaffRestrictedPreference = (preference: Preference): boolean =>
-  STAFF_RESTRICTED_PREFERENCE_IDS.has(preference.id);
+export const isAcademicsRestrictedPreference = (
+  preference: Preference,
+): boolean => ACADEMICS_RESTRICTED_PREFERENCE_IDS.has(preference.id);
 
-export const filterStaffPreferences = (
+export const filterAcademicsPreferences = (
   preferences: Preference[],
 ): Preference[] =>
-  preferences.filter((item) => !isStaffRestrictedPreference(item));
+  preferences.filter((item) => !isAcademicsRestrictedPreference(item));
 
-export const mergeStaffPreferences = (
+export const mergeAcademicsPreferences = (
   visiblePreferences: Preference[],
   allPreferences: Preference[],
 ): Preference[] => [
-  ...filterStaffPreferences(visiblePreferences),
-  ...allPreferences.filter(isStaffRestrictedPreference),
+  ...filterAcademicsPreferences(visiblePreferences),
+  ...allPreferences.filter(isAcademicsRestrictedPreference),
 ];
 
 const HOME_WIDGETS_KEY = "home_widgets_preferences";

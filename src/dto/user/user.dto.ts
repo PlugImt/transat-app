@@ -24,6 +24,7 @@ export const userSchema = z.object({
   password_updated_date: z.date().optional(),
   language: z.string().optional(),
   pass_id: z.number().optional(),
+  roles: z.array(z.string()).optional(),
 });
 
 export type User = z.infer<typeof userSchema>;

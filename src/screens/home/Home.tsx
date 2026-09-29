@@ -14,7 +14,6 @@ import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
 import { useHomeWidgetsFetching } from "@/hooks/home/useHomeWidgetsFetching";
 import { useWidgetComponents } from "@/hooks/home/useWidgetComponents";
 import { useHomeWidgetPreferences } from "@/hooks/services/usePreferences";
-import { resetHomeWidgetPreferences } from "@/services/storage/preferences";
 import type { AppNavigation, BottomTabParamList } from "@/types";
 import { isNight } from "@/utils";
 
@@ -30,6 +29,7 @@ export const Home = () => {
     enabledPreferences: enabledWidgets,
     isPending,
     updateOrder,
+    resetPreferences,
   } = useHomeWidgetPreferences();
   const { isFetching, refetch } = useHomeWidgetsFetching();
   const { getWidgetComponent } = useWidgetComponents();
@@ -79,7 +79,7 @@ export const Home = () => {
             items={widgets}
             title={t("common.customizeWidgets")}
             onUpdate={updateOrder}
-            onReset={async () => resetHomeWidgetPreferences(t)}
+            onReset={resetPreferences}
           >
             <Button
               label={t("common.customizeWidgets")}

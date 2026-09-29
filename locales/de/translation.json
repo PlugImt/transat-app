@@ -57,7 +57,9 @@
     "today": "Heute",
     "errors": {
       "occurred": "Ein Fehler ist aufgetreten",
-      "unableToFetch": "Daten konnten nicht abgerufen werden"
+      "unableToFetch": "Daten konnten nicht abgerufen werden",
+      "studentOnlyTitle": "Eingeschränkter Zugriff",
+      "studentOnly": "Diese Funktion ist nur für Studierende verfügbar"
     },
     "days": {
       "monday": "Montag",
@@ -118,7 +120,7 @@
       "termsLink": "Nutzungsbedingungen und Datenschutzrichtlinie"
     },
     "email": "E-Mail",
-    "emailPlaceholder": "vorname.nachname@imt-atlantique.net",
+    "emailPlaceholder": "vorname.nachname@imt-atlantique.net / .fr",
     "password": "Passwort",
     "confirmPassword": "Passwort bestätigen",
     "firstName": "Vorname",

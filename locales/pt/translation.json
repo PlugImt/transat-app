@@ -57,7 +57,9 @@
     "today": "Hoje",
     "errors": {
       "occurred": "Ocorreu um erro",
-      "unableToFetch": "Não foi possível buscar os dados"
+      "unableToFetch": "Não foi possível buscar os dados",
+      "studentOnlyTitle": "Acesso restrito",
+      "studentOnly": "Esta funcionalidade está disponível apenas para estudantes"
     },
     "days": {
       "monday": "Segunda-feira",
@@ -118,7 +120,7 @@
       "termsLink": "termos de uso e política de privacidade"
     },
     "email": "E-mail",
-    "emailPlaceholder": "nome.sobrenome@imt-atlantique.net",
+    "emailPlaceholder": "nome.sobrenome@imt-atlantique.net / .fr",
     "password": "Senha",
     "confirmPassword": "Confirmar senha",
     "firstName": "Nome",

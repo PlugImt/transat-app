@@ -7,23 +7,21 @@ import LinkCard, { LinkCardLoading } from "@/components/custom/card/LinkCard";
 import { PreferenceCustomizationButton } from "@/components/custom/PreferenceCustomizationModal";
 import { Empty } from "@/components/page/Empty";
 import { Page } from "@/components/page/Page";
-import { useTheme } from "@/contexts/ThemeContext";
 import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
 import { useServicePreferences } from "@/hooks/services/usePreferences";
 import type { Preference } from "@/services/storage/preferences";
-import { resetServicePreferences } from "@/services/storage/preferences";
 import type { AppNavigation } from "@/types";
 
 export const Services = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<AppNavigation>();
   const { scrollHandler } = useAnimatedHeader();
-  const { actualTheme } = useTheme();
   const {
     enabledPreferences: enabledServices,
     preferences: services,
     isPending,
     updateOrder,
+    resetPreferences,
   } = useServicePreferences();
 
   const handleServicePress = (service: Preference) => {
@@ -63,7 +61,7 @@ export const Services = () => {
             items={services}
             title={t("common.customizeServices")}
             onUpdate={updateOrder}
-            onReset={async () => resetServicePreferences(t, actualTheme)}
+            onReset={resetPreferences}
           >
             <Button
               label={t("common.customizeServices")}

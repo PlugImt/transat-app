@@ -1,4 +1,5 @@
 export * from "./app.utils";
+export * from "./auth.utils";
 export * from "./class.utils";
 export * from "./date.utils";
 export * from "./image.utils";

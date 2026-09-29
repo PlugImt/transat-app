@@ -1,5 +1,5 @@
-import { useNavigation } from "@react-navigation/native";
-import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { NativeStackNavigationProp } from "expo-router/build/react-navigation/native-stack";
+import { useNavigation } from "expo-router/react-navigation";
 import { Edit } from "lucide-react-native";
 import { MotiView } from "moti";
 import { useTranslation } from "react-i18next";

@@ -15,6 +15,7 @@ import { Page } from "@/components/page/Page";
 import useAuth from "@/hooks/account/useAuth";
 import i18n from "@/i18n";
 import type { AuthNavigation } from "@/types";
+import { isImtEmail } from "@/utils";
 
 export const Signup = () => {
   const navigation = useNavigation<AuthNavigation>();
@@ -33,8 +34,10 @@ export const Signup = () => {
     .object({
       email: z
         .string()
+        .trim()
+        .toLowerCase()
         .email(t("auth.errors.email"))
-        .refine((email) => email.endsWith("@imt-atlantique.net"), {
+        .refine(isImtEmail, {
           message: t("auth.errors.imtOnly"),
         }),
       password: z.string().min(6, t("auth.errors.password")),
@@ -74,7 +77,7 @@ export const Signup = () => {
     !confirmPassword ||
     password.length < 6 ||
     password !== confirmPassword ||
-    !email.endsWith("@imt-atlantique.net") ||
+    !isImtEmail(email) ||
     !terms;
 
   const handleSignup = async (data: {

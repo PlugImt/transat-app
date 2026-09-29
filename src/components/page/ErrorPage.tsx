@@ -1,8 +1,9 @@
-import { CircleX } from "lucide-react-native";
+import { CircleX, ShieldOff } from "lucide-react-native";
 import type React from "react";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
+import { isStudentOnlyForbiddenError } from "@/api/errors";
 import { Button } from "@/components/common/Button";
 import { useSafeRefetch } from "@/components/query/useSafeRefetch";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -30,10 +31,33 @@ export const ErrorPage = ({
   const { t } = useTranslation();
   const { theme } = useTheme();
   const safeRefetch = useSafeRefetch(refetch, refreshing);
+  const isStudentOnly = isStudentOnlyForbiddenError(error);
 
   useEffect(() => {
     hapticFeedback.error();
   }, []);
+
+  if (isStudentOnly) {
+    return (
+      <Page
+        title={title}
+        className="flex-1 justify-center items-center"
+        footer={children}
+      >
+        <View className="justify-center items-center gap-4">
+          <ShieldOff color={theme.secondary} size={40} />
+          <View className="items-center gap-1">
+            <Text variant="h3" className="text-center">
+              {t("common.errors.studentOnlyTitle")}
+            </Text>
+            <Text color="muted" className="text-center">
+              {t("common.errors.studentOnly")}
+            </Text>
+          </View>
+        </View>
+      </Page>
+    );
+  }
 
   return (
     <Page

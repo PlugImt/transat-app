@@ -6,6 +6,8 @@ export type ApiErrorBody = {
   message?: string;
 };
 
+export const STUDENT_ONLY_ERROR = "This feature is only available to students";
+
 function extractServerMessage(data: unknown): string | undefined {
   if (!data || typeof data !== "object") {
     return undefined;
@@ -90,3 +92,11 @@ export class ApiError extends Error {
     return error instanceof ApiError;
   }
 }
+
+export const isStudentOnlyForbiddenError = (
+  error: unknown,
+): error is ApiError =>
+  ApiError.isApiError(error) &&
+  error.status === 403 &&
+  (error.code === STUDENT_ONLY_ERROR ||
+    error.serverMessage === STUDENT_ONLY_ERROR);

@@ -4,6 +4,7 @@ import { performSessionTeardown } from "@/api/session";
 import { QUERY_KEYS } from "@/constants";
 import type { User } from "@/dto";
 import { storage } from "@/services/storage/asyncStorage";
+import { addTokenRolesToUser } from "@/utils";
 
 interface LoginResponse {
   token: string;
@@ -60,7 +61,10 @@ export const useAuthMutations = () => {
     mutationKey: QUERY_KEYS.auth.saveToken,
     mutationFn: async (token: string) => {
       await storage.set("token", token);
-      const userData = await apiRequest<User>(API_ROUTES.user);
+      const userData = addTokenRolesToUser(
+        await apiRequest<User>(API_ROUTES.user),
+        token,
+      );
       await storage.set("newf", userData);
       return userData;
     },

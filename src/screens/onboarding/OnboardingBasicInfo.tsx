@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Keyboard, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { Button } from "@/components/common/Button";
 import Input from "@/components/common/Input";
 import { Text } from "@/components/common/Text";
@@ -120,7 +121,7 @@ export const OnboardingBasicInfo = ({
   };
 
   return (
-    <View
+    <SafeAreaView
       className="flex-1 px-6 py-8"
       style={{ backgroundColor: theme.background }}
     >
@@ -189,6 +190,6 @@ export const OnboardingBasicInfo = ({
           disabled={!isDirty || !isValid}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };

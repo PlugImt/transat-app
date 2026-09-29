@@ -2,6 +2,7 @@ import { CheckCircle2, Sparkles } from "lucide-react-native";
 import { MotiView } from "moti";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { Button } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -15,7 +16,7 @@ export const OnboardingSuccess = ({ onFinish }: OnboardingSuccessProps) => {
   const { t } = useTranslation();
 
   return (
-    <View
+    <SafeAreaView
       className="flex-1 px-6 py-8"
       style={{ backgroundColor: theme.background }}
     >
@@ -51,7 +52,7 @@ export const OnboardingSuccess = ({ onFinish }: OnboardingSuccessProps) => {
             <Text variant="h1">{t("onboarding.success.title")}</Text>
             <Sparkles size={24} color={theme.primary} />
           </View>
-          <Text variant="body" color="muted" className="text-center px-4">
+          <Text variant="default" color="muted" className="text-center px-4">
             {t("onboarding.success.description")}
           </Text>
         </MotiView>
@@ -60,6 +61,6 @@ export const OnboardingSuccess = ({ onFinish }: OnboardingSuccessProps) => {
       <View className="pb-8">
         <Button label={t("onboarding.success.start")} onPress={onFinish} />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };

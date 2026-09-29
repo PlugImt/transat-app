@@ -4,6 +4,7 @@ import { Edit } from "lucide-react-native";
 import { MotiView } from "moti";
 import { useTranslation } from "react-i18next";
 import { TouchableOpacity, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Avatar from "@/components/common/Avatar";
 import { Button, IconButton } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
@@ -95,7 +96,7 @@ export const OnboardingProfilePicture = ({
   };
 
   return (
-    <View
+    <SafeAreaView
       className="flex-1 px-6 py-8"
       style={{ backgroundColor: theme.background }}
     >
@@ -158,6 +159,6 @@ export const OnboardingProfilePicture = ({
           disabled={!hasProfilePicture}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };

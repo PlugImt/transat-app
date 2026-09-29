@@ -11,6 +11,7 @@ import {
 import { MotiView } from "moti";
 import { useTranslation } from "react-i18next";
 import { ScrollView, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Avatar from "@/components/common/Avatar";
 import { Button } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
@@ -90,7 +91,10 @@ export const OnboardingPreview = ({
   ];
 
   return (
-    <View className="flex-1" style={{ backgroundColor: theme.background }}>
+    <SafeAreaView
+      className="flex-1"
+      style={{ backgroundColor: theme.background }}
+    >
       <ScrollView
         className="flex-1"
         contentContainerStyle={{
@@ -249,6 +253,6 @@ export const OnboardingPreview = ({
           onPress={handleComplete}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };

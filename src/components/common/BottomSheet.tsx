@@ -8,9 +8,7 @@ import {
   useContext,
   useRef,
 } from "react";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
-  runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
@@ -60,10 +58,6 @@ const BottomSheet = ({ children }: { children: ReactNode }) => {
   const { theme } = useTheme();
   const opacity = useSharedValue(0);
 
-  const gesture = Gesture.Pan().onFinalize((e) => {
-    if (e.velocityY > 500) runOnJS(handleBottomSheet)(false);
-  });
-
   const animatedBackdropStyle = useAnimatedStyle(() => ({
     opacity: opacity.value,
   }));
@@ -90,16 +84,12 @@ const BottomSheet = ({ children }: { children: ReactNode }) => {
         />
       )}
     >
-      <GestureDetector gesture={gesture}>
-        <Animated.View>
-          <BottomSheetView
-            style={{ backgroundColor: theme.card }}
-            className="gap-1 py-6 px-5"
-          >
-            {children}
-          </BottomSheetView>
-        </Animated.View>
-      </GestureDetector>
+      <BottomSheetView
+        style={{ backgroundColor: theme.card }}
+        className="gap-1 py-6 px-5"
+      >
+        {children}
+      </BottomSheetView>
     </BottomSheetModal>
   );
 };

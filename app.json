@@ -24,9 +24,7 @@
       },
       "package": "com.yohann69.transat2_0",
       "googleServicesFile": "./google-services.json",
-      "permissions": [
-        "android.permission.RECORD_AUDIO"
-      ]
+      "permissions": ["android.permission.RECORD_AUDIO"]
     },
     "web": {
       "bundler": "metro",
@@ -39,9 +37,7 @@
         {
           "icon": "./assets/images/icon-bg.png",
           "color": "#ffffff",
-          "sounds": [
-            "./assets/sounds/notification_sound.wav"
-          ]
+          "sounds": ["./assets/sounds/notification_sound.wav"]
         }
       ],
       [

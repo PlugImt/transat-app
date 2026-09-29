@@ -1,14 +1,11 @@
 import * as Sentry from "@sentry/react-native";
-import React, {
-  createContext,
-  type FC,
-  useCallback,
-} from "react";
+import React, { createContext, type FC, useCallback } from "react";
 import { ApiError } from "@/api/errors";
 import type { User } from "@/dto";
 import { useUser } from "@/hooks/account/useUser";
 import { useAuthMutations } from "@/hooks/auth/useAuthMutations";
 import { useVerificationCode } from "@/hooks/auth/useVerificationCode";
+import { setForceShowOnboarding } from "@/hooks/onboarding/useOnboardingSteps";
 
 interface AuthContextType {
   user: User | null | undefined;
@@ -86,6 +83,8 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
       const response = await loginMutation({ email, password });
       await saveTokenMutation(response.token);
       const { data: user } = await refetchUser();
+      // Force show onboarding after login
+      await setForceShowOnboarding(true);
       Sentry.setUser({
         email: user?.email,
         id: user?.id_newf,
@@ -177,6 +176,8 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
       const { token } = await verifyCodeMutation({ email, verification_code });
       await saveTokenMutation(token);
       await refetchUser();
+      // Force show onboarding after registration (verification)
+      await setForceShowOnboarding(true);
       return { success: true };
     } catch (error) {
       console.error("Error verifying code:", error);

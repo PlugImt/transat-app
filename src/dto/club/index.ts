@@ -17,7 +17,10 @@ export const clubDetailsSchema = z.object({
   link: z.string().optional(),
   member_count: z.number(),
   member_photos: z.array(z.string()),
+  // Legacy single responsible (kept for backward compatibility)
   responsible: userSchema.optional(),
+  // New: multiple responsibles support
+  responsibles: z.array(userSchema).optional(),
   has_joined: z.boolean(),
 });
 

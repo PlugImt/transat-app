@@ -20,6 +20,8 @@ interface ReservationDialogProps {
   isReturning?: boolean;
   isActionCancel?: boolean;
   startDate?: string;
+  warningMessage?: string;
+  confirmationMessage?: string;
 }
 
 export const ReservationDialog = ({
@@ -28,6 +30,8 @@ export const ReservationDialog = ({
   isReturning = false,
   isActionCancel = false,
   startDate,
+  warningMessage,
+  confirmationMessage,
 }: ReservationDialogProps) => {
   const { t } = useTranslation();
   const { toast } = useToast();
@@ -54,11 +58,14 @@ export const ReservationDialog = ({
         await reservationMutation.mutateAsync({ id: itemId, isReturning });
       }
 
-      const successMessage = isActionCancel
-        ? t("services.reservation.cancelSuccess")
-        : isReturning
-          ? t("services.reservation.returnSuccess")
-          : t("services.reservation.reserveSuccess");
+      // Use custom confirmation message if provided, otherwise use default
+      const successMessage = confirmationMessage
+        ? confirmationMessage
+        : isActionCancel
+          ? t("services.reservation.cancelSuccess")
+          : isReturning
+            ? t("services.reservation.returnSuccess")
+            : t("services.reservation.reserveSuccess");
 
       toast(successMessage);
       hapticFeedback.success();
@@ -80,11 +87,14 @@ export const ReservationDialog = ({
       ? t("services.reservation.returnItem")
       : t("services.reservation.reserve");
 
-  const dialogDescription = isActionCancel
-    ? t("services.reservation.cancelConfirmDesc")
-    : isReturning
-      ? t("services.reservation.returnConfirmDesc")
-      : t("services.reservation.reserveConfirmDesc");
+  // Use custom warning message if provided, otherwise use default
+  const dialogDescription = warningMessage
+    ? warningMessage
+    : isActionCancel
+      ? t("services.reservation.cancelConfirmDesc")
+      : isReturning
+        ? t("services.reservation.returnConfirmDesc")
+        : t("services.reservation.reserveConfirmDesc");
 
   const confirmLabel = isActionCancel
     ? t("services.reservation.confirmCancel")

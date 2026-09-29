@@ -11,6 +11,8 @@ export interface ReservationDisplayItem {
   type: "category" | "item";
   slot?: boolean;
   user?: User;
+  warningMessage?: string;
+  confirmationMessage?: string;
 }
 
 export interface GroupedReservations<T = PersonalReservationItem> {
@@ -117,6 +119,8 @@ export const transformToDisplayItems = (
       type: "item",
       slot: item.slot,
       user: item.user,
+      warningMessage: item.warning_message,
+      confirmationMessage: item.confirmation_message,
     });
   });
 

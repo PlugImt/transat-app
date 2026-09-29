@@ -1,5 +1,6 @@
 import { queryOptions } from "@tanstack/react-query";
 import { API_ROUTES } from "@/api/common";
+import { ApiError } from "@/api/errors";
 import { apiRequest } from "@/api/helpers";
 import { queryClient } from "@/api/query-client";
 import { performSessionTeardown } from "@/api/session";
@@ -21,10 +22,21 @@ export const userQueryOptions = queryOptions({
       );
       await storage.set("newf", userData);
       return userData;
-    } catch (_error) {
+    } catch (error) {
+      // Only log out on 401 Unauthorized; network/other errors keep the session
+      // so the app can work offline and retry once connectivity is restored.
+      if (ApiError.isApiError(error) && error.status !== 401) {
+        return null;
+      }
       await performSessionTeardown(queryClient);
       return null;
     }
   },
   staleTime: 1000 * 60 * 5,
+  retry: (failureCount, error) => {
+    if (ApiError.isApiError(error) && error.status === 401) {
+      return false;
+    }
+    return failureCount < 3;
+  },
 });

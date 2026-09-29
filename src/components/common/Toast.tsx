@@ -202,4 +202,4 @@ const useToast = () => {
   return context;
 };
 
-export { ToastProvider, type ToastVariant, Toast, variants, useToast };
+export { Toast, ToastProvider, type ToastVariant, useToast, variants };

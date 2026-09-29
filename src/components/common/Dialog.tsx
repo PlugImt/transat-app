@@ -161,4 +161,4 @@ const useDialog = () => {
   return context;
 };
 
-export { Dialog, DialogTrigger, DialogContent, useDialog };
+export { Dialog, DialogContent, DialogTrigger, useDialog };

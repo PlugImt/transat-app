@@ -8,7 +8,7 @@ export const useChangePassword = () => {
   return useMutation({
     mutationFn: updatePassword,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.user] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.user });
     },
   });
 };

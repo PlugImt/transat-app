@@ -1,11 +1,12 @@
-import { RootNavigator } from "@/app/navigation/RootNavigator";
+import { RootNavigator } from "@/navigation/RootNavigator";
 import "@/i18n";
 import "./global.css";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import * as Sentry from "@sentry/react-native";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "@/api/query-client";
+import "@/api/query-client-setup";
 import * as Notifications from "expo-notifications";
-import { Provider } from "jotai";
 import { ToastProvider } from "@/components/common/Toast";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
@@ -20,22 +21,18 @@ Notifications.setNotificationHandler({
   }),
 });
 const App = () => {
-  const queryClient = new QueryClient();
-
   return (
-    <Provider>
-      <ThemeProvider>
-        <QueryClientProvider client={queryClient}>
-          <BottomSheetModalProvider>
-            <AuthProvider>
-              <ToastProvider position="top">
-                <RootNavigator />
-              </ToastProvider>
-            </AuthProvider>
-          </BottomSheetModalProvider>
-        </QueryClientProvider>
-      </ThemeProvider>
-    </Provider>
+    <ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <BottomSheetModalProvider>
+          <AuthProvider>
+            <ToastProvider position="top">
+              <RootNavigator />
+            </ToastProvider>
+          </AuthProvider>
+        </BottomSheetModalProvider>
+      </QueryClientProvider>
+    </ThemeProvider>
   );
 };
 

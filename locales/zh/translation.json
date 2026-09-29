@@ -15,6 +15,7 @@
     "clearAll": "清除全部",
     "filter": "筛选",
     "refresh": "刷新",
+    "retry": "重试",
     "link": "链接",
     "reset": "重置",
     "or": "或",
@@ -199,6 +200,12 @@
     "logout": "退出登录",
     "logoutDesc": "您确定要退出登录吗？",
     "logoutConfirm": "退出我的账户",
+    "deleteAccount": {
+      "title": "删除我的账户",
+      "desc": "您确定要删除您的账户吗？此操作不可逆，将删除您的所有数据。",
+      "confirm": "删除",
+      "error": "无法删除账户"
+    },
     "security": "安全",
     "notifications": {
       "notifications": "通知",
@@ -521,7 +528,7 @@
         },
         "link": {
           "title": "链接",
-          "placeholder": "https://www.vibly.fr",
+          "placeholder": "https://www.instagram.com/bde_imtatlantique_nantes",
           "invalid": "链接无效",
           "max": "链接不得超过100个字符"
         },

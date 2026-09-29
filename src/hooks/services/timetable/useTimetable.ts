@@ -4,7 +4,7 @@ import { QUERY_KEYS } from "@/constants";
 import { getWeekId } from "@/utils";
 
 export const useTimetable = (email?: string) => {
-  const { data, isPending, refetch, error, isError } = useQuery({
+  const { data, isPending, isFetching, refetch, error, isError } = useQuery({
     queryKey: QUERY_KEYS.timetable,
     queryFn: email ? () => getTimetableToday(email) : skipToken,
     enabled: !!email,
@@ -13,6 +13,7 @@ export const useTimetable = (email?: string) => {
   return {
     data,
     isPending,
+    isFetching,
     refetch,
     error,
     isError,

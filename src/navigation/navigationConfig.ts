@@ -1,5 +1,5 @@
-import type { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs";
-import type { NativeStackNavigationOptions } from "@react-navigation/native-stack";
+import type { BottomTabNavigationOptions } from "expo-router/build/react-navigation/bottom-tabs";
+import type { NativeStackNavigationOptions } from "expo-router/build/react-navigation/native-stack";
 import type { ThemeType } from "@/contexts/ThemeContext";
 
 export const screenOptions: NativeStackNavigationOptions = {
@@ -8,6 +8,7 @@ export const screenOptions: NativeStackNavigationOptions = {
 
 export const tabBarOptions = (
   theme: ThemeType,
+  bottomInset = 0,
 ): BottomTabNavigationOptions => ({
   headerShown: false,
   tabBarActiveTintColor: theme.primary,
@@ -17,8 +18,8 @@ export const tabBarOptions = (
     backgroundColor: theme.background,
     borderTopColor: theme.border,
     paddingTop: 8,
-    height: 60,
-    paddingBottom: 0,
+    height: 60 + bottomInset,
+    paddingBottom: bottomInset,
   },
   headerTitleStyle: {
     backgroundColor: theme.background,

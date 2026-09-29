@@ -1,4 +1,5 @@
-import { API_ROUTES, apiRequest } from "@/api";
+import { API_ROUTES } from "@/api/common";
+import { apiRequest } from "@/api/helpers";
 import type { TraqArticle } from "@/dto/traq";
 
 export const getTraq = async (): Promise<TraqArticle[]> => {

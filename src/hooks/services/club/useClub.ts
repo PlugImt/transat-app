@@ -11,16 +11,17 @@ import { QUERY_KEYS } from "@/constants";
 import type { Club, ClubDetails } from "@/dto/club";
 
 export const useClubs = () => {
-  const { data, isPending, refetch, isError, error } = useQuery({
+  const { data, isPending, isFetching, refetch, isError, error } = useQuery({
     queryKey: QUERY_KEYS.club.clubs,
     queryFn: () => getClubs(),
   });
 
-  return { data, isPending, refetch, isError, error };
+  return { data, isPending, isFetching, refetch, isError, error };
 };
 
 export const useFilteredClubs = (searchValue: string) => {
-  const { data: clubs, isPending, refetch, isError, error } = useClubs();
+  const { data: clubs, isPending, isFetching, refetch, isError, error } =
+    useClubs();
 
   const filteredClubs = useMemo(() => {
     if (!clubs || !searchValue.trim()) {
@@ -70,6 +71,7 @@ export const useFilteredClubs = (searchValue: string) => {
   return {
     data: filteredClubs,
     isPending,
+    isFetching,
     refetch,
     isError,
     error,
@@ -77,12 +79,12 @@ export const useFilteredClubs = (searchValue: string) => {
 };
 
 export const useClubDetails = (id: number) => {
-  const { data, isPending, refetch, isError, error } = useQuery({
+  const { data, isPending, isFetching, refetch, isError, error } = useQuery({
     queryKey: [...QUERY_KEYS.club.clubDetails, id],
     queryFn: () => getClubDetails(id),
   });
 
-  return { data, isPending, refetch, isError, error };
+  return { data, isPending, isFetching, refetch, isError, error };
 };
 
 export const useJoinClubMutation = (id: number) => {
@@ -114,10 +116,10 @@ export const useLeaveClubMutation = (id: number) => {
 };
 
 export const useClubMembers = (id: number) => {
-  const { data, isPending, refetch, isError, error } = useQuery({
+  const { data, isPending, isFetching, refetch, isError, error } = useQuery({
     queryKey: [...QUERY_KEYS.club.clubMembers, id],
     queryFn: () => getClubMembers(id),
   });
 
-  return { data, isPending, refetch, isError, error };
+  return { data, isPending, isFetching, refetch, isError, error };
 };

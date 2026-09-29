@@ -1,7 +1,8 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { API_ROUTES, apiRequest, Method } from "@/api";
+import { performSessionTeardown } from "@/api/session";
 import { QUERY_KEYS } from "@/constants";
-import type { NotLoggedIn, User } from "@/dto";
+import type { User } from "@/dto";
 import { storage } from "@/services/storage/asyncStorage";
 
 interface LoginResponse {
@@ -10,61 +11,6 @@ interface LoginResponse {
 
 export const useAuthMutations = () => {
   const queryClient = useQueryClient();
-
-  const {
-    data: user,
-    isPending: isUserLoading,
-    refetch: refetchUser,
-  } = useQuery({
-    queryKey: QUERY_KEYS.auth.user,
-    queryFn: async () => {
-      const token = await storage.get("token");
-      if (!token) return null as NotLoggedIn;
-
-      try {
-        const userData = await apiRequest<User>(API_ROUTES.user);
-        await storage.set("newf", userData);
-        return userData;
-      } catch (error) {
-        // Only remove token and log out if it's a 401 Unauthorized error
-        // Network errors (slow/no internet) should not log the user out
-        const errorWithStatus = error as Error & {
-          status?: number;
-          isNetworkError?: boolean;
-        };
-
-        if (errorWithStatus.status === 401) {
-          // Token is invalid or expired - log out
-          await storage.remove("token");
-          await storage.remove("newf");
-          queryClient.setQueryData(QUERY_KEYS.auth.user, null);
-          return null as NotLoggedIn;
-        }
-
-        // For network errors or other errors, keep the user logged in
-        // Return null but don't remove the token
-        // This allows the app to work offline and retry when connection is restored
-        console.warn(
-          "[Auth] Failed to fetch user, but keeping session:",
-          errorWithStatus.isNetworkError
-            ? "Network error"
-            : `Status ${errorWithStatus.status}`,
-        );
-        return null as NotLoggedIn;
-      }
-    },
-    staleTime: 1000 * 60 * 5, // 5 minutes
-    retry: (failureCount, error) => {
-      // Don't retry on 401 (unauthorized) - token is invalid
-      const errorWithStatus = error as Error & { status?: number };
-      if (errorWithStatus.status === 401) {
-        return false;
-      }
-      // Retry network errors up to 3 times
-      return failureCount < 3;
-    },
-  });
-
   const loginMutation = useMutation<
     LoginResponse,
     Error,
@@ -108,9 +54,6 @@ export const useAuthMutations = () => {
         true,
       );
     },
-    onError: (error) => {
-      console.log(error);
-    },
   });
 
   const saveTokenMutation = useMutation({
@@ -120,6 +63,9 @@ export const useAuthMutations = () => {
       const userData = await apiRequest<User>(API_ROUTES.user);
       await storage.set("newf", userData);
       return userData;
+    },
+    onSuccess: (userData) => {
+      queryClient.setQueryData(QUERY_KEYS.user, userData);
     },
   });
 
@@ -169,16 +115,10 @@ export const useAuthMutations = () => {
   });
 
   const logout = async () => {
-    await storage.remove("token");
-    await storage.remove("newf");
-
-    queryClient.setQueryData(QUERY_KEYS.auth.user, null);
+    await performSessionTeardown(queryClient);
   };
 
   return {
-    user,
-    refetchUser,
-    isUserLoading,
     login: loginMutation.mutateAsync,
     register: registerMutation.mutateAsync,
     saveToken: saveTokenMutation.mutateAsync,

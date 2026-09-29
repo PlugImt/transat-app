@@ -1,7 +1,7 @@
 import { t } from "i18next";
 import { z } from "zod";
 import { formationName } from "@/enums";
-import { passwordChangeSchema } from ".";
+import { passwordChangeSchema } from "./user.dto";
 
 export const updateUserPayloadSchema = z.object({
   first_name: z.string().nonempty(t("auth.errors.firstName")).max(50),

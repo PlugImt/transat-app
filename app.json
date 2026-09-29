@@ -2,31 +2,25 @@
   "expo": {
     "name": "Transat",
     "slug": "Transat",
-    "version": "2.2.5",
+    "owner": "plugimt",
+    "version": "2.2.7",
     "orientation": "portrait",
     "icon": "./assets/images/icon-bg.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
-    "splash": {
-      "backgroundColor": "#0D0505"
-    },
     "ios": {
-      "icon": {
-        "dark": "./assets/images/ios-icon.png",
-        "light": "./assets/images/ios-icon.png",
-        "tinted": "./assets/images/ios-icon-tint.png"
-      },
-      "supportsTablet": true,
+      "icon": "./assets/images/transat.icon",
       "bundleIdentifier": "fr.resel.transat",
+      "supportsTablet": true,
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/ios-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/images/adaptive-foreground.png",
+        "backgroundImage": "./assets/images/adaptive-background.png",
+        "backgroundColor": "#EC7F32"
       },
       "package": "com.yohann69.transat2_0",
       "googleServicesFile": "./google-services.json",
@@ -71,11 +65,10 @@
           "project": "transat-app",
           "organization": "plugimt"
         }
-      ]
+      ],
+      "@react-native-community/datetimepicker",
+      "@sentry/react-native"
     ],
-    "experiments": {
-      "typedRoutes": true
-    },
     "extra": {
       "router": {
         "origin": false
@@ -84,6 +77,8 @@
         "projectId": "04d25877-7d89-4041-8e48-209ceee3a640"
       }
     },
-    "owner": "plugimt"
+    "experiments": {
+      "typedRoutes": true
+    }
   }
 }

@@ -18,19 +18,20 @@ import { hapticFeedback } from "@/utils/haptics.utils";
 import type { AddEventFormData } from "./types";
 
 export const useEvents = (time: EventTimeFilter = "upcoming") => {
-  const { data, isPending, refetch, isError, error } = useQuery({
+  const { data, isPending, isFetching, refetch, isError, error } = useQuery({
     queryKey: [...QUERY_KEYS.event.events, time],
     queryFn: () => getEvents(time),
     staleTime: 1000 * 60 * 5,
   });
 
-  return { data, isPending, refetch, isError, error };
+  return { data, isPending, isFetching, refetch, isError, error };
 };
 
 export const useEventsByTab = (tabValue: "upcoming" | "past") => {
   const {
     data: events,
     isPending,
+    isFetching,
     isError,
     error,
     refetch,
@@ -39,6 +40,7 @@ export const useEventsByTab = (tabValue: "upcoming" | "past") => {
   return {
     events,
     isPending,
+    isFetching,
     isError,
     error,
     refetch,
@@ -49,13 +51,13 @@ export const useClubEvents = (
   clubId: number,
   time: EventTimeFilter = "upcoming",
 ) => {
-  const { data, isPending, refetch, isError, error } = useQuery({
+  const { data, isPending, isFetching, refetch, isError, error } = useQuery({
     queryKey: [...QUERY_KEYS.event.clubEvents, clubId, time],
     queryFn: () => getClubEvents(clubId, time),
     staleTime: 1000 * 60 * 5,
   });
 
-  return { data, isPending, refetch, isError, error };
+  return { data, isPending, isFetching, refetch, isError, error };
 };
 
 export const useClubEventsByTab = (
@@ -65,6 +67,7 @@ export const useClubEventsByTab = (
   const {
     data: events,
     isPending,
+    isFetching,
     isError,
     error,
     refetch,
@@ -73,6 +76,7 @@ export const useClubEventsByTab = (
   return {
     events,
     isPending,
+    isFetching,
     isError,
     error,
     refetch,
@@ -80,12 +84,12 @@ export const useClubEventsByTab = (
 };
 
 export const useEventDetails = (id: number) => {
-  const { data, isPending, refetch, isError, error } = useQuery({
+  const { data, isPending, isFetching, refetch, isError, error } = useQuery({
     queryKey: [...QUERY_KEYS.event.eventDetails, id],
     queryFn: () => getEventDetails(id),
   });
 
-  return { data, isPending, refetch, isError, error };
+  return { data, isPending, isFetching, refetch, isError, error };
 };
 
 export const useJoinEventMutation = (id: number) => {
@@ -117,12 +121,12 @@ export const useLeaveClubMutation = (id: number) => {
 };
 
 export const useEventMembers = (id: number) => {
-  const { data, isPending, refetch, isError, error } = useQuery({
+  const { data, isPending, isFetching, refetch, isError, error } = useQuery({
     queryKey: [...QUERY_KEYS.event.eventMembers, id],
     queryFn: () => getEventMembers(id),
   });
 
-  return { data, isPending, refetch, isError, error };
+  return { data, isPending, isFetching, refetch, isError, error };
 };
 
 export const useAddEvent = () => {

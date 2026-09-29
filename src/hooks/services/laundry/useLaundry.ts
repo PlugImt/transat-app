@@ -14,7 +14,6 @@ export const useLaundry = () => {
   } = useQuery({
     queryFn: () => fetchLaundry(),
     queryKey: QUERY_KEYS.laundry,
-    initialData: [],
   });
 
   return {
@@ -32,7 +31,8 @@ export const useLaundry = () => {
 };
 
 export const useLaundryStats = () => {
-  const { washingMachines, dryers, isPending, isError, error } = useLaundry();
+  const { washingMachines, dryers, isPending, isFetching, isError, error, refetch } =
+    useLaundry();
 
   const availableWashers = washingMachines.filter(
     (machine: LaundryWithType) => machine.available,
@@ -50,7 +50,9 @@ export const useLaundryStats = () => {
     availableDryers,
     totalDryers,
     isPending,
+    isFetching,
     isError,
     error,
+    refetch,
   };
 };

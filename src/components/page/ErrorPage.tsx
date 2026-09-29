@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { Button } from "@/components/common/Button";
+import { useSafeRefetch } from "@/components/query/useSafeRefetch";
 import { useTheme } from "@/contexts/ThemeContext";
 import { hapticFeedback } from "@/utils/haptics.utils";
 import { Text } from "../common/Text";
@@ -14,6 +15,7 @@ type ErrorPageProps = {
   error: Error | null;
   refetch: () => void;
   isRefetching: boolean;
+  refreshing?: boolean;
   children?: React.ReactNode;
 };
 
@@ -22,10 +24,12 @@ export const ErrorPage = ({
   error,
   refetch,
   isRefetching,
+  refreshing = isRefetching,
   children,
 }: ErrorPageProps) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
+  const safeRefetch = useSafeRefetch(refetch, refreshing);
 
   useEffect(() => {
     hapticFeedback.error();
@@ -36,7 +40,8 @@ export const ErrorPage = ({
       title={title}
       className="flex-1 justify-center items-center"
       footer={children}
-      onRefresh={refetch}
+      onRefresh={safeRefetch}
+      refreshing={refreshing}
     >
       <View className="justify-center items-center gap-4">
         <CircleX color={theme.destructive} size={40} />
@@ -53,9 +58,9 @@ export const ErrorPage = ({
       </View>
       <View className="gap-2">
         <Button
-          label="Réessayer"
+          label={t("common.retry")}
           variant="secondary"
-          onPress={refetch}
+          onPress={safeRefetch}
           isUpdating={isRefetching}
         />
       </View>

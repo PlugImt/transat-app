@@ -1,6 +1,6 @@
-import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
-import type { NavigatorScreenParams } from "@react-navigation/core";
-import type { StackNavigationProp } from "@react-navigation/stack";
+import type { BottomTabNavigationProp } from "expo-router/build/react-navigation/bottom-tabs";
+import type { NativeStackNavigationProp } from "expo-router/build/react-navigation/native-stack";
+import type { NavigatorScreenParams } from "expo-router/react-navigation";
 import type { Homework, OrderedItem } from "@/dto";
 
 export type BottomTabParamList = {
@@ -41,7 +41,6 @@ export type BottomTabParamList = {
   FourchettasOrder: { id: number; orderUser?: OrderedItem[] };
 
   // Account screens
-  Account: undefined;
   EditProfile: undefined;
   Settings: undefined;
   ChangePassword: undefined;
@@ -53,7 +52,6 @@ export type BottomTabParamList = {
   Legal: undefined;
 
   // Games screens
-  Games: undefined;
   Bassine: undefined;
   BassineLeaderboard: undefined;
 };
@@ -68,14 +66,14 @@ export type AuthStackParamList = {
   Legal: undefined;
 };
 
-export type AuthNavigation = StackNavigationProp<AuthStackParamList>;
+export type AuthNavigation = NativeStackNavigationProp<AuthStackParamList>;
 
 export type AppStackParamList = {
   Navbar: NavigatorScreenParams<BottomTabParamList>;
 };
 
 export type AppNavigation = BottomTabNavigationProp<BottomTabParamList> &
-  StackNavigationProp<BottomTabParamList>;
+  NativeStackNavigationProp<BottomTabParamList>;
 
 export type RootStackParamList = {
   Auth: NavigatorScreenParams<AuthStackParamList>;
@@ -83,15 +81,9 @@ export type RootStackParamList = {
   App: NavigatorScreenParams<AppStackParamList>;
 };
 
-declare global {
-  namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
-  }
-}
-
 export enum TabRoute {
-  Home = "HomeScreen",
-  Services = "ServicesScreen",
-  Games = "GamesScreen",
-  Account = "AccountScreen",
+  Home = "Home",
+  Services = "Services",
+  Games = "Games",
+  Account = "Account",
 }

@@ -15,9 +15,7 @@ export const useUpdateAccount = () => {
       await storage.set("newf", freshUser);
 
       queryClient.setQueryData(QUERY_KEYS.user, freshUser);
-      queryClient.setQueryData(QUERY_KEYS.auth.user, freshUser);
       await queryClient.invalidateQueries({ queryKey: QUERY_KEYS.user });
-      await queryClient.invalidateQueries({ queryKey: QUERY_KEYS.auth.user });
     },
   });
 };

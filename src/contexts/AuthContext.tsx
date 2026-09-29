@@ -1,13 +1,8 @@
 import * as Sentry from "@sentry/react-native";
-import type { AxiosError } from "axios";
-import React, {
-  createContext,
-  type FC,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
-import type { Loading, NotLoggedIn, User } from "@/dto";
+import React, { createContext, type FC, useCallback } from "react";
+import { ApiError } from "@/api/errors";
+import type { User } from "@/dto";
+import { useUser } from "@/hooks/account/useUser";
 import { useAuthMutations } from "@/hooks/auth/useAuthMutations";
 import { useVerificationCode } from "@/hooks/auth/useVerificationCode";
 import { setForceShowOnboarding } from "@/hooks/onboarding/useOnboardingSteps";
@@ -40,13 +35,13 @@ interface AuthContextType {
   isResending: boolean;
   resetPassword: (
     email: string,
-  ) => Promise<{ success: boolean; error?: string }>;
+  ) => Promise<{ success: boolean; error?: string; status?: number }>;
   changePassword: (
     email: string,
     verification_code: string,
     new_password: string,
     new_password_confirmation: string,
-  ) => Promise<{ success: boolean; error?: string }>;
+  ) => Promise<{ success: boolean; error?: string; status?: number }>;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(
@@ -57,9 +52,12 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const {
-    user: userQuery,
-    refetchUser,
-    isUserLoading,
+    data: userData,
+    isPending: isUserLoading,
+    refetch: refetchUser,
+  } = useUser();
+
+  const {
     isLoggingIn,
     isRegistering,
     login: loginMutation,
@@ -78,48 +76,44 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     isResending,
   } = useVerificationCode();
 
-  const [user, setUser] = useState<User | NotLoggedIn | Loading>(undefined);
-
-  useEffect(() => {
-    if (typeof userQuery !== "undefined") {
-      setUser(userQuery);
-    }
-  }, [userQuery]);
+  const user = isUserLoading ? undefined : userData;
 
   const login = async (email: string, password: string) => {
     try {
       const response = await loginMutation({ email, password });
       await saveTokenMutation(response.token);
-      const user = await refetchUser();
-      setUser(user.data);
+      const { data: user } = await refetchUser();
       // Force show onboarding after login
       await setForceShowOnboarding(true);
       Sentry.setUser({
-        email: user.data?.email,
-        id: user.data?.id_newf,
-        username: `${user.data?.first_name} ${user.data?.last_name}`,
+        email: user?.email,
+        id: user?.id_newf,
+        username: `${user?.first_name} ${user?.last_name}`,
       });
       Sentry.addBreadcrumb({
         message: "User logged in",
         level: "info",
         data: {
-          email: user.data?.email,
+          email: user?.email,
         },
       });
       return { success: true };
     } catch (error) {
-      const axiosError = error as AxiosError<{ error: string }>;
-      const errorMessage = axiosError.response?.data?.error || "Login failed";
-      console.error("Login failed:", error, errorMessage);
+      if (ApiError.isApiError(error)) {
+        console.error("Login failed:", error, error.serverMessage);
 
-      if (
-        axiosError.response?.status === 401 &&
-        errorMessage === "Validate your account first"
-      ) {
-        return { needsVerification: true, email };
+        if (
+          error.status === 401 &&
+          error.code === "Validate your account first"
+        ) {
+          return { needsVerification: true, email };
+        }
+
+        throw new Error(error.serverMessage ?? error.message);
       }
 
-      throw new Error(errorMessage);
+      console.error("Login failed:", error);
+      throw new Error("Login failed");
     }
   };
 
@@ -132,13 +126,14 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
       await registerMutation({ email, password, language });
       return { success: true };
     } catch (error) {
-      const axiosError = error as AxiosError;
-      if (axiosError.response?.status === 409) {
-        throw new Error("You already have an account");
-      }
+      if (ApiError.isApiError(error)) {
+        if (error.status === 409) {
+          throw new Error("You already have an account");
+        }
 
-      if (axiosError.response?.status === 400) {
-        throw new Error("Only IMT emails are allowed");
+        if (error.status === 400) {
+          throw new Error("Only IMT emails are allowed");
+        }
       }
 
       throw new Error("Registration failed");
@@ -171,7 +166,6 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
   const logout = async () => {
     try {
       await logoutMutation();
-      setUser(null);
     } catch (error) {
       console.error("Error logging out:", error);
     }
@@ -181,13 +175,15 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     try {
       const { token } = await verifyCodeMutation({ email, verification_code });
       await saveTokenMutation(token);
-      const user = await refetchUser();
-      setUser(user.data);
+      await refetchUser();
       // Force show onboarding after registration (verification)
       await setForceShowOnboarding(true);
       return { success: true };
     } catch (error) {
       console.error("Error verifying code:", error);
+      if (ApiError.isApiError(error)) {
+        return { success: false };
+      }
       return { success: false };
     }
   };
@@ -198,6 +194,13 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
       return { success: true };
     } catch (error) {
       console.error("Error resetting password:", error);
+      if (ApiError.isApiError(error)) {
+        return {
+          success: false,
+          error: error.serverMessage ?? error.message,
+          status: error.status,
+        };
+      }
       return { success: false };
     }
   };
@@ -218,6 +221,13 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
       return { success: true };
     } catch (error) {
       console.error("Error changing password:", error);
+      if (ApiError.isApiError(error)) {
+        return {
+          success: false,
+          error: error.serverMessage ?? error.message,
+          status: error.status,
+        };
+      }
       return { success: false };
     }
   };

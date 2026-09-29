@@ -1,5 +1,5 @@
-import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
+import { useNavigation } from "expo-router";
+import type { NativeStackNavigationProp } from "expo-router/build/react-navigation/native-stack";
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
 import type React from "react";
 import { useTranslation } from "react-i18next";
@@ -12,7 +12,7 @@ import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { MenuItem } from "@/dto";
 
-type NavigationProp = StackNavigationProp<{
+type NavigationProp = NativeStackNavigationProp<{
   RestaurantReviews: { id: number };
 }>;
 

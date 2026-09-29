@@ -6,18 +6,19 @@ export const useTraq = () => {
   const {
     data: traq,
     isPending,
+    isFetching,
     refetch,
     error,
     isError,
   } = useQuery({
     queryKey: QUERY_KEYS.traq,
     queryFn: () => getTraq(),
-    initialData: [],
   });
 
   return {
     traq,
     isPending,
+    isFetching,
     refetch,
     error,
     isError,

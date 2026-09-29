@@ -10,6 +10,7 @@ export const useMenuRestaurant = () => {
   const {
     data: menu,
     isPending,
+    isFetching,
     refetch,
     error,
     isError,
@@ -21,6 +22,7 @@ export const useMenuRestaurant = () => {
   return {
     menu,
     isPending,
+    isFetching,
     refetch,
     error,
     isError,
@@ -31,6 +33,7 @@ export const userMenuRating = (id: number) => {
   const {
     data: rating,
     isPending,
+    isFetching,
     refetch,
     error,
     isError,
@@ -43,6 +46,7 @@ export const userMenuRating = (id: number) => {
   return {
     rating,
     isPending,
+    isFetching,
     refetch,
     error,
     isError,

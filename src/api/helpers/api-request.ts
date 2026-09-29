@@ -1,9 +1,10 @@
 import type { SpanStatus } from "@sentry/core";
 import { spanToTraceHeader } from "@sentry/core";
 import * as Sentry from "@sentry/react-native";
-import axios, { type AxiosError, type AxiosRequestConfig } from "axios";
+import axios, { type AxiosRequestConfig } from "axios";
 import { t } from "i18next";
 import { Method } from "@/api/enums";
+import { ApiError } from "@/api/errors";
 import { getApiInstance } from "@/api/helpers/api-instance";
 import type { ApiMethod } from "@/api/types";
 import { storage } from "@/services/storage/asyncStorage";
@@ -56,35 +57,22 @@ export const apiRequest = async <T>(
         span?.setStatus({ code: 1 } satisfies SpanStatus);
         return response.data;
       } catch (error) {
-        let err: Error & { status?: number; isNetworkError?: boolean };
+        const fallbackMessage =
+          t("common.errors.occurred") || "An unexpected error occurred.";
 
-        // Preserve axios error information for proper error handling
         if (axios.isAxiosError(error)) {
-          const axiosError = error as AxiosError;
-          err = new Error(
-            axiosError.response?.data
-              ? String(axiosError.response.data)
-              : axiosError.message ||
-                  t("common.errors.occurred") ||
-                  "An unexpected error occurred.",
-          ) as Error & { status?: number; isNetworkError?: boolean };
-
-          // Attach status code for proper error handling upstream
-          err.status = axiosError.response?.status;
-          // Network errors don't have a response (timeout, no connection, etc.)
-          err.isNetworkError = !axiosError.response && !!axiosError.code;
-        } else {
-          err = (
-            error instanceof Error ? error : new Error(String(error))
-          ) as Error & {
-            status?: number;
-            isNetworkError?: boolean;
-          };
+          const apiError = ApiError.fromAxiosError(error, fallbackMessage);
+          span?.setStatus({
+            code: 2,
+            message: apiError.message,
+          } satisfies SpanStatus);
+          Sentry.captureException(apiError);
+          throw apiError;
         }
 
+        const err = error instanceof Error ? error : new Error(String(error));
         span?.setStatus({ code: 2, message: err.message } satisfies SpanStatus);
         Sentry.captureException(err);
-
         throw err;
       }
     },

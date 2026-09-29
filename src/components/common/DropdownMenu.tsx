@@ -155,8 +155,8 @@ const useDropdownMenu = () => {
 
 export {
   DropdownMenu,
-  DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuTrigger,
   useDropdownMenu,
 };

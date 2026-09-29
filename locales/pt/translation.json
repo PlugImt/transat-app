@@ -15,6 +15,7 @@
     "clearAll": "Limpar tudo",
     "filter": "Filtrar",
     "refresh": "Atualizar",
+    "retry": "Tentar novamente",
     "link": "Link",
     "reset": "Redefinir",
     "or": "Ou",
@@ -199,6 +200,12 @@
     "logout": "Sair",
     "logoutDesc": "Tem certeza de que deseja sair?",
     "logoutConfirm": "Sair da minha conta",
+    "deleteAccount": {
+      "title": "Excluir minha conta",
+      "desc": "Tem certeza de que deseja excluir sua conta? Esta ação é irreversível e excluirá todos os seus dados.",
+      "confirm": "Excluir",
+      "error": "Não foi possível excluir a conta"
+    },
     "security": "Segurança",
     "notifications": {
       "notifications": "Notificações",
@@ -521,7 +528,7 @@
         },
         "link": {
           "title": "Link",
-          "placeholder": "https://www.vibly.fr",
+          "placeholder": "https://www.instagram.com/bde_imtatlantique_nantes",
           "invalid": "O link não é válido",
           "max": "O link não deve exceder 100 caracteres"
         },

@@ -20,6 +20,7 @@ export const clearUserScopedQueries = (queryClient: QueryClient) => {
 export const performSessionTeardown = async (queryClient: QueryClient) => {
   await storage.remove("token");
   await storage.remove("newf");
+  await storage.remove("expoPushToken");
   queryClient.setQueryData(QUERY_KEYS.user, null);
   clearUserScopedQueries(queryClient);
   Sentry.setUser(null);

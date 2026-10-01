@@ -1,6 +1,6 @@
 import axios, { type AxiosInstance } from "axios";
 import { queryClient } from "@/api/query-client";
-import { performSessionTeardown } from "@/api/session";
+import { isSessionInvalidError, performSessionTeardown } from "@/api/session";
 import { storage } from "@/services/storage/asyncStorage";
 
 let apiInstance: AxiosInstance | null = null;
@@ -37,7 +37,7 @@ const createApiInstance = async (): Promise<AxiosInstance> => {
     async (error) => {
       if (
         axios.isAxiosError(error) &&
-        error.response?.status === 401 &&
+        isSessionInvalidError(error) &&
         !isTearingDownSession
       ) {
         const headers = error.config?.headers;
@@ -49,6 +49,18 @@ const createApiInstance = async (): Promise<AxiosInstance> => {
         );
 
         if (hadAuth) {
+          // A newer token (e.g. issued after a password change) may already be stored; keep it.
+          const sentAuth = String(
+            headers?.Authorization ??
+              (typeof headers?.get === "function"
+                ? headers.get("Authorization")
+                : ""),
+          );
+          const currentToken = await storage.get<string>("token");
+          if (currentToken && sentAuth !== `Bearer ${currentToken}`) {
+            return Promise.reject(error);
+          }
+
           isTearingDownSession = true;
           try {
             await performSessionTeardown(queryClient);

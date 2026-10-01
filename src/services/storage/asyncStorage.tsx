@@ -7,7 +7,19 @@ class AsyncStorageService implements StorageService {
    */
   async get<T>(key: string): Promise<T | null> {
     try {
-      const item = await AsyncStorage.getItem(key);
+      // Android can transiently fail reads on cold start; retry so a failed read isn't treated as "no token".
+      let item: string | null = null;
+      for (let attempt = 0; ; attempt++) {
+        try {
+          item = await AsyncStorage.getItem(key);
+          break;
+        } catch (readError) {
+          if (attempt >= 2) throw readError;
+          await new Promise((resolve) =>
+            setTimeout(resolve, 150 * (attempt + 1)),
+          );
+        }
+      }
       if (!item) return null;
 
       const parsedItem: StorageItem = JSON.parse(item);

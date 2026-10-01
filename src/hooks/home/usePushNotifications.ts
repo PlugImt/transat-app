@@ -69,7 +69,8 @@ const registerForPushNotificationsAsync = async () => {
 };
 
 export function usePushNotifications() {
-  const { saveExpoPushToken } = useAuth();
+  const { saveExpoPushToken, user } = useAuth();
+  const isAuthenticated = Boolean(user);
 
   const [expoPushToken, setExpoPushToken] = useState("");
   const [notificationOpened, setNotificationOpened] = useState(false);
@@ -78,6 +79,7 @@ export function usePushNotifications() {
   const navigation = useNavigation<AppNavigation>();
 
   useEffect(() => {
+    if (!isAuthenticated) return;
     laundryNotificationService.initialize();
     const cleanupInterval = setInterval(() => {
       laundryNotificationService.cleanup();
@@ -95,7 +97,7 @@ export function usePushNotifications() {
     return () => {
       clearInterval(cleanupInterval);
     };
-  }, [saveExpoPushToken]);
+  }, [saveExpoPushToken, isAuthenticated]);
 
   useEffect(() => {
     const checkInitialNotification = async () => {

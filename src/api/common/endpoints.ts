@@ -31,9 +31,7 @@ export const API_ROUTES: Record<Route, ApiRoute> = {
   bassineUserHistory: "/bassine/history/:email",
   reservation: "/reservation",
   reservationCategory: "/reservation/category/:id",
-  reservationCreateCategory: "/reservation/category",
   reservationItem: "/reservation/item/:id",
-  reservationCreateItem: "/reservation/item",
   reservationClub: "/reservation/club/:id",
   reservationMy: "/reservation/me",
   reservationSearch: "/reservation/search",
@@ -79,9 +77,7 @@ type Route =
   | "bassineUserHistory"
   | "reservation"
   | "reservationCategory"
-  | "reservationCreateCategory"
   | "reservationItem"
-  | "reservationCreateItem"
   | "reservationClub"
   | "reservationMy"
   | "reservationSearch"

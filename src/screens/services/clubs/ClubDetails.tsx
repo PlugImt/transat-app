@@ -40,7 +40,7 @@ const ClubDetails = () => {
     await refetchClub();
     await Promise.all([
       queryClient.invalidateQueries({
-        queryKey: QUERY_KEYS.reservation.club(id),
+        queryKey: QUERY_KEYS.reservation.catalog({ clubId: id }),
       }),
     ]);
   };

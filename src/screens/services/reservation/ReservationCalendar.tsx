@@ -1,200 +1,148 @@
 import { type RouteProp, useRoute } from "expo-router/react-navigation";
-import { useEffect, useMemo, useState } from "react";
-import { useTranslation } from "react-i18next";
-import Animated from "react-native-reanimated";
-import Swiper from "react-native-swiper";
-import { Text } from "@/components/common/Text";
-import CalendarSlot from "@/components/custom/calendar/CalendarSlot";
-import { DaySelector } from "@/components/custom/calendar/DaySelector";
-import { ErrorPage } from "@/components/page/ErrorPage";
-import { Page } from "@/components/page/Page";
-import { getIsRefetching } from "@/components/query";
-import type { ReservationScheme } from "@/dto";
-import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
-import { useReservationItem } from "@/hooks/services/reservation/useReservation";
-import type { BottomTabParamList } from "@/types";
+import { useMemo, useRef, useState } from "react";
 import {
-  fromYMD,
-  generateCalendarSlots,
-  shiftDate,
-  toYMD,
-} from "@/utils/calendar.utils";
+  FlatList,
+  type NativeScrollEvent,
+  type NativeSyntheticEvent,
+  View,
+} from "react-native";
+import { Page } from "@/components/page/Page";
+import {
+  BOOKING_BAR_HEIGHT,
+  BookingBar,
+  type SelectedSlot,
+} from "@/components/reservation/BookingBar";
+import { DaySchedule } from "@/components/reservation/DaySchedule";
+import { DayStrip } from "@/components/reservation/DayStrip";
+import { useNow } from "@/hooks/common";
+import { useItemSchedule } from "@/hooks/services/reservation";
+import type { BottomTabParamList } from "@/types";
+import type { DaySlotView } from "@/utils/reservation.utils";
+import {
+  DAY_INDEXES,
+  getParisYmd,
+  indexToYmd,
+  ymdToIndex,
+} from "@/utils/reservation-time";
 
-type ItemRouteProp = RouteProp<BottomTabParamList, "ReservationCalendar">;
+type CalendarRouteProp = RouteProp<BottomTabParamList, "ReservationCalendar">;
 
 export const ReservationCalendar = () => {
-  const { t } = useTranslation();
-  const route = useRoute<ItemRouteProp>();
-  const { id, title } = route.params;
-  const { scrollHandler } = useAnimatedHeader();
+  const { id, title, date } = useRoute<CalendarRouteProp>().params;
+  const today = getParisYmd(useNow(60_000));
 
-  const todayStr = useMemo(() => toYMD(new Date()), []);
-  const [selectedDate, setSelectedDate] = useState<string | undefined>(
-    todayStr,
+  // Day the pager is indexed from and opens on; fixed so indexes stay valid when midnight passes.
+  const anchor = useRef(date ?? getParisYmd(new Date())).current;
+
+  const [selectedDay, setSelectedDay] = useState(anchor);
+  const selectedIndex = ymdToIndex(anchor, selectedDay);
+  const [selection, setSelection] = useState<Map<string, SelectedSlot>>(
+    () => new Map(),
   );
-  const [swiperKey, setSwiperKey] = useState<string>(`swiper-${todayStr}`);
+  const [pagerWidth, setPagerWidth] = useState(0);
+  const pagerRef = useRef<FlatList<number>>(null);
 
-  const { data, isPending, isFetching, isError, error, refetch } =
-    useReservationItem(id, selectedDate);
+  // Same query as the visible page: used for the item's custom messages.
+  const { data: schedule } = useItemSchedule(id, selectedDay);
 
-  const isRefetching = getIsRefetching(isFetching, isPending);
+  const selectedKeys = useMemo(() => new Set(selection.keys()), [selection]);
+  const selectedSlots = useMemo(
+    () =>
+      [...selection.values()].sort(
+        (a, b) => a.start.getTime() - b.start.getTime(),
+      ),
+    [selection],
+  );
 
-  const { current, before, after } = useMemo(() => {
-    const current = data?.item?.reservation ?? data?.reservation ?? [];
-    const before =
-      data?.item?.reservation_before ?? data?.reservation_before ?? [];
-    const after =
-      data?.item?.reservation_after ?? data?.reservation_after ?? [];
-    return { current, before, after };
-  }, [data]);
-
-  const [display, setDisplay] = useState<{
-    current: (ReservationScheme | undefined)[];
-    before: (ReservationScheme | undefined)[];
-    after: (ReservationScheme | undefined)[];
-  }>({ current: [], before: [], after: [] });
-
-  useEffect(() => {
-    if (data) {
-      setDisplay({
-        current: current || [],
-        before: before || [],
-        after: after || [],
-      });
-    }
-  }, [data, current, before, after]);
-
-  const handleDateSelect = (date: Date) => {
-    const formattedDate = toYMD(date);
-    setSelectedDate(formattedDate);
-    setSwiperKey(`swiper-${formattedDate}`);
+  const handleSelectDay = (ymd: string) => {
+    const index = ymdToIndex(anchor, ymd);
+    const distance = Math.abs(index - selectedIndex);
+    setSelectedDay(ymd);
+    pagerRef.current?.scrollToIndex({ index, animated: distance <= 1 });
   };
 
-  const currentDateObj = selectedDate ? fromYMD(selectedDate) : new Date();
-  const prevDateObj = shiftDate(selectedDate, -1);
-  const nextDateObj = shiftDate(selectedDate, 1);
+  const handlePageChange = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const index = Math.round(event.nativeEvent.contentOffset.x / pagerWidth);
+    setSelectedDay(indexToYmd(anchor, index));
+  };
 
-  const calendarDataDay = generateCalendarSlots(
-    display.current || [],
-    currentDateObj,
-  );
-  const calendarDataDayBefore = generateCalendarSlots(
-    display.before || [],
-    prevDateObj,
-  );
-  const calendarDataDayAfter = generateCalendarSlots(
-    display.after || [],
-    nextDateObj,
-  );
-
-  const formatDate = (d: Date) => toYMD(d);
-
-  const handleIndexChanged = (index: number) => {
-    if (index === 1) return;
-    const delta = index === 0 ? -1 : 1;
-    const nextDate = shiftDate(selectedDate, delta);
-    const nextDateStr = formatDate(nextDate);
-    setDisplay((prev) => {
-      if (delta === 1) {
-        return {
-          current: prev.after || [],
-          before: prev.current || [],
-          after: [],
-        };
+  const handleToggle = (slot: DaySlotView) =>
+    setSelection((previous) => {
+      const next = new Map(previous);
+      if (next.has(slot.key)) {
+        next.delete(slot.key);
+      } else {
+        next.set(slot.key, { key: slot.key, start: slot.start, end: slot.end });
       }
-      return {
-        current: prev.before || [],
-        after: prev.current || [],
-        before: [],
-      };
+      return next;
     });
-    setSelectedDate(nextDateStr);
-    setSwiperKey(`swiper-${nextDateStr}`);
-  };
 
-  if (isError) {
-    return (
-      <ErrorPage
-        title={title}
-        error={error}
-        refetch={refetch}
-        isRefetching={isRefetching}
-        refreshing={isFetching}
-      />
-    );
-  }
+  const clearSelection = () => setSelection(new Map());
+  const hasSelection = selection.size > 0;
 
   return (
     <Page
       title={title}
-      onRefresh={refetch}
-      refreshing={isFetching}
-      className="gap-2"
-      asChildren
+      disableScroll
+      className="flex-1 gap-0 px-0"
+      style={{ paddingBottom: 0 }}
     >
-      <DaySelector
-        onDateSelect={handleDateSelect}
-        selectedDate={currentDateObj}
+      <DayStrip
+        anchor={anchor}
+        selected={selectedDay}
+        today={today}
+        onSelect={handleSelectDay}
       />
 
-      <Swiper
-        key={swiperKey}
-        index={1}
-        loop={false}
-        showsPagination={false}
-        onIndexChanged={handleIndexChanged}
+      <View
+        className="flex-1"
+        onLayout={(event) => setPagerWidth(event.nativeEvent.layout.width)}
       >
-        {/* Previous day */}
-        <Animated.FlatList
-          style={{ flex: 1 }}
-          data={calendarDataDayBefore}
-          renderItem={({ item }) => (
-            <CalendarSlot reservationDetails={item} itemId={id} />
-          )}
-          keyExtractor={(item, index) => `${String(item?.id)}-before-${index}`}
-          onScroll={scrollHandler}
-          showsVerticalScrollIndicator
-          ListFooterComponent={
-            isPending && (!before || before.length === 0) ? (
-              <Text>{t("common.loading")}</Text>
-            ) : null
-          }
-        />
+        {pagerWidth > 0 && (
+          <FlatList
+            key={pagerWidth}
+            ref={pagerRef}
+            data={DAY_INDEXES}
+            extraData={selectedKeys}
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={(index) => String(index)}
+            initialScrollIndex={selectedIndex}
+            getItemLayout={(_, index) => ({
+              length: pagerWidth,
+              offset: pagerWidth * index,
+              index,
+            })}
+            initialNumToRender={1}
+            maxToRenderPerBatch={1}
+            windowSize={3}
+            onMomentumScrollEnd={handlePageChange}
+            renderItem={({ item: index }) => (
+              <View style={{ width: pagerWidth }}>
+                <DaySchedule
+                  itemId={id}
+                  ymd={indexToYmd(anchor, index)}
+                  selectedKeys={selectedKeys}
+                  onToggle={handleToggle}
+                  bottomSpace={hasSelection ? BOOKING_BAR_HEIGHT : 0}
+                />
+              </View>
+            )}
+          />
+        )}
+      </View>
 
-        {/* Current day */}
-        <Animated.FlatList
-          style={{ flex: 1 }}
-          data={calendarDataDay}
-          renderItem={({ item }) => (
-            <CalendarSlot reservationDetails={item} itemId={id} />
-          )}
-          keyExtractor={(item, index) => `${String(item?.id)}-cur-${index}`}
-          onScroll={scrollHandler}
-          showsVerticalScrollIndicator
-          ListFooterComponent={
-            isPending && (!current || current.length === 0) ? (
-              <Text>{t("common.loading")}</Text>
-            ) : null
-          }
+      {hasSelection && (
+        <BookingBar
+          itemId={id}
+          slots={selectedSlots}
+          warningMessage={schedule?.warningMessage}
+          confirmationMessage={schedule?.confirmationMessage}
+          onClear={clearSelection}
+          onBooked={clearSelection}
         />
-
-        {/* Next day */}
-        <Animated.FlatList
-          style={{ flex: 1 }}
-          data={calendarDataDayAfter}
-          renderItem={({ item }) => (
-            <CalendarSlot reservationDetails={item} itemId={id} />
-          )}
-          keyExtractor={(item, index) => `${String(item?.id)}-after-${index}`}
-          onScroll={scrollHandler}
-          showsVerticalScrollIndicator
-          ListFooterComponent={
-            isPending && (!after || after.length === 0) ? (
-              <Text>{t("common.loading")}</Text>
-            ) : null
-          }
-        />
-      </Swiper>
+      )}
     </Page>
   );
 };

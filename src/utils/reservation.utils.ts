@@ -1,155 +1,226 @@
-import type { User } from "@/dto";
 import type {
-  GetReservation,
-  PersonalReservationItem,
+  MyReservation,
+  ReservationCatalog,
+  ReservationCategory,
+  ReservationItem,
+  ReservationUser,
+  ReservedSlot,
 } from "@/dto/reservation";
-import { formatDateTime } from "@/utils/date.utils";
+import { toYYYYMMDD } from "@/utils/date.utils";
+import { buildDaySlots, parseApiDate } from "@/utils/reservation-time";
 
-export interface ReservationDisplayItem {
-  id: number;
-  name: string;
-  type: "category" | "item";
-  slot?: boolean;
-  user?: User;
-  warningMessage?: string;
-  confirmationMessage?: string;
+const sameEmail = (a?: string, b?: string) =>
+  !!a && !!b && a.toLowerCase() === b.toLowerCase();
+
+export type ItemAvailability = "slot" | "free" | "mine" | "taken";
+
+export const getItemAvailability = (
+  item: ReservationItem,
+  myEmail?: string,
+): ItemAvailability => {
+  if (item.slot) return "slot";
+  if (!item.user) return "free";
+  return sameEmail(item.user.email, myEmail) ? "mine" : "taken";
+};
+
+export type CatalogRow =
+  | { type: "header"; section: "categories" | "items" }
+  | { type: "category"; category: ReservationCategory }
+  | { type: "item"; item: ReservationItem; availability: ItemAvailability };
+
+export const buildCatalogRows = (
+  catalog: ReservationCatalog,
+  options: { myEmail?: string },
+): CatalogRow[] => {
+  const items = catalog.items.map((item) => ({
+    item,
+    availability: getItemAvailability(item, options.myEmail),
+  }));
+
+  const rows: CatalogRow[] = [];
+
+  if (catalog.categories.length > 0) {
+    rows.push({ type: "header", section: "categories" });
+    for (const category of catalog.categories) {
+      rows.push({ type: "category", category });
+    }
+  }
+
+  if (items.length > 0) {
+    rows.push({ type: "header", section: "items" });
+    for (const { item, availability } of items) {
+      rows.push({ type: "item", item, availability });
+    }
+  }
+
+  return rows;
+};
+
+export type SlotStatus = "free" | "mine" | "taken";
+
+export interface DaySlotView {
+  key: string;
+  start: Date;
+  end: Date;
+  status: SlotStatus;
+  user?: ReservationUser;
+  /** Slot has already ended: it can't be booked or cancelled anymore. */
+  isPast: boolean;
 }
 
-export interface GroupedReservations<T = PersonalReservationItem> {
-  [date: string]: T[];
+export const buildDayView = (
+  ymd: string,
+  reservations: ReservedSlot[],
+  myEmail: string | undefined,
+  now: Date,
+): DaySlotView[] => {
+  const parsed = reservations.map((reservation) => ({
+    start: parseApiDate(reservation.start_date),
+    end: parseApiDate(reservation.end_date),
+    user: reservation.user,
+  }));
+
+  return buildDaySlots(ymd).map(({ start, end }) => {
+    const reservation = parsed.find((r) => r.start < end && r.end > start);
+    const status: SlotStatus = !reservation
+      ? "free"
+      : sameEmail(reservation.user.email, myEmail)
+        ? "mine"
+        : "taken";
+
+    return {
+      key: start.toISOString(),
+      start,
+      end,
+      status,
+      user: reservation?.user,
+      isPast: end <= now,
+    };
+  });
+};
+
+export const formatUserName = (user: ReservationUser) =>
+  `${user.first_name} ${user.last_name}`.trim();
+
+export interface ReservationDayGroup {
+  /** Day in the device time zone, YYYY-MM-DD. */
+  day: string;
+  /** Any instant of that day, to format the heading. */
+  date: Date;
+  items: MyReservation[];
 }
 
-/**
- * Formats a Date object into YYYY-MM-DD format for grouping.
- */
-export const toDateKey = (date: Date): string => {
-  const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, "0");
-  const day = date.getDate().toString().padStart(2, "0");
-  return `${year}-${month}-${day}`;
+/** Merges back-to-back slots (sorted by start) into continuous ranges. */
+export const mergeContiguousSlots = (
+  slots: { start: Date; end: Date }[],
+): { start: Date; end: Date }[] => {
+  const ranges: { start: Date; end: Date }[] = [];
+
+  for (const slot of slots) {
+    const last = ranges[ranges.length - 1];
+    if (last && last.end.getTime() === slot.start.getTime()) {
+      last.end = slot.end;
+    } else {
+      ranges.push({ start: slot.start, end: slot.end });
+    }
+  }
+
+  return ranges;
 };
 
-/**
- * Converts ISO string to hour format (e.g., "14h30").
- */
-export const toHourString = (isoString: string): string => {
-  const date = new Date(isoString);
-  const hours = date.getHours().toString().padStart(2, "0");
-  const minutes = date.getMinutes().toString().padStart(2, "0");
-  return `${hours}h${minutes}`;
+/** Groups reservations by day in the device time zone, in the order given. */
+export const groupByLocalDay = (
+  items: MyReservation[],
+): ReservationDayGroup[] => {
+  const groups = new Map<string, ReservationDayGroup>();
+
+  for (const item of items) {
+    const date = parseApiDate(item.start_date);
+    const day = toYYYYMMDD(date);
+    const group = groups.get(day);
+    if (group) {
+      group.items.push(item);
+    } else {
+      groups.set(day, { day, date, items: [item] });
+    }
+  }
+
+  return [...groups.values()];
 };
 
-/**
- * Formats a date range with localized full date-time.
- * Format: "DD MMM YYYY HHhMM - DD MMM YYYY HHhMM"
- */
-export const formatDateTimeRange = (startDate: Date, endDate: Date): string => {
-  return `${formatDateTime(startDate)} - ${formatDateTime(endDate)}`;
-};
-
-/**
- * Formats a time range (same day, time only).
- * Format: "HHhMM - HHhMM"
- */
-export const formatTimeRange = (startDate: string, endDate: string): string => {
-  return `${toHourString(startDate)} - ${toHourString(endDate)}`;
-};
-
-/**
- * Groups reservations by date.
- */
-export const groupReservationsByDate = <T extends PersonalReservationItem>(
-  items: T[],
-): GroupedReservations<T> => {
-  return items.reduce<GroupedReservations<T>>((acc, item) => {
-    const dateKey = toDateKey(new Date(item.start_date));
-    acc[dateKey] = acc[dateKey] ? [...acc[dateKey], item] : [item];
-    return acc;
-  }, {});
-};
-
-/**
- * Sorts items by start date.
- */
-export const sortByStartDate = <T extends PersonalReservationItem>(
-  items: T[],
-  direction: "asc" | "desc" = "asc",
-): T[] => {
-  return [...items].sort((a, b) => {
-    const dateA = new Date(a.start_date).getTime();
-    const dateB = new Date(b.start_date).getTime();
-    return direction === "asc" ? dateA - dateB : dateB - dateA;
-  });
-};
-
-/**
- * Splits reservations into slot and non-slot items.
- */
-export const splitReservationsBySlot = <T extends PersonalReservationItem>(
-  items: T[],
-): { slotItems: T[]; nonSlotItems: T[] } => {
-  return {
-    slotItems: items.filter((item) => item.slot),
-    nonSlotItems: items.filter((item) => !item.slot),
-  };
-};
-
-/**
- * Converts API response to display items for UI components.
- */
-export const transformToDisplayItems = (
-  data: GetReservation | undefined,
-): ReservationDisplayItem[] => {
-  const items: ReservationDisplayItem[] = [];
-
-  // Add categories
-  data?.categories?.forEach((category) => {
-    items.push({
-      id: category.id,
-      name: category.name,
-      type: "category",
-    });
+export const sortByStart = (
+  items: MyReservation[],
+  direction: "asc" | "desc",
+): MyReservation[] =>
+  [...items].sort((a, b) => {
+    const delta =
+      parseApiDate(a.start_date).getTime() -
+      parseApiDate(b.start_date).getTime();
+    return direction === "asc" ? delta : -delta;
   });
 
-  // Add items
-  data?.items?.forEach((item) => {
-    items.push({
-      id: item.id,
-      name: item.name,
-      type: "item",
-      slot: item.slot,
-      user: item.user,
-      warningMessage: item.warning_message,
-      confirmationMessage: item.confirmation_message,
-    });
-  });
+export const reservationKey = (item: MyReservation) =>
+  `${item.id}-${item.start_date}`;
 
-  return items;
-};
+/** Rows the widget may render; the card clips and fades the ones beyond its height. */
+export const WIDGET_MAX_ROWS = 4;
+/** Rows kept for items held the longest, so a long-forgotten one is never buried. */
+const WIDGET_HELD_QUOTA = 2;
 
-/**
- * Generates a unique key for reservation items to avoid React key conflicts.
- */
-export const generateReservationKey = (
-  item: PersonalReservationItem,
-  prefix?: string,
-): string => {
-  const base = `${item.id}-${item.start_date}`;
-  return prefix ? `${prefix}-${base}` : base;
-};
+/** Reservations still relevant: items not returned yet, and slots that haven't ended. */
+export const getActiveReservations = (
+  current: MyReservation[],
+  now: Date,
+): MyReservation[] =>
+  current.filter(
+    (reservation) =>
+      !reservation.slot ||
+      (!!reservation.end_date && parseApiDate(reservation.end_date) > now),
+  );
 
 /**
- * Checks if a reservation item has an end date.
+ * Picks the few current reservations worth showing in a compact widget: the items
+ * held for the longest time first, then the next upcoming slots.
  */
-export const hasEndDate = (item: PersonalReservationItem): boolean => {
-  return item.end_date !== null && item.end_date !== undefined;
+export const pickWidgetReservations = (
+  current: MyReservation[],
+): MyReservation[] => {
+  const held = sortByStart(
+    current.filter((reservation) => !reservation.slot),
+    "asc",
+  );
+  const slots = mergeAdjacentReservations(
+    sortByStart(
+      current.filter((reservation) => reservation.slot),
+      "asc",
+    ),
+  );
+
+  let heldCount = Math.min(held.length, WIDGET_HELD_QUOTA);
+  const slotCount = Math.min(slots.length, WIDGET_MAX_ROWS - heldCount);
+  heldCount = Math.min(held.length, WIDGET_MAX_ROWS - slotCount);
+
+  return [...held.slice(0, heldCount), ...slots.slice(0, slotCount)];
 };
 
-/**
- * Gets the appropriate action button type for a reservation.
- */
-export const getReservationAction = (
-  item: PersonalReservationItem,
-): "cancel" | "return" => {
-  return item.slot ? "cancel" : "return";
+/** Merges back-to-back slots of the same item (sorted by start) into one reservation. */
+const mergeAdjacentReservations = (slots: MyReservation[]): MyReservation[] => {
+  const merged: MyReservation[] = [];
+
+  for (const slot of slots) {
+    const previous = merged.findLast(
+      (reservation) => reservation.id === slot.id,
+    );
+    if (
+      previous?.end_date &&
+      parseApiDate(previous.end_date).getTime() ===
+        parseApiDate(slot.start_date).getTime()
+    ) {
+      previous.end_date = slot.end_date;
+    } else {
+      merged.push({ ...slot });
+    }
+  }
+
+  return merged;
 };

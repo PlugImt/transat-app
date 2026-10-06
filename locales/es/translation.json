@@ -457,7 +457,6 @@
       "description": "Reservar equipos y actividades",
       "reserve": "Reservar",
       "returnItem": "Devolver",
-      "reservedBy": "Reservado por",
       "reserveConfirmDesc": "Al reservar, te comprometes a devolver el equipo en el mismo estado en que lo encontraste",
       "returnConfirmDesc": "¿Confirmas que quieres devolver este equipo?",
       "confirmReserve": "Sí, me comprometo",
@@ -475,15 +474,49 @@
         "emptyUpcoming": "No hay reservas próximas",
         "emptyUpcomingDescription": "Reserva una sala o equipo para ver tus próximas reservas",
         "emptyPast": "No hay reservas pasadas",
-        "emptyPastDescription": "No tienes reservas pasadas"
+        "emptyPastDescription": "No tienes reservas pasadas",
+        "activeCount_one": "{{count}} reserva activa",
+        "activeCount_other": "{{count}} reservas activas",
+        "noneActive": "Ninguna reserva activa",
+        "heldSince": "Desde {{time}}"
       },
       "errors": {
-        "empty": "No hay reservas disponibles",
-        "emptyDescription": "No hay equipos o actividades disponibles en este momento",
         "reserveError": "Error durante la reserva",
         "returnError": "Error durante la devolución",
         "cancelError": "No se pudo cancelar la reserva",
-        "startDateRequired": "La fecha de inicio es obligatoria"
+        "conflict": "Alguien acaba de reservar esto. Actualiza e inténtalo de nuevo."
+      },
+      "tomorrow": "Mañana",
+      "status": {
+        "available": "Disponible",
+        "mine": "Lo tienes tú",
+        "takenBy": "Reservado por {{name}}",
+        "perSlot": "Reserva por franja horaria"
+      },
+      "sections": {
+        "categories": "Categorías",
+        "items": "Para reservar"
+      },
+      "empty": {
+        "catalog": {
+          "title": "No hay reservas disponibles",
+          "description": "No hay equipos o actividades disponibles en este momento"
+        },
+        "search": {
+          "title": "Sin resultados",
+          "description": "Prueba con otra búsqueda"
+        }
+      },
+      "calendar": {
+        "free": "Libre",
+        "mine": "Tu franja",
+        "parisTime": "{{time}} en París",
+        "selected_one": "{{count}} franja seleccionada",
+        "selected_other": "{{count}} franjas seleccionadas",
+        "clear": "Borrar",
+        "confirmTitle_one": "Reservar {{count}} franja",
+        "confirmTitle_other": "Reservar {{count}} franjas",
+        "partial": "{{done}} de {{total}} franjas reservadas"
       }
     },
     "events": {

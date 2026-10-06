@@ -8,9 +8,16 @@ interface CardProps {
   className?: string;
   onPress?: () => void;
   active?: boolean;
+  accessibilityLabel?: string;
 }
 
-const Card = ({ children, className, onPress, active = false }: CardProps) => {
+const Card = ({
+  children,
+  className,
+  onPress,
+  active = false,
+  accessibilityLabel,
+}: CardProps) => {
   const { theme } = useTheme();
   return (
     <TouchableOpacity
@@ -21,6 +28,8 @@ const Card = ({ children, className, onPress, active = false }: CardProps) => {
       }}
       onPress={onPress}
       disabled={!onPress}
+      accessibilityRole={onPress ? "button" : undefined}
+      accessibilityLabel={accessibilityLabel}
     >
       {children}
     </TouchableOpacity>

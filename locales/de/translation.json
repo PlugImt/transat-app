@@ -457,7 +457,6 @@
       "description": "Ausrüstung und Aktivitäten reservieren",
       "reserve": "Reservieren",
       "returnItem": "Zurückgeben",
-      "reservedBy": "Reserviert von",
       "reserveConfirmDesc": "Mit der Reservierung verpflichten Sie sich, die Ausrüstung in demselben Zustand zurückzugeben, in dem Sie sie vorgefunden haben",
       "returnConfirmDesc": "Bestätigen Sie, dass Sie diese Ausrüstung zurückgeben möchten?",
       "confirmReserve": "Ja, ich verpflichte mich",
@@ -475,15 +474,49 @@
         "emptyUpcoming": "Keine bevorstehenden Reservierungen",
         "emptyUpcomingDescription": "Reservieren Sie einen Raum oder Ausrüstung, um Ihre bevorstehenden Reservierungen zu sehen",
         "emptyPast": "Keine vergangenen Reservierungen",
-        "emptyPastDescription": "Sie haben keine vergangenen Reservierungen"
+        "emptyPastDescription": "Sie haben keine vergangenen Reservierungen",
+        "activeCount_one": "{{count}} aktive Reservierung",
+        "activeCount_other": "{{count}} aktive Reservierungen",
+        "noneActive": "Keine aktive Reservierung",
+        "heldSince": "Seit {{time}}"
       },
       "errors": {
-        "empty": "Keine Reservierungen verfügbar",
-        "emptyDescription": "Zur Zeit sind keine Ausrüstung oder Aktivitäten verfügbar",
         "reserveError": "Fehler bei der Reservierung",
         "returnError": "Fehler bei der Rückgabe",
         "cancelError": "Reservierung kann nicht storniert werden",
-        "startDateRequired": "Startdatum ist erforderlich"
+        "conflict": "Jemand hat das gerade reserviert. Bitte aktualisieren Sie und versuchen Sie es erneut."
+      },
+      "tomorrow": "Morgen",
+      "status": {
+        "available": "Verfügbar",
+        "mine": "Sie haben es",
+        "takenBy": "Reserviert von {{name}}",
+        "perSlot": "Stundenweise reservierbar"
+      },
+      "sections": {
+        "categories": "Kategorien",
+        "items": "Zum Reservieren"
+      },
+      "empty": {
+        "catalog": {
+          "title": "Keine Reservierungen verfügbar",
+          "description": "Zur Zeit sind keine Ausrüstung oder Aktivitäten verfügbar"
+        },
+        "search": {
+          "title": "Keine Ergebnisse",
+          "description": "Versuchen Sie eine andere Suche"
+        }
+      },
+      "calendar": {
+        "free": "Frei",
+        "mine": "Ihr Zeitfenster",
+        "parisTime": "{{time}} in Paris",
+        "selected_one": "{{count}} Zeitfenster ausgewählt",
+        "selected_other": "{{count}} Zeitfenster ausgewählt",
+        "clear": "Zurücksetzen",
+        "confirmTitle_one": "{{count}} Zeitfenster reservieren",
+        "confirmTitle_other": "{{count}} Zeitfenster reservieren",
+        "partial": "{{done}} von {{total}} Zeitfenstern reserviert"
       }
     },
     "events": {

@@ -1,14 +1,21 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "expo-router/react-navigation";
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import type { TextInput } from "react-native";
 import type { EventDetails } from "@/dto/event";
 import { useImageUpload } from "@/hooks/common";
+import { createDateTimeISO } from "@/utils/date.utils";
 import { hapticFeedback } from "@/utils/haptics.utils";
 import { type AddEventFormData, createAddEventSchema } from "./types";
 import { useUpdateEvent } from "./useEvent";
+
+// Same format the date picker writes (no seconds/ms), so an untouched date isn't seen as modified.
+const normalizeDate = (iso: string) => {
+  const date = new Date(iso);
+  return createDateTimeISO(date, date);
+};
 
 export const useEditEventForm = (event: EventDetails) => {
   const { t } = useTranslation();
@@ -23,25 +30,29 @@ export const useEditEventForm = (event: EventDetails) => {
   const locationRef = useRef<TextInput>(null);
   const linkRef = useRef<TextInput>(null);
 
+  const initialValues = useRef<Partial<AddEventFormData>>({
+    name: event.name || "",
+    description: event.description || "",
+    location: event.location || "",
+    start_date: event.start_date
+      ? normalizeDate(event.start_date)
+      : new Date().toISOString(),
+    end_date: event.end_date ? normalizeDate(event.end_date) : undefined,
+    id_club: event.club?.id || undefined,
+    link: event.link || undefined,
+    picture: event.picture || undefined,
+  }).current;
+
   const {
     control,
     handleSubmit,
     formState: { errors, isValid, isDirty },
     watch,
     reset,
-    setValue,
+    setValue: setFormValue,
   } = useForm<AddEventFormData>({
     resolver: zodResolver(editEventSchema),
-    defaultValues: {
-      name: event.name || "",
-      description: event.description || "",
-      location: event.location || "",
-      start_date: event.start_date || new Date().toISOString(),
-      end_date: event.end_date || undefined,
-      id_club: event.club?.id || undefined,
-      link: event.link || undefined,
-      picture: event.picture || undefined,
-    },
+    defaultValues: initialValues,
     mode: "onChange",
   });
 
@@ -54,7 +65,33 @@ export const useEditEventForm = (event: EventDetails) => {
   const link = watch("link");
   const picture = watch("picture");
 
-  const isButtonDisabled = !isValid || !isDirty;
+  // Programmatic changes (date picker, image) must count as edits to enable the button.
+  const setValue: typeof setFormValue = useCallback(
+    (name, value, options) =>
+      setFormValue(name, value, {
+        shouldDirty: true,
+        shouldValidate: true,
+        ...options,
+      }),
+    [setFormValue],
+  );
+
+  // Compare with the initial values directly so any change enables the button, however it was made.
+  const current: AddEventFormData = {
+    name,
+    description,
+    location,
+    start_date,
+    end_date,
+    id_club,
+    link,
+    picture,
+  };
+  const hasChanges = (Object.keys(current) as (keyof AddEventFormData)[]).some(
+    (key) => (current[key] ?? "") !== (initialValues[key] ?? ""),
+  );
+
+  const isButtonDisabled = !isValid || !(isDirty || hasChanges);
 
   const handleUpdateEvent = (data: AddEventFormData) => {
     updateEvent({ id: event.id, data });

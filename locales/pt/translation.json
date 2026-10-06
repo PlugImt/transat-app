@@ -457,7 +457,6 @@
       "description": "Reservar equipamentos e atividades",
       "reserve": "Reservar",
       "returnItem": "Devolver",
-      "reservedBy": "Reservado por",
       "reserveConfirmDesc": "Ao reservar, você se compromete a devolver o equipamento no mesmo estado em que o encontrou",
       "returnConfirmDesc": "Você confirma que quer devolver este equipamento?",
       "confirmReserve": "Sim, eu me comprometo",
@@ -475,15 +474,49 @@
         "emptyUpcoming": "Nenhuma reserva futura",
         "emptyUpcomingDescription": "Reserve uma sala ou equipamento para ver suas reservas futuras",
         "emptyPast": "Nenhuma reserva passada",
-        "emptyPastDescription": "Você não tem reservas passadas"
+        "emptyPastDescription": "Você não tem reservas passadas",
+        "activeCount_one": "{{count}} reserva ativa",
+        "activeCount_other": "{{count}} reservas ativas",
+        "noneActive": "Nenhuma reserva ativa",
+        "heldSince": "Desde {{time}}"
       },
       "errors": {
-        "empty": "Nenhuma reserva disponível",
-        "emptyDescription": "Nenhum equipamento ou atividade está disponível no momento",
         "reserveError": "Erro durante a reserva",
         "returnError": "Erro durante a devolução",
         "cancelError": "Não foi possível cancelar a reserva",
-        "startDateRequired": "A data de início é obrigatória"
+        "conflict": "Alguém acabou de reservar isto. Atualize e tente novamente."
+      },
+      "tomorrow": "Amanhã",
+      "status": {
+        "available": "Disponível",
+        "mine": "Você está com ele",
+        "takenBy": "Reservado por {{name}}",
+        "perSlot": "Reserva por horário"
+      },
+      "sections": {
+        "categories": "Categorias",
+        "items": "Para reservar"
+      },
+      "empty": {
+        "catalog": {
+          "title": "Nenhuma reserva disponível",
+          "description": "Nenhum equipamento ou atividade está disponível no momento"
+        },
+        "search": {
+          "title": "Sem resultados",
+          "description": "Tente outra pesquisa"
+        }
+      },
+      "calendar": {
+        "free": "Livre",
+        "mine": "Seu horário",
+        "parisTime": "{{time}} em Paris",
+        "selected_one": "{{count}} horário selecionado",
+        "selected_other": "{{count}} horários selecionados",
+        "clear": "Limpar",
+        "confirmTitle_one": "Reservar {{count}} horário",
+        "confirmTitle_other": "Reservar {{count}} horários",
+        "partial": "{{done}} de {{total}} horários reservados"
       }
     },
     "events": {

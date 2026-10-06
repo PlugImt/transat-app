@@ -12,6 +12,7 @@ import { Page } from "@/components/page/Page";
 import { useUser } from "@/hooks/account";
 import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
 import { useHomeWidgetsFetching } from "@/hooks/home/useHomeWidgetsFetching";
+import { useVisibleWidgets } from "@/hooks/home/useVisibleWidgets";
 import { useWidgetComponents } from "@/hooks/home/useWidgetComponents";
 import { useHomeWidgetPreferences } from "@/hooks/services/usePreferences";
 import type { AppNavigation, BottomTabParamList } from "@/types";
@@ -33,6 +34,7 @@ export const Home = () => {
   } = useHomeWidgetPreferences();
   const { isFetching, refetch } = useHomeWidgetsFetching();
   const { getWidgetComponent } = useWidgetComponents();
+  const visibleWidgets = useVisibleWidgets(enabledWidgets);
 
   if (isPending) {
     return <SplashScreen />;
@@ -63,16 +65,18 @@ export const Home = () => {
       }
     >
       <Animated.FlatList
-        data={enabledWidgets}
+        data={visibleWidgets}
         renderItem={({ item }) => getWidgetComponent(item.id)}
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={true}
         onScroll={scrollHandler}
         ListEmptyComponent={
-          <Empty
-            title={t("common.noWidgetsEnabled")}
-            description={t("common.noWidgetsEnabledDescription")}
-          />
+          enabledWidgets.length === 0 ? (
+            <Empty
+              title={t("common.noWidgetsEnabled")}
+              description={t("common.noWidgetsEnabledDescription")}
+            />
+          ) : null
         }
         ListFooterComponent={
           <PreferenceCustomizationButton

@@ -9,7 +9,9 @@ type DateFormat =
   | "long"
   | "relative"
   | "ago"
-  | "dateTime";
+  | "dateTime"
+  // Any date-fns pattern, e.g. "EEE d MMM"
+  | (string & Record<never, never>);
 
 export const useDate = () => {
   const { i18n } = useTranslation();

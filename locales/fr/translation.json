@@ -511,7 +511,6 @@
       "description": "Réservez du matériel et des salles",
       "reserve": "Réserver",
       "returnItem": "Rendre",
-      "reservedBy": "Réservé par",
       "reserveConfirmDesc": "En réservant, vous vous engagez à rendre le matériel dans le même état que vous l'avez trouvé",
       "returnConfirmDesc": "Confirmez-vous vouloir rendre cet équipement ?",
       "confirmReserve": "Oui, je m'engage",
@@ -529,15 +528,49 @@
         "emptyUpcoming": "Aucune réservation à venir",
         "emptyUpcomingDescription": "Réservez une salle ou du matériel pour voir vos réservations à venir",
         "emptyPast": "Aucune réservation passée",
-        "emptyPastDescription": "Vous n'avez pas de réservation passée"
+        "emptyPastDescription": "Vous n'avez pas de réservation passée",
+        "activeCount_one": "{{count}} réservation en cours",
+        "activeCount_other": "{{count}} réservations en cours",
+        "noneActive": "Aucune réservation en cours",
+        "heldSince": "Depuis {{time}}"
       },
       "errors": {
-        "empty": "Aucune réservation disponible",
-        "emptyDescription": "Aucun équipement ou activité n'est disponible pour le moment",
         "reserveError": "Erreur lors de la réservation",
         "returnError": "Erreur lors du retour",
         "cancelError": "Impossible d'annuler la réservation",
-        "startDateRequired": "La date de début est requise"
+        "conflict": "Quelqu'un vient de réserver ceci. Actualisez et réessayez."
+      },
+      "tomorrow": "Demain",
+      "status": {
+        "available": "Disponible",
+        "mine": "Vous l'avez",
+        "takenBy": "Réservé par {{name}}",
+        "perSlot": "Réservation par créneau"
+      },
+      "sections": {
+        "categories": "Catégories",
+        "items": "À réserver"
+      },
+      "empty": {
+        "catalog": {
+          "title": "Aucune réservation disponible",
+          "description": "Aucun équipement ou activité n'est disponible pour le moment"
+        },
+        "search": {
+          "title": "Aucun résultat",
+          "description": "Essayez une autre recherche"
+        }
+      },
+      "calendar": {
+        "free": "Libre",
+        "mine": "Votre créneau",
+        "parisTime": "{{time}} à Paris",
+        "selected_one": "{{count}} créneau sélectionné",
+        "selected_other": "{{count}} créneaux sélectionnés",
+        "clear": "Effacer",
+        "confirmTitle_one": "Réserver {{count}} créneau",
+        "confirmTitle_other": "Réserver {{count}} créneaux",
+        "partial": "{{done}} créneaux sur {{total}} réservés"
       }
     },
     "events": {

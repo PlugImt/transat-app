@@ -1,76 +1,50 @@
-import { useNavigation } from "expo-router/react-navigation";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
-import { Button } from "@/components/common/Button";
-import Search from "@/components/common/SearchInput";
-import { ReservationList } from "@/components/reservation";
-import type { GetReservation } from "@/dto/reservation";
+import SearchInput from "@/components/common/SearchInput";
+import { CatalogList } from "@/components/reservation/CatalogList";
+import { MyReservationsEntry } from "@/components/reservation/MyReservationsEntry";
 import { useDebouncedValue } from "@/hooks/common/useDebouncedValue";
-import { useStaleData } from "@/hooks/common/useStaleData";
 import {
+  useReservationCatalog,
   useReservationSearch,
-  useReservations,
-} from "@/hooks/services/reservation/useReservation";
-import type { AppNavigation } from "@/types";
+} from "@/hooks/services/reservation";
 
 export const Reservation = () => {
   const { t } = useTranslation();
-  const navigation = useNavigation<AppNavigation>();
   const [query, setQuery] = useState("");
 
-  const reservationQuery = useReservations();
-  const debouncedQuery = useDebouncedValue(query, 300);
-  const searchQuery = useReservationSearch(debouncedQuery);
+  const search = useDebouncedValue(query.trim(), 300);
+  const isSearching = search.length > 0;
 
-  const isSearching = debouncedQuery.length > 0;
-  const rawData = isSearching ? searchQuery.data : reservationQuery.data;
-  const data = useStaleData(
-    rawData as GetReservation,
-    isSearching && searchQuery.isPending,
-  );
-
-  const isPending = reservationQuery.isPending;
-  const isFetching =
-    reservationQuery.isFetching ||
-    (isSearching ? searchQuery.isFetching : false);
-  const isError = isSearching ? searchQuery.isError : reservationQuery.isError;
-  const error = (
-    isSearching ? searchQuery.error : reservationQuery.error
-  ) as Error | null;
-
-  const refetch = async () => {
-    await reservationQuery.refetch();
-    if (query.length > 0) await searchQuery.refetch();
-  };
-
-  const headerComponent = (
-    <View className="flex-row items-center gap-2 mb-3">
-      <Search
-        placeholder={String(t("common.search"))}
-        onChangeText={setQuery}
-        value={query}
-        onChange={setQuery}
-      />
-      <Button
-        label={t("services.reservation.personal.title")}
-        variant="secondary"
-        onPress={() => navigation.navigate("MyReservations")}
-      />
-    </View>
-  );
+  const catalogQuery = useReservationCatalog();
+  const searchQuery = useReservationSearch(search);
+  const activeQuery = isSearching ? searchQuery : catalogQuery;
 
   return (
-    <ReservationList
+    <CatalogList
       title={t("services.reservation.title")}
-      data={data}
-      isPending={isPending}
-      isFetching={isFetching}
-      isError={isError}
-      error={error}
-      refetch={refetch}
-      headerComponent={headerComponent}
-      variant="page"
+      catalog={activeQuery.data}
+      isPending={activeQuery.isPending}
+      isError={activeQuery.isError}
+      error={activeQuery.error}
+      refetch={activeQuery.refetch}
+      isSearching={isSearching}
+      header={
+        <View className="gap-3 mb-2">
+          {/* The default flex-1 would collapse the input to no height in a column. */}
+          <SearchInput
+            className="w-full"
+            value={query}
+            onChange={setQuery}
+            autoCorrect={false}
+            returnKeyType="search"
+          />
+          {!isSearching && <MyReservationsEntry />}
+        </View>
+      }
     />
   );
 };
+
+export default Reservation;

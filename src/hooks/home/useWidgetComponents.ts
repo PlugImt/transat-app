@@ -3,6 +3,7 @@ import React, { useCallback } from "react";
 import { EventWidget } from "@/screens/services/events/widget/EventWidget";
 import { HomeworkWidget } from "@/screens/services/homework/widget/HomeworkWidget";
 import LaundryWidget from "@/screens/services/laundry/widget/LaundryWidget";
+import { ReservationWidget } from "@/screens/services/reservation/widget/ReservationWidget";
 import { RestaurantWidget } from "@/screens/services/restaurant/widget/RestaurantWidget";
 import TimetableWidget from "@/screens/services/schedule/widget/TimetableWidget";
 import { WeatherWidget } from "@/screens/services/weather/widget/WeatherWidget";
@@ -17,6 +18,7 @@ export function useWidgetComponents() {
       homework: () => React.createElement(HomeworkWidget),
       events: () => React.createElement(EventWidget),
       laundry: () => React.createElement(LaundryWidget),
+      reservation: () => React.createElement(ReservationWidget),
     }),
     [],
   );

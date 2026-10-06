@@ -30,13 +30,8 @@ export type BottomTabParamList = {
   Olimtpe: undefined;
   Reservation: undefined;
   MyReservations: undefined;
-  ReservationCategory: {
-    id: number;
-    type: string;
-    title: string;
-    level?: number;
-  };
-  ReservationCalendar: { id: number; title: string };
+  ReservationCategory: { id: number; title: string };
+  ReservationCalendar: { id: number; title: string; date?: string };
   Fourchettas: undefined;
   FourchettasOrder: { id: number; orderUser?: OrderedItem[] };
 

@@ -1,14 +1,24 @@
 import { type RouteProp, useRoute } from "expo-router/react-navigation";
-import { ReservationPageContainer } from "@/components/reservation";
-import { useReservationCategory } from "@/hooks/services/reservation";
+import { CatalogList } from "@/components/reservation/CatalogList";
+import { useReservationCatalog } from "@/hooks/services/reservation";
 import type { BottomTabParamList } from "@/types";
 
 type CategoryRouteProp = RouteProp<BottomTabParamList, "ReservationCategory">;
 
 export const Category = () => {
-  const route = useRoute<CategoryRouteProp>();
-  const { id, title } = route.params;
-  const categoryQuery = useReservationCategory(id);
+  const { id, title } = useRoute<CategoryRouteProp>().params;
+  const { data, isPending, isError, error, refetch } = useReservationCatalog({
+    categoryId: id,
+  });
 
-  return <ReservationPageContainer title={title} {...categoryQuery} />;
+  return (
+    <CatalogList
+      title={title}
+      catalog={data}
+      isPending={isPending}
+      isError={isError}
+      error={error}
+      refetch={refetch}
+    />
+  );
 };

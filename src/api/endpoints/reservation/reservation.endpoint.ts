@@ -2,81 +2,109 @@ import { API_ROUTES } from "@/api/common";
 import { Method } from "@/api/enums";
 import { apiRequest } from "@/api/helpers";
 import type {
-  GetReservation,
+  ItemSchedule,
+  ItemScheduleResponse,
+  MyReservations,
+  MyReservationsFilter,
   MyReservationsResponse,
-  ReservationDetails,
-} from "@/dto";
+  ReservationCatalog,
+  ReservationCatalogResponse,
+} from "@/dto/reservation";
+import { toApiDateTime } from "@/utils/reservation-time";
 
-export const getReservationRoot = async () => {
-  return await apiRequest<GetReservation[]>(
-    `${API_ROUTES.reservation}`,
-    Method.GET,
+export type CatalogScope = { categoryId?: number; clubId?: number };
+
+const toCatalog = (
+  response: ReservationCatalogResponse,
+): ReservationCatalog => ({
+  categories: response.categories ?? [],
+  items: response.items ?? [],
+});
+
+export const getReservationCatalog = async ({
+  categoryId,
+  clubId,
+}: CatalogScope = {}): Promise<ReservationCatalog> => {
+  const route =
+    categoryId !== undefined
+      ? API_ROUTES.reservationCategory.replace(":id", String(categoryId))
+      : clubId !== undefined
+        ? API_ROUTES.reservationClub.replace(":id", String(clubId))
+        : API_ROUTES.reservation;
+
+  return toCatalog(
+    await apiRequest<ReservationCatalogResponse>(route, Method.GET),
   );
 };
 
-export const getReservationCategories = async (id: number) => {
-  return await apiRequest<GetReservation[]>(
-    API_ROUTES.reservationCategory.replace(":id", id.toString()),
+export const searchReservationCatalog = async (
+  query: string,
+): Promise<ReservationCatalog> =>
+  toCatalog(
+    await apiRequest<ReservationCatalogResponse>(
+      `${API_ROUTES.reservationSearch}?q=${encodeURIComponent(query)}`,
+      Method.GET,
+    ),
+  );
+
+/** `ymd` is the day the schedule is centred on; the API also returns its neighbours. */
+export const getItemSchedule = async (
+  itemId: number,
+  ymd: string,
+): Promise<ItemSchedule> => {
+  const response = await apiRequest<ItemScheduleResponse>(
+    `${API_ROUTES.reservationItem.replace(":id", String(itemId))}?date=${ymd}`,
     Method.GET,
   );
-};
 
-export const getReservationClub = async (id: number) => {
-  return await apiRequest<GetReservation>(
-    API_ROUTES.reservationClub.replace(":id", id.toString()),
-    Method.GET,
-  );
-};
-
-export const getReservationItem = async (id: number, date: string) => {
-  return await apiRequest<ReservationDetails>(
-    API_ROUTES.reservationItem.replace(":id", id.toString()) +
-      `${date ? `?date=${date}` : ""}`,
-    Method.GET,
-  );
-};
-
-export const updateReservation = async (
-  id: number,
-  startTime: string | null,
-) => {
-  if (startTime) {
-    return await apiRequest(
-      API_ROUTES.reservationItem.replace(":id", id.toString()),
-      Method.PATCH,
-      { start_date: startTime },
-    );
+  const unique = new Map<string, ItemSchedule["reservations"][number]>();
+  for (const slot of [
+    ...(response.reservation_before ?? []),
+    ...(response.reservation ?? []),
+    ...(response.reservation_after ?? []),
+  ]) {
+    unique.set(`${slot.start_date}|${slot.user.email}`, slot);
   }
 
-  return await apiRequest(
-    API_ROUTES.reservationItem.replace(":id", id.toString()),
-    Method.PATCH,
-    { end_date: new Date().toISOString().slice(0, 19).replace("T", " ") },
-  );
-};
-
-export const deleteReservation = async (id: number, startTime: string) => {
-  return await apiRequest(
-    API_ROUTES.reservationItem.replace(":id", id.toString()),
-    Method.DELETE,
-    { start_date: startTime },
-  );
+  return {
+    id: response.id,
+    name: response.name,
+    slot: response.slot,
+    warningMessage: response.warning_message,
+    confirmationMessage: response.confirmation_message,
+    reservations: [...unique.values()],
+  };
 };
 
 export const getMyReservations = async (
-  time?: "all" | "past" | "current",
-): Promise<MyReservationsResponse> => {
-  const query = time ? `?time=${time}` : "";
-  return await apiRequest<MyReservationsResponse>(
-    `${API_ROUTES.reservationMy}${query}`,
+  filter: MyReservationsFilter,
+): Promise<MyReservations> => {
+  const response = await apiRequest<MyReservationsResponse>(
+    `${API_ROUTES.reservationMy}?time=${filter}`,
     Method.GET,
   );
+  return { current: response.current ?? [], past: response.past ?? [] };
 };
 
-export const searchReservations = async (q: string) => {
-  const query = q ? `?q=${encodeURIComponent(q)}` : "";
-  return await apiRequest<GetReservation>(
-    `${API_ROUTES.reservationSearch}${query}`,
-    Method.GET,
-  );
-};
+const itemRoute = (itemId: number) =>
+  API_ROUTES.reservationItem.replace(":id", String(itemId));
+
+export const reserveSlot = (itemId: number, start: Date) =>
+  apiRequest(itemRoute(itemId), Method.PATCH, {
+    start_date: toApiDateTime(start),
+  });
+
+export const cancelSlot = (itemId: number, start: Date) =>
+  apiRequest(itemRoute(itemId), Method.DELETE, {
+    start_date: toApiDateTime(start),
+  });
+
+export const takeItem = (itemId: number) =>
+  apiRequest(itemRoute(itemId), Method.PATCH, {
+    start_date: toApiDateTime(new Date()),
+  });
+
+export const returnItem = (itemId: number) =>
+  apiRequest(itemRoute(itemId), Method.PATCH, {
+    end_date: toApiDateTime(new Date()),
+  });

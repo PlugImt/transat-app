@@ -457,7 +457,6 @@
       "description": "预订设备和活动",
       "reserve": "预订",
       "returnItem": "归还",
-      "reservedBy": "预订者",
       "reserveConfirmDesc": "通过预订，您承诺以发现时的相同状态归还设备",
       "returnConfirmDesc": "您确认要归还此设备吗？",
       "confirmReserve": "是的，我承诺",
@@ -475,15 +474,46 @@
         "emptyUpcoming": "没有即将到来的预订",
         "emptyUpcomingDescription": "预订房间或设备以查看您即将到来的预订",
         "emptyPast": "没有过去的预订",
-        "emptyPastDescription": "您没有过去的预订"
+        "emptyPastDescription": "您没有过去的预订",
+        "activeCount_other": "{{count}} 个进行中的预订",
+        "noneActive": "没有进行中的预订",
+        "heldSince": "自 {{time}} 起"
       },
       "errors": {
-        "empty": "没有可用的预订",
-        "emptyDescription": "目前没有设备或活动可用",
         "reserveError": "预订过程中出错",
         "returnError": "归还过程中出错",
         "cancelError": "无法取消预订",
-        "startDateRequired": "开始日期为必填项"
+        "conflict": "刚刚有人预订了此项。请刷新后重试。"
+      },
+      "tomorrow": "明天",
+      "status": {
+        "available": "可预订",
+        "mine": "由您持有",
+        "takenBy": "已被 {{name}} 预订",
+        "perSlot": "按时段预订"
+      },
+      "sections": {
+        "categories": "分类",
+        "items": "可预订"
+      },
+      "empty": {
+        "catalog": {
+          "title": "没有可用的预订",
+          "description": "目前没有设备或活动可用"
+        },
+        "search": {
+          "title": "没有结果",
+          "description": "请尝试其他搜索词"
+        }
+      },
+      "calendar": {
+        "free": "空闲",
+        "mine": "您的时段",
+        "parisTime": "巴黎时间 {{time}}",
+        "selected_other": "已选择 {{count}} 个时段",
+        "clear": "清除",
+        "confirmTitle_other": "预订 {{count}} 个时段",
+        "partial": "已预订 {{done}}/{{total}} 个时段"
       }
     },
     "events": {

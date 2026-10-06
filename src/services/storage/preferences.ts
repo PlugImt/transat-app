@@ -8,7 +8,8 @@ export type WidgetType =
   | "homework"
   | "laundry"
   | "fourchettas"
-  | "events";
+  | "events"
+  | "reservation";
 
 export type ServiceType =
   | "laundry"
@@ -72,6 +73,12 @@ const getDefaultHomeWidgets = (t: (key: string) => string): Preference[] => [
     name: t("services.restaurant.title"),
     enabled: true,
     order: 1,
+  },
+  {
+    id: "reservation",
+    name: t("services.reservation.personal.title"),
+    enabled: true,
+    order: 2,
   },
   {
     id: "events",

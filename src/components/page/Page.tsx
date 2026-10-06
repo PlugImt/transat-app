@@ -9,6 +9,7 @@ import {
   type ViewStyle,
 } from "react-native";
 import Animated from "react-native-reanimated";
+import { useFloatingTabBarInset } from "@/components/navigation/floatingTabBar";
 import { useTheme } from "@/contexts/ThemeContext";
 import {
   AnimatedHeaderContext,
@@ -48,8 +49,9 @@ export const Page = ({
 }: PageProps) => {
   const { theme } = useTheme();
   const { scrollHandler, headerShown, scrollY } = useAnimatedHeader();
+  const floatingTabBarInset = useFloatingTabBarInset();
   const containerStyle = {
-    paddingBottom: footer ? 0 : 40,
+    paddingBottom: (footer ? 0 : 40) + floatingTabBarInset,
     paddingTop: HEADER_HEIGHT,
     ...style,
   };
@@ -134,7 +136,8 @@ export const Page = ({
             style={{
               backgroundColor: theme.background,
               paddingHorizontal: 20,
-              paddingVertical: 16,
+              paddingTop: 16,
+              paddingBottom: 16 + floatingTabBarInset,
             }}
           >
             {footer}

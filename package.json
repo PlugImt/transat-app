@@ -14,7 +14,7 @@
     "lint": "biome lint",
     "format": "biome check --write",
     "build:android": "eas build --profile production --platform android --local",
-    "build:ios": "EAS_SKIP_AUTO_FINGERPRINT=1 eas build --profile production --platform ios --local"
+    "build:ios": "eas build --profile production --platform ios --local"
   },
   "jest": {
     "preset": "jest-expo"

@@ -82,7 +82,7 @@ export const ReservationCalendar = () => {
 
   return (
     <Page
-      title={title}
+      title={title ?? schedule?.name ?? ""}
       disableScroll
       className="flex-1 gap-0 px-0"
       style={{ paddingBottom: 0 }}

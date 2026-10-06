@@ -59,7 +59,8 @@
       "occurred": "An error occurred",
       "unableToFetch": "Unable to fetch data",
       "studentOnlyTitle": "Restricted access",
-      "studentOnly": "This feature is only available to students"
+      "studentOnly": "This feature is only available to students",
+      "notificationUnavailable": "This content is no longer available"
     },
     "days": {
       "monday": "Monday",

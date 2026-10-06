@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useIsAcademics } from "@/hooks/account";
+import { useNotificationNavigation } from "@/hooks/home/useNotificationNavigation";
 import { screenOptions, tabBarOptions } from "@/navigation/navigationConfig";
 import { Home } from "@/screens";
 import Account from "@/screens/account/Account";
@@ -145,6 +146,8 @@ export const BottomTabNavigator = () => {
   const { theme } = useTheme();
   const isAcademics = useIsAcademics();
   const insets = useSafeAreaInsets();
+
+  useNotificationNavigation();
 
   const handleTabPress = () => {
     return {

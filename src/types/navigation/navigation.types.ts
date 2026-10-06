@@ -31,7 +31,7 @@ export type BottomTabParamList = {
   Reservation: undefined;
   MyReservations: undefined;
   ReservationCategory: { id: number; title: string };
-  ReservationCalendar: { id: number; title: string; date?: string };
+  ReservationCalendar: { id: number; title?: string; date?: string };
   Fourchettas: undefined;
   FourchettasOrder: { id: number; orderUser?: OrderedItem[] };
 

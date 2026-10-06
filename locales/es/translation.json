@@ -59,7 +59,8 @@
       "occurred": "Ha ocurrido un error",
       "unableToFetch": "No se pudieron obtener los datos",
       "studentOnlyTitle": "Acceso restringido",
-      "studentOnly": "Esta función solo está disponible para estudiantes"
+      "studentOnly": "Esta función solo está disponible para estudiantes",
+      "notificationUnavailable": "Este contenido ya no está disponible"
     },
     "days": {
       "monday": "Lunes",

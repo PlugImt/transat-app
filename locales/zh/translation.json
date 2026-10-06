@@ -59,7 +59,8 @@
       "occurred": "发生错误",
       "unableToFetch": "无法获取数据",
       "studentOnlyTitle": "访问受限",
-      "studentOnly": "此功能仅对学生开放"
+      "studentOnly": "此功能仅对学生开放",
+      "notificationUnavailable": "此内容已不可用"
     },
     "days": {
       "monday": "星期一",

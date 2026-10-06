@@ -1,21 +1,10 @@
 import Constants from "expo-constants";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
-import { useNavigation } from "expo-router/react-navigation";
 import { useEffect, useState } from "react";
 import { Platform } from "react-native";
 import { laundryNotificationService } from "@/services/notifications/laundryNotifications";
-import type { AppNavigation } from "@/types";
 import useAuth from "../account/useAuth";
-
-interface NotificationContent {
-  title?: string | null;
-  body?: string | null;
-  data: {
-    screen?: string;
-    [key: string]: unknown;
-  };
-}
 
 const handleRegistrationError = (errorMessage: string) => {
   if (Platform.OS === "web") {
@@ -73,10 +62,6 @@ export function usePushNotifications() {
   const isAuthenticated = Boolean(user);
 
   const [expoPushToken, setExpoPushToken] = useState("");
-  const [notificationOpened, setNotificationOpened] = useState(false);
-  const [notificationData, setNotificationData] =
-    useState<NotificationContent | null>(null);
-  const navigation = useNavigation<AppNavigation>();
 
   useEffect(() => {
     if (!isAuthenticated) return;
@@ -99,25 +84,12 @@ export function usePushNotifications() {
     };
   }, [saveExpoPushToken, isAuthenticated]);
 
+  // Signed out: a pending tap can't be opened and must not replay after the next login.
   useEffect(() => {
-    const checkInitialNotification = async () => {
-      const lastNotificationResponse =
-        await Notifications.getLastNotificationResponseAsync();
-      if (lastNotificationResponse) {
-        setNotificationOpened(true);
-        setNotificationData(
-          lastNotificationResponse.notification.request.content,
-        );
-        const screen =
-          lastNotificationResponse.notification.request.content.data.screen;
-        if (screen && typeof screen === "string") {
-          // biome-ignore lint/suspicious/noExplicitAny: à être mieux handle
-          navigation.navigate(screen as any);
-        }
-      }
-    };
-    checkInitialNotification();
-  }, [navigation]);
+    if (user === null) {
+      Notifications.clearLastNotificationResponseAsync().catch(() => {});
+    }
+  }, [user]);
 
-  return { expoPushToken, notificationOpened, notificationData };
+  return { expoPushToken };
 }

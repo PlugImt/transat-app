@@ -59,7 +59,8 @@
       "occurred": "Ein Fehler ist aufgetreten",
       "unableToFetch": "Daten konnten nicht abgerufen werden",
       "studentOnlyTitle": "Eingeschränkter Zugriff",
-      "studentOnly": "Diese Funktion ist nur für Studierende verfügbar"
+      "studentOnly": "Diese Funktion ist nur für Studierende verfügbar",
+      "notificationUnavailable": "Dieser Inhalt ist nicht mehr verfügbar"
     },
     "days": {
       "monday": "Montag",

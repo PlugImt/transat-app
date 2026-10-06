@@ -6,14 +6,15 @@ import { getItemSchedule } from "@/api/endpoints/reservation/reservation.endpoin
 import { QUERY_KEYS } from "@/constants";
 import { getParisYmd } from "@/utils/reservation-time";
 import {
+  type ExternalLink,
   type ParameterlessScreen,
   type RouteTarget,
   servicesRoute,
 } from "./route-target";
 
 export interface ResolvedDestination {
-  /** Best-effort route, used as soon as the payload is understood. */
-  target: RouteTarget;
+  /** Best-effort destination, used as soon as the payload is understood. */
+  target: RouteTarget | ExternalLink;
   /** Opened instead when `check` finds the entity gone. */
   fallback?: RouteTarget;
   /** Verifies the entity and may refine the route; rejects with an ApiError when it is gone. */
@@ -28,7 +29,7 @@ export type DestinationResolver = (
 type DestinationDefinition<S extends z.ZodType> = {
   /** Validates the navigation payload (`id`, `params`) this destination needs. */
   schema: S;
-  target: (navigation: z.output<S>) => RouteTarget;
+  target: (navigation: z.output<S>) => RouteTarget | ExternalLink;
   check?: (
     navigation: z.output<S>,
     queryClient: QueryClient,
@@ -146,5 +147,10 @@ export const DESTINATIONS: Record<string, DestinationResolver> = {
   service: defineDestination({
     schema: z.object({ id: serviceKey }),
     target: ({ id }) => servicesRoute(SERVICE_SCREENS[id]),
+  }),
+
+  url: defineDestination({
+    schema: z.object({ id: z.httpUrl() }),
+    target: ({ id }) => ({ url: id }),
   }),
 };

@@ -16,6 +16,13 @@ export type RouteTarget = {
   params?: object;
 };
 
+/** A page outside the app, opened in the default browser. */
+export type ExternalLink = { url: string };
+
+export const isExternalLink = (
+  target: RouteTarget | ExternalLink,
+): target is ExternalLink => "url" in target;
+
 /** Screens that take no route params. */
 export type ParameterlessScreen = {
   [S in ScreenName]: BottomTabParamList[S] extends undefined ? S : never;

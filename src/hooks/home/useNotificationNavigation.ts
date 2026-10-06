@@ -6,8 +6,10 @@ import {
 } from "expo-router/react-navigation";
 import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { Linking } from "react-native";
 import { useToast } from "@/components/common/Toast";
 import {
+  isExternalLink,
   resolveNotificationRoute,
   toNavbarParams,
 } from "@/services/notifications/navigation";
@@ -43,7 +45,11 @@ export const useNotificationNavigation = () => {
       try {
         const route = await resolveNotificationRoute(content.data, queryClient);
         if (route?.target) {
-          navigation.navigate("Navbar", toNavbarParams(route.target));
+          if (isExternalLink(route.target)) {
+            await Linking.openURL(route.target.url);
+          } else {
+            navigation.navigate("Navbar", toNavbarParams(route.target));
+          }
         }
         if (route?.unavailable) {
           toast(t("common.errors.notificationUnavailable"), "info");

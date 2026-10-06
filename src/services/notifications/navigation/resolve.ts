@@ -6,14 +6,14 @@ import {
   notificationNavigationSchema,
 } from "@/dto/notification";
 import { DESTINATIONS, type ResolvedDestination } from "./destinations";
-import type { RouteTarget } from "./route-target";
+import type { ExternalLink, RouteTarget } from "./route-target";
 
 const CHECK_TIMEOUT_MS = 3000;
 const GONE_STATUSES = new Set([403, 404, 410]);
 
 export type NotificationRoute = {
   /** Where to go; null when there is nowhere sensible to send the user. */
-  target: RouteTarget | null;
+  target: RouteTarget | ExternalLink | null;
   /** The entity is gone or no longer accessible, so `target` is the fallback. */
   unavailable: boolean;
 };

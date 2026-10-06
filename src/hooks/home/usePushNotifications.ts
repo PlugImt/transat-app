@@ -1,7 +1,7 @@
 import Constants from "expo-constants";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Platform } from "react-native";
 import { laundryNotificationService } from "@/services/notifications/laundryNotifications";
 import useAuth from "../account/useAuth";
@@ -61,8 +61,6 @@ export function usePushNotifications() {
   const { saveExpoPushToken, user } = useAuth();
   const isAuthenticated = Boolean(user);
 
-  const [expoPushToken, setExpoPushToken] = useState("");
-
   useEffect(() => {
     if (!isAuthenticated) return;
     laundryNotificationService.initialize();
@@ -70,14 +68,9 @@ export function usePushNotifications() {
       laundryNotificationService.cleanup();
     }, 60000);
     registerForPushNotificationsAsync()
-      .then(async (token) => {
-        setExpoPushToken(token ?? "");
-        await saveExpoPushToken(token ?? "");
-      })
+      .then((token) => saveExpoPushToken(token ?? ""))
       .catch((error: unknown) => {
-        const errorMessage =
-          error instanceof Error ? error.message : String(error);
-        setExpoPushToken(errorMessage);
+        console.warn("[Notifications] Push registration failed", error);
       });
     return () => {
       clearInterval(cleanupInterval);
@@ -90,6 +83,4 @@ export function usePushNotifications() {
       Notifications.clearLastNotificationResponseAsync().catch(() => {});
     }
   }, [user]);
-
-  return { expoPushToken };
 }

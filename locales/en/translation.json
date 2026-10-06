@@ -212,11 +212,14 @@
     "security": "Security",
     "notifications": {
       "notifications": "Notifications",
-      "fetchError": "Unable to fetch notification settings",
       "updateError": "Unable to update notification settings",
       "setNotification": "Be notified",
       "toggleRestaurant": "Be notified when the daily menu is published",
-      "toggleTraq": "Be notified when a new item is offered at Traq'"
+      "toggleTraq": "Be notified when a new item is offered at Traq'",
+      "toggleEvents": "Be notified when a new event is created",
+      "eventReminders": "Event reminders",
+      "toggleEventReminders": "Be notified one hour before events you attend or from your clubs",
+      "toggleReservations": "Be notified about your reservations"
     },
     "hapticFeedback": {
       "title": "Haptic Feedback",

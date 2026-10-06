@@ -13,17 +13,6 @@ export interface LaundryNotificationState {
 
 const NOTIFICATION_STORAGE_KEY = "laundry_notifications";
 
-// Configure local notifications
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: true,
-    shouldShowBanner: true,
-    shouldShowList: true,
-  }),
-});
-
 class LaundryNotificationService {
   private notifications: Map<string, LaundryNotificationState> = new Map();
 

@@ -212,11 +212,14 @@
     "security": "Segurança",
     "notifications": {
       "notifications": "Notificações",
-      "fetchError": "Não foi possível buscar as configurações de notificação",
       "updateError": "Não foi possível atualizar as configurações de notificação",
       "setNotification": "Ser notificado",
       "toggleRestaurant": "Ser notificado quando o cardápio do dia for publicado",
-      "toggleTraq": "Ser notificado quando um novo item for oferecido no Traq'"
+      "toggleTraq": "Ser notificado quando um novo item for oferecido no Traq'",
+      "toggleEvents": "Ser notificado quando um novo evento for criado",
+      "eventReminders": "Lembretes de eventos",
+      "toggleEventReminders": "Ser notificado uma hora antes dos eventos em que participa ou dos seus clubes",
+      "toggleReservations": "Ser notificado sobre as suas reservas"
     },
     "hapticFeedback": {
       "title": "Retroalimentação tátil",

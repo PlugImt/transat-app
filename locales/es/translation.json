@@ -212,11 +212,14 @@
     "security": "Seguridad",
     "notifications": {
       "notifications": "Notificaciones",
-      "fetchError": "No se pudieron obtener la configuración de notificaciones",
       "updateError": "No se pudieron actualizar la configuración de notificaciones",
       "setNotification": "Recibir notificación",
       "toggleRestaurant": "Ser notificado cuando se publique el menú del día",
-      "toggleTraq": "Ser notificado cuando se ofrezca un nuevo artículo en Traq'"
+      "toggleTraq": "Ser notificado cuando se ofrezca un nuevo artículo en Traq'",
+      "toggleEvents": "Ser notificado cuando se cree un nuevo evento",
+      "eventReminders": "Recordatorios de eventos",
+      "toggleEventReminders": "Ser notificado una hora antes de los eventos a los que asistes o de tus clubes",
+      "toggleReservations": "Ser notificado sobre tus reservas"
     },
     "hapticFeedback": {
       "title": "Retroalimentación táctil",

@@ -39,7 +39,7 @@ const legacyNavigation = (data: Record<string, unknown>) => {
   return undefined;
 };
 
-export const getNotificationNavigation = (
+const getNotificationNavigation = (
   data: unknown,
 ): NotificationNavigation | null => {
   if (!data || typeof data !== "object") return null;
@@ -50,9 +50,7 @@ export const getNotificationNavigation = (
   return parsed.success ? parsed.data : null;
 };
 
-export const resolveDestination = (
-  data: unknown,
-): ResolvedDestination | null => {
+const resolveDestination = (data: unknown): ResolvedDestination | null => {
   const navigation = getNotificationNavigation(data);
   if (!navigation || !Object.hasOwn(DESTINATIONS, navigation.type)) {
     return null;

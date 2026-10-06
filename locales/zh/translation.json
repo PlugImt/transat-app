@@ -212,11 +212,14 @@
     "security": "安全",
     "notifications": {
       "notifications": "通知",
-      "fetchError": "无法获取通知设置",
       "updateError": "无法更新通知设置",
       "setNotification": "接收通知",
       "toggleRestaurant": "当日菜单发布时收到通知",
-      "toggleTraq": "Traq'有新商品时收到通知"
+      "toggleTraq": "Traq'有新商品时收到通知",
+      "toggleEvents": "有新活动创建时收到通知",
+      "eventReminders": "活动提醒",
+      "toggleEventReminders": "在您参加的活动或所属社团的活动开始前一小时收到通知",
+      "toggleReservations": "收到有关您预订的通知"
     },
     "hapticFeedback": {
       "title": "触觉反馈",

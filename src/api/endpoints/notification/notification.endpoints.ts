@@ -1,45 +1,34 @@
 import { API_ROUTES } from "@/api/common";
 import { Method } from "@/api/enums";
 import { apiRequest } from "@/api/helpers";
-import type { NotificationType } from "@/dto";
+import {
+  type NotificationPreference,
+  type NotificationPreferences,
+  type NotificationType,
+  notificationTypeSchema,
+} from "@/dto";
 
-export const addNotification = async (
-  service: NotificationType,
-): Promise<boolean> => {
-  const response = await apiRequest<{ subscribed: boolean }>(
-    API_ROUTES.notifications,
-    Method.POST,
-    {
-      service: service.trim(),
-    },
-  );
+export const getNotificationPreferences =
+  async (): Promise<NotificationPreferences> => {
+    const { preferences } = await apiRequest<{
+      preferences: { service: string; enabled: boolean }[];
+    }>(API_ROUTES.notificationPreferences, Method.GET);
 
-  return response.subscribed;
-};
-
-export const getNotificationsState = async (
-  service?: NotificationType,
-  services?: NotificationType[],
-): Promise<boolean | NotificationType[]> => {
-  try {
-    const params: Record<string, string | string[]> = {};
-
-    if (service) {
-      params.service = service.trim();
-    } else if (services?.length) {
-      params.services = services.map((s) => s.trim());
+    const result: NotificationPreferences = {};
+    for (const { service, enabled } of preferences) {
+      // Categories added by a newer backend are ignored until the app knows them.
+      const known = notificationTypeSchema.safeParse(service);
+      if (known.success) result[known.data] = enabled;
     }
+    return result;
+  };
 
-    const response = await apiRequest<{ services: NotificationType[] }>(
-      API_ROUTES.notifications,
-      Method.GET,
-      {},
-      { params },
-    );
-
-    return service ? response.services.includes(service) : response.services;
-  } catch (error) {
-    console.error("Error fetching notification state:", error);
-    return service ? false : [];
-  }
-};
+export const setNotificationPreference = (
+  service: NotificationType,
+  enabled: boolean,
+) =>
+  apiRequest<NotificationPreference>(
+    API_ROUTES.notificationPreferences,
+    Method.PUT,
+    { service, enabled },
+  );

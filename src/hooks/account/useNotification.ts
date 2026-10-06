@@ -1,114 +1,63 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { addNotification, getNotificationsState } from "@/api";
+import { useTranslation } from "react-i18next";
+import {
+  getNotificationPreferences,
+  setNotificationPreference,
+} from "@/api/endpoints/notification";
+import { useToast } from "@/components/common/Toast";
 import { QUERY_KEYS } from "@/constants";
-import { type NotificationType, NotificationTypeValues } from "@/dto";
-import { storage } from "@/services/storage/asyncStorage";
+import type { NotificationPreferences, NotificationType } from "@/dto";
 
+/** Per-category notification choices, stored on the server per user. */
 const useNotification = () => {
   const queryClient = useQueryClient();
+  const { toast } = useToast();
+  const { t } = useTranslation();
 
-  /**
-   * Récupérer l'état des notifications
-   */
-  const notificationsQuery = useQuery<
-    Record<NotificationType, boolean>,
-    Error,
-    Record<NotificationType, boolean>
-  >({
-    queryKey: [QUERY_KEYS.notification],
-    queryFn: async () => {
-      try {
-        const storedData = (await storage.get("notification")) || {};
-
-        const enabledNotifications = await getNotificationsState();
-
-        if (enabledNotifications === false) {
-          console.warn(
-            "No JWT token found or invalid state. Returning stored data.",
-          );
-          return storedData as Record<NotificationType, boolean>;
-        }
-
-        if (Array.isArray(enabledNotifications)) {
-          const updatedNotifications = {
-            ...(storedData as Record<NotificationType, boolean>),
-          };
-
-          for (const notif of enabledNotifications) {
-            if (NotificationTypeValues.includes(notif as NotificationType)) {
-              updatedNotifications[notif as NotificationType] = true;
-            }
-          }
-
-          await storage.set("notification", updatedNotifications);
-          return updatedNotifications;
-        }
-
-        return storedData as Record<NotificationType, boolean>;
-      } catch (error) {
-        console.error("Error fetching notifications:", error);
-        return (
-          (await storage.get("notification")) ||
-          ({} as Record<NotificationType, boolean>)
-        );
-      }
-    },
+  const query = useQuery({
+    queryKey: QUERY_KEYS.notification,
+    queryFn: getNotificationPreferences,
   });
 
-  /**
-   * Active ou désactive une notification
-   * @param service Type de notification à modifier
-   */
-  const toggleNotification = useMutation({
-    mutationFn: async (service: NotificationType) => {
-      const enabled = await addNotification(service);
-      return { service, enabled };
+  const mutation = useMutation({
+    mutationFn: ({
+      service,
+      enabled,
+    }: {
+      service: NotificationType;
+      enabled: boolean;
+    }) => setNotificationPreference(service, enabled),
+    onMutate: async ({ service, enabled }) => {
+      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.notification });
+      const previous = queryClient.getQueryData<NotificationPreferences>(
+        QUERY_KEYS.notification,
+      );
+      queryClient.setQueryData<NotificationPreferences>(
+        QUERY_KEYS.notification,
+        { ...previous, [service]: enabled },
+      );
+      return { previous };
     },
-
-    // Mise à jour optimiste
-    onMutate: async (service) => {
-      // Empêche les requêtes concurrentes
-      await queryClient.cancelQueries({ queryKey: [QUERY_KEYS.notification] });
-
-      // Sauvegarde l'état actuel pour annulation en cas d'erreur
-      const previousNotifications =
-        queryClient.getQueryData<Record<NotificationType, boolean>>([
-          QUERY_KEYS.notification,
-        ]) || ({} as Record<NotificationType, boolean>);
-
-      // Inverse l'état de la notification sélectionnée
-      const newValue = !(previousNotifications[service] ?? false);
-
-      // Met à jour l'UI immédiatement
-      queryClient.setQueryData([QUERY_KEYS.notification], {
-        ...previousNotifications,
-        [service]: newValue,
-      });
-
-      return { previousNotifications };
+    onError: (_error, _variables, context) => {
+      queryClient.setQueryData(QUERY_KEYS.notification, context?.previous);
+      toast(t("settings.notifications.updateError"), "destructive");
     },
-    onSuccess: async ({ service, enabled }) => {
-      const notifications = (await storage.get("notification")) || {};
-      await storage.set("notification", {
-        ...notifications,
-        [service]: enabled,
-      });
-
-      queryClient.setQueryData([QUERY_KEYS.notification], {
-        ...notifications,
-        [service]: enabled,
-      });
-    },
+    onSettled: () =>
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notification }),
   });
 
   return {
-    data: notificationsQuery.data,
-    isPending: notificationsQuery.isPending,
-    isError: notificationsQuery.isError,
-    error: notificationsQuery.error,
+    data: query.data,
+    isPending: query.isPending,
+    isFetching: query.isFetching,
+    isError: query.isError,
+    error: query.error,
+    refetch: query.refetch,
 
-    toggleNotification: toggleNotification.mutate,
-    isToggling: toggleNotification.isPending,
+    setPreference: (service: NotificationType, enabled: boolean) =>
+      mutation.mutate({ service, enabled }),
+    /** Category whose change is being saved, to disable only its switch. */
+    savingService: mutation.isPending ? mutation.variables.service : null,
   };
 };
 

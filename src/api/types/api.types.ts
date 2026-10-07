@@ -1,1 +1,1 @@
-export type ApiMethod = "GET" | "POST" | "PATCH" | "DELETE";
+export type ApiMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";

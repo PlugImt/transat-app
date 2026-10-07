@@ -1,6 +1,6 @@
 export const API_ROUTES: Record<Route, ApiRoute> = {
   user: "/newf/me",
-  notifications: "/newf/notifications/subscriptions",
+  notificationPreferences: "/newf/notifications/preferences",
   weather: "/weather",
   planning_today: "/planning/users/:email/courses/today",
   planning_week: "/planning/users/:email/courses",
@@ -48,7 +48,7 @@ export const API_ROUTES: Record<Route, ApiRoute> = {
 type ApiRoute = `/${string}`;
 type Route =
   | "user"
-  | "notifications"
+  | "notificationPreferences"
   | "weather"
   | "planning_today"
   | "planning_week"

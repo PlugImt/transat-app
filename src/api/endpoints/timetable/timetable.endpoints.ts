@@ -53,7 +53,7 @@ export const getTimetableForWeek = async (
 
   const url = API_ROUTES.planning_week.replace(":email", email);
 
-  return await apiRequest<Timetable>(url, Method.GET, {
+  return await apiRequest<Timetable>(url, Method.GET, undefined, {
     params: {
       start: startDate,
       end: endDate,

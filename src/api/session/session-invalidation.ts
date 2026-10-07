@@ -1,5 +1,4 @@
-import axios from "axios";
-import { ApiError } from "@/api/errors";
+import { ApiError, HttpError } from "@/api/errors";
 
 // Backend reasons that legitimately end a session: account deleted, or password changed after the token was issued.
 const ACCOUNT_INVALID_PATTERN =
@@ -16,9 +15,9 @@ export const isSessionInvalidError = (error: unknown): boolean => {
   let status: number | undefined;
   let messages: string[] = [];
 
-  if (axios.isAxiosError(error)) {
-    status = error.response?.status;
-    messages = collectMessages(error.response?.data);
+  if (error instanceof HttpError) {
+    status = error.status;
+    messages = collectMessages(error.data);
   } else if (ApiError.isApiError(error)) {
     status = error.status;
     messages = [

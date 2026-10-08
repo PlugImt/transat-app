@@ -1,5 +1,3 @@
-import type { AxiosError } from "axios";
-
 /** Response body shape used by existing auth and API error handlers. */
 export type ApiErrorBody = {
   error?: string;
@@ -40,6 +38,29 @@ function extractErrorCode(data: unknown): string | undefined {
   return undefined;
 }
 
+/** Raw failure of an HTTP call: no answer at all (`status` undefined) or a non-2xx answer. */
+export class HttpError extends Error {
+  readonly status?: number;
+  readonly data?: unknown;
+  readonly code?: string;
+
+  constructor(
+    message: string,
+    options?: {
+      status?: number;
+      data?: unknown;
+      code?: string;
+      cause?: unknown;
+    },
+  ) {
+    super(message, { cause: options?.cause });
+    this.name = "HttpError";
+    this.status = options?.status;
+    this.data = options?.data;
+    this.code = options?.code;
+  }
+}
+
 export class ApiError extends Error {
   readonly status?: number;
   readonly code?: string;
@@ -64,18 +85,15 @@ export class ApiError extends Error {
     this.data = options?.data;
   }
 
-  static fromAxiosError(
-    error: AxiosError<ApiErrorBody>,
-    fallbackMessage: string,
-  ): ApiError {
-    if (!error.response) {
+  static fromHttpError(error: HttpError, fallbackMessage: string): ApiError {
+    if (error.status === undefined) {
       return new ApiError(fallbackMessage, {
         code: error.code,
         cause: error,
       });
     }
 
-    const { data, status } = error.response;
+    const { data, status } = error;
     const serverMessage = extractServerMessage(data);
     const code = extractErrorCode(data);
 

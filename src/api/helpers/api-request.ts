@@ -1,11 +1,10 @@
 import type { SpanStatus } from "@sentry/core";
 import { spanToTraceHeader } from "@sentry/core";
 import * as Sentry from "@sentry/react-native";
-import axios, { type AxiosRequestConfig } from "axios";
 import { t } from "i18next";
 import { Method } from "@/api/enums";
-import { ApiError, isStudentOnlyForbiddenError } from "@/api/errors";
-import { getApiInstance } from "@/api/helpers/api-instance";
+import { ApiError, HttpError, isStudentOnlyForbiddenError } from "@/api/errors";
+import { httpRequest, type QueryParams } from "@/api/helpers/http-client";
 import type { ApiMethod } from "@/api/types";
 import { storage } from "@/services/storage/asyncStorage";
 
@@ -13,7 +12,7 @@ export const apiRequest = async <T>(
   endpoint: string,
   method: ApiMethod = Method.GET,
   data?: unknown,
-  config: AxiosRequestConfig = {},
+  config: { params?: QueryParams } = {},
   isAnonymous = false,
 ): Promise<T> => {
   const token = await storage.get("token");
@@ -21,8 +20,6 @@ export const apiRequest = async <T>(
   if (!token && !isAnonymous) {
     throw new Error(t("account.noToken"));
   }
-
-  const api = await getApiInstance();
 
   return Sentry.startSpan(
     {
@@ -46,22 +43,22 @@ export const apiRequest = async <T>(
       }
 
       try {
-        const response = await api.request<T>({
+        const result = await httpRequest<T>({
           url: endpoint,
           method,
-          data,
-          ...config,
+          body: data,
+          params: config.params,
           headers,
         });
 
         span?.setStatus({ code: 1 } satisfies SpanStatus);
-        return response.data;
+        return result;
       } catch (error) {
         const fallbackMessage =
           t("common.errors.occurred") || "An unexpected error occurred.";
 
-        if (axios.isAxiosError(error)) {
-          const apiError = ApiError.fromAxiosError(error, fallbackMessage);
+        if (error instanceof HttpError) {
+          const apiError = ApiError.fromHttpError(error, fallbackMessage);
           const displayedError = isStudentOnlyForbiddenError(apiError)
             ? new ApiError(t("common.errors.studentOnly"), {
                 status: apiError.status,

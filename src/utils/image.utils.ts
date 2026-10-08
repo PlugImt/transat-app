@@ -1,8 +1,9 @@
-import axios from "axios";
 import * as ImagePicker from "expo-image-picker";
 import { t } from "i18next";
 import type { ImageSourcePropType } from "react-native";
-import { storage } from "@/services/storage/asyncStorage";
+import { API_ROUTES } from "@/api/common";
+import { Method } from "@/api/enums";
+import { apiRequest } from "@/api/helpers/api-request";
 
 /**
  * Opens the gallery, lets the user pick an image, and uploads it to the API.
@@ -27,11 +28,6 @@ export const uploadImage = async (): Promise<string> => {
   const image = result.assets[0];
 
   try {
-    const token = await storage.get("token");
-    if (!token) {
-      throw new Error(t("account.noToken"));
-    }
-
     const formData = new FormData();
     formData.append("image", {
       uri: image.uri,
@@ -39,20 +35,17 @@ export const uploadImage = async (): Promise<string> => {
       type: `image/${image.uri.split(".").pop()}` || "image/jpeg",
     } as unknown as Blob);
 
-    const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+    const upload = await apiRequest<{ success: boolean; url: string }>(
+      API_ROUTES.upload,
+      Method.POST,
+      formData,
+    );
 
-    const uploadResponse = await axios.post(`${apiUrl}/upload`, formData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "multipart/form-data",
-      },
-    });
-
-    if (!uploadResponse.data.success) {
+    if (!upload.success) {
       throw new Error(t("account.profilePictureUpdateFailed"));
     }
 
-    return uploadResponse.data.url;
+    return upload.url;
   } catch (error) {
     console.error("Image upload failed:", error);
     throw new Error(t("account.profilePictureUpdateFailed"));

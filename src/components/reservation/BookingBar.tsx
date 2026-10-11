@@ -1,9 +1,8 @@
-import { MotiView } from "moti";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { Button } from "@/components/common/Button";
+import { FloatingActionBar } from "@/components/common/FloatingActionBar";
 import { Text } from "@/components/common/Text";
-import { useTheme } from "@/contexts/ThemeContext";
 import { useDate } from "@/hooks/common/useDate";
 import {
   useReservationFeedback,
@@ -38,7 +37,6 @@ export const BookingBar = ({
   onBooked,
 }: BookingBarProps) => {
   const { t } = useTranslation();
-  const { theme } = useTheme();
   const { formatDate, formatTime } = useDate();
   const feedback = useReservationFeedback();
   const reserveSlots = useReserveSlots();
@@ -81,23 +79,7 @@ export const BookingBar = ({
     );
 
   return (
-    <MotiView
-      from={{ opacity: 0, translateY: 24 }}
-      animate={{ opacity: 1, translateY: 0 }}
-      transition={{ type: "timing", duration: 200 }}
-      className="absolute left-4 right-4 flex-row items-center gap-3 rounded-2xl border px-4"
-      style={{
-        bottom: 12,
-        height: BOOKING_BAR_HEIGHT,
-        backgroundColor: theme.card,
-        borderColor: theme.border,
-        shadowColor: "#000",
-        shadowOpacity: 0.15,
-        shadowRadius: 12,
-        shadowOffset: { width: 0, height: 4 },
-        elevation: 8,
-      }}
-    >
+    <FloatingActionBar height={BOOKING_BAR_HEIGHT}>
       <View className="flex-1">
         <Text variant="h3" numberOfLines={1}>
           {t("services.reservation.calendar.selected", { count: slots.length })}
@@ -144,6 +126,6 @@ export const BookingBar = ({
           isUpdating={reserveSlots.isPending}
         />
       </ConfirmAction>
-    </MotiView>
+    </FloatingActionBar>
   );
 };

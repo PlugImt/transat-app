@@ -63,14 +63,14 @@ const AlbumCardComponent = ({ album, width, onPress }: AlbumCardProps) => {
           </View>
         )}
       </View>
-      <View className="pt-2 gap-0.5">
-        <Text variant="lg" numberOfLines={2}>
+      <View className="pt-2 gap-0.5" style={{ width, overflow: "hidden" }}>
+        <Text variant="lg" numberOfLines={1} ellipsizeMode="tail">
           {album.title}
         </Text>
-        <Text color="muted" variant="sm" numberOfLines={1}>
+        <Text color="muted" variant="sm" numberOfLines={1} ellipsizeMode="tail">
           {subtitle}
         </Text>
-        <Text color="muted" variant="sm">
+        <Text color="muted" variant="sm" numberOfLines={1}>
           {count}
         </Text>
       </View>

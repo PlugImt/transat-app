@@ -35,6 +35,11 @@ export type BottomTabParamList = {
   Fourchettas: undefined;
   FourchettasOrder: { id: number; orderUser?: OrderedItem[] };
 
+  // Games screens
+  Games: undefined;
+  Bassine: undefined;
+  BassineLeaderboard: undefined;
+
   // Account screens
   EditProfile: undefined;
   Settings: undefined;

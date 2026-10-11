@@ -21,6 +21,7 @@ import Settings from "@/screens/account/settings/Settings";
 import {
   Clubs,
   Fourchettas,
+  Games,
   Homework,
   Laundry,
   Olimtpe,
@@ -39,6 +40,8 @@ import EventDetails from "@/screens/services/events/components/EventDetails";
 import { EventMemberList } from "@/screens/services/events/components/EventMemberList";
 import Events from "@/screens/services/events/Events";
 import { FourchettasOrder } from "@/screens/services/fourchettas/components/order/FourchettasOrder";
+import Bassine from "@/screens/services/games/bassine/Bassine";
+import { BassineLeaderboard } from "@/screens/services/games/bassine/leaderboard/BassineLeaderboard";
 import { HomeworkDetails } from "@/screens/services/homework/components/HomeworkDetails";
 import { AlbumDetails } from "@/screens/services/photos/AlbumDetails";
 import {
@@ -114,13 +117,21 @@ const ServicesStack = () => (
     <Stack.Screen name="ReservationCalendar" component={ReservationCalendar} />
     <Stack.Screen name="Fourchettas" component={Fourchettas} />
     <Stack.Screen name="FourchettasOrder" component={FourchettasOrder} />
+    <Stack.Screen name="Games" component={Games} />
+    <Stack.Screen name="Bassine" component={Bassine} />
+    <Stack.Screen name="BassineLeaderboard" component={BassineLeaderboard} />
   </Stack.Navigator>
 );
 
 const PhotosStack = () => (
   <Stack.Navigator screenOptions={screenOptions}>
     <Stack.Screen name="Photos" component={Photos} />
-    <Stack.Screen name="AlbumDetails" component={AlbumDetails} />
+    <Stack.Screen
+      name="AlbumDetails"
+      component={AlbumDetails}
+      // One screen per album: opening the album that is already shown (e.g. from a notification) reuses it.
+      getId={({ params }) => String(params.id)}
+    />
   </Stack.Navigator>
 );
 

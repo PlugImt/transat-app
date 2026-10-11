@@ -15,11 +15,25 @@ export const TabsContext = createContext<TabsContextProps>({
 });
 
 interface TabsProps {
-  defaultValue: string;
+  defaultValue?: string;
+  /** Controlled mode: the parent owns the selected tab. */
+  value?: string;
+  onValueChange?: (id: string) => void;
   children: React.ReactNode;
 }
-const Tabs = ({ defaultValue, children }: TabsProps) => {
-  const [activeTab, setActiveTab] = useState(defaultValue);
+const Tabs = ({
+  defaultValue = "",
+  value,
+  onValueChange,
+  children,
+}: TabsProps) => {
+  const [innerTab, setInnerTab] = useState(defaultValue);
+  const controlled = value !== undefined;
+  const activeTab = controlled ? value : innerTab;
+  const setActiveTab = (id: string) => {
+    if (!controlled) setInnerTab(id);
+    onValueChange?.(id);
+  };
 
   return (
     <TabsContext.Provider value={{ activeTab, setActiveTab }}>
@@ -34,6 +48,7 @@ const TabsList = ({
 }: React.ComponentPropsWithoutRef<typeof View>) => {
   return (
     <View
+      accessibilityRole="tablist"
       className={cn("flex flex-row justify-center gap-4", className)}
       {...props}
     />
@@ -63,6 +78,8 @@ const TabsTrigger = ({
         backgroundColor: activeTab === value ? theme.card : "transparent",
       }}
       onPress={() => setActiveTab(value)}
+      accessibilityRole="tab"
+      accessibilityState={{ selected: activeTab === value }}
       {...props}
     >
       <Text className={cn("text-center", textClasses)}>{title}</Text>

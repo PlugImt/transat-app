@@ -1,147 +1,146 @@
 import {
   Calendar,
+  File as FileIcon,
   Folder,
   FolderOpen,
   HardDrive,
-  Image as ImageIcon,
   Images,
+  Tag,
 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
-import { ActivityIndicator, Linking, Pressable, View } from "react-native";
-import { Text } from "@/components/common/Text";
+import { ActivityIndicator, Linking, View } from "react-native";
+import { Button } from "@/components/common/Button";
+import { useDialog } from "@/components/common/Dialog";
+import InfoItem from "@/components/common/InfoItem";
+import { useTheme } from "@/contexts/ThemeContext";
 import { useDate } from "@/hooks/common";
 import { usePhotoDetail } from "@/hooks/services/photos/usePhotos";
-import { formatBytes } from "@/utils/photo.utils";
+import { formatBytes, isDriveFolderUrl } from "@/utils/photo.utils";
 
 type PhotoInfoPanelProps = {
   photoId: string;
-  bottomOffset: number;
   onOpenAlbum?: (id: number, title: string) => void;
   onError: () => void;
 };
 
-const MUTED = "#ffffffa6";
-
+/** Content of the viewer's information dialog. Only what the backend actually knows is shown. */
 export const PhotoInfoPanel = ({
   photoId,
-  bottomOffset,
   onOpenAlbum,
   onError,
 }: PhotoInfoPanelProps) => {
   const { t } = useTranslation();
+  const { theme } = useTheme();
   const { formatDate } = useDate();
+  const { setOpen } = useDialog();
   const { data, isPending, isError, refetch } = usePhotoDetail(photoId);
-
-  const taken = data?.taken_at ? new Date(data.taken_at) : null;
-  const size = data ? formatBytes(data.size_bytes) : "";
-  const dimensions =
-    data && data.width > 0 && data.height > 0
-      ? `${data.width} × ${data.height}`
-      : "";
-  const album = data?.album ?? null;
-  const location = data
-    ? [data.album?.title, data.section].filter(Boolean).join(" › ")
-    : "";
 
   const open = (url: string) => {
     Linking.openURL(url).catch(onError);
   };
 
+  if (isPending) return <ActivityIndicator color={theme.primary} />;
+  if (isError || !data) {
+    return (
+      <Button
+        variant="secondary"
+        label={t("photos.viewer.infoError")}
+        onPress={() => refetch()}
+      />
+    );
+  }
+
+  const icon = (Icon: typeof Calendar) => (
+    <Icon size={20} color={theme.muted} />
+  );
+  const dimensions =
+    data.width > 0 && data.height > 0 ? `${data.width} × ${data.height}` : "";
+  const size = formatBytes(data.size_bytes);
+  const album = data.album;
+  const eventFolder = isDriveFolderUrl(album?.drive_url)
+    ? album.drive_url
+    : null;
+  const photoFolder = isDriveFolderUrl(data.folder_url)
+    ? data.folder_url
+    : null;
+
+  // A capture date only exists with EXIF or a date in the file name; otherwise the date shown is an approximation.
+  const when = data.taken_at
+    ? {
+        label: t("photos.viewer.captured"),
+        value:
+          formatDate(new Date(data.taken_at), "PPPp") +
+          (data.taken_at_source === "filename"
+            ? ` · ${t("photos.viewer.fromFileName")}`
+            : ""),
+      }
+    : {
+        label: t("photos.viewer.dateApprox"),
+        value: formatDate(new Date(data.sort_at), "PPP"),
+      };
+
+  const closeThen = (run: () => void) => () => {
+    setOpen(false);
+    run();
+  };
+
   return (
-    <View
-      accessibilityViewIsModal={false}
-      className="absolute left-3 right-3 rounded-3xl px-5 py-4 gap-3"
-      style={{ bottom: bottomOffset, backgroundColor: "rgba(24,24,24,0.96)" }}
-    >
-      {isPending && <ActivityIndicator color="#fff" />}
-      {isError && (
-        <Pressable
-          onPress={() => refetch()}
-          accessibilityRole="button"
-          className="py-2"
-        >
-          <Text style={{ color: "#fff" }}>{t("photos.viewer.infoError")}</Text>
-        </Pressable>
+    <View className="gap-4">
+      {album && (
+        <InfoItem
+          icon={icon(Tag)}
+          label={t("photos.viewer.event")}
+          value={album.title}
+        />
       )}
-      {data && (
-        <>
-          <Row icon={<ImageIcon size={18} color={MUTED} />} text={data.name} />
-          {(taken || data.sort_at) && (
-            <Row
-              icon={<Calendar size={18} color={MUTED} />}
-              text={formatDate(
-                taken ?? new Date(data.sort_at),
-                taken ? "Pp" : "PPP",
-              )}
-            />
-          )}
-          {(size || dimensions) && (
-            <Row
-              icon={<HardDrive size={18} color={MUTED} />}
-              text={[dimensions, size].filter(Boolean).join(" · ")}
-            />
-          )}
-          {location !== "" && (
-            <Row icon={<Folder size={18} color={MUTED} />} text={location} />
-          )}
-          <View className="flex-row flex-wrap gap-2 pt-1">
-            {album && onOpenAlbum && (
-              <PanelButton
-                icon={<Images size={16} color="#fff" />}
-                label={t("photos.viewer.viewAlbum")}
-                onPress={() => onOpenAlbum(album.id, album.title)}
-              />
-            )}
-            {/* The event's root folder, never "Sports" or "Autres". */}
-            {album && (
-              <PanelButton
-                icon={<FolderOpen size={16} color="#fff" />}
-                label={t("photos.viewer.openEventFolder")}
-                onPress={() => open(album.drive_url)}
-              />
-            )}
-            {data.folder_url !== "" && (
-              <PanelButton
-                icon={<Folder size={16} color="#fff" />}
-                label={t("photos.viewer.openFolder")}
-                onPress={() => open(data.folder_url)}
-              />
-            )}
-          </View>
-        </>
+      <InfoItem icon={icon(Calendar)} label={when.label} value={when.value} />
+      <InfoItem
+        icon={icon(FileIcon)}
+        label={t("photos.viewer.fileName")}
+        value={data.name}
+      />
+      {data.section !== "" && (
+        <InfoItem
+          icon={icon(Folder)}
+          label={t("photos.viewer.folder")}
+          value={data.section}
+        />
       )}
+      {(dimensions || size) && (
+        <InfoItem
+          icon={icon(HardDrive)}
+          label={t("photos.viewer.size")}
+          value={[dimensions, size].filter(Boolean).join(" · ")}
+        />
+      )}
+
+      <View className="gap-2 pt-1">
+        {album && onOpenAlbum && (
+          <Button
+            variant="secondary"
+            label={t("photos.viewer.viewAlbum")}
+            icon={<Images size={16} color="#000" />}
+            onPress={closeThen(() => onOpenAlbum(album.id, album.title))}
+          />
+        )}
+        {/* The event's root folder, never "Sports" or "Autres". */}
+        {eventFolder && (
+          <Button
+            variant="secondary"
+            label={t("photos.viewer.openEventFolder")}
+            icon={<FolderOpen size={16} color="#000" />}
+            onPress={() => open(eventFolder)}
+          />
+        )}
+        {photoFolder && photoFolder !== eventFolder && (
+          <Button
+            variant="secondary"
+            label={t("photos.viewer.openFolder")}
+            icon={<Folder size={16} color="#000" />}
+            onPress={() => open(photoFolder)}
+          />
+        )}
+      </View>
     </View>
   );
 };
-
-const Row = ({ icon, text }: { icon: React.ReactElement; text: string }) => (
-  <View className="flex-row items-center gap-3">
-    {icon}
-    <Text style={{ color: "#fff", flex: 1 }} numberOfLines={2}>
-      {text}
-    </Text>
-  </View>
-);
-
-const PanelButton = ({
-  icon,
-  label,
-  onPress,
-}: {
-  icon: React.ReactElement;
-  label: string;
-  onPress: () => void;
-}) => (
-  <Pressable
-    onPress={onPress}
-    accessibilityRole="button"
-    accessibilityLabel={label}
-    className="flex-row items-center gap-2 rounded-full px-4 py-2"
-    style={{ backgroundColor: "rgba(255,255,255,0.14)" }}
-  >
-    {icon}
-    <Text style={{ color: "#fff" }} variant="sm">
-      {label}
-    </Text>
-  </Pressable>
-);

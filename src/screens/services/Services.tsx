@@ -1,5 +1,7 @@
 import { useNavigation } from "expo-router/react-navigation";
+import { Play } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
+import { View } from "react-native";
 import Animated from "react-native-reanimated";
 import { Button } from "@/components/common/Button";
 import Image from "@/components/common/Image";
@@ -7,6 +9,7 @@ import LinkCard, { LinkCardLoading } from "@/components/custom/card/LinkCard";
 import { PreferenceCustomizationButton } from "@/components/custom/PreferenceCustomizationModal";
 import { Empty } from "@/components/page/Empty";
 import { Page } from "@/components/page/Page";
+import { useTheme } from "@/contexts/ThemeContext";
 import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
 import { useServicePreferences } from "@/hooks/services/usePreferences";
 import type { Preference } from "@/services/storage/preferences";
@@ -14,6 +17,7 @@ import type { AppNavigation } from "@/types";
 
 export const Services = () => {
   const { t } = useTranslation();
+  const { theme } = useTheme();
   const navigation = useNavigation<AppNavigation>();
   const { scrollHandler } = useAnimatedHeader();
   const {
@@ -34,7 +38,19 @@ export const Services = () => {
       title={item.name}
       description={item.description || ""}
       onPress={() => handleServicePress(item)}
-      image={<Image source={item.image} />}
+      image={
+        item.id === "games" ? (
+          // Same icon as the Games tab this service replaces.
+          <View
+            className="h-16 w-16 items-center justify-center rounded-lg"
+            style={{ backgroundColor: theme.border }}
+          >
+            <Play size={34} color={theme.primary} />
+          </View>
+        ) : (
+          <Image source={item.image} />
+        )
+      }
     />
   );
 

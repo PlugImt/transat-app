@@ -11,7 +11,7 @@ import { cn } from "@/utils";
 import { hapticFeedback } from "@/utils/haptics.utils";
 
 type ButtonVariant = "default" | "secondary" | "destructive" | "ghost" | "link";
-type ButtonSize = "default" | "sm" | "lg";
+type ButtonSize = "default" | "sm" | "lg" | "xl";
 
 const getButtonStyle = (variant: ButtonVariant, theme: ThemeType) => {
   const buttonStyles: {
@@ -67,6 +67,10 @@ const getSizeStyles = (size: ButtonSize) => {
     lg: {
       height: 48,
       paddingHorizontal: 16,
+    },
+    xl: {
+      height: 64,
+      paddingHorizontal: 24,
     },
   };
 

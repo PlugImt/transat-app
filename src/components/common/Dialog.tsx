@@ -20,8 +20,22 @@ interface DialogContextType {
 
 const DialogContext = createContext<DialogContextType | undefined>(undefined);
 
-const Dialog = ({ children }: { children: React.ReactNode }) => {
-  const [open, setOpen] = useState(false);
+const Dialog = ({
+  children,
+  open: controlledOpen,
+  onOpenChange,
+}: {
+  children: React.ReactNode;
+  /** Controlled mode: the caller owns the state (for dialogs opened from a menu rather than a trigger). */
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}) => {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const open = controlledOpen ?? internalOpen;
+  const setOpen = (value: boolean) => {
+    if (controlledOpen === undefined) setInternalOpen(value);
+    onOpenChange?.(value);
+  };
 
   return (
     <DialogContext.Provider value={{ open, setOpen }}>
@@ -52,6 +66,8 @@ type DialogContentProps = {
   disableConfirm?: boolean;
   scrollable?: boolean;
   contentMaxHeight?: number;
+  /** When false a tap on the backdrop does not close the dialog (a form must not be lost by accident). */
+  dismissible?: boolean;
 };
 
 const DialogContent = ({
@@ -66,6 +82,7 @@ const DialogContent = ({
   title,
   isPending,
   contentMaxHeight,
+  dismissible = true,
 }: DialogContentProps) => {
   const { open, setOpen } = useDialog();
 
@@ -88,7 +105,9 @@ const DialogContent = ({
     >
       <TouchableWithoutFeedback
         className="w-full h-full"
-        onPress={() => setOpen(false)}
+        onPress={() => {
+          if (dismissible) setOpen(false);
+        }}
       >
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}

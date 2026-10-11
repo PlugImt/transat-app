@@ -1,16 +1,26 @@
 import { Image as ExpoImage } from "expo-image";
+import { LinearGradient } from "expo-linear-gradient";
 import {
   Check,
   Download,
+  EllipsisVertical,
   ExternalLink,
+  Flag,
   Info,
+  Share as ShareIcon,
   TriangleAlert,
   X,
 } from "lucide-react-native";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  type ReactElement,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useTranslation } from "react-i18next";
 import {
-  ActivityIndicator,
   FlatList,
   Linking,
   Modal,
@@ -26,7 +36,10 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Button, IconButton } from "@/components/common/Button";
+import { Dialog, DialogContent } from "@/components/common/Dialog";
 import { Text } from "@/components/common/Text";
+import { useTheme } from "@/contexts/ThemeContext";
 import type { Photo } from "@/dto";
 import { useDate } from "@/hooks/common";
 import { usePhotoDetail } from "@/hooks/services/photos/usePhotos";
@@ -35,7 +48,9 @@ import {
   useSavePhoto,
 } from "@/hooks/services/photos/useSavePhoto";
 import { hapticFeedback } from "@/utils/haptics.utils";
+import { shareLink } from "@/utils/photo.utils";
 import { PhotoInfoPanel } from "./PhotoInfoPanel";
+import { ReportPhotoDialog } from "./ReportPhotoDialog";
 import { ZoomableImage } from "./ZoomableImage";
 
 const HI_RES_SIZE = 2560;
@@ -59,6 +74,7 @@ export const PhotoViewer = ({
   onOpenAlbum,
 }: PhotoViewerProps) => {
   const { t } = useTranslation();
+  const { theme } = useTheme();
   const { formatDate } = useDate();
   const { width, height } = useWindowDimensions();
   const insets = useSafeAreaInsets();
@@ -66,8 +82,12 @@ export const PhotoViewer = ({
   const [index, setIndex] = useState(startIndex);
   const [zoomed, setZoomed] = useState(false);
   const [chromeVisible, setChromeVisible] = useState(true);
+  const [notice, setNotice] = useState<"openFailed" | "shareFailed" | null>(
+    null,
+  );
+  const [menuOpen, setMenuOpen] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
-  const [openFailed, setOpenFailed] = useState(false);
+  const [reportOpen, setReportOpen] = useState(false);
   const [everZoomed, setEverZoomed] = useState<Record<string, boolean>>({});
 
   const backdrop = useSharedValue(1);
@@ -116,14 +136,6 @@ export const PhotoViewer = ({
     }
   }, []);
 
-  const handleClose = useCallback(() => {
-    if (infoOpen) {
-      setInfoOpen(false);
-      return;
-    }
-    onClose();
-  }, [infoOpen, onClose]);
-
   const backdropStyle = useAnimatedStyle(() => ({ opacity: backdrop.value }));
   const chromeStyle = useAnimatedStyle(() => ({
     opacity: chrome.value * backdrop.value,
@@ -131,8 +143,17 @@ export const PhotoViewer = ({
 
   const openInDrive = () => {
     if (!photo) return;
-    setOpenFailed(false);
-    Linking.openURL(photo.drive_url).catch(() => setOpenFailed(true));
+    setNotice(null);
+    Linking.openURL(photo.drive_url).catch(() => setNotice("openFailed"));
+  };
+
+  const handleShare = () => {
+    if (!photo) return;
+    setNotice(null);
+    shareLink(
+      photo.album_title ?? formatDate(new Date(photo.sort_at), "PPP"),
+      photo.drive_url,
+    ).catch(() => setNotice("shareFailed"));
   };
 
   const handleSave = () => {
@@ -143,8 +164,11 @@ export const PhotoViewer = ({
 
   if (!photo) return null;
 
-  const title = formatDate(new Date(photo.sort_at), "PPP");
-  const banner = openFailed ? "openFailed" : status;
+  // The event leads when there is one; without it the date stands alone, nothing is invented.
+  const dateLabel = formatDate(new Date(photo.sort_at), "PPP");
+  const headline = photo.album_title ?? dateLabel;
+  const subtitle = photo.album_title ? dateLabel : null;
+  const banner = notice ?? status;
 
   return (
     <Modal
@@ -152,7 +176,7 @@ export const PhotoViewer = ({
       transparent
       animationType="fade"
       statusBarTranslucent
-      onRequestClose={handleClose}
+      onRequestClose={onClose}
     >
       <GestureHandlerRootView style={{ flex: 1 }}>
         <Animated.View
@@ -185,7 +209,6 @@ export const PhotoViewer = ({
             if (next !== index) {
               setIndex(next);
               setZoomed(false);
-              setInfoOpen(false);
               reset();
             }
           }}
@@ -211,29 +234,153 @@ export const PhotoViewer = ({
           pointerEvents={chromeVisible ? "box-none" : "none"}
           style={[StyleSheet.absoluteFill, chromeStyle]}
         >
-          <View
-            className="flex-row items-center justify-between px-4"
-            style={{ paddingTop: insets.top + 8 }}
+          {menuOpen && (
+            <Pressable
+              style={StyleSheet.absoluteFill}
+              accessibilityLabel={t("photos.viewer.close")}
+              onPress={() => setMenuOpen(false)}
+            />
+          )}
+          <LinearGradient
+            colors={["rgba(0,0,0,0.7)", "rgba(0,0,0,0)"]}
+            pointerEvents="box-none"
+            style={{
+              paddingTop: insets.top + 8,
+              paddingBottom: 28,
+              paddingHorizontal: 16,
+            }}
           >
-            <RoundButton label={t("photos.viewer.close")} onPress={handleClose}>
-              <X size={22} color="#fff" />
-            </RoundButton>
-            <Text
-              style={{ color: "#fff" }}
-              variant="lg"
-              accessibilityRole="header"
+            <View
+              className="flex-row items-start gap-3"
+              pointerEvents="box-none"
             >
-              {title}
-            </Text>
-            <View style={{ width: 40 }} />
-          </View>
+              <IconButton
+                icon={<X size={24} color="#fff" />}
+                variant="link"
+                accessibilityLabel={t("photos.viewer.close")}
+                onPress={onClose}
+              />
+              <View
+                className="flex-1 items-center justify-center"
+                style={{ minHeight: 40 }}
+                pointerEvents="none"
+              >
+                <Text
+                  variant="lg"
+                  numberOfLines={2}
+                  accessibilityRole="header"
+                  style={[styles.headerText, { color: "#fff" }]}
+                >
+                  {headline}
+                </Text>
+                {subtitle && (
+                  <Text
+                    variant="sm"
+                    numberOfLines={1}
+                    style={[
+                      styles.headerText,
+                      { color: "rgba(255,255,255,0.85)" },
+                    ]}
+                  >
+                    {subtitle}
+                  </Text>
+                )}
+              </View>
+              {/* Same width as the close button so the title stays centred. */}
+              <IconButton
+                icon={<EllipsisVertical size={24} color="#fff" />}
+                variant="link"
+                accessibilityLabel={t("photos.viewer.more")}
+                onPress={() => setMenuOpen((open) => !open)}
+              />
+            </View>
+          </LinearGradient>
+
+          {menuOpen && (
+            <View
+              className="absolute right-4 overflow-hidden rounded-xl border-[1.5px]"
+              style={{
+                top: insets.top + 56,
+                backgroundColor: theme.card,
+                borderColor: theme.border,
+              }}
+            >
+              <MenuItem
+                icon={<Info size={18} color={theme.text} />}
+                label={t("photos.viewer.info")}
+                onPress={() => {
+                  setMenuOpen(false);
+                  setInfoOpen(true);
+                }}
+              />
+              <MenuItem
+                icon={<ExternalLink size={18} color={theme.text} />}
+                label={t("photos.viewer.openInDrive")}
+                onPress={() => {
+                  setMenuOpen(false);
+                  openInDrive();
+                }}
+              />
+              <MenuItem
+                icon={<Flag size={18} color={theme.text} />}
+                label={t("photos.viewer.report.action")}
+                onPress={() => {
+                  setMenuOpen(false);
+                  setReportOpen(true);
+                }}
+              />
+            </View>
+          )}
 
           <View className="flex-1" pointerEvents="box-none" />
 
-          {infoOpen && (
+          {banner !== "idle" && banner !== "saving" && (
+            <Banner
+              kind={banner}
+              onOpenDrive={openInDrive}
+              onDismiss={() => {
+                setNotice(null);
+                reset();
+              }}
+              top={insets.top + 96}
+            />
+          )}
+
+          <View
+            className="flex-row items-center gap-3 self-center rounded-2xl px-3 py-3"
+            style={{
+              marginBottom: insets.bottom + 16,
+              width: Math.min(width - 32, 420),
+              backgroundColor: "rgba(0,0,0,0.5)",
+            }}
+          >
+            <Button
+              variant="ghost"
+              label={t("photos.selection.download")}
+              icon={<Download />}
+              isUpdating={status === "saving"}
+              accessibilityLabel={t("photos.viewer.save")}
+              onPress={handleSave}
+              className="flex-1"
+            />
+            <IconButton
+              icon={<ShareIcon />}
+              variant="ghost"
+              accessibilityLabel={t("photos.viewer.share")}
+              onPress={handleShare}
+            />
+          </View>
+        </Animated.View>
+
+        <Dialog open={infoOpen} onOpenChange={setInfoOpen}>
+          <DialogContent
+            title={t("photos.viewer.info")}
+            cancelLabel={t("photos.viewer.close")}
+            contentMaxHeight={420}
+            scrollable
+          >
             <PhotoInfoPanel
               photoId={photo.id}
-              bottomOffset={insets.bottom + 84}
               onOpenAlbum={
                 onOpenAlbum
                   ? (id, albumTitle) => {
@@ -242,110 +389,50 @@ export const PhotoViewer = ({
                     }
                   : undefined
               }
-              onError={() => setOpenFailed(true)}
+              onError={() => setNotice("openFailed")}
             />
-          )}
-
-          {banner !== "idle" && banner !== "saving" && (
-            <Banner
-              kind={banner}
-              onOpenDrive={openInDrive}
-              onDismiss={() => {
-                setOpenFailed(false);
-                reset();
-              }}
-              top={insets.top + 64}
-            />
-          )}
-
-          <View
-            className="flex-row items-center justify-around px-6"
-            style={{ paddingBottom: insets.bottom + 16, paddingTop: 12 }}
-          >
-            <ActionButton
-              label={t("photos.viewer.save")}
-              onPress={handleSave}
-              busy={status === "saving"}
-              icon={<Download size={22} color="#fff" />}
-            />
-            <ActionButton
-              label={t("photos.viewer.openInDrive")}
-              onPress={openInDrive}
-              icon={<ExternalLink size={22} color="#fff" />}
-            />
-            <ActionButton
-              label={t("photos.viewer.info")}
-              onPress={() => setInfoOpen((open) => !open)}
-              active={infoOpen}
-              icon={<Info size={22} color="#fff" />}
-            />
-          </View>
-        </Animated.View>
+          </DialogContent>
+        </Dialog>
+        <ReportPhotoDialog
+          photoId={photo.id}
+          open={reportOpen}
+          onOpenChange={setReportOpen}
+        />
       </GestureHandlerRootView>
     </Modal>
   );
 };
 
-const RoundButton = ({
-  label,
-  onPress,
-  children,
-}: {
-  label: string;
-  onPress: () => void;
-  children: React.ReactElement;
-}) => (
-  <Pressable
-    onPress={onPress}
-    accessibilityRole="button"
-    accessibilityLabel={label}
-    hitSlop={8}
-    className="h-10 w-10 items-center justify-center rounded-full"
-    style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
-  >
-    {children}
-  </Pressable>
-);
+const styles = StyleSheet.create({
+  // Legible over bright photos as well as dark ones.
+  headerText: {
+    textAlign: "center",
+    textShadowColor: "rgba(0,0,0,0.6)",
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 4,
+  },
+});
 
-const ActionButton = ({
-  label,
-  onPress,
+type BannerKind = "saved" | "openFailed" | "shareFailed" | SaveError;
+
+const MenuItem = ({
   icon,
-  busy,
-  active,
+  label,
+  onPress,
 }: {
+  icon: ReactElement;
   label: string;
   onPress: () => void;
-  icon: React.ReactElement;
-  busy?: boolean;
-  active?: boolean;
 }) => (
   <Pressable
     onPress={onPress}
-    disabled={busy}
-    accessibilityRole="button"
-    accessibilityLabel={label}
-    accessibilityState={{ busy, selected: active }}
-    className="items-center gap-1 px-3 py-1"
-    style={{ opacity: busy ? 0.7 : 1 }}
+    accessibilityRole="menuitem"
+    className="min-w-[200px] flex-row items-center gap-3 px-4 py-3"
   >
-    <View
-      className="h-11 w-11 items-center justify-center rounded-full"
-      style={{
-        backgroundColor: active
-          ? "rgba(255,255,255,0.28)"
-          : "rgba(255,255,255,0.14)",
-      }}
-    >
-      {busy ? <ActivityIndicator color="#fff" /> : icon}
-    </View>
-    <Text style={{ color: "#fff" }} variant="sm">
-      {label}
-    </Text>
+    {icon}
+    <Text>{label}</Text>
   </Pressable>
 );
-
-type BannerKind = "saved" | "openFailed" | SaveError;
 
 const Banner = ({
   kind,

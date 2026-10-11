@@ -9,6 +9,7 @@ import {
   View,
 } from "react-native";
 import Animated from "react-native-reanimated";
+import { Tabs, TabsList, TabsTrigger } from "@/components/common/Tabs";
 import { Text } from "@/components/common/Text";
 import { Empty } from "@/components/page/Empty";
 import { ErrorPage } from "@/components/page/ErrorPage";
@@ -16,35 +17,45 @@ import { Page } from "@/components/page/Page";
 import { getIsRefetching } from "@/components/query";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { PhotoAlbum } from "@/dto";
+import { usePhotoSelection } from "@/hooks/services/photos/usePhotoSelection";
 import { usePhotoAlbums, usePhotos } from "@/hooks/services/photos/usePhotos";
 import type { AppNavigation } from "@/types";
 import { AlbumCard } from "./components/AlbumCard";
 import { PhotoGrid } from "./components/PhotoGrid";
-import {
-  type PhotosTab,
-  PhotosTabSwitcher,
-} from "./components/PhotosTabSwitcher";
+import { PhotoLayoutMenu } from "./components/PhotoLayoutMenu";
+import { PhotoSelectionBar } from "./components/PhotoSelectionBar";
 import {
   type AlbumListRow,
   albumColumnsFor,
   buildAlbumRows,
 } from "./photos.utils";
 
+type PhotosTab = "gallery" | "albums";
+
 export const Photos = () => {
+  const { t } = useTranslation();
   const [tab, setTab] = useState<PhotosTab>("gallery");
   const [albumsOpened, setAlbumsOpened] = useState(false);
 
-  const switchTab = (next: PhotosTab) => {
+  const switchTab = (next: string) => {
     if (next === "albums") setAlbumsOpened(true);
-    setTab(next);
+    setTab(next as PhotosTab);
   };
-  const switcher = <PhotosTabSwitcher value={tab} onChange={switchTab} />;
+  // Same Tabs as the reservation screens; the page padding is 0 here, so the list gets the default px-5.
+  const switcher = (
+    <Tabs value={tab} onValueChange={switchTab}>
+      <TabsList className="grid grid-cols-2 w-full px-5 pb-4">
+        <TabsTrigger value="gallery" title={t("photos.tabs.gallery")} />
+        <TabsTrigger value="albums" title={t("photos.tabs.albums")} />
+      </TabsList>
+    </Tabs>
+  );
 
   // Both views stay mounted once opened: switching back keeps the scroll position and the loaded pages.
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1, display: tab === "gallery" ? "flex" : "none" }}>
-        <PhotoGallery header={switcher} />
+        <PhotoGallery header={switcher} active={tab === "gallery"} />
       </View>
       {albumsOpened && (
         <View style={{ flex: 1, display: tab === "albums" ? "flex" : "none" }}>
@@ -71,9 +82,16 @@ const useRefresh = (refresh: () => Promise<unknown>) => {
   return { refreshing, onRefresh };
 };
 
-const PhotoGallery = ({ header }: { header: React.ReactElement }) => {
+const PhotoGallery = ({
+  header,
+  active,
+}: {
+  header: React.ReactElement;
+  active: boolean;
+}) => {
   const { t } = useTranslation();
   const navigation = useNavigation<AppNavigation>();
+  const { store, onLimit } = usePhotoSelection();
   const query = usePhotos();
   const { refreshing, onRefresh } = useRefresh(query.refresh);
 
@@ -100,28 +118,35 @@ const PhotoGallery = ({ header }: { header: React.ReactElement }) => {
   }
 
   return (
-    <Page
-      title={t("photos.title")}
-      className="gap-0 px-0"
-      onRefresh={onRefresh}
-      refreshing={refreshing}
-      asChildren
-    >
-      <PhotoGrid
-        photos={query.photos}
-        groupByDay
-        header={header}
-        loading={query.isPending}
-        fetchingMore={query.isFetchingNextPage}
-        loadMoreFailed={query.isFetchNextPageError}
-        onLoadMore={loadMore}
-        onRetryMore={() => query.fetchNextPage()}
-        onOpenAlbum={(id, title) =>
-          navigation.navigate("AlbumDetails", { id, title })
-        }
-        empty={<Empty icon={<Images />} title={t("photos.empty")} />}
-      />
-    </Page>
+    <View style={{ flex: 1 }}>
+      <Page
+        title={t("photos.title")}
+        className="gap-0 px-0"
+        onRefresh={onRefresh}
+        refreshing={refreshing}
+        header={<PhotoLayoutMenu />}
+        asChildren
+      >
+        <PhotoGrid
+          selection={store}
+          onSelectionLimit={onLimit}
+          photos={query.photos}
+          grouping="event"
+          header={header}
+          hasMore={query.hasNextPage}
+          loading={query.isPending}
+          fetchingMore={query.isFetchingNextPage}
+          loadMoreFailed={query.isFetchNextPageError}
+          onLoadMore={loadMore}
+          onRetryMore={() => query.fetchNextPage()}
+          onOpenAlbum={(id, title) =>
+            navigation.navigate("AlbumDetails", { id, title })
+          }
+          empty={<Empty icon={<Images />} title={t("photos.empty")} />}
+        />
+      </Page>
+      <PhotoSelectionBar store={store} active={active} />
+    </View>
   );
 };
 

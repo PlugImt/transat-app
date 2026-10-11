@@ -219,7 +219,10 @@
       "toggleEvents": "Ser notificado quando um novo evento for criado",
       "eventReminders": "Lembretes de eventos",
       "toggleEventReminders": "Ser notificado uma hora antes dos eventos em que participa ou dos seus clubes",
-      "toggleReservations": "Ser notificado sobre as suas reservas"
+      "toggleReservations": "Ser notificado sobre as suas reservas",
+      "togglePhotos": "Receber uma notificação quando houver um novo álbum de evento",
+      "permissionOff": "As notificações estão desativadas para o Transat neste telemóvel. Ative-as nas definições do telemóvel para as receber; a escolha acima não é alterada.",
+      "openSystemSettings": "Abrir definições do telemóvel"
     },
     "hapticFeedback": {
       "title": "Retroalimentação tátil",
@@ -650,11 +653,85 @@
       "seconds": "seg"
     }
   },
+  "games": {
+    "title": "Jogos",
+    "description": "Os jogos da app, a começar pela Baía",
+    "bassine": {
+      "title": "Baía",
+      "description": "Quando uma cerveja é servida, a baía enche pouco a pouco, e quando está cheia você pode pedir para encher seu copo com\n\nPara cada copo cheio, atualize seu contador para ser o rei da baía 👑",
+      "location": "Na MDE durante as festas",
+      "price": "Gratuito",
+      "seeLeaderboard": "Ver classificação",
+      "leaderboard": {
+        "title": "Classificação",
+        "score": "Pontuação",
+        "history": {
+          "title": "Histórico",
+          "emptyHistory": "Ninguém pegou uma baía ainda",
+          "emptyHistoryDescription": "Adicione suas baías ao contador para vê-las aparecer aqui"
+        },
+        "firstPlaceLead_zero": "está empatado",
+        "firstPlaceLead_one": "está logo atrás de você",
+        "firstPlaceLeader_few": "está a apenas {{count}} baías atrás de você",
+        "firstPlaceLead_other": "está {{count}} baías atrás de você",
+        "followingPlace_zero": "está empatado",
+        "followingPlace_one": "está logo à frente de você",
+        "followingPlace_few": "está a apenas {{count}} baías à sua frente",
+        "followingPlace_other": "está {{count}} baías à sua frente",
+        "tookBassine_one": "tomou {{count}} baía",
+        "tookBassine_other": "tomou {{count}} baías"
+      }
+    }
+  },
   "photos": {
     "title": "Fotos",
     "tabs": {
       "gallery": "Galeria",
       "albums": "Álbuns"
+    },
+    "selection": {
+      "select": "Selecionar",
+      "hint": "Os originais são guardados na sua biblioteca",
+      "count_one": "{{count}} selecionada",
+      "count_other": "{{count}} selecionadas",
+      "saving": "A guardar {{done}}/{{total}}…",
+      "close": "Cancelar seleção",
+      "download": "Transferir",
+      "downloadCount_one": "Transferir {{count}} foto",
+      "downloadCount_other": "Transferir {{count}} fotos",
+      "retry": "Tentar novamente",
+      "busy": "Já existe uma transferência em curso.",
+      "limit": "Pode selecionar até {{count}} fotos de cada vez.",
+      "saved_one": "{{count}} foto guardada na sua biblioteca.",
+      "saved_other": "{{count}} fotos guardadas na sua biblioteca.",
+      "partial": "{{saved}} guardadas, {{failed}} com falha. As fotos com falha continuam selecionadas.",
+      "failedAll_one": "Não foi possível guardar a foto.",
+      "failedAll_other": "Não foi possível guardar nenhuma das {{count}} fotos.",
+      "failedCount_one": "{{count}} com falha",
+      "failedCount_other": "{{count}} com falha",
+      "cancelled_one": "Cancelado. {{count}} foto guardada.",
+      "cancelled_other": "Cancelado. {{count}} fotos guardadas.",
+      "reason": {
+        "permission": "Permita o acesso à sua biblioteca",
+        "permissionBlocked": "Acesso negado: abra as Definições",
+        "unsupported": "Formato não guardável (RAW)",
+        "tooLarge": "Ficheiro demasiado grande",
+        "incomplete": "Transferência incompleta",
+        "missing": "Foto já não disponível",
+        "storage": "Espaço de armazenamento insuficiente",
+        "network": "Erro de rede",
+        "unknown": "Ocorreu um erro"
+      }
+    },
+    "albumUnavailable": "Este álbum já não está disponível",
+    "albumUnavailableHint": "Pode ter sido removido ou ainda não estar publicado.",
+    "backToPhotos": "Voltar às Fotos",
+    "share": "Partilhar álbum",
+    "layout": {
+      "title": "Visualização em grelha",
+      "compact": "Compacta",
+      "standard": "Padrão",
+      "mosaic": "Mosaico"
     },
     "empty": "Ainda não há fotos",
     "emptyAlbums": "Ainda não há álbuns",
@@ -674,6 +751,45 @@
       "video": "Vídeo de {{date}}. Abre o Google Drive."
     },
     "viewer": {
+      "more": "Mais opções",
+      "share": "Partilhar foto",
+      "report": {
+        "action": "Denunciar foto",
+        "title": "Denunciar esta foto",
+        "intro": "Denunciar não apaga nem oculta a foto: pede aos responsáveis que a analisem.",
+        "reasonLabel": "Motivo",
+        "reasons": {
+          "appears_in_photo": "Remover esta foto porque apareço nela",
+          "inappropriate": "Conteúdo inapropriado ou NSFW",
+          "poor_quality": "Foto de má qualidade ou inutilizável",
+          "other": "Outro"
+        },
+        "commentLabel": "Comentário (opcional)",
+        "commentLabelRequired": "Comentário (obrigatório)",
+        "commentRequired": "Descreva o problema para enviar a denúncia.",
+        "commentPlaceholder": "Descreva o problema",
+        "commentHint": "Quanto mais detalhes der, mais fácil será para os responsáveis analisar a denúncia.",
+        "privacy": "O seu nome e o seu e-mail são partilhados com as pessoas que analisam a denúncia.",
+        "counter": "{{count}}/{{max}}",
+        "submit": "Enviar denúncia",
+        "chooseReason": "Escolha um motivo para enviar a denúncia.",
+        "successTitle": "Denúncia enviada",
+        "successBody": "Obrigado. Os responsáveis vão analisar esta foto. Ela continua visível até decidirem.",
+        "errors": {
+          "rateLimited": "Enviou demasiadas denúncias. Tente novamente mais tarde.",
+          "photoGone": "Esta foto já não está disponível.",
+          "invalid": "A denúncia é inválida. Verifique o motivo e o comentário.",
+          "network": "Não foi possível ligar. Verifique a rede e tente novamente.",
+          "unknown": "Não foi possível enviar a denúncia. Tente novamente."
+        }
+      },
+      "event": "Evento",
+      "folder": "Pasta",
+      "fileName": "Nome do ficheiro",
+      "captured": "Captada",
+      "fromFileName": "do nome do ficheiro",
+      "dateApprox": "Data (aproximada)",
+      "size": "Tamanho",
       "close": "Fechar",
       "save": "Guardar",
       "openInDrive": "Abrir no Drive",
@@ -684,6 +800,9 @@
       "openFolder": "Pasta da foto",
       "openSettings": "Definições",
       "status": {
+        "shareFailed": "A partilha falhou.",
+        "missing": "Esta foto já não está disponível.",
+        "storage": "Espaço insuficiente no seu dispositivo.",
         "saved": "Foto guardada na sua biblioteca.",
         "openFailed": "Não foi possível abrir o Google Drive.",
         "permission": "Permita o acesso à biblioteca para guardar a foto.",

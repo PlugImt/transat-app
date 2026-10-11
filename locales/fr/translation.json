@@ -219,7 +219,10 @@
       "toggleEvents": "Être notifié lorsqu'un nouvel événement est créé",
       "eventReminders": "Rappels d'événements",
       "toggleEventReminders": "Être notifié une heure avant les événements auxquels vous participez ou de vos clubs",
-      "toggleReservations": "Être notifié à propos de vos réservations"
+      "toggleReservations": "Être notifié à propos de vos réservations",
+      "togglePhotos": "Être notifié quand un nouvel album d'événement est disponible",
+      "permissionOff": "Les notifications sont désactivées pour Transat sur ce téléphone. Activez-les dans les réglages du téléphone pour recevoir celles-ci ; le choix ci-dessus n'est pas modifié.",
+      "openSystemSettings": "Ouvrir les réglages du téléphone"
     },
     "hapticFeedback": {
       "title": "Retour haptique",
@@ -658,11 +661,85 @@
       }
     }
   },
+  "games": {
+    "title": "Jeux",
+    "description": "Les jeux de l'appli, à commencer par la Bassine",
+    "bassine": {
+      "title": "Bassine",
+      "description": "Lorsqu'une bière est servie la bassine se remplie petit à petit, et lorsqu'elle est pleine vous pouvez demander de remplir votre verre avec\n\nÀ chaque verre rempli, mettez à jour votre compteur pour être le roi de la bassine 👑",
+      "location": "À la MDE pendant les soirées",
+      "price": "Gratuit",
+      "seeLeaderboard": "Voir le classement",
+      "leaderboard": {
+        "title": "Classement",
+        "score": "Score",
+        "history": {
+          "title": "Historique",
+          "emptyHistory": "Personne n'a encore pris de bassine",
+          "emptyHistoryDescription": "Ajoute tes bassines au compteur pour les voir apparaître ici"
+        },
+        "firstPlaceLead_zero": "est à égalité",
+        "firstPlaceLead_one": "est juste derrière vous",
+        "firstPlaceLeader_few": "n'est qu'à {{count}} bassines derrière vous",
+        "firstPlaceLead_other": "est {{count}} bassines derrière vous",
+        "followingPlace_zero": "est à égalité",
+        "followingPlace_one": "est juste devant",
+        "followingPlace_few": "n'est qu'à {{count}} bassines devant vous",
+        "followingPlace_other": "est {{count}} bassines devant vous",
+        "tookBassine_one": "a pris {{count}} bassine",
+        "tookBassine_other": "a pris {{count}} bassines"
+      }
+    }
+  },
   "photos": {
     "title": "Photos",
     "tabs": {
       "gallery": "Galerie",
       "albums": "Albums"
+    },
+    "selection": {
+      "select": "Sélectionner",
+      "hint": "Les originaux sont enregistrés dans votre photothèque",
+      "count_one": "{{count}} sélectionnée",
+      "count_other": "{{count}} sélectionnées",
+      "saving": "Enregistrement {{done}}/{{total}}…",
+      "close": "Annuler la sélection",
+      "download": "Télécharger",
+      "downloadCount_one": "Télécharger {{count}} photo",
+      "downloadCount_other": "Télécharger {{count}} photos",
+      "retry": "Réessayer",
+      "busy": "Un téléchargement est déjà en cours.",
+      "limit": "Vous pouvez sélectionner jusqu'à {{count}} photos à la fois.",
+      "saved_one": "{{count}} photo enregistrée dans votre photothèque.",
+      "saved_other": "{{count}} photos enregistrées dans votre photothèque.",
+      "partial": "{{saved}} enregistrées, {{failed}} en échec. Les photos en échec restent sélectionnées.",
+      "failedAll_one": "La photo n'a pas pu être enregistrée.",
+      "failedAll_other": "Aucune des {{count}} photos n'a pu être enregistrée.",
+      "failedCount_one": "{{count}} en échec",
+      "failedCount_other": "{{count}} en échec",
+      "cancelled_one": "Annulé. {{count}} photo enregistrée.",
+      "cancelled_other": "Annulé. {{count}} photos enregistrées.",
+      "reason": {
+        "permission": "Autorisez l'accès à votre photothèque",
+        "permissionBlocked": "Accès refusé : ouvrez les Réglages",
+        "unsupported": "Format non enregistrable (RAW)",
+        "tooLarge": "Fichier trop volumineux",
+        "incomplete": "Téléchargement incomplet",
+        "missing": "Photo plus disponible",
+        "storage": "Espace de stockage insuffisant",
+        "network": "Erreur réseau",
+        "unknown": "Une erreur est survenue"
+      }
+    },
+    "albumUnavailable": "Cet album n'est plus disponible",
+    "albumUnavailableHint": "Il a peut-être été supprimé ou n'est pas encore publié.",
+    "backToPhotos": "Retour aux photos",
+    "share": "Partager l'album",
+    "layout": {
+      "title": "Affichage",
+      "compact": "Compact",
+      "standard": "Standard",
+      "mosaic": "Mosaïque"
     },
     "empty": "Aucune photo pour le moment",
     "emptyAlbums": "Aucun album pour le moment",
@@ -682,6 +759,45 @@
       "video": "Vidéo du {{date}}. Ouvre Google Drive."
     },
     "viewer": {
+      "more": "Plus d'options",
+      "share": "Partager la photo",
+      "report": {
+        "action": "Signaler la photo",
+        "title": "Signaler cette photo",
+        "intro": "Un signalement ne supprime ni ne masque la photo : il demande une vérification par les responsables.",
+        "reasonLabel": "Motif",
+        "reasons": {
+          "appears_in_photo": "Retirer cette photo car j'apparais dessus",
+          "inappropriate": "Contenu inapproprié ou NSFW",
+          "poor_quality": "Photo de mauvaise qualité ou inutilisable",
+          "other": "Autre"
+        },
+        "commentLabel": "Commentaire (facultatif)",
+        "commentLabelRequired": "Commentaire (obligatoire)",
+        "commentRequired": "Expliquez le problème pour envoyer le signalement.",
+        "commentPlaceholder": "Précisez le problème",
+        "commentHint": "Plus vous donnez de détails, plus les responsables pourront examiner le signalement facilement.",
+        "privacy": "Votre nom et votre adresse e-mail sont transmis aux personnes qui examinent le signalement.",
+        "counter": "{{count}}/{{max}}",
+        "submit": "Envoyer le signalement",
+        "chooseReason": "Choisissez un motif pour envoyer le signalement.",
+        "successTitle": "Signalement envoyé",
+        "successBody": "Merci. Les responsables vont examiner cette photo. Elle reste visible en attendant leur décision.",
+        "errors": {
+          "rateLimited": "Vous avez envoyé trop de signalements. Réessayez plus tard.",
+          "photoGone": "Cette photo n'est plus disponible.",
+          "invalid": "Le signalement est invalide. Vérifiez le motif et le commentaire.",
+          "network": "Connexion impossible. Vérifiez votre réseau et réessayez.",
+          "unknown": "Le signalement n'a pas pu être envoyé. Réessayez."
+        }
+      },
+      "event": "Événement",
+      "folder": "Dossier",
+      "fileName": "Nom du fichier",
+      "captured": "Prise de vue",
+      "fromFileName": "d'après le nom du fichier",
+      "dateApprox": "Date (approximative)",
+      "size": "Taille",
       "close": "Fermer",
       "save": "Enregistrer",
       "openInDrive": "Ouvrir dans Drive",
@@ -692,6 +808,9 @@
       "openFolder": "Dossier de la photo",
       "openSettings": "Réglages",
       "status": {
+        "shareFailed": "Le partage a échoué.",
+        "missing": "Cette photo n'est plus disponible.",
+        "storage": "Espace de stockage insuffisant sur votre appareil.",
         "saved": "Photo enregistrée dans votre photothèque.",
         "openFailed": "Impossible d'ouvrir Google Drive.",
         "permission": "Autorisez l'accès à la photothèque pour enregistrer la photo.",

@@ -42,6 +42,16 @@ export const servicesRoute = <S extends ScreenName>(
   params: (args as [object?])[0],
 });
 
+/** Route inside the Photos stack. */
+export const photosRoute = <S extends ScreenName>(
+  screen: S,
+  ...args: ScreenArgs<S>
+): RouteTarget => ({
+  tab: "PhotosScreen",
+  screen,
+  params: (args as [object?])[0],
+});
+
 /**
  * Params for `navigate("Navbar", ...)`. `initial: false` keeps the stack's root
  * screen underneath so "back" leaves the opened page instead of exiting the tab.

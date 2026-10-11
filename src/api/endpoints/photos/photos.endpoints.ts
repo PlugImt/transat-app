@@ -1,6 +1,7 @@
 import { API_ROUTES } from "@/api/common";
 import { Method } from "@/api/enums";
 import { apiRequest } from "@/api/helpers";
+import type { PhotoReportReason } from "@/constants";
 import type {
   PhotoAlbum,
   PhotoAlbumsPage,
@@ -51,5 +52,24 @@ export const getPhoto = async (id: string) => {
   return await apiRequest<PhotoDetail>(
     API_ROUTES.photosDetail.replace(":id", id),
     Method.GET,
+  );
+};
+
+export type PhotoReportInput = {
+  photoId: string;
+  reason: PhotoReportReason;
+  comment: string;
+};
+
+/** The reporter, the club and the recipients are worked out by the backend: only these three are sent. */
+export const reportPhoto = async ({
+  photoId,
+  reason,
+  comment,
+}: PhotoReportInput) => {
+  return await apiRequest<{ id: number; duplicate: boolean }>(
+    API_ROUTES.photosReports,
+    Method.POST,
+    { photo_id: photoId, reason, comment },
   );
 };

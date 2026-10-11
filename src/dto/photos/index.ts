@@ -7,6 +7,8 @@ export type Photo = {
   height: number;
   sort_at: string;
   album_id: number | null;
+  /** The event's name, from the same album as `album_id`: null when the photo has no published event. */
+  album_title: string | null;
   /** Null when Drive has no thumbnail for the file: show a placeholder. */
   thumbnail_url: string | null;
   thumbnail_fallback_url: string | null;

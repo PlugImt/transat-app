@@ -219,7 +219,10 @@
       "toggleEvents": "Be notified when a new event is created",
       "eventReminders": "Event reminders",
       "toggleEventReminders": "Be notified one hour before events you attend or from your clubs",
-      "toggleReservations": "Be notified about your reservations"
+      "toggleReservations": "Be notified about your reservations",
+      "togglePhotos": "Be notified when a new event album is available",
+      "permissionOff": "Notifications are turned off for Transat on this phone. Turn them on in your phone settings to receive these; the choice above is not changed.",
+      "openSystemSettings": "Open phone settings"
     },
     "hapticFeedback": {
       "title": "Haptic Feedback",
@@ -658,11 +661,85 @@
       "seconds": "sec"
     }
   },
+  "games": {
+    "title": "Games",
+    "description": "The app's games, starting with the Basin",
+    "bassine": {
+      "title": "Basin",
+      "description": "When a beer is served, the basin fills little by little, and when it's full you can ask to fill your glass with\n\nFor each glass filled, update your counter to be the king of the basin 👑",
+      "location": "At the MDE during parties",
+      "price": "Free",
+      "seeLeaderboard": "See leaderboard",
+      "leaderboard": {
+        "title": "Leaderboard",
+        "score": "Score",
+        "history": {
+          "title": "History",
+          "emptyHistory": "Nobody has taken a basin yet",
+          "emptyHistoryDescription": "Add your basins to the counter to see them appear here"
+        },
+        "firstPlaceLead_zero": "is tied",
+        "firstPlaceLead_one": "is just behind you",
+        "firstPlaceLeader_few": "is only {{count}} basins behind you",
+        "firstPlaceLead_other": "is {{count}} basins behind you",
+        "followingPlace_zero": "is tied",
+        "followingPlace_one": "is just ahead",
+        "followingPlace_few": "is only {{count}} basins ahead of you",
+        "followingPlace_other": "is {{count}} basins ahead of you",
+        "tookBassine_one": "took {{count}} basin",
+        "tookBassine_other": "took {{count}} basins"
+      }
+    }
+  },
   "photos": {
     "title": "Photos",
     "tabs": {
       "gallery": "Gallery",
       "albums": "Albums"
+    },
+    "selection": {
+      "select": "Select",
+      "hint": "Originals are saved to your library",
+      "count_one": "{{count}} selected",
+      "count_other": "{{count}} selected",
+      "saving": "Saving {{done}}/{{total}}…",
+      "close": "Cancel selection",
+      "download": "Download",
+      "downloadCount_one": "Download {{count}} picture",
+      "downloadCount_other": "Download {{count}} pictures",
+      "retry": "Retry",
+      "busy": "A download is already in progress.",
+      "limit": "You can select up to {{count}} photos at a time.",
+      "saved_one": "{{count}} photo saved to your library.",
+      "saved_other": "{{count}} photos saved to your library.",
+      "partial": "{{saved}} saved, {{failed}} failed. Failed photos stay selected.",
+      "failedAll_one": "The photo couldn't be saved.",
+      "failedAll_other": "None of the {{count}} photos could be saved.",
+      "failedCount_one": "{{count}} failed",
+      "failedCount_other": "{{count}} failed",
+      "cancelled_one": "Cancelled. {{count}} photo saved.",
+      "cancelled_other": "Cancelled. {{count}} photos saved.",
+      "reason": {
+        "permission": "Allow access to your photo library",
+        "permissionBlocked": "Library access denied: open Settings",
+        "unsupported": "Format can't be saved (RAW)",
+        "tooLarge": "File too large",
+        "incomplete": "Download incomplete",
+        "missing": "Photo no longer available",
+        "storage": "Not enough storage space",
+        "network": "Network error",
+        "unknown": "Something went wrong"
+      }
+    },
+    "albumUnavailable": "This album is no longer available",
+    "albumUnavailableHint": "It may have been removed or is not published yet.",
+    "backToPhotos": "Back to Photos",
+    "share": "Share album",
+    "layout": {
+      "title": "Grid layout",
+      "compact": "Compact",
+      "standard": "Standard",
+      "mosaic": "Mosaic"
     },
     "empty": "No photos yet",
     "emptyAlbums": "No albums yet",
@@ -682,6 +759,45 @@
       "video": "Video from {{date}}. Opens Google Drive."
     },
     "viewer": {
+      "more": "More options",
+      "share": "Share photo",
+      "report": {
+        "action": "Report photo",
+        "title": "Report this photo",
+        "intro": "Reporting does not delete or hide the photo: it asks the people in charge to review it.",
+        "reasonLabel": "Reason",
+        "reasons": {
+          "appears_in_photo": "Remove this photo because I appear in it",
+          "inappropriate": "Inappropriate or NSFW content",
+          "poor_quality": "Poor-quality or unusable photo",
+          "other": "Other"
+        },
+        "commentLabel": "Comment (optional)",
+        "commentLabelRequired": "Comment (required)",
+        "commentRequired": "Describe the problem to send the report.",
+        "commentPlaceholder": "Describe the problem",
+        "commentHint": "The more detail you give, the easier it is for the people in charge to review your report.",
+        "privacy": "Your name and email address are shared with the people who review the report.",
+        "counter": "{{count}}/{{max}}",
+        "submit": "Send report",
+        "chooseReason": "Choose a reason to send the report.",
+        "successTitle": "Report sent",
+        "successBody": "Thank you. The people in charge will review this photo. It stays visible until they decide.",
+        "errors": {
+          "rateLimited": "You have sent too many reports. Try again later.",
+          "photoGone": "This photo is no longer available.",
+          "invalid": "The report is invalid. Check the reason and the comment.",
+          "network": "Unable to connect. Check your network and try again.",
+          "unknown": "The report could not be sent. Try again."
+        }
+      },
+      "event": "Event",
+      "folder": "Folder",
+      "fileName": "File name",
+      "captured": "Captured",
+      "fromFileName": "from file name",
+      "dateApprox": "Date (approximate)",
+      "size": "Size",
       "close": "Close",
       "save": "Save",
       "openInDrive": "Open in Drive",
@@ -692,6 +808,9 @@
       "openFolder": "Photo's folder",
       "openSettings": "Settings",
       "status": {
+        "shareFailed": "Sharing failed.",
+        "missing": "This photo is no longer available.",
+        "storage": "Not enough storage space on your device.",
         "saved": "Photo saved to your library.",
         "openFailed": "Couldn't open Google Drive.",
         "permission": "Allow photo library access to save the photo.",

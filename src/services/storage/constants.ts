@@ -6,6 +6,7 @@ export const STORAGE_KEYS = {
   THEME: "theme",
   ONBOARDING_COMPLETED: "onboarding_completed",
   HAPTIC_FEEDBACK: "haptic_feedback",
+  PHOTOS_GRID_LEVEL: "photos_grid_level_v2",
 } as const;
 
 export default STORAGE_KEYS;

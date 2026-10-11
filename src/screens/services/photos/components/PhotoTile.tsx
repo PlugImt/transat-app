@@ -2,7 +2,7 @@ import { Image as ExpoImage } from "expo-image";
 import { Check, ImageOff, Play, TriangleAlert } from "lucide-react-native";
 import { memo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { PixelRatio, Pressable, View } from "react-native";
+import { Pressable, View } from "react-native";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Photo } from "@/dto";
 import {
@@ -12,7 +12,6 @@ import {
   TILE_SELECTED,
   useTileSelection,
 } from "@/hooks/services/photos/usePhotoSelection";
-import { thumbnailUrl } from "../photos.layout";
 
 type PhotoTileProps = {
   photo: Photo;
@@ -49,12 +48,12 @@ const PhotoTileComponent = ({
   const selectable = photo.media_type === "image";
   const [stage, setStage] = useState<Stage>(0);
 
-  const ratio = PixelRatio.get();
+  // One size for every grid level: changing the density reuses the cached images instead of downloading others.
   const uri =
     stage === 0
-      ? thumbnailUrl(photo.thumbnail_url, width, ratio)
+      ? photo.thumbnail_url
       : stage === 1
-        ? thumbnailUrl(photo.thumbnail_fallback_url, width, ratio)
+        ? photo.thumbnail_fallback_url
         : null;
   // No thumbnail at all (the backend says Drive has none): a placeholder, not an error to retry.
   const unavailable = !photo.thumbnail_url;

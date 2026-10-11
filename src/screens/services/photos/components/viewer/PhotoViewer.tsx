@@ -53,7 +53,7 @@ import { PhotoInfoPanel } from "./PhotoInfoPanel";
 import { ReportPhotoDialog } from "./ReportPhotoDialog";
 import { ZoomableImage } from "./ZoomableImage";
 
-const HI_RES_SIZE = 2560;
+const HI_RES_SIZE = 2048;
 const NEAR_END = 6;
 
 type PhotoViewerProps = {

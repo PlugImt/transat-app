@@ -65,12 +65,6 @@ export const tileSizeFor = (width: number, columns: number) =>
 const mosaicRowHeight = (width: number) =>
   Math.round(tileSizeFor(width, columnsFor(width)) * 1.2);
 
-/** Width in points of a typical tile, to pick a thumbnail resolution. */
-export const typicalTileWidth = (level: LayoutLevel, width: number) =>
-  level === "mosaic"
-    ? mosaicRowHeight(width) * 1.2
-    : tileSizeFor(width, columnsForLevel(level, width));
-
 type Block = { tiles: Tile[]; height: number };
 
 const clamp = (v: number, lo: number, hi: number) =>
@@ -397,19 +391,3 @@ export const sameRow = (a: PhotoRow, b: PhotoRow) =>
       t.height === o.height
     );
   });
-
-const THUMB_BUCKETS = [400, 800, 1200] as const;
-
-/** Thumbnail URL sized for a tile. Google serves any width from the same id; buckets keep the image cache effective. */
-export const thumbnailUrl = (
-  url: string | null,
-  tileWidth: number,
-  pixelRatio: number,
-) => {
-  if (!url) return null;
-  const wanted = tileWidth * pixelRatio;
-  const bucket =
-    THUMB_BUCKETS.find((b) => b >= wanted) ??
-    THUMB_BUCKETS[THUMB_BUCKETS.length - 1];
-  return url.replace(/(=w|sz=w)\d+$/, `$1${bucket}`);
-};

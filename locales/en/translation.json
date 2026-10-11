@@ -658,32 +658,49 @@
       "seconds": "sec"
     }
   },
-  "games": {
-    "title": "Games",
-    "bassine": {
-      "title": "Basin",
-      "description": "When a beer is served, the basin fills little by little, and when it's full you can ask to fill your glass with\n\nFor each glass filled, update your counter to be the king of the basin 👑",
-      "location": "At the MDE during parties",
-      "price": "Free",
-      "seeLeaderboard": "See leaderboard",
-      "leaderboard": {
-        "title": "Leaderboard",
-        "score": "Score",
-        "history": {
-          "title": "History",
-          "emptyHistory": "Nobody has taken a basin yet",
-          "emptyHistoryDescription": "Add your basins to the counter to see them appear here"
-        },
-        "firstPlaceLead_zero": "is tied",
-        "firstPlaceLead_one": "is just behind you",
-        "firstPlaceLeader_few": "is only {{count}} basins behind you",
-        "firstPlaceLead_other": "is {{count}} basins behind you",
-        "followingPlace_zero": "is tied",
-        "followingPlace_one": "is just ahead",
-        "followingPlace_few": "is only {{count}} basins ahead of you",
-        "followingPlace_other": "is {{count}} basins ahead of you",
-        "tookBassine_one": "took {{count}} basin",
-        "tookBassine_other": "took {{count}} basins"
+  "photos": {
+    "title": "Photos",
+    "tabs": {
+      "gallery": "Gallery",
+      "albums": "Albums"
+    },
+    "empty": "No photos yet",
+    "emptyAlbums": "No albums yet",
+    "photoCount_one": "{{count}} photo",
+    "photoCount_other": "{{count}} photos",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "academicYear": "Year {{year}}",
+    "otherAlbums": "Other albums",
+    "dateUnknown": "Date not specified",
+    "photosFrom": "Photos from {{date}}",
+    "openFolderInDrive": "Open folder in Google Drive",
+    "openFailed": "Couldn't open Google Drive.",
+    "loadMoreFailed": "Couldn't load more. Tap to retry.",
+    "a11y": {
+      "photo": "Photo from {{date}}",
+      "video": "Video from {{date}}. Opens Google Drive."
+    },
+    "viewer": {
+      "close": "Close",
+      "save": "Save",
+      "openInDrive": "Open in Drive",
+      "info": "Info",
+      "infoError": "Couldn't load the info. Tap to retry.",
+      "viewAlbum": "View album",
+      "openEventFolder": "Event folder",
+      "openFolder": "Photo's folder",
+      "openSettings": "Settings",
+      "status": {
+        "saved": "Photo saved to your library.",
+        "openFailed": "Couldn't open Google Drive.",
+        "permission": "Allow photo library access to save the photo.",
+        "permissionBlocked": "Photo library access was denied. Enable it in Settings.",
+        "unsupported": "This format (RAW) can't be saved. Open it in Drive.",
+        "tooLarge": "File too large. Open it in Drive.",
+        "incomplete": "Incomplete download. Open the photo in Drive.",
+        "network": "Can't connect. Check your network.",
+        "unknown": "Saving failed. Please try again."
       }
     }
   },

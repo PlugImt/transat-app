@@ -3,7 +3,7 @@
     "name": "Transat",
     "slug": "Transat",
     "owner": "plugimt",
-    "version": "2.3.0",
+    "version": "2.4.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon-bg.png",
     "scheme": "myapp",
@@ -68,7 +68,15 @@
       ],
       "@react-native-community/datetimepicker",
       "@sentry/react-native",
-      "./plugins/withSceneLifecycle"
+      "./plugins/withSceneLifecycle",
+      "expo-image",
+      [
+        "expo-media-library",
+        {
+          "savePhotosPermission": "Allow Transat to save photos from the Photos service to your library.",
+          "isAccessMediaLocationEnabled": false
+        }
+      ]
     ],
     "extra": {
       "router": {

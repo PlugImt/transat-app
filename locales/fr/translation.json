@@ -658,32 +658,49 @@
       }
     }
   },
-  "games": {
-    "title": "Jeux",
-    "bassine": {
-      "title": "Bassine",
-      "description": "Lorsqu'une bière est servie la bassine se remplie petit à petit, et lorsqu'elle est pleine vous pouvez demander de remplir votre verre avec\n\nÀ chaque verre rempli, mettez à jour votre compteur pour être le roi de la bassine 👑",
-      "location": "À la MDE pendant les soirées",
-      "price": "Gratuit",
-      "seeLeaderboard": "Voir le classement",
-      "leaderboard": {
-        "title": "Classement",
-        "score": "Score",
-        "history": {
-          "title": "Historique",
-          "emptyHistory": "Personne n'a encore pris de bassine",
-          "emptyHistoryDescription": "Ajoute tes bassines au compteur pour les voir apparaître ici"
-        },
-        "firstPlaceLead_zero": "est à égalité",
-        "firstPlaceLead_one": "est juste derrière vous",
-        "firstPlaceLeader_few": "n'est qu'à {{count}} bassines derrière vous",
-        "firstPlaceLead_other": "est {{count}} bassines derrière vous",
-        "followingPlace_zero": "est à égalité",
-        "followingPlace_one": "est juste devant",
-        "followingPlace_few": "n'est qu'à {{count}} bassines devant vous",
-        "followingPlace_other": "est {{count}} bassines devant vous",
-        "tookBassine_one": "a pris {{count}} bassine",
-        "tookBassine_other": "a pris {{count}} bassines"
+  "photos": {
+    "title": "Photos",
+    "tabs": {
+      "gallery": "Galerie",
+      "albums": "Albums"
+    },
+    "empty": "Aucune photo pour le moment",
+    "emptyAlbums": "Aucun album pour le moment",
+    "photoCount_one": "{{count}} photo",
+    "photoCount_other": "{{count}} photos",
+    "today": "Aujourd'hui",
+    "yesterday": "Hier",
+    "academicYear": "Année {{year}}",
+    "otherAlbums": "Autres albums",
+    "dateUnknown": "Date non renseignée",
+    "photosFrom": "Photos du {{date}}",
+    "openFolderInDrive": "Ouvrir le dossier dans Google Drive",
+    "openFailed": "Impossible d'ouvrir Google Drive.",
+    "loadMoreFailed": "Impossible de charger la suite. Toucher pour réessayer.",
+    "a11y": {
+      "photo": "Photo du {{date}}",
+      "video": "Vidéo du {{date}}. Ouvre Google Drive."
+    },
+    "viewer": {
+      "close": "Fermer",
+      "save": "Enregistrer",
+      "openInDrive": "Ouvrir dans Drive",
+      "info": "Infos",
+      "infoError": "Impossible de charger les infos. Toucher pour réessayer.",
+      "viewAlbum": "Voir l'album",
+      "openEventFolder": "Dossier de l'événement",
+      "openFolder": "Dossier de la photo",
+      "openSettings": "Réglages",
+      "status": {
+        "saved": "Photo enregistrée dans votre photothèque.",
+        "openFailed": "Impossible d'ouvrir Google Drive.",
+        "permission": "Autorisez l'accès à la photothèque pour enregistrer la photo.",
+        "permissionBlocked": "Accès à la photothèque refusé. Activez-le dans les réglages.",
+        "unsupported": "Ce format (RAW) ne peut pas être enregistré. Ouvrez-le dans Drive.",
+        "tooLarge": "Fichier trop volumineux. Ouvrez-le dans Drive.",
+        "incomplete": "Téléchargement incomplet. Ouvrez la photo dans Drive.",
+        "network": "Connexion impossible. Vérifiez votre réseau.",
+        "unknown": "L'enregistrement a échoué. Réessayez."
       }
     }
   },

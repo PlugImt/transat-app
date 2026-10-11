@@ -650,32 +650,49 @@
       "seconds": "Sek"
     }
   },
-  "games": {
-    "title": "Spiele",
-    "bassine": {
-      "title": "Becken",
-      "description": "Wenn eine Bier serviert wird, füllt sich das Becken langsam, und wenn es voll ist, können Sie fragen, ob Sie Ihr Glas füllen können\n\nFür jedes gefüllte Glas aktualisieren Sie Ihren Zähler, um der König des Beckens zu werden 👑",
-      "location": "Bei der MDE während Partys",
-      "price": "Kostenlos",
-      "seeLeaderboard": "Rangliste ansehen",
-      "leaderboard": {
-        "title": "Rangliste",
-        "score": "Punktzahl",
-        "history": {
-          "title": "Verlauf",
-          "emptyHistory": "Noch niemand hat eine Bassine genommen",
-          "emptyHistoryDescription": "Füge deine Bassinen dem Zähler hinzu, damit sie hier erscheinen"
-        },
-        "firstPlaceLead_zero": "liegt gleichauf",
-        "firstPlaceLead_one": "liegt knapp hinter Ihnen",
-        "firstPlaceLeader_few": "liegt nur {{count}} Becken hinter Ihnen",
-        "firstPlaceLead_other": "liegt {{count}} Becken hinter Ihnen",
-        "followingPlace_zero": "liegt gleichauf",
-        "followingPlace_one": "liegt knapp vor Ihnen",
-        "followingPlace_few": "liegt nur {{count}} Becken vor Ihnen",
-        "followingPlace_other": "liegt {{count}} Becken vor Ihnen",
-        "tookBassine_one": "hat {{count}} Becken genommen",
-        "tookBassine_other": "hat {{count}} Becken genommen"
+  "photos": {
+    "title": "Fotos",
+    "tabs": {
+      "gallery": "Galerie",
+      "albums": "Alben"
+    },
+    "empty": "Noch keine Fotos",
+    "emptyAlbums": "Noch keine Alben",
+    "photoCount_one": "{{count}} Foto",
+    "photoCount_other": "{{count}} Fotos",
+    "today": "Heute",
+    "yesterday": "Gestern",
+    "academicYear": "Jahr {{year}}",
+    "otherAlbums": "Weitere Alben",
+    "dateUnknown": "Datum nicht angegeben",
+    "photosFrom": "Fotos vom {{date}}",
+    "openFolderInDrive": "Ordner in Google Drive öffnen",
+    "openFailed": "Google Drive konnte nicht geöffnet werden.",
+    "loadMoreFailed": "Weitere Fotos konnten nicht geladen werden. Zum Wiederholen tippen.",
+    "a11y": {
+      "photo": "Foto vom {{date}}",
+      "video": "Video vom {{date}}. Öffnet Google Drive."
+    },
+    "viewer": {
+      "close": "Schließen",
+      "save": "Speichern",
+      "openInDrive": "In Drive öffnen",
+      "info": "Infos",
+      "infoError": "Infos konnten nicht geladen werden. Zum Wiederholen tippen.",
+      "viewAlbum": "Album ansehen",
+      "openEventFolder": "Ordner der Veranstaltung",
+      "openFolder": "Ordner des Fotos",
+      "openSettings": "Einstellungen",
+      "status": {
+        "saved": "Foto in deiner Mediathek gespeichert.",
+        "openFailed": "Google Drive konnte nicht geöffnet werden.",
+        "permission": "Erlaube den Zugriff auf die Mediathek, um das Foto zu speichern.",
+        "permissionBlocked": "Zugriff auf die Mediathek verweigert. Aktiviere ihn in den Einstellungen.",
+        "unsupported": "Dieses Format (RAW) kann nicht gespeichert werden. Öffne es in Drive.",
+        "tooLarge": "Datei zu groß. Öffne sie in Drive.",
+        "incomplete": "Download unvollständig. Öffne das Foto in Drive.",
+        "network": "Keine Verbindung. Prüfe dein Netzwerk.",
+        "unknown": "Speichern fehlgeschlagen. Versuche es erneut."
       }
     }
   },

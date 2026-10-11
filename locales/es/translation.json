@@ -650,32 +650,49 @@
       "seconds": "seg"
     }
   },
-  "games": {
-    "title": "Juegos",
-    "bassine": {
-      "title": "Cuenca",
-      "description": "Cuando se sirve una cerveza, la cuenca se llena poco a poco, y cuando está llena puedes pedir que se llene tu vaso con\n\nPor cada vaso lleno, actualiza tu contador para ser el rey de la cuenca 👑",
-      "location": "En la MDE durante las fiestas",
-      "price": "Gratis",
-      "seeLeaderboard": "Ver la clasificación",
-      "leaderboard": {
-        "title": "Clasificación",
-        "score": "Puntuación",
-        "history": {
-          "title": "Historial",
-          "emptyHistory": "Nadie ha tomado una cuenca aún",
-          "emptyHistoryDescription": "Añade tus cuencas al contador para que aparezcan aquí"
-        },
-        "firstPlaceLead_zero": "está empatado",
-        "firstPlaceLead_one": "está justo detrás de ti",
-        "firstPlaceLeader_few": "está a solo {{count}} cuencas detrás de ti",
-        "firstPlaceLead_other": "está {{count}} cuencas detrás de ti",
-        "followingPlace_zero": "está empatado",
-        "followingPlace_one": "está justo delante de ti",
-        "followingPlace_few": "está a solo {{count}} cuencas delante de ti",
-        "followingPlace_other": "está {{count}} cuencas delante de ti",
-        "tookBassine_one": "tomó {{count}} cuenca",
-        "tookBassine_other": "tomó {{count}} cuencas"
+  "photos": {
+    "title": "Fotos",
+    "tabs": {
+      "gallery": "Galería",
+      "albums": "Álbumes"
+    },
+    "empty": "Aún no hay fotos",
+    "emptyAlbums": "Aún no hay álbumes",
+    "photoCount_one": "{{count}} foto",
+    "photoCount_other": "{{count}} fotos",
+    "today": "Hoy",
+    "yesterday": "Ayer",
+    "academicYear": "Curso {{year}}",
+    "otherAlbums": "Otros álbumes",
+    "dateUnknown": "Fecha no indicada",
+    "photosFrom": "Fotos del {{date}}",
+    "openFolderInDrive": "Abrir la carpeta en Google Drive",
+    "openFailed": "No se pudo abrir Google Drive.",
+    "loadMoreFailed": "No se pudo cargar más. Toca para reintentar.",
+    "a11y": {
+      "photo": "Foto del {{date}}",
+      "video": "Vídeo del {{date}}. Abre Google Drive."
+    },
+    "viewer": {
+      "close": "Cerrar",
+      "save": "Guardar",
+      "openInDrive": "Abrir en Drive",
+      "info": "Info",
+      "infoError": "No se pudo cargar la información. Toca para reintentar.",
+      "viewAlbum": "Ver álbum",
+      "openEventFolder": "Carpeta del evento",
+      "openFolder": "Carpeta de la foto",
+      "openSettings": "Ajustes",
+      "status": {
+        "saved": "Foto guardada en tu biblioteca.",
+        "openFailed": "No se pudo abrir Google Drive.",
+        "permission": "Permite el acceso a la biblioteca para guardar la foto.",
+        "permissionBlocked": "Acceso a la biblioteca denegado. Actívalo en Ajustes.",
+        "unsupported": "Este formato (RAW) no se puede guardar. Ábrelo en Drive.",
+        "tooLarge": "Archivo demasiado grande. Ábrelo en Drive.",
+        "incomplete": "Descarga incompleta. Abre la foto en Drive.",
+        "network": "Sin conexión. Revisa tu red.",
+        "unknown": "No se pudo guardar. Inténtalo de nuevo."
       }
     }
   },

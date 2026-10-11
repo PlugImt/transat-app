@@ -7,7 +7,7 @@ export type BottomTabParamList = {
   // Main tabs
   HomeScreen: undefined;
   ServicesScreen: undefined;
-  GamesScreen: undefined;
+  PhotosScreen: undefined;
   AccountScreen: undefined;
 
   // Services screens
@@ -46,9 +46,9 @@ export type BottomTabParamList = {
   Help: undefined;
   Legal: undefined;
 
-  // Games screens
-  Bassine: undefined;
-  BassineLeaderboard: undefined;
+  // Photos screens
+  Photos: undefined;
+  AlbumDetails: { id: number; title: string };
 };
 
 export type BottomTabNavigation = BottomTabNavigationProp<BottomTabParamList>;
@@ -79,6 +79,6 @@ export type RootStackParamList = {
 export enum TabRoute {
   Home = "Home",
   Services = "Services",
-  Games = "Games",
+  Photos = "Photos",
   Account = "Account",
 }

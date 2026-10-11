@@ -647,32 +647,49 @@
       "seconds": "秒"
     }
   },
-  "games": {
-    "title": "游戏",
-    "bassine": {
-      "title": "池塘",
-      "description": "当啤酒被服务时，池塘会慢慢填满，当它满时，你可以要求填满你的杯子\n\n每填满一个杯子，更新你的计数器，成为池塘之王 👑",
-      "location": "在MDE的派对期间",
-      "price": "免费",
-      "seeLeaderboard": "查看排行榜",
-      "leaderboard": {
-        "title": "排行榜",
-        "score": "分数",
-        "history": {
-          "title": "历史",
-          "emptyHistory": "还没有人记录过池塘",
-          "emptyHistoryDescription": "将你的池塘添加到计数器以在此显示"
-        },
-        "firstPlaceLead_zero": "打成平手",
-        "firstPlaceLead_one": "就在你后面",
-        "firstPlaceLeader_few": "仅落后你{{count}}个池塘",
-        "firstPlaceLead_other": "落后你{{count}}个池塘",
-        "followingPlace_zero": "打成平手",
-        "followingPlace_one": "就在你前面",
-        "followingPlace_few": "仅领先你{{count}}个池塘",
-        "followingPlace_other": "领先你{{count}}个池塘",
-        "tookBassine_one": "取了{{count}}次池塘",
-        "tookBassine_other": "取了{{count}}次池塘"
+  "photos": {
+    "title": "照片",
+    "tabs": {
+      "gallery": "图库",
+      "albums": "相册"
+    },
+    "empty": "暂无照片",
+    "emptyAlbums": "暂无相册",
+    "photoCount_one": "{{count}} 张照片",
+    "photoCount_other": "{{count}} 张照片",
+    "today": "今天",
+    "yesterday": "昨天",
+    "academicYear": "{{year}} 学年",
+    "otherAlbums": "其他相册",
+    "dateUnknown": "日期未注明",
+    "photosFrom": "{{date}}的照片",
+    "openFolderInDrive": "在 Google Drive 中打开文件夹",
+    "openFailed": "无法打开 Google Drive。",
+    "loadMoreFailed": "无法加载更多，点按重试。",
+    "a11y": {
+      "photo": "{{date}}的照片",
+      "video": "{{date}}的视频，将打开 Google Drive。"
+    },
+    "viewer": {
+      "close": "关闭",
+      "save": "保存",
+      "openInDrive": "在 Drive 中打开",
+      "info": "信息",
+      "infoError": "无法加载信息，点按重试。",
+      "viewAlbum": "查看相册",
+      "openEventFolder": "活动文件夹",
+      "openFolder": "照片所在文件夹",
+      "openSettings": "设置",
+      "status": {
+        "saved": "照片已保存到相册。",
+        "openFailed": "无法打开 Google Drive。",
+        "permission": "请允许访问相册以保存照片。",
+        "permissionBlocked": "相册访问被拒绝，请在设置中开启。",
+        "unsupported": "无法保存此格式（RAW），请在 Drive 中打开。",
+        "tooLarge": "文件过大，请在 Drive 中打开。",
+        "incomplete": "下载不完整，请在 Drive 中打开照片。",
+        "network": "无法连接，请检查网络。",
+        "unknown": "保存失败，请重试。"
       }
     }
   },

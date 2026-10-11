@@ -4,7 +4,7 @@ import type { BottomTabParamList } from "@/types";
 type TabName =
   | "HomeScreen"
   | "ServicesScreen"
-  | "GamesScreen"
+  | "PhotosScreen"
   | "AccountScreen";
 
 type ScreenName = keyof BottomTabParamList;

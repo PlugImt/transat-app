@@ -650,32 +650,49 @@
       "seconds": "seg"
     }
   },
-  "games": {
-    "title": "Jogos",
-    "bassine": {
-      "title": "Baía",
-      "description": "Quando uma cerveja é servida, a baía enche pouco a pouco, e quando está cheia você pode pedir para encher seu copo com\n\nPara cada copo cheio, atualize seu contador para ser o rei da baía 👑",
-      "location": "Na MDE durante as festas",
-      "price": "Gratuito",
-      "seeLeaderboard": "Ver classificação",
-      "leaderboard": {
-        "title": "Classificação",
-        "score": "Pontuação",
-        "history": {
-          "title": "Histórico",
-          "emptyHistory": "Ninguém pegou uma baía ainda",
-          "emptyHistoryDescription": "Adicione suas baías ao contador para vê-las aparecer aqui"
-        },
-        "firstPlaceLead_zero": "está empatado",
-        "firstPlaceLead_one": "está logo atrás de você",
-        "firstPlaceLeader_few": "está a apenas {{count}} baías atrás de você",
-        "firstPlaceLead_other": "está {{count}} baías atrás de você",
-        "followingPlace_zero": "está empatado",
-        "followingPlace_one": "está logo à frente de você",
-        "followingPlace_few": "está a apenas {{count}} baías à sua frente",
-        "followingPlace_other": "está {{count}} baías à sua frente",
-        "tookBassine_one": "tomou {{count}} baía",
-        "tookBassine_other": "tomou {{count}} baías"
+  "photos": {
+    "title": "Fotos",
+    "tabs": {
+      "gallery": "Galeria",
+      "albums": "Álbuns"
+    },
+    "empty": "Ainda não há fotos",
+    "emptyAlbums": "Ainda não há álbuns",
+    "photoCount_one": "{{count}} foto",
+    "photoCount_other": "{{count}} fotos",
+    "today": "Hoje",
+    "yesterday": "Ontem",
+    "academicYear": "Ano {{year}}",
+    "otherAlbums": "Outros álbuns",
+    "dateUnknown": "Data não indicada",
+    "photosFrom": "Fotos de {{date}}",
+    "openFolderInDrive": "Abrir a pasta no Google Drive",
+    "openFailed": "Não foi possível abrir o Google Drive.",
+    "loadMoreFailed": "Não foi possível carregar mais. Toque para tentar de novo.",
+    "a11y": {
+      "photo": "Foto de {{date}}",
+      "video": "Vídeo de {{date}}. Abre o Google Drive."
+    },
+    "viewer": {
+      "close": "Fechar",
+      "save": "Guardar",
+      "openInDrive": "Abrir no Drive",
+      "info": "Info",
+      "infoError": "Não foi possível carregar as informações. Toque para tentar de novo.",
+      "viewAlbum": "Ver álbum",
+      "openEventFolder": "Pasta do evento",
+      "openFolder": "Pasta da foto",
+      "openSettings": "Definições",
+      "status": {
+        "saved": "Foto guardada na sua biblioteca.",
+        "openFailed": "Não foi possível abrir o Google Drive.",
+        "permission": "Permita o acesso à biblioteca para guardar a foto.",
+        "permissionBlocked": "Acesso à biblioteca negado. Ative-o nas definições.",
+        "unsupported": "Este formato (RAW) não pode ser guardado. Abra-o no Drive.",
+        "tooLarge": "Ficheiro demasiado grande. Abra-o no Drive.",
+        "incomplete": "Transferência incompleta. Abra a foto no Drive.",
+        "network": "Sem ligação. Verifique a sua rede.",
+        "unknown": "Falha ao guardar. Tente novamente."
       }
     }
   },

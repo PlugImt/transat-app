@@ -67,7 +67,8 @@
         }
       ],
       "@react-native-community/datetimepicker",
-      "@sentry/react-native"
+      "@sentry/react-native",
+      "./plugins/withSceneLifecycle"
     ],
     "extra": {
       "router": {

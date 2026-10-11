@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 import { FlatList, RefreshControl, View } from "react-native";
-import { useFloatingTabBarInset } from "@/components/navigation/floatingTabBar";
 import { WidgetErrorCard } from "@/components/query";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/hooks/account";
@@ -30,7 +29,6 @@ export const DaySchedule = ({
   const { theme } = useTheme();
   const { user } = useAuth();
   const now = useNow();
-  const tabBarInset = useFloatingTabBarInset();
   const { data, isPending, isError, error, refetch } = useItemSchedule(
     itemId,
     ymd,
@@ -66,7 +64,7 @@ export const DaySchedule = ({
       contentContainerStyle={{
         paddingHorizontal: 16,
         paddingTop: 8,
-        paddingBottom: tabBarInset + bottomSpace + 16,
+        paddingBottom: bottomSpace + 16,
         gap: 8,
       }}
       refreshControl={

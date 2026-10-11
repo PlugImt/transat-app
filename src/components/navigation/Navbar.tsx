@@ -51,15 +51,15 @@ import { RestaurantReviews } from "@/screens/services/restaurant/components/Revi
 import { Services } from "@/screens/services/Services";
 import type { BottomTabParamList } from "@/types";
 import { hapticFeedback } from "@/utils/haptics.utils";
-import {
-  canUseGlassTabBar,
-  FloatingTabBarInsetContext,
-  getFloatingTabBarInset,
-} from "./floatingTabBar";
-import { GlassTabBar } from "./GlassTabBar";
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
-const Stack = createNativeStackNavigator<BottomTabParamList>();
+type StackParamList = BottomTabParamList & {
+  Home: undefined;
+  Services: undefined;
+  Games: undefined;
+  Account: undefined;
+};
+const Stack = createNativeStackNavigator<StackParamList>();
 
 // Stack navigators for each main tab
 const HomeStack = () => (
@@ -158,65 +158,46 @@ export const BottomTabNavigator = () => {
   };
 
   return (
-    <FloatingTabBarInsetContext.Provider
-      value={canUseGlassTabBar ? getFloatingTabBarInset(insets.bottom) : 0}
-    >
-      <Tab.Navigator
-        screenOptions={
-          canUseGlassTabBar
-            ? { headerShown: false }
-            : tabBarOptions(theme, insets.bottom)
-        }
-        tabBar={
-          canUseGlassTabBar ? (props) => <GlassTabBar {...props} /> : undefined
-        }
-      >
+    <Tab.Navigator screenOptions={tabBarOptions(theme, insets.bottom)}>
+      <Tab.Screen
+        name="HomeScreen"
+        component={HomeStack}
+        listeners={handleTabPress}
+        options={{
+          tabBarLabel: t("common.home"),
+          tabBarIcon: ({ color }) => <LucideHome size={24} color={color} />,
+        }}
+      />
+      <Tab.Screen
+        name="ServicesScreen"
+        component={ServicesStack}
+        listeners={handleTabPress}
+        options={{
+          tabBarLabel: t("services.title"),
+          tabBarIcon: ({ color }) => <GridIcon size={24} color={color} />,
+        }}
+      />
+      {!isAcademics && (
         <Tab.Screen
-          name="HomeScreen"
-          component={HomeStack}
+          name="GamesScreen"
+          component={GamesStack}
           listeners={handleTabPress}
           options={{
-            tabBarLabel: t("common.home"),
-            tabBarIcon: ({ color, size }) => (
-              <LucideHome size={size} color={color} />
-            ),
+            tabBarLabel: t("games.title"),
+            tabBarIcon: ({ color }) => <Play size={24} color={color} />,
           }}
         />
-        <Tab.Screen
-          name="ServicesScreen"
-          component={ServicesStack}
-          listeners={handleTabPress}
-          options={{
-            tabBarLabel: t("services.title"),
-            tabBarIcon: ({ color, size }) => (
-              <GridIcon size={size} color={color} />
-            ),
-          }}
-        />
-        {!isAcademics && (
-          <Tab.Screen
-            name="GamesScreen"
-            component={GamesStack}
-            listeners={handleTabPress}
-            options={{
-              tabBarLabel: t("games.title"),
-              tabBarIcon: ({ color, size }) => (
-                <Play size={size} color={color} />
-              ),
-            }}
-          />
-        )}
-        <Tab.Screen
-          name="AccountScreen"
-          component={AccountStack}
-          listeners={handleTabPress}
-          options={{
-            tabBarLabel: t("common.account"),
-            tabBarIcon: ({ color, size }) => <User size={size} color={color} />,
-          }}
-        />
-      </Tab.Navigator>
-    </FloatingTabBarInsetContext.Provider>
+      )}
+      <Tab.Screen
+        name="AccountScreen"
+        component={AccountStack}
+        listeners={handleTabPress}
+        options={{
+          tabBarLabel: t("common.account"),
+          tabBarIcon: ({ color }) => <User size={24} color={color} />,
+        }}
+      />
+    </Tab.Navigator>
   );
 };
 

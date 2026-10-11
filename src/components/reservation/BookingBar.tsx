@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { Button } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
-import { useFloatingTabBarInset } from "@/components/navigation/floatingTabBar";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useDate } from "@/hooks/common/useDate";
 import {
@@ -41,7 +40,6 @@ export const BookingBar = ({
   const { t } = useTranslation();
   const { theme } = useTheme();
   const { formatDate, formatTime } = useDate();
-  const tabBarInset = useFloatingTabBarInset();
   const feedback = useReservationFeedback();
   const reserveSlots = useReserveSlots();
 
@@ -89,7 +87,7 @@ export const BookingBar = ({
       transition={{ type: "timing", duration: 200 }}
       className="absolute left-4 right-4 flex-row items-center gap-3 rounded-2xl border px-4"
       style={{
-        bottom: tabBarInset || 12,
+        bottom: 12,
         height: BOOKING_BAR_HEIGHT,
         backgroundColor: theme.card,
         borderColor: theme.border,

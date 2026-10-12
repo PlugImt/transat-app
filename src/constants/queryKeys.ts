@@ -40,7 +40,6 @@ export const QUERY_KEYS = {
     login: ["auth", "login"],
     register: ["auth", "register"],
     saveToken: ["auth", "saveToken"],
-    saveExpoPushToken: ["auth", "saveExpoPushToken"],
     resetPassword: ["auth", "resetPassword"],
     changePassword: ["auth", "changePassword"],
   },

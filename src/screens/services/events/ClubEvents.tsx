@@ -31,10 +31,8 @@ const ClubEventsTabContent = ({
 }) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const { events, isPending, isFetching, isError, error, refetch } = useClubEventsByTab(
-    clubId,
-    tabValue,
-  );
+  const { events, isPending, isFetching, isError, error, refetch } =
+    useClubEventsByTab(clubId, tabValue);
 
   if (isPending) {
     return <ClubEventsSkeleton />;

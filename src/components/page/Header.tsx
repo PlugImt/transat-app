@@ -22,12 +22,19 @@ type HeaderProps = {
   onBack?: () => void;
 };
 
-export function Header({ headerShown, title, children, onBack }: Readonly<HeaderProps>) {
+export function Header({
+  headerShown,
+  title,
+  children,
+  onBack,
+}: Readonly<HeaderProps>) {
   const { theme } = useTheme();
   const navigation = useNavigation();
 
   const route = useRoute();
-    const canGoBack = Boolean(onBack) || !Object.values(TabRoute).includes(route.name as TabRoute);
+  const canGoBack =
+    Boolean(onBack) ||
+    !Object.values(TabRoute).includes(route.name as TabRoute);
 
   const headerAnimatedStyle = useAnimatedStyle(() => {
     // If canGoBack is true, the header is not shown (here to compute the value every time)

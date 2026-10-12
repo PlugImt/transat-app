@@ -23,6 +23,15 @@ export const isExternalLink = (
   target: RouteTarget | ExternalLink,
 ): target is ExternalLink => "url" in target;
 
+/** What the signed-in account can reach in the app. */
+export type NavigationAccess = { isAcademics: boolean };
+
+/** Academics accounts have no Photos tab, so a route into it would lead nowhere. */
+export const isRouteAvailable = (
+  target: RouteTarget,
+  access: NavigationAccess,
+) => target.tab !== "PhotosScreen" || !access.isAcademics;
+
 /** Screens that take no route params. */
 export type ParameterlessScreen = {
   [S in ScreenName]: BottomTabParamList[S] extends undefined ? S : never;

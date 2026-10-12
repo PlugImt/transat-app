@@ -15,6 +15,7 @@ export const API_ROUTES: Record<Route, ApiRoute> = {
   logout: "/auth/logout",
   saveToken: "/auth/token",
   saveExpoPushToken: "/auth/expo-push-token",
+  devices: "/devices",
   verifyCode: "/auth/verification-code",
   verifyAccount: "/auth/verify-account",
   resendCode: "/auth/resend-code",
@@ -68,6 +69,7 @@ type Route =
   | "logout"
   | "saveToken"
   | "saveExpoPushToken"
+  | "devices"
   | "verifyCode"
   | "verifyAccount"
   | "resendCode"

@@ -20,8 +20,14 @@ export const useClubs = () => {
 };
 
 export const useFilteredClubs = (searchValue: string) => {
-  const { data: clubs, isPending, isFetching, refetch, isError, error } =
-    useClubs();
+  const {
+    data: clubs,
+    isPending,
+    isFetching,
+    refetch,
+    isError,
+    error,
+  } = useClubs();
 
   const filteredClubs = useMemo(() => {
     if (!clubs || !searchValue.trim()) {

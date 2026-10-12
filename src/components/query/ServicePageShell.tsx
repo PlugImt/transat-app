@@ -11,7 +11,10 @@ export type ServicePageShellProps = {
   loading: ReactNode;
   children: ReactNode;
   errorFooter?: ReactNode;
-  pageProps?: Omit<PageProps, "children" | "title" | "onRefresh" | "refreshing">;
+  pageProps?: Omit<
+    PageProps,
+    "children" | "title" | "onRefresh" | "refreshing"
+  >;
 };
 
 export const ServicePageShell = ({

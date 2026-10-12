@@ -71,6 +71,7 @@ export const Stars = ({
         {Array.from({ length: max }).map((_, index) => {
           return (
             <SingleStar
+              // biome-ignore lint/suspicious/noArrayIndexKey: a star is identified by its position
               key={`review-star-${index}-${max}`}
               index={index}
               isFilled={index < value}
@@ -89,6 +90,7 @@ export const Stars = ({
       {/* Étoiles pleines */}
       {Array.from({ length: fullStars }).map((_, index) => (
         <SingleStar
+          // biome-ignore lint/suspicious/noArrayIndexKey: a star is identified by its position
           key={`full-star-${index}-${value}`}
           index={index}
           isFilled={true}
@@ -100,6 +102,7 @@ export const Stars = ({
       {/* Étoiles vides */}
       {Array.from({ length: emptyStars }).map((_, index) => (
         <SingleStar
+          // biome-ignore lint/suspicious/noArrayIndexKey: a star is identified by its position
           key={`empty-star-${index}-${value}`}
           index={index}
           isFilled={false}

@@ -83,7 +83,8 @@
           "isAccessMediaLocationEnabled": false,
           "granularPermissions": []
         }
-      ]
+      ],
+      "@bacons/apple-targets"
     ],
     "extra": {
       "router": {

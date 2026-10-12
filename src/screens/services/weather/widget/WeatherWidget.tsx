@@ -7,8 +7,14 @@ import { useDate } from "@/hooks/common";
 import { useWeather } from "@/hooks/services/weather/useWeather";
 
 export const WeatherWidget = () => {
-  const { data: weather, isPending, isFetching, isError, error, refetch } =
-    useWeather();
+  const {
+    data: weather,
+    isPending,
+    isFetching,
+    isError,
+    error,
+    refetch,
+  } = useWeather();
   const { formatLong } = useDate();
 
   const date = new Date();

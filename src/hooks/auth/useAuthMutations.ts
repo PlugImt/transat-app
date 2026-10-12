@@ -73,20 +73,6 @@ export const useAuthMutations = () => {
     },
   });
 
-  const saveExpoPushTokenMutation = useMutation({
-    mutationKey: QUERY_KEYS.auth.saveExpoPushToken,
-    mutationFn: async (token: string) => {
-      const expoPushToken = await storage.get("expoPushToken");
-      if (expoPushToken === token) return true;
-
-      await apiRequest(API_ROUTES.user, "PATCH", {
-        notification_token: token,
-      });
-      await storage.set("expoPushToken", token);
-      return true;
-    },
-  });
-
   const resetPasswordMutation = useMutation({
     mutationKey: QUERY_KEYS.auth.resetPassword,
     mutationFn: async (email: string) => {
@@ -126,17 +112,14 @@ export const useAuthMutations = () => {
     login: loginMutation.mutateAsync,
     register: registerMutation.mutateAsync,
     saveToken: saveTokenMutation.mutateAsync,
-    saveExpoPushToken: saveExpoPushTokenMutation.mutateAsync,
     resetPassword: resetPasswordMutation.mutateAsync,
     changePassword: changePasswordMutation.mutateAsync,
     logout,
     isLoggingIn: loginMutation.isPending,
     isRegistering: registerMutation.isPending,
     isSavingToken: saveTokenMutation.isPending,
-    isSavingExpoPushToken: saveExpoPushTokenMutation.isPending,
     loginError: loginMutation.error,
     registerError: registerMutation.error,
     saveTokenError: saveTokenMutation.error,
-    saveExpoPushTokenError: saveExpoPushTokenMutation.error,
   };
 };

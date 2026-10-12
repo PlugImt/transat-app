@@ -74,12 +74,20 @@ const HomeStack = () => (
     <Stack.Screen name="Homework" component={Homework} />
     <Stack.Screen name="HomeworkDetails" component={HomeworkDetails} />
     <Stack.Screen name="Clubs" component={Clubs} />
-    <Stack.Screen name="ClubDetails" component={ClubDetails} />
+    <Stack.Screen
+      name="ClubDetails"
+      component={ClubDetails}
+      getId={({ params }) => String(params.id)}
+    />
     <Stack.Screen name="ClubMemberList" component={ClubMemberList} />
     <Stack.Screen name="ClubEvents" component={ClubEvents} />
     <Stack.Screen name="Events" component={Events} />
     <Stack.Screen name="EventMemberList" component={EventMemberList} />
-    <Stack.Screen name="EventDetails" component={EventDetails} />
+    <Stack.Screen
+      name="EventDetails"
+      component={EventDetails}
+      getId={({ params }) => String(params.id)}
+    />
     <Stack.Screen name="AddEvent" component={AddEvent} />
     <Stack.Screen name="EditEvent" component={EditEvent} />
     <Stack.Screen name="Traq" component={Traq} />
@@ -101,12 +109,20 @@ const ServicesStack = () => (
     <Stack.Screen name="Homework" component={Homework} />
     <Stack.Screen name="HomeworkDetails" component={HomeworkDetails} />
     <Stack.Screen name="Clubs" component={Clubs} />
-    <Stack.Screen name="ClubDetails" component={ClubDetails} />
+    <Stack.Screen
+      name="ClubDetails"
+      component={ClubDetails}
+      getId={({ params }) => String(params.id)}
+    />
     <Stack.Screen name="ClubMemberList" component={ClubMemberList} />
     <Stack.Screen name="ClubEvents" component={ClubEvents} />
     <Stack.Screen name="Events" component={Events} />
     <Stack.Screen name="EventMemberList" component={EventMemberList} />
-    <Stack.Screen name="EventDetails" component={EventDetails} />
+    <Stack.Screen
+      name="EventDetails"
+      component={EventDetails}
+      getId={({ params }) => String(params.id)}
+    />
     <Stack.Screen name="AddEvent" component={AddEvent} />
     <Stack.Screen name="EditEvent" component={EditEvent} />
     <Stack.Screen name="Traq" component={Traq} />

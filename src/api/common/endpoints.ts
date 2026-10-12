@@ -30,6 +30,12 @@ export const API_ROUTES: Record<Route, ApiRoute> = {
   bassineLeaderboard: "/bassine/leaderboard",
   bassineHistory: "/bassine/history",
   bassineUserHistory: "/bassine/history/:email",
+  photos: "/photos",
+  photosAlbums: "/photos/albums",
+  photosAlbum: "/photos/albums/:id",
+  photosAlbumPhotos: "/photos/albums/:id/photos",
+  photosDetail: "/photos/:id",
+  photosReports: "/photos/reports",
   reservation: "/reservation",
   reservationCategory: "/reservation/category/:id",
   reservationItem: "/reservation/item/:id",
@@ -77,6 +83,12 @@ type Route =
   | "bassineLeaderboard"
   | "bassineHistory"
   | "bassineUserHistory"
+  | "photos"
+  | "photosAlbums"
+  | "photosAlbum"
+  | "photosAlbumPhotos"
+  | "photosDetail"
+  | "photosReports"
   | "reservation"
   | "reservationCategory"
   | "reservationItem"

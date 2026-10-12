@@ -8,6 +8,7 @@ export const NotificationTypeValues = [
   "EVENTS",
   "EVENT_REMINDERS",
   "RESERVATIONS",
+  "PHOTOS",
 ] as const;
 export const notificationTypeSchema = z.enum(NotificationTypeValues);
 

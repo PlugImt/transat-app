@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from "expo-router/build/react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "expo-router/build/react-navigation/native-stack";
-import { GridIcon, LucideHome, Play, User } from "lucide-react-native";
+import { GridIcon, Images, LucideHome, User } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -25,6 +25,7 @@ import {
   Homework,
   Laundry,
   Olimtpe,
+  Photos,
   Reservation,
   Restaurant,
   Timetable,
@@ -42,6 +43,7 @@ import { FourchettasOrder } from "@/screens/services/fourchettas/components/orde
 import Bassine from "@/screens/services/games/bassine/Bassine";
 import { BassineLeaderboard } from "@/screens/services/games/bassine/leaderboard/BassineLeaderboard";
 import { HomeworkDetails } from "@/screens/services/homework/components/HomeworkDetails";
+import { AlbumDetails } from "@/screens/services/photos/AlbumDetails";
 import {
   Category,
   PersonalReservations,
@@ -56,7 +58,7 @@ const Tab = createBottomTabNavigator<BottomTabParamList>();
 type StackParamList = BottomTabParamList & {
   Home: undefined;
   Services: undefined;
-  Games: undefined;
+  Photos: undefined;
   Account: undefined;
 };
 const Stack = createNativeStackNavigator<StackParamList>();
@@ -115,14 +117,21 @@ const ServicesStack = () => (
     <Stack.Screen name="ReservationCalendar" component={ReservationCalendar} />
     <Stack.Screen name="Fourchettas" component={Fourchettas} />
     <Stack.Screen name="FourchettasOrder" component={FourchettasOrder} />
-  </Stack.Navigator>
-);
-
-const GamesStack = () => (
-  <Stack.Navigator screenOptions={screenOptions}>
     <Stack.Screen name="Games" component={Games} />
     <Stack.Screen name="Bassine" component={Bassine} />
     <Stack.Screen name="BassineLeaderboard" component={BassineLeaderboard} />
+  </Stack.Navigator>
+);
+
+const PhotosStack = () => (
+  <Stack.Navigator screenOptions={screenOptions}>
+    <Stack.Screen name="Photos" component={Photos} />
+    <Stack.Screen
+      name="AlbumDetails"
+      component={AlbumDetails}
+      // One screen per album: opening the album that is already shown (e.g. from a notification) reuses it.
+      getId={({ params }) => String(params.id)}
+    />
   </Stack.Navigator>
 );
 
@@ -179,12 +188,12 @@ export const BottomTabNavigator = () => {
       />
       {!isAcademics && (
         <Tab.Screen
-          name="GamesScreen"
-          component={GamesStack}
+          name="PhotosScreen"
+          component={PhotosStack}
           listeners={handleTabPress}
           options={{
-            tabBarLabel: t("games.title"),
-            tabBarIcon: ({ color }) => <Play size={24} color={color} />,
+            tabBarLabel: t("photos.title"),
+            tabBarIcon: ({ color }) => <Images size={24} color={color} />,
           }}
         />
       )}

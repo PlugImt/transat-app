@@ -219,7 +219,10 @@
       "toggleEvents": "Benachrichtigt werden, wenn eine neue Veranstaltung erstellt wird",
       "eventReminders": "Veranstaltungserinnerungen",
       "toggleEventReminders": "Eine Stunde vor Veranstaltungen, an denen Sie teilnehmen oder die zu Ihren Clubs gehören, benachrichtigt werden",
-      "toggleReservations": "Über Ihre Reservierungen benachrichtigt werden"
+      "toggleReservations": "Über Ihre Reservierungen benachrichtigt werden",
+      "togglePhotos": "Benachrichtigt werden, wenn ein neues Ereignisalbum verfügbar ist",
+      "permissionOff": "Benachrichtigungen sind für Transat auf diesem Telefon ausgeschaltet. Aktiviere sie in den Telefoneinstellungen, um diese zu erhalten; deine Auswahl oben bleibt unverändert.",
+      "openSystemSettings": "Telefoneinstellungen öffnen"
     },
     "hapticFeedback": {
       "title": "Haptische Rückmeldung",
@@ -652,6 +655,7 @@
   },
   "games": {
     "title": "Spiele",
+    "description": "Die Spiele der App, angefangen mit dem Becken",
     "bassine": {
       "title": "Becken",
       "description": "Wenn eine Bier serviert wird, füllt sich das Becken langsam, und wenn es voll ist, können Sie fragen, ob Sie Ihr Glas füllen können\n\nFür jedes gefüllte Glas aktualisieren Sie Ihren Zähler, um der König des Beckens zu werden 👑",
@@ -676,6 +680,138 @@
         "followingPlace_other": "liegt {{count}} Becken vor Ihnen",
         "tookBassine_one": "hat {{count}} Becken genommen",
         "tookBassine_other": "hat {{count}} Becken genommen"
+      }
+    }
+  },
+  "photos": {
+    "title": "Fotos",
+    "tabs": {
+      "gallery": "Galerie",
+      "albums": "Alben"
+    },
+    "selection": {
+      "select": "Auswählen",
+      "hint": "Originale werden in deiner Mediathek gespeichert",
+      "count_one": "{{count}} ausgewählt",
+      "count_other": "{{count}} ausgewählt",
+      "saving": "Speichern {{done}}/{{total}}…",
+      "close": "Auswahl abbrechen",
+      "download": "Herunterladen",
+      "downloadCount_one": "{{count}} Foto herunterladen",
+      "downloadCount_other": "{{count}} Fotos herunterladen",
+      "retry": "Erneut versuchen",
+      "busy": "Ein Download läuft bereits.",
+      "limit": "Du kannst bis zu {{count}} Fotos gleichzeitig auswählen.",
+      "saved_one": "{{count}} Foto in deiner Mediathek gespeichert.",
+      "saved_other": "{{count}} Fotos in deiner Mediathek gespeichert.",
+      "partial": "{{saved}} gespeichert, {{failed}} fehlgeschlagen. Fehlgeschlagene Fotos bleiben ausgewählt.",
+      "failedAll_one": "Das Foto konnte nicht gespeichert werden.",
+      "failedAll_other": "Keines der {{count}} Fotos konnte gespeichert werden.",
+      "failedCount_one": "{{count}} fehlgeschlagen",
+      "failedCount_other": "{{count}} fehlgeschlagen",
+      "cancelled_one": "Abgebrochen. {{count}} Foto gespeichert.",
+      "cancelled_other": "Abgebrochen. {{count}} Fotos gespeichert.",
+      "reason": {
+        "permission": "Zugriff auf deine Mediathek erlauben",
+        "permissionBlocked": "Zugriff verweigert: Einstellungen öffnen",
+        "unsupported": "Format nicht speicherbar (RAW)",
+        "tooLarge": "Datei zu groß",
+        "incomplete": "Download unvollständig",
+        "missing": "Foto nicht mehr verfügbar",
+        "storage": "Nicht genug Speicherplatz",
+        "network": "Netzwerkfehler",
+        "unknown": "Etwas ist schiefgelaufen"
+      }
+    },
+    "albumUnavailable": "Dieses Album ist nicht mehr verfügbar",
+    "albumUnavailableHint": "Es wurde möglicherweise entfernt oder ist noch nicht veröffentlicht.",
+    "backToPhotos": "Zurück zu Fotos",
+    "share": "Album teilen",
+    "layout": {
+      "title": "Rasteransicht",
+      "compact": "Kompakt",
+      "standard": "Standard",
+      "mosaic": "Mosaik"
+    },
+    "empty": "Noch keine Fotos",
+    "emptyAlbums": "Noch keine Alben",
+    "photoCount_one": "{{count}} Foto",
+    "photoCount_other": "{{count}} Fotos",
+    "today": "Heute",
+    "yesterday": "Gestern",
+    "academicYear": "Jahr {{year}}",
+    "otherAlbums": "Weitere Alben",
+    "dateUnknown": "Datum nicht angegeben",
+    "photosFrom": "Fotos vom {{date}}",
+    "openFolderInDrive": "Ordner in Google Drive öffnen",
+    "openFailed": "Google Drive konnte nicht geöffnet werden.",
+    "loadMoreFailed": "Weitere Fotos konnten nicht geladen werden. Zum Wiederholen tippen.",
+    "a11y": {
+      "photo": "Foto vom {{date}}",
+      "video": "Video vom {{date}}. Öffnet Google Drive."
+    },
+    "viewer": {
+      "more": "Weitere Optionen",
+      "share": "Foto teilen",
+      "report": {
+        "action": "Foto melden",
+        "title": "Dieses Foto melden",
+        "intro": "Eine Meldung löscht oder verbirgt das Foto nicht: Sie bittet die Verantwortlichen, es zu prüfen.",
+        "reasonLabel": "Grund",
+        "reasons": {
+          "appears_in_photo": "Dieses Foto entfernen, weil ich darauf zu sehen bin",
+          "inappropriate": "Unangemessener oder NSFW-Inhalt",
+          "poor_quality": "Foto von schlechter Qualität oder unbrauchbar",
+          "other": "Sonstiges"
+        },
+        "commentLabel": "Kommentar (optional)",
+        "commentLabelRequired": "Kommentar (erforderlich)",
+        "commentRequired": "Beschreibe das Problem, um die Meldung zu senden.",
+        "commentPlaceholder": "Beschreibe das Problem",
+        "commentHint": "Je mehr Details du angibst, desto leichter können die Verantwortlichen die Meldung prüfen.",
+        "privacy": "Dein Name und deine E-Mail-Adresse werden an die Personen weitergegeben, die die Meldung prüfen.",
+        "counter": "{{count}}/{{max}}",
+        "submit": "Meldung senden",
+        "chooseReason": "Wähle einen Grund, um die Meldung zu senden.",
+        "successTitle": "Meldung gesendet",
+        "successBody": "Danke. Die Verantwortlichen prüfen dieses Foto. Es bleibt bis zu ihrer Entscheidung sichtbar.",
+        "errors": {
+          "rateLimited": "Du hast zu viele Meldungen gesendet. Versuche es später erneut.",
+          "photoGone": "Dieses Foto ist nicht mehr verfügbar.",
+          "invalid": "Die Meldung ist ungültig. Prüfe Grund und Kommentar.",
+          "network": "Verbindung nicht möglich. Prüfe dein Netzwerk und versuche es erneut.",
+          "unknown": "Die Meldung konnte nicht gesendet werden. Versuche es erneut."
+        }
+      },
+      "event": "Ereignis",
+      "folder": "Ordner",
+      "fileName": "Dateiname",
+      "captured": "Aufgenommen",
+      "fromFileName": "aus dem Dateinamen",
+      "dateApprox": "Datum (ungefähr)",
+      "size": "Größe",
+      "close": "Schließen",
+      "save": "Speichern",
+      "openInDrive": "In Drive öffnen",
+      "info": "Infos",
+      "infoError": "Infos konnten nicht geladen werden. Zum Wiederholen tippen.",
+      "viewAlbum": "Album ansehen",
+      "openEventFolder": "Ordner der Veranstaltung",
+      "openFolder": "Ordner des Fotos",
+      "openSettings": "Einstellungen",
+      "status": {
+        "shareFailed": "Teilen fehlgeschlagen.",
+        "missing": "Dieses Foto ist nicht mehr verfügbar.",
+        "storage": "Nicht genug Speicherplatz auf deinem Gerät.",
+        "saved": "Foto in deiner Mediathek gespeichert.",
+        "openFailed": "Google Drive konnte nicht geöffnet werden.",
+        "permission": "Erlaube den Zugriff auf die Mediathek, um das Foto zu speichern.",
+        "permissionBlocked": "Zugriff auf die Mediathek verweigert. Aktiviere ihn in den Einstellungen.",
+        "unsupported": "Dieses Format (RAW) kann nicht gespeichert werden. Öffne es in Drive.",
+        "tooLarge": "Datei zu groß. Öffne sie in Drive.",
+        "incomplete": "Download unvollständig. Öffne das Foto in Drive.",
+        "network": "Keine Verbindung. Prüfe dein Netzwerk.",
+        "unknown": "Speichern fehlgeschlagen. Versuche es erneut."
       }
     }
   },

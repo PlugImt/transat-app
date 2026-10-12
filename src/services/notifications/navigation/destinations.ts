@@ -2,12 +2,14 @@ import type { QueryClient } from "@tanstack/react-query";
 import { z } from "zod";
 import { getClubDetails } from "@/api/endpoints/club/club.endpoint";
 import { getEventDetails } from "@/api/endpoints/event/event.endpoint";
+import { getPhotoAlbum } from "@/api/endpoints/photos/photos.endpoints";
 import { getItemSchedule } from "@/api/endpoints/reservation/reservation.endpoint";
 import { QUERY_KEYS } from "@/constants";
 import { getParisYmd } from "@/utils/reservation-time";
 import {
   type ExternalLink,
   type ParameterlessScreen,
+  photosRoute,
   type RouteTarget,
   servicesRoute,
 } from "./route-target";
@@ -111,6 +113,25 @@ export const DESTINATIONS: Record<string, DestinationResolver> = {
       return undefined;
     },
     fallback: servicesRoute("Clubs"),
+  }),
+
+  // The album is identified by its id; the title in the payload is only a heading until the album is fetched.
+  photo_album: defineDestination({
+    schema: z.object({
+      id: entityId,
+      params: z.object({ title: z.string().max(200).optional() }).optional(),
+    }),
+    target: ({ id, params }) =>
+      photosRoute("AlbumDetails", { id, title: params?.title ?? "" }),
+    check: async ({ id }, queryClient) => {
+      const album = await queryClient.fetchQuery({
+        queryKey: QUERY_KEYS.photos.album(id),
+        queryFn: () => getPhotoAlbum(id),
+        staleTime: CHECK_STALE_TIME,
+      });
+      return photosRoute("AlbumDetails", { id, title: album.title });
+    },
+    fallback: photosRoute("Photos"),
   }),
 
   restaurant: defineDestination({

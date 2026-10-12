@@ -13,6 +13,13 @@ export const QUERY_KEYS = {
     history: ["bassine", "history"],
     userHistory: ["bassine", "history", "user"],
   },
+  photos: {
+    gallery: ["photos", "gallery"],
+    detail: (id: string) => ["photos", "detail", id],
+    albums: ["photos", "albums"],
+    album: (id: number) => ["photos", "album", id],
+    albumPhotos: (id: number) => ["photos", "album", id, "photos"],
+  },
   club: {
     clubs: ["clubs"],
     clubDetails: ["clubDetails"],

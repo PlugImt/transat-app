@@ -219,7 +219,10 @@
       "toggleEvents": "有新活动创建时收到通知",
       "eventReminders": "活动提醒",
       "toggleEventReminders": "在您参加的活动或所属社团的活动开始前一小时收到通知",
-      "toggleReservations": "收到有关您预订的通知"
+      "toggleReservations": "收到有关您预订的通知",
+      "togglePhotos": "有新的活动相册时通知我",
+      "permissionOff": "此手机上已关闭 Transat 的通知。请在手机设置中开启后才能收到；上方的选择不会改变。",
+      "openSystemSettings": "打开手机设置"
     },
     "hapticFeedback": {
       "title": "触觉反馈",
@@ -649,6 +652,7 @@
   },
   "games": {
     "title": "游戏",
+    "description": "应用里的游戏，从池塘开始",
     "bassine": {
       "title": "池塘",
       "description": "当啤酒被服务时，池塘会慢慢填满，当它满时，你可以要求填满你的杯子\n\n每填满一个杯子，更新你的计数器，成为池塘之王 👑",
@@ -673,6 +677,138 @@
         "followingPlace_other": "领先你{{count}}个池塘",
         "tookBassine_one": "取了{{count}}次池塘",
         "tookBassine_other": "取了{{count}}次池塘"
+      }
+    }
+  },
+  "photos": {
+    "title": "照片",
+    "tabs": {
+      "gallery": "图库",
+      "albums": "相册"
+    },
+    "selection": {
+      "select": "选择",
+      "hint": "原图将保存到你的相册",
+      "count_one": "已选择 {{count}} 张",
+      "count_other": "已选择 {{count}} 张",
+      "saving": "正在保存 {{done}}/{{total}}…",
+      "close": "取消选择",
+      "download": "下载",
+      "downloadCount_one": "下载 {{count}} 张照片",
+      "downloadCount_other": "下载 {{count}} 张照片",
+      "retry": "重试",
+      "busy": "已有下载正在进行。",
+      "limit": "一次最多可选择 {{count}} 张照片。",
+      "saved_one": "{{count}} 张照片已保存到相册。",
+      "saved_other": "{{count}} 张照片已保存到相册。",
+      "partial": "已保存 {{saved}} 张，{{failed}} 张失败。失败的照片仍保持选中。",
+      "failedAll_one": "无法保存这张照片。",
+      "failedAll_other": "{{count}} 张照片均无法保存。",
+      "failedCount_one": "{{count}} 张失败",
+      "failedCount_other": "{{count}} 张失败",
+      "cancelled_one": "已取消。已保存 {{count}} 张照片。",
+      "cancelled_other": "已取消。已保存 {{count}} 张照片。",
+      "reason": {
+        "permission": "请允许访问相册",
+        "permissionBlocked": "访问被拒绝：请打开设置",
+        "unsupported": "无法保存此格式（RAW）",
+        "tooLarge": "文件过大",
+        "incomplete": "下载不完整",
+        "missing": "照片已不可用",
+        "storage": "存储空间不足",
+        "network": "网络错误",
+        "unknown": "出了点问题"
+      }
+    },
+    "albumUnavailable": "此相册已不可用",
+    "albumUnavailableHint": "可能已被删除或尚未发布。",
+    "backToPhotos": "返回照片",
+    "share": "分享相册",
+    "layout": {
+      "title": "网格布局",
+      "compact": "紧凑",
+      "standard": "标准",
+      "mosaic": "马赛克"
+    },
+    "empty": "暂无照片",
+    "emptyAlbums": "暂无相册",
+    "photoCount_one": "{{count}} 张照片",
+    "photoCount_other": "{{count}} 张照片",
+    "today": "今天",
+    "yesterday": "昨天",
+    "academicYear": "{{year}} 学年",
+    "otherAlbums": "其他相册",
+    "dateUnknown": "日期未注明",
+    "photosFrom": "{{date}}的照片",
+    "openFolderInDrive": "在 Google Drive 中打开文件夹",
+    "openFailed": "无法打开 Google Drive。",
+    "loadMoreFailed": "无法加载更多，点按重试。",
+    "a11y": {
+      "photo": "{{date}}的照片",
+      "video": "{{date}}的视频，将打开 Google Drive。"
+    },
+    "viewer": {
+      "more": "更多选项",
+      "share": "分享照片",
+      "report": {
+        "action": "举报照片",
+        "title": "举报这张照片",
+        "intro": "举报不会删除或隐藏照片，只是请负责人进行审核。",
+        "reasonLabel": "原因",
+        "reasons": {
+          "appears_in_photo": "我出现在照片中，请删除",
+          "inappropriate": "不当或 NSFW 内容",
+          "poor_quality": "照片质量差或无法使用",
+          "other": "其他"
+        },
+        "commentLabel": "备注（可选）",
+        "commentLabelRequired": "备注（必填）",
+        "commentRequired": "请描述问题后再提交举报。",
+        "commentPlaceholder": "请描述问题",
+        "commentHint": "提供的细节越多，负责人越容易审核你的举报。",
+        "privacy": "你的姓名和电子邮件地址会提供给审核举报的人员。",
+        "counter": "{{count}}/{{max}}",
+        "submit": "提交举报",
+        "chooseReason": "请选择一个原因后再提交。",
+        "successTitle": "举报已提交",
+        "successBody": "谢谢。负责人将审核这张照片，在他们决定之前照片仍然可见。",
+        "errors": {
+          "rateLimited": "你提交的举报过多，请稍后再试。",
+          "photoGone": "这张照片已不可用。",
+          "invalid": "举报无效，请检查原因和备注。",
+          "network": "无法连接，请检查网络后重试。",
+          "unknown": "举报未能提交，请重试。"
+        }
+      },
+      "event": "活动",
+      "folder": "文件夹",
+      "fileName": "文件名",
+      "captured": "拍摄时间",
+      "fromFileName": "来自文件名",
+      "dateApprox": "日期（大致）",
+      "size": "大小",
+      "close": "关闭",
+      "save": "保存",
+      "openInDrive": "在 Drive 中打开",
+      "info": "信息",
+      "infoError": "无法加载信息，点按重试。",
+      "viewAlbum": "查看相册",
+      "openEventFolder": "活动文件夹",
+      "openFolder": "照片所在文件夹",
+      "openSettings": "设置",
+      "status": {
+        "shareFailed": "分享失败。",
+        "missing": "此照片已不可用。",
+        "storage": "设备存储空间不足。",
+        "saved": "照片已保存到相册。",
+        "openFailed": "无法打开 Google Drive。",
+        "permission": "请允许访问相册以保存照片。",
+        "permissionBlocked": "相册访问被拒绝，请在设置中开启。",
+        "unsupported": "无法保存此格式（RAW），请在 Drive 中打开。",
+        "tooLarge": "文件过大，请在 Drive 中打开。",
+        "incomplete": "下载不完整，请在 Drive 中打开照片。",
+        "network": "无法连接，请检查网络。",
+        "unknown": "保存失败，请重试。"
       }
     }
   },

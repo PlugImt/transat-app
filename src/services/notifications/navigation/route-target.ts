@@ -4,7 +4,7 @@ import type { BottomTabParamList } from "@/types";
 type TabName =
   | "HomeScreen"
   | "ServicesScreen"
-  | "GamesScreen"
+  | "PhotosScreen"
   | "AccountScreen";
 
 type ScreenName = keyof BottomTabParamList;
@@ -38,6 +38,16 @@ export const servicesRoute = <S extends ScreenName>(
   ...args: ScreenArgs<S>
 ): RouteTarget => ({
   tab: "ServicesScreen",
+  screen,
+  params: (args as [object?])[0],
+});
+
+/** Route inside the Photos stack. */
+export const photosRoute = <S extends ScreenName>(
+  screen: S,
+  ...args: ScreenArgs<S>
+): RouteTarget => ({
+  tab: "PhotosScreen",
   screen,
   params: (args as [object?])[0],
 });

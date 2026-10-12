@@ -219,7 +219,10 @@
       "toggleEvents": "Ser notificado cuando se cree un nuevo evento",
       "eventReminders": "Recordatorios de eventos",
       "toggleEventReminders": "Ser notificado una hora antes de los eventos a los que asistes o de tus clubes",
-      "toggleReservations": "Ser notificado sobre tus reservas"
+      "toggleReservations": "Ser notificado sobre tus reservas",
+      "togglePhotos": "Recibir una notificación cuando haya un nuevo álbum de evento",
+      "permissionOff": "Las notificaciones están desactivadas para Transat en este teléfono. Actívalas en los ajustes del teléfono para recibirlas; tu elección de arriba no cambia.",
+      "openSystemSettings": "Abrir ajustes del teléfono"
     },
     "hapticFeedback": {
       "title": "Retroalimentación táctil",
@@ -652,6 +655,7 @@
   },
   "games": {
     "title": "Juegos",
+    "description": "Los juegos de la app, empezando por la Cuenca",
     "bassine": {
       "title": "Cuenca",
       "description": "Cuando se sirve una cerveza, la cuenca se llena poco a poco, y cuando está llena puedes pedir que se llene tu vaso con\n\nPor cada vaso lleno, actualiza tu contador para ser el rey de la cuenca 👑",
@@ -676,6 +680,138 @@
         "followingPlace_other": "está {{count}} cuencas delante de ti",
         "tookBassine_one": "tomó {{count}} cuenca",
         "tookBassine_other": "tomó {{count}} cuencas"
+      }
+    }
+  },
+  "photos": {
+    "title": "Fotos",
+    "tabs": {
+      "gallery": "Galería",
+      "albums": "Álbumes"
+    },
+    "selection": {
+      "select": "Seleccionar",
+      "hint": "Los originales se guardan en tu biblioteca",
+      "count_one": "{{count}} seleccionada",
+      "count_other": "{{count}} seleccionadas",
+      "saving": "Guardando {{done}}/{{total}}…",
+      "close": "Cancelar selección",
+      "download": "Descargar",
+      "downloadCount_one": "Descargar {{count}} foto",
+      "downloadCount_other": "Descargar {{count}} fotos",
+      "retry": "Reintentar",
+      "busy": "Ya hay una descarga en curso.",
+      "limit": "Puedes seleccionar hasta {{count}} fotos a la vez.",
+      "saved_one": "{{count}} foto guardada en tu biblioteca.",
+      "saved_other": "{{count}} fotos guardadas en tu biblioteca.",
+      "partial": "{{saved}} guardadas, {{failed}} con error. Las fotos con error siguen seleccionadas.",
+      "failedAll_one": "No se pudo guardar la foto.",
+      "failedAll_other": "No se pudo guardar ninguna de las {{count}} fotos.",
+      "failedCount_one": "{{count}} con error",
+      "failedCount_other": "{{count}} con error",
+      "cancelled_one": "Cancelado. {{count}} foto guardada.",
+      "cancelled_other": "Cancelado. {{count}} fotos guardadas.",
+      "reason": {
+        "permission": "Permite el acceso a tu biblioteca",
+        "permissionBlocked": "Acceso denegado: abre Ajustes",
+        "unsupported": "Formato no guardable (RAW)",
+        "tooLarge": "Archivo demasiado grande",
+        "incomplete": "Descarga incompleta",
+        "missing": "Foto ya no disponible",
+        "storage": "Espacio de almacenamiento insuficiente",
+        "network": "Error de red",
+        "unknown": "Algo salió mal"
+      }
+    },
+    "albumUnavailable": "Este álbum ya no está disponible",
+    "albumUnavailableHint": "Puede que se haya eliminado o que aún no esté publicado.",
+    "backToPhotos": "Volver a Fotos",
+    "share": "Compartir álbum",
+    "layout": {
+      "title": "Vista de cuadrícula",
+      "compact": "Compacta",
+      "standard": "Estándar",
+      "mosaic": "Mosaico"
+    },
+    "empty": "Aún no hay fotos",
+    "emptyAlbums": "Aún no hay álbumes",
+    "photoCount_one": "{{count}} foto",
+    "photoCount_other": "{{count}} fotos",
+    "today": "Hoy",
+    "yesterday": "Ayer",
+    "academicYear": "Curso {{year}}",
+    "otherAlbums": "Otros álbumes",
+    "dateUnknown": "Fecha no indicada",
+    "photosFrom": "Fotos del {{date}}",
+    "openFolderInDrive": "Abrir la carpeta en Google Drive",
+    "openFailed": "No se pudo abrir Google Drive.",
+    "loadMoreFailed": "No se pudo cargar más. Toca para reintentar.",
+    "a11y": {
+      "photo": "Foto del {{date}}",
+      "video": "Vídeo del {{date}}. Abre Google Drive."
+    },
+    "viewer": {
+      "more": "Más opciones",
+      "share": "Compartir foto",
+      "report": {
+        "action": "Denunciar foto",
+        "title": "Denunciar esta foto",
+        "intro": "Denunciar no elimina ni oculta la foto: pide a los responsables que la revisen.",
+        "reasonLabel": "Motivo",
+        "reasons": {
+          "appears_in_photo": "Eliminar esta foto porque aparezco en ella",
+          "inappropriate": "Contenido inapropiado o NSFW",
+          "poor_quality": "Foto de mala calidad o inutilizable",
+          "other": "Otro"
+        },
+        "commentLabel": "Comentario (opcional)",
+        "commentLabelRequired": "Comentario (obligatorio)",
+        "commentRequired": "Describe el problema para enviar la denuncia.",
+        "commentPlaceholder": "Describe el problema",
+        "commentHint": "Cuantos más detalles des, más fácil será para los responsables revisar la denuncia.",
+        "privacy": "Tu nombre y tu correo electrónico se comparten con las personas que revisan la denuncia.",
+        "counter": "{{count}}/{{max}}",
+        "submit": "Enviar denuncia",
+        "chooseReason": "Elige un motivo para enviar la denuncia.",
+        "successTitle": "Denuncia enviada",
+        "successBody": "Gracias. Los responsables revisarán esta foto. Seguirá visible hasta que decidan.",
+        "errors": {
+          "rateLimited": "Has enviado demasiadas denuncias. Inténtalo más tarde.",
+          "photoGone": "Esta foto ya no está disponible.",
+          "invalid": "La denuncia no es válida. Revisa el motivo y el comentario.",
+          "network": "No se pudo conectar. Comprueba tu red e inténtalo de nuevo.",
+          "unknown": "No se pudo enviar la denuncia. Inténtalo de nuevo."
+        }
+      },
+      "event": "Evento",
+      "folder": "Carpeta",
+      "fileName": "Nombre del archivo",
+      "captured": "Capturada",
+      "fromFileName": "del nombre del archivo",
+      "dateApprox": "Fecha (aproximada)",
+      "size": "Tamaño",
+      "close": "Cerrar",
+      "save": "Guardar",
+      "openInDrive": "Abrir en Drive",
+      "info": "Info",
+      "infoError": "No se pudo cargar la información. Toca para reintentar.",
+      "viewAlbum": "Ver álbum",
+      "openEventFolder": "Carpeta del evento",
+      "openFolder": "Carpeta de la foto",
+      "openSettings": "Ajustes",
+      "status": {
+        "shareFailed": "No se pudo compartir.",
+        "missing": "Esta foto ya no está disponible.",
+        "storage": "No hay suficiente espacio en tu dispositivo.",
+        "saved": "Foto guardada en tu biblioteca.",
+        "openFailed": "No se pudo abrir Google Drive.",
+        "permission": "Permite el acceso a la biblioteca para guardar la foto.",
+        "permissionBlocked": "Acceso a la biblioteca denegado. Actívalo en Ajustes.",
+        "unsupported": "Este formato (RAW) no se puede guardar. Ábrelo en Drive.",
+        "tooLarge": "Archivo demasiado grande. Ábrelo en Drive.",
+        "incomplete": "Descarga incompleta. Abre la foto en Drive.",
+        "network": "Sin conexión. Revisa tu red.",
+        "unknown": "No se pudo guardar. Inténtalo de nuevo."
       }
     }
   },

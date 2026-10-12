@@ -6,6 +6,7 @@ export * from "./homework";
 export * from "./laundry";
 export * from "./menu";
 export * from "./notification";
+export * from "./photos";
 export * from "./reservation";
 export * from "./timetable";
 export * from "./user";

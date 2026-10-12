@@ -21,7 +21,8 @@ export type ServiceType =
   | "fourchettas"
   | "clubs"
   | "reservation"
-  | "events";
+  | "events"
+  | "games";
 
 export type PreferenceId = WidgetType | ServiceType;
 
@@ -44,6 +45,7 @@ const ACADEMICS_RESTRICTED_PREFERENCE_IDS = new Set<PreferenceId>([
   "reservation",
   "traq",
   "olimtpe",
+  "games",
 ]);
 
 export const isAcademicsRestrictedPreference = (
@@ -164,6 +166,14 @@ const getDefaultServices = (
       enabled: true,
       order: 6,
       image: require("@/assets/images/services/event.png"),
+    },
+    {
+      id: "games",
+      name: t("games.title"),
+      description: t("games.description"),
+      screen: "Games",
+      enabled: true,
+      order: 7,
     },
   ];
 };

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import i18n from "@/i18n";
+import { useTranslation } from "react-i18next";
 
 interface LanguageOption {
   code: string;
@@ -20,6 +20,8 @@ export const useLanguageOptions = () => {
     useState<LanguageOption | null>(null);
   const [otherLanguages, setOtherLanguages] = useState<LanguageOption[]>([]);
 
+  // The hook (not the i18n singleton) re-renders this component when the language changes.
+  const { i18n } = useTranslation();
   const currentLanguage = i18n.language;
 
   useEffect(() => {
@@ -41,7 +43,7 @@ export const useLanguageOptions = () => {
 
     setCurrentLanguageOption(currentLang || null);
     setOtherLanguages(otherLangs);
-  }, [currentLanguage]);
+  }, [currentLanguage, i18n.options.resources]);
 
   return {
     currentLanguageOption,

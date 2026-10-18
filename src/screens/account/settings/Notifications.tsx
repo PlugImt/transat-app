@@ -106,22 +106,25 @@ export const Notifications = () => {
                 disabled={isPending || savingService === type}
               />
             </View>
-            {/* Photos is opt-in: saying yes here is not the same as the phone allowing notifications. */}
-            {type === "PHOTOS" && granted === false && (
-              <View className="gap-3">
-                <Text variant="sm" color="muted">
-                  {t("settings.notifications.permissionOff")}
-                </Text>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  label={t("settings.notifications.openSystemSettings")}
-                  onPress={openSystemSettings}
-                />
-              </View>
-            )}
           </View>
         ))}
+        {/* The phone's permission is separate from the choices above: it is only reported, never changed here. */}
+        {granted === false && (
+          <View className="gap-6">
+            <Divider />
+            <View className="gap-3">
+              <Text variant="sm" color="muted">
+                {t("settings.notifications.permissionOff")}
+              </Text>
+              <Button
+                variant="secondary"
+                size="sm"
+                label={t("settings.notifications.openSystemSettings")}
+                onPress={openSystemSettings}
+              />
+            </View>
+          </View>
+        )}
       </View>
     </Page>
   );

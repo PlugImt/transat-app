@@ -1,17 +1,11 @@
 import {
   createContext,
-  default as React,
   type ReactNode,
   useContext,
   useEffect,
   useState,
 } from "react";
-import {
-  type ColorSchemeName,
-  Appearance as NativeAppearance,
-  StatusBar,
-  useColorScheme,
-} from "react-native";
+import { type ColorSchemeName, StatusBar, useColorScheme } from "react-native";
 import { storage } from "@/services/storage/asyncStorage";
 import STORAGE_KEYS from "@/services/storage/constants";
 import colors from "@/themes/colors";

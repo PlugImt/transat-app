@@ -1,6 +1,7 @@
 import * as Notifications from "expo-notifications";
 import { useCallback, useEffect, useState } from "react";
 import { AppState, Linking } from "react-native";
+import { isNotificationAllowed } from "@/services/notifications/permission";
 
 /** The operating system's push permission, which is separate from the choices made in the app. */
 export const useNotificationPermission = () => {
@@ -9,8 +10,8 @@ export const useNotificationPermission = () => {
 
   const refresh = useCallback(async () => {
     try {
-      const { granted: isGranted } = await Notifications.getPermissionsAsync();
-      setGranted(isGranted);
+      const permission = await Notifications.getPermissionsAsync();
+      setGranted(isNotificationAllowed(permission));
     } catch {
       setGranted(null);
     }

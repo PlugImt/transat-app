@@ -31,8 +31,15 @@ export const useLaundry = () => {
 };
 
 export const useLaundryStats = () => {
-  const { washingMachines, dryers, isPending, isFetching, isError, error, refetch } =
-    useLaundry();
+  const {
+    washingMachines,
+    dryers,
+    isPending,
+    isFetching,
+    isError,
+    error,
+    refetch,
+  } = useLaundry();
 
   const availableWashers = washingMachines.filter(
     (machine: LaundryWithType) => machine.available,

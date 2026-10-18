@@ -10,10 +10,8 @@ import { EventCard, EventCardSkeleton } from "../components/EventCard";
 export const ClubEventWidget = ({ clubId }: { clubId: number }) => {
   const { t } = useTranslation();
   const navigation = useNavigation<AppNavigation>();
-  const { data, isPending, isFetching, isError, error, refetch } = useClubEvents(
-    clubId,
-    "upcoming",
-  );
+  const { data, isPending, isFetching, isError, error, refetch } =
+    useClubEvents(clubId, "upcoming");
 
   return (
     <WidgetBoundary

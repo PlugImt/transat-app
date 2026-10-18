@@ -8,9 +8,10 @@ import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Linking } from "react-native";
 import { useToast } from "@/components/common/Toast";
+import { useIsAcademics } from "@/hooks/account";
+import { notificationLog } from "@/services/notifications/log";
 import {
-  isExternalLink,
-  resolveNotificationRoute,
+  openNotification,
   toNavbarParams,
 } from "@/services/notifications/navigation";
 import type { AppStackParamList } from "@/types";
@@ -25,8 +26,19 @@ export const useNotificationNavigation = () => {
   const queryClient = useQueryClient();
   const { toast } = useToast();
   const { t } = useTranslation();
+  const isAcademics = useIsAcademics();
   const response = Notifications.useLastNotificationResponse();
   const handledId = useRef<string | null>(null);
+  const latestTap = useRef(0);
+  const mounted = useRef(false);
+
+  // Leaving the navigator (sign-out) makes any tap still being resolved obsolete.
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
 
   useEffect(() => {
     if (!response) {
@@ -41,26 +53,29 @@ export const useNotificationNavigation = () => {
     if (handledId.current === identifier) return;
     handledId.current = identifier;
 
+    const tap = ++latestTap.current;
+    const isCurrent = () => mounted.current && latestTap.current === tap;
     const open = async () => {
       try {
-        const route = await resolveNotificationRoute(content.data, queryClient);
-        if (route?.target) {
-          if (isExternalLink(route.target)) {
-            await Linking.openURL(route.target.url);
-          } else {
-            navigation.navigate("Navbar", toNavbarParams(route.target));
-          }
-        }
-        if (route?.unavailable) {
-          toast(t("common.errors.notificationUnavailable"), "info");
-        }
+        await openNotification(content.data, {
+          queryClient,
+          access: { isAcademics },
+          navigate: (target) =>
+            navigation.navigate("Navbar", toNavbarParams(target)),
+          openUrl: (url) => Linking.openURL(url),
+          notifyUnavailable: () =>
+            toast(t("common.errors.notificationUnavailable"), "info"),
+          isCurrent,
+        });
       } catch (error) {
-        console.warn("[Notifications] Failed to open destination", error);
+        notificationLog.warn("failed to open notification destination", error);
       } finally {
         // Consumed: it must not replay when this navigator remounts.
-        await Notifications.clearLastNotificationResponseAsync();
+        if (isCurrent()) {
+          await Notifications.clearLastNotificationResponseAsync();
+        }
       }
     };
     open();
-  }, [response, navigation, queryClient, toast, t]);
+  }, [response, navigation, queryClient, toast, t, isAcademics]);
 };

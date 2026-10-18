@@ -14,7 +14,8 @@ import { RestaurantClosed } from "./components/RestaurantMenu/RestaurantClosed";
 export const Restaurant = () => {
   const { t } = useTranslation();
 
-  const { menu, isPending, isFetching, refetch, isError, error } = useMenuRestaurant();
+  const { menu, isPending, isFetching, refetch, isError, error } =
+    useMenuRestaurant();
   const openingHoursData = getOpeningHoursData(t);
   const weekend: boolean = isWeekend();
   const outOfHours: boolean = menu?.updatedDate

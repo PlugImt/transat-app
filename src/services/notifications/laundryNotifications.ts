@@ -43,6 +43,12 @@ class LaundryNotificationService {
     await storage.set(NOTIFICATION_STORAGE_KEY, notificationsObj);
   }
 
+  /** Forgets every reminder: they belong to the account that is leaving. The system side is cancelled by the caller. */
+  async reset() {
+    this.notifications = new Map();
+    await storage.remove(NOTIFICATION_STORAGE_KEY);
+  }
+
   async scheduleNotification(
     machineNumber: string,
     machineType: string,

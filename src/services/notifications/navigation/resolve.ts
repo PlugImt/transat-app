@@ -6,7 +6,13 @@ import {
   notificationNavigationSchema,
 } from "@/dto/notification";
 import { DESTINATIONS, type ResolvedDestination } from "./destinations";
-import type { ExternalLink, RouteTarget } from "./route-target";
+import {
+  type ExternalLink,
+  isExternalLink,
+  isRouteAvailable,
+  type NavigationAccess,
+  type RouteTarget,
+} from "./route-target";
 
 const CHECK_TIMEOUT_MS = 3000;
 const GONE_STATUSES = new Set([403, 404, 410]);
@@ -16,6 +22,13 @@ export type NotificationRoute = {
   target: RouteTarget | ExternalLink | null;
   /** The entity is gone or no longer accessible, so `target` is the fallback. */
   unavailable: boolean;
+};
+
+export type ResolveOptions = {
+  /** How long the entity check may take before the page opens anyway. */
+  timeoutMs?: number;
+  /** The account's access; without it nothing is withheld. */
+  access?: NavigationAccess;
 };
 
 const parseJson = (value: unknown) => {
@@ -73,16 +86,24 @@ const isGone = (error: unknown) =>
  * Resolves the route a tapped notification should open, or null if its payload
  * is unknown or invalid. Never throws: any failure other than "entity gone"
  * (offline, slow API...) still opens the page, which shows its own error state.
+ *
+ * The payload only names an entity: whether this account may see it is decided by
+ * the API (403/404/410 send the user to the fallback) and by `access`.
  */
 export const resolveNotificationRoute = async (
   data: unknown,
   queryClient: QueryClient,
-  timeoutMs = CHECK_TIMEOUT_MS,
+  { timeoutMs = CHECK_TIMEOUT_MS, access }: ResolveOptions = {},
 ): Promise<NotificationRoute | null> => {
   const destination = resolveDestination(data);
   if (!destination) return null;
 
+  const reachable = (target: RouteTarget | ExternalLink) =>
+    isExternalLink(target) || !access || isRouteAvailable(target, access);
   const { target, fallback, check } = destination;
+  const fallbackRoute = fallback && reachable(fallback) ? fallback : null;
+
+  if (!reachable(target)) return { target: fallbackRoute, unavailable: true };
   if (!check) return { target, unavailable: false };
 
   try {
@@ -90,7 +111,7 @@ export const resolveNotificationRoute = async (
     return { target: refined ?? target, unavailable: false };
   } catch (error) {
     if (isGone(error)) {
-      return { target: fallback ?? null, unavailable: true };
+      return { target: fallbackRoute, unavailable: true };
     }
     return { target, unavailable: false };
   }

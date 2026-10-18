@@ -18,9 +18,19 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 export const RootNavigator = () => {
   const { user } = useAuth();
   const { theme } = useTheme();
-  usePushNotifications();
   const [isI18nReady, setIsI18nReady] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState<boolean | null>(null);
+  // Which account the onboarding answer is about: after a logout the old answer is stale for the next login.
+  const [onboardingCheckedFor, setOnboardingCheckedFor] = useState<
+    string | null
+  >(null);
+  // The system permission prompt comes once the user is in the app, not in the middle of login or onboarding.
+  usePushNotifications({
+    canPrompt:
+      Boolean(user) &&
+      showOnboarding === false &&
+      onboardingCheckedFor === user?.email,
+  });
 
   useEffect(() => {
     i18nInitializedPromise.then(() => {
@@ -32,6 +42,7 @@ export const RootNavigator = () => {
     // If user is not logged in, we don't need to check onboarding
     if (user === null) {
       setShowOnboarding(false);
+      setOnboardingCheckedFor(null);
       return;
     }
 
@@ -50,6 +61,7 @@ export const RootNavigator = () => {
         // On error, show onboarding by default
         setShowOnboarding(true);
       }
+      setOnboardingCheckedFor(user.email);
     };
 
     // Add a small delay to ensure storage is updated after verifyCode

@@ -1,5 +1,5 @@
 import * as Sentry from "@sentry/react-native";
-import React, { createContext, type FC, useCallback } from "react";
+import React, { createContext, type FC } from "react";
 import { ApiError } from "@/api/errors";
 import type { User } from "@/dto";
 import { useUser } from "@/hooks/account/useUser";
@@ -25,7 +25,6 @@ interface AuthContextType {
     language: string,
   ) => Promise<{ success: boolean }>;
   saveToken: (token: string) => Promise<{ success: boolean }>;
-  saveExpoPushToken: (token: string) => Promise<boolean | undefined>;
   verifyCode: (
     email: string,
     verification_code: string,
@@ -64,7 +63,6 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     register: registerMutation,
     saveToken: saveTokenMutation,
     logout: logoutMutation,
-    saveExpoPushToken: saveExpoPushTokenMutation,
     resetPassword: resetPasswordMutation,
     changePassword: changePasswordMutation,
   } = useAuthMutations();
@@ -150,19 +148,6 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     }
   };
 
-  const saveExpoPushToken = useCallback(
-    async (token: string) => {
-      try {
-        await saveExpoPushTokenMutation(token);
-        return true;
-      } catch (error) {
-        console.error("Error saving expo push token:", error);
-        return false;
-      }
-    },
-    [saveExpoPushTokenMutation],
-  );
-
   const logout = async () => {
     try {
       await logoutMutation();
@@ -239,7 +224,6 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({
     logout,
     register,
     saveToken,
-    saveExpoPushToken,
     resendCode,
     verifyCode,
     isVerifying,

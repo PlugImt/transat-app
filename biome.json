@@ -7,7 +7,14 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "includes": ["**", "!**/.expo", "!**/expo-env.d.ts"]
+    "includes": [
+      "**",
+      "!**/.expo",
+      "!**/expo-env.d.ts",
+      "!ios",
+      "!android",
+      "!**/*.css"
+    ]
   },
   "formatter": {
     "enabled": true,

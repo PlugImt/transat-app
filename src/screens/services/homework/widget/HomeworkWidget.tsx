@@ -12,14 +12,8 @@ import { HomeworkWidgetLoading } from "./HomeworkWidgetLoading";
 export const HomeworkWidget = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<AppNavigation>();
-  const {
-    upcomingHomeworks,
-    isPending,
-    isFetching,
-    isError,
-    error,
-    refetch,
-  } = useHomework();
+  const { upcomingHomeworks, isPending, isFetching, isError, error, refetch } =
+    useHomework();
 
   const emptyContent = (
     <View className="flex flex-col gap-2 mr-2">

@@ -304,6 +304,11 @@
     "price": "价格",
     "additionalInfo": "附加信息",
     "weather": "天气",
+    "departure": {
+      "title": "下一班公交",
+      "none": "暂无发车",
+      "minutes": "{{count}} 分钟"
+    },
     "traq": {
       "title": "Traq",
       "description": "酒吧提供的所有饮品",

@@ -304,6 +304,11 @@
     "price": "Preço",
     "additionalInfo": "Informações adicionais",
     "weather": "Clima",
+    "departure": {
+      "title": "Próximos autocarros",
+      "none": "Sem partidas",
+      "minutes": "{{count}} min"
+    },
     "traq": {
       "title": "Traq",
       "description": "Todas as bebidas oferecidas no bar",

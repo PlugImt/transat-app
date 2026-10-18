@@ -1,5 +1,6 @@
 import type { ReactElement } from "react";
 import React, { useCallback } from "react";
+import { DepartureWidget } from "@/screens/services/departure/widget/DepartureWidget";
 import { EventWidget } from "@/screens/services/events/widget/EventWidget";
 import { HomeworkWidget } from "@/screens/services/homework/widget/HomeworkWidget";
 import LaundryWidget from "@/screens/services/laundry/widget/LaundryWidget";
@@ -19,6 +20,7 @@ export function useWidgetComponents() {
       events: () => React.createElement(EventWidget),
       laundry: () => React.createElement(LaundryWidget),
       reservation: () => React.createElement(ReservationWidget),
+      departure: () => React.createElement(DepartureWidget),
     }),
     [],
   );

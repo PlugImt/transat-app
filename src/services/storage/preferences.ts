@@ -9,7 +9,8 @@ export type WidgetType =
   | "laundry"
   | "fourchettas"
   | "events"
-  | "reservation";
+  | "reservation"
+  | "departure";
 
 export type ServiceType =
   | "laundry"
@@ -93,6 +94,13 @@ const getDefaultHomeWidgets = (t: (key: string) => string): Preference[] => [
     name: t("services.laundry.title"),
     enabled: true,
     order: 3,
+  },
+  // Naolib data for the Chantrerie campus only, so it is opt-in.
+  {
+    id: "departure",
+    name: t("services.departure.title"),
+    enabled: false,
+    order: 7,
   },
 ];
 

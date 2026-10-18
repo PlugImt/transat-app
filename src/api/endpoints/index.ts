@@ -1,4 +1,5 @@
 export * from "./club";
+export * from "./departure";
 export * from "./device";
 export * from "./games";
 export * from "./homework";

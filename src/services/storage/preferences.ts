@@ -95,11 +95,10 @@ const getDefaultHomeWidgets = (t: (key: string) => string): Preference[] => [
     enabled: true,
     order: 3,
   },
-  // Naolib data for the Chantrerie campus only, so it is opt-in.
   {
     id: "departure",
     name: t("services.departure.title"),
-    enabled: false,
+    enabled: true,
     order: 7,
   },
 ];

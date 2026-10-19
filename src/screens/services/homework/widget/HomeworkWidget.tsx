@@ -1,6 +1,7 @@
 import { useNavigation } from "expo-router/react-navigation";
 import { useTranslation } from "react-i18next";
-import { TouchableOpacity, View } from "react-native";
+import { TouchableOpacity } from "react-native";
+import CardGroup from "@/components/common/CardGroup";
 import { Text } from "@/components/common/Text";
 import { WidgetBoundary } from "@/components/query";
 import type { Homework } from "@/dto";
@@ -16,12 +17,9 @@ export const HomeworkWidget = () => {
     useHomework();
 
   const emptyContent = (
-    <View className="flex flex-col gap-2 mr-2">
-      <Text className="ml-4" variant="h3">
-        {t("services.homework.title")}
-      </Text>
+    <CardGroup title={t("services.homework.title")}>
       <Text className="ml-4 italic">{t("services.homework.noHomework")}</Text>
-    </View>
+    </CardGroup>
   );
 
   return (
@@ -38,10 +36,7 @@ export const HomeworkWidget = () => {
       isEmpty={!upcomingHomeworks?.length}
       empty={emptyContent}
     >
-      <View className="flex flex-col gap-2">
-        <Text className="ml-4" variant="h3">
-          {t("services.homework.title")}
-        </Text>
+      <CardGroup title={t("services.homework.title")}>
         <TouchableOpacity
           onPress={() => navigation.navigate("Homework")}
           className="rounded-lg flex flex-col gap-3"
@@ -50,7 +45,7 @@ export const HomeworkWidget = () => {
             <HomeworkWidgetItem key={hw.id} homework={hw} />
           ))}
         </TouchableOpacity>
-      </View>
+      </CardGroup>
     </WidgetBoundary>
   );
 };

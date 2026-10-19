@@ -17,11 +17,15 @@ import { QUERY_KEYS } from "@/constants";
 import { hapticFeedback } from "@/utils/haptics.utils";
 import type { AddEventFormData } from "./types";
 
-export const useEvents = (time: EventTimeFilter = "upcoming") => {
+export const useEvents = (
+  time: EventTimeFilter = "upcoming",
+  options?: { enabled?: boolean },
+) => {
   const { data, isPending, isFetching, refetch, isError, error } = useQuery({
     queryKey: [...QUERY_KEYS.event.events, time],
     queryFn: () => getEvents(time),
     staleTime: 1000 * 60 * 5,
+    enabled: options?.enabled,
   });
 
   return { data, isPending, isFetching, refetch, isError, error };

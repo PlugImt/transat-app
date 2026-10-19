@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import Card from "@/components/common/Card";
+import CardGroup from "@/components/common/CardGroup";
 import { Text } from "@/components/common/Text";
 import { WidgetBoundary } from "@/components/query";
 import { TextSkeleton } from "@/components/Skeleton";
@@ -57,14 +58,15 @@ export const DepartureWidget = () => {
       query={{ isPending, isFetching, isError, error, refetch }}
       loading={<DepartureSkeleton />}
     >
-      <Card className="gap-3">
-        <Text variant="lg">{t("services.departure.title")}</Text>
-        <View className="flex-row justify-between">
-          {(data?.lines ?? []).map((line) => (
-            <LineColumn key={line.name} line={line} now={now} />
-          ))}
-        </View>
-      </Card>
+      <CardGroup title={t("services.departure.title")}>
+        <Card>
+          <View className="flex-row justify-between">
+            {(data?.lines ?? []).map((line) => (
+              <LineColumn key={line.name} line={line} now={now} />
+            ))}
+          </View>
+        </Card>
+      </CardGroup>
     </WidgetBoundary>
   );
 };
@@ -114,17 +116,22 @@ const LineColumn = ({ line, now }: { line: Line; now: number }) => {
   );
 };
 
-export const DepartureSkeleton = () => (
-  <Card className="gap-3">
-    <TextSkeleton variant="lg" className="w-32" />
-    <View className="flex-row justify-between">
-      {[0, 1, 2].map((index) => (
-        <View key={index} className="flex-1 items-center gap-2">
-          <TextSkeleton variant="lg" className="w-12" />
-          <TextSkeleton variant="h3" className="w-14" />
-          <TextSkeleton variant="sm" className="w-10" />
+export const DepartureSkeleton = () => {
+  const { t } = useTranslation();
+
+  return (
+    <CardGroup title={t("services.departure.title")}>
+      <Card>
+        <View className="flex-row justify-between">
+          {[0, 1, 2].map((index) => (
+            <View key={index} className="flex-1 items-center gap-2">
+              <TextSkeleton variant="lg" className="w-12" />
+              <TextSkeleton variant="h3" className="w-14" />
+              <TextSkeleton variant="sm" className="w-10" />
+            </View>
+          ))}
         </View>
-      ))}
-    </View>
-  </Card>
-);
+      </Card>
+    </CardGroup>
+  );
+};

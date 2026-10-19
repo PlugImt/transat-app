@@ -15,8 +15,8 @@ interface CardGroupProps {
 const CardGroup = ({ title, children, className, onPress }: CardGroupProps) => {
   const { t } = useTranslation();
   return (
-    <View className={cn(!onPress && "gap-2", className)}>
-      <View className="flex-row items-center justify-between gap-4">
+    <View className={cn("gap-2", className)}>
+      <View className="h-8 flex-row items-center justify-between gap-4">
         <Text variant="h3" className="ml-4">
           {title}
         </Text>
@@ -25,6 +25,7 @@ const CardGroup = ({ title, children, className, onPress }: CardGroupProps) => {
             label={t("common.seeMore")}
             onPress={onPress}
             variant="link"
+            size="sm"
           />
         )}
       </View>

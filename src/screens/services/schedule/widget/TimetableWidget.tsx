@@ -1,6 +1,7 @@
 import { useNavigation } from "expo-router/react-navigation";
 import { useTranslation } from "react-i18next";
 import { TouchableOpacity, View } from "react-native";
+import CardGroup from "@/components/common/CardGroup";
 import { Text } from "@/components/common/Text";
 import { WidgetBoundary } from "@/components/query";
 import type { Course } from "@/dto";
@@ -84,10 +85,7 @@ export const TimetableWidget = () => {
     (!isMorningNow && noCoursesAfternoon);
 
   const emptyContent = (
-    <View className="flex flex-col gap-2 mr-2">
-      <Text className="ml-4" variant="h3">
-        {t("services.timetable.title")}
-      </Text>
+    <CardGroup title={t("services.timetable.title")}>
       <TouchableOpacity
         onPress={() => navigation.navigate("Timetable")}
         className="rounded-lg flex flex-col gap-3"
@@ -123,7 +121,7 @@ export const TimetableWidget = () => {
           )}
         </View>
       </TouchableOpacity>
-    </View>
+    </CardGroup>
   );
 
   return (
@@ -140,11 +138,7 @@ export const TimetableWidget = () => {
       isEmpty={showEmptyState}
       empty={emptyContent}
     >
-      <View className="flex flex-col gap-2">
-        <Text className="ml-4" variant="h3">
-          {t("services.timetable.title")}
-        </Text>
-
+      <CardGroup title={t("services.timetable.title")}>
         <TouchableOpacity
           onPress={() => navigation.navigate("Timetable")}
           className="rounded-lg flex flex-col gap-3"
@@ -153,7 +147,7 @@ export const TimetableWidget = () => {
             <TimetableCourseWidget key={course.id} course={course} />
           ))}
         </TouchableOpacity>
-      </View>
+      </CardGroup>
     </WidgetBoundary>
   );
 };

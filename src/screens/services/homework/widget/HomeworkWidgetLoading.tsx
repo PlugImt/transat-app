@@ -1,18 +1,20 @@
 import { useNavigation } from "expo-router/react-navigation";
+import { useTranslation } from "react-i18next";
 import { TouchableOpacity, View } from "react-native";
+import CardGroup from "@/components/common/CardGroup";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { AppNavigation } from "@/types";
 
 export const HomeworkWidgetLoading = () => {
+  const { t } = useTranslation();
   const { theme } = useTheme();
   const navigation = useNavigation<AppNavigation>();
 
   const skeletonCount = () => Math.floor(Math.random() * 3) + 1;
 
   return (
-    <View className="flex flex-col gap-2">
-      <TextSkeleton lastLineWidth={128} />
+    <CardGroup title={t("services.homework.title")}>
       <TouchableOpacity
         onPress={() => navigation.navigate("Homework")}
         className="px-6 py-4 rounded-lg flex flex-col gap-6"
@@ -42,6 +44,6 @@ export const HomeworkWidgetLoading = () => {
           ))}
         </View>
       </TouchableOpacity>
-    </View>
+    </CardGroup>
   );
 };

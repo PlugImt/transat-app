@@ -1,4 +1,5 @@
 import { useNow } from "@/hooks/common";
+import { useEvents } from "@/hooks/services/event/useEvent";
 import { useMyReservations } from "@/hooks/services/reservation";
 import type { Preference } from "@/services/storage/preferences";
 import { getActiveReservations } from "@/utils/reservation.utils";
@@ -20,7 +21,15 @@ export const useVisibleWidgets = (widgets: Preference[]): Preference[] => {
     !!reservations &&
     getActiveReservations(reservations.current, now).length === 0;
 
+  const hasEventsWidget = widgets.some((widget) => widget.id === "events");
+  const { data: events } = useEvents("upcoming", {
+    enabled: hasEventsWidget,
+  });
+  const hasNoEvents = !!events && events.length === 0;
+
   return widgets.filter(
-    (widget) => !(widget.id === "reservation" && hasNoReservation),
+    (widget) =>
+      !(widget.id === "reservation" && hasNoReservation) &&
+      !(widget.id === "events" && hasNoEvents),
   );
 };

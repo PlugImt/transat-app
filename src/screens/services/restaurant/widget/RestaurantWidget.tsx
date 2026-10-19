@@ -3,7 +3,7 @@ import { useNavigation } from "expo-router/react-navigation";
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { Dimensions, TouchableOpacity, View } from "react-native";
+import { Dimensions, View } from "react-native";
 import Card from "@/components/common/Card";
 import CardGroup from "@/components/common/CardGroup";
 import Image from "@/components/common/Image";
@@ -89,10 +89,7 @@ export const RestaurantWidget = () => {
     !updatedToday
   ) {
     return (
-      <View className="flex flex-col gap-2">
-        <Text className="ml-4" variant="h3">
-          {title}
-        </Text>
+      <CardGroup title={title}>
         <Card className="flex flex-row gap-4 items-center">
           <Image
             source={require("@/assets/images/services/restaurant.png")}
@@ -149,7 +146,7 @@ export const RestaurantWidget = () => {
             )}
           </View>
         </Card>
-      </View>
+      </CardGroup>
     );
   }
 
@@ -165,10 +162,7 @@ export const RestaurantWidget = () => {
 
   if (!hasMenuItems) {
     return (
-      <View className="flex flex-col gap-2">
-        <Text className="ml-4" variant="h3">
-          {title}
-        </Text>
+      <CardGroup title={title}>
         <Card className="flex flex-row gap-4 items-center">
           <Image
             source={require("@/assets/images/services/restaurant.png")}
@@ -197,23 +191,12 @@ export const RestaurantWidget = () => {
             )}
           </View>
         </Card>
-      </View>
+      </CardGroup>
     );
   }
 
   return (
-    <View className="flex flex-col gap-2">
-      <View className="flex flex-row items-center justify-between gap-2">
-        <Text className="ml-4" variant="h3">
-          {title}
-        </Text>
-
-        <TouchableOpacity onPress={() => navigation.navigate("Restaurant")}>
-          <Text variant="sm" color="primary" className="px-4">
-            {t("common.seeMore")}
-          </Text>
-        </TouchableOpacity>
-      </View>
+    <CardGroup title={title} onPress={() => navigation.navigate("Restaurant")}>
       <Card
         onPress={() => navigation.navigate("Restaurant")}
         className="relative overflow-hidden h-60"
@@ -324,7 +307,7 @@ export const RestaurantWidget = () => {
           }}
         />
       </Card>
-    </View>
+    </CardGroup>
   );
 };
 

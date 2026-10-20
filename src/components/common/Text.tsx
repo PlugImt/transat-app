@@ -23,7 +23,7 @@ export const Text = ({
   const { theme } = useTheme();
 
   const variantClasses: { [key: string]: string } = {
-    h1: "text-3xl font-black",
+    h1: "text-3xl font-extrabold",
     h2: "text-2xl font-bold",
     h3: "text-xl font-bold",
     lg: "text-lg font-bold",

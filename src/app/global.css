@@ -4,7 +4,7 @@
 
 @layer base {
   .h1 {
-    @apply text-3xl font-black text-foreground;
+    @apply text-3xl font-extrabold text-foreground;
   }
 
   .h2 {

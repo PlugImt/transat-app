@@ -6,7 +6,7 @@
     "version": "2.5.2",
     "orientation": "portrait",
     "icon": "./assets/images/icon-bg.png",
-    "scheme": "myapp",
+    "scheme": "transat",
     "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/images/transat.icon",
@@ -74,7 +74,6 @@
       ],
       "@react-native-community/datetimepicker",
       "@sentry/react-native",
-      "./plugins/withSceneLifecycle",
       "expo-image",
       [
         "expo-media-library",
@@ -95,7 +94,8 @@
       }
     },
     "experiments": {
-      "typedRoutes": true
+      "typedRoutes": true,
+      "reactCompiler": true
     }
   }
 }

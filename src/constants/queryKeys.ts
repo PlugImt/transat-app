@@ -62,6 +62,7 @@ export const QUERY_KEYS = {
     ],
     my: (filter: "current" | "past") => ["reservation", "my", filter],
     myAll: ["reservation", "my"],
+    waitlist: ["reservation", "waitlist"],
     search: (q: string) => ["reservation", "search", q],
   },
 };

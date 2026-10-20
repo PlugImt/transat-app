@@ -535,6 +535,29 @@
       "cancelConfirmDesc": "Êtes-vous sûr de vouloir annuler cette réservation ?",
       "confirmCancel": "Oui, j'annule",
       "cancelSuccess": "Réservation annulée",
+      "waitlist": {
+        "join": "M'alerter si disponible",
+        "leave": "Retirer l'alerte",
+        "joined": "Alerte activée : vous êtes n°{{position}} dans la file",
+        "left": "Alerte retirée",
+        "declined": "Alerte retirée",
+        "queued": "Alerte activée, n°{{position}} dans la file",
+        "availableNow": "Disponible maintenant",
+        "waitingForReturn": "En attente de son retour",
+        "sectionTitle": "Alertes",
+        "errors": {
+          "joinError": "Impossible d'activer l'alerte",
+          "leaveError": "Impossible de retirer l'alerte",
+          "takenByOther": "Trop tard : quelqu'un vient de le réserver. Vous gardez votre place dans la file.",
+          "stillAvailable": "C'est disponible : réservez-le directement.",
+          "alreadyQueued": "Vous avez déjà une alerte sur ceci.",
+          "ownReservation": "Vous avez déjà cette réservation.",
+          "queueLimit": "Vous avez trop d'alertes. Retirez-en d'abord.",
+          "notQueued": "Cette alerte n'existe plus.",
+          "invalidStart": "Ce créneau n'est plus réservable.",
+          "itemNotFound": "Cet élément n'existe plus."
+        }
+      },
       "personal": {
         "title": "Mes réservations",
         "emptyUpcoming": "Aucune réservation à venir",

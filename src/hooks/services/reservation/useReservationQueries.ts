@@ -3,6 +3,7 @@ import {
   type CatalogScope,
   getItemSchedule,
   getMyReservations,
+  getMyWaitlist,
   getReservationCatalog,
   searchReservationCatalog,
 } from "@/api/endpoints/reservation/reservation.endpoint";
@@ -29,6 +30,15 @@ export const useItemSchedule = (itemId: number, ymd: string) =>
     queryKey: QUERY_KEYS.reservation.schedule(itemId, ymd),
     queryFn: () => getItemSchedule(itemId, ymd),
     staleTime: 1000 * 30,
+  });
+
+/** Where the user stands in the queues of items and slots that were reserved when they asked to be alerted. */
+export const useMyWaitlist = (options?: { enabled?: boolean }) =>
+  useQuery({
+    queryKey: QUERY_KEYS.reservation.waitlist,
+    queryFn: getMyWaitlist,
+    staleTime: 1000 * 30,
+    enabled: options?.enabled ?? true,
   });
 
 export const useMyReservations = (

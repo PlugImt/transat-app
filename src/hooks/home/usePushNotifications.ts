@@ -1,6 +1,9 @@
 import * as Notifications from "expo-notifications";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { registerNotificationCategories } from "@/services/notifications/categories";
 import { laundryNotificationService } from "@/services/notifications/laundryNotifications";
+import { notificationLog } from "@/services/notifications/log";
 import useAuth from "../account/useAuth";
 import { useDeviceRegistration } from "./useDeviceRegistration";
 
@@ -11,9 +14,21 @@ export function usePushNotifications({
   canPrompt?: boolean;
 } = {}) {
   const { user } = useAuth();
+  const { t } = useTranslation();
   const isAuthenticated = Boolean(user);
 
   useDeviceRegistration({ canPrompt });
+
+  // The buttons of a notification are named by the app, so they follow its language.
+  useEffect(() => {
+    if (!isAuthenticated) return;
+    registerNotificationCategories({
+      reserve: t("services.reservation.reserve"),
+      decline: t("common.cancel"),
+    }).catch((error) =>
+      notificationLog.warn("failed to register notification categories", error),
+    );
+  }, [isAuthenticated, t]);
 
   useEffect(() => {
     if (!isAuthenticated) return;

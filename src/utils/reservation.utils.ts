@@ -1,3 +1,4 @@
+import { ApiError } from "@/api/errors";
 import type {
   MyReservation,
   ReservationCatalog,
@@ -5,6 +6,8 @@ import type {
   ReservationItem,
   ReservationUser,
   ReservedSlot,
+  WaitlistEntry,
+  WaitlistErrorCode,
 } from "@/dto/reservation";
 import { toYYYYMMDD } from "@/utils/date.utils";
 import { buildDaySlots, parseApiDate } from "@/utils/reservation-time";
@@ -101,6 +104,56 @@ export const buildDayView = (
 
 export const formatUserName = (user: ReservationUser) =>
   `${user.first_name} ${user.last_name}`.trim();
+
+/** The queue entry of an item (no `start`) or of one slot, if the user is in it. */
+export const findWaitlistEntry = (
+  entries: WaitlistEntry[] | undefined,
+  itemId: number,
+  start?: Date,
+): WaitlistEntry | undefined =>
+  entries?.find(
+    (entry) =>
+      entry.item_id === itemId &&
+      (start
+        ? entry.start_date !== undefined &&
+          parseApiDate(entry.start_date).getTime() === start.getTime()
+        : entry.start_date === undefined),
+  );
+
+export const waitlistEntryKey = (entry: WaitlistEntry) =>
+  `${entry.item_id}-${entry.start_date ?? "item"}`;
+
+/** Waiting list `code` of a failed call (the API answers `{ error, code }`). */
+export const getWaitlistErrorCode = (
+  error: unknown,
+): WaitlistErrorCode | undefined => {
+  if (!ApiError.isApiError(error)) return undefined;
+  const code = (error.data as { code?: unknown } | undefined)?.code;
+  return typeof code === "string" ? (code as WaitlistErrorCode) : undefined;
+};
+
+const WAITLIST_ERROR_KEYS = {
+  not_available: "services.reservation.waitlist.errors.takenByOther",
+  still_available: "services.reservation.waitlist.errors.stillAvailable",
+  already_queued: "services.reservation.waitlist.errors.alreadyQueued",
+  own_reservation: "services.reservation.waitlist.errors.ownReservation",
+  queue_limit: "services.reservation.waitlist.errors.queueLimit",
+  not_queued: "services.reservation.waitlist.errors.notQueued",
+  invalid_start: "services.reservation.waitlist.errors.invalidStart",
+  item_not_found: "services.reservation.waitlist.errors.itemNotFound",
+} as const satisfies Partial<Record<WaitlistErrorCode, string>>;
+
+/** Translation key explaining a known waiting list failure; undefined for anything else (network, 500...). */
+export const getWaitlistErrorKey = (
+  error: unknown,
+):
+  | (typeof WAITLIST_ERROR_KEYS)[keyof typeof WAITLIST_ERROR_KEYS]
+  | undefined => {
+  const code = getWaitlistErrorCode(error);
+  return code && code in WAITLIST_ERROR_KEYS
+    ? WAITLIST_ERROR_KEYS[code as keyof typeof WAITLIST_ERROR_KEYS]
+    : undefined;
+};
 
 export interface ReservationDayGroup {
   /** Day in the device time zone, YYYY-MM-DD. */

@@ -143,16 +143,26 @@ export const DESTINATIONS: Record<string, DestinationResolver> = {
     schema: z.object({
       id: entityId,
       params: z
-        .object({ date: ymd.optional(), title: z.string().optional() })
+        .object({
+          date: ymd.optional(),
+          title: z.string().optional(),
+          // Waiting list offer: "1", with `start` (API UTC time) for a slot.
+          waitlist: z.string().optional(),
+          start: z.string().optional(),
+        })
         .optional(),
     }),
+    // The offer and its "Réserver" / "Annuler" buttons live in the user's reservations, not in the calendar.
     target: ({ id, params }) =>
-      servicesRoute("ReservationCalendar", {
-        id,
-        title: params?.title,
-        date: params?.date,
-      }),
+      params?.waitlist === "1"
+        ? servicesRoute("MyReservations")
+        : servicesRoute("ReservationCalendar", {
+            id,
+            title: params?.title,
+            date: params?.date,
+          }),
     check: async ({ id, params }, queryClient) => {
+      if (params?.waitlist === "1") return undefined;
       const date = params?.date ?? getParisYmd(new Date());
       const item = await queryClient.fetchQuery({
         queryKey: QUERY_KEYS.reservation.schedule(id, date),

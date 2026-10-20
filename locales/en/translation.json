@@ -489,6 +489,29 @@
       "cancelConfirmDesc": "Are you sure you want to cancel this reservation?",
       "confirmCancel": "Yes, cancel",
       "cancelSuccess": "Reservation canceled!",
+      "waitlist": {
+        "join": "Alert me when available",
+        "leave": "Remove alert",
+        "joined": "Alert set: you are number {{position}} in line",
+        "left": "Alert removed",
+        "declined": "Alert removed",
+        "queued": "Alert on, number {{position}} in line",
+        "availableNow": "Available now",
+        "waitingForReturn": "Waiting for it to be returned",
+        "sectionTitle": "Alerts",
+        "errors": {
+          "joinError": "Unable to set the alert",
+          "leaveError": "Unable to remove the alert",
+          "takenByOther": "Too late: someone else just reserved it. You keep your place in line.",
+          "stillAvailable": "It is available: reserve it directly.",
+          "alreadyQueued": "You already have an alert on this.",
+          "ownReservation": "You already hold this reservation.",
+          "queueLimit": "You have too many alerts. Remove some first.",
+          "notQueued": "This alert no longer exists.",
+          "invalidStart": "This slot can no longer be booked.",
+          "itemNotFound": "This item no longer exists."
+        }
+      },
       "personal": {
         "title": "My reservations",
         "emptyUpcoming": "No upcoming reservations",

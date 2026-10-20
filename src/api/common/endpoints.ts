@@ -41,6 +41,8 @@ export const API_ROUTES: Record<Route, ApiRoute> = {
   reservation: "/reservation",
   reservationCategory: "/reservation/category/:id",
   reservationItem: "/reservation/item/:id",
+  reservationItemWaitlist: "/reservation/item/:id/waitlist",
+  reservationWaitlist: "/reservation/waitlist",
   reservationClub: "/reservation/club/:id",
   reservationMy: "/reservation/me",
   reservationSearch: "/reservation/search",
@@ -98,6 +100,8 @@ type Route =
   | "reservationItem"
   | "reservationClub"
   | "reservationMy"
+  | "reservationItemWaitlist"
+  | "reservationWaitlist"
   | "reservationSearch"
   | "event"
   | "eventClub"

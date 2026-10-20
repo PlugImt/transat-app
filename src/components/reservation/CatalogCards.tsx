@@ -8,17 +8,20 @@ import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { ReservationCategory, ReservationItem } from "@/dto/reservation";
 import {
+  useMyWaitlist,
   useReservationFeedback,
   useReturnItem,
   useTakeItem,
 } from "@/hooks/services/reservation";
 import type { AppNavigation } from "@/types";
 import {
+  findWaitlistEntry,
   formatUserName,
   type ItemAvailability,
 } from "@/utils/reservation.utils";
 import { ActionPill } from "./ActionPill";
 import { ConfirmAction } from "./ConfirmAction";
+import { WaitlistButton } from "./WaitlistButton";
 
 export const CategoryCard = ({
   category,
@@ -105,13 +108,15 @@ export const ItemCard = ({
   const feedback = useReservationFeedback();
   const takeItem = useTakeItem();
   const returnItem = useReturnItem();
+  const { data: waitlist } = useMyWaitlist();
 
   const isMine = availability === "mine";
   const isTaken = availability === "taken";
+  const queueEntry = isTaken ? findWaitlistEntry(waitlist, item.id) : undefined;
 
   const content = (
     <Card
-      className={`flex-row items-center gap-4 ${isTaken ? "opacity-60" : ""}`}
+      className="flex-row items-center gap-4"
       accessibilityLabel={item.name}
       onPress={
         availability === "slot"
@@ -128,6 +133,13 @@ export const ItemCard = ({
           {item.name}
         </Text>
         <StatusLine item={item} availability={availability} />
+        {queueEntry && (
+          <Text variant="sm" color="primary" numberOfLines={1}>
+            {t("services.reservation.waitlist.queued", {
+              position: queueEntry.position,
+            })}
+          </Text>
+        )}
       </View>
       {availability === "slot" && <ChevronRight color={theme.muted} />}
       {availability === "free" && (
@@ -138,6 +150,11 @@ export const ItemCard = ({
           label={t("services.reservation.returnItem")}
           tone="primary"
         />
+      )}
+      {isTaken && (
+        <View className="items-end gap-2">
+          <WaitlistButton itemId={item.id} />
+        </View>
       )}
     </Card>
   );

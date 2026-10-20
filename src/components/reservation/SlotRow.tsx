@@ -6,13 +6,19 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { useDate } from "@/hooks/common/useDate";
 import {
   useCancelSlot,
+  useMyWaitlist,
   useReservationFeedback,
 } from "@/hooks/services/reservation";
 import { hapticFeedback } from "@/utils/haptics.utils";
-import { type DaySlotView, formatUserName } from "@/utils/reservation.utils";
+import {
+  type DaySlotView,
+  findWaitlistEntry,
+  formatUserName,
+} from "@/utils/reservation.utils";
 import { differsFromParis, formatParisTime } from "@/utils/reservation-time";
 import { ActionPill } from "./ActionPill";
 import { ConfirmAction } from "./ConfirmAction";
+import { WaitlistButton } from "./WaitlistButton";
 
 interface SlotRowProps {
   itemId: number;
@@ -27,6 +33,7 @@ export const SlotRow = ({ itemId, slot, selected, onToggle }: SlotRowProps) => {
   const { formatTime } = useDate();
   const feedback = useReservationFeedback();
   const cancelSlot = useCancelSlot();
+  const { data: waitlist } = useMyWaitlist();
 
   const range = `${formatTime(slot.start)} – ${formatTime(slot.end)}`;
   const parisHint = differsFromParis(slot.start)
@@ -58,6 +65,54 @@ export const SlotRow = ({ itemId, slot, selected, onToggle }: SlotRowProps) => {
       },
     );
 
+  if (slot.status === "taken") {
+    const queueEntry = findWaitlistEntry(waitlist, itemId, slot.start);
+
+    return (
+      <View
+        accessibilityLabel={`${range}, ${statusLabel}`}
+        className="flex-row items-center justify-between gap-3 rounded-xl border-[1.5px] px-4 py-3"
+        style={{
+          backgroundColor: theme.card,
+          borderColor: theme.border,
+          opacity: slot.isPast ? 0.45 : 1,
+        }}
+      >
+        <View className="flex-1 gap-0.5">
+          <Text variant="h3">{range}</Text>
+          {parisHint && (
+            <Text variant="sm" color="muted">
+              {parisHint}
+            </Text>
+          )}
+          <View className="flex-row items-center gap-1">
+            <Lock size={14} color={theme.muted} />
+            <Text
+              variant="sm"
+              color="muted"
+              numberOfLines={1}
+              className="flex-shrink"
+            >
+              {statusLabel}
+            </Text>
+          </View>
+          {queueEntry && !slot.isPast && (
+            <Text variant="sm" color="primary">
+              {t("services.reservation.waitlist.queued", {
+                position: queueEntry.position,
+              })}
+            </Text>
+          )}
+        </View>
+        {!slot.isPast && (
+          <View className="items-end gap-2">
+            <WaitlistButton itemId={itemId} start={slot.start} />
+          </View>
+        )}
+      </View>
+    );
+  }
+
   const row = (
     <TouchableOpacity
       activeOpacity={0.7}
@@ -80,7 +135,7 @@ export const SlotRow = ({ itemId, slot, selected, onToggle }: SlotRowProps) => {
       style={{
         backgroundColor: selected ? `${theme.primary}15` : theme.card,
         borderColor: selected ? theme.primary : theme.border,
-        opacity: slot.isPast ? 0.45 : slot.status === "taken" ? 0.7 : 1,
+        opacity: slot.isPast ? 0.45 : 1,
       }}
     >
       <View>
@@ -93,19 +148,6 @@ export const SlotRow = ({ itemId, slot, selected, onToggle }: SlotRowProps) => {
       </View>
 
       <View className="flex-row items-center gap-2 flex-shrink">
-        {slot.status === "taken" && (
-          <>
-            <Lock size={14} color={theme.muted} />
-            <Text
-              variant="sm"
-              color="muted"
-              numberOfLines={1}
-              className="flex-shrink"
-            >
-              {statusLabel}
-            </Text>
-          </>
-        )}
         {slot.status === "mine" && (
           <ActionPill label={statusLabel} tone="primary" />
         )}

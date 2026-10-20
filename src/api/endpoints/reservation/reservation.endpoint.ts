@@ -4,11 +4,15 @@ import { apiRequest } from "@/api/helpers";
 import type {
   ItemSchedule,
   ItemScheduleResponse,
+  JoinWaitlistResponse,
+  LeaveWaitlistResponse,
   MyReservations,
   MyReservationsFilter,
   MyReservationsResponse,
   ReservationCatalog,
   ReservationCatalogResponse,
+  WaitlistEntry,
+  WaitlistResponse,
 } from "@/dto/reservation";
 import { toApiDateTime } from "@/utils/reservation-time";
 
@@ -108,3 +112,48 @@ export const returnItem = (itemId: number) =>
   apiRequest(itemRoute(itemId), Method.PATCH, {
     end_date: toApiDateTime(new Date()),
   });
+
+const waitlistRoute = (itemId: number) =>
+  API_ROUTES.reservationItemWaitlist.replace(":id", String(itemId));
+
+/** The slot is named for slot items only; an item without slot has a single queue. */
+const waitlistBody = (start?: Date) =>
+  start ? { start_date: toApiDateTime(start) } : undefined;
+
+export const getMyWaitlist = async (): Promise<WaitlistEntry[]> => {
+  const response = await apiRequest<WaitlistResponse>(
+    API_ROUTES.reservationWaitlist,
+    Method.GET,
+  );
+  return response.waitlist ?? [];
+};
+
+export const joinWaitlist = (itemId: number, start?: Date) =>
+  apiRequest<JoinWaitlistResponse>(
+    waitlistRoute(itemId),
+    Method.POST,
+    waitlistBody(start),
+  );
+
+export const leaveWaitlist = (itemId: number, start?: Date) =>
+  apiRequest<LeaveWaitlistResponse>(
+    waitlistRoute(itemId),
+    Method.DELETE,
+    waitlistBody(start),
+  );
+
+/** "Réserver" of the waiting list: books at once, 409 `not_available` when someone was faster. */
+export const reserveFromWaitlist = (itemId: number, start?: Date) =>
+  apiRequest(
+    `${waitlistRoute(itemId)}/reserve`,
+    Method.POST,
+    waitlistBody(start),
+  );
+
+/** "Annuler" of the waiting list: leaves the queue and passes the turn to the next person. */
+export const declineWaitlist = (itemId: number, start?: Date) =>
+  apiRequest<LeaveWaitlistResponse>(
+    `${waitlistRoute(itemId)}/decline`,
+    Method.POST,
+    waitlistBody(start),
+  );

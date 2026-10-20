@@ -63,6 +63,48 @@ export const myReservationsResponseSchema = z.object({
   past: z.array(myReservationSchema).nullable().optional(),
 });
 
+/** One place in a queue of interest, for an item without slot or for one slot. */
+export const waitlistEntrySchema = z.object({
+  item_id: z.number(),
+  item_name: z.string(),
+  slot: z.boolean(),
+  /** UTC wall time of the slot, "YYYY-MM-DD HH:mm:ss"; absent for an item without slot. */
+  start_date: z.string().optional(),
+  /** 1 for the first of the queue. */
+  position: z.number(),
+  /** The resource was released and this user has been told, without answering yet. */
+  notified: z.boolean(),
+  joined_at: z.string(),
+});
+
+export const waitlistResponseSchema = z.object({
+  waitlist: z.array(waitlistEntrySchema).nullable().optional(),
+});
+
+export const joinWaitlistResponseSchema = z.object({
+  message: z.string(),
+  position: z.number(),
+});
+
+export const leaveWaitlistResponseSchema = z.object({
+  message: z.string(),
+  next_notified: z.boolean(),
+});
+
+/** Stable `code` of the waiting list errors (HTTP 400, 404 and 409). */
+export const waitlistErrorCodes = [
+  "bad_request",
+  "item_not_found",
+  "start_required",
+  "invalid_start",
+  "still_available",
+  "own_reservation",
+  "already_queued",
+  "queue_limit",
+  "not_queued",
+  "not_available",
+] as const;
+
 export type ReservationUser = z.infer<typeof reservationUserSchema>;
 export type ReservationCategory = z.infer<typeof reservationCategorySchema>;
 export type ReservationItem = z.infer<typeof reservationItemSchema>;
@@ -75,6 +117,11 @@ export type ItemScheduleResponse = z.infer<typeof itemScheduleResponseSchema>;
 export type MyReservationsResponse = z.infer<
   typeof myReservationsResponseSchema
 >;
+export type WaitlistEntry = z.infer<typeof waitlistEntrySchema>;
+export type WaitlistResponse = z.infer<typeof waitlistResponseSchema>;
+export type JoinWaitlistResponse = z.infer<typeof joinWaitlistResponseSchema>;
+export type LeaveWaitlistResponse = z.infer<typeof leaveWaitlistResponseSchema>;
+export type WaitlistErrorCode = (typeof waitlistErrorCodes)[number];
 
 /** API responses with nulls replaced by empty lists. */
 export type ReservationCatalog = {

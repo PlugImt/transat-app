@@ -7,13 +7,22 @@ import {
 import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Linking } from "react-native";
+import {
+  declineWaitlist,
+  reserveFromWaitlist,
+} from "@/api/endpoints/reservation/reservation.endpoint";
 import { useToast } from "@/components/common/Toast";
+import { QUERY_KEYS } from "@/constants";
 import { useIsAcademics } from "@/hooks/account";
 import { notificationLog } from "@/services/notifications/log";
 import {
   openNotification,
   toNavbarParams,
 } from "@/services/notifications/navigation";
+import {
+  isWaitlistAction,
+  runWaitlistAction,
+} from "@/services/notifications/waitlistActions";
 import type { AppStackParamList } from "@/types";
 
 /**
@@ -45,7 +54,9 @@ export const useNotificationNavigation = () => {
       handledId.current = null;
       return;
     }
-    if (response.actionIdentifier !== Notifications.DEFAULT_ACTION_IDENTIFIER) {
+    const actionId = response.actionIdentifier;
+    const isDefaultTap = actionId === Notifications.DEFAULT_ACTION_IDENTIFIER;
+    if (!isDefaultTap && !isWaitlistAction(actionId)) {
       return;
     }
 
@@ -57,6 +68,22 @@ export const useNotificationNavigation = () => {
     const isCurrent = () => mounted.current && latestTap.current === tap;
     const open = async () => {
       try {
+        if (isWaitlistAction(actionId)) {
+          await runWaitlistAction(actionId, content.data, {
+            reserve: reserveFromWaitlist,
+            decline: declineWaitlist,
+            refresh: () =>
+              queryClient.invalidateQueries({
+                queryKey: QUERY_KEYS.reservation.all,
+              }),
+            notify: (message, tone) => toast(message, tone),
+            translate: (key) => t(key),
+            navigate: (target) =>
+              navigation.navigate("Navbar", toNavbarParams(target)),
+            isCurrent,
+          });
+          return;
+        }
         await openNotification(content.data, {
           queryClient,
           access: { isAcademics },

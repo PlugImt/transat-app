@@ -14,6 +14,7 @@ import {
 import { parseApiDate } from "@/utils/reservation-time";
 import { RowSkeleton } from "./CatalogCards";
 import { MyReservationRow } from "./MyReservationRow";
+import { WaitlistSection } from "./WaitlistSection";
 
 const Section = ({
   title,
@@ -60,19 +61,22 @@ export const PersonalReservationList = ({
 
   if (reservations.length === 0) {
     return (
-      <Empty
-        icon={<CalendarX2 />}
-        title={t(
-          isPast
-            ? "services.reservation.personal.emptyPast"
-            : "services.reservation.personal.emptyUpcoming",
-        )}
-        description={t(
-          isPast
-            ? "services.reservation.personal.emptyPastDescription"
-            : "services.reservation.personal.emptyUpcomingDescription",
-        )}
-      />
+      <View className="gap-6">
+        {!isPast && <WaitlistSection />}
+        <Empty
+          icon={<CalendarX2 />}
+          title={t(
+            isPast
+              ? "services.reservation.personal.emptyPast"
+              : "services.reservation.personal.emptyUpcoming",
+          )}
+          description={t(
+            isPast
+              ? "services.reservation.personal.emptyPastDescription"
+              : "services.reservation.personal.emptyUpcomingDescription",
+          )}
+        />
+      </View>
     );
   }
 
@@ -92,6 +96,7 @@ export const PersonalReservationList = ({
 
   return (
     <View className="gap-6">
+      {!isPast && <WaitlistSection />}
       {held.length > 0 && (
         <Section title={t("services.reservation.current")}>
           {held.map((reservation) => (

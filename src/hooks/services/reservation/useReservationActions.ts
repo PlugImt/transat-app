@@ -1,6 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   cancelSlot,
+  declineWaitlist,
+  joinWaitlist,
+  leaveWaitlist,
+  reserveFromWaitlist,
   reserveSlot,
   returnItem,
   takeItem,
@@ -56,3 +60,27 @@ export const useTakeItem = () =>
 
 export const useReturnItem = () =>
   useReservationMutation((itemId: number) => returnItem(itemId));
+
+type WaitlistTarget = { itemId: number; start?: Date };
+
+export const useJoinWaitlist = () =>
+  useReservationMutation(({ itemId, start }: WaitlistTarget) =>
+    joinWaitlist(itemId, start),
+  );
+
+export const useLeaveWaitlist = () =>
+  useReservationMutation(({ itemId, start }: WaitlistTarget) =>
+    leaveWaitlist(itemId, start),
+  );
+
+/** "Réserver" of a waiting list offer. */
+export const useReserveFromWaitlist = () =>
+  useReservationMutation(({ itemId, start }: WaitlistTarget) =>
+    reserveFromWaitlist(itemId, start),
+  );
+
+/** "Annuler" of a waiting list offer: the turn goes to the next person. */
+export const useDeclineWaitlist = () =>
+  useReservationMutation(({ itemId, start }: WaitlistTarget) =>
+    declineWaitlist(itemId, start),
+  );

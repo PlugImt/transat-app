@@ -6,9 +6,9 @@ import {
   useState,
 } from "react";
 import { type ColorSchemeName, StatusBar, useColorScheme } from "react-native";
+import colors from "@/constants/theme";
 import { storage } from "@/services/storage/asyncStorage";
 import STORAGE_KEYS from "@/services/storage/constants";
-import colors from "@/constants/theme";
 
 export type ThemeMode = "system" | "light" | "dark";
 

@@ -1,9 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  type RouteProp,
-  useNavigation,
-  useRoute,
-} from "expo-router/react-navigation";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -15,14 +11,12 @@ import { Text } from "@/components/common/Text";
 import { useToast } from "@/components/common/Toast";
 import { Page } from "@/components/page/Page";
 import useAuth from "@/hooks/account/useAuth";
-import type { AuthStackParamList } from "@/types";
+import { paramString } from "@/navigation/params";
 import { isImtEmail, normalizeEmail } from "@/utils";
 
-type ResetPasswordRouteProp = RouteProp<AuthStackParamList, "ResetPassword">;
-
 export const ResetPassword = () => {
-  const navigation = useNavigation();
-  const route = useRoute<ResetPasswordRouteProp>();
+  const router = useRouter();
+  const params = useLocalSearchParams<{ email?: string }>();
   const { resetPassword, changePassword, isPending, isVerifying } = useAuth();
   const { t } = useTranslation();
   const { toast } = useToast();
@@ -62,7 +56,7 @@ export const ResetPassword = () => {
   } = useForm({
     resolver: zodResolver(resetSchema),
     defaultValues: {
-      email: route.params?.email || "",
+      email: paramString(params.email) || "",
       verificationCode: "",
       newPassword: "",
       confirmPassword: "",
@@ -131,7 +125,7 @@ export const ResetPassword = () => {
       );
       if (response.success) {
         toast(t("auth.resetPassword.resetPasswordSuccess"), "success");
-        navigation.goBack();
+        router.back();
       } else if (response.status === 429) {
         toast(t("auth.errors.tooManyRequests"), "destructive");
       } else if (response.status === 400) {

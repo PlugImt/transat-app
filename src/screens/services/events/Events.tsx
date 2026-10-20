@@ -1,5 +1,4 @@
-import type { StackNavigationProp } from "expo-router/js-stack";
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { PartyPopper, Plus } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { RefreshControl } from "react-native";
@@ -19,11 +18,8 @@ import { getIsRefetching } from "@/components/query";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Event } from "@/dto/event";
 import { useEventsByTab } from "@/hooks/services/event/useEvent";
+import { paths } from "@/navigation/paths";
 import { EventCard, EventCardSkeleton } from "./components/EventCard";
-
-type NavigationProp = StackNavigationProp<{
-  AddEvent: undefined;
-}>;
 
 const EventsTabContent = ({ tabValue }: { tabValue: "upcoming" | "past" }) => {
   const { t } = useTranslation();
@@ -102,7 +98,7 @@ const EventsTabContent = ({ tabValue }: { tabValue: "upcoming" | "past" }) => {
 export const Events = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const navigation = useNavigation<NavigationProp>();
+  const router = useRouter();
 
   return (
     <Page
@@ -114,7 +110,7 @@ export const Events = () => {
         <IconButton
           icon={<Plus color={theme.primary} />}
           variant="link"
-          onPress={() => navigation.navigate("AddEvent")}
+          onPress={() => router.push(paths.addEvent)}
         />
       }
     >

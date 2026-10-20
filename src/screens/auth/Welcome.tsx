@@ -1,21 +1,18 @@
-import { useNavigation } from "expo-router";
-import type { NativeStackNavigationProp } from "expo-router/build/react-navigation/native-stack";
+import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { HeroAnimation } from "@/components/animations/HeroAnimation/HeroAnimation";
 import { Button } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
 import { Page } from "@/components/page/Page";
-import type { AuthStackParamList } from "@/types";
-
-type LoginScreenNavigationProp = NativeStackNavigationProp<AuthStackParamList>;
+import { paths } from "@/navigation/paths";
 
 export const Welcome = () => {
   const { t } = useTranslation();
-  const navigation = useNavigation<LoginScreenNavigationProp>();
+  const router = useRouter();
 
   const handleNavigation = (route: "Signin" | "Signup") => {
-    navigation.navigate(route);
+    router.push(route === "Signin" ? paths.signIn : paths.signUp);
   };
 
   const buttonsFooter = (

@@ -29,7 +29,7 @@ export const HeroAvatar = ({
     direction,
   );
   return (
-    <MotiView style={[animatedStyle, { width: size, height: size }]}>
+    <MotiView style={[animatedStyle as object, { width: size, height: size }]}>
       <Image
         source={image}
         fill

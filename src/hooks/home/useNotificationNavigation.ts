@@ -1,9 +1,6 @@
 import { useQueryClient } from "@tanstack/react-query";
 import * as Notifications from "expo-notifications";
-import {
-  type NavigationProp,
-  useNavigation,
-} from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Linking } from "react-native";
@@ -15,15 +12,11 @@ import { useToast } from "@/components/common/Toast";
 import { QUERY_KEYS } from "@/constants";
 import { useIsAcademics } from "@/hooks/account";
 import { notificationLog } from "@/services/notifications/log";
-import {
-  openNotification,
-  toNavbarParams,
-} from "@/services/notifications/navigation";
+import { openNotification } from "@/services/notifications/navigation";
 import {
   isWaitlistAction,
   runWaitlistAction,
 } from "@/services/notifications/waitlistActions";
-import type { AppStackParamList } from "@/types";
 
 /**
  * Opens the destination of a tapped push notification. Mount it where the app
@@ -31,7 +24,7 @@ import type { AppStackParamList } from "@/types";
  * app is open, in background, or closed (the response is queued until mounted).
  */
 export const useNotificationNavigation = () => {
-  const navigation = useNavigation<NavigationProp<AppStackParamList>>();
+  const router = useRouter();
   const queryClient = useQueryClient();
   const { toast } = useToast();
   const { t } = useTranslation();
@@ -78,8 +71,7 @@ export const useNotificationNavigation = () => {
               }),
             notify: (message, tone) => toast(message, tone),
             translate: (key) => t(key),
-            navigate: (target) =>
-              navigation.navigate("Navbar", toNavbarParams(target)),
+            navigate: (target) => router.push(target),
             isCurrent,
           });
           return;
@@ -87,8 +79,7 @@ export const useNotificationNavigation = () => {
         await openNotification(content.data, {
           queryClient,
           access: { isAcademics },
-          navigate: (target) =>
-            navigation.navigate("Navbar", toNavbarParams(target)),
+          navigate: (target) => router.push(target),
           openUrl: (url) => Linking.openURL(url),
           notifyUnavailable: () =>
             toast(t("common.errors.notificationUnavailable"), "info"),
@@ -97,12 +88,11 @@ export const useNotificationNavigation = () => {
       } catch (error) {
         notificationLog.warn("failed to open notification destination", error);
       } finally {
-        // Consumed: it must not replay when this navigator remounts.
         if (isCurrent()) {
           await Notifications.clearLastNotificationResponseAsync();
         }
       }
     };
     open();
-  }, [response, navigation, queryClient, toast, t, isAcademics]);
+  }, [response, router, queryClient, toast, t, isAcademics]);
 };

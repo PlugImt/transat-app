@@ -1,4 +1,3 @@
-import { type RouteProp, useRoute } from "expo-router/react-navigation";
 import { useTranslation } from "react-i18next";
 import Animated from "react-native-reanimated";
 import { UserCard, UserCardSkeleton } from "@/components/custom";
@@ -6,13 +5,11 @@ import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
 import { getIsRefetching } from "@/components/query";
 import { useClubMembers } from "@/hooks/services/club/useClub";
-import type { BottomTabParamList } from "@/types";
+import { useRouteId } from "@/navigation/params";
 
 export const ClubMemberList = () => {
   const { t } = useTranslation();
-  const { params } =
-    useRoute<RouteProp<BottomTabParamList, "ClubMemberList">>();
-  const { id } = params;
+  const id = useRouteId();
 
   const { data, isPending, isFetching, refetch, isError, error } =
     useClubMembers(id);

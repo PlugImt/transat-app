@@ -1,5 +1,4 @@
-import type { NativeStackNavigationProp } from "expo-router/build/react-navigation/native-stack";
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { Edit } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { TouchableOpacity, View } from "react-native";
@@ -10,24 +9,13 @@ import { Page } from "@/components/page/Page";
 import type { User } from "@/dto";
 import { useUpdateProfilePicture } from "@/hooks/account/useUpdateProfilePicture";
 import { useUser } from "@/hooks/account/useUser";
-import type { OnboardingStackParamList } from "@/navigation/OnboardingNavigator";
+import { setOnboardingSkipped } from "@/hooks/onboarding/useOnboardingSteps";
+import { paths } from "@/navigation/paths";
 import { hapticFeedback } from "@/utils/haptics.utils";
 
-type NavigationProp = NativeStackNavigationProp<OnboardingStackParamList>;
-
-interface OnboardingProfilePictureProps {
-  route: {
-    params: { user: User };
-  };
-  onSkipStep: () => void;
-}
-
-export const OnboardingProfilePicture = ({
-  route,
-  onSkipStep,
-}: OnboardingProfilePictureProps) => {
+export const OnboardingProfilePicture = () => {
   const { t } = useTranslation();
-  const navigation = useNavigation<NavigationProp>();
+  const router = useRouter();
   const { mutate: updateProfilePicture, isPending: isUpdating } =
     useUpdateProfilePicture();
   const { data: user, refetch } = useUser();
@@ -53,16 +41,16 @@ export const OnboardingProfilePicture = ({
       !userData.formation_name || !userData.graduation_year;
 
     if (needsBasicInfo) {
-      navigation.navigate("BasicInfo", { user: userData });
+      router.push(paths.basicInfo);
     } else if (needsAcademicInfo) {
-      navigation.navigate("AcademicInfo", { user: userData });
+      router.push(paths.academicInfo);
     } else {
-      navigation.navigate("Preview", { user: userData });
+      router.push(paths.preview);
     }
   };
 
   const handleNext = () => {
-    const currentUser = user || route.params.user;
+    const currentUser = user;
     if (!currentUser) {
       return;
     }
@@ -79,8 +67,8 @@ export const OnboardingProfilePicture = ({
   };
 
   const handleSkip = () => {
-    onSkipStep();
-    const currentUser = user || route.params.user;
+    setOnboardingSkipped(true);
+    const currentUser = user;
     if (!currentUser) {
       return;
     }
@@ -88,8 +76,10 @@ export const OnboardingProfilePicture = ({
     navigateToNextStep(currentUser);
   };
 
-  const displayUser = user || route.params.user;
+  const displayUser = user;
   const hasProfilePicture = !!displayUser?.profile_picture;
+
+  if (!displayUser) return null;
 
   return (
     <Page

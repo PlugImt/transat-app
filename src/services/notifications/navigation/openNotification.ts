@@ -4,6 +4,7 @@ import { resolveNotificationRoute } from "./resolve";
 import {
   isExternalLink,
   type NavigationAccess,
+  pathOf,
   type RouteTarget,
 } from "./route-target";
 
@@ -64,7 +65,7 @@ export const openNotification = async (
     destination: route.target
       ? isExternalLink(route.target)
         ? "external"
-        : route.target.screen
+        : pathOf(route.target)
       : "none",
   });
   if (route.unavailable) return "unavailable";

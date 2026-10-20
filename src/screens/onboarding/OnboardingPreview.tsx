@@ -1,5 +1,5 @@
-import type { NativeStackNavigationProp } from "expo-router/build/react-navigation/native-stack";
-import { useNavigation } from "expo-router/react-navigation";
+import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "expo-router";
 import {
   GraduationCap,
   Phone,
@@ -14,36 +14,26 @@ import Card from "@/components/common/Card";
 import InfoItem from "@/components/common/InfoItem";
 import { Text } from "@/components/common/Text";
 import { Page } from "@/components/page/Page";
+import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
-import type { User } from "@/dto";
 import { useUser } from "@/hooks/account/useUser";
-import type { OnboardingStackParamList } from "@/navigation/OnboardingNavigator";
+import { setOnboardingCompleted } from "@/hooks/onboarding/useOnboardingSteps";
+import { paths } from "@/navigation/paths";
 
-type NavigationProp = NativeStackNavigationProp<OnboardingStackParamList>;
-
-interface OnboardingPreviewProps {
-  route: {
-    params: { user: User };
-  };
-  onComplete: () => void;
-}
-
-export const OnboardingPreview = ({
-  route,
-  onComplete,
-}: OnboardingPreviewProps) => {
+export const OnboardingPreview = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
-  const navigation = useNavigation<NavigationProp>();
-  const { data: currentUser } = useUser();
-  const displayUser = currentUser || route.params.user;
+  const router = useRouter();
+  const queryClient = useQueryClient();
+  const { data: displayUser } = useUser();
 
-  const handleComplete = () => {
-    // Mark onboarding as complete at navigator level
-    onComplete();
-    // Navigate to success screen within the stack
-    navigation.navigate("Success");
+  const handleComplete = async () => {
+    await setOnboardingCompleted(true);
+    await queryClient.invalidateQueries({ queryKey: QUERY_KEYS.user });
+    router.push(paths.success);
   };
+
+  if (!displayUser) return null;
 
   return (
     <Page

@@ -1,5 +1,5 @@
 import { LinearGradient } from "expo-linear-gradient";
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -13,7 +13,7 @@ import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { MenuItem } from "@/dto";
 import { useMenuRestaurant } from "@/hooks/services/restaurant/useMenuRestaurant";
-import type { AppNavigation } from "@/types";
+import { paths } from "@/navigation/paths";
 import { beforeToday, isDinner, isLunch, isNight, isWeekend } from "@/utils";
 
 const MenuItemCard = ({ item }: { item: MenuItem }) => {
@@ -28,7 +28,7 @@ export const RestaurantWidget = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
 
-  const navigation = useNavigation<AppNavigation>();
+  const router = useRouter();
 
   const { menu, isPending, isFetching, isError, error, refetch } =
     useMenuRestaurant();
@@ -196,9 +196,9 @@ export const RestaurantWidget = () => {
   }
 
   return (
-    <CardGroup title={title} onPress={() => navigation.navigate("Restaurant")}>
+    <CardGroup title={title} onPress={() => router.push(paths.restaurant)}>
       <Card
-        onPress={() => navigation.navigate("Restaurant")}
+        onPress={() => router.push(paths.restaurant)}
         className="relative overflow-hidden h-60"
       >
         <View className="gap-6">
@@ -316,17 +316,17 @@ export default RestaurantWidget;
 export const RestaurantWidgetLoading = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
-  const navigation = useNavigation<AppNavigation>();
+  const router = useRouter();
 
   const skeletonCount = () => Math.floor(Math.random() * 3) + 1;
 
   return (
     <CardGroup
       title={t("services.restaurant.title")}
-      onPress={() => navigation.navigate("Restaurant")}
+      onPress={() => router.push(paths.restaurant)}
     >
       <Card
-        onPress={() => navigation.navigate("Restaurant")}
+        onPress={() => router.push(paths.restaurant)}
         className="relative overflow-hidden h-60"
       >
         <View className="gap-6">

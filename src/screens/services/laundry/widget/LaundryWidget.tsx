@@ -1,4 +1,4 @@
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { WashingMachineIcon, Wind } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
@@ -9,11 +9,11 @@ import { WidgetBoundary } from "@/components/query";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useLaundryStats } from "@/hooks/services/laundry/useLaundry";
-import type { AppNavigation } from "@/types";
+import { paths } from "@/navigation/paths";
 
 export const LaundryWidget = () => {
   const { t } = useTranslation();
-  const navigation = useNavigation<AppNavigation>();
+  const router = useRouter();
   const { theme } = useTheme();
 
   const {
@@ -42,10 +42,10 @@ export const LaundryWidget = () => {
     >
       <CardGroup
         title={t("services.laundry.title")}
-        onPress={() => navigation.navigate("Laundry")}
+        onPress={() => router.push(paths.laundry)}
       >
         <Card
-          onPress={() => navigation.navigate("Laundry")}
+          onPress={() => router.push(paths.laundry)}
           className="flex-row justify-between gap-6"
         >
           <View className="items-center">
@@ -92,16 +92,16 @@ export default LaundryWidget;
 
 export const LaundryWidgetLoading = () => {
   const { t } = useTranslation();
-  const navigation = useNavigation<AppNavigation>();
+  const router = useRouter();
   const { theme } = useTheme();
 
   return (
     <CardGroup
       title={t("services.laundry.title")}
-      onPress={() => navigation.navigate("Laundry")}
+      onPress={() => router.push(paths.laundry)}
     >
       <Card
-        onPress={() => navigation.navigate("Laundry")}
+        onPress={() => router.push(paths.laundry)}
         className="flex-row justify-between gap-6"
       >
         <View className="items-center gap-2">

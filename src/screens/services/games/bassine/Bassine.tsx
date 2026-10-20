@@ -1,4 +1,4 @@
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { ChevronRight, Minus, Plus } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -20,7 +20,7 @@ import {
   useBassineIncrement,
   useBassineOverview,
 } from "@/hooks/services/games/bassine/useBassine";
-import type { AppNavigation } from "@/types";
+import { paths } from "@/navigation/paths";
 import { AboutBassine } from "./AboutBassine";
 import { useNeighbors } from "./hooks/useNeighbors";
 
@@ -41,7 +41,7 @@ export const Bassine = () => {
 
   const [count, setCount] = useState(data?.bassine_count ?? 0);
 
-  const navigation = useNavigation<AppNavigation>();
+  const router = useRouter();
   const { mutate: inc, isPending: isIncPending } = useBassineIncrement();
   const { mutate: dec, isPending: isDecPending } = useBassineDecrement();
 
@@ -76,7 +76,7 @@ export const Bassine = () => {
         <Card
           className="rounded-full flex-row items-center gap-4 px-4 py-2 self-center"
           onPress={() => {
-            navigation.navigate("BassineLeaderboard");
+            router.push(paths.bassineLeaderboard);
           }}
         >
           <View className="flex-row items-center gap-2">
@@ -142,7 +142,7 @@ export default Bassine;
 const BassineSkeleton = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const navigation = useNavigation<AppNavigation>();
+  const router = useRouter();
   return (
     <Page
       title={t("games.bassine.title")}
@@ -153,7 +153,7 @@ const BassineSkeleton = () => {
         <Card
           className="rounded-full flex-row items-center gap-4 px-4 py-2 self-center"
           onPress={() => {
-            navigation.navigate("BassineLeaderboard");
+            router.push(paths.bassineLeaderboard);
           }}
         >
           <View className="flex-row items-center gap-2">

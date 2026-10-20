@@ -1,6 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { NativeStackNavigationProp } from "expo-router/build/react-navigation/native-stack";
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -13,27 +12,16 @@ import type { User } from "@/dto";
 import { updateUserPayloadSchema } from "@/dto";
 import { useUpdateAccount } from "@/hooks/account/useUpdateAccount";
 import { useUser } from "@/hooks/account/useUser";
-import type { OnboardingStackParamList } from "@/navigation/OnboardingNavigator";
+import { setOnboardingSkipped } from "@/hooks/onboarding/useOnboardingSteps";
+import { paths } from "@/navigation/paths";
 import { hapticFeedback } from "@/utils/haptics.utils";
 
-type NavigationProp = NativeStackNavigationProp<OnboardingStackParamList>;
-
-interface OnboardingBasicInfoProps {
-  route: {
-    params: { user: User };
-  };
-  onSkipStep: () => void;
-}
-
-export const OnboardingBasicInfo = ({
-  route,
-  onSkipStep,
-}: OnboardingBasicInfoProps) => {
-  const navigation = useNavigation<NavigationProp>();
+export const OnboardingBasicInfo = () => {
+  const router = useRouter();
   const { t } = useTranslation();
   const { mutate: updateAccount, isPending: isUpdating } = useUpdateAccount();
   const { data: user, refetch } = useUser();
-  const displayUser = user || route.params.user;
+  const displayUser = user;
 
   const {
     control,
@@ -46,7 +34,7 @@ export const OnboardingBasicInfo = ({
       first_name: "",
       last_name: "",
       phone_number: "",
-      email: displayUser.email || "",
+      email: displayUser?.email || "",
       graduation_year: displayUser?.graduation_year || undefined,
       formation_name: displayUser?.formation_name || undefined,
     },
@@ -72,9 +60,9 @@ export const OnboardingBasicInfo = ({
       !userData.formation_name || !userData.graduation_year;
 
     if (needsAcademicInfo) {
-      navigation.navigate("AcademicInfo", { user: userData });
+      router.push(paths.academicInfo);
     } else {
-      navigation.navigate("Preview", { user: userData });
+      router.push(paths.preview);
     }
   };
 
@@ -112,8 +100,8 @@ export const OnboardingBasicInfo = ({
   };
 
   const handleSkip = () => {
-    onSkipStep();
-    navigateToNextStep(user || route.params.user);
+    setOnboardingSkipped(true);
+    if (user) navigateToNextStep(user);
   };
 
   return (

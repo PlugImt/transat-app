@@ -1,4 +1,3 @@
-import { type RouteProp, useRoute } from "expo-router/react-navigation";
 import { CookingPot, Star, Utensils } from "lucide-react-native";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -14,26 +13,20 @@ import { getIsRefetching } from "@/components/query";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import { userMenuRating } from "@/hooks/services/restaurant/useMenuRestaurant";
+import { useRouteId } from "@/navigation/params";
 import { AllergenDialog } from "@/screens/services/restaurant/components/Reviews/AllergenDialog";
 import { ReviewDialog } from "@/screens/services/restaurant/components/Reviews/ReviewDialog";
 import {
   ReviewItem,
   ReviewItemSkeleton,
 } from "@/screens/services/restaurant/components/Reviews/ReviewItem";
-import type { BottomTabParamList } from "@/types";
 import { getOpeningHoursData } from "@/utils";
 import { getAllergenImage } from "@/utils/allergenImages";
-
-export type RestaurantReviewsRouteProp = RouteProp<
-  BottomTabParamList,
-  "RestaurantReviews"
->;
 
 export const RestaurantReviews = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const route = useRoute<RestaurantReviewsRouteProp>();
-  const { id } = route.params;
+  const id = useRouteId();
   const openingHoursData = useMemo(() => getOpeningHoursData(t), [t]);
 
   const {

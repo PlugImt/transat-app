@@ -1,5 +1,5 @@
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { Mail, Phone, Settings } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
@@ -16,13 +16,13 @@ import { AvatarSkeleton, TextSkeleton } from "@/components/Skeleton";
 import { QUERY_KEYS } from "@/constants";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useUser } from "@/hooks/account/useUser";
-import type { AppNavigation } from "@/types";
+import { paths } from "@/navigation/paths";
 import { getStudentYear } from "@/utils";
 
 export const Account = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
-  const navigation = useNavigation<AppNavigation>();
+  const router = useRouter();
   const queryClient = useQueryClient();
 
   const { data: user, isPending, isError, error } = useUser();
@@ -36,7 +36,7 @@ export const Account = () => {
   };
 
   const navigateToEditProfile = () => {
-    navigation.navigate("EditProfile");
+    router.push(paths.editProfile);
   };
 
   if (isPending) {
@@ -66,7 +66,7 @@ export const Account = () => {
         <IconButton
           icon={<Settings color={theme.text} />}
           variant="link"
-          onPress={() => navigation.navigate("Settings")}
+          onPress={() => router.push(paths.settings)}
         />
       }
     >
@@ -111,7 +111,7 @@ export default Account;
 const AccountLoading = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
-  const navigation = useNavigation<AppNavigation>();
+  const router = useRouter();
 
   return (
     <Page
@@ -120,7 +120,7 @@ const AccountLoading = () => {
         <IconButton
           icon={<Settings color={theme.text} />}
           variant="link"
-          onPress={() => navigation.navigate("Settings")}
+          onPress={() => router.push(paths.settings)}
         />
       }
     >
@@ -146,7 +146,7 @@ const AccountLoading = () => {
 
       <Button
         label={t("account.editProfile")}
-        onPress={() => navigation.navigate("EditProfile")}
+        onPress={() => router.push(paths.editProfile)}
         size="sm"
         variant="secondary"
       />

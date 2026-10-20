@@ -1,22 +1,22 @@
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { TouchableOpacity, View } from "react-native";
 import CardGroup from "@/components/common/CardGroup";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
-import type { AppNavigation } from "@/types";
+import { paths } from "@/navigation/paths";
 
 export const TimetableLoadingWidget = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const navigation = useNavigation<AppNavigation>();
+  const router = useRouter();
 
   const skeletonCount = () => Math.floor(Math.random() * 3) + 1;
 
   return (
     <CardGroup title={t("services.timetable.title")}>
       <TouchableOpacity
-        onPress={() => navigation.navigate("Timetable")}
+        onPress={() => router.push(paths.timetable)}
         className="px-6 py-4 rounded-lg flex flex-col gap-6"
         style={{ backgroundColor: theme.card }}
       >

@@ -1,8 +1,4 @@
-import {
-  type RouteProp,
-  useNavigation,
-  useRoute,
-} from "expo-router/react-navigation";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { Images, Share as ShareIcon } from "lucide-react-native";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -24,7 +20,8 @@ import {
   useAlbumPhotos,
   usePhotoAlbum,
 } from "@/hooks/services/photos/usePhotos";
-import type { AppNavigation, BottomTabParamList } from "@/types";
+import { paramNumber, paramString } from "@/navigation/params";
+import { paths } from "@/navigation/paths";
 import { isDriveFolderUrl, shareLink } from "@/utils/photo.utils";
 import { PhotoGrid } from "./components/PhotoGrid";
 import { PhotoLayoutMenu } from "./components/PhotoLayoutMenu";
@@ -34,13 +31,14 @@ import { parseEventDate } from "./photos.utils";
 export const AlbumDetails = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const { params } = useRoute<RouteProp<BottomTabParamList, "AlbumDetails">>();
-  const navigation = useNavigation<AppNavigation>();
-  const { id } = params;
+  const params = useLocalSearchParams<{ id: string; title?: string }>();
+  const router = useRouter();
+  const id = paramNumber(params.id);
+  const titleParam = paramString(params.title);
 
   const album = usePhotoAlbum(id);
   // The title can be empty (a notification only carries a heading): the album's own name takes over once loaded.
-  const title = params.title || album.data?.title || t("photos.title");
+  const title = titleParam || album.data?.title || t("photos.title");
   const query = useAlbumPhotos(id);
   const { store, onLimit } = usePhotoSelection();
   const selecting = useSelectionMode(store);
@@ -81,9 +79,7 @@ export const AlbumDetails = () => {
             variant="secondary"
             label={t("photos.backToPhotos")}
             onPress={() =>
-              navigation.canGoBack()
-                ? navigation.goBack()
-                : navigation.navigate("Photos")
+              router.canGoBack() ? router.back() : router.navigate(paths.photos)
             }
           />
         </Empty>

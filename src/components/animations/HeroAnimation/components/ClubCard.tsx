@@ -24,7 +24,7 @@ export const ClubCard = ({ image, index = 0 }: ClubCardProps) => {
     direction,
   );
   return (
-    <MotiView style={animatedStyle}>
+    <MotiView style={animatedStyle as object}>
       <Card className="p-2 items-center justify-center">
         <Image source={image} size={45} resizeMode="contain" />
       </Card>

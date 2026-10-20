@@ -5,10 +5,10 @@ import { getEventDetails } from "@/api/endpoints/event/event.endpoint";
 import { getPhotoAlbum } from "@/api/endpoints/photos/photos.endpoints";
 import { getItemSchedule } from "@/api/endpoints/reservation/reservation.endpoint";
 import { QUERY_KEYS } from "@/constants";
+import type { ServiceLanding } from "@/navigation/paths";
 import { getParisYmd } from "@/utils/reservation-time";
 import {
   type ExternalLink,
-  type ParameterlessScreen,
   photosRoute,
   type RouteTarget,
   servicesRoute,
@@ -74,7 +74,7 @@ const SERVICE_SCREENS = {
   reservations: "Reservation",
   my_reservations: "MyReservations",
   fourchettas: "Fourchettas",
-} as const satisfies Record<string, ParameterlessScreen>;
+} as const satisfies Record<string, ServiceLanding>;
 
 type ServiceKey = keyof typeof SERVICE_SCREENS;
 

@@ -5,12 +5,10 @@ import { Button } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useFinishOnboarding } from "@/navigation/finish-onboarding";
 
-interface OnboardingSuccessProps {
-  onFinish: () => void;
-}
-
-export const OnboardingSuccess = ({ onFinish }: OnboardingSuccessProps) => {
+export const OnboardingSuccess = () => {
+  const onFinish = useFinishOnboarding();
   const { theme } = useTheme();
   const { t } = useTranslation();
 

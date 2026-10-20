@@ -1,4 +1,3 @@
-import { useRoute } from "expo-router/react-navigation";
 import {
   Bell,
   BellOff,
@@ -19,7 +18,7 @@ import {
   useJoinEventMutation,
   useLeaveClubMutation,
 } from "@/hooks/services/event/useEvent";
-import type { EventDetailsRouteProp } from "./EventDetails";
+import { useRouteId } from "@/navigation/params";
 
 interface NotificationButtonProps {
   isMember: boolean;
@@ -31,8 +30,7 @@ const NotificationButton = ({
   disabled,
 }: NotificationButtonProps) => {
   const { t } = useTranslation();
-  const route = useRoute<EventDetailsRouteProp>();
-  const { id } = route.params;
+  const id = useRouteId();
 
   const { mutate: joinEvent, isPending: isJoining } = useJoinEventMutation(id);
   const { mutate: leaveEvent, isPending: isLeaving } = useLeaveClubMutation(id);

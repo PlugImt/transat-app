@@ -1,4 +1,4 @@
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { TouchableOpacity, View } from "react-native";
 import CardGroup from "@/components/common/CardGroup";
@@ -7,14 +7,14 @@ import { WidgetBoundary } from "@/components/query";
 import type { Course } from "@/dto";
 import { useAuth } from "@/hooks/account/useAuth";
 import { useTimetable } from "@/hooks/services/timetable/useTimetable";
-import type { BottomTabNavigation } from "@/types/navigation";
+import { paths } from "@/navigation/paths";
 import { TimetableCourseWidget } from "./TimetableCourseWidget";
 import { TimetableLoadingWidget } from "./TimetableLoadingWidget";
 
 export const TimetableWidget = () => {
   const { t } = useTranslation();
 
-  const navigation = useNavigation<BottomTabNavigation>();
+  const router = useRouter();
 
   const { user } = useAuth();
 
@@ -87,7 +87,7 @@ export const TimetableWidget = () => {
   const emptyContent = (
     <CardGroup title={t("services.timetable.title")}>
       <TouchableOpacity
-        onPress={() => navigation.navigate("Timetable")}
+        onPress={() => router.push(paths.timetable)}
         className="rounded-lg flex flex-col gap-3"
       >
         <View className="flex flex-col">
@@ -140,7 +140,7 @@ export const TimetableWidget = () => {
     >
       <CardGroup title={t("services.timetable.title")}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("Timetable")}
+          onPress={() => router.push(paths.timetable)}
           className="rounded-lg flex flex-col gap-3"
         >
           {filteredCourses?.map((course: Course) => (

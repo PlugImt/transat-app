@@ -1,4 +1,4 @@
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { CalendarClock } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
@@ -13,7 +13,7 @@ import {
   useReservationFeedback,
   useReturnItem,
 } from "@/hooks/services/reservation";
-import type { AppNavigation } from "@/types";
+import { paths } from "@/navigation/paths";
 import { getParisYmd, parseApiDate } from "@/utils/reservation-time";
 import { ConfirmAction } from "./ConfirmAction";
 
@@ -31,7 +31,7 @@ export const MyReservationRow = ({
   caption,
 }: MyReservationRowProps) => {
   const { t } = useTranslation();
-  const navigation = useNavigation<AppNavigation>();
+  const router = useRouter();
   const { theme } = useTheme();
   const { formatDate, formatTime } = useDate();
   const feedback = useReservationFeedback();
@@ -75,11 +75,13 @@ export const MyReservationRow = ({
       onPress={
         reservation.slot
           ? () =>
-              navigation.navigate("ReservationCalendar", {
-                id: reservation.id,
-                title: reservation.name,
-                date: getParisYmd(start),
-              })
+              router.push(
+                paths.reservationCalendar(
+                  reservation.id,
+                  reservation.name,
+                  getParisYmd(start),
+                ),
+              )
           : undefined
       }
     >

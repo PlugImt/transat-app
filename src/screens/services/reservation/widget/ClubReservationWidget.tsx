@@ -1,4 +1,4 @@
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import CardGroup from "@/components/common/CardGroup";
@@ -10,7 +10,7 @@ import {
 } from "@/components/reservation/CatalogRowView";
 import { useAuth } from "@/hooks/account";
 import { useReservationCatalog } from "@/hooks/services/reservation";
-import type { AppNavigation } from "@/types";
+import { paths } from "@/navigation/paths";
 import { buildCatalogRows } from "@/utils/reservation.utils";
 
 const PREVIEW_COUNT = 3;
@@ -18,7 +18,7 @@ const PREVIEW_COUNT = 3;
 export const ClubReservationWidget = ({ clubId }: { clubId: number }) => {
   const { t } = useTranslation();
   const { user } = useAuth();
-  const navigation = useNavigation<AppNavigation>();
+  const router = useRouter();
   const { data, isPending, isFetching, isError, error, refetch } =
     useReservationCatalog({ clubId });
 
@@ -39,7 +39,7 @@ export const ClubReservationWidget = ({ clubId }: { clubId: number }) => {
         title={t("services.reservation.title")}
         onPress={
           rows.length > PREVIEW_COUNT
-            ? () => navigation.navigate("Reservation")
+            ? () => router.push(paths.reservation)
             : undefined
         }
       >

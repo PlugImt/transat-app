@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Keyboard } from "react-native";
@@ -19,7 +19,7 @@ export const ChangePassword = () => {
   const { mutate: changePassword, isPending: isUpdatingPassword } =
     useChangePassword();
   const { toast } = useToast();
-  const navigation = useNavigation();
+  const router = useRouter();
   const passwordSchema = z
     .object({
       password: z.string().min(6, t("auth.errors.password")),
@@ -60,7 +60,7 @@ export const ChangePassword = () => {
         onSuccess: () => {
           resetPassword();
           toast(t("auth.resetPassword.passwordChanged"), "success");
-          navigation.goBack();
+          router.back();
           hapticFeedback.success();
         },
         onError: (error) => {

@@ -1,5 +1,4 @@
-import { useNavigation } from "expo-router";
-import type { NativeStackNavigationProp } from "expo-router/build/react-navigation/native-stack";
+import { useRouter } from "expo-router";
 import { Beef, ChefHat, Soup, Vegan } from "lucide-react-native";
 import type React from "react";
 import { useTranslation } from "react-i18next";
@@ -11,10 +10,7 @@ import { Stars } from "@/components/custom/star/Stars";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { MenuItem } from "@/dto";
-
-type NavigationProp = NativeStackNavigationProp<{
-  RestaurantReviews: { id: number };
-}>;
+import { paths } from "@/navigation/paths";
 
 interface CardProps {
   title: string;
@@ -24,7 +20,7 @@ interface CardProps {
 
 const RestaurantCard = ({ title, meals, icon }: CardProps) => {
   const { theme } = useTheme();
-  const navigation = useNavigation<NavigationProp>();
+  const router = useRouter();
   const { t } = useTranslation();
 
   const getIcon = () => {
@@ -54,9 +50,7 @@ const RestaurantCard = ({ title, meals, icon }: CardProps) => {
           <TouchableOpacity
             className="flex-row justify-between gap-4 items-center"
             key={item.id}
-            onPress={() =>
-              navigation.navigate("RestaurantReviews", { id: item.id })
-            }
+            onPress={() => router.push(paths.restaurantReviews(item.id))}
           >
             <Text className="flex-1">{item.name}</Text>
             <View className="flex-row items-center gap-1">

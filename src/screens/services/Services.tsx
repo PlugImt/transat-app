@@ -1,4 +1,4 @@
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { Play } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
@@ -12,13 +12,13 @@ import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAnimatedHeader } from "@/hooks/common/useAnimatedHeader";
 import { useServicePreferences } from "@/hooks/services/usePreferences";
+import { type PreferenceScreen, preferenceHref } from "@/navigation/paths";
 import type { Preference } from "@/services/storage/preferences";
-import type { AppNavigation } from "@/types";
 
 export const Services = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const navigation = useNavigation<AppNavigation>();
+  const router = useRouter();
   const { scrollHandler } = useAnimatedHeader();
   const {
     enabledPreferences: enabledServices,
@@ -29,8 +29,8 @@ export const Services = () => {
   } = useServicePreferences();
 
   const handleServicePress = (service: Preference) => {
-    // biome-ignore lint/suspicious/noExplicitAny: Service screen typing needs to be fixed properly
-    navigation.navigate(service.screen as any);
+    const destination = preferenceHref[service.screen as PreferenceScreen];
+    if (destination) router.push(destination);
   };
 
   const renderServiceCard = (item: Preference) => (

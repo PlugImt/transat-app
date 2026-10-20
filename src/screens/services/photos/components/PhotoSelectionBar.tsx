@@ -1,4 +1,4 @@
-import { useNavigation } from "expo-router/react-navigation";
+import { useNavigation } from "expo-router";
 import { Download, RotateCw, Settings, X } from "lucide-react-native";
 import { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";

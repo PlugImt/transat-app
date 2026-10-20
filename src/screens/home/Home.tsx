@@ -1,5 +1,4 @@
-import type { BottomTabNavigationProp } from "expo-router/js-tabs";
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import Animated from "react-native-reanimated";
@@ -15,16 +14,14 @@ import { useHomeWidgetsFetching } from "@/hooks/home/useHomeWidgetsFetching";
 import { useVisibleWidgets } from "@/hooks/home/useVisibleWidgets";
 import { useWidgetComponents } from "@/hooks/home/useWidgetComponents";
 import { useHomeWidgetPreferences } from "@/hooks/services/usePreferences";
-import type { AppNavigation, BottomTabParamList } from "@/types";
+import { paths } from "@/navigation/paths";
 import { isNight } from "@/utils";
 
 export const Home = () => {
   const { data: user } = useUser();
   const { t } = useTranslation();
   const { scrollHandler } = useAnimatedHeader();
-  const navigation = useNavigation<AppNavigation>();
-  const tabNavigation =
-    navigation.getParent<BottomTabNavigationProp<BottomTabParamList>>();
+  const router = useRouter();
   const {
     preferences: widgets,
     enabledPreferences: enabledWidgets,
@@ -56,7 +53,7 @@ export const Home = () => {
               variant="h1"
               color="primary"
               numberOfLines={1}
-              onPress={() => tabNavigation?.navigate("AccountScreen")}
+              onPress={() => router.push(paths.account)}
             >
               {user.first_name}
             </Text>

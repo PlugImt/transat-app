@@ -1,15 +1,16 @@
 import { LinearGradient } from "expo-linear-gradient";
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
+import { type PreferenceScreen, preferenceHref } from "@/navigation/paths";
 import { GameCard } from "./components/GameCard";
 import { gamesConfig } from "./config";
 
 export const Games = () => {
   const { t } = useTranslation();
-  const navigation = useNavigation();
+  const router = useRouter();
 
   return (
     <Page
@@ -24,7 +25,9 @@ export const Games = () => {
             key={key}
             title={t(titleKey)}
             Icon={Icon}
-            onPress={() => navigation.navigate(route as never)}
+            onPress={() =>
+              router.push(preferenceHref[route as PreferenceScreen])
+            }
           />
         ))}
       </View>

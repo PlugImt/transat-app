@@ -1,4 +1,4 @@
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { Image, View } from "react-native";
 import { Button } from "@/components/common/Button";
@@ -11,7 +11,7 @@ interface SuccessScreenProps {
 
 export const SuccessScreen = ({ hasOrdered }: SuccessScreenProps) => {
   const { t } = useTranslation();
-  const navigation = useNavigation();
+  const router = useRouter();
 
   return (
     <Page title={t("services.fourchettas.orderTitle")} className="h-full">
@@ -33,7 +33,7 @@ export const SuccessScreen = ({ hasOrdered }: SuccessScreenProps) => {
         </View>
         <Button
           label={t("services.fourchettas.back")}
-          onPress={() => navigation.goBack()}
+          onPress={() => router.back()}
           variant="secondary"
         />
       </View>

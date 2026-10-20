@@ -1,4 +1,4 @@
-import { type RouteProp, useRoute } from "expo-router/react-navigation";
+import { useLocalSearchParams } from "expo-router";
 import { useMemo, useRef, useState } from "react";
 import {
   FlatList,
@@ -16,7 +16,7 @@ import { DaySchedule } from "@/components/reservation/DaySchedule";
 import { DayStrip } from "@/components/reservation/DayStrip";
 import { useNow } from "@/hooks/common";
 import { useItemSchedule } from "@/hooks/services/reservation";
-import type { BottomTabParamList } from "@/types";
+import { paramNumber, paramString } from "@/navigation/params";
 import type { DaySlotView } from "@/utils/reservation.utils";
 import {
   DAY_INDEXES,
@@ -25,10 +25,15 @@ import {
   ymdToIndex,
 } from "@/utils/reservation-time";
 
-type CalendarRouteProp = RouteProp<BottomTabParamList, "ReservationCalendar">;
-
 export const ReservationCalendar = () => {
-  const { id, title, date } = useRoute<CalendarRouteProp>().params;
+  const params = useLocalSearchParams<{
+    id: string;
+    title?: string;
+    date?: string;
+  }>();
+  const id = paramNumber(params.id);
+  const title = paramString(params.title);
+  const date = paramString(params.date) || undefined;
   const today = getParisYmd(useNow(60_000));
 
   // Day the pager is indexed from and opens on; fixed so indexes stay valid when midnight passes.

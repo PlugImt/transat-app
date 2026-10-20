@@ -1,4 +1,4 @@
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { Check } from "lucide-react-native";
 import { MotiView } from "moti";
 import { useTranslation } from "react-i18next";
@@ -11,7 +11,6 @@ import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useLanguageOptions } from "@/hooks/account/useLanguageOptions";
 import { useUpdateLanguage } from "@/hooks/account/useUpdateLanguage";
-import type { AppNavigation } from "@/types";
 import SettingCategory from "./components/SettingCategory";
 import { SettingsItem } from "./components/SettingsItem";
 
@@ -19,14 +18,14 @@ export const Language = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   const { toast } = useToast();
-  const navigation = useNavigation<AppNavigation>();
+  const router = useRouter();
   const { mutate: updateLanguage, isPending } = useUpdateLanguage();
   const { currentLanguageOption, otherLanguages } = useLanguageOptions();
 
   const handleLanguageChange = async (languageCode: string) => {
     updateLanguage(languageCode, {
       onSuccess: () => {
-        navigation.goBack();
+        router.back();
       },
       onError: () => {
         toast(t("settings.language.selectLanguageError"), "destructive");

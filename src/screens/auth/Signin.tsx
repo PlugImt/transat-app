@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -12,10 +12,11 @@ import { Text } from "@/components/common/Text";
 import { useToast } from "@/components/common/Toast";
 import { Page } from "@/components/page/Page";
 import useAuth from "@/hooks/account/useAuth";
+import { paths } from "@/navigation/paths";
 import { isImtEmail } from "@/utils";
 
 export const Signin = () => {
-  const navigation = useNavigation();
+  const router = useRouter();
   const { login, isPending } = useAuth();
   const { t } = useTranslation();
   const { toast } = useToast();
@@ -110,12 +111,7 @@ export const Signin = () => {
           />
           <Button
             label={t("auth.resetPassword.forgotPassword")}
-            onPress={() =>
-              navigation.navigate("Auth", {
-                screen: "ResetPassword",
-                params: { email: watch("email") },
-              })
-            }
+            onPress={() => router.push(paths.resetPassword(watch("email")))}
             isUpdating={isPending}
             variant="link"
             size="sm"

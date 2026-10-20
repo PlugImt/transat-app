@@ -1,5 +1,4 @@
-import { useNavigation, useRoute } from "expo-router";
-import type { NativeStackNavigationProp } from "expo-router/build/react-navigation/native-stack";
+import { useRouter } from "expo-router";
 import { Bell, BellOff, ExternalLink, MapPin } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { Linking, View } from "react-native";
@@ -14,8 +13,9 @@ import {
   useJoinClubMutation,
   useLeaveClubMutation,
 } from "@/hooks/services/club/useClub";
+import { useRouteId } from "@/navigation/params";
+import { paths } from "@/navigation/paths";
 import { linkToDomain } from "@/utils/";
-import type { ClubDetailsRouteProp } from "../ClubDetails";
 
 interface NotificationButtonProps {
   isMember: boolean;
@@ -27,8 +27,7 @@ const NotificationButton = ({
   disabled,
 }: NotificationButtonProps) => {
   const { t } = useTranslation();
-  const route = useRoute<ClubDetailsRouteProp>();
-  const { id } = route.params;
+  const id = useRouteId();
 
   const { mutate: joinClub, isPending: isJoining } = useJoinClubMutation(id);
   const { mutate: leaveClub, isPending: isLeaving } = useLeaveClubMutation(id);
@@ -57,10 +56,6 @@ const NotificationButton = ({
   );
 };
 
-type NavigationProp = NativeStackNavigationProp<{
-  ClubMemberList: { id: number };
-}>;
-
 interface ClubDetailsHeaderProps {
   club: ClubDetails;
 }
@@ -77,7 +72,7 @@ export const ClubDetailsHeader = ({ club }: ClubDetailsHeaderProps) => {
 
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const navigation = useNavigation<NavigationProp>();
+  const router = useRouter();
 
   const label = link?.toLowerCase().includes("whatsapp")
     ? "WhatsApp"
@@ -86,7 +81,7 @@ export const ClubDetailsHeader = ({ club }: ClubDetailsHeaderProps) => {
       : String(t("common.link"));
 
   const handleMemberListPress = () => {
-    navigation.navigate("ClubMemberList", { id: club.id });
+    router.push(paths.clubMembers(club.id));
   };
 
   return (

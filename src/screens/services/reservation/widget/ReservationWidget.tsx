@@ -1,5 +1,5 @@
 import { LinearGradient } from "expo-linear-gradient";
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { CalendarClock, Package } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
@@ -13,7 +13,7 @@ import type { MyReservation } from "@/dto/reservation";
 import { useNow } from "@/hooks/common";
 import { useDate } from "@/hooks/common/useDate";
 import { useDayLabel, useMyReservations } from "@/hooks/services/reservation";
-import type { AppNavigation } from "@/types";
+import { paths } from "@/navigation/paths";
 import {
   getActiveReservations,
   pickWidgetReservations,
@@ -51,7 +51,7 @@ const WidgetRow = ({ reservation }: { reservation: MyReservation }) => {
 export const ReservationWidget = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const navigation = useNavigation<AppNavigation>();
+  const router = useRouter();
   const now = useNow(60_000);
   const { data, isPending, isFetching, isError, error, refetch } =
     useMyReservations("current");
@@ -60,7 +60,7 @@ export const ReservationWidget = () => {
     getActiveReservations(data?.current ?? [], now),
   );
   const isClipped = rows.length > FULL_ROWS;
-  const openReservations = () => navigation.navigate("MyReservations");
+  const openReservations = () => router.push(paths.myReservations);
 
   return (
     <WidgetBoundary

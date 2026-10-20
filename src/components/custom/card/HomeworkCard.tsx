@@ -1,4 +1,4 @@
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { CheckCircle, Circle } from "lucide-react-native";
 import { useState } from "react";
 import { TouchableOpacity, View } from "react-native";
@@ -6,7 +6,7 @@ import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Homework } from "@/dto";
 import { useHomeworkDate } from "@/hooks/services/homework";
-import type { BottomTabNavigation } from "@/types/navigation";
+import { paths } from "@/navigation/paths";
 
 interface Props {
   homework: Homework;
@@ -15,7 +15,7 @@ interface Props {
 export default function HomeworkCard({ homework }: Props) {
   const { theme } = useTheme();
   const { formatDeadline, getDeadlineStatus } = useHomeworkDate();
-  const navigation = useNavigation<BottomTabNavigation>();
+  const router = useRouter();
   const [isDone, setIsDone] = useState(homework.done);
 
   const toggleDone = () => {
@@ -30,7 +30,7 @@ export default function HomeworkCard({ homework }: Props) {
 
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate("HomeworkDetails", { homework })}
+      onPress={() => router.push(paths.homeworkDetails(homework))}
       activeOpacity={0.8}
     >
       <View

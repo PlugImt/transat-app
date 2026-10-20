@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -11,7 +11,7 @@ import { useAddEvent } from "./useEvent";
 
 export const useAddEventForm = () => {
   const { t } = useTranslation();
-  const navigation = useNavigation();
+  const router = useRouter();
   const { mutate: addEvent, isPending: isAddingEvent } = useAddEvent();
   const { mutate: uploadImage, isPending: isUploadingImage } = useImageUpload();
 
@@ -58,12 +58,12 @@ export const useAddEventForm = () => {
   const handleAddEvent = (data: AddEventFormData) => {
     addEvent(data);
     reset();
-    navigation.goBack();
+    router.back();
   };
 
   const handleCancel = () => {
     hapticFeedback.light();
-    navigation.goBack();
+    router.back();
   };
 
   const handleSelectImage = () => {

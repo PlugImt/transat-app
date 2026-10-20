@@ -1,5 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query";
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import {
   Bell,
   FileText,
@@ -22,7 +22,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { useHapticFeedback } from "@/hooks/account/useHapticFeedback";
 import { useLanguageOptions } from "@/hooks/account/useLanguageOptions";
 import { useUser } from "@/hooks/account/useUser";
-import type { AppNavigation } from "@/types";
+import { paths } from "@/navigation/paths";
 import SettingCategory from "./components/SettingCategory";
 import SettingsItem from "./components/SettingsItem";
 
@@ -31,7 +31,7 @@ export const Settings = () => {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
   const { data: user, isPending } = useUser();
-  const navigation = useNavigation<AppNavigation>();
+  const router = useRouter();
   const { currentLanguageOption } = useLanguageOptions();
   const { isEnabled: isHapticEnabled, toggleHapticFeedback } =
     useHapticFeedback();
@@ -62,7 +62,7 @@ export const Settings = () => {
           <Button
             label={t("common.edit")}
             variant="ghost"
-            onPress={() => navigation.navigate("EditProfile")}
+            onPress={() => router.push(paths.editProfile)}
           />
         }
       />
@@ -72,13 +72,13 @@ export const Settings = () => {
           icon={<Palette color={theme.text} size={22} />}
           title={t("settings.appearance.title", "Theme")}
           subtitle={getAppearanceSubtitle()}
-          onPress={() => navigation.navigate("Appearance")}
+          onPress={() => router.push(paths.appearance)}
         />
         <SettingsItem
           icon={<Globe color={theme.text} size={22} />}
           title={t("settings.language.language")}
           subtitle={currentLanguageOption?.name ?? ""}
-          onPress={() => navigation.navigate("Language")}
+          onPress={() => router.push(paths.language)}
         />
       </SettingCategory>
 
@@ -86,7 +86,7 @@ export const Settings = () => {
         <SettingsItem
           icon={<Bell color={theme.text} size={22} />}
           title="Notifications"
-          onPress={() => navigation.navigate("Notifications")}
+          onPress={() => router.push(paths.notifications)}
         />
       </SettingCategory>
 
@@ -94,7 +94,7 @@ export const Settings = () => {
         <SettingsItem
           icon={<Shield color={theme.text} size={22} />}
           title={t("auth.resetPassword.changePassword")}
-          onPress={() => navigation.navigate("ChangePassword")}
+          onPress={() => router.push(paths.changePassword)}
         />
       </SettingCategory>
 
@@ -114,19 +114,19 @@ export const Settings = () => {
           icon={<HelpCircle color={theme.text} size={22} />}
           title={t("settings.help.title")}
           subtitle={t("settings.help.subtitle")}
-          onPress={() => navigation.navigate("Help")}
+          onPress={() => router.push(paths.help)}
         />
         <SettingsItem
           icon={<Info color={theme.text} size={22} />}
           title={t("settings.about.title")}
           subtitle={t("common.knowMore")}
-          onPress={() => navigation.navigate("About")}
+          onPress={() => router.push(paths.about)}
         />
         <SettingsItem
           icon={<FileText color={theme.text} size={22} />}
           title={t("settings.legal.title")}
           subtitle={t("settings.legal.subtitle")}
-          onPress={() => navigation.navigate("Legal")}
+          onPress={() => router.push(paths.legal)}
         />
       </SettingCategory>
 

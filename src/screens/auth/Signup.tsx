@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -14,11 +14,11 @@ import { useToast } from "@/components/common/Toast";
 import { Page } from "@/components/page/Page";
 import useAuth from "@/hooks/account/useAuth";
 import i18n from "@/i18n";
-import type { AuthNavigation } from "@/types";
+import { paths } from "@/navigation/paths";
 import { isImtEmail } from "@/utils";
 
 export const Signup = () => {
-  const navigation = useNavigation<AuthNavigation>();
+  const router = useRouter();
   const { register, isPending } = useAuth();
   const { t } = useTranslation();
   const { toast } = useToast();
@@ -165,7 +165,7 @@ export const Signup = () => {
                     labelClasses="text-sm"
                     style={{ padding: 0 }}
                     label={t("auth.signUp.termsLink")}
-                    onPress={() => navigation.navigate("Legal")}
+                    onPress={() => router.push(paths.authLegal)}
                   />
                 </View>
               }

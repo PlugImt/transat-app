@@ -1,6 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { NativeStackNavigationProp } from "expo-router/build/react-navigation/native-stack";
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { GraduationCap } from "lucide-react-native";
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -15,28 +14,17 @@ import type { User } from "@/dto";
 import { updateUserPayloadSchema } from "@/dto";
 import { useUpdateAccount } from "@/hooks/account/useUpdateAccount";
 import { useUser } from "@/hooks/account/useUser";
-import type { OnboardingStackParamList } from "@/navigation/OnboardingNavigator";
+import { setOnboardingSkipped } from "@/hooks/onboarding/useOnboardingSteps";
+import { paths } from "@/navigation/paths";
 import { hapticFeedback } from "@/utils/haptics.utils";
 
-type NavigationProp = NativeStackNavigationProp<OnboardingStackParamList>;
-
-interface OnboardingAcademicInfoProps {
-  route: {
-    params: { user: User };
-  };
-  onSkipStep: () => void;
-}
-
-export const OnboardingAcademicInfo = ({
-  route,
-  onSkipStep,
-}: OnboardingAcademicInfoProps) => {
-  const navigation = useNavigation<NavigationProp>();
+export const OnboardingAcademicInfo = () => {
+  const router = useRouter();
   const { theme } = useTheme();
   const { t } = useTranslation();
   const { mutate: updateAccount, isPending: isUpdating } = useUpdateAccount();
   const { data: user, refetch } = useUser();
-  const displayUser = user || route.params.user;
+  const displayUser = user;
 
   const {
     control,
@@ -47,10 +35,10 @@ export const OnboardingAcademicInfo = ({
   } = useForm({
     resolver: zodResolver(updateUserPayloadSchema),
     defaultValues: {
-      first_name: displayUser.first_name || "",
-      last_name: displayUser.last_name || "",
-      phone_number: displayUser.phone_number || "",
-      email: displayUser.email || "",
+      first_name: displayUser?.first_name || "",
+      last_name: displayUser?.last_name || "",
+      phone_number: displayUser?.phone_number || "",
+      email: displayUser?.email || "",
       graduation_year: displayUser?.graduation_year || undefined,
       formation_name: displayUser?.formation_name || undefined,
     },
@@ -85,22 +73,21 @@ export const OnboardingAcademicInfo = ({
     Keyboard.dismiss();
     // Ensure we have all required fields from the current user
     const payload = {
-      first_name: data.first_name || displayUser.first_name || "",
-      last_name: data.last_name || displayUser.last_name || "",
-      email: data.email || displayUser.email || "",
-      phone_number: data.phone_number || displayUser.phone_number || "",
+      first_name: data.first_name || displayUser?.first_name || "",
+      last_name: data.last_name || displayUser?.last_name || "",
+      email: data.email || displayUser?.email || "",
+      phone_number: data.phone_number || displayUser?.phone_number || "",
       graduation_year:
-        data.graduation_year || displayUser.graduation_year || undefined,
+        data.graduation_year || displayUser?.graduation_year || undefined,
       formation_name:
-        data.formation_name || displayUser.formation_name || undefined,
+        data.formation_name || displayUser?.formation_name || undefined,
     };
 
     updateAccount(payload as User, {
       onSuccess: async () => {
         hapticFeedback.success();
-        const updatedUser = await refetch();
-        const currentUser = updatedUser.data || displayUser;
-        navigation.navigate("Preview", { user: currentUser });
+        await refetch();
+        router.push(paths.preview);
       },
       onError: (error) => {
         hapticFeedback.error();
@@ -113,9 +100,8 @@ export const OnboardingAcademicInfo = ({
   };
 
   const handleSkip = () => {
-    onSkipStep();
-    const currentUser = user || route.params.user;
-    navigation.navigate("Preview", { user: currentUser });
+    setOnboardingSkipped(true);
+    router.push(paths.preview);
   };
 
   return (

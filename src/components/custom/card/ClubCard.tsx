@@ -1,7 +1,7 @@
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import Image from "@/components/common/Image";
 import type { Club } from "@/dto/club";
-import type { AppNavigation } from "@/types";
+import { paths } from "@/navigation/paths";
 import LinkCard, { LinkCardLoading } from "./LinkCard";
 
 interface ClubCardProps {
@@ -11,14 +11,14 @@ interface ClubCardProps {
 }
 
 const ClubCard = ({ club, size = "default", onPress }: ClubCardProps) => {
-  const navigation = useNavigation<AppNavigation>();
+  const router = useRouter();
 
   const handlePress = () => {
     if (onPress) {
       onPress();
       return;
     }
-    navigation.navigate("ClubDetails", { id: club.id });
+    router.push(paths.club(club.id));
   };
 
   return (

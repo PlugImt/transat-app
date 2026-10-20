@@ -1,4 +1,3 @@
-import { type RouteProp, useRoute } from "expo-router/react-navigation";
 import { Link, MapPin, Users } from "lucide-react-native";
 import { Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -17,15 +16,12 @@ import { useTheme } from "@/contexts/ThemeContext";
 import type { EventDetails } from "@/dto/event";
 import { useEditEventForm } from "@/hooks/services/event/useEditEventForm";
 import { useEventDetails } from "@/hooks/services/event/useEvent";
+import { useRouteId } from "@/navigation/params";
 import { SelectClubButton } from "@/screens/services/clubs/components/SelectClub";
-import type { BottomTabParamList } from "@/types/navigation";
-
-type EditEventRouteProp = RouteProp<BottomTabParamList, "EditEvent">;
 
 export const EditEvent = () => {
   const { t } = useTranslation();
-  const route = useRoute<EditEventRouteProp>();
-  const { id } = route.params;
+  const id = useRouteId();
 
   const {
     data: event,

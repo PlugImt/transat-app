@@ -1,9 +1,4 @@
-import type { BottomTabNavigationProp } from "expo-router/build/react-navigation/bottom-tabs";
-import type { NativeStackNavigationProp } from "expo-router/build/react-navigation/native-stack";
-import {
-  type CompositeNavigationProp,
-  useNavigation,
-} from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { Image, View } from "react-native";
 import { Button } from "@/components/common/Button";
@@ -12,21 +7,17 @@ import { AboutModal } from "@/components/custom/AboutModal";
 import { Page } from "@/components/page/Page";
 import { useUser } from "@/hooks/account/useUser";
 import { useEventsUpcomingPhone } from "@/hooks/services/fourchettas/useFourchettas";
-import type { AppStackParamList, BottomTabParamList } from "@/types";
+import { paths } from "@/navigation/paths";
 import {
   FourchettasEventCard,
   FourchettasEventCardLoading,
 } from "./components/FourchettasEventCard";
 import { phoneWithoutSpaces } from "./utils/common";
 
-type NavigationProp = CompositeNavigationProp<
-  NativeStackNavigationProp<AppStackParamList>,
-  BottomTabNavigationProp<BottomTabParamList>
->;
 export const Fourchettas = () => {
   const { data: user } = useUser();
   const { t } = useTranslation();
-  const navigation = useNavigation<NavigationProp>();
+  const router = useRouter();
 
   const {
     data: events = [],
@@ -48,13 +39,7 @@ export const Fourchettas = () => {
           <Button
             variant="default"
             onPress={() => {
-              // Je n'ai pas réussi à trouver comment faire pour que le type soit reconnu
-              // Mais ça marche :)
-              // A l'aide !
-              // @ts-expect-error
-              navigation.navigate("AccountScreen", {
-                screen: "EditProfile",
-              });
+              router.push(paths.editProfile);
             }}
             label={t("services.fourchettas.addPhoneNumberButton")}
           />
@@ -119,10 +104,7 @@ export const Fourchettas = () => {
               key={evt.id}
               event={evt}
               onPress={() =>
-                navigation.navigate("FourchettasOrder", {
-                  id: evt.id,
-                  orderUser: evt.orderuser,
-                })
+                router.push(paths.fourchettasOrder(evt.id, evt.orderuser))
               }
             />
           ))

@@ -1,5 +1,4 @@
 import { useQueryClient } from "@tanstack/react-query";
-import { type RouteProp, useRoute } from "expo-router/react-navigation";
 import { useTranslation } from "react-i18next";
 import CardGroup from "@/components/common/CardGroup";
 import { UserCardSkeleton } from "@/components/custom";
@@ -9,8 +8,8 @@ import { Page } from "@/components/page/Page";
 import { getIsRefetching } from "@/components/query";
 import { QUERY_KEYS } from "@/constants";
 import { useClubDetails } from "@/hooks/services/club/useClub";
+import { useRouteId } from "@/navigation/params";
 import { ClubEventWidget } from "@/screens/services/events/widget/ClubEventWidget";
-import type { BottomTabParamList } from "@/types/navigation";
 import { ClubReservationWidget } from "../reservation/widget/ClubReservationWidget";
 import {
   ClubDetailsHeader,
@@ -18,12 +17,9 @@ import {
 } from "./components/ClubDetailsHeader";
 import { ClubResponsible } from "./components/ClubResponsible";
 
-export type ClubDetailsRouteProp = RouteProp<BottomTabParamList, "ClubDetails">;
-
 const ClubDetails = () => {
   const { t } = useTranslation();
-  const route = useRoute<ClubDetailsRouteProp>();
-  const { id } = route.params;
+  const id = useRouteId();
 
   const {
     data: club,
@@ -99,8 +95,7 @@ export default ClubDetails;
 
 export const ClubDetailsSkeleton = () => {
   const { t } = useTranslation();
-  const route = useRoute<ClubDetailsRouteProp>();
-  const { id } = route.params;
+  const id = useRouteId();
 
   return (
     <Page title={t("services.clubs.title")}>

@@ -1,4 +1,4 @@
-import { useNavigation, useRoute } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { ArrowLeft } from "lucide-react-native";
 import type React from "react";
 import type { ReactNode } from "react";
@@ -11,7 +11,6 @@ import Animated, {
 } from "react-native-reanimated";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
-import { TabRoute } from "@/types";
 
 export const HEADER_HEIGHT = 60;
 
@@ -29,12 +28,8 @@ export function Header({
   onBack,
 }: Readonly<HeaderProps>) {
   const { theme } = useTheme();
-  const navigation = useNavigation();
-
-  const route = useRoute();
-  const canGoBack =
-    Boolean(onBack) ||
-    !Object.values(TabRoute).includes(route.name as TabRoute);
+  const router = useRouter();
+  const canGoBack = Boolean(onBack) || router.canGoBack();
 
   const headerAnimatedStyle = useAnimatedStyle(() => {
     // If canGoBack is true, the header is not shown (here to compute the value every time)
@@ -69,14 +64,23 @@ export function Header({
     if (onBack) {
       onBack();
     } else {
-      navigation.goBack();
+      router.back();
     }
   };
 
   return (
     <Animated.View
-      style={[headerAnimatedStyle, { backgroundColor: theme.overlay }]}
-      className="absolute top-0 left-0 right-0 z-10"
+      style={[
+        headerAnimatedStyle,
+        {
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 10,
+          backgroundColor: theme.overlay,
+        },
+      ]}
     >
       <Animated.View
         style={[contentAnimatedStyle, { height: HEADER_HEIGHT }]}

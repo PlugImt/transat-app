@@ -1,12 +1,12 @@
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { TouchableOpacity, View } from "react-native";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
-import type { AppNavigation } from "@/types";
+import { paths } from "@/navigation/paths";
 
 export const TimetableLoadingWidget = () => {
   const { theme } = useTheme();
-  const navigation = useNavigation<AppNavigation>();
+  const router = useRouter();
 
   const skeletonCount = () => Math.floor(Math.random() * 3) + 1;
 
@@ -14,7 +14,7 @@ export const TimetableLoadingWidget = () => {
     <View className="flex flex-col gap-2">
       <TextSkeleton lastLineWidth={128} />
       <TouchableOpacity
-        onPress={() => navigation.navigate("Timetable")}
+        onPress={() => router.push(paths.timetable)}
         className="px-6 py-4 rounded-lg flex flex-col gap-6"
         style={{ backgroundColor: theme.card }}
       >

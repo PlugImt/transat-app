@@ -68,6 +68,8 @@ export const Page = ({
   const normalizedChildren = normalizeChildren(children);
 
   const contentWrapperProps = {
+    contentInsetAdjustmentBehavior:
+      Platform.OS === "ios" ? ("automatic" as const) : undefined,
     onScroll: scrollHandler,
     refreshControl: onRefresh ? (
       <RefreshControl
@@ -91,29 +93,33 @@ export const Page = ({
         : normalizedChildren;
     }
     if (disableScroll) {
+      const {
+        contentInsetAdjustmentBehavior: _contentInsetAdjustmentBehavior,
+        ...viewProps
+      } = contentWrapperProps;
       return (
         <View
           className={containerClassName}
-          style={containerStyle}
-          {...contentWrapperProps}
+          style={[{ flex: 1 }, containerStyle]}
+          {...viewProps}
         >
           {normalizedChildren}
         </View>
       );
     }
     return (
-      <Animated.ScrollView {...contentWrapperProps}>
+      <Animated.ScrollView style={{ flex: 1 }} {...contentWrapperProps}>
         {normalizedChildren}
       </Animated.ScrollView>
     );
   };
 
   return (
-    <View style={{ backgroundColor: theme.background }} className="flex-1">
+    <View style={{ flex: 1, backgroundColor: theme.background }}>
       {background && (
         <View
           pointerEvents="none"
-          style={StyleSheet.absoluteFillObject}
+          style={StyleSheet.absoluteFill}
           className="overflow-hidden"
         >
           {background}

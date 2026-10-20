@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { Edit, GraduationCap } from "lucide-react-native";
 import { useEffect, useMemo } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -29,7 +29,7 @@ import { hapticFeedback } from "@/utils/haptics.utils";
 export const EditProfile = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
-  const navigation = useNavigation();
+  const router = useRouter();
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const { data: user, isPending, isError, error } = useUser();
@@ -103,7 +103,7 @@ export const EditProfile = () => {
         hapticFeedback.success();
         await refetch();
         toast(t("account.profileUpdated"), "success");
-        navigation.goBack();
+        router.back();
       },
       onError: (error) => {
         toast(error.message, "destructive");
@@ -253,7 +253,7 @@ export const EditProfile = () => {
 
         <Button
           label={t("common.cancel")}
-          onPress={() => navigation.goBack()}
+          onPress={() => router.back()}
           variant="secondary"
         />
       </View>
@@ -266,7 +266,7 @@ export default EditProfile;
 const EditAccountSkeleton = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const navigation = useNavigation();
+  const router = useRouter();
 
   return (
     <Page title={t("account.editProfile")}>
@@ -274,7 +274,7 @@ const EditAccountSkeleton = () => {
         <Text variant="h1">{t("account.editProfile")}</Text>
         <Button
           label={t("common.cancel")}
-          onPress={() => navigation.goBack()}
+          onPress={() => router.back()}
           size="sm"
           variant="ghost"
         />

@@ -1,5 +1,4 @@
-import type { BottomTabNavigationProp } from "expo-router/js-tabs";
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { ChevronRight, Clock, MapPin } from "lucide-react-native";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -14,10 +13,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import type { User } from "@/dto";
 import type { Event } from "@/dto/event";
 import { useDate } from "@/hooks/common";
-
-type NavigationProp = BottomTabNavigationProp<{
-  EventDetails: { id: number };
-}>;
+import { paths } from "@/navigation/paths";
 
 type EventCardProps = {
   event: Event;
@@ -27,7 +23,7 @@ export const EventCard = ({ event }: EventCardProps) => {
   const { theme } = useTheme();
   const { formatTime, formatAgo } = useDate();
   const { t } = useTranslation();
-  const navigation = useNavigation<NavigationProp>();
+  const router = useRouter();
 
   const startDate = new Date(event.start_date);
   const endDate = new Date(event.end_date);
@@ -43,7 +39,7 @@ export const EventCard = ({ event }: EventCardProps) => {
     <Card
       className="flex-row items-center gap-0"
       onPress={() => {
-        navigation.navigate("EventDetails", { id: event.id });
+        router.push(paths.event(event.id));
       }}
     >
       <View className="flex-1 flex-row items-center gap-4">

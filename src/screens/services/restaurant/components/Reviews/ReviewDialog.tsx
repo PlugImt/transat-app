@@ -1,4 +1,3 @@
-import { useRoute } from "expo-router/react-navigation";
 import type React from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -11,7 +10,7 @@ import { Textarea } from "@/components/common/Textarea";
 import { useToast } from "@/components/common/Toast";
 import { Stars } from "@/components/custom/star/Stars";
 import { usePostRestaurantReview } from "@/hooks/services/restaurant/useMenuRestaurant";
-import type { RestaurantReviewsRouteProp } from "@/screens/services/restaurant/components/Reviews";
+import { useRouteId } from "@/navigation/params";
 import { hapticFeedback } from "@/utils/haptics.utils";
 
 interface ReviewDialogProps {
@@ -24,8 +23,7 @@ export const ReviewDialog = ({ children }: ReviewDialogProps) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
 
-  const route = useRoute<RestaurantReviewsRouteProp>();
-  const { id } = route.params;
+  const id = useRouteId();
 
   const { mutate: postReview, isPending: isPostingReview } =
     usePostRestaurantReview(id);

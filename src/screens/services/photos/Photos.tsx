@@ -1,4 +1,4 @@
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { Images } from "lucide-react-native";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -19,7 +19,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import type { PhotoAlbum } from "@/dto";
 import { usePhotoSelection } from "@/hooks/services/photos/usePhotoSelection";
 import { usePhotoAlbums, usePhotos } from "@/hooks/services/photos/usePhotos";
-import type { AppNavigation } from "@/types";
+import { paths } from "@/navigation/paths";
 import { AlbumCard } from "./components/AlbumCard";
 import { PhotoGrid } from "./components/PhotoGrid";
 import { PhotoLayoutMenu } from "./components/PhotoLayoutMenu";
@@ -90,7 +90,7 @@ const PhotoGallery = ({
   active: boolean;
 }) => {
   const { t } = useTranslation();
-  const navigation = useNavigation<AppNavigation>();
+  const router = useRouter();
   const { store, onLimit } = usePhotoSelection();
   const query = usePhotos();
   const { refreshing, onRefresh } = useRefresh(query.refresh);
@@ -139,9 +139,7 @@ const PhotoGallery = ({
           loadMoreFailed={query.isFetchNextPageError}
           onLoadMore={loadMore}
           onRetryMore={() => query.fetchNextPage()}
-          onOpenAlbum={(id, title) =>
-            navigation.navigate("AlbumDetails", { id, title })
-          }
+          onOpenAlbum={(id, title) => router.navigate(paths.album(id, title))}
           empty={<Empty icon={<Images />} title={t("photos.empty")} />}
         />
       </Page>
@@ -157,7 +155,7 @@ const PhotoAlbums = ({ header }: { header: React.ReactElement }) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
   const { width } = useWindowDimensions();
-  const navigation = useNavigation<AppNavigation>();
+  const router = useRouter();
   const query = usePhotoAlbums();
   const { refreshing, onRefresh } = useRefresh(query.refresh);
 
@@ -168,9 +166,8 @@ const PhotoAlbums = ({ header }: { header: React.ReactElement }) => {
   const rows = buildAlbumRows(query.albums, perRow);
 
   const openAlbum = useCallback(
-    (album: PhotoAlbum) =>
-      navigation.navigate("AlbumDetails", { id: album.id, title: album.title }),
-    [navigation],
+    (album: PhotoAlbum) => router.navigate(paths.album(album.id, album.title)),
+    [router],
   );
 
   if (query.isError && query.albums.length === 0) {

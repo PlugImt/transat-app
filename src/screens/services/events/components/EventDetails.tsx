@@ -1,8 +1,4 @@
-import {
-  type RouteProp,
-  useNavigation,
-  useRoute,
-} from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { Edit, MoreVertical, Trash2 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
@@ -34,19 +30,12 @@ import {
   useDeleteEvent,
   useEventDetails,
 } from "@/hooks/services/event/useEvent";
-import type { AppNavigation } from "@/types";
-import type { BottomTabParamList } from "@/types/navigation";
+import { useRouteId } from "@/navigation/params";
+import { paths } from "@/navigation/paths";
 import {
   EventDetailsHeader,
   EventDetailsHeaderSkeleton,
 } from "./EventDetailsHeader";
-
-type NavigationProp = AppNavigation;
-
-export type EventDetailsRouteProp = RouteProp<
-  BottomTabParamList,
-  "EventDetails"
->;
 
 type EventActionsProps = {
   event: EventDetailsType;
@@ -55,17 +44,17 @@ type EventActionsProps = {
 const EventActions = ({ event }: EventActionsProps) => {
   const { theme } = useTheme();
   const { t } = useTranslation();
-  const navigation = useNavigation<AppNavigation>();
+  const router = useRouter();
 
   const { mutate: deleteEvent, isPending: isDeleting } = useDeleteEvent();
 
   const handleEditEvent = () => {
-    navigation.navigate("EditEvent", { id: event.id });
+    router.push(paths.editEvent(event.id));
   };
 
   const handleDeleteEvent = () => {
     deleteEvent(event.id);
-    navigation.goBack();
+    router.back();
   };
 
   return (
@@ -104,9 +93,8 @@ const EventActions = ({ event }: EventActionsProps) => {
 const EventDetails = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const route = useRoute<EventDetailsRouteProp>();
-  const { id } = route.params;
-  const navigation = useNavigation<NavigationProp>();
+  const id = useRouteId();
+  const router = useRouter();
   const { user } = useAuth();
 
   const {
@@ -152,7 +140,7 @@ const EventDetails = () => {
   const isOwner = event.creator.email === user?.email;
 
   const openEventMembers = () => {
-    navigation.navigate("EventMemberList", { id });
+    router.push(paths.eventMembers(id));
   };
 
   const eventActions = (

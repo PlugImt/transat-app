@@ -1,20 +1,8 @@
-import type { NavigatorScreenParams } from "expo-router/react-navigation";
-import type { BottomTabParamList } from "@/types";
+import type { Href } from "expo-router";
+import { photosHref, servicesHref } from "@/navigation/paths";
 
-type TabName =
-  | "HomeScreen"
-  | "ServicesScreen"
-  | "PhotosScreen"
-  | "AccountScreen";
-
-type ScreenName = keyof BottomTabParamList;
-
-/** A screen to open, addressed through the tab whose stack hosts it. */
-export type RouteTarget = {
-  tab: TabName;
-  screen: ScreenName;
-  params?: object;
-};
+/** A screen to open. Shared screens are addressed on the Services tab. */
+export type RouteTarget = Href;
 
 /** A page outside the app, opened in the default browser. */
 export type ExternalLink = { url: string };

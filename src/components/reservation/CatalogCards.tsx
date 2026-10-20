@@ -1,4 +1,4 @@
-import { useNavigation } from "expo-router/react-navigation";
+import { useRouter } from "expo-router";
 import { ChevronRight, FolderOpen } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
@@ -12,7 +12,7 @@ import {
   useReturnItem,
   useTakeItem,
 } from "@/hooks/services/reservation";
-import type { AppNavigation } from "@/types";
+import { paths } from "@/navigation/paths";
 import {
   formatUserName,
   type ItemAvailability,
@@ -26,17 +26,14 @@ export const CategoryCard = ({
   category: ReservationCategory;
 }) => {
   const { theme } = useTheme();
-  const navigation = useNavigation<AppNavigation>();
+  const router = useRouter();
 
   return (
     <Card
       className="flex-row items-center gap-4"
       accessibilityLabel={category.name}
       onPress={() =>
-        navigation.push("ReservationCategory", {
-          id: category.id,
-          title: category.name,
-        })
+        router.push(paths.reservationCategory(category.id, category.name))
       }
     >
       <FolderOpen color={theme.secondary} size={22} />
@@ -101,7 +98,7 @@ export const ItemCard = ({
 }) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const navigation = useNavigation<AppNavigation>();
+  const router = useRouter();
   const feedback = useReservationFeedback();
   const takeItem = useTakeItem();
   const returnItem = useReturnItem();
@@ -115,11 +112,7 @@ export const ItemCard = ({
       accessibilityLabel={item.name}
       onPress={
         availability === "slot"
-          ? () =>
-              navigation.navigate("ReservationCalendar", {
-                id: item.id,
-                title: item.name,
-              })
+          ? () => router.push(paths.reservationCalendar(item.id, item.name))
           : undefined
       }
     >

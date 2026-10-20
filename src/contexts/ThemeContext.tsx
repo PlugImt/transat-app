@@ -8,7 +8,7 @@ import {
 import { type ColorSchemeName, StatusBar, useColorScheme } from "react-native";
 import { storage } from "@/services/storage/asyncStorage";
 import STORAGE_KEYS from "@/services/storage/constants";
-import colors from "@/themes/colors";
+import colors from "@/constants/theme";
 
 export type ThemeMode = "system" | "light" | "dark";
 

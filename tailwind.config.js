@@ -1,17 +1,12 @@
-const colors = require("./src/themes/colors").default;
+const colors = require("./src/constants/theme").default;
 
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   presets: [require("nativewind/preset")],
   theme: {
-    fontFamily: {
-      sans: ["Poppins", "sans-serif"],
-    },
     extend: {
       colors: {
-        // Light theme colors (default)
         border: colors.light.muted,
         input: colors.light.input,
         background: colors.light.background,

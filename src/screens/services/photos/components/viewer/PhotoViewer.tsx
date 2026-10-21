@@ -38,7 +38,6 @@ import Animated, {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Button, IconButton } from "@/components/common/Button";
 import { Dialog, DialogContent } from "@/components/common/Dialog";
-import { ProgressBar } from "@/components/common/ProgressBar";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Photo } from "@/dto";
@@ -360,6 +359,7 @@ export const PhotoViewer = ({
               label={t("photos.selection.download")}
               icon={<Download />}
               isUpdating={status === "saving"}
+              progress={progress}
               accessibilityLabel={t("photos.viewer.save")}
               onPress={handleSave}
               className="flex-1"
@@ -370,12 +370,6 @@ export const PhotoViewer = ({
               accessibilityLabel={t("photos.viewer.share")}
               onPress={handleShare}
             />
-            {status === "saving" && (
-              <ProgressBar
-                value={progress}
-                className="absolute bottom-0 left-0 right-0 rounded-none"
-              />
-            )}
           </View>
         </Animated.View>
 

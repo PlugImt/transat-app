@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 import { BackHandler, Linking, View } from "react-native";
 import { Button, IconButton } from "@/components/common/Button";
 import { FloatingActionBar } from "@/components/common/FloatingActionBar";
-import { ProgressBar } from "@/components/common/ProgressBar";
 import { Text } from "@/components/common/Text";
 import { useToast } from "@/components/common/Toast";
 import { useBulkSavePhotos } from "@/hooks/services/photos/useBulkSavePhotos";
@@ -155,6 +154,7 @@ export const PhotoSelectionBar = ({
           <Button
             label={label}
             isUpdating={running}
+            progress={progress}
             disabled={count === 0}
             icon={
               hasFailures ? (
@@ -167,7 +167,6 @@ export const PhotoSelectionBar = ({
             onPress={download}
           />
         )}
-        {running && <ProgressBar value={progress} />}
       </View>
     </FloatingActionBar>
   );

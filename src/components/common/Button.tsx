@@ -1,10 +1,19 @@
-import React, { type ComponentPropsWithoutRef, cloneElement } from "react";
+import React, {
+  type ComponentPropsWithoutRef,
+  cloneElement,
+  useEffect,
+} from "react";
 import {
   ActivityIndicator,
   type GestureResponderEvent,
   TouchableOpacity,
   type ViewStyle,
 } from "react-native";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
 import { Text } from "@/components/common/Text";
 import { type ThemeType, useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils";
@@ -77,6 +86,34 @@ const getSizeStyles = (size: ButtonSize) => {
   return sizeStyles[size] || sizeStyles.default;
 };
 
+/** Tints the left part of the button, up to `value` (0 to 1). */
+const ProgressFill = ({ value, color }: { value: number; color: string }) => {
+  const clamped = Math.min(1, Math.max(0, value));
+  const width = useSharedValue(clamped);
+
+  useEffect(() => {
+    width.value = withTiming(clamped, { duration: 200 });
+  }, [clamped, width]);
+
+  const style = useAnimatedStyle(() => ({ width: `${width.value * 100}%` }));
+
+  return (
+    <Animated.View
+      pointerEvents="none"
+      style={[
+        {
+          position: "absolute",
+          top: 0,
+          bottom: 0,
+          left: 0,
+          backgroundColor: `${color}40`,
+        },
+        style,
+      ]}
+    />
+  );
+};
+
 interface ButtonProps
   extends ComponentPropsWithoutRef<typeof TouchableOpacity> {
   label?: string;
@@ -85,6 +122,8 @@ interface ButtonProps
   size?: ButtonSize;
   icon?: React.ReactElement<{ color: string; size?: number }>;
   isUpdating?: boolean;
+  /** 0 to 1 while `isUpdating`: the button fills up instead of showing a spinner. */
+  progress?: number;
 }
 
 const Button = ({
@@ -95,11 +134,13 @@ const Button = ({
   size = "default",
   icon,
   isUpdating,
+  progress,
   onPress,
   ...props
 }: ButtonProps) => {
   const { theme } = useTheme();
   const isDisabled = props.disabled || isUpdating;
+  const showProgress = isUpdating && progress !== undefined;
 
   const buttonStyle = getButtonStyle(variant, theme);
   const textColor = getTextColor(variant, theme);
@@ -116,18 +157,19 @@ const Button = ({
         {
           ...buttonStyle,
           ...sizeStyles,
-          opacity: isDisabled ? 0.5 : 1,
+          opacity: isDisabled && !showProgress ? 0.5 : 1,
         },
       ]}
       className={cn(
         className,
-        "rounded-lg gap-1 flex-row items-center justify-center",
+        "overflow-hidden rounded-lg gap-1 flex-row items-center justify-center",
       )}
       activeOpacity={1}
       {...props}
       disabled={isDisabled}
       onPress={handlePress}
     >
+      {showProgress && <ProgressFill value={progress} color={textColor} />}
       {label && (
         <Text
           style={{
@@ -138,7 +180,7 @@ const Button = ({
           {label}
         </Text>
       )}
-      {isUpdating ? (
+      {isUpdating && !showProgress ? (
         <ActivityIndicator color={textColor} />
       ) : (
         icon && cloneElement(icon, { color: textColor })

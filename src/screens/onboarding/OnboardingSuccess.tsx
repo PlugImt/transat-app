@@ -5,6 +5,7 @@ import { Button } from "@/components/common/Button";
 import { Text } from "@/components/common/Text";
 import { Page } from "@/components/page/Page";
 import { useTheme } from "@/contexts/ThemeContext";
+import { setOnboardingCompleted } from "@/hooks/onboarding/useOnboardingSteps";
 import { useFinishOnboarding } from "@/navigation/finish-onboarding";
 
 export const OnboardingSuccess = () => {
@@ -12,12 +13,18 @@ export const OnboardingSuccess = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
 
+  // A profile that was already complete never goes through the preview step, so completion is recorded here too.
+  const handleFinish = async () => {
+    await setOnboardingCompleted(true);
+    onFinish();
+  };
+
   return (
     <Page
       disableScroll
       className="flex-1 items-center justify-center gap-8"
       footer={
-        <Button label={t("onboarding.success.start")} onPress={onFinish} />
+        <Button label={t("onboarding.success.start")} onPress={handleFinish} />
       }
     >
       <View

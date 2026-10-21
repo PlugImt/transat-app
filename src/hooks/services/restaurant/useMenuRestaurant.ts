@@ -29,7 +29,7 @@ export const useMenuRestaurant = () => {
   };
 };
 
-export const userMenuRating = (id: number) => {
+export const useMenuRating = (id: number) => {
   const {
     data: rating,
     isPending,

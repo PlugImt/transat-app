@@ -12,7 +12,7 @@ import { Page } from "@/components/page/Page";
 import { getIsRefetching } from "@/components/query";
 import { TextSkeleton } from "@/components/Skeleton";
 import { useTheme } from "@/contexts/ThemeContext";
-import { userMenuRating } from "@/hooks/services/restaurant/useMenuRestaurant";
+import { useMenuRating } from "@/hooks/services/restaurant/useMenuRestaurant";
 import { useRouteId } from "@/navigation/params";
 import { AllergenDialog } from "@/screens/services/restaurant/components/Reviews/AllergenDialog";
 import { ReviewDialog } from "@/screens/services/restaurant/components/Reviews/ReviewDialog";
@@ -36,7 +36,7 @@ export const RestaurantReviews = () => {
     refetch,
     isError,
     error,
-  } = userMenuRating(id);
+  } = useMenuRating(id);
 
   if (isPending) {
     return <RestaurantReviewSkeleton />;

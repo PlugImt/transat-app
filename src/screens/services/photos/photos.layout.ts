@@ -19,6 +19,8 @@ export type DayHeaderRow = {
   type: "header";
   key: string;
   date: Date;
+  /** The last day of an event that spans several days; the header shows the range. */
+  endDate: Date | null;
   /** The event the group belongs to, when it is grouped by event and has one. */
   title: string | null;
   height: number;
@@ -294,7 +296,7 @@ const uniformBlocks = (
 type BuildOptions = {
   level: LayoutLevel;
   width: number;
-  /** One header per day, per event within each day, or none. Events are never merged because they share a date. */
+  /** One header per day, one per event whatever the days it spans, or none. */
   grouping: "none" | "day" | "event";
   /** No further page will be appended: the last row may take its final shape. */
   complete: boolean;
@@ -349,10 +351,11 @@ export const buildRows = (
     return { rows, images, imageIndex, rowOfPhoto };
   }
 
+  // An event is one group even when it spans several days; photos without one stay grouped by day.
   const groupOf = (p: Photo) =>
-    grouping === "event"
-      ? `${dayKey(p.sort_at)}|${p.album_id ?? ""}`
-      : dayKey(p.sort_at);
+    grouping === "event" && p.album_id !== null
+      ? `a${p.album_id}`
+      : `d${dayKey(p.sort_at)}`;
 
   let start = 0;
   while (start < photos.length) {
@@ -361,11 +364,21 @@ export const buildRows = (
     while (end < photos.length && groupOf(photos[end]) === group) end += 1;
     const title = grouping === "event" ? photos[start].album_title : null;
     const height = title ? EVENT_HEADER_ROW_HEIGHT : HEADER_ROW_HEIGHT;
+    let first = new Date(photos[start].sort_at);
+    let last = first;
+    for (let i = start + 1; i < end; i++) {
+      const at = new Date(photos[i].sort_at);
+      if (at < first) first = at;
+      if (at > last) last = at;
+    }
+    const spansDays =
+      dayKey(first.toISOString()) !== dayKey(last.toISOString());
     rows.push({
       type: "header",
-      // The first photo's id keeps keys unique when a day's photos interleave events.
+      // The first photo's id keeps keys unique when the same event comes back after other photos.
       key: `h-${group}-${photos[start].id}`,
-      date: new Date(photos[start].sort_at),
+      date: spansDays ? first : new Date(photos[start].sort_at),
+      endDate: spansDays ? last : null,
       title,
       height,
       offset,

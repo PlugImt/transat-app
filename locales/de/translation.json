@@ -696,6 +696,7 @@
     },
     "selection": {
       "select": "Auswählen",
+      "pick": "Wähle Fotos zum Herunterladen aus",
       "hint": "Originale werden in deiner Mediathek gespeichert",
       "count_one": "{{count}} ausgewählt",
       "count_other": "{{count}} ausgewählt",
@@ -818,6 +819,9 @@
         "network": "Keine Verbindung. Prüfe dein Netzwerk.",
         "unknown": "Speichern fehlgeschlagen. Versuche es erneut."
       }
+    },
+    "menu": {
+      "title": "Weitere Optionen"
     }
   },
   "user": {

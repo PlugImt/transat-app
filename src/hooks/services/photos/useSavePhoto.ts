@@ -46,7 +46,14 @@ export const requestSavePermission = async () => {
 export const savePhotoOriginal = async (
   queryClient: QueryClient,
   id: string,
-  { askPermission = true }: { askPermission?: boolean } = {},
+  {
+    askPermission = true,
+    onProgress,
+  }: {
+    askPermission?: boolean;
+    /** 0 to 1: the download takes up to 95%, the last part is adding the photo to the library. */
+    onProgress?: (fraction: number) => void;
+  } = {},
 ) => {
   let cached: File | null = null;
   try {
@@ -69,6 +76,13 @@ export const savePhotoOriginal = async (
       cached,
       {
         idempotent: true,
+        onProgress: ({ bytesWritten, totalBytes }) => {
+          // Drive may not announce a length: the indexed size stands in.
+          const expected = totalBytes > 0 ? totalBytes : detail.size_bytes;
+          if (expected > 0) {
+            onProgress?.(Math.min(0.95, (bytesWritten / expected) * 0.95));
+          }
+        },
       },
     );
     // Google answers with an HTML warning page instead of the file when it cannot serve it directly.
@@ -77,6 +91,7 @@ export const savePhotoOriginal = async (
     }
 
     await Asset.create(downloaded.uri);
+    onProgress?.(1);
   } finally {
     try {
       if (cached?.exists) cached.delete();
@@ -90,12 +105,22 @@ export const savePhotoOriginal = async (
 export const useSavePhoto = () => {
   const queryClient = useQueryClient();
   const [status, setStatus] = useState<SaveStatus>("idle");
+  const [progress, setProgress] = useState(0);
 
   const save = useCallback(
     async (id: string) => {
       setStatus("saving");
+      setProgress(0);
       try {
-        await savePhotoOriginal(queryClient, id);
+        await savePhotoOriginal(queryClient, id, {
+          // A re-render per percent is plenty for a bar.
+          onProgress: (fraction) =>
+            setProgress((previous) =>
+              fraction >= 1 || fraction - previous >= 0.02
+                ? fraction
+                : previous,
+            ),
+        });
         setStatus("saved");
       } catch (error) {
         setStatus(classifySaveError(error));
@@ -106,7 +131,7 @@ export const useSavePhoto = () => {
 
   const reset = useCallback(() => setStatus("idle"), []);
 
-  return { status, save, reset };
+  return { status, progress, save, reset };
 };
 
 export const classifySaveError = (error: unknown): SaveError => {

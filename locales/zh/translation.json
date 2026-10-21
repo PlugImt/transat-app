@@ -693,6 +693,7 @@
     },
     "selection": {
       "select": "选择",
+      "pick": "选择要下载的照片",
       "hint": "原图将保存到你的相册",
       "count_one": "已选择 {{count}} 张",
       "count_other": "已选择 {{count}} 张",
@@ -815,6 +816,9 @@
         "network": "无法连接，请检查网络。",
         "unknown": "保存失败，请重试。"
       }
+    },
+    "menu": {
+      "title": "更多选项"
     }
   },
   "user": {

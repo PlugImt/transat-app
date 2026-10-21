@@ -24,7 +24,7 @@ import { paramNumber, paramString } from "@/navigation/params";
 import { paths } from "@/navigation/paths";
 import { isDriveFolderUrl, shareLink } from "@/utils/photo.utils";
 import { PhotoGrid } from "./components/PhotoGrid";
-import { PhotoLayoutMenu } from "./components/PhotoLayoutMenu";
+import { PhotoMenu } from "./components/PhotoMenu";
 import { PhotoSelectionBar } from "./components/PhotoSelectionBar";
 import { parseEventDate } from "./photos.utils";
 
@@ -126,7 +126,7 @@ export const AlbumDetails = () => {
                 onPress={shareAlbum}
               />
             )}
-            <PhotoLayoutMenu />
+            <PhotoMenu selection={store} />
           </View>
         }
         // Back leaves selection first (the system Back button does the same).

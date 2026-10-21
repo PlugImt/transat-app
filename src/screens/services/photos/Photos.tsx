@@ -22,7 +22,7 @@ import { usePhotoAlbums, usePhotos } from "@/hooks/services/photos/usePhotos";
 import { paths } from "@/navigation/paths";
 import { AlbumCard } from "./components/AlbumCard";
 import { PhotoGrid } from "./components/PhotoGrid";
-import { PhotoLayoutMenu } from "./components/PhotoLayoutMenu";
+import { PhotoMenu } from "./components/PhotoMenu";
 import { PhotoSelectionBar } from "./components/PhotoSelectionBar";
 import {
   type AlbumListRow,
@@ -124,7 +124,7 @@ const PhotoGallery = ({
         className="gap-0 px-0"
         onRefresh={onRefresh}
         refreshing={refreshing}
-        header={<PhotoLayoutMenu />}
+        header={<PhotoMenu selection={store} />}
         asChildren
       >
         <PhotoGrid

@@ -13,14 +13,16 @@ import {
   Alert,
   type FlatList,
   Linking,
-  Platform,
   Pressable,
   useWindowDimensions,
   View,
   type ViewToken,
 } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import Animated from "react-native-reanimated";
+import Animated, {
+  type SharedValue,
+  useAnimatedStyle,
+} from "react-native-reanimated";
 import {
   FLOATING_ACTION_BAR_BOTTOM,
   FLOATING_ACTION_BAR_HEIGHT,
@@ -31,6 +33,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import type { Photo } from "@/dto";
 import { useDate } from "@/hooks/common";
 import { useAnimatedHeaderContext } from "@/hooks/common/useAnimatedHeader";
+import { useCanGoBack } from "@/hooks/common/useCanGoBack";
 import { usePhotoLayout } from "@/hooks/services/photos/usePhotoLayout";
 import {
   type PhotoSelectionStore,
@@ -41,6 +44,7 @@ import {
   buildRows,
   columnsFor,
   columnsForLevel,
+  type DayHeaderRow,
   EVENT_HEADER_ROW_HEIGHT,
   GRID_GAP,
   type GridRow,
@@ -115,6 +119,27 @@ export const PhotoGrid = ({
     () => buildRows(photos, { level, width, grouping, complete: !hasMore }),
     [photos, level, width, grouping, hasMore],
   );
+
+  // Same rule as the page header: it only slides away on scroll when there is nowhere to go back to.
+  const pinned = useCanGoBack();
+
+  // Where each header starts and where the next one does: that is all a header needs to stick and be replaced.
+  const headerInfo = useMemo(() => {
+    const headers = layout.rows.filter(
+      (row): row is DayHeaderRow => row.type === "header",
+    );
+    return new Map(
+      headers.map((row, i) => [
+        row.key,
+        {
+          top: rowsStart + row.offset,
+          nextTop: headers[i + 1]
+            ? rowsStart + headers[i + 1].offset
+            : Number.POSITIVE_INFINITY,
+        },
+      ]),
+    );
+  }, [layout, rowsStart]);
 
   // Latest values for callbacks that must keep a stable identity (viewability).
   const live = useRef({ layout, rowsStart, topPhotoId: "" });
@@ -218,7 +243,24 @@ export const PhotoGrid = ({
   const renderItem = useCallback(
     ({ item, index }: { item: GridRow; index: number }) =>
       item.type === "header" ? (
-        <DayHeader date={item.date} title={item.title} />
+        headerContext ? (
+          <StickyDayHeader
+            row={item}
+            top={headerInfo.get(item.key)?.top ?? 0}
+            nextTop={
+              headerInfo.get(item.key)?.nextTop ?? Number.POSITIVE_INFINITY
+            }
+            pinned={pinned}
+            scrollY={headerContext.scrollY}
+            headerShown={headerContext.headerShown}
+          />
+        ) : (
+          <DayHeader
+            date={item.date}
+            endDate={item.endDate}
+            title={item.title}
+          />
+        )
       ) : (
         <PhotoRowView
           row={item}
@@ -230,8 +272,24 @@ export const PhotoGrid = ({
           onLongPress={handleLongPress}
         />
       ),
-    [visible, handlePress, handleLongPress, selection],
+    [
+      visible,
+      handlePress,
+      handleLongPress,
+      selection,
+      headerContext,
+      headerInfo,
+      pinned,
+    ],
   );
+
+  // The list header, when there is one, counts as the first child.
+  const stickyHeaderIndices = useMemo(() => {
+    const offset = header ? 1 : 0;
+    return layout.rows.flatMap((row, i) =>
+      row.type === "header" ? [i + offset] : [],
+    );
+  }, [layout, header]);
 
   // Row heights and offsets are known, so the list can jump anywhere without measuring what lies in between.
   const getItemLayout = useCallback(
@@ -309,6 +367,7 @@ export const PhotoGrid = ({
             keyExtractor={(row) => row.key}
             renderItem={renderItem}
             getItemLayout={getItemLayout}
+            stickyHeaderIndices={stickyHeaderIndices}
             ListHeaderComponent={listHeader}
             ListEmptyComponent={
               loading ? <GridSkeleton width={width} level={level} /> : empty
@@ -325,7 +384,8 @@ export const PhotoGrid = ({
             maxToRenderPerBatch={6}
             windowSize={7}
             updateCellsBatchingPeriod={40}
-            removeClippedSubviews={Platform.OS === "android"}
+            // Android clips by default; flipping it once headers exist (empty list, then rows) crashes addViewAt.
+            removeClippedSubviews={false}
           />
         </View>
       </GestureDetector>
@@ -395,34 +455,58 @@ const PhotoRowView = memo(
 );
 PhotoRowView.displayName = "PhotoRowView";
 
+const sameDay = (a: Date, b: Date) =>
+  a.getFullYear() === b.getFullYear() &&
+  a.getMonth() === b.getMonth() &&
+  a.getDate() === b.getDate();
+
+/** "Today", "Yesterday", a date, or the span of an event that lasts several days. */
+const useDateLabel = (date: Date, endDate: Date | null) => {
+  const { t } = useTranslation();
+  const { formatDate } = useDate();
+  const now = new Date();
+
+  if (endDate) {
+    const from = date <= endDate ? date : endDate;
+    const to = date <= endDate ? endDate : date;
+    const year = to.getFullYear() === now.getFullYear() ? "" : " yyyy";
+    const sameMonth =
+      from.getMonth() === to.getMonth() &&
+      from.getFullYear() === to.getFullYear();
+    return sameMonth
+      ? `${formatDate(from, "d")} – ${formatDate(to, `d MMMM${year}`)}`
+      : `${formatDate(from, "d MMM")} – ${formatDate(to, `d MMM${year}`)}`;
+  }
+
+  const yesterday = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate() - 1,
+  );
+  const label = sameDay(date, now)
+    ? t("photos.today")
+    : sameDay(date, yesterday)
+      ? t("photos.yesterday")
+      : formatDate(
+          date,
+          date.getFullYear() === now.getFullYear()
+            ? "EEEE d MMMM"
+            : "d MMMM yyyy",
+        );
+  return label.charAt(0).toUpperCase() + label.slice(1);
+};
+
 const DayHeader = memo(
-  ({ date, title }: { date: Date; title: string | null }) => {
-    const { t } = useTranslation();
-    const { formatDate } = useDate();
-
-    const now = new Date();
-    const sameDay = (a: Date, b: Date) =>
-      a.getFullYear() === b.getFullYear() &&
-      a.getMonth() === b.getMonth() &&
-      a.getDate() === b.getDate();
-    const yesterday = new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate() - 1,
-    );
-
-    const label = sameDay(date, now)
-      ? t("photos.today")
-      : sameDay(date, yesterday)
-        ? t("photos.yesterday")
-        : formatDate(
-            date,
-            date.getFullYear() === now.getFullYear()
-              ? "EEEE d MMMM"
-              : "d MMMM yyyy",
-          );
-
-    const dateLabel = label.charAt(0).toUpperCase() + label.slice(1);
+  ({
+    date,
+    endDate,
+    title,
+  }: {
+    date: Date;
+    endDate: Date | null;
+    title: string | null;
+  }) => {
+    const dateLabel = useDateLabel(date, endDate);
 
     return (
       // Fixed height: the layout computes row offsets in advance.
@@ -456,6 +540,49 @@ const DayHeader = memo(
   },
 );
 DayHeader.displayName = "DayHeader";
+
+/**
+ * A header that stays at the top while its group scrolls, then gives way to the next one: the list sticks it (and keeps
+ * it mounted), this only shifts it under the page header, which slides away on scroll. The next header still pushes it
+ * up at the right moment.
+ */
+const StickyDayHeader = memo(
+  ({
+    row,
+    top,
+    nextTop,
+    pinned,
+    scrollY,
+    headerShown,
+  }: {
+    row: DayHeaderRow;
+    /** Scroll position at which the header starts, and the one where the next header starts. */
+    top: number;
+    nextTop: number;
+    pinned: boolean;
+    scrollY: SharedValue<number>;
+    headerShown: SharedValue<number>;
+  }) => {
+    const { theme } = useTheme();
+
+    const style = useAnimatedStyle(() => {
+      const below = pinned ? HEADER_HEIGHT : headerShown.value * HEADER_HEIGHT;
+      const y = top - scrollY.value;
+      const limit = nextTop - scrollY.value - row.height;
+      // Where the list draws it, and where it should be: no lower than the page header, no higher than the push.
+      const sticky = Math.min(Math.max(y, 0), limit);
+      const wanted = Math.min(Math.max(y, below), limit);
+      return { transform: [{ translateY: wanted - sticky }] };
+    });
+
+    return (
+      <Animated.View style={[{ backgroundColor: theme.background }, style]}>
+        <DayHeader date={row.date} endDate={row.endDate} title={row.title} />
+      </Animated.View>
+    );
+  },
+);
+StickyDayHeader.displayName = "StickyDayHeader";
 
 /** Grey tiles in the geometry of the current level, so the real photos replace them without layout shift. */
 const GridSkeleton = ({

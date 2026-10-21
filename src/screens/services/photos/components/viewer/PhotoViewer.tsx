@@ -38,6 +38,7 @@ import Animated, {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Button, IconButton } from "@/components/common/Button";
 import { Dialog, DialogContent } from "@/components/common/Dialog";
+import { ProgressBar } from "@/components/common/ProgressBar";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Photo } from "@/dto";
@@ -95,7 +96,7 @@ export const PhotoViewer = ({
   const listRef = useRef<FlatList<Photo>>(null);
 
   const photo = photos[index];
-  const { status, save, reset } = useSavePhoto();
+  const { status, progress, save, reset } = useSavePhoto();
 
   // The sharper rendition is only requested after the user zooms, using the template the backend provides.
   const wantsHiRes = !!photo && !!everZoomed[photo.id];
@@ -347,7 +348,7 @@ export const PhotoViewer = ({
           )}
 
           <View
-            className="flex-row items-center gap-3 self-center rounded-2xl px-3 py-3"
+            className="flex-row items-center gap-3 self-center overflow-hidden rounded-2xl px-3 py-3"
             style={{
               marginBottom: insets.bottom + 16,
               width: Math.min(width - 32, 420),
@@ -369,6 +370,12 @@ export const PhotoViewer = ({
               accessibilityLabel={t("photos.viewer.share")}
               onPress={handleShare}
             />
+            {status === "saving" && (
+              <ProgressBar
+                value={progress}
+                className="absolute bottom-0 left-0 right-0 rounded-none"
+              />
+            )}
           </View>
         </Animated.View>
 

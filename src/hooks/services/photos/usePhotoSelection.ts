@@ -18,6 +18,8 @@ export class PhotoSelectionStore {
   private selected = new Set<string>();
   private failed = new Set<string>();
   private modeOn = false;
+  /** Entered from the menu: the mode stays on with nothing selected, until it is left explicitly. */
+  private pinned = false;
   private cached = { mode: false, count: 0 };
   private byId = new Map<string, Set<Listener>>();
   private tiles = new Set<Listener>();
@@ -75,6 +77,14 @@ export class PhotoSelectionStore {
     };
   }
 
+  /** From the menu: selection mode with nothing selected yet. */
+  enter() {
+    if (this.locked || this.modeOn) return;
+    this.pinned = true;
+    this.modeOn = true;
+    this.commit("all");
+  }
+
   /** Long press: starts selection mode with this photo. Returns false when the limit is reached. */
   start(id: string) {
     if (this.locked) return true;
@@ -98,7 +108,7 @@ export class PhotoSelectionStore {
     if (this.selected.has(id)) {
       this.selected.delete(id);
       this.failed.delete(id);
-      if (this.selected.size === 0) {
+      if (this.selected.size === 0 && !this.pinned) {
         this.modeOn = false;
         this.commit("all");
       } else {
@@ -119,6 +129,7 @@ export class PhotoSelectionStore {
     this.selected = new Set(ids);
     this.failed = new Set(ids);
     this.modeOn = ids.length > 0;
+    this.pinned = false;
     this.commit(this.modeOn ? touched.concat(ids) : "all");
   }
 
@@ -127,6 +138,7 @@ export class PhotoSelectionStore {
     this.selected.clear();
     this.failed.clear();
     this.modeOn = false;
+    this.pinned = false;
     this.commit("all");
   }
 

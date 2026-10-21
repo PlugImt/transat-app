@@ -727,6 +727,7 @@
     },
     "selection": {
       "select": "Sélectionner",
+      "pick": "Sélectionnez des photos à télécharger",
       "hint": "Les originaux sont enregistrés dans votre photothèque",
       "count_one": "{{count}} sélectionnée",
       "count_other": "{{count}} sélectionnées",
@@ -849,6 +850,9 @@
         "network": "Connexion impossible. Vérifiez votre réseau.",
         "unknown": "L'enregistrement a échoué. Réessayez."
       }
+    },
+    "menu": {
+      "title": "Plus d'options"
     }
   },
   "user": {

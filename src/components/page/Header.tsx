@@ -11,6 +11,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { Text } from "@/components/common/Text";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useCanGoBack } from "@/hooks/common/useCanGoBack";
 
 export const HEADER_HEIGHT = 60;
 
@@ -29,7 +30,8 @@ export function Header({
 }: Readonly<HeaderProps>) {
   const { theme } = useTheme();
   const router = useRouter();
-  const canGoBack = Boolean(onBack) || router.canGoBack();
+  const hasPreviousScreen = useCanGoBack();
+  const canGoBack = Boolean(onBack) || hasPreviousScreen;
 
   const headerAnimatedStyle = useAnimatedStyle(() => {
     // If canGoBack is true, the header is not shown (here to compute the value every time)

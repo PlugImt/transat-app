@@ -25,7 +25,8 @@ export const useVisibleWidgets = (widgets: Preference[]): Preference[] => {
   const { data: events } = useEvents("upcoming", {
     enabled: hasEventsWidget,
   });
-  const hasNoEvents = !!events && events.length === 0;
+  // The API answers `null`, not `[]`, when there is no event.
+  const hasNoEvents = events !== undefined && !events?.length;
 
   return widgets.filter(
     (widget) =>

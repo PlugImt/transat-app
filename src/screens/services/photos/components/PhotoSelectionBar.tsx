@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { BackHandler, Linking, View } from "react-native";
 import { Button, IconButton } from "@/components/common/Button";
 import { FloatingActionBar } from "@/components/common/FloatingActionBar";
+import { ProgressBar } from "@/components/common/ProgressBar";
 import { Text } from "@/components/common/Text";
 import { useToast } from "@/components/common/Toast";
 import { useBulkSavePhotos } from "@/hooks/services/photos/useBulkSavePhotos";
@@ -38,7 +39,7 @@ export const PhotoSelectionBar = ({
   const { toast } = useToast();
   const navigation = useNavigation();
   const { mode, count } = useSelectionSummary(store);
-  const { state, start, cancel, reset } = useBulkSavePhotos();
+  const { state, progress, start, cancel, reset } = useBulkSavePhotos();
 
   const running = state.phase === "running";
   // Failures still in the selection; once the user changes it, the bar goes back to a plain download.
@@ -125,7 +126,9 @@ export const PhotoSelectionBar = ({
     ? t("photos.selection.saving", { done: state.done, total: state.total })
     : hasFailures
       ? t("photos.selection.retry")
-      : t("photos.selection.downloadCount", { count });
+      : count === 0
+        ? t("photos.selection.pick")
+        : t("photos.selection.downloadCount", { count });
 
   return (
     <FloatingActionBar>
@@ -164,6 +167,7 @@ export const PhotoSelectionBar = ({
             onPress={download}
           />
         )}
+        {running && <ProgressBar value={progress} />}
       </View>
     </FloatingActionBar>
   );

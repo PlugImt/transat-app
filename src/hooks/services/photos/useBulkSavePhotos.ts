@@ -42,7 +42,11 @@ const isFatal = (code: SaveError) =>
 export const useBulkSavePhotos = () => {
   const queryClient = useQueryClient();
   const [state, setState] = useState<BulkSaveState>(IDLE);
+  // Share of the whole batch, counting the photos still downloading: what a progress bar shows.
+  const [progress, setProgress] = useState(0);
   const cancelled = useRef(false);
+  const inflight = useRef(new Map<string, number>());
+  const finished = useRef(0);
 
   const start = useCallback(
     async (ids: string[]): Promise<BulkOutcome<SaveError> | null> => {
@@ -51,7 +55,19 @@ export const useBulkSavePhotos = () => {
       if (unique.length === 0) return null;
       running = true;
       cancelled.current = false;
+      inflight.current.clear();
+      finished.current = 0;
+      setProgress(0);
       setState({ ...IDLE, phase: "running", total: unique.length });
+
+      const publish = () => {
+        let partial = 0;
+        for (const fraction of inflight.current.values()) partial += fraction;
+        const share = (finished.current + partial) / unique.length;
+        setProgress((previous) =>
+          share >= 1 || Math.abs(share - previous) >= 0.01 ? share : previous,
+        );
+      };
 
       try {
         // Asked once for the batch, so a refusal costs nothing and never leaves a half-done run.
@@ -81,8 +97,21 @@ export const useBulkSavePhotos = () => {
         const outcome = await runBulk<SaveError>({
           ids: unique,
           concurrency: CONCURRENCY,
-          save: (id) =>
-            savePhotoOriginal(queryClient, id, { askPermission: false }),
+          save: async (id) => {
+            try {
+              await savePhotoOriginal(queryClient, id, {
+                askPermission: false,
+                onProgress: (fraction) => {
+                  inflight.current.set(id, fraction);
+                  publish();
+                },
+              });
+            } finally {
+              inflight.current.delete(id);
+              finished.current += 1;
+              publish();
+            }
+          },
           classify: classifySaveError,
           isFatal,
           stopAfterRepeated: {
@@ -121,7 +150,10 @@ export const useBulkSavePhotos = () => {
     cancelled.current = true;
   }, []);
 
-  const reset = useCallback(() => setState(IDLE), []);
+  const reset = useCallback(() => {
+    setState(IDLE);
+    setProgress(0);
+  }, []);
 
-  return { state, start, cancel, reset };
+  return { state, progress, start, cancel, reset };
 };

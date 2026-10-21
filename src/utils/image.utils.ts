@@ -1,3 +1,4 @@
+import { File } from "expo-file-system";
 import * as ImagePicker from "expo-image-picker";
 import { t } from "i18next";
 import type { ImageSourcePropType } from "react-native";
@@ -28,12 +29,9 @@ export const uploadImage = async (): Promise<string> => {
   const image = result.assets[0];
 
   try {
+    // expo/fetch (the global fetch since SDK 58) does not read `{ uri, name, type }` parts: it needs a File.
     const formData = new FormData();
-    formData.append("image", {
-      uri: image.uri,
-      name: image.uri.split("/").pop() || "image.jpg",
-      type: `image/${image.uri.split(".").pop()}` || "image/jpeg",
-    } as unknown as Blob);
+    formData.append("image", new File(image.uri) as unknown as Blob);
 
     const upload = await apiRequest<{ success: boolean; url: string }>(
       API_ROUTES.upload,

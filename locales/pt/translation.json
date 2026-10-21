@@ -696,6 +696,7 @@
     },
     "selection": {
       "select": "Selecionar",
+      "pick": "Selecione fotos para transferir",
       "hint": "Os originais são guardados na sua biblioteca",
       "count_one": "{{count}} selecionada",
       "count_other": "{{count}} selecionadas",
@@ -818,6 +819,9 @@
         "network": "Sem ligação. Verifique a sua rede.",
         "unknown": "Falha ao guardar. Tente novamente."
       }
+    },
+    "menu": {
+      "title": "Mais opções"
     }
   },
   "user": {

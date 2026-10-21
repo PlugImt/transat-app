@@ -727,6 +727,7 @@
     },
     "selection": {
       "select": "Select",
+      "pick": "Select photos to download",
       "hint": "Originals are saved to your library",
       "count_one": "{{count}} selected",
       "count_other": "{{count}} selected",
@@ -849,6 +850,9 @@
         "network": "Can't connect. Check your network.",
         "unknown": "Saving failed. Please try again."
       }
+    },
+    "menu": {
+      "title": "More options"
     }
   },
   "user": {

@@ -1,9 +1,10 @@
 import { MotiView } from "moti";
 import type { ReactNode } from "react";
+import { useTabBarInset } from "@/components/navigation/TabContentInsets";
 import { useTheme } from "@/contexts/ThemeContext";
 
 export const FLOATING_ACTION_BAR_HEIGHT = 76;
-/** Distance from the bottom of the screen area, which already ends above the tab bar. */
+/** Distance above the tab bar (or the bottom of the screen outside the tabs). */
 export const FLOATING_ACTION_BAR_BOTTOM = 12;
 
 type FloatingActionBarProps = {
@@ -17,6 +18,7 @@ export const FloatingActionBar = ({
   height = FLOATING_ACTION_BAR_HEIGHT,
 }: FloatingActionBarProps) => {
   const { theme } = useTheme();
+  const tabBarInset = useTabBarInset() ?? 0;
 
   return (
     <MotiView
@@ -25,7 +27,7 @@ export const FloatingActionBar = ({
       transition={{ type: "timing", duration: 200 }}
       className="absolute left-4 right-4 flex-row items-center gap-3 rounded-2xl border px-4"
       style={{
-        bottom: FLOATING_ACTION_BAR_BOTTOM,
+        bottom: FLOATING_ACTION_BAR_BOTTOM + tabBarInset,
         height,
         backgroundColor: theme.card,
         borderColor: theme.border,

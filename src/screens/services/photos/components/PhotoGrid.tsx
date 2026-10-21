@@ -28,6 +28,7 @@ import {
   FLOATING_ACTION_BAR_HEIGHT,
 } from "@/components/common/FloatingActionBar";
 import { Text } from "@/components/common/Text";
+import { useTabBarInset } from "@/components/navigation/TabContentInsets";
 import { HEADER_HEIGHT } from "@/components/page/Header";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { Photo } from "@/dto";
@@ -632,11 +633,16 @@ const GridSkeleton = ({
 /** Room under the last photos for the floating bar while selecting, so the bar never hides them. */
 const SelectionSpacer = ({ store }: { store: PhotoSelectionStore }) => {
   const { mode } = useSelectionSummary(store);
+  const tabBarInset = useTabBarInset() ?? 0;
   if (!mode) return null;
   return (
     <View
       style={{
-        height: FLOATING_ACTION_BAR_HEIGHT + FLOATING_ACTION_BAR_BOTTOM + 16,
+        height:
+          FLOATING_ACTION_BAR_HEIGHT +
+          FLOATING_ACTION_BAR_BOTTOM +
+          tabBarInset +
+          16,
       }}
     />
   );

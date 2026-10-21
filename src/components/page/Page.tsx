@@ -9,6 +9,7 @@ import {
   type ViewStyle,
 } from "react-native";
 import Animated from "react-native-reanimated";
+import { useTabBarInset } from "@/components/navigation/TabContentInsets";
 import { useTheme } from "@/contexts/ThemeContext";
 import {
   AnimatedHeaderContext,
@@ -48,10 +49,18 @@ export const Page = ({
 }: PageProps) => {
   const { theme } = useTheme();
   const { scrollHandler, headerShown, scrollY } = useAnimatedHeader();
-  const containerStyle = {
+  const tabBarInset = useTabBarInset();
+  const base = {
     paddingBottom: footer ? 0 : 40,
     paddingTop: HEADER_HEIGHT,
     ...style,
+  };
+  // Content scrolls under the translucent tab bar: its last item must be able to come out above it.
+  const containerStyle = {
+    ...base,
+    paddingBottom:
+      (typeof base.paddingBottom === "number" ? base.paddingBottom : 0) +
+      (tabBarInset ?? 0),
   };
 
   const containerClassName = cn("gap-6 px-5", className);
@@ -68,8 +77,11 @@ export const Page = ({
   const normalizedChildren = normalizeChildren(children);
 
   const contentWrapperProps = {
+    // In the tabs the bottom inset is the explicit padding above, never added a second time by UIKit.
     contentInsetAdjustmentBehavior:
-      Platform.OS === "ios" ? ("automatic" as const) : undefined,
+      Platform.OS === "ios" && tabBarInset === null
+        ? ("automatic" as const)
+        : undefined,
     onScroll: scrollHandler,
     refreshControl: onRefresh ? (
       <RefreshControl
@@ -141,7 +153,7 @@ export const Page = ({
               backgroundColor: theme.background,
               paddingHorizontal: 20,
               paddingTop: 16,
-              paddingBottom: 16,
+              paddingBottom: 16 + (tabBarInset ?? 0),
             }}
           >
             {footer}

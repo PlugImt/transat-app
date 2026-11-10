@@ -24,6 +24,7 @@ import {
   FlatList,
   Linking,
   Modal,
+  Platform,
   Pressable,
   StyleSheet,
   useWindowDimensions,
@@ -35,7 +36,10 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 import { Button, IconButton } from "@/components/common/Button";
 import { Dialog, DialogContent } from "@/components/common/Dialog";
 import { Text } from "@/components/common/Text";
@@ -54,6 +58,8 @@ import { ReportPhotoDialog } from "./ReportPhotoDialog";
 import { ZoomableImage } from "./ZoomableImage";
 
 const HI_RES_SIZE = 2048;
+/** Lowest status bar height on iOS; used while the modal's safe area is not measured yet. */
+const MIN_TOP_INSET = Platform.OS === "ios" ? 20 : 0;
 const NEAR_END = 6;
 
 type PhotoViewerProps = {
@@ -66,7 +72,25 @@ type PhotoViewerProps = {
   onOpenAlbum?: (id: number, title: string) => void;
 };
 
-export const PhotoViewer = ({
+/**
+ * A Modal is its own native window on iOS: the insets of the app's root provider do not apply in it, which left the
+ * close and menu buttons under the clock. The viewer measures its safe area inside the modal instead.
+ */
+export const PhotoViewer = (props: PhotoViewerProps) => (
+  <Modal
+    visible
+    transparent
+    animationType="fade"
+    statusBarTranslucent
+    onRequestClose={props.onClose}
+  >
+    <SafeAreaProvider>
+      <PhotoViewerContent {...props} />
+    </SafeAreaProvider>
+  </Modal>
+);
+
+const PhotoViewerContent = ({
   photos,
   startIndex,
   onClose,
@@ -171,236 +195,225 @@ export const PhotoViewer = ({
   const banner = notice ?? status;
 
   return (
-    <Modal
-      visible
-      transparent
-      animationType="fade"
-      statusBarTranslucent
-      onRequestClose={onClose}
-    >
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <Animated.View
-          style={[
-            StyleSheet.absoluteFill,
-            { backgroundColor: "#000" },
-            backdropStyle,
-          ]}
-        />
-        <FlatList
-          ref={listRef}
-          horizontal
-          pagingEnabled
-          data={photos}
-          extraData={index}
-          keyExtractor={(item) => item.id}
-          initialScrollIndex={startIndex}
-          getItemLayout={(_, i) => ({
-            length: width,
-            offset: width * i,
-            index: i,
-          })}
-          windowSize={3}
-          maxToRenderPerBatch={2}
-          initialNumToRender={1}
-          scrollEnabled={!zoomed}
-          showsHorizontalScrollIndicator={false}
-          onMomentumScrollEnd={(e) => {
-            const next = Math.round(e.nativeEvent.contentOffset.x / width);
-            if (next !== index) {
-              setIndex(next);
-              setZoomed(false);
-              reset();
-            }
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Animated.View
+        style={[
+          StyleSheet.absoluteFill,
+          { backgroundColor: "#000" },
+          backdropStyle,
+        ]}
+      />
+      <FlatList
+        ref={listRef}
+        horizontal
+        pagingEnabled
+        data={photos}
+        extraData={index}
+        keyExtractor={(item) => item.id}
+        initialScrollIndex={startIndex}
+        getItemLayout={(_, i) => ({
+          length: width,
+          offset: width * i,
+          index: i,
+        })}
+        windowSize={3}
+        maxToRenderPerBatch={2}
+        initialNumToRender={1}
+        scrollEnabled={!zoomed}
+        showsHorizontalScrollIndicator={false}
+        onMomentumScrollEnd={(e) => {
+          const next = Math.round(e.nativeEvent.contentOffset.x / width);
+          if (next !== index) {
+            setIndex(next);
+            setZoomed(false);
+            reset();
+          }
+        }}
+        renderItem={({ item, index: i }) => (
+          <ZoomableImage
+            photoId={item.id}
+            width={width}
+            height={height}
+            thumbnailUrl={item.thumbnail_url}
+            previewUrl={item.preview_url}
+            fallbackUrl={item.thumbnail_fallback_url}
+            hiResUrl={i === index ? hiResUrl : null}
+            active={i === index}
+            backdrop={backdrop}
+            onZoomChange={handleZoomChange}
+            onTap={toggleChrome}
+            onDismiss={onClose}
+          />
+        )}
+      />
+
+      <Animated.View
+        pointerEvents={chromeVisible ? "box-none" : "none"}
+        style={[StyleSheet.absoluteFill, chromeStyle]}
+      >
+        {menuOpen && (
+          <Pressable
+            style={StyleSheet.absoluteFill}
+            accessibilityLabel={t("photos.viewer.close")}
+            onPress={() => setMenuOpen(false)}
+          />
+        )}
+        <LinearGradient
+          colors={["rgba(0,0,0,0.7)", "rgba(0,0,0,0)"]}
+          pointerEvents="box-none"
+          style={{
+            paddingTop: Math.max(insets.top, MIN_TOP_INSET) + 8,
+            paddingBottom: 28,
+            paddingHorizontal: 16,
           }}
-          renderItem={({ item, index: i }) => (
-            <ZoomableImage
-              photoId={item.id}
-              width={width}
-              height={height}
-              thumbnailUrl={item.thumbnail_url}
-              previewUrl={item.preview_url}
-              fallbackUrl={item.thumbnail_fallback_url}
-              hiResUrl={i === index ? hiResUrl : null}
-              active={i === index}
-              backdrop={backdrop}
-              onZoomChange={handleZoomChange}
-              onTap={toggleChrome}
-              onDismiss={onClose}
-            />
-          )}
-        />
-
-        <Animated.View
-          pointerEvents={chromeVisible ? "box-none" : "none"}
-          style={[StyleSheet.absoluteFill, chromeStyle]}
         >
-          {menuOpen && (
-            <Pressable
-              style={StyleSheet.absoluteFill}
-              accessibilityLabel={t("photos.viewer.close")}
-              onPress={() => setMenuOpen(false)}
-            />
-          )}
-          <LinearGradient
-            colors={["rgba(0,0,0,0.7)", "rgba(0,0,0,0)"]}
-            pointerEvents="box-none"
-            style={{
-              paddingTop: insets.top + 8,
-              paddingBottom: 28,
-              paddingHorizontal: 16,
-            }}
-          >
-            <View
-              className="flex-row items-start gap-3"
-              pointerEvents="box-none"
-            >
-              <IconButton
-                icon={<X size={24} color="#fff" />}
-                variant="link"
-                accessibilityLabel={t("photos.viewer.close")}
-                onPress={onClose}
-              />
-              <View
-                className="flex-1 items-center justify-center"
-                style={{ minHeight: 40 }}
-                pointerEvents="none"
-              >
-                <Text
-                  variant="lg"
-                  numberOfLines={2}
-                  accessibilityRole="header"
-                  style={[styles.headerText, { color: "#fff" }]}
-                >
-                  {headline}
-                </Text>
-                {subtitle && (
-                  <Text
-                    variant="sm"
-                    numberOfLines={1}
-                    style={[
-                      styles.headerText,
-                      { color: "rgba(255,255,255,0.85)" },
-                    ]}
-                  >
-                    {subtitle}
-                  </Text>
-                )}
-              </View>
-              {/* Same width as the close button so the title stays centred. */}
-              <IconButton
-                icon={<EllipsisVertical size={24} color="#fff" />}
-                variant="link"
-                accessibilityLabel={t("photos.viewer.more")}
-                onPress={() => setMenuOpen((open) => !open)}
-              />
-            </View>
-          </LinearGradient>
-
-          {menuOpen && (
-            <View
-              className="absolute right-4 overflow-hidden rounded-xl border-[1.5px]"
-              style={{
-                top: insets.top + 56,
-                backgroundColor: theme.card,
-                borderColor: theme.border,
-              }}
-            >
-              <MenuItem
-                icon={<Info size={18} color={theme.text} />}
-                label={t("photos.viewer.info")}
-                onPress={() => {
-                  setMenuOpen(false);
-                  setInfoOpen(true);
-                }}
-              />
-              <MenuItem
-                icon={<ExternalLink size={18} color={theme.text} />}
-                label={t("photos.viewer.openInDrive")}
-                onPress={() => {
-                  setMenuOpen(false);
-                  openInDrive();
-                }}
-              />
-              <MenuItem
-                icon={<Flag size={18} color={theme.text} />}
-                label={t("photos.viewer.report.action")}
-                onPress={() => {
-                  setMenuOpen(false);
-                  setReportOpen(true);
-                }}
-              />
-            </View>
-          )}
-
-          <View className="flex-1" pointerEvents="box-none" />
-
-          {banner !== "idle" && banner !== "saving" && (
-            <Banner
-              kind={banner}
-              onOpenDrive={openInDrive}
-              onDismiss={() => {
-                setNotice(null);
-                reset();
-              }}
-              top={insets.top + 96}
-            />
-          )}
-
-          <View
-            className="flex-row items-center gap-3 self-center overflow-hidden rounded-2xl px-3 py-3"
-            style={{
-              marginBottom: insets.bottom + 16,
-              width: Math.min(width - 32, 420),
-              backgroundColor: "rgba(0,0,0,0.5)",
-            }}
-          >
-            <Button
-              variant="ghost"
-              label={t("photos.selection.download")}
-              icon={<Download />}
-              isUpdating={status === "saving"}
-              progress={progress}
-              accessibilityLabel={t("photos.viewer.save")}
-              onPress={handleSave}
-              className="flex-1"
-            />
+          <View className="flex-row items-start gap-3" pointerEvents="box-none">
             <IconButton
-              icon={<ShareIcon />}
-              variant="ghost"
-              accessibilityLabel={t("photos.viewer.share")}
-              onPress={handleShare}
+              icon={<X size={24} color="#fff" />}
+              variant="link"
+              accessibilityLabel={t("photos.viewer.close")}
+              onPress={onClose}
+            />
+            <View
+              className="flex-1 items-center justify-center"
+              style={{ minHeight: 40 }}
+              pointerEvents="none"
+            >
+              <Text
+                variant="lg"
+                numberOfLines={2}
+                accessibilityRole="header"
+                style={[styles.headerText, { color: "#fff" }]}
+              >
+                {headline}
+              </Text>
+              {subtitle && (
+                <Text
+                  variant="sm"
+                  numberOfLines={1}
+                  style={[
+                    styles.headerText,
+                    { color: "rgba(255,255,255,0.85)" },
+                  ]}
+                >
+                  {subtitle}
+                </Text>
+              )}
+            </View>
+            {/* Same width as the close button so the title stays centred. */}
+            <IconButton
+              icon={<EllipsisVertical size={24} color="#fff" />}
+              variant="link"
+              accessibilityLabel={t("photos.viewer.more")}
+              onPress={() => setMenuOpen((open) => !open)}
             />
           </View>
-        </Animated.View>
+        </LinearGradient>
 
-        <Dialog open={infoOpen} onOpenChange={setInfoOpen}>
-          <DialogContent
-            title={t("photos.viewer.info")}
-            cancelLabel={t("photos.viewer.close")}
-            contentMaxHeight={420}
-            scrollable
+        {menuOpen && (
+          <View
+            className="absolute right-4 overflow-hidden rounded-xl border-[1.5px]"
+            style={{
+              top: Math.max(insets.top, MIN_TOP_INSET) + 56,
+              backgroundColor: theme.card,
+              borderColor: theme.border,
+            }}
           >
-            <PhotoInfoPanel
-              photoId={photo.id}
-              onOpenAlbum={
-                onOpenAlbum
-                  ? (id, albumTitle) => {
-                      onClose();
-                      onOpenAlbum(id, albumTitle);
-                    }
-                  : undefined
-              }
-              onError={() => setNotice("openFailed")}
+            <MenuItem
+              icon={<Info size={18} color={theme.text} />}
+              label={t("photos.viewer.info")}
+              onPress={() => {
+                setMenuOpen(false);
+                setInfoOpen(true);
+              }}
             />
-          </DialogContent>
-        </Dialog>
-        <ReportPhotoDialog
-          photoId={photo.id}
-          open={reportOpen}
-          onOpenChange={setReportOpen}
-        />
-      </GestureHandlerRootView>
-    </Modal>
+            <MenuItem
+              icon={<ExternalLink size={18} color={theme.text} />}
+              label={t("photos.viewer.openInDrive")}
+              onPress={() => {
+                setMenuOpen(false);
+                openInDrive();
+              }}
+            />
+            <MenuItem
+              icon={<Flag size={18} color={theme.text} />}
+              label={t("photos.viewer.report.action")}
+              onPress={() => {
+                setMenuOpen(false);
+                setReportOpen(true);
+              }}
+            />
+          </View>
+        )}
+
+        <View className="flex-1" pointerEvents="box-none" />
+
+        {banner !== "idle" && banner !== "saving" && (
+          <Banner
+            kind={banner}
+            onOpenDrive={openInDrive}
+            onDismiss={() => {
+              setNotice(null);
+              reset();
+            }}
+            top={Math.max(insets.top, MIN_TOP_INSET) + 96}
+          />
+        )}
+
+        <View
+          className="flex-row items-center gap-3 self-center overflow-hidden rounded-2xl px-3 py-3"
+          style={{
+            marginBottom: insets.bottom + 16,
+            width: Math.min(width - 32, 420),
+            backgroundColor: "rgba(0,0,0,0.5)",
+          }}
+        >
+          <Button
+            variant="ghost"
+            label={t("photos.selection.download")}
+            icon={<Download />}
+            isUpdating={status === "saving"}
+            progress={progress}
+            accessibilityLabel={t("photos.viewer.save")}
+            onPress={handleSave}
+            className="flex-1"
+          />
+          <IconButton
+            icon={<ShareIcon />}
+            variant="ghost"
+            accessibilityLabel={t("photos.viewer.share")}
+            onPress={handleShare}
+          />
+        </View>
+      </Animated.View>
+
+      <Dialog open={infoOpen} onOpenChange={setInfoOpen}>
+        <DialogContent
+          title={t("photos.viewer.info")}
+          cancelLabel={t("photos.viewer.close")}
+          contentMaxHeight={420}
+          scrollable
+        >
+          <PhotoInfoPanel
+            photoId={photo.id}
+            onOpenAlbum={
+              onOpenAlbum
+                ? (id, albumTitle) => {
+                    onClose();
+                    onOpenAlbum(id, albumTitle);
+                  }
+                : undefined
+            }
+            onError={() => setNotice("openFailed")}
+          />
+        </DialogContent>
+      </Dialog>
+      <ReportPhotoDialog
+        photoId={photo.id}
+        open={reportOpen}
+        onOpenChange={setReportOpen}
+      />
+    </GestureHandlerRootView>
   );
 };
 

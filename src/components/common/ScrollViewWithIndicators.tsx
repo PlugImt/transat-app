@@ -1,7 +1,7 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { MotiView } from "moti";
 import type React from "react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   type LayoutChangeEvent,
   type NativeScrollEvent,
@@ -38,17 +38,25 @@ const ScrollViewWithIndicators = ({
 }: ScrollViewWithIndicatorsProps) => {
   const { theme } = useTheme();
   const [showTopIndicator, setShowTopIndicator] = useState(false);
-  const [showBottomIndicator, setShowBottomIndicator] = useState(true);
-  const [scrollViewHeight, setScrollViewHeight] = useState(0);
+  // Hidden until both sizes are known: content that fits shows no fade, whatever order the events arrive in.
+  const [showBottomIndicator, setShowBottomIndicator] = useState(false);
+  const metrics = useRef({ scrollY: 0, viewHeight: 0, contentHeight: 0 });
+
+  const updateBottom = () => {
+    const { scrollY, viewHeight, contentHeight } = metrics.current;
+    if (viewHeight === 0 || contentHeight === 0) return;
+    setShowBottomIndicator(scrollY + viewHeight < contentHeight - 5);
+  };
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const { contentOffset, layoutMeasurement, contentSize } = event.nativeEvent;
-    const scrollY = contentOffset.y;
-    const scrollViewHeight = layoutMeasurement.height;
-    const contentHeight = contentSize.height;
-
-    setShowTopIndicator(scrollY > 5);
-    setShowBottomIndicator(scrollY + scrollViewHeight < contentHeight - 5);
+    metrics.current = {
+      scrollY: contentOffset.y,
+      viewHeight: layoutMeasurement.height,
+      contentHeight: contentSize.height,
+    };
+    setShowTopIndicator(contentOffset.y > 5);
+    updateBottom();
 
     scrollViewProps.onScroll?.(event);
   };
@@ -57,15 +65,15 @@ const ScrollViewWithIndicators = ({
     contentWidth: number,
     contentHeight: number,
   ) => {
-    if (scrollViewHeight > 0) {
-      setShowBottomIndicator(contentHeight > scrollViewHeight);
-    }
+    metrics.current.contentHeight = contentHeight;
+    updateBottom();
 
     scrollViewProps.onContentSizeChange?.(contentWidth, contentHeight);
   };
 
   const handleScrollViewLayout = (event: LayoutChangeEvent) => {
-    setScrollViewHeight(event.nativeEvent.layout.height);
+    metrics.current.viewHeight = event.nativeEvent.layout.height;
+    updateBottom();
 
     scrollViewProps.onLayout?.(event);
   };

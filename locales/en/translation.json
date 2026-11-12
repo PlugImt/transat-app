@@ -955,7 +955,8 @@
           "title": "You stay in control",
           "text": "You can delete all your face data at any time from this screen. It is also deleted with your account."
         }
-      }
+      },
+      "accuracyNote": "Face recognition is not 100% accurate: some photos you appear in may be missing (face in profile, blurry or too small), and a photo may sometimes show up although it isn't you. If so, use \"This is not me\" from the photo's menu."
     }
   },
   "user": {

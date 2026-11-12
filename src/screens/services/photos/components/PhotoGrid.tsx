@@ -70,6 +70,8 @@ type PhotoGridProps = Omit<
   /** One header per calendar day, per event within each day (gallery), or none. */
   grouping?: "none" | "day" | "event";
   header?: ReactElement;
+  /** Shown under the last photo once everything is loaded (not on an empty list). */
+  endNote?: ReactElement;
   empty?: ReactElement;
   loading?: boolean;
   fetchingMore?: boolean;
@@ -96,6 +98,7 @@ export const PhotoGrid = ({
   photos,
   grouping = "none",
   header,
+  endNote,
   empty,
   loading,
   fetchingMore,
@@ -334,6 +337,8 @@ export const PhotoGrid = ({
   ) : hasMore || fetchingMore ? (
     // Photos exist beyond the loaded ones: grey tiles, not animated, until they arrive.
     <GridSkeleton width={width} level={level} rows={4} />
+  ) : endNote && photos.length > 0 ? (
+    endNote
   ) : null;
 
   const footer = (

@@ -75,7 +75,7 @@ const DropdownContent = ({
         </TouchableOpacity>
       </BottomSheetTrigger>
 
-      <BottomSheet>
+      <BottomSheet enableContentPanningGesture={false}>
         <Text variant="h2">{placeholder}</Text>
         <WheelPicker
           data={options.map((option) => ({

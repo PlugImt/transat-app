@@ -91,7 +91,10 @@ export const useEditEventForm = (event: EventDetails) => {
     (key) => (current[key] ?? "") !== (initialValues[key] ?? ""),
   );
 
-  const isButtonDisabled = !isValid || !(isDirty || hasChanges);
+  // Validity from the current values themselves: react-hook-form's isValid only follows the edited field after a
+  // programmatic setValue (date or time), which kept the button disabled until a text field was typed in.
+  const isCurrentValid = editEventSchema.safeParse(current).success;
+  const isButtonDisabled = !isCurrentValid || !(isDirty || hasChanges);
 
   const handleUpdateEvent = (data: AddEventFormData) => {
     updateEvent({ id: event.id, data });

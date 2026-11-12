@@ -140,6 +140,13 @@ export const MyPhotos = () => {
           onLoadMore={loadMore}
           onRetryMore={() => query.fetchNextPage()}
           onNotMe={onNotMe}
+          endNote={
+            <View className="px-6 py-8">
+              <Text color="muted" variant="sm" className="text-center">
+                {t("photos.faces.accuracyNote")}
+              </Text>
+            </View>
+          }
           empty={
             <Empty
               icon={<ScanFace />}

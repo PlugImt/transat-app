@@ -53,7 +53,17 @@ const BottomSheetTrigger = ({
   return cloneElement(children, { onPress: () => handleBottomSheet(true) });
 };
 
-const BottomSheet = ({ children }: { children: ReactNode }) => {
+const BottomSheet = ({
+  children,
+  enableContentPanningGesture = true,
+}: {
+  children: ReactNode;
+  /**
+   * False when the content scrolls on its own (a wheel picker): the sheet's pan would otherwise take every
+   * vertical drag. The sheet still closes from its handle, the backdrop or a button.
+   */
+  enableContentPanningGesture?: boolean;
+}) => {
   const { bottomSheetRef, handleBottomSheet } = useBottomSheet();
   const { theme } = useTheme();
   const opacity = useSharedValue(0);
@@ -69,6 +79,7 @@ const BottomSheet = ({ children }: { children: ReactNode }) => {
       handleIndicatorStyle={{ backgroundColor: theme.text }}
       enableDismissOnClose
       enablePanDownToClose
+      enableContentPanningGesture={enableContentPanningGesture}
       index={0}
       onAnimate={(_from, to) => {
         opacity.value = withTiming(to === 0 ? 0.5 : 0, { duration: 300 });

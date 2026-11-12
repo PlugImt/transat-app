@@ -955,7 +955,8 @@
           "title": "Tu gardes la main",
           "text": "Tu peux supprimer toutes tes données faciales à tout moment depuis cet écran. Elles sont aussi supprimées avec ton compte."
         }
-      }
+      },
+      "accuracyNote": "La reconnaissance faciale n'est pas fiable à 100 % : certaines photos où tu apparais peuvent manquer (visage de profil, flou ou trop petit), et une photo peut parfois s'afficher alors que ce n'est pas toi. Dans ce cas, utilise « Ce n'est pas moi » depuis le menu de la photo."
     }
   },
   "user": {

@@ -38,6 +38,11 @@ export const API_ROUTES: Record<Route, ApiRoute> = {
   photosAlbumPhotos: "/photos/albums/:id/photos",
   photosDetail: "/photos/:id",
   photosReports: "/photos/reports",
+  photosMine: "/photos/me",
+  faces: "/faces",
+  facesConsent: "/faces/consent",
+  facesReferences: "/faces/references",
+  facesRejectPhoto: "/faces/photos/:id/reject",
   reservation: "/reservation",
   reservationCategory: "/reservation/category/:id",
   reservationItem: "/reservation/item/:id",
@@ -95,6 +100,11 @@ type Route =
   | "photosAlbumPhotos"
   | "photosDetail"
   | "photosReports"
+  | "photosMine"
+  | "faces"
+  | "facesConsent"
+  | "facesReferences"
+  | "facesRejectPhoto"
   | "reservation"
   | "reservationCategory"
   | "reservationItem"

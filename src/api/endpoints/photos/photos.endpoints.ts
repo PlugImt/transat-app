@@ -3,6 +3,7 @@ import { Method } from "@/api/enums";
 import { apiRequest } from "@/api/helpers";
 import type { PhotoReportReason } from "@/constants";
 import type {
+  FaceStatus,
   PhotoAlbum,
   PhotoAlbumsPage,
   PhotoDetail,
@@ -71,5 +72,51 @@ export const reportPhoto = async ({
     API_ROUTES.photosReports,
     Method.POST,
     { photo_id: photoId, reason, comment },
+  );
+};
+
+/** The photos where face recognition found the user. */
+export const getMyPhotos = async (cursor?: string) => {
+  return await apiRequest<PhotosPage>(
+    API_ROUTES.photosMine,
+    Method.GET,
+    undefined,
+    { params: { cursor, limit: PHOTOS_PAGE_SIZE } },
+  );
+};
+
+export const getFaceStatus = async () => {
+  return await apiRequest<FaceStatus>(API_ROUTES.faces, Method.GET);
+};
+
+/** Explicit opt-in to the consent text of the given version. */
+export const giveFaceConsent = async (version: string) => {
+  return await apiRequest<FaceStatus>(API_ROUTES.facesConsent, Method.POST, {
+    version,
+    accepted: true,
+  });
+};
+
+/** Sends a selfie: the backend keeps only its face embedding, never the image. */
+export const addFaceReference = async (selfie: Blob) => {
+  const form = new FormData();
+  form.append("photo", selfie);
+  return await apiRequest<FaceStatus>(
+    API_ROUTES.facesReferences,
+    Method.POST,
+    form,
+  );
+};
+
+/** Withdraws consent and erases every face data of the user. */
+export const deleteFaceData = async () => {
+  return await apiRequest<undefined>(API_ROUTES.faces, Method.DELETE);
+};
+
+/** "This is not me": removes the photo from the user's album. */
+export const rejectMyPhoto = async (photoId: string) => {
+  return await apiRequest<undefined>(
+    API_ROUTES.facesRejectPhoto.replace(":id", photoId),
+    Method.POST,
   );
 };

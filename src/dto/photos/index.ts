@@ -58,3 +58,21 @@ export type PhotoDetail = Photo & {
   thumbnail_fallback_template: string;
   album: { id: number; title: string; drive_url: string } | null;
 };
+
+/** GET /faces: the face recognition opt-in ("Mes photos"). */
+export type FaceStatus = {
+  /** False when the backend has no recognition service: the feature is hidden. */
+  available: boolean;
+  enabled: boolean;
+  /** The consent text version the user agreed to (null without consent). */
+  consent_version: string | null;
+  current_consent_version: string;
+  consented_at: string | null;
+  references: number;
+  max_references: number;
+  /** The library is still being compared with the latest selfie. */
+  matching: boolean;
+  photo_count: number;
+  library_scanned: number;
+  library_total: number;
+};

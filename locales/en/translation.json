@@ -853,6 +853,79 @@
     },
     "menu": {
       "title": "More options"
+    },
+    "faces": {
+      "entry": "My photos",
+      "title": "My photos",
+      "settingsTitle": "Face recognition",
+      "manage": "Manage face recognition",
+      "openAlbum": "See my photos",
+      "unavailable": "Face recognition is not available right now.",
+      "empty": "No photos yet",
+      "emptyHint": "As soon as you appear on an event photo, it will show up here.",
+      "onboarding": {
+        "title": "Find every photo you appear in",
+        "description": "Turn on face recognition and send a selfie to get your personal album, with past and future photos.",
+        "cta": "Get started"
+      },
+      "consent": {
+        "title": "Find your photos with face recognition",
+        "outdated": "The consent text has changed: read it and accept the new version to continue.",
+        "intro": "By turning this on, you agree that Transat creates a biometric template of your face from the selfie you send, and compares it with the faces on event photos (past and future) to offer you a personal album.",
+        "points": {
+          "selfie": "Your selfie is not kept: only the mathematical template is stored, on our servers in Europe.",
+          "private": "Only you can see the photos you appear in.",
+          "delete": "You can turn this off and delete all your face data at any time from your profile; it is also deleted with your account.",
+          "legal": "This processing is based on your explicit consent (GDPR art. 9). It is optional and does not affect your access to the rest of the app."
+        },
+        "checkbox": "I agree to the processing of my biometric data for this feature.",
+        "accept": "Turn on face recognition"
+      },
+      "selfie": {
+        "title": "Add a selfie",
+        "addAnother": "Add another selfie",
+        "hint": "Facing the camera, well lit, alone in the picture, no sunglasses. A 2nd or 3rd selfie (other angle, other light) improves recognition.",
+        "camera": "Take a selfie",
+        "library": "Choose from library",
+        "added": "Selfie added! We are now looking for your photos, this can take a few minutes.",
+        "permissionDenied": "Allow access to the camera or the photo library to add a selfie."
+      },
+      "status": {
+        "enabled": "Face recognition is on",
+        "references_one": "{{count}} selfie out of {{max}}",
+        "references_other": "{{count}} selfies out of {{max}}",
+        "matching": "We are looking for your photos across the whole gallery, this can take a few minutes.",
+        "found_zero": "No photos found yet.",
+        "found_one": "{{count}} photo found.",
+        "found_other": "{{count}} photos found.",
+        "library": "Gallery analysis in progress: {{scanned}} / {{total}} photos."
+      },
+      "notMe": {
+        "action": "This is not me",
+        "confirmTitle": "Not you?",
+        "confirmMessage": "The photo will be removed from your album and not suggested again.",
+        "done": "Photo removed from your album."
+      },
+      "delete": {
+        "action": "Delete my face data",
+        "hint": "Turns the feature off and permanently erases your face template, your consent and your album.",
+        "confirmTitle": "Delete your face data?",
+        "confirmMessage": "Your face template, your consent and your album will be permanently deleted. You can turn the feature on again later.",
+        "confirm": "Delete",
+        "cancel": "Cancel",
+        "done": "Your face data has been deleted."
+      },
+      "errors": {
+        "no_face": "No face found. Try again with a well-lit photo, facing the camera.",
+        "multiple_faces": "Several faces found: take a selfie where you are alone.",
+        "face_too_small": "Your face is too small or blurry: come closer and try again.",
+        "too_many_references": "You already added the maximum number of selfies.",
+        "consent_outdated": "The consent text has changed: accept the new version.",
+        "consent_required": "Turn on face recognition first.",
+        "rate_limited": "Too many attempts: try again in an hour.",
+        "unavailable": "Face recognition is not available right now.",
+        "generic": "Something went wrong, please try again later."
+      }
     }
   },
   "user": {

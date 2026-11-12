@@ -75,6 +75,8 @@ export const paths = {
   bassine: "/games/bassine" as Href,
   bassineLeaderboard: "/games/bassine/leaderboard" as Href,
 
+  myPhotos: "/photos/me" as Href,
+  faceRecognition: "/photos/faces" as Href,
   album: (albumId: number, title: string) =>
     route("/photos/[id]", { id: id(albumId), title }),
 

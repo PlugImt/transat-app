@@ -853,6 +853,79 @@
     },
     "menu": {
       "title": "Plus d'options"
+    },
+    "faces": {
+      "entry": "Mes photos",
+      "title": "Mes photos",
+      "settingsTitle": "Reconnaissance faciale",
+      "manage": "Gérer la reconnaissance faciale",
+      "openAlbum": "Voir mes photos",
+      "unavailable": "La reconnaissance faciale n'est pas disponible pour le moment.",
+      "empty": "Aucune photo pour l'instant",
+      "emptyHint": "Dès que tu apparais sur une photo d'événement, elle s'affichera ici.",
+      "onboarding": {
+        "title": "Retrouve toutes les photos où tu apparais",
+        "description": "Active la reconnaissance faciale et envoie un selfie pour obtenir ton album personnel, avec les photos passées et futures.",
+        "cta": "Découvrir"
+      },
+      "consent": {
+        "title": "Retrouve tes photos grâce à la reconnaissance faciale",
+        "outdated": "Le texte de consentement a changé : lis-le et accepte la nouvelle version pour continuer.",
+        "intro": "En activant cette option, tu acceptes que Transat crée une empreinte biométrique de ton visage à partir du selfie que tu envoies, et la compare aux visages présents sur les photos des événements (passées et futures) afin de te proposer un album personnel.",
+        "points": {
+          "selfie": "Ton selfie n'est pas conservé : seule l'empreinte mathématique est gardée, sur nos serveurs en Europe.",
+          "private": "Seul toi vois les photos où tu apparais.",
+          "delete": "Tu peux désactiver cette option et supprimer toutes tes données faciales à tout moment depuis ton profil ; elles sont aussi supprimées avec ton compte.",
+          "legal": "Ce traitement repose sur ton consentement explicite (art. 9 RGPD). Il est facultatif et n'affecte pas ton accès au reste de l'application."
+        },
+        "checkbox": "J'accepte le traitement de mes données biométriques pour cette fonctionnalité.",
+        "accept": "Activer la reconnaissance faciale"
+      },
+      "selfie": {
+        "title": "Ajoute un selfie",
+        "addAnother": "Ajouter un autre selfie",
+        "hint": "De face, bien éclairé, seul·e sur la photo et sans lunettes de soleil. Un 2e ou 3e selfie (autre angle, autre lumière) améliore la reconnaissance.",
+        "camera": "Prendre un selfie",
+        "library": "Choisir dans la galerie",
+        "added": "Selfie ajouté ! On cherche maintenant tes photos, cela peut prendre quelques minutes.",
+        "permissionDenied": "Autorise l'accès à l'appareil photo ou à la galerie pour ajouter un selfie."
+      },
+      "status": {
+        "enabled": "Reconnaissance faciale activée",
+        "references_one": "{{count}} selfie sur {{max}}",
+        "references_other": "{{count}} selfies sur {{max}}",
+        "matching": "On cherche tes photos dans toute la galerie, cela peut prendre quelques minutes.",
+        "found_zero": "Aucune photo trouvée pour l'instant.",
+        "found_one": "{{count}} photo trouvée.",
+        "found_other": "{{count}} photos trouvées.",
+        "library": "Analyse de la galerie en cours : {{scanned}} / {{total}} photos."
+      },
+      "notMe": {
+        "action": "Ce n'est pas moi",
+        "confirmTitle": "Ce n'est pas toi ?",
+        "confirmMessage": "La photo sera retirée de ton album et ne te sera plus proposée.",
+        "done": "Photo retirée de ton album."
+      },
+      "delete": {
+        "action": "Supprimer mes données faciales",
+        "hint": "Désactive la fonctionnalité et efface définitivement ton empreinte faciale, ton consentement et ton album.",
+        "confirmTitle": "Supprimer tes données faciales ?",
+        "confirmMessage": "Ton empreinte faciale, ton consentement et ton album seront supprimés définitivement. Tu pourras réactiver la fonctionnalité plus tard.",
+        "confirm": "Supprimer",
+        "cancel": "Annuler",
+        "done": "Tes données faciales ont été supprimées."
+      },
+      "errors": {
+        "no_face": "Aucun visage détecté. Réessaie avec une photo de face, bien éclairée.",
+        "multiple_faces": "Plusieurs visages détectés : prends un selfie où tu es seul·e.",
+        "face_too_small": "Ton visage est trop petit ou flou : rapproche-toi et réessaie.",
+        "too_many_references": "Tu as déjà ajouté le nombre maximum de selfies.",
+        "consent_outdated": "Le texte de consentement a changé : accepte la nouvelle version.",
+        "consent_required": "Active d'abord la reconnaissance faciale.",
+        "rate_limited": "Trop d'essais : réessaie dans une heure.",
+        "unavailable": "La reconnaissance faciale n'est pas disponible pour le moment.",
+        "generic": "Une erreur est survenue, réessaie plus tard."
+      }
     }
   },
   "user": {

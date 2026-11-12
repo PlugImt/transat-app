@@ -20,6 +20,8 @@ export const QUERY_KEYS = {
     albums: ["photos", "albums"],
     album: (id: number) => ["photos", "album", id],
     albumPhotos: (id: number) => ["photos", "album", id, "photos"],
+    mine: ["photos", "mine"],
+    faces: ["photos", "faces"],
   },
   club: {
     clubs: ["clubs"],

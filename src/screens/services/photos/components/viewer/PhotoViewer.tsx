@@ -9,6 +9,7 @@ import {
   Info,
   Share as ShareIcon,
   TriangleAlert,
+  UserX,
   X,
 } from "lucide-react-native";
 import {
@@ -70,6 +71,8 @@ type PhotoViewerProps = {
   /** Asked when the user nears the end of what is loaded, so paging continues across backend pages. */
   onEndReached?: () => void;
   onOpenAlbum?: (id: number, title: string) => void;
+  /** "This is not me", on the user's own album: the viewer closes, the caller confirms and removes the photo. */
+  onNotMe?: (photo: Photo) => void;
 };
 
 /**
@@ -96,6 +99,7 @@ const PhotoViewerContent = ({
   onClose,
   onEndReached,
   onOpenAlbum,
+  onNotMe,
 }: PhotoViewerProps) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
@@ -335,6 +339,17 @@ const PhotoViewerContent = ({
                 openInDrive();
               }}
             />
+            {onNotMe && photo && (
+              <MenuItem
+                icon={<UserX size={18} color={theme.text} />}
+                label={t("photos.faces.notMe.action")}
+                onPress={() => {
+                  setMenuOpen(false);
+                  onClose();
+                  onNotMe(photo);
+                }}
+              />
+            )}
             <MenuItem
               icon={<Flag size={18} color={theme.text} />}
               label={t("photos.viewer.report.action")}

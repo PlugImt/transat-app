@@ -79,6 +79,8 @@ type PhotoGridProps = Omit<
   onLoadMore: () => void;
   onRetryMore?: () => void;
   onOpenAlbum?: (id: number, title: string) => void;
+  /** Offered in the viewer's menu on the user's own album ("this is not me"). */
+  onNotMe?: (photo: Photo) => void;
   /** Multi-selection by long press. Omitted: photos only open. */
   selection?: PhotoSelectionStore;
   /** The selection limit was hit. */
@@ -102,6 +104,7 @@ export const PhotoGrid = ({
   onLoadMore,
   onRetryMore,
   onOpenAlbum,
+  onNotMe,
   selection,
   onSelectionLimit,
   ...listProps
@@ -397,6 +400,7 @@ export const PhotoGrid = ({
           onClose={closeViewer}
           onEndReached={onLoadMore}
           onOpenAlbum={onOpenAlbum}
+          onNotMe={onNotMe}
         />
       )}
     </>

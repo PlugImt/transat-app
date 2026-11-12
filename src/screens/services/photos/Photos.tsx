@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import { Images } from "lucide-react-native";
+import { Images, ScanFace } from "lucide-react-native";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -9,6 +9,7 @@ import {
   View,
 } from "react-native";
 import Animated from "react-native-reanimated";
+import { IconButton } from "@/components/common/Button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/common/Tabs";
 import { Text } from "@/components/common/Text";
 import { Empty } from "@/components/page/Empty";
@@ -17,6 +18,7 @@ import { Page } from "@/components/page/Page";
 import { getIsRefetching } from "@/components/query";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { PhotoAlbum } from "@/dto";
+import { useFaceStatus } from "@/hooks/services/photos/useFaces";
 import { usePhotoSelection } from "@/hooks/services/photos/usePhotoSelection";
 import { usePhotoAlbums, usePhotos } from "@/hooks/services/photos/usePhotos";
 import { paths } from "@/navigation/paths";
@@ -124,7 +126,12 @@ const PhotoGallery = ({
         className="gap-0 px-0"
         onRefresh={onRefresh}
         refreshing={refreshing}
-        header={<PhotoMenu selection={store} />}
+        header={
+          <View className="flex-row items-center">
+            <MyPhotosButton />
+            <PhotoMenu selection={store} />
+          </View>
+        }
         asChildren
       >
         <PhotoGrid
@@ -257,5 +264,22 @@ const PhotoAlbums = ({ header }: { header: React.ReactElement }) => {
         windowSize={7}
       />
     </Page>
+  );
+};
+
+/** "Mes photos", shown only when the backend offers face recognition. */
+const MyPhotosButton = () => {
+  const { t } = useTranslation();
+  const { theme } = useTheme();
+  const router = useRouter();
+  const status = useFaceStatus();
+  if (!status.data?.available) return null;
+  return (
+    <IconButton
+      icon={<ScanFace size={20} color={theme.text} />}
+      variant="link"
+      accessibilityLabel={t("photos.faces.entry")}
+      onPress={() => router.push(paths.myPhotos)}
+    />
   );
 };

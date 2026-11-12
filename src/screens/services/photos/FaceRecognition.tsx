@@ -3,21 +3,25 @@ import { useRouter } from "expo-router";
 import {
   Camera,
   ImagePlus,
+  Info,
   ScanFace,
   ShieldCheck,
   Trash,
 } from "lucide-react-native";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ActivityIndicator, Alert, View } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import { ApiError } from "@/api/errors";
-import { Button } from "@/components/common/Button";
+import { Button, IconButton } from "@/components/common/Button";
 import Card from "@/components/common/Card";
 import { Checkbox } from "@/components/common/Checkbox";
+import { Dialog, DialogContent } from "@/components/common/Dialog";
 import { Text } from "@/components/common/Text";
+import { useToast } from "@/components/common/Toast";
 import { Empty } from "@/components/page/Empty";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
+import { ConfirmAction } from "@/components/reservation/ConfirmAction";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { FaceStatus } from "@/dto";
 import {
@@ -57,7 +61,9 @@ const useErrorMessage = () => {
  */
 export const FaceRecognition = () => {
   const { t } = useTranslation();
+  const { theme } = useTheme();
   const status = useFaceStatus();
+  const [infoOpen, setInfoOpen] = useState(false);
 
   if (status.isError) {
     return (
@@ -71,7 +77,18 @@ export const FaceRecognition = () => {
   }
   const data = status.data;
   return (
-    <Page title={t("photos.faces.settingsTitle")}>
+    <Page
+      title={t("photos.faces.settingsTitle")}
+      header={
+        <IconButton
+          icon={<Info size={20} color={theme.text} />}
+          variant="link"
+          accessibilityLabel={t("photos.faces.about.open")}
+          onPress={() => setInfoOpen(true)}
+        />
+      }
+    >
+      <AboutDialog open={infoOpen} onOpenChange={setInfoOpen} />
       {!data ? (
         <ActivityIndicator />
       ) : !data.available ? (
@@ -88,12 +105,43 @@ export const FaceRecognition = () => {
 
 export default FaceRecognition;
 
+/** How the feature works and what is kept, reachable at any time from the settings header. */
+const AboutDialog = ({
+  open,
+  onOpenChange,
+}: {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) => {
+  const { t } = useTranslation();
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent
+        title={t("photos.faces.about.title")}
+        className="gap-3"
+        confirmLabel={t("photos.faces.about.close")}
+        scrollable
+      >
+        {(["ai", "photos", "selfie", "private", "control"] as const).map(
+          (key) => (
+            <View key={key} className="gap-0.5">
+              <Text variant="lg">{t(`photos.faces.about.${key}.title`)}</Text>
+              <Text color="muted">{t(`photos.faces.about.${key}.text`)}</Text>
+            </View>
+          ),
+        )}
+      </DialogContent>
+    </Dialog>
+  );
+};
+
 const ConsentStep = ({ status }: { status: FaceStatus }) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
   const [accepted, setAccepted] = useState(false);
   const consent = useGiveFaceConsent();
   const errorMessage = useErrorMessage();
+  const { toast } = useToast();
   const outdated = status.enabled;
 
   return (
@@ -131,7 +179,7 @@ const ConsentStep = ({ status }: { status: FaceStatus }) => {
         isUpdating={consent.isPending}
         onPress={() =>
           consent.mutate(status.current_consent_version, {
-            onError: (error) => Alert.alert(errorMessage(error)),
+            onError: (error) => toast(errorMessage(error), "destructive"),
           })
         }
       />
@@ -146,6 +194,7 @@ const EnabledStep = ({ status }: { status: FaceStatus }) => {
   const add = useAddFaceReference();
   const remove = useDeleteFaceData();
   const errorMessage = useErrorMessage();
+  const { toast } = useToast();
   const canAdd = status.references < status.max_references;
 
   const pick = async (source: "camera" | "library") => {
@@ -154,7 +203,7 @@ const EnabledStep = ({ status }: { status: FaceStatus }) => {
         ? await ImagePicker.requestCameraPermissionsAsync()
         : await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (!permission.granted) {
-      Alert.alert(t("photos.faces.selfie.permissionDenied"));
+      toast(t("photos.faces.selfie.permissionDenied"), "destructive");
       return;
     }
     const options: ImagePicker.ImagePickerOptions = {
@@ -172,33 +221,19 @@ const EnabledStep = ({ status }: { status: FaceStatus }) => {
     const uri = result.canceled ? undefined : result.assets[0]?.uri;
     if (!uri) return;
     add.mutate(uri, {
-      onSuccess: () => Alert.alert(t("photos.faces.selfie.added")),
-      onError: (error) => Alert.alert(errorMessage(error)),
+      onSuccess: () => toast(t("photos.faces.selfie.added"), "success", 5000),
+      onError: (error) => toast(errorMessage(error), "destructive", 5000),
     });
   };
 
-  const confirmDelete = () =>
-    Alert.alert(
-      t("photos.faces.delete.confirmTitle"),
-      t("photos.faces.delete.confirmMessage"),
-      [
-        { text: t("photos.faces.delete.cancel"), style: "cancel" },
-        {
-          text: t("photos.faces.delete.confirm"),
-          style: "destructive",
-          onPress: () =>
-            remove.mutate(undefined, {
-              onSuccess: () => {
-                Alert.alert(t("photos.faces.delete.done"));
-                router.canGoBack()
-                  ? router.back()
-                  : router.navigate(paths.photos);
-              },
-              onError: (error) => Alert.alert(errorMessage(error)),
-            }),
-        },
-      ],
-    );
+  const deleteAll = () =>
+    remove.mutate(undefined, {
+      onSuccess: () => {
+        toast(t("photos.faces.delete.done"), "success");
+        router.canGoBack() ? router.back() : router.navigate(paths.photos);
+      },
+      onError: (error) => toast(errorMessage(error), "destructive"),
+    });
 
   return (
     <View className="gap-4">
@@ -264,14 +299,21 @@ const EnabledStep = ({ status }: { status: FaceStatus }) => {
         />
       )}
 
-      <Button
-        label={t("photos.faces.delete.action")}
-        variant="destructive"
-        icon={<Trash color={theme.background} />}
-        isUpdating={remove.isPending}
-        disabled={remove.isPending}
-        onPress={confirmDelete}
-      />
+      <ConfirmAction
+        title={t("photos.faces.delete.confirmTitle")}
+        description={t("photos.faces.delete.confirmMessage")}
+        confirmLabel={t("photos.faces.delete.confirm")}
+        onConfirm={deleteAll}
+        isPending={remove.isPending}
+      >
+        <Button
+          label={t("photos.faces.delete.action")}
+          variant="destructive"
+          icon={<Trash color={theme.background} />}
+          isUpdating={remove.isPending}
+          disabled={remove.isPending}
+        />
+      </ConfirmAction>
       <Text variant="sm" color="muted">
         {t("photos.faces.delete.hint")}
       </Text>

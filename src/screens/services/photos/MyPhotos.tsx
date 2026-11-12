@@ -2,8 +2,11 @@ import { useRouter } from "expo-router";
 import { ScanFace, Settings } from "lucide-react-native";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ActivityIndicator, Alert, View } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import { Button, IconButton } from "@/components/common/Button";
+import { Dialog, DialogContent } from "@/components/common/Dialog";
+import { Text } from "@/components/common/Text";
+import { useToast } from "@/components/common/Toast";
 import { Empty } from "@/components/page/Empty";
 import { ErrorPage } from "@/components/page/ErrorPage";
 import { Page } from "@/components/page/Page";
@@ -35,6 +38,9 @@ export const MyPhotos = () => {
   const { store, onLimit } = usePhotoSelection();
   const selecting = useSelectionMode(store);
   const [refreshing, setRefreshing] = useState(false);
+  const { toast } = useToast();
+  // The photo waiting for the "not me" confirmation.
+  const [notMe, setNotMe] = useState<Photo | null>(null);
 
   const refresh = useCallback(async () => {
     setRefreshing(true);
@@ -55,25 +61,14 @@ export const MyPhotos = () => {
     }
   }, [query]);
 
-  const onNotMe = useCallback(
-    (photo: Photo) =>
-      Alert.alert(
-        t("photos.faces.notMe.confirmTitle"),
-        t("photos.faces.notMe.confirmMessage"),
-        [
-          { text: t("photos.faces.delete.cancel"), style: "cancel" },
-          {
-            text: t("photos.faces.notMe.action"),
-            onPress: () =>
-              reject.mutate(photo.id, {
-                onSuccess: () => Alert.alert(t("photos.faces.notMe.done")),
-                onError: () => Alert.alert(t("photos.faces.errors.generic")),
-              }),
-          },
-        ],
-      ),
-    [reject, t],
-  );
+  const onNotMe = useCallback((photo: Photo) => setNotMe(photo), []);
+  const confirmNotMe = () => {
+    if (!notMe) return;
+    reject.mutate(notMe.id, {
+      onSuccess: () => toast(t("photos.faces.notMe.done"), "success"),
+      onError: () => toast(t("photos.faces.errors.generic"), "destructive"),
+    });
+  };
 
   const title = t("photos.faces.title");
   const settingsButton = (
@@ -159,6 +154,19 @@ export const MyPhotos = () => {
         />
       </Page>
       <PhotoSelectionBar store={store} />
+      <Dialog
+        open={notMe !== null}
+        onOpenChange={(open) => !open && setNotMe(null)}
+      >
+        <DialogContent
+          title={t("photos.faces.notMe.confirmTitle")}
+          cancelLabel={t("photos.faces.delete.cancel")}
+          confirmLabel={t("photos.faces.notMe.action")}
+          onConfirm={confirmNotMe}
+        >
+          <Text>{t("photos.faces.notMe.confirmMessage")}</Text>
+        </DialogContent>
+      </Dialog>
     </View>
   );
 };

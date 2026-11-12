@@ -14,14 +14,39 @@ import {
   giveFaceConsent,
   rejectMyPhoto,
 } from "@/api";
+import { ApiError } from "@/api/errors";
 import { QUERY_KEYS } from "@/constants";
 import type { FaceStatus, PhotosPage } from "@/dto";
+
+/** What a backend without face recognition (older API, 404) means: the feature is simply hidden. */
+const UNAVAILABLE: FaceStatus = {
+  available: false,
+  enabled: false,
+  consent_version: null,
+  current_consent_version: "",
+  consented_at: null,
+  references: 0,
+  max_references: 0,
+  matching: false,
+  photo_count: 0,
+  library_scanned: 0,
+  library_total: 0,
+};
+
+const fetchFaceStatus = async () => {
+  try {
+    return await getFaceStatus();
+  } catch (error) {
+    if (ApiError.isApiError(error) && error.status === 404) return UNAVAILABLE;
+    throw error;
+  }
+};
 
 /** The opt-in status. Polled while the library is still being compared with a new selfie. */
 export const useFaceStatus = () =>
   useQuery({
     queryKey: QUERY_KEYS.photos.faces,
-    queryFn: getFaceStatus,
+    queryFn: fetchFaceStatus,
     staleTime: 60 * 1000,
     refetchInterval: (query) =>
       query.state.data?.matching ? 15 * 1000 : false,

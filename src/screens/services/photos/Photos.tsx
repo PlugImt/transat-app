@@ -23,6 +23,7 @@ import { usePhotoSelection } from "@/hooks/services/photos/usePhotoSelection";
 import { usePhotoAlbums, usePhotos } from "@/hooks/services/photos/usePhotos";
 import { paths } from "@/navigation/paths";
 import { AlbumCard } from "./components/AlbumCard";
+import { MyPhotosAlbumCard } from "./components/MyPhotosAlbumCard";
 import { PhotoGrid } from "./components/PhotoGrid";
 import { PhotoMenu } from "./components/PhotoMenu";
 import { PhotoSelectionBar } from "./components/PhotoSelectionBar";
@@ -230,7 +231,12 @@ const PhotoAlbums = ({ header }: { header: React.ReactElement }) => {
         data={rows}
         keyExtractor={(row) => row.key}
         renderItem={renderRow}
-        ListHeaderComponent={header}
+        ListHeaderComponent={
+          <>
+            {header}
+            <MyPhotosAlbumCard width={cardWidth} side={SIDE} />
+          </>
+        }
         ListEmptyComponent={
           query.isPending ? (
             <ActivityIndicator className="mt-10" color={theme.primary} />

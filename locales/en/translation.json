@@ -925,6 +925,36 @@
         "rate_limited": "Too many attempts: try again in an hour.",
         "unavailable": "Face recognition is not available right now.",
         "generic": "Something went wrong, please try again later."
+      },
+      "pinned": {
+        "label": "Pinned",
+        "off": "Turn on face recognition to find your photos",
+        "searching": "Looking for your photos…"
+      },
+      "about": {
+        "open": "How does it work?",
+        "title": "How does it work?",
+        "close": "Got it",
+        "ai": {
+          "title": "An AI hosted by Transat",
+          "text": "Recognition is done by an open-source model (Immich's) running on Transat's servers. No external AI service (Google, OpenAI…) analyses faces."
+        },
+        "photos": {
+          "title": "Photos go nowhere",
+          "text": "Event photos stay on the Google Drive where they are already stored. Our server reads them to analyse them, without copying or sending them anywhere else."
+        },
+        "selfie": {
+          "title": "Your selfie is not kept",
+          "text": "Your selfie is analysed and immediately discarded. Only the mathematical template of your face is kept (a list of 512 numbers), never the image."
+        },
+        "private": {
+          "title": "Your album is private",
+          "text": "Only you can see the photos you appear in. You can remove a photo from your album with \"This is not me\"."
+        },
+        "control": {
+          "title": "You stay in control",
+          "text": "You can delete all your face data at any time from this screen. It is also deleted with your account."
+        }
       }
     }
   },

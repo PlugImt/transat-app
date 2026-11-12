@@ -925,6 +925,36 @@
         "rate_limited": "Trop d'essais : réessaie dans une heure.",
         "unavailable": "La reconnaissance faciale n'est pas disponible pour le moment.",
         "generic": "Une erreur est survenue, réessaie plus tard."
+      },
+      "pinned": {
+        "label": "Épinglé",
+        "off": "Active la reconnaissance faciale pour retrouver tes photos",
+        "searching": "Recherche de tes photos…"
+      },
+      "about": {
+        "open": "Comment ça marche ?",
+        "title": "Comment ça marche ?",
+        "close": "Compris",
+        "ai": {
+          "title": "Une IA hébergée par Transat",
+          "text": "La reconnaissance est faite par un modèle open source (celui d'Immich) qui tourne sur les serveurs de Transat. Aucun service d'IA externe (Google, OpenAI…) n'analyse les visages."
+        },
+        "photos": {
+          "title": "Les photos ne partent nulle part",
+          "text": "Les photos des événements restent sur le Google Drive où elles sont déjà stockées. Notre serveur les lit pour les analyser, sans les copier ni les envoyer ailleurs."
+        },
+        "selfie": {
+          "title": "Ton selfie n'est pas gardé",
+          "text": "Ton selfie est analysé puis oublié aussitôt. On garde seulement l'empreinte mathématique de ton visage (une suite de 512 nombres), jamais l'image."
+        },
+        "private": {
+          "title": "Ton album est privé",
+          "text": "Personne d'autre que toi ne voit les photos où tu apparais. Tu peux retirer une photo de ton album avec « Ce n'est pas moi »."
+        },
+        "control": {
+          "title": "Tu gardes la main",
+          "text": "Tu peux supprimer toutes tes données faciales à tout moment depuis cet écran. Elles sont aussi supprimées avec ton compte."
+        }
       }
     }
   },

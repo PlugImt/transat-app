@@ -38,6 +38,9 @@ export type PhotoAlbum = {
   cover_url: string | null;
   first_taken_at: string | null;
   last_taken_at: string | null;
+  /** The album's page on transat.dev, which opens the app when it is installed: the link to share. */
+  share_url?: string;
+  /** Same as share_url on current servers: albums no longer expose their Drive folder. */
   drive_url: string;
 };
 
@@ -56,7 +59,13 @@ export type PhotoDetail = Photo & {
   download_url: string;
   thumbnail_template: string;
   thumbnail_fallback_template: string;
-  album: { id: number; title: string; drive_url: string } | null;
+  album: {
+    id: number;
+    title: string;
+    /** The album's page on transat.dev (older servers do not send it). */
+    share_url?: string;
+    drive_url: string;
+  } | null;
 };
 
 /** GET /faces: the face recognition opt-in ("Mes photos"). */

@@ -22,7 +22,7 @@ import {
 } from "@/hooks/services/photos/usePhotos";
 import { paramNumber, paramString } from "@/navigation/params";
 import { paths } from "@/navigation/paths";
-import { isDriveFolderUrl, shareLink } from "@/utils/photo.utils";
+import { shareLink } from "@/utils/photo.utils";
 import { PhotoGrid } from "./components/PhotoGrid";
 import { PhotoMenu } from "./components/PhotoMenu";
 import { PhotoSelectionBar } from "./components/PhotoSelectionBar";
@@ -100,13 +100,12 @@ export const AlbumDetails = () => {
   }
 
   const data = album.data;
-  // The backend always returns the event's own folder, never the year or "Sports"/"Autres": no usable link, no button.
-  const folderUrl = isDriveFolderUrl(data?.drive_url) ? data.drive_url : null;
+  // The album's transat.dev page: it opens the app on this album when installed, the web gallery otherwise.
+  // Never the album's Drive folder: without this link there is no share button.
+  const shareUrl = data?.share_url ?? null;
   const shareAlbum = () => {
-    if (!folderUrl) return;
-    shareLink(title, folderUrl).catch(() =>
-      Alert.alert(t("photos.openFailed")),
-    );
+    if (!shareUrl) return;
+    shareLink(title, shareUrl).catch(() => Alert.alert(t("photos.openFailed")));
   };
 
   return (
@@ -118,7 +117,7 @@ export const AlbumDetails = () => {
         refreshing={refreshing}
         header={
           <View className="flex-row items-center">
-            {folderUrl && (
+            {shareUrl && (
               <IconButton
                 icon={<ShareIcon size={20} color={theme.text} />}
                 variant="link"

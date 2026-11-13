@@ -13,6 +13,7 @@
       "bundleIdentifier": "fr.resel.transat",
       "appleTeamId": "MNJWMF9YMG",
       "supportsTablet": true,
+      "associatedDomains": ["applinks:transat.dev"],
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
@@ -24,6 +25,20 @@
         "backgroundColor": "#EC7F32"
       },
       "package": "com.yohann69.transat2_0",
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "https",
+              "host": "transat.dev",
+              "pathPrefix": "/albums/"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ],
       "googleServicesFile": "./google-services.json",
       "permissions": ["android.permission.RECORD_AUDIO"],
       "blockedPermissions": [

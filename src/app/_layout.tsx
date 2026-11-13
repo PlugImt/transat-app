@@ -19,8 +19,10 @@ import { usePushNotifications } from "@/hooks/home";
 import { shouldShowOnboarding } from "@/hooks/onboarding/useOnboardingSteps";
 import { i18nInitializedPromise } from "@/i18n";
 import { FinishOnboardingProvider } from "@/navigation/finish-onboarding";
+import { installLogCapture } from "@/services/dev/logCapture";
 import { installNotificationHandler } from "@/services/notifications/presentation";
 
+installLogCapture();
 installNotificationHandler();
 
 Sentry.init({

@@ -1,17 +1,48 @@
+import { useRouter } from "expo-router";
+import { useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { Linking, View } from "react-native";
+import { Linking, Pressable, View } from "react-native";
 import { HeroAnimation } from "@/components/animations/HeroAnimation";
 import Badge from "@/components/common/Badge";
 import Card from "@/components/common/Card";
 import CardGroup from "@/components/common/CardGroup";
 import { Text } from "@/components/common/Text";
+import { useToast } from "@/components/common/Toast";
 import { Page } from "@/components/page/Page";
+import { paths } from "@/navigation/paths";
 import { getAppVersionInfo } from "@/utils";
+import { hapticFeedback } from "@/utils/haptics.utils";
+
+// The developer menu has no other entry point: it opens after this many quick taps on the version.
+const DEV_MENU_TAPS = 7;
+// Taps further apart than this start the count over.
+const TAP_RESET_MS = 1500;
 
 export const About = () => {
   const { t } = useTranslation();
 
+  const router = useRouter();
+  const { toast } = useToast();
+  const taps = useRef({ count: 0, last: 0 });
+
   const appVersionInfo = getAppVersionInfo();
+
+  const handleVersionPress = () => {
+    const now = Date.now();
+    const count =
+      now - taps.current.last > TAP_RESET_MS ? 1 : taps.current.count + 1;
+    taps.current = { count, last: now };
+
+    const remaining = DEV_MENU_TAPS - count;
+    if (remaining <= 0) {
+      taps.current = { count: 0, last: 0 };
+      hapticFeedback.success();
+      router.push(paths.devMenu);
+    } else if (remaining <= 3) {
+      hapticFeedback.light();
+      toast(`${remaining}…`, "default", 700);
+    }
+  };
 
   const handleOpenLink = async (url: string) => {
     try {
@@ -91,9 +122,11 @@ export const About = () => {
       <Text className="text-center italic" color="muted">
         {t("common.plugImtNote")}
       </Text>
-      <Text className="text-center" color="muted" variant="sm">
-        {t("settings.about.version")} {appVersionInfo.fullVersion}
-      </Text>
+      <Pressable onPress={handleVersionPress} hitSlop={12}>
+        <Text className="text-center" color="muted" variant="sm">
+          {t("settings.about.version")} {appVersionInfo.fullVersion}
+        </Text>
+      </Pressable>
     </Page>
   );
 };

@@ -1,4 +1,5 @@
 import { API_ROUTES } from "@/api/common";
+import { getApiBaseUrl } from "@/services/dev/apiEnvironment";
 import { getInstallationId } from "@/services/devices/installationId";
 import { storage } from "@/services/storage/asyncStorage";
 
@@ -12,7 +13,7 @@ export const clearPendingDeviceSignOut = () =>
 
 // A plain fetch on purpose: the session teardown calls this, and the API client imports the session module.
 const sendSignOut = async () => {
-  const base = (process.env.EXPO_PUBLIC_API_URL ?? "").replace(/\/+$/, "");
+  const base = await getApiBaseUrl();
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), SIGN_OUT_TIMEOUT_MS);
   try {

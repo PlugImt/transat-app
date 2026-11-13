@@ -89,6 +89,7 @@ export const paths = {
   about: "/account/about" as Href,
   help: "/account/help" as Href,
   legal: "/account/legal" as Href,
+  devMenu: "/account/developer" as Href,
 
   profilePicture: "/profile-picture" as Href,
   basicInfo: "/basic-info" as Href,

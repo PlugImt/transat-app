@@ -1,6 +1,7 @@
 import { HttpError } from "@/api/errors";
 import { queryClient } from "@/api/query-client";
 import { isSessionInvalidError, performSessionTeardown } from "@/api/session";
+import { getApiBaseUrl } from "@/services/dev/apiEnvironment";
 import { storage } from "@/services/storage/asyncStorage";
 
 export type QueryParams = Record<string, string | number | boolean | undefined>;
@@ -69,7 +70,7 @@ export const httpRequest = async <T>({
   params,
   headers = {},
 }: HttpRequest): Promise<T> => {
-  const baseURL = process.env.EXPO_PUBLIC_API_URL ?? "";
+  const baseURL = await getApiBaseUrl();
   const isFormData =
     typeof FormData !== "undefined" && body instanceof FormData;
   const hasBody = body !== undefined && method !== "GET" && method !== "HEAD";

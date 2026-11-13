@@ -11,6 +11,7 @@
     "ios": {
       "icon": "./assets/images/transat.icon",
       "bundleIdentifier": "fr.resel.transat",
+      "appleTeamId": "MNJWMF9YMG",
       "supportsTablet": true,
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
@@ -83,7 +84,8 @@
           "granularPermissions": []
         }
       ],
-      "@bacons/apple-targets"
+      "@bacons/apple-targets",
+      "expo-font"
     ],
     "extra": {
       "router": {

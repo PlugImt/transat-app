@@ -5,7 +5,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { File } from "expo-file-system";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import {
   addFaceReference,
   deleteFaceData,
@@ -47,12 +47,13 @@ export const useFaceStatus = () =>
   useQuery({
     queryKey: QUERY_KEYS.photos.faces,
     queryFn: fetchFaceStatus,
-    staleTime: 60 * 1000,
-    refetchInterval: (query) =>
-      query.state.data?.matching ? 15 * 1000 : false,
+    refetchInterval: (query) => (query.state.data?.matching ? 5 * 1000 : false),
   });
 
-/** The user's own album; refreshed whenever the status says new matches may exist. */
+/**
+ * The user's own album. The matches are found in the background after a selfie (or when new photos are
+ * analysed), so the album is refetched as soon as the status reports a different count or the end of matching.
+ */
 export const useMyPhotos = (enabled: boolean) => {
   const queryClient = useQueryClient();
   const queryKey = QUERY_KEYS.photos.mine;
@@ -62,8 +63,17 @@ export const useMyPhotos = (enabled: boolean) => {
     initialPageParam: undefined as string | undefined,
     getNextPageParam: (last: PhotosPage) => last.next_cursor ?? undefined,
     enabled,
-    staleTime: 60 * 1000,
   });
+
+  const { data: status } = useFaceStatus();
+  const progress = status && `${status.photo_count}:${status.matching}`;
+  const seen = useRef(progress);
+  useEffect(() => {
+    if (progress === seen.current) return;
+    const first = seen.current === undefined;
+    seen.current = progress;
+    if (!first) void queryClient.invalidateQueries({ queryKey, exact: true });
+  }, [progress, queryClient, queryKey]);
   const photos = useMemo(
     () => query.data?.pages.flatMap((page) => page.photos) ?? [],
     [query.data],
@@ -81,10 +91,9 @@ const useFaceMutation = <TVariables>(
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn,
+    // The global mutation cache then refetches the status and the album.
     onSuccess: (status) => {
       if (status) queryClient.setQueryData(QUERY_KEYS.photos.faces, status);
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.photos.faces });
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.photos.mine });
     },
   });
 };
@@ -104,7 +113,6 @@ export const useDeleteFaceData = () => {
     mutationFn: deleteFaceData,
     onSuccess: () => {
       queryClient.removeQueries({ queryKey: QUERY_KEYS.photos.mine });
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.photos.faces });
     },
   });
 };
@@ -126,7 +134,6 @@ export const useRejectMyPhoto = () => {
             })),
           },
       );
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.photos.faces });
     },
   });
 };

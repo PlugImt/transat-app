@@ -4,6 +4,7 @@ import { Asset, requestPermissionsAsync } from "expo-media-library";
 import { useCallback, useState } from "react";
 import { getPhoto } from "@/api";
 import { ApiError } from "@/api/errors";
+import { STATIC_QUERY_META } from "@/api/query-client";
 import { QUERY_KEYS } from "@/constants";
 import { extensionForMime } from "@/utils/photo.utils";
 
@@ -61,6 +62,7 @@ export const savePhotoOriginal = async (
       queryKey: QUERY_KEYS.photos.detail(id),
       queryFn: () => getPhoto(id),
       staleTime: 30 * 60 * 1000,
+      meta: STATIC_QUERY_META,
     });
 
     // Photobooth files have no extension: derive it from the MIME type the backend indexed.

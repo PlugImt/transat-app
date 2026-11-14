@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchLaundry } from "@/api";
+import { LIVE_POLL_INTERVAL } from "@/api/query-client";
 import { QUERY_KEYS } from "@/constants";
 import type { LaundryWithType } from "@/dto";
 
@@ -14,6 +15,7 @@ export const useLaundry = () => {
   } = useQuery({
     queryFn: () => fetchLaundry(),
     queryKey: QUERY_KEYS.laundry,
+    refetchInterval: LIVE_POLL_INTERVAL,
   });
 
   return {

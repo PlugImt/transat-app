@@ -7,6 +7,7 @@ import {
   joinClub,
   leaveClub,
 } from "@/api";
+import { LIVE_POLL_INTERVAL } from "@/api/query-client";
 import { QUERY_KEYS } from "@/constants";
 import type { Club, ClubDetails } from "@/dto/club";
 
@@ -88,6 +89,7 @@ export const useClubDetails = (id: number) => {
   const { data, isPending, isFetching, refetch, isError, error } = useQuery({
     queryKey: [...QUERY_KEYS.club.clubDetails, id],
     queryFn: () => getClubDetails(id),
+    refetchInterval: LIVE_POLL_INTERVAL,
   });
 
   return { data, isPending, isFetching, refetch, isError, error };
@@ -125,6 +127,7 @@ export const useClubMembers = (id: number) => {
   const { data, isPending, isFetching, refetch, isError, error } = useQuery({
     queryKey: [...QUERY_KEYS.club.clubMembers, id],
     queryFn: () => getClubMembers(id),
+    refetchInterval: LIVE_POLL_INTERVAL,
   });
 
   return { data, isPending, isFetching, refetch, isError, error };

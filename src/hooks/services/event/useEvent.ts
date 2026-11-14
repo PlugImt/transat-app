@@ -12,6 +12,7 @@ import {
   leaveEvent,
   updateEvent,
 } from "@/api/endpoints/event/event.endpoint";
+import { LIVE_POLL_INTERVAL } from "@/api/query-client";
 import { useToast } from "@/components/common/Toast";
 import { QUERY_KEYS } from "@/constants";
 import { hapticFeedback } from "@/utils/haptics.utils";
@@ -24,7 +25,6 @@ export const useEvents = (
   const { data, isPending, isFetching, refetch, isError, error } = useQuery({
     queryKey: [...QUERY_KEYS.event.events, time],
     queryFn: () => getEvents(time),
-    staleTime: 1000 * 60 * 5,
     enabled: options?.enabled,
   });
 
@@ -58,7 +58,6 @@ export const useClubEvents = (
   const { data, isPending, isFetching, refetch, isError, error } = useQuery({
     queryKey: [...QUERY_KEYS.event.clubEvents, clubId, time],
     queryFn: () => getClubEvents(clubId, time),
-    staleTime: 1000 * 60 * 5,
   });
 
   return { data, isPending, isFetching, refetch, isError, error };
@@ -91,6 +90,7 @@ export const useEventDetails = (id: number) => {
   const { data, isPending, isFetching, refetch, isError, error } = useQuery({
     queryKey: [...QUERY_KEYS.event.eventDetails, id],
     queryFn: () => getEventDetails(id),
+    refetchInterval: LIVE_POLL_INTERVAL,
   });
 
   return { data, isPending, isFetching, refetch, isError, error };
@@ -128,6 +128,7 @@ export const useEventMembers = (id: number) => {
   const { data, isPending, isFetching, refetch, isError, error } = useQuery({
     queryKey: [...QUERY_KEYS.event.eventMembers, id],
     queryFn: () => getEventMembers(id),
+    refetchInterval: LIVE_POLL_INTERVAL,
   });
 
   return { data, isPending, isFetching, refetch, isError, error };

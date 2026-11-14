@@ -15,6 +15,7 @@ import { ToastProvider } from "@/components/common/Toast";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { useAuth } from "@/hooks/account/useAuth";
+import { useRefetchOnNavigation } from "@/hooks/common/useRefetchOnNavigation";
 import { usePushNotifications } from "@/hooks/home";
 import { shouldShowOnboarding } from "@/hooks/onboarding/useOnboardingSteps";
 import { i18nInitializedPromise } from "@/i18n";
@@ -47,6 +48,7 @@ Sentry.init({
 const RootGate = () => {
   const { user } = useAuth();
   usePushNotifications();
+  useRefetchOnNavigation();
   const [isI18nReady, setIsI18nReady] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState<boolean | null>(null);
   const finishOnboarding = useCallback(() => setShowOnboarding(false), []);
